@@ -30,6 +30,7 @@ Cet outil simule l'environnement linux et vous permettra même de programmer dan
 ```
 
 ## DBeaver
+DBeaver permet d'interagir avec des systèmes de gestion dde bases de données.
 
 ```shell
     winget install dbeaver.dbeaver
