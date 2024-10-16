@@ -1,0 +1,1552 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../../">
+      
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
+    
+    
+      
+        <title>Listes Chaînées - Cours de NSI</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#listes-chainees" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Cours de NSI" class="md-header__button md-logo" aria-label="Cours de NSI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Cours de NSI
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Listes Chaînées
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  Welcome to MkDocs
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../les-outils/" class="md-tabs__link">
+          
+  
+  Les outils
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../" class="md-tabs__link">
+          
+  
+  Terminale
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Cours de NSI" class="md-nav__button md-logo" aria-label="Cours de NSI" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Cours de NSI
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Welcome to MkDocs
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Les outils
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Les outils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../les-outils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Outils pour développer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../les-outils/setup-vscode/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setup vscode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Terminale
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Terminale
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Index
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Structures de donnees
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Structures de donnees
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Listes Chaînées
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Listes Chaînées
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#partie-1-paradigme-fonctionnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partie 1 - Paradigme fonctionnel
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Partie 1 - Paradigme fonctionnel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemple-concret-de-representation-en-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple concret de représentation en python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traduction-de-notre-definition-en-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Traduction de notre définition en python:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creation-et-acces-aux-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Création et Accès aux Éléments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creation-dune-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Création d'une Liste
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acces-aux-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accès aux Éléments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fonctions-de-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fonctions de Base
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fonctions de Base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tester-si-une-liste-est-vide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tester si une Liste est Vide
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculer-la-taille-dune-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calculer la Taille d'une Liste
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculer-la-somme-des-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calculer la Somme des Éléments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fonctions-de-modification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fonctions De modification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ajouter-un-element-en-tete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ajouter un Élément en Tête
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partie-2-poo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partie 2 - POO
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Partie 2 - POO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listes-chainees-programmation-orientee-objet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Listes chaînées - Programmation Orientée Objet
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Listes chaînées - Programmation Orientée Objet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemple-classe-animal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple : Classe Animal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definition-de-la-classe-maillon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Définition de la classe Maillon
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Définition de la classe Maillon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#probleme-initial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problème initial
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-classe-chien-heritant-de-animal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple : Classe Chien héritant de Animal
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sentinelle-dans-les-listes-chainees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sentinelle dans les Listes Chaînées
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sentinelle dans les Listes Chaînées">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classe-sentinelle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classe Sentinelle
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definition-de-la-liste-chainee" class="md-nav__link">
+    <span class="md-ellipsis">
+      Définition de la liste chaînée
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classe-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classe Liste
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classe Liste">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributs-de-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attributs de Liste
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ajouter-un-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ajouter un élément
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-methode-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      La méthode str
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-probleme-de-la-mutabilite" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le problème de la mutabilité
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#partie-1-paradigme-fonctionnel" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partie 1 - Paradigme fonctionnel
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Partie 1 - Paradigme fonctionnel">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemple-concret-de-representation-en-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple concret de représentation en python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#traduction-de-notre-definition-en-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Traduction de notre définition en python:
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creation-et-acces-aux-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Création et Accès aux Éléments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#creation-dune-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Création d'une Liste
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acces-aux-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accès aux Éléments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fonctions-de-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fonctions de Base
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fonctions de Base">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#tester-si-une-liste-est-vide" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tester si une Liste est Vide
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculer-la-taille-dune-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calculer la Taille d'une Liste
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#calculer-la-somme-des-elements" class="md-nav__link">
+    <span class="md-ellipsis">
+      Calculer la Somme des Éléments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#fonctions-de-modification" class="md-nav__link">
+    <span class="md-ellipsis">
+      Fonctions De modification
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ajouter-un-element-en-tete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ajouter un Élément en Tête
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#partie-2-poo" class="md-nav__link">
+    <span class="md-ellipsis">
+      Partie 2 - POO
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Partie 2 - POO">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#listes-chainees-programmation-orientee-objet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Listes chaînées - Programmation Orientée Objet
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Listes chaînées - Programmation Orientée Objet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemple-classe-animal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple : Classe Animal
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definition-de-la-classe-maillon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Définition de la classe Maillon
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Définition de la classe Maillon">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#probleme-initial" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problème initial
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-classe-chien-heritant-de-animal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple : Classe Chien héritant de Animal
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sentinelle-dans-les-listes-chainees" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sentinelle dans les Listes Chaînées
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sentinelle dans les Listes Chaînées">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#classe-sentinelle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classe Sentinelle
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#definition-de-la-liste-chainee" class="md-nav__link">
+    <span class="md-ellipsis">
+      Définition de la liste chaînée
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classe-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classe Liste
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classe Liste">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#attributs-de-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Attributs de Liste
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ajouter-un-element" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ajouter un élément
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-methode-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      La méthode str
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-probleme-de-la-mutabilite" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le problème de la mutabilité
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="listes-chainees">Listes Chaînées</h1>
+<div class="admonition danger">
+<p class="admonition-title">Attention</p>
+<p>Ici, nous ne parlons pas du tout des listes python. Nous n'en utiliserons d'ailleurs pas.</p>
+</div>
+<p>Les <strong>listes chaînées</strong> sont une structure de données linéaire qui permet de stocker une séquence d'éléments. Il existe une multitude de manière de les implémenter. Nous en verrons 2. </p>
+<p>Les listes chaînées sont un outil formidable pour faire ses premiers pas en récursivité. C'est aussi l'occasion de découvrir le paradigme fonctionnel, et aussi d'aller juste un peu plus loin dans le paradigme orienté objet.</p>
+<h2 id="partie-1-paradigme-fonctionnel">Partie 1 - Paradigme fonctionnel</h2>
+<div class="admonition tip">
+<p class="admonition-title">Le Paradigme Fonctionnel</p>
+<p>Le paradigme fonctionnel se distingue principalement par :</p>
+<ul>
+<li>L'<strong>immuabilité</strong> des structures de données : ici, chaque fonction renvoie une <strong>nouvelle</strong> liste, sans affecter l'originale. Lorsqu'on insere dans une liste, il faut comprendre "renvoyer une nouvelle liste dans laquelle on a inséré"</li>
+<li>L'usage intensif de la <strong>récursivité</strong> : au lieu de boucles, les fonctions comme <code>taille</code>, <code>somme</code>, ou <code>inverser</code> utiliseront la récursivité pour recueillir des informations sur la liste.</li>
+<li>L'importance des <strong>fonctions pures</strong> : chaque fonction renvoie toujours le même résultat pour les mêmes arguments, sans effets de bord.</li>
+</ul>
+<p>Ce style de programmation garantit des comportements prévisibles et sûrs, ce qui est particulièrement utile en programmation concurrente et dans les applications où la fiabilité est critique.</p>
+</div>
+<p>Dans cette partie, nous allons explorer les bases des listes chaînées <strong>immuables</strong>, ce qui signifie qu'elles ne peuvent pas être modifiées par le code une fois créées. Toute opération qui "modifie" une liste renvoie une <strong>nouvelle</strong> liste, tout en préservant l'ancienne.</p>
+<div class="admonition abstract">
+<p class="admonition-title">Définition</p>
+<p>Nous travaillerons avec des listes chaînées où chaque élément est un entier. </p>
+<p>Chaque liste peut être :</p>
+<ol>
+<li><strong>vide</strong></li>
+<li>Contenir un élément appelé la <strong>tête</strong>, suivi de la <strong>queue</strong>, qui est une autre liste chaînée.</li>
+</ol>
+</div>
+<h3 id="exemple-concret-de-representation-en-python">Exemple concret de représentation en python</h3>
+<p>Nous utiliserons des tuples pour contenir une liste chainée car les tuples sont immuables, ils collent bien au cadre de la programmation fonctionnelle.</p>
+<p>Nous matérialiserons la liste vide par un tuple vide.</p>
+<p>Le tuple suivant représente une liste où la tête est <code>2</code>, et la queue est une liste dont la tête est <code>3</code>, suivie d'une liste ou la tete est 4, suivie elle-même de la liste vide.</p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">())))</span>
+</code></pre></div>
+<h3 id="traduction-de-notre-definition-en-python">Traduction de notre définition en python:</h3>
+<p><div class="highlight"><pre><span></span><code><span class="nb">type</span> <span class="n">vide</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[()]</span>
+<span class="n">LISTE_VIDE</span><span class="p">:</span> <span class="n">vide</span> <span class="o">=</span> <span class="p">()</span>
+
+<span class="nb">type</span> <span class="n">liste</span> <span class="o">=</span> <span class="n">vide</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">liste</span><span class="p">]</span>
+</code></pre></div>
+Nous créons ici deux types :</p>
+<ul>
+<li><code>vide</code> représente le vide modélisé par un tuple vide.</li>
+<li><code>liste</code> est une structure récursive qui peut être soit vide, soit un 2-uplet: tête (int) et queue(liste).</li>
+</ul>
+<h3 id="creation-et-acces-aux-elements">Création et Accès aux Éléments</h3>
+<h3 id="creation-dune-liste">Création d'une Liste</h3>
+<p>Une fonction typique pour créer une nouvelle liste à partir d'un entier et d'une autre liste :
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">creer</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="n">liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">liste</span><span class="p">:</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+</code></pre></div>
+Elle prend deux arguments :
+- <code>t</code> : la tête (l'élément à ajouter).
+- <code>q</code> : la queue (la liste suivante).</p>
+<h3 id="acces-aux-elements">Accès aux Éléments</h3>
+<p>Les deux opérations d'accès principales sont :
+- <strong>Tête</strong> : obtenir le premier élément de la liste.
+- <strong>Queue</strong> : obtenir la sous-liste à partir du deuxième élément.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">tete</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Liste vide&quot;</span>
+    <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">queue</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">liste</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Liste vide&quot;</span>
+    <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<h3 id="fonctions-de-base">Fonctions de Base</h3>
+<h4 id="tester-si-une-liste-est-vide">Tester si une Liste est Vide</h4>
+<p><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">lst</span> <span class="o">==</span> <span class="n">LISTE_VIDE</span>
+</code></pre></div>
+Cette fonction retourne <code>True</code> si la liste est vide, sinon <code>False</code>.</p>
+<h4 id="calculer-la-taille-dune-liste">Calculer la Taille d'une Liste</h4>
+<p><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">taille</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">taille</span><span class="p">(</span><span class="n">queue</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>
+</code></pre></div>
+Ici, on calcule récursivement la taille en comptant chaque élément jusqu'à atteindre la liste vide.</p>
+<h4 id="calculer-la-somme-des-elements">Calculer la Somme des Éléments</h4>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">somme</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mi">0</span>
+    <span class="k">return</span> <span class="n">tete</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">+</span> <span class="n">somme</span><span class="p">(</span><span class="n">queue</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>
+</code></pre></div>
+<h4 id="fonctions-de-modification">Fonctions De modification</h4>
+<h4 id="ajouter-un-element-en-tete">Ajouter un Élément en Tête</h4>
+<div class="admonition success supprimer la tête">
+<p class="admonition-title">Success</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">supprimer_tete</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">liste</span><span class="p">:</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">),</span> <span class="s2">&quot;La liste est vide&quot;</span>
+    <span class="k">return</span> <span class="n">queue</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+</code></pre></div>
+On peut supprimer la tête de la liste, mais il est nécessaire de vérifier que la liste n'est pas vide avant de le faire.</p>
+</div>
+<div class="admonition success">
+<p class="admonition-title">Inverser une Liste</p>
+<p><div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">inverser</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">liste</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">LISTE_VIDE</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">ajouter_fin</span><span class="p">(</span><span class="n">tete</span><span class="p">(</span><span class="n">lst</span><span class="p">),</span> <span class="n">inverser</span><span class="p">(</span><span class="n">queue</span><span class="p">(</span><span class="n">lst</span><span class="p">)))</span>
+</code></pre></div>
+La fonction part du constat qu'il faut inverser la queue et lui ajouter la tete à la fin pour renverser une liste en sachant qu'on sait déjà renverser une sous-liste.</p>
+</div>
+<h2 id="partie-2-poo">Partie 2 - POO</h2>
+<h3 id="listes-chainees-programmation-orientee-objet">Listes chaînées - Programmation Orientée Objet</h3>
+<p>Les listes chaînées sont un prétexte pour apprendre plein de choses à base d'une structure simple, avant de passer à des structures plus évoluées. Vous croyez en avoir fini après la programmation fonctionnelle? Que nenni! Accrochez vous à votre poney, c'est parti!</p>
+<div class="admonition abstract définition">
+<p class="admonition-title">Abstract</p>
+<p>En programmation orientée objet, un programme est un ensemble d'entités qui interagissent. Ces entités sont appelées des <strong>objets</strong>. Un objet possède un <strong>état</strong> (les données qui le caractérisent) et des <strong>comportements</strong> (ce qu'il sait faire).</p>
+<p>L'état d'un objet est représenté par l'ensemble de ses <strong>attributs</strong>
+Les comportements d'un objet sont représentés par l'ensemble de ses <strong>méthodes</strong></p>
+<p>Une <strong>classe</strong> permet de définir une famille d'objets. A partir d'une classe, on peut créer autant d'objets que l'on veut. Ce sont des exemplaires, des <strong>instances</strong> de la classe.</p>
+</div>
+<h4 id="exemple-classe-animal">Exemple : Classe <code>Animal</code></h4>
+<p>Voici un exemple basique d'une classe en Python :</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Animal</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nom</span> <span class="o">=</span> <span class="n">nom</span>  <span class="c1"># Attribut d&#39;instance</span>
+
+    <span class="k">def</span> <span class="nf">parler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>   <span class="c1"># Méthode d&#39;instance</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nom</span><span class="si">}</span><span class="s2"> fait du bruit.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>Dans cet exemple :
+- <strong><code>__init__</code></strong> : Le constructeur de la classe. Il initialise les objets de la classe avec des attributs spécifiques (ici, le nom de l'animal).
+- <strong><code>self</code></strong> : Représente l'instance actuelle de la classe. Il permet d'accéder aux attributs et méthodes de l'objet lui-même.</p>
+<p>Exemple d'instanciation :</p>
+<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Bidule&quot;</span><span class="p">)</span>   <span class="c1"># création d&#39;une instance d&#39;Animal</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">nom</span><span class="p">)</span>           <span class="c1"># On accède aux attributs avec le point. Affiche: Bidule</span>
+<span class="n">x</span><span class="o">.</span><span class="n">nom</span> <span class="o">=</span> <span class="s2">&quot;Truc&quot;</span>         <span class="c1"># (mutabilité) On modifie les attributs de la même manière </span>
+<span class="n">x</span><span class="o">.</span><span class="n">parler</span><span class="p">()</span>  <span class="c1"># On accède aussi aux méthodes par le point. Affiche: Truc fait du bruit.</span>
+</code></pre></div>
+<div class="admonition danger requis">
+<p class="admonition-title">Danger</p>
+<p>Vous devez savoir refaire les exercices sur la création et l'utilisation de classes en POO sans regarder le corrigé.</p>
+</div>
+<p>!!! info Classe <code>Maillon</code></p>
+<pre><code>Nous allons maintenant appliquer ces concepts à la structure de données **liste chaînée**. En programmation fonctionnelle, nous avons considéré qu'une liste est un couple d'éléments tête et queue, la queue étant elle même une liste, et nous avons défini la liste vide.
+
+Ici nous allons commencer par nous concentrer sur un Maillon d'une chaîne.
+
+Un maillon porte une donnée, ainsi qu'une référence vers son maillon suivant.
+</code></pre>
+<h4 id="definition-de-la-classe-maillon">Définition de la classe <code>Maillon</code></h4>
+<p>La classe <code>Maillon</code> représente un élément de notre liste chaînée. Chaque maillon contient deux attributs :
+1. <strong><code>data</code></strong> : La donnée contenue dans le maillon (ici un entier).
+2. <strong><code>next</code></strong> : Une référence vers le maillon suivant. (nous reviendrons sur ce terme)</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Maillon</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">next</span><span class="p">:</span> <span class="s1">&#39;Maillon&#39;</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="nb">next</span>
+</code></pre></div>
+<h5 id="probleme-initial">Problème initial</h5>
+<p>Cependant, cette définition présente un problème. Lorsqu’on crée un maillon, on doit spécifier le maillon suivant (<code>next</code>), mais ce maillon suivant n’existe pas encore à ce stade de la création. Nous devons résoudre ce problème pour pouvoir créer une chaîne. </p>
+<div class="highlight"><pre><span></span><code><span class="n">premier_maillon</span> <span class="o">=</span> <span class="n">Maillon</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="o">...</span><span class="n">euh</span><span class="p">,</span> <span class="n">j</span><span class="s1">&#39;ai pas de maillon...)</span>
+</code></pre></div>
+<p>Il existe plusieurs façons de palier ce problème, mais j'ai fait le choix de l'élégance car vous le valez bien.</p>
+<p>Ce choix nécessite de vous introduire à un concept fondamental en POO: L'héritage.</p>
+<div class="admonition info héritage en poo">
+<p class="admonition-title">Info</p>
+<p>L’<strong>héritage</strong> est un autre concept fondamental en POO. Il permet à une classe (dite <strong>classe dérivée</strong>, ou <strong>sous classe</strong>) d’hériter des attributs et méthodes d’une autre classe (dite <strong>classe de base</strong>, ou <strong>super classe</strong>).</p>
+</div>
+<h4 id="exemple-classe-chien-heritant-de-animal">Exemple : Classe <code>Chien</code> héritant de <code>Animal</code></h4>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Chien</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">parler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nom</span><span class="si">}</span><span class="s2"> aboie.&quot;</span><span class="p">)</span>
+</code></pre></div>
+<p>La classe <code>Chien</code> hérite de <code>Animal</code> mais peut redéfinir certaines méthodes (ici, <code>parler</code>), ou encore en créer d'autres. Ainsi, un objet de la classe <code>Chien</code> pourra aboyer au lieu de "faire du bruit"</p>
+<p><em>Programme exemple</em>:
+<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Animal quelconque&quot;</span><span class="p">)</span>
+<span class="n">x</span><span class="o">.</span><span class="n">parler</span><span class="p">()</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">Chien</span><span class="p">(</span><span class="s2">&quot;Rex&quot;</span><span class="p">)</span>
+<span class="n">y</span><span class="o">.</span><span class="n">parler</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Animal</span><span class="p">),</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Chien</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">Animal</span><span class="p">),</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">Chien</span><span class="p">))</span>
+</code></pre></div>
+<em>Affichage:</em>
+<div class="highlight"><pre><span></span><code>Animal quelconque fait du bruit
+Rex aboie
+True False
+True True
+</code></pre></div></p>
+<p>La fonction <code>isinstance</code> sert à savoir si un objet est une instance d'une classe.
+Si on a besoin de l'utiliser, c'est presque toujours du à un défaut de conception. On n'aura pas besoin de l'utiliser.</p>
+<p>En français, on peut très bien dire dès lors "Un Chien <strong>EST UN</strong> Animal"</p>
+<h3 id="sentinelle-dans-les-listes-chainees">Sentinelle dans les Listes Chaînées</h3>
+<p>Revenons maintenant à notre problème initial.</p>
+<div class="admonition info sentinelle">
+<p class="admonition-title">Info</p>
+<p>En informatique, une <strong>sentinelle</strong> est une valeur spéciale qui indique une ou plusieurs bornes d'une structure de données. </p>
+</div>
+<p>Appliqué à notre cas, en considérant que la sentinelle et dans notre chaîne:
+- Il n'y a que des maillons dans la chaine. 
+- La sentinelle est dans la chaîne, donc la <strong>Sentinelle EST UN Maillon</strong>.
+- Mais tout maillon a un prochain maillon.  <br />
+- Vu que la sentinelle est un Maillon, elle doit donc avoir un prochain maillon. </p>
+<p>Il semble que nous soyons de retour à notre problème initial, mais en fait non.
+Pour résoudre ce casse tête, On va lui dire que son prochain maillon, c'est <strong><em>initialement</em></strong> elle-même.</p>
+<h4 id="classe-sentinelle">Classe <code>Sentinelle</code></h4>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Sentinelle</span><span class="p">(</span><span class="n">Maillon</span><span class="p">):</span>    <span class="c1"># Une Sentinelle EST UN Maillon</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>   <span class="c1"># Son prochain Maillon est initialement elle-même</span>
+</code></pre></div>
+<p>Cette classe hérite de la classe <code>Maillon</code>. 
+Grâce à l’appel de <strong><code>super()</code></strong>, nous invoquons le constructeur de <code>Maillon</code> tout en assignant la sentinelle comme le maillon suivant d'elle-même.
+Sa donnée est arbitrairement mise à 0.</p>
+<p>Notre <strong>liste chaînée circulaire</strong> revient à sa sentinelle, créant ainsi une boucle. Ici, la <strong>sentinelle</strong> est utilisée pour maintenir cette boucle en pointant vers elle-même.</p>
+<p>Voici comment évoluera progressivement notre sentinelle (0) lorsqu'on ajoutera en tête les éléments 5, 3, puis 12:</p>
+<table><tr><td>
+
+<pre class="mermaid"><code>---
+title: Maillon sentinelle
+---
+graph LR
+0((0)) --&gt; 0</code></pre>
+</td><td>
+
+<pre class="mermaid"><code>---
+title: Ajout de la donnée 5
+---
+graph LR
+0((0)) --&gt; 5((5))
+5 --&gt; 0</code></pre>
+</td><td>
+
+<pre class="mermaid"><code>---
+title: Ajout de la donnée 3
+---
+graph LR
+0((0)) --&gt; 3((3))
+3 --&gt; 5((5))
+5 --&gt; 0</code></pre>
+</td></tr></table>
+
+<pre class="mermaid"><code>---
+title: Ajout de la donnée 12
+---
+graph LR
+0((0)) --&gt; 12((12))
+12((12)) --&gt; 3((3))
+3 --&gt; 5((5))
+5 --&gt; 0</code></pre>
+<p>Il est très important de comprendre que l'attribut next est une référence à un noeud. <strong><em>"next, c'est la flèche qui va vers"</em></strong></p>
+<h3 id="definition-de-la-liste-chainee">Définition de la liste chaînée</h3>
+<p>Comme il peut se deviner à partir des dessins précédents, nous allons gérer une liste à partir de sa sentinelle. <strong>Nous assimilerons alors une liste à sa sentinelle, en renommant tout simplement la classe sentinelle en Liste. On OUBLIE donc la classe sentinelle qui n'était là que pour la démarche de réflexion. La sentinelle d'une liste, c'est elle-même en tant que Maillon</strong></p>
+<h3 id="classe-liste">Classe <code>Liste</code></h3>
+<p>La classe <code>Liste</code> hérite de <code>Maillon</code> et représente notre liste chaînée complète.</p>
+<p>Lorsqu'elle est créée, c'est un maillon pointant sur lui-même et qui représentera toujours sa propre sentinelle.</p>
+<h4 id="attributs-de-liste">Attributs de <code>Liste</code></h4>
+<ul>
+<li><strong><code>__taille</code></strong> : Stocke la taille de la liste.</li>
+<li><strong><code>ajouter_tete</code></strong> : Ajoute un nouvel élément en tête de la liste.</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Liste</span><span class="p">(</span><span class="n">Maillon</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__taille</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre></div>
+<p>Dans une méthode, self.next représente toujours le premier Maillon, à moins que la liste ne soit vide, auquel cas elle pointe sur elle même.</p>
+<p>Ici, on choisit de plus de maintenir la taille du maillon en permanence.
+On marque cet attribut comme privé grâce au double underscore, afin de signifier qu'il ne doit pas être modifié par les programmeurs qui utilisent cette classe.</p>
+<p>Vu que la récupération de la taille est une opérationn courante, sa récupération sera donc en <span class="arithmatex">\(\mathcal{O}(1)\)</span>, au lieu de <span class="arithmatex">\(\mathcal{O}(n)\)</span> s'il faut parcourir tous les maillons d'une liste de taille <span class="arithmatex">\(n\)</span>. Ceci se fait au prix de l'augmentation de la taille de stockage de la liste, mais on ne peut pas tout avoir.</p>
+<p><strong>Tout ce qui suit est du légo avec les maillons, il faut juste penser à bien faire les opérations dans l'ordre à chaque fois. On procèdera de manière impérative, avec des while.</strong></p>
+<h4 id="ajouter-un-element">Ajouter un élément</h4>
+<p>On veut ajouter un nouveau maillon portant la donnée 12 en tête de liste:</p>
+<p><pre class="mermaid"><code>---
+title: Liste initiale
+---
+graph LR
+0((0)) --&gt; 3((3))
+3 --&gt; 5((5))
+5 --&gt; 0</code></pre>
+1. On créé un Maillon portant la donnée 12 et pointant vers le Maillon suivant la sentinelle (donc la liste elle meme, puisqu'elle est sa sentinelle)
+<pre class="mermaid"><code>---
+title: 
+---
+graph LR
+0((0)) ====&gt; 3((3))
+12((12)) --&gt; 3
+3 --&gt; 5((5))
+5 --&gt; 0</code></pre></p>
+<ol>
+<li>La flèche en gras représente la référence self.next
+il faut la remplacer par une référence au maillon 12</li>
+</ol>
+<pre class="mermaid"><code>---
+title: 
+---
+graph LR
+0((0)) ==&gt; 12((12))
+12 --&gt; 3((3))
+3 --&gt; 5((5))
+5 --&gt; 0</code></pre>
+<ol>
+<li>Vu qu'on a choisi de maintenir la taille, il ne faut pas oublier de lui ajouter 1</li>
+</ol>
+<p>La méthode <code>ajouter_tete</code> écrite en conséquence insère un nouveau maillon juste après la sentinelle.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">ajouter_tete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">e</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">Maillon</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">next</span><span class="p">)</span>     <span class="c1"># 1</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">next</span> <span class="o">=</span> <span class="n">m</span>                 <span class="c1"># 2</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">__taille</span> <span class="o">+=</span> <span class="mi">1</span>            <span class="c1"># 3</span>
+</code></pre></div>
+<p>L'approche proposée permet de simplifier le code des méthodes.
+En effet, ça marche indépendamment du fait que la liste soit vide ou pas.</p>
+<p><pre class="mermaid"><code>---
+title: Liste initiale
+---
+graph RL
+0((0)) --&gt; 0</code></pre>
+1. On créé un Maillon portant la donnée 12 et pointant vers le Maillon suivant la sentinelle 
+<pre class="mermaid"><code>---
+title: 
+---
+graph RL
+0((0)) ==&gt; 0
+12((12)) --&gt; 0</code></pre></p>
+<ol>
+<li>La flèche en gras représente la référence self.next
+il faut la remplacer par une référence au maillon 12</li>
+</ol>
+<pre class="mermaid"><code>---
+title: 
+---
+graph LR
+0((0)) ==&gt; 12((12))
+12 --&gt; 0</code></pre>
+<h4 id="la-methode-str">La méthode str</h4>
+<p>Afin de vous lancer sur le parcours de cette structure, je vous donne votre deuxième méthode, la méthode <code>__str__</code>, car je veux pointer du doigt comment déterminer si on est arrivés à la fin de la chaîne lorsqu'on la parcourt du début.</p>
+<p>Nous utilisons la traditionnelle technique d'accumulation.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="n">acc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>                 <span class="c1"># Accumulateur</span>
+    <span class="n">courant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">next</span>      <span class="c1"># Element en cours de traitement</span>
+    <span class="k">while</span> <span class="n">courant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span><span class="p">:</span>
+        <span class="n">acc</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">courant</span><span class="o">.</span><span class="n">data</span><span class="si">}</span><span class="s2"> -&gt; &quot;</span>
+        <span class="n">courant</span> <span class="o">=</span> <span class="n">courant</span><span class="o">.</span><span class="n">next</span>
+    <span class="k">return</span> <span class="n">acc</span> <span class="o">+</span> <span class="s2">&quot;_|_&quot;</span>
+</code></pre></div>
+<p>On saute de maillon en maillon en utilisant <code>courant = courant.next</code>
+On avance tant que le maillon courant n'est pas la sentinelle, à savoir self.</p>
+<div class="admonition tip opérateur is">
+<p class="admonition-title">Tip</p>
+<p>l'opérateur is sert à comparer les objets, non pas en termes de valeur, mais en termes d'adresse mémoire.</p>
+</div>
+<h3 id="le-probleme-de-la-mutabilite">Le problème de la mutabilité</h3>
+<p>TODO</p>
+<div class="admonition question défi">
+<p class="admonition-title">Question</p>
+<p>A vous maintenant de recréer toutes les fonctionalités que vous avez vues en programmation fonctionnelles en tant que méthodes de ces listes.</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+    
+  </body>
+</html>
