@@ -77,10 +77,10 @@ class Humain:
         self.prenom = prenom
         self.animaux: list[Animal] = []
 
-    def adopte(a: Animal):
+    def adopte(self, a: Animal):
         self.animaux.append(a)
     
-    def afficher_animaux():
+    def afficher_animaux(self):
         for a in self.animaux:
             print(a.nom)
 ```
