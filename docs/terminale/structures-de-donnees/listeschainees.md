@@ -140,7 +140,7 @@ Lorsqu'elle est créée (donc vide), c'est un maillon pointant sur lui-même et 
 ```python
 class Liste(Maillon):
     def __init__(self):
-        super(0, self).__init__()
+        super().__init__(0, self)
         self.__taille = 0
 ```
 
