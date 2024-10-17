@@ -246,6 +246,24 @@ Afin de vous lancer sur le parcours de cette structure, je vous donne votre deux
         return self.next is self
     ```
 
+!!! hint "Méthode exemple"
+    Cette méthode spéciale (c'est une méthode de classe) pourra être utilisée dans les doctests:
+
+    ```python
+    @staticmethod
+    def exemple() -> 'Liste':
+        lst = Liste()
+        lst.ajouter_tete(89)
+        lst.ajouter_tete(3)
+        lst.ajouter_tete(2)
+        return lst
+    ```
+
+    On l'appellera ainsi:
+
+    ```python
+    lst = Liste.exemple()
+    ```
 
 !!! question Défi 
     A vous maintenant de recréer les fonctions que vous avez vues en programmation fonctionnelles en tant que méthodes de la classe liste en commençant par la méthode ajouter_fin. Vous n'utiliserez pas la récursivité.
