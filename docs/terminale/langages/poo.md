@@ -140,3 +140,20 @@ True True
 La fonction `isinstance` sert à savoir si un objet est une instance d'une classe.
 Si on a besoin de l'utiliser, c'est presque toujours du à un défaut de conception. On n'aura pas besoin de l'utiliser.
 
+
+!!! question "Modélisation objet"
+
+    Une voiture a une marque, un modèle, un prix, un nombre de kilomètres parcourus, une quantite de carburant dans le réservoir (en litres), et une consommation (litres au 100).
+    Une voiture peut rouler sur une certaine distance. À chaque fois qu'elle roule, le kilométrage augmente, et le carburant diminue.
+    Le réservoir de la voiture a une capacité maximale.
+    On peut afficher les caractéristiques de la voiture.
+
+    Un Humain a une quantité d'argent disponible sur son compte en banque.
+    Un Humain peut acheter des voitures.
+    Un Humain peut faire des trajets avec une voiture pour un certain nombre de kilomètres.
+    Avant de commencer un trajet, l'humain vérifie s'il a assez d'essence, sinon, il va à la station service faire le plein.
+    Lorsqu'un humain fait le plein de sa voiture, son compte en banque diminue. 
+
+    Ecrivez une classe Humain et une classe Voiture compatibles avec cette description.
+    Instanciez ensuite Humain et Voiture afin de tester des scenarios d'utilisation.
+

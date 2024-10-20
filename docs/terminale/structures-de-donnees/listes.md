@@ -61,6 +61,7 @@ def creer(t: int, q: liste) -> liste:
     return (t, q)
 ```
 Elle prend deux arguments :
+
 - `t` : la tête (l'élément à ajouter).
 - `q` : la queue (la liste suivante).
 

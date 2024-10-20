@@ -1,4 +1,4 @@
-# Listes chaînées - Approche mutable Orientée Objet
+# Listes chaînées - Approche Orientée Objet
 
 
 !!! danger "Requis"
