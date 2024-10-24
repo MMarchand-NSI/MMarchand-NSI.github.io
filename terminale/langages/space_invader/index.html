@@ -20,7 +20,7 @@
     
     
       
-        <title>Projet space invader - Science Informatique</title>
+        <title>Projet space invader - Science Informatique - Site en construction</title>
       
     
     
@@ -90,7 +90,7 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Science Informatique" class="md-header__button md-logo" aria-label="Science Informatique" data-md-component="logo">
+    <a href="../../.." title="Science Informatique - Site en construction" class="md-header__button md-logo" aria-label="Science Informatique - Site en construction" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
@@ -104,7 +104,7 @@
       <div class="md-header__ellipsis">
         <div class="md-header__topic">
           <span class="md-ellipsis">
-            Science Informatique
+            Science Informatique - Site en construction
           </span>
         </div>
         <div class="md-header__topic" data-md-component="header-topic">
@@ -288,13 +288,13 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Science Informatique" class="md-nav__button md-logo" aria-label="Science Informatique" data-md-component="logo">
+    <a href="../../.." title="Science Informatique - Site en construction" class="md-nav__button md-logo" aria-label="Science Informatique - Site en construction" data-md-component="logo">
       
   
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
 
     </a>
-    Science Informatique
+    Science Informatique - Site en construction
   </label>
   
   <ul class="md-nav__list" data-md-scrollfix>
@@ -977,30 +977,67 @@
 <div class="admonition warning">
 <p class="admonition-title">Propreté</p>
 <p>La très grande majorité des exemples sur internet de jeux pyxels ne sont pas propres du tout. Merci de ne pas vous en inspirer afin de ne pas prendre de mauvaises habitudes.
-A ce titre, c'est la raison pour laquelle je vous guide afin de le faire proprement.</p>
+A ce titre, c'est la raison pour laquelle je vous guide afin de le faire proprement, dans la limite du raisonable.</p>
 </div>
-<p>Voici la modélisation de ce space invader:</p>
+<p>Voici la modélisation de ce space invader où nous utilisons l'héritage à fin de simplification (Je considère l'héritage comme faisant partie de la zone proximale de développement). Sans héritage, il faudrait gérer dans toutes les classes tous les attributs et méthodes d'EltGraphique. Il reste toujours possible de les adapter dans les classes filles.</p>
+<pre class="mermaid"><code>classDiagram
+    EltGraphique &lt;|-- Vaisseau
+    EltGraphique &lt;|-- Ennemi
+    EltGraphique &lt;|-- Missile
+    EltGraphique : +float x
+    EltGraphique : +float y
+    EltGraphique : +float dx
+    EltGraphique : +float dy
+    EltGraphique : +int height
+    EltGraphique : +int width
+    EltGraphique : +int u
+    EltGraphique : +int v
+    EltGraphique : +draw()
+    EltGraphique : +update()
+    EltGraphique : +bool collision(EltGraphique)
+
+    class Jeu{
+        +int score
+        +draw()
+        +update()
+        -check_collisions()
+    }
+    class Ennemi{
+        +tirer()
+    }
+    class Vaisseau{
+        +tirer()
+    }
+    Jeu "1"--"1" Vaisseau
+    Jeu "1"--"*" Ennemi
+    Ennemi "1"--"*" Missile
+    Vaisseau "1"--"*" Missile</code></pre>
 <h2 id="element-graphique">Element graphique</h2>
-<p>Un Elément Graphique est quelque chose qui peut apparaître à l'écran.
-- Il a une position x, y dans le plan.
-- Il a un vecteur de déplacement dx, dy
-- Il a une coordonnée dans le fichier de ressource pour aller y rechercher son image.
-- Il a une largeur <code>width</code> et une hauteur <code>height</code>.
-- Il sait se dessiner à l'écran.
-- Il sait se mettre à jour en fonction de son vecteur directeur.
-- Il sait dire s'il est en collision avec un autre élément graphique (voir fonction donnée plus bas).</p>
+<p>Un Elément Graphique est quelque chose qui peut apparaître à l'écran.</p>
+<ul>
+<li>Il a une position x, y dans le plan.</li>
+<li>Il a un vecteur de déplacement dx, dy duquel il se déplace en permanence</li>
+<li>Il a une coordonnée dans le fichier de ressource pour aller y rechercher son image.</li>
+<li>Il a une largeur <code>width</code> et une hauteur <code>height</code>.</li>
+<li>Il sait se dessiner à l'écran.</li>
+<li>Il sait se mettre à jour en fonction de son vecteur directeur.</li>
+<li>Il sait dire s'il est en collision avec un autre élément graphique (voir fonction donnée plus bas).</li>
+</ul>
 <p>Par exemple, Un Vaisseau <strong>EST UN</strong> Element Graphique.</p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
 <p>Les vecteurs de position et de déplacement seront gérés en float. Par contre l'affichage attendra des ints.
-C'est équivalent à dire qu'on réfléchit dans <span class="arithmatex">\(\mathbb{R^2}\)</span> mais qu'on affiche dans <span class="arithmatex">\(\mathbb{N^2}\)</span></p>
+C'est équivalent à dire qu'on réfléchit au mouvement dans <span class="arithmatex">\(\mathbb{R^2}\)</span> mais qu'on affiche dans <span class="arithmatex">\(\mathbb{Z^2}\)</span></p>
 </div>
 <h2 id="le-jeu">Le Jeu</h2>
 <p>Le jeu est le chef d'orchestre.</p>
-<p>il gère:
-- Un Vaisseau 
-- Des Ennemis
-- Un Score</p>
+<p>il gère:</p>
+<ul>
+<li>Un Vaisseau </li>
+<li>Des Ennemis</li>
+<li>Un Score</li>
+<li>Les évènements utilisateurs dans sa méthode update</li>
+</ul>
 <p>Le Jeu doit pouvoir spawner un ennemi à une certaine position pour un certain vecteur de déplacement. Le jeu sait se dessiner et demander à ses vaisseaux et à ses ennemis de se mettre à jour et de se dessiner.</p>
 <p>Le jeu sait tester toutes les collisions et agir en conséquence.</p>
 <h2 id="le-vaisseau">Le Vaisseau</h2>
@@ -1014,6 +1051,7 @@ Un ennemi connaît la liste de ses missiles et sait leur demander de se mettre �
 <h2 id="optionnel">Optionnel</h2>
 <ul>
 <li>Il existe plusieurs types d'ennemis plus ou moins puissants.</li>
+<li>Il y a un boss ded fin de niveau.</li>
 <li>Les ennemis et le vaisseau peuvent avoir des points de vie.</li>
 <li>Le jeu peut créer une explosion à un certain endroit</li>
 <li>Les ennemis peuvent drop des Bonus (invincibilité, changement de missile, ...)
@@ -1037,6 +1075,8 @@ Si vous écrivez trop de code, c'est que vous avez peut-être pris un mauvais ch
             <span class="ow">or</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">height</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> 
      <span class="p">)</span>
 </code></pre></div>
+<p>Pour aller plus loin dans les collisions, vous pouvez vous intéresser au théorème des axes séparateurs (Accessible spé math), ou encore à GJK, qui utilise la somme de Minkowski (Difficile à ce stade, mais je vous le mets quand même parce que c'est beau)</p>
+<p>La détection de collisions utilise en fait plusieurs algorithmes. Un algorithme pour voir "en gros" qui pourrait entrer en collision en effectuant un partitionnement de l'espace (Broad phase). Un algorithme pour voir d'un peu plus près ce qui pourrait être en collision d'après le résultat du broad en utilisant la fonction que je vous ai donné, ou SAT, ou autre (Mid phase). Un algorithme pour déterminer au pixel près ce qui entre en collision d'après le résultat du Mid avec par exemple GJK (Narrow phase).</p>
 
 
 
