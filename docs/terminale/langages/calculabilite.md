@@ -32,7 +32,7 @@ def distance_org(p: tuple[float, float]):
     return (x**2 + y**2)**(0.5)
 ```
 
-Si on considère une fonction comme un sous-programme, donc unn programme.
+Considérons une fonction comme un sous-programme, donc un programme.
 
 Vous avez déjà vu qu'en python, on peut trier ces points en fonction de leur distance à l'origine grâce à l'appel:
 
@@ -58,7 +58,7 @@ Ici, le programme sorted prend bien en paramètre le programme distance_org.
 Une machine de turing est un concept abstrait. Il existe une définition très formelle de ce qu'est une machine de Turing, mais ça n'est pas l'objectif ici.
 On peut considérer une machine de Turing comme un automate possédant des états.
 
-
+[Site de simulation](https://turingmachine.io/)
 
 Elle est constituée d'un ruban infini comportant des cases.
 
