@@ -46,6 +46,10 @@
       
     
     
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
+    
+      <link rel="stylesheet" href="../../../assets/_markdown_exec_ansi.css">
+    
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
       <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
@@ -973,7 +977,18 @@ Les comportements d'un objet sont représentés par l'ensemble de ses <strong>m�
 
     <span class="k">def</span> <span class="nf">parler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>   <span class="c1"># Méthode d&#39;instance</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nom</span><span class="si">}</span><span class="s2"> fait du bruit.&quot;</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Bidule&quot;</span><span class="p">)</span>   <span class="c1"># création d&#39;une instance d&#39;Animal portant le nom bidule</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">nom</span><span class="p">)</span>           <span class="c1"># On accède aux attributs de l&#39;instance avec le point. Affiche: Bidule</span>
+
+<span class="n">x</span><span class="o">.</span><span class="n">nom</span> <span class="o">=</span> <span class="s2">&quot;Truc&quot;</span>         <span class="c1"># Mutabilité -&gt; On peut modifier les attributs de l&#39;instance de la même manière </span>
+<span class="n">x</span><span class="o">.</span><span class="n">parler</span><span class="p">()</span>  <span class="c1"># On accède aussi aux méthodes d&#39;instance par le point. Affiche: Truc fait du bruit.</span>
 </code></pre></div>
+<div class="result">
+<p>Bidule
+<br/>
+Truc fait du bruit.</p>
+</div>
 <p>Dans cet exemple :</p>
 <ul>
 <li><strong><code>__init__</code></strong> : Cette méthode sera automatiquement chargée d'initialiser les attributs de l'objet en cours d'instanciation. On le considère comme le <strong>constructeur</strong> de la classe.</li>
@@ -1004,12 +1019,6 @@ Les comportements d'un objet sont représentés par l'ensemble de ses <strong>m�
 </code></pre></div>
 <p>On considèrera malgré tout que <code>__init__</code> est le constructeur, car si on vous pose la question, c'est la réponse attendue.</p>
 </div>
-<p>Exemple d'utilisation de cette classe :</p>
-<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Bidule&quot;</span><span class="p">)</span>   <span class="c1"># création d&#39;une instance d&#39;Animal portant le nom bidule</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">nom</span><span class="p">)</span>           <span class="c1"># On accède aux attributs de l&#39;instance avec le point. Affiche: Bidule</span>
-<span class="n">x</span><span class="o">.</span><span class="n">nom</span> <span class="o">=</span> <span class="s2">&quot;Truc&quot;</span>         <span class="c1"># Mutabilité -&gt; On peut modifier les attributs de l&#39;instance de la même manière </span>
-<span class="n">x</span><span class="o">.</span><span class="n">parler</span><span class="p">()</span>  <span class="c1"># On accède aussi aux méthodes d&#39;instance par le point. Affiche: Truc fait du bruit.</span>
-</code></pre></div>
 <h2 id="interactions-entre-objets">Interactions entre objets</h2>
 <p>Rajoutons la phrase "Un Humain porte un nom, un prenom et peut adopter des animaux domestiques. On peut afficher la liste des animaux d'un Humain".</p>
 <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">Humain</span><span class="p">:</span>
@@ -1024,14 +1033,16 @@ Les comportements d'un objet sont représentés par l'ensemble de ses <strong>m�
     <span class="k">def</span> <span class="nf">afficher_animaux</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">animaux</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">nom</span><span class="p">)</span>
-</code></pre></div>
-<p>On pourra alors faire ce qui est décrit en français :</p>
-<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">Humain</span><span class="p">(</span><span class="s2">&quot;Peter&quot;</span><span class="p">,</span> <span class="s2">&quot;Quill&quot;</span><span class="p">)</span>
+
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">Humain</span><span class="p">(</span><span class="s2">&quot;Peter&quot;</span><span class="p">,</span> <span class="s2">&quot;Quill&quot;</span><span class="p">)</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Rocket&quot;</span><span class="p">)</span>
 <span class="n">x</span><span class="o">.</span><span class="n">adopte</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-
 <span class="n">x</span><span class="o">.</span><span class="n">afficher_animaux</span><span class="p">()</span>   <span class="c1"># Affiche Rocket</span>
 </code></pre></div>
+<div class="result">
+<p>Rocket</p>
+</div>
 <p>Ici, on a choisi que l'humain porte la liste de ses animaux. On aurait pu à la place ajouter un attribut propriétaire à la classe Animal pour dire qu'un animal est la propriété d'un humain particulier. Mais on aurait perdu la possibilité d'afficher les animaux d'un humain sans disposer de la liste de tous les animaux. Il faut souvent choisir quelle classe est le "chef d'orchestre" en fonction du problème qu'on a à traiter.</p>
 <div class="admonition info">
 <p class="admonition-title">Héritage</p>
@@ -1135,6 +1146,8 @@ Instanciez ensuite Humain et Voiture afin de tester des scenarios d'utilisation.
     
     
       <script src="../../../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
       
         <script src="../../../javascripts/katex.js"></script>
       
