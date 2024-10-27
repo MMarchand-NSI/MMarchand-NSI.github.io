@@ -1173,18 +1173,18 @@ On sait alors que <span class="arithmatex">\(plus(a, 0)\)</span> vaut <span clas
 ça veut dire qu'on veut faire converger b vers 0 afin d'assurer la terminaison de notre fonction.
 On doit donc réécrire <span class="arithmatex">\(a+b\)</span> afin de faire apparaître <span class="arithmatex">\(b-1\)</span>, soit <code>pred(b)</code>. </p>
 <div class="arithmatex">\[a+b =a+(b-1) +1 \]</div>
-<p>donc <span class="arithmatex">\(plus(a,b)=succ(a, pred(b))\)</span></p>
+<p>donc <span class="arithmatex">\(plus(a,b)=succ(plus(a, pred(b)))\)</span></p>
 <p>Ecrivons donc notre fonction en conséquence:</p>
 <div class="arithmatex">\[plus(a,b)=\begin{cases}
     a &amp; , \text{si } b=0  \text{ (cas de base)}\\ 
-    succ(a, pred(b)) &amp;, \text{sinon}
+    succ(plus(a, pred(b))) &amp;, \text{sinon}
     \end{cases}\]</div>
 <p>En écrivant bêtement la définition en python:</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">plus</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">entiernat</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">entiernat</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">entiernat</span><span class="p">:</span>
   <span class="k">if</span> <span class="n">b</span> <span class="o">==</span> <span class="n">ZERO</span><span class="p">:</span>
     <span class="k">return</span> <span class="n">a</span>
   <span class="k">else</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">succ</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">pred</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">succ</span><span class="p">(</span><span class="n">plus</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">pred</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
 
 <span class="n">afficher</span><span class="p">(</span><span class="n">plus</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 </code></pre></div>
