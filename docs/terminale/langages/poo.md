@@ -13,13 +13,21 @@
 
 Voici un exemple basique d'une classe en Python qui modélise la phrase "Un animal porte un nom, et il sait parler."
 
-```python
+```python exec="true" source="material-block" session="poo"
 class Animal:
     def __init__(self, nom: str):
         self.nom = nom  # Attribut d'instance
     
     def parler(self):   # Méthode d'instance
         print(f"{self.nom} fait du bruit.")
+
+x = Animal("Bidule")   # création d'une instance d'Animal portant le nom bidule
+print(x.nom)           # On accède aux attributs de l'instance avec le point. Affiche: Bidule
+print("<br/>")  # markdown-exec: hide
+
+x.nom = "Truc"         # Mutabilité -> On peut modifier les attributs de l'instance de la même manière 
+x.parler()  # On accède aussi aux méthodes d'instance par le point. Affiche: Truc fait du bruit.
+
 ```
 
 Dans cet exemple :
@@ -50,27 +58,24 @@ Dans cet exemple :
             print("Appel de __init__ : Initialisation de l'instance")
             self.valeur = valeur
     
-    def afficher_valeur(self):
-        print(f"Valeur : {self.valeur}")
+        def afficher_valeur(self):
+            print(f"Valeur : {self.valeur}")
+    
+    # Instanciation d'un objet
+    c = MaClasse("truc")
+    c.afficher_valeur()
     ```
 
     On considèrera malgré tout que `__init__` est le constructeur, car si on vous pose la question, c'est la réponse attendue.
 
   
-Exemple d'utilisation de cette classe :
 
-```python
-x = Animal("Bidule")   # création d'une instance d'Animal portant le nom bidule
-print(x.nom)           # On accède aux attributs de l'instance avec le point. Affiche: Bidule
-x.nom = "Truc"         # Mutabilité -> On peut modifier les attributs de l'instance de la même manière 
-x.parler()  # On accède aussi aux méthodes d'instance par le point. Affiche: Truc fait du bruit.
-```
 
 ## Interactions entre objets
 
 Rajoutons la phrase "Un Humain porte un nom, un prenom et peut adopter des animaux domestiques. On peut afficher la liste des animaux d'un Humain".
 
-```python
+```python exec="true" source="material-block" session="poo"
 class Humain:
     def __init__(self, prenom: str, nom: str):
         self.nom = nom
@@ -83,15 +88,11 @@ class Humain:
     def afficher_animaux(self):
         for a in self.animaux:
             print(a.nom)
-```
 
-On pourra alors faire ce qui est décrit en français :
 
-```python
 x = Humain("Peter", "Quill")
 y = Animal("Rocket")
 x.adopte(y)
-
 x.afficher_animaux()   # Affiche Rocket
 ```
 
