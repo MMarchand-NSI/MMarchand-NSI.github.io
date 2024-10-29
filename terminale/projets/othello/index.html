@@ -927,19 +927,19 @@
 </code></pre></div>
 <h1 id="ecriture-progressive-des-fonctions-necessaires">Ecriture progressive des fonctions nécessaires</h1>
 <div class="admonition question">
-<p class="admonition-title">Poser un pion</p>
+<p class="admonition-title">1. Poser un pion</p>
 <p>Ecrire <code>poser_pion(c: coup, joueur: int, g: grille)</code></p>
 <p>Cette fonction modifie en place la grille g sachant que le joueur donné a joué le coup c. Trivial</p>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Créer la grille</p>
+<p class="admonition-title">2. Créer la grille</p>
 <p>Ecrire <code>creer_grille() -&gt; grille</code></p>
 <p>Cette fonction initialise la grille à un début de partie.</p>
 <p><code>show(1, creer_grille())</code> doit afficher ceci:</p>
 <p><img alt="alt text" src="../image-3.png" /></p>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Pouvoir jouer</p>
+<p class="admonition-title">3. Pouvoir jouer</p>
 <p>Ecrire <code>peut_jouer(c: coup, joueur: int, g: grille) -&gt; bool</code></p>
 <p>Cette fonction touche au coeur du fonctionnement du jeu.
 Le joueur peut jouer si lorsqu'il joue le coup c, il peut capturer d'autres pions. On pourra procéder <strong>pour chaque direction</strong> à partir du coup joué.</p>
@@ -948,55 +948,60 @@ Le joueur peut jouer si lorsqu'il joue le coup c, il peut capturer d'autres pion
 <p>Les petits points sont les endroits ou le joueur peut jouer.</p>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Coups possibles</p>
+<p class="admonition-title">4. Coups possibles</p>
 <p>Ecrire <code>coups_possibles(joueur: int, g: grille) -&gt; tuple[coup,...]</code></p>
 <p>En utilisant la fonction précédente, écrire une fonction qui renvoie tous
 les coups possibles pour le joueur sur la grille.</p>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Score</p>
+<p class="admonition-title">5. Score</p>
 <p>Ecrire <code>get_score(g: grille) -&gt; tuple[int, int]</code></p>
 <p>Cette fonction renvoie le score des blanc et celui des noirs sur la grille.
 Le score se calcule ainsi: 1 point par pion présent.</p>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Jouer un coup</p>
+<p class="admonition-title">6. Jouer un coup</p>
 <p>Ecrire <code>jouer_coup(c: coup, joueur: int, g: grille) -&gt; grille</code></p>
 <p>Cette fonction est la pierre angulaire du jeu.</p>
 <p>Elle ne modifie pas g, mais renvoie une <strong>copie</strong> modifiée de g où le joueur a joué le coup c.</p>
-<p>Il faut:
-1. Poser le pion
-2. Retourner tous les pions qu'il est possible de retourner.</p>
+<p>Il faut:</p>
+<ol>
+<li>Poser le pion</li>
+<li>Retourner tous les pions qu'il est possible de retourner.</li>
+</ol>
 <p>Le retournement n'est qu'une adaptation de l'algorithme qui détermine si on peut jouer.</p>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Game Over</p>
+<p class="admonition-title">7. Game Over</p>
 <p>Ecrire <code>is_game_over(g: grille) -&gt; bool</code></p>
 <p>Le jeu est terminé si ni les blanc, ni les noirs ne peuvent jouer.</p>
 </div>
 <h1 id="boucle-principale">Boucle principale</h1>
 <div class="admonition question">
-<p class="admonition-title">Partie à 2 joueurs humains</p>
+<p class="admonition-title">8. Partie à 2 joueurs humains</p>
 <p>Ecrire <code>partie1j()</code> qui est la boucle principale pour la partie à 2 joueurs humains.
 Les humains entrent les coordonnées de la grille qu'ils souhaitent jouer dans la console.
-On adoptera ce format d'entrée utilisateur:
-- Si l'humain entre <code>46</code>, c'est qu'il veut jouer le coup <code>(4,6)</code></p>
+On adoptera ce format d'entrée utilisateur:</p>
+<ul>
+<li>Si l'humain entre <code>46</code>, c'est qu'il veut jouer le coup <code>(4,6)</code></li>
+</ul>
+<p>Vous blinderez la vérification de ce qu'entre l'utilisateur afin qu'on ne puisse pas rentrer n'importe quoi.</p>
 </div>
 <h1 id="ihm">IHM</h1>
 <div class="admonition question">
-<p class="admonition-title">Peintres en pixels</p>
-<p>Implémentez ce jeu avec l'interface graphique de votre choix. (Flet est un bon choix)</p>
+<p class="admonition-title">9. Peintres en pixels</p>
+<p>Donnez à ce jeu l'interface graphique de votre choix. (Flet par exemple)</p>
 </div>
 <h1 id="strategie">Stratégie</h1>
 <div class="admonition question">
-<p class="admonition-title">Stratégie</p>
+<p class="admonition-title">10. Stratégie</p>
 <p>Réfléchissez à une stratégie pour gagner à ce jeu.</p>
 <p>Je propose de réfléchir à quelles cases il est important d'occuper, ou de ne pas occuper.</p>
 <p>On peut aussi déterminer des phases de jeu, et ajuster en conséquence au cours de la partie.</p>
 </div>
 <h1 id="ia">IA</h1>
 <div class="admonition question">
-<p class="admonition-title">Pour la suite</p>
+<p class="admonition-title">11. Pour la suite</p>
 <p>Ecrire <code>grilles_possibles(joueur: int, g: grille) -&gt; list[tuple[grille,coup]]</code></p>
 <p>Cette fonction renvoie la liste des grilles issues de chaque coup possible du joueur, chacune accompagnée du coup en question.</p>
 <p>En compréhension, cette fonction fait une ligne.</p>
