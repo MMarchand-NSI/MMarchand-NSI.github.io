@@ -13,7 +13,7 @@
 
 Voici un exemple basique d'une classe en Python qui modélise la phrase "Un animal porte un nom, et il sait parler."
 
-```python exec="true" source="material-block" session="poo"
+```python
 class Animal:
     def __init__(self, nom: str):
         self.nom = nom  # Attribut d'instance
@@ -23,11 +23,15 @@ class Animal:
 
 x = Animal("Bidule")   # création d'une instance d'Animal portant le nom bidule
 print(x.nom)           # On accède aux attributs de l'instance avec le point. Affiche: Bidule
-print("<br/>")  # markdown-exec: hide
-
 x.nom = "Truc"         # Mutabilité -> On peut modifier les attributs de l'instance de la même manière 
 x.parler()  # On accède aussi aux méthodes d'instance par le point. Affiche: Truc fait du bruit.
 
+```
+
+Ce programme affichera
+```
+Bidule
+Truc fait du bruit
 ```
 
 Dans cet exemple :
@@ -75,7 +79,7 @@ Dans cet exemple :
 
 Rajoutons la phrase "Un Humain porte un nom, un prenom et peut adopter des animaux domestiques. On peut afficher la liste des animaux d'un Humain".
 
-```python exec="true" source="material-block" session="poo"
+```python
 class Humain:
     def __init__(self, prenom: str, nom: str):
         self.nom = nom
@@ -100,7 +104,8 @@ x.afficher_animaux()   # Affiche Rocket
 Ici, on a choisi que l'humain porte la liste de ses animaux. On aurait pu à la place ajouter un attribut propriétaire à la classe Animal pour dire qu'un animal est la propriété d'un humain particulier. Mais on aurait perdu la possibilité d'afficher les animaux d'un humain sans disposer de la liste de tous les animaux. Il faut souvent choisir quelle classe est le "chef d'orchestre" en fonction du problème qu'on a à traiter.
 
 !!! info "Héritage"
-    L’**héritage** est un autre concept fondamental en POO. Il permet à une classe (dite **classe dérivée**, ou **sous classe**) d’hériter des attributs et méthodes d’une autre classe (dite **classe de base**, ou **super classe**).
+    L’**héritage** est un autre pilier fondamental en POO. Il permet à une classe (dite **sous classe**) d’hériter des attributs et méthodes d’une autre classe (dite **super classe**).
+
 
 #### Exemple : Classe `RatonLaveur` héritant de `Animal`
 
@@ -139,7 +144,7 @@ True True
 ```
 
 La fonction `isinstance` sert à savoir si un objet est une instance d'une classe.
-Si on a besoin de l'utiliser, c'est presque toujours du à un défaut de conception. On n'aura pas besoin de l'utiliser.
+Si on a besoin de l'utiliser hors debugging, c'est sûrement du à un défaut de conception. On n'aura pas besoin de l'utiliser.
 
 
 !!! question "Modélisation objet"
@@ -155,6 +160,6 @@ Si on a besoin de l'utiliser, c'est presque toujours du à un défaut de concept
     Avant de commencer un trajet, l'humain vérifie s'il a assez d'essence, sinon, il va à la station service faire le plein.
     Lorsqu'un humain fait le plein de sa voiture, son compte en banque diminue. 
 
-    Ecrivez une classe Humain et une classe Voiture compatibles avec cette description.
-    Instanciez ensuite Humain et Voiture afin de tester des scenarios d'utilisation.
+    - Ecrivez une classe Humain et une classe Voiture compatibles avec cette description.
+    - Instanciez ensuite Humain et Voiture afin de tester des scenarios d'utilisation.
 
