@@ -55,16 +55,17 @@ Ici, le programme sorted prend bien en paramètre le programme distance_org.
 
 ### Machine de Turing
 
+TODO
+
 Une machine de turing est un concept abstrait. Il existe une définition très formelle de ce qu'est une machine de Turing, mais ça n'est pas l'objectif ici.
 On peut considérer une machine de Turing comme un automate possédant des états.
 
 [Site de simulation](https://turingmachine.io/)
 
-Elle est constituée d'un ruban infini comportant des cases.
-
-
 
 ## La calculabilité ne dépend pas du langage
+
+TODO 
 
 Il faut bien comprendre que la calculabilité ne dépend pas du langage qu'on veut utiliser, et pour cause, tous les langages de programmation turing-complets sont théoriquement équivalents.
 

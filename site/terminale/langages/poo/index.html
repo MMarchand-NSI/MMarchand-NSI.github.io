@@ -12,11 +12,11 @@
         <link rel="prev" href="../calculabilite/">
       
       
-        <link rel="next" href="../../projets/space_invader/">
+        <link rel="next" href="../recursivite/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
     
     
       
@@ -24,7 +24,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.8c3ca2c6.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -45,10 +45,6 @@
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
-    
-      <link rel="stylesheet" href="../../../assets/_markdown_exec_pyodide.css">
-    
-      <link rel="stylesheet" href="../../../assets/_markdown_exec_ansi.css">
     
       <link rel="stylesheet" href="../../../stylesheets/extra.css">
     
@@ -696,6 +692,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../recursivite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Récursivité
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -980,15 +997,13 @@ Les comportements d'un objet sont représentés par l'ensemble de ses <strong>m�
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Bidule&quot;</span><span class="p">)</span>   <span class="c1"># création d&#39;une instance d&#39;Animal portant le nom bidule</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">nom</span><span class="p">)</span>           <span class="c1"># On accède aux attributs de l&#39;instance avec le point. Affiche: Bidule</span>
-
 <span class="n">x</span><span class="o">.</span><span class="n">nom</span> <span class="o">=</span> <span class="s2">&quot;Truc&quot;</span>         <span class="c1"># Mutabilité -&gt; On peut modifier les attributs de l&#39;instance de la même manière </span>
 <span class="n">x</span><span class="o">.</span><span class="n">parler</span><span class="p">()</span>  <span class="c1"># On accède aussi aux méthodes d&#39;instance par le point. Affiche: Truc fait du bruit.</span>
 </code></pre></div>
-<div class="result">
-<p>Bidule
-<br/>
-Truc fait du bruit.</p>
-</div>
+<p>Ce programme affichera
+<div class="highlight"><pre><span></span><code>Bidule
+Truc fait du bruit
+</code></pre></div></p>
 <p>Dans cet exemple :</p>
 <ul>
 <li><strong><code>__init__</code></strong> : Cette méthode sera automatiquement chargée d'initialiser les attributs de l'objet en cours d'instanciation. On le considère comme le <strong>constructeur</strong> de la classe.</li>
@@ -1044,13 +1059,10 @@ Truc fait du bruit.</p>
 <span class="n">x</span><span class="o">.</span><span class="n">adopte</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
 <span class="n">x</span><span class="o">.</span><span class="n">afficher_animaux</span><span class="p">()</span>   <span class="c1"># Affiche Rocket</span>
 </code></pre></div>
-<div class="result">
-<p>Rocket</p>
-</div>
 <p>Ici, on a choisi que l'humain porte la liste de ses animaux. On aurait pu à la place ajouter un attribut propriétaire à la classe Animal pour dire qu'un animal est la propriété d'un humain particulier. Mais on aurait perdu la possibilité d'afficher les animaux d'un humain sans disposer de la liste de tous les animaux. Il faut souvent choisir quelle classe est le "chef d'orchestre" en fonction du problème qu'on a à traiter.</p>
 <div class="admonition info">
 <p class="admonition-title">Héritage</p>
-<p>L’<strong>héritage</strong> est un autre concept fondamental en POO. Il permet à une classe (dite <strong>classe dérivée</strong>, ou <strong>sous classe</strong>) d’hériter des attributs et méthodes d’une autre classe (dite <strong>classe de base</strong>, ou <strong>super classe</strong>).</p>
+<p>L’<strong>héritage</strong> est un autre pilier fondamental en POO. Il permet à une classe (dite <strong>sous classe</strong>) d’hériter des attributs et méthodes d’une autre classe (dite <strong>super classe</strong>).</p>
 </div>
 <h4 id="exemple-classe-ratonlaveur-heritant-de-animal">Exemple : Classe <code>RatonLaveur</code> héritant de <code>Animal</code></h4>
 <p>Nous pourrions ajouter un attribut <code>espece</code> à la classe Animal pour les distinguer, mais ici, pour introduire le concept, nous allons choisir cette phrase en Français: "Un RatonLaveur EST UN Animal"</p>
@@ -1079,7 +1091,7 @@ True False
 True True
 </code></pre></div></p>
 <p>La fonction <code>isinstance</code> sert à savoir si un objet est une instance d'une classe.
-Si on a besoin de l'utiliser, c'est presque toujours du à un défaut de conception. On n'aura pas besoin de l'utiliser.</p>
+Si on a besoin de l'utiliser hors debugging, c'est sûrement du à un défaut de conception. On n'aura pas besoin de l'utiliser.</p>
 <div class="admonition question">
 <p class="admonition-title">Modélisation objet</p>
 <p>Une voiture a une marque, un modèle, un prix, un nombre de kilomètres parcourus, une quantite de carburant dans le réservoir (en litres), et une consommation (litres au 100).
@@ -1091,8 +1103,10 @@ Un Humain peut acheter des voitures.
 Un Humain peut faire des trajets avec une voiture pour un certain nombre de kilomètres.
 Avant de commencer un trajet, l'humain vérifie s'il a assez d'essence, sinon, il va à la station service faire le plein.
 Lorsqu'un humain fait le plein de sa voiture, son compte en banque diminue. </p>
-<p>Ecrivez une classe Humain et une classe Voiture compatibles avec cette description.
-Instanciez ensuite Humain et Voiture afin de tester des scenarios d'utilisation.</p>
+<ul>
+<li>Ecrivez une classe Humain et une classe Voiture compatibles avec cette description.</li>
+<li>Instanciez ensuite Humain et Voiture afin de tester des scenarios d'utilisation.</li>
+</ul>
 </div>
 
 
@@ -1149,9 +1163,7 @@ Instanciez ensuite Humain et Voiture afin de tester des scenarios d'utilisation.
     <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.525ec568.min.js"></script>
-      
-        <script src="../../../assets/_markdown_exec_pyodide.js"></script>
+      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
       
         <script src="../../../javascripts/katex.js"></script>
       
