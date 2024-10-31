@@ -163,7 +163,61 @@ rouge = "\N{LARGE RED SQUARE}"
 bleu = 2*"\N{LARGE BLUE SQUARE}"
 ```
 
+### Conversion Binaire
 
-### Permutations
+La conversion du décimal en binaire est un procédé récursif qui fonctionne sur base de la division euclidienne par 2.
+
+Ecrire la fonction récursive:  `dec_to_bin(n: int) -> str`
+
+Sachant que 1000 appels récursifs sont autorisés au maximum en python, quel est le plus grand nombre que vous pouvez convertir?
+
+### Permutations des n premiers entiers naturels
 
 TODO
+
+### Le tour du cavalier
+
+EN COURS
+
+Le tour du cavalier est un problème hyper classique consistant à déplacer un cavalier sur un échiquier de manière à ce qu’il visite chaque case exactement une fois.
+
+Il existe deux types de tours:
+
+- **Tour fermé** : Le cavalier revient à sa case de départ après avoir visité chaque case une fois, formant ainsi un circuit fermé.
+- **Tour ouvert** : Le cavalier termine son parcours sur une case différente de celle de départ sans revenir à sa position initiale.
+
+!!! question "Sur un échiquier 5x5"
+
+    - Quand le cavalier part d'une case blanche, peut-il aller sur une case de la même couleur?
+    - Combien de mouvements doit faire le cavalier pour parcourir toutes les cases?
+    - Expliquer, de manière structurée, en vous servant des réponses aux questions précédentes, pourquoi il est impossible qu'un cavalier revienne à son point de départ en ayant visité toutes les cases sur un échiquier 5x5. 
+
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ab_dY3dZFHM?si=oq-g4MCITwUF3dXC" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+#### Tour ouvert
+
+On donne les types suivants, ainsi que les variables globales LARGEUR et HAUTEUR (de l'échiquier)
+
+```python
+type coup = tuple[int, int] 
+type chemin = list[coup]
+
+HAUTEUR = 5
+LARGEUR = 5
+```
+
+!!! question "Coups suivants"
+    Ecrire la fonction `coups_suivants(c: coup) -> list[coup]`
+    
+    Cette fonction renvoie la liste des coups possibles à la suite du coup (i,j)
+
+
+!!! question "Parcours de toutes les solutions possibles"
+    Ecrire la fonction récursive `parcours(c: coup, chemins: list[chemin], acc: chemin)`
+
+    - acc contient le chemin en cours de construction
+    - chemins contient la liste de tous les chemins. Une liste est mutable, donc elle peut être modifiée à n'importe quel moment.
+    - à chaque appel, il faut visiter tous les coups qui ne sont pas déjà dans le chemin, en l'ajoutant bien sur dans le chemin.
+    - dès qu'on a un chemin dont la taille est égale au nombre de cases, il faut l'ajouter aux chemins.
+    
