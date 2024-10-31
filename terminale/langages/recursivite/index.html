@@ -1563,7 +1563,7 @@ On doit donc réécrire <span class="arithmatex">\(a+b\)</span> afin de faire ap
 <p>Cette fonction renvoie la liste des coups possibles à la suite du coup (i,j)</p>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Parcours de toutes les solutions possibles</p>
+<p class="admonition-title">Parcours de tous les tours possibles</p>
 <p>Ecrire la fonction récursive <code>parcours(c: coup, chemins: list[chemin], acc: chemin)</code></p>
 <ul>
 <li>acc contient le chemin en cours de construction</li>
@@ -1571,6 +1571,26 @@ On doit donc réécrire <span class="arithmatex">\(a+b\)</span> afin de faire ap
 <li>à chaque appel, il faut visiter tous les coups qui ne sont pas déjà dans le chemin, en l'ajoutant bien sur dans le chemin.</li>
 <li>dès qu'on a un chemin dont la taille est égale au nombre de cases, il faut l'ajouter aux chemins.</li>
 </ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Tours fermés</p>
+<ul>
+<li>Dans une autre fonction au nom approprié, modifier le cas de base pour n'afficher que les tours fermés.</li>
+<li>Ca ne doit rien renvoyer sur un échiquier 5x5</li>
+<li>On ne testera que sur un échiquier de taille 6x5 (c'est très long)</li>
+</ul>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Pour ceux qui tentent</p>
+<p>Ceux qui se sont frottés à rust peuvent constater la différence de performance sur ce genre de problèmes.
+Dans cargo.toml, ajouter:
+<div class="highlight"><pre><span></span><code><span class="k">[profile.release]</span>
+<span class="n">opt-level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span>
+<span class="n">lto</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">true</span>
+</code></pre></div></p>
+<p>On utilisera le flag --release pour build ou run. Par exemple:
+<div class="highlight"><pre><span></span><code>cargo<span class="w"> </span>run<span class="w"> </span>--release
+</code></pre></div></p>
 </div>
 
 
