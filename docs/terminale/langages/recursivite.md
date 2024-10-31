@@ -213,11 +213,29 @@ LARGEUR = 5
     Cette fonction renvoie la liste des coups possibles à la suite du coup (i,j)
 
 
-!!! question "Parcours de toutes les solutions possibles"
+!!! question "Parcours de tous les tours possibles"
     Ecrire la fonction récursive `parcours(c: coup, chemins: list[chemin], acc: chemin)`
 
     - acc contient le chemin en cours de construction
     - chemins contient la liste de tous les chemins. Une liste est mutable, donc elle peut être modifiée à n'importe quel moment.
     - à chaque appel, il faut visiter tous les coups qui ne sont pas déjà dans le chemin, en l'ajoutant bien sur dans le chemin.
     - dès qu'on a un chemin dont la taille est égale au nombre de cases, il faut l'ajouter aux chemins.
-    
+
+!!! question "Tours fermés"
+    - Dans une autre fonction au nom approprié, modifier le cas de base pour n'afficher que les tours fermés.
+    - Ca ne doit rien renvoyer sur un échiquier 5x5
+    - On ne testera que sur un échiquier de taille 6x5 (c'est très long)
+
+!!! hint "Pour ceux qui tentent"
+    Ceux qui se sont frottés à rust peuvent constater la différence de performance sur ce genre de problèmes.
+    Dans cargo.toml, ajouter:
+    ```toml
+    [profile.release]
+    opt-level = 3
+    lto = true
+    ```
+
+    On utilisera le flag --release pour build ou run. Par exemple:
+    ```sh
+    cargo run --release
+    ```

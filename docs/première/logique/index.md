@@ -179,7 +179,7 @@ Si la tension à la base n’est pas suffisamment forte, le courant entre le col
 La LED ne s’allumera que si la tension est suffisante à la base de Q1 et de Q2. Si l’une ou l’autre des bases n’est pas alimentée, le courant est coupé et la LED s’éteint.
 
 
-# Portes et Circuits logiques
+## Portes et Circuits logiques
 
 Le circuit électtronique précédent se résume entièrement à la porte logique ET suivante, suivie des représentations d'autres portes.
 
@@ -233,7 +233,7 @@ components: {
 }
 ```
 
-## Circuit demi-additionneur
+### Circuit demi-additionneur
 
 Ce circuit prend 2 bits en entrée et les additionne, comme s'il s'agissait d'entiers binaires dont on **pose l'addition**.
 
@@ -254,7 +254,7 @@ Ainsi, on peut directement construire la table de vérité du circuit résultant
 !!! question ""
     Réalisez le circuit demi-additionneur dans l'interface et ajoutez le à votre document word.
 
-## Circuit additionneur complet (Full Adder)
+### Circuit additionneur complet (Full Adder)
 
 Le circuite additionneur prend en entrée deux bits $a$ et $b$ ainsi qu'une retenue $C_{in}$.
 
