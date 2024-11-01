@@ -1,9 +1,11 @@
 # The Game Of Life
 
+![alt text](image-4.png)
+
 
 Un [automate cellulaire](https://fr.wikipedia.org/wiki/Automate_cellulaire) est constitué d’une grille régulière de cellules étant chacune dans un état (parmi un nombre fini d’états possibles), et d’une règle d’évolution locale et synchrone : à chaque étape de temps (discret), l’état de chaque cellule est mis à jour en fonction de l’état de ses voisines (et du sien).
 
-!!! tip Pourquoi?
+!!! hint "Pourquoi?"
     Pourquoi ça intéresse certains scientifiques? Parce qu'ils cherchent à savoir comment des structures parfois très complexes émergent d'un système de règles extrêmement simples. On dit qu'ils travaillent sur l'émergence. Ca en intéresse d'autres juste parce qu'ils trouvent ça fascinant.
 
 Le mathématicien [John Conway](https://fr.wikipedia.org/wiki/John_Horton_Conway) a défini en 1970 un automate cellulaire particulier qu’il a nommé « jeu de la vie ». 
@@ -81,7 +83,11 @@ Au lieu d’être une grille infinie, c’est une grille k × k dont la colonne 
     
     6. Écrire une fonction `grille_suivante(g:grille) -> grille` qui prend en entrée une grille et renvoie la prochaine grille à afficher. Cette fonction devra faire une ligne (en compréhension).
 
+    7. Il ne vous reste plus maintenant qu'à écrire une seule ligne de code pour voir se dérouler sous vos yeux ébahis, le jeu de la vie.
+
 !!! tip "Calculabilité"
     Le jeu de la vie est Turing-Complet. Tout algorithme peut y être implémenté (ça peut se démontrer par exemple en exhibant en son sein une porte ET et une porte NON). Par conséquent, il est impossible de prédire le comportement asymptotique de toute grille donnée. 
 
     <iframe width="560" height="315" src="https://www.youtube.com/embed/WfuhbI8HE7s?si=dFeIVhBW4wGLYFQ6" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/Kk2MH9O4pXY?si=EKQCTXRYIj_GZH8G" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
