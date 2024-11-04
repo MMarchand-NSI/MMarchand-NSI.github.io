@@ -1748,9 +1748,21 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
 </tr>
 </tbody>
 </table>
-<p>2- Conclure sur une égalité
-3- Montrer que  <span class="arithmatex">\(\overline{a.b} = \bar{a}+\bar{b}\)</span></p>
+<p>2- Conclure sur une égalité</p>
+<p>3- Montrer que  <span class="arithmatex">\(\overline{a.b} = \bar{a}+\bar{b}\)</span></p>
 <p>Ces égalités à connaître sont connues sous le nom de lois de de Morgan</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Propriétés de base</p>
+<p>Que valent les expressions suivantes?</p>
+<ol>
+<li><span class="arithmatex">\(1+a\)</span></li>
+<li><span class="arithmatex">\(1.a\)</span></li>
+<li><span class="arithmatex">\(0+a\)</span></li>
+<li><span class="arithmatex">\(0.a\)</span></li>
+<li><span class="arithmatex">\(a.\bar{a}\)</span></li>
+<li><span class="arithmatex">\(a+\bar{a}\)</span></li>
+</ol>
 </div>
 <h2 id="un-peu-delectronique">Un peu d'électronique</h2>
 <h3 id="le-transistor">Le transistor</h3>
@@ -1760,12 +1772,11 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
 <ul>
 <li>(C) Le collecteur</li>
 <li>(B) La base</li>
-<li>L'émetteur
-\end{itemize}</li>
+<li>L'émetteur</li>
 </ul>
 <p>Voici son symbole électrique et ce à quoi ça ressemble:
 <img alt="alt text" src="image.png" /></p>
-<p>L'objet n'est pas ici d'être expert en transistors mais de saisir un de ses usages fondamentaux: \textbf{L'interrupteur commandé}.</p>
+<p>L'objet n'est pas ici d'être expert en transistors mais de saisir un de ses usages fondamentaux: <strong>L'interrupteur commandé</strong>.</p>
 <p>Si la tension à la base n’est pas suffisamment forte, le courant entre le collecteur et l’émetteur est coupé.</p>
 <h3 id="une-operation-logique-avec-des-transistors-et">Une opération logique avec des transistors : ET</h3>
 <p><img alt="alt text" src="image-1.png" /></p>
@@ -1797,7 +1808,7 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
 <p class="admonition-title">Turing Complete</p>
 <p>Ces exercices sont les premiers niveaux d'un jeu nommé "<a href="https://store.steampowered.com/app/1444480/Turing_Complete/">turing complete</a>". Ce jeu, partant de la simple porte NAND, vous emmène jsuqu'à construire un ordinateur entier.</p>
 <p>Au début des exercices, seule la porte NAND est utilisable. A chaque fois que vous arrivez à créer une nouvelle porte, elle devient utilisable.</p>
-<p>Pour chacun des exercices, réaliser ce qui est demandé dans l'interface ci-dessous et reportez la question et une image de la solution dans un document word.</p>
+<p>Réalisez chacun de ces exercices les uns sous les autres dans l'interface suivante et sauvegardez votre travail avec le bouton "télécharger le circuit".</p>
 <ul>
 <li>Créer une porte NOT. Seule porte autorisée: NAND</li>
 <li>Créer une porte AND</li>
@@ -1869,15 +1880,16 @@ components: {
 <li>En observant la colonne <span class="arithmatex">\(C_{out}\)</span>, on reconnaît la table de vérité de la porte AND.</li>
 </ul>
 <div class="admonition question">
-<p>Réalisez le circuit demi-additionneur dans l'interface et ajoutez le à votre document word.</p>
+<p class="admonition-title">Réalisation du demi-additionneur</p>
+<p>Réalisez le circuit demi-additionneur dans l'interface et téléchargez le résultat.</p>
 </div>
 <h3 id="circuit-additionneur-complet-full-adder">Circuit additionneur complet (Full Adder)</h3>
 <p>Le circuite additionneur prend en entrée deux bits <span class="arithmatex">\(a\)</span> et <span class="arithmatex">\(b\)</span> ainsi qu'une retenue <span class="arithmatex">\(C_{in}\)</span>.</p>
 <p>Il émet 2 informations en sortie, la somme obtenue <span class="arithmatex">\(S\)</span>, ainsi que la retenue <span class="arithmatex">\(C_{out}\)</span></p>
 <div class="admonition question">
-<p class="admonition-title">Exercice</p>
+<p class="admonition-title">Full-Adder</p>
 <ul>
-<li>Complétez la table de vérité suivante pour l'additionneur complet. Vous pouvez la compléter ci-dessous et la copier/coller dans votre document.</li>
+<li>Complétez la table de vérité suivante pour l'additionneur complet.</li>
 </ul>
 <table>
 <thead>
@@ -1960,9 +1972,44 @@ components: {
 <ul>
 <li>Montrer que <span class="arithmatex">\(S = a \oplus b \oplus C_{in}\)</span></li>
 <li>Montrer que <span class="arithmatex">\(C_{out} = (a \oplus b) . C_{in} + a . b\)</span></li>
-<li>Réalisez alors le circuit de l'additionneur complet et ajoutez le à votre document word.</li>
+<li>Réalisez alors le circuit de l'additionneur complet et sauvegardez-le.</li>
 </ul>
 </div>
+<div class="admonition question">
+<p class="admonition-title">Additionneur 4 bits</p>
+<p>Un additionneur 4 bits est composé d'un Half-Adder et de 3 Full-Adders en chaîne.
+Le but est d'additionner le nombre formé par les bits de la première colonne avec le nombre formé par les bits de la deuxième colonne.</p>
+<p>Les composants d'affichage en bas vous permettent de visualiser sous forme décimale chaque nombre, et il y en a aussi un pour le résultat.</p>
+<p>Réalisez ce circuit et sauvegardez-le</p>
+</div>
+<p><logic-editor  showonly="in out display halfadder adder" style="height: 750px; width: auto;" mode="design">
+    <script type="application/json">
+        
+{ // JSON5
+  v: 6,
+  components: {
+    disp0: {type: 'display', pos: [190, 645], id: '0-3'},
+    in0: {type: 'in', pos: [65, 80], id: 4},
+    in1: {type: 'in', pos: [150, 120], id: 5},
+    in2: {type: 'in', pos: [65, 180], id: 6},
+    in3: {type: 'in', pos: [150, 220], id: 7},
+    in4: {type: 'in', pos: [70, 310], id: 32},
+    in5: {type: 'in', pos: [155, 350], id: 33},
+    in7: {type: 'in', pos: [70, 430], id: 35},
+    in8: {type: 'in', pos: [160, 470], id: 36},
+    disp1: {type: 'display', pos: [295, 645], id: '12-15'},
+    disp2: {type: 'display', pos: [475, 645], id: [31, '38-40']},
+    out1: {type: 'out', pos: [440, 80], id: 41},
+    out2: {type: 'out', pos: [440, 200], id: 42},
+    out3: {type: 'out', pos: [440, 330], id: 43},
+    out4: {type: 'out', pos: [440, 450], id: 44},
+    label0: {type: 'label', pos: [235, 650], text: '+'},
+    label1: {type: 'label', pos: [370, 650], text: '='},
+    label2: {type: 'label', pos: [255, 30], text: 'Additionneur 4-bits'},
+  }
+}
+    </script>
+    </logic-editor></p>
 
 
 
