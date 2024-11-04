@@ -27,7 +27,7 @@ Avec les travaux d'[Alan Turing](https://fr.wikipedia.org/wiki/Alan_Turing) de 1
 
 ## Les booléens
 
-Les booléens sont au nombre de 2 : au choix, ${Vrain, Faux}$ ou ${0, 1}$.
+Les booléens sont au nombre de 2 : au choix, $\{ Vrai, Faux\}$ ou $\{0, 1\}$.
 
 On peut utiliser l’une ou l’autre des représentations, c’est justement le principe de modélisation.
 
@@ -145,10 +145,22 @@ Lorsqu'on demande d'établir la table de vérité d'une expression booléenne, o
     | 1   | 1   | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> |
     
     2- Conclure sur une égalité
+
     3- Montrer que  $\overline{a.b} = \bar{a}+\bar{b}$
 
     Ces égalités à connaître sont connues sous le nom de lois de de Morgan
 
+
+!!! question "Propriétés de base"
+    Que valent les expressions suivantes?
+
+    1. $1+a$
+    2. $1.a$
+    3. $0+a$
+    4. $0.a$
+    5. $a.\bar{a}$
+    6. $a+\bar{a}$
+    
 
 ## Un peu d'électronique
 
@@ -163,12 +175,11 @@ C'est un composant électronique doté de 3 pattes:
 - (C) Le collecteur
 - (B) La base
 - L'émetteur
-\end{itemize}
 
 Voici son symbole électrique et ce à quoi ça ressemble:
 ![alt text](image.png)
 
-L'objet n'est pas ici d'être expert en transistors mais de saisir un de ses usages fondamentaux: \textbf{L'interrupteur commandé}.
+L'objet n'est pas ici d'être expert en transistors mais de saisir un de ses usages fondamentaux: **L'interrupteur commandé**.
 
 Si la tension à la base n’est pas suffisamment forte, le courant entre le collecteur et l’émetteur est coupé.
 
@@ -212,7 +223,7 @@ Le circuit électtronique précédent se résume entièrement à la porte logiqu
 
     Au début des exercices, seule la porte NAND est utilisable. A chaque fois que vous arrivez à créer une nouvelle porte, elle devient utilisable.
 
-    Pour chacun des exercices, réaliser ce qui est demandé dans l'interface ci-dessous et reportez la question et une image de la solution dans un document word.
+    Réalisez chacun de ces exercices les uns sous les autres dans l'interface suivante et sauvegardez votre travail avec le bouton "télécharger le circuit".
 
     - Créer une porte NOT. Seule porte autorisée: NAND
     - Créer une porte AND
@@ -222,7 +233,7 @@ Le circuit électtronique précédent se résume entièrement à la porte logiqu
 
     Pourquoi appelle-t-on une porte NAND une porte universelle?
 
-```{.logic showonly="in out nand not and or nor xor" style="height: auto;width: auto;" mode="design"}
+```{.logic showonly="in out nand not and or nor xor label" style="height: auto;width: auto;" mode="design"}
 
 { 
 v: 6,
@@ -251,8 +262,8 @@ Ainsi, on peut directement construire la table de vérité du circuit résultant
 - En observant la colonne $s$, on reconnaît la table de vérité de la porte XOR.
 - En observant la colonne $C_{out}$, on reconnaît la table de vérité de la porte AND.
 
-!!! question ""
-    Réalisez le circuit demi-additionneur dans l'interface et ajoutez le à votre document word.
+!!! question "Réalisation du demi-additionneur"
+    Réalisez le circuit demi-additionneur dans l'interface et téléchargez le résultat.
 
 ### Circuit additionneur complet (Full Adder)
 
@@ -261,8 +272,8 @@ Le circuite additionneur prend en entrée deux bits $a$ et $b$ ainsi qu'une rete
 Il émet 2 informations en sortie, la somme obtenue $S$, ainsi que la retenue $C_{out}$
 
 
-!!! question "Exercice"
-    - Complétez la table de vérité suivante pour l'additionneur complet. Vous pouvez la compléter ci-dessous et la copier/coller dans votre document.
+!!! question "Full-Adder"
+    - Complétez la table de vérité suivante pour l'additionneur complet.
 
     | $a$ | $b$ | $C_{in}$ | $S$                  | $C_{out}$            | Commentaire             |
     | --- | --- | -------- | -------------------- | -------------------- | ----------------------- |
@@ -277,5 +288,42 @@ Il émet 2 informations en sortie, la somme obtenue $S$, ainsi que la retenue $C
 
     - Montrer que $S = a \oplus b \oplus C_{in}$
     - Montrer que $C_{out} = (a \oplus b) . C_{in} + a . b$
-    - Réalisez alors le circuit de l'additionneur complet et ajoutez le à votre document word.
+    - Réalisez alors le circuit de l'additionneur complet et sauvegardez-le.
+
+!!! question "Additionneur 4 bits"
+    Un additionneur 4 bits est composé d'un Half-Adder et de 3 Full-Adders en chaîne.
+    Le but est d'additionner le nombre formé par les bits de la première colonne avec le nombre formé par les bits de la deuxième colonne.
+
+    Les composants d'affichage en bas vous permettent de visualiser sous forme décimale chaque nombre, et il y en a aussi un pour le résultat.
+
+    Réalisez ce circuit et sauvegardez-le
+
+
+
+```{.logic showonly="in out display halfadder adder" style="height: 750px; width: auto;" mode="design"}
+
+{ // JSON5
+  v: 6,
+  components: {
+    disp0: {type: 'display', pos: [190, 645], id: '0-3'},
+    in0: {type: 'in', pos: [65, 80], id: 4},
+    in1: {type: 'in', pos: [150, 120], id: 5},
+    in2: {type: 'in', pos: [65, 180], id: 6},
+    in3: {type: 'in', pos: [150, 220], id: 7},
+    in4: {type: 'in', pos: [70, 310], id: 32},
+    in5: {type: 'in', pos: [155, 350], id: 33},
+    in7: {type: 'in', pos: [70, 430], id: 35},
+    in8: {type: 'in', pos: [160, 470], id: 36},
+    disp1: {type: 'display', pos: [295, 645], id: '12-15'},
+    disp2: {type: 'display', pos: [475, 645], id: [31, '38-40']},
+    out1: {type: 'out', pos: [440, 80], id: 41},
+    out2: {type: 'out', pos: [440, 200], id: 42},
+    out3: {type: 'out', pos: [440, 330], id: 43},
+    out4: {type: 'out', pos: [440, 450], id: 44},
+    label0: {type: 'label', pos: [235, 650], text: '+'},
+    label1: {type: 'label', pos: [370, 650], text: '='},
+    label2: {type: 'label', pos: [255, 30], text: 'Additionneur 4-bits'},
+  }
+}
+```
 
