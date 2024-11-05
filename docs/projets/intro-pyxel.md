@@ -6,7 +6,7 @@ L'objectif est de créer une classe Pixel capable de se dessiner et de se dépla
 import pyxel as px
 
 class Pixel:
-    def __init__(self, x:float, y: float, dx: float=0, dy:float=0, couleur:float=0):
+    def __init__(self, x:float, y: float, dx: float=0, dy:float=0, color:float=0):
         """
         Initialise un pixel avec une position (x, y), un vecteur directeur (dx, dy) et une couleur.
         """
@@ -42,13 +42,13 @@ class Jeu:
         Gère les événements utilisateur pour déplacer le pixel.
         """
         # Modification du vecteur directeur selon les touches fléchées
-        if pyxel.btn(px.KEY_RIGHT):
+        if px.btn(px.KEY_RIGHT):
             self.pixel.dx += 1
-        elif pyxel.btn(px.KEY_LEFT):
+        elif px.btn(px.KEY_LEFT):
             self.pixel.dx -= 1
-        if pyxel.btn(px.KEY_DOWN):
+        if px.btn(px.KEY_DOWN):
             self.pixel.dy += 1
-        elif pyxel.btn(px.KEY_UP):
+        elif px.btn(px.KEY_UP):
             self.pixel.dy -= 1
 
         # Le jeu demande au pixel de se mettre à jour
@@ -59,12 +59,12 @@ class Jeu:
         Efface l'écran et dessine le pixel.
         """
         # Remplir l'écran en noir
-        pyxel.cls(0)
+        px.cls(0)
         # Le jeu demande au pixel de se dessiner
         self.pixel.draw()
 
 
-if __name__ = "__main__":
+if __name__ == "__main__":
     # Démarre l'application
     pyxel.init(30, 30, title="Pixel en Mouvement", fps = 10)
     appli = Jeu()
@@ -85,3 +85,18 @@ if __name__ = "__main__":
         - Modifiez la classe Pixel pour tenir compte de cette informations. 
     7. Espace torique: Un pixel peut dépasser un bord mais il réapparaît au bord opposé (ce qui fait de l'espace de jeu un espace sans bord)
         - Modifiez la classe Pixel pour tenir compte de cette informations.
+    8. Lorsqu'on appuie sur la touche "p", un pixel aléatoire est supprimé.
+
+
+!!! question "Remplacer un pixel par un sprite"
+    1. Téléchargez le fichier 1.pyxres sur [le site de la nuit du code](https://depot.nuitducode.net)
+        - Il s'agit d'un fichier contenant des ressources visuelles et sonores.
+        - Placez le **dans le même répertoire** que votre fichier python.
+        - Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources du jeu, exécutez la commande suivante dans un terminal:
+            `pyxel edit 2.pyxres`
+        - N'hésitez pas à bidouiller, vous ne pouvez rien casser, au pire vous pourrez retélécharger le fichier.
+    2. A la place d'un simple pixel, on veut maintenant utiliser un sprite
+        - Pour le faire, il faut d'abord charger ce fichier dans le code juste avant de démarrer le jeu:
+            `px.load("2.pyxres")`
+        - Ensuite il faut dessiner le sprite que vous aurez choisi au lieu de simplement remplir un pixel. Il n'y a qu'une ligne de code à modifier. Je vous laisse la trouver en explorant la [documentation de pyxel](https://github.com/kitao/pyxel/blob/main/docs/README.fr.md).
+
