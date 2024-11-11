@@ -1007,6 +1007,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../terminale/langages/haskell/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Haskell
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../terminale/langages/poo/" class="md-nav__link">
         
   
@@ -1218,6 +1239,7 @@
 
 <h1 id="systemes-dexploitation">Systèmes d'exploitation</h1>
 <p>EN CONSTRUCTION</p>
+<p>Essayer avec http://ftp.debian.org/debian/dists/stable/main/installer-amd64/current/images/netboot/mini.iso</p>
 <h2 id="introduction">Introduction</h2>
 <p>Un système d’exploitation est un logiciel essentiel qui gère l’ensemble des ressources d’un ordinateur (processeur, mémoire, stockage) et permet aux utilisateurs d’interagir avec la machine. Il assure le bon fonctionnement des applications, la sécurité, et la gestion efficace des tâches. Dans ce chapitre, nous aborderons ses principales fonctions et découvrirons les types de systèmes d’exploitation courants.</p>
 <h1 id="demarrage-de-lordinateur">Démarrage de l'ordinateur:</h1>
@@ -1257,7 +1279,7 @@
 <p>Par exemple pour windows:</p>
 <p><img alt="alt text" src="../image.png" /></p>
 <h2 id="tp-installation-dun-systeme-dexploitation-dans-une-machine-virtuelle">TP Installation d'un système d'exploitation dans une machine virtuelle.</h2>
-<p>Nous allons installer un tout petit système d'exploitation basé sur le noyau linux: TinyCoreLinux.
+<p>Nous allons installer un système d'exploitation basé sur le noyau linux: Alpine.
 Cette installation est très technique en comparaison à une installation d'un Full Linux, qui se fait en quelques clicks.
 Mais:
 - Ca vous habitue à la ligne de commande
@@ -1266,72 +1288,64 @@ Mais:
 <ol>
 <li>
 <p>Créer un disque dur virtuel pour notre OS
-<code>qemu-img create -f qcow2 tinycore.img 50M</code></p>
+<code>qemu-img create -f qcow2 alpine.img 5G</code></p>
 </li>
 <li>
 <p>On démarre une machine virtuelle. Un ordinateur dans votre ordinateur. Ici on lui donne comme disque dur le disque virtuel qu'on vient de créer, on y insère le cd-rom d'installation du système d'exploitation, et on lui demande de booter sur le cdrom. On l'autorise à utiliser 256M de RAM sur la machine physique.
-<code>qemu-system-x86_64 -boot d -cdrom TinyCorePure64-15.0.iso -hda tinycore.img -m 256</code></p>
+<code>qemu-system-x86_64 -boot d -cdrom alpine-virt-3.20.3-x86_64.iso -hda alpine_disk.qcow2 -m 512 -net nic -net user</code></p>
 </li>
 <li>
-<p>Au bout d'un moment, des options s'offrent à vous. Sélectionnez la dernière avec les flèches et appuyez sur entrée.
-Le système d'exploitation se charge.</p>
+<p>Lorsque le système demande de vous logger, entrez "root"</p>
 </li>
 <li>
-<p>Le clavier n'est pas en français, c'est toujours la même chose pour les français, il faut tatonner pour trouver les bonnes touches pour le mettre en français:
-<div class="highlight"><pre><span></span><code>tce-load -wi kmaps
-sudo loadkmap &lt; /usr/share/kmap/azerty/fr-pc.kmap
-</code></pre></div>
-`
-Ouf, maintenant c'est plus facile.</p>
+<p>Le clavier n'est pas en français, mais ça sera bientôt le cas. On lance l'installation en tapant: <code>setup-alpine</code>, puis entrée.</p>
 </li>
 <li>
-<p>On va maintenant télécharger le programme d'installation de TinyCoreLinux. Puis on lance l'installation. (Faites vous confiance, lisez bien les options, vous ne pouvez rien casser)
-<div class="highlight"><pre><span></span><code>tce-load -wi tc-install
-sudo tc-install.sh
-</code></pre></div>
-    On veut installer:</p>
+<p>Répondez aux questions comme sur l'image suivante (quand je n'ai rien mis, j'ai juste appuyé sur entrée):
+<img alt="" src="../image-2.png" /></p>
+</li>
+</ol>
+<p><img alt="" src="../image-3.png" /></p>
+<p>Sur l'image suivante, à la fin, on voit qu'il nous demande sur quel disque dur on veut installer alpine. On va lui dire de l'installer sur le disque qu'on a créé. On voit ici que le "QEMU DRIVE" est sda. On entre donc sda.</p>
+<p><img alt="" src="../image-4.png" /></p>
+<p><img alt="alt text" src="../image-5.png" /></p>
 <ul>
-<li>Depuis le CDROM qu'on a inséré dans la machine virtuelle. Afin d'avoir le clavier en français, rajouter aux options de boot:
-<code>kmap=azerty/fr-pc</code></li>
-<li>L'installation Frugal</li>
-<li>Sur le disque entier, qui est sda (sda est le disque virtuel que nous avons créé)</li>
-<li>On veut installer un bootloader</li>
-<li>On ne veut pas installer d'extensions pour l'instant, donc on appuie sur entrée juste après.</li>
-<li>On veut formatter le disque entier en ext4</li>
-<li>On veut le clavier azerty, donc on entre kmap=azerty/fr-pc dans les boot options (voir image suivante)</li>
-<li>A ce stade l'écran devrait ressembler à ça: </li>
+<li>
+<p>On valide l'installation en entrant y  (si vous ne mettez pas y, ça s'arrête et vous devez tout recommencer)</p>
+</li>
+<li>
+<p>Le système d'exploitation est installé, et il nous demande de redémarrer.</p>
+</li>
+<li>
+<p>On entre cette commande pour arrêter l'ordinateur: <code>poweroff</code></p>
+</li>
 </ul>
-</li>
-</ol>
-<p><img alt="alt text" src="../image-1.png" /></p>
-<pre><code>- Confirmez et l'installation commence. Une fois avoir appuyé sur entrée comme c'est demandé, il faut éteindre la machine:
-`sudo poweroff`
-</code></pre>
-<ol>
+<div class="admonition hint">
+<p class="admonition-title">Commande pour démarrer l'ordinateur</p>
+<ul>
 <li>
-<p>Maintenant on peut redémarrer la machine sans le CD d'installation du système d'exploitation, en lui demandant de booter sur le disque dur.
-<code>qemu-system-x86_64 -boot c -hda tinycore.img -m 256</code></p>
+<p>Dès que vous voulez démarrer cet ordinateur, entrez:
+<code>qemu-system-x86_64 -hda alpine_disk.qcow2 -m 512 -nic user,ipv6=off,hostfwd=tcp::22022-:22</code></p>
 </li>
 <li>
-<p>Alors je ne vous l'ai pas dit tout à l'heure, mais il va falloir refaire les manipulations pour le clavier une dernière fois. En effet. tout à l'heure, il n'y avait pas encore de disque pour faire persister la configuration. Il faut donc le refaire une dernière fois.
-<div class="highlight"><pre><span></span><code>tce-load -wi kmaps
-sudo loadkmap &lt; /usr/share/kmap/azerty/fr-pc.kmap
-</code></pre></div></p>
+<p>Dès que vous voudrez l'arrêter, entrez:
+<code>doas poweroff</code></p>
 </li>
-<li>
-<p>Eteignez votre machine, puis rallumez-la afin de vérifier que ça a bien été pris en compte.</p>
-</li>
-<li>
-<p>Bravo, vous avez installé vous même en ligne de commandes un OS basé sur le noyau Linux.</p>
-</li>
-</ol>
+</ul>
+</div>
 <div class="admonition question">
 <p class="admonition-title">Commandes linux</p>
-<p>Liste de questions sur la ligne de commande</p>
+<p>Liste de questions sur la ligne de commande
+- df -Th</p>
 </div>
 <p>Vidéo commandes linux</p>
-<p>De retour à notre interface:</p>
-<p><code>tce-load -wi Xvesa.tcz Xlibs.tcz Xprogs.tcz aterm.tcz flwm_topside.tcz wbar.tcz</code></p>
+<div class="admonition tip">
+<p class="admonition-title">Interface graphique de l'OS</p>
+<p>Un OS dispose habituellement d'une interface graphique, comme windows.
+Sous linux, vous avez même l'embarras du choix.
+On n'en ajoutera pas car ça prend trop d'espace disque, mais voici ce que ça peut donner.
+<img alt="alt text" src="../image-6.png" /></p>
+</div>
 
 
 
