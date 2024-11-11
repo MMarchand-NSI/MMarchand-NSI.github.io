@@ -234,36 +234,40 @@ graph LR
 12 --> 0
 ```
 
-#### La méthode est_vide
+#### Méthodes de départ
 
 Afin de vous lancer sur le parcours de cette structure, je vous donne votre deuxième méthode, la méthode `est_vide`.
+
+```python
+def est_vide(self) -> bool:
+    """
+    Renvoie True si la liste est vide, False sinon.
+    """
+    return self.next is self
+```
+
+ainsi que la méthode longueur, qui renvoie la taille calculée de la liste.
+
+A l'origine, le maillon courant est le premier maillon de la liste, ou elle même si la liste est vide.
+Tant que courant n'est pas self (sinon ça veut dire qu'on est revenu à la sentinelle), on incremente l'accumulateur et on passe au maillon suivant.
+
+```python
+def longueur(self) -> bool:
+    """
+    Renvoie la taille calculée de la liste.
+    """
+    acc = 0
+    courant = self.next
+    while courant is not self:
+        acc += 1
+        courant = courant.next
+    return acc
+```
 
 
 !!! tip Opérateur is
     l'opérateur is sert à comparer les objets, non pas en termes de valeur, mais en termes d'adresse mémoire.
-    ```python
-    def est_vide(self) -> bool:
-        return self.next is self
-    ```
 
-!!! hint "Méthode exemple"
-    Cette méthode spéciale (c'est une méthode de classe) pourra être utilisée dans les doctests:
-
-    ```python
-    @staticmethod
-    def exemple() -> 'Liste':
-        lst = Liste()
-        lst.ajouter_tete(89)
-        lst.ajouter_tete(3)
-        lst.ajouter_tete(2)
-        return lst
-    ```
-
-    On l'appellera ainsi:
-
-    ```python
-    lst = Liste.exemple()
-    ```
 
 !!! question Défi 
     A vous maintenant de recréer les fonctions que vous avez vues en programmation fonctionnelles en tant que méthodes de la classe liste en commençant par la méthode ajouter_fin. Vous n'utiliserez pas la récursivité.
