@@ -252,7 +252,7 @@ A l'origine, le maillon courant est le premier maillon de la liste, ou elle mêm
 Tant que courant n'est pas self (sinon ça veut dire qu'on est revenu à la sentinelle), on incremente l'accumulateur et on passe au maillon suivant.
 
 ```python
-def longueur(self) -> bool:
+def longueur(self) -> int:
     """
     Renvoie la taille calculée de la liste.
     """
