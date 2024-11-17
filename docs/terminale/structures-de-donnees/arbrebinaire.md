@@ -3,20 +3,34 @@
 !!! danger "Pré-requis"
     Si les travaux sur les listes sont maîtrisés, ceci ne devrait presque être qu'une formalité.
 
+
+```mermaid
+
+graph TD;
+    A((3))
+    A --> B((7))
+    A --> C((2))
+    B --> D((9))
+    B --> E((18))
+    C --> F((15))
+    C --> G((6))
+    C --> H((5))
+    F --> I((8))
+```
+
+Ci-dessus, voici un arbre enraciné.
+
+
+!!! abstract "Définitions"
+    Un arbre est constitué de plusieurs Noeuds.
+    Un noeud peut porter une donnée. Ici, un entier.
+
 !!! abstract "Arbre (enraciné)"
-    Un arbre est soit vide, soit composé d'une donnée ainsi que de plusieurs sous-arbres.
+    Un arbre est soit vide, soit composé d'un noeud portant une donnée ainsi que d'une liste de plusieurs sous-arbres.
 
     !!! question "Exercice"
         Nous ne travaillerons qu'avec des arbres portant des entiers.
         Proposez une implémentation python du type arbre.
-
-    On nomme racine un arbre qui n'a pas de parent.
-
-    On nomme feuille un arbre qui n'a pas d'enfant.
-
-    On nomme hauteur d'un arbre la longueur du chemin à sa feuille la plus éloignée.
-
-    On nomme taille d'un arbre son nombre de sous-arbre + 1 (lui-même).
 
 
 !!! abstract "Arbre binaire"

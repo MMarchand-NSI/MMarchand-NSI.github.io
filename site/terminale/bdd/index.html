@@ -8,6 +8,8 @@
       
       
       
+        <link rel="canonical" href="https://mmarchand-nsi.github.io/terminale/bdd/">
+      
       
         <link rel="prev" href="../../projets/space_invader/">
       
@@ -21,6 +23,11 @@
     
       
         <title>Base de données et SGBD - Science Informatique - Site en construction</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
+<script src="https://mmarchand-nsi.github.io//js/sqlite_ide.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/sql/sql.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.css"><link rel="stylesheet" href="https://mmarchand-nsi.github.io//css/sqlite_ide.css"><script>path="https://mmarchand-nsi.github.io/"</script>
       
     
     
@@ -556,6 +563,73 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Prog
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Prog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/strings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chaînes de caractères (str)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -655,6 +729,27 @@
   
   <span class="md-ellipsis">
     Othello
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projets/pendu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Le pendu
   </span>
   
 
@@ -880,53 +975,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../langages/calculabilite/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Calculabilité et Décidabilité
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../langages/poo/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
     Paradigme orienté objets
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../langages/recursivite/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Récursivité
   </span>
   
 
@@ -981,27 +1034,6 @@
             Structures de donnees
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../structures-de-donnees/arbrebinaire/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Arbres binaires
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
             
               
                 
@@ -1094,20 +1126,24 @@
 
 
 <h1 id="base-de-donnees-et-sgbd">Base de données et SGBD</h1>
+<p>EN CONSTRUCTION</p>
+<div class="admonition abstract">
+<p class="admonition-title">Introduction</p>
 <p>Une base de données est un ensemble de données structurées.</p>
 <p>Un système de gestion de bases de données (SGBD) est un outil permattant de stocker et d'interagir avec des bases de données.</p>
 <p>Il existe plusieurs modèles pour stocker les données dans une base de données.</p>
 <p>Nous allons nous intéresser au modèle dit <strong>relationnel</strong>.</p>
-<p>Nous utiliserons le SGBD Postgresql</p>
+<p>Nous utiliserons les SGBD SQLite et Postgresql.</p>
+</div>
 <h1 id="le-modele-relationnel">Le modèle relationnel</h1>
-<p>Nous travaillerons avec cette base de données.</p>
+<p>Nous travaillerons avec cette base de données exemple bien connue qui s'appelle chinook.</p>
 <p><img alt="alt text" src="image.png" /></p>
-<h2 id="algebre-relationnelle">Algèbre relationnelle</h2>
-<p>Ici, nous allons définir quelques termes de l'algèbre relationnelle.</p>
+<h2 id="la-theorie-de-lalgebre-relationnelle">La théorie de l'algèbre relationnelle</h2>
+<p>Ne vous laissez pas avoir par le caractère ronflant des définitions. Au final, on manipule des lignes et des colonnes.</p>
 <div class="admonition abstract">
 <p class="admonition-title">Relation</p>
 <p>Une relation est un ensemble fini d'entités relevant d'un même concept. les entités sont décrites par certaines de leur caractéristiques. Une relation a un nom par lequel elle est identifiée.</p>
-<p>Sur le dessin de la base de données, Chaque "boîte" est uue relation.
+<p>Sur le dessin de la base de données, Chaque "boîte" est une relation.
 Par exemple, on a la relation Artiste.</p>
 </div>
 <div class="admonition abstract">
@@ -1119,6 +1155,144 @@ Par exemple, on a la relation Artiste.</p>
 <p class="admonition-title">Domaine d'un attribut</p>
 <p>Chaque attribut a un <strong>domaine</strong>. Il s'agit de l'ensemble des valeurs que peut prendre l'attribut. Le domaine de l'attribut Name de la relation Artiste est "chaîne de caractères"</p>
 </div>
+<div class="admonition danger">
+<p class="admonition-title">Vocabulaire</p>
+<p>En pratique, les mots attributs, relation et schéma ne sont pas utilisés en dehors de l'étude de l'algèbre relationnelle, qui constitue l'outil théorique derrière le modèle relationnel.</p>
+<p>Vous entendrez parler de:</p>
+<ul>
+<li>Tables pour les relations</li>
+<li>Champs (Fields) ou colonnes (columns), pour les attributs</li>
+<li>Enregistrements (Records) ou lignes (rows) pour les entités</li>
+<li>Le mot schéma est souvent utilisé pour décrire l'ensemble des tables constituant une base de données.</li>
+</ul>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Notations - Algèbre relationnelle</p>
+<p>Soit <span class="arithmatex">\(R\)</span> une relation avec n attributs. Cette relation est notée <span class="arithmatex">\(R(a_1:dom_1, a_2: dom_2, ..., a_n:dom_n)\)</span></p>
+<p>Par exemple, pour employee: <strong>Employee(EmployeeId: entier, LastName: chaîne de caractère, FirstName: .....)</strong></p>
+<p>Un <strong>n-uplet</strong> (ou <strong>tuple</strong>) de <span class="arithmatex">\(R\)</span>, est une entité respectant le schéma de <span class="arithmatex">\(R\)</span>.</p>
+<p>L'<strong>ensemble</strong> des n-uplets d'une relation à un instant donné compose une <strong>instance</strong> de la relation.</p>
+<p>Cette définition ensembliste n'est pas anodine car elle impose que l'ordre des n-uplets n'a pas d'importance et qu'il ne peut pas y avoir de n-uplets identiques.</p>
+</div>
+<hr />
+<h2 id="la-pratique">La pratique</h2>
+<p>Un SGBD est un outil permettant de stocker et d'interagir avec des bases de données.</p>
+<div class="admonition abstract">
+<p class="admonition-title">SQL</p>
+<p>SQL (Structured Query Language) est un langage de requête structurel. Il permet de manipuler des bases de données structurées.
+Il fonctionne avec des clauses.</p>
+</div>
+<h3 id="requetes-sql">Requêtes SQL</h3>
+<div class="admonition abstract">
+<p class="admonition-title">Les clauses SELECT et FROM</p>
+<p>La clause SELECT permet de demander des données.
+Sous cet encart, écrivez et exécutez:
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="n">mediatypeid</span><span class="p">,</span><span class="w"> </span><span class="n">name</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">media_types</span><span class="p">;</span>
+</code></pre></div></p>
+<ul>
+<li>La clause FROM permet de signifier les relations sur lesquelles vous voulez travailler.</li>
+<li>La clause SELECT permet de demander quels attributs vous voulez obtenir, séparés par une virgule.</li>
+<li><code>*</code> signifie tous les attributs de la relation.</li>
+<li>Toute requête se termine par un point-virgule</li>
+</ul>
+<p>Essayez ces autres requêtes:
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">media_types</span><span class="p">;</span>
+
+<span class="k">SELECT</span><span class="w"> </span><span class="n">title</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">albums</span>
+<span class="k">LIMIT</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span>
+</code></pre></div></p>
+<ul>
+<li>En SQLite, la clause LIMIT permet de ne renvoyer que les premiers enregistrements. C'est pratique pour tester des requêtes sans afficher des milliers de résultats.</li>
+</ul>
+</div>
+<script>var chinook = new Worker(path + "/js/worker.sql-wasm.js");</script>
+<div id="ide1" >
+<label for='sqlcommands'>Exécuter des requêtes sur chinook:</label>
+<br>
+<textarea id="sqlcommands" class="sqlcommands"></textarea>
+<button id="execute" class="sqlbutton execute">Exécuter</button>
+<div id="error" class="sqlerror"></div>
+<pre id="output" class="sqloutput"></pre>
+</div>
+<script>
+  onElementLoaded("div#ide1").then(() => {
+    const ide = document.querySelector("div#ide1");
+    load(ide, 'https:/mmarchand-nsi.github.io/assets/chinook.db', '', '', chinook);
+}).catch(() => {});
+</script>
+<div class="admonition abstract">
+<p class="admonition-title">La clause WHERE</p>
+<p>La clause where permet d'émettre une condition sur les enregistrements récupérés.
+Par exemple, pour connaître tous les clients habitant en France, exécutez:</p>
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">customers</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;France&#39;</span><span class="p">;</span>
+</code></pre></div>
+<p>Essayez cette autre requêtes:
+<div class="highlight"><pre><span></span><code><span class="k">SELECT</span><span class="w"> </span><span class="o">*</span>
+<span class="k">FROM</span><span class="w"> </span><span class="n">customers</span>
+<span class="k">WHERE</span><span class="w"> </span><span class="n">country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;France&#39;</span><span class="w"> </span><span class="k">AND</span><span class="w"> </span><span class="n">city</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;Paris&#39;</span><span class="p">;</span>
+</code></pre></div></p>
+<p>Dans une clause WHERE, on émet une condition sur les attributs des tables sur lesquelles on travaille.</p>
+<div class="admonition tip">
+<p class="admonition-title">L'opérateur pratique LIKE</p>
+<p>L'opérateur like permet une recherche basée sur un motif.</p>
+<ul>
+<li><code>WHERE Name LIKE 'A%'</code> : renvoie vrai pour tous les noms qui commencent par "A".</li>
+<li><code>WHERE Name LIKE '%land'</code> : renvoie vrai pour tous les noms qui se terminent par "land".</li>
+<li><code>WHERE Name LIKE '%an%'</code> : renvoie vrai pour tous les noms contenant "an".</li>
+</ul>
+<p><code>%</code> représente 0 ou plusieurs caractères</p>
+<ul>
+<li><code>WHERE Name LIKE 'J_n'</code> : renvoie vrai pour "Jan", "Jon", etc.</li>
+<li><code>WHERE Name LIKE 'C_t%'</code> : renvoie vrai pour "Cat", "Cut", "Cart", etc.</li>
+</ul>
+<p><code>_</code> représente un seul caractère</p>
+</div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercices - automatismes</p>
+<p>Pour chaque item de la liste suivante, écrivez la requête qui permet de l'obtenir.</p>
+<p>Vous conserverez les réponses dans un fichier .sql</p>
+<p>Vous pouvez écrire des commentaires dans un fichier sql en les faisant précéder de <code>--</code></p>
+<ol>
+<li>Les clients situés dans le pays "Canada".</li>
+<li>Le prénom et le nom des clients vivant à "Paris".</li>
+<li>Les clients dont l'email contient "yahoo".</li>
+<li>Les clients dont l'identifiant de support est "3".</li>
+<li>Les noms des employés qui travaillent dans la ville de "Calgary".</li>
+<li>Les employés avec le titre "Sales Support Agent".</li>
+<li>Les employés engagés après l'année 2003.</li>
+<li>Les informations des employés dont le supérieur a l'ID "1".</li>
+<li>Les factures d'un client ayant l'ID "10".</li>
+<li>Les factures dont le total est supérieur à 10.</li>
+<li>Les factures émises en "2010".</li>
+<li>Les factures provenant du pays "USA".</li>
+<li>Les titres dont la durée dépasse 5 minutes.</li>
+<li>Les artistes dont le nom contient "The".</li>
+<li>Les artistes dont le nom commence par "A".</li>
+<li>Les albums dont le titre contient "Greatest Hits".</li>
+</ol>
+</div>
+
+<div id="ide2" >
+<label for='sqlcommands'>Exécuter des requêtes sur chinook:</label>
+<br>
+<textarea id="sqlcommands" class="sqlcommands"></textarea>
+<button id="execute" class="sqlbutton execute">Exécuter</button>
+<div id="error" class="sqlerror"></div>
+<pre id="output" class="sqloutput"></pre>
+</div>
+<script>
+  onElementLoaded("div#ide2").then(() => {
+    const ide = document.querySelector("div#ide2");
+    load(ide, 'https:/mmarchand-nsi.github.io/assets/chinook.db', '', '', chinook);
+}).catch(() => {});
+</script>
+
 
 
 

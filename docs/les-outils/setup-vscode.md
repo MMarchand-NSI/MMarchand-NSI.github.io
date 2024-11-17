@@ -1,5 +1,5 @@
 ![Logo](image-6.png){ align=right }
-
+[](){#setup-vscode}
 # Setup de VSCode
 
 Un IDE (environnement de développement intégré) est un logiciel qui aide les programmeurs à développer.
