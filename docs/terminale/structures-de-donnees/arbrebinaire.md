@@ -1,8 +1,12 @@
-# Arbres binaires
+# Arbres enracinés
+
+EN CONSTRUCTION 
 
 !!! danger "Pré-requis"
-    Si les travaux sur les listes sont maîtrisés, ceci ne devrait presque être qu'une formalité.
+    Si les listes sont maîtrisées, ceci ne devrait presque être qu'une formalité.
 
+## Arbre enraciné quelconque
+Voici un arbre enraciné quelconque:
 
 ```mermaid
 
@@ -18,29 +22,33 @@ graph TD;
     F --> I((8))
 ```
 
-Ci-dessus, voici un arbre enraciné.
-
-
-!!! abstract "Définitions"
-    Un arbre est constitué de plusieurs Noeuds.
-    Un noeud peut porter une donnée. Ici, un entier.
-
 !!! abstract "Arbre (enraciné)"
-    Un arbre est soit vide, soit composé d'un noeud portant une donnée ainsi que d'une liste de plusieurs sous-arbres.
+    Un arbre est soit **vide**, soit composé d'un **noeud** portant une donnée ainsi qu'une **forêt**.
 
-    !!! question "Exercice"
-        Nous ne travaillerons qu'avec des arbres portant des entiers.
-        Proposez une implémentation python du type arbre.
+    Une **forêt** est vie ou c'est un ensemble d'arbres disjoints.
 
+    On appelle **racine** un noeud qui n'a pas de parent.
+
+    On appelle **feuille** un noeud n'ayant pas d'enfant.
+
+    La **taille** d'un arbre est son nombre de noeuds.
+
+    La **hauteur** d'un arbre possède 2 définitions impactant la définition de la hauteur de l'arbre vide:
+    - Longueur du chemin à la feuille la plus éloignée ($hauteur(\empty)=-1$)
+    - Nombre de noeuds dans le chemin à la feuille la plus éloignée. ($hauteur(\empty)=0$)
+
+
+Dans un premier temps, nous allons nous intéresser à une forme spéciale d'arbre, les arbres binaires.
+
+## Arbres binaires
 
 !!! abstract "Arbre binaire"
-    Un arbre binaire est une structure composée d'une clé (ou étiquette), ainsi que de 2 arbres, le sous-arbre gauche (sag) ainsi que le sous-arbre droit (sad). C'est un arbre très particulier car on distingue bien la position de chaque sous-arbre.
+    Un arbre binaire est une structure composée d'une **clé** (ou étiquette), ainsi que de 2 arbres, le **sous-arbre gauche** (sag) ainsi que le **sous-arbre droit** (sad). C'est un arbre très particulier car on distingue bien la position de chaque sous-arbre.
+
+    ![img](abin.svg)
 
     !!! question "Exercice"
-        En vous inspirant du travail fait sur les listes:
-
-        1. Proposez une implémentation python du type arbrebin.
-        2. Proposez une implémentation OCaml du type arbrebin.
+        Proposez une implémentation python immuable du type arbrebin.
 
 
 !!! question "Exercices"
@@ -50,17 +58,27 @@ Ci-dessus, voici un arbre enraciné.
     - `sag(a: arbrebin) -> arbrebin`
     - `sad(a: arbrebin) -> arbrebin`
     - `est_vide(a: arbrebin) -> bool`
+    - `est_feuille(a: arbrebin) -> bool`
     
     Implémenter en conséquence les fonctions récursives:
     
     - `hauteur` calcule la hauteur d'un arbre
         - (je suis un arbre, je pose la question à mon sag et mon sad, qu'est-ce que je fais avec leurs réponse?)
     - `taille` calcule le nombre de noeuds d'un arbre
-    - `somme` calcule la somme des élements d'un arbre
+    - `somme` calcule la somme des clés d'un arbre
     - `to_str` renvoie une str comportant toutes les clés d'un arbre.
     - `minimum` renvoie la clé minimum d'un arbre binaire.
-    - `minimum` renvoie la clé minimum d'un arbre binaire.
+    - `maximum` renvoie la clé maximum d'un arbre binaire.
+    - `sont_egaux` renvoie si 2 arbres sont identiques.
 
+!!! question "Arbre aléatoire"
+    - Créer une fonction récursive `genere_alea(h: int) -> arbrebin` qui génère un arbre complet ayant pour hauteur h, comportant des clés aléatoires de 1 à 100.
+    - Spé maths: Créer une fonction récursive `genere_alea2() -> arbrebin` qui génère un arbre comportant des clés aléatoires de 1 à 100. La probabilité de créer un noeud doit être l'inverse de sa hauteur.
+    - Spé Maths: Etudiez les fonctions $f_\alpha(x)=e^{-\alpha  x^2}, x\in \mathbb{R^+},  \alpha \in \mathbb{R}^{*+}$
+        - Variations, limites, convexité
+        - Trouvez les coordonnées de leur point d'inflexion.
+        - Proposez une utilisation de cette fonction pour qu'elle génère un arbre de hauteur à peu près $h$ en vous servant du point d'inflexion. (on estimera que la probabilité donnée au delà du point d'inflexion est rapidement trop faible pour aller bien loin, et qu'il est déjà probable que certaines branches se soient déjà arrêtées avant d'atteindre la hauteur $h$)
+        - Répétez le procédé en vous basant non pas sur le point d'inflexion mais là ou un noeud à la hauteur h a pour probabilité 0.5 d'être créée.
 
 !!! question "Arbre équilibré"
     Un arbre est équilibré s'il est vide ou que, à la fois:
@@ -68,6 +86,7 @@ Ci-dessus, voici un arbre enraciné.
     - La distance entre la hauteur de ses enfants est au maximum 1.
     - Ses enfants sont équilibrés.
     
+    Dessinez un arbre équilibré.
     Ecrire la fonction `est_equilibre(a: arbrebin) -> bool`.
 
 !!! question "Renforcement"
@@ -75,44 +94,23 @@ Ci-dessus, voici un arbre enraciné.
     (Ca n'est en réalité qu'une généralisation de chaque algorithme à un nombre quelconque d'enfants)
 
 
-!!! abstract "Arbre binaire - Définition alternative"
-    Un arbre est soit vide, soit c'est un ensemble de noeuds reliés hiérarchiquement.
-
-    Chaque noeud a au plus 2 enfants, l'enfant gauche et l'enfant droit.
-
-    On nomme racine le noeud qui n'a pas de parent.
-
-    On nomme feuille un noeud qui n'a pas d'enfant.
-
-    On nomme hauteur d'un arbre la longueur du chemin de la racine à sa feuille la plus éloignée.
-
-    On nomme taille d'un arbre son nombre de noeuds.
 
 !!! hint "Implémentation mutable"
-    L'implémentation ci-dessous utilise aussi une sentinelle, mais ne l'utilise pas de manière aussi sioux que pour les listes. Elle signifie seulement l'absence d'enfant. La création d'une sentinelle nous permet de ne pas utiliser la valeur générique None, qui pourrait signifier bien autre chose qu'une absence d'enfant, car None n'est pas propre à notre structure.
+    L'implémentation ci-dessous utilise aussi une sentinelle, mais ne l'utilise pas de manière aussi sioux que pour les listes. Rien dde circulaire. Elle signifie seulement l'arbre vide. La création d'une sentinelle nous permet de ne pas utiliser la valeur générique None, qui pourrait signifier bien autre chose qu'une absence d'enfant, car None n'est pas propre à notre structure.
 
     ```python
-    class Noeud:
-        def __init__(self, cle, gauche: 'Noeud', droit: 'Noeud'):
+    class ArbreBin:
+        def __init__(self, cle, gauche: 'ArbreBin', droit: 'ArbreBin'):
             self.cle = cle
             self.gauche = gauche
             self.droit = droit
 
         def est_feuille(self):
-            return self.gauche is NIL and self.droite is NIL
+            return self.gauche is ARBRE_VIDE and self.droite is ARBRE_VIDE
 
     class Sentinelle(Noeud):
         def __init__(self):
             super().__init__(0, self, self)
-
-    NIL = Sentinelle()
-
-    class ArbreBin:
-        def __init__(self, racine: 'Noeud'):
-            self.racine = racine
-        
-        def est_vide(self) -> bool:
-            return self.racine is NIL
 
     ```
 
@@ -189,8 +187,13 @@ graph TD;
         - Pour un arbre filiforme
         - Pour un arbre parfait
 
-!!! question "TD->TP Compression de données - Codage de Huffman"
-    Voir fichier donné
+    - Implémentez ces fonctions pour la version mutable (important)
+
+!!! question "Application à la compression de données - Codage de Huffman"
+    Sensibilisation à la notion d'information.
+    Vidéo introductive:
+
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/_PG-jJKB_do?si=jCH2BWFpFK6zjw3v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 
 !!! tip "Avancé - Rotations"
@@ -203,5 +206,4 @@ graph TD;
 
 
 !!! question "MP2I"
-    Pas de bidouillage. Priorité à la disjonction de cas.
-    Implémentez toutes les fonctions en OCaml. 
+    Implémentez doctement toutes les fonctions en OCaml. (seulement la version immuable. Il est aussi possible d'implémenter la version mutable en OCaml, mais chaque chose en son temps)
