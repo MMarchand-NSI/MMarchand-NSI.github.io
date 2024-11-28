@@ -7,7 +7,7 @@ Il est inutile d'essayer de comprendre ces définitions avant d'avoir pratiqué 
 
 
 !!! tip "Le Paradigme Fonctionnel"
-    Cette définition s'appuie sur le travail qui a été fait sur les listes chainées, afin de pouvoir vous la représenter plus facilement.
+    Cette définition s'appuie sur le travail qui a été fait sur les listes, afin de pouvoir vous la représenter plus facilement.
 
     Le paradigme fonctionnel se distingue principalement par :
     

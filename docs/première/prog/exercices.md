@@ -1,6 +1,6 @@
 # Exercices Accumulation
 
-!!! warning "Mode opératoire"
+!!! example "Mode opératoire"
     - Créez un fichier exos_accumulation.py
 
     !!! danger "Attention"
@@ -27,7 +27,7 @@
 !!! question "Produit des entiers > 0" 
     Écrire et tester une fonction qui renvoie le produit des nombres entiers de 1 jusque n.
 
-    En mathématiques on appelle ce nombre $n!$ qui se lit "n factorielle", avec $0! = 1$
+    On appelle ce nombre $n!$ qui se lit "n factorielle", avec $0! = 1$
 
 !!! question "Nombre de voyelles"
     Écrire une fonction qui lit une chaîne de caractères et affiche le nombre de voyelles présentes dans cette chaîne.
