@@ -77,8 +77,7 @@ Dans un premier temps, nous allons nous intéresser à une forme spéciale d'arb
     - Spé Maths: Etudiez les fonctions $f_\alpha(x)=e^{-\alpha  x^2}, x\in \mathbb{R^+},  \alpha \in \mathbb{R}^{*+}$
         - Variations, limites, convexité
         - Trouvez les coordonnées de leur point d'inflexion.
-        - Proposez une utilisation de cette fonction pour qu'elle génère un arbre de hauteur à peu près $h$ en vous servant du point d'inflexion. (on estimera que la probabilité donnée au delà du point d'inflexion est rapidement trop faible pour aller bien loin, et qu'il est déjà probable que certaines branches se soient déjà arrêtées avant d'atteindre la hauteur $h$)
-        - Répétez le procédé en vous basant non pas sur le point d'inflexion mais là ou un noeud à la hauteur h a pour probabilité 0.5 d'être créée.
+        - Proposez comment utiliser cette fonction pour générer la probabilité de créer un noeud de hauteur $x$, pour que l'arbre ait à peu près la hauteur $h$. (on estimera que la probabilité renvoyée au delà du point d'inflexion est rapidement trop faible pour aller bien loin, et qu'il est déjà probable que certaines branches se soient déjà arrêtées avant d'atteindre la hauteur $h$)
 
 !!! question "Arbre équilibré"
     Un arbre est équilibré s'il est vide ou que, à la fois:
@@ -88,11 +87,6 @@ Dans un premier temps, nous allons nous intéresser à une forme spéciale d'arb
     
     Dessinez un arbre équilibré.
     Ecrire la fonction `est_equilibre(a: arbrebin) -> bool`.
-
-!!! question "Renforcement"
-    Ecrire les mêmes fonctions pour un arbre enraciné quelconque.
-    (Ca n'est en réalité qu'une généralisation de chaque algorithme à un nombre quelconque d'enfants)
-
 
 
 !!! hint "Implémentation mutable"
@@ -108,14 +102,36 @@ Dans un premier temps, nous allons nous intéresser à une forme spéciale d'arb
         def est_feuille(self):
             return self.gauche is ARBRE_VIDE and self.droite is ARBRE_VIDE
 
-    class Sentinelle(Noeud):
+        def est_vide(self):
+            return self.gauche is ARBRE_VIDE and self.droite is ARBRE_VIDE
+
+
+    class Sentinelle(ArbreBin):
         def __init__(self):
             super().__init__(0, self, self)
+
+    ARBRE_VIDE = Sentinelle()
+    ```
+
+    Un autre possibilté est celle-ci, cette fois-ci avec l'utilisation de None:
+
+    ```python
+
+    class Noeud:
+        def __init__(self, cle, gauche: 'ArbreBin|None', droit: 'ArbreBin|None'):
+            self.cle = cle
+            self.gauche = gauche
+            self.droit = droit
+
+        def est_feuille(self):
+            return self.gauche is None and self.droite is None
+
+        ## Ici, on ne peut pas avoir de méthode est_vide() car self ne peut jamais être None. Si self existe, c'est qu'un objet a été instancié, donc qu'il n'est nécessairement pas rien.
 
     ```
 
 !!! question "Exercice"
-    Implémentez les mêmes fonctions pour la version mutable.
+    Implémentez les mêmes fonctions pour les versions mutables proposées.
 
 
 ## Les méthodes de parcours en profondeur d'un arbre
@@ -134,8 +150,22 @@ Dans un premier temps, nous allons nous intéresser à une forme spéciale d'arb
 
 ## Parcours en largeur d'un arbre.
 
-Pour parcourir un arbre en largeur, nous allons nous appuyer sur la structure 
-de file.
+Parcourir un arbre en largeur revient à le parcourir étage par étage, de gauche à droite.
+
+Nous allons, pour ce faire, nous appuyer sur la structure de file.
+
+- On initialise une file avec la racine.
+- Tant que la file n'est pas vide:
+    - On défile un noeud
+    - On l'affiche (ou autre action)
+    - On enfile ses enfants.
+
+
+!!! question "Implémentation"
+    - Ecrire une fonction de parcours en largeur qui affiche un arbre.
+    - Modifier sensiblement la fonction pour qu'elle retourne une liste de ses éléments.
+    - Remplacez le mécanisme de file par un mécanisme de pile. Que se passe-t-il?
+
 
 ## Arbre binaire de recherche
 
