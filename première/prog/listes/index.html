@@ -666,6 +666,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Le type list en python
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -675,6 +686,52 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#les-tuples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Les tuples
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#les-listes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Les listes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choisir-entre-tuple-et-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choisir entre tuple et liste
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1171,6 +1228,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#les-tuples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Les tuples
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#les-listes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Les listes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choisir-entre-tuple-et-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choisir entre tuple et liste
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1259,11 +1351,11 @@ Ce qu'il se passe réellement, c'est que <code>liste1 + liste2</code> est calcul
 <div class="admonition abstract">
 <p class="admonition-title">Fonctions génériques aux séquences</p>
 <p>Avec les tuples, on peut utiliser toutes les fonctionns disponibles pour les séquences, comme <code>len()</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="n">tuple1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># tuple de taille 3</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tuple1</span><span class="p">))</span>  <span class="c1"># Affiche 3</span>
+<div class="highlight"><pre><span></span><code><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>  <span class="c1"># tuple de taille 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>  <span class="c1"># Affiche 3</span>
 </code></pre></div>
 </div>
-<p>!!!  example "Itérer sur une liste"
+<p>!!!  example "Parcourir une liste"
     Une liste est une séquence, tout comme unn str.
     Les algorithmes sont strictement identiques.</p>
 <pre><code>Parcours par élément:
@@ -1294,6 +1386,54 @@ Ici, nous itérons sur tous les **indices** de la liste `liste1` et affichons ch
     <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="c1"># Affiche [0, 1, 4, 9, 16]</span>
 </code></pre></div>
+</div>
+<div class="admonition hint les tuples">
+<p class="admonition-title">Hint</p>
+<p>C'est aussi une collection d'éléments, comme les listes:</p>
+<div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;bidule&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># Affiche ok</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Affiche 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># Affiche bidule</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>  <span class="c1"># IndexError</span>
+</code></pre></div>
+<p>Les tuples sont, comme les str, immuables. On ne peut pas les modifier une fois créés.</p>
+<p>Il faut considérer qu'on peut faire exactement la même chose avec des tuples qu'avec des str, sauf qu'au lieu de caractères, on manipule des valeurs de n'importe quel type.</p>
+<p>La seule particularité est le tuple à un seul élément, qui se termine par une virgule, pour ne pas le confondre avec des expressions arithmétiques:</p>
+<div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># Affiche 1</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># Erreur, car t est l&#39;int 1</span>
+</code></pre></div>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Tuple ou liste?</p>
+<p>En Python, les <strong>tuples</strong> et les <strong>listes</strong> sont des structures de données qui permettent de stocker plusieurs éléments dans une seule variable, mais ils ont des cas d'utilisation différents en fonction de leurs propriétés.</p>
+<h3 id="les-tuples"><strong>Les tuples</strong></h3>
+<ul>
+<li><strong>Immutables</strong> : Une fois créés, leurs éléments ne peuvent pas être modifiés.</li>
+<li><strong>Usage typique</strong> : Utilisés pour représenter des collections de données qui ne doivent pas changer, comme :</li>
+<li>Les coordonnées (x, y, z).</li>
+<li>Les retours de fonction contenant plusieurs valeurs.</li>
+<li>Des ensembles de données "constantes" (par exemple, des jours de la semaine).</li>
+<li><strong>Performance</strong> : Plus rapides que les listes pour certaines opérations, en raison de leur immutabilité.</li>
+<li><strong>Syntaxe</strong> : Les tuples sont définis avec des parenthèses, par exemple : <code>mon_tuple = (1, 2, 3)</code>.</li>
+</ul>
+<h3 id="les-listes"><strong>Les listes</strong></h3>
+<ul>
+<li><strong>Mutables</strong> : Leurs éléments peuvent être ajoutés, modifiés ou supprimés après leur création.</li>
+<li><strong>Usage typique</strong> : Utilisées pour des collections de données qui doivent être modifiées, comme :</li>
+<li>Une liste de tâches ou de noms d'utilisateurs.</li>
+<li>Des données à trier, filtrer ou parcourir.</li>
+<li>Des structures dynamiques qui évoluent au cours de l'exécution du programme.</li>
+<li><strong>Performance</strong> : Plus flexibles que les tuples, mais légèrement plus lentes pour certaines opérations en raison de leur mutabilité.</li>
+<li><strong>Syntaxe</strong> : Les listes sont définies avec des crochets, par exemple : <code>ma_liste = [1, 2, 3]</code>.</li>
+</ul>
+<h3 id="choisir-entre-tuple-et-liste"><strong>Choisir entre tuple et liste</strong></h3>
+<ul>
+<li>Si vous avez besoin d'une structure <strong>fixe</strong> ou d'un <strong>contenu non modifiable</strong>, utilisez un <strong>tuple</strong>.</li>
+<li>Si vous avez besoin d'une structure <strong>modulable</strong> ou de données dynamiques, optez pour une <strong>liste</strong>.</li>
+</ul>
 </div>
 
 
