@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://mmarchand-nsi.github.io/premi%C3%A8re/prog/exercices/">
+        <link rel="canonical" href="https://mmarchand-nsi.github.io/premi%C3%A8re/prog/listes/">
       
       
-        <link rel="prev" href="../../logique/">
+        <link rel="prev" href="../exercices/">
       
       
-        <link rel="next" href="../listes/">
+        <link rel="next" href="../strings/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Exercices Algorithmique - Science Informatique - Site en construction</title>
+        <title>Le type list en python - Science Informatique - Site en construction</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
 <script src="https://mmarchand-nsi.github.io//js/sqlite_ide.js"></script>
 
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#exercices-algorithmique" class="md-skip">
+        <a href="#le-type-list-en-python" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Exercices Algorithmique
+              Le type list en python
             
           </span>
         </div>
@@ -633,6 +633,27 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../exercices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exercices Algorithmique
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -649,7 +670,7 @@
           
   
   <span class="md-ellipsis">
-    Exercices Algorithmique
+    Le type list en python
   </span>
   
 
@@ -660,7 +681,7 @@
         
   
   <span class="md-ellipsis">
-    Exercices Algorithmique
+    Le type list en python
   </span>
   
 
@@ -682,18 +703,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#accumulation-types-primitifs" class="md-nav__link">
+  <a href="#les-tuples" class="md-nav__link">
     <span class="md-ellipsis">
-      Accumulation - types primitifs
+      Les tuples
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#listes" class="md-nav__link">
+  <a href="#les-listes" class="md-nav__link">
     <span class="md-ellipsis">
-      Listes
+      Les listes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choisir-entre-tuple-et-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choisir entre tuple et liste
     </span>
   </a>
   
@@ -703,27 +733,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../listes/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Le type list en python
-  </span>
-  
-
-      </a>
     </li>
   
 
@@ -1226,18 +1235,27 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#accumulation-types-primitifs" class="md-nav__link">
+  <a href="#les-tuples" class="md-nav__link">
     <span class="md-ellipsis">
-      Accumulation - types primitifs
+      Les tuples
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#listes" class="md-nav__link">
+  <a href="#les-listes" class="md-nav__link">
     <span class="md-ellipsis">
-      Listes
+      Les listes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choisir-entre-tuple-et-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Choisir entre tuple et liste
     </span>
   </a>
   
@@ -1258,89 +1276,164 @@
                   
 
 
-<h1 id="exercices-algorithmique">Exercices Algorithmique</h1>
-<h2 id="accumulation-types-primitifs">Accumulation - types primitifs</h2>
+<h1 id="le-type-list-en-python">Le type list en python</h1>
+<div class="admonition abstract">
+<p class="admonition-title">Qu'est-ce qu'une liste?</p>
+<p>C'est un type de donnée qui permet de stocker plusieurs informations de n'importe quel type.</p>
+<p>En Python, on peut créer une liste en utilisant des crochets.</p>
+<p>Par exemple, la liste <code>[1, 2, 3]</code> contient trois entiers, <code>1</code>, <code>2</code> et <code>3</code>.</p>
+<p>Une liste est mutable, ce qui signifie qu'on peut modifier son contenu une fois qu'elle est créée.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Une liste est une séquence</p>
+<p>Une liste est une séquence, comme les <code>str</code>. Tout ce qui a été vu pour les str est aussi vrai pour les listes.
+(sauf les méthodes spécifiques aux chaines de caractère, comme is_alpha, etc...)</p>
+<p>Le premier indice d'une séquence de taille <span class="arithmatex">\(n\)</span> est 0, le deuxieme est 1, ... , et le dernier est <span class="arithmatex">\(n-1\)</span>.</p>
+</div>
 <div class="admonition example">
-<p class="admonition-title">Mode opératoire</p>
+<p class="admonition-title">Création d'une liste</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">ma_liste</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+</code></pre></div>
+Ici, la liste <code>ma_liste</code> contient trois éléments, <code>1</code>, <code>2</code> et <code>3</code>.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Accès aux éléments d'une liste - Identique aux str</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">ma_liste</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="s2">&quot;ko&quot;</span><span class="p">,</span> <span class="s2">&quot;truc&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ma_liste</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># Affiche ok</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ma_liste</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Affiche ko</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ma_liste</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># Affiche truc  </span>
+</code></pre></div>
+Ici, nous accedons aux éléments de la liste <code>ma_liste</code> en utilisant des indices.</p>
+<p><code>t[i]</code> est l'element numéro <code>i</code> de la liste <code>t</code>.</p>
+</div>
+<div class="admonition example">
+<p class="admonition-title">Modifier les éléments d'une liste</p>
+<p>On ne pouvait pas faire ceci avec les str car ils sont immuables.
+<div class="highlight"><pre><span></span><code><span class="n">ma_liste</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">ma_liste</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ma_liste</span><span class="p">)</span>  <span class="c1"># Affiche [4, 2, 3]</span>
+
+<span class="n">ma_liste</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">42</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ma_liste</span><span class="p">)</span>  <span class="c1"># Affiche [4, 2, 42]</span>
+
+<span class="n">ma_liste</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="mi">77</span> <span class="c1"># IndexError: list assignment index out of range</span>
+</code></pre></div></p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Concaténer des listes</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">liste1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">liste2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">liste1</span> <span class="o">=</span> <span class="n">liste1</span> <span class="o">+</span> <span class="n">liste2</span>
+</code></pre></div>
+Ici, nous concaténons les listes <code>liste1</code> et <code>liste2</code>.</p>
+<p>Cette syntaxe ne veut pas dire qu'on modifie la liste contenue dans la variable <code>liste1</code>, ni qu'on lui ajoute des éléments.
+Ce qu'il se passe réellement, c'est que <code>liste1 + liste2</code> est calculé, puis la valuer de la variable <code>liste1</code> est remplacée par cette nouvelle liste.</p>
+<p>On souhaite bénéficier du caractère mutable des listes, afin de ne pas avoir à recréer l'intégralité en mémoire à chaque fois.</p>
+<p>Pour ceci on dispose de méthodes dites "en place", qui modifient directement la liste sans passer par une création de nouvelle liste en mémoire. Ici la méthode extend.</p>
+<div class="highlight"><pre><span></span><code><span class="n">ma_liste</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">ma_liste</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>       <span class="c1"># la méthode extend ne renvoie rien (None)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ma_liste</span><span class="p">)</span>  <span class="c1"># Affiche [1, 2, 3, 4, 5, 6]</span>
+</code></pre></div>
+<p>Ici, ma_liste a été modifiée directement en mémoire, sans avoir recours à un calcul intermédiaire.</p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Ajouter un élément à une liste</p>
+<p>La méthode append est utilisée pour ajouter un élément en fin de liste.</p>
+<div class="highlight"><pre><span></span><code><span class="n">ma_liste</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">ma_liste</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>             <span class="c1"># la méthode append ne renvoie rien (None)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ma_liste</span><span class="p">)</span>  <span class="c1"># Affiche [1, 2, 3, 4]</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Attention à ne pas confondre</p>
+<p>Il est très important de bien différencier ajouter un élément (append) et concaténer une liste à une autre liste (extend)</p>
+</div>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Fonctions génériques aux séquences</p>
+<p>Avec les tuples, on peut utiliser toutes les fonctionns disponibles pour les séquences, comme <code>len()</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>  <span class="c1"># tuple de taille 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>  <span class="c1"># Affiche 3</span>
+</code></pre></div>
+</div>
+<p>!!!  example "Parcourir une liste"
+    Une liste est une séquence, tout comme unn str.
+    Les algorithmes sont strictement identiques.</p>
+<pre><code>Parcours par élément:
+```python
+liste1 = [2, 9, 3]
+for element in liste1:
+    print(element)
+```
+
+Ici, nous itérons sur tous les **éléments** de la liste `liste1` et affichons chacun d'entre eux successivement.
+
+Parcours par indice:
+
+```python
+liste1 = [1, 2, 3]
+for i in range(len(liste1)):
+    print(liste1[i])
+```
+Ici, nous itérons sur tous les **indices** de la liste `liste1` et affichons chacun d'entre eux successivement.
+</code></pre>
+<div class="admonition tip">
+<p class="admonition-title">Algo - Accumulation</p>
+<p><strong>Le principe d'accumulation est identique.</strong></p>
+<p>Construire la liste des carrés des n premiers entiers</p>
+<div class="highlight"><pre><span></span><code><span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># Liste vide</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="c1"># Affiche [0, 1, 4, 9, 16]</span>
+</code></pre></div>
+</div>
+<div class="admonition hint les tuples">
+<p class="admonition-title">Hint</p>
+<p>C'est aussi une collection d'éléments, comme les listes:</p>
+<div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;bidule&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># Affiche ok</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># Affiche 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># Affiche bidule</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>  <span class="c1"># IndexError</span>
+</code></pre></div>
+<p>Les tuples sont, comme les str, immuables. On ne peut pas les modifier une fois créés.</p>
+<p>Il faut considérer qu'on peut faire exactement la même chose avec des tuples qu'avec des str, sauf qu'au lieu de caractères, on manipule des valeurs de n'importe quel type.</p>
+<p>La seule particularité est le tuple à un seul élément, qui se termine par une virgule, pour ne pas le confondre avec des expressions arithmétiques:</p>
+<div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># Affiche 1</span>
+
+<span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="c1"># Erreur, car t est l&#39;int 1</span>
+</code></pre></div>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Tuple ou liste?</p>
+<p>En Python, les <strong>tuples</strong> et les <strong>listes</strong> sont des structures de données qui permettent de stocker plusieurs éléments dans une seule variable, mais ils ont des cas d'utilisation différents en fonction de leurs propriétés.</p>
+<h3 id="les-tuples"><strong>Les tuples</strong></h3>
 <ul>
-<li>Créez un fichier exos_accumulation.py</li>
+<li><strong>Immutables</strong> : Une fois créés, leurs éléments ne peuvent pas être modifiés.</li>
+<li><strong>Usage typique</strong> : Utilisés pour représenter des collections de données qui ne doivent pas changer, comme :</li>
+<li>Les coordonnées (x, y, z).</li>
+<li>Les retours de fonction contenant plusieurs valeurs.</li>
+<li>Des ensembles de données "constantes" (par exemple, des jours de la semaine).</li>
+<li><strong>Performance</strong> : Plus rapides que les listes pour certaines opérations, en raison de leur immutabilité.</li>
+<li><strong>Syntaxe</strong> : Les tuples sont définis avec des parenthèses, par exemple : <code>mon_tuple = (1, 2, 3)</code>.</li>
 </ul>
-<div class="admonition danger">
-<p class="admonition-title">Attention</p>
-<p>En informatique, on ne met <strong>jamais</strong> d'espace ni de caractère spécial (accents, etc) dans un nom de fichier ou de répertoire.</p>
-</div>
-<p>Pour chacun de ces exercices, il s'agit :</p>
+<h3 id="les-listes"><strong>Les listes</strong></h3>
 <ul>
-<li>d'initialiser une variable résultat</li>
-<li>de le remplir à l'aide d'un parcours d'itérable</li>
-<li>de renvoyer le résultat</li>
+<li><strong>Mutables</strong> : Leurs éléments peuvent être ajoutés, modifiés ou supprimés après leur création.</li>
+<li><strong>Usage typique</strong> : Utilisées pour des collections de données qui doivent être modifiées, comme :</li>
+<li>Une liste de tâches ou de noms d'utilisateurs.</li>
+<li>Des données à trier, filtrer ou parcourir.</li>
+<li>Des structures dynamiques qui évoluent au cours de l'exécution du programme.</li>
+<li><strong>Performance</strong> : Plus flexibles que les tuples, mais légèrement plus lentes pour certaines opérations en raison de leur mutabilité.</li>
+<li><strong>Syntaxe</strong> : Les listes sont définies avec des crochets, par exemple : <code>ma_liste = [1, 2, 3]</code>.</li>
 </ul>
-<p>Cette manière de faire est extrêmement fréquente et constitue la base de ce que vous devez savoir faire en algorithmique. On dit qu'on accumule progressivement dans le résultat afin de pouvoir le renvoyer.
-La première étape est toujours de bien modéliser le problème en écrivant une signature de fonction appropriée, avec des noms de fonction et de paramètres choisis judicieusement pour qu'ils soient à la fois évocateurs de ce qu'ils représentent, ni trop courts, ni trop longs.</p>
-<p>La première chose à considérer lorsqu'on travaille sur une variable est toujours: "de quelle type est-elle?" La réponse nous informe sur ce qu'on peut faire ou pas avec cette variable d'après le cours. Ca devient naturel et instantané avec de la pratique, mais pour l'instant, vous devez faire l'effort d'y penser.</p>
-<p>Toute fonction devra être testée.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Somme des entiers</p>
-<p>Écrire et tester une fonction qui renvoie la somme des nombres entiers de 1 jusque n.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Produit des entiers &gt; 0</p>
-<p>Écrire et tester une fonction qui renvoie le produit des nombres entiers de 1 jusque n.</p>
-<p>On appelle ce nombre <span class="arithmatex">\(n!\)</span> qui se lit "n factorielle", avec <span class="arithmatex">\(0! = 1\)</span></p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Nombre de voyelles</p>
-<p>Écrire une fonction qui lit une chaîne de caractères et affiche le nombre de voyelles présentes dans cette chaîne.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Inverser</p>
-<p>Ecrire une fonction qui renvoie les caractères d'une chaîne de caractères dans l'autre sens. inverser("banane") renvoie "enanab".</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">1 sur 2</p>
-<p>Ecrire une fonction qui prend une chaîne de caractère en paramètre. Elle renvoie une chaîne de caractères où seulement 1 caractère sur 2 est présent.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">contient</p>
-<p>Ecrire une fonction qui renvoie True si une chaîne contient un caractère, False sinon. On n'utilisera pas l'opérateur <code>in</code>.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Nombre d'occurences</p>
-<p>Écrire une fonction qui prend en paramètres une chaîne de caractère et un caractère et renvoie le nombre de fois où le caractère apparaît dans la chaîne de caractère.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Take</p>
-<p>Ecrire une fonction qui renvoie les n premiers caractères d'une chaîne de caractères. Si n est supérieur au nombre de caractères, renvoyer la chaîne de caractères entière.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Drop</p>
-<p>Ecrire une fonction qui renvoie une chaîne amputée de ses n premiers caractères. Si n est supérieur au nombre de caractère, renvoyer la chaîne vide.</p>
-</div>
-<h2 id="listes">Listes</h2>
-<div class="admonition question">
-<p class="admonition-title">Somme</p>
-<p>Ecrire et tester une fonction <code>somme</code> qui prend en paramètres une liste de floats et qui renvoie leur somme.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Moyenne</p>
-<p>Ecrire et tester une fonction <code>moyenne</code> qui prend en paramètres ue liste de floats et qui renvoie leur moyenne.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Minimum</p>
-<p>Ecrire et tester une fonction <code>minimum</code> qui prend en paramètres une liste d'entiers et qui renvoie le minimum.</p>
-<p>Il faut initialiser le minimum au premier élément de la liste, et pour chaque élément parcouru, mettre à jour le minimum si c'est nécessaire.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Maximum</p>
-<p>Ecrire et tester une fonction <code>maximum</code> qui prend en paramètres une liste d'entiers et qui renvoie le minimum, sur le même principe.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Tri</p>
-<p>Le problème du tri est fondamental en informatique. Beaucoup d'algorithmes commencent par trier les données afin de pouvoir utiliser des techniques efficaces.</p>
-<p>Si on ne précise pas l'ordre du tri, on parle de tri par ordre croissant.</p>
-<p>Une liste est triée si chaque élément est plus grand que le precedent.</p>
-<p>Ecrire et tester une fonction <code>est_triee(lst: list[int]) -&gt; bool</code> qui prend en paramètres une liste et qui renvoie True si la liste est triée, False sinon.</p>
+<h3 id="choisir-entre-tuple-et-liste"><strong>Choisir entre tuple et liste</strong></h3>
+<ul>
+<li>Si vous avez besoin d'une structure <strong>fixe</strong> ou d'un <strong>contenu non modifiable</strong>, utilisez un <strong>tuple</strong>.</li>
+<li>Si vous avez besoin d'une structure <strong>modulable</strong> ou de données dynamiques, optez pour une <strong>liste</strong>.</li>
+</ul>
 </div>
 
 
@@ -1362,7 +1455,7 @@ La première étape est toujours de bien modéliser le problème en écrivant un
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">November 28, 2024</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">December 9, 2024</span>
   </span>
 
     

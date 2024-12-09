@@ -1,4 +1,7 @@
-# Exercices Accumulation
+# Exercices Algorithmique
+
+
+## Accumulation - types primitifs
 
 !!! example "Mode opératoire"
     - Créez un fichier exos_accumulation.py
@@ -19,7 +22,6 @@
 
     Toute fonction devra être testée.
 
-## Accumuler - types primitifs
 
 !!! question "Somme des entiers" 
     Écrire et tester une fonction qui renvoie la somme des nombres entiers de 1 jusque n.
@@ -50,3 +52,31 @@
 !!! question "Drop"
     Ecrire une fonction qui renvoie une chaîne amputée de ses n premiers caractères. Si n est supérieur au nombre de caractère, renvoyer la chaîne vide.
 
+## Listes
+
+!!! question "Somme"
+    Ecrire et tester une fonction `somme` qui prend en paramètres une liste de floats et qui renvoie leur somme.
+
+
+!!! question "Moyenne"
+    Ecrire et tester une fonction `moyenne` qui prend en paramètres ue liste de floats et qui renvoie leur moyenne.
+
+
+!!! question "Minimum"
+    Ecrire et tester une fonction `minimum` qui prend en paramètres une liste d'entiers et qui renvoie le minimum.
+
+    Il faut initialiser le minimum au premier élément de la liste, et pour chaque élément parcouru, mettre à jour le minimum si c'est nécessaire.
+
+
+!!! question "Maximum"
+    Ecrire et tester une fonction `maximum` qui prend en paramètres une liste d'entiers et qui renvoie le minimum, sur le même principe.
+
+
+!!! question "Tri"
+    Le problème du tri est fondamental en informatique. Beaucoup d'algorithmes commencent par trier les données afin de pouvoir utiliser des techniques efficaces.
+
+    Si on ne précise pas l'ordre du tri, on parle de tri par ordre croissant.
+
+    Une liste est triée si chaque élément est plus grand que le precedent.
+
+    Ecrire et tester une fonction `est_triee(lst: list[int]) -> bool` qui prend en paramètres une liste et qui renvoie True si la liste est triée, False sinon.
