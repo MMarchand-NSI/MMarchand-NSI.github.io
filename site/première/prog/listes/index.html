@@ -22,7 +22,7 @@
     
     
       
-        <title>Le type list en python - Science Informatique - Site en construction</title>
+        <title>Le type list (et tuple) - Science Informatique - Site en construction</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
 <script src="https://mmarchand-nsi.github.io//js/sqlite_ide.js"></script>
 
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#le-type-list-en-python" class="md-skip">
+        <a href="#le-type-list-et-tuple" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Le type list en python
+              Le type list (et tuple)
             
           </span>
         </div>
@@ -670,7 +670,7 @@
           
   
   <span class="md-ellipsis">
-    Le type list en python
+    Le type list (et tuple)
   </span>
   
 
@@ -681,7 +681,7 @@
         
   
   <span class="md-ellipsis">
-    Le type list en python
+    Le type list (et tuple)
   </span>
   
 
@@ -1276,7 +1276,7 @@
                   
 
 
-<h1 id="le-type-list-en-python">Le type list en python</h1>
+<h1 id="le-type-list-et-tuple">Le type list (et tuple)</h1>
 <div class="admonition abstract">
 <p class="admonition-title">Qu'est-ce qu'une liste?</p>
 <p>C'est un type de donnée qui permet de stocker plusieurs informations de n'importe quel type.</p>
@@ -1355,27 +1355,23 @@ Ce qu'il se passe réellement, c'est que <code>liste1 + liste2</code> est calcul
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>  <span class="c1"># Affiche 3</span>
 </code></pre></div>
 </div>
-<p>!!!  example "Parcourir une liste"
-    Une liste est une séquence, tout comme unn str.
-    Les algorithmes sont strictement identiques.</p>
-<pre><code>Parcours par élément:
-```python
-liste1 = [2, 9, 3]
-for element in liste1:
-    print(element)
-```
-
-Ici, nous itérons sur tous les **éléments** de la liste `liste1` et affichons chacun d'entre eux successivement.
-
-Parcours par indice:
-
-```python
-liste1 = [1, 2, 3]
-for i in range(len(liste1)):
-    print(liste1[i])
-```
-Ici, nous itérons sur tous les **indices** de la liste `liste1` et affichons chacun d'entre eux successivement.
-</code></pre>
+<div class="admonition example">
+<p class="admonition-title">Parcourir une liste</p>
+<p>Une liste est une séquence, tout comme unn str.
+Les algorithmes sont strictement identiques.</p>
+<p>Parcours par élément:
+<div class="highlight"><pre><span></span><code><span class="n">liste1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">liste1</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+</code></pre></div></p>
+<p>Ici, nous itérons sur tous les <strong>éléments</strong> de la liste <code>liste1</code> et affichons chacun d'entre eux successivement.</p>
+<p>Parcours par indice:</p>
+<p><div class="highlight"><pre><span></span><code><span class="n">liste1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">liste1</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">liste1</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</code></pre></div>
+Ici, nous itérons sur tous les <strong>indices</strong> de la liste <code>liste1</code> et affichons chacun d'entre eux successivement.</p>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Algo - Accumulation</p>
 <p><strong>Le principe d'accumulation est identique.</strong></p>
@@ -1387,8 +1383,8 @@ Ici, nous itérons sur tous les **indices** de la liste `liste1` et affichons ch
 <span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="c1"># Affiche [0, 1, 4, 9, 16]</span>
 </code></pre></div>
 </div>
-<div class="admonition hint les tuples">
-<p class="admonition-title">Hint</p>
+<div class="admonition hint">
+<p class="admonition-title">Les tuples</p>
 <p>C'est aussi une collection d'éléments, comme les listes:</p>
 <div class="highlight"><pre><span></span><code><span class="n">t</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;ok&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;bidule&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># Affiche ok</span>

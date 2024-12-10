@@ -1,4 +1,4 @@
-# Le type list en python
+# Le type list (et tuple)
 
 
 !!! abstract "Qu'est-ce qu'une liste?"
@@ -96,7 +96,7 @@
     print(len(lst))  # Affiche 3
     ```
 
-!!!  example "Parcourir une liste"
+!!! example "Parcourir une liste"
     Une liste est une séquence, tout comme unn str.
     Les algorithmes sont strictement identiques.
 
@@ -133,7 +133,7 @@
     ```
 
 
-!!! hint Les tuples
+!!! hint "Les tuples"
 
     C'est aussi une collection d'éléments, comme les listes:
 

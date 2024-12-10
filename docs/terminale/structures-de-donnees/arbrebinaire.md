@@ -1,7 +1,5 @@
 # Arbres enracinés
 
-EN CONSTRUCTION 
-
 !!! danger "Pré-requis"
     Si les listes sont maîtrisées, ceci ne devrait presque être qu'une formalité.
 
@@ -172,9 +170,9 @@ Nous allons, pour ce faire, nous appuyer sur la structure de file.
 !!! abstract "Arbre binaire de recherche (ABR)"
     Un arbre binaire de recherche (ABR) est un arbre binaire vide ou possèdant ces propriétés:
     
-    - la clé du sag non vide est inférieure ou égale à sa clé.
-    - la clé du sad non vide est supérieure ou égale à sa clé.
-    - Le sad et le sag sont des ABR.
+    - le max des clés de son sag est inférieur à sa clé
+    - le min des clés de son sad est supérieur à sa clé
+    - son sag et son sad sont des abr
 
     Définition équivalente:
     Pour chaque noeud d'un ABR:
@@ -184,6 +182,8 @@ Nous allons, pour ce faire, nous appuyer sur la structure de file.
 
 
     L'objectif est ici de disposer d'une structure qui nous permette de rechercher de l'information très rapidement.
+
+    On considère dans le cours que les clés sont uniques, ce qui est habituellement le cas, mais on pourrait aussi prendre en compte des clés dupliquées, auquel cas, on travaillerait sur des inégalités au sens large.
 
 ```mermaid
 graph TD;
@@ -237,3 +237,12 @@ graph TD;
 
 !!! question "MP2I"
     Implémentez doctement toutes les fonctions en OCaml. (seulement la version immuable. Il est aussi possible d'implémenter la version mutable en OCaml, mais chaque chose en son temps)
+
+    On utilisera cette définition d'un arbre binaire:
+
+    ```ocaml
+    type 'a arbrebin = Vide | Noeud of 'a * 'a arbrebin * 'a arbrebin
+    ```
+
+    `'a` est l'équivalent du type générique T qu'on a utilisé en python.
+    `'a arbrebin` veut dire arbre binaire portant des données de type `'a`
