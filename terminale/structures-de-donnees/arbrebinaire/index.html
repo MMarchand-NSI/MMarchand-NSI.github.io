@@ -1482,6 +1482,11 @@ Ecrire la fonction <code>est_equilibre(a: arbrebin) -&gt; bool</code>.</p>
     <span class="k">def</span> <span class="nf">est_vide</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="ow">is</span> <span class="n">ARBRE_VIDE</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span> <span class="ow">is</span> <span class="n">ARBRE_VIDE</span>
 
+    <span class="k">def</span> <span class="nf">taille</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">est_vide</span><span class="p">():</span>
+            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span><span class="o">.</span><span class="n">taille</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">droit</span><span class="o">.</span><span class="n">taille</span><span class="p">()</span>
+
 
 <span class="k">class</span> <span class="nc">Sentinelle</span><span class="p">(</span><span class="n">ArbreBin</span><span class="p">):</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -1499,7 +1504,23 @@ Ecrire la fonction <code>est_equilibre(a: arbrebin) -&gt; bool</code>.</p>
     <span class="k">def</span> <span class="nf">est_feuille</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span> <span class="ow">is</span> <span class="kc">None</span>
 
-    <span class="c1">## Ici, on ne peut pas avoir de méthode est_vide() car self ne peut jamais être None. Si self existe, c&#39;est qu&#39;un objet a été instancié, donc qu&#39;il n&#39;est nécessairement pas rien.</span>
+    <span class="c1">## Ici, on ne peut pas avoir de méthode est_vide() car self ne peut jamais être None. </span>
+    <span class="c1">## Si self existe, c&#39;est qu&#39;un objet a été instancié, donc qu&#39;il n&#39;est nécessairement pas rien.</span>
+
+    <span class="k">def</span> <span class="nf">taille</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        self ne pouvant pas être None, le cas de base est qu&#39;il est une feuille.</span>
+<span class="sd">        Ca nous oblige à tester que self.gauche et self.droite ne sont pas None, car None n&#39;a pas de méthode taille()</span>
+<span class="sd">        Comparez ceci avec l&#39;implémentation ci-dessus. </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_feuille</span><span class="p">():</span>
+            <span class="k">return</span> <span class="mi">0</span>
+        <span class="n">tg</span><span class="p">,</span> <span class="n">td</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span><span class="p">:</span>
+            <span class="n">td</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span><span class="o">.</span><span class="n">taille</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span><span class="p">:</span>
+            <span class="n">tg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span><span class="o">.</span><span class="n">taille</span><span class="p">()</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">tg</span> <span class="o">+</span> <span class="n">td</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
@@ -1643,7 +1664,7 @@ F --- O["4"]</code></pre></p>
 <li>https://cmps-people.ok.ubc.ca/ylucet/DS/Huffman.html</li>
 <li>https://www.csfieldguide.org.nz/en/interactives/huffman-tree/</li>
 </ul>
-<p>Créez un package projets à la racine de votre repo. N'oubliez pas de mettre <code>__init__.py</code> dans le dossier.</p>
+<p>Créez un package "projets" à la racine de votre repo. N'oubliez pas de mettre <code>__init__.py</code> dans le dossier.</p>
 <div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">structures.hierarchiques</span> <span class="kn">import</span> <span class="n">arbrebin_immuable</span> <span class="k">as</span> <span class="n">ab</span>
 <span class="kn">from</span> <span class="nn">structures.hierarchiques</span> <span class="kn">import</span> <span class="n">dessin</span>
 
