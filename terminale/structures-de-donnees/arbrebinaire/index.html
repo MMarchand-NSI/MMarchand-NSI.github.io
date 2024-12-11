@@ -1600,6 +1600,46 @@ Pour chaque noeud d'un ABR:</p>
 <p>Sensibilisation à la notion d'information.
 Vidéo introductive:</p>
 <p><iframe width="560" height="315" src="https://www.youtube.com/embed/_PG-jJKB_do?si=jCH2BWFpFK6zjw3v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></p>
+<p>Liens utiles:
+- https://www.youtube.com/watch?v=iiGZ947Tcck
+- https://cmps-people.ok.ubc.ca/ylucet/DS/Huffman.html
+- https://www.csfieldguide.org.nz/en/interactives/huffman-tree/</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">structures.hierarchiques</span> <span class="kn">import</span> <span class="n">arbrebin_immuable</span> <span class="k">as</span> <span class="n">ab</span>
+<span class="kn">from</span> <span class="nn">structures.hierarchiques</span> <span class="kn">import</span> <span class="n">dessin</span>
+
+<span class="nb">type</span> <span class="n">arbrehuff</span> <span class="o">=</span> <span class="n">ab</span><span class="o">.</span><span class="n">arbrebin</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span>
+<span class="c1"># Un Noeud de l&#39;arbre de huffman porte une lettre et une fréquence</span>
+
+<span class="k">def</span> <span class="nf">get_chars</span><span class="p">(</span><span class="n">arbre</span><span class="p">:</span> <span class="n">arbrehuff</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Récupère les caractères du noeud&#39;&#39;&#39;</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">ab</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">arbre</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ab</span><span class="o">.</span><span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">get_count</span><span class="p">(</span><span class="n">arbre</span><span class="p">:</span> <span class="n">arbrehuff</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&#39;&#39;&#39;Récupère la fréquence du noeud&#39;&#39;&#39;</span>
+    <span class="k">assert</span> <span class="ow">not</span> <span class="n">ab</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">arbre</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">ab</span><span class="o">.</span><span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="k">def</span> <span class="nf">get_dicofreq</span><span class="p">(</span><span class="n">texte</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie un dictionnaire de fréquence des lettres du texte en entrée&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">get_arbre_huffman</span><span class="p">(</span><span class="n">dicofreq</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">arbrehuff</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie un arbre de Huffman d&#39;après le dictionnaire de fréquences des lettres&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">get_codes</span><span class="p">(</span><span class="n">arbre</span><span class="p">:</span> <span class="n">arbrehuff</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie un dictionnaire contenant la codification binaire de chaque caractère&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">compresser</span><span class="p">(</span><span class="n">texte</span><span class="p">,</span> <span class="n">codes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compresse un texte en utilisant le dictionnaire d&#39;encodage&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">decompresser</span><span class="p">(</span><span class="n">texte</span><span class="p">,</span> <span class="n">codes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Décompresse un texte en utilisant le dictionnaire d&#39;encodage&quot;&quot;&quot;</span>
+    <span class="k">pass</span>
+</code></pre></div>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Avancé - Rotations</p>
