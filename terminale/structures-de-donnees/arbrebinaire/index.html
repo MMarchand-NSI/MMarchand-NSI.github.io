@@ -255,7 +255,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../premi%C3%A8re/logique/" class="md-tabs__link">
+        <a href="../../../premi%C3%A8re/IHM/flet/" class="md-tabs__link">
           
   
   Première
@@ -541,7 +541,7 @@
             
   
   <span class="md-ellipsis">
-    Logique
+    IHM
   </span>
   
 
@@ -550,6 +550,73 @@
         
         <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            IHM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../premi%C3%A8re/IHM/flet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interface Homme machine
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Logique
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
             <span class="md-nav__icon md-icon"></span>
             Logique
           </label>
@@ -601,10 +668,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
         
           
-          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
             
   
   <span class="md-ellipsis">
@@ -615,8 +682,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
             <span class="md-nav__icon md-icon"></span>
             Prog
           </label>
@@ -1665,31 +1732,22 @@ F --- O["4"]</code></pre></p>
 <li>https://www.csfieldguide.org.nz/en/interactives/huffman-tree/</li>
 </ul>
 <p>Créez un package "projets" à la racine de votre repo. N'oubliez pas de mettre <code>__init__.py</code> dans le dossier.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">structures.hierarchiques</span> <span class="kn">import</span> <span class="n">arbrebin_immuable</span> <span class="k">as</span> <span class="n">ab</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">structures.hierarchiques</span> <span class="kn">import</span> <span class="n">arbrebin_mutable</span> <span class="k">as</span> <span class="n">ab</span>
 <span class="kn">from</span> <span class="nn">structures.hierarchiques</span> <span class="kn">import</span> <span class="n">dessin</span>
-
-<span class="nb">type</span> <span class="n">arbrehuff</span> <span class="o">=</span> <span class="n">ab</span><span class="o">.</span><span class="n">arbrebin</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span>
-<span class="c1"># Un Noeud de l&#39;arbre de huffman porte une lettre et une fréquence</span>
-
-<span class="k">def</span> <span class="nf">get_chars</span><span class="p">(</span><span class="n">arbre</span><span class="p">:</span> <span class="n">arbrehuff</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Récupère les caractères du noeud&#39;&#39;&#39;</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="n">ab</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">arbre</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ab</span><span class="o">.</span><span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="k">def</span> <span class="nf">get_count</span><span class="p">(</span><span class="n">arbre</span><span class="p">:</span> <span class="n">arbrehuff</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&#39;&#39;&#39;Récupère la fréquence du noeud&#39;&#39;&#39;</span>
-    <span class="k">assert</span> <span class="ow">not</span> <span class="n">ab</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">arbre</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ab</span><span class="o">.</span><span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span>
 
 <span class="k">def</span> <span class="nf">get_dicofreq</span><span class="p">(</span><span class="n">texte</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie un dictionnaire de fréquence des lettres du texte en entrée&quot;&quot;&quot;</span>
     <span class="k">pass</span>
 
-<span class="k">def</span> <span class="nf">get_arbre_huffman</span><span class="p">(</span><span class="n">dicofreq</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">arbrehuff</span><span class="p">:</span>
+<span class="k">def</span> <span class="nf">get_arbre_huffman</span><span class="p">(</span><span class="n">dicofreq</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ab</span><span class="o">.</span><span class="n">ArbreBin</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie un arbre de Huffman d&#39;après le dictionnaire de fréquences des lettres&quot;&quot;&quot;</span>
+    <span class="c1"># Etape 1: Construire EN COMPREHENSION une liste de feuilles d&#39;après le dictionnaire de fréquences</span>
+
+    <span class="c1"># Etape 2: Construire l&#39;arbre de Huffman en agrégeant progresivement les arbres de la liste</span>
+
     <span class="k">pass</span>
 
-<span class="k">def</span> <span class="nf">get_codes</span><span class="p">(</span><span class="n">arbre</span><span class="p">:</span> <span class="n">arbrehuff</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<span class="k">def</span> <span class="nf">get_codes</span><span class="p">(</span><span class="n">arbre</span><span class="p">:</span> <span class="n">ab</span><span class="o">.</span><span class="n">ArbreBin</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Fonction récursive.</span>
 <span class="sd">    Renvoie un dictionnaire contenant la codification binaire de chaque caractère</span>
