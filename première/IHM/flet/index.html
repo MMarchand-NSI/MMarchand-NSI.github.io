@@ -1433,33 +1433,39 @@
 <span class="n">ft</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">main</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="une-application-simple">Une application simple</h3>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">flet</span> <span class="k">as</span> <span class="nn">ft</span>
-
+<div class="highlight"><pre><span></span><code><span class="c1"># type: ignore</span>
+<span class="kn">import</span> <span class="nn">flet</span> <span class="k">as</span> <span class="nn">ft</span>
 
 <span class="k">def</span> <span class="nf">fois_2</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span>
 
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="n">ft</span><span class="o">.</span><span class="n">Page</span><span class="p">):</span>
     <span class="n">page</span><span class="o">.</span><span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Multiplication par 2&quot;</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">vertical_alignment</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">MainAxisAlignment</span><span class="o">.</span><span class="n">START</span>  <span class="c1"># Alignement au sommet</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="mi">300</span>  <span class="c1"># Largeur minimale</span>
+    <span class="n">page</span><span class="o">.</span><span class="n">window</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="mi">200</span>  <span class="c1"># Hauteur ajustée automatiquement</span>
 
-    <span class="c1"># 1. Définir les widgets</span>
+    <span class="c1"># 1. Définir les Controls</span>
     <span class="n">input_text</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">TextField</span><span class="p">(</span><span class="n">label</span><span class="o">=</span><span class="s2">&quot;Entrez un nombre&quot;</span><span class="p">)</span>
     <span class="n">result_label</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;blue&quot;</span><span class="p">)</span>
 
-    <span class="c1"># 2. Définir le bouton et son callback</span>
+    <span class="c1"># 2. Définir le bouton et son callback dans la fonction main</span>
     <span class="k">def</span> <span class="nf">bouton_click</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">ft</span><span class="o">.</span><span class="n">Control</span><span class="p">):</span>
         <span class="n">result_label</span><span class="o">.</span><span class="n">value</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Résultat: </span><span class="si">{</span><span class="n">fois_2</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">input_text</span><span class="o">.</span><span class="n">value</span><span class="p">))</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">page</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
 
-    <span class="n">button</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">ElevatedButton</span><span class="p">(</span>
+    <span class="n">bouton</span> <span class="o">=</span> <span class="n">ft</span><span class="o">.</span><span class="n">ElevatedButton</span><span class="p">(</span>
         <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Multiplier par 2&quot;</span><span class="p">,</span>
-        <span class="n">on_click</span><span class="o">=</span><span class="n">bouton_click</span><span class="p">)</span>  <span class="c1">#on_click est une fonction qui est appelée lorsque le bouton est cliqué. On appelle cette fonction un CALLBACK.</span>
+        <span class="n">on_click</span><span class="o">=</span><span class="n">bouton_click</span><span class="p">)</span> 
+
+    <span class="c1">#bouton_click est une fonction qui est appelée lorsque le bouton est cliqué.</span>
+    <span class="c1">#On appelle cette fonction un CALLBACK.</span>
 
     <span class="c1"># 3. Ajouter les widgets à la page</span>
     <span class="n">page</span><span class="o">.</span><span class="n">add</span><span class="p">(</span>
         <span class="n">ft</span><span class="o">.</span><span class="n">Text</span><span class="p">(</span><span class="s2">&quot;Application de multiplication par 2&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">20</span><span class="p">),</span>
         <span class="n">input_text</span><span class="p">,</span>
-        <span class="n">button</span><span class="p">,</span>
+        <span class="n">bouton</span><span class="p">,</span>
         <span class="n">result_label</span><span class="p">,</span>
     <span class="p">)</span>
 
@@ -1469,13 +1475,13 @@
 <p>En ligne de commande, écrire:
 <div class="highlight"><pre><span></span><code>flet<span class="w"> </span>run<span class="w"> </span>--web<span class="w"> </span>app.py
 </code></pre></div></p>
-<p>Le navigateur devrait se lancer à l'adresse <a href="http://127.0.0.1:53283">text</a></p>
+<p>Le navigateur devrait se lancer à l'adresse http://127.0.0.1:53283  (le port peut changer)</p>
 <p>Comme vous l'avez appris l'année dernière, tout ordinateur est connu sur un réseau via son adresse IP qui est unique.</p>
 <p>Quelle que soit son adresse IP, tout ordinateur se connaît lui-même sous l'adresse 127.0.0.1, ou localhost.</p>
 <p>C'est un peu lors de la communication entre humains. Si vous vous appelez Bob et que vous avez faim, vous dites "J'ai faim", et pas "Bob a faim".</p>
 <p>127.0.0.1, c'est un peu le "Je" des machines sur un réseau. Tout le monde a son "Je", qui s'appelle ici localhost (boucle locale).</p>
 <p>Flet a lancé un serveur HTTP sur lequel il sert l'application flet que vous avez créé sur le PORT 53283.</p>
-<p>Votre ordinateur est un peeu comme un immeuble. Il a une adresse certes, mais il existe plusieurs services qui ont chacun un numéro de porte.</p>
+<p>Votre ordinateur est un peu comme un immeuble. Il a une adresse certes, mais il existe plusieurs services qui ont chacun un numéro de porte.</p>
 <p>Ici, flet s'est lancé à la porte 53283 de l'immeuble.</p>
 <p>Lorsque vous allez sur internet, vous ne spécifiez pas de port. C'est parce qu'il y a des ports par défaut.</p>
 <ul>
@@ -1483,7 +1489,12 @@
 <li>Ca marche, car 443 est le port par défuat pour https, il n'y a pas besoin de le mettre.</li>
 </ul>
 <h3 id="documentation-officielle">Documentation officielle</h3>
+<p>La documentation officielle est très bien faite et permet de tester divers contrôles.</p>
 <p><a href="https://flet.dev/docs">Lien doc flet</a></p>
+<div class="admonition question">
+<p class="admonition-title">Pendu</p>
+<p>Donnez une IHM flet à votre pendu</p>
+</div>
 
 
 
