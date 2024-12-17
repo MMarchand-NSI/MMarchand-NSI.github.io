@@ -32,6 +32,7 @@ graph TD;
     La **taille** d'un arbre est son nombre de noeuds.
 
     La **hauteur** d'un arbre possède 2 définitions impactant la définition de la hauteur de l'arbre vide:
+    
     - Longueur du chemin à la feuille la plus éloignée ($hauteur(\empty)=-1$)
     - Nombre de noeuds dans le chemin à la feuille la plus éloignée. ($hauteur(\empty)=0$)
 
@@ -103,6 +104,11 @@ Dans un premier temps, nous allons nous intéresser à une forme spéciale d'arb
         def est_vide(self):
             return self.gauche is ARBRE_VIDE and self.droite is ARBRE_VIDE
 
+        def taille(self) -> int:
+            if self.est_vide():
+                return -1
+            return 1 + self.gauche.taille() + self.droit.taille()
+
 
     class Sentinelle(ArbreBin):
         def __init__(self):
@@ -116,7 +122,7 @@ Dans un premier temps, nous allons nous intéresser à une forme spéciale d'arb
     ```python
 
     class Noeud:
-        def __init__(self, cle, gauche: 'ArbreBin|None', droit: 'ArbreBin|None'):
+        def __init__(self, cle, gauche: 'Noeud|None', droit: 'Noeud|None'):
             self.cle = cle
             self.gauche = gauche
             self.droit = droit
@@ -124,7 +130,23 @@ Dans un premier temps, nous allons nous intéresser à une forme spéciale d'arb
         def est_feuille(self):
             return self.gauche is None and self.droite is None
 
-        ## Ici, on ne peut pas avoir de méthode est_vide() car self ne peut jamais être None. Si self existe, c'est qu'un objet a été instancié, donc qu'il n'est nécessairement pas rien.
+        ## Ici, on ne peut pas avoir de méthode est_vide() car self ne peut jamais être None. 
+        ## Si self existe, c'est qu'un objet a été instancié, donc qu'il n'est nécessairement pas rien.
+
+        def taille(self) -> int:
+            """
+            self ne pouvant pas être None, le cas de base est qu'il est une feuille.
+            Ca nous oblige à tester que self.gauche et self.droite ne sont pas None, car None n'a pas de méthode taille()
+            Comparez ceci avec l'implémentation ci-dessus. 
+            """
+            if self.is_feuille():
+                return 0
+            tg, td = 0, 0
+            if self.gauche:
+                td = self.gauche.taille()
+            if self.droite:
+                tg = self.droite.taille()
+            return 1 + tg + td
 
     ```
 
@@ -219,11 +241,146 @@ graph TD;
 
     - Implémentez ces fonctions pour la version mutable (important)
 
+!!! question "Arbre symétrique"
+    ```mermaid
+    graph TD
+    A1["10"] --- B1["5"]
+    A1 --- C1["15"]
+    B1 --- D1["3"]
+    B1 --- E1["7"]
+    C1 --- F1["12"]
+    C1 --- G1["18"]
+
+    %% Arbre miroir
+    A2["10"] --- B2["15"]
+    A2 --- C2["5"]
+    B2 --- D2["18"]
+    B2 --- E2["12"]
+    C2 --- F2["7"]
+    C2 --- G2["3"]
+    ```
+
+    Les deux arbres ci-dessus sont des miroirs l'un de l'autre.
+
+    Ecrire une fonction `sont_miroirs[T](a1: arbrebin[T], a2: arbrebin[T]) -> bool`.
+
+    L'arbre ci-dessous est symétrique.
+    ```mermaid
+    graph TD
+    A["10"] --- B["5"]
+    A --- C["5"]
+    B --- D["3"]
+    B --- E["7"]
+    C --- F["7"]
+    C --- G["3"]
+    D --- H["1"]
+    D --- I["2"]
+    G --- J["2"]
+    G --- K["1"]
+    E --- L["4"]
+    E --- M["6"]
+    F --- N["6"]
+    F --- O["4"]
+    ```
+
+    Ecrire une fonction `est_symetrique[T](a: arbrebin[T]) -> bool`.
+
 !!! question "Application à la compression de données - Codage de Huffman"
-    Sensibilisation à la notion d'information.
-    Vidéo introductive:
 
     <iframe width="560" height="315" src="https://www.youtube.com/embed/_PG-jJKB_do?si=jCH2BWFpFK6zjw3v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+
+    Liens à consulter:
+
+    - https://www.youtube.com/watch?v=iiGZ947Tcck
+    - https://cmps-people.ok.ubc.ca/ylucet/DS/Huffman.html
+    - https://www.csfieldguide.org.nz/en/interactives/huffman-tree/
+
+    Créez un package "projets" à la racine de votre repo. N'oubliez pas de mettre `__init__.py` dans le dossier.
+
+    ```python
+    from structures.hierarchiques import arbrebin_mutable as ab
+    from structures.hierarchiques import dessin
+
+    def get_dicofreq(texte: str) -> dict[str, int]:
+        """Renvoie un dictionnaire de fréquence des lettres du texte en entrée"""
+        pass
+
+    def get_arbre_huffman(dicofreq: dict[str, int]) -> ab.ArbreBin:
+        """Renvoie un arbre de Huffman d'après le dictionnaire de fréquences des lettres"""
+        # Etape 1: Construire EN COMPREHENSION une liste de feuilles d'après le dictionnaire de fréquences
+
+        # Etape 2: Construire l'arbre de Huffman en agrégeant progresivement les arbres de la liste
+
+        pass
+
+    def get_codes(arbre: ab.ArbreBin) -> dict[str, str]:
+        """
+        Fonction récursive.
+        Renvoie un dictionnaire contenant la codification binaire de chaque caractère
+        """
+        pass
+
+    def compresser(texte, codes: dict[str, str]) -> str:
+        """Compresse un texte en utilisant le dictionnaire d'encodage"""
+        pass
+
+    def decompresser(texte, codes: dict[str, str]) -> str:
+        """Décompresse un texte en utilisant le dictionnaire d'encodage"""
+        pass
+    ```
+
+
+!!! info "Encadrement de la hauteur d'un arbre"
+    
+    $hauteur(\empty)=-1$
+
+    **Hauteur d'un arbre filiforme**
+
+    Un arbre filiforme de taille $n$ est de hauteur $n-1$
+
+
+    **Hauteur d'un arbre parfait à $n$ noeuds***
+
+    ```mermaid
+    graph TD
+    subgraph Niveau0 ["2^0 nœud"]
+        A["1"]
+    end
+    subgraph Niveau1 ["2^1 nœuds"]
+        A --- B["2"]
+        A --- C["3"]
+    end
+    subgraph Niveau2 ["2^2 nœuds"]
+        B --- D["4"]
+        B --- E["5"]
+        C --- F["6"]
+        C --- G["7"]
+    end
+    subgraph Niveau3 ["2^3 nœuds"]
+        D --- H["8"]
+        D --- I["9"]
+        E --- J["10"]
+        E --- K["11"]
+        F --- L["12"]
+        F --- M["13"]
+        G --- N["14"]
+        G --- O["15"]
+    end
+    ```
+    Cet arbre de hauteur 3 a $2^0 + 2^1 + 2^2 + 2^3 = 15$ nœuds ($2^{4}-1$).
+
+    Un arbre parfait de hauteur $h$ a $\displaystyle \sum_{k=0}^h 2^k$ noeuds.
+
+    On reconnaît la somme des termes d'une suite géométrique de raison 2.
+    
+    Un arbre parfait de hauteur $h$ a donc $N=2^{h+1}-1$ nœuds.
+
+    $N = 2^{h+1} - 1$
+
+    $2^{h+1} = N + 1$
+    
+    En passant au logarithme de base 2 de chaque côté, la hauteur d'un arbre parfait ayant $n$ noeuds est donnée par la formule $h = \log_2(n+1)$.
 
 
 !!! tip "Avancé - Rotations"
@@ -246,3 +403,4 @@ graph TD;
 
     `'a` est l'équivalent du type générique T qu'on a utilisé en python.
     `'a arbrebin` veut dire arbre binaire portant des données de type `'a`
+

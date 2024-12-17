@@ -42,8 +42,10 @@ Il est inutile d'essayer de comprendre ces définitions avant d'avoir pratiqué 
 !!! hint "Meilleur paradigme?"
     Au delà du purisme, la plupart des nouveaux langages implémentent divers concepts provenant de multiples paradigmes. Ils sont dits multi-paradigmes. Pour la simple et bonne raison que ce qui est facile à penser dans un paradigme l'est parfois moins dans un autre. Il convient de ne pas se réduire à une guerre inter-paradigme. La question "Quel est le meilleur paradigme?" n'a pas de sens lorsqu'on s'attaque à des problèmes réels. La réelle richesse provient de la connaissance initiale de ces paradigme et de savoir en faire la part des choses indépendament d'une supposée meilleure façon de penser. 
 
-    Les phrases suivantes sont de meilleures questions à se poser:
+    Les phrases suivantes sont de meilleures questions à se poser en fonctionn du contexte:
+
     - "Dans quel paradigme vais-je me sentir plus à l'aise pour penser mon problème?". 
     - "Dans quel paradigme est-il raisonable de résoudre mon problème étant donné l'état du marché des développeurs?"
     - "Dans quel paradigme est-il raisonable de résoudre mon problème étant données les compétences de mes développeurs?"
+    - ...
 

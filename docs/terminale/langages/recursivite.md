@@ -64,7 +64,7 @@ Par exemple, $P_0 = 1$, $P_4 = 1\times 4 \times 6 \times 4 \times 1$
 
 - Simplifiez l'expression de $\displaystyle \frac{P_{n+1}}{P_n}$ sachant que:
     - $\displaystyle P_n = \prod_{k=0}^{n} \binom{n}{k}$
-    - $\displaystyle \binom{n}{k} = \frac{n!}{k!(n-k)!}$
+    - $\displaystyle \binom{n}{k} = \frac{n!}{k!(n-k)!}$ (On pourra chercher à le montrer par récurrence)
 
 - Démontrez votre conjecture en conséquence.
 
