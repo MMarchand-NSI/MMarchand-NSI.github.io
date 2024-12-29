@@ -90,7 +90,7 @@ Un SGBD est un outil permettant de stocker et d'interagir avec des bases de donn
     - La clause FROM permet de signifier les relations sur lesquelles vous voulez travailler.
     - La clause SELECT permet de demander quels attributs vous voulez obtenir, séparés par une virgule.
     - `*` signifie tous les attributs de la relation.
-    - Toute requête se termine par un point-virgule
+    - **Toute requête se termine par un point-virgule**
 
     Essayez ces autres requêtes:
     ```sql
@@ -143,10 +143,15 @@ Un SGBD est un outil permettant de stocker et d'interagir avec des bases de donn
 
         `_` représente un seul caractère
 
+!!! tip "Entraînement et CheatSheet"
+    Voici un lien où vous pouvez vous entraîner sur des exemples variés:
+    [Entraînement SQL](https://sqlzoo.net/wiki/SQL_Tutorial)
+
+    Et voici une cheatsheet sur les fonctionnalités basiques: [SQL CheatSheet](assets/sql_cheat_sheet.pdf)
 
 !!! question "Exercices - automatismes"
 
-    Pour chaque item de la liste suivante, écrivez la requête qui permet de l'obtenir.
+    Pour chaque item de la liste suivante, écrivez la requête qui permet de l'obtenir. Notez que dans le contxte d'évaluation écrite, vous devez progressivement vous efforcer d'écrire vos requêtes afin qu'elles fonctionnent du premier coup, et pas d'y aller au petit bonheur la chance.
 
     Vous conserverez les réponses dans un fichier .sql
     
@@ -172,3 +177,23 @@ Un SGBD est un outil permettant de stocker et d'interagir avec des bases de donn
 
 {{sqlide titre="Exécuter des requêtes sur chinook:" base="assets/chinook.db" espace="chinook"}}
 
+!!! abstract "Les fonctions d'agrégation"
+
+    - SUM : Calcule la somme des valeurs d'une colonne.
+    - COUNT : Compte le nombre de lignes (ou d'éléments non nuls) dans une colonne.
+    - MAX : Retourne la valeur maximale d'une colonne.
+    - MIN : Retourne la valeur minimale d'une colonne.
+    - AVG : Calcule la moyenne des valeurs d'une colonne. (average)
+
+    Par exemple, pour obtenir le nombre de factures, vous pouvez utiliser `SELECT COUNT(*) FROM invoices;`
+
+    Pour calculer la moyenne du montant des factures, vous pouvez utiliser `SELECT AVG(total) FROM invoices;`
+
+!!! questions "Exercices - fonctions d'agrégation"
+    Calculer:
+
+    1. Le nombre de factures.
+    2. La somme des montants des factures.
+    3. La moyenne des montants des factures.
+    4. La valeur minimale des montants des factures.
+    5. La valeur maximale des montants des factures.
