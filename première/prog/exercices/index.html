@@ -1604,7 +1604,7 @@ Si <span class="arithmatex">\(a\)</span> est impair, on le multiplie par 3 et on
 <div class="admonition question">
 <p class="admonition-title">Recherche sur le tri</p>
 <p>A l'aide des fonctions <code>i_miniminium_partiel</code> et <code>echanger</code>, imaginer une fonction <code>tri_selection(lst: list[int])</code> qui trie en place une liste dans l'ordre croissant.</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">tri_selectionn</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">tri_selection</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
         <span class="o">...</span>
         <span class="o">...</span>
@@ -1613,6 +1613,43 @@ Si <span class="arithmatex">\(a\)</span> est impair, on le multiplie par 3 et on
 <li>Etudier ce qu'il se passe si on essaye de trier la liste vide</li>
 <li>Etudier ce qu'il se passe si on essaye de trier une liste à 1 élément</li>
 </ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Compression par différence</p>
+<p>Le codage par différence (delta encoding en anglais) permet de compresser un tableau de données en indiquant pour chaque donnée, sa différence avec la précédente (plutôt que la donnée elle-même). On se retrouve alors avec un tableau de données assez petites nécessitant moins de place en mémoire. Cette méthode se révèle efficace lorsque les valeurs consécutives sont proches.</p>
+<p>Programmer la fonction <code>compresse</code> qui prend en paramètre un tableau non vide de nombres entiers et qui renvoie un tableau contenant les valeurs entières compressées à l’aide cette technique.</p>
+<p>Exemples:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">compresse</span><span class="p">([</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">802</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1003</span><span class="p">])</span>
+<span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="o">&gt;&gt;&gt;</span> <span class="n">compresse</span><span class="p">([</span><span class="mi">42</span><span class="p">])</span>
+<span class="p">[</span><span class="mi">42</span><span class="p">]</span> 
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Décompression</p>
+<p>Ecrivez une fonction <code>decompresse</code> qui décompresse un tableau de données compressée par la méthode précédente</p>
+<p>Exemples :</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span> <span class="n">decompresse</span><span class="p">([</span><span class="mi">1000</span><span class="p">,</span> <span class="o">-</span><span class="mi">200</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">198</span><span class="p">,</span> <span class="mi">3</span><span class="p">])</span>
+<span class="p">[</span><span class="mi">1000</span><span class="p">,</span> <span class="mi">800</span><span class="p">,</span> <span class="mi">802</span><span class="p">,</span> <span class="mi">1000</span><span class="p">,</span> <span class="mi">1003</span><span class="p">]</span>
+
+<span class="o">&gt;&gt;&gt;</span> <span class="n">decompresse</span><span class="p">([</span><span class="mi">42</span><span class="p">])</span>
+<span class="p">[</span><span class="mi">42</span><span class="p">]</span> 
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">ADN</p>
+<p>On donne la séquence de nuléotide d'un brin de l'ADN sous la forme d'une chaîne de caractères.
+Ecrivez une fonction <code>complementaire</code> qui renvoie la sequence du brin complementaire sachant que:</p>
+<ul>
+<li>le complementaire de A est T</li>
+<li>le complementaire de G est C</li>
+<li>le complementaire de T est A</li>
+<li>le complementaire de C est G</li>
+</ul>
+<p>Exemple:</p>
+<div class="highlight"><pre><span></span><code><span class="o">&gt;&gt;&gt;</span><span class="n">complementaire</span><span class="p">(</span><span class="s2">&quot;ATTTCCGGTAAACATGT&quot;</span><span class="p">)</span>
+<span class="s1">&#39;TAAAGGCCATTTGTACA&#39;</span>
+</code></pre></div>
 </div>
 
 
