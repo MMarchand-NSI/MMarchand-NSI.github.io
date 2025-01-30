@@ -22,7 +22,7 @@
     
     
       
-        <title>TP SGBD - Postgresql - Science Informatique - Site en construction</title>
+        <title>SGBD - Postgresql - Science Informatique - Site en construction</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
 <script src="https://mmarchand-nsi.github.io//js/sqlite_ide.js"></script>
 
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#tp-sgbd-postgresql" class="md-skip">
+        <a href="#sgbd-postgresql" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              TP SGBD - Postgresql
+              SGBD - Postgresql
             
           </span>
         </div>
@@ -1135,7 +1135,7 @@
           
   
   <span class="md-ellipsis">
-    TP SGBD - Postgresql
+    SGBD - Postgresql
   </span>
   
 
@@ -1146,7 +1146,7 @@
         
   
   <span class="md-ellipsis">
-    TP SGBD - Postgresql
+    SGBD - Postgresql
   </span>
   
 
@@ -1660,7 +1660,7 @@
                   
 
 
-<h1 id="tp-sgbd-postgresql">TP SGBD - Postgresql</h1>
+<h1 id="sgbd-postgresql">SGBD - Postgresql</h1>
 <h2 id="pre-requis">Pré-requis</h2>
 <p>Ces outils doivent être installés (voir la section "les outils"):</p>
 <ul>
@@ -1670,7 +1670,7 @@
 <h2 id="install-setup-postgresql">Install &amp; Setup PostgreSQL</h2>
 <p>Ici, nous allons utiliser PostgreSQL, qui est instalable via conda, dans une version plus ultra pratique pour le développement. 
 Par contre, c'est juste inimaginable en production car toute la sécurité est levée.</p>
-<p>Tout ce qui suit se fait dans le miniforge prompt.</p>
+<p>Tout ce qui suit se fait dans le Miniforge Prompt.</p>
 <h3 id="1-creation-et-activation-dun-environnement-a-part-qui-sappelle-outils">1. Création et activation d'un environnement à part qui s'appelle <code>outils</code></h3>
 <div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>outils
 </code></pre></div>
@@ -1698,7 +1698,7 @@ Pour le mettre à la racine de votre répertoire utilisateur, vous pouvez utilis
 <div class="admonition warning">
 <p class="admonition-title">Avant de quitter votre ordi</p>
 <p>Attention, il faudra quitter proprement le SGBD à l'aide de la commande </p>
-<div class="highlight"><pre><span></span><code>pg_ctl<span class="w"> </span>stop<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data<span class="sb">`</span>
+<div class="highlight"><pre><span></span><code>pg_ctl<span class="w"> </span>stop<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data
 </code></pre></div>
 </div>
 <h3 id="5-creation-dun-superutilisateur">5. Création d'un superutilisateur</h3>
@@ -1714,12 +1714,14 @@ Ce super utilisateur s'appelle <code>admin</code> et son mot de passe sera <code
 <h3 id="7-connexion-a-la-base-de-donnees-avec-dbeaver">7. Connexion à la base de données avec DBeaver</h3>
 <p>Maintenant, on peut ouvrir dBeaver pour interagir avec l'instance de postgresql que nous avous lancée.
 Comme souvent, il y a plein de boutons, mais seulement peu nous intéressent.</p>
-<p>Il faut ajouter une "Nouvelle connection" <img alt="alt text" src="../image-4.png" /> à postgresql sachant que:
-- Host: localhost
-- Port: 5432
-- Database: lycee
-- User: admin
-- Mot de passe: password</p>
+<p>Il faut ajouter une "Nouvelle connection" <img alt="alt text" src="../image-4.png" /> à postgresql sachant que:</p>
+<ul>
+<li>Host: localhost</li>
+<li>Port: 5432</li>
+<li>Database: lycee</li>
+<li>User: admin</li>
+<li>Mot de passe: password</li>
+</ul>
 <p><img alt="alt text" src="../image-5.png" /></p>
 <p>Vous pouvez tester la connexion avec le bouton en bas à gauche.</p>
 <p>dBeaver va vouloir télécharger les drivers pour se connecter à postgresql, cliquez sur le bouton télécharger.
@@ -1753,7 +1755,20 @@ Il faudra lui demander de se rafraîchir. (F5 ou menu contextuel)</p>
 </code></pre></div>
 <p>Voilà à quoi doit ressembler votre arborescence une fois que vous avez exécuté les requêtes ci-dessus:</p>
 <p><img alt="alt text" src="../image-6.png" /></p>
-<p>FIN</p>
+<div class="admonition warning">
+<p class="admonition-title">Utilisation au quotidien</p>
+<ul>
+<li>Démarrer la base de données:
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>activate<span class="w"> </span>outils
+pg_ctl<span class="w"> </span>start<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data
+</code></pre></div></li>
+<li>Bosser</li>
+<li>Arreter la base de données:
+<div class="highlight"><pre><span></span><code>pg_ctl<span class="w"> </span>stop<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data
+</code></pre></div></li>
+</ul>
+</div>
+<p><strong>FIN</strong></p>
 <hr />
 <p>IGNORER CE QUI SUIT</p>
 <h2 id="exercices-sur-la-base-de-donnees-pagila">Exercices sur la base de données pagila</h2>
