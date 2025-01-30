@@ -71,6 +71,14 @@
 !!! question "Maximum"
     Ecrire et tester une fonction `maximum` qui prend en paramètres une liste d'entiers et qui renvoie le minimum, sur le même principe.
 
+!!! question "Indice Minimum"
+    Ecrire et tester une fonction `i_minimum` qui prend en paramètres une liste d'entiers et qui renvoie l'index du minimum.
+
+    Il faut initialiser le minimum au premier élément de la liste, et pour chaque élément parcouru, mettre à jour le minimum si c'est nécessaire.
+
+!!! question "Indice Minimum à partir de"
+    Ecrire et tester une fonction `i_minimum_partiel` qui prend en paramètres une liste d'entiers et un indice i_dep et qui renvoie l'index du minimum à partir de l'indice i_dep.
+
 
 !!! question "Tri"
     Le problème du tri est fondamental en informatique. Beaucoup d'algorithmes commencent par trier les données afin de pouvoir utiliser des techniques efficaces.
@@ -80,3 +88,99 @@
     Une liste est triée si chaque élément est plus grand que le precedent.
 
     Ecrire et tester une fonction `est_triee(lst: list[int]) -> bool` qui prend en paramètres une liste et qui renvoie True si la liste est triée, False sinon.
+
+!!! question "Echanger"
+    Ecrire et tester une fonction `echange(lst: list[int], i: int, j: int)` qui prend en paramètres une liste et deux indices et qui echange les valeurs des deux indices.
+
+
+!!! question "Suite de syracuse"
+    On part d'un nombre entier $a>0$.
+    Si $a$ est pair, on le divise par 2 pour obtenir la prochaine valeur
+    Si $a$ est impair, on le multiplie par 3 et on ajoute 1 pour obtenir la prochaine valeur.
+
+    Voici les différentes valeurs prises, en prenant au départ $a=15$
+
+    ![alt text](image.png)
+
+    - Écrire la suite de nombres correspondante pour $a=7$.
+
+    - Écrire une fonction `syracuse(a: int, n: int)` qui affiche les n premiers nombres de la suite pour le nombre de départ a.
+
+    - Modifier la fonction pour qu'elle renvoie la liste des n premiers nombres de la suite.
+
+    - Modifier la fonction en `syracuse(a: int)-> list[int]` pour qu'elle s'arrête d'alimenter la liste résultat dès que la nouvelle valeur est 1. Testez pour a=15 et a=7. Les questions suivantes portent sur cette suite générée se terminant par 1.
+
+    Pour un nombre de départ a, on appelle "temps de vol" de la suite l'indice du dernier élément de la liste.
+    
+    - Quel est le temps de vol pour $a=15$? Pour $a=7$?
+
+    On appelle altitude maximum de la suite la valeur maximum de la suite d'entier.
+    
+    - Quelle est l'altitude pour $a=15$? Pour $a = 7$?
+    - Écrire les fonctions `temps_de_vol(a: int) -> int` et `altitude_max(a: int) -> int`.
+
+    Recherche: 
+    
+    - Qu'est-ce que la conjecture de Collatz? A-t-elle été prouvée?
+    - Qui est Paul Erdős? 
+    - Il a prononcé une phrase célèbre sur la conjecture de Collatz. Laquelle?
+
+
+!!! question "Recherche sur le tri"
+    A l'aide des fonctions `i_miniminium_partiel` et `echanger`, imaginer une fonction `tri_selection(lst: list[int])` qui trie en place une liste dans l'ordre croissant.
+    
+    ```python
+    def tri_selection(lst: list[int]):
+        for i in range(0, len(lst)-1):
+            ...
+            ...
+    ```
+
+    - Etudier ce qu'il se passe si on essaye de trier la liste vide
+    - Etudier ce qu'il se passe si on essaye de trier une liste à 1 élément
+    
+
+!!! question "Compression par différence"
+    Le codage par différence (delta encoding en anglais) permet de compresser un tableau de données en indiquant pour chaque donnée, sa différence avec la précédente (plutôt que la donnée elle-même). On se retrouve alors avec un tableau de données assez petites nécessitant moins de place en mémoire. Cette méthode se révèle efficace lorsque les valeurs consécutives sont proches.
+
+    Programmer la fonction `compresse` qui prend en paramètre un tableau non vide de nombres entiers et qui renvoie un tableau contenant les valeurs entières compressées à l’aide cette technique.
+
+    Exemples:
+
+    ```python
+    >>> compresse([1000, 800, 802, 1000, 1003])
+    [1000, -200, 2, 198, 3]
+    >>> compresse([42])
+    [42] 
+    ```
+
+!!! question "Décompression"
+    Ecrivez une fonction `decompresse` qui décompresse un tableau de données compressée par la méthode précédente
+
+    Exemples :
+
+    ```python
+    >>> decompresse([1000, -200, 2, 198, 3])
+    [1000, 800, 802, 1000, 1003]
+    
+    >>> decompresse([42])
+    [42] 
+    ```
+
+!!! question "ADN"
+    On donne la séquence de nuléotide d'un brin de l'ADN sous la forme d'une chaîne de caractères.
+    Ecrivez une fonction `complementaire` qui renvoie la sequence du brin complementaire sachant que:
+
+    - le complementaire de A est T
+    - le complementaire de G est C
+    - le complementaire de T est A
+    - le complementaire de C est G
+    
+    Exemple:
+
+    ```python
+    >>>complementaire("ATTTCCGGTAAACATGT")
+    'TAAAGGCCATTTGTACA'
+    ```
+
+

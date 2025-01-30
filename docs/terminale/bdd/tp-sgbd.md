@@ -1,31 +1,56 @@
 # TP SGBD - Postgresql
 
+## Pré-requis
+Ces outils doivent être installés (voir la section "les outils"):
 
-## Installation PostgreSQL
+- miniforge
+- dbeaver
 
-Ici, nous allons utiliser PostgreSQL, qui est instalable via conda, dans une version déjà paramétrée pour le développement.
-C'est ultra pratique pour le développement. Par contre, c'est juste inimaginable en production car toute la sécurité est levée.
 
-Tout ce qui suit se fait dans votre environnement conda en ligne de commande.
+## Install & Setup PostgreSQL
 
-1. Installation de postgresql
+Ici, nous allons utiliser PostgreSQL, qui est instalable via conda, dans une version plus ultra pratique pour le développement. 
+Par contre, c'est juste inimaginable en production car toute la sécurité est levée.
+
+Tout ce qui suit se fait dans le miniforge prompt.
+
+### 1. Création et activation d'un environnement à part qui s'appelle `outils`
+
+```bash
+conda create -n outils
+```
+
+```bash
+conda activate outils
+```
+
+!!! warning "Pas dans base"
+    N'utilisez l'environnement base que pour créer et activer des environnements.
+    Votre première action dans un prompt conda doit être d'activer un environnement spécifique.
+
+### 2. Installation de postgresql
 
 ```bash
 conda install postgresql
 ```
 
-2. Initialisation de Postgresql avec un répertoire de données
+Maintenant, nous disposons d'un tas d'outils pour interagir avec postgresql.
+
+### 3. Initialisation de Postgresql avec un répertoire de données
+
+**Chez vous**, remplacez `P:\\data` partout par un autre chemin que vous connaissez sur votre disque.
+Pour le mettre à la racine de votre répertoire utilisateur, vous pouvez utiliser `%USERPROFILE%\\data` à la place.
 
 ```bash
-initdb -D P:\\Documents\\data
+initdb -D P:\\data
 ```
 
-Toutes les données propres à vos données seront stockées dans ce dossier. Chez vous bien sûr il faudra mettre un autre chemin.
+Toutes vos bases de données seront stockées dans ce dossier.
 
-3. Lancement de Postgresql
+### 4. Lancement du service Postgresql
 
 ```bash
-pg_ctl start -D P:\\Documents\\data -l p:\\Documents\\logfile.log &
+pg_ctl start -D P:\\data
 ```
 
 A partir de cet instant, un service tourne sur votre machine sur le port 5432. C'est le port par défaut de Postgresql.
@@ -34,50 +59,91 @@ A partir de cet instant, un service tourne sur votre machine sur le port 5432. C
     Attention, il faudra quitter proprement le SGBD à l'aide de la commande 
 
     ```bash
-    pg_ctl stop -D P:\\Documents\\data`
+    pg_ctl stop -D P:\\data`
     ```
 
-## Création de la base de données Pagila.
+### 5. Création d'un superutilisateur
 
-Nous allons créer une base de données connue, pagila.
-
-Pagila simule un système de location de films. Elle contient des données fictives sur les clients, les films, les employés, les magasins, ainsi que les transactions de location et de paiement.
-
-1. Création de la base de données
+Nous allons créer un utilisteur qui a le droit de tout faire sur postgresql.
+Ce super utilisateur s'appelle `admin` et son mot de passe sera `password`.
+(bien entendu c'est la plus over nulle des sécurisations)
 
 ```bash
-createdb pagila
+createuser --superuser --password admin
 ```
 
-2. Téléchargez le fichier [https://www.postgresql.org/ftp/projects/pgFoundry/dbsamples/pagila/pagila/](https://ftp.postgresql.org/pub/projects/pgFoundry/dbsamples/pagila/pagila/pagila-0.10.1.zip)
+Indiquer le mot de passe password
 
-3. Récupérez-y les fichiers pagila-schema.sql et pagila-data.sql
+### 6. Création d'une base de données
 
-4. Exécuter ces deux fichiers grâce à cette commande:
-
-```bash
-psql -U <votre utilisateur> -d pagila -a -f pagila-schema.sql
-psql -U <votre utilisateur> -d pagila -a -f pagila-data.sql
+```bash	
+createdb lycee
 ```
 
-## Connexion à la base de données avec DBeaver
+### 7. Connexion à la base de données avec DBeaver
 
-Il faut tout d'abord ajouter dans pgadmin4 la connection à postgresql.
-Il faut ajouter une "Nouvelle connection" à postgresql sachant que:
+Maintenant, on peut ouvrir dBeaver pour interagir avec l'instance de postgresql que nous avous lancée.
+Comme souvent, il y a plein de boutons, mais seulement peu nous intéressent.
+
+Il faut ajouter une "Nouvelle connection" ![alt text](image-4.png) à postgresql sachant que:
 - Host: localhost
 - Port: 5432
-- Database: pagila
-- User: Votre user windows
+- Database: lycee
+- User: admin
+- Mot de passe: password
 
-Il n'y a pas de mot de passe.
+![alt text](image-5.png)
 
-Lorsque vous êtes connectés, vos tables se situent à gauche dans pagila > Schémas > public > Tables 
+Vous pouvez tester la connexion avec le bouton en bas à gauche.
 
-Dans l'arborescence, lorsque vous cliquez droit sur "Tables", puis "voir le diagramme", vous pouvez voir... le fameux diagramme...
+dBeaver va vouloir télécharger les drivers pour se connecter à postgresql, cliquez sur le bouton télécharger.
+Il existe beaucoup de drivers pour diverses bases de données. dBeaver ne les récupère que lorsqu'il y a besoin.
 
-Trouvez un moyen d'exécuter des requêtes SQL.
+!!! warning "Attention"
+    Il faut bien cliquer la case à cocher "show all databases" qui est dans un des onglets selon la version de dBeaver.
 
-## Exercices
+Quand c'est bon, cliquez sur terminer.
+
+L'arborescence de gauche ne se met pas à jour automatiquement quand vous créez ou supprimez de nouveaux objets.
+Il faudra lui demander de se rafraîchir. (F5 ou menu contextuel)
+
+### 8. Créer les données de base pour le projet:
+
+
+
+```sql
+\c lycee;
+
+drop table if exists eleves;
+
+create table eleves(
+    id SERIAL primary key,  -- Avec SERIAL, si on ajoute un enregistrement, l'id est automatiquement créée 
+    nom text not null,
+    prenom text not null,
+    age integer
+);
+
+
+insert into eleves(id, nom, prenom, age) 
+values
+(1, 'Dupont', 'Jean', 16),
+(3, 'Durand', 'Pierre', 16),
+(4, 'Dufour', 'Paul', 15)
+;
+
+```
+
+Voilà à quoi doit ressembler votre arborescence une fois que vous avez exécuté les requêtes ci-dessus:
+
+![alt text](image-6.png)
+
+FIN
+
+---
+
+IGNORER CE QUI SUIT
+
+## Exercices sur la base de données pagila
 
 !!! question "Requêtes basiques"
 

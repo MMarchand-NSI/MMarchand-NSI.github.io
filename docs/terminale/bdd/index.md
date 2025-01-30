@@ -139,7 +139,7 @@ Un SGBD est un outil permettant de stocker et d'interagir avec des bases de donn
         `%` représente 0 ou plusieurs caractères
 
         - `WHERE Name LIKE 'J_n'` : renvoie vrai pour "Jan", "Jon", etc.
-        - `WHERE Name LIKE 'C_t%'` : renvoie vrai pour "Cat", "Cut", "Cart", etc.
+        - `WHERE Name LIKE 'C_t%'` : renvoie vrai pour "Cat", "Cut", etc.
 
         `_` représente un seul caractère
 
@@ -147,7 +147,7 @@ Un SGBD est un outil permettant de stocker et d'interagir avec des bases de donn
     Voici un lien où vous pouvez vous entraîner sur des exemples variés:
     [Entraînement SQL](https://sqlzoo.net/wiki/SQL_Tutorial)
 
-    Et voici une cheatsheet sur les fonctionnalités basiques: [SQL CheatSheet](assets/sql_cheat_sheet.pdf)
+    Et voici une cheatsheet sur les fonctionnalités basiques: [SQL CheatSheet](/docs/assets/SQL_cheat_sheet.pdf)
 
 !!! question "Exercices - automatismes"
 
