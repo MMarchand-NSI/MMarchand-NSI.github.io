@@ -23,6 +23,16 @@ L'objectif dans la construction d'une fonction récursive est d'assurer la conve
 !!! warning "Tests"
     Par tester, on entendra écrire la docstring appropriée et inclure en fin de fichier le boilerplate de doctest.
 
+!!! danger "Note d'intention"
+    La récursivité est abordée à travers la programmation dynamique et l'implémentation des structures de données de base:
+
+    - piles
+    - listes
+    - arbres
+
+    Les exercices qui suivent portent sur la récursivité sur les entiers, et sont destinés aux personnes qui ont et veulent avoir un bon bagage mathématique. Ce ne sont globalement pas des exercices faciles, c'est tout l'intérêt.
+
+
 ## Récursivité sur les entiers - Triangle de Pascal
 
 Observez la façon dont est construit le tableau suivant. On appelle i l'indice ligne, et j l'indice colonne. Le tableau a 6 lignes sur l'exemple, mais on le considère de taille infinie.
@@ -50,23 +60,30 @@ On cherche à définir une fonction $C(i,j)$ qui renvoie le nombre à la coordon
     - Quelle est la condition sur $i$ et $j$ pour que $C(i, j)$ renvoie 1?
     - Sinon, exprimez $C(i,j)$ de manière récursive.
 - Ecrivez et testez la fonction récursive `C(i: int, j: int) -> int` qui renvoie le nombre à la coordonnée $\binom{i}{j}$.
-- Ecrivez la fonction `pascal(n: int) -> list[list[int]]` qui renvoie le tableau à $n-1$ lignes. Par exemple, le tableau exemple est renvoyé par `pascal(5)`. La fonction doit faire une ligne. Vous utiliserez les listes en compréhension.
+- Ecrivez la fonction `pascal(n: int) -> list[list[int]]` qui renvoie le tableau à $n+1$ lignes. Par exemple, le tableau exemple est renvoyé par `pascal(5)`. La fonction doit faire une ligne. Vous utiliserez les listes en compréhension.
 
-On s'intéresse maintenant à la suite $P_n$ de chacun des termes non nuls de la ligne $n$.
+On s'intéresse maintenant à la suite du produit $P_n$ de chacun des termes non nuls de la ligne $n$.
 Par exemple, $P_0 = 1$, $P_4 = 1\times 4 \times 6 \times 4 \times 1$
+
 - En utilisant la fonction C, écrire et tester la fonction `P(n: int) -> int`
 
-**Spé Math:** On considère maintenant la suite $\displaystyle Q_n = \frac{P_{n-1}P_{n+1}}{P_n^2}, n>0$
+On considère maintenant la suite $\displaystyle Q_n = \frac{P_{n-1}P_{n+1}}{P_n^2}, n>0$
 
 - Ecrire la fonction `Q(n: int) -> float`
 
 - En jouant avec cette fonction, conjecturer sur $\displaystyle \lim_{n \to \infin}Q_n$
 
-- Simplifiez l'expression de $\displaystyle \frac{P_{n+1}}{P_n}$ sachant que:
+- Montrez que $\displaystyle \frac{P_{n+1}}{P_n} = \prod_{k=0}^{n} \frac{n+1}{n+1-k}$ sachant que:
     - $\displaystyle P_n = \prod_{k=0}^{n} \binom{n}{k}$
-    - $\displaystyle \binom{n}{k} = \frac{n!}{k!(n-k)!}$ (On pourra chercher à le montrer par récurrence)
+    - $\displaystyle \binom{n}{k} = \frac{n!}{k!(n-k)!}$ (C'est bien de savoir le montrer par récurrence)
 
-- Démontrez votre conjecture en conséquence.
+- En déduire que $\displaystyle \frac{P_{n+1}}{P_n} = \frac{(n+1)^n}{n!}$
+
+- Vous avez fait le plus dur. Démontrez votre conjecture en conséquence. Il faudra se ramener à une limite éminemment célèbre.
+
+!!! tip "Interprétation"
+    - $\displaystyle \frac{P_{n+1}}{P_n}$ mesure les rapports successifs de $P_n$, elle est donc une mesure "d'évolution".
+    - $Q_n$ mesure les rapports successifs de $\displaystyle \frac{P_{n+1}}{P_n}$ , elle mesure donc l'évolution de la mesure d'évolution de $P_n$.
 
 ## Récursivité sur les entiers - Opérations
 
@@ -211,13 +228,6 @@ Ici, il faut s'appuyer sur la structure qui détermine le nombre de solutions (c
 rouge = "\N{LARGE RED SQUARE}"
 bleu = 2*"\N{LARGE BLUE SQUARE}"
 ```
-
-### Conversion Binaire
-
-La conversion d'entiers naturels en binaire est un procédé récursif qui fonctionne sur base de la division euclidienne par 2.
-
-Ecrire la fonction récursive:  `dec_to_bin(n: int) -> str`
-
 
 ### Permutations des n premiers entiers naturels
 

@@ -1,4 +1,5 @@
-# TP SGBD - Postgresql
+# SGBD - Postgresql
+
 
 ## Pré-requis
 Ces outils doivent être installés (voir la section "les outils"):
@@ -12,7 +13,7 @@ Ces outils doivent être installés (voir la section "les outils"):
 Ici, nous allons utiliser PostgreSQL, qui est instalable via conda, dans une version plus ultra pratique pour le développement. 
 Par contre, c'est juste inimaginable en production car toute la sécurité est levée.
 
-Tout ce qui suit se fait dans le miniforge prompt.
+Tout ce qui suit se fait dans le Miniforge Prompt.
 
 ### 1. Création et activation d'un environnement à part qui s'appelle `outils`
 
@@ -59,7 +60,7 @@ A partir de cet instant, un service tourne sur votre machine sur le port 5432. C
     Attention, il faudra quitter proprement le SGBD à l'aide de la commande 
 
     ```bash
-    pg_ctl stop -D P:\\data`
+    pg_ctl stop -D P:\\data
     ```
 
 ### 5. Création d'un superutilisateur
@@ -86,6 +87,7 @@ Maintenant, on peut ouvrir dBeaver pour interagir avec l'instance de postgresql 
 Comme souvent, il y a plein de boutons, mais seulement peu nous intéressent.
 
 Il faut ajouter une "Nouvelle connection" ![alt text](image-4.png) à postgresql sachant que:
+
 - Host: localhost
 - Port: 5432
 - Database: lycee
@@ -112,7 +114,6 @@ Il faudra lui demander de se rafraîchir. (F5 ou menu contextuel)
 
 
 ```sql
-\c lycee;
 
 drop table if exists eleves;
 
@@ -137,7 +138,21 @@ Voilà à quoi doit ressembler votre arborescence une fois que vous avez exécut
 
 ![alt text](image-6.png)
 
-FIN
+
+!!! warning "Utilisation au quotidien"
+    - Démarrer la base de données:
+    ```bash
+    conda activate outils
+    pg_ctl start -D P:\\data
+    ```
+    - Bosser
+    - Arreter la base de données:
+    ```bash
+    pg_ctl stop -D P:\\data
+    ```
+    
+
+**FIN**
 
 ---
 

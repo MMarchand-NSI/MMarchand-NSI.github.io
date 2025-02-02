@@ -727,6 +727,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../premi%C3%A8re/prog/scope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Portée des variables (scope)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../premi%C3%A8re/prog/strings/" class="md-nav__link">
         
   
@@ -848,6 +869,27 @@
   
   <span class="md-ellipsis">
     MasterMind
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/musique/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Créer un clavier musical
   </span>
   
 
@@ -1124,7 +1166,7 @@
         
   
   <span class="md-ellipsis">
-    TP SGBD - Postgresql
+    SGBD - Postgresql
   </span>
   
 
@@ -1365,15 +1407,6 @@
   <a href="#probleme-2" class="md-nav__link">
     <span class="md-ellipsis">
       Problème 2
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#conversion-binaire" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conversion Binaire
     </span>
   </a>
   
@@ -1671,15 +1704,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#conversion-binaire" class="md-nav__link">
-    <span class="md-ellipsis">
-      Conversion Binaire
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#permutations-des-n-premiers-entiers-naturels" class="md-nav__link">
     <span class="md-ellipsis">
       Permutations des n premiers entiers naturels
@@ -1759,6 +1783,16 @@
 <p class="admonition-title">Tests</p>
 <p>Par tester, on entendra écrire la docstring appropriée et inclure en fin de fichier le boilerplate de doctest.</p>
 </div>
+<div class="admonition danger">
+<p class="admonition-title">Note d'intention</p>
+<p>La récursivité est abordée à travers la programmation dynamique et l'implémentation des structures de données de base:</p>
+<ul>
+<li>piles</li>
+<li>listes</li>
+<li>arbres</li>
+</ul>
+<p>Les exercices qui suivent portent sur la récursivité sur les entiers, et sont destinés aux personnes qui ont et veulent avoir un bon bagage mathématique. Ce ne sont globalement pas des exercices faciles, c'est tout l'intérêt.</p>
+</div>
 <h2 id="recursivite-sur-les-entiers-triangle-de-pascal">Récursivité sur les entiers - Triangle de Pascal</h2>
 <p>Observez la façon dont est construit le tableau suivant. On appelle i l'indice ligne, et j l'indice colonne. Le tableau a 6 lignes sur l'exemple, mais on le considère de taille infinie.</p>
 <div class="arithmatex">\[
@@ -1784,12 +1818,14 @@ Sinon, un nombre est toujours égal à celui du dessus, plus celui du dessus à 
 </ul>
 </li>
 <li>Ecrivez et testez la fonction récursive <code>C(i: int, j: int) -&gt; int</code> qui renvoie le nombre à la coordonnée <span class="arithmatex">\(\binom{i}{j}\)</span>.</li>
-<li>Ecrivez la fonction <code>pascal(n: int) -&gt; list[list[int]]</code> qui renvoie le tableau à <span class="arithmatex">\(n-1\)</span> lignes. Par exemple, le tableau exemple est renvoyé par <code>pascal(5)</code>. La fonction doit faire une ligne. Vous utiliserez les listes en compréhension.</li>
+<li>Ecrivez la fonction <code>pascal(n: int) -&gt; list[list[int]]</code> qui renvoie le tableau à <span class="arithmatex">\(n+1\)</span> lignes. Par exemple, le tableau exemple est renvoyé par <code>pascal(5)</code>. La fonction doit faire une ligne. Vous utiliserez les listes en compréhension.</li>
 </ul>
-<p>On s'intéresse maintenant à la suite <span class="arithmatex">\(P_n\)</span> de chacun des termes non nuls de la ligne <span class="arithmatex">\(n\)</span>.
-Par exemple, <span class="arithmatex">\(P_0 = 1\)</span>, <span class="arithmatex">\(P_4 = 1\times 4 \times 6 \times 4 \times 1\)</span>
-- En utilisant la fonction C, écrire et tester la fonction <code>P(n: int) -&gt; int</code></p>
-<p><strong>Spé Math:</strong> On considère maintenant la suite <span class="arithmatex">\(\displaystyle Q_n = \frac{P_{n-1}P_{n+1}}{P_n^2}, n&gt;0\)</span></p>
+<p>On s'intéresse maintenant à la suite du produit <span class="arithmatex">\(P_n\)</span> de chacun des termes non nuls de la ligne <span class="arithmatex">\(n\)</span>.
+Par exemple, <span class="arithmatex">\(P_0 = 1\)</span>, <span class="arithmatex">\(P_4 = 1\times 4 \times 6 \times 4 \times 1\)</span></p>
+<ul>
+<li>En utilisant la fonction C, écrire et tester la fonction <code>P(n: int) -&gt; int</code></li>
+</ul>
+<p>On considère maintenant la suite <span class="arithmatex">\(\displaystyle Q_n = \frac{P_{n-1}P_{n+1}}{P_n^2}, n&gt;0\)</span></p>
 <ul>
 <li>
 <p>Ecrire la fonction <code>Q(n: int) -&gt; float</code></p>
@@ -1798,16 +1834,26 @@ Par exemple, <span class="arithmatex">\(P_0 = 1\)</span>, <span class="arithmate
 <p>En jouant avec cette fonction, conjecturer sur <span class="arithmatex">\(\displaystyle \lim_{n \to \infin}Q_n\)</span></p>
 </li>
 <li>
-<p>Simplifiez l'expression de <span class="arithmatex">\(\displaystyle \frac{P_{n+1}}{P_n}\)</span> sachant que:</p>
+<p>Montrez que <span class="arithmatex">\(\displaystyle \frac{P_{n+1}}{P_n} = \prod_{k=0}^{n} \frac{n+1}{n+1-k}\)</span> sachant que:</p>
 <ul>
 <li><span class="arithmatex">\(\displaystyle P_n = \prod_{k=0}^{n} \binom{n}{k}\)</span></li>
-<li><span class="arithmatex">\(\displaystyle \binom{n}{k} = \frac{n!}{k!(n-k)!}\)</span> (On pourra chercher à le montrer par récurrence)</li>
+<li><span class="arithmatex">\(\displaystyle \binom{n}{k} = \frac{n!}{k!(n-k)!}\)</span> (C'est bien de savoir le montrer par récurrence)</li>
 </ul>
 </li>
 <li>
-<p>Démontrez votre conjecture en conséquence.</p>
+<p>En déduire que <span class="arithmatex">\(\displaystyle \frac{P_{n+1}}{P_n} = \frac{(n+1)^n}{n!}\)</span></p>
+</li>
+<li>
+<p>Vous avez fait le plus dur. Démontrez votre conjecture en conséquence. Il faudra se ramener à une limite éminemment célèbre.</p>
 </li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">Interprétation</p>
+<ul>
+<li><span class="arithmatex">\(\displaystyle \frac{P_{n+1}}{P_n}\)</span> mesure les rapports successifs de <span class="arithmatex">\(P_n\)</span>, elle est donc une mesure "d'évolution".</li>
+<li><span class="arithmatex">\(Q_n\)</span> mesure les rapports successifs de <span class="arithmatex">\(\displaystyle \frac{P_{n+1}}{P_n}\)</span> , elle mesure donc l'évolution de la mesure d'évolution de <span class="arithmatex">\(P_n\)</span>.</li>
+</ul>
+</div>
 <h2 id="recursivite-sur-les-entiers-operations">Récursivité sur les entiers - Opérations</h2>
 <p>La récursivité vous a été présentée via des structures de données elles-mêmes récursives. Ici nous allons nous concentrer sur les entiers naturels.</p>
 <p>L'objectif est de construire toutes les opérations que vous connaissez, simplement à partir de la définition du successeur d'un nombre.</p>
@@ -1915,9 +1961,6 @@ On doit donc réécrire <span class="arithmatex">\(a+b\)</span> afin de faire ap
 <div class="highlight"><pre><span></span><code><span class="n">rouge</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\N{LARGE RED SQUARE}</span><span class="s2">&quot;</span>
 <span class="n">bleu</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="s2">&quot;</span><span class="se">\N{LARGE BLUE SQUARE}</span><span class="s2">&quot;</span>
 </code></pre></div>
-<h3 id="conversion-binaire">Conversion Binaire</h3>
-<p>La conversion d'entiers naturels en binaire est un procédé récursif qui fonctionne sur base de la division euclidienne par 2.</p>
-<p>Ecrire la fonction récursive:  <code>dec_to_bin(n: int) -&gt; str</code></p>
 <h3 id="permutations-des-n-premiers-entiers-naturels">Permutations des n premiers entiers naturels</h3>
 <p>TODO</p>
 <h3 id="le-tour-du-cavalier">Le tour du cavalier</h3>
