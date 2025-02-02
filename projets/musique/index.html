@@ -1,0 +1,2628 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mmarchand-nsi.github.io/projets/musique/">
+      
+      
+        <link rel="prev" href="../mastermind/">
+      
+      
+        <link rel="next" href="../othello/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
+    
+    
+      
+        <title>Créer un clavier musical - Science Informatique - Site en construction</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
+<script src="https://mmarchand-nsi.github.io//js/sqlite_ide.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/sql/sql.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.css"><link rel="stylesheet" href="https://mmarchand-nsi.github.io//css/sqlite_ide.css"><script>path="https://mmarchand-nsi.github.io/"</script>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#creer-un-clavier-musical" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Science Informatique - Site en construction" class="md-header__button md-logo" aria-label="Science Informatique - Site en construction" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Science Informatique - Site en construction
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Créer un clavier musical
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+    
+  
+  &nbsp;
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../les-outils/" class="md-tabs__link">
+          
+  
+  Les outils
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../premi%C3%A8re/IHM/flet/" class="md-tabs__link">
+          
+  
+  Première
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../intro-pyxel/" class="md-tabs__link">
+          
+  
+  Projets
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../terminale/complements_python/" class="md-tabs__link">
+          
+  
+  Terminale
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Science Informatique - Site en construction" class="md-nav__button md-logo" aria-label="Science Informatique - Site en construction" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Science Informatique - Site en construction
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    &nbsp;
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Les outils
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Les outils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../les-outils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Outils pour développer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../les-outils/git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git et Github
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../les-outils/setup-vscode/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setup vscode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Première
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Première
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    IHM
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            IHM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/IHM/flet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interface Homme machine
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Logique
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Logique
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/logique/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Logique
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Prog
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Prog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/exercices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exercices Algorithmique
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/listes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Le type list (et tuple)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/scope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Portée des variables (scope)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/strings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chaînes de caractères (str)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Projets
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Projets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../intro-pyxel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction à pyxel - POO
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../jeudelavie/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Game Of Life
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mastermind/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MasterMind
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Créer un clavier musical
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Créer un clavier musical
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objectif" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#un-peu-de-theorie" class="md-nav__link">
+    <span class="md-ellipsis">
+      Un peu de théorie
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#le-midi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le MIDI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup python
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup VSCode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-de-depart" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code de départ
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cours
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jouer-des-notes-de-musique" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jouer des notes de musique
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creer-un-clavier-complet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Créer un clavier complet
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Créer un clavier complet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectif_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specifications-fonctionnelles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spécifications fonctionnelles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specifications-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spécifications techniques
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#annexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Annexes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Annexes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notes-midi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes MIDI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#percussions-midi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Percussions MIDI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instruments-midi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instruments MIDI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../othello/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Othello
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pendu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Le pendu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../space_invader/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Projet space invader
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Terminale
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Terminale
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/complements_python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compléments sur le tri, min et max
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Bdd
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Bdd
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/bdd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Base de données et SGBD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/bdd/jointure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jointures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/bdd/manipulation-integrite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manipulation et intégrité
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/bdd/sql-murder-mystery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQL murder mystery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/bdd/tp-sgbd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SGBD - Postgresql
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Langages
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Langages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Paradigmes de programmation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Paradigme orienté objets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/recursivite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Récursivité
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Structures de donnees
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Structures de donnees
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/structures-de-donnees/arbrebinaire/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arbres enracinés
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/structures-de-donnees/listes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Listes - Paradigme fonctionnel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/structures-de-donnees/listeschainees/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Listes chaînées - Approche Orientée Objet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objectif" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif:
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#un-peu-de-theorie" class="md-nav__link">
+    <span class="md-ellipsis">
+      Un peu de théorie
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#le-midi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le MIDI
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup python
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setup-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Setup VSCode
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-de-depart" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code de départ
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cours" class="md-nav__link">
+    <span class="md-ellipsis">
+      Cours
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#jouer-des-notes-de-musique" class="md-nav__link">
+    <span class="md-ellipsis">
+      Jouer des notes de musique
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#creer-un-clavier-complet" class="md-nav__link">
+    <span class="md-ellipsis">
+      Créer un clavier complet
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Créer un clavier complet">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#objectif_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Objectif
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specifications-fonctionnelles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spécifications fonctionnelles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#specifications-techniques" class="md-nav__link">
+    <span class="md-ellipsis">
+      Spécifications techniques
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#annexes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Annexes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Annexes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#notes-midi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notes MIDI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#percussions-midi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Percussions MIDI
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#instruments-midi" class="md-nav__link">
+    <span class="md-ellipsis">
+      Instruments MIDI
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="creer-un-clavier-musical">Créer un clavier musical</h1>
+<p><img alt="alt text" src="../image-10.png" /></p>
+<h2 id="objectif">Objectif:</h2>
+<ul>
+<li>Apprendre à gérer les évènements utilisateurs pour construire une interface homme/machine.</li>
+<li>Utiliser des modules.</li>
+<li>Utiliser des variables globales. </li>
+<li>Utiliser des dictionnaires.</li>
+<li>Découvrir que même la musique a un standard de représentation informatique mondial, le MIDI.</li>
+</ul>
+<h2 id="un-peu-de-theorie">Un peu de théorie</h2>
+<p>Kurt Gödel a montré qu’il est possible d’associer à toute formule, à tout énoncé, voire à toute démonstration, un nombre entier unique. L’argument repose sur le fait que tout symbole et toute suite de symboles peuvent être encodés numériquement (par exemple sous forme binaire), permettant ainsi de « traduire » n’importe quel objet formel en un entier.</p>
+<p>En informatique, tout objet manipulable (texte, image, son, vidéo, programme, etc.) est de fait une suite finie de bits.</p>
+<p>Or, une suite finie de bits peut être vue comme la représentation binaire d’un entier naturel.</p>
+<p><strong>Tout objet formel est représentable par un entier naturel. 
+C'est un principe fondamental et omniprésent de la science informatique.</strong></p>
+<h2 id="le-midi">Le MIDI</h2>
+<p>La norme MIDI (Musical Instrument Digital Interface) est un protocole de communication entre instruments électroniques, ordinateurs, logiciels de musique, etc.</p>
+<p>Au lieu d’envoyer une représentationn d'ondes sonores, les instruments MIDI envoient des messages (ex. : « Note ON », « Note OFF », « Program Change », etc.) qui décrivent quelle note jouer, à quel moment, avec quelle intensité, et une kyrielle d'autres paramètres encore.</p>
+<p>Par exemple, un message « Note ON » se compose de trois octets :</p>
+<ul>
+<li>L’identifiant du message et du canal (un nombre),</li>
+<li>Le numéro de la note (un nombre, de 0 à 127),</li>
+<li>La vélocité (un nombre, de 0 à 127).</li>
+</ul>
+<p>Ainsi, même pour décrire la durée, la hauteur d’une note ou le changement d’instrument, tout se fait par des nombres (généralement compris entre 0 et 127 dans le MIDI basique)</p>
+<p>Ces messages seront interprétés au final par un synthétiseur de sons qui dispose d'une banque de sons, où chaque instrument a été échantilloné pour produire les sons voulus au gré des messages reçus.</p>
+<p>Certains instruments disposent d'un synthétiseur intégré. C'est le cas des claviers numériques du type clavinova, par exemple, mais le principe est le même. Parmis moultes configurations techniques possibles, sur une scène de concert <strong>de haut niveau technique</strong>, le musicien qui joue du synthétiseur peut n'envoyer que des signaux MIDI à la régie. La régie, elle, peut aussi envoyer des messages MIDI à son instrument (pour déclencher des séquences automatiques, changer la configuration à la place du musicien), et la génération du son se fait en régie avec ce qu'on appelle un rack de sons. Le musicien peut alors entendre le son produit grâce aux wedges (oreillettes ou haut parleur de scène). Nous touchons ici à ce qui est un métier en soi.</p>
+<hr />
+<h2 id="setup-python">Setup python</h2>
+<p>Dans votre environnement conda:
+<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>install<span class="w"> </span>mido<span class="w"> </span>pygame
+pip<span class="w"> </span>install<span class="w"> </span>pynput<span class="w"> </span>pyttsx3
+</code></pre></div></p>
+<ul>
+<li>
+<p>installer pygame permet de s'affranchir de pas mal de configuration MIDI sur l'ordinateur.</p>
+</li>
+<li>
+<p>mido permet à python de connaître et de donner à l'utilisateur la possibilité de manipuler de la musique selon le standard MIDI.</p>
+</li>
+<li>
+<p>pynput sert à capturer les évènements utilisateurs (clavier et souris)</p>
+</li>
+<li>
+<p>pyttsx3 est un module de synthèse vocale.</p>
+</li>
+</ul>
+<h2 id="setup-vscode">Setup VSCode</h2>
+<p>Mise en place des fichiers:
+Vous avez à disposition 3 fichiers:</p>
+<ul>
+<li>evenements.py<ul>
+<li>Ce fichier contient des fonctions pour écouter les évènements du clavier.</li>
+</ul>
+</li>
+<li>midiutils.py<ul>
+<li>Ce fichier contient des fonctions pour jouer de la musique.</li>
+</ul>
+</li>
+<li>synthese.py<ul>
+<li>Ce fichier sert à faire de la synthèse de... 🤔</li>
+</ul>
+</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">Actions</p>
+<ul>
+<li>Créez un répertoire projet_musique dans votre répertoire NSI</li>
+<li>Mettez-y les trois fichiers python. <strong>Il ne faut pas les modifier</strong></li>
+<li>Ouvrez le répertoire du projet dans VSCode</li>
+<li>Créez-y un fichier clavier.py . Ce qui est demandé se fera dans ce fichier.</li>
+<li>Ouvrez le dans VSCode.</li>
+</ul>
+</div>
+<h2 id="code-de-depart">Code de départ</h2>
+<p>Voici le code initial du fichier clavier.py que vous venez de créer.
+Il ne permet pas encore de produire de la musique, juste de gérer les évènements clavier/souris.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">evenements</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">logging</span> <span class="kn">import</span> <span class="n">info</span>
+
+<span class="k">def</span> <span class="nf">appuie_touche</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Key</span><span class="p">):</span>
+    <span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Touche </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">char</span><span class="p">)</span><span class="si">}</span><span class="s1"> appuyée&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">relache_touche</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Key</span><span class="p">):</span>
+    <span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Touche </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> relâchée&#39;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">click</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">bouton</span><span class="p">:</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Button</span><span class="p">,</span> <span class="n">etat</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">bouton</span> <span class="o">==</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Button</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
+        <span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">y</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">bouton</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">etat</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">bouton</span> <span class="o">==</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Button</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
+        <span class="n">info</span><span class="p">(</span><span class="s2">&quot;click droit&quot;</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">bouton</span> <span class="o">==</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Button</span><span class="o">.</span><span class="n">middle</span><span class="p">:</span>
+        <span class="n">info</span><span class="p">(</span><span class="s2">&quot;molette&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">bouge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+    <span class="c1"># pass veut dire: &quot;ne rien faire&quot;.</span>
+    <span class="k">pass</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot; Fonction principale </span>
+<span class="sd">    Python reste à cette ligne jusqu&#39;à la fin du programme.</span>
+<span class="sd">    On indique à python qu&#39;il faut exécuter:</span>
+<span class="sd">    - appuie_touche lorsqu&#39;une touche est appuyée</span>
+<span class="sd">    - relache_touche lorsqu&#39;une touche est relachée</span>
+<span class="sd">    - click quand un bouton de souris est cliquée</span>
+<span class="sd">    - bouge lorsque la souris est bougée.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">evenements</span><span class="o">.</span><span class="n">demarre_listeners</span><span class="p">(</span><span class="n">appuie_touche</span><span class="p">,</span> <span class="n">relache_touche</span><span class="p">,</span> <span class="n">click</span><span class="p">,</span> <span class="n">bouge</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+    <span class="c1">#Pour supprimer les infos de log dans la console, vous pouvez utiliser NOTSET à la place de INFO.</span>
+    <span class="c1">#Pour voir des informations supplémentaires de log dans la console, vous pouvez utiliser DEBUG à la place de INFO.</span>
+
+    <span class="n">main</span><span class="p">()</span>
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Exercices</p>
+<ul>
+<li>Trouvez un moyen d'afficher "click gauche" lorsqu'on clique sur le bouton gauche de la souris.</li>
+<li>Trouvez un moyen d'afficher les coordonnées de la souris lorsqu'on la bouge.</li>
+</ul>
+</div>
+<h2 id="cours">Cours</h2>
+<div class="admonition abstract">
+<p class="admonition-title">Modules</p>
+<p>Quand on <code>import evenements</code>, python va voir s'il existe un fichier qui s'appelle evenements.py dans le répertoire. Oui, on en a mis un. Elle va donc rendre accessible à votre programme toutes les fonctions et les variables contenues dedans.
+Par exemple, maintenant qu'on a importé le module evenements, on peut accéder à sa fonction demarre_listeners en écrivant <code>evenements.demarre_listeners(....)</code></p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Listeners - programmation évènementielle</p>
+<p>Un écouteur d'évènement (on dira listener) est une boucle infinie qui vérifie qu'un événement se produit. Quand l'événement écouté se produit, alors la boucle lance la fonction associée, qu'on appelle un <strong>callback</strong>. </p>
+<p>On peut écouter les événements se produisant sur les périphériques de l'ordinateur: l'écran tactile, la souris, le clavier...</p>
+<p>L'événement peut être un clic souris, le mouvement de la souris, une touche du clavier enfoncée, relâchée, la modification d'un fichier sur le disque dur, le branchement d'un matériel USB...</p>
+<p><strong>A vous de décider du contenu de vos callback en fonction du comportement que </strong>vous** désirez quand un utilisateur déclenche un évènement.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercice</p>
+<p>Modifiez le callback appuie_touche pour que, lorsqu'on enfonce la touche "s", le programme affiche "Exercice réussi :)"</p>
+</div>
+<p>A partir de maintenant, vous avez presque tout ce qu'il vous faut pour écrire une application d'espionnage répandue qu'on appelle un keylogger. Il ne vous manque plus qu'à savoir communiquer avec des périphériques de stockage ou transfert de données. <strong>MAIS Se rend coupable de l’infraction prévue à l’article 323-1 du code pénal la personne qui, sachant qu’elle n’y est pas autorisée, accède à l’insu des victimes, à un système de traitement automatisé de donnée. La cour de cassation fait explicitement référence à des keyloggers dans des arrêts. Les peines sont très lourdes étant donné les conséquences (industrialisation de récupération de mots de passes (bancaires...), porte ouverte à l'usurpation d'identité, atteinte à la vie privée... florilège).</strong></p>
+<h2 id="jouer-des-notes-de-musique">Jouer des notes de musique</h2>
+<p>Le module midiutils comporte des fonctions Midi (Musical Instrument Digital Interface, standard international en musique) qui permettent (entre autre) de jouer des notes de musique, et d'arrêter des notes de musique. Comme lorsqu'on appuie sur une touche de piano (Message MIDI note_on) et qu'on relâche une touche de piano (Message MIDI note_off).</p>
+<p>Les numéros MIDI d'instruments sont disponibles en annexe. Les numéros MIDI des notes de musique sont en annexe.</p>
+<p>Vous pouvez, grâce à un booléen, dire que vous voulez jouer une percussion, auquel cas, les notes à jouer/relâcher pour les diverses percussions sont aussi en annexe.</p>
+<div class="admonition question">
+<p class="admonition-title">Adaptation du code</p>
+<p>Modifiez la fonction main ainsi.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="n">midiutils</span><span class="o">.</span><span class="n">debut_environnement_sonore</span><span class="p">()</span>
+    <span class="c1"># Démarrage de la boucle principale</span>
+    <span class="n">evenements</span><span class="o">.</span><span class="n">demarre_listeners</span><span class="p">(</span><span class="n">appuie_touche</span><span class="p">,</span> <span class="n">relache_touche</span><span class="p">,</span> <span class="n">click</span><span class="p">,</span> <span class="n">bouge</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="c1"># Sortie de la boucle principale</span>
+    <span class="n">midiutils</span><span class="o">.</span><span class="n">fin_environnement_sonore</span><span class="p">()</span>
+</code></pre></div>
+<p>Lancez le programme. Il vous demande de choisir quel synthétiseur utiliser s'il en existe plusieurs. Choisissez celui de windows le cas échéant.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Prise en main</p>
+<p>Apportez des modifications au bon endroit du code pour que:</p>
+<ul>
+<li>lorsqu'on appuie sur la touche "a", la note LA 440 soit joué.</li>
+<li>lorsqu'on relâche la touche "a", cette même note soit relâchée.</li>
+<li>lorsqu'on appuie sur la touche "&lt;", une percussion précise soit jouée (de votre choix).</li>
+<li>lorsqu'on relâche la touche "&lt;", cette même percussion est relâchée.</li>
+</ul>
+</div>
+<h2 id="creer-un-clavier-complet">Créer un clavier complet</h2>
+<h3 id="objectif_1">Objectif</h3>
+<p>Transformer votre clavier en instrument.</p>
+<h3 id="specifications-fonctionnelles">Spécifications fonctionnelles</h3>
+<p>Chaque partie de votre clavier doit être séparé sur ce mode:</p>
+<p><img alt="alt text" src="../image-6.png" /></p>
+<ul>
+<li>Les touches bleues servent à jouer des percussions.</li>
+<li>Les touches vertes servent à jouer un instrument particulier.</li>
+<li>2 touches oranges servent à changer d'instrument (instrument suivant, instrument précédent).</li>
+<li>2 touches oranges servent à modifier la vélocité (+, -).</li>
+<li>Une touche orange sert à jouer une mélodie stockée dans une liste.</li>
+<li>Le mouvement de la souris sert à modifier le pitchwheel</li>
+</ul>
+<p>Si vous n'avez pas de clavier avec pavé numérique chez vous, ne faites pas le bloc rose. Il est cependant intéressant à faire dans le sens où il va vous obliger à fouiller un peu sur la façon dont sont représentées ces touches.</p>
+<h3 id="specifications-techniques">Spécifications techniques</h3>
+<ul>
+<li>
+<p>Vous devrez associer à des touches du clavier un numéro de note.</p>
+<ul>
+<li>A cette fin, vous travaillerez avec des dictionnaires en variables globales, un pour chaque bloc de touches.</li>
+</ul>
+</li>
+<li>
+<p>Vous aurez un numéro d' <code>instrument_courant</code> en variable globale.</p>
+</li>
+<li>
+<p>Utiliser la fonction "dire" du module</p>
+</li>
+</ul>
+<h2 id="annexes">Annexes</h2>
+<h3 id="notes-midi">Notes MIDI</h3>
+<p><img alt="" src="../image-7.png" /></p>
+<h3 id="percussions-midi">Percussions MIDI</h3>
+<p><img alt="alt text" src="../image-9.png" /></p>
+<h3 id="instruments-midi">Instruments MIDI</h3>
+<div class="admonition warning">
+<p class="admonition-title">Attention</p>
+<p>Les numéros que vous voyez sont ceux que les musiciens voient dans leurs outils. Dans le code, la numérotation commence à 0, pas à 1.</p>
+</div>
+<table>
+<thead>
+<tr>
+<th style="text-align: right;">Numéro</th>
+<th style="text-align: left;">Instrument GM (en français)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Piano acoustique (grand)</td>
+</tr>
+<tr>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Piano acoustique brillant</td>
+</tr>
+<tr>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Piano électrique (grand)</td>
+</tr>
+<tr>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Piano bar (honky-tonk)</td>
+</tr>
+<tr>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Piano électrique 1</td>
+</tr>
+<tr>
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Piano électrique 2</td>
+</tr>
+<tr>
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Clavecin</td>
+</tr>
+<tr>
+<td style="text-align: right;">8</td>
+<td style="text-align: left;">Clavinet</td>
+</tr>
+<tr>
+<td style="text-align: right;">9</td>
+<td style="text-align: left;">Célesta</td>
+</tr>
+<tr>
+<td style="text-align: right;">10</td>
+<td style="text-align: left;">Glockenspiel</td>
+</tr>
+<tr>
+<td style="text-align: right;">11</td>
+<td style="text-align: left;">Boîte à musique</td>
+</tr>
+<tr>
+<td style="text-align: right;">12</td>
+<td style="text-align: left;">Vibraphone</td>
+</tr>
+<tr>
+<td style="text-align: right;">13</td>
+<td style="text-align: left;">Marimba</td>
+</tr>
+<tr>
+<td style="text-align: right;">14</td>
+<td style="text-align: left;">Xylophone</td>
+</tr>
+<tr>
+<td style="text-align: right;">15</td>
+<td style="text-align: left;">Cloches tubulaires</td>
+</tr>
+<tr>
+<td style="text-align: right;">16</td>
+<td style="text-align: left;">Dulcimer</td>
+</tr>
+<tr>
+<td style="text-align: right;">17</td>
+<td style="text-align: left;">Orgue à tirettes</td>
+</tr>
+<tr>
+<td style="text-align: right;">18</td>
+<td style="text-align: left;">Orgue percussif</td>
+</tr>
+<tr>
+<td style="text-align: right;">19</td>
+<td style="text-align: left;">Orgue rock</td>
+</tr>
+<tr>
+<td style="text-align: right;">20</td>
+<td style="text-align: left;">Orgue d’église</td>
+</tr>
+<tr>
+<td style="text-align: right;">21</td>
+<td style="text-align: left;">Orgue à anche</td>
+</tr>
+<tr>
+<td style="text-align: right;">22</td>
+<td style="text-align: left;">Accordéon</td>
+</tr>
+<tr>
+<td style="text-align: right;">23</td>
+<td style="text-align: left;">Harmonica</td>
+</tr>
+<tr>
+<td style="text-align: right;">24</td>
+<td style="text-align: left;">Accordéon tango</td>
+</tr>
+<tr>
+<td style="text-align: right;">25</td>
+<td style="text-align: left;">Guitare acoustique (cordes nylon)</td>
+</tr>
+<tr>
+<td style="text-align: right;">26</td>
+<td style="text-align: left;">Guitare acoustique (cordes acier)</td>
+</tr>
+<tr>
+<td style="text-align: right;">27</td>
+<td style="text-align: left;">Guitare électrique (jazz)</td>
+</tr>
+<tr>
+<td style="text-align: right;">28</td>
+<td style="text-align: left;">Guitare électrique (clean)</td>
+</tr>
+<tr>
+<td style="text-align: right;">29</td>
+<td style="text-align: left;">Guitare électrique (étouffée)</td>
+</tr>
+<tr>
+<td style="text-align: right;">30</td>
+<td style="text-align: left;">Guitare saturée (overdriven)</td>
+</tr>
+<tr>
+<td style="text-align: right;">31</td>
+<td style="text-align: left;">Guitare distorsion</td>
+</tr>
+<tr>
+<td style="text-align: right;">32</td>
+<td style="text-align: left;">Harmoniques de guitare</td>
+</tr>
+<tr>
+<td style="text-align: right;">33</td>
+<td style="text-align: left;">Basse acoustique</td>
+</tr>
+<tr>
+<td style="text-align: right;">34</td>
+<td style="text-align: left;">Basse électrique (doigt)</td>
+</tr>
+<tr>
+<td style="text-align: right;">35</td>
+<td style="text-align: left;">Basse électrique (médiator)</td>
+</tr>
+<tr>
+<td style="text-align: right;">36</td>
+<td style="text-align: left;">Basse sans frette (fretless)</td>
+</tr>
+<tr>
+<td style="text-align: right;">37</td>
+<td style="text-align: left;">Slap basse 1</td>
+</tr>
+<tr>
+<td style="text-align: right;">38</td>
+<td style="text-align: left;">Slap basse 2</td>
+</tr>
+<tr>
+<td style="text-align: right;">39</td>
+<td style="text-align: left;">Basse synthé 1</td>
+</tr>
+<tr>
+<td style="text-align: right;">40</td>
+<td style="text-align: left;">Basse synthé 2</td>
+</tr>
+<tr>
+<td style="text-align: right;">41</td>
+<td style="text-align: left;">Violon</td>
+</tr>
+<tr>
+<td style="text-align: right;">42</td>
+<td style="text-align: left;">Alto</td>
+</tr>
+<tr>
+<td style="text-align: right;">43</td>
+<td style="text-align: left;">Violoncelle</td>
+</tr>
+<tr>
+<td style="text-align: right;">44</td>
+<td style="text-align: left;">Contrebasse</td>
+</tr>
+<tr>
+<td style="text-align: right;">45</td>
+<td style="text-align: left;">Cordes tremolo</td>
+</tr>
+<tr>
+<td style="text-align: right;">46</td>
+<td style="text-align: left;">Cordes pizzicato</td>
+</tr>
+<tr>
+<td style="text-align: right;">47</td>
+<td style="text-align: left;">Harpe orchestrale</td>
+</tr>
+<tr>
+<td style="text-align: right;">48</td>
+<td style="text-align: left;">Timbales</td>
+</tr>
+<tr>
+<td style="text-align: right;">49</td>
+<td style="text-align: left;">Ensemble de cordes 1</td>
+</tr>
+<tr>
+<td style="text-align: right;">50</td>
+<td style="text-align: left;">Ensemble de cordes 2</td>
+</tr>
+<tr>
+<td style="text-align: right;">51</td>
+<td style="text-align: left;">Cordes synthétiques 1</td>
+</tr>
+<tr>
+<td style="text-align: right;">52</td>
+<td style="text-align: left;">Cordes synthétiques 2</td>
+</tr>
+<tr>
+<td style="text-align: right;">53</td>
+<td style="text-align: left;">Chœur « Aahs »</td>
+</tr>
+<tr>
+<td style="text-align: right;">54</td>
+<td style="text-align: left;">Voix « Oohs »</td>
+</tr>
+<tr>
+<td style="text-align: right;">55</td>
+<td style="text-align: left;">Voix synthétique</td>
+</tr>
+<tr>
+<td style="text-align: right;">56</td>
+<td style="text-align: left;">Coup d’orchestre</td>
+</tr>
+<tr>
+<td style="text-align: right;">57</td>
+<td style="text-align: left;">Trompette</td>
+</tr>
+<tr>
+<td style="text-align: right;">58</td>
+<td style="text-align: left;">Trombone</td>
+</tr>
+<tr>
+<td style="text-align: right;">59</td>
+<td style="text-align: left;">Tuba</td>
+</tr>
+<tr>
+<td style="text-align: right;">60</td>
+<td style="text-align: left;">Trompette bouchée</td>
+</tr>
+<tr>
+<td style="text-align: right;">61</td>
+<td style="text-align: left;">Cor d’harmonie</td>
+</tr>
+<tr>
+<td style="text-align: right;">62</td>
+<td style="text-align: left;">Section de cuivres</td>
+</tr>
+<tr>
+<td style="text-align: right;">63</td>
+<td style="text-align: left;">Cuivres synthétiques 1</td>
+</tr>
+<tr>
+<td style="text-align: right;">64</td>
+<td style="text-align: left;">Cuivres synthétiques 2</td>
+</tr>
+<tr>
+<td style="text-align: right;">65</td>
+<td style="text-align: left;">Saxophone soprano</td>
+</tr>
+<tr>
+<td style="text-align: right;">66</td>
+<td style="text-align: left;">Saxophone alto</td>
+</tr>
+<tr>
+<td style="text-align: right;">67</td>
+<td style="text-align: left;">Saxophone ténor</td>
+</tr>
+<tr>
+<td style="text-align: right;">68</td>
+<td style="text-align: left;">Saxophone baryton</td>
+</tr>
+<tr>
+<td style="text-align: right;">69</td>
+<td style="text-align: left;">Hautbois</td>
+</tr>
+<tr>
+<td style="text-align: right;">70</td>
+<td style="text-align: left;">Cor anglais</td>
+</tr>
+<tr>
+<td style="text-align: right;">71</td>
+<td style="text-align: left;">Basson</td>
+</tr>
+<tr>
+<td style="text-align: right;">72</td>
+<td style="text-align: left;">Clarinette</td>
+</tr>
+<tr>
+<td style="text-align: right;">73</td>
+<td style="text-align: left;">Piccolo</td>
+</tr>
+<tr>
+<td style="text-align: right;">74</td>
+<td style="text-align: left;">Flûte</td>
+</tr>
+<tr>
+<td style="text-align: right;">75</td>
+<td style="text-align: left;">Flûte à bec</td>
+</tr>
+<tr>
+<td style="text-align: right;">76</td>
+<td style="text-align: left;">Flûte de Pan</td>
+</tr>
+<tr>
+<td style="text-align: right;">77</td>
+<td style="text-align: left;">Bouteille soufflée (blown bottle)</td>
+</tr>
+<tr>
+<td style="text-align: right;">78</td>
+<td style="text-align: left;">Shakuhachi</td>
+</tr>
+<tr>
+<td style="text-align: right;">79</td>
+<td style="text-align: left;">Sifflet</td>
+</tr>
+<tr>
+<td style="text-align: right;">80</td>
+<td style="text-align: left;">Ocarina</td>
+</tr>
+<tr>
+<td style="text-align: right;">81</td>
+<td style="text-align: left;">Lead 1 (carré)</td>
+</tr>
+<tr>
+<td style="text-align: right;">82</td>
+<td style="text-align: left;">Lead 2 (dent de scie)</td>
+</tr>
+<tr>
+<td style="text-align: right;">83</td>
+<td style="text-align: left;">Lead 3 (calliope)</td>
+</tr>
+<tr>
+<td style="text-align: right;">84</td>
+<td style="text-align: left;">Lead 4 (chiff)</td>
+</tr>
+<tr>
+<td style="text-align: right;">85</td>
+<td style="text-align: left;">Lead 5 (charang)</td>
+</tr>
+<tr>
+<td style="text-align: right;">86</td>
+<td style="text-align: left;">Lead 6 (voix)</td>
+</tr>
+<tr>
+<td style="text-align: right;">87</td>
+<td style="text-align: left;">Lead 7 (quintes)</td>
+</tr>
+<tr>
+<td style="text-align: right;">88</td>
+<td style="text-align: left;">Lead 8 (basse + lead)</td>
+</tr>
+<tr>
+<td style="text-align: right;">89</td>
+<td style="text-align: left;">Pad 1 (new age)</td>
+</tr>
+<tr>
+<td style="text-align: right;">90</td>
+<td style="text-align: left;">Pad 2 (chaud)</td>
+</tr>
+<tr>
+<td style="text-align: right;">91</td>
+<td style="text-align: left;">Pad 3 (polysynthé)</td>
+</tr>
+<tr>
+<td style="text-align: right;">92</td>
+<td style="text-align: left;">Pad 4 (chœur)</td>
+</tr>
+<tr>
+<td style="text-align: right;">93</td>
+<td style="text-align: left;">Pad 5 (archet)</td>
+</tr>
+<tr>
+<td style="text-align: right;">94</td>
+<td style="text-align: left;">Pad 6 (métallique)</td>
+</tr>
+<tr>
+<td style="text-align: right;">95</td>
+<td style="text-align: left;">Pad 7 (halo)</td>
+</tr>
+<tr>
+<td style="text-align: right;">96</td>
+<td style="text-align: left;">Pad 8 (balayage)</td>
+</tr>
+<tr>
+<td style="text-align: right;">97</td>
+<td style="text-align: left;">FX 1 (pluie)</td>
+</tr>
+<tr>
+<td style="text-align: right;">98</td>
+<td style="text-align: left;">FX 2 (bande-son)</td>
+</tr>
+<tr>
+<td style="text-align: right;">99</td>
+<td style="text-align: left;">FX 3 (cristal)</td>
+</tr>
+<tr>
+<td style="text-align: right;">100</td>
+<td style="text-align: left;">FX 4 (atmosphère)</td>
+</tr>
+<tr>
+<td style="text-align: right;">101</td>
+<td style="text-align: left;">FX 5 (brillance)</td>
+</tr>
+<tr>
+<td style="text-align: right;">102</td>
+<td style="text-align: left;">FX 6 (gobelins)</td>
+</tr>
+<tr>
+<td style="text-align: right;">103</td>
+<td style="text-align: left;">FX 7 (échos)</td>
+</tr>
+<tr>
+<td style="text-align: right;">104</td>
+<td style="text-align: left;">FX 8 (science-fiction)</td>
+</tr>
+<tr>
+<td style="text-align: right;">105</td>
+<td style="text-align: left;">Sitar</td>
+</tr>
+<tr>
+<td style="text-align: right;">106</td>
+<td style="text-align: left;">Banjo</td>
+</tr>
+<tr>
+<td style="text-align: right;">107</td>
+<td style="text-align: left;">Shamisen</td>
+</tr>
+<tr>
+<td style="text-align: right;">108</td>
+<td style="text-align: left;">Koto</td>
+</tr>
+<tr>
+<td style="text-align: right;">109</td>
+<td style="text-align: left;">Kalimba</td>
+</tr>
+<tr>
+<td style="text-align: right;">110</td>
+<td style="text-align: left;">Cornemuse</td>
+</tr>
+<tr>
+<td style="text-align: right;">111</td>
+<td style="text-align: left;">Vièle (fiddle)</td>
+</tr>
+<tr>
+<td style="text-align: right;">112</td>
+<td style="text-align: left;">Shanai</td>
+</tr>
+<tr>
+<td style="text-align: right;">113</td>
+<td style="text-align: left;">Grelots (Tinkle Bell)</td>
+</tr>
+<tr>
+<td style="text-align: right;">114</td>
+<td style="text-align: left;">Agogo</td>
+</tr>
+<tr>
+<td style="text-align: right;">115</td>
+<td style="text-align: left;">Steel Drums (tambours métalliques)</td>
+</tr>
+<tr>
+<td style="text-align: right;">116</td>
+<td style="text-align: left;">Woodblock (bloc de bois)</td>
+</tr>
+<tr>
+<td style="text-align: right;">117</td>
+<td style="text-align: left;">Tambour taiko</td>
+</tr>
+<tr>
+<td style="text-align: right;">118</td>
+<td style="text-align: left;">Tom mélodique</td>
+</tr>
+<tr>
+<td style="text-align: right;">119</td>
+<td style="text-align: left;">Tambour synthétique</td>
+</tr>
+<tr>
+<td style="text-align: right;">120</td>
+<td style="text-align: left;">Cymbale inversée</td>
+</tr>
+<tr>
+<td style="text-align: right;">121</td>
+<td style="text-align: left;">Bruit de frettes de guitare</td>
+</tr>
+<tr>
+<td style="text-align: right;">122</td>
+<td style="text-align: left;">Bruit de souffle</td>
+</tr>
+<tr>
+<td style="text-align: right;">123</td>
+<td style="text-align: left;">Bruit de bord de mer</td>
+</tr>
+<tr>
+<td style="text-align: right;">124</td>
+<td style="text-align: left;">Chant d’oiseau</td>
+</tr>
+<tr>
+<td style="text-align: right;">125</td>
+<td style="text-align: left;">Sonnerie de téléphone</td>
+</tr>
+<tr>
+<td style="text-align: right;">126</td>
+<td style="text-align: left;">Hélicoptère</td>
+</tr>
+<tr>
+<td style="text-align: right;">127</td>
+<td style="text-align: left;">Applaudissements</td>
+</tr>
+<tr>
+<td style="text-align: right;">128</td>
+<td style="text-align: left;">Coup de feu</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 2, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright &copy; 2024 - 2028 Matthieu Marchand
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="https://mkdocs-logic.forge.apps.education.fr/javascripts/bundle.js"></script>
+      
+    
+  </body>
+</html>
