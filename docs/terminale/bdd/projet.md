@@ -1,6 +1,12 @@
-# Gestion d'un lycée
+# Gestion d'un lycée - Fullstack
 
-L'application flask qui vous a été transmise permet de gérer une liste d'élèves stockés dans une base de données
+L'application flask qui vous a été transmise permet de gérer une liste d'élèves stockés dans une base de données    
+
+!!! hint "C'est dur au début"
+    Il est normal de trouver cette activité dure au début, car il faut penser à plein de choses en même temps.
+    Moyennant une implication constante, vous passerez un cap, non seulement dans la compréhension des concepts, mais encore mieux, dans leur assimilation pérenne.
+
+    Les explications techniques sont volontairement légères, afin de ne pas alourdir l'accès à la compréhension globale (le point de cette activité).
 
 !!! danger "Je ne veux pas voir de cosmétique"
     L'application est volontairement moche. Aucun CSS n'a été rajouté, car la cosmétique ajoute énormément de code qui nuit à la compréhension globale, il y a déjà beaucoup à faire et ça va vous perdre.
@@ -51,18 +57,14 @@ En cliquant sur le bouton submit, l'utilisateur soummet son formulaire et les pa
 Voici à quoi ressemble cette requête qui sera envoyée au serveur:
 
 ```
-POST https://www.monsite.com/inscription_utilisateur HTTP/1.1
+POST /inscription_utilisateur HTTP/1.1
 Host: www.monsite.com
 Content-Type: application/x-www-form-urlencoded
 
 prenom=Jean&nom=Dupont
 ```
 
-TOUT le web réside sur l'exploitation de ces méthodes.
-
-!!! danger Distinctions importantes
-    - Le HTML, le CSS, et le javascript sont interprétés par le navigateur du client.
-    - Tout ce qui est python est interprété sur le serveur.
+Le web réside principalement sur l'exploitation de ces méthodes.
 
 ## Flask
 
@@ -194,7 +196,7 @@ Une application minimaliste qui permet de gérer une liste d'élèves.
 
 En réalité, on vous a fourni l'application contenant un CRUD pour les élèves.
 
-Un CRUD est un ensemble de routes qui permettent de créer, modifier, supprimer et lire des données. (Create, Read, Update, Delete)
+Un CRUD est un ensemble de fonctionnalités qui permettent de créer, lire, modifier et supprimer des données relatives à un objet formel. (Create, Read, Update, Delete).
 
 
 ## Démarrer l'application
@@ -217,38 +219,64 @@ Le site est alors accessible sur http://127.0.0.1:5000
 
 ## Exercices
 
-Les exercices suivants se font progressivement ainsi:
+!!! tip "Méthode"
+    Les "exercices" suivants se font progressivement ainsi:
 
-- Etudier les modifications de la base de données à effectuer.
-- Effectuer les modifications.
-- Recenser les fichiers à créer t/ou modifier dans le code
-- Procéder aux modifications
-- A chaque pas, tester si l'application fonctionne toujours.
+    - Etudier les modifications de la base de données à effectuer (mettre à jour le MPD).
+    - Effectuer les modifications de la base avec des données exemples.
+    - Effectuer les changements dans le modèle de classes en conséquence.
+    - Effectuer les changements dans les services de données.
+    - Créer/modifier le contrôleur nécessaire.
+    - Créer/modifier la vue nécessaire (le jinja).
+    - A chaque pas, tester.
 
-Il faut toujours vérifier que tout fonctionne encore, et qu'une modification n'a pas engendré de régression.
-Une régression est un bug qui survient dans quelque chose qui fonctionnait à cause de l'ajout d'une fonctionnalité.
-Leur détection fait partie du travail de recette de projet. 
-La recette d'un projet est la phase de tests d'une nouvelle mouture d'une application avant de la rendre publique.
-Il existe différents types de tests, ici, il s'agit de TNR (tests de non régression)
-Les développeurs font attention, mais quand on a le nez dans le guidon, on ne peut pas tout voir.
-C'est le travail spécifique de certaines personnes de construire des plans de test et de les exécuter.
-Ces personnes sont souvent rattachés au QC (quality control).
-Ce ne sont pas des développeurs, c'est une partie de l'entreprise qui se charge de tester.
 
 !!! question "Ajouter l'âge dans l'application Flask"
     Lorsqu'un développeur arrive sur un projet, on lui donne une petite tâche qui sert surtout à prendre en main une architecture parfois complexe. (Ici ça n'est pas le cas) 
-    Votre client veut que vous ajoutiez la possibilité de gérer la date de naissance de l'élève
+
+    - En tant qu'administrateur, Je veux ajouter la possibilité de gérer la date de naissance de l'élève.
+    - En tant qu'administrateur, je veux pouvoir lire l'âge d'un élève. (ceci ne nécessite pas de modification de la base de données) 
 
 !!! question "Un élève doit avoir une classe"
-    Votre client veut que vous ajoutiez la possibilité de gérer la classe de l'élève.
+    Spécification fonctionnelle:
 
-    Il faut donc un CRUD pour les classes, ainsi que la possibilité pour un élève de sélectionner sa classe.
+    - En tant qu'administrateur, je veux pouvoir CRUD des classes.
+    - En tant qu'administrateur, je veux pouvoir affecter des élèves à des classes.
+    - En tant qu'administrateur, je veux pouvoir modifier la classe d'un élève.
+
+
+    Spécification UX/UI:
+
+    Lorsqu'on créé ou modifie un élève, on doit avoir une liste déroulante permettant de choisir sa classe.
+
+    Il faut donc :
+    
+    1. Un CRUD pour les classes
+    2. La possibilité d'affecter un élève à une classe en création, lecture ou modification.
+
+!!! question "Les élèves ont des matières"
+    Spécification fonctionnelle:
+    En tant qu'administrateur, je veux pouvoir CRUD des matières.
+
+    Tous les élèves auront les mêmes matières.
+
+    Spécification UX/UI:
+    Identiques au CRUD élèves
+
 
 !!! question "Un élève doit avoir des notes"
-    Votre client veut que vous ajoutiez la possibilité de gérer les notes de l'élève.
+    Spécification fonctionnelle:
+    - En tant qu'administrateur, lorsque je consulte un élève, je peux créer une note dans une matière.
+    - En tant qu'administrateur, lorsque je consulte un élève, je vois la liste de ses notes.
+    - En tant qu'administrateur, lorsque je consulte un élève, je dois pouvoir cliquer sur une note afin de la modifier.
+    - En tant qu'administrateur, lorsque je consulte un élève, je peux supprimer une de ses notes.
 
-    Il faut donc un CRUD pour les notes d'un élève.
+    Une note a une valeur, une date, un coefficient, une matière.
 
-    Les notes d'un élève 
-
-    Le client veut que ans la liste des élèves, on puisse voir et modifier les notes
+    Spécification UX/UI:
+    - L'affectation d'une matière à une note doit se faire par le biais d'une liste déroulante.
+ 
+!!! question "Statistiques"
+    Spécification fonctionnelle:
+    - En tant qu'administrateur, lorsque je consulte la liste des classes, je veux voir apparaître la moyenne générale de classe.
+ 
