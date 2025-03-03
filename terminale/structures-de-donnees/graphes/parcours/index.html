@@ -1663,6 +1663,10 @@
 
 
 <h1 id="parcours-de-graphes">Parcours de graphes</h1>
+<div class="admonition warning">
+<p class="admonition-title">Pré-requis</p>
+<p>Les algorithmes de parcours en profondeur et en largeur des arbres doivent être maîtrisés.</p>
+</div>
 <div class="admonition tip">
 <p class="admonition-title">Graphe exemple</p>
 <p>Dans un premier temps vous ignorerez les poids (les nombres sur les arêtes)
@@ -1702,60 +1706,47 @@ J --- L
 </code></pre>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Parcours en profondeur - DFS (Depth First Search)</p>
+<p class="admonition-title">Parcours en largeur - BFS (Breadth First Search)</p>
+<p>Faites l'exercice de vous rappeler du parcours en largeur sur les arbres binaires sans consulter le cours.</p>
+<p>Si on l'applique tel quel, le problème est qu'on boucle infiniment sur des cycles. Il faut donc garder en mémoire quels sommets on a visité pour ne pas les visiter plusieurs fois. </p>
 <ul>
-<li>
-<p>Faites l'exercice de vous rappeler du parcours en profondeur préfixe sur les arbres binaires sans consulter le cours.</p>
-</li>
-<li>
-<p>Ecrire l'ordre des visites pour un parcours en profondeur des graphes exemples de cette manière. Je vous conseille de les recopier et de gribouiller au papier.</p>
-</li>
+<li>Ecrire une méthode de parcours itératif en largeur des sommets d'un graphe. Le comportement de visite est l'affichage du nom du noeud.</li>
 </ul>
-<p>Ici, le problème est qu'on peut indéfiniment boucler sur des cycles de sommets. Il faut donc garder en mémoire quels sommets on a visité pour ne pas les visiter plusieurs fois. </p>
-<ul>
-<li>En vous inspirant de ce fonctionnement, écrire une méthode de parcours récursif en profondeur des sommets d'un graphe. Le comportement de visite est l'affichage du nom du noeud.</li>
-</ul>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">GrapheNO</span><span class="p">,</span> <span class="n">depart</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">visites</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">structures.lineaires</span> <span class="kn">import</span> <span class="n">file</span>
+<span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">graphe</span><span class="p">,</span> <span class="n">depart</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">visites</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Graphes connexes</p>
-<p>En utilisant la fonction dfs, écrire un algorithme qui détermine si un graphe est connexe ou pas. </p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">is_connexe</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">GrapheNO</span><span class="p">)</span>
+<p class="admonition-title">Parcours en profondeur - Depth First Search (DFS)</p>
+<p>De la même manière, en vous inspirant du travail sur les arbres binaires, écrire une fonction qui réalise le parcours en profondeur d'un graphe.</p>
+<p>On se souviendra que la différence entre un parcours en largeur et en profondeur ne tient pas à grand chose dans le code. </p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">dfs</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">graphe</span><span class="p">,</span> <span class="n">depart</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">visites</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span>
 </code></pre></div>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Composantes connexes</p>
-<p>En utilisant la fonction dfs, écrire un algorithme qui détermine renvoie la liste des composantes connexes d'un graphe. (Une composante connexe est un sous-graphe, donc un Graphe) </p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Parcours en largeur - Breadth Firsst Search (BFS)</p>
-<p>Donnez l'ordre des visites pour le parcours en largeur du graphe exemple.</p>
-<p>De la même manière, en vous inspirant du travail sur les arbres binaires, écrire une fonction qui réalise le parcours en largeur d'un graphe.</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Plus court chemin - Non pondéré</p>
-<p>On peut trouver le plus court chemin entre 2 sommets d'un graphe non pondéré en réalisant un parcours en largeur depuis le premier sommet jusqu'à visiter le deuxième sommet.
-Ecrire une fonction
-<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">shortest_path</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">GrapheNO</span><span class="p">,</span> <span class="n">s1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">s2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<p>On peut trouver le plus court chemin entre 2 sommets d'un graphe non pondéré en réalisant un parcours en largeur depuis le premier sommet jusqu'à visiter le deuxième sommet.</p>
+<p>Ecrire une fonction:</p>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">shortest_path</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">graphe</span><span class="p">,</span> <span class="n">s1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">s2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Connexité</p>
+<p>A l'aide d'un parcours de graphe, écrire un algorithme
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">est_connexe</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div></p>
 </div>
 <div class="admonition question">
-<p class="admonition-title">IMPLEMENTATION Graphes pondérés non orientés</p>
-<pre class="mermaid"><code>    graph LR
-    A((A)) ---|4| B((B))
-    A ---|7| C((C))
-    B ---|2| D((D))
-    B ---|5| E((E))
-    C ---|3| F((F))
-    D ---|6| G((G))
-    E ---|1| G
-    F ---|8| G
-</code></pre>
-<p>Nous avons parfois besoin d'associer à une arête un poids (ou coût). Par exemple, dans un réseau informatique, il peut s'agir de la vitesse de connexion entre 2 machines. Dans un réseau routier, il peut s'agir de la distance entre deux endroits. Dans un réseau de neurone, il peut s'agir de l'importance à accorder à une connexion entre deux neurones...</p>
-<p>Dans la liste d'adjacence, on utilisera maintenant un disctionnaire de sommets accompagnés du poids de l'arête correspondante.</p>
-<p>La matrice d'adjacence contiendra les poids des arêtes.</p>
-<p>Proposez une implémentation de graphe pondéré non orienté.</p>
+<p class="admonition-title">Sous-graphe</p>
+<p>Ecrire une fonction qui renvoie le sous graphe constitué des sommets dans la liste:
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">sous_graphe</span><span class="p">(</span><span class="n">sommets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">g</span><span class="p">:</span> <span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">graphe</span>
+</code></pre></div></p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Connexité 2</p>
+<p>Ecrire une fonction permettant de récupérer une liste de sous graphes connexes:</p>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">sous_graphes_connexes</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">graph</span><span class="p">]</span>
+</code></pre></div>
 </div>
 
 
