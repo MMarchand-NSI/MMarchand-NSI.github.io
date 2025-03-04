@@ -2175,8 +2175,10 @@ F --- O["4"]</code></pre></p>
 </code></pre></div>
 </div>
 <div class="admonition info">
-<p class="admonition-title">Encadrement de la hauteur d'un arbre</p>
+<p class="admonition-title">Encadrement de la hauteur d'un arbre binaire</p>
 <p><span class="arithmatex">\(hauteur(\empty)=-1\)</span></p>
+<p><strong>Comment encadrer</strong></p>
+<p>Avec <span class="arithmatex">\(n\)</span> noeuds, l'arbre le plus haut qu'on puisse construire est filiforme, et l'arbre le moins haut est un arbre où tous les niveaux sont remplis sauf evéntuellement le dernier. </p>
 <p><strong>Hauteur d'un arbre filiforme</strong></p>
 <p>Un arbre filiforme de taille <span class="arithmatex">\(n\)</span> est de hauteur <span class="arithmatex">\(n-1\)</span></p>
 <p><strong>Hauteur d'un arbre parfait à <span class="arithmatex">\(n\)</span> noeuds</strong>*</p>
@@ -2210,7 +2212,28 @@ Cet arbre de hauteur 3 a <span class="arithmatex">\(2^0 + 2^1 + 2^2 + 2^3 = 15\)
 <p>Un arbre parfait de hauteur <span class="arithmatex">\(h\)</span> a donc <span class="arithmatex">\(N=2^{h+1}-1\)</span> nœuds.</p>
 <p><span class="arithmatex">\(N = 2^{h+1} - 1\)</span></p>
 <p><span class="arithmatex">\(2^{h+1} = N + 1\)</span></p>
-<p>En passant au logarithme de base 2 de chaque côté, la hauteur d'un arbre parfait ayant <span class="arithmatex">\(n\)</span> noeuds est donnée par la formule <span class="arithmatex">\(h = \log_2(n+1)\)</span>.</p>
+<p>En passant au logarithme de base 2 de chaque côté, la hauteur d'un arbre parfait ayant <span class="arithmatex">\(n\)</span> noeuds est donnée par la formule <span class="arithmatex">\(h = \log_2(n+1)-1\)</span>.</p>
+<p><strong>Encadrement</strong></p>
+<p>En tenant compte du fait que l'arbre n'est pas nécessairement rempli au dernier niveau, sa hauteur minimum est celle de l'arbre parfait associé:</p>
+<p><span class="arithmatex">\(\lceil \log_2(n+1) - 1 \rceil\)</span>, donc <span class="arithmatex">\(\lceil \log_2(n+1) \rceil - 1\)</span> </p>
+<p>On en déduit l'encadrement de la hauteur <span class="arithmatex">\(h\)</span> de tout arbre binaire de taille <span class="arithmatex">\(n\)</span>:</p>
+<p><span class="arithmatex">\(\lceil \log_2(n+1) \rceil - 1 \leq h \leq n - 1.\)</span></p>
+<p>Soit <span class="arithmatex">\( n \ge 1 \)</span>. Nous allons démontrer que : <span class="arithmatex">\(\lfloor \log_2(n) \rfloor = \lceil \log_2(n+1) \rceil - 1\)</span></p>
+<p>Posons <span class="arithmatex">\(k = \lfloor \log_2(n) \rfloor\)</span></p>
+<p>Par définition de la fonction partie entière inférieure, cela signifie que : </p>
+<p><span class="arithmatex">\(k \le \log_2(n) &lt; k+1\)</span></p>
+<p>(Le but ici, c'est de faire apparaître du <span class="arithmatex">\(n+1\)</span> au milieu, de passer l'inégalité de gauche en strict et celle de droite en large. Et comme ce qu'on veut démontrer est censé être vrai, ça devrait bien se goupiller)</p>
+<p>En appliquant la fonction <span class="arithmatex">\(x \mapsto 2^x\)</span>, on obtient : <span class="arithmatex">\(2^k \le n &lt; 2^{k+1}\)</span></p>
+<p>En ajoutant 1 à chaque terme, nous avons : <span class="arithmatex">\(2^k + 1 \le  \textcolor{red}{n + 1 \le} 2^{k+1}\)</span></p>
+<p>En prenant le logarithme en base 2 de ces inégalités, on trouve : </p>
+<p><span class="arithmatex">\(\log_2(2^k + 1) \le \log_2(n+1) \le \log_2(2^{k+1}) = k+1\)</span></p>
+<p>Comme <span class="arithmatex">\(\log_2(2^k + 1) &gt; \log_2(2^k) = k\)</span>, on obtient <span class="arithmatex">\(k \textcolor{red}{&lt;} \log_2(n+1) \le k+1\)</span></p>
+<p>i.e., par définition de la fonction partie entière supérieure, <span class="arithmatex">\(\lceil \log_2(n+1) \rceil = k+1\)</span></p>
+<p>En isolant <span class="arithmatex">\(k\)</span>, nous avons  <span class="arithmatex">\(k = \lceil \log_2(n+1) \rceil - 1\)</span></p>
+<p>Comme nous avons défini $ k = \lfloor \log_2(n) \rfloor $, nous concluons que :</p>
+<div class="arithmatex">\[\lfloor \log_2(n) \rfloor = \lceil \log_2(n+1) \rceil - 1\]</div>
+<p>l'encadrement de la hauteur <span class="arithmatex">\(h\)</span> de tout arbre binaire de taille <span class="arithmatex">\(n \geq 1\)</span> est donc:</p>
+<div class="arithmatex">\[\Huge \lfloor \log_2(n) \rfloor \leq h \leq n - 1\]</div>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Avancé - Rotations</p>
