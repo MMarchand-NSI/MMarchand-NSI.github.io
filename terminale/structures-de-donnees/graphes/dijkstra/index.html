@@ -1688,52 +1688,31 @@ Q = ensemble de tous les sommets
         relacher l&#39;arc (u, v) 
 </code></pre></div>
 <p>Ensuite, on peut calculer les distances et les prédécesseurs.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">heapq</span>
-
-<span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">depart</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Calcule les distances minimales depuis le sommet source </span>
-<span class="sd">    vers tous les autres sommets du graphe g.</span>
-
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># 1) Initialisation des distances à l&#39;infini, sauf la source à 0</span>
-    <span class="n">distances</span> <span class="o">=</span> <span class="p">{</span><span class="n">node</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">node</span> <span class="ow">in</span> <span class="n">graph</span><span class="p">}</span>
-    <span class="n">distances</span><span class="p">[</span><span class="n">source</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">predecesseurs</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">depart</span><span class="p">]</span>
+    <span class="n">distance_depart</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">gr</span><span class="o">.</span><span class="n">sommets</span><span class="p">(</span><span class="n">g</span><span class="p">)}</span>
+    <span class="n">distance_depart</span><span class="p">[</span><span class="n">depart</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">precedent</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
-    <span class="c1"># 2) Création de la file de priorité (Tas-min)</span>
-    <span class="c1">#    Elle contiendra des tuples (distance à la source, sommet)</span>
-    <span class="n">pq</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">0</span><span class="p">,</span> <span class="n">source</span><span class="p">)]</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># On défile toujours le sommet dont la distance à la source est la plus petite</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">sommet</span><span class="p">:</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">sommet</span><span class="p">])</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
 
-    <span class="c1"># 3) Ensemble pour marquer les sommets déjà visités</span>
-    <span class="n">visited</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-
-    <span class="c1"># 4) Boucle principale: Tant que la file n&#39;est pas vide</span>
-    <span class="k">while</span> <span class="n">pq</span><span class="p">:</span>
-        <span class="c1"># On défile le sommet u le plus proche (distance min)</span>
-        <span class="n">dist_u</span><span class="p">,</span> <span class="n">u</span> <span class="o">=</span> <span class="n">heapq</span><span class="o">.</span><span class="n">heappop</span><span class="p">(</span><span class="n">pq</span><span class="p">)</span>
-
-        <span class="c1"># Si ce sommet n&#39;est pas déjà visité</span>
-        <span class="k">if</span> <span class="n">u</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">visited</span><span class="p">:</span>
-
-            <span class="c1"># On le marque comme visité</span>
-            <span class="n">visited</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-
-            <span class="c1"># Relâchement des arêtes sortantes de u</span>
-            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">voisins</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-                <span class="c1"># dist_u = distance minimale connue pour atteindre u</span>
-                <span class="n">alt</span> <span class="o">=</span> <span class="n">dist_u</span> <span class="o">+</span> <span class="n">poids</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>  <span class="c1"># possible distance pour aller jusqu&#39;à v</span>
-                <span class="k">if</span> <span class="n">alt</span> <span class="o">&lt;</span> <span class="n">distances</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
-                    <span class="c1"># On a trouvé une plus petite distance de source à v</span>
-                    <span class="n">distances</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">alt</span>
-                    <span class="c1"># on renseigne le prédécesseur de v</span>
-                    <span class="n">predecesseur</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
-                    <span class="c1"># On enfile v avec la nouvelle distance</span>
-                    <span class="n">heapq</span><span class="o">.</span><span class="n">heappush</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span> <span class="p">(</span><span class="n">alt</span><span class="p">,</span> <span class="n">v</span><span class="p">))</span>
-
-    <span class="c1"># distances[v] contient la distance la plus courte de source à v</span>
-    <span class="c1"># predecesseur[v] contient le sommet prédécesseur de v sur le plus court chemin de source à v</span>
-    <span class="k">return</span> <span class="n">distances</span><span class="p">,</span> <span class="n">predecesseur</span>
+        <span class="c1"># Pour chaque voisin v</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">gr</span><span class="o">.</span><span class="n">get_voisins</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+            <span class="c1"># si la nouvelle distance de v à la source est plus courte que celle déjà calculée dans le dico</span>
+            <span class="k">if</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">gr</span><span class="o">.</span><span class="n">poids</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+                <span class="c1"># On met à jour la distance dans le dico</span>
+                <span class="n">distance_depart</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">gr</span><span class="o">.</span><span class="n">poids</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+                <span class="c1"># Jusqu&#39;ici, On vient de u pour le plus court chemin du depart à v</span>
+                <span class="n">precedent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+                <span class="c1"># Si v n&#39;a pas encore fait partie de f, on l&#39;enfile</span>
+                <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">distance_depart</span><span class="p">,</span> <span class="n">precedent</span>
 </code></pre></div>
 
 
