@@ -43,6 +43,8 @@ Certains instruments disposent d'un synthétiseur intégré. C'est le cas des cl
 
 ## Setup python
 
+
+
 Dans votre environnement conda:
 ```bash
 conda install mido pygame

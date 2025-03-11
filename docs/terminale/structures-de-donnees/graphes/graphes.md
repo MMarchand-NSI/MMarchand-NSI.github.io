@@ -14,13 +14,15 @@ Les graphes sont des structures de données essentielles en informatique, permet
 
 3. **Arcs** : Dans le cas des graphes orientés, les connexions entre les sommets sont appelées arcs. Ils ont une direction, ce qui signifie qu'ils vont d'un sommet source à un sommet destination.
 
+3. **Poids** : Parfois, les arêtes portent une information appelée poids. Dans un graphe représentant des interconnexions entre des villes, il peut s'agir d'une distance. Dans un graphe de neurones, il peut s'agir de l'importance à accorder à une connexion entre deux neurones. Dans un graphe de routage, il peut s'agir de la vitesse de connexion entre 2 routeurs. On appelle graphe pondéré un graphe dont les arêtes portent un poids.
+
 ### B. Graphes Orientés et Non Orientés
 
 1. **Graphes Orientés** : Les graphes orientés ont des arcs avec une direction spécifiée. Ils sont utilisés pour représenter des relations asymétriques, comme les connexions dans un réseau social où on peut suivre quelqu'un sans qu'il nous suive.
 
 ```graphviz dot gori.png
 digraph G {
-    rankdir=LR
+    rankdir=LR;
 
     A -> B;
     C -> A;
@@ -34,7 +36,7 @@ digraph G {
 
 ```graphviz dot gnori.png
 graph G {
-    rankdir=LR
+    rankdir=LR;
 
     A -- B;
     C -- A;
@@ -42,6 +44,25 @@ graph G {
     C -- B;
 }
 ```
+3. **Graphes pondérés** : Les graphes pondérés sont des graphes dont les arêtes portent un poids.
+
+Voici un exemple de graphe non orienté pondéré où le poids représente la distance entre les villes. 
+On peut aussi avoir des graphes orientés pondérés.
+
+```graphviz dot gpond.png
+graph G {
+    rankdir=LR;
+    node [shape=ellipse, style=filled, fillcolor=lightblue];
+
+    "Paris" -- "Lyon"       [label="464"];
+    "Paris" -- "Bordeaux"   [label="584"];
+    "Lyon"  -- "Marseille"  [label="315"];
+    "Marseille" -- "Toulouse" [label="405"];
+    "Bordeaux" -- "Toulouse"  [label="245"];
+}
+```
+
+
 
 ## II. Modélisation de Situations sous Forme de Graphes
 
@@ -117,7 +138,7 @@ Pour travailler avec des graphes, différentes représentations peuvent être ut
 
 ```graphviz dot g1.png
 graph G {
-    rankdir=LR
+    rankdir=LR;
 
     A -- B;
     C -- A;
@@ -132,7 +153,6 @@ graph G {
 </center>
 
 $$
-% ceci est du latex (prononcer latek)
 \begin{array}{c|ccccc}
  & A & B & C & D & E \\
 \hline
@@ -179,18 +199,52 @@ E & 0 & 0 & 0 & 1 & 0 \\
 \end{array}
 $$
 
+!!! abstract "Matrice d'adjacence - Graphes orientés" 
+    Une matrice à deux dimensions où mat[i][j] est égal au poids de l’arête allant du sommet i au sommet j, et 0 s’il n’existe pas d’arête. i est l’indice ligne. j est l’indice colonne.
+
+<center>
+
+```graphviz dot g3.png
+digraph G {
+    rankdir=LR;
+
+    A -> B [label="2"];
+    C -> A [label="5"];
+    B -> D [label="3"];
+    C -> D [label="1"];
+    E -> D [label="4"];
+    B -> C [label="2"];
+    A -> E [label="6"];
+}
+```
+</center>
+
+
+$$ 
+\begin{array}{c|ccccc}
+ & A & B & C & D & E \\
+\hline
+A & 0 & 2 & 0 & 0 & 6 \\
+B & 0 & 0 & 2 & 3 & 0 \\
+C & 5 & 0 & 0 & 1 & 0 \\
+D & 0 & 0 & 0 & 0 & 0 \\
+E & 0 & 0 & 0 & 4 & 0 \\
+\end{array}
+$$
 
 !!! example "Implémentations possible"
     On peut utiliser une liste de listes  pour matérialiser la matrice et assimiler le graphe à la matrice, sans considération des étiquettes.
     
     ```python
-        type graphe = list[list[int]]
+        type num = int|float
+        type graphe = list[list[num]]
     ```
 
     On peut vouloir aussi intégrer l'étiquette des sommets.
 
     ```python
-        type matrice = list[list[int]]
+        type num = int|float
+        type matrice = list[list[num]]
         type graphe = tuple[list[str], matrice]
 
         def creer_vide() -> graphe:
@@ -201,12 +255,12 @@ $$
 
         def matrice(g: graphe) -> matrice:
             return g[1]
-        
+
+        def poids(i: int, j: int, g: graphe) -> matrice:
+            return matrice(g)[i][j]
+
         def index_sommet(g: graphe, s: str) -> int:
             return sommets(g).index(s)
-
-        def nb_voisins(g: graphe, s: str) -> int:
-            return sum(matrice(g)[index_sommet(g, s)])
     ```
 
     L'implémentation des graphes est rarement effectuée en POO, ou alors tout simplement pour encapsuler les méthodes précédentes pour être raccord avec le paradigme du langage d'implémentation.
@@ -222,14 +276,22 @@ $$
             return sum(self.mat[self.sommets.index[s]])
     ```
 
+!!! question "Graphes non orientés"
+    Complétez le code du fichier python fourni implémentant un graphe non orienté pondéré.
+
+
 ### B. Listes d'adjacence
 
 Chaque sommet est représenté par une liste contenant les sommets adjacents. Dans le cas des graphes orientés, on peut avoir une liste de successeurs (suivants) ou une liste de prédécesseurs (précédents). Dans les exercices, on aura une liste de successeurs.
 
 !!! example "Implémentation possible"
-    On peut utiliser un dictionnaire `dict[str, list[str]]`
+    On peut utiliser `dict[str, list[str]]` pour un graphe non pondéré.
 
     Chaque clé sera un sommet, chaque valeur sera la liste des sommets sortants.
+
+    Dans le cas d'un graphe pondéré, on peut utiliser `dict[str, dict[str, int|float]]`.
+
+    Chaque clé sera un sommet, chaque valeur sera un dictionnaire contenant les sommets sortants assortis de leur poids.
 
 !!! question Application
     Compléter le code suivant pour le graphe orienté, et aussi pour le graphe non orienté:
@@ -250,6 +312,10 @@ Chaque sommet est représenté par une liste contenant les sommets adjacents. Da
     }
     ```
 
+!!! question "Graphes orientés pondérés"
+    Complétez le code du fichier python fourni implémentant un graphe orienté pondéré.
+
+
 !!! question "Graphes complets et densité:"
     On ne parlera ici de de graphes non orientés.
 
@@ -268,49 +334,10 @@ Chaque sommet est représenté par une liste contenant les sommets adjacents. Da
         - Donner l'expression de $\delta(n, m)$
         - Ecrire une fonction `densite` qui calcule la densité d'un graphe.
 
-## V. Exercices fondamentaux
 
-!!! question "Exercice 1 (Graphe Orienté) :"
-    Considérez le graphe orienté suivant :
-    ```mermaid
-    graph LR
-    A --> B
-    B --> C
-    C --> A
-    D --> A
-    D --> B
-    ```
-    !!! abstract "Cycles"
-        Dans un graphe non orienté, un cycle est une suite d'arêtes consécutives distinctes (chaine simple) dont les deux sommets extrémités sont identiques. Dans les graphes orientés, la notion équivalente est celle de circuit, même si on parle parfois aussi de cycle. Afin de simplifier le vocabulaire, on parlera de cycle pour les deux. Un graphe ne comportant pas de cycle est dit acyclique.
-
-    - Le graphe est-il acyclique? Justifier
-    - Écrivez la matrice d'adjacence.
-    - Écrivez les listes de successeurs
-
-!!! question "Exercice 2 (Graphe Non Orienté) :"
-    Considérez le graphe non orienté suivant :
-
-    ```mermaid
-    graph LR
-    A --- B
-    A --- C
-    A --- D
-    B --- C
-    B --- D
-    C --- D
-    E --- F
-    E --- G
-    F --- G
-    ```
-    !!! abstract "Graphe connexe"
-        Un graphe est dit connexe si, pour chaque paire de nœuds distincts dans le graphe, il existe un chemin entre ces deux nœuds. Autrement dit, il n'y a pas de sous-graphes isolés dans un graphe connexe, chaque nœud peut être atteint à partir de n'importe quel autre nœud par une séquence d'arêtes. 
-
-    - Le graphe est-il connexe? Justifier
-    - Le graphe est-il cyclique? Justifier
-    - Écrivez la matrice d'adjacence.
-    - Écrivez les listes de successeurs
-
-
+!!! question "Graphes orientés pondérés"
+    - Ajoutez une fonction get_listes_adjacences à l'implémentation du graphe non orienté pondéré.
+    - Ajoutez une fonction get_matrice_adjacence à l'implémentation du graphe orienté pondéré.
 
 
 
@@ -328,5 +355,84 @@ Par exemple, dans le cas de la représentation par listes d'adjacence, la comple
 
 - Créer une matrice vide.
 - Pour chaque liste de successeurs, marquer les éléments correspondants dans la matrice.
+
+
+## V. Exercices fondamentaux
+
+!!! question "Exercice 1 :"
+    Considérez le graphe suivant :
+    
+    ```graphviz dot g4.png
+    digraph G {
+    rankdir=LR;
+    A -> B;
+    B -> C;
+    A -> C;
+    D -> A;
+    D -> B;
+    }
+    ```
+
+    !!! abstract "Cycles"
+        Dans un graphe non orienté, un cycle est une suite d'arêtes consécutives distinctes (chaine simple) dont les deux sommets extrémités sont identiques. Dans les graphes orientés, la notion équivalente est celle de circuit, même si on parle parfois aussi de cycle. Afin de simplifier le vocabulaire, on parlera de cycle pour les deux. Un graphe ne comportant pas de cycle est dit acyclique.
+
+    Partie 1:
+
+    - Le graphe est-il acyclique? Justifier
+    - Écrivez la matrice d'adjacence.
+    - Écrivez les listes de successeurs
+
+    Partie 2:
+
+    - On considère la version non orientée de ce graphe.
+    - Répondre aux même questions.
+
+!!! question "Exercice 2 :"
+    Considérez le graphe non orienté suivant :
+
+    ```graphviz dot g5.png
+    graph G {
+        rankdir=LR;
+
+        A -- B;
+        A -- C;
+        A -- D;
+        B -- C;
+        B -- D;
+        C -- D;
+        E -- F;
+        E -- G;
+        F -- G;
+    }
+    ```
+
+    !!! abstract "Graphe connexe"
+        Un graphe est dit connexe si, pour chaque paire de nœuds distincts dans le graphe, il existe un chemin entre ces deux nœuds. Autrement dit, il n'y a pas de sous-graphes isolés dans un graphe connexe, chaque nœud peut être atteint à partir de n'importe quel autre nœud par une séquence d'arêtes. 
+
+    - Le graphe est-il connexe? Justifier
+    - Le graphe est-il cyclique? Justifier
+    - Écrivez la matrice d'adjacence.
+    - Écrivez les listes de successeurs
+
+
+!!! abstract "Relation entre sommets et arêtes"
+
+    On peut prouver que la somme des degres d'un graphe est le double du nombre d'arêtes.
+
+    Euler l'a fait par double dénombrement.
+
+    On se propose de compter le nombre d'extrémités d'arêtes de 2 manières:
+
+    - Chaque arête possède 2 extrémités, donc c'est 2 fois le nombre d'arêtes.
+    - **Le degré d'un sommet représente le nombre d'extrémités rattachées**. Donc la somme des degrés représente le nombre total d'extrémités.
+
+    On aboutit donc à cette formule, pour un graphe $(S, A)$, où $S$ est l'ensemble des sommets, et $A$ l'ensemble des arêtes:
+
+    $$ \sum_{s \in S} deg(s) = 2 \times |A| $$
+
+!!! question "Poignées de main"
+    Lors d’une réception réunissant 8 personnes, on demande à chacune d’entre elles de dire combien de poignées de main elles ont échangées au total pendant la soirée. En additionnant ces 8 réponses, on obtient 20.
+    Combien de poignées de main ont effectivement eu lieu pendant cette réception ?
+    Quelle est la densité du graphe des poignées de mainassocié?
 
 

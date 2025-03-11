@@ -1,107 +1,122 @@
 # Parcours de graphes
 
+!!! warning "Pré-requis"
+    Les algorithmes de parcours en profondeur et en largeur des arbres doivent être maîtrisés.
+
 
 !!! tip "Graphe exemple"
     Dans un premier temps vous ignorerez les poids (les nombres sur les arêtes)
-    ```mermaid
-    graph LR
-    A((A)) ---|85| B((B))
-    A ---|217| C((C))
-    A ---|173| E((E))
-    B ---|80 | F((F))
-    C ---|186| G((G))
-    C ---|103| H((H))
-    H ---|183| D((D))
-    H ---|167| J((J))
-    F ---|250| I((I))
-    E ---|502| J
-    I ---|84 | J
+    
+    ```graphviz dot g6.png
+    graph G {
+        rankdir=LR;
+        node [shape=circle];
 
+        A -- B [label="85"];
+        A -- C [label="217"];
+        A -- E [label="173"];
+        B -- F [label="80"];
+        C -- G [label="186"];
+        C -- H [label="103"];
+        H -- D [label="183"];
+        H -- J [label="167"];
+        F -- I [label="250"];
+        E -- J [label="502"];
+        I -- J [label="84"];
+    }
     ```
-
 
 !!! tip "Graphe exemple2"
-    ```mermaid
-    graph
-    A((A)) --- J((J))
-    A --- M((M))
-    B((B)) --- G((G))
-    B --- J
-    B --- L((L))
-    B --- M
-    C((C)) --- G
-    C --- L((L))
-    D((D)) --- E((E))
-    E --- K((K))
-    E --- L
-    F((F)) --- G
-    G --- H((H))
-    G --- I((I))
-    G --- J
-    J --- L
+    ```graphviz dot g7.png
+    graph G {
+        rankdir=LR;
+        node [shape=circle];
 
+        A -- J;
+        A -- M;
+        B -- G;
+        B -- J;
+        B -- L;
+        B -- M;
+        C -- G;
+        C -- L;
+        D -- E;
+        E -- K;
+        E -- L;
+        F -- G;
+        G -- H;
+        G -- I;
+        G -- J;
+        J -- L;
+    }
     ```
 
+!!! question "Parcours en largeur - BFS (Breadth First Search)"
+    Faites l'exercice de vous rappeler du parcours en largeur sur les arbres binaires sans consulter le cours.
 
+    Si on l'applique tel quel, le problème est qu'on boucle infiniment sur des cycles. Il faut donc garder en mémoire quels sommets on a enfilé pour ne pas les enfiler plusieurs fois.
+    En effet, un sommet enfilé sera nécessairement traité, et il ne faut pas qu'il puisse être enfilé plusieuurs fois. 
 
-!!! question "Parcours en profondeur - DFS (Depth First Search)"
-    - Faites l'exercice de vous rappeler du parcours en profondeur préfixe sur les arbres binaires sans consulter le cours.
-
-    - Ecrire l'ordre des visites pour un parcours en profondeur des graphes exemples de cette manière. Je vous conseille de les recopier et de gribouiller au papier.
-
-    Ici, le problème est qu'on peut indéfiniment boucler sur des cycles de sommets. Il faut donc garder en mémoire quels sommets on a visité pour ne pas les visiter plusieurs fois. 
-
-    - En vous inspirant de ce fonctionnement, écrire une méthode de parcours récursif en profondeur des sommets d'un graphe. Le comportement de visite est l'affichage du nom du noeud.
+    - Ecrire une méthode de parcours itératif en largeur des sommets d'un graphe. Le comportement de visite est l'affichage du nom du noeud.
 
     ```python
-    def dfs(g: GrapheNO, depart: str, visites: list[str])
+    from structures.lineaires import file
+    def bfs(depart: str, g: graphe)
     ```
 
-!!! question "Graphes connexes"
 
-    En utilisant la fonction dfs, écrire un algorithme qui détermine si un graphe est connexe ou pas. 
+!!! question "Parcours en profondeur - Depth First Search (DFS)"
+
+    De la même manière, en vous inspirant du travail sur les arbres binaires, écrire une fonction qui réalise le parcours en profondeur d'un graphe.
+
+    On se souviendra que la différence entre un parcours en largeur et en profondeur ne tient pas à grand chose dans le code. 
 
     ```python
-    def is_connexe(g: GrapheNO)
+    def dfs(depart: str, g: graphe)
     ```
 
-!!! question "Composantes connexes"
-    En utilisant la fonction dfs, écrire un algorithme qui détermine renvoie la liste des composantes connexes d'un graphe. (Une composante connexe est un sous-graphe, donc un Graphe) 
 
-!!! question "Parcours en largeur - Breadth Firsst Search (BFS)"
-    Donnez l'ordre des visites pour le parcours en largeur du graphe exemple.
 
-    De la même manière, en vous inspirant du travail sur les arbres binaires, écrire une fonction qui réalise le parcours en largeur d'un graphe.
+!!! question "Connexité"
+    A l'aide d'un parcours de graphe, écrire un algorithme
+    ```python
+        def est_connexe(g: graphe) -> bool
+    ```
+
+    On pourra tester avec le graphe non connexe du cours.
+
+!!! question "Sous-graphe"
+    Ecrire une fonction qui renvoie le sous graphe constitué des sommets dans la liste:
+    ```python
+        def sous_graphe(sommets: list[str], g: graphe) -> graphe
+    ```
+
+!!! question "Connexité 2"
+    Ecrire une fonction permettant de récupérer une liste de sous graphes connexes:
+
+    ```python
+        def sous_graphes_connexes(g: graphe) -> list[graph]
+    ```
+
+!!! question "Arbre couvrant"
+
+    On supposera le graphe connexe.
+
+    1. Modifier le BSF pour qu'il renvoie un dictionnaire des noeuds précédant les noeuds découverts.
+        - Lorsqu'un noeud $v$ est découvert à partir d'un noeud $u$, on y ajoute l'item $v:u$  
+
+    2. Modifier à nouveau cette fonction pour qu'elle renvoie un graphe construit à partir du dictionnaire de noeuds précédents.
+
+    On appelle ce graphe un arbre couvrant. En théorie des graphes, un arbre est un graphe connexe acyclique.
+    Les arbres que nous avons vus précédemment sont dits enracinés car ils possèdent un sommet spécial qu'on appelle la racine.
 
 
 !!! question "Plus court chemin - Non pondéré"
-    On peut trouver le plus court chemin entre 2 sommets d'un graphe non pondéré en réalisant un parcours en largeur depuis le premier sommet jusqu'à visiter le deuxième sommet.
-    Ecrire une fonction
+    On peut trouver le plus court chemin entre 2 sommets d'un graphe **non pondéré** en réalisant un parcours en largeur depuis le premier sommet jusqu'à visiter le deuxième sommet.
+
+    
+    Ecrire une fonction:
+
     ```python
-        def shortest_path(g: GrapheNO, s1: str, s2: str) -> list[str]
+        def shortest_path(g: graphe, s1: str, s2: str) -> list[str]
     ```
-
-
-
-!!! question "IMPLEMENTATION Graphes pondérés non orientés"
-    ```mermaid
-        graph LR
-        A((A)) ---|4| B((B))
-        A ---|7| C((C))
-        B ---|2| D((D))
-        B ---|5| E((E))
-        C ---|3| F((F))
-        D ---|6| G((G))
-        E ---|1| G
-        F ---|8| G
-
-    ```
-
-    Nous avons parfois besoin d'associer à une arête un poids (ou coût). Par exemple, dans un réseau informatique, il peut s'agir de la vitesse de connexion entre 2 machines. Dans un réseau routier, il peut s'agir de la distance entre deux endroits. Dans un réseau de neurone, il peut s'agir de l'importance à accorder à une connexion entre deux neurones...
-
-    Dans la liste d'adjacence, on utilisera maintenant un disctionnaire de sommets accompagnés du poids de l'arête correspondante.
-
-    La matrice d'adjacence contiendra les poids des arêtes.
-
-    Proposez une implémentation de graphe pondéré non orienté.
-

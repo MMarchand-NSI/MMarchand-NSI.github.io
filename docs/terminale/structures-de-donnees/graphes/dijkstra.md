@@ -14,13 +14,13 @@ On maintient aussi une liste de prédécesseurs. De quel sommet vient-on sur le 
 
 
 ```
-distance : dict[str, int]
+distance_depart : dict[str, int]
 prédécesseur : dict[str, str]
 
 pour chaque sommet v de V :
-    distance[v] = ∞
+    distance_depart[v] = ∞
     prédécesseur[v] = NIL
-distance[s] = 0
+distance_depart[s] = 0
 
 Q = ensemble de tous les sommets
 ```
@@ -37,52 +37,62 @@ Tant que Q n'est pas vide:
 
 Ensuite, on peut calculer les distances et les prédécesseurs.
 
+```python
+def dijkstra(depart: str, g: gr.graphe) -> tuple[dict[str, float], dict[str, str]]:
+    """
+    """
+    f = [depart]
+    distance_depart = {s: float('inf') for s in gr.sommets(g)}
+    distance_depart[depart] = 0
+    precedent: dict[str, str] = dict()
+
+    while len(f) > 0:
+        # On défile toujours le sommet dont la distance à la source est la plus petite
+        u = min(f, key=lambda sommet: distance_depart[sommet])
+        f.remove(u)
+
+        # Pour chaque voisin v
+        for v in gr.get_voisins(u, g):
+            # si la nouvelle distance de v à la source est plus courte que celle déjà calculée dans le dico
+            if distance_depart[v] > distance_depart[u] + gr.poids(u, v, g):
+                # On met à jour la distance dans le dico
+                distance_depart[v] = distance_depart[u] + gr.poids(u, v, g)
+                # Jusqu'ici, On vient de u pour le plus court chemin du depart à v
+                precedent[v] = u
+                # Si v n'a pas encore fait partie de f, on l'enfile
+                if v not in f:
+                    f.append(v)
+    return distance_depart, precedent
+```
+
+
 
 ```python
 import heapq
 
-def dijkstra(source, g):
+def dijkstra(depart: str, g: gr.graphe) -> tuple[dict[str, float], dict[str, str]]:
     """
-    Calcule les distances minimales depuis le sommet source 
-    vers tous les autres sommets du graphe g.
-
     """
-    # 1) Initialisation des distances à l'infini, sauf la source à 0
-    distances = {node: float('inf') for node in graph}
-    distances[source] = 0
-    predecesseurs = {}
+    f = [depart]
+    distance_depart = {s: float('inf') for s in gr.sommets(g)}
+    distance_depart[depart] = 0
+    precedent: dict[str, str] = dict()
 
-    # 2) Création de la file de priorité (Tas-min)
-    #    Elle contiendra des tuples (distance à la source, sommet)
-    pq = [(0, source)]
-    
-    # 3) Ensemble pour marquer les sommets déjà visités
-    visited = set()
-    
-    # 4) Boucle principale: Tant que la file n'est pas vide
-    while pq:
-        # On défile le sommet u le plus proche (distance min)
-        dist_u, u = heapq.heappop(pq)
-        
-        # Si ce sommet n'est pas déjà visité
-        if u not in visited:
-        
-            # On le marque comme visité
-            visited.add(u)
-            
-            # Relâchement des arêtes sortantes de u
-            for v in voisins(u, g):
-                # dist_u = distance minimale connue pour atteindre u
-                alt = dist_u + poids(u, v)  # possible distance pour aller jusqu'à v
-                if alt < distances[v]:
-                    # On a trouvé une plus petite distance de source à v
-                    distances[v] = alt
-                    # on renseigne le prédécesseur de v
-                    predecesseur[v] = u
-                    # On enfile v avec la nouvelle distance
-                    heapq.heappush(pq, (alt, v))
-    
-    # distances[v] contient la distance la plus courte de source à v
-    # predecesseur[v] contient le sommet prédécesseur de v sur le plus court chemin de source à v
-    return distances, predecesseur
+    while len(f) > 0:
+        # On défile toujours le sommet dont la distance à la source est la plus petite
+        u = min(f, key=lambda sommet: distance_depart[sommet])
+        f.remove(u)
+
+        # Pour chaque voisin v
+        for v in gr.get_voisins(u, g):
+            # si la nouvelle distance de v à la source est plus courte que celle déjà calculée dans le dico
+            if distance_depart[v] > distance_depart[u] + gr.poids(u, v, g):
+                # On met à jour la distance dans le dico
+                distance_depart[v] = distance_depart[u] + gr.poids(u, v, g)
+                # Jusqu'ici, On vient de u pour le plus court chemin du depart à v
+                precedent[v] = u
+                # Si v n'a pas encore fait partie de f, on l'enfile
+                if v not in f:
+                    f.append(v)
+    return distance_depart, precedent
 ```

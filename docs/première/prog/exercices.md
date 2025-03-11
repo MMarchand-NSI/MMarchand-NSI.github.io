@@ -184,3 +184,115 @@
     ```
 
 
+## Dictionnaires
+
+# Traitement des données en table
+
+!!! hint "Exercices"
+
+    Pour chacun d'exercices suivant, on attend qu'une fonction soit écrite et testée.
+
+
+
+!!! question "Notes d'une classe"
+
+
+    Un dictionnaire notes contient les noms des élèves en clés et leurs moyennes en valeurs.
+
+    ```python
+        notes = {'Alice': 15, 'Bob': 12, 'Clara': 17, 'David': 10}
+    ```
+
+    1. Écrire une fonction `rapport_moyenne` qui prend en paramètre un dictionnaire et affiche la moyenne de chaque élève sous la forme : "Alice a une moyenne de 15.". Ajouter un commentaire selon la moyenne : "Excellent" pour une moyenne ≥ 16, "Bien" pour une moyenne entre 12 et 15 inclus, et "À améliorer" pour une moyenne < 12.
+
+    2. Écrire une fonction ajouter_eleve(notes: dict, nom: str, moyenne: float) qui ajoute un nouvel élève au dictionnaire.
+
+    3. Écrire une fonction modifier_moyenne(notes: dict, nom: str, nouvelle_moyenne: float) qui modifie la moyenne d'un élève.
+
+    4. Écrire une fonction `eleves_mention(notes: dict, seuil: float) -> list[str]` qui renvoie la liste des élèves ayant une moyenne ≥ seuil.
+
+
+
+!!! question "Gestion des bibliothèques"
+
+    Un dictionnaire bibliotheques contient plusieurs bibliothèques.
+
+    ```python
+        bibliotheques = {
+            'biblio1': {'nom': 'Bibliothèque Centrale', 'ville': 'Paris', 'livres': 30000},
+            'biblio2': {'nom': 'Médiathèque', 'ville': 'Lyon', 'livres': 15000},
+            'biblio3': {'nom': 'Bibliothèque Universitaire', 'ville': 'Marseille', 'livres': 50000}
+        }
+    ```
+
+    1. Écrire une fonction afficher_bibliotheques qui affiche les informations sous la forme : "Bibliothèque Centrale à Paris : 30000 livres.".
+
+    2. Écrire une fonction ajouter_bibliotheque qui ajoute une nouvelle bibliothèque au dictionnaire.
+
+    3. Écrire une fonction plus_grande_bibliotheque qui renvoie la bibliothèque ayant le plus de livres.
+
+    4. Écrire une fonction total_livres qui calcule et renvoie le nombre total de livres.
+
+
+!!! question "Gestion d'employés"
+
+    Un dictionnaire employes contient les informations des employés.
+
+    ```python
+        employes = {
+            'emp1': {'nom': 'Alice', 'poste': 'Développeur', 'salaire': 3500},
+            'emp2': {'nom': 'Bob', 'poste': 'Designer', 'salaire': 3000},
+            'emp3': {'nom': 'Clara', 'poste': 'Chef de projet', 'salaire': 5000}
+        }
+    ```
+
+    1. Écrire une fonction afficher_employes qui affiche les informations sous la forme : "Alice est Développeur et gagne 3500 euros.".
+
+    2. Écrire une fonction ajouter_employe qui ajoute un nouvel employé au dictionnaire.
+
+    3. Écrire une fonction augmenter_salaires qui augmente tous les salaires d'un pourcentage donné en paramètres.
+
+    4. Écrire une fonction employe_salaire_max qui renvoie l'employé ayant le salaire le plus élevé.
+
+
+!!! question "Analyse de performances d'athlètes"
+    Un dictionnaire athletes permet de suivre les performances.
+
+    ```python
+        athletes = {
+            'Pierre': {'sport': 'marathon', 'temps': [2.15, 2.18, 2.16]},
+            'Sophie': {'sport': 'marathon', 'temps': [2.20, 2.22, 2.19]}
+        }
+    ```
+
+
+    Écrire les fonctions suivantes :
+    
+    1. calculer_moyenne_performances qui calcule la moyenne des performances
+    2. meilleur_temps qui trouve l'athlète avec le meilleur temps pour un sport donné
+    3. progression_athlete qui calcule la progression entre les performances
+    4. ajouter_performance qui ajoute une nouvelle performance
+
+!!! question "Voitures - compréhension"
+
+    ```python
+    voitures = [
+        {"marque": "Toyota", "modele": "Corolla", "annee": 2020, "kilometrage": 20000},
+        {"marque": "Ford", "modele": "Mustang", "annee": 1968, "kilometrage": 120000},
+        {"marque": "Tesla", "modele": "Model 3", "annee": 2021, "kilometrage": 15000},
+        {"marque": "Renault", "modele": "Clio", "annee": 2019, "kilometrage": 40000},
+        {"marque": "BMW", "modele": "X5", "annee": 2022, "kilometrage": 10000},
+    ]
+    ```
+
+    0. Quel est le type de la variable voitures?
+    1. Combien y-a-t-il de voitures?
+    2. Donner la liste des marques.
+    3. Donner la liste des voitures (`list[dict]`), mais seulement avec la marque et le modèle.
+    4. Quelles sont les voitures ayant un kilométrage inférieur à 25000 km?
+    5. Ecrire une fonction `get_marque(voiture: dict) -> str` qui renvoie la marque d'une voiture.
+    6. Décrire, après l'avoir testé, ce que fait l'instruction `sorted(voitures, key=get_marque)`
+    7. Ecrire une fonction `get_annee(voiture: dict) -> int` qui renvoie l'année d'une voiture.
+    8. Décrire, après l'avoir testé, ce que fait l'instruction `min(voitures, key=get_annee)`
+    9. Quelle est la voiture ayant le plus grand kilométrage?
+    10. Trier les voitures en fonction de leur kilométrage.

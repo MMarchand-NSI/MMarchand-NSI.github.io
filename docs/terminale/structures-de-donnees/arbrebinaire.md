@@ -331,9 +331,13 @@ graph TD;
     ```
 
 
-!!! info "Encadrement de la hauteur d'un arbre"
+!!! info "Encadrement de la hauteur d'un arbre binaire"
     
     $hauteur(\empty)=-1$
+
+    **Comment encadrer**
+
+    Avec $n$ noeuds, l'arbre le plus haut qu'on puisse construire est filiforme, et l'arbre le moins haut est un arbre où tous les niveaux sont remplis sauf evéntuellement le dernier. 
 
     **Hauteur d'un arbre filiforme**
 
@@ -380,7 +384,51 @@ graph TD;
 
     $2^{h+1} = N + 1$
     
-    En passant au logarithme de base 2 de chaque côté, la hauteur d'un arbre parfait ayant $n$ noeuds est donnée par la formule $h = \log_2(n+1)$.
+    En passant au logarithme de base 2 de chaque côté, la hauteur d'un arbre parfait ayant $n$ noeuds est donnée par la formule $h = \log_2(n+1)-1$.
+
+    **Encadrement**
+
+    En tenant compte du fait que l'arbre n'est pas nécessairement rempli au dernier niveau, sa hauteur minimum est celle de l'arbre parfait associé:
+    
+    $\lceil \log_2(n+1) - 1 \rceil$, donc $\lceil \log_2(n+1) \rceil - 1$ 
+    
+    On en déduit l'encadrement de la hauteur $h$ de tout arbre binaire de taille $n$:
+
+    $\lceil \log_2(n+1) \rceil - 1 \leq h \leq n - 1.$
+
+    Soit \( n \ge 1 \). Nous allons démontrer que : $\lfloor \log_2(n) \rfloor = \lceil \log_2(n+1) \rceil - 1$
+
+    Posons $k = \lfloor \log_2(n) \rfloor$
+
+    Par définition de la fonction partie entière inférieure, cela signifie que : 
+    
+    $k \le \log_2(n) < k+1$
+
+    (Le but ici, c'est de faire apparaître du $n+1$ au milieu, de passer l'inégalité de gauche en strict et celle de droite en large. Et comme ce qu'on veut démontrer est censé être vrai, ça devrait bien se goupiller)
+
+    En appliquant la fonction $x \mapsto 2^x$, on obtient : $2^k \le n < 2^{k+1}$
+
+    En ajoutant 1 à chaque terme, nous avons : $2^k + 1 \le  \textcolor{red}{n + 1 \le} 2^{k+1}$
+
+    En prenant le logarithme en base 2 de ces inégalités, on trouve : 
+    
+    $\log_2(2^k + 1) \le \log_2(n+1) \le \log_2(2^{k+1}) = k+1$
+
+    Comme $\log_2(2^k + 1) > \log_2(2^k) = k$, on obtient $k \textcolor{red}{<} \log_2(n+1) \le k+1$
+
+    i.e., par définition de la fonction partie entière supérieure, $\lceil \log_2(n+1) \rceil = k+1$
+
+    En isolant $k$, nous avons  $k = \lceil \log_2(n+1) \rceil - 1$
+
+    Comme nous avons défini $ k = \lfloor \log_2(n) \rfloor $, nous concluons que :
+
+    $$\lfloor \log_2(n) \rfloor = \lceil \log_2(n+1) \rceil - 1$$
+
+    l'encadrement de la hauteur $h$ de tout arbre binaire de taille $n \geq 1$ est donc:
+
+    $$\Huge \lfloor \log_2(n) \rfloor \leq h \leq n - 1$$
+
+
 
 
 !!! tip "Avancé - Rotations"
@@ -391,6 +439,28 @@ graph TD;
     - Ecrire une fonction `rotation_gauche`
     - En considérant les hauteurs des sad et sag avant et après rotation, discuter à quoi pourraient servir les rotations.
 
+
+
+
+!!! question "Recherche - Python avancé"
+    Que fait la fonction suivante?
+
+    ```python
+    def mystere[T](a: arbrebin[T]) -> list[T]:
+        def aux(f: list[arbrebin[T]]) -> list[T]:
+            match f:
+                case []:     # cas où f est la liste vide
+                    return []
+                case (), *reste:   # cas ou le premier element de f est l'arbre vide (), et on affecte le reste de la liste à la variable reste.
+                    return aux(reste)
+                case (cle, (), ()), *reste: # cas où le premier élément est une feuille
+                    return [cle] + aux(reste)
+                case (cle, sag, sad), *reste: # cas où le premier élément est un noeud quelconque.
+                    return [cle] + aux(reste + [sag] + [sad])
+                case _:  # spécial python, car python n'étant pas fortement typé, la fonctoin accepte n'importe quoi en paramètre.
+                    raise ValueError("Ce cas ne peut pas arriver, le type de a doit être arbrebin[T], vous avez mis n'importe quoi dans la fonction")
+        return aux([a])
+    ```
 
 !!! question "MP2I"
     Implémentez doctement toutes les fonctions en OCaml. (seulement la version immuable. Il est aussi possible d'implémenter la version mutable en OCaml, mais chaque chose en son temps)
