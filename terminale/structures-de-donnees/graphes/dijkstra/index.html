@@ -1670,13 +1670,13 @@
 <p>On va maintenir un dictionnaire de <span class="arithmatex">\(distances\)</span> au sommet source <span class="arithmatex">\(s\)</span>.</p>
 <p>La distance à tous les sommets est initialement infinie, sauf pour <span class="arithmatex">\(s\)</span> qui aura une distance de 0 à lui-même.</p>
 <p>On maintient aussi une liste de prédécesseurs. De quel sommet vient-on sur le plus court chemin?</p>
-<div class="highlight"><pre><span></span><code>distance : dict[str, int]
+<div class="highlight"><pre><span></span><code>distance_depart : dict[str, int]
 prédécesseur : dict[str, str]
 
 pour chaque sommet v de V :
-    distance[v] = ∞
+    distance_depart[v] = ∞
     prédécesseur[v] = NIL
-distance[s] = 0
+distance_depart[s] = 0
 
 Q = ensemble de tous les sommets
 </code></pre></div>
@@ -1689,6 +1689,34 @@ Q = ensemble de tous les sommets
 </code></pre></div>
 <p>Ensuite, on peut calculer les distances et les prédécesseurs.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">depart</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">depart</span><span class="p">]</span>
+    <span class="n">distance_depart</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">gr</span><span class="o">.</span><span class="n">sommets</span><span class="p">(</span><span class="n">g</span><span class="p">)}</span>
+    <span class="n">distance_depart</span><span class="p">[</span><span class="n">depart</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">precedent</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># On défile toujours le sommet dont la distance à la source est la plus petite</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">sommet</span><span class="p">:</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">sommet</span><span class="p">])</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+
+        <span class="c1"># Pour chaque voisin v</span>
+        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">gr</span><span class="o">.</span><span class="n">get_voisins</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+            <span class="c1"># si la nouvelle distance de v à la source est plus courte que celle déjà calculée dans le dico</span>
+            <span class="k">if</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">gr</span><span class="o">.</span><span class="n">poids</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
+                <span class="c1"># On met à jour la distance dans le dico</span>
+                <span class="n">distance_depart</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">gr</span><span class="o">.</span><span class="n">poids</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
+                <span class="c1"># Jusqu&#39;ici, On vient de u pour le plus court chemin du depart à v</span>
+                <span class="n">precedent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
+                <span class="c1"># Si v n&#39;a pas encore fait partie de f, on l&#39;enfile</span>
+                <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">distance_depart</span><span class="p">,</span> <span class="n">precedent</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">heapq</span>
+
+<span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">depart</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">depart</span><span class="p">]</span>
@@ -1734,7 +1762,7 @@ Q = ensemble de tous les sommets
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">February 18, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">March 11, 2025</span>
   </span>
 
     
