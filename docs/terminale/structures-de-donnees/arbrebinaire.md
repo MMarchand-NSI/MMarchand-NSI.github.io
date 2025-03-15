@@ -443,9 +443,13 @@ graph TD;
 
 
 !!! question "Recherche - Python avancé"
-    Que fait la fonction suivante?
+    Sans l'exécuter, étudier ce que fait la fonction suivante:
 
     ```python
+    type vide = tuple[()]
+    type arbrebin[T] = vide|tuple[T, arbrebin[T], arbrebin[T]] 
+    ARBRE_VIDE = ()
+    
     def mystere[T](a: arbrebin[T]) -> list[T]:
         def aux(f: list[arbrebin[T]]) -> list[T]:
             match f:
@@ -461,6 +465,9 @@ graph TD;
                     raise ValueError("Ce cas ne peut pas arriver, le type de a doit être arbrebin[T], vous avez mis n'importe quoi dans la fonction")
         return aux([a])
     ```
+
+
+
 
 !!! question "MP2I"
     Implémentez doctement toutes les fonctions en OCaml. (seulement la version immuable. Il est aussi possible d'implémenter la version mutable en OCaml, mais chaque chose en son temps)
