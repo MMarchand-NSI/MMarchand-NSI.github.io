@@ -1551,6 +1551,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Algorithme de Dijkstra
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1560,6 +1571,43 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enonce-de-linvariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Énoncé de l’invariant
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preuve-esquisse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preuve (esquisse)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1651,6 +1699,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enonce-de-linvariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Énoncé de l’invariant
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preuve-esquisse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preuve (esquisse)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1667,9 +1741,12 @@
 <h1 id="algorithme-de-dijkstra">Algorithme de Dijkstra</h1>
 <p>Dijkstra est un algorithme de plus court chemin dans un graphe pondéré (avec des poids non négatifs) qui permet, à partir d’un sommet source s, de trouver les distances minimales vers tous les autres sommets.</p>
 <p>Le principe est le suivant :</p>
-<p>On va maintenir un dictionnaire de <span class="arithmatex">\(distances\)</span> au sommet source <span class="arithmatex">\(s\)</span>.</p>
-<p>La distance à tous les sommets est initialement infinie, sauf pour <span class="arithmatex">\(s\)</span> qui aura une distance de 0 à lui-même.</p>
-<p>On maintient aussi une liste de prédécesseurs. De quel sommet vient-on sur le plus court chemin?</p>
+<ul>
+<li>L’algorithme maintient un tableau (ou dictionnaire) <code>distance</code>, qui stocke pour chaque sommet <span class="arithmatex">\(v\)</span> une valeur estimée de la distance minimale <span class="arithmatex">\(d(v)\)</span> depuis la source <span class="arithmatex">\(s\)</span>.</li>
+<li>À chaque itération, Dijkstra <strong>choisit</strong> parmi les sommets non encore "retirés" celui qui a la plus petite distance estimée et le "verrouille"</li>
+<li>Pour ce sommet <span class="arithmatex">\(u\)</span> ainsi choisi, on dit que sa distance est <strong>définitive</strong>, car on ne la modifiera plus ensuite.</li>
+<li>Puis on <strong>relâche</strong> toutes les arêtes sortant de <span class="arithmatex">\(u\)</span>, si on découvre un chemin plus court via <span class="arithmatex">\(u\)</span>.</li>
+</ul>
 <div class="highlight"><pre><span></span><code>distance_depart : dict[str, int]
 prédécesseur : dict[str, str]
 
@@ -1723,6 +1800,50 @@ Q = ensemble de tous les sommets
                     <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">distance_depart</span><span class="p">,</span> <span class="n">precedent</span>
 </code></pre></div>
+<hr />
+<p>Voici <strong>l’idée générale</strong> de la démonstration de la <strong>correction</strong> de l’algorithme de Dijkstra (dans un graphe à <strong>poids d’arêtes non négatifs</strong>). On énonce souvent cette preuve sous forme d’un <strong>invariant</strong> qui est préservé à chaque étape, ou par <strong>induction</strong> sur la taille de l’ensemble de sommets déjà “fixés” par Dijkstra.</p>
+<h2 id="enonce-de-linvariant">Énoncé de l’invariant</h2>
+<p>Soit <span class="arithmatex">\(S\)</span> l’ensemble des sommets définitivement “fixés” (ou « extraits » de la structure de priorité, selon l’implémentation).<br />
+<strong>Invariant</strong> : Pour tout sommet <span class="arithmatex">\(x \in S\)</span>, la valeur <code>distance[x]</code> coïncide <em>exactement</em> avec la <strong>distance réelle</strong> la plus courte de <span class="arithmatex">\(s\)</span> à <span class="arithmatex">\(x\)</span>.</p>
+<p>Nous allons montrer :</p>
+<ol>
+<li>L’invariant est vrai avant toute itération (initialement, seul le sommet source <span class="arithmatex">\(s\)</span> a <code>distance[s] = 0</code>, et c’est bien la distance réelle).  </li>
+<li>Il est <strong>préservé</strong> à chaque étape (si l’invariant est vrai, alors après avoir choisi le prochain sommet et fait les relâchements, il reste vrai).  </li>
+<li>Quand l’algorithme se termine, tous les sommets de <span class="arithmatex">\(V\)</span> (ou en tout cas ceux qui sont atteignables depuis <span class="arithmatex">\(s\)</span>) ont leur distance correcte.</li>
+</ol>
+<hr />
+<h2 id="preuve-esquisse">Preuve (esquisse)</h2>
+<ol>
+<li><strong>Initialisation</strong>  </li>
+<li>Au début, <code>distance[s] = 0</code> et <code>distance[v] = +∞</code> pour <span class="arithmatex">\(v \neq s\)</span>. Le seul sommet éventuellement “fixé” est <span class="arithmatex">\(s\)</span>, ou bien aucun si on attend la première étape pour “fixer” un sommet.  </li>
+<li>
+<p>De toute façon, <code>distance[s] = 0</code> est la bonne distance de <span class="arithmatex">\(s\)</span> à lui-même, et <code>distance[v] = +∞</code> est un majorant correct pour les autres.</p>
+</li>
+<li>
+<p><strong>Choix du sommet <span class="arithmatex">\(u\)</span> et vérification de sa distance</strong><br />
+   Supposons que tous les sommets déjà dans <span class="arithmatex">\(S\)</span> (verrouillés) ont leur distance exacte. L’algorithme choisit un sommet <span class="arithmatex">\(u\notin S\)</span> qui a la plus petite distance estimée parmi ceux restants.  </p>
+</li>
+<li><strong>Idée-clé</strong> : si <code>distance[u]</code> n’était <strong>pas</strong> la véritable distance de <span class="arithmatex">\(s\)</span> à <span class="arithmatex">\(u\)</span>, cela signifierait qu’il existerait un chemin plus court <span class="arithmatex">\(\pi\)</span> de <span class="arithmatex">\(s\)</span> vers <span class="arithmatex">\(u\)</span>, passant (forcément) par un sommet <span class="arithmatex">\(w\)</span> qui n’est pas encore « fixé ».  </li>
+<li>Or, si un tel chemin plus court existait, alors <code>distance[w]</code> (ou un autre sommet intermédiaire) serait nécessairement <strong>plus petit</strong> que <code>distance[u]</code>, donc on aurait extrait ce sommet <span class="arithmatex">\(w\)</span> avant <span class="arithmatex">\(u\)</span> (puisque Dijkstra choisit toujours le plus petit).  </li>
+<li>Cette contradiction montre que <code>distance[u]</code> est en réalité <strong>exacte</strong>.  </li>
+<li>
+<p>On ajoute alors <span class="arithmatex">\(u\)</span> à <span class="arithmatex">\(S\)</span>.</p>
+</li>
+<li>
+<p><strong>Relâchements des arêtes sortant de <span class="arithmatex">\(u\)</span></strong><br />
+   On met à jour la distance de ses voisins <span class="arithmatex">\(v\)</span>. Cela ne viole pas l’invariant pour les sommets <strong>déjà</strong> dans <span class="arithmatex">\(S\)</span>, puisqu’on ne touche pas à leurs distances (ils restent fixés).  </p>
+</li>
+<li>
+<p>Pour les sommets hors de <span class="arithmatex">\(S\)</span>, on <strong>abaisse</strong> éventuellement la distance estimée si on découvre un chemin plus court passant par <span class="arithmatex">\(u\)</span>. Mais comme <span class="arithmatex">\(u\)</span> est maintenant correct, ces nouvelles valeurs restent de bonnes estimations (ou s’améliorent).</p>
+</li>
+<li>
+<p><strong>Induction</strong>  </p>
+</li>
+<li>Au démarrage, l’invariant est vrai pour le sommet source <span class="arithmatex">\(s\)</span>.  </li>
+<li>Si, à l’itération <span class="arithmatex">\(k\)</span>, l’invariant est vrai pour les sommets dans <span class="arithmatex">\(S\)</span>, alors après avoir choisi un nouveau sommet <span class="arithmatex">\(u\)</span> et relâché ses arêtes, <span class="arithmatex">\(S\cup\{u\}\)</span> conserve la propriété.  </li>
+<li>Lorsque l’algorithme se termine (ou quand tous les sommets atteignables depuis <span class="arithmatex">\(s\)</span> ont été choisis), chaque sommet de <span class="arithmatex">\(S\)</span> a sa distance « figée » et <strong>exacte</strong>.</li>
+</ol>
+<p><strong>Conclusion</strong> : L’ensemble final des distances (<span class="arithmatex">\(\text{distance}[v]\)</span>) renvoyé par Dijkstra coïncide donc avec les <strong>plus courtes distances</strong> de <span class="arithmatex">\(s\)</span> à chaque sommet <span class="arithmatex">\(v\)</span>.  </p>
 
 
 
