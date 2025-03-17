@@ -1685,13 +1685,10 @@ Q = ensemble de tous les sommets
     Extraire de Q le sommet u tel que distance[u] est minimal
 
     Pour chaque voisin v de u :
-        relacher l&#39;arc (u, v) si nécessaire
+        relacher l&#39;arête (u, v) si nécessaire
 </code></pre></div>
-<p>Relacher l'arc (u, v) signifie que si la distance de la source à v en passant par u est plus petite que la distance déjà connue:</p>
-<ul>
-<li>on met à jour cette distance dans le dictionnaire (on a trouvé une plus petite distance source-&gt;v).</li>
-<li>si v n'est pas déjà connu, on l'enfile.</li>
-</ul>
+<p>Relacher l'arc (u, v) signifie que, si la distance de la source à v en passant par u est plus petite que la distance déjà connue, on met à jour cette distance dans le dictionnaire (on a trouvé une plus petite distance source-&gt;v).</p>
+<p>Pourquoi le mot "relâcher"? Ca vient de la terminologie de l’optimisation. On dit qu’on "relâche" une contrainte ou un majorant quand on le réduit si une meilleure valeur est trouvée. On relâche l'ancienne valeur pour adopter la nouvelle.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">depart</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Version dite naîve d&#39;implémentation de l&#39;algorithme de dijkstra.</span>
