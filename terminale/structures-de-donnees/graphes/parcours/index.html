@@ -1732,6 +1732,47 @@ Dès qu'on découvre un sommet non visité, on le découvre forcément depuis so
 </code></pre></div>
 </div>
 <div class="admonition question">
+<p class="admonition-title">Indicateurs courants sur les graphes</p>
+<p>En seconde (oui je sais c'est loin), vous avez peut-être découvert les notions d'excentricité, de rayon, de diamètre de graphe,
+ainsi que des éléments d'explication permettant une première approche d'interprétation de ces valeurs.</p>
+<p>Vous écrirez les fonctions suivantes en une ligne à l'aide de listes en compréhension et des fonctions min et max.</p>
+<p>La fonction distance de l'exercice précédent est nécessaire.</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">excentricite</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphe</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retourne l&#39;excentricité du sommet s dans le graphe non pondéré g.</span>
+<span class="sd">    L&#39;excentricité d&#39;un sommet est la distance à son sommet le plus éloigné.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">centre</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retourne le centre du graphe g.</span>
+<span class="sd">    Le centre du graphe est l&#39;ensemble des sommets ayant la plus petite excentricité.</span>
+<span class="sd">    On appelle de tels sommets des somemts centraux.</span>
+<span class="sd">    Les sommets centraux sont stratégiquement importants, par exemple pour placer un serveur, un relais,</span>
+<span class="sd">    un entrepôt. Ils minimisent la distance maximale à tous les autres sommets.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="o">...</span>
+    <span class="k">return</span> <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">rayon</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retourne le rayon du graphe non pondéré g.</span>
+<span class="sd">    Le rayon d&#39;un graphe est l&#39;excentricité des sommets centraux.</span>
+<span class="sd">    Il représente la distance maximale de n&#39;importe quel sommet aux sommets centraux.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">...</span>
+
+<span class="k">def</span> <span class="nf">diametre</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Retourne le diamètre du graphe non pondéré g.</span>
+<span class="sd">    Le diamètre d&#39;un graphe est la distance maximum entre 2 sommets du graphe.</span>
+<span class="sd">    Il donne une idée de son étendue. Un graphe avec un petit diamètre est dit efficace, ou compact.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="o">...</span>
+</code></pre></div>
+</div>
+<div class="admonition question">
 <p class="admonition-title">Arbre couvrant</p>
 <p>On supposera le graphe connexe.</p>
 <ol>
