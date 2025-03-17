@@ -1711,10 +1711,24 @@ En effet, un sommet enfilé sera nécessairement traité, et il ne faut pas qu'i
 </code></pre></div>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Plus court chemin - Non pondéré</p>
-<p>On peut trouver le plus court chemin entre 2 sommets d'un graphe <strong>non pondéré</strong> en réalisant un parcours en largeur depuis le premier sommet jusqu'à visiter le deuxième sommet.</p>
-<p>Ecrire une fonction:</p>
-<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">shortest_path</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">graphe</span><span class="p">,</span> <span class="n">s1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">s2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>
+<p class="admonition-title">Plus court chemins - Non pondéré</p>
+<p>On peut trouver le plus court chemin entre 2 sommets d'un graphe <strong>non pondéré</strong> en réalisant un parcours en largeur qui renvoie un dictionnaire des prédécessurs.
+Dès qu'on découvre un sommet non visité, on le découvre forcément depuis son prédécesseur sur son plus court chemin à la source.</p>
+<p>Ensuite, en examinant le dictionnaire des prédécesseurs, on peut en déduire le plus court chemin</p>
+<ol>
+<li>Ecrire une fonction:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">predecesseurs_bfs</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">graphe</span><span class="p">,</span> <span class="n">s1</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+<ol>
+<li>Ecrire une fonction:</li>
+</ol>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">shortest_path</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">graphe</span><span class="p">,</span> <span class="n">s1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">s2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
+</code></pre></div>
+<ol>
+<li>Ecrire une fonction distance qui renvoie la longueur du plus court chemin entre <span class="arithmatex">\(s1\)</span> et <span class="arithmatex">\(s2\)</span> dans le graphe <span class="arithmatex">\(g\)</span></li>
+</ol>
+<div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">distance</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">graphe</span><span class="p">,</span> <span class="n">s1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">s2</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
