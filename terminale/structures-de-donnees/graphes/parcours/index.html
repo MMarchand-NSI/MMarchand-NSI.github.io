@@ -1667,11 +1667,12 @@
 <p class="admonition-title">Pré-requis</p>
 <p>Les algorithmes de parcours en profondeur et en largeur des arbres doivent être maîtrisés.</p>
 </div>
+<p>Les exercices suivants portent uniquement sur les graphes non orientés.</p>
 <div class="admonition question">
 <p class="admonition-title">Parcours en largeur - BFS (Breadth First Search)</p>
 <p>Faites l'exercice de vous rappeler du parcours en largeur sur les arbres binaires sans consulter le cours.</p>
 <p>Si on l'applique tel quel, le problème est qu'on boucle infiniment sur des cycles. Il faut donc garder en mémoire quels sommets on a enfilé pour ne pas les enfiler plusieurs fois.
-En effet, un sommet enfilé sera nécessairement traité, et il ne faut pas qu'il puisse être enfilé plusieuurs fois. </p>
+En effet, un sommet enfilé sera nécessairement traité, et il ne faut pas qu'il puisse être enfilé plusieurs fois. </p>
 <ul>
 <li>Ecrire une méthode de parcours itératif en largeur des sommets d'un graphe. Le comportement de visite est l'accumulation du sommet dans une liste renvoyée.</li>
 </ul>
@@ -1691,7 +1692,7 @@ En effet, un sommet enfilé sera nécessairement traité, et il ne faut pas qu'i
 <p>En utilisant une des fonctions précédentes, écrire la fonction suivante:</p>
 <div class="highlight"><pre><span></span><code>    <span class="k">def</span> <span class="nf">est_connexe</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span>
 </code></pre></div>
-<p>On pourra tester avec le graphe non connexe du cours, cette fonction peut faire unne ligne.</p>
+<p>On pourra tester avec le graphe non connexe du cours, cette fonction peut faire une ligne.</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Sous graphe</p>
@@ -1777,10 +1778,11 @@ ainsi que des éléments d'explication permettant une première approche d'inter
 <p>On supposera le graphe connexe.</p>
 <p>En théorie des graphes, un arbre est tout simplement un graphe connexe acyclique.
 Les arbres que nous avons vus précédemment sont dits enracinés car ils possèdent un sommet spécial qu'on appelle la racine.</p>
-<p>Construire un arbre à partir du dictionnaire des prédécesseurs. On appelle ce graphe un arbre couvrant.
-Les arbres couvrants sont cruciaux dans de nombreux algorithmes.</p>
+<p>Construire un arbre à partir du dictionnaire des prédécesseurs. On appelle ce graphe un arbre couvrant.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_arbre_couvrant</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">graphe</span><span class="p">:</span>
 </code></pre></div>
+<p>Sur les graphes pondérés, il est fréquent de rechercher l'arbre couvrant de poids minimum (Minimum Spanning Tree).
+Il représente le minimum de ce qui peut tout connecter au moindre coût.</p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Graphe exemple</p>
