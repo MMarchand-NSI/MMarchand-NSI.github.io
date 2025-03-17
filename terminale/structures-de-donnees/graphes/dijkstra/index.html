@@ -1685,43 +1685,27 @@ Q = ensemble de tous les sommets
     Extraire de Q le sommet u tel que distance[u] est minimal
 
     Pour chaque voisin v de u :
-        relacher l&#39;arc (u, v) 
+        relacher l&#39;arc (u, v) si nécessaire
 </code></pre></div>
-<p>Ensuite, on peut calculer les distances et les prédécesseurs.</p>
+<p>Relacher l'arc (u, v) signifie que si la distance de la source à v en passant par u est plus petite que la distance déjà connue:</p>
+<ul>
+<li>on met à jour cette distance dans le dictionnaire (on a trouvé une plus petite distance source-&gt;v).</li>
+<li>si v n'est pas déjà connu, on l'enfile.</li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">depart</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Version dite naîve d&#39;implémentation de l&#39;algorithme de dijkstra.</span>
+<span class="sd">    Normalement, f est une file de priorité pour des raisons de réduction drastique de complexité, mais cette structure n&#39;est pas au programme.</span>
+<span class="sd">    Le principe de l&#39;algorithme reste exactement le même cependant.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">depart</span><span class="p">]</span>
+
+    <span class="c1"># Initialisation des distances au sommet de départ (infinies à l&#39;origine, sauf pour le sommet de départ)</span>
     <span class="n">distance_depart</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">gr</span><span class="o">.</span><span class="n">sommets</span><span class="p">(</span><span class="n">g</span><span class="p">)}</span>
     <span class="n">distance_depart</span><span class="p">[</span><span class="n">depart</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">precedent</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-
-    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="c1"># On défile toujours le sommet dont la distance à la source est la plus petite</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">sommet</span><span class="p">:</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">sommet</span><span class="p">])</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-
-        <span class="c1"># Pour chaque voisin v</span>
-        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">gr</span><span class="o">.</span><span class="n">get_voisins</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-            <span class="c1"># si la nouvelle distance de v à la source est plus courte que celle déjà calculée dans le dico</span>
-            <span class="k">if</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">gr</span><span class="o">.</span><span class="n">poids</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-                <span class="c1"># On met à jour la distance dans le dico</span>
-                <span class="n">distance_depart</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">gr</span><span class="o">.</span><span class="n">poids</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-                <span class="c1"># Jusqu&#39;ici, On vient de u pour le plus court chemin du depart à v</span>
-                <span class="n">precedent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
-                <span class="c1"># Si v n&#39;a pas encore fait partie de f, on l&#39;enfile</span>
-                <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-                    <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">distance_depart</span><span class="p">,</span> <span class="n">precedent</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">heapq</span>
-
-<span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">depart</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">depart</span><span class="p">]</span>
-    <span class="n">distance_depart</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">gr</span><span class="o">.</span><span class="n">sommets</span><span class="p">(</span><span class="n">g</span><span class="p">)}</span>
-    <span class="n">distance_depart</span><span class="p">[</span><span class="n">depart</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Initialisation du dictionnaire des sommets précédents.</span>
+    <span class="c1"># avoir &quot;A&quot;:&quot;Z&quot; dedans signifie que &quot;Z&quot; est avant &quot;A&quot; dans le plus court chemin du depart à &quot;A&quot;</span>
+    <span class="c1"># Ce dictionnaire permettra de reconstituer tous les plus courts chemins au sommet de départ.</span>
     <span class="n">precedent</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
     <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
