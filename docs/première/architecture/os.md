@@ -48,7 +48,7 @@ L'absence d'interface graphique permet souvent de réduire l'utilisation des res
 
 Lorsque le système d'exploitation n'a pas d'interface graphique, l'interaction se fait via une interface en ligne de commande (CLI = Command Line Interface). Dans ce type d’interface, l’utilisateur entre des commandes textuelles dans un terminal pour exécuter des actions, comme la gestion de fichiers, le contrôle des processus, ou la configuration du réseau.
 
-L’utilisateur doit connaître des commandes spécifiques, comme celles utilisées sous Linux (par exemple, ls pour lister les fichiers, cd pour changer de répertoire, ou top pour surveiller les processus en cours). Ces commandes permettent une interaction directe avec le système, souvent de manière plus rapide et précise que par une interface graphique, bien que cela nécessite des connaissances en syntaxe et en structure de commandes.
+L’utilisateur doit connaître des commandes spécifiques, comme celles utilisées sous Linux (par exemple, ls pour lister les fichiers, cd pour changer de répertoire, ou top pour surveiller les processus en cours). Ces commandes permettent une interaction directe avec le système, souvent de manière plus rapide et précise que par une interface graphique.
 
 Dans un système d'exploitation avec une interface graphique avancée, il est toujours possible d'accéder au CLI via un terminal.
 
@@ -60,21 +60,35 @@ Par exemple pour windows:
 ## TP Installation d'un système d'exploitation dans une machine virtuelle.
 
 Nous allons installer un système d'exploitation basé sur le noyau linux: Alpine.
-Cette installation est très technique en comparaison à une installation d'un Full Linux, qui se fait en quelques clicks.
+Cette installation est plus technique en comparaison à une installation d'un Full Linux, qui se fait en quelques clicks avec des questions compréhensibles par le commun des mortels.
+
 Mais:
 - Ca vous habitue à la ligne de commande
 - On voit bien toutes les étapes
-- Les ordinateurs ne sont pas assez puissants
+- Les ordinateurs du lycée ne sont pas assez puissants
 
-1. Créer un disque dur virtuel pour notre OS
-`qemu-img create -f qcow2 alpine.img 5G`
+Pour cette activité, il faut utiliser le moins possible de RAM. Donc on n'ouvre rien qui n'est pas en lien direct avec l'activité (genre pronote...).
 
-2. On démarre une machine virtuelle. Un ordinateur dans votre ordinateur. Ici on lui donne comme disque dur le disque virtuel qu'on vient de créer, on y insère le cd-rom d'installation du système d'exploitation, et on lui demande de booter sur le cdrom. On l'autorise à utiliser 256M de RAM sur la machine physique.
-`qemu-system-x86_64 -boot d -cdrom alpine-virt-3.20.3-x86_64.iso -hda alpine_disk.qcow2 -m 512 -net nic -net user`
+Tout se fera dans le même répertoire de MSYS2
 
-3. Lorsque le système demande de vous logger, entrez "root"
+!!! note "Préparation"
+    - Tout se fait dans le même répertoire MSYS2 MINGW64 (chercher avec la loupe de windows)
+    - Installer qemu, le gestionnaire de machines virtuelles, en exécutant cette commande: `pacman -S mingw-w64-x86_64-qemu`
+    - Télécharger le disque d'installation d'alpine: `wget https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/x86_64/alpine-virt-3.21.3-x86_64.iso`
+
+0. Télécharger le disque d'installation d'alpine: `wget https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/x86_64/alpine-virt-3.21.3-x86_64.iso`
+
+1. Créer un disque dur virtuel de 5Go pour le brancher à notre PC virtuel.
+`qemu-img create -f qcow2 disquedur.qcow2 5G`
+
+2. On démarre une machine virtuelle. Un ordinateur dans votre ordinateur. Ici on lui donne comme disque dur le disque virtuel qu'on vient de créer, on y insère le cd-rom d'installation du système d'exploitation, et on lui demande de booter sur le cdrom. On l'autorise à utiliser 512M de RAM sur la machine physique. on lui branche notre disque (hda) de 5G. Les autres options sont des options pour la gestion du réseau.
+`qemu-system-x86_64 -boot d -cdrom alpine-virt-3.21.3-x86_64.iso -hda disquedur.qcow2 -m 512 -net nic -net user`
+
+3. Après avoir booté, le système demande de vous logger, entrez "root" et validez avec la touche entrée. L'utilisateur root est le superutilisateur. Il a le droit de tout faire.
 
 4. Le clavier n'est pas en français, mais ça sera bientôt le cas. On lance l'installation en tapant: `setup-alpine`, puis entrée.
+
+![alt text](image-8.png)
 
 5. Répondez aux questions comme sur l'image suivante (quand je n'ai rien mis, j'ai juste appuyé sur entrée):
 ![](image-2.png)
@@ -113,5 +127,5 @@ Vidéo commandes linux
 !!! tip "Interface graphique de l'OS"
     Un OS dispose habituellement d'une interface graphique, comme windows.
     Sous linux, vous avez même l'embarras du choix.
-    On n'en ajoutera pas car ça prend trop d'espace disque, mais voici ce que ça peut donner.
+    On n'en ajoutera pas car ça prend trop d'espace disque et que les ordis ne sont pas assez puissants pour faire tourner 2 OS, mais voici ce que ça peut donner.
     ![alt text](image-6.png)
