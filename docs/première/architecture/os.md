@@ -27,18 +27,22 @@ A partir de ce moment, c'est le système d'exploitation qui va prendre la main e
 
 ```mermaid
 graph TD
-    A[Démarrage de l'ordinateur] --> B[POST (Power-On Self-Test)]
+    A[Démarrage de l'ordinateur] --> B[POST -> Power-On Self-Test]
     B --> C[Chargement du BIOS/UEFI]
-    C --> D[Identification du périphérique de démarrage]
-    D --> E[Chargement du chargeur d'amorçage (Bootloader)]
-    E --> F[Chargement du noyau du système d'exploitation]
+    C --> D[Identification du périphérique<br>de démarrage]
+    D --> E[Chargement du chargeur<br>d'amorçage -> Bootloader]
+    E --> F[Chargement du noyau<br>du système d'exploitation]
 ```
 
 ## A quoi sert un système d'exploitation
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/qza9V9ad7nc?si=_RwgafPcuO7JaL8H" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-Visionnez cette vidéo, et résumez la en une introduction et 3 parties.
+Visionnez cette vidéo, et résumez la en une introduction et 3 parties. Elle constitue le minimum que vous devez savoir sur les systèmes d'exploitation.
+
+https://eylenburg.github.io/os_familytree.htm
+Il existe une multitude de systèmes d'exploitation, comme en témoigne la page suivante: https://eylenburg.github.io/os_familytree.htm
+
 
 ## Interagir avec le système d'exploitation
 
@@ -90,7 +94,7 @@ Tout se fera dans le même répertoire de MSYS2
 
 ![alt text](image-8.png)
 
-5. Répondez aux questions comme sur l'image suivante (quand je n'ai rien mis, j'ai juste appuyé sur entrée):
+5. Répondez aux questions comme sur l'image suivante (quand je n'ai rien mis, j'ai juste appuyé sur entrée. pour le mot de passe, mettez root):
 ![](image-2.png)
 
 
@@ -109,19 +113,12 @@ Sur l'image suivante, à la fin, on voit qu'il nous demande sur quel disque dur 
 - On entre cette commande pour arrêter l'ordinateur: `poweroff`
 
 
-!!! hint "Commande pour démarrer l'ordinateur"
+!!! hint "Commande pour démarrer l'ordinateur virtuel"
     - Dès que vous voulez démarrer cet ordinateur, entrez:
     `qemu-system-x86_64 -hda alpine_disk.qcow2 -m 512 -nic user,ipv6=off,hostfwd=tcp::22022-:22`
 
     - Dès que vous voudrez l'arrêter, entrez:
     `doas poweroff`
-
-!!! question "Commandes linux"
-    Liste de questions sur la ligne de commande
-    - df -Th
-
-
-Vidéo commandes linux
 
 
 !!! tip "Interface graphique de l'OS"
