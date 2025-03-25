@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8c3ca2c6.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -1868,15 +1868,12 @@ Cette installation est plus technique en comparaison à une installation d'un Fu
 </div>
 <ol>
 <li>
-<p>Télécharger le disque d'installation d'alpine: <code>wget https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/x86_64/alpine-virt-3.21.3-x86_64.iso</code></p>
-</li>
-<li>
 <p>Créer un disque dur virtuel de 5Go pour le brancher à notre PC virtuel.
 <code>qemu-img create -f qcow2 disquedur.qcow2 5G</code></p>
 </li>
 <li>
 <p>On démarre une machine virtuelle. Un ordinateur dans votre ordinateur. Ici on lui donne comme disque dur le disque virtuel qu'on vient de créer, on y insère le cd-rom d'installation du système d'exploitation, et on lui demande de booter sur le cdrom. On l'autorise à utiliser 512M de RAM sur la machine physique. on lui branche notre disque (hda) de 5G. Les autres options sont des options pour la gestion du réseau.
-<code>qemu-system-x86_64 -boot d -cdrom alpine-virt-3.21.3-x86_64.iso -hda disquedur.qcow2 -m 512 -net nic -net user</code></p>
+<code>qemu-system-x86_64 -boot d -cdrom alpine-virt-3.21.3-x86_64.iso -hda disquedur.qcow2 -m 256 -net nic -net user</code></p>
 </li>
 <li>
 <p>Après avoir booté, le système demande de vous logger, entrez "root" et validez avec la touche entrée. L'utilisateur root est le superutilisateur. Il a le droit de tout faire.</p>
@@ -1902,7 +1899,11 @@ Cette installation est plus technique en comparaison à une installation d'un Fu
 <p>Le système d'exploitation est installé, et il nous demande de redémarrer.</p>
 </li>
 <li>
-<p>On entre cette commande pour arrêter l'ordinateur: <code>poweroff</code></p>
+<p>On entre cette commande pour arrêter l'ordinateur: <code>doas poweroff</code></p>
+<ul>
+<li>La commande doas nous permet sous alpine d'exécuter une commande comme si on était le super utilisateur (si on y a droit)</li>
+<li>Dans d'autres distributions linux, on recontre communément la commande <code>sudo</code></li>
+</ul>
 </li>
 </ul>
 <div class="admonition hint">
@@ -1910,7 +1911,7 @@ Cette installation est plus technique en comparaison à une installation d'un Fu
 <ul>
 <li>
 <p>Dès que vous voulez démarrer cet ordinateur, entrez:
-<code>qemu-system-x86_64 -hda alpine_disk.qcow2 -m 512 -nic user,ipv6=off,hostfwd=tcp::22022-:22</code></p>
+<code>qemu-system-x86_64 -hda disquedur.qcow2 -m 256 -nic user,ipv6=off,hostfwd=tcp::22022-:22</code></p>
 </li>
 <li>
 <p>Dès que vous voudrez l'arrêter, entrez:
@@ -1924,7 +1925,26 @@ Cette installation est plus technique en comparaison à une installation d'un Fu
 Sous linux, vous avez même l'embarras du choix.
 On n'en ajoutera pas car ça prend trop d'espace disque et que les ordis ne sont pas assez puissants pour faire tourner 2 OS, mais voici ce que ça peut donner.
 <img alt="alt text" src="../image-6.png" /></p>
+<ul>
+<li>Chez vous, si vous avez beaucoup de RAM, vous pouvez attribuer plus de mémoire à la machine virtuelle en mettant par exemple 2G à la place de 256.</li>
+<li>Vous pouvez ainsi installer un environnement dektop en exécutant la commande <code>setup-desktop</code> et en choisissant <code>xfce</code> (le plus léger, les autres demandent beaucoup de RAM)</li>
+<li>En éteignant, puis rallumant la machine, vous aurez un environnement graphique plus léger, mais similaire à windows.</li>
+</ul>
 </div>
+<h2 id="manipulations">Manipulations</h2>
+<div class="admonition question">
+<p class="admonition-title">Exercice</p>
+<ul>
+<li>Mettre à jour la distro</li>
+<li>Installer python et nano</li>
+<li>Ecrire un script python simple</li>
+<li>Exécuter le script python</li>
+</ul>
+</div>
+<h2 id="les-commandes-linux-de-base">les commandes Linux de base</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZtqBQ68cfJc?si=vV-v1yeCKhRjc1Is" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p>Cette vidéo les résume. Elle dure 5h mais dispose d'un sommaire.</p>
 
 
 
@@ -2005,7 +2025,7 @@ On n'en ajoutera pas car ça prend trop d'espace disque et que les ordis ne sont
     <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.525ec568.min.js"></script>
       
         <script src="../../../javascripts/katex.js"></script>
       
