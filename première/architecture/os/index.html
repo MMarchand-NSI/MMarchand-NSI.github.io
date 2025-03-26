@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://mmarchand-nsi.github.io/premi%C3%A8re/architecture/os/">
       
       
-        <link rel="prev" href="../bit-alterne/">
+        <link rel="prev" href="../droits-linux/">
       
       
         <link rel="next" href="../../logique/">
@@ -641,6 +641,27 @@
   
   <span class="md-ellipsis">
     Le protocole du bit alterné
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../droits-linux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gestion des droits sous linux
   </span>
   
 
@@ -1816,16 +1837,28 @@
 <p>Ceci peut se découper en 4 étapes:</p>
 <ol>
 <li>
-<p>Alimentation et auto-test matériel (POST) : L'ordinateur s'allume, et le BIOS (Basic Input/Output System) ou UEFI (Unified Extensible Firmware Interface) effectue un Power-On Self-Test (POST). Ce test vérifie les composants matériels essentiels (mémoire, processeur, carte graphique, etc.) pour s'assurer qu'ils fonctionnent correctement.</p>
+<p>Alimentation et auto-test matériel (POST) : </p>
+<ul>
+<li>L'ordinateur s'allume, et le BIOS (Basic Input/Output System) ou UEFI (Unified Extensible Firmware Interface) effectue un Power-On Self-Test (POST). Ce test vérifie les composants matériels essentiels (mémoire, processeur, carte graphique, etc.) pour s'assurer qu'ils fonctionnent correctement.</li>
+</ul>
 </li>
 <li>
-<p>Chargement du BIOS/UEFI : Le BIOS ou UEFI initialise le matériel de base, en activant la mémoire et les périphériques nécessaires pour lancer le système d'exploitation. Il identifie également le périphérique de démarrage (disque dur, SSD, clé USB) où est installé l'OS.</p>
+<p>Chargement du BIOS/UEFI :</p>
+<ul>
+<li>Le BIOS ou UEFI initialise le matériel de base, en activant la mémoire et les périphériques nécessaires pour lancer le système d'exploitation. Il identifie également le périphérique de démarrage (disque dur, SSD, clé USB) où est installé l'OS.</li>
+</ul>
 </li>
 <li>
-<p>Chargement du chargeur d'amorçage (Bootloader) : Une fois le périphérique de démarrage identifié, le BIOS ou UEFI passe le contrôle au chargeur d'amorçage, souvent GRUB pour Linux ou Bootmgr pour Windows. Le bootloader est un petit programme qui charge le noyau du système d'exploitation en mémoire.</p>
+<p>Chargement du chargeur d'amorçage (Bootloader) :</p>
+<ul>
+<li>Une fois le périphérique de démarrage identifié, le BIOS ou UEFI passe le contrôle au chargeur d'amorçage, souvent GRUB pour Linux ou Bootmgr pour Windows. Le bootloader est un petit programme qui charge le noyau du système d'exploitation en mémoire.</li>
+</ul>
 </li>
 <li>
-<p>Chargement du noyau : Le chargeur d'amorçage charge ensuite le noyau du système d'exploitation en mémoire et lui passe le contrôle. Le noyau initialise les fonctions essentielles : gestion de la mémoire, création de processus initiaux, et prise en charge des pilotes matériels de base.</p>
+<p>Chargement du noyau : </p>
+<ul>
+<li>Le chargeur d'amorçage charge ensuite le noyau du système d'exploitation en mémoire et lui passe le contrôle. Le noyau initialise les fonctions essentielles : gestion de la mémoire, création de processus initiaux, et prise en charge des pilotes matériels de base.</li>
+</ul>
 </li>
 </ol>
 <p>A partir de ce moment, c'est le système d'exploitation qui va prendre la main et servir à faire le lien entre le matériel et les applications.</p>
@@ -1862,6 +1895,11 @@ Cette installation est plus technique en comparaison à une installation d'un Fu
 <p class="admonition-title">Préparation</p>
 <ul>
 <li>Tout se fait dans le même répertoire MSYS2 MINGW64 (chercher avec la loupe de windows)</li>
+<li>Exécutez <code>pacman -Syu</code> de manière répétitive jusqu'à ce que le message "there is nothing to do" apparaisse.<ul>
+<li>Ceci sert à mettre à jour MSYS2.</li>
+<li>Le terminal peut demander à être fermer, il faut le faire et relancer MINGW64</li>
+</ul>
+</li>
 <li>Installer qemu, le gestionnaire de machines virtuelles, en exécutant cette commande: <code>pacman -S mingw-w64-x86_64-qemu</code></li>
 <li>Télécharger le disque d'installation d'alpine: <code>wget https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/x86_64/alpine-virt-3.21.3-x86_64.iso</code></li>
 </ul>
@@ -1935,16 +1973,45 @@ On n'en ajoutera pas car ça prend trop d'espace disque et que les ordis ne sont
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
 <ul>
-<li>Mettre à jour la distro</li>
-<li>Installer python et nano</li>
-<li>Ecrire un script python simple</li>
-<li>Exécuter le script python</li>
+<li>Mettre à jour alpine<ul>
+<li><code>doas apk update</code> fait état des nouvelles versions de composants disponibles</li>
+<li><code>doas apk upgrade</code> applique les mises à jour disponibles</li>
+</ul>
+</li>
+<li>Installer python et nano (Un éditeur de texte pour CLI)<ul>
+<li><code>doas apk add nano python3</code></li>
+</ul>
+</li>
+<li>Ecrire un script python simple<ul>
+<li>créer un fichier test.py</li>
+<li>Ce programme affiche "Voici un entier aléatoire: 6", où 6 est un exemple</li>
+<li>La première ligne de code doit être <code>#! /usr/bin/python</code> qui indique au système qu'il faut envoyer le contenu du fichier à l'exécutale python pour exécution.</li>
+</ul>
+</li>
+<li>Exécuter le script python<ul>
+<li><code>./test.py</code> demande l'exécution du fichier python</li>
+<li>Vous rencontrez un problème. L'utilisateur courant n'a pas le droit d'exécuter ce fichier.</li>
+<li>Trouvez un moyen de rendre le fichier exécutable par l'utilisateur courant.</li>
+</ul>
+</li>
 </ul>
 </div>
 <h2 id="les-commandes-linux-de-base">les commandes Linux de base</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ZtqBQ68cfJc?si=vV-v1yeCKhRjc1Is" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 <p>Cette vidéo les résume. Elle dure 5h mais dispose d'un sommaire.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercices</p>
+<ul>
+<li>Créez un fichier arbo.sh</li>
+<li>Editez ce fichier pour qu'il comporte toutes les commandes nécessaires à la création de l'arborescence suivante.<ul>
+<li>1 commande par ligne</li>
+</ul>
+</li>
+<li>Exécutez le fichier arbo.sh et vérifiez que l'arborescence a bien été créée.</li>
+</ul>
+<p><img alt="alt text" src="../Arborescence_3_Mon_Site.png" /></p>
+</div>
 
 
 
