@@ -1971,7 +1971,7 @@ On n'en ajoutera pas car ça prend trop d'espace disque et que les ordis ne sont
 </div>
 <h2 id="manipulations">Manipulations</h2>
 <div class="admonition question">
-<p class="admonition-title">Exercice</p>
+<p class="admonition-title">Exercice débrouille</p>
 <ul>
 <li>Mettre à jour alpine<ul>
 <li><code>doas apk update</code> fait état des nouvelles versions de composants disponibles</li>
@@ -1996,12 +1996,94 @@ On n'en ajoutera pas car ça prend trop d'espace disque et que les ordis ne sont
 </li>
 </ul>
 </div>
+<hr />
+<h2 id="naviguer-dans-le-systeme-de-fichiers">Naviguer dans le système de fichiers</h2>
+<h3 id="1-chemin-absolu">1. Chemin absolu</h3>
+<ul>
+<li>
+<p><strong>Définition</strong> : un chemin absolu <strong>commence toujours par la racine</strong> <code>/</code> et indique l’emplacement exact d’un fichier ou répertoire dans l’arborescence, <strong>depuis la racine</strong> jusqu’au répertoire/fichier ciblé.</p>
+</li>
+<li>
+<p><strong>Exemple</strong> :
+  <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/alice/Documents
+</code></pre></div>
+  Ce chemin part de <code>/</code> (racine), puis va dans <code>home</code>, puis <code>alice</code>, puis <code>Documents</code>.<br />
+  Peu importe d’où vous partez, vous atterrirez exactement dans <code>/home/alice/Documents</code>.</p>
+</li>
+</ul>
+<hr />
+<h3 id="2-chemin-relatif">2. Chemin relatif</h3>
+<ul>
+<li>
+<p><strong>Définition</strong> : un chemin relatif <strong>ne commence pas par <code>/</code></strong> et indique l’emplacement d’un répertoire ou fichier <strong>par rapport au répertoire courant</strong> (celui où vous vous trouvez déjà).</p>
+</li>
+<li>
+<p><strong>Exemples</strong> :</p>
+</li>
+<li>
+<p>Si vous êtes déjà dans <code>/home/alice</code>, alors :
+     <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>Documents
+</code></pre></div>
+     vous amène dans <code>/home/alice/Documents</code>.</p>
+</li>
+<li>
+<p>S’il faut monter d’un répertoire avant d’aller ailleurs, on utilise <code>..</code> pour désigner le parent :
+     <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>../Bob
+</code></pre></div>
+     si vous êtes dans <code>/home/alice</code>, <code>cd ../Bob</code> vous amène dans <code>/home/Bob</code>.</p>
+</li>
+</ul>
+<hr />
+<h3 id="3-bien-savoir-que">3. Bien savoir que:</h3>
+<ul>
+<li><code>.</code> désigne le répertoire courant (rarement nécessaire avec <code>cd</code>, mais on peut l’utiliser dans d’autres commandes).</li>
+<li><code>..</code> désigne le répertoire parent (celui qui contient le répertoire courant).</li>
+<li>Un <strong>chemin absolu</strong> fonctionne <strong>où que vous soyez</strong>.</li>
+<li>Un <strong>chemin relatif</strong> dépend de <strong>votre emplacement actuel</strong> (<code>pwd</code> pour savoir où vous êtes).</li>
+</ul>
+<hr />
+<h4 id="exemple-de-navigation">Exemple de navigation</h4>
+<ol>
+<li>
+<p><strong>Position de départ</strong> :<br />
+   Vous êtes dans <code>/home/alice</code>.
+   <div class="highlight"><pre><span></span><code><span class="nb">pwd</span>
+<span class="c1"># /home/alice</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Aller dans <code>Documents</code> (chemin relatif)</strong> :
+   <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>Documents
+<span class="nb">pwd</span>
+<span class="c1"># /home/alice/Documents</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Revenir au répertoire parent (chemin relatif avec <code>..</code>)</strong> :
+   <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>..
+<span class="nb">pwd</span>
+<span class="c1"># /home/alice</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Aller directement à <code>/etc</code> (chemin absolu)</strong> :
+   <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/etc
+<span class="nb">pwd</span>
+<span class="c1"># /etc</span>
+</code></pre></div></p>
+</li>
+</ol>
+<hr />
+<p><strong>En résumé</strong> :<br />
+- <strong>Chemin absolu</strong> : commence par <code>/</code> et décrit <strong>l’itinéraire complet</strong> depuis la racine.<br />
+- <strong>Chemin relatif</strong> : <strong>dépend</strong> du répertoire courant et ne commence pas par <code>/</code>.<br />
+- Utilisez <code>cd</code> pour naviguer facilement en combinant <code>..</code> (parent) et les noms de dossiers.</p>
 <h2 id="les-commandes-linux-de-base">les commandes Linux de base</h2>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ZtqBQ68cfJc?si=vV-v1yeCKhRjc1Is" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 <p>Cette vidéo les résume. Elle dure 5h mais dispose d'un sommaire.</p>
 <div class="admonition question">
-<p class="admonition-title">Exercices</p>
+<p class="admonition-title">Exercice</p>
 <ul>
 <li>Créez un fichier arbo.sh</li>
 <li>Editez ce fichier pour qu'il comporte toutes les commandes nécessaires à la création de l'arborescence suivante.<ul>
