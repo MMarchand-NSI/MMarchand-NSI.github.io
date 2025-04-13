@@ -77,7 +77,7 @@ Un système d'exploitation multitâche est __préemptif__ lorsque celui-ci peut 
     - prendre en compte les priorités 
     - être prédictible
 
-    Ces objectifs sont parfois complémentaires, parfois contradictoires : augmenter la performance par rapport à l'un d'entre eux peut se faire au détriment d'un autre. Il est impossible de créer un algorithme qui optimise tous les critères de façon simultanée.
+    Ces objectifs sont parfois complémentaires, parfois contradictoires : augmenter la performance par rapport à l'un d'entre eux peut se faire au détriment d'un autre. **Il est impossible de créer un algorithme qui optimise tous les critères de façon simultanée.**
 
 ### Ordonnancement non préemptif
 
@@ -347,7 +347,7 @@ L'exécution d'un processus nécessite un ensemble de ressources (mémoire princ
 Lorsqu'un processus demande un accès exclusif à une ressource déjà allouée à un autre processus, le système d'exploitation décide de le mettre en attente jusqu'à ce que la ressource demandée devienne disponible ou lui retourner un message indiquant que la ressource n'est pas disponible: réessayer plus tard.
 
 !!! danger "Interblocage (deadlock)"
-    Des problèmes peuvent survenir, lorsque les processus obtiennent des accès exclusifs aux ressources. Par exemple, un processus détient une ressource et attend une autre ressource qui est utilisée par un autre processus; le processus détient la ressource et attend la ressource. On a une situation d'interblocage (deadlock en anglais) car attend et attend. Les deux processus vont attendre indéfiniment.
+    Des problèmes peuvent survenir, lorsque les processus obtiennent des accès exclusifs aux ressources. Par exemple, un processus A détient une ressource P et attend une autre ressource Q qui est utilisée par un autre processus B; le processus B détient la ressource Q et attend la ressource P. On a une situation d'interblocage (deadlock en anglais) car Les deux processus attendent mutuellement des ressources qui ne seront jamais libérées. Les deux processus vont attendre indéfiniment.
 
     En général, un ensemble de processus est en interblocage si chaque processus attend la libération d'une ressource qui est allouée à un autre processus de l'ensemble. Comme tous les processus sont en attente, aucun ne  pourra s'exécuter et donc libérer les ressources demandées par les autres. Ils attendront tous indéfiniment
 
@@ -364,8 +364,8 @@ Lorsqu'un processus demande un accès exclusif à une ressource déjà allouée 
 
     Supposons deux processus A et B qui demandent des accès exclusifs aux enregistrements d'une base de données. On arrive à une situation d'interblocage si :
 
-    - Le processus A a verrouillé l'enregistrement et demande l'accès à l'enregistrement.
-    - Le processus B a verrouillé l'enregistrement et demande l'accès à l'enregistrement.
+    - Le processus A a verrouillé l'enregistrement P et demande l'accès à l'enregistrement Q.
+    - Le processus B a verrouillé l'enregistrement Q et demande l'accès à l'enregistrement P.
 
 !!! example "circulation routière"
     Considérons deux routes à double sens qui se croisent comme dans la figure suivante, où la circulation est impossible. Un problème d'interblocage y est présent. A chaque intersection, une voiture (processus) attend que la route (ressource) se libère.
@@ -385,7 +385,7 @@ Lorsqu'un processus demande un accès exclusif à une ressource déjà allouée 
         Les instructions sleep permettent de simuler des actions supplémentaires (et de passer la main aux autres processus entre temps).
         L'instruction with verrou signifie "attend que la ressource soit disponible et exécute le bloc ensuite en la verrouillant, puis dévérouille la ressource. C'est pour ça qu'on utilise with pour lire et écrire dans des fichiers.
 
-        Proposez une résolution de cette situation d'interblocage.
+        Proposez une résolution de cette situation d'interblocage en modifiant sensiblement le programme python.
     
 
 !!! abstract "Détection d'interblocage"
@@ -396,7 +396,9 @@ Lorsqu'un processus demande un accès exclusif à une ressource déjà allouée 
     - Un arc orienté d'une ressource vers un processus signifie que la ressource est allouée au processus.
     - Un arc orienté d'un processus vers une ressource signifie que le processus est bloqué en attente de la ressource
 
-    Exemple de graphe d'allocation des ressources au moment de l'interblocage. (On remarque qu'il est cyclique) 
+    Exemple de graphe d'allocation des ressources au moment de l'interblocage. On remarque qu'il est cyclique.
+
+    L'apparition d'un cycle dans le graphe d'allocation des ressources indique une situation d'interblocage. 
 
     ![alt text](image-2.png)
 
@@ -413,7 +415,7 @@ Lorsqu'un processus demande un accès exclusif à une ressource déjà allouée 
     |Libère S |Libère T |Libère R|
 
     Pour répondre aux question suivantes, on dessinera progressivement le graphe d'allocation des ressources. S'il y a un interblocage possible, on pourra répondre en dessinant le graphe au crayon gris pour l'expliquer.
-    Il faut dessiner le graphe étpae par étape, et ne pas oublier d'effacer les arêtes correspondant à la libération de ressources ou au déblocage des processus
+    Il faut dessiner le graphe étape par étape, et ne pas oublier d'effacer les arêtes correspondant à la libération de ressources ou au déblocage des processus
 
     1. Si les processus sont exécutés séquentiellement, les uns après les autres, y-a-t-il interblocage possible?
     2. Si l'exécution est gérée par un ordonnanceur de type circulaire, y-a-t'il interblocage? (A demande R, B demande S, ...)
@@ -423,7 +425,7 @@ Lorsqu'un processus demande un accès exclusif à une ressource déjà allouée 
 
     La plupart du temps, il suffit de se donner une ligne de conduite:
 
-    Tous les processus doivent bloquer les ressources dans le même ordre et les libérer dans le même ordre. Attention, c'est un sujet extrêmement vaste et prisé de la recherche, et ça ne se résume pas qu'à ça, mais c'est un bon début.
+    Tous les processus doivent bloquer les ressources dans le même ordre et les libérer dans le même ordre. Attention, c'est un sujet extrêmement vaste et prisé de la recherche, et ça ne se résume pas qu'à ça, mais c'est un très bon début.
 
     !!! question Résolution interblocage
         Réordonnez le contenu des programmes des processus A, B et C pour se défaire de l'interblocage précédent.
@@ -503,8 +505,7 @@ Sous un système d'exploitation comme Linux, au moment du démarrage de l'ordina
     Vous avez la base de la gestion des process dans un terminal. (Et oui, on peut causer avec les processus par le biais de signaux, on ne les abordera pas, mais il vous faut le guide de survie minimum)
 
 
-!!! question On y retourne (la base 2)
-
+!!! question "On y retourne (la base 2)"
 
     Pour lancer directement le programme en arrière plan, lancez la commande
     
@@ -524,14 +525,14 @@ Sous un système d'exploitation comme Linux, au moment du démarrage de l'ordina
 
 # Exercices à réaliser après avoir travaillé et compris le cours.
 
-Q1. Qu'est-ce qu'un processus informatique ?
-Q2. Quels sont les états dans lequel un processus peut se trouver ?
-Q3. Quel dispositif attribue à un processus un état ?
-Q4. Dans quel état se trouve un processus en cours d'exécution par le microprocesseur ?
-Q5. Par quoi est identifié un processus ?
-Q6. Qu'est-ce que l'ordonnancement des processus ?
-Q7. Nommez les 2 grandes famille d'ordonnanceurs et décrivez leur différence fondamentale.
-Q8. Considérons cinq processus notés A, B, C, D et E dans une file d'attente. Les durées d'exécution et leurs dates d'arrivage respectifs sont donnés dans le tableau ci-dessous.
+- Q1. Qu'est-ce qu'un processus informatique ?
+- Q2. Quels sont les états dans lequel un processus peut se trouver ?
+- Q3. Quel dispositif attribue à un processus un état ?
+- Q4. Dans quel état se trouve un processus en cours d'exécution par le microprocesseur ?
+- Q5. Par quoi est identifié un processus ?
+- Q6. Qu'est-ce que l'ordonnancement des processus ?
+- Q7. Nommez les 2 grandes famille d'ordonnanceurs et décrivez leur différence fondamentale.
+- Q8. Considérons cinq processus notés A, B, C, D et E dans une file d'attente. Les durées d'exécution et leurs dates d'arrivage respectifs sont donnés dans le tableau ci-dessous.
 
 |Processus |Durée d'exécution| Date d'arrivage |
 |--|--|--|
@@ -550,7 +551,7 @@ Donner le schéma d'exécution des algorithmes d'ordonnancement suivants :
 
 Quelle politique d'ordonnancement donne le meilleur résultat, c'est-à-dire celui correspondant à la durée minimale d'attente moyenne par processus ?
 
-Q9. Trois processus A, B et C ont été chargés dans un système informatique comme indiqué ci-dessous :
+- Q9. Trois processus A, B et C ont été chargés dans un système informatique comme indiqué ci-dessous :
 
 |Processus |Durée d'exécution| Date d'arrivage |
 |--|--|--|
@@ -567,7 +568,7 @@ Donner le schéma d'exécution des algorithmes d'ordonnancement suivants (il n'e
 
 Quelle politique d'ordonnancement donne le meilleur résultat c'est-à-dire celui correspondant à la durée minimale d'attente moyenne par processus ?
 
-Q10. Quelle commande permet de lister les processus en cours sur la machine?
-Q11. Quelle Combinaison de touche permet de killer un processus dans un terminal?
-Q12. Quelle Combinaison de touche permet de killer le processus en avant plan dans un terminal?
-Q13. Réalisez le diagramme d'état d'un processus.
+- Q10. Quelle commande permet de lister les processus en cours sur la machine?
+- Q11. Quelle Combinaison de touche permet de killer un processus dans un terminal?
+- Q12. Quelle Combinaison de touche permet de killer le processus en avant plan dans un terminal?
+- Q13. Réalisez le diagramme d'état d'un processus.

@@ -1,0 +1,141 @@
+# Le problème du tri
+
+Par tableau, on entendra liste python dans l'implémentation.
+
+!!! abstract "Trier"
+    Un tableau est dit trié lorsque ses éléments sont ordonnés (du plus petit au plus grand si ça n'est pas précisé).
+
+    Un tableau dont les éléments ne sont pas ordonnés n'est pas trié. (ça peut paraître bête mais c'est important)
+
+    Il existe plusieurs méthodes pour trier. Cette opération est fondamentale en informatique.
+
+    Les deux méthodes ci-dessous permettent de le faire à la façon dont on peut trier un jeu de cartes.
+
+    Il en existe d'autres bien plus performantes
+
+---
+
+## Tri par sélection
+!!! abstract "Algorithme imagé"
+    
+    Je veux trier des cartes
+
+    - Dans ma main droite, j'ai l'ensemble des cartes. 
+    - Je **déplace** successivement sur ma main gauche la plus petite carte de la main droite.
+    - A l'arrivée, ma main gauche est triée et ma main droite est vide
+
+
+L'invariant est ici composé de 2 propriétés:
+1. Les cartes de la main gauches sont toutes inférieures ou égales à celles de la main droite
+2. Les cartes de la main gauche sont triées
+
+**INITIALISATION**
+L'invariant est vrai au début car ma main gauche est vide (elle n'est pas désordonnée) et toutes les cartes de la main droite sont fatalement supérieures aux 0 cartes de ma main gauche.
+
+**CONSERVATION DE L'INVARIANT**
+A un moment quelconque de l'algorithme, imaginons l'invariant vrai, avec $m$ cartes dans la main droite triée, et n cartes dans la main gauche.
+Ces n cartes sont donc toutes plus grandes ou égales que les cartes de la main gauche.
+
+Si je prends la plus petite carte de la main droite, elle reste donc supérieure à celles de la main gauche.
+Si je la place sur ma main gauche, de ce fait ma main gauche reste triée
+De plus, les cartes de ma main droite sont encore supérieures ou égales à celles de la main gauche.
+
+Après avoir appliqué une étape de l'algorithme, on a donc prouvé que l'invariant est conservé.
+
+**CONCLUSION**
+L'invariant est vrai au départ, et il est conservé à chaque étape quelconque de l'algorithme.
+C'est donc qu'il est aussi vrai à la fin de l'algorithme.
+A la fin de l'algorithme, toutes les cartes sont dans la main gauche et l'invariant est vrai.
+C'est donc que dans ma main gauche, toutes les cartes sont triées.
+
+
+!!! question "Implémentation d'après l'exemple donné"
+
+    Ecrire une fonction tri_selection(main_gauche: list[int], main_droite: list[int]) qui applique cet algorithme.
+
+    ```python
+    def tri_selection(main_gauche: list[int], main_droite: list[int]):
+        """
+        Applique le tri par sélection tel que présenté
+
+        >>> g = []
+        >>> d = [5, 3, 9, 6]
+        >>> tri_selection(g, d)
+        >>> g
+        [3, 5, 6, 9]
+        >>> d
+        []
+        """
+    ```
+
+--- 
+
+!!! abstract "Algorithme usuel"
+    
+    - On dispose d'un tableau $T$ de taille $n$ noté $T[0..n-1]$  
+    - **Pour** $i$ allant de $0$ à $n-1$
+        - $\displaystyle imin = \argmin_{j \in [i, n-1]} T[j]$
+        - échanger $T[i]$ et $T[imin]$
+
+    Notez que nous avons déjà résolu et étudié le problème $\argmin$
+
+L'invariant que nous avons évoqué ci-dessus s'appelle un **invariant de boucle**
+
+!!! hint "Notations"
+    - $T[i..j]$ reprrésente le sous-tableau de $T$ de l'indice $i$ à l'indice $j$ inclus.
+    - $T[i..j] \le T[k..l]$ signifie que toutes les valeurs du tableau de gauche sont inférieures ou égales aux valeurs du tableau de droite
+    - $T[i..i]$ représente le sous-tableau à 1 élément
+    - L'opérateur + sur des tableaux est la concaténation
+
+    
+
+
+**INVARIANT:**
+Au début de chaque itération $i$, $T[0..i-1]$ est trié et $T[0..i-1] \le T[i..n-1]$
+
+Preuve de correction:
+
+**INITIALISATION:**
+
+Pour i=0, $T[0..-1]$ est le tableau vide. Il est trié (il n'y a aucun désordre possible, donc par définition, il est trié).
+
+De plus, tous les éléments restants sont supérieurs aux 0 éléments du tableau vide.
+
+L'invariant est donc vrai avant la première itération.
+
+**CONSERVATION**
+
+On suppose l'invariant vrai avant l'itération $i$
+
+$T[0..i-1]$ est trié et $T[0..i-1] \le T[i..n-1]$  (HYPOTHESE)
+
+On veut prouver que l'invariant est toujours vrai avant l'itération $i+1$, donc que: $T[0..i]$ est trié et $T[0..i] \le T[i+1..n-1]$
+
+
+A l'itération $i$, on calcule $\displaystyle imin = \argmin_{k \in \![ i, n-1\!]} T[k]$
+
+On a donc trouvé $imin$ tel qu'on peut décomposer le tableau en:
+
+$T[0..i-1] + T[i..i] + T[i+1..imin-1] + T[imin..imin] + T[imin+1..n-1]$
+
+
+Lorsque nous intervertissons $T[imin]$ et $T[i]$, notre tableau devient:
+
+$T[0..i-1] + T[imin..imin] + T[i+1..imin-1] + T[i..i] + T[imin+1..n-1]$
+
+
+Or $T[imin] \le T[i+1..imin-1]$, $T[imin] \le T[imin+1..n-1]$ et $T[imin] \le T[i]$. Donc $T[imin] \le T[i+1..n-1]$ 
+
+Mais $T[imin]$ est aussi plus grand ou égal aux éléments de $T[0..i-1]$ par HYPOTHESE car il appartient à l'origine à $T[i..n-1]$.
+
+En le rattachant à $T[0..i-1]$, on ne brise donc pas le tri.
+
+On a donc $T[0..i]$ trié et $T[0..i] \le T[imin] \le T[i+1..n-1]$
+
+L'invariant est donc conservé.
+
+
+!!! question "Complexité"
+    Quelle est la complexité de l'algorithme de tri par insertion
+
+

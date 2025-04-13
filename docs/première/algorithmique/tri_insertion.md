@@ -1,0 +1,83 @@
+# Tri par insertion
+
+!!! abstract "Algorithme imagé"
+    
+    Je veux trier des cartes
+
+    - Dans ma main gauche, j'ai **une carte**. 
+    - Dans ma main droite, j'ai **le reste des cartes**.
+    - Je **déplace** successivement dans ma main gauche chaque carte de la main droite en l'insérant à la bonne position pour que la main droite soit triée.
+    - A l'arrivée, ma main gauche est triée et ma main droite est vide
+
+
+ Autrement dit:
+
+```markdown
+1. Pour i allant de 1 à n-1 faire :
+2.      inserer_bonne_place(T, i)
+3. Retourner T
+```
+
+L'algorithme `inserer_bonne_place` place correctement l'élément $T[i]$ dans le sous-tableau trié $T[0..i-1]$ afin que $T[0..i]$ soit trié.
+
+**Prouvons la correction du tri par insertion en supposant existant et totalement correct l'algorithme `inserer_bonne_place`.**
+
+L'**invariant** avant l'itération $i$ est: "$T[0..i-1]$ est trié"
+
+**INITIALISATION**
+Si le tableau est vide ou ne contient qu'un élément, la boucle ne s'exécute pas et le tableau est inchangé. Donc trié dans les deux cas.
+
+Sinon, avant de rentrer la première fois dans la boucle pour $i=1$, $T[0]$ est trié.
+
+**CONSERVATION**
+
+Supposons l'invariant vrai au début de l'itération $i$: "$T[0..i-1]$ est trié" (HYPOTHESE)
+
+Nous voulons montrer qu'à l'issue de la boucle, "$T[0..i]$ est trié"
+
+Or `inserer_bonne_place(T, i)` nous l'assure justement.
+
+"$T[0..i]$ est trié" est donc vrai au sortir de l'itération.
+
+L'invariant est conservé.
+
+**Terminaison**
+L'algorithme se termine car c'est une simple boucle sur un algorithme se terminant (on ne détaillera pas).
+A l'issue du programme, $i=n-1$ et la conservation de l'invariant nous assure donc que $T[0..n-1]$ sera trié.
+
+---
+
+Afin de valider cette correction, il nous faut créer l'algorithme `inserer_bonne_place` et en prouver la correction.
+
+!!! question "Insérer à la bonne place"
+    Créer l'algorithme qui permette d'insérer un élément d'un tableau à la bonne place, en considérant que le sous tableau précédent soit triés.
+
+    Par exemple pour un tableau trié jusqu'à l'indice 2 inclus, voici ce que doit donner la séquence suivante:
+
+    1. $T=[1, 2, 3, 1.5, 0]$
+    2. on exécute `inserer_bonne_place(T, 3)`
+    3. on doit avoir $T=[1, 1.5, 2, 3, 0]$
+    4. on exécute `inserer_bonne_place(T, 4)`
+    5. on doit avoir $T=[0, 1, 1.5, 2, 3]$
+
+    Indice: On utilisera un indice j, initialement valorisé à $j←i$ et on descendra progressivement jusqu'à trouver la bonne place.
+
+
+!!! warning "Solution"
+
+    ```markdown
+    # Algorithme inserer_bonne_place(T, i)
+    1. a_deplacer ← T[i]
+    2. j ← i
+    3. TANT QUE j>0 et T[j-1]>a_deplacer
+    4.    T[j-1] ← T[j]
+    5.    j ← j-1
+    6. T[j] = pivot 
+    ```
+
+Pour prouver la correction de cet algorithme, on se base sur l'invariant suivant, pour $j$ décroissant ($j$ est notre variant de boucle qui assure la terminaison): 
+
+"$T[0..j-1]$ et $T[j+1..i]$ sont triés. De plus, $T[0..j-1] \le T[j+1..i]$"
+
+La preuve de correction n'est pas compliquée en soi mais elle est longue. 
+Nous l'admettrons.

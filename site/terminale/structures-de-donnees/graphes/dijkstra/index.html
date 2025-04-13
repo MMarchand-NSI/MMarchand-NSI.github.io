@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.0253249f.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.8c3ca2c6.min.css">
       
         
         <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
@@ -629,11 +629,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../premi%C3%A8re/architecture/bit-alterne/" class="md-nav__link">
+      <a href="../../../../premi%C3%A8re/architecture/droits-linux/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Le protocole du bit alterné
+    Gestion des droits sous linux
   </span>
   
 
@@ -852,6 +852,73 @@
   
   <span class="md-ellipsis">
     Chaînes de caractères (str)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reseau
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Reseau
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/reseau/bit-alterne/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Le protocole du bit alterné
   </span>
   
 
@@ -1639,6 +1706,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Algorithme de Dijkstra
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1648,6 +1726,43 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enonce-de-linvariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Énoncé de l’invariant
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preuve-esquisse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preuve (esquisse)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1739,6 +1854,32 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#enonce-de-linvariant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Énoncé de l’invariant
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#preuve-esquisse" class="md-nav__link">
+    <span class="md-ellipsis">
+      Preuve (esquisse)
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1755,9 +1896,12 @@
 <h1 id="algorithme-de-dijkstra">Algorithme de Dijkstra</h1>
 <p>Dijkstra est un algorithme de plus court chemin dans un graphe pondéré (avec des poids non négatifs) qui permet, à partir d’un sommet source s, de trouver les distances minimales vers tous les autres sommets.</p>
 <p>Le principe est le suivant :</p>
-<p>On va maintenir un dictionnaire de <span class="arithmatex">\(distances\)</span> au sommet source <span class="arithmatex">\(s\)</span>.</p>
-<p>La distance à tous les sommets est initialement infinie, sauf pour <span class="arithmatex">\(s\)</span> qui aura une distance de 0 à lui-même.</p>
-<p>On maintient aussi une liste de prédécesseurs. De quel sommet vient-on sur le plus court chemin?</p>
+<ul>
+<li>L’algorithme maintient un tableau (ou dictionnaire) <code>distance</code>, qui stocke pour chaque sommet <span class="arithmatex">\(v\)</span> une valeur estimée de la distance minimale <span class="arithmatex">\(d(v)\)</span> depuis la source <span class="arithmatex">\(s\)</span>.</li>
+<li>À chaque itération, Dijkstra <strong>choisit</strong> parmi les sommets non encore "retirés" celui qui a la plus petite distance estimée et le "verrouille"</li>
+<li>Pour ce sommet <span class="arithmatex">\(u\)</span> ainsi choisi, on dit que sa distance est <strong>définitive</strong>, car on ne la modifiera plus ensuite.</li>
+<li>Puis on <strong>relâche</strong> toutes les arêtes sortant de <span class="arithmatex">\(u\)</span>, si on découvre un chemin plus court via <span class="arithmatex">\(u\)</span>.</li>
+</ul>
 <div class="highlight"><pre><span></span><code>distance_depart : dict[str, int]
 prédécesseur : dict[str, str]
 
@@ -1773,15 +1917,24 @@ Q = ensemble de tous les sommets
     Extraire de Q le sommet u tel que distance[u] est minimal
 
     Pour chaque voisin v de u :
-        relacher l&#39;arc (u, v) 
+        relacher l&#39;arête (u, v) si nécessaire
 </code></pre></div>
-<p>Ensuite, on peut calculer les distances et les prédécesseurs.</p>
+<p>Relacher l'arc (u, v) signifie que, si la distance de la source à v en passant par u est plus petite que la distance déjà connue, on met à jour cette distance dans le dictionnaire (on a trouvé une plus petite distance source-&gt;v).</p>
+<p>Pourquoi le mot "relâcher"? Ca vient de la terminologie de l’optimisation. On dit qu’on "relâche" une contrainte ou un majorant quand on le réduit si une meilleure valeur est trouvée. On relâche l'ancienne valeur pour adopter la nouvelle.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">depart</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Version dite naîve d&#39;implémentation de l&#39;algorithme de dijkstra.</span>
+<span class="sd">    Normalement, f est une file de priorité pour des raisons de réduction drastique de complexité, mais cette structure n&#39;est pas au programme.</span>
+<span class="sd">    Le principe de l&#39;algorithme reste exactement le même cependant.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">depart</span><span class="p">]</span>
+
+    <span class="c1"># Initialisation des distances au sommet de départ (infinies à l&#39;origine, sauf pour le sommet de départ)</span>
     <span class="n">distance_depart</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">gr</span><span class="o">.</span><span class="n">sommets</span><span class="p">(</span><span class="n">g</span><span class="p">)}</span>
     <span class="n">distance_depart</span><span class="p">[</span><span class="n">depart</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="c1"># Initialisation du dictionnaire des sommets précédents.</span>
+    <span class="c1"># avoir &quot;A&quot;:&quot;Z&quot; dedans signifie que &quot;Z&quot; est avant &quot;A&quot; dans le plus court chemin du depart à &quot;A&quot;</span>
+    <span class="c1"># Ce dictionnaire permettra de reconstituer tous les plus courts chemins au sommet de départ.</span>
     <span class="n">precedent</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
 
     <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
@@ -1802,34 +1955,50 @@ Q = ensemble de tous les sommets
                     <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">distance_depart</span><span class="p">,</span> <span class="n">precedent</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">heapq</span>
-
-<span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">depart</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">g</span><span class="p">:</span> <span class="n">gr</span><span class="o">.</span><span class="n">graphe</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">depart</span><span class="p">]</span>
-    <span class="n">distance_depart</span> <span class="o">=</span> <span class="p">{</span><span class="n">s</span><span class="p">:</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">gr</span><span class="o">.</span><span class="n">sommets</span><span class="p">(</span><span class="n">g</span><span class="p">)}</span>
-    <span class="n">distance_depart</span><span class="p">[</span><span class="n">depart</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">precedent</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
-
-    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="c1"># On défile toujours le sommet dont la distance à la source est la plus petite</span>
-        <span class="n">u</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">sommet</span><span class="p">:</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">sommet</span><span class="p">])</span>
-        <span class="n">f</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
-
-        <span class="c1"># Pour chaque voisin v</span>
-        <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">gr</span><span class="o">.</span><span class="n">get_voisins</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-            <span class="c1"># si la nouvelle distance de v à la source est plus courte que celle déjà calculée dans le dico</span>
-            <span class="k">if</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">gr</span><span class="o">.</span><span class="n">poids</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">g</span><span class="p">):</span>
-                <span class="c1"># On met à jour la distance dans le dico</span>
-                <span class="n">distance_depart</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">distance_depart</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">gr</span><span class="o">.</span><span class="n">poids</span><span class="p">(</span><span class="n">u</span><span class="p">,</span> <span class="n">v</span><span class="p">,</span> <span class="n">g</span><span class="p">)</span>
-                <span class="c1"># Jusqu&#39;ici, On vient de u pour le plus court chemin du depart à v</span>
-                <span class="n">precedent</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>
-                <span class="c1"># Si v n&#39;a pas encore fait partie de f, on l&#39;enfile</span>
-                <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>
-                    <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">distance_depart</span><span class="p">,</span> <span class="n">precedent</span>
-</code></pre></div>
+<hr />
+<p>Voici <strong>l’idée générale</strong> de la démonstration de la <strong>correction</strong> de l’algorithme de Dijkstra (dans un graphe à <strong>poids d’arêtes non négatifs</strong>). On énonce souvent cette preuve sous forme d’un <strong>invariant</strong> qui est préservé à chaque étape, ou par <strong>induction</strong> sur la taille de l’ensemble de sommets déjà “fixés” par Dijkstra.</p>
+<h2 id="enonce-de-linvariant">Énoncé de l’invariant</h2>
+<p>Soit <span class="arithmatex">\(S\)</span> l’ensemble des sommets définitivement “fixés” (ou « extraits » de la structure de priorité, selon l’implémentation).<br />
+<strong>Invariant</strong> : Pour tout sommet <span class="arithmatex">\(x \in S\)</span>, la valeur <code>distance[x]</code> coïncide <em>exactement</em> avec la <strong>distance réelle</strong> la plus courte de <span class="arithmatex">\(s\)</span> à <span class="arithmatex">\(x\)</span>.</p>
+<p>Nous allons montrer :</p>
+<ol>
+<li>L’invariant est vrai avant toute itération (initialement, seul le sommet source <span class="arithmatex">\(s\)</span> a <code>distance[s] = 0</code>, et c’est bien la distance réelle).  </li>
+<li>Il est <strong>préservé</strong> à chaque étape (si l’invariant est vrai, alors après avoir choisi le prochain sommet et fait les relâchements, il reste vrai).  </li>
+<li>Quand l’algorithme se termine, tous les sommets de <span class="arithmatex">\(V\)</span> (ou en tout cas ceux qui sont atteignables depuis <span class="arithmatex">\(s\)</span>) ont leur distance correcte.</li>
+</ol>
+<hr />
+<h2 id="preuve-esquisse">Preuve (esquisse)</h2>
+<ol>
+<li><strong>Initialisation</strong>  </li>
+<li>Au début, <code>distance[s] = 0</code> et <code>distance[v] = +∞</code> pour <span class="arithmatex">\(v \neq s\)</span>. Le seul sommet éventuellement “fixé” est <span class="arithmatex">\(s\)</span>, ou bien aucun si on attend la première étape pour “fixer” un sommet.  </li>
+<li>
+<p>De toute façon, <code>distance[s] = 0</code> est la bonne distance de <span class="arithmatex">\(s\)</span> à lui-même, et <code>distance[v] = +∞</code> est un majorant correct pour les autres.</p>
+</li>
+<li>
+<p><strong>Choix du sommet <span class="arithmatex">\(u\)</span> et vérification de sa distance</strong><br />
+   Supposons que tous les sommets déjà dans <span class="arithmatex">\(S\)</span> (verrouillés) ont leur distance exacte. L’algorithme choisit un sommet <span class="arithmatex">\(u\notin S\)</span> qui a la plus petite distance estimée parmi ceux restants.  </p>
+</li>
+<li><strong>Idée-clé</strong> : si <code>distance[u]</code> n’était <strong>pas</strong> la véritable distance de <span class="arithmatex">\(s\)</span> à <span class="arithmatex">\(u\)</span>, cela signifierait qu’il existerait un chemin plus court <span class="arithmatex">\(\pi\)</span> de <span class="arithmatex">\(s\)</span> vers <span class="arithmatex">\(u\)</span>, passant (forcément) par un sommet <span class="arithmatex">\(w\)</span> qui n’est pas encore « fixé ».  </li>
+<li>Or, si un tel chemin plus court existait, alors <code>distance[w]</code> (ou un autre sommet intermédiaire) serait nécessairement <strong>plus petit</strong> que <code>distance[u]</code>, donc on aurait extrait ce sommet <span class="arithmatex">\(w\)</span> avant <span class="arithmatex">\(u\)</span> (puisque Dijkstra choisit toujours le plus petit).  </li>
+<li>Cette contradiction montre que <code>distance[u]</code> est en réalité <strong>exacte</strong>.  </li>
+<li>
+<p>On ajoute alors <span class="arithmatex">\(u\)</span> à <span class="arithmatex">\(S\)</span>.</p>
+</li>
+<li>
+<p><strong>Relâchements des arêtes sortant de <span class="arithmatex">\(u\)</span></strong><br />
+   On met à jour la distance de ses voisins <span class="arithmatex">\(v\)</span>. Cela ne viole pas l’invariant pour les sommets <strong>déjà</strong> dans <span class="arithmatex">\(S\)</span>, puisqu’on ne touche pas à leurs distances (ils restent fixés).  </p>
+</li>
+<li>
+<p>Pour les sommets hors de <span class="arithmatex">\(S\)</span>, on <strong>abaisse</strong> éventuellement la distance estimée si on découvre un chemin plus court passant par <span class="arithmatex">\(u\)</span>. Mais comme <span class="arithmatex">\(u\)</span> est maintenant correct, ces nouvelles valeurs restent de bonnes estimations (ou s’améliorent).</p>
+</li>
+<li>
+<p><strong>Induction</strong>  </p>
+</li>
+<li>Au démarrage, l’invariant est vrai pour le sommet source <span class="arithmatex">\(s\)</span>.  </li>
+<li>Si, à l’itération <span class="arithmatex">\(k\)</span>, l’invariant est vrai pour les sommets dans <span class="arithmatex">\(S\)</span>, alors après avoir choisi un nouveau sommet <span class="arithmatex">\(u\)</span> et relâché ses arêtes, <span class="arithmatex">\(S\cup\{u\}\)</span> conserve la propriété.  </li>
+<li>Lorsque l’algorithme se termine (ou quand tous les sommets atteignables depuis <span class="arithmatex">\(s\)</span> ont été choisis), chaque sommet de <span class="arithmatex">\(S\)</span> a sa distance « figée » et <strong>exacte</strong>.</li>
+</ol>
+<p><strong>Conclusion</strong> : L’ensemble final des distances (<span class="arithmatex">\(\text{distance}[v]\)</span>) renvoyé par Dijkstra coïncide donc avec les <strong>plus courtes distances</strong> de <span class="arithmatex">\(s\)</span> à chaque sommet <span class="arithmatex">\(v\)</span>.  </p>
 
 
 
@@ -1850,7 +2019,7 @@ Q = ensemble de tous les sommets
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">March 11, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">March 25, 2025</span>
   </span>
 
     
@@ -1910,7 +2079,7 @@ Q = ensemble de tous les sommets
     <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.525ec568.min.js"></script>
       
         <script src="../../../../javascripts/katex.js"></script>
       

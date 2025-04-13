@@ -11,14 +11,14 @@
         <link rel="canonical" href="https://mmarchand-nsi.github.io/premi%C3%A8re/architecture/os/">
       
       
-        <link rel="prev" href="../bit-alterne/">
+        <link rel="prev" href="../droits-linux/">
       
       
         <link rel="next" href="../../logique/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
     
     
       
@@ -31,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8c3ca2c6.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -636,11 +636,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../bit-alterne/" class="md-nav__link">
+      <a href="../droits-linux/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Le protocole du bit alterné
+    Gestion des droits sous linux
   </span>
   
 
@@ -908,6 +908,73 @@
   
   <span class="md-ellipsis">
     Chaînes de caractères (str)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reseau
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Reseau
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reseau/bit-alterne/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Le protocole du bit alterné
   </span>
   
 
@@ -1816,16 +1883,28 @@
 <p>Ceci peut se découper en 4 étapes:</p>
 <ol>
 <li>
-<p>Alimentation et auto-test matériel (POST) : L'ordinateur s'allume, et le BIOS (Basic Input/Output System) ou UEFI (Unified Extensible Firmware Interface) effectue un Power-On Self-Test (POST). Ce test vérifie les composants matériels essentiels (mémoire, processeur, carte graphique, etc.) pour s'assurer qu'ils fonctionnent correctement.</p>
+<p>Alimentation et auto-test matériel (POST) : </p>
+<ul>
+<li>L'ordinateur s'allume, et le BIOS (Basic Input/Output System) ou UEFI (Unified Extensible Firmware Interface) effectue un Power-On Self-Test (POST). Ce test vérifie les composants matériels essentiels (mémoire, processeur, carte graphique, etc.) pour s'assurer qu'ils fonctionnent correctement.</li>
+</ul>
 </li>
 <li>
-<p>Chargement du BIOS/UEFI : Le BIOS ou UEFI initialise le matériel de base, en activant la mémoire et les périphériques nécessaires pour lancer le système d'exploitation. Il identifie également le périphérique de démarrage (disque dur, SSD, clé USB) où est installé l'OS.</p>
+<p>Chargement du BIOS/UEFI :</p>
+<ul>
+<li>Le BIOS ou UEFI initialise le matériel de base, en activant la mémoire et les périphériques nécessaires pour lancer le système d'exploitation. Il identifie également le périphérique de démarrage (disque dur, SSD, clé USB) où est installé l'OS.</li>
+</ul>
 </li>
 <li>
-<p>Chargement du chargeur d'amorçage (Bootloader) : Une fois le périphérique de démarrage identifié, le BIOS ou UEFI passe le contrôle au chargeur d'amorçage, souvent GRUB pour Linux ou Bootmgr pour Windows. Le bootloader est un petit programme qui charge le noyau du système d'exploitation en mémoire.</p>
+<p>Chargement du chargeur d'amorçage (Bootloader) :</p>
+<ul>
+<li>Une fois le périphérique de démarrage identifié, le BIOS ou UEFI passe le contrôle au chargeur d'amorçage, souvent GRUB pour Linux ou Bootmgr pour Windows. Le bootloader est un petit programme qui charge le noyau du système d'exploitation en mémoire.</li>
+</ul>
 </li>
 <li>
-<p>Chargement du noyau : Le chargeur d'amorçage charge ensuite le noyau du système d'exploitation en mémoire et lui passe le contrôle. Le noyau initialise les fonctions essentielles : gestion de la mémoire, création de processus initiaux, et prise en charge des pilotes matériels de base.</p>
+<p>Chargement du noyau : </p>
+<ul>
+<li>Le chargeur d'amorçage charge ensuite le noyau du système d'exploitation en mémoire et lui passe le contrôle. Le noyau initialise les fonctions essentielles : gestion de la mémoire, création de processus initiaux, et prise en charge des pilotes matériels de base.</li>
+</ul>
 </li>
 </ol>
 <p>A partir de ce moment, c'est le système d'exploitation qui va prendre la main et servir à faire le lien entre le matériel et les applications.</p>
@@ -1862,21 +1941,23 @@ Cette installation est plus technique en comparaison à une installation d'un Fu
 <p class="admonition-title">Préparation</p>
 <ul>
 <li>Tout se fait dans le même répertoire MSYS2 MINGW64 (chercher avec la loupe de windows)</li>
+<li>Exécutez <code>pacman -Syu</code> de manière répétitive jusqu'à ce que le message "there is nothing to do" apparaisse.<ul>
+<li>Ceci sert à mettre à jour MSYS2.</li>
+<li>Le terminal peut demander à être fermer, il faut le faire et relancer MINGW64</li>
+</ul>
+</li>
 <li>Installer qemu, le gestionnaire de machines virtuelles, en exécutant cette commande: <code>pacman -S mingw-w64-x86_64-qemu</code></li>
 <li>Télécharger le disque d'installation d'alpine: <code>wget https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/x86_64/alpine-virt-3.21.3-x86_64.iso</code></li>
 </ul>
 </div>
 <ol>
 <li>
-<p>Télécharger le disque d'installation d'alpine: <code>wget https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/x86_64/alpine-virt-3.21.3-x86_64.iso</code></p>
-</li>
-<li>
 <p>Créer un disque dur virtuel de 5Go pour le brancher à notre PC virtuel.
 <code>qemu-img create -f qcow2 disquedur.qcow2 5G</code></p>
 </li>
 <li>
 <p>On démarre une machine virtuelle. Un ordinateur dans votre ordinateur. Ici on lui donne comme disque dur le disque virtuel qu'on vient de créer, on y insère le cd-rom d'installation du système d'exploitation, et on lui demande de booter sur le cdrom. On l'autorise à utiliser 512M de RAM sur la machine physique. on lui branche notre disque (hda) de 5G. Les autres options sont des options pour la gestion du réseau.
-<code>qemu-system-x86_64 -boot d -cdrom alpine-virt-3.21.3-x86_64.iso -hda disquedur.qcow2 -m 512 -net nic -net user</code></p>
+<code>qemu-system-x86_64 -boot d -cdrom alpine-virt-3.21.3-x86_64.iso -hda disquedur.qcow2 -m 256 -net nic -net user</code></p>
 </li>
 <li>
 <p>Après avoir booté, le système demande de vous logger, entrez "root" et validez avec la touche entrée. L'utilisateur root est le superutilisateur. Il a le droit de tout faire.</p>
@@ -1902,7 +1983,11 @@ Cette installation est plus technique en comparaison à une installation d'un Fu
 <p>Le système d'exploitation est installé, et il nous demande de redémarrer.</p>
 </li>
 <li>
-<p>On entre cette commande pour arrêter l'ordinateur: <code>poweroff</code></p>
+<p>On entre cette commande pour arrêter l'ordinateur: <code>doas poweroff</code></p>
+<ul>
+<li>La commande doas nous permet sous alpine d'exécuter une commande comme si on était le super utilisateur (si on y a droit)</li>
+<li>Dans d'autres distributions linux, on recontre communément la commande <code>sudo</code></li>
+</ul>
 </li>
 </ul>
 <div class="admonition hint">
@@ -1910,7 +1995,7 @@ Cette installation est plus technique en comparaison à une installation d'un Fu
 <ul>
 <li>
 <p>Dès que vous voulez démarrer cet ordinateur, entrez:
-<code>qemu-system-x86_64 -hda alpine_disk.qcow2 -m 512 -nic user,ipv6=off,hostfwd=tcp::22022-:22</code></p>
+<code>qemu-system-x86_64 -hda disquedur.qcow2 -m 256 -nic user,ipv6=off,hostfwd=tcp::22022-:22</code></p>
 </li>
 <li>
 <p>Dès que vous voudrez l'arrêter, entrez:
@@ -1924,7 +2009,196 @@ Cette installation est plus technique en comparaison à une installation d'un Fu
 Sous linux, vous avez même l'embarras du choix.
 On n'en ajoutera pas car ça prend trop d'espace disque et que les ordis ne sont pas assez puissants pour faire tourner 2 OS, mais voici ce que ça peut donner.
 <img alt="alt text" src="../image-6.png" /></p>
+<ul>
+<li>Chez vous, si vous avez beaucoup de RAM, vous pouvez attribuer plus de mémoire à la machine virtuelle en mettant par exemple 2G à la place de 256.</li>
+<li>Vous pouvez ainsi installer un environnement dektop en exécutant la commande <code>setup-desktop</code> et en choisissant <code>xfce</code> (le plus léger, les autres demandent beaucoup de RAM)</li>
+<li>En éteignant, puis rallumant la machine, vous aurez un environnement graphique plus léger, mais similaire à windows.</li>
+</ul>
 </div>
+<h2 id="manipulations">Manipulations</h2>
+<div class="admonition question">
+<p class="admonition-title">Exercice débrouille</p>
+<ul>
+<li>Mettre à jour alpine<ul>
+<li><code>doas apk update</code> fait état des nouvelles versions de composants disponibles</li>
+<li><code>doas apk upgrade</code> applique les mises à jour disponibles</li>
+</ul>
+</li>
+<li>Installer python et nano (Un éditeur de texte pour CLI)<ul>
+<li><code>doas apk add nano python3</code></li>
+</ul>
+</li>
+<li>Ecrire un script python simple<ul>
+<li>créer un fichier test.py</li>
+<li>Ce programme affiche "Voici un entier aléatoire: 6", où 6 est un exemple</li>
+<li>La première ligne de code doit être <code>#! /usr/bin/python</code> qui indique au système qu'il faut envoyer le contenu du fichier à l'exécutale python pour exécution.</li>
+</ul>
+</li>
+<li>Exécuter le script python<ul>
+<li><code>./test.py</code> demande l'exécution du fichier python</li>
+<li>Vous rencontrez un problème. L'utilisateur courant n'a pas le droit d'exécuter ce fichier.</li>
+<li>Trouvez un moyen de rendre le fichier exécutable par l'utilisateur courant.</li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h2 id="naviguer-dans-le-systeme-de-fichiers">Naviguer dans le système de fichiers</h2>
+<h3 id="1-chemin-absolu">1. Chemin absolu</h3>
+<ul>
+<li>
+<p><strong>Définition</strong> : un chemin absolu <strong>commence toujours par la racine</strong> <code>/</code> et indique l’emplacement exact d’un fichier ou répertoire dans l’arborescence, <strong>depuis la racine</strong> jusqu’au répertoire/fichier ciblé.</p>
+</li>
+<li>
+<p><strong>Exemple</strong> :
+  <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/home/alice/Documents
+</code></pre></div>
+  Ce chemin part de <code>/</code> (racine), puis va dans <code>home</code>, puis <code>alice</code>, puis <code>Documents</code>.<br />
+  Peu importe d’où vous partez, vous atterrirez exactement dans <code>/home/alice/Documents</code>.</p>
+</li>
+</ul>
+<hr />
+<h3 id="2-chemin-relatif">2. Chemin relatif</h3>
+<ul>
+<li>
+<p><strong>Définition</strong> : un chemin relatif <strong>ne commence pas par <code>/</code></strong> et indique l’emplacement d’un répertoire ou fichier <strong>par rapport au répertoire courant</strong> (celui où vous vous trouvez déjà).</p>
+</li>
+<li>
+<p><strong>Exemples</strong> :</p>
+</li>
+<li>
+<p>Si vous êtes déjà dans <code>/home/alice</code>, alors :
+     <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>Documents
+</code></pre></div>
+     vous amène dans <code>/home/alice/Documents</code>.</p>
+</li>
+<li>
+<p>S’il faut monter d’un répertoire avant d’aller ailleurs, on utilise <code>..</code> pour désigner le parent :
+     <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>../Bob
+</code></pre></div>
+     si vous êtes dans <code>/home/alice</code>, <code>cd ../Bob</code> vous amène dans <code>/home/Bob</code>.</p>
+</li>
+</ul>
+<hr />
+<h3 id="3-bien-savoir-que">3. Bien savoir que:</h3>
+<ul>
+<li><code>.</code> désigne le répertoire courant (rarement nécessaire avec <code>cd</code>, mais on peut l’utiliser dans d’autres commandes).</li>
+<li><code>..</code> désigne le répertoire parent (celui qui contient le répertoire courant).</li>
+<li>Un <strong>chemin absolu</strong> fonctionne <strong>où que vous soyez</strong>.</li>
+<li>Un <strong>chemin relatif</strong> dépend de <strong>votre emplacement actuel</strong> (<code>pwd</code> pour savoir où vous êtes).</li>
+</ul>
+<hr />
+<h4 id="exemple-de-navigation">Exemple de navigation</h4>
+<ol>
+<li>
+<p><strong>Position de départ</strong> :<br />
+   Vous êtes dans <code>/home/alice</code>.
+   <div class="highlight"><pre><span></span><code><span class="nb">pwd</span>
+<span class="c1"># /home/alice</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Aller dans <code>Documents</code> (chemin relatif)</strong> :
+   <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>Documents
+<span class="nb">pwd</span>
+<span class="c1"># /home/alice/Documents</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Revenir au répertoire parent (chemin relatif avec <code>..</code>)</strong> :
+   <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>..
+<span class="nb">pwd</span>
+<span class="c1"># /home/alice</span>
+</code></pre></div></p>
+</li>
+<li>
+<p><strong>Aller directement à <code>/etc</code> (chemin absolu)</strong> :
+   <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>/etc
+<span class="nb">pwd</span>
+<span class="c1"># /etc</span>
+</code></pre></div></p>
+</li>
+</ol>
+<hr />
+<p><strong>En résumé</strong> :<br />
+- <strong>Chemin absolu</strong> : commence par <code>/</code> et décrit <strong>l’itinéraire complet</strong> depuis la racine.<br />
+- <strong>Chemin relatif</strong> : <strong>dépend</strong> du répertoire courant et ne commence pas par <code>/</code>.<br />
+- Utilisez <code>cd</code> pour naviguer facilement en combinant <code>..</code> (parent) et les noms de dossiers.</p>
+<h2 id="les-commandes-linux-de-base">les commandes Linux de base</h2>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/ZtqBQ68cfJc?si=vV-v1yeCKhRjc1Is" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+<p>Cette vidéo les résume. Elle dure 5h mais dispose d'un sommaire.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercice</p>
+<ul>
+<li>Créez un fichier arbo.sh</li>
+<li>Editez ce fichier pour qu'il comporte toutes les commandes nécessaires à la création de l'arborescence suivante.<ul>
+<li>1 commande par ligne</li>
+</ul>
+</li>
+<li>Exécutez le fichier arbo.sh et vérifiez que l'arborescence a bien été créée.</li>
+</ul>
+<p><img alt="alt text" src="../Arborescence_3_Mon_Site.png" /></p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Questions</p>
+<p>Ces questions couvrent les bases de la navigation, la manipulation de fichiers et dossiers, la gestion des droits, la recherche de fichiers, et quelques notions de redirection et de processus. Elles permettent déjà de se familiariser avec l’essentiel de la ligne de commande sous Linux.</p>
+<ol>
+<li><strong>Navigation et gestion des répertoires :</strong><ul>
+<li>Quelle est la différence entre <code>cd /home</code> et <code>cd home</code> (sans le /) ?  </li>
+<li>Quelle commande permet d’afficher le répertoire courant (là où vous êtes) ?  </li>
+<li>Comment revenir au répertoire parent avec la commande <code>cd</code> ?</li>
+</ul>
+</li>
+<li><strong>Listing et informations sur les fichiers :</strong><ul>
+<li>À quoi sert la commande <code>ls</code> ? Citez deux options utiles de <code>ls</code>.  </li>
+<li>Quelle différence y a-t-il entre <code>ls</code> et <code>ls -l</code> ?</li>
+</ul>
+</li>
+<li><strong>Création et suppression de fichiers/répertoires :</strong><ul>
+<li>Comment créer un fichier vide ? (Donnez deux méthodes possibles)  </li>
+<li>Quelle commande utilise-t-on pour supprimer un répertoire <strong>vide</strong> ? Et pour un répertoire <strong>non vide</strong> ?</li>
+</ul>
+</li>
+<li><strong>Copie et déplacement :</strong><ul>
+<li>Comment copier un fichier <code>source.txt</code> en <code>destination.txt</code> depuis la ligne de commande ?  </li>
+<li>Comment déplacer (ou renommer) un fichier <code>test.txt</code> en <code>test2.txt</code> ?</li>
+</ul>
+</li>
+<li><strong>Recherche de texte :</strong><ul>
+<li>Quelle commande peut-on utiliser pour rechercher un mot clé dans un fichier texte ?  </li>
+<li>Comment rechercher le terme <code>linux</code> dans tous les fichiers du répertoire courant ?</li>
+</ul>
+</li>
+<li><strong>Permissions et propriétés des fichiers :</strong><ul>
+<li>Comment afficher les droits de fichier et le propriétaire/groupe d’un fichier ou répertoire ?  </li>
+<li>Que signifie <code>rwxr-xr--</code> (dans l’ordre : propriétaire, groupe, autres) ?  </li>
+<li>À quoi sert la commande <code>chmod</code> ? Donnez un exemple simple d’utilisation.</li>
+</ul>
+</li>
+<li><strong>Recherche et localisation de fichiers :</strong><ul>
+<li>Comment chercher un fichier nommé <code>notes.txt</code> dans l’arborescence à partir du répertoire courant ?  </li>
+<li>Quelle commande (ou quelles options) permet de trouver des fichiers selon leur nom ou d’autres critères (taille, type, etc.) ?</li>
+</ul>
+</li>
+<li><strong>Affichage et manipulation du contenu des fichiers :</strong><ul>
+<li>Quelle commande permet d’afficher le contenu d’un fichier texte directement dans le terminal ?  </li>
+<li>Comment afficher les premières lignes d’un fichier ? Les dernières ?</li>
+</ul>
+</li>
+<li><strong>Redirection et pipes :</strong><ul>
+<li>Que fait <code>&gt;</code> après une commande (par exemple <code>ls &gt; liste.txt</code>) ?  </li>
+<li>À quoi sert le caractère <code>|</code> (pipe) ? Donnez un exemple simple.</li>
+</ul>
+</li>
+<li><strong>Informations système et processus :</strong><ul>
+<li>Quelle commande affiche des informations sur la mémoire et les processus en temps réel ?  </li>
+<li>Comment lister les processus en cours d’exécution dans le terminal ?</li>
+</ul>
+</li>
+</ol>
+</div>
+<hr />
 
 
 
@@ -2005,7 +2279,7 @@ On n'en ajoutera pas car ça prend trop d'espace disque et que les ordis ne sont
     <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.525ec568.min.js"></script>
       
         <script src="../../../javascripts/katex.js"></script>
       
