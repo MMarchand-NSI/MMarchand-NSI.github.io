@@ -2141,7 +2141,9 @@ Donne moi la valeur de n et choisis un entier dans ta tête
 </div>
 <h2 id="recherche-dichotomique-sur-tableau-trie">Recherche dichotomique sur tableau trié</h2>
 <p>La recherche dichotomique s'inspire de la manière la plus efficace de jouer au "plus ou moins" en divisant l'intervalle de recherche par deux à chaque tentative.</p>
-<p>Pour l'instant, ignorons les lignes 1 et 2. </p>
+<p>En voici une <a href="https://www.cs.usfca.edu/~galles/visualization/Search.html">Visualisation</a></p>
+<p>Puis, en voici l'algorithme:</p>
+<p>En première lecture, ignorez les lignes 1 et 2. </p>
 <div class="highlight"><pre><span></span><code><span class="gs">**ENTRÉE**</span> 
 <span class="k">-</span><span class="w"> </span>Un tableau d&#39;entiers T[0..n-1]
 <span class="k">-</span><span class="w"> </span>Un entier à trouver val
@@ -2149,12 +2151,12 @@ Donne moi la valeur de n et choisis un entier dans ta tête
 L&#39;indice du premier élément trouvé, None si la valeur n&#39;appartient pas au tableau.
 
 <span class="gh"># Algorithme DICHOTOMIE(T, val)</span>
-<span class="k">1.</span> SI n==0 OU T[0]&gt;val:
-<span class="k">2.</span>  RETOURNER None
+<span class="k">1.</span> SI n==0 OU T[0]&gt;val
+<span class="k">2.</span>      RETOURNER None
 <span class="k">3.</span> gauche ← 0
 <span class="k">4.</span> droite ← n-1
 <span class="k">5.</span> TANT QUE gauche &lt;= droite
-<span class="k">6.</span>      milieu ← gauche + (droite - gauche)/2
+<span class="k">6.</span>      milieu ← gauche + (droite - gauche)//2
 <span class="k">7.</span>      SI T[milieu] = valeur
 <span class="k">8.</span>          RETOURNER milieu
 <span class="k">9.</span>      SINON SI T[milieu] &gt; valeur
@@ -2163,6 +2165,40 @@ L&#39;indice du premier élément trouvé, None si la valeur n&#39;appartient pa
 <span class="k">12.</span>         gauche ← milieu + 1
 <span class="k">13.</span> RETOURNER None
 </code></pre></div>
+<p>Le variant de boucle est la quantité droite-gauche+1. Quand elle est égale à 0, l'algorithme termine.</p>
+<p>L'invariant est la propriété "La valeur recherchée est dans T[gauche..droite]"</p>
+<p><strong>INITIALISATION</strong>
+à l'origine, <span class="arithmatex">\(gauche=0\)</span> et <span class="arithmatex">\(droite=n-1\)</span>. La valeur recherchée est bien dans T[gauche..droite]</p>
+<p><strong>CONSERVATION</strong></p>
+<p>Faisons l'hypothèse que "La valeur recherchée est dans <span class="arithmatex">\(T[gauche..droite]\)</span>" à l'entrée d'une itération et vérifions que c'est toujours vrai à l'itération suivante.</p>
+<p>Nous commençons par calculer l'indice milieu de l'intervalle <span class="arithmatex">\([gauche; droite]\)</span>.</p>
+<p>Nous pouvons donc décomposer notre tableau ainsi:</p>
+<div class="arithmatex">\[T[gauche..milieu-1] + T[milieu..milieu] + T[milieu+1..droite]\]</div>
+<p>Nous avons alors 3 possibilités:
+- Si <span class="arithmatex">\(T[milieu]\)</span> porte la valeur recherchée, on retourne l'indice milieu et l'algorithme s'arrête
+- Sinon si <span class="arithmatex">\(T[milieu]\)</span> est plus grand que la valeur recherchée, vu que <span class="arithmatex">\(T\)</span> est trié, c'et que la valeur recherchée est dans <span class="arithmatex">\(T[gauche..milieu-1]\)</span> et justement, on valorise <span class="arithmatex">\(droite\)</span> à <span class="arithmatex">\(milieu-1\)</span> 
+- Sinon, c'est que la valeur recherchée est dans <span class="arithmatex">\(T[milieu+1 .. droite]\)</span> et justement, on valorise <span class="arithmatex">\(gauche\)</span> à <span class="arithmatex">\(milieu+1\)</span></p>
+<p>Dans le premier cas, l'algorithme s'arrête.
+Dans les cas où il se poursuit, l'invariant est donc conservé.</p>
+<p><strong>TERMINAISON</strong>
+1. <strong>Dans le cas où la valeur est bien présente dans le tableau:</strong> 
+Dans le pire des cas, la taille de l'intervalle <span class="arithmatex">\([gauche;droite]\)</span> va être divisée par deux de manière continue jusqu'à atteindre 1 et la conservation de l'invariant garantit que la valeur se trouvera dans <span class="arithmatex">\(T[gauche;droite]\)</span>, avec <span class="arithmatex">\(gauche=droite=milieu\)</span>. L'algorithme s'arrête donc bien en renvoyant <span class="arithmatex">\(T[milieu]\)</span> (Note: la taille d'un intervalle d'entiers est le nombre d'entiers qu'il contient)</p>
+<ol>
+<li>
+<p><strong>Dans le cas où la valeur n'est pas dans le tableau:</strong>
+La taille de l'intervalle <span class="arithmatex">\([gauche;droite]\)</span> va être divisée par deux de manière continue jusqu'à atteindre 1. Cependant, contrairement au cas précédent, l'indice <span class="arithmatex">\(milieu\)</span> ne portera pas la valeur recherchée.
+Ainsi, que la valeur recherchée soit plus grande ou plus petite que <span class="arithmatex">\(T[milieu]\)</span>, on aura gauche&gt;droite et la boucle se terminera. L'algorithme renverra None.</p>
+</li>
+<li>
+<p><strong>Dans le cas où la valeur est plus petite que le premier élément du tableau</strong>:
+Ce cas est traître en implémentation, mais nous engage à bien définir le domaine de valeurs de nos variables.
+On se trouvera à la fin avec <span class="arithmatex">\(milieu=0\)</span>, et <span class="arithmatex">\(T[milieu]&gt;valeur\)</span>.
+On va donc exécuter <span class="arithmatex">\(droite ← milieu - 1\)</span>, ce qui va positionner <span class="arithmatex">\(milieu\)</span> à <span class="arithmatex">\(-1\)</span>
+C'est un problème car le domaine de valeurs d'un indice de tableau est un entier non signé (positif). Notez bien que les bidouilles d'indices négatifs sont propres à python.
+Par exemple, Rust lèvera une erreur sur ce cas car il n'autorisera pas la variable droite à prendre la valeur -1 attendu qu'elle est obligatoirement positive pour servir d'indice de tableau.
+C'est pour ça qu'existent les lignes 1 et 2. On commence par vérifier que la valeur recherchée n'est pas inférieure au premier élément pour ne jamais tomber sur ce cas. On en profite aussi pour régler son compte au cas du tableau vide, car de la même manière, droite ne peut pas valoir -1 en 4ème ligne.</p>
+</li>
+</ol>
 
 
 
