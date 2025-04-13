@@ -233,7 +233,7 @@ Le circuit électtronique précédent se résume entièrement à la porte logiqu
 
     Pourquoi appelle-t-on une porte NAND une porte universelle?
 
-```{.logic showonly="in out nand not and or nor xor label" style="height: auto;width: auto;" mode="design"}
+```{.logic showonly="in out nand not and or nor xor label" height=500 mode="design"}
 
 { 
 v: 6,
@@ -300,7 +300,7 @@ Il émet 2 informations en sortie, la somme obtenue $S$, ainsi que la retenue $C
 
 
 
-```{.logic showonly="in out display halfadder adder" style="height: 750px; width: auto;" mode="design"}
+```{.logic showonly="in out display halfadder adder" height=750 mode="design"}
 
 { // JSON5
   v: 6,
