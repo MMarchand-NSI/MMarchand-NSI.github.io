@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://mmarchand-nsi.github.io/premi%C3%A8re/algorithmique/tri_selection/">
+        <link rel="canonical" href="https://mmarchand-nsi.github.io/premi%C3%A8re/algorithmique/3.tri_insertion/">
       
       
-        <link rel="prev" href="../tri_insertion/">
+        <link rel="prev" href="../2.tri_selection/">
       
       
-        <link rel="next" href="../../architecture/droits-linux/">
+        <link rel="next" href="../4.dichotomie/">
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
@@ -22,7 +22,7 @@
     
     
       
-        <title>2. Tri par Sélection - Science Informatique - Site en construction</title>
+        <title>3. Tri par insertion - Science Informatique - Site en construction</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
 <script src="https://mmarchand-nsi.github.io//js/sqlite_ide.js"></script>
 
@@ -83,7 +83,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#2-tri-par-selection" class="md-skip">
+        <a href="#3-tri-par-insertion" class="md-skip">
           Skip to content
         </a>
       
@@ -117,7 +117,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              2. Tri par Sélection
+              3. Tri par insertion
             
           </span>
         </div>
@@ -657,28 +657,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../dichotomie/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    4. Recherche dichotomique
-  </span>
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../extrema/" class="md-nav__link">
+      <a href="../1.extrema/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -699,11 +678,11 @@
   
   
     <li class="md-nav__item">
-      <a href="../tri_insertion/" class="md-nav__link">
+      <a href="../2.tri_selection/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    3. Tri par insertion
+    2. Tri par Sélection
   </span>
   
 
@@ -729,55 +708,37 @@
         
       
       
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  <span class="md-ellipsis">
-    2. Tri par Sélection
-  </span>
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
-    2. Tri par Sélection
+    3. Tri par insertion
   </span>
   
 
       </a>
       
-        
+    </li>
+  
 
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+              
+            
+              
+                
   
   
   
-    
   
+    <li class="md-nav__item">
+      <a href="../4.dichotomie/" class="md-nav__link">
+        
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#tri-par-selection" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tri par sélection
-    </span>
-  </a>
+  <span class="md-ellipsis">
+    4. Recherche dichotomique
+  </span>
   
-</li>
-      
-    </ul>
-  
-</nav>
-      
+
+      </a>
     </li>
   
 
@@ -2061,23 +2022,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#tri-par-selection" class="md-nav__link">
-    <span class="md-ellipsis">
-      Tri par sélection
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -2091,109 +2035,67 @@
                   
 
 
-<h1 id="2-tri-par-selection">2. Tri par Sélection</h1>
-<p>Par tableau, on entendra liste python dans l'implémentation.</p>
-<div class="admonition abstract">
-<p class="admonition-title">Trier</p>
-<p>Un tableau est dit trié lorsque ses éléments sont ordonnés (du plus petit au plus grand si ça n'est pas précisé).</p>
-<p>Un tableau dont les éléments ne sont pas ordonnés n'est pas trié. (ça peut paraître bête mais c'est important)</p>
-<p>Il existe plusieurs méthodes pour trier. Cette opération est fondamentale en informatique.</p>
-<p>Les deux méthodes ci-dessous permettent de le faire à la façon dont on peut trier un jeu de cartes.</p>
-<p>Il en existe d'autres bien plus performantes</p>
-</div>
-<hr />
-<h2 id="tri-par-selection">Tri par sélection</h2>
+<h1 id="3-tri-par-insertion">3. Tri par insertion</h1>
 <div class="admonition abstract">
 <p class="admonition-title">Algorithme imagé</p>
 <p>Je veux trier des cartes</p>
 <ul>
-<li>Dans ma main droite, j'ai l'ensemble des cartes. </li>
-<li>Je <strong>déplace</strong> successivement sur ma main gauche la plus petite carte de la main droite.</li>
+<li>Dans ma main gauche, j'ai <strong>une carte</strong>. </li>
+<li>Dans ma main droite, j'ai <strong>le reste des cartes</strong>.</li>
+<li>Je <strong>déplace</strong> successivement dans ma main gauche chaque carte de la main droite en l'insérant à la bonne position pour que la main droite soit triée.</li>
 <li>A l'arrivée, ma main gauche est triée et ma main droite est vide</li>
 </ul>
 </div>
-<p>L'invariant est ici composé de 2 propriétés:
-1. Les cartes de la main gauches sont toutes inférieures ou égales à celles de la main droite
-2. Les cartes de la main gauche sont triées</p>
+<p>Autrement dit:</p>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> Pour i allant de 1 à n-1 faire :
+<span class="k">2.</span>      inserer_bonne_place(T, i)
+<span class="k">3.</span> Retourner T
+</code></pre></div>
+<p>L'algorithme <code>inserer_bonne_place</code> place correctement l'élément <span class="arithmatex">\(T[i]\)</span> dans le sous-tableau trié <span class="arithmatex">\(T[0..i-1]\)</span> afin que <span class="arithmatex">\(T[0..i]\)</span> soit trié.</p>
+<p><strong>Prouvons la correction du tri par insertion en supposant existant et totalement correct l'algorithme <code>inserer_bonne_place</code>.</strong></p>
+<p>L'<strong>invariant</strong> avant l'itération <span class="arithmatex">\(i\)</span> est: "<span class="arithmatex">\(T[0..i-1]\)</span> est trié"</p>
 <p><strong>INITIALISATION</strong>
-L'invariant est vrai au début car ma main gauche est vide (elle n'est pas désordonnée) et toutes les cartes de la main droite sont fatalement supérieures aux 0 cartes de ma main gauche.</p>
-<p><strong>CONSERVATION DE L'INVARIANT</strong>
-A un moment quelconque de l'algorithme, imaginons l'invariant vrai, avec <span class="arithmatex">\(m\)</span> cartes dans la main droite triée, et n cartes dans la main gauche.
-Ces n cartes sont donc toutes plus grandes ou égales que les cartes de la main gauche.</p>
-<p>Si je prends la plus petite carte de la main droite, elle reste donc supérieure à celles de la main gauche.
-Si je la place sur ma main gauche, de ce fait ma main gauche reste triée
-De plus, les cartes de ma main droite sont encore supérieures ou égales à celles de la main gauche.</p>
-<p>Après avoir appliqué une étape de l'algorithme, on a donc prouvé que l'invariant est conservé.</p>
-<p><strong>CONCLUSION</strong>
-L'invariant est vrai au départ, et il est conservé à chaque étape quelconque de l'algorithme.
-C'est donc qu'il est aussi vrai à la fin de l'algorithme.
-A la fin de l'algorithme, toutes les cartes sont dans la main gauche et l'invariant est vrai.
-C'est donc que dans ma main gauche, toutes les cartes sont triées.</p>
+Si le tableau est vide ou ne contient qu'un élément, la boucle ne s'exécute pas et le tableau est inchangé. Donc trié dans les deux cas.</p>
+<p>Sinon, avant de rentrer la première fois dans la boucle pour <span class="arithmatex">\(i=1\)</span>, <span class="arithmatex">\(T[0]\)</span> est trié.</p>
+<p><strong>CONSERVATION</strong></p>
+<p>Supposons l'invariant vrai au début de l'itération <span class="arithmatex">\(i\)</span>: "<span class="arithmatex">\(T[0..i-1]\)</span> est trié" (HYPOTHESE)</p>
+<p>Nous voulons montrer qu'à l'issue de la boucle, "<span class="arithmatex">\(T[0..i]\)</span> est trié"</p>
+<p>Or <code>inserer_bonne_place(T, i)</code> nous l'assure justement.</p>
+<p>"<span class="arithmatex">\(T[0..i]\)</span> est trié" est donc vrai au sortir de l'itération.</p>
+<p>L'invariant est conservé.</p>
+<p><strong>Terminaison</strong>
+L'algorithme se termine car c'est une simple boucle sur un algorithme se terminant (on ne détaillera pas).
+A l'issue du programme, <span class="arithmatex">\(i=n-1\)</span> et la conservation de l'invariant nous assure donc que <span class="arithmatex">\(T[0..n-1]\)</span> sera trié.</p>
+<hr />
+<p>Afin de valider cette correction, il nous faut créer l'algorithme <code>inserer_bonne_place</code> et en prouver la correction.</p>
 <div class="admonition question">
-<p class="admonition-title">Implémentation d'après l'exemple donné</p>
-<p>Ecrire une fonction tri_selection(main_gauche: list[int], main_droite: list[int]) qui applique cet algorithme.</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">tri_selection</span><span class="p">(</span><span class="n">main_gauche</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">main_droite</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Applique le tri par sélection tel que présenté</span>
-
-<span class="sd">    &gt;&gt;&gt; g = []</span>
-<span class="sd">    &gt;&gt;&gt; d = [5, 3, 9, 6]</span>
-<span class="sd">    &gt;&gt;&gt; tri_selection(g, d)</span>
-<span class="sd">    &gt;&gt;&gt; g</span>
-<span class="sd">    [3, 5, 6, 9]</span>
-<span class="sd">    &gt;&gt;&gt; d</span>
-<span class="sd">    []</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<p class="admonition-title">Insérer à la bonne place</p>
+<p>Créer l'algorithme qui permette d'insérer un élément d'un tableau à la bonne place, en considérant que le sous tableau précédent soit triés.</p>
+<p>Par exemple pour un tableau trié jusqu'à l'indice 2 inclus, voici ce que doit donner la séquence suivante:</p>
+<ol>
+<li><span class="arithmatex">\(T=[1, 2, 3, 1.5, 0]\)</span></li>
+<li>on exécute <code>inserer_bonne_place(T, 3)</code></li>
+<li>on doit avoir <span class="arithmatex">\(T=[1, 1.5, 2, 3, 0]\)</span></li>
+<li>on exécute <code>inserer_bonne_place(T, 4)</code></li>
+<li>on doit avoir <span class="arithmatex">\(T=[0, 1, 1.5, 2, 3]\)</span></li>
+</ol>
+<p>Indice: On utilisera un indice j, initialement valorisé à <span class="arithmatex">\(j←i\)</span> et on descendra progressivement jusqu'à trouver la bonne place.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Solution</p>
+<div class="highlight"><pre><span></span><code><span class="gh"># Algorithme inserer_bonne_place(T, i)</span>
+<span class="k">1.</span> a_deplacer ← T[i]
+<span class="k">2.</span> j ← i
+<span class="k">3.</span> TANT QUE j&gt;0 et T[j-1]&gt;a_deplacer
+<span class="k">4.</span>    T[j-1] ← T[j]
+<span class="k">5.</span>    j ← j-1
+<span class="k">6.</span> T[j] = pivot 
 </code></pre></div>
 </div>
-<hr />
-<div class="admonition abstract">
-<p class="admonition-title">Algorithme usuel</p>
-<ul>
-<li>On dispose d'un tableau <span class="arithmatex">\(T\)</span> de taille <span class="arithmatex">\(n\)</span> noté <span class="arithmatex">\(T[0..n-1]\)</span>  </li>
-<li><strong>Pour</strong> <span class="arithmatex">\(i\)</span> allant de <span class="arithmatex">\(0\)</span> à <span class="arithmatex">\(n-1\)</span><ul>
-<li><span class="arithmatex">\(\displaystyle imin = \argmin_{j \in [i, n-1]} T[j]\)</span></li>
-<li>échanger <span class="arithmatex">\(T[i]\)</span> et <span class="arithmatex">\(T[imin]\)</span></li>
-</ul>
-</li>
-</ul>
-<p>Notez que nous avons déjà résolu et étudié le problème <span class="arithmatex">\(\argmin\)</span></p>
-</div>
-<p>L'invariant que nous avons évoqué ci-dessus s'appelle un <strong>invariant de boucle</strong></p>
-<div class="admonition hint">
-<p class="admonition-title">Notations</p>
-<ul>
-<li><span class="arithmatex">\(T[i..j]\)</span> reprrésente le sous-tableau de <span class="arithmatex">\(T\)</span> de l'indice <span class="arithmatex">\(i\)</span> à l'indice <span class="arithmatex">\(j\)</span> inclus.</li>
-<li><span class="arithmatex">\(T[i..j] \le T[k..l]\)</span> signifie que toutes les valeurs du tableau de gauche sont inférieures ou égales aux valeurs du tableau de droite</li>
-<li><span class="arithmatex">\(T[i..i]\)</span> représente le sous-tableau à 1 élément</li>
-<li>L'opérateur + sur des tableaux est la concaténation</li>
-</ul>
-</div>
-<p><strong>INVARIANT:</strong>
-Au début de chaque itération <span class="arithmatex">\(i\)</span>, <span class="arithmatex">\(T[0..i-1]\)</span> est trié et <span class="arithmatex">\(T[0..i-1] \le T[i..n-1]\)</span></p>
-<p>Preuve de correction:</p>
-<p><strong>INITIALISATION:</strong></p>
-<p>Pour i=0, <span class="arithmatex">\(T[0..-1]\)</span> est le tableau vide. Il est trié (il n'y a aucun désordre possible, donc par définition, il est trié).</p>
-<p>De plus, tous les éléments restants sont supérieurs aux 0 éléments du tableau vide.</p>
-<p>L'invariant est donc vrai avant la première itération.</p>
-<p><strong>CONSERVATION</strong></p>
-<p>On suppose l'invariant vrai avant l'itération <span class="arithmatex">\(i\)</span></p>
-<p><span class="arithmatex">\(T[0..i-1]\)</span> est trié et <span class="arithmatex">\(T[0..i-1] \le T[i..n-1]\)</span>  (HYPOTHESE)</p>
-<p>On veut prouver que l'invariant est toujours vrai avant l'itération <span class="arithmatex">\(i+1\)</span>, donc que: <span class="arithmatex">\(T[0..i]\)</span> est trié et <span class="arithmatex">\(T[0..i] \le T[i+1..n-1]\)</span></p>
-<p>A l'itération <span class="arithmatex">\(i\)</span>, on calcule <span class="arithmatex">\(\displaystyle imin = \argmin_{k \in \![ i, n-1\!]} T[k]\)</span></p>
-<p>On a donc trouvé <span class="arithmatex">\(imin\)</span> tel qu'on peut décomposer le tableau en:</p>
-<p><span class="arithmatex">\(T[0..i-1] + T[i..i] + T[i+1..imin-1] + T[imin..imin] + T[imin+1..n-1]\)</span></p>
-<p>Lorsque nous intervertissons <span class="arithmatex">\(T[imin]\)</span> et <span class="arithmatex">\(T[i]\)</span>, notre tableau devient:</p>
-<p><span class="arithmatex">\(T[0..i-1] + T[imin..imin] + T[i+1..imin-1] + T[i..i] + T[imin+1..n-1]\)</span></p>
-<p>Or <span class="arithmatex">\(T[imin] \le T[i+1..imin-1]\)</span>, <span class="arithmatex">\(T[imin] \le T[imin+1..n-1]\)</span> et <span class="arithmatex">\(T[imin] \le T[i]\)</span>. Donc <span class="arithmatex">\(T[imin] \le T[i+1..n-1]\)</span> </p>
-<p>Mais <span class="arithmatex">\(T[imin]\)</span> est aussi plus grand ou égal aux éléments de <span class="arithmatex">\(T[0..i-1]\)</span> par HYPOTHESE car il appartient à l'origine à <span class="arithmatex">\(T[i..n-1]\)</span>.</p>
-<p>En le rattachant à <span class="arithmatex">\(T[0..i-1]\)</span>, on ne brise donc pas le tri.</p>
-<p>On a donc <span class="arithmatex">\(T[0..i]\)</span> trié et <span class="arithmatex">\(T[0..i] \le T[imin] \le T[i+1..n-1]\)</span></p>
-<p>L'invariant est donc conservé.</p>
-<div class="admonition question">
-<p class="admonition-title">Complexité</p>
-<p>Quelle est la complexité de l'algorithme de tri par insertion</p>
-</div>
+<p>Pour prouver la correction de cet algorithme, on se base sur l'invariant suivant, pour <span class="arithmatex">\(j\)</span> décroissant (<span class="arithmatex">\(j\)</span> est notre variant de boucle qui assure la terminaison): </p>
+<p>"<span class="arithmatex">\(T[0..j-1]\)</span> et <span class="arithmatex">\(T[j+1..i]\)</span> sont triés. De plus, <span class="arithmatex">\(T[0..j-1] \le T[j+1..i]\)</span>"</p>
+<p>La preuve de correction n'est pas compliquée en soi mais elle est longue. 
+Nous l'admettrons.</p>
 
 
 
