@@ -22,7 +22,7 @@
     
     
       
-        <title>3. Tri par insertion - Science Informatique - Site en construction</title>
+        <title>Tri par insertion - Science Informatique - Site en construction</title>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
 <script src="https://mmarchand-nsi.github.io//js/sqlite_ide.js"></script>
 
@@ -85,7 +85,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#3-tri-par-insertion" class="md-skip">
+        <a href="#tri-par-insertion" class="md-skip">
           Skip to content
         </a>
       
@@ -119,7 +119,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              3. Tri par insertion
+              Tri par insertion
             
           </span>
         </div>
@@ -663,7 +663,7 @@
         
   
   <span class="md-ellipsis">
-    1. Algorithmique
+    Algorithmique
   </span>
   
 
@@ -684,7 +684,7 @@
         
   
   <span class="md-ellipsis">
-    2. Tri par Sélection
+    Tri par Sélection
   </span>
   
 
@@ -714,7 +714,7 @@
         
   
   <span class="md-ellipsis">
-    3. Tri par insertion
+    Tri par insertion
   </span>
   
 
@@ -736,7 +736,7 @@
         
   
   <span class="md-ellipsis">
-    4. Recherche dichotomique
+    Recherche dichotomique
   </span>
   
 
@@ -2037,14 +2037,14 @@
                   
 
 
-<h1 id="3-tri-par-insertion">3. Tri par insertion</h1>
+<h1 id="tri-par-insertion">Tri par insertion</h1>
 <div class="admonition abstract">
 <p class="admonition-title">Algorithme imagé</p>
 <p>Je veux trier des cartes</p>
 <ul>
 <li>Dans ma main gauche, j'ai <strong>une carte</strong>. </li>
 <li>Dans ma main droite, j'ai <strong>le reste des cartes</strong>.</li>
-<li>Je <strong>déplace</strong> successivement dans ma main gauche chaque carte de la main droite en l'insérant à la bonne position pour que la main droite soit triée.</li>
+<li>Je <strong>déplace</strong> successivement dans ma main gauche chaque carte de la main droite en l'<strong>insérant à la bonne position</strong> pour que la main gauche soit triée.</li>
 <li>A l'arrivée, ma main gauche est triée et ma main droite est vide</li>
 </ul>
 </div>
@@ -2083,8 +2083,8 @@ A l'issue du programme, <span class="arithmatex">\(i=n-1\)</span> et la conserva
 </ol>
 <p>Indice: On utilisera un indice j, initialement valorisé à <span class="arithmatex">\(j←i\)</span> et on descendra progressivement jusqu'à trouver la bonne place.</p>
 </div>
-<div class="admonition warning">
-<p class="admonition-title">Solution</p>
+<details class="warning">
+<summary>Solution</summary>
 <div class="highlight"><pre><span></span><code><span class="gh"># Algorithme inserer_bonne_place(T, i)</span>
 <span class="k">1.</span> a_deplacer ← T[i]
 <span class="k">2.</span> j ← i
@@ -2093,11 +2093,17 @@ A l'issue du programme, <span class="arithmatex">\(i=n-1\)</span> et la conserva
 <span class="k">5.</span>    j ← j-1
 <span class="k">6.</span> T[j] = pivot 
 </code></pre></div>
-</div>
+</details>
 <p>Pour prouver la correction de cet algorithme, on se base sur l'invariant suivant, pour <span class="arithmatex">\(j\)</span> décroissant (<span class="arithmatex">\(j\)</span> est notre variant de boucle qui assure la terminaison): </p>
 <p>"<span class="arithmatex">\(T[0..j-1]\)</span> et <span class="arithmatex">\(T[j+1..i]\)</span> sont triés. De plus, <span class="arithmatex">\(T[0..j-1] \le T[j+1..i]\)</span>"</p>
 <p>La preuve de correction n'est pas compliquée en soi mais elle est longue. 
 Nous l'admettrons.</p>
+<div class="admonition question">
+<p class="admonition-title">Complexité</p>
+<ul>
+<li>Etudier la complexité du tri par insertion</li>
+</ul>
+</div>
 
 
 
