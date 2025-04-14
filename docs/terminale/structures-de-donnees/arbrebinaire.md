@@ -23,7 +23,7 @@ graph TD;
 !!! abstract "Arbre (enraciné)"
     Un arbre est soit **vide**, soit composé d'un **noeud** portant une donnée ainsi qu'une **forêt**.
 
-    Une **forêt** est vie ou c'est un ensemble d'arbres disjoints.
+    Une **forêt** est vide ou c'est un ensemble d'arbres disjoints.
 
     On appelle **racine** un noeud qui n'a pas de parent.
 
@@ -461,7 +461,7 @@ graph TD;
                     return [cle] + aux(reste)
                 case (cle, sag, sad), *reste: # cas où le premier élément est un noeud quelconque.
                     return [cle] + aux(reste + [sag] + [sad])
-                case _:  # spécial python, car python n'étant pas fortement typé, la fonctoin accepte n'importe quoi en paramètre.
+                case _:  # spécial python, car python n'étant pas fortement typé, la fonction accepte n'importe quoi en paramètre.
                     raise ValueError("Ce cas ne peut pas arriver, le type de a doit être arbrebin[T], vous avez mis n'importe quoi dans la fonction")
         return aux([a])
     ```
@@ -480,4 +480,3 @@ graph TD;
 
     `'a` est l'équivalent du type générique T qu'on a utilisé en python.
     `'a arbrebin` veut dire arbre binaire portant des données de type `'a`
-
