@@ -4,32 +4,11 @@ import { Chart, registerables } from 'https://cdn.jsdelivr.net/npm/chart.js@3.7.
 // @ts-ignore
 import {create, all} from 'https://cdn.jsdelivr.net/npm/mathjs@13.0.0/+esm';
 
-(function() {
 
-
-let mainTag = document.getElementsByTagName('complexity');
-
-if ( mainTag=== null) {
-    return;
-}
 
 Chart.register(...registerables);
 const math = create(all, {});
 
-document.getElementsByTagName('complexity')[0].innerHTML = `
-    <form>
-        <label for="f1">Fonction 1:</label>
-        <select name="f1" class="md-select"></select>
-        <label for="f2">Fonction 2:</label>
-        <select name="f2"></select>
-        <button type = "button" class="md-button" name="bAfficher">Afficher</button>
-        <button type = "button" class="md-button" name="bStop">Stop</button>
-        <br/>
-        <label for="vitesse">Vitesse :</label>
-        <input type="range" id="vitesse" name="vitesse" min="0" max="500" step="1" value="0">
-    </form>
-    <canvas id="dessin_complexite" width="800" height="350"></canvas>
-    `;
 
 
 
@@ -37,15 +16,6 @@ document.getElementsByTagName('complexity')[0].innerHTML = `
 
 
 let mesfoncs = new Map();
-mesfoncs.set('ln(x)', Math.log);
-mesfoncs.set('x' , (x)=>x);
-mesfoncs.set('x ln(x)', (x)=> x * Math.log(x));
-mesfoncs.set('x^2', (x)=>x*x);
-mesfoncs.set('x^3', (x)=>x*x*x);
-mesfoncs.set('2^x', (x)=>Math.pow(2,x));
-mesfoncs.set('x!', (x)=>math.gamma(x+1));
-
-
 let chart = undefined;
 let currentXMax = 2;
 let currentXMin = 0;
@@ -184,8 +154,42 @@ function animate(id) {
 }
 
 
-document.addEventListener('DOMContentLoaded', function () {
-        
+export function init() {
+
+        debugger;
+
+        let mainTag = document.getElementsByTagName('complexity');
+
+        if ( mainTag=== null) {
+            return;
+        }
+
+        document.getElementsByTagName('complexity')[0].innerHTML = `
+        <form>
+            <label for="f1">Fonction 1:</label>
+            <select name="f1" class="md-select"></select>
+            <label for="f2">Fonction 2:</label>
+            <select name="f2"></select>
+            <button type = "button" class="md-button" name="bAfficher">Afficher</button>
+            <button type = "button" class="md-button" name="bStop">Stop</button>
+            <br/>
+            <label for="vitesse">Vitesse :</label>
+            <input type="range" id="vitesse" name="vitesse" min="0" max="500" step="1" value="0">
+        </form>
+        <canvas id="dessin_complexite" width="800" height="350"></canvas>
+        `;
+
+
+        mesfoncs = new Map();
+        mesfoncs.set('ln(x)', Math.log);
+        mesfoncs.set('x' , (x)=>x);
+        mesfoncs.set('x ln(x)', (x)=> x * Math.log(x));
+        mesfoncs.set('x^2', (x)=>x*x);
+        mesfoncs.set('x^3', (x)=>x*x*x);
+        mesfoncs.set('2^x', (x)=>Math.pow(2,x));
+        mesfoncs.set('x!', (x)=>math.gamma(x+1));
+
+    
         let sf1  = document.getElementsByName('f1')[0];
 
         let sf2 = document.getElementsByName('f2')[0];
@@ -206,16 +210,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
             flagAnim = true;
             // @ts-ignore
-            let sf1 = document.getElementsByName('f1')[0].value;
+            let vf1 = sf1.value;
             // @ts-ignore
-            let sf2 = document.getElementsByName('f2')[0].value;
+            let vf2 = sf2.value;
 
-            f1 = mesfoncs.get(sf1);
-            f2 = mesfoncs.get(sf2);
+            f1 = mesfoncs.get(vf1);
+            f2 = mesfoncs.get(vf2);
             creerGraphique('dessin_complexite');
 
-            chart.data.datasets[0].label = sf1;
-            chart.data.datasets[1].label = sf2;
+            chart.data.datasets[0].label = vf1;
+            chart.data.datasets[1].label = vf2;
             chart.update();
             
             idanimation++;
@@ -232,6 +236,5 @@ document.addEventListener('DOMContentLoaded', function () {
             timeout = 500 - parseInt(slider.value);
         });
 
-});
+};
 
-})();
