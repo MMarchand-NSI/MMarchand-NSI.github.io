@@ -1,0 +1,2778 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mmarchand-nsi.github.io/premi%C3%A8re/algorithmique/1.algo/">
+      
+      
+        <link rel="prev" href="../../IHM/flet/">
+      
+      
+        <link rel="next" href="../2.tri_selection/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
+    
+    
+      
+        <title>Algorithmique - Science Informatique - Site en construction</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
+<script src="https://mmarchand-nsi.github.io//js/sqlite_ide.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/sql/sql.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.css"><link rel="stylesheet" href="https://mmarchand-nsi.github.io//css/sqlite_ide.css"><script>path="https://mmarchand-nsi.github.io/"</script>
+<script src="/javascripts/bundle.js"></script>
+
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8c3ca2c6.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#algorithmique" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Science Informatique - Site en construction" class="md-header__button md-logo" aria-label="Science Informatique - Site en construction" data-md-component="logo">
+      
+  <img src="../../../assets/logo-tr.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Science Informatique - Site en construction
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Algorithmique
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+    
+  
+  &nbsp;
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../les-outils/" class="md-tabs__link">
+          
+  
+  Les outils
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../IHM/flet/" class="md-tabs__link">
+          
+  
+  Première
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../projets/intro-pyxel/" class="md-tabs__link">
+          
+  
+  Projets
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+    
+      
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../terminale/architecture_reseau/bitwise/" class="md-tabs__link">
+          
+  
+  Terminale
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Science Informatique - Site en construction" class="md-nav__button md-logo" aria-label="Science Informatique - Site en construction" data-md-component="logo">
+      
+  <img src="../../../assets/logo-tr.png" alt="logo">
+
+    </a>
+    Science Informatique - Site en construction
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    &nbsp;
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Les outils
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Les outils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../les-outils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Outils pour développer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../les-outils/git/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Git et Github
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../les-outils/ocaml/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    OCaml
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../les-outils/setup-vscode/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Setup vscode
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  <span class="md-ellipsis">
+    Première
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Première
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    IHM
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            IHM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IHM/flet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Interface Homme machine
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Algorithmique
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithmique
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Algorithmique
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Algorithmique
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#probleme-informatique" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problème informatique
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correction-dun-algorithme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Correction d'un algorithme
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Correction d'un algorithme">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terminaison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Terminaison
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boucles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Boucles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variant-de-boucle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variant de boucle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correction-totale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Correction totale
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.tri_selection/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tri par Sélection
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3.tri_insertion/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Tri par insertion
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.dichotomie/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Recherche dichotomique
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Architecture
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/droits-linux/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gestion des droits sous linux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/os/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Systèmes d'exploitation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Logique
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Logique
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../logique/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Logique
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Prog
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Prog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prog/exercices/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exercices Algorithmique
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prog/listes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Le type list (et tuple)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prog/scope/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Portée des variables (scope)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prog/strings/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Chaînes de caractères (str)
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Reseau
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Reseau
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reseau/bit-alterne/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Le protocole du bit alterné
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Projets
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Projets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/intro-pyxel/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction à pyxel - POO
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/jeudelavie/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    The Game Of Life
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/mastermind/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    MasterMind
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/musique/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Créer un clavier musical
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/othello/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Othello
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/pendu/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Le pendu
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/space_invader/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Projet space invader
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Terminale
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Terminale
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Architecture reseau
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture reseau
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/architecture_reseau/bitwise/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Opérateurs Bitwise en Python
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/architecture_reseau/chiffrement/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Introduction au chiffrement
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/architecture_reseau/chiffrement2/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Cryptographie Asymétriques
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/architecture_reseau/routage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Le Routage
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Bdd
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Bdd
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/bdd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Base de données et SGBD
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/bdd/jointure/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Jointures
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/bdd/manipulation-integrite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Manipulation et intégrité
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/bdd/projet/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Gestion d'un lycée - Fullstack
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/bdd/sql-murder-mystery/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SQL murder mystery
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/bdd/tp-sgbd/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    SGBD - Postgresql
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Langages
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Langages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/langages/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Paradigmes de programmation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/langages/complements_python/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Compléments sur le tri, min et max
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/langages/poo/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Paradigme orienté objets
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/langages/recursivite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Récursivité
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Processus
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Processus
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/processus/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Processus
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Structures de donnees
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Structures de donnees
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/structures-de-donnees/arbrebinaire/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Arbres enracinés
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/structures-de-donnees/listes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Listes - Paradigme fonctionnel
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/structures-de-donnees/listeschainees/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Listes chaînées - Approche Orientée Objet
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5_4" id="__nav_5_5_4_label" tabindex="0">
+            
+  
+  <span class="md-ellipsis">
+    Graphes
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Graphes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/structures-de-donnees/graphes/dijkstra/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Algorithme de Dijkstra
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/structures-de-donnees/graphes/graphes/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Graphes - Généralités et Implémentation
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/structures-de-donnees/graphes/parcours/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Parcours de graphes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#probleme-informatique" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problème informatique
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#correction-dun-algorithme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Correction d'un algorithme
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Correction d'un algorithme">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#terminaison" class="md-nav__link">
+    <span class="md-ellipsis">
+      Terminaison
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#boucles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Boucles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variant-de-boucle" class="md-nav__link">
+    <span class="md-ellipsis">
+      Variant de boucle
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#correction-totale" class="md-nav__link">
+    <span class="md-ellipsis">
+      Correction totale
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="algorithmique">Algorithmique</h1>
+<div class="admonition abstract">
+<p class="admonition-title">Définition</p>
+<p>Un algorithme est un dispositif formel qui, pour chaque <strong>entrée</strong> issue d’un ensemble déterminé, exécute une suite finie d’instructions élémentaires et termine au bout d’un nombre fini d’étapes, en produisant une <strong>sortie</strong> (ou un état final).</p>
+<p>Un dispositif formel désigne une structure logique qui sert à décrire et étudier de façon rigoureuse un calcul.</p>
+<p>En pratique, on s’appuie sur cette intuition :</p>
+<ul>
+<li>Lister des <strong>étapes finies</strong> et exécutables clairement,</li>
+<li>Garantir une <strong>terminaison</strong> pour toute entrée (ou au moins pour toutes celles qu’on considère valides),</li>
+<li>Obtenir une <strong>réponse correcte</strong> vis-à-vis du problème initial.</li>
+</ul>
+<p>Un algorithme peut être spécifié en langage humain ou en langage informatique, mais peut aussi être basé sur un système matériel. L'unique obligation est que sa spécification fournisse une description précise de la procédure de calcul à suivre.</p>
+</div>
+<hr />
+<p><strong>Nous nous appuierons sur des algorithmes simples que vous avez déjà implémentés.</strong></p>
+<hr />
+<h2 id="probleme-informatique">Problème informatique</h2>
+<div class="admonition abstract">
+<p class="admonition-title">Problème</p>
+<p>Un problème informatique est une question bien définie, pour laquelle on cherche une méthode systématique (un algorithme) permettant de produire une solution valide pour toutes les données d'entrée possibles.</p>
+<p>Les problèmes bien définis, connus et étudiés possèdent des noms. Ils sont universellement reconnus par la communauté scientifique.</p>
+<table>
+<thead>
+<tr>
+<th>Nom du problème</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TSP (Travelling Salesman Problem)</td>
+<td>Trouver le plus court chemin passant par toutes les villes une seule fois.</td>
+</tr>
+<tr>
+<td>PRIME</td>
+<td>Déterminer si un entier donné est un nombre premier.</td>
+</tr>
+<tr>
+<td>SORTING</td>
+<td>Trier une liste d’éléments selon un ordre.</td>
+</tr>
+<tr>
+<td>SEARCH</td>
+<td>Trouver un élément dans une structure (tableau, graphe, arbre, …).</td>
+</tr>
+<tr>
+<td>FACTORING</td>
+<td>Décomposer un nombre en facteurs premiers.</td>
+</tr>
+<tr>
+<td>SAT (Satisfiability)</td>
+<td>Savoir s’il existe une affectation qui rend une formule logique vraie.</td>
+</tr>
+<tr>
+<td>CLIQUE</td>
+<td>Trouver un ensemble de sommets tous adjacents dans un graphe.</td>
+</tr>
+<tr>
+<td>PATH</td>
+<td>Savoir s’il existe un chemin entre deux nœuds dans un graphe.</td>
+</tr>
+<tr>
+<td>SUBSET SUM</td>
+<td>Trouver si une somme d’éléments d’un ensemble donne une valeur cible.</td>
+</tr>
+</tbody>
+</table>
+<p>Une partie importante de la recherche en informatique consiste à trouver des algorithmes de plus en plus efficaces pour résoudre des problèmes donnés.</p>
+</div>
+<h2 id="correction-dun-algorithme">Correction d'un algorithme</h2>
+<p>On ne peut pas déterminer qu'un algorithme est bon juste parce qu'il marche intuitivement sur quelques entrées qu'on a testé. Certains outils humains peuvent causer des pertes humaines et/ou économiques importantes s'ils sont mal programmés. Il est donc nécessaire de s'assurer que les algorithmes utilisés sont toujours totalement corrects. C'est à dire qu'ils résolvent toujours le problème qu'ils sont censés résoudre.</p>
+<p>Nous travaillerons sur base du problème FIND-MIN afin de découvrir comment on démontre qu'un algorithme est totalement correct.</p>
+<div class="admonition abstract">
+<p class="admonition-title">Definition: tableau</p>
+<p>Un tableau (ou array en anglais) est une structure de données qui permet de stocker plusieurs valeurs du même type, organisées de manière ordonnée, et accessibles via un indice (ou index).</p>
+<p>En python, nous utilisons le type <code>list</code> pour modéliser des tableaux.</p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Le problème du minimum - FIND-MIN</p>
+<p><strong>Il s'agit de trouver le plus petit élément d'un tableau <span class="arithmatex">\(\bold{T}\)</span>.</strong></p>
+<p>Considérons un tableau <span class="arithmatex">\(T\)</span> de taille <span class="arithmatex">\(\bold {n&gt;0}\)</span>. <span class="arithmatex">\(n\)</span> est choisi strictement positif car le plus petit élément de l'ensemble vide est indéfini (vu qu'il n'y a pas d'élément, il n'y a pas de plus petit élément). Cette contrainte sur l'algorithme est appelée une <strong>pré-condition</strong></p>
+<p>Le problème du minimum est de trouver le plus petit <span class="arithmatex">\(T[i]\)</span> pour <span class="arithmatex">\(i\)</span> parcourant l'intervalle <span class="arithmatex">\([\![0;n-1]\!]\)</span></p>
+<p>Voici la notation qu'on utilise pour dire ça:</p>
+<div class="arithmatex">\[\huge \min_{i \in [\![0;n-1]\!]} T[i]\]</div>
+</div>
+<p>Considérons <strong>l'entrée</strong> <span class="arithmatex">\([4, 9, 3, 19]\)</span></p>
+<p>L'algorithme renvoie <span class="arithmatex">\(3\)</span></p>
+<p>Considérons l'entrée <span class="arithmatex">\([]\)</span>. </p>
+<p>C'est un cas non défini. En pratique, l'algorithme produira une erreur ou une valeur spéciale en sortie.</p>
+<p>Voici l'algorithme que nous avons déjà vu:</p>
+<div class="highlight"><pre><span></span><code><span class="gh"># Algorithme - Calculer le minimum de T</span>
+<span class="gh"># Entrée: Un tableau T de taille n</span>
+<span class="gh"># Sortie: Le plus petit élément de T</span>
+<span class="gh"># Précondition: n&gt;0</span>
+<span class="k">1.</span> mini ← T[0]
+<span class="k">2.</span> POUR i allant de 1 à n-1:
+<span class="k">3.</span>     SI T[i] &lt; mini
+<span class="k">4.</span>          mini ← T[i]
+<span class="k">3.</span> RETOURNER mini
+</code></pre></div>
+<hr />
+<h3 id="terminaison">Terminaison</h3>
+<div class="admonition abstract">
+<p class="admonition-title">Terminaison</p>
+<p><strong>Un algorithme doit se terminer</strong></p>
+<p>Si toutes les boucles d'un algorithme se terminent, alors l'algorithme se termine. </p>
+</div>
+<h3 id="boucles">Boucles</h3>
+<div class="admonition abstract">
+<p class="admonition-title">Boucle bornée</p>
+<p><strong>Une boucle bornée est une boucle dont le nombre d’itérations est déterminé ou limité avant l’exécution, et qui s’exécute donc un nombre fini de fois garanti.</strong></p>
+<p>Le compteur de boucle n'est pas modifié par les instructions internes à la boucle.</p>
+<p>exemple:</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>      <span class="c1"># exactement 10 itérations</span>
+    <span class="n">faire_quelque_chose</span><span class="p">()</span>
+</code></pre></div>
+<p>Une boucle while est aussi considérée comme bornée dans le cas où un compteur garantit sa terminaison à la façon d'une boucle for.</p>
+<div class="highlight"><pre><span></span><code><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">:</span>
+    <span class="n">faire_quelque_chose</span><span class="p">()</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div>
+<p><strong>Une boucle bornée dont l'indice de départ est supérieure à son indice d'arrivée ne s'exécute pas</strong>. De même, <span class="arithmatex">\(\displaystyle \sum_{k=6}^{2}k=0\)</span> car c'est une somme qui n'accumule aucune valeur. En effet, la condition d'arrêt de la boucle est déjà remplie avant de s'y engager.</p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Boucle non bornée</p>
+<p><strong>Une boucle non bornée est une boucle dont le nombre d’itérations n’est pas déterminé à l’avance.</strong>
+On ne peut pas savoir a priori combien de fois elle va s’exécuter : cela dépend d’une condition dynamique, qui évolue pendant l’exécution.</p>
+<div class="highlight"><pre><span></span><code><span class="k">while</span> <span class="ow">not</span> <span class="n">condition</span><span class="p">():</span>
+    <span class="n">faire_quelque_chose</span><span class="p">()</span>
+</code></pre></div>
+<p>ici, la terminaison dépend d'une condition dont on ne peut pas a priori prévoir à l'avance si elle termine.</p>
+</div>
+<h3 id="variant-de-boucle">Variant de boucle</h3>
+<div class="admonition abstract">
+<p class="admonition-title">Variant de boucle</p>
+<p><strong>Un variant de boucle est une quantité</strong> entière positive strictement décroissante qui assure la terminaison d'une boucle lorsqu'elle atteint une limite inférieure (souvent 0).</p>
+<p>Pour prouver qu'un algorithme se termine, on exhibe un variant de boucle et on montre que cette quantité est <strong>strictememnt</strong> décroissante, pour atteindre son minimum.</p>
+</div>
+<p>Puor FIND-MIN, Le variant de boucle est <span class="arithmatex">\(n-i-1\)</span>. et il assure la terminaison du programme.</p>
+<p>Quoi qu'il arrive, <span class="arithmatex">\(i\)</span> va aller de <span class="arithmatex">\(0\)</span> à <span class="arithmatex">\(n-1\)</span>, donc le variant de <span class="arithmatex">\(n-1\)</span> à 0, puis la boucle se termine, car elle n'est composée que d'instructions élémentaires qui se terminent. </p>
+<p>D'un point de vue général:</p>
+<div class="admonition abstract">
+<p class="admonition-title">Théorème</p>
+<p>Toute boucle bornée composée d'instructions se terminant se termine.</p>
+</div>
+<hr />
+<h3 id="correction-totale">Correction totale</h3>
+<div class="admonition abstract">
+<p class="admonition-title">Invariant de boucle</p>
+<p>Un <strong>invariant de boucle est une propriété</strong> qui :</p>
+<ol>
+<li><strong>Est vraie au début de chaque itération</strong> d’une boucle.  </li>
+<li><strong>Reste vraie</strong> après chaque itération.  </li>
+</ol>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Correction totale</p>
+<p>Plus formellement, si l’on note <span class="arithmatex">\(I\)</span> l’invariant, il doit vérifier :</p>
+<ul>
+<li><strong>Initialisation</strong> : Au moment d’entrer dans la boucle (avant la première itération), <span class="arithmatex">\(I\)</span> est vrai.  </li>
+<li><strong>Conservation</strong> : Si <span class="arithmatex">\(I\)</span> est vrai au début d’une itération, alors il reste vraie à la fin de cette itération (Donc au début de la suivante).</li>
+<li><strong>Terminaison</strong> : Quand la boucle s’arrête (car on a préalablement porouvé la terminaison ou on le prouve ici), la propriété <span class="arithmatex">\(I\)</span> et la condition de sortie permettent de conclure sur le résultat de l’algorithme.</li>
+</ul>
+<p>Ces trois phases nous permettent de prouver qu'une boucle fait bien ce qu'on voulait qu'elle fasse. On dit que la boucle est <strong>partiellement correcte</strong> lorsqu'on a démontré la conservation de l'invariant.</p>
+<p><strong>Une boucle partiellement correcte qui se termine est totalement correcte.</strong></p>
+<p>Un algorithme est dit <strong>totalement correct</strong> si toutes ses boucles sont totalement correctes.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Notations</p>
+<ul>
+<li><span class="arithmatex">\(T[i..j]\)</span> représente le sous-tableau de <span class="arithmatex">\(T\)</span> de l'indice <span class="arithmatex">\(i\)</span> à l'indice <span class="arithmatex">\(j\)</span> inclus.</li>
+<li><span class="arithmatex">\(T[i..i]\)</span> reprrésente le sous-tableau de <span class="arithmatex">\(T\)</span> ne comportant que <span class="arithmatex">\(T[i]\)</span>.</li>
+<li>Attention, contrairement aux slices, la borne supérieure est incluse.</li>
+</ul>
+</div>
+<p><strong>FORMULATION DE L'INVARIANT:</strong></p>
+<p>Formulons l'invariant pour le problème du minimum et prouvons la correction de notre programme:</p>
+<p>"Avant l'itération <span class="arithmatex">\(i\)</span>, <span class="arithmatex">\(mini\)</span> contient le minimum de <span class="arithmatex">\(T[0..i-1]\)</span>"</p>
+<p><strong>INITIALISATION</strong></p>
+<ol>
+<li>
+<p>Si le tableau n'a qu'un élément, la boucle ne s'exécute pas et le minimum est correctement renvoyé. </p>
+</li>
+<li>
+<p>Si le tableau a au moins un élément, <span class="arithmatex">\(i=1\)</span> et <span class="arithmatex">\(mini\)</span> est bien le minimum de <span class="arithmatex">\(T[0..0]\)</span>, le tableau constitué d'un seul élément.</p>
+</li>
+</ol>
+<p><strong>L'invariant est donc vérifié pour <span class="arithmatex">\(\bold{i=1}\)</span>.</strong></p>
+<p><strong>CONSERVATION</strong>
+On suppose que pour <span class="arithmatex">\(i\ge1\)</span> quelconque, l'invariant est vrai.</p>
+<p>Donc en début d'itération <span class="arithmatex">\(i\)</span>, "<span class="arithmatex">\(mini\)</span> est le minimum de <span class="arithmatex">\(T[0..i-1]\)</span>" est vrai</p>
+<p>On veut alors prouver qu'après une itération, "<span class="arithmatex">\(mini\)</span> est le minimum de <span class="arithmatex">\(T[0..i]\)</span>" est vrai</p>
+<p>Déroulons l'algorithme:
+- Si <span class="arithmatex">\(T[i] \gt mini\)</span>, alors <span class="arithmatex">\(mini\)</span> est aussi le <span class="arithmatex">\(minimum\)</span> de <span class="arithmatex">\(T[0..i]\)</span> et l'invariant est vérifié en sortie d'itération, car on ne fait rien dans ce cas.
+- Sinon, <span class="arithmatex">\(T[i] \le mini\)</span>, et donc <span class="arithmatex">\(mini\)</span> n'est pas le minimum de <span class="arithmatex">\(T[0..i]\)</span>. Mais nous rétablissons immédiatement l'invariant en affectant <span class="arithmatex">\(T[i]\)</span> à <span class="arithmatex">\(mini\)</span> qui devient bien le minimum de <span class="arithmatex">\(T[0..i]\)</span>.</p>
+<p>Dans tous les cas, en sortie de boucle, "<span class="arithmatex">\(mini\)</span> est le minimum de T[0..i]" est vrai, ce que nous voulions démontrer.</p>
+<p>L'invariant est donc conservé. L'algorithme est partiellement correct.</p>
+<p><strong>TERMINAISON</strong>
+Nous avons déjà prouvé la terminaison de l'algorithme.</p>
+<p>Lors de sa dernière itération, <span class="arithmatex">\(i=n-1\)</span> et l'invariant reste vrai pour <span class="arithmatex">\(i=n\)</span> par conservation.</p>
+<p>Donc mini est le minimum de <span class="arithmatex">\(T[0..n-1]\)</span></p>
+<p>Notre algorithme de recherche de minimum est donc totalement correct.</p>
+<hr />
+<h1 id="le-probleme-de-lindice-minimum-argmin">Le problème de l'indice minimum - ARGMIN</h1>
+<div class="admonition abstract">
+<p class="admonition-title">Description du problème</p>
+<p><strong>Il s'agit de trouver l'indice du minimum d'un tableau <span class="arithmatex">\(\bold{T}\)</span> à partir d'un indice <span class="arithmatex">\(\bold{k}\)</span></strong></p>
+<p>Considérons un tableau <span class="arithmatex">\(T\)</span> de taille <span class="arithmatex">\(n&gt;0\)</span> (pré-condition identique)</p>
+<p>Le problème est de trouver l'indice <span class="arithmatex">\(i\)</span> du plus petit <span class="arithmatex">\(T[i]\)</span> pour <span class="arithmatex">\(i\)</span> parcourant l'intervalle <span class="arithmatex">\([\![k;n-1]\!]\)</span></p>
+<p>Voici la notation associée à ce problème:</p>
+<div class="arithmatex">\[\huge \argmin_{i \in [\![k;n-1]\!]} T[i]\]</div>
+<p>Considérons l'entrée T=[0, 9, 3, 19] et k=1</p>
+<p>La sortie de l'algorithme pour cette entrée est 2, car à partir de l'indice 1, 3 est le minimum, et son indice dans le tableau est 2.</p>
+</div>
+<p>Nous voulons que cet algorithme résoud ARGMIN</p>
+<div class="highlight"><pre><span></span><code><span class="gh"># Algorithme - Calculer l&#39;indice du minimum de T à partir de l&#39;indice k</span>
+<span class="gh"># Entrées:</span>
+   Un tableau T de taille n
+   Un indice de départ k
+<span class="gh"># Sortie: Le plus petit élément de T</span>
+<span class="gh"># Précondition: n&gt;0</span>
+<span class="k">1.</span> imini ← k
+<span class="k">2.</span> Pour i allant de k+1 à n-1:
+<span class="k">3.</span>     Si T[i] &lt; T[imini]
+<span class="k">4.</span>          imini ← i
+<span class="k">3.</span> Retourner mini
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Exercice</p>
+<p>Reprendre la méthode précédente pour prouver la correction totale de l'algorithme de recherche d'indice minimum:</p>
+<ol>
+<li>Formulation de l'invariant</li>
+<li>Initialisation</li>
+<li>Conservation</li>
+<li>Terminaison</li>
+</ol>
+</div>
+<h2 id="introduction-a-la-complexite-en-temps">Introduction à la complexité en temps</h2>
+<p>Ici, il s'agit d'estimer le temps que va prendre un algorithme à s'exécuter. Il existe aussi une complexité spatiale, mais nous ne l'aborderons pas.</p>
+<p>Dans le cadre de ce cours, on assimilera le temps au <strong>nombre d'instructions élémentaires</strong> nécessaires à l'exécution d'un algorithme, <strong>dans le pire des cas</strong>. Le pire des cas est celui d'une entrée qui va nécessiter le plus d'instructions.</p>
+<p>Il existe d'autres cas de figure que le pire des cas, mais nous ne les aborderons pas.</p>
+<p>Lorsque nous parlerons de complexité, nous entendrons donc toujours <strong>complexité temporelle dans le pire des cas</strong>.</p>
+<div class="admonition abstract">
+<p class="admonition-title">Taille d'une instance</p>
+<p>La taille d'une instance d'un problème algorithmique est une grandeur  représentant une mesure pertinente (nombre d'éléments, nombre de bits, longueur d'une chaîne, etc.) associée aux données en entrée de l'algorithme.</p>
+<p>En pratique, la taille est souvent notée <span class="arithmatex">\(n\)</span>. <span class="arithmatex">\(n\)</span> est choisie de façon à être fonction de la quantité de travail que doit effectuer l'algorithme.</p>
+<p>Pour le problème du minimum, la taille de l'instance est celle du tableau en entrée.</p>
+</div>
+<div class="highlight"><pre><span></span><code><span class="gh"># Algorithme - Calculer le minimum de T[0..n-1]</span>
+<span class="k">1.</span> mini ← T[0]
+<span class="k">2.</span> Pour i allant de 1 à n-1:
+<span class="k">3.</span>     Si T[i] &lt; e
+<span class="k">4.</span>          mini ← T[i]
+<span class="k">3.</span> Retourner mini
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Pire des cas</p>
+<ul>
+<li>
+<p>Quelle est la caractéristique d'une instance représentant le pire des cas pour le problème du minimum?</p>
+</li>
+<li>
+<p>A côté de chaque instruction de ce programme, indiquer le nombre de fois où elle sera exécutée en fonction de la taille <span class="arithmatex">\(n\)</span> de l'instance.</p>
+</li>
+<li>
+<p>En déduire le nombre d'instructions élémentaires <span class="arithmatex">\(T(n)\)</span> exécutées par l'algorithme dans le pire des cas en fonction de <span class="arithmatex">\(n\)</span></p>
+<ul>
+<li>Vous devez trouver <span class="arithmatex">\(T(n)=3n+2\)</span></li>
+</ul>
+</li>
+</ul>
+<p>Attention: On note souvent <span class="arithmatex">\(T(n)\)</span> le temps en fonction de <span class="arithmatex">\(n\)</span>. Aussi en français, on appelle souvent les tableaux <span class="arithmatex">\(T\)</span>. Ce qui peut porter à confusion.</p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Complexités élémentaires</p>
+<ul>
+<li>Lorsqu'on trouve que <span class="arithmatex">\(T(n)=a\)</span>, on dit que l'algorithme est à coût constant.<ul>
+<li>On dira aussi que la complexité est un <span class="arithmatex">\(\mathcal{O}(1)\)</span> (grand O de 1)</li>
+</ul>
+</li>
+<li>Lorsqu'on trouve que <span class="arithmatex">\(T(n)=an+b\)</span>, on dit que l'algorithme a un coût linéaire.<ul>
+<li>On dira aussi que la complexité est un <span class="arithmatex">\(\mathcal{O}(n)\)</span> (grand O de n)</li>
+</ul>
+</li>
+<li>Lorsqu'on trouve que <span class="arithmatex">\(T(n)=an^2+bn+c\)</span>, on dit que l'algorithme a un coût quadratique.<ul>
+<li>On dira aussi que la complexité est un <span class="arithmatex">\(\mathcal{O}(n^2)\)</span> (grand O de <span class="arithmatex">\(n\)</span> carré)</li>
+</ul>
+</li>
+</ul>
+<p>Si un algorithme est en <span class="arithmatex">\(\mathcal{O}(n^2)\)</span>, ça veut dire que sa fonction de temps est <strong>dominée</strong> par <span class="arithmatex">\(n^2\)</span>. Elle ne peut pas être plus "grande".</p>
+<p>Ces 3 types de complexités font partie de la même classe de complexité. On l'appelle la classe P. Elle englobe tous les algorithmes qui calculent en temps polynômial.</p>
+</div>
+<p>Le petit outil ci-dessous permet de comparer la croissance de 2 fonctions quand <span class="arithmatex">\(x\)</span> tend vers l'infini positif. C'est ce qui nous intéresse en complexité.</p>
+<p>Sélectionnez donc <span class="arithmatex">\(x^2\)</span> et <span class="arithmatex">\(2^x\)</span>. Lorsque vous appuyez sur Démarrer, une animation se lance. Vous visionnez alors la courbe représentative des fonctions à travers une fenêtre de largeur 2 qui se déplace vers la droite sur l'axe des abscisses. Vous pouvez régler la vitesse de déplacement de cette fenêtre avec le curseur.</p>
+<p>Attention, la hauteur du graphique ne change pas mais ymax croît en permanence.
+Toutes ces fonctions sont croissantes et ne cesseront jamais de l'être. Elles tendent toutes vers <span class="arithmatex">\(+\infin\)</span> quand <span class="arithmatex">\(x\)</span> tend vers <span class="arithmatex">\(+\infin\)</span>.</p>
+<script type="module" src="/javascripts/plotter.js" defer></script>
+
+<p><complexity></complexity></p>
+<p>On peut se rendre compte que plus <span class="arithmatex">\(x\)</span> grandit, plus certaines fonctions sont "négligeables" devant d'autres. Ca explique par exemple pourquoi on ne conservera que l'information <span class="arithmatex">\(n^2\)</span> dans l'expression <span class="arithmatex">\(an^2+bn+c\)</span> quand on s'occupe de valeurs de <span class="arithmatex">\(n\)</span> tendant vers <span class="arithmatex">\(+\infin\)</span>. Car le reste est négligeable par rapport à l'expression <span class="arithmatex">\(an^2\)</span>. Il y a même une notation pour ça. <span class="arithmatex">\(o(n^2)\)</span> (petit o de <span class="arithmatex">\(n^2\)</span>) représente les fonctions <strong>négligeables</strong> devant <span class="arithmatex">\(n^2\)</span>. Toutes ces fonctions s'éloignent infiniment l'une de l'autre à mesure que x tend vers l'infini.</p>
+<div class="admonition question">
+<p class="admonition-title">Complexité du minimum</p>
+<p>Quelle est la complexité de l'algorithme de recherche de minimum?</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercice</p>
+<p><strong>Objectif :</strong> Étant donné un tableau de taille <span class="arithmatex">\(n\)</span>, afficher toutes les paires possibles d’éléments.</p>
+<p>Entrée : Un tableau T[0..n-1]
+Sortie <em>imprécise</em> : Toutes les paires d’éléments possibles</p>
+<p>Voici 2 algorithmes possibles selon qu'on considère ou non des répétitions.</p>
+<p><strong>Algo 1</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> Pour i allant de 0 à n-1 :
+<span class="k">2.</span>     Pour j allant de 0 à n-1 :
+<span class="k">3.</span>         afficher(T[i], T[j])
+</code></pre></div>
+<ol>
+<li>Ecrivez l'affichage obtenu pour T=[2, 4, 6]</li>
+<li>Estimer <span class="arithmatex">\(T(n)\)</span> et en déduire la complexité de l'Algo1</li>
+</ol>
+<p><strong>Algo 2</strong></p>
+<div class="highlight"><pre><span></span><code><span class="k">1.</span> Pour i allant de 0 à n-1 :
+<span class="k">2.</span>     Pour j allant de i à n-1 :
+<span class="k">3.</span>         afficher(T[i], T[j])
+</code></pre></div>
+<ol>
+<li>Ecrivez l'affichage obtenu pour T=[2, 4, 6]</li>
+<li>Estimer <span class="arithmatex">\(T(n)\)</span> et en déduire la complexité de l'Algo2</li>
+</ol>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Moyenne mobile d'un tableau</p>
+<p>Les moyennes mobiles sont utilisées dans divers domaines pour lisser des fluctuations à court terme et ainsi révéler clairement les tendances globales à moyen ou long terme. Par exemple, en finance, elles servent à identifier les tendances du marché boursier sur des périodes précises. En météorologie, elles permettent de mieux discerner les tendances saisonnières des températures ou précipitations. En santé publique, elles facilitent le suivi des épidémies, en compensant les variations dues aux week-ends ou aux jours fériés. De même, en électronique et traitement du signal, elles sont utilisées pour filtrer le bruit des données issues de capteurs. Enfin, en économie et en marketing digital, elles aident à repérer les cycles économiques et à analyser le trafic web pour une meilleure prise de décision stratégique.</p>
+<p><strong>Définition :</strong><br />
+Étant donné un tableau de nombres réels <span class="arithmatex">\( T[0..n-1] \)</span>, le tableau <span class="arithmatex">\(M\)</span> de <strong>moyennes mobiles</strong> de taille <span class="arithmatex">\( k \)</span> est défini ainsi:</p>
+<div class="arithmatex">\[
+M[i] = \frac{T[i+k-1] + T[i+k-2] + \dots + T[i]}{k}
+\]</div>
+<p>Ainsi, le tableau des moyennes mobiles <span class="arithmatex">\( M \)</span> aura pour taille <span class="arithmatex">\( n-k+1 \)</span>.</p>
+<hr />
+<p><strong>Question 1 :</strong><br />
+Calculer les tableaux de moyennes mobiles <span class="arithmatex">\(M\)</span> pour le tableau T suivant :</p>
+<ul>
+<li><span class="arithmatex">\( T = [2, 4, 6, 11, 10, 12] \)</span><ol>
+<li>pour <span class="arithmatex">\( k = 3 \)</span></li>
+<li>pour <span class="arithmatex">\( k = 4 \)</span></li>
+</ol>
+</li>
+</ul>
+<hr />
+<p><strong>Question 2 :</strong><br />
+Écrire en pseudocode simple un algorithme permettant de calculer la moyenne mobile d’un tableau <span class="arithmatex">\( T[0..n-1] \)</span> avec une fenêtre de taille <span class="arithmatex">\( k \)</span>.</p>
+<hr />
+<p><strong>Question 3 :</strong><br />
+Ecrivez une fonction permettant de tester votre pseudo code.</p>
+<hr />
+<p><strong>Question 4 :</strong><br />
+Étudier et exprimer la complexité temporelle de l’algorithme en fonction des variables <span class="arithmatex">\( n \)</span> et <span class="arithmatex">\( k \)</span>.</p>
+<hr />
+<p><strong>Question 5 (Bonus) :</strong><br />
+Proposer une amélioration de l'algorithme pour réduire sa complexité temporelle, en expliquant le principe et la complexité obtenue.</p>
+</div>
+<hr />
+<h2 id="annexe-initiation-a-la-recurrence">Annexe: Initiation à la récurrence</h2>
+<p>La preuve de correction partielle à l'aide de l'invariant de boucle est appelé un raisonnement inductif, ou récurrent. C'est simple mais ça peut paraître abscons parce que c'est un peu plus long que ce dont vous avez l'habitude. Donc ça peut prendre un temps avant de se rendre compte qu'au final c'est simple. Il faut juste persévérer.</p>
+<p>Ce raisonnement en 3 étapes sert à montrer qu'une <strong>propriété dépendant d'un entier naturel</strong> est vraie tout le temps à partir d'un entier de départ.</p>
+<p>Prenons un exemple concret qui ne nécessite que de savoir manipuler des expressions mathématiques élémentaires.</p>
+<p>On veut montrer que la propriété <span class="arithmatex">\(P_n\)</span>: "La somme <span class="arithmatex">\(S_n\)</span> des <span class="arithmatex">\(n\)</span> premiers entiers impairs est égale à <span class="arithmatex">\(n^2\)</span>" est toujours vraie pour <span class="arithmatex">\(n \ge 1\)</span></p>
+<h3 id="1-initialisation">1. INITIALISATION</h3>
+<p><span style="color:red;font-weight:bold;">
+On veut montrer que c'est vrai au début
+</span></p>
+<p>Pour <span class="arithmatex">\(n=1\)</span>, <span class="arithmatex">\(S_1 = 1 = 1^2\)</span> donc <span class="arithmatex">\(P_1\)</span> est vraie
+Pour <span class="arithmatex">\(n=2\)</span>, <span class="arithmatex">\(S_2 = 1 + 3 = 4 = 2^2\)</span> donc <span class="arithmatex">\(P_2\)</span> est vraie
+Pour <span class="arithmatex">\(n=3\)</span>, <span class="arithmatex">\(S_2 = 1 + 3 + 5 = 9 = 3^2\)</span> donc <span class="arithmatex">\(P_3\)</span> est vraie</p>
+<p><strong>C'est donc vrai au début</strong>. (en réalité, il ne suffit que de le montrer pour <span class="arithmatex">\(n=1\)</span>, mais le faire plusieurs fois permet de s'approprier un peu les propriétés qu'on manipule)</p>
+<h3 id="2-conservation-heredite">2. CONSERVATION / Hérédité</h3>
+<p><span style="color:red;font-weight:bold;">
+On veut montrer que si jamais <span class="arithmatex">\(P_n\)</span> est vraie pour un <span class="arithmatex">\(n\)</span> quelconque, alors ça implique automatiquement que <span class="arithmatex">\(P_{n+1}\)</span> est vraie.
+</span></p>
+<p>On va donc supposer que <span class="arithmatex">\(P_n\)</span> est vraie pour un <span class="arithmatex">\(n\)</span> quelconque.</p>
+<p>Donc que <span class="arithmatex">\(S_n=1+3+....+(2n-1) = n^2\)</span></p>
+<p><strong>Ce qu'on veut démontrer</strong>, c'est donc que sous cette hypothèse on aura automatiquement <span class="arithmatex">\(P_{n+1}\)</span> vraie. Donc que <span class="arithmatex">\(S_{n+1} = (n+1)^2\)</span></p>
+<p>Calculons donc <span class="arithmatex">\(S_{n+1}\)</span>, en se disant qu'on veut faire apparaître <span class="arithmatex">\(S_n\)</span> pour pouvoir utiliser notre hypothèse (sinon elle sert à rien, c'est ridicule).</p>
+<p><span class="arithmatex">\(S_{n+1} = 1+...+(2n+1)\)</span>
+<span class="arithmatex">\(S_{n+1} = 1+...+(2n-1)+(2n+1)\)</span>
+<span class="arithmatex">\(S_{n+1} = S_n +(2n+1)\)</span></p>
+<p>Or, <span class="arithmatex">\(P_n\)</span> est Vraie par hypothèse. Donc <span class="arithmatex">\(S_n= n^2\)</span></p>
+<p><span class="arithmatex">\(S_{n+1} = n^2 + 2n + 1\)</span></p>
+<p>On reconnaît une identité remarquable, donc:</p>
+<p><span class="arithmatex">\(S_{n+1} = (n+1)^2\)</span></p>
+<p>C'est justement ce qu'on voulait démontrer!</p>
+<p>On vient donc de prouver que <strong>si jamais <span class="arithmatex">\(P_n\)</span> est vraie un jour, alors <span class="arithmatex">\(P_{n+1}\)</span> elle nécessairement vraie aussi</strong></p>
+<h3 id="3-conclusion">3. CONCLUSION</h3>
+<p><span class="arithmatex">\(P_1\)</span> est vraie. Donc nécessairement, <span class="arithmatex">\(P_2\)</span> est vraie. Donc nécessairement, <span class="arithmatex">\(P_3\)</span> est vraie. Donc nécessairement, <span class="arithmatex">\(P_4\)</span> est vraie, etc...</p>
+<p><img alt="alt text" src="../image.png" /></p>
+<p>Il est important d'initialiser, car il faut que ça soit vrai au moins une fois pour que ça soit "infiniment vrai" par conservation/hérédité.</p>
+<p><strong>Si <span class="arithmatex">\(P_1\)</span> est vraie et que <span class="arithmatex">\(P_n \implies P_{n+1}\)</span>, alors <span class="arithmatex">\(P_n\)</span> est vraie pour tout <span class="arithmatex">\(n \ge 1\)</span></strong></p>
+<p>Cette propriété (qui se démontre elle-même grâce aux axiômes fondamentaux des mathématiques) est au coeur du raisonnement.</p>
+<p>On peut donc affirmer le coeur léger que "La somme <span class="arithmatex">\(S_n\)</span> des <span class="arithmatex">\(n\)</span> premiers entiers impairs est égale à <span class="arithmatex">\(n^2\)</span> pour tout <span class="arithmatex">\(n \ge 1\)</span>"</p>
+<div class="admonition question">
+<p class="admonition-title">Exercice</p>
+<p>Démontrer que <span class="arithmatex">\(P_n\)</span> = "La somme <span class="arithmatex">\(S_n\)</span> des n premiers entiers est égale à <span class="arithmatex">\(\displaystyle \frac{n(n+1)}{2}\)</span>" est vraie pour n&gt;1"</p>
+<p>Pour ce faire, complétez la démonstration suivante:</p>
+</div>
+<p><strong>1. INITIALISATION</strong></p>
+<p>Pour <span class="arithmatex">\(n=1\)</span>, <span class="arithmatex">\(S_1 = \dots\)</span></p>
+<p><strong>C'est donc vrai au début</strong></p>
+<p><strong>2. CONSERVATION</strong></p>
+<p><strong>On veut montrer que si jamais <span class="arithmatex">\(P_n\)</span> est vraie pour un <span class="arithmatex">\(n\)</span> quelconque, alors ça implique automatiquement que <span class="arithmatex">\(P_{n+1}\)</span> est vraie.</strong></p>
+<p>On va donc supposer que <span class="arithmatex">\(P_n\)</span> est vraie pour un <span class="arithmatex">\(n\)</span> quelconque.</p>
+<p>Donc que <span class="arithmatex">\(S_n= \dots\dots\dots\dots\dots\dots\)</span></p>
+<p><strong>Ce qu'on veut démontrer</strong>, c'est que sous cette hypothèse, <span class="arithmatex">\(P_{n+1}\)</span> est vraie. 
+Donc que <span class="arithmatex">\(S_{n+1} = \dots\dots\dots\dots\dots\)</span></p>
+<p>Calculons donc <span class="arithmatex">\(S_{n+1}\)</span></p>
+<p><span class="arithmatex">\(S_{n+1} = \dots\dots\dots\dots\dots\dots\)</span></p>
+<div class="arithmatex">\[\dots\dots\dots\dots\]</div>
+<p>Or, <span class="arithmatex">\(P_n\)</span> est Vraie par hypothèse. Donc <span class="arithmatex">\(S_n= n^2\)</span></p>
+<p><span class="arithmatex">\(S_{n+1} = \dots\dots\dots\dots\dots\)</span></p>
+<div class="arithmatex">\[\dots\dots\dots\dots\]</div>
+<p>C'est justement ce qu'on voulait démontrer!</p>
+<p>On vient donc de prouver que <strong>si jamais <span class="arithmatex">\(P_n\)</span> est vraie un jour, alors <span class="arithmatex">\(P_{n+1}\)</span> est nécessairement vraie aussi</strong></p>
+<h3 id="3-conclusion_1">3. CONCLUSION</h3>
+<p><span class="arithmatex">\(P_1\)</span> est vraie et pour tout <span class="arithmatex">\(n\)</span>, <span class="arithmatex">\(P_n \implies P_{n+1}\)</span></p>
+<p>La somme <span class="arithmatex">\(S_n\)</span> des n premiers entiers est donc égale à <span class="arithmatex">\(n(n+1)/2\)</span> pour tout <span class="arithmatex">\(n&gt;1\)</span>.</p>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 19, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Matthieu Marchand
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.525ec568.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="https://mkdocs-logic.forge.apps.education.fr/javascripts/bundle.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/rod2ik/cdn@main/mkdocs/javascripts/mkdocs-graphviz.js"></script>
+      
+    
+  </body>
+</html>
