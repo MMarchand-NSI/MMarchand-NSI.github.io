@@ -156,8 +156,7 @@ function animate(id) {
 
 export function init() {
 
-        debugger;
-
+        console.log('plotter loaded');
         let mainTag = document.getElementsByTagName('complexity');
 
         if ( mainTag=== null) {
