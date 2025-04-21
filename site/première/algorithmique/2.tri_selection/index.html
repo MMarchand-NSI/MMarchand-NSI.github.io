@@ -783,6 +783,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.glouton/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Algorithmes gloutons
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2159,8 +2180,17 @@
 <p class="admonition-title">Trier</p>
 <p>Un tableau est dit trié lorsque ses éléments sont ordonnés (du plus petit au plus grand si ça n'est pas précisé).</p>
 <p>Un tableau dont les éléments ne sont pas ordonnés n'est pas trié. (ça peut paraître bête mais c'est important)</p>
+<p>Lorsqu'on trie un tableau T, le tableau résultat doit:
+- Etre trié
+- Etre une permutation du tableau initial</p>
+<p>Une permutation d'un tableau T est un tableau contenant exactement les mêmes éléments avec la même multiplicité, indépendamment de leur ordre.</p>
+<p>Par exemple:</p>
+<ul>
+<li>[1, 9, 7] est une premutation de [9, 1, 7]</li>
+<li>[2, 8, 7, 8] est une permutation de [8, 2, 8, 7]</li>
+</ul>
 <p>Il existe plusieurs méthodes pour trier. Cette opération est fondamentale en informatique.</p>
-<p>Les deux méthodes ci-dessous permettent de le faire à la façon dont on peut trier un jeu de cartes.</p>
+<p>Les méthodes ci-dessous permettent de le faire à la façon dont on peut trier un jeu de cartes.</p>
 <p>Il en existe d'autres bien plus performantes</p>
 </div>
 <hr />
@@ -2177,29 +2207,53 @@
 </ul>
 <p><img alt="alt text" src="../image-2.png" /></p>
 </div>
-<p>L'invariant est ici composé de 2 propriétés:
-1. Les cartes de la main gauches sont toutes inférieures ou égales à celles de la main droite
-2. Les cartes de la main gauche sont triées</p>
+<p>L'invariant est ici composé de 3 propriétés:</p>
+<ol>
+<li>Les cartes de la main gauches sont toutes inférieures ou égales à celles de la main droite</li>
+<li>Les cartes de la main gauche sont triées</li>
+<li>Les cartes de la main gauche et de la main droite sont une permutation du tableau initial</li>
+</ol>
 <p><strong>INITIALISATION</strong>
-L'invariant est vrai au début car ma main gauche est vide (elle n'est pas désordonnée, donc triée) et toutes les cartes de la main droite sont supérieures aux 0 cartes de ma main gauche. Cette dernière affirmation à première vue étrange vient qu'en logique, c'est vrai parce que rien dans le vide ne permet de l'infirmer. De la même manière, "Tous les portables sont éteints dans la pièce" est vrai même s'il n'y a pas de portable dans la pièce. Les anglophones appellent ça une "vacuous truth", une vérité émanant de l'incapacité du vide à infirmer.</p>
+L'invariant est vrai au début car :</p>
+<ol>
+<li>
+<p>Toutes les cartes de la main droite sont supérieures aux 0 cartes de ma main gauche. Cette dernière affirmation à première vue étrange vient qu'en logique, c'est vrai parce que rien dans le vide ne permet de l'infirmer. De la même manière, "Tous les portables sont éteints dans la pièce" est vrai même s'il n'y a pas de portable dans la pièce. Les anglophones appellent ça une "vacuous truth", une vérité émanant de l'incapacité du vide à infirmer. (1)</p>
+</li>
+<li>
+<p>Ma main gauche est vide donc elle n'est pas désordonnée. Elle est donc triée.</p>
+</li>
+<li>
+<p>Dans ma main droite, j'ai l'ensemble du jeu de cartes, ni plus ni moins,donc une permutation du jeu de cartes.</p>
+</li>
+</ol>
 <p><strong>CONSERVATION DE L'INVARIANT</strong>
-A un moment quelconque de l'algorithme, imaginons l'invariant vrai, avec <span class="arithmatex">\(m\)</span> cartes dans la main droite triée, et n cartes dans la main gauche.
-Ces n cartes sont donc toutes plus grandes ou égales que les cartes de la main gauche.</p>
-<p>Si je prends la plus petite carte de la main droite, elle reste donc supérieure à celles de la main gauche.
-Si je la place sur ma main gauche, de ce fait ma main gauche reste triée
-De plus, les cartes de ma main droite sont encore supérieures ou égales à celles de la main gauche.</p>
-<p>Après avoir appliqué une étape de l'algorithme, on a donc prouvé que l'invariant est conservé.</p>
-<p><strong>CONCLUSION</strong>
-L'invariant est vrai au départ, et il est conservé à chaque étape quelconque de l'algorithme.
-C'est donc qu'il est aussi vrai à la fin de l'algorithme.
-A la fin de l'algorithme, toutes les cartes sont dans la main gauche et l'invariant est vrai.
-C'est donc que dans ma main gauche, toutes les cartes sont triées.</p>
+A un moment quelconque de l'algorithme, imaginons l'invariant vrai.</p>
+<ol>
+<li>Les cartes de ma main gauche sont inférieures à celles de la main droite</li>
+<li>La main gauche est triée</li>
+<li>L'ensemble des cartes en ma possession est une permutation du jeu de cartes</li>
+</ol>
+<p>Si je prends la carte de la main droite, par (1.), elle reste donc supérieure à celles de la main gauche.</p>
+<p>Dans le processus, je ne perds ni ne gagne de cartes (3. reste vraie).</p>
+<p>De plus, les cartes de ma main droite sont encore supérieures ou égales à celles de la main gauche (1. reste vraie)</p>
+<p>De ce fait, si je la place sur ma main gauche triée, ma main gauche reste triée (2. reste vraie)</p>
+<p>Après avoir appliqué une étape de l'algorithme en supposant l'invariant vrai, on a donc prouvé que l'invariant est conservé.</p>
+<p><strong>TERMINAISON</strong></p>
+<p>La main droite perd exactement une carte par tour ; après n tours, elle est vide. On ne peut plus déplacer de cartes. Donc l'algorithme se termine.</p>
+<p>L'invariant est vrai au départ, et il est conservé à chaque étape quelconque de l'algorithme.
+C'est donc qu'il est aussi vrai à la fin de l'algorithme.</p>
+<p>A la fin de l'algorithme, toutes les cartes sont dans la main gauche et l'invariant est vrai.</p>
+<p>C'est donc que ma main gauche contient une permutation triée du jeu de cartes.</p>
 <div class="admonition question">
 <p class="admonition-title">Implémentation d'après l'exemple donné</p>
 <p>Ecrire une fonction <code>tri_selection(main_gauche: list[int], main_droite: list[int])</code> qui applique cet algorithme.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">tri_selection</span><span class="p">(</span><span class="n">main_gauche</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">main_droite</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Applique le tri par sélection tel que présenté</span>
+<span class="sd">    Applique le tri par sélection tel que présenté.</span>
+
+<span class="sd">    TANT QUE &quot;la main droite n&#39;est pas vide&quot;</span>
+<span class="sd">       PRENDRE LE MINIMUM DE LA MAIN DROITE</span>
+<span class="sd">       L&#39;AJOUTER A LA FIN DE LA MAIN GAUCHE</span>
 
 <span class="sd">    &gt;&gt;&gt; g = []</span>
 <span class="sd">    &gt;&gt;&gt; d = [5, 3, 9, 6]</span>
@@ -2212,11 +2266,12 @@ C'est donc que dans ma main gauche, toutes les cartes sont triées.</p>
 </code></pre></div>
 </div>
 <hr />
+<p>Nous allons maintenant faire exactement la même chose, mais avec les notations usuelles.</p>
 <div class="admonition abstract">
 <p class="admonition-title">Algorithme usuel</p>
 <ul>
 <li>On dispose d'un tableau <span class="arithmatex">\(T\)</span> de taille <span class="arithmatex">\(n\)</span> noté <span class="arithmatex">\(T[0..n-1]\)</span>  </li>
-<li><strong>Pour</strong> <span class="arithmatex">\(i\)</span> allant de <span class="arithmatex">\(0\)</span> à <span class="arithmatex">\(n-2\)</span><ul>
+<li><strong>Pour</strong> <span class="arithmatex">\(i\)</span> allant de <span class="arithmatex">\(0\)</span> à <span class="arithmatex">\(\color{red}n-2\)</span><ul>
 <li><span class="arithmatex">\(\displaystyle imin = \argmin_{j \in [i, n-1]} T[j]\)</span></li>
 <li>échanger <span class="arithmatex">\(T[i]\)</span> et <span class="arithmatex">\(T[imin]\)</span></li>
 </ul>
@@ -2227,38 +2282,121 @@ C'est donc que dans ma main gauche, toutes les cartes sont triées.</p>
 <div class="admonition hint">
 <p class="admonition-title">Notations</p>
 <ul>
-<li><span class="arithmatex">\(T[i..j]\)</span> reprrésente le sous-tableau de <span class="arithmatex">\(T\)</span> de l'indice <span class="arithmatex">\(i\)</span> à l'indice <span class="arithmatex">\(j\)</span> inclus.</li>
+<li><span class="arithmatex">\(T[i..j]\)</span> représente le sous-tableau de <span class="arithmatex">\(T\)</span> de l'indice <span class="arithmatex">\(i\)</span> à l'indice <span class="arithmatex">\(j\)</span> inclus.
+        - Si <span class="arithmatex">\(i&gt;j\)</span>, alors il s'agit du tableau vide.</li>
 <li><span class="arithmatex">\(T[i..j] \le T[k..l]\)</span> signifie que toutes les valeurs du tableau de gauche sont inférieures ou égales aux valeurs du tableau de droite</li>
+<li><span class="arithmatex">\(T[i] \le T[j..k]\)</span> signifie que la valeur <span class="arithmatex">\(T[i]\)</span> est inférieure ou égale à toutes les valeurs de <span class="arithmatex">\(T[j..k]\)</span></li>
 <li><span class="arithmatex">\(T[i..i]\)</span> représente le sous-tableau à 1 élément</li>
 <li>L'opérateur + sur des tableaux est la concaténation</li>
 </ul>
 </div>
-<p><strong>FORMULATION DE L'INVARIANT:</strong>
-Au début de chaque itération <span class="arithmatex">\(i\)</span>, <span class="arithmatex">\(T[0..i-1]\)</span> est trié et <span class="arithmatex">\(T[0..i-1] \le T[i..n-1]\)</span></p>
-<p>Preuve de correction:</p>
+<p><strong>FORMULATION DE L'INVARIANT:</strong></p>
+<p>On reprend l'invariant précédent avec les notations.</p>
+<p>Au début de chaque itération <span class="arithmatex">\(i\)</span>:</p>
+<ol>
+<li><span class="arithmatex">\(T[0..i-1] \le T[i..n-1]\)</span></li>
+<li><span class="arithmatex">\(T[0..i-1]\)</span> est trié</li>
+<li><span class="arithmatex">\(T[0..n-1]\)</span> est une permutation du tableau initial</li>
+</ol>
 <p><strong>INITIALISATION:</strong></p>
-<p>Pour i=0, <span class="arithmatex">\(T[0..-1]\)</span> est le tableau vide. Il est trié (il n'y a aucun désordre possible, donc par définition, il est trié).</p>
-<p>De plus, tous les éléments restants sont supérieurs aux 0 éléments du tableau vide.</p>
+<p>Pour i=0:</p>
+<p><span class="arithmatex">\(T[0..i-1] = T[0..-1] = []\)</span></p>
+<ol>
+<li>Tous les éléments de <span class="arithmatex">\([]\)</span> sont inférieurs aux éléments de <span class="arithmatex">\(T[0..n-1]\)</span> (Le tableau entier)</li>
+<li><span class="arithmatex">\(T[0..-1]\)</span> est le tableau vide. Il est trié.</li>
+<li><span class="arithmatex">\(T[0..n-1]\)</span> est une permutation de lui-même.</li>
+</ol>
 <p>L'invariant est donc vrai avant la première itération.</p>
 <p><strong>CONSERVATION</strong></p>
-<p>On suppose l'invariant vrai avant l'itération <span class="arithmatex">\(i\)</span></p>
-<p><span class="arithmatex">\(T[0..i-1]\)</span> est trié et <span class="arithmatex">\(T[0..i-1] \le T[i..n-1]\)</span>  (HYPOTHESE)</p>
-<p>On veut prouver que l'invariant est toujours vrai avant l'itération <span class="arithmatex">\(i+1\)</span>, donc que: <span class="arithmatex">\(T[0..i]\)</span> est trié et <span class="arithmatex">\(T[0..i] \le T[i+1..n-1]\)</span></p>
+<p>On suppose l'invariant vrai avant l'itération <span class="arithmatex">\(i\)</span>:</p>
+<table>
+<thead>
+<tr>
+<th>Indice</th>
+<th><span class="arithmatex">\(0\)</span></th>
+<th>…</th>
+<th><span class="arithmatex">\(i‑1\)</span></th>
+<th><span class="arithmatex">\(i\)</span></th>
+<th>…</th>
+<th><span class="arithmatex">\(n‑1\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Valeur</strong></td>
+<td><span class="arithmatex">\(T[0]\)</span></td>
+<td>…</td>
+<td><span class="arithmatex">\(T[i‑1]\)</span></td>
+<td><span class="arithmatex">\(T[i]\)</span></td>
+<td>…</td>
+<td><span class="arithmatex">\(T[n‑1]\)</span></td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li><span class="arithmatex">\(T[0..i-1] \le T[i..n-1]\)</span></li>
+<li><span class="arithmatex">\(T[0..i-1]\)</span> est trié</li>
+<li><span class="arithmatex">\(T[0..n-1]\)</span> est une permutation du tableau initial</li>
+</ol>
+<p>On veut prouver que l'invariant est toujours vrai avant l'itération <span class="arithmatex">\(i+1\)</span>, donc qu'à la fin de l'itération <span class="arithmatex">\(i\)</span> transformant <span class="arithmatex">\(T\)</span> en <span class="arithmatex">\(T'\)</span>:</p>
+<ul>
+<li><span class="arithmatex">\(T'[0..i] \le T'[i+1..n-1]\)</span></li>
+<li><span class="arithmatex">\(T'[0..i]\)</span> est trié</li>
+<li><span class="arithmatex">\(T'[0..n-1]\)</span> reste une permutation de <span class="arithmatex">\(T\)</span></li>
+</ul>
 <p>A l'itération <span class="arithmatex">\(i\)</span>, on calcule <span class="arithmatex">\(\displaystyle imin = \argmin_{k \in \![ i, n-1\!]} T[k]\)</span></p>
 <p>On a donc trouvé <span class="arithmatex">\(imin\)</span> tel qu'on peut décomposer le tableau en:</p>
-<p><span class="arithmatex">\(T[0..i-1] + T[i..i] + T[i+1..imin-1] + T[imin..imin] + T[imin+1..n-1]\)</span></p>
-<p>Lorsque nous intervertissons <span class="arithmatex">\(T[imin]\)</span> et <span class="arithmatex">\(T[i]\)</span>, notre tableau devient:</p>
-<p><span class="arithmatex">\(T[0..i-1] + T[imin..imin] + T[i+1..imin-1] + T[i..i] + T[imin+1..n-1]\)</span></p>
-<p>Or <span class="arithmatex">\(T[imin] \le T[i+1..imin-1]\)</span>, <span class="arithmatex">\(T[imin] \le T[imin+1..n-1]\)</span> et <span class="arithmatex">\(T[imin] \le T[i]\)</span>. Donc <span class="arithmatex">\(T[imin] \le T[i+1..n-1]\)</span> </p>
-<p>Mais <span class="arithmatex">\(T[imin]\)</span> est aussi plus grand ou égal aux éléments de <span class="arithmatex">\(T[0..i-1]\)</span> par HYPOTHESE car il appartient à l'origine à <span class="arithmatex">\(T[i..n-1]\)</span>.</p>
-<p>En le rattachant à <span class="arithmatex">\(T[0..i-1]\)</span>, on ne brise donc pas le tri.</p>
-<p>On a donc <span class="arithmatex">\(T[0..i]\)</span> trié et <span class="arithmatex">\(T[0..i] \le T[imin] \le T[i+1..n-1]\)</span></p>
+<table>
+<thead>
+<tr>
+<th>0</th>
+<th>…</th>
+<th>i‑1</th>
+<th>i</th>
+<th>i+1</th>
+<th>…</th>
+<th>imin‑1</th>
+<th>imin</th>
+<th>imin+1</th>
+<th>…</th>
+<th>n‑1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T[0]</td>
+<td>…</td>
+<td>T[i‑1]</td>
+<td>T[i]</td>
+<td>T[i+1]</td>
+<td>…</td>
+<td>T[imin‑1]</td>
+<td>T[imin]</td>
+<td>T[imin+1]</td>
+<td>…</td>
+<td>T[n‑1]</td>
+</tr>
+</tbody>
+</table>
+<p><span class="arithmatex">\(T = T[0..i-1] + {\color{red}T[i..i]} + T[i+1..imin-1] + {\color{blue}T[imin..imin]} + T[imin+1..n-1]\)</span></p>
+<p>Puis on intervertit <span class="arithmatex">\(T[imin]\)</span> et <span class="arithmatex">\(T[i]\)</span>, et notre tableau final devient:</p>
+<p><span class="arithmatex">\(T' = \underbrace{T[0..i-1] + {\color{blue}T[imin..imin]}}_{\large T'[0..i]} +  \underbrace{T[i+1..imin-1] + {\color{red}T[i..i]} + T[imin+1..n-1]}_{\large T'[i+1..n-1]}\)</span></p>
+<p>On note immédiatement que <strong>(3.) est conservé</strong> car on ne fait que transposer 2 éléments de <span class="arithmatex">\(T\)</span>. <span class="arithmatex">\(T'\)</span> reste donc une permutation de <span class="arithmatex">\(T\)</span>.</p>
+<p>Par définition de <span class="arithmatex">\(imin\)</span>, et sachant (1.)</p>
+<p><span class="arithmatex">\(T[0..i-1] \le T[imin..imin] \le T[i+1..imin-1] + T[imin+1..n-1]\)</span></p>
+<p>Donc <span class="arithmatex">\(T'[0..i] \le T'[i+1..n-1]\)</span>, et donc <strong>(1.) est conservé</strong>.</p>
+<p>Mais <span class="arithmatex">\(T[imin]\)</span> est aussi plus grand ou égal aux éléments triés de <span class="arithmatex">\(T[0..i-1]\)</span> car il appartient à <span class="arithmatex">\(T[i..n-1]\)</span>. Donc en le rattachant à <span class="arithmatex">\(T[0..i-1]\)</span>, on ne brise pas le tri. <span class="arithmatex">\(T'[0..i]\)</span> est donc trié et <strong>(2.) est conservé</strong>.</p>
 <p>L'invariant est donc conservé.</p>
 <p><strong>TERMINAISON</strong></p>
 <p>A la fin de la dernière itération pour <span class="arithmatex">\(i=n-2\)</span>, l'invariant est conservé. Il est donc vrai pour <span class="arithmatex">\(i=n-1\)</span></p>
-<p>donc "<span class="arithmatex">\(T[0..n-2]\)</span> est trié et <span class="arithmatex">\(T[0..n-2] \le T[n-1..n-1]\)</span>" est vrai.
-Ce qui revient à dire que "<span class="arithmatex">\(T[0..n-1]\)</span> est trié" est vrai.</p>
-<p>A la fin de l'exécution de l'algorithme le tableau est donc trié.</p>
+<ol>
+<li><span class="arithmatex">\(T[0..n-2] \le T[n-1..n-1]\)</span></li>
+<li><span class="arithmatex">\(T[0..n-2]\)</span> est trié</li>
+<li><span class="arithmatex">\(T[0..n-1]\)</span> est une permutation du tableau initial</li>
+</ol>
+<p>(1.) et (2.) impliquent que <span class="arithmatex">\(T[0..n-1]\)</span> est trié. (c'est pour ça que ça suffit d'aller jusqu'à <span class="arithmatex">\(n-2\)</span>)</p>
+<p>(3.) implique que le tableau est une permutation du tableau initial.</p>
+<p>A la fin de l'exécution de l'algorithme le tableau est donc une permutation triée du tableau initial.</p>
 <p>L'algorithme est totalement correct.</p>
 <div class="admonition question">
 <p class="admonition-title">Complexité</p>
@@ -2284,7 +2422,7 @@ Ce qui revient à dire que "<span class="arithmatex">\(T[0..n-1]\)</span> est tr
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 19, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date">April 21, 2025</span>
   </span>
 
     
