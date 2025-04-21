@@ -156,8 +156,6 @@ function animate(id) {
 
 export function init() {
 
-        debugger;
-
         let mainTag = document.getElementsByTagName('complexity');
 
         if ( mainTag=== null) {

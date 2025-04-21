@@ -2,6 +2,7 @@
 
 !!! abstract "Définition"
     Les protocoles de sécurisation asymétriques font appel à:
+    
     - Une clé publique: un ensemble d'informations auxquelles tout le monde peut avoir accès
     - Une clé privée: un ensemble d'informations secrétes qu'une seule personne connaît.
 
@@ -53,9 +54,11 @@ Note over Alice, Bob: Par le pouvoir du crâne <br>ancestral, ils ont le même K
 ```
 
 Pouvoir du crâne ancestral ⤵️
+
 ![alt text](image-7.png)
 
 Eve a sniffé toutes les communications, elle est donc en possession de:
+
 - A
 - B
 - la clé publique p
@@ -65,6 +68,7 @@ Vu qu'elle intercepte A, elle est en possession de $f_k(a)$.
 Il lui suffit donc de calculer $f_k^{-1}(A)$ pour trouver a, et tout le système tombe.
 
 Pour mieux comprendre, on va imaginer que la fonction est celle-ci:
+
 $$\large f_k : x \mapsto k.x$$
 
 ```mermaid
