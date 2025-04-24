@@ -2234,9 +2234,9 @@
 
 <h1 id="introduction-a-la-recurrence">Introduction à la récurrence</h1>
 <p>La preuve de correction partielle à l'aide de l'invariant de boucle est appelé un raisonnement inductif, ou récurrent. C'est simple mais ça peut paraître abscons parce que c'est un peu plus long que ce dont vous avez l'habitude. Donc ça peut prendre un temps à assimiler, c'est normal.</p>
-<p>Ce raisonnement en 3 étapes sert à montrer qu'une <strong>propriété dépendant d'un entier naturel</strong> est vraie tout le temps à partir d'un entier de départ.</p>
+<p>Ce raisonnement en 3 étapes sert à montrer qu'une <strong>proposition dépendant d'un entier naturel</strong> est vraie tout le temps à partir d'un entier de départ.</p>
 <p>Prenons un exemple concret qui ne nécessite que de savoir manipuler des expressions élémentaires.</p>
-<p>On veut montrer que la propriété <span class="arithmatex">\(P_n\)</span>: "La somme <span class="arithmatex">\(S_n\)</span> des <span class="arithmatex">\(n\)</span> premiers entiers impairs est égale à <span class="arithmatex">\(n^2\)</span>" est toujours vraie pour <span class="arithmatex">\(n \ge 1\)</span></p>
+<p>On veut montrer que la proposition <span class="arithmatex">\(P_n\)</span>: "La somme <span class="arithmatex">\(S_n\)</span> des <span class="arithmatex">\(n\)</span> premiers entiers impairs est égale à <span class="arithmatex">\(n^2\)</span>" est toujours vraie pour <span class="arithmatex">\(n \ge 1\)</span></p>
 <h3 id="1-initialisation">1. INITIALISATION</h3>
 <p><span style="color:red;font-weight:bold;">
 On veut montrer que c'est vrai au début
@@ -2244,7 +2244,7 @@ On veut montrer que c'est vrai au début
 <p>Pour <span class="arithmatex">\(n=1\)</span>, <span class="arithmatex">\(S_1 = 1 = 1^2\)</span> donc <span class="arithmatex">\(P_1\)</span> est vraie</p>
 <p>Pour <span class="arithmatex">\(n=2\)</span>, <span class="arithmatex">\(S_2 = 1 + 3 = 4 = 2^2\)</span> donc <span class="arithmatex">\(P_2\)</span> est vraie</p>
 <p>Pour <span class="arithmatex">\(n=3\)</span>, <span class="arithmatex">\(S_2 = 1 + 3 + 5 = 9 = 3^2\)</span> donc <span class="arithmatex">\(P_3\)</span> est vraie</p>
-<p><strong>C'est donc vrai au début</strong>. (en réalité, il ne suffit que de le montrer pour <span class="arithmatex">\(n=1\)</span>, mais le faire plusieurs fois permet de s'approprier un peu les propriétés qu'on manipule)</p>
+<p><strong>C'est donc vrai au début</strong>. (en réalité, il ne suffit que de le montrer pour <span class="arithmatex">\(n=1\)</span>, mais le faire plusieurs fois permet de s'approprier un peu les propositions qu'on manipule)</p>
 <p>Mais ça ne veut pas dire que ça sera toujorus vrai, et c'est justement ça qui nous occupe.</p>
 <h3 id="2-conservation-heredite">2. CONSERVATION / Hérédité</h3>
 <p><span style="color:red;font-weight:bold;"></p>
@@ -2254,9 +2254,9 @@ On veut montrer que c'est vrai au début
 <p>Donc que <span class="arithmatex">\(S_n=1+3+....+(2n-1) = n^2\)</span></p>
 <p><strong>Ce qu'on veut démontrer</strong>, c'est donc que sous cette hypothèse on aura automatiquement <span class="arithmatex">\(P_{n+1}\)</span> vraie. Donc que <span class="arithmatex">\(S_{n+1} = (n+1)^2\)</span></p>
 <p>Calculons donc <span class="arithmatex">\(S_{n+1}\)</span>, en se disant qu'on veut faire apparaître <span class="arithmatex">\(S_n\)</span> pour pouvoir utiliser notre hypothèse (sinon elle sert à rien, c'est ridicule).</p>
-<p><span class="arithmatex">\(S_{n+1} = 1+...+(2n+1)\)</span>
-<span class="arithmatex">\(S_{n+1} = 1+...+(2n-1)+(2n+1)\)</span>
-<span class="arithmatex">\(S_{n+1} = S_n +(2n+1)\)</span></p>
+<p><span class="arithmatex">\(S_{n+1} = 1+...+(2n+1)\)</span></p>
+<p><span class="arithmatex">\(S_{n+1} = 1+...+(2n-1)+(2n+1)\)</span></p>
+<p><span class="arithmatex">\(S_{n+1} = S_n +(2n+1)\)</span></p>
 <p>Or, <span class="arithmatex">\(P_n\)</span> est Vraie par hypothèse. Donc <span class="arithmatex">\(S_n= n^2\)</span></p>
 <p><span class="arithmatex">\(S_{n+1} = n^2 + 2n + 1\)</span></p>
 <p>A partir du moment où on a réussi à utiliser notre hypothèse, on cherche à retrouver l'écriture de ce qu'on veut démontrer en bidouillant.</p>
@@ -2269,7 +2269,7 @@ On veut montrer que c'est vrai au début
 <p><img alt="alt text" src="../image.png" /></p>
 <p>Il est important d'initialiser, car il faut que ça soit vrai au moins une fois pour que ça soit "infiniment vrai" par conservation/hérédité.</p>
 <p><strong>Si <span class="arithmatex">\(P_1\)</span> est vraie et que <span class="arithmatex">\(P_n \implies P_{n+1}\)</span>, alors <span class="arithmatex">\(P_n\)</span> est vraie pour tout <span class="arithmatex">\(n \ge 1\)</span></strong></p>
-<p>Cette propriété (qui se démontre elle-même grâce aux axiômes fondamentaux des mathématiques) est au coeur du raisonnement.</p>
+<p>Cette proposition (qui se démontre elle-même grâce aux axiômes fondamentaux des mathématiques) est au coeur du raisonnement.</p>
 <p>On peut donc affirmer le coeur léger que "La somme <span class="arithmatex">\(S_n\)</span> des <span class="arithmatex">\(n\)</span> premiers entiers impairs est égale à <span class="arithmatex">\(n^2\)</span> pour tout <span class="arithmatex">\(n \ge 1\)</span>"</p>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
