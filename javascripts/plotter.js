@@ -1,16 +1,3 @@
-// @ts-check
-// @ts-ignore
-import { Chart, registerables } from 'https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.esm.js';
-// @ts-ignore
-import {create, all} from 'https://cdn.jsdelivr.net/npm/mathjs@13.0.0/+esm';
-
-
-
-Chart.register(...registerables);
-const math = create(all, {});
-
-
-
 
 
 
@@ -154,7 +141,7 @@ function animate(id) {
 }
 
 
-export function init() {
+function init() {
 
         console.log('plotter loaded');
         let mainTag = document.getElementsByTagName('complexity');
@@ -237,3 +224,4 @@ export function init() {
 
 };
 
+init();
