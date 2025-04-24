@@ -1,6 +1,4 @@
-
-
-
+// @ts-check
 
 let mesfoncs = new Map();
 let chart = undefined;
@@ -49,6 +47,7 @@ function creerGraphique(idDiv) {
     
     data = generateData(f1, f2, currentXMin, currentXMax);
 
+    // @ts-ignore
     chart = new Chart(ctx, {
         type: 'scatter',
         data: {
@@ -152,10 +151,10 @@ function init() {
 
         document.getElementsByTagName('complexity')[0].innerHTML = `
         <form>
-            <label for="f1">Fonction 1:</label>
-            <select name="f1" class="md-select"></select>
-            <label for="f2">Fonction 2:</label>
-            <select name="f2"></select>
+            <label for="selfonc1">Fonction 1:</label>
+            <select id="selfonc1" class="md-select"></select>
+            <label for="selfonc2">Fonction 2:</label>
+            <select id="selfonc2"></select>
             <button type = "button" class="md-button" name="bAfficher">Afficher</button>
             <button type = "button" class="md-button" name="bStop">Stop</button>
             <br/>
@@ -173,12 +172,13 @@ function init() {
         mesfoncs.set('x^2', (x)=>x*x);
         mesfoncs.set('x^3', (x)=>x*x*x);
         mesfoncs.set('2^x', (x)=>Math.pow(2,x));
+        // @ts-ignore
         mesfoncs.set('x!', (x)=>math.gamma(x+1));
 
     
-        let sf1  = document.getElementsByName('f1')[0];
+        let sf1  = document.getElementById('selfonc1');
 
-        let sf2 = document.getElementsByName('f2')[0];
+        let sf2 = document.getElementById('selfonc2');
 
         mesfoncs.forEach((_, key) => {
             let o = new Option(key, key);
@@ -195,6 +195,7 @@ function init() {
         document.getElementsByName('bAfficher')[0].addEventListener('click', function () {
 
             flagAnim = true;
+
             // @ts-ignore
             let vf1 = sf1.value;
             // @ts-ignore
@@ -216,11 +217,14 @@ function init() {
         });
 
         let slider = document.getElementById("vitesse");
-        // @ts-ignore
-        slider.addEventListener('input', function () {
-            // @ts-ignore
-            timeout = 500 - parseInt(slider.value);
-        });
+        if (slider) {
+            slider.addEventListener('input', function () {
+                // @ts-ignore
+                timeout = 500 - parseInt(slider.value);
+            });
+        } else {
+            console.error('slider introuvable');
+        }
 
 };
 

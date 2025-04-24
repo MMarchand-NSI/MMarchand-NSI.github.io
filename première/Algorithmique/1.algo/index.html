@@ -2531,7 +2531,24 @@ $$</p>
     <span class="n">faire_quelque_chose</span><span class="p">()</span>
     <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
 </code></pre></div>
-<p><strong>Une boucle bornée dont l'indice de départ est supérieure à son indice d'arrivée ne s'exécute pas</strong>. De même, <span class="arithmatex">\(\displaystyle \sum_{k=6}^{2}k=0\)</span> car c'est une somme qui n'accumule aucune valeur. En effet, la condition d'arrêt de la boucle est déjà remplie avant de s'y engager.</p>
+<p><strong>Une boucle bornée dont l’indice de départ est strictement supérieur à l’indice d’arrivée est parfaitement définie en algorithmique.
+Elle est simplement vide d’exécution : le corps de la boucle ne s’exécute jamais.</strong></p>
+<p>Le code suivant ne renvoie pas d'erreur, mais n'affiche rien.</p>
+<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">2</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;instruction&quot;</span><span class="p">)</span>
+</code></pre></div>
+<hr />
+<div class="admonition tip">
+<p class="admonition-title">Fondements mathématiques de cette assertion</p>
+<p>De même, <span class="arithmatex">\(\displaystyle \sum_{k=6}^{2}k=0\)</span>. Il n'existe aucun <span class="arithmatex">\(k\)</span> tel que <span class="arithmatex">\(6 \le k \le 2\)</span>. L'ensemble des <span class="arithmatex">\(k\)</span> est donc l'ensemble vide. La somme de l'ensemble vide est 0. On pose parfois ceci comme une convention, mais c'est en réalité bien plus profond que ça. Cette convention est bien fondée par définition des propriétés fondamentales d'une somme. La somme vide est nécessaire pour que les règles de manipulation des sommes soient universelles et sans cas particulier. C'est une exigence de cohérence interne dans les mathématiques. On peut rapprocher cette nécessité de la nécessité d'avoir été conduit à admettre l'existence de zéro dans l'histoire.
+Le zéro et la somme vide émergent naturellement d'une même nécessité: donner un sens cohérent et neutre à l'absence.</p>
+<p>Imaginez une tirelire. Mettez-y quelques pièces chaque jour et faites en la somme. Mais si vous ny avez rien mis du tout, combien y a-t-il ?</p>
+<p>Zéro. C’est une somme vide, et elle a un sens.</p>
+<p>On peut également rapprocher cette nécessité de celle de l’infini.
+Si la somme vide donne un sens à l’absence de termes, l’infini donne un sens à l’absence de borne.
+Ce n’est pas un nombre en soi, mais un concept qui permet de prolonger les raisonnements mathématiques au-delà de toute limite finie.
+Zéro, somme vide, infini : autant de manières pour les mathématiques de donner forme à ce qui, à première vue, pourrait sembler impensable — l’absence, l’incomplétude, ou l’illimité — tout en gardant une structure cohérente, rigoureuse, et manipulable.</p>
+</div>
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">Boucle non bornée</p>
