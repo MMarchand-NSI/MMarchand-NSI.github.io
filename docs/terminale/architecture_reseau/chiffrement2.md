@@ -64,8 +64,8 @@ Eve a sniffé toutes les communications, elle est donc en possession de:
 - la clé publique p
 - Elle connaît aussi la fonction utilisée.
 
-Vu qu'elle intercepte A, elle est en possession de $f_k(a)$.
-Il lui suffit donc de calculer $f_k^{-1}(A)$ pour trouver a, et tout le système tombe.
+Vu qu'elle intercepte A, elle est en possession de $f_p(a)$.
+Il lui suffit donc de calculer $f_p^{-1}(A)$ pour trouver a, et tout le système tombe.
 
 Pour mieux comprendre, on va imaginer que la fonction est celle-ci:
 
