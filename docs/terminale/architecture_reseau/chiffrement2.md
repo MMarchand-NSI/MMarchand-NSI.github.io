@@ -78,7 +78,7 @@ Alice ->> Bob: A
 Note over Bob: K=fb(A)=p.a.b
 Note over Bob: B=fp(b)=p.b
 Bob ->> Alice: B
-Note over Alice: K=fb(B)=p.a.b
+Note over Alice: K=fa(B)=p.a.b
 ```
 
 Alice et Bob ont bien le même $K$ sans avoir échangé leur clé.
@@ -117,7 +117,7 @@ Pour un entier $p$ fixé, voici la fonction que nous utiliserons:
 
 $$\Huge f_{k} : x \mapsto x^k \mod p$$
 
-En python, ça correspond à l'expression `(g**x)%p`
+En python, ça correspond à l'expression `(x**k)%p`
 
 Il n'existe pas de formule pour la réciproque. On est obligé de procéder algorithmiquement pour chaque cas et le calcul est difficile quand p est un grand nombre premier. La recherche de son inverse est qualifiée de problème du logarithme discret. On ne sait pas le faire en temps raisonnable (après avoir travaillé sur le problème TSP, vous comprenez maintenant très bien cette phrase en informatique).
 
@@ -147,15 +147,29 @@ $$f_a(B) \equiv B^a \equiv (g^b)^a \equiv g^{ab} \equiv (g^a)^b \equiv A^b \equi
 
 # La pratique
 
-Pour cette activité, vous vous mettrez en binôme.
+Pour cette activité, vous vous mettrez en binôme. Toutes les lectures/écriture de fichier sont en bytes.
 
-1. Dans MSYS2, générez un grand nombre premier grâce à openssl, ça sera votre $p$ commun. Si vous n'avez pas openssl, `pacman -S openssl`
-
+1. Dans MSYS2, générez un grand nombre premier grâce à openssl (boîte à outils de crypto), ça sera votre $p$ commun (on génère des clés à 2048 bits). Si vous n'avez pas openssl, `pacman -S openssl`
 ```bash
 openssl prime -generate -bits 2048
 ```
+2. Ecrire une fonction qui génère un fichier public_prenom.key (où prenom est votre prenom), contenant votre entier, ainsi que $g=2$, à la suite (bytes)
+3. Ecrire une fonction qui lit un fichier public_prenom.key, et qui renvoie un tuple constitué de p et de g.
+4. Pour constituer votre clé privée, vous utiliserez le module secrets, qui est l'équivalent de random pour faire de la crypto. et vous utiliserez sa fonction secrets.randbits afin de générer une clé privée de la taille de la clé publique, mais strictement inférieure à la clé publique. Ecrire une fonction qui génère le fichier private_prenom.key (bytes).
+5. Pour un p, un g et un a donné, écrire une fonction qui génère modpow_prenom.key, contenant $g^a \mod p$ (voir fonction fournie ci-après)
+6. Organisez-vous à 2 pour échanger les informations nécessaires à la création d'une clé commune de chiffrement symétrique (les fichiers seront transmis par clé USB) et reproduisez l'échange que vous avez déjà réalisé, cette fois en utilisant le chiffrement asymétrique.
 
-2. Pour $g$, en théorie, il faut prendre ce qu'on appelle une racine primitive de $p$, mais en réalité, quand $p$ est très grand, 2 est suffisant. On prendra 2.
 
-3. Pour constituer votre clé privée, vous utiliserez le module secrets, qui est l'équivalent de random pour faire de la crypto. et vous utiliserez sa  secrets.randbits afin de générer une clé privée de la taille de la clé publique, mais strictement inférieure à la clé publique.
-
+!!! tip "Exponentielle modulaire"
+    ```python
+    def modpow(base: int, exp: int, m: int) -> int:
+        """exponentiation modulaire.
+        calcule (base^exp)%m rapidement"""
+        result = 1
+        while exp > 0:
+            if exp & 1:
+                result = (result * base) % m
+            exp >>= 1
+            base = (base * base) % m
+        return result
+    ```
