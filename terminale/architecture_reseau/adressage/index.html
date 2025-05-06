@@ -2460,7 +2460,7 @@ Pour un masque 20, c'est 11111111.11111111.11110000.00000000 , soit 255.255.240.
 </ul>
 </div>
 <h2 id="outil-ipcalc">Outil IPCALC</h2>
-<p>Vous pouvez analyser des adresses IP dans MSYS2 grâce au script perl ipcalc.pl</p>
+<p>Vous pouvez analyser des adresses IP dans MSYS2 grâce au script perl <code>ipcalc.pl</code></p>
 <ol>
 <li>Téléchargez le script dans MSYS2. 
 <code>wget https://gist.githubusercontent.com/mathewpeterson/2303195/raw/ipcalc.pl</code></li>
@@ -2529,12 +2529,13 @@ Cependant, on ne peut attribuer ni l'IP de broadcast, ni l'IP du réseau. Ce qui
 <div class="admonition abstract">
 <p class="admonition-title">Routeur</p>
 <p>Un routeur est un ordinateur spécialisé. Son rôle est de <strong>relier plusieurs réseaux distincts</strong> et d'acheminer les paquets entre eux.</p>
+<p>Une interface est ce qui connecte physiquement une machine à un réseau (dites vous que c'est une prise ethernet). Par définition, il est donc nécessaire d’avoir au minimum deux interfaces réseau dans un routeur. Sinon il n'a pas de réseaux à relier.</p>
 <p>Il lit l’adresse de destination dans l’en‑tête IP transmise dans une requête, consulte sa table de routage puis transmet le paquet par l’interface qui mène vers sa prochaine destination.</p>
 <p>Un routeur possède plusieurs interfaces qui correspondent à autant de réseaux qu'il relie.</p>
 <p>Ci-dessous, on voit un routeur avec 10 interfaces ethernet. Chacune de ces interfaces a une adresse IP différente dans le réseau qu'elle inerve.
 Par exemple, si le réseeu de la dernière prise est 192.168.0.0/16, on pourra donner à cette interface l'adresse 192.168.0.253 (on prend souvent 253 pour pouvoir numéroter les PC à partir de 1)</p>
 <p><img alt="alt text" src="../image-10.png" /></p>
-<p>Une machine doit connaître l'adresse de l'interface du routeur lui correspondant. En effet, elle doit passer par le routeur pour émettre des requêtes à l'extérieur du réseau, et ça n'est pas magique. On appelle cette adresse IP la passerelle par défaut.</p>
+<p>Une machine doit connaître l'adresse de l'interface du routeur lui correspondant. En effet, elle doit passer par le routeur pour émettre des requêtes à l'extérieur du réseau. On appelle cette adresse IP la passerelle par défaut. C'est l'IP de l'interface du routeur que voit la machine.</p>
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">Switch (commutateur Ethernet)</p>
@@ -2544,7 +2545,7 @@ Par exemple, si le réseeu de la dernière prise est 192.168.0.0/16, on pourra d
 <p>TODO: table adresses MAC</p>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Réseau</p>
+<p class="admonition-title">Exercice</p>
 <p>On considère le réseau suivant. Chaque interface d'un routeur inerve un réseau spécifique.</p>
 <p><img alt="alt text" src="../image-8.png" /></p>
 <p>Les adresses indiquées sont les adresses réseau indiquées au format CIDR (IP + masque entier).</p>
@@ -2554,6 +2555,38 @@ Par exemple, si le réseeu de la dernière prise est 192.168.0.0/16, on pourra d
 <li>Combien de machines peut-on connecter au réseau déservi par l'interface eth0 du routeur A?</li>
 </ul>
 </div>
+<div class="admonition question">
+<p class="admonition-title">Exo Bac</p>
+<p><img alt="alt text" src="../image-12.png" /></p>
+<ol>
+<li>Les machines du réseau local L1 indiquent un masque de sous réseau sur 24
+bits en notation CIDR, soit 255.255.255.0 en notation décimale pointée.
+Donner le masque de sous réseau en notation décimale pointée des machines
+du réseau L2 (masque de sous réseau de 16 bits).</li>
+<li>Donner l’adresse du réseau L2.</li>
+<li>Donner l’adresse de diffusion du réseau L2.</li>
+<li>Donner le nombre maximum de machines pouvant être connectées au réseau L2.</li>
+</ol>
+</div>
+<p>!!! question "Réseau d'un lycée (Bac)
+    Dans un lycée, le réseau contient plusieurs sous-réseaux : pédagogie (noté P),
+    administration (noté AD), vie_scolaire (noté VS).
+    1. L’adresse IP du réseau pédagogie est 110.217.50.0 et on utilise le masque de
+    sous-réseau 255.255.255.0 (i.e. les trois premiers octets sont réservés au
+    réseau).
+    Déterminer le nombre de machines que l’on peut brancher au maximum sur le
+    réseau pédagogie (remarque : l’adresse IP 110.217.50.255 est réservée : c’est
+    l’adresse de diffusion).
+    2. Déterminer l’écriture binaire du nombre 217.
+    3. Déterminer l’écriture décimale du nombre binaire 110010.
+    On scinde finalement le réseau pédagogie en deux sous-réseaux pédagogie 1 (noté
+    P1) et pédagogie 2 (noté P2) et on utilise le masque de sous-réseau 255.255.255.0
+    pour les deux.
+    Les adresses IP de ces deux sous-réseaux sont :
+        - 110.217.50.0 pour le réseau pédagogie 1
+        - 110.217.52.0 pour le réseau pédagogie 2
+    4. Indiquer, en justifiant, si une machine ayant l’adresse IP 110.217.53.22 fait
+    partie du réseau pédagogie 2 ou non.</p>
 
 
 
