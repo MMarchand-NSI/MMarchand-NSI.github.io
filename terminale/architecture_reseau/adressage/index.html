@@ -2475,12 +2475,12 @@ Pour un masque 20, c'est 11111111.11111111.11110000.00000000 , soit 255.255.240.
 <pre>
 <!-- Version 0.34 6/19/2001 -->
 
-Address:   <font color="#0000ff">192.168.23.34         <font color="#000000"><font color="#909090">11000000.10101000.00010111 .00100010<font color="#000000"><br>Netmask:   <font color="#0000ff">255.255.255.0 == 24   <font color="#000000"><font color="#ff0000">11111111.11111111.11111111 .00000000<font color="#000000"><br>Wildcard:  <font color="#0000ff">0.0.0.255             <font color="#000000"><font color="#909090">00000000.00000000.00000000 .11111111<font color="#000000"><br>=>
+Address:   <font color="#0000ff">192.168.23.34         <font color="#000000"><font color="#909090">11000000.10101000.00010111 .00100010<font color="#000000"><br>Netmask:   <font color="#0000ff">255.255.255.0 == 24   <font color="#000000"><font color="#ff0000">11111111.11111111.11111111 .00000000<font color="#000000"><br>Wildcard:  <font color="#0000ff">0.0.0.255             <font color="#000000"><font color="#909090">00000000.00000000.00000000 .11111111<font color="#000000"><br>
 Network:   <font color="#0000ff">192.168.23.0/24       <font color="#000000"><font color="#009900">110<font color="#909090">00000.10101000.00010111 .00000000<font color="#000000"> (<font color="#009900">Class C<font color="#000000">)<br>Broadcast: <font color="#0000ff">192.168.23.255        <font color="#000000"><font color="#909090">11000000.10101000.00010111 .11111111<font color="#000000"><br>HostMin:   <font color="#0000ff">192.168.23.1          <font color="#000000"><font color="#909090">11000000.10101000.00010111 .00000001<font color="#000000"><br>HostMax:   <font color="#0000ff">192.168.23.254        <font color="#000000"><font color="#909090">11000000.10101000.00010111 .11111110<font color="#000000"><br>Hosts/Net: <font color="#0000ff">254                   <font color="#000000">(<a href="http://www.ietf.org/rfc/rfc1918.txt">Private Internet</a>)
 </pre>
 
 <p>On remarque que (bitwise):</p>
-<p><span class="arithmatex">\(Wildcard = ! Netmask\)</span> </p>
+<p><span class="arithmatex">\(Wildcard = ! Netmask\)</span></p>
 <p>Wildcard est le complément à 1 du masque</p>
 <p><span class="arithmatex">\(Network = Address \text{ \&amp; } Netmask\)</span> </p>
 <p>L'adresse réseau est le ET logique entre l'adresse IP et le masque.</p>
@@ -2568,25 +2568,31 @@ du réseau L2 (masque de sous réseau de 16 bits).</li>
 <li>Donner le nombre maximum de machines pouvant être connectées au réseau L2.</li>
 </ol>
 </div>
-<p>!!! question "Réseau d'un lycée (Bac)
-    Dans un lycée, le réseau contient plusieurs sous-réseaux : pédagogie (noté P),
-    administration (noté AD), vie_scolaire (noté VS).
-    1. L’adresse IP du réseau pédagogie est 110.217.50.0 et on utilise le masque de
-    sous-réseau 255.255.255.0 (i.e. les trois premiers octets sont réservés au
-    réseau).
-    Déterminer le nombre de machines que l’on peut brancher au maximum sur le
-    réseau pédagogie (remarque : l’adresse IP 110.217.50.255 est réservée : c’est
-    l’adresse de diffusion).
-    2. Déterminer l’écriture binaire du nombre 217.
-    3. Déterminer l’écriture décimale du nombre binaire 110010.
-    On scinde finalement le réseau pédagogie en deux sous-réseaux pédagogie 1 (noté
-    P1) et pédagogie 2 (noté P2) et on utilise le masque de sous-réseau 255.255.255.0
-    pour les deux.
-    Les adresses IP de ces deux sous-réseaux sont :
-        - 110.217.50.0 pour le réseau pédagogie 1
-        - 110.217.52.0 pour le réseau pédagogie 2
-    4. Indiquer, en justifiant, si une machine ayant l’adresse IP 110.217.53.22 fait
-    partie du réseau pédagogie 2 ou non.</p>
+<div class="admonition question">
+<p class="admonition-title">Réseau d'un lycée (Bac)</p>
+<p>Dans un lycée, le réseau contient plusieurs sous-réseaux : pédagogie (noté P),
+administration (noté AD), vie_scolaire (noté VS).</p>
+<ol>
+<li>L’adresse IP du réseau pédagogie est 110.217.50.0 et on utilise le masque de
+sous-réseau 255.255.255.0 (i.e. les trois premiers octets sont réservés au
+réseau).
+Déterminer le nombre de machines que l’on peut brancher au maximum sur le
+réseau pédagogie (remarque : l’adresse IP 110.217.50.255 est réservée : c’est
+l’adresse de diffusion).</li>
+<li>Déterminer l’écriture binaire du nombre 217.</li>
+<li>Déterminer l’écriture décimale du nombre binaire 110010.
+On scinde finalement le réseau pédagogie en deux sous-réseaux pédagogie 1 (noté
+P1) et pédagogie 2 (noté P2) et on utilise le masque de sous-réseau 255.255.255.0
+pour les deux.
+Les adresses IP de ces deux sous-réseaux sont :<ul>
+<li>110.217.50.0 pour le réseau pédagogie 1</li>
+<li>110.217.52.0 pour le réseau pédagogie 2</li>
+</ul>
+</li>
+<li>Indiquer, en justifiant, si une machine ayant l’adresse IP 110.217.53.22 fait
+partie du réseau pédagogie 2 ou non.</li>
+</ol>
+</div>
 
 
 
