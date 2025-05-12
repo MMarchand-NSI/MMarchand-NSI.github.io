@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.40">
     
     
       
@@ -33,7 +33,7 @@
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.0253249f.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.8c3ca2c6.min.css">
       
         
         <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
@@ -305,7 +305,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../architecture_reseau/bitwise/" class="md-tabs__link">
+        <a href="../../architecture_reseau/adressage/" class="md-tabs__link">
           
   
   Terminale
@@ -1416,6 +1416,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../architecture_reseau/adressage/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Réseaux
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../architecture_reseau/bitwise/" class="md-nav__link">
         
   
@@ -2330,7 +2351,7 @@ Les données sont volontairement bidons car nous nous intéressons tout d'abord 
 <script>
   onElementLoaded("div#ide1").then(() => {
     const ide = document.querySelector("div#ide1");
-    load(ide, '/', '\nPRAGMA foreign_keys=1;\n\nCREATE TABLE t1 (\n    idt1 INT PRIMARY KEY,\n    a VARCHAR(50),\n    b VARCHAR(50)\n);\n\nCREATE TABLE t2 (\n    idt2 INT PRIMARY KEY,\n    idt1 INT,\n    c INT,\n    FOREIGN KEY (idt1) REFERENCES t1(idt1)\n);\n\n-- Insertion de donnÃ©es dans t1\nINSERT INTO t1 (idt1, a, b) VALUES\n(1, \'Alpha\', \'Beta\'),\n(2, \'Gamma\', \'Delta\'),\n(3, \'Epsilon\', \'Zeta\'),\n(4, \'Eta\', \'Theta\');\n\n-- Insertion de donnÃ©es dans t2\nINSERT INTO t2 (idt2, idt1, c) VALUES\n(10, 3, 100),\n(11, 4, 200),\n(12, 4, 700)\n;\n', '', jointure);
+    load(ide, '/', '\nPRAGMA foreign_keys=1;\n\nCREATE TABLE t1 (\n    idt1 INT PRIMARY KEY,\n    a VARCHAR(50),\n    b VARCHAR(50)\n);\n\nCREATE TABLE t2 (\n    idt2 INT PRIMARY KEY,\n    idt1 INT,\n    c INT,\n    FOREIGN KEY (idt1) REFERENCES t1(idt1)\n);\n\n-- Insertion de données dans t1\nINSERT INTO t1 (idt1, a, b) VALUES\n(1, \'Alpha\', \'Beta\'),\n(2, \'Gamma\', \'Delta\'),\n(3, \'Epsilon\', \'Zeta\'),\n(4, \'Eta\', \'Theta\');\n\n-- Insertion de données dans t2\nINSERT INTO t2 (idt2, idt1, c) VALUES\n(10, 3, 100),\n(11, 4, 200),\n(12, 4, 700)\n;\n', '', jointure);
 }).catch(() => {});
 </script>
 <div class="admonition example">
@@ -2408,7 +2429,7 @@ Les données sont volontairement bidons car nous nous intéressons tout d'abord 
 <script>
   onElementLoaded("div#ide2").then(() => {
     const ide = document.querySelector("div#ide2");
-    load(ide, '/', 'PRAGMA foreign_keys=1;\n\n-- CrÃ©ation des tables\nCREATE TABLE Artistes (\n    ArtisteId INT PRIMARY KEY,\n    Nom VARCHAR(50)\n);\n\nCREATE TABLE Albums (\n    AlbumId INT PRIMARY KEY,\n    ArtisteId INT,\n    Titre VARCHAR(100),\n    FOREIGN KEY (ArtisteId) REFERENCES Artistes(ArtisteId)\n);\n\n-- Insertion de donnÃ©es dans Artistes\nINSERT INTO Artistes (ArtisteId, Nom) VALUES\n(1, \'Mozart\'),\n(2, \'Beethoven\'),\n(3, \'Chopin\');\n\n-- Insertion de donnÃ©es dans Albums\nINSERT INTO Albums (AlbumId, ArtisteId, Titre) VALUES\n(1, 1, \'Requiem\'),\n(2, 1, \'Symphonie No. 40\'),\n(3, 2, \'Sonate Waldstein\'),\n(4, 3, \'Nocturnes\');', '', musique);
+    load(ide, '/', 'PRAGMA foreign_keys=1;\n\n-- Création des tables\nCREATE TABLE Artistes (\n    ArtisteId INT PRIMARY KEY,\n    Nom VARCHAR(50)\n);\n\nCREATE TABLE Albums (\n    AlbumId INT PRIMARY KEY,\n    ArtisteId INT,\n    Titre VARCHAR(100),\n    FOREIGN KEY (ArtisteId) REFERENCES Artistes(ArtisteId)\n);\n\n-- Insertion de données dans Artistes\nINSERT INTO Artistes (ArtisteId, Nom) VALUES\n(1, \'Mozart\'),\n(2, \'Beethoven\'),\n(3, \'Chopin\');\n\n-- Insertion de données dans Albums\nINSERT INTO Albums (AlbumId, ArtisteId, Titre) VALUES\n(1, 1, \'Requiem\'),\n(2, 1, \'Symphonie No. 40\'),\n(3, 2, \'Sonate Waldstein\'),\n(4, 3, \'Nocturnes\');', '', musique);
 }).catch(() => {});
 </script>
 <p>Ce qui nous intéresse ici, c'est de compléter les tuples de la relation album avec le nom du compositeur. En effectuant le produit cartésien, on voit bien que Mozart n'a rien à faire avec la sonate Waldstein, ni avec les nocturnes. Les seules associations qui nous intéressent sont ceux qui ont le même ArtisteId.</p>
@@ -2606,7 +2627,7 @@ C'est visuel, et c'est simple. Aucune excuse pour rater une jointure.</p>
     <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.83f73b43.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.525ec568.min.js"></script>
       
         <script src="../../../javascripts/katex.js"></script>
       
@@ -2621,6 +2642,8 @@ C'est visuel, et c'est simple. Aucune excuse pour rater une jointure.</p>
         <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.js"></script>
       
         <script src="https://cdn.jsdelivr.net/npm/mathjs/lib/browser/math.js"></script>
+      
+        <script src="https://unpkg.com/cytoscape@3.31.2/dist/cytoscape.min.js"></script>
       
     
   </body>

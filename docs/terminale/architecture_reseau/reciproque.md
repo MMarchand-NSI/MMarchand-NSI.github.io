@@ -14,7 +14,7 @@ Cela signifie que :
 
 Conséquence: si on connaît la valeur de $f(x)$, alors ils faut calculer $f^{-1}(f(x))$ pour retrouver x.
 
-Si Alice envoie $A=f(x)$, alors si Eve sniffe A et connaît $f$ (publique), elle cherche sa réciproque $f^{-1}$, et calcule $f^{-1}(A)=f^{-1}(f(x))=x$ pour trouver $A$
+Si Alice envoie $A=f(x)$, alors si Eve sniffe A et connaît $f$ (publique), elle cherche sa réciproque $f^{-1}$, et calcule $f^{-1}(A)=f^{-1}(f(x))=x$ pour trouver $x$
 
 ---
 

@@ -437,6 +437,15 @@ Lorsqu'un processus demande un accès exclusif à une ressource déjà allouée 
         | | | |
         | | | |
 
+
+## Outil interblocage
+
+
+<div id="process_viewer"></div>
+
+<script src="/javascripts/process_viewer.js" defer></script>
+
+
 ## Bidouiller du processus > Les trucs qui servent tout le temps
 
 
