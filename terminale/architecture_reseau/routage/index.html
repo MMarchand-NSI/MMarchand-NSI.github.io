@@ -2662,15 +2662,7 @@
 <img alt="alt text" src="../image-1.png" /></p>
 <p>Au départ chaque routeur ne connait que les réseaux directement accessibles, avec une distance nulle.</p>
 <p>Ensuite, toutes les 30 secondes, les réseaux envoient leurs tables de routages à leurs voisins directement accessibles, à la réception chaque routeur met à jour sa table de routage en associant à chaque destination la passerelle avec la plus courte distance en saut.</p>
-<p>L'algorithme utilisé est une variante distribuée de l'algorithme de Bellman-Ford, qui permet à chaque nœud de calculer la distance entre 2 sommets d'un graphe selon cette définition récursive (pour un graphe non pondéré):</p>
-<div class="arithmatex">\[\large d(x, y, V) = \begin{cases}
-   0 &amp;\text{si } x=y \\
-   \infin &amp;\text{si } x \in V \\
-   \displaystyle \min_{v \in voisins(x)\backslash V} 1 + d(v,y, V \cup \{x\}) &amp;\text{sinon}
-\end{cases}
-\]</div>
-<p><span class="arithmatex">\(V\)</span> est l'ensemble des voisins visités.</p>
-<p>On calcule 1 plus la distance de <span class="arithmatex">\(v\)</span> à <span class="arithmatex">\(y\)</span> pour chaque voisin <span class="arithmatex">\(v\)</span> de <span class="arithmatex">\(x\)</span> non visité. Puis en prenant le minimum, on obtient notre résultat. Il sera assez simple de programmer une telle formule lorsque vous aure compris la programmation dynamique. Pour un graphe pondéré, il suffit de remplacer le <span class="arithmatex">\(1\)</span> par <span class="arithmatex">\(c(x,v)\)</span> qui est le poids (ou coût) de l'arête <span class="arithmatex">\((x,v)\)</span></p>
+<p>L'algorithme utilisé est une variante distribuée de l'algorithme de Bellman-Ford.</p>
 <div class="admonition question exercices">
 <p class="admonition-title">Question</p>
 <ol>
@@ -2705,12 +2697,40 @@
 <p>Le protocole OSPF (Open Shortest Path First) est une implémentation distribuée de l’algorithme de Dijkstra. Cet algorithme calcule le plus court chemin depuis un sommet vers tous les autres dans un graphe pondéré sans poids négatif.</p>
 <p>Dijkstra repose sur une idée proche du parcours en largeur (BFS), mais avec une amélioration essentielle : on ne visite pas les sommets "dans l’ordre où on les découvre", mais "dans l’ordre croissant de leur coût depuis la source".</p>
 <p>Cela nécessite une structure de données particulière appelée file de priorité (ou priority queue). Contrairement à une file FIFO classique, dans une file de priorité, on extrait toujours l’élément ayant la priorité la plus élevée (ici : la distance minimale).</p>
-<p>On peut implémenter la file de priorité avec une structure efficace, comme par exemple un tas binaire (binary heap) qui permet des opérations rapides en :</p>
-<ul>
-<li>insertion</li>
-<li>extraction du minimum</li>
-<li>diminution de clé</li>
-</ul>
+<p>On peut implémenter la file de priorité avec une structure efficace, comme par exemple un tas binaire (binary heap) qui permet des opérations rapides pour gérer l'extraction du minimum (entre autre).</p>
+<p>Ici, voici une version de l'algorithme en simulant une file de priorité avec une liste. (Cette version n'est donc pas aussi effficace qu'elle devrait l'être, mais elle fait le travail)</p>
+<div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">dijkstra</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">graphe</span><span class="p">,</span> <span class="n">source</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calcule la distance la plus courte (poids positif) depuis `source`</span>
+<span class="sd">    vers tous les sommets atteignables du graphe `g`.</span>
+
+<span class="sd">    Attention, cet algorithme ne fonctionne que sur poids positifs</span>
+
+<span class="sd">    Retourne le dictionnaire des distances minimales à la source et le dictionnaire des prédécesseurs</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">dist</span> <span class="o">=</span> <span class="p">{</span><span class="n">source</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>    <span class="c1"># distance connue la plus courte</span>
+    <span class="n">prec</span> <span class="o">=</span> <span class="p">{}</span>             <span class="c1"># prédécesseur pour reconstruire le chemin</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">source</span><span class="p">]</span>          <span class="c1"># &#39;file&#39; des sommets à traiter</span>
+
+    <span class="k">while</span> <span class="n">f</span> <span class="o">!=</span> <span class="p">[]:</span>
+        <span class="c1"># 1) extrait de la &#39;file&#39; le sommet le plus proche de la source</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">dist</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+        <span class="n">reste</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+
+        <span class="c1"># 2) pour chaque arrête (u,v) de poids &#39;poids&#39;</span>
+        <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">poids</span> <span class="ow">in</span> <span class="n">get_voisins</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">u</span><span class="p">):</span>
+            <span class="n">alt</span> <span class="o">=</span> <span class="n">dist</span><span class="p">[</span><span class="n">u</span><span class="p">]</span> <span class="o">+</span> <span class="n">poids</span>  <span class="c1"># Distance de v à la source depuis u</span>
+            <span class="c1"># Si v n&#39;a pas encore été découvert, </span>
+            <span class="c1"># ou qu&#39;on a trouvé une meilleure distance à la source</span>
+            <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">dist</span> <span class="ow">or</span> <span class="n">alt</span> <span class="o">&lt;</span> <span class="n">dist</span><span class="p">[</span><span class="n">v</span><span class="p">]:</span>
+                <span class="n">dist</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">alt</span>   <span class="c1"># &#39;plugin&#39; distance</span>
+                <span class="n">prec</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span>     <span class="c1"># &#39;plugin&#39; prédécesseur</span>
+                <span class="k">if</span> <span class="n">v</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">f</span><span class="p">:</span>  <span class="c1"># on enfile v s&#39;il ne l&#39;est pas déjà</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dist</span><span class="p">,</span> <span class="n">prec</span>
+</code></pre></div>
 
 
 
