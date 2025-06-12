@@ -87,18 +87,7 @@ Au départ chaque routeur ne connait que les réseaux directement accessibles, a
 
 Ensuite, toutes les 30 secondes, les réseaux envoient leurs tables de routages à leurs voisins directement accessibles, à la réception chaque routeur met à jour sa table de routage en associant à chaque destination la passerelle avec la plus courte distance en saut.
 
-L'algorithme utilisé est une variante distribuée de l'algorithme de Bellman-Ford, qui permet à chaque nœud de calculer la distance entre 2 sommets d'un graphe selon cette définition récursive (pour un graphe non pondéré):
-
-$$\large d(x, y, V) = \begin{cases}
-   0 &\text{si } x=y \\
-   \infin &\text{si } x \in V \\
-   \displaystyle \min_{v \in voisins(x)\backslash V} 1 + d(v,y, V \cup \{x\}) &\text{sinon}
-\end{cases}
-$$
-
-$V$ est l'ensemble des voisins visités.
-
-On calcule 1 plus la distance de $v$ à $y$ pour chaque voisin $v$ de $x$ non visité. Puis en prenant le minimum, on obtient notre résultat. Il sera assez simple de programmer une telle formule lorsque vous aure compris la programmation dynamique. Pour un graphe pondéré, il suffit de remplacer le $1$ par $c(x,v)$ qui est le poids (ou coût) de l'arête $(x,v)$
+L'algorithme utilisé est une variante distribuée de l'algorithme de Bellman-Ford.
 
 
 !!! question Exercices
@@ -142,8 +131,42 @@ Dijkstra repose sur une idée proche du parcours en largeur (BFS), mais avec une
 
 Cela nécessite une structure de données particulière appelée file de priorité (ou priority queue). Contrairement à une file FIFO classique, dans une file de priorité, on extrait toujours l’élément ayant la priorité la plus élevée (ici : la distance minimale).
 
-On peut implémenter la file de priorité avec une structure efficace, comme par exemple un tas binaire (binary heap) qui permet des opérations rapides en :
+On peut implémenter la file de priorité avec une structure efficace, comme par exemple un tas binaire (binary heap) qui permet des opérations rapides pour gérer l'extraction du minimum (entre autre).
 
-- insertion
-- extraction du minimum
-- diminution de clé
+Ici, voici une version de l'algorithme en simulant une file de priorité avec une liste. (Cette version n'est donc pas aussi effficace qu'elle devrait l'être, mais elle fait le travail)
+
+```python
+
+def dijkstra(g: graphe, source: str) -> tuple[dict[str, float], dict[str, str]]:
+    """
+    Calcule la distance la plus courte (poids positif) depuis `source`
+    vers tous les sommets atteignables du graphe `g`.
+
+    Attention, cet algorithme ne fonctionne que sur poids positifs
+
+    Retourne le dictionnaire des distances minimales à la source et le dictionnaire des prédécesseurs
+    """
+
+    dist = {source: 0}    # distance connue la plus courte
+    prec = {}             # prédécesseur pour reconstruire le chemin
+    f = [source]          # 'file' des sommets à traiter
+
+    while f != []:
+        # 1) extrait de la 'file' le sommet le plus proche de la source
+        u = min(f, key=dist.get)
+        reste.remove(u)
+
+        # 2) pour chaque arrête (u,v) de poids 'poids'
+        for v, poids in get_voisins(g, u):
+            alt = dist[u] + poids  # Distance de v à la source depuis u
+            # Si v n'a pas encore été découvert, 
+            # ou qu'on a trouvé une meilleure distance à la source
+            if v not in dist or alt < dist[v]:
+                dist[v] = alt   # 'plugin' distance
+                prec[v] = u     # 'plugin' prédécesseur
+                if v not in f:  # on enfile v s'il ne l'est pas déjà
+                    f.append(v)
+
+    return dist, prec
+```
+

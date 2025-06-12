@@ -863,6 +863,27 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../7.distance/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Dimensions supérieures et distances
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1937,6 +1958,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../terminale/langages/calculabilite/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Calculabilité et Décidabilité
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../terminale/langages/complements_python/" class="md-nav__link">
         
   
@@ -2812,7 +2854,59 @@ Sortie <em>imprécise</em> : Toutes les paires d'éléments possibles</p>
 </div>
 <h2 id="exercice">Exercice</h2>
 <div class="admonition question">
-<p class="admonition-title">Ensembe des minimisants</p>
+<p class="admonition-title">Algo mystère</p>
+<div class="highlight"><pre><span></span><code><span class="gh"># Algorithme mystère</span>
+<span class="gh"># Entrée: Un entier n&gt;=0</span>
+<span class="gh"># Sortie: Un entier p&gt;=0</span>
+
+<span class="k">1.</span> p ← 1
+<span class="k">2.</span> POUR i allant de 1 à n
+<span class="k">3.</span>      p ← 2*p
+<span class="k">4.</span> RETOURNER p
+</code></pre></div>
+<ol>
+<li>Calculer mystere(0), mystere(1), mystere(2), mystere(3), mystere(4)</li>
+<li>Que calcule l'algorithme mystère?</li>
+<li>Justifier que la boucle se termine</li>
+<li>Proposez un invariant de boucle: "Avant l'itération <span class="arithmatex">\(i\)</span>, p contient ...."</li>
+<li>Montrez la correction totale de la boucle</li>
+</ol>
+</div>
+<details class="warning">
+<summary>Solution</summary>
+<ol>
+<li>mystere(0)=1 , en effet, on met 1 dans p, puis on effectue une boucle qui part de 1 jusqu'à 0. D'après le cours, cette boucle est bien définie, mais elle est vide d'instruction. Le programme renvoie donc simplement p qui vaut 1.</li>
+</ol>
+<p>mystere(1)=2, mystere(2)=4, mystere(3)=8, mystere(4)=16</p>
+<ol>
+<li>
+<p>L'algorithme mystère prend un entier n en entrée, et renvoie <span class="arithmatex">\(2^n\)</span> en sortie.</p>
+</li>
+<li>
+<p>Nous sommes en présence d'une boucle bornée composée d'instructions élémentaires se terminant. Par conséquent cette boucle se termine.</p>
+</li>
+<li>
+<p>"Avant l'itération <span class="arithmatex">\(i\)</span>, p contient <span class="arithmatex">\(2^{i-1}\)</span>"</p>
+</li>
+</ol>
+<p>5.</p>
+<p><strong>INITIALISATION</strong></p>
+<p>Avant la première itération pour <span class="arithmatex">\(i=1\)</span>,  <span class="arithmatex">\(p\)</span>= vaut <span class="arithmatex">\(1\)</span>, et <span class="arithmatex">\(2^{i-1}=2^{1-1}=2^0=1\)</span></p>
+<p>La proposition "Avant l'itération <span class="arithmatex">\(i\)</span>, p contient <span class="arithmatex">\(2^{i-1}\)</span> est donc vraie pour <span class="arithmatex">\(i=1\)</span></p>
+<p><strong>CONSERVATION</strong></p>
+<p>Pour un <span class="arithmatex">\(i\)</span> quelconque, émettons l'hypothèse que "Avant l'itération <span class="arithmatex">\(i\)</span>, p contient <span class="arithmatex">\(2^{i-1}\)</span>"</p>
+<p>Nous voulons alors démontrer ici que ça restera vrai pour <span class="arithmatex">\(i+1\)</span> après avoir déroulé les instructions de la boucle, donc que "Avant l'itération <span class="arithmatex">\(i+1\)</span>, p contiendra <span class="arithmatex">\(2^{i}\)</span>" (on a remplacé les <span class="arithmatex">\(i\)</span> par des <span class="arithmatex">\(i+1\)</span> dans l'invariant)</p>
+<p>Par hypothèse, au début de la boucle, <span class="arithmatex">\(p=2^{i-1}\)</span></p>
+<p>La seule instruction de la boucle double la valeur de <span class="arithmatex">\(p\)</span></p>
+<p>Suite à son exécution, on aura donc <span class="arithmatex">\(p=2\times 2^{i-1}=2^i\)</span>.</p>
+<p>C'est bien ce qu'il fallait démontrer.</p>
+<p>Si l'invaraint est "vrai un jour", il sera donc conservé.</p>
+<p><strong>Terminaison</strong></p>
+<p>L'invariant est vrai pour <span class="arithmatex">\(i=1\)</span> et est conservé à chaque itération. A la fin de la dernière itération pour <span class="arithmatex">\(i=n\)</span> il sera donc vrai pour <span class="arithmatex">\(i=n+1\)</span>.</p>
+<p>En réécrivant l'invariant pour <span class="arithmatex">\(i=n+1\)</span>, on obtient qu'à l'issue de la boucle, p contient <span class="arithmatex">\(2^{(n+1)-1}\)</span>, autrement dit, p contient <span class="arithmatex">\(2^n\)</span></p>
+</details>
+<div class="admonition question">
+<p class="admonition-title">Ensemble des minimisants</p>
 <p>Ecrire et tester une fonction python <code>argmin</code> qui résoud le problème ARGMIN en renvoyant cette fois-ci <strong>l'ensemble</strong> des minimisants.</p>
 <div class="arithmatex">\[
 ens\_min = \argmin_{k \le {\color{red}i} &lt; n}\, f[i]
@@ -2991,6 +3085,10 @@ $$</p>
         <script src="https://cdn.jsdelivr.net/npm/mathjs/lib/browser/math.js"></script>
       
         <script src="https://unpkg.com/cytoscape@3.31.2/dist/cytoscape.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+      
+        <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
       
     
   </body>
