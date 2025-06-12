@@ -2570,7 +2570,7 @@
 <div class="admonition abstract">
 <p class="admonition-title">Le problème FIND‑MIN</p>
 <p><strong>But:</strong> Déterminer la <em>valeur minimale</em> d’un tableau <span class="arithmatex">\(T\)</span> de taille <span class="arithmatex">\(n\)</span>.</p>
-<p><strong>Précondition</strong> : <span class="arithmatex">\(n &gt; 0\)</span>.</p>
+<p><strong>Précondition</strong> : <span class="arithmatex">\(n &gt; 0\)</span>. Le tableau ne doit pas être vide car il n'existe pas de valeur neutre universelle pour le minimum. Par exemple, il n'existe aucun réel inférieur à tous les réels. Le minimum de l'ensemble vide est indéfini.</p>
 <p><strong>Post-condition</strong> <br />
 Si <span class="arithmatex">\(m\)</span> est le résultat, alors<br />
 $$ \huge
@@ -2641,7 +2641,7 @@ On ne peut pas savoir a priori combien de fois elle va s'exécuter : cela dépen
 <div class="highlight"><pre><span></span><code><span class="k">while</span> <span class="ow">not</span> <span class="n">condition_arret</span><span class="p">():</span>
     <span class="n">faire_quelque_chose</span><span class="p">()</span>
 </code></pre></div>
-<p>Ici, la terminaison dépend d'une condition d'arrêt dont on ne peut pas a priori si elle sera vraie un jour.</p>
+<p>Ici, la terminaison dépend d'une condition d'arrêt dont on ne peut pas a priori savoir si elle sera vraie un jour.</p>
 </div>
 <h3 id="variant-de-boucle">Variant de boucle</h3>
 <div class="admonition abstract">
@@ -2649,7 +2649,7 @@ On ne peut pas savoir a priori combien de fois elle va s'exécuter : cela dépen
 <p><strong>Un variant de boucle est une quantité</strong> entière positive strictement décroissante qui assure la terminaison d'une boucle lorsqu'elle atteint une limite inférieure (souvent 0).</p>
 <p>Pour prouver qu'un algorithme se termine, on exhibe un variant de boucle et on montre que cette quantité est <strong>strictememnt</strong> décroissante, pour atteindre son minimum.</p>
 </div>
-<p>Puor FIND-MIN, Le variant de boucle est <span class="arithmatex">\(n-i-1\)</span>. et il assure la terminaison du programme.</p>
+<p>Pour FIND-MIN, Le variant de boucle est <span class="arithmatex">\(n-i-1\)</span>. et il assure la terminaison du programme.</p>
 <p>Quoi qu'il arrive, <span class="arithmatex">\(i\)</span> va aller de <span class="arithmatex">\(0\)</span> à <span class="arithmatex">\(n-1\)</span>, donc le variant de <span class="arithmatex">\(n-1\)</span> à 0, puis la boucle se termine, car elle n'est composée que d'instructions élémentaires qui se terminent. </p>
 <p>D'un point de vue général:</p>
 <div class="admonition abstract">
@@ -2693,7 +2693,7 @@ On ne peut pas savoir a priori combien de fois elle va s'exécuter : cela dépen
 <p><strong>INITIALISATION</strong></p>
 <ol>
 <li>
-<p>Si le tableau n'a qu'un élément, la boucle ne s'exécute pas et le minimum est correctement renvoyé. </p>
+<p>Si le tableau n'a qu'un élément, la boucle est vide d'exécution et le minimum est correctement renvoyé. </p>
 </li>
 <li>
 <p>Si le tableau a au moins un élément, <span class="arithmatex">\(i=1\)</span> et <span class="arithmatex">\(mini\)</span> est bien le minimum de <span class="arithmatex">\(T[0..0]\)</span>, le tableau constitué d'un seul élément.</p>
@@ -2712,7 +2712,7 @@ On suppose que pour <span class="arithmatex">\(i\ge1\)</span> quelconque, l'inva
 <p>Dans tous les cas, en sortie de boucle, "<span class="arithmatex">\(mini\)</span> est le minimum de T[0..i]" est vrai, ce que nous voulions démontrer.</p>
 <p>L'invariant est donc conservé. L'algorithme est partiellement correct.</p>
 <p><strong>TERMINAISON</strong>
-Nous avons déjà prouvé la terminaison de l'algorithme.</p>
+L'algorithme est composé d'une boucle bornée dont les instructions se terminent. Donc Il se termine.</p>
 <p>Lors de sa dernière itération, <span class="arithmatex">\(i=n-1\)</span> et l'invariant reste vrai pour <span class="arithmatex">\(i=n\)</span> par conservation.</p>
 <p>Donc mini est le minimum de <span class="arithmatex">\(T[0..n-1]\)</span></p>
 <p>Notre algorithme de recherche de minimum est donc totalement correct.</p>
@@ -2721,11 +2721,8 @@ Nous avons déjà prouvé la terminaison de l'algorithme.</p>
 <div class="admonition abstract">
 <p class="admonition-title">Description du problème ARGMIN</p>
 <p><strong>But:</strong> Déterminer le plus petit <strong>indice</strong> de la <em>valeur minimale</em> d’un tableau <span class="arithmatex">\(T\)</span> de taille <span class="arithmatex">\(n\)</span> à partir d'un indice <span class="arithmatex">\(k\)</span>.</p>
-<p><strong>Préconditions</strong> : </p>
-<ul>
-<li><span class="arithmatex">\(n &gt; 0\)</span></li>
-<li><span class="arithmatex">\(0 \le k &lt; n\)</span></li>
-</ul>
+<p><strong>Précondition</strong> : 
+- <span class="arithmatex">\(0 \le k &lt; n\)</span></p>
 <p><strong>Post-condition</strong>
 Si <span class="arithmatex">\(imin\)</span> est le résultat, alors voici la notation utilisée
 $$ \huge
@@ -2735,7 +2732,6 @@ $$</p>
 <p>Par exemple, si <span class="arithmatex">\(T=[4, 1, 1, 5, 9, 1]\)</span>, alors l'ensemble des indices minimisants à partir de <span class="arithmatex">\(k=0\)</span> est <span class="arithmatex">\([1, 2, 5]\)</span>, et donc <span class="arithmatex">\(imin\)</span> vaudra <span class="arithmatex">\(1\)</span>.</p>
 <p>Considérons l'entrée <span class="arithmatex">\(T=[0, 9, 3, 19]\)</span> et <span class="arithmatex">\(k=1\)</span></p>
 <p>La sortie de l'algorithme pour cette entrée est 2, car à partir de l'indice 1, 3 est le minimum, et son indice dans le tableau est 2.</p>
-<p>Note: Habituellement, argmin renvoie l'ensemble des minimisants, mais on peut préciser qu'<strong>on ne cherche qu'un minimisant</strong>, ce qui est notre cas.</p>
 </div>
 <p>Nous voulons prouver que cet algorithme que nous avons déjà programmé résoud ARGMIN</p>
 <div class="highlight"><pre><span></span><code><span class="gh"># Algorithme - Calculer l&#39;indice du minimum de T à partir de l&#39;indice k</span>
@@ -2813,7 +2809,6 @@ $$</p>
 </li>
 </ul>
 <p>Si un algorithme est en <span class="arithmatex">\(\mathcal{O}(n^2)\)</span>, ça veut dire que sa fonction de temps est <strong>dominée</strong> par <span class="arithmatex">\(n^2\)</span>. Elle ne peut pas être plus "grande".</p>
-<p>Ces 3 types de complexités font partie de la même classe de complexité. On l'appelle la classe P. Elle englobe tous les algorithmes qui calculent en temps polynômial.</p>
 </div>
 <p>Le petit outil ci-dessous permet de comparer la croissance de 2 fonctions quand <span class="arithmatex">\(x\)</span> tend vers l'infini positif. C'est ce qui nous intéresse en complexité.</p>
 <p>Sélectionnez donc <span class="arithmatex">\(x^2\)</span> et <span class="arithmatex">\(2^x\)</span>. Lorsque vous appuyez sur Démarrer, une animation se lance. Vous visionnez alors la courbe représentative des fonctions à travers une fenêtre de largeur 2 qui se déplace vers la droite sur l'axe des abscisses. Vous pouvez régler la vitesse de déplacement de cette fenêtre avec le curseur.</p>
@@ -3086,7 +3081,7 @@ $$</p>
       
         <script src="https://unpkg.com/cytoscape@3.31.2/dist/cytoscape.min.js"></script>
       
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.17/d3.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
       
         <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
       
