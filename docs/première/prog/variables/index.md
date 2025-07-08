@@ -3,17 +3,32 @@
 
 ## Qu'est-ce que c'est?
 
-Une variable est le seul moyen de se souvenir d'une information entre les instructions d'un programme.
+!!! abstract "Le plus important"
+    **Une variable est le seul moyen de se souvenir d'une information entre les instructions d'un programme.**
 
-Toute information qui n'est pas stockée dans une variable est perdue.
+    **Toute information qui n'est pas stockée dans une variable est perdue.**
 
-Il faut la voir comme une boîte avec une étiquette.
+    **Toute nouvelle information stockée dans une variable 'efface' la précédente information.**
+
+    **Les variables sont stockées sous forme binaire dans la mémoire de l'ordinateur: la RAM**
+
+L'image suivante montre une barette de RAM de 128Go
+
+![Barette de 128Go](image-1.png)
+
+Il faut voir une variable comme une boîte avec une étiquette qui est le nom de la variable.
+
+TODO mettre image de boite
 
 !!! danger "Ecriture dans une variable"
     Pour mettre quelque chose dans une variable, on utilise l'opérateur `=`.
     On dit que c'est un opérateur d'affectation.
 
-    Attention, `=` ne représente pas un opérateur d'égalité, il sert à mettre le résultat de ce qui est à droite dans la variable désignée à gauche.
+    ```python
+    a = 4
+    ```
+
+    **Attention** `=` ne représente pas l'égalité, il sert à mettre le résultat de ce qui est à droite dans la variable désignée à gauche, c'est une opération mécanique.
 
     Si la variable n'existe pas déjà, elle est crée, sinon, son contenu est remplacé.
 

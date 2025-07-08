@@ -29,9 +29,9 @@ Lorsque les programmes deviennent longs, on peut se perdre dans les types, alors
 
 ## Représentation en mémoire
 
-**Comme toute information**, les str sont stockés dans la mémoire sous forme d'une suite de bits organisés en octets.
+**Comme toute information**, les str sont stockés dans la mémoire sous forme d'une suite de bits organisés en octets. Il faut que tout le monde le fasse de la même manière pour que les informations puissent être transmises. A ce titre, il existe des standards.
 
-### Le code Ascii
+### Le standard Ascii
 
 Le code ASCII (utilisé au départ par les ordinateurs) associe un nombre entre 0 et 127 à chaque caractère courant.
 
@@ -54,7 +54,7 @@ print(chr(48))   ## Affiche '0'
 Le code précédent affiche le nombre de bits utilisés par python pour stocker l'information 157.
 
 
-### UNICODE
+### Le standard Unicode
 
 Le code ASCII ne suffit pas pour représenter toutes les lettres (comme 'é', 'ç') ou d’autres symboles d'autres langues. Pour encoder plus de caractères, on utilise maintenant Unicode, qui peut représenter plus de 1 million de caractères du monde entier (accents, symboles scientifiques, emojis...).
 
@@ -100,7 +100,7 @@ Ici, la fonction `chr` nous permet directement d'utiliser le point unicode pour 
 Le site suivant est celui de la norme unicode https://home.unicode.org/
 
 
-### Opérations possibles
+## Opérations possibles
 
 
 | **Opérateur**        | **Opération**                    | **Exemple**                    |
@@ -111,7 +111,7 @@ Le site suivant est celui de la norme unicode https://home.unicode.org/
 
 | **Fonction**        | **Description**                    | **Exemple**                    |
 | -------------------- | -------------------------------- | ------------------------------ |
-| `len()`              | Longueur de la chaîne            | `len("chat")` → `4`            |
+| `len()`              | **Longueur de la chaîne**            | `len("chat")` → `4`            |
 | `ord()`              | Code Unicode d’un caractère      | `ord('A')` → `65`              |
 | `chr()`              | Caractère depuis un code Unicode | `chr(65)` → `'A'`              |
 
@@ -128,24 +128,82 @@ Le site suivant est celui de la norme unicode https://home.unicode.org/
 | -------------------- | -------------------------------- | ------------------------------ |
 | `in`                 | Présence d’un élément            | `'a' in "chat"` → `True`       |
 | `not in`             | Absence d’un élément             | `'z' not in "chat"` → `True`   |
-| `==`, `!=`           | Égalité / différence             | `"Abc" == "abc"` → `False`      |
-| `<`, `>`, `<=`, `>=` | Comparaison lexicographique      | `"poire" < "portugal"` → `True`       |
+| `==`, `!=`           | **Égalité / différence**             | `"Abc" == "abc"` → `False`      |
+| `<`, `>`, `<=`, `>=` | **Comparaison lexicographique**      | `"poire" < "portugal"` → `True`       |
 
 Note: La comparaison lexicographique est celle de l'ordre des mots dans un dictionnaire.
 
-## Division Euclidienne
+## Accès aux caractères
 
-La division euclidienne est celle que vous avez appris en primaire. On n'en fait plus trop après, mais c'est une opération fondamentale.
+En Python, une chaîne de caractères est une suite ordonnée de lettres, comme un mot ou une phrase. Chaque lettre de la chaîne est numérotée selon sa position : la première lettre porte le numéro 0, la deuxième le numéro 1, et ainsi de suite. Par exemple, dans la chaîne "chat", la lettre 'c' est à la position 0, 'h' à la position 1, 'a' à la position 2, et 't' à la position 3. Pour accéder à une lettre, on écrit le nom de la chaîne suivi de crochets avec le numéro entre les crochets. Exemple : `"chat"[1]` renvoie 'h'.
+
+| Indice | 0     | 1     | 2     | 3     |
+| ------ | ----- | ----- | ----- | ----- |
+| Lettre | `'c'` | `'h'` | `'a'` | `'t'` |
+
+!!! danger "Attention au 0"
+    Il faut faire attention, comme d'habitude, on commence toujours à tout numéroter à partir de 0.
+
+    Si la longueur de `"chat"` est 4, ses indices vont de 0 à 3
+
+!!! danger "Dépassement d'indice"
+    Si on demande le caractère à un indice qui n'existe pas, python émettra une erreur.
+    `>>> "chat"[4]`
+    `IndexError: string index out of range`
 
 
-![alt text](image.png)
+!!! question "Algorithme"
 
-Dans l'opération précédente, on effectue la division euclidienne de 163 par 5.
+    ```python
+    texte = "truc"
+    res = ""
 
-Le quotient est 32. On l'obtient en calculant `163 // 5`
+    POUR CHAQUE Caractère car de la variable texte, FAIRE:
+        res = car + res
+    FIN POUR
 
-le reste est 3. On l'obtient en calculant `163 % 5`
+    AFFICHER res
+    ```
+    
+    - Qu'affiche l'algorithme précédent?
 
-Si j'ai 163 chocolats et que je veux les mettre dans des boîtes de 5, je pourrai donc faire 32 boîtes pleines, et il me restera 3 chocolats.
+    `POUR CHAQUE Caractère car de la variable texte, FAIRE:` s'écrit en python ainsi:
 
-$163 = 5 \times 32 + 3$
+    ```python
+    for car in texte:
+    ```
+
+    - Ecrire le programme python correspondant
+
+
+!!! question "Algorithme"
+
+
+    ```python
+    texte = "truc"
+    res = ""
+
+    POUR CHAQUE entier i de 0 à 2, FAIRE:
+        SI texte[i] > texte[i+1] VAUT VRAI, ALORS FAIRE
+            res = texte[i] + res
+        FIN SI
+    FIN POUR
+    
+    AFFICHER res
+    ```
+
+    - Qu'affiche l'algorithme précédent?
+
+
+    `POUR CHAQUE entier i de 0 à 2, FAIRE:` s'écrit en python:
+    ```python
+    for i in range(0, 3):
+    ```
+
+    `SI texte[i] > texte[i+1] VAUT VRAI, ALORS FAIRE` s'écrit en python:
+    ```python
+    if texte[i] > texte[i+1]:
+    ```
+
+    Pourquoi 3? c'est le signal STOP pour python, il ne le fera pas. Il n'ira donc que jusqu'à 2.
+
