@@ -1,0 +1,46 @@
+# Les variables
+
+
+## Qu'est-ce que c'est?
+
+Une variable est le seul moyen de se souvenir d'une information entre les instructions d'un programme.
+
+Toute information qui n'est pas stockée dans une variable est perdue.
+
+Il faut la voir comme une boîte avec une étiquette.
+
+!!! danger "Ecriture dans une variable"
+    Pour mettre quelque chose dans une variable, on utilise l'opérateur `=`.
+    On dit que c'est un opérateur d'affectation.
+
+    Attention, `=` ne représente pas un opérateur d'égalité, il sert à mettre le résultat de ce qui est à droite dans la variable désignée à gauche.
+
+    Si la variable n'existe pas déjà, elle est crée, sinon, son contenu est remplacé.
+
+
+!!! question "Exercice"
+    ```python
+    truc = 4  # On affecte 4 à truc
+    truc = 3
+    ```
+    Que vaut truc à la fin de l'exécution de ces deux instructions?
+
+
+!!! danger "Lecture d'une variable"
+    On peut utiliser le contenu d'une variable dans une expression en écrivant juste son nom.
+
+
+!!! question "Exercice"
+    ```python
+    truc = 2
+    print(truc)
+    bidule = truc + 5
+    print(bidule + truc)
+    ```
+
+    Déterminer ce qui sera affiché à l'écran lorsque ce programme va s'exécuter.
+
+
+## Type d'une variable
+
+Toute variable a un type qui désige le genre d'information stockée dans la variable. Ici, nous avons uniquement créé des variables de type "entier".
