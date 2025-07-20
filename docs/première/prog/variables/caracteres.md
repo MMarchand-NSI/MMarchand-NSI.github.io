@@ -29,7 +29,7 @@ Lorsque les programmes deviennent longs, on peut se perdre dans les types, alors
 
 ## Représentation en mémoire
 
-**Comme toute information**, les str sont stockés dans la mémoire sous forme d'une suite de bits organisés en octets. Il faut que tout le monde le fasse de la même manière pour que les informations puissent être transmises. A ce titre, il existe des standards.
+**Comme toute information, les str sont stockés dans la mémoire sous forme d'une suite de bits organisés en octets.** Il faut que tout le monde le fasse de la même manière pour que les informations puissent être communiquées. A ce titre, il existe des standards internationaux.
 
 ### Le standard Ascii
 

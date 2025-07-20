@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Odomètre visuel</title>
+  <style>
+    body {
+      font-family: monospace;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .counter {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      margin-bottom: 1em;
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 2em;
+    }
+
+    .digit-wrapper {
+      height: 2em;
+      width: 2em;
+      font-size: 2em;
+      overflow: hidden;
+      border: 1px solid #ccc;
+    }
+
+    .wheel {
+      display: flex;
+      flex-direction: column;
+      transform: translateY(0);
+    }
+
+    .wheel.animate {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .wheel span {
+      height: 2em;
+      line-height: 2em;
+      text-align: center;
+    }
+
+    button.global {
+      font-size: 1.5em;
+      margin: 0.5em;
+      padding: 0.2em 0.6em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="counter" id="counter"></div>
+
+  <div>
+    <button class="global" onclick="increment()">+</button>
+    <button class="global" onclick="decrement()">−</button>
+  </div>
+
+  <script>
+    const digits = "01"; // ou binaire, hexa, emojis...
+    const base = digits.length;
+    const numDigits = 4;
+
+    const counterEl = document.getElementById("counter");
+    const columns = [];
+
+    for (let i = 0; i < numDigits; i++) {
+      const column = document.createElement("div");
+      column.className = "column";
+
+      const wrapper = document.createElement("div");
+      wrapper.className = "digit-wrapper";
+
+      const wheel = document.createElement("div");
+      wheel.className = "wheel";
+
+      const initial = document.createElement("span");
+      initial.textContent = digits[0];
+      wheel.appendChild(initial);
+
+      wrapper.appendChild(wheel);
+      column.appendChild(wrapper);
+      counterEl.appendChild(column);
+
+      columns.push({ wheel, current: 0, animating: false });
+    }
+
+    /**
+     * Met à jour la colonne d'indice `colIndex` pour afficher la valeur `newValue`.
+     * Si la colonne est déjà en train d'etre mise à jour, ne fait rien.
+     * @param {number} colIndex
+     * @param {number} newValue
+     */
+    function updateColumn(colIndex, newValue) {
+      const col = columns[colIndex];
+      if (col.animating) return;
+
+      const from = col.current;
+      const to = newValue;
+      if (from === to) return;
+
+      const direction = (to - from + base) % base > base / 2 ? -1 : 1;
+      const nextChar = digits[to];
+      const newSpan = document.createElement("span");
+      newSpan.textContent = nextChar;
+
+      col.animating = true;
+      col.current = to;
+
+      if (direction > 0) {
+        col.wheel.appendChild(newSpan);
+        requestAnimationFrame(() => {
+          col.wheel.classList.add("animate");
+          col.wheel.style.transform = "translateY(-2em)";
+        });
+      } else {
+        col.wheel.prepend(newSpan);
+        col.wheel.style.transform = "translateY(-2em)";
+        col.wheel.offsetHeight;
+        col.wheel.classList.add("animate");
+        col.wheel.style.transform = "translateY(0)";
+      }
+
+      setTimeout(() => {
+        col.wheel.classList.remove("animate");
+        col.wheel.style.transform = "translateY(0)";
+        col.wheel.innerHTML = `<span>${nextChar}</span>`;
+        col.animating = false;
+      }, 300);
+    }
+
+    function getValue() {
+      let value = 0;
+      for (let i = 0; i < numDigits; i++) {
+        value = value * base + columns[i].current;
+      }
+      return value;
+    }
+
+    function setValue(newVal) {
+      let value = newVal;
+      const newDigits = Array(numDigits).fill(0);
+
+      for (let i = numDigits - 1; i >= 0; i--) {
+        newDigits[i] = value % base;
+        value = Math.floor(value / base);
+      }
+
+      for (let i = 0; i < numDigits; i++) {
+        updateColumn(i, newDigits[i]);
+      }
+    }
+
+    function increment() {
+      const maxValue = base ** numDigits - 1;
+      const current = getValue();
+      if (current < maxValue) {
+        setValue(current + 1);
+      }
+    }
+
+    function decrement() {
+      const current = getValue();
+      if (current > 0) {
+        setValue(current - 1);
+      }
+    }
+  </script>
+</body>
+</html>

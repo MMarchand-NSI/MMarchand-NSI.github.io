@@ -64,7 +64,7 @@ Nous reviendrons en temps et en heure sur les autres.
 | **Opérations binaires**    | ET bit-à-bit                | `&`                | `5 & 3 → 1`          |
 |                            | OU bit-à-bit                | `\|`               | `5 \| 3 → 7`         |
 |                            | OU exclusif (XOR)           | `^`                | `5 ^ 3 → 6`          |
-|                            | Négation binaire            | `~`                | `~5 → -6`            |
+|                            | Complément à 1            | `~`                | `~5 → -6`            |
 |                            | Décalage à gauche           | `<<`               | `3 << 2 → 12`        |
 |                            | Décalage à droite           | `>>`               | `12 >> 2 → 3`        |
 
@@ -73,15 +73,29 @@ Nous reviendrons en temps et en heure sur les autres.
 
 La division euclidienne est celle que vous avez appris en primaire. On n'en fait plus trop après, mais c'est une opération fondamentale.
 
+<center>
+
+![](image-2.png)
+
+</center>
+
+<center>
 
 ![alt text](image.png)
 
+</center>
+
 Dans l'opération précédente, on effectue la division euclidienne de 163 par 5.
 
-Le quotient est 32. On l'obtient en calculant `163 // 5`
+Le **quotient** est 32. On l'obtient en calculant `163 // 5`
 
-le reste est 3. On l'obtient en calculant `163 % 5`
+le **reste** est 3. On l'obtient en calculant `163 % 5`
 
-Si j'ai 163 chocolats et que je veux les mettre dans des boîtes de 5, je pourrai donc faire 32 boîtes pleines, et il me restera 3 chocolats.
 
-$163 = 5 \times 32 + 3$
+!!! tip "Signification"
+    Si j'ai 163 chocolats et que je veux les rassembler dans des boîtes de 5, je pourrai donc faire 32 boîtes pleines, et il me restera 3 chocolats.
+
+    $163 = 5 \times 32 + 3$
+
+    **Le reste est toujours plus petit que le diviseur**, en effet, si on trouvait un reste supérieur ou égal à 5, il nous resterait suffisamment de chocolats pour faire au moins une boîte de 5, et donc il resterait en réalité moins.
+

@@ -47,10 +47,10 @@ Ici, le programme sorted prend bien en paramètre le programme distance_org.
 ## Définitions
 
 !!! abstract "Calculabilité"
-    Un problème est calculable s'il existe un algorithme qui le résoud en temps fini pour toutes les entrées possibles.
+    Un problème est calculable lorsqu’il existe un algorithme qui donne une réponse correcte en un temps fini pour toute entrée possible.
 
 !!! abstract "Décidabilité"
-    La décidabilité est un sous-ensemble de la calculabilité. La décidabilité ne s'intéresse qu'aux problèmes dont la réponse est oui ou non.
+    Un problème est décidable s'il s’agit d’un problème de décision (réponse "oui" ou "non") pour lequel un algorithme existe et termine toujours. Les problèmes décidables forment un sous-ensemble des problèmes calculables.
 
 
 ### Machine de Turing
@@ -60,6 +60,8 @@ On peut considérer une machine de Turing comme un automate possédant des état
 
 [Site de simulation](https://turingmachine.io/)
 
+!!! question "Exercices"
+    Faire les exercices associés à l'automate "binary increment"
 
 ## La calculabilité ne dépend pas du langage
 
