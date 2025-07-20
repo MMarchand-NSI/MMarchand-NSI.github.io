@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Compteur interactif compact</title>
+  <style>
+    body {
+      font-family: monospace;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .parametres {
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      margin-bottom: 1em;
+      flex-wrap: wrap;
+    }
+
+    .champ {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .compteur {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .chiffres {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      margin-bottom: 1em;
+    }
+
+    .colonne {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 2em;
+    }
+
+    .roue-wrapper {
+      height: 2em;
+      width: 2em;
+      font-size: 2em;
+      overflow: hidden;
+      border: 1px solid #ccc;
+    }
+
+    .roue {
+      display: flex;
+      flex-direction: column;
+      transform: translateY(0);
+    }
+
+    .roue.animate {
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .roue span {
+      height: 2em;
+      line-height: 2em;
+      text-align: center;
+    }
+
+    .global {
+      font-size: 1.5em;
+      margin: 0.5em;
+      padding: 0.2em 0.6em;
+    }
+
+    .valeur {
+      margin-top: 1em;
+      font-size: 1.2em;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="parametres" id="parametres"></div>
+  <div id="compteur"></div>
+
+  <script>
+    let compteurActuel = null;
+
+    function creerCompteur(id, alphabet, chiffres) {
+      const base = alphabet.length;
+      const container = document.getElementById(id);
+      container.innerHTML = "";
+
+      const compteurEl = document.createElement("div");
+      compteurEl.className = "compteur";
+
+      const lignes = document.createElement("div");
+      lignes.className = "chiffres";
+      compteurEl.appendChild(lignes);
+
+      const boutons = document.createElement("div");
+      const plus = document.createElement("button");
+      const moins = document.createElement("button");
+      plus.className = moins.className = "global";
+      plus.textContent = "+";
+      moins.textContent = "−";
+      boutons.appendChild(plus);
+      boutons.appendChild(moins);
+      compteurEl.appendChild(boutons);
+
+      const affichage = document.createElement("div");
+      affichage.className = "valeur";
+      compteurEl.appendChild(affichage);
+
+      container.appendChild(compteurEl);
+
+      const colonnes = [];
+
+      for (let i = 0; i < chiffres; i++) {
+        const col = document.createElement("div");
+        col.className = "colonne";
+
+        const wrap = document.createElement("div");
+        wrap.className = "roue-wrapper";
+
+        const roue = document.createElement("div");
+        roue.className = "roue";
+
+        const span0 = document.createElement("span");
+        span0.textContent = alphabet[0];
+        roue.appendChild(span0);
+
+        wrap.appendChild(roue);
+        col.appendChild(wrap);
+        lignes.appendChild(col);
+
+        colonnes.push({ roue, current: 0, animating: false });
+      }
+
+      function majColonne(i, newVal, direction) {
+        const col = colonnes[i];
+        if (col.animating || col.current === newVal) return;
+
+        const span = document.createElement("span");
+        span.textContent = alphabet[newVal];
+        col.current = newVal;
+        col.animating = true;
+
+        if (direction > 0) {
+          col.roue.appendChild(span);
+          requestAnimationFrame(() => {
+            col.roue.classList.add("animate");
+            col.roue.style.transform = "translateY(-2em)";
+          });
+        } else {
+          col.roue.prepend(span);
+          col.roue.style.transform = "translateY(-2em)";
+          col.roue.offsetHeight;
+          col.roue.classList.add("animate");
+          col.roue.style.transform = "translateY(0)";
+        }
+
+        setTimeout(() => {
+          col.roue.classList.remove("animate");
+          col.roue.style.transform = "translateY(0)";
+          col.roue.innerHTML = `<span>${alphabet[newVal]}</span>`;
+          col.animating = false;
+        }, 300);
+      }
+
+      function getValeur() {
+        return colonnes.reduce((acc, col) => acc * base + col.current, 0);
+      }
+
+      function setValeur(nouvelleValeur, direction) {
+        const chiffresArr = Array(chiffres).fill(0);
+        let reste = nouvelleValeur;
+        for (let i = chiffres - 1; i >= 0; i--) {
+          chiffresArr[i] = reste % base;
+          reste = Math.floor(reste / base);
+        }
+
+        for (let i = 0; i < chiffres; i++) {
+          majColonne(i, chiffresArr[i], direction);
+        }
+
+        affichage.textContent = "Valeur décimale : " + nouvelleValeur;
+      }
+
+      plus.onclick = () => {
+        const val = getValeur();
+        if (val < base ** chiffres - 1) setValeur(val + 1, +1);
+      };
+
+      moins.onclick = () => {
+        const val = getValeur();
+        if (val > 0) setValeur(val - 1, -1);
+      };
+
+      setValeur(0, +1);
+      compteurActuel = { alphabet: alphabet.join(""), chiffres };
+    }
+
+    function initialiserFormulaire() {
+      const zone = document.getElementById("parametres");
+
+      const champ1 = document.createElement("div");
+      champ1.className = "champ";
+      const labelAlpha = document.createElement("label");
+      labelAlpha.textContent = "Alphabet de chiffres : ";
+      const champAlphabet = document.createElement("input");
+      champAlphabet.type = "text";
+      champAlphabet.value = "0123456789";
+      champ1.appendChild(labelAlpha);
+      champ1.appendChild(champAlphabet);
+
+      const champ2 = document.createElement("div");
+      champ2.className = "champ";
+      const labelChiffres = document.createElement("label");
+      labelChiffres.textContent = "Nombre de chiffres : ";
+      const champChiffres = document.createElement("input");
+      champChiffres.type = "number";
+      champChiffres.min = 1;
+      champChiffres.value = 4;
+      champ2.appendChild(labelChiffres);
+      champ2.appendChild(champChiffres);
+
+      zone.appendChild(champ1);
+      zone.appendChild(champ2);
+
+      function reinitCompteur() {
+        const alphabet = champAlphabet.value.split("");
+        const chiffres = parseInt(champChiffres.value);
+        if (alphabet.length > 0 && chiffres > 0) {
+          const config = compteurActuel || {};
+          if (config.alphabet !== alphabet.join("") || config.chiffres !== chiffres) {
+            creerCompteur("compteur", alphabet, chiffres);
+          }
+        }
+      }
+
+      champAlphabet.addEventListener("input", reinitCompteur);
+      champChiffres.addEventListener("input", reinitCompteur);
+
+      reinitCompteur();
+    }
+
+    initialiserFormulaire();
+  </script>
+</body>
+</html>
