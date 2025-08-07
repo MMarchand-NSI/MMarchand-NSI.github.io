@@ -1,0 +1,3288 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mmarchand-nsi.github.io/premi%C3%A8re/Num%C3%A9ration/entiers/">
+      
+      
+        <link rel="prev" href="../../IHM/flet/">
+      
+      
+        <link rel="next" href="../../architecture/droits-linux/">
+      
+      
+      <link rel="icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>Représentation des entiers naturels - Science Informatique - Site en construction</title>
+<script src="/javascripts/bundle.js"></script>
+
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#representation-des-entiers-naturels" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../.." title="Science Informatique - Site en construction" class="md-header__button md-logo" aria-label="Science Informatique - Site en construction" data-md-component="logo">
+      
+  <img src="../../../assets/logo-tr.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Science Informatique - Site en construction
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Représentation des entiers naturels
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  &nbsp;
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../les-outils/" class="md-tabs__link">
+          
+  
+  
+  Les outils
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../Algorithmique/1.algo/" class="md-tabs__link">
+          
+  
+  
+  Première
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../projets/intro-pyxel/" class="md-tabs__link">
+          
+  
+  
+  Projets
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../terminale/architecture_reseau/adressage/" class="md-tabs__link">
+          
+  
+  
+  Terminale
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../.." title="Science Informatique - Site en construction" class="md-nav__button md-logo" aria-label="Science Informatique - Site en construction" data-md-component="logo">
+      
+  <img src="../../../assets/logo-tr.png" alt="logo">
+
+    </a>
+    Science Informatique - Site en construction
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    &nbsp;
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Les outils
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Les outils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../les-outils/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Outils pour développer
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../les-outils/git/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Git et Github
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../les-outils/ocaml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    OCaml
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../les-outils/setup-vscode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Setup vscode
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Première
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Première
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Algorithmique
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithmique
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Algorithmique/1.algo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Algorithmique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Algorithmique/2.tri_selection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tri par Sélection
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Algorithmique/3.tri_insertion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tri par insertion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Algorithmique/4.dichotomie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recherche dichotomique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Algorithmique/5.glouton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Algorithmes gloutons
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Algorithmique/6.intro_recurrence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction à la récurrence
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Algorithmique/7.distance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dimensions supérieures et distances
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Algorithmique/8.knn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Algorithme des k plus proches voisins (KNN)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    IHM
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            IHM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../IHM/flet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interface Homme machine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Numération
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Numération
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Représentation des entiers naturels
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Représentation des entiers naturels
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#un-peu-de-philosophie-le-signifiant-et-le-signifie" class="md-nav__link">
+    <span class="md-ellipsis">
+      Un peu de philosophie: Le signifiant et le signifié
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#les-chiffres-et-les-nombres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Les chiffres et les nombres
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#le-systeme-positionnel-decimal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le système positionnel décimal
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-roue-des-chiffres" class="md-nav__link">
+    <span class="md-ellipsis">
+      La roue des chiffres
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changer-de-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changer de base
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rechanger-de-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rechanger de base
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#systemes-alternatifs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Systèmes alternatifs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/droits-linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gestion des droits sous linux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../architecture/os/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Systèmes d'exploitation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Logique
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Logique
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../logique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Logique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Prog
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Prog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prog/exercices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercices Algorithmique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prog/listes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le type list (et tuple)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prog/scope/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Portée des variables (scope)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prog/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chaînes de caractères (str)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_5" id="__nav_3_6_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Variables
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_5">
+            <span class="md-nav__icon md-icon"></span>
+            Variables
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prog/variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les variables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prog/variables/caracteres/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les chaînes de caractère
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prog/variables/entiers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le type entier
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prog/variables/recul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prendre un peu de recul
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reseau
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            Reseau
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reseau/bit-alterne/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le protocole du bit alterné
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Projets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Projets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/intro-pyxel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction à pyxel - POO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/jeudelavie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The Game Of Life
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/mastermind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MasterMind
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/musique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Créer un clavier musical
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/othello/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Othello
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/pendu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le pendu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/space_invader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Projet space invader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Terminale
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Terminale
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Architecture reseau
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture reseau
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/architecture_reseau/adressage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Réseaux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/architecture_reseau/bitwise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Opérateurs Bitwise en Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/architecture_reseau/chiffrement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction au chiffrement
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/architecture_reseau/chiffrement2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cryptographie Asymétriques
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/architecture_reseau/reciproque/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mini cours – Fonction réciproque
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/architecture_reseau/routage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le Routage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bdd
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Bdd
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/bdd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Base de données et SGBD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/bdd/jointure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jointures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/bdd/manipulation-integrite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulation et intégrité
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/bdd/projet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gestion d'un lycée - Fullstack
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/bdd/sql-murder-mystery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQL murder mystery
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/bdd/tp-sgbd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SGBD - Postgresql
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Langages
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Langages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/langages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Paradigmes de programmation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/langages/calculabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Calculabilité et Décidabilité
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/langages/complements_python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compléments sur le tri, min et max
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/langages/poo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Paradigme orienté objets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/langages/recursivite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Récursivité
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Processus
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Processus
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/processus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Processus
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Structures de donnees
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Structures de donnees
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/structures-de-donnees/arbrebinaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arbres enracinés
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/structures-de-donnees/listes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Listes - Paradigme fonctionnel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/structures-de-donnees/listeschainees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Listes chaînées - Approche Orientée Objet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5_4" id="__nav_5_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Graphes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Graphes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/structures-de-donnees/graphes/dijkstra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Algorithme de Dijkstra
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/structures-de-donnees/graphes/graphes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graphes - Généralités et Implémentation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/structures-de-donnees/graphes/parcours/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parcours de graphes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#un-peu-de-philosophie-le-signifiant-et-le-signifie" class="md-nav__link">
+    <span class="md-ellipsis">
+      Un peu de philosophie: Le signifiant et le signifié
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#les-chiffres-et-les-nombres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Les chiffres et les nombres
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#le-systeme-positionnel-decimal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le système positionnel décimal
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-roue-des-chiffres" class="md-nav__link">
+    <span class="md-ellipsis">
+      La roue des chiffres
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#changer-de-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      Changer de base
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rechanger-de-base" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rechanger de base
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#systemes-alternatifs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Systèmes alternatifs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
+<script src="https://mmarchand-nsi.github.io//js/sqlite_ide.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/sql/sql.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.css">
+<link rel="stylesheet" href="https://mmarchand-nsi.github.io//css/sqlite_ide.css">
+<script>sqljs_base_path="https://mmarchand-nsi.github.io/"</script>
+
+<h1 id="representation-des-entiers-naturels">Représentation des entiers naturels</h1>
+<div class="admonition question">
+<p class="admonition-title">Préambule</p>
+<ul>
+<li>Quel est le premier chiffre?</li>
+<li>Quel est le dernier chiffre?</li>
+<li>Combien y-a-t-il de chiffres?</li>
+<li>Donnez les valeurs de <span class="arithmatex">\(10^k\)</span> pour <span class="arithmatex">\(k\)</span> allant de 0 à 5</li>
+<li>Plus grand nombre:<ul>
+<li>Quel est le plus grand nombre représentable sur:<ul>
+<li>1 chiffres?</li>
+<li>4 chiffres?</li>
+<li>9 chiffres?</li>
+</ul>
+</li>
+<li>Pour chaque résultat précédent, Ajoutez-y 1. D'après ce que vous obtenez, exprimez les solutions en vous aidant de puissances.</li>
+<li>Quel calcul faut-il faire pour obtenir le plus grand nombre sur 5678 chiffres?</li>
+<li>Donnez une formule permettant de connaître le plus grand nombre représentable sur <span class="arithmatex">\(n&gt;0\)</span> chiffres.</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="un-peu-de-philosophie-le-signifiant-et-le-signifie">Un peu de philosophie: Le signifiant et le signifié</h2>
+<p>Sur terre, il existe des centaines de manière de signifier qu'on parle d'un poisson.</p>
+<p>On peut écrire et dire "poisson" en français.</p>
+<p>On peut écrire et dire "fish" en anglais.</p>
+<p>On peut écrire 魚, ou さかな et dire "sakana" en japonais.</p>
+<p><img alt="alt text" src="../image.png" /></p>
+<p><strong>Ce qu’on dit ou écrit (le signifiant) peut varier d'une personne à l'autre sur terre. L'idée qu’on désigne (le signifié), par contre, reste inchangé.</strong></p>
+<p>Ce qui réveille l'idée d'un poisson est différent, mais l'idée d'un poisson est globalement la même pour tous.</p>
+<p>La relation entre le signifiant et le signifié est arbitraire. Il n'y a aucune raison qu'on choisisse un signifiant particulier pour décrire un signifié. Autrement dit, les deux n’ont pas de relation logique et doivent être apprises. Il s’agit d’une convention humaine.</p>
+<h2 id="les-chiffres-et-les-nombres">Les chiffres et les nombres</h2>
+<p>Les nombres servent à signifier une <strong>quantité</strong> ou un <strong>ordre</strong>.</p>
+<ul>
+<li>Il y a 53 pommes dans le panier <span class="arithmatex">\(\rarr\)</span> cardinal</li>
+<li>Je suis arrivé en 3ème position <span class="arithmatex">\(\rarr\)</span> ordinal</li>
+</ul>
+<p>Pour l’instant vous n'avez été habitués qu’à dire, lire et écrire les nombres sur base de cet ensemble de dessins <span class="arithmatex">\(&lt;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&gt;\)</span>. On appelle chacun de ces dessins un chiffre (indo-arabe).</p>
+<p>Au japon, leur équivalent est &lt;零, 一, 二, 三, 四, 五, 六, 七, 八, 九&gt; mais les nombres ne sont pas construits de la même façon que chez nous. Le Japon a totalement adopté le système de numération occidental au cours du XXème siècle. (vous remarquerez au passage qu'en France, nous utilisons toujours les chiffres romains pour écrire les siècles)</p>
+<p><strong>Une lettre est un dessin. Nous disposons de 26 lettres dans l'alphabet.
+Avec ces lettres, nous composons des mots auxquels nous attribuons un sens.</strong></p>
+<p><strong>Un chiffre est un dessin. Nous disposons de dix chiffres. 
+Avec ces chiffres, nous composons des nombres auxquels nous attribuons un sens, celui d'une quantité ou d'un ordre.</strong></p>
+<p><img alt="alt text" src="../image-1.png" /></p>
+<p>Contrairement à l'exemple du poisson, pratiquement tout le monde sur terre s'accorde maintenant sur les symboles, mais pas sur leur prononciation.</p>
+<p>Presque tous les adultes alphabétisés sur terre comprennent le dessin <span class="arithmatex">\(88\)</span> de la même façon, mais peu comprennent le dessin <span class="arithmatex">\(quatre\text{-}vingt\text{-}huit\)</span></p>
+<h2 id="le-systeme-positionnel-decimal">Le système positionnel décimal</h2>
+<p>Le système décimal, celui que vous avez appris dès tout petits est la base 10, constitué de ces chiffres: </p>
+<div class="arithmatex">\[&lt;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&gt;\]</div>
+<p><span class="arithmatex">\(5429\)</span> en base 10 se décompose ainsi:
+<span class="arithmatex">\(<span class="arithmatex">\(5429_{10}=5 \times 1000+4 \times 100+2 \times 10+9 \times 1\)</span>\)</span>
+<span class="arithmatex">\(<span class="arithmatex">\(\Large \textcolor{blue}{5429}_{10}= \textcolor{blue}{5} \times 10^{\textcolor{red}{3}}+ \textcolor{blue}{4} \times 10^{\textcolor{red}{2}}+ \textcolor{blue}{2} \times 10^{\textcolor{red}{1}}+ \textcolor{blue}{9} \times 10^{\textcolor{red}{0}}\)</span>\)</span></p>
+<p>Chaque chiffre représente un nombre de puissances de 10.
+Le chiffre le plus à droite est multiplié par <span class="arithmatex">\(10^0\)</span>, celui de gauche par <span class="arithmatex">\(10^1\)</span>, etc pour <span class="arithmatex">\(10^2\)</span>, <span class="arithmatex">\(10^3\)</span>...</p>
+<p>On interprète chaque chiffre selon sa position (système de numération positionnel)</p>
+<p>Plus petits, vous parliez de la colonne des unités, des dizaines, des centaines, des milliers, ...</p>
+<h2 id="la-roue-des-chiffres">La roue des chiffres</h2>
+<div class="admonition abstract">
+<p class="admonition-title">Vocabulaire</p>
+<ul>
+<li><strong>Incrémenter</strong> est l'action d'ajouter un</li>
+<li><strong>Décrémenter</strong> est l'action de retirer un </li>
+</ul>
+</div>
+<p>La petite application ci-dessous permet d'incrémenter ou décrémenter un compteur constitué de roues de chiffres.</p>
+<div class="parametres" id="parametres"></div>
+<div id="compteur"></div>
+
+<script>
+    let compteurActuel = null;
+
+    function creerCompteur(id, alphabet, chiffres) {
+      const base = alphabet.length;
+      const container = document.getElementById(id);
+      container.innerHTML = "";
+
+      const compteurEl = document.createElement("div");
+      compteurEl.className = "compteur";
+
+      const lignes = document.createElement("div");
+      lignes.className = "chiffres";
+      compteurEl.appendChild(lignes);
+
+      const boutons = document.createElement("div");
+      const plus = document.createElement("button");
+      const moins = document.createElement("button");
+      plus.className = moins.className = "global";
+      plus.textContent = "+";
+      moins.textContent = "−";
+      boutons.appendChild(plus);
+      boutons.appendChild(moins);
+      compteurEl.appendChild(boutons);
+
+      const affichage = document.createElement("div");
+      affichage.className = "valeur";
+      compteurEl.appendChild(affichage);
+
+      container.appendChild(compteurEl);
+
+      const colonnes = [];
+
+      for (let i = 0; i < chiffres; i++) {
+        const col = document.createElement("div");
+        col.className = "colonne";
+
+        const wrap = document.createElement("div");
+        wrap.className = "roue-wrapper";
+
+        const roue = document.createElement("div");
+        roue.className = "roue";
+
+        const span0 = document.createElement("span");
+        span0.textContent = alphabet[0];
+        roue.appendChild(span0);
+
+        wrap.appendChild(roue);
+        col.appendChild(wrap);
+        lignes.appendChild(col);
+
+        colonnes.push({ roue, current: 0, animating: false });
+      }
+
+      function majColonne(i, newVal, direction) {
+        const col = colonnes[i];
+        if (col.animating || col.current === newVal) return;
+
+        const span = document.createElement("span");
+        span.textContent = alphabet[newVal];
+        col.current = newVal;
+        col.animating = true;
+
+        if (direction > 0) {
+          col.roue.appendChild(span);
+          requestAnimationFrame(() => {
+            col.roue.classList.add("animate");
+            col.roue.style.transform = "translateY(-2em)";
+          });
+        } else {
+          col.roue.prepend(span);
+          col.roue.style.transform = "translateY(-2em)";
+          col.roue.offsetHeight;
+          col.roue.classList.add("animate");
+          col.roue.style.transform = "translateY(0)";
+        }
+
+        setTimeout(() => {
+          col.roue.classList.remove("animate");
+          col.roue.style.transform = "translateY(0)";
+          col.roue.innerHTML = `<span>${alphabet[newVal]}</span>`;
+          col.animating = false;
+        }, 300);
+      }
+
+      function getValeur() {
+        return colonnes.reduce((acc, col) => acc * base + col.current, 0);
+      }
+
+      function setValeur(nouvelleValeur, direction) {
+        const chiffresArr = Array(chiffres).fill(0);
+        let reste = nouvelleValeur;
+        for (let i = chiffres - 1; i >= 0; i--) {
+          chiffresArr[i] = reste % base;
+          reste = Math.floor(reste / base);
+        }
+
+        for (let i = 0; i < chiffres; i++) {
+          majColonne(i, chiffresArr[i], direction);
+        }
+
+        affichage.textContent = "Valeur décimale : " + nouvelleValeur;
+      }
+
+      plus.onclick = () => {
+        const val = getValeur();
+        if (val < base ** chiffres - 1) setValeur(val + 1, +1);
+      };
+
+      moins.onclick = () => {
+        const val = getValeur();
+        if (val > 0) setValeur(val - 1, -1);
+      };
+
+      setValeur(0, +1);
+      compteurActuel = { alphabet: alphabet.join(""), chiffres };
+    }
+
+    function initialiserFormulaire() {
+      const zone = document.getElementById("parametres");
+
+      const champ1 = document.createElement("div");
+      champ1.className = "champ";
+      const labelAlpha = document.createElement("label");
+      labelAlpha.textContent = "Alphabet de chiffres : ";
+      const champAlphabet = document.createElement("input");
+      champAlphabet.type = "text";
+      champAlphabet.value = "0123456789";
+      champ1.appendChild(labelAlpha);
+      champ1.appendChild(champAlphabet);
+
+      const champ2 = document.createElement("div");
+      champ2.className = "champ";
+      const labelChiffres = document.createElement("label");
+      labelChiffres.textContent = "Nombre de chiffres : ";
+      const champChiffres = document.createElement("input");
+      champChiffres.type = "number";
+      champChiffres.min = 1;
+      champChiffres.value = 4;
+      champ2.appendChild(labelChiffres);
+      champ2.appendChild(champChiffres);
+
+      zone.appendChild(champ1);
+      zone.appendChild(champ2);
+
+      function reinitCompteur() {
+        const alphabet = champAlphabet.value.split("");
+        const chiffres = parseInt(champChiffres.value);
+        if (alphabet.length > 0 && chiffres > 0) {
+          const config = compteurActuel || {};
+          if (config.alphabet !== alphabet.join("") || config.chiffres !== chiffres) {
+            creerCompteur("compteur", alphabet, chiffres);
+          }
+        }
+      }
+
+      champAlphabet.addEventListener("input", reinitCompteur);
+      champChiffres.addEventListener("input", reinitCompteur);
+
+      reinitCompteur();
+    }
+
+    initialiserFormulaire();
+  </script>
+
+<style>
+
+
+    #compteur *, #parametres * {
+      font-family: monospace;
+      text-align: center;
+    }
+
+
+    .parametres {
+      display: flex;
+      justify-content: center;
+      gap: 2em;
+      margin-bottom: 1em;
+      flex-wrap: wrap;
+    }
+
+    .champ {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .compteur {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .chiffres {
+      display: flex;
+      justify-content: center;
+      gap: 1em;
+      margin-bottom: 1em;
+    }
+
+    .colonne {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 2em;
+    }
+
+    .roue-wrapper {
+      height: 2em;
+      width: 2em;
+      font-size: 2em;
+      overflow: hidden;
+      border: 1px solid #ccc;
+    }
+
+    .roue {
+      display: flex;
+      flex-direction: column;
+      transform: translateY(0);
+    }
+
+    .roue.animate {
+      transition: transform 0.3s ease-in-out !important;
+    }
+
+    .roue span {
+      height: 2em;
+      line-height: 2em;
+      text-align: center;
+    }
+
+    .global {
+      font-size: 1.5em;
+      margin: 0.5em;
+      padding: 0.2em 0.6em;
+    }
+
+    .valeur {
+      margin-top: 1em;
+      font-size: 1.2em;
+    }
+  </style>
+
+<p><strong>La colonne/roue 0 est la colonne de droite. la colonne 1 est la colonne juste à sa gauche, etc...</strong></p>
+<ul>
+<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 1?</li>
+<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 2?</li>
+<li>Que doit faire la roue 2 pour que la roue 3 bouge?</li>
+</ul>
+<h2 id="changer-de-base">Changer de base</h2>
+<p>Modifiez l'alphabet de chiffres pour ces chiffres: <span class="arithmatex">\(&lt;0, 1, 2&gt;\)</span></p>
+<p>Nos roues n'ont plus alors que 3 chiffres chacune.</p>
+<ul>
+<li>Incrémentez le compteur 10 fois. <ul>
+<li>Quel est le nombre obtenu? </li>
+<li>Comment est-il écrit?</li>
+</ul>
+</li>
+<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 1?</li>
+<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 2?</li>
+<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 3?</li>
+<li>Que doit faire la roue 2 pour que la roue 3 bouge?</li>
+</ul>
+<p>Ici, vous venez de représenter des nombres dans la <strong>base 3</strong>.</p>
+<p>Pourquoi? <strong>Tout simplement</strong> parce qu'on ne dispose que de 3 chiffres pour représenter les nombres.</p>
+<ul>
+<li><strong>Ecrivez</strong> le plus grand nombre possible sur 4 chiffres en base 3.</li>
+<li>A quel nombre correspond-il?</li>
+</ul>
+<h2 id="rechanger-de-base">Rechanger de base</h2>
+<p>Modifiez l'alphabet de chiffres pour ces chiffres: <span class="arithmatex">\(&lt;0, 1&gt;\)</span></p>
+<ul>
+<li>En quelle base sont maintenant écrits les nombres affichés au compteur?</li>
+<li>Incrémentez le compteur 10 fois. <ul>
+<li>Quel est le nombre obtenu? </li>
+<li>Comment est-il écrit?</li>
+</ul>
+</li>
+<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 1?</li>
+<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 2?</li>
+<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 3?</li>
+<li>Que doit faire la roue 2 pour que la roue 3 bouge?</li>
+</ul>
+<div class="admonition danger">
+<p class="admonition-title">Le binaire</p>
+<p><strong>Le binaire, c'est tout simplement la base 2.</strong></p>
+<p>Le mot "binaire" vient du latin binarius, qui signifie "composé de deux".</p>
+<p>En base 2, chaque chiffre (appelé <strong>bit</strong>, contraction de <strong>binary digit</strong>) ne peut valoir que :</p>
+<ul>
+<li>0 : "éteint", "faux", "non", etc.</li>
+<li>1 : "allumé", "vrai", "oui", etc.</li>
+</ul>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">L'hexadécimal</p>
+<p><strong>L'hexadécimal, c'est la base 16</strong></p>
+<p>On ne dispose que de 10 chiffres, pas de 16, il nous en manque donc 6. On n'a pas voulu recréer de nouveaux symboles pour ces chiffres, alors on utilise les lettres de l'alphabet. Les chiffres de l'hexadécimal sont donc</p>
+<div class="arithmatex">\[&lt;0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F&gt;\]</div>
+<p>l'hexadécimal revient souvent en informatique:</p>
+<ul>
+<li>Utilisé pour les couleurs en HTML/CSS (ex : #FF0000 pour rouge)</li>
+<li>1 chiffre hexadécimal représente 4 bits → lecture plus simple du binaire</li>
+<li>Plus lisible que le binaire ou le décimal pour les données machines</li>
+<li>Utilisé pour représenter les adresses mémoire en informatique bas niveau</li>
+<li>Indispensable pour déboguer ou lire les fichiers binaires</li>
+<li>Utile en systèmes, électronique, assembleur, sécurité informatique</li>
+</ul>
+</div>
+<h2 id="systemes-alternatifs">Systèmes alternatifs</h2>
+<p>En réalité vous utilisez sans le savoir d’autres modes.</p>
+<p>Vous comptez par exemple les minutes et les secondes dans le système sexagésimal hérité des babyloniens (-3000).</p>
+<p>Vous dites quatre-vingt quinze (4 × 20 + 15) en héritage des celtes qui comptaient sur une base de 20 chiffres (ils comptaient aussi sur les doigts de pied). <a href="https://fr.wikipedia.org/wiki/Num%C3%A9ration_maya">Tout comme les mayas</a></p>
+<script src="https://mmarchand-nsi.github.io//js/material-tabbed-fix.js"></script>
+
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 20, 2025 19:00:43 UTC">July 20, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Matthieu Marchand
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="https://mkdocs-logic.forge.apps.education.fr/javascripts/bundle.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/rod2ik/cdn@main/mkdocs/javascripts/mkdocs-graphviz.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjs/lib/browser/math.js"></script>
+      
+        <script src="https://unpkg.com/cytoscape@3.31.2/dist/cytoscape.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+      
+        <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -25,6 +25,9 @@ On peut écrire et dire "fish" en anglais.
 
 On peut écrire 魚, ou さかな et dire "sakana" en japonais.
 
+
+![alt text](image.png)
+
 **Ce qu’on dit ou écrit (le signifiant) peut varier d'une personne à l'autre sur terre. L'idée qu’on désigne (le signifié), par contre, reste inchangé.**
 
 Ce qui réveille l'idée d'un poisson est différent, mais l'idée d'un poisson est globalement la même pour tous.
@@ -40,13 +43,15 @@ Les nombres servent à signifier une **quantité** ou un **ordre**.
 
 Pour l’instant vous n'avez été habitués qu’à dire, lire et écrire les nombres sur base de cet ensemble de dessins $<0, 1, 2, 3, 4, 5, 6, 7, 8, 9>$. On appelle chacun de ces dessins un chiffre (indo-arabe).
 
-Au japon, leur équivalent est <零, 一, 二, 三, 四, 五, 六, 七, 八, 九> mais les nombres ne sont pas construits de la même façon que chez nous. Le Japon a totalement adopté le système de numération occidental au cours du XXème siècle. (vous remarquerez au passage qu'en France, nous utilisons toujours les chiffres romains pour écrire les siècles) 
+Au japon, leur équivalent est <零, 一, 二, 三, 四, 五, 六, 七, 八, 九> mais les nombres ne sont pas construits de la même façon que chez nous. Le Japon a totalement adopté le système de numération occidental au cours du XXème siècle. (vous remarquerez au passage qu'en France, nous utilisons toujours les chiffres romains pour écrire les siècles)
 
 **Une lettre est un dessin. Nous disposons de 26 lettres dans l'alphabet.
 Avec ces lettres, nous composons des mots auxquels nous attribuons un sens.**
 
 **Un chiffre est un dessin. Nous disposons de dix chiffres. 
 Avec ces chiffres, nous composons des nombres auxquels nous attribuons un sens, celui d'une quantité ou d'un ordre.**
+
+![alt text](image-1.png)
 
 Contrairement à l'exemple du poisson, pratiquement tout le monde sur terre s'accorde maintenant sur les symboles, mais pas sur leur prononciation.
 
