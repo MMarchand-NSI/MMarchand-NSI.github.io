@@ -8,10 +8,10 @@
       
       
       
-        <link rel="canonical" href="https://mmarchand-nsi.github.io/premi%C3%A8re/Num%C3%A9ration/entiers/">
+        <link rel="canonical" href="https://mmarchand-nsi.github.io/premi%C3%A8re/Num%C3%A9ration/4-relatifs/">
       
       
-        <link rel="prev" href="../../IHM/flet/">
+        <link rel="prev" href="../3-depuis10/">
       
       
         <link rel="next" href="../../architecture/droits-linux/">
@@ -22,7 +22,7 @@
     
     
       
-        <title>Représentation des entiers naturels - Science Informatique - Site en construction</title>
+        <title>Entiers relatifs en binaire (Entiers signés) - Science Informatique - Site en construction</title>
 <script src="/javascripts/bundle.js"></script>
 
       
@@ -80,7 +80,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#representation-des-entiers-naturels" class="md-skip">
+        <a href="#entiers-relatifs-en-binaire-entiers-signes" class="md-skip">
           Skip to content
         </a>
       
@@ -113,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Représentation des entiers naturels
+              Entiers relatifs en binaire (Entiers signés)
             
           </span>
         </div>
@@ -921,6 +921,75 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../1-entiers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Représentation des entiers naturels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2-vers10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Conversions vers la base 10
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../3-depuis10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Conversions depuis la base 10
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -938,7 +1007,7 @@
   
   
   <span class="md-ellipsis">
-    Représentation des entiers naturels
+    Entiers relatifs en binaire (Entiers signés)
     
   </span>
   
@@ -951,7 +1020,7 @@
   
   
   <span class="md-ellipsis">
-    Représentation des entiers naturels
+    Entiers relatifs en binaire (Entiers signés)
     
   </span>
   
@@ -974,63 +1043,126 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#un-peu-de-philosophie-le-signifiant-et-le-signifie" class="md-nav__link">
+  <a href="#additionner-des-entiers-naturels" class="md-nav__link">
     <span class="md-ellipsis">
-      Un peu de philosophie: Le signifiant et le signifié
+      Additionner des entiers naturels
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Additionner des entiers naturels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#en-base-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      En Base 10
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-base-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      En Base 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="En Base 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#additions-a-trou" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additions à trou
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additions-a-trou_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additions à trou
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loppose-dun-nombre" class="md-nav__link">
+    <span class="md-ellipsis">
+      L'opposé d'un nombre
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="L&#39;opposé d&#39;un nombre">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition-mathematique" class="md-nav__link">
+    <span class="md-ellipsis">
+      Définition mathématique
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-au-decimal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application au décimal
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#representation-de-loppose-dun-nombre-en-binaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      Représentation de l'opposé d'un nombre en binaire
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#les-chiffres-et-les-nombres" class="md-nav__link">
+  <a href="#complement-a-1" class="md-nav__link">
     <span class="md-ellipsis">
-      Les chiffres et les nombres
+      Complément à 1
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#le-systeme-positionnel-decimal" class="md-nav__link">
+  <a href="#formule-pour-trouver-la-representation-de-loppose" class="md-nav__link">
     <span class="md-ellipsis">
-      Le système positionnel décimal
+      Formule pour trouver la représentation de l'opposé
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#la-roue-des-chiffres" class="md-nav__link">
+  <a href="#intervalle-des-entiers-sur-4-bits-signes" class="md-nav__link">
     <span class="md-ellipsis">
-      La roue des chiffres
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#changer-de-base" class="md-nav__link">
-    <span class="md-ellipsis">
-      Changer de base
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rechanger-de-base" class="md-nav__link">
-    <span class="md-ellipsis">
-      Rechanger de base
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#systemes-alternatifs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Systèmes alternatifs
+      Intervalle des entiers sur 4 bits signés:
     </span>
   </a>
   
@@ -2669,6 +2801,78 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5_5" id="__nav_5_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Piles files
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Piles files
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../terminale/structures-de-donnees/piles-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les Piles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -2711,63 +2915,126 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#un-peu-de-philosophie-le-signifiant-et-le-signifie" class="md-nav__link">
+  <a href="#additionner-des-entiers-naturels" class="md-nav__link">
     <span class="md-ellipsis">
-      Un peu de philosophie: Le signifiant et le signifié
+      Additionner des entiers naturels
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Additionner des entiers naturels">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#en-base-10" class="md-nav__link">
+    <span class="md-ellipsis">
+      En Base 10
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-base-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      En Base 2
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="En Base 2">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#additions-a-trou" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additions à trou
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#additions-a-trou_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Additions à trou
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loppose-dun-nombre" class="md-nav__link">
+    <span class="md-ellipsis">
+      L'opposé d'un nombre
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="L&#39;opposé d&#39;un nombre">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition-mathematique" class="md-nav__link">
+    <span class="md-ellipsis">
+      Définition mathématique
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#application-au-decimal" class="md-nav__link">
+    <span class="md-ellipsis">
+      Application au décimal
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#representation-de-loppose-dun-nombre-en-binaire" class="md-nav__link">
+    <span class="md-ellipsis">
+      Représentation de l'opposé d'un nombre en binaire
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#les-chiffres-et-les-nombres" class="md-nav__link">
+  <a href="#complement-a-1" class="md-nav__link">
     <span class="md-ellipsis">
-      Les chiffres et les nombres
+      Complément à 1
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#le-systeme-positionnel-decimal" class="md-nav__link">
+  <a href="#formule-pour-trouver-la-representation-de-loppose" class="md-nav__link">
     <span class="md-ellipsis">
-      Le système positionnel décimal
+      Formule pour trouver la représentation de l'opposé
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#la-roue-des-chiffres" class="md-nav__link">
+  <a href="#intervalle-des-entiers-sur-4-bits-signes" class="md-nav__link">
     <span class="md-ellipsis">
-      La roue des chiffres
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#changer-de-base" class="md-nav__link">
-    <span class="md-ellipsis">
-      Changer de base
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#rechanger-de-base" class="md-nav__link">
-    <span class="md-ellipsis">
-      Rechanger de base
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#systemes-alternatifs" class="md-nav__link">
-    <span class="md-ellipsis">
-      Systèmes alternatifs
+      Intervalle des entiers sur 4 bits signés:
     </span>
   </a>
   
@@ -2796,387 +3063,172 @@
 <link rel="stylesheet" href="https://mmarchand-nsi.github.io//css/sqlite_ide.css">
 <script>sqljs_base_path="https://mmarchand-nsi.github.io/"</script>
 
-<h1 id="representation-des-entiers-naturels">Représentation des entiers naturels</h1>
+<h1 id="entiers-relatifs-en-binaire-entiers-signes">Entiers relatifs en binaire (Entiers signés)</h1>
+<h2 id="additionner-des-entiers-naturels">Additionner des entiers naturels</h2>
+<h3 id="en-base-10">En Base 10</h3>
+<p><span class="arithmatex">\(\begin{array}{ccc}
+_1 &amp;  &amp;  \\
+  &amp; 5 &amp; 1 \\
+\text{+}  &amp; 7 &amp; 5 \\
+\hline
+1 &amp; 2 &amp; 6
+\end{array}\)</span></p>
+<p><span class="arithmatex">\(5+7=12\)</span> donc <span class="arithmatex">\(2\)</span> et je retiens <span class="arithmatex">\(1\)</span></p>
+<h3 id="en-base-2">En Base 2</h3>
+<p>C'est exactement la même chose.</p>
+<p><span class="arithmatex">\(\begin{array}{ccccc}
+_1 &amp; _1 &amp; _1 &amp;  &amp; \\
+  &amp; 1 &amp; 0 &amp; 1 &amp; 1\\
+\text{+}  &amp; 1 &amp; 1 &amp; 1 &amp; 0 \\
+\hline
+1 &amp; 1 &amp; 0 &amp; 0 &amp; 1
+\end{array}\)</span></p>
+<p>Il faut seulement savoir que:</p>
+<ul>
+<li><span class="arithmatex">\(1 + 1 = 10\)</span>  (deux) donc <span class="arithmatex">\(0\)</span> et je retiens <span class="arithmatex">\(1\)</span></li>
+<li><span class="arithmatex">\(1 + 1 + 1 = 11\)</span>  (trois) donc <span class="arithmatex">\(1\)</span> et je retiens <span class="arithmatex">\(1\)</span></li>
+</ul>
 <div class="admonition question">
-<p class="admonition-title">Préambule</p>
-<ul>
-<li>Quel est le premier chiffre?</li>
-<li>Quel est le dernier chiffre?</li>
-<li>Combien y-a-t-il de chiffres?</li>
-<li>Donnez les valeurs de <span class="arithmatex">\(10^k\)</span> pour <span class="arithmatex">\(k\)</span> allant de 0 à 5</li>
-<li>Plus grand nombre:<ul>
-<li>Quel est le plus grand nombre représentable sur:<ul>
-<li>1 chiffres?</li>
-<li>4 chiffres?</li>
-<li>9 chiffres?</li>
-</ul>
-</li>
-<li>Pour chaque résultat précédent, Ajoutez-y 1. D'après ce que vous obtenez, exprimez les solutions en vous aidant de puissances.</li>
-<li>Quel calcul faut-il faire pour obtenir le plus grand nombre sur 5678 chiffres?</li>
-<li>Donnez une formule permettant de connaître le plus grand nombre représentable sur <span class="arithmatex">\(n&gt;0\)</span> chiffres.</li>
-</ul>
-</li>
-</ul>
+<p class="admonition-title">Additions en base 2 – Exercices</p>
+<p>Effectue les additions suivantes en <strong>base 2</strong>, en les posant, retenues apparentes..</p>
+<ol>
+<li><span class="arithmatex">\( 0010_2 + 0101_2 = \ \_\_\_\_ \)</span>  </li>
+<li><span class="arithmatex">\( 1000_2 + 0011_2 = \ \_\_\_\_ \)</span>  </li>
+<li><span class="arithmatex">\( 0001_2 + 0010_2 = \ \_\_\_\_ \)</span></li>
+<li><span class="arithmatex">\( 0011_2 + 0011_2 = \ \_\_\_\_ \)</span>  </li>
+<li><span class="arithmatex">\( 0110_2 + 0101_2 = \ \_\_\_\_ \)</span>  </li>
+<li><span class="arithmatex">\( 1111_2 + 0001_2 = \ \_\_\_\_ \)</span></li>
+</ol>
+<h4 id="additions-a-trou">Additions à trou</h4>
+<ol>
+<li>Complète : <span class="arithmatex">\( \_\_\_\_ +\ 0011_2 = 0110_2 \)</span>  </li>
+<li>Complète : <span class="arithmatex">\( 0101_2 +\ \_\_\_\_ = 1111_2 \)</span></li>
+</ol>
 </div>
-<h2 id="un-peu-de-philosophie-le-signifiant-et-le-signifie">Un peu de philosophie: Le signifiant et le signifié</h2>
-<p>Sur terre, il existe des centaines de manière de signifier qu'on parle d'un poisson.</p>
-<p>On peut écrire et dire "poisson" en français.</p>
-<p>On peut écrire et dire "fish" en anglais.</p>
-<p>On peut écrire 魚, ou さかな et dire "sakana" en japonais.</p>
-<p><img alt="alt text" src="../image.png" /></p>
-<p><strong>Ce qu’on dit ou écrit (le signifiant) peut varier d'une personne à l'autre sur terre. L'idée qu’on désigne (le signifié), par contre, reste inchangé.</strong></p>
-<p>Ce qui réveille l'idée d'un poisson est différent, mais l'idée d'un poisson est globalement la même pour tous.</p>
-<p>La relation entre le signifiant et le signifié est arbitraire. Il n'y a aucune raison qu'on choisisse un signifiant particulier pour décrire un signifié. Autrement dit, les deux n’ont pas de relation logique et doivent être apprises. Il s’agit d’une convention humaine.</p>
-<h2 id="les-chiffres-et-les-nombres">Les chiffres et les nombres</h2>
-<p>Les nombres servent à signifier une <strong>quantité</strong> ou un <strong>ordre</strong>.</p>
+<details class="warning">
+<summary>Corrigés – Additions en base 2</summary>
+<ol>
+<li><span class="arithmatex">\( 0010_2 + 0101_2 = 0111_2 \)</span> → 2 + 5 = 7  </li>
+<li><span class="arithmatex">\( 1000_2 + 0011_2 = 1011_2 \)</span> → 8 + 3 = 11  </li>
+<li><span class="arithmatex">\( 0001_2 + 0010_2 = 0011_2 \)</span> → 1 + 2 = 3  </li>
+<li><span class="arithmatex">\( 0011_2 + 0011_2 = 0110_2 \)</span> → 3 + 3 = 6  </li>
+<li><span class="arithmatex">\( 0110_2 + 0101_2 = 1011_2 \)</span> → 6 + 5 = 11  </li>
+<li><span class="arithmatex">\( 1111_2 + 0001_2 = 1\ 0000_2 \)</span> → 15 + 1 = 16 (5 bits)</li>
+</ol>
+<h4 id="additions-a-trou_1">Additions à trou</h4>
+<ol>
+<li><span class="arithmatex">\( 0101_2 + 0011_2 = 0110_2 \Rightarrow \boxed{0101_2} \)</span>  </li>
+<li><span class="arithmatex">\( 0101_2 + 1010_2 = 1111_2 \Rightarrow \boxed{1010_2} \)</span></li>
+</ol>
+</details>
+<h2 id="loppose-dun-nombre">L'opposé d'un nombre</h2>
+<h3 id="definition-mathematique">Définition mathématique</h3>
+<p>Pour tout entier relatif <span class="arithmatex">\(x\)</span>, il existe un unique entier relatif <span class="arithmatex">\(y\)</span> tel que <span class="arithmatex">\(x + y = 0\)</span>.<br />
+On appelle ce nombre <span class="arithmatex">\(y\)</span> <strong>l'opposé</strong> de <span class="arithmatex">\(x\)</span>.</p>
+<p>L'opposé d'un nombre <span class="arithmatex">\(x\)</span>, c'est l'unique nombre <span class="arithmatex">\(y\)</span> tel que <span class="arithmatex">\(x + y = 0\)</span>.</p>
+<h3 id="application-au-decimal">Application au décimal</h3>
+<p>Dans notre système de numération usuel, l'opposé de 3, c'est le nombre <span class="arithmatex">\(y\)</span> tel que <span class="arithmatex">\(3 + y = 0\)</span>.<br />
+Les humains ont choisi de l'écrire <strong><span class="arithmatex">\(-3\)</span></strong>, et on le lit "<strong>moins trois</strong>" en français.</p>
+<h2 id="representation-de-loppose-dun-nombre-en-binaire">Représentation de l'opposé d'un nombre en binaire</h2>
+<p>Nous devons trouver un mode de représentation des entiers relatifs qui répond à la définition mathématique de l'opposé d'un nombre, et qui préserve notre addition sachant qu'il n'existe pas de symbole "-" vu qu'on n'a le droit d'utiliser que les symboles 0 et 1.</p>
+<p>On va donc résoudre une addition à trou, ce qui nous garantit déjà de préserver l'addition:</p>
+<p>Prenons le nombre positif "cinq" <span class="arithmatex">\( 101_{2} \)</span>.
+Pour trouver son opposé <span class="arithmatex">\(y= \text{moins 5}\)</span>, on doit donc résoudre :</p>
+<div class="arithmatex">\[
+101_{2} + y = 0
+\]</div>
+<p>On va poser l’<strong>addition à trou</strong> pour trouver <span class="arithmatex">\( y \)</span> :</p>
+<p><span class="arithmatex">\(\begin{array}{ccccc}
+  &amp; 1 &amp; 0 &amp; 1 \\
+\text{+}  &amp; \_ &amp; \_ &amp; \_ \\
+\hline
+ &amp; 0 &amp; 0 &amp; 0
+\end{array}\)</span></p>
+<details class="warning">
+<summary>Corrigé</summary>
+<p><span class="arithmatex">\(\begin{array}{ccccc}
+... _1  &amp; _1 &amp; _1 &amp; _1 &amp; _1 &amp; _1 &amp;  \\
+...&amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 1 \\
+\text{+} ... &amp; 1 &amp; 1 &amp; 1 &amp; 0 &amp; 1 &amp; 1 \\
+\hline
+&amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 0
+\end{array}\)</span></p>
+</details>
+<p>On remarque que notre opposé est préfixé par une infinité de 1. Tout comme n'importe quel nombre positif peut être préfixé par une infinité de 0, c'est juste qu'on ne les écrit pas.</p>
+<p>Pour résoudre ce problème, on ne va travailler que sur des nombres dont <strong>la taille est fixée à l'avance.</strong></p>
+<div class="admonition danger">
+<p class="admonition-title">Attention</p>
+<p>Il faut savoir <strong>à l'avance</strong> en quelle "langue" est écrit un nombre avant de le traduire. </p>
+<p>De la même façon, donnez moi la définition du mot "pain"</p>
+<details class="warning">
+<summary>Réponse</summary>
+<p>Il s'agit d'une douleur en anglais. Il fallait savoir à l'avance qu'il s'agissait d'un mot anglais.</p>
+</details>
+<p>Ici c'est pareil, lorsqu'on voit <span class="arithmatex">\(101101\)</span>, il faut savoir si on parle d'un entier relatif ou d'un entier naturel à l'avance, et il faut savoir sur combien de bits on travaille.</p>
+<p>Il est impossible de répondre à la question "Quel nombre est représenté par <span class="arithmatex">\(10011\)</span> ?" si on ne sait pas à l'avance de quoi on parle.</p>
+</div>
+<p>Ici, "moins cinq" s'écrit:</p>
 <ul>
-<li>Il y a 53 pommes dans le panier <span class="arithmatex">\(\rarr\)</span> cardinal</li>
-<li>Je suis arrivé en 3ème position <span class="arithmatex">\(\rarr\)</span> ordinal</li>
+<li><span class="arithmatex">\(1011\)</span> <strong>sur 4 bits signés</strong></li>
+<li><span class="arithmatex">\(11011\)</span> <strong>sur 5 bits signés</strong></li>
 </ul>
-<p>Pour l’instant vous n'avez été habitués qu’à dire, lire et écrire les nombres sur base de cet ensemble de dessins <span class="arithmatex">\(&lt;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&gt;\)</span>. On appelle chacun de ces dessins un chiffre (indo-arabe).</p>
-<p>Au japon, leur équivalent est &lt;零, 一, 二, 三, 四, 五, 六, 七, 八, 九&gt; mais les nombres ne sont pas construits de la même façon que chez nous. Le Japon a totalement adopté le système de numération occidental au cours du XXème siècle. (vous remarquerez au passage qu'en France, nous utilisons toujours les chiffres romains pour écrire les siècles)</p>
-<p><strong>Une lettre est un dessin. Nous disposons de 26 lettres dans l'alphabet.
-Avec ces lettres, nous composons des mots auxquels nous attribuons un sens.</strong></p>
-<p><strong>Un chiffre est un dessin. Nous disposons de dix chiffres. 
-Avec ces chiffres, nous composons des nombres auxquels nous attribuons un sens, celui d'une quantité ou d'un ordre.</strong></p>
-<p><img alt="alt text" src="../image-1.png" /></p>
-<p>Contrairement à l'exemple du poisson, pratiquement tout le monde sur terre s'accorde maintenant sur les symboles, mais pas sur leur prononciation.</p>
-<p>Presque tous les adultes alphabétisés sur terre comprennent le dessin <span class="arithmatex">\(88\)</span> de la même façon, mais peu comprennent le dessin <span class="arithmatex">\(quatre\text{-}vingt\text{-}huit\)</span></p>
-<h2 id="le-systeme-positionnel-decimal">Le système positionnel décimal</h2>
-<p>Le système décimal, celui que vous avez appris dès tout petits est la base 10, constitué de ces chiffres: </p>
-<div class="arithmatex">\[&lt;0, 1, 2, 3, 4, 5, 6, 7, 8, 9&gt;\]</div>
-<p><span class="arithmatex">\(5429\)</span> en base 10 se décompose ainsi:
-<span class="arithmatex">\(<span class="arithmatex">\(5429_{10}=5 \times 1000+4 \times 100+2 \times 10+9 \times 1\)</span>\)</span>
-<span class="arithmatex">\(<span class="arithmatex">\(\Large \textcolor{blue}{5429}_{10}= \textcolor{blue}{5} \times 10^{\textcolor{red}{3}}+ \textcolor{blue}{4} \times 10^{\textcolor{red}{2}}+ \textcolor{blue}{2} \times 10^{\textcolor{red}{1}}+ \textcolor{blue}{9} \times 10^{\textcolor{red}{0}}\)</span>\)</span></p>
-<p>Chaque chiffre représente un nombre de puissances de 10.
-Le chiffre le plus à droite est multiplié par <span class="arithmatex">\(10^0\)</span>, celui de gauche par <span class="arithmatex">\(10^1\)</span>, etc pour <span class="arithmatex">\(10^2\)</span>, <span class="arithmatex">\(10^3\)</span>...</p>
-<p>On interprète chaque chiffre selon sa position (système de numération positionnel)</p>
-<p>Plus petits, vous parliez de la colonne des unités, des dizaines, des centaines, des milliers, ...</p>
-<h2 id="la-roue-des-chiffres">La roue des chiffres</h2>
+<p>C'est aussi valable pour "cinq" qui s'écrit:</p>
+<ul>
+<li><span class="arithmatex">\(0101\)</span> <strong>sur 4 bits signés</strong></li>
+<li><span class="arithmatex">\(00101\)</span> <strong>sur 5 bits signés</strong></li>
+</ul>
+<p>Le bit le plus à gauche, aussi appelé <strong>bit de poids fort</strong> (celui qui correspond à la plus grande puissance de 2), est appelé le <strong>bit de signe</strong>.
+<strong>Il ne peut valoir que 0 si le nombre est positif, et 1 si le nombre est négatif.</strong></p>
+<p>De cette manière, on sait que si on travaille sur 8 bits signés, <span class="arithmatex">\(10001001\)</span> sera un nombre négatif, et que <span class="arithmatex">\(00001001\)</span> sera un nombre positif. </p>
+<hr />
+<p>A partir de maintenant nous allons découvrir une formule simple pour exhiber l'opposé d'un nombre.</p>
+<h2 id="complement-a-1">Complément à 1</h2>
+<p>Le complément à 1 d'une suite de bits est la même séquence où on a intervertit les 0 et les 1.</p>
+<p>Le complément à 1 de <span class="arithmatex">\(110010\)</span> est <span class="arithmatex">\(001101\)</span></p>
+<div class="admonition question">
+<p class="admonition-title">Exercice</p>
+<p>On travaille <strong>sur 4 bits</strong>. On note <span class="arithmatex">\(c_1(x)\)</span> le complément à 1 de <span class="arithmatex">\(x\)</span></p>
+<p>Calculez <span class="arithmatex">\(x + c_1(x)\)</span> pour <span class="arithmatex">\(x=\)</span>:  </p>
+<ul>
+<li><span class="arithmatex">\(1010\)</span></li>
+<li><span class="arithmatex">\(1101\)</span></li>
+<li><span class="arithmatex">\(0110\)</span></li>
+<li><span class="arithmatex">\(0100\)</span></li>
+</ul>
+<p>Calculez <span class="arithmatex">\(x+c_1(x)+1\)</span> pour les mêmes valeurs. Qu'obtenez vous <strong>sur 4 bits</strong>?</p>
+</div>
+<h2 id="formule-pour-trouver-la-representation-de-loppose">Formule pour trouver la représentation de l'opposé</h2>
+<div class="admonition danger">
+<p class="admonition-title">Opposé d'un entier signé <span class="arithmatex">\(x\)</span> sur <span class="arithmatex">\(n\)</span> bits</p>
+<p>Attendu que <span class="arithmatex">\(x + (c_1(x) + 1) = 0\)</span>, c'est que <span class="arithmatex">\(c_1(x) + 1\)</span> donne l'écriture de l'opposé de <span class="arithmatex">\(x\)</span></p>
+<p><strong>La représentation de l'opposé d'un entier signé <span class="arithmatex">\(x\)</span> s'obtient en calculant <span class="arithmatex">\(c_1(x) + 1\)</span></strong></p>
+</div>
+<p><iframe
+  src="https://play.rust-lang.org/?edition=2021&mode=debug&version=stable&code=fn%20main()%20%7B%20println!(%22Hello%2C%20Rust!%22);%20%7D"
+  width="100%"
+  height="460"
+  frameborder="0"
+  loading="lazy"
+></iframe>
+</p>
+<h2 id="intervalle-des-entiers-sur-4-bits-signes">Intervalle des entiers sur 4 bits signés:</h2>
+<p><img alt="alt text" src="../image-2.png" /></p>
 <div class="admonition abstract">
-<p class="admonition-title">Vocabulaire</p>
+<p class="admonition-title">A savoir</p>
 <ul>
-<li><strong>Incrémenter</strong> est l'action d'ajouter un</li>
-<li><strong>Décrémenter</strong> est l'action de retirer un </li>
+<li>Sur <span class="arithmatex">\(n\)</span> bits signés, on peut écrire les nombres de <span class="arithmatex">\(-2^n\)</span> à <span class="arithmatex">\(2^n-1\)</span> inclus</li>
+<li>On remarque que <span class="arithmatex">\(-2^n\)</span> n'a pas d'opposé sur <span class="arithmatex">\(n\)</span> bits, puisqu'on ne peut pas écrire <span class="arithmatex">\(2^n\)</span> sur <span class="arithmatex">\(n\)</span> bits.</li>
 </ul>
 </div>
-<p>La petite application ci-dessous permet d'incrémenter ou décrémenter un compteur constitué de roues de chiffres.</p>
-<div class="parametres" id="parametres"></div>
-<div id="compteur"></div>
-
-<script>
-    let compteurActuel = null;
-
-    function creerCompteur(id, alphabet, chiffres) {
-      const base = alphabet.length;
-      const container = document.getElementById(id);
-      container.innerHTML = "";
-
-      const compteurEl = document.createElement("div");
-      compteurEl.className = "compteur";
-
-      const lignes = document.createElement("div");
-      lignes.className = "chiffres";
-      compteurEl.appendChild(lignes);
-
-      const boutons = document.createElement("div");
-      const plus = document.createElement("button");
-      const moins = document.createElement("button");
-      plus.className = moins.className = "global";
-      plus.textContent = "+";
-      moins.textContent = "−";
-      boutons.appendChild(plus);
-      boutons.appendChild(moins);
-      compteurEl.appendChild(boutons);
-
-      const affichage = document.createElement("div");
-      affichage.className = "valeur";
-      compteurEl.appendChild(affichage);
-
-      container.appendChild(compteurEl);
-
-      const colonnes = [];
-
-      for (let i = 0; i < chiffres; i++) {
-        const col = document.createElement("div");
-        col.className = "colonne";
-
-        const wrap = document.createElement("div");
-        wrap.className = "roue-wrapper";
-
-        const roue = document.createElement("div");
-        roue.className = "roue";
-
-        const span0 = document.createElement("span");
-        span0.textContent = alphabet[0];
-        roue.appendChild(span0);
-
-        wrap.appendChild(roue);
-        col.appendChild(wrap);
-        lignes.appendChild(col);
-
-        colonnes.push({ roue, current: 0, animating: false });
-      }
-
-      function majColonne(i, newVal, direction) {
-        const col = colonnes[i];
-        if (col.animating || col.current === newVal) return;
-
-        const span = document.createElement("span");
-        span.textContent = alphabet[newVal];
-        col.current = newVal;
-        col.animating = true;
-
-        if (direction > 0) {
-          col.roue.appendChild(span);
-          requestAnimationFrame(() => {
-            col.roue.classList.add("animate");
-            col.roue.style.transform = "translateY(-2em)";
-          });
-        } else {
-          col.roue.prepend(span);
-          col.roue.style.transform = "translateY(-2em)";
-          col.roue.offsetHeight;
-          col.roue.classList.add("animate");
-          col.roue.style.transform = "translateY(0)";
-        }
-
-        setTimeout(() => {
-          col.roue.classList.remove("animate");
-          col.roue.style.transform = "translateY(0)";
-          col.roue.innerHTML = `<span>${alphabet[newVal]}</span>`;
-          col.animating = false;
-        }, 300);
-      }
-
-      function getValeur() {
-        return colonnes.reduce((acc, col) => acc * base + col.current, 0);
-      }
-
-      function setValeur(nouvelleValeur, direction) {
-        const chiffresArr = Array(chiffres).fill(0);
-        let reste = nouvelleValeur;
-        for (let i = chiffres - 1; i >= 0; i--) {
-          chiffresArr[i] = reste % base;
-          reste = Math.floor(reste / base);
-        }
-
-        for (let i = 0; i < chiffres; i++) {
-          majColonne(i, chiffresArr[i], direction);
-        }
-
-        affichage.textContent = "Valeur décimale : " + nouvelleValeur;
-      }
-
-      plus.onclick = () => {
-        const val = getValeur();
-        if (val < base ** chiffres - 1) setValeur(val + 1, +1);
-      };
-
-      moins.onclick = () => {
-        const val = getValeur();
-        if (val > 0) setValeur(val - 1, -1);
-      };
-
-      setValeur(0, +1);
-      compteurActuel = { alphabet: alphabet.join(""), chiffres };
-    }
-
-    function initialiserFormulaire() {
-      const zone = document.getElementById("parametres");
-
-      const champ1 = document.createElement("div");
-      champ1.className = "champ";
-      const labelAlpha = document.createElement("label");
-      labelAlpha.textContent = "Alphabet de chiffres : ";
-      const champAlphabet = document.createElement("input");
-      champAlphabet.type = "text";
-      champAlphabet.value = "0123456789";
-      champ1.appendChild(labelAlpha);
-      champ1.appendChild(champAlphabet);
-
-      const champ2 = document.createElement("div");
-      champ2.className = "champ";
-      const labelChiffres = document.createElement("label");
-      labelChiffres.textContent = "Nombre de chiffres : ";
-      const champChiffres = document.createElement("input");
-      champChiffres.type = "number";
-      champChiffres.min = 1;
-      champChiffres.value = 4;
-      champ2.appendChild(labelChiffres);
-      champ2.appendChild(champChiffres);
-
-      zone.appendChild(champ1);
-      zone.appendChild(champ2);
-
-      function reinitCompteur() {
-        const alphabet = champAlphabet.value.split("");
-        const chiffres = parseInt(champChiffres.value);
-        if (alphabet.length > 0 && chiffres > 0) {
-          const config = compteurActuel || {};
-          if (config.alphabet !== alphabet.join("") || config.chiffres !== chiffres) {
-            creerCompteur("compteur", alphabet, chiffres);
-          }
-        }
-      }
-
-      champAlphabet.addEventListener("input", reinitCompteur);
-      champChiffres.addEventListener("input", reinitCompteur);
-
-      reinitCompteur();
-    }
-
-    initialiserFormulaire();
-  </script>
-
-<style>
-
-
-    #compteur *, #parametres * {
-      font-family: monospace;
-      text-align: center;
-    }
-
-
-    .parametres {
-      display: flex;
-      justify-content: center;
-      gap: 2em;
-      margin-bottom: 1em;
-      flex-wrap: wrap;
-    }
-
-    .champ {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .compteur {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    .chiffres {
-      display: flex;
-      justify-content: center;
-      gap: 1em;
-      margin-bottom: 1em;
-    }
-
-    .colonne {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 2em;
-    }
-
-    .roue-wrapper {
-      height: 2em;
-      width: 2em;
-      font-size: 2em;
-      overflow: hidden;
-      border: 1px solid #ccc;
-    }
-
-    .roue {
-      display: flex;
-      flex-direction: column;
-      transform: translateY(0);
-    }
-
-    .roue.animate {
-      transition: transform 0.3s ease-in-out !important;
-    }
-
-    .roue span {
-      height: 2em;
-      line-height: 2em;
-      text-align: center;
-    }
-
-    .global {
-      font-size: 1.5em;
-      margin: 0.5em;
-      padding: 0.2em 0.6em;
-    }
-
-    .valeur {
-      margin-top: 1em;
-      font-size: 1.2em;
-    }
-  </style>
-
-<p><strong>La colonne/roue 0 est la colonne de droite. la colonne 1 est la colonne juste à sa gauche, etc...</strong></p>
+<div class="admonition question">
+<p class="admonition-title">Exercices</p>
 <ul>
-<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 1?</li>
-<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 2?</li>
-<li>Que doit faire la roue 2 pour que la roue 3 bouge?</li>
-</ul>
-<h2 id="changer-de-base">Changer de base</h2>
-<p>Modifiez l'alphabet de chiffres pour ces chiffres: <span class="arithmatex">\(&lt;0, 1, 2&gt;\)</span></p>
-<p>Nos roues n'ont plus alors que 3 chiffres chacune.</p>
-<ul>
-<li>Incrémentez le compteur 10 fois. <ul>
-<li>Quel est le nombre obtenu? </li>
-<li>Comment est-il écrit?</li>
-</ul>
-</li>
-<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 1?</li>
-<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 2?</li>
-<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 3?</li>
-<li>Que doit faire la roue 2 pour que la roue 3 bouge?</li>
-</ul>
-<p>Ici, vous venez de représenter des nombres dans la <strong>base 3</strong>.</p>
-<p>Pourquoi? <strong>Tout simplement</strong> parce qu'on ne dispose que de 3 chiffres pour représenter les nombres.</p>
-<ul>
-<li><strong>Ecrivez</strong> le plus grand nombre possible sur 4 chiffres en base 3.</li>
-<li>A quel nombre correspond-il?</li>
-</ul>
-<h2 id="rechanger-de-base">Rechanger de base</h2>
-<p>Modifiez l'alphabet de chiffres pour ces chiffres: <span class="arithmatex">\(&lt;0, 1&gt;\)</span></p>
-<ul>
-<li>En quelle base sont maintenant écrits les nombres affichés au compteur?</li>
-<li>Incrémentez le compteur 10 fois. <ul>
-<li>Quel est le nombre obtenu? </li>
-<li>Comment est-il écrit?</li>
-</ul>
-</li>
-<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 1?</li>
-<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 2?</li>
-<li>Combien de fois faut-il incrémenter le compteur pour faire bouger la roue 3?</li>
-<li>Que doit faire la roue 2 pour que la roue 3 bouge?</li>
-</ul>
-<div class="admonition danger">
-<p class="admonition-title">Le binaire</p>
-<p><strong>Le binaire, c'est tout simplement la base 2.</strong></p>
-<p>Le mot "binaire" vient du latin binarius, qui signifie "composé de deux".</p>
-<p>En base 2, chaque chiffre (appelé <strong>bit</strong>, contraction de <strong>binary digit</strong>) ne peut valoir que :</p>
-<ul>
-<li>0 : "éteint", "faux", "non", etc.</li>
-<li>1 : "allumé", "vrai", "oui", etc.</li>
+<li>Donnez par ordre croissant tous les entiers sur 3 bits signés</li>
+<li>Ecrivez <span class="arithmatex">\(-53\)</span> sur 8 bits</li>
+<li>Trouvez la représentation décimale de l'entier signé sur 8-bits <span class="arithmatex">\(10101100\)</span></li>
+<li>Est-ce qu'on peut représenter 211 sur 8 bits signés? Sur 8 bits non signés?</li>
 </ul>
 </div>
-<div class="admonition danger">
-<p class="admonition-title">L'hexadécimal</p>
-<p><strong>L'hexadécimal, c'est la base 16</strong></p>
-<p>On ne dispose que de 10 chiffres, pas de 16, il nous en manque donc 6. On n'a pas voulu recréer de nouveaux symboles pour ces chiffres, alors on utilise les lettres de l'alphabet. Les chiffres de l'hexadécimal sont donc</p>
-<div class="arithmatex">\[&lt;0, 1, 2, 3, 4, 5, 6, 7, 8, 9, A, B, C, D, E, F&gt;\]</div>
-<p>l'hexadécimal revient souvent en informatique:</p>
-<ul>
-<li>Utilisé pour les couleurs en HTML/CSS (ex : #FF0000 pour rouge)</li>
-<li>1 chiffre hexadécimal représente 4 bits → lecture plus simple du binaire</li>
-<li>Plus lisible que le binaire ou le décimal pour les données machines</li>
-<li>Utilisé pour représenter les adresses mémoire en informatique bas niveau</li>
-<li>Indispensable pour déboguer ou lire les fichiers binaires</li>
-<li>Utile en systèmes, électronique, assembleur, sécurité informatique</li>
-</ul>
-</div>
-<h2 id="systemes-alternatifs">Systèmes alternatifs</h2>
-<p>En réalité vous utilisez sans le savoir d’autres modes.</p>
-<p>Vous comptez par exemple les minutes et les secondes dans le système sexagésimal hérité des babyloniens (-3000).</p>
-<p>Vous dites quatre-vingt quinze (4 × 20 + 15) en héritage des celtes qui comptaient sur une base de 20 chiffres (ils comptaient aussi sur les doigts de pied). <a href="https://fr.wikipedia.org/wiki/Num%C3%A9ration_maya">Tout comme les mayas</a></p>
 <script src="https://mmarchand-nsi.github.io//js/material-tabbed-fix.js"></script>
 
 
@@ -3199,7 +3251,7 @@ Le chiffre le plus à droite est multiplié par <span class="arithmatex">\(10^0\
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 20, 2025 19:00:43 UTC">July 20, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2025 11:43:39 UTC">September 7, 2025</span>
   </span>
 
     

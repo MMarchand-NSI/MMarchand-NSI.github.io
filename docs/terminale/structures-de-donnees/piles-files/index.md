@@ -1,7 +1,4 @@
-# Piles et Files
-
-
-## Les Piles
+# Les Piles
 
 Les piles(stacks en anglais) correspondent **exactement** à la notion de pile dans la vie courante. C'est une structure qui contient des éléments empilés.
 
@@ -22,9 +19,9 @@ Ce type de structure de données est par exemple utilisé dans:
 - La lecture d'expressions mathématiques
 - En général le parcours de structures de données comme les graphes, arbres... que nous verrons plus tard.
 
-### Interface
+## Interface
 
-!!! abstract Définition interface
+!!! abstract "Définition - Interface"
     L'interface d'une structure de données abstraite est composée des fonctionalités **théoriques** que doit savoir remplir la structure de données. On appelle ces fonctionalités des **primitives**.
 
     Vous devez penser à la structure et au fonctionnement de l'interface (comme des légos) lorsque vous résolvez des problèmes. Pas à Python en particulier.
@@ -33,12 +30,12 @@ Une pile est définie par l’interface comprenant les primitives suivantes:
 
 |Primitive|Description|
 |--|--|
-| CREER_PILE() → Pile | Renvoie une nouvelle Pile vide |
+| CREER() → Pile | Renvoie une nouvelle Pile vide |
 | EST_VIDE(p: Pile) → Booléen |Savoir si la pile p est vide |
 | EMPILER(p: Pile, e: T) |Empiler un élément e pour le mettre au sommet de la pile p |
-| DEPILER(p) → T | Dépiler un élément: le retirer du sommet de la pile et le renvoyer |
+| DEPILER(p: Pile) → T | Dépiler un élément: le retirer du sommet de la pile et le renvoyer |
 
-### Implémentation en Python
+## Implémentation en Python
 
 !!! abstract Définition - Implémentation
 
@@ -54,9 +51,39 @@ Le type list en Python présente deux méthodes rapides qui lui permettent d’i
 
 (voir la [Documentation de python](https://wiki.python.org/moin/TimeComplexity))
 
-Pour notre première implémentation, on pourra dire que:
 
-- **une Pile d'un type quelconque T est une liste d'éléments de type T.**
+### Implémentation minimaliste
+
+Voici une pile de "n'importe quoi" (str, int, float, ...) implémentée avec une liste de "n'importe quoi"
+
+```python
+from typing import Any # N'importe quoi
+
+type Pile = list[Any]
+
+def creer() -> Pile:
+    return []
+
+def est_vide(p: Pile) -> bool:
+    return len(p) == 0
+
+def empiler(e: Any, p: Pile):
+    p.append(e)
+
+def depiler(p: Pile) -> Any:
+    assert not pile_vide(p), "La pile est vide"
+    return p.pop()
+
+```
+
+
+### Implémentation avancée
+
+Ici on considère que:
+
+**Une Pile d'éléments d'un type quelconque T est une liste d'éléments de type T**
+
+On ajoute aussi des docstrings qui intègrent les tests unitaires de chaque fonction.
 
 Voici le fichier pile.py
 
@@ -65,49 +92,51 @@ Voici le fichier pile.py
 
 type Pile[T] = list[T]
 
-def creer_pile[T]() -> Pile[T]:
+def creer[T]() -> Pile[T]:
     """
     Crée une pile vide.
 
-    >>> s: Pile[int] = creer_pile()
-    >>> s
+    >>> p: Pile[int] = creer()
+    >>> p
     []
     """
     return []
 
-def pile_vide[T](p: Pile[T]) -> bool:
+def est_vide[T](p: Pile[T]) -> bool:
     """
     Indique si la pile est vide.
 
-    >>> p: Pile[str] = creer_pile()
-    >>> pile_vide(p)  # True pour une pile vide
+    >>> p: Pile[str] = creer()
+    >>> est_vide(p)  #? True pour une pile vide
     True
     >>> empiler("test", p)
-    >>> pile_vide(p)  # False sinon
+    >>> est_vide(p)  #? False sinon
     False
     """
     return len(p) == 0
 
-def empiler[T](e: T, p: Pile[T]) -> None:
+def empiler[T](e: T, p: Pile[T]):
     """
     Empile l'élément e au sommet de la pile p (modifie p sur place).
 
-    >>> p = creer_pile[int]()
-    >>> empiler(p, 10)  # pas de valeur de retour (None)
+    >>> p = creer()
+    >>> empiler(10, p)  #? pas de valeur de retour (None)
     >>> p
     [10]
-    >>> empiler(p, 5);
+    >>> empiler(5, p)
+    >>> p
     [10, 5]
     """
     p.append(e)
+
 
 def depiler[T](p: Pile[T]) -> T:
     """
     Dépile et retourne l'élément au sommet de la pile p.
 
-    >>> p = creer_pile[int]()
-    >>> empiler(p, 1)
-    >>> empiler(p, 2)
+    >>> p = creer()
+    >>> empiler(1, p)
+    >>> empiler(2, p)
     >>> depiler(p)
     2
     >>> p
@@ -116,23 +145,48 @@ def depiler[T](p: Pile[T]) -> T:
     Dépile sur pile vide -> AssertionError :
 
     >>> depiler(p)
+    1
     >>> depiler(p)  # doctest: +ELLIPSIS
     Traceback (most recent call last):
     ...
     AssertionError: La pile est vide
     """
-    assert not pile_vide(p), "La pile est vide"
+    assert not est_vide(p), "La pile est vide"
     return p.pop()
 
 
 if __name__ == "__main__":
     import doctest
     doctest.testmod()
-
 ```
 
+## Exercices
 
-!!! question Exercice 1
+!!! question "Préparation"
+    Les chemins sont donnés relativement à votre répertoire `prog_term`
+
+    Les commandes sont lancées dans ce même répertoire.
+
+    Préparation des fichiers:
+
+    - Créez le répertoire `structures`. Ajoutez-y un fichier vide `__init__.py`
+    - Créez le répertoire `structures/lineaires`. Ajoutez-y un fichier vide `__init__.py`
+    - Reporter le code de création de la structure de Pile dans le fichier `structures/lineaires/pile.py`
+    - Créez le fichier `exos\exospiles.py` et ajoutez y ce code:
+
+    ```python
+    from structures.lineaires import pile
+    ```
+
+    Vous travaillerez dans le fichier exospiles.py
+
+    - Vous lancerez votre programme à l'aide de la commande `uv run -m exos.exospiles`
+
+
+Les exercices suivants sont à réaliser dans le fichier `structures\lineaires\`.
+
+
+!!! question "Exercice 1"
 
     Créer une fonction `pile_exemple` qui renvoie la pile suivante:
 
@@ -145,7 +199,7 @@ if __name__ == "__main__":
     -----------
     ``` 
 
-!!! question Sans exécuter le code - papier
+!!! question "Sans exécuter le code - papier"
     Dessinez la pile p à chacune de ses modifications.
 
     ```python
@@ -158,8 +212,7 @@ if __name__ == "__main__":
     ```
 
 
-!!! question Sommet d'une pile
-
+!!! question "Sommet d'une pile"
     Écrire une fonction `sommet` qui renvoie le sommet d'une pile sans qu'elle soit modifiée à la sortie de la fonction. (on peut donc la modifier, mais on remet tout bien en place avant de sortir de la fonction)
 
     ```python 
@@ -173,20 +226,32 @@ if __name__ == "__main__":
         """
     ```
 
-!!! question Taille d'une pile - version destructive
+!!! question "Taille d'une pile - version destructive"
     Créer une fonction  ```taille_pile[T](p: Pile[T]) -> int``` qui renvoie la taille de p de manière destructive.
     (la pile est vide si on l'affiche après un appel de fonction)
 
 
-!!! question Taille d'une pile - version non destructive
+!!! question "Taille d'une pile - version non destructive"
     Créer une fonction  ```taille_pile[T](p: Pile[T]) -> int``` qui renvoie la taille de p de manière non destructive.
     (la pile est intacte si on l'affiche après un appel de fonction)
 
     On pourra utiliser une pile temporaire.
 
 
+!!! question "Renverser une pile"
+    Créer et tester une fonction ```renverse``` qui prend une pile $p$ en paramètre et renvoie une pile contenant les éléments de $p$ dans l'ordre inverse.
+    
+    Cette fonction ne retourne rien.
+    
+    On commencera bien évidemment par travailler la signature de la fonction d'après l'énoncé.
 
-!!! question Sujet épreuve pratique (30 minutes grand maximum)
+
+!!! question "Renverser une pile en place"
+    Créer une fonction  ```renverse_inplace``` qui prend une pile en paramètre et la renverse **en place**.
+    Cette fonction ne retourne rien.
+
+
+!!! question "Sujet épreuve pratique (30 minutes grand maximum)"
     Ne vous grillez pas immédiatement cet exercice. Il faut le faire une fois que vous êtes à l'aise avec les autres, et pas le même jour.
 
     On dispose de chaînes de caractères contenant uniquement des parenthèses ouvrantes et fermantes.
