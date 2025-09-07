@@ -123,7 +123,7 @@ Pour travailler avec des graphes, différentes représentations peuvent être ut
 
     Les matrices sont utilisées dans divers domaines des mathématiques, de l'informatique, de la physique, et d'autres disciplines pour représenter et manipuler des données. Les matrices jouent un rôle crucial dans la résolution de systèmes d'équations linéaires, la transformation géométrique, la théorie des graphes, et de nombreux autres domaines.
 
-    Les cartes graphiques sont des composants principalement créés pour le calcul matriciel.
+    Les cartes graphiques (GPU) sont conçues pour le rendu d’images, mais leur architecture est spécialisée dans le calcul matriciel et vectoriel massivement parallèle. C’est ce qui les rend aussi utiles pour l’intelligence artificielle et le calcul scientifique.
 
 !!! abstract "Matrice d'adjacence - Graphes non-orientés"
 
@@ -134,7 +134,6 @@ Pour travailler avec des graphes, différentes représentations peuvent être ut
 
 <center>
 
-<!--- Ci-dessous, j'utilise l'intégration de mermaid https://mermaid.js.org/-->
 
 ```graphviz dot g1.png
 graph G {

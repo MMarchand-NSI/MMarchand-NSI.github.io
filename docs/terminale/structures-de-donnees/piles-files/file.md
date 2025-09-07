@@ -1,6 +1,5 @@
 # Files
 
-
 Les files (queues en anglais) correspondent exactement à la notion de file dans la vie courante:
 
 Une file d’attente à la caisse, à un feu rouge…
@@ -146,7 +145,7 @@ Les exercices suivants se font dans le fichier exos_files.py.
 
 !!! question "Look-and-say"
     A reprendre.
-    
+
     La suite "Look-and-say", de Conway, consiste à lire à haute voix une série de chiffres en les groupant: ainsi la suite 11121223 est lue "trois 1, un 2, un 1,deux 2, un trois", qu'on écrit 3112112213.
 
     1. Ecrire une fonction `etape` qui prend 2 files, `entree` et `sortie`, en paramètre. Elle retire les `n` premiers chiffres `c` identiques de `entree` et ajoute les chiffres `n` et `c` à la sortie. Testez cette fonction.
