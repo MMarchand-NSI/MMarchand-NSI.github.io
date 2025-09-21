@@ -1,6 +1,6 @@
 ![Logo](image-6.png){ align=right }
-[](){#setup-vscode}
-# Setup de VSCode
+
+# Setup VSCode
 
 Un IDE (environnement de développement intégré) est un logiciel qui aide les programmeurs à développer.
 
@@ -8,18 +8,23 @@ VSCode est de loin l'IDE le plus utilisé (73,6% des développeurs et 77% des é
 
 ## Pré-requis
 
-Vous avez installé les outils recommandés avec winget
+Vous avez installé les outils 
+
+- VSCode
+- UV
 
 ## Configurer VSCode pour développer en python.
 
 Cliquez sur l'icône des extensions ![alt text](image-1.png)
 
-Recherchez `nsi-dev` dans la petite barre de recherche.
-Cliquez sur le petit bouton bleu "install"
+Recherchez `python` dans la petite barre de recherche.
+Cliquez sur le petit bouton bleu "install" à côté de l'extension python
 
-![alt text](image.png)
+![alt text](image-16.png)
 
-Ca-y-est, c'est configuré.
+Ca-y-est, VSCode sait maintenant travailler avec Python.
+
+A l'heure où j'écris ces lignes, on voit que l'extension a été téléchargée 184 millions de fois dans le monde. Vous pouvez remarquer la popularité à la fois de VSCode et de python dans le monde.
 
 ## Comment travailler avec VSCode?
 
@@ -41,34 +46,51 @@ Lorsque vous ouvrez un répertoire pour la première fois, VSCode vous demande s
 Vous pouvez directement créer des fichiers et des dossiers dans L'explorer de VSCode à l'aide de ces boutons ![alt text](image-3.png)
 
 
-### Gérer vos environnements Python
+### Gérer Python
 
-L'extension NSI-DEV vous fournit une manière simplifiée de gérer vos environnements python. Il ne faut pas que vous ayez installé python sur votre machine, c'est miniforge qui va se charger de faire coexister une ou pusieurs installations de python.
+UV va nous permettre de gérer nous même l'installation de Python.
 
-![alt text](image-4.png)
+**Ouvrez un terminal** Menu Terminal > new Terminal
 
-Sur l'image ci-dessus, on voit 2 environnements python utilisables que j'ai appelé py312 (pour la version 12 de python) et py313 (pour la version 13 de python).
+Le terminal s'ouvre **dans votre répertoire**
 
-Lorsque vous l'utiliserez pour la première fois, il n'y en aura pas, il faudra en créer un en appuyant sur le bouton +
+#### Initialiser le répertoire ouvert
 
-On vous demandera alors de valider une version de python pour votre environnement, puis un nom.
+Ceci n'est à faire qu'une seule fois. Si vous l'avez fait au lycée ça n'est plus nécessaire.
 
-A l'heure où j'écris ces lignes, je vous conseille de demander la version 3.13 et d'appeler cet environnement py313.
+Exécutez ces 3 commandes **dans votre répertoire**
 
-Après quelques instants (ça peut être un peu long), vous verrez apparaître votre environnement.
+```bash
+uv python pin 3.13
+uv init --bare
+uv sync
+```
+
+Pour les terminales, simplement faire `uv init`
+
+!!! danger "Troubleshooting"
+
+    **En cas de problème**, supprimez le répertoire `.venv`
+
+    exécutez la commande:
+
+    ```bash
+    uv sync
+    ```
+
+    Toutes les informations nécessaires à la création et au maintient de votre environnement sont dans les fichiers uv.lock, .python-version, pyproject.toml
+
+    uv va lire ces fichiers, et télécharger tout ce dont il a besoin.
 
 ### Programmer en Python
 
 VSCode doit savoir quel environnement python utiliser pour exécuter vos programme, étant donné qu'il peut en exister plusieurs.
 
-Lorsque vous avez un fichier python ouvert, il faut cliquer sur la barre d'état en bas à droite, à l'emplacement où vous voyez sur l'image 3.12.7('py312': conda). Une liste déroulante va alors s'afficher où vous pourrez sélectionner votre environnement.
+Lorsque vous avez un fichier python ouvert, il faut cliquer sur la barre d'état en bas à droite. Une liste déroulante va alors s'afficher où vous pourrez sélectionner votre environnement.
 Si c'est la première fois que vous ouvrez VS code, vous verrez peut-être un bouton "Select interpreter" à la place.
 
 ![alt text](image-5.png)
 
-
-!!! warning "Jamais dans base"
-    Il existe un environnement par défaut qui s'appelle base. L'extension le masque volontairement. N'utilisez jamais cet environnement.
 
 ### Ajouter des modules python
 
@@ -76,8 +98,6 @@ Lorsque vous voulez installer un module python, il faut ouvrir un terminal confi
 Ca se fait directement en appuyant sur le petit cube de l'image ci-dessous. (La poubelle vous permet de supprimer l'environnement)
 
 ![alt text](image-7.png)
-
-Un terminal MSYS2 apparaît.
 
 Imaginons que vous vouliez installer le module pyxel, vous pouvez alors y exécuter cette commande:
 

@@ -11,14 +11,21 @@ Il aussi est tout à fait possible d'installer la plupart de ces outils en les t
 
 Le couteau suisse de la programmation.
 
+Sous Windows:
+
 ```shell
 winget install Microsoft.VisualStudioCode
 ```
 
+Sous macos, Cliquer sur le lien suivant pour télécharger VSCode et pouvoir l'installer
+[Télécharger Pour MacOS](https://code.visualstudio.com/docs?dv=osx)
+
+
 ## UV
 
 Le tout nouveau couteau suisse de python.
-Exécutez cette ligne dans un terminal.
+
+Sous windows, exécutez cette ligne dans un terminal.
 
 ```powershell
 powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
@@ -26,6 +33,36 @@ powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | ie
 Redémarrez votre ordinateur.
 
 
+Si vous êtes sous linux ou MacOS, dans un terminal:
+
+```bash
+wget -qO- https://astral.sh/uv/install.sh | sh
+```
+
+
+
+## MSYS2
+Cet outil simule l'environnement linux et vous permettra même de programmer dans d'autres langages de programmation, ainsi que d'nistaller simplement un système de gestion de bases de données.
+
+Cet outil n'est nécessaire que sous windows.
+
+```shell
+winget install MSYS2.MSYS2
+```
+
+--- 
+
+## Graphviz
+
+Un utilitaire pour dessiner des graphes depuis python car `print` a ses limites pour visualiser certaines structures.
+
+Seulement en terminale.
+
+```shell
+winget install Graphviz.Graphviz
+```
+
+---
 ## GIT
 
 Un outil de base pour gérer "le stockage" de ses fichiers.
@@ -46,33 +83,3 @@ Pour la facilité d'utilisation au quotidien (pour utiliser git comme une clé u
 
 Dans les settings de VSCode, recherchez `post commit command` et mettez le paramètre à `sync`
 
-## Graphviz
-
-Un utilitaire pour dessiner des graphes depuis python.
-
-```shell
-winget install Graphviz.Graphviz
-```
-
-## DBeaver
-DBeaver permet d'interagir avec des systèmes de gestion de bases de données.
-
-```shell
-winget install dbeaver.dbeaver
-```
-
----
-
-## Miniforge
-Si python est installé sur votre machine, désinstallez-le.
-Nous allons utiliser ce gestionnaire d'environnements à la place.
-
-```shell
-winget install CondaForge.Miniforge3
-```
-
-## MSYS2
-Cet outil simule l'environnement linux et vous permettra même de programmer dans d'autres langages de programmation
-```shell
-winget install MSYS2.MSYS2
-```
