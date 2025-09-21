@@ -2711,7 +2711,7 @@
   
   
   <span class="md-ellipsis">
-    Graphes - Généralités et Implémentation
+    Graphes
     
   </span>
   
@@ -2734,7 +2734,7 @@
   
   
   <span class="md-ellipsis">
-    Parcours de graphes
+    Parcours
     
   </span>
   
@@ -3045,7 +3045,7 @@ graph TD;
 <p>Implémenter en conséquence les fonctions récursives:</p>
 <ul>
 <li><code>hauteur</code> calcule la hauteur d'un arbre<ul>
-<li>(je suis un arbre, je pose la question à mon sag et mon sad, qu'est-ce que je fais avec leurs réponse?)</li>
+<li>(je suis lutin qui reçcoit un arbre, je pose la même question à mon sag et mon sad, qu'est-ce que je fais avec leurs réponse?)</li>
 </ul>
 </li>
 <li><code>taille</code> calcule le nombre de noeuds d'un arbre</li>
@@ -3060,15 +3060,16 @@ graph TD;
 <p class="admonition-title">Arbre aléatoire</p>
 <ul>
 <li>Créer une fonction récursive <code>genere_alea(h: int) -&gt; arbrebin</code> qui génère un arbre complet ayant pour hauteur h, comportant des clés aléatoires de 1 à 100.</li>
-<li>Spé maths: Créer une fonction récursive <code>genere_alea2() -&gt; arbrebin</code> qui génère un arbre comportant des clés aléatoires de 1 à 100. La probabilité de créer un noeud doit être l'inverse de sa hauteur.</li>
-<li>Spé Maths: Etudiez les fonctions <span class="arithmatex">\(f_\alpha(x)=e^{-\alpha  x^2}, x\in \mathbb{R^+},  \alpha \in \mathbb{R}^{*+}\)</span><ul>
-<li>Variations, limites, convexité</li>
-<li>Trouvez les coordonnées de leur point d'inflexion.</li>
-<li>Proposez comment utiliser cette fonction pour générer la probabilité de créer un noeud de hauteur <span class="arithmatex">\(x\)</span>, pour que l'arbre ait à peu près la hauteur <span class="arithmatex">\(h\)</span>. (on estimera que la probabilité renvoyée au delà du point d'inflexion est rapidement trop faible pour aller bien loin, et qu'il est déjà probable que certaines branches se soient déjà arrêtées avant d'atteindre la hauteur <span class="arithmatex">\(h\)</span>)</li>
-</ul>
-</li>
 </ul>
 </div>
+<!--
+    - Spé maths: Créer une fonction récursive `genere_alea2() -> arbrebin` qui génère un arbre comportant des clés aléatoires de 1 à 100. La probabilité de créer un noeud doit être l'inverse de sa hauteur.
+    - Spé Maths: Etudiez les fonctions $f_\alpha(x)=e^{-\alpha  x^2}, x\in \mathbb{R^+},  \alpha \in \mathbb{R}^{*+}$
+        - Variations, limites, convexité
+        - Trouvez les coordonnées de leur point d'inflexion.
+        - Proposez comment utiliser cette fonction pour générer la probabilité de créer un noeud de hauteur $x$, pour que l'arbre ait à peu près la hauteur $h$. (on estimera que la probabilité renvoyée au delà du point d'inflexion est rapidement trop faible pour aller bien loin, et qu'il est déjà probable que certaines branches se soient déjà arrêtées avant d'atteindre la hauteur $h$)
+-->
+
 <div class="admonition question">
 <p class="admonition-title">Arbre équilibré</p>
 <p>Un arbre est équilibré s'il est vide ou que, à la fois:</p>
@@ -3310,11 +3311,11 @@ F --- O["4"]</code></pre></p>
 </div>
 <div class="admonition info">
 <p class="admonition-title">Encadrement de la hauteur d'un arbre binaire</p>
-<p><span class="arithmatex">\(hauteur(\empty)=-1\)</span></p>
+<p><span class="arithmatex">\(hauteur(\empty)=0\)</span></p>
 <p><strong>Comment encadrer</strong></p>
 <p>Avec <span class="arithmatex">\(n\)</span> noeuds, l'arbre le plus haut qu'on puisse construire est filiforme, et l'arbre le moins haut est un arbre où tous les niveaux sont remplis sauf evéntuellement le dernier. </p>
 <p><strong>Hauteur d'un arbre filiforme</strong></p>
-<p>Un arbre filiforme de taille <span class="arithmatex">\(n\)</span> est de hauteur <span class="arithmatex">\(n-1\)</span></p>
+<p>Un arbre filiforme de taille <span class="arithmatex">\(n\)</span> est de hauteur <span class="arithmatex">\(n\)</span></p>
 <p><strong>Hauteur d'un arbre parfait à <span class="arithmatex">\(n\)</span> noeuds</strong>*</p>
 <p><pre class="mermaid"><code>graph TD
 subgraph Niveau0 ["2^0 nœud"]
@@ -3341,33 +3342,17 @@ subgraph Niveau3 ["2^3 nœuds"]
     G --- O["15"]
 end</code></pre>
 Cet arbre de hauteur 3 a <span class="arithmatex">\(2^0 + 2^1 + 2^2 + 2^3 = 15\)</span> nœuds (<span class="arithmatex">\(2^{4}-1\)</span>).</p>
-<p>Un arbre parfait de hauteur <span class="arithmatex">\(h\)</span> a <span class="arithmatex">\(\displaystyle \sum_{k=0}^h 2^k\)</span> noeuds.</p>
+<p>Un arbre parfait de hauteur <span class="arithmatex">\(h\)</span> a <span class="arithmatex">\(\displaystyle \sum_{k=0}^{h-1} 2^k\)</span> noeuds.</p>
 <p>On reconnaît la somme des termes d'une suite géométrique de raison 2.</p>
-<p>Un arbre parfait de hauteur <span class="arithmatex">\(h\)</span> a donc <span class="arithmatex">\(N=2^{h+1}-1\)</span> nœuds.</p>
-<p><span class="arithmatex">\(N = 2^{h+1} - 1\)</span></p>
-<p><span class="arithmatex">\(2^{h+1} = N + 1\)</span></p>
-<p>En passant au logarithme de base 2 de chaque côté, la hauteur d'un arbre parfait ayant <span class="arithmatex">\(n\)</span> noeuds est donnée par la formule <span class="arithmatex">\(h = \log_2(n+1)-1\)</span>.</p>
+<p>Un arbre parfait de hauteur <span class="arithmatex">\(h\)</span> a donc <span class="arithmatex">\(2^h-1\)</span> nœuds.</p>
 <p><strong>Encadrement</strong></p>
-<p>En tenant compte du fait que l'arbre n'est pas nécessairement rempli au dernier niveau, sa hauteur minimum est celle de l'arbre parfait associé:</p>
-<p><span class="arithmatex">\(\lceil \log_2(n+1) - 1 \rceil\)</span>, donc <span class="arithmatex">\(\lceil \log_2(n+1) \rceil - 1\)</span> </p>
-<p>On en déduit l'encadrement de la hauteur <span class="arithmatex">\(h\)</span> de tout arbre binaire de taille <span class="arithmatex">\(n\)</span>:</p>
-<p><span class="arithmatex">\(\lceil \log_2(n+1) \rceil - 1 \leq h \leq n - 1.\)</span></p>
-<p>Soit <span class="arithmatex">\( n \ge 1 \)</span>. Nous allons démontrer que : <span class="arithmatex">\(\lfloor \log_2(n) \rfloor = \lceil \log_2(n+1) \rceil - 1\)</span></p>
-<p>Posons <span class="arithmatex">\(k = \lfloor \log_2(n) \rfloor\)</span></p>
-<p>Par définition de la fonction partie entière inférieure, cela signifie que : </p>
-<p><span class="arithmatex">\(k \le \log_2(n) &lt; k+1\)</span></p>
-<p>(Le but ici, c'est de faire apparaître du <span class="arithmatex">\(n+1\)</span> au milieu, de passer l'inégalité de gauche en strict et celle de droite en large. Et comme ce qu'on veut démontrer est censé être vrai, ça devrait bien se goupiller)</p>
-<p>En appliquant la fonction <span class="arithmatex">\(x \mapsto 2^x\)</span>, on obtient : <span class="arithmatex">\(2^k \le n &lt; 2^{k+1}\)</span></p>
-<p>En ajoutant 1 à chaque terme, nous avons : <span class="arithmatex">\(2^k + 1 \le  \textcolor{red}{n + 1 \le} 2^{k+1}\)</span></p>
-<p>En prenant le logarithme en base 2 de ces inégalités, on trouve : </p>
-<p><span class="arithmatex">\(\log_2(2^k + 1) \le \log_2(n+1) \le \log_2(2^{k+1}) = k+1\)</span></p>
-<p>Comme <span class="arithmatex">\(\log_2(2^k + 1) &gt; \log_2(2^k) = k\)</span>, on obtient <span class="arithmatex">\(k \textcolor{red}{&lt;} \log_2(n+1) \le k+1\)</span></p>
-<p>i.e., par définition de la fonction partie entière supérieure, <span class="arithmatex">\(\lceil \log_2(n+1) \rceil = k+1\)</span></p>
-<p>En isolant <span class="arithmatex">\(k\)</span>, nous avons  <span class="arithmatex">\(k = \lceil \log_2(n+1) \rceil - 1\)</span></p>
-<p>Comme nous avons défini $ k = \lfloor \log_2(n) \rfloor $, nous concluons que :</p>
-<div class="arithmatex">\[\lfloor \log_2(n) \rfloor = \lceil \log_2(n+1) \rceil - 1\]</div>
-<p>l'encadrement de la hauteur <span class="arithmatex">\(h\)</span> de tout arbre binaire de taille <span class="arithmatex">\(n \geq 1\)</span> est donc:</p>
-<div class="arithmatex">\[\Huge \lfloor \log_2(n) \rfloor \leq h \leq n - 1\]</div>
+<p>Un arbre de hauteur <span class="arithmatex">\(h\)</span> a donc au maximum <span class="arithmatex">\(2^h-1\)</span> noeuds.</p>
+<p>Pour un arbre de taille n, et de hauteur <span class="arithmatex">\(h\)</span>, on aura donc <span class="arithmatex">\(n \le 2^h-1\)</span></p>
+<p>Soit <span class="arithmatex">\(2^h \ge n+1\)</span></p>
+<p>En appliquant la fonction croissante logarithme de base 2 de chaque côté, <span class="arithmatex">\(h  \ge \log_2(n+1)\)</span>.</p>
+<p>Comme h est entier,  <span class="arithmatex">\(h  \ge \lceil \log_2(n+1) \rceil\)</span></p>
+<p>Attendu que <span class="arithmatex">\(h\)</span> est nécessairement inférieure ou égale au nombre de noeuds (cas de l'arbre filiforme), on obtient l'encadrement final</p>
+<div class="arithmatex">\[\Huge \lceil \log_2(n+1) \rceil \leq h \leq n \]</div>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Avancé - Rotations</p>

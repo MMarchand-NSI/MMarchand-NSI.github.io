@@ -65,7 +65,9 @@ Le système décimal, celui que vous avez appris dès tout petits est la base 10
 $$<0, 1, 2, 3, 4, 5, 6, 7, 8, 9>$$
 
 $5429$ en base 10 se décompose ainsi:
+
 $$5429_{10}=5 \times 1000+4 \times 100+2 \times 10+9 \times 1$$
+
 $$\Large \textcolor{blue}{5429}_{10}= \textcolor{blue}{5} \times 10^{\textcolor{red}{3}}+ \textcolor{blue}{4} \times 10^{\textcolor{red}{2}}+ \textcolor{blue}{2} \times 10^{\textcolor{red}{1}}+ \textcolor{blue}{9} \times 10^{\textcolor{red}{0}}$$
 
 Chaque chiffre représente un nombre de puissances de 10.

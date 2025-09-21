@@ -42,7 +42,7 @@ Dans un premier temps, nous allons nous intéresser à une forme spéciale d'arb
 ## Arbres binaires
 
 !!! abstract "Arbre binaire"
-    Un arbre binaire est une structure composée d'une **clé** (ou étiquette), ainsi que de 2 arbres, le **sous-arbre gauche** (sag) ainsi que le **sous-arbre droit** (sad). C'est un arbre très particulier car on distingue bien la position de chaque sous-arbre.
+    Un arbre binaire est une structure composée d'une **clé** (ou étiquette), ainsi que de 2 arbres, le **sous-arbre gauche** (sag) ainsi que le **sous-arbre droit** (sad). C'est un arbre très particulier car on distingue bien la **position** de chaque sous-arbre.
 
     ![img](abin.svg)
 
@@ -62,7 +62,7 @@ Dans un premier temps, nous allons nous intéresser à une forme spéciale d'arb
     Implémenter en conséquence les fonctions récursives:
     
     - `hauteur` calcule la hauteur d'un arbre
-        - (je suis un arbre, je pose la question à mon sag et mon sad, qu'est-ce que je fais avec leurs réponse?)
+        - (je suis lutin qui reçcoit un arbre, je pose la même question à mon sag et mon sad, qu'est-ce que je fais avec leurs réponse?)
     - `taille` calcule le nombre de noeuds d'un arbre
     - `somme` calcule la somme des clés d'un arbre
     - `to_str` renvoie une str comportant toutes les clés d'un arbre.
@@ -72,11 +72,15 @@ Dans un premier temps, nous allons nous intéresser à une forme spéciale d'arb
 
 !!! question "Arbre aléatoire"
     - Créer une fonction récursive `genere_alea(h: int) -> arbrebin` qui génère un arbre complet ayant pour hauteur h, comportant des clés aléatoires de 1 à 100.
+
+
+<!--
     - Spé maths: Créer une fonction récursive `genere_alea2() -> arbrebin` qui génère un arbre comportant des clés aléatoires de 1 à 100. La probabilité de créer un noeud doit être l'inverse de sa hauteur.
     - Spé Maths: Etudiez les fonctions $f_\alpha(x)=e^{-\alpha  x^2}, x\in \mathbb{R^+},  \alpha \in \mathbb{R}^{*+}$
         - Variations, limites, convexité
         - Trouvez les coordonnées de leur point d'inflexion.
         - Proposez comment utiliser cette fonction pour générer la probabilité de créer un noeud de hauteur $x$, pour que l'arbre ait à peu près la hauteur $h$. (on estimera que la probabilité renvoyée au delà du point d'inflexion est rapidement trop faible pour aller bien loin, et qu'il est déjà probable que certaines branches se soient déjà arrêtées avant d'atteindre la hauteur $h$)
+-->
 
 !!! question "Arbre équilibré"
     Un arbre est équilibré s'il est vide ou que, à la fois:
@@ -333,7 +337,7 @@ graph TD;
 
 !!! info "Encadrement de la hauteur d'un arbre binaire"
     
-    $hauteur(\empty)=-1$
+    $hauteur(\empty)=0$
 
     **Comment encadrer**
 
@@ -341,7 +345,7 @@ graph TD;
 
     **Hauteur d'un arbre filiforme**
 
-    Un arbre filiforme de taille $n$ est de hauteur $n-1$
+    Un arbre filiforme de taille $n$ est de hauteur $n$
 
 
     **Hauteur d'un arbre parfait à $n$ noeuds***
@@ -374,59 +378,27 @@ graph TD;
     ```
     Cet arbre de hauteur 3 a $2^0 + 2^1 + 2^2 + 2^3 = 15$ nœuds ($2^{4}-1$).
 
-    Un arbre parfait de hauteur $h$ a $\displaystyle \sum_{k=0}^h 2^k$ noeuds.
+    Un arbre parfait de hauteur $h$ a $\displaystyle \sum_{k=0}^{h-1} 2^k$ noeuds.
 
     On reconnaît la somme des termes d'une suite géométrique de raison 2.
     
-    Un arbre parfait de hauteur $h$ a donc $N=2^{h+1}-1$ nœuds.
-
-    $N = 2^{h+1} - 1$
-
-    $2^{h+1} = N + 1$
-    
-    En passant au logarithme de base 2 de chaque côté, la hauteur d'un arbre parfait ayant $n$ noeuds est donnée par la formule $h = \log_2(n+1)-1$.
+    Un arbre parfait de hauteur $h$ a donc $2^h-1$ nœuds.
 
     **Encadrement**
-
-    En tenant compte du fait que l'arbre n'est pas nécessairement rempli au dernier niveau, sa hauteur minimum est celle de l'arbre parfait associé:
     
-    $\lceil \log_2(n+1) - 1 \rceil$, donc $\lceil \log_2(n+1) \rceil - 1$ 
+    Un arbre de hauteur $h$ a donc au maximum $2^h-1$ noeuds.
+
+    Pour un arbre de taille n, et de hauteur $h$, on aura donc $n \le 2^h-1$
     
-    On en déduit l'encadrement de la hauteur $h$ de tout arbre binaire de taille $n$:
+    Soit $2^h \ge n+1$
 
-    $\lceil \log_2(n+1) \rceil - 1 \leq h \leq n - 1.$
+    En appliquant la fonction croissante logarithme de base 2 de chaque côté, $h  \ge \log_2(n+1)$.
 
-    Soit \( n \ge 1 \). Nous allons démontrer que : $\lfloor \log_2(n) \rfloor = \lceil \log_2(n+1) \rceil - 1$
+    Comme h est entier,  $h  \ge \lceil \log_2(n+1) \rceil$
 
-    Posons $k = \lfloor \log_2(n) \rfloor$
+    Attendu que $h$ est nécessairement inférieure ou égale au nombre de noeuds (cas de l'arbre filiforme), on obtient l'encadrement final
 
-    Par définition de la fonction partie entière inférieure, cela signifie que : 
-    
-    $k \le \log_2(n) < k+1$
-
-    (Le but ici, c'est de faire apparaître du $n+1$ au milieu, de passer l'inégalité de gauche en strict et celle de droite en large. Et comme ce qu'on veut démontrer est censé être vrai, ça devrait bien se goupiller)
-
-    En appliquant la fonction $x \mapsto 2^x$, on obtient : $2^k \le n < 2^{k+1}$
-
-    En ajoutant 1 à chaque terme, nous avons : $2^k + 1 \le  \textcolor{red}{n + 1 \le} 2^{k+1}$
-
-    En prenant le logarithme en base 2 de ces inégalités, on trouve : 
-    
-    $\log_2(2^k + 1) \le \log_2(n+1) \le \log_2(2^{k+1}) = k+1$
-
-    Comme $\log_2(2^k + 1) > \log_2(2^k) = k$, on obtient $k \textcolor{red}{<} \log_2(n+1) \le k+1$
-
-    i.e., par définition de la fonction partie entière supérieure, $\lceil \log_2(n+1) \rceil = k+1$
-
-    En isolant $k$, nous avons  $k = \lceil \log_2(n+1) \rceil - 1$
-
-    Comme nous avons défini $ k = \lfloor \log_2(n) \rfloor $, nous concluons que :
-
-    $$\lfloor \log_2(n) \rfloor = \lceil \log_2(n+1) \rceil - 1$$
-
-    l'encadrement de la hauteur $h$ de tout arbre binaire de taille $n \geq 1$ est donc:
-
-    $$\Huge \lfloor \log_2(n) \rfloor \leq h \leq n - 1$$
+    $$\Huge \lceil \log_2(n+1) \rceil \leq h \leq n $$
 
 
 

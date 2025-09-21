@@ -178,12 +178,10 @@ if __name__ == "__main__":
     from structures.lineaires import pile
     ```
 
-    Vous travaillerez dans le fichier exospiles.py
+    **Vous travaillerez dans le fichier exospiles.py**
 
     - Vous lancerez votre programme à l'aide de la commande `uv run -m exos.exospiles`
 
-
-Les exercices suivants sont à réaliser dans le fichier `structures\lineaires\`.
 
 
 !!! question "Exercice 1"
