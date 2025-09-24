@@ -51,7 +51,7 @@ def est_vide(f: File) -> bool:
     return len(f) == 0
 
 def enfiler(e: Any, f: File) -> bool:
-    f.appendleft(e, f)
+    f.appendleft(e)
 
 def defiler(f: File) -> Any:
     assert len(f)!=0, "File Vide"

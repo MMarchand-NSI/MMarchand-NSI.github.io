@@ -13,20 +13,19 @@ Vous avez installé les outils
 - VSCode
 - UV
 
-## Configurer VSCode pour développer en python.
+!!! hint Configurer VSCode pour développer en python.
 
-Cliquez sur l'icône des extensions ![alt text](image-1.png)
+    Cliquez sur l'icône des extensions ![alt text](image-1.png)
 
-Recherchez `python` dans la petite barre de recherche.
-Cliquez sur le petit bouton bleu "install" à côté de l'extension python
+    Recherchez `python` dans la petite barre de recherche.
+    Cliquez sur le petit bouton bleu "install" à côté de l'extension python
 
-![alt text](image-16.png)
+    ![alt text](image-16.png)
 
-Ca-y-est, VSCode sait maintenant travailler avec Python.
+    Ca-y-est, VSCode sait maintenant travailler avec Python.
 
-A l'heure où j'écris ces lignes, on voit que l'extension a été téléchargée 184 millions de fois dans le monde. Vous pouvez remarquer la popularité à la fois de VSCode et de python dans le monde.
+    A l'heure où j'écris ces lignes, on voit que l'extension a été téléchargée 184 millions de fois dans le monde. Vous pouvez remarquer la popularité à la fois de VSCode et de python dans le monde.
 
-## Comment travailler avec VSCode?
 
 !!! danger "Attention, sinon ça ne fonctionnera pas"
     __Dans VSCode, on ouvre TOUJOURS un répertoire, JAMAIS un fichier.__
@@ -36,72 +35,61 @@ A l'heure où j'écris ces lignes, on voit que l'extension a été téléchargé
     Quand vous rouvrez VSCode, vous retrouvez tout comme vous l'avez laissé la dernière fois que vous l'avez ouvert.
 
 
-Lorsque vous ouvrez un répertoire pour la première fois, VSCode vous demande s'il peut avoir confiance en ce répertoire. Cochez la case et cliquez sur le bouton bleu, "Yes i trust". Il ne vous le redemandera plus pour ce répertoire ni pour le répertoire parent.
+    Lorsque vous ouvrez un répertoire pour la première fois, VSCode vous demande s'il peut avoir confiance en ce répertoire. Cochez la case et cliquez sur le bouton bleu, "Yes i trust". Il ne vous le redemandera plus pour ce répertoire ni pour le répertoire parent.
 
-![alt text](image-2.png)
-
-
-### Gérer les fichiers du répertoire.
-
-Vous pouvez directement créer des fichiers et des dossiers dans L'explorer de VSCode à l'aide de ces boutons ![alt text](image-3.png)
+    ![alt text](image-2.png)
 
 
-### Gérer Python
+!!! danger "Configuration initiale de UV"
+    **Ceci n'est à réaliser qu'une seule fois, il ne faut plus le faire chez vous.**
 
-UV va nous permettre de gérer nous même l'installation de Python.
+    1. Ouvrez dans VSCode votre répertoire de programmation.
+    2. **Ouvrez un terminal** Menu Terminal > new Terminal
 
-**Ouvrez un terminal** Menu Terminal > new Terminal
+    Exécutez ces 3 commandes dans le terminal:
 
-Le terminal s'ouvre **dans votre répertoire**
+    ```bash
+    uv python pin 3.13
+    uv init --bare
+    uv sync
+    ```
+    
 
-#### Initialiser le répertoire ouvert
+!!! hint Vérifier que tout est ok
+    **Lorsque vous avez un fichier python ouvert**, l'image suivante montre une bonne configuration:
 
-Ceci n'est à faire qu'une seule fois. Si vous l'avez fait au lycée ça n'est plus nécessaire.
+    1. Vous devez avoir votre venv sélectionné, en bas à droite de VSCode, comme indiqué sur l'image ci-dessous. Si votre venv n'est pas sélectionné, cliquez sur la barre d'état (1 sur l'image) et sélectionnez votre venv dans la liste déroulante.
 
-Exécutez ces 3 commandes **dans votre répertoire**
+    2. Quand vous ouvrez un terminal, le nom du répertoire doit apparaître comme sur l'image ci-dessous. (2)
 
-```bash
-uv python pin 3.13
-uv init --bare
-uv sync
-```
 
-Pour les terminales, simplement faire `uv init`
+    ![alt text](image-18.png)
+
+
 
 !!! danger "Troubleshooting"
 
     **En cas de problème**, supprimez le répertoire `.venv`
 
-    exécutez la commande:
+    exécutez les 2 commandes l'une après l'autre:
 
     ```bash
+    uv python install 3.13
     uv sync
     ```
 
-    Toutes les informations nécessaires à la création et au maintient de votre environnement sont dans les fichiers uv.lock, .python-version, pyproject.toml
-
-    uv va lire ces fichiers, et télécharger tout ce dont il a besoin.
-
-### Programmer en Python
-
-VSCode doit savoir quel environnement python utiliser pour exécuter vos programme, étant donné qu'il peut en exister plusieurs.
-
-Lorsque vous avez un fichier python ouvert, il faut cliquer sur la barre d'état en bas à droite. Une liste déroulante va alors s'afficher où vous pourrez sélectionner votre environnement.
-Si c'est la première fois que vous ouvrez VS code, vous verrez peut-être un bouton "Select interpreter" à la place.
-
-![alt text](image-5.png)
+    - La première s'assure que python 3.13 est installé et l'installe si nécessaire.
+    - La deuxième remet votre venv bien comme il faut.
 
 
 ### Ajouter des modules python
 
-Lorsque vous voulez installer un module python, il faut ouvrir un terminal configuré pour votre environnement.
-Ca se fait directement en appuyant sur le petit cube de l'image ci-dessous. (La poubelle vous permet de supprimer l'environnement)
+Lorsque vous voulez installer un module python, il faut ouvrir un terminal dans VSCode, en prenant garde à ce que le venv soit bien sélectionné en bas à droite.
 
-![alt text](image-7.png)
 
 Imaginons que vous vouliez installer le module pyxel, vous pouvez alors y exécuter cette commande:
 
-`pip install pyxel`
+`uv add pyxel`
 
 Ca y est, vous pouvez maintenant écrire `import pyxel` dans vos programmes.
 
