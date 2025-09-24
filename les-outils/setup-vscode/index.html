@@ -2979,14 +2979,16 @@ uv<span class="w"> </span>sync
 </div>
 <div class="admonition danger">
 <p class="admonition-title">Troubleshooting</p>
-<p><strong>En cas de problème</strong>, supprimez le répertoire <code>.venv</code></p>
-<p>exécutez les 2 commandes l'une après l'autre:</p>
+<p><strong>En cas de problème</strong></p>
+<p>exécutez les 3 commandes l'une après l'autre:</p>
 <div class="highlight"><pre><span></span><code>uv<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.13
-uv<span class="w"> </span>sync
+uv<span class="w"> </span>venv<span class="w"> </span>--clear
+uv<span class="w"> </span>sync<span class="w"> </span>--reinstall
 </code></pre></div>
 <ul>
 <li>La première s'assure que python 3.13 est installé et l'installe si nécessaire.</li>
-<li>La deuxième remet votre venv bien comme il faut.</li>
+<li>La deuxième réinitialise le venv</li>
+<li>la troisième se charge de tout mettre à jour avec les paquets que vous auriez déjà installés</li>
 </ul>
 </div>
 <h3 id="ajouter-des-modules-python">Ajouter des modules python</h3>
