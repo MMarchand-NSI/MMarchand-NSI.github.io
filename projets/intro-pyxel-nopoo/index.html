@@ -2870,18 +2870,23 @@
 
 <span class="c1"># -- Mise à jour régulière de l&#39;état du jeu ---</span>
 
-<span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Gère les événements utilisateur pour déplacer le pixel.</span>
 <span class="sd">    Cette fonction est automatiquement appelée en boucle par pyxel.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">global</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">color</span>
+
     <span class="c1"># Modification du vecteur directeur selon les touches fléchées</span>
     <span class="k">if</span> <span class="n">px</span><span class="o">.</span><span class="n">btn</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">KEY_RIGHT</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="o">.</span><span class="n">dx</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">dx</span> <span class="o">=</span> <span class="o">...</span>
+        <span class="n">dy</span> <span class="o">=</span> <span class="o">...</span>
     <span class="k">elif</span> <span class="o">...</span>
     <span class="o">...</span>
 
-<span class="c1"># -- Dessin régulier de l&#39;état u jeu à l&#39;écran ---</span>
+
+
+<span class="c1"># -- Dessin régulier de l&#39;état du jeu à l&#39;écran ---</span>
 
 <span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -2893,11 +2898,11 @@
 
 
 <span class="c1"># 1. Démarrer le moteur de jeu en 10 FPS</span>
-<span class="n">pyxel</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Carré en Mouvement&quot;</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+<span class="n">px</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Carré en Mouvement&quot;</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
 <span class="c1"># 2. Initialiser les variables du jeu</span>
 <span class="n">reinit</span><span class="p">()</span>
 <span class="c1"># 3. Lancer le jeu</span>
-<span class="n">pyxel</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">draw</span><span class="p">)</span>
+<span class="n">px</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">draw</span><span class="p">)</span>
 
 <span class="c1"># Cette dernière instruction lance une boucle infinie,</span>
 <span class="c1"># qui appelle update, puis draw, de manière régulière, à chaque Frame (ici 10 fois par seconde)</span>
@@ -2913,7 +2918,7 @@
 </ul>
 </li>
 <li>Espace torique: Un carré peut maintenant dépasser un bord mais il réapparaît au bord opposé (ce qui fait de l'espace de jeu un espace sans bord)<ul>
-<li>Modifiez la fonction update pour tenir compte de cette information.</li>
+<li>Modifiez la fonction update pour tenir compte de cette information. On s'intéressera à l'opérateur modulo. La modification doit être minime.</li>
 </ul>
 </li>
 </ol>
@@ -2921,18 +2926,21 @@
 <div class="admonition question">
 <p class="admonition-title">Remplacer un pixel par un sprite</p>
 <ol>
-<li>Téléchargez le fichier 1.pyxres sur <a href="https://depot.nuitducode.net">le site de la nuit du code</a><ul>
+<li>Téléchargez le fichier 2.pyxres sur <a href="https://depot.nuitducode.net">le site de la nuit du code</a><ul>
 <li>Il s'agit d'un fichier contenant des ressources visuelles et sonores.</li>
 <li>Placez le <strong>dans le même répertoire</strong> que votre fichier python.</li>
 <li>Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources du jeu, exécutez la commande suivante dans un terminal:
-    <code>pyxel edit 2.pyxres</code></li>
+    <code>pyxel edit &lt;répertoire&gt;\2.pyxres</code></li>
 <li>N'hésitez pas à bidouiller, vous ne pouvez rien casser, au pire vous pourrez retélécharger le fichier.</li>
 </ul>
 </li>
 <li>A la place d'un simple carré, on veut maintenant utiliser un sprite<ul>
-<li>Pour le faire, il faut d'abord charger ce fichier dans le code juste avant de démarrer le jeu:
-    <code>px.load("2.pyxres")</code>   (attention, au chemin de fichier près)</li>
-<li>Ensuite il faut dessiner le sprite que vous aurez choisi au lieu de simplement remplir un pixel. Il n'y a qu'une ligne de code à modifier. Je vous laisse la trouver en explorant la <a href="https://github.com/kitao/pyxel/blob/main/docs/README.fr.md">documentation de pyxel</a>.</li>
+<li>Pour le faire, il faut d'abord charger ce fichier dans le code <strong>juste avant de démarrer le jeu</strong>:
+    <code>px.load("&lt;répertoire&gt;\2.pyxres")</code></li>
+<li>Ensuite il faut dessiner le sprite que vous aurez choisi au lieu de simplement remplir un pixel. Il n'y a qu'une ligne de code à modifier. Je vous laisse la trouver en explorant la <a href="https://github.com/kitao/pyxel/blob/main/docs/README.fr.md">documentation de pyxel</a>.<ul>
+<li>remarque: Vous aurez nécessairement besoin d'augmenter la hauteur et la largeur de votre fenêtre (H et W), ce qui réduira la taille des "pixels".</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
@@ -2959,7 +2967,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2025 13:21:20 UTC">September 21, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 26, 2025 14:07:08 UTC">September 26, 2025</span>
   </span>
 
     
