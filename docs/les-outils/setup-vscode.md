@@ -13,9 +13,9 @@ Vous avez installé les outils
 - VSCode
 - UV
 
-!!! hint Configurer VSCode pour développer en python.
+!!! hint "Configurer VSCode pour développer en python"
 
-    Cliquez sur l'icône des extensions ![alt text](image-1.png)
+    Dans VSCode, Cliquez sur l'icône des extensions ![alt text](image-1.png)
 
     Recherchez `python` dans la petite barre de recherche.
     Cliquez sur le petit bouton bleu "install" à côté de l'extension python
@@ -55,7 +55,7 @@ Vous avez installé les outils
     ```
     
 
-!!! hint Vérifier que tout est ok
+!!! hint "Vérifier que tout est ok"
     **Lorsque vous avez un fichier python ouvert**, l'image suivante montre une bonne configuration:
 
     1. Vous devez avoir votre venv sélectionné, en bas à droite de VSCode, comme indiqué sur l'image ci-dessous. Si votre venv n'est pas sélectionné, cliquez sur la barre d'état (1 sur l'image) et sélectionnez votre venv dans la liste déroulante.
@@ -69,17 +69,19 @@ Vous avez installé les outils
 
 !!! danger "Troubleshooting"
 
-    **En cas de problème**, supprimez le répertoire `.venv`
+    **En cas de problème**
 
-    exécutez les 2 commandes l'une après l'autre:
+    exécutez les 3 commandes l'une après l'autre:
 
     ```bash
     uv python install 3.13
-    uv sync
+    uv venv --clear
+    uv sync --reinstall
     ```
 
     - La première s'assure que python 3.13 est installé et l'installe si nécessaire.
-    - La deuxième remet votre venv bien comme il faut.
+    - La deuxième réinitialise le venv
+    - la troisième se charge de tout mettre à jour avec les paquets que vous auriez déjà installés
 
 
 ### Ajouter des modules python

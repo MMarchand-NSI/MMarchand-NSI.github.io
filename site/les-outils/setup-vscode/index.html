@@ -2934,18 +2934,15 @@
 <li>VSCode</li>
 <li>UV</li>
 </ul>
-<p>!!! hint Configurer VSCode pour développer en python.</p>
-<pre><code>Cliquez sur l'icône des extensions ![alt text](image-1.png)
-
-Recherchez `python` dans la petite barre de recherche.
-Cliquez sur le petit bouton bleu "install" à côté de l'extension python
-
-![alt text](image-16.png)
-
-Ca-y-est, VSCode sait maintenant travailler avec Python.
-
-A l'heure où j'écris ces lignes, on voit que l'extension a été téléchargée 184 millions de fois dans le monde. Vous pouvez remarquer la popularité à la fois de VSCode et de python dans le monde.
-</code></pre>
+<div class="admonition hint">
+<p class="admonition-title">Configurer VSCode pour développer en python</p>
+<p>Dans VSCode, Cliquez sur l'icône des extensions <img alt="alt text" src="../image-1.png" /></p>
+<p>Recherchez <code>python</code> dans la petite barre de recherche.
+Cliquez sur le petit bouton bleu "install" à côté de l'extension python</p>
+<p><img alt="alt text" src="../image-16.png" /></p>
+<p>Ca-y-est, VSCode sait maintenant travailler avec Python.</p>
+<p>A l'heure où j'écris ces lignes, on voit que l'extension a été téléchargée 184 millions de fois dans le monde. Vous pouvez remarquer la popularité à la fois de VSCode et de python dans le monde.</p>
+</div>
 <div class="admonition danger">
 <p class="admonition-title">Attention, sinon ça ne fonctionnera pas</p>
 <p><strong>Dans VSCode, on ouvre TOUJOURS un répertoire, JAMAIS un fichier.</strong></p>
@@ -2967,8 +2964,8 @@ uv<span class="w"> </span>init<span class="w"> </span>--bare
 uv<span class="w"> </span>sync
 </code></pre></div>
 </div>
-<div class="admonition hint vérifier que tout est ok">
-<p class="admonition-title">Hint</p>
+<div class="admonition hint">
+<p class="admonition-title">Vérifier que tout est ok</p>
 <p><strong>Lorsque vous avez un fichier python ouvert</strong>, l'image suivante montre une bonne configuration:</p>
 <ol>
 <li>
@@ -2982,14 +2979,16 @@ uv<span class="w"> </span>sync
 </div>
 <div class="admonition danger">
 <p class="admonition-title">Troubleshooting</p>
-<p><strong>En cas de problème</strong>, supprimez le répertoire <code>.venv</code></p>
-<p>exécutez les 2 commandes l'une après l'autre:</p>
+<p><strong>En cas de problème</strong></p>
+<p>exécutez les 3 commandes l'une après l'autre:</p>
 <div class="highlight"><pre><span></span><code>uv<span class="w"> </span>python<span class="w"> </span>install<span class="w"> </span><span class="m">3</span>.13
-uv<span class="w"> </span>sync
+uv<span class="w"> </span>venv<span class="w"> </span>--clear
+uv<span class="w"> </span>sync<span class="w"> </span>--reinstall
 </code></pre></div>
 <ul>
 <li>La première s'assure que python 3.13 est installé et l'installe si nécessaire.</li>
-<li>La deuxième remet votre venv bien comme il faut.</li>
+<li>La deuxième réinitialise le venv</li>
+<li>la troisième se charge de tout mettre à jour avec les paquets que vous auriez déjà installés</li>
 </ul>
 </div>
 <h3 id="ajouter-des-modules-python">Ajouter des modules python</h3>
@@ -3023,7 +3022,7 @@ uv<span class="w"> </span>sync
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2025 14:49:14 UTC">September 21, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 24, 2025 15:54:31 UTC">September 24, 2025</span>
   </span>
 
     

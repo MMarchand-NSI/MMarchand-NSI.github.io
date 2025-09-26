@@ -238,9 +238,7 @@ if __name__ == "__main__":
 
 !!! question "Renverser une pile"
     Créer et tester une fonction ```renverse``` qui prend une pile $p$ en paramètre et renvoie une pile contenant les éléments de $p$ dans l'ordre inverse.
-    
-    Cette fonction ne retourne rien.
-    
+        
     On commencera bien évidemment par travailler la signature de la fonction d'après l'énoncé.
 
 

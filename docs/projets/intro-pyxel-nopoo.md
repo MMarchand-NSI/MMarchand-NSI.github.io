@@ -37,18 +37,23 @@ def reinit():
 
 # -- Mise à jour régulière de l'état du jeu ---
 
-def update(self):
+def update():
     """
     Gère les événements utilisateur pour déplacer le pixel.
     Cette fonction est automatiquement appelée en boucle par pyxel.
     """
+    global x, y, dx, dy, color
+
     # Modification du vecteur directeur selon les touches fléchées
     if px.btn(px.KEY_RIGHT):
-        self.pixel.dx += 1
+        dx = ...
+        dy = ...
     elif ...
     ...
 
-# -- Dessin régulier de l'état u jeu à l'écran ---
+
+
+# -- Dessin régulier de l'état du jeu à l'écran ---
 
 def draw():
     """
@@ -60,11 +65,11 @@ def draw():
 
 
 # 1. Démarrer le moteur de jeu en 10 FPS
-pyxel.init(H, W, title="Carré en Mouvement", fps = 10)
+px.init(H, W, title="Carré en Mouvement", fps = 10)
 # 2. Initialiser les variables du jeu
 reinit()
 # 3. Lancer le jeu
-pyxel.run(update, draw)
+px.run(update, draw)
 
 # Cette dernière instruction lance une boucle infinie,
 # qui appelle update, puis draw, de manière régulière, à chaque Frame (ici 10 fois par seconde)
@@ -78,7 +83,7 @@ pyxel.run(update, draw)
     4. Le carré ne doit pas bouger s'il va dépasser de l'écran.
         - Modifiez la fonction update pour tenir compte de cette information. 
     5. Espace torique: Un carré peut maintenant dépasser un bord mais il réapparaît au bord opposé (ce qui fait de l'espace de jeu un espace sans bord)
-        - Modifiez la fonction update pour tenir compte de cette information.
+        - Modifiez la fonction update pour tenir compte de cette information. On s'intéressera à l'opérateur modulo. La modification doit être minime.
 
 
 !!! question "Remplacer un pixel par un sprite"
@@ -86,10 +91,11 @@ pyxel.run(update, draw)
         - Il s'agit d'un fichier contenant des ressources visuelles et sonores.
         - Placez le **dans le même répertoire** que votre fichier python.
         - Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources du jeu, exécutez la commande suivante dans un terminal:
-            `pyxel edit 2.pyxres`
+            `pyxel edit <répertoire>\2.pyxres`
         - N'hésitez pas à bidouiller, vous ne pouvez rien casser, au pire vous pourrez retélécharger le fichier.
     2. A la place d'un simple carré, on veut maintenant utiliser un sprite
-        - Pour le faire, il faut d'abord charger ce fichier dans le code juste avant de démarrer le jeu:
-            `px.load("2.pyxres")`   (attention, au chemin de fichier près)
+        - Pour le faire, il faut d'abord charger ce fichier dans le code **juste avant de démarrer le jeu**:
+            `px.load("<répertoire>\2.pyxres")`
         - Ensuite il faut dessiner le sprite que vous aurez choisi au lieu de simplement remplir un pixel. Il n'y a qu'une ligne de code à modifier. Je vous laisse la trouver en explorant la [documentation de pyxel](https://github.com/kitao/pyxel/blob/main/docs/README.fr.md).
+            - remarque: Vous aurez nécessairement besoin d'augmenter la hauteur et la largeur de votre fenêtre (H et W), ce qui réduira la taille des "pixels".
 
