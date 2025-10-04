@@ -4,7 +4,7 @@ Prenons un peu de recul en regardant comment ça se passe dans d'autres langages
 
 ## Les entiers
 
-En rust, comme dans beaucoup d'autres langages, il faut préciser le nombre de bits qu'on utilise pour stocker notre variable
+En rust, comme dans d'autres langages, il faut préciser le nombre de bits qu'on utilise pour stocker notre variable
 
 
 
@@ -69,7 +69,7 @@ fn exercice3_sol() {
 
 
 Exemple d'erreur en C, mais qui n'intervient qu'à l'exécution.
-En C, on est obligé de réserver soi même la mémoir pour nos variables, et de la libérer quand on n'en a plus besoin.
+En C, on est obligé de réserver soi même la mémoire pour nos variables, et de la libérer quand on n'en a plus besoin.
 
 ```c
 #include <stdio.h>

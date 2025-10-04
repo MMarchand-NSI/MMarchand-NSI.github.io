@@ -87,7 +87,7 @@ px.run(update, draw)
 
 
 !!! question "Remplacer un pixel par un sprite"
-    1. Téléchargez le fichier 1.pyxres sur [le site de la nuit du code](https://depot.nuitducode.net)
+    1. Téléchargez le fichier 2.pyxres sur [le site de la nuit du code](https://depot.nuitducode.net)
         - Il s'agit d'un fichier contenant des ressources visuelles et sonores.
         - Placez le **dans le même répertoire** que votre fichier python.
         - Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources du jeu, exécutez la commande suivante dans un terminal:

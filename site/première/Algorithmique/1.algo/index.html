@@ -1388,6 +1388,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../prog/bouclefor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bouclefor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../prog/exercices/" class="md-nav__link">
         
   
@@ -1491,10 +1514,82 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_5" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_6" >
         
           
-          <label class="md-nav__link" for="__nav_3_6_5" id="__nav_3_6_5_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_3_6_6" id="__nav_3_6_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Sequences
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            Sequences
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../prog/sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les séquences
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_7" id="__nav_3_6_7_label" tabindex="0">
             
   
   
@@ -1507,8 +1602,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_5_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_3_6_5">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_7">
             <span class="md-nav__icon md-icon"></span>
             Variables
           </label>
@@ -3433,7 +3528,237 @@ $$</p>
 <p>Attention, la hauteur du graphique ne change pas mais ymax croît en permanence.
 Toutes ces fonctions sont croissantes et ne cesseront jamais de l'être. Elles tendent toutes vers <span class="arithmatex">\(+\infin\)</span> quand <span class="arithmatex">\(x\)</span> tend vers <span class="arithmatex">\(+\infin\)</span>.</p>
 <p><complexity></complexity></p>
-<script src="/javascripts/plotter.js" defer></script>
+<script>
+let mesfoncs = new Map();
+let chart = undefined;
+let currentXMax = 2;
+let currentXMin = 0;
+// @ts-ignore
+const xMin = 0;
+// @ts-ignore
+const xMax = 49.1;
+let f1 = undefined;
+let f2 = undefined;
+let idanimation = 0;
+let flagAnim = true;
+
+let timeout = 500;
+let data = undefined
+
+/**
+ * @param {(arg0: number) => number} f
+ * @param {(arg0: number) => number} g
+ * @param {number} pxMin
+ * @param {number} pxMax
+ */
+function generateData(f, g, pxMin, pxMax) {
+    const data = [];
+    for (let x = pxMin; x <= pxMax+0.3; x += 0.1) {
+        data.push({ x: x, y1: f(x), y2: g(x)});
+    }
+    return data;
+}
+
+function creerGraphique(idDiv) {
+
+    // @ts-ignore
+    const ctx = document.getElementById(idDiv).getContext('2d');
+
+    currentXMax = 2;
+    currentXMin = 0;
+
+
+    if (chart) {
+        chart.stop();
+        chart.destroy();
+        chart = undefined;
+    }
+
+    data = generateData(f1, f2, currentXMin, currentXMax);
+
+    // @ts-ignore
+    chart = new Chart(ctx, {
+        type: 'scatter',
+        data: {
+            datasets: [
+                {
+                    label: 'f(x)',
+                    data: data.map(point => ({ x: point.x, y: point.y1 })),
+                    borderColor: 'blue',
+                    showLine: true,
+                    fill: false,
+                },
+                {
+                    label: 'g(x)',
+                    data: data.map(point => ({ x: point.x, y: point.y2 })),
+                    borderColor: 'green',
+                    showLine: true,
+                    fill: false,
+                }
+            ]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                x: {
+                    grid: {
+                        display: false // Désactive la grille sur l'axe x
+                    },              
+                    ticks: {
+                        callback: function(value, index, ticks) {
+                          // On considère que le tick maximum est le dernier dans le tableau ticks
+                          if (index === ticks.length - 1 || index=== 0) {
+                            return Math.round(value*10)/10;
+                          }
+                          return '';
+                        }
+                    },              
+                    type: 'linear',
+                    position: 'bottom',
+                    title: {
+                        display: true,
+                        text: 'Taille de l\'entrée'
+                    },
+                    min: 0
+                },
+                y: {
+                    grid: {
+                        display: false // Désactive la grille sur l'axe y
+                    },              
+                    ticks: {
+                        callback: function(value, index, ticks) {
+                          // On considère que le tick maximum est le dernier dans le tableau ticks
+                          if (index === ticks.length - 1 || index=== 0) {
+                            return Math.round(value*10)/10;
+                          }
+                          return '';
+                        }
+                      },              
+                    title: {
+                        display: true,
+                        text: 'Temps de calcul'
+                    },
+                    min: 0
+                }
+            }
+        }
+    });
+
+
+}
+
+
+/**
+ * @param {number} id
+ */
+function animate(id) {
+    if (chart && id === idanimation && flagAnim) {
+            chart.options.scales.x.min = currentXMin;
+            chart.options.scales.x.max = currentXMax;
+            chart.options.scales.y.max = Math.max(f1(currentXMax), f2(currentXMax));
+
+            data = generateData(f1, f2, currentXMin, currentXMax);
+
+            chart.data.datasets[0].data = data.map(point => ({ x: point.x, y: point.y1 }));
+            chart.data.datasets[1].data = data.map(point => ({ x: point.x, y: point.y2 }));
+            chart.update();
+            currentXMax += 0.1;
+            currentXMin += 0.1;
+            setTimeout(animate, timeout, id);
+        }
+}
+
+
+function init() {
+
+        console.log('plotter loaded');
+        let mainTag = document.getElementsByTagName('complexity');
+
+        if ( mainTag=== null) {
+            return;
+        }
+
+        document.getElementsByTagName('complexity')[0].innerHTML = `
+        <form>
+            <label for="selfonc1">Fonction 1:</label>
+            <select id="selfonc1" class="md-select"></select>
+            <label for="selfonc2">Fonction 2:</label>
+            <select id="selfonc2"></select>
+            <button type = "button" class="md-button" name="bAfficher">Afficher</button>
+            <button type = "button" class="md-button" name="bStop">Stop</button>
+            <br/>
+            <label for="vitesse">Vitesse :</label>
+            <input type="range" id="vitesse" name="vitesse" min="0" max="500" step="1" value="0">
+        </form>
+        <canvas id="dessin_complexite" width="800" height="350"></canvas>
+        `;
+
+
+        mesfoncs = new Map();
+        mesfoncs.set('ln(x)', Math.log);
+        mesfoncs.set('x' , (x)=>x);
+        mesfoncs.set('x ln(x)', (x)=> x * Math.log(x));
+        mesfoncs.set('x^2', (x)=>x*x);
+        mesfoncs.set('x^3', (x)=>x*x*x);
+        mesfoncs.set('2^x', (x)=>Math.pow(2,x));
+        // @ts-ignore
+        mesfoncs.set('x!', (x)=>math.gamma(x+1));
+
+
+        let sf1  = document.getElementById('selfonc1');
+
+        let sf2 = document.getElementById('selfonc2');
+
+        mesfoncs.forEach((_, key) => {
+            let o = new Option(key, key);
+            // @ts-ignore
+            sf1.add(o);
+            // @ts-ignore
+            sf2.add(o.cloneNode(true));
+        });
+
+        document.getElementsByName('bStop')[0].addEventListener('click', function () {
+            flagAnim = false;
+        });
+
+        document.getElementsByName('bAfficher')[0].addEventListener('click', function () {
+
+            flagAnim = true;
+
+            // @ts-ignore
+            let vf1 = sf1.value;
+            // @ts-ignore
+            let vf2 = sf2.value;
+
+            f1 = mesfoncs.get(vf1);
+            f2 = mesfoncs.get(vf2);
+            creerGraphique('dessin_complexite');
+
+            chart.data.datasets[0].label = vf1;
+            chart.data.datasets[1].label = vf2;
+            chart.update();
+
+            idanimation++;
+            animate(idanimation);
+
+
+            return false;
+        });
+
+        let slider = document.getElementById("vitesse");
+        if (slider) {
+            slider.addEventListener('input', function () {
+                // @ts-ignore
+                timeout = 500 - parseInt(slider.value);
+            });
+        } else {
+            console.error('slider introuvable');
+        }
+
+};
+
+init();
+</script>
 
 <p>On peut se rendre compte que plus <span class="arithmatex">\(x\)</span> grandit, plus certaines fonctions sont "négligeables" devant d'autres. Ca explique par exemple pourquoi on ne conservera que l'information <span class="arithmatex">\(n^2\)</span> dans l'expression <span class="arithmatex">\(an^2+bn+c\)</span> quand on s'occupe de valeurs de <span class="arithmatex">\(n\)</span> tendant vers <span class="arithmatex">\(+\infin\)</span>. Car le reste est négligeable par rapport à l'expression <span class="arithmatex">\(an^2\)</span>. Il y a même une notation pour ça. <span class="arithmatex">\(o(n^2)\)</span> (petit o de <span class="arithmatex">\(n^2\)</span>) représente les fonctions <strong>négligeables</strong> devant <span class="arithmatex">\(n^2\)</span>. Toutes ces fonctions s'éloignent infiniment l'une de l'autre à mesure que x tend vers l'infini.</p>
 <div class="admonition question">

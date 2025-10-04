@@ -71,22 +71,24 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
 ### OU EXCLUSIF
 **Répond à la question ”Est-ce que les deux sont différents?”**
 
-Imaginons deux interrupteurs pour une lampe : un interrupteur à l’entrée et un autre près du lit. La lampe s’allume seulement si les interrupteurs ne sont pas dans la même position.
+Deux interrupteur dans une pièce actionnent la même lampe.
+- S'ils sont dans la même position, alors la lampe sera éteinte.
+- S'ils sont dans une position différente, alors la lampe sera allumée.
 
-- Si les deux interrupteurs sont en position OFF ou les deux en position ON, la lampe reste éteinte.
-- Si un interrupteur est ON et l’autre est OFF, alors la lampe s’allume.
+Le mécanisme qui est derrière ce comportement est un ou exclusif.
 
-
-
-Il existe d'autres opérateurs, mais qui peuvent être construits à partir des précédents. D'ailleurs, il ne suffit que de 2 opérateurs pour construire tous les autres.
 
 ## Tables de vérité
 
 Dans une table de vérité, on énumère toutes les combinaisons possibles de vrais et de faux avec les variables en entrée (ici a et b), puis on répond à la question posée.
 
+Vous pouvez vérifier la table de vérité de vos expressions sur [Ce site](https://www.dcode.fr/table-verite-logique)
+
 ### Table NON
 
 "NON a" renvoie le "contraire" de a.
+
+Ici, il n'y a que a qui peut simplement prendre les valeurs 0 et 1.
 
 | a   | $\bar{a}$ |
 | --- | --------- |
@@ -97,6 +99,8 @@ Dans une table de vérité, on énumère toutes les combinaisons possibles de vr
 La table de vérité donne toutes les possibilités de résultats.
 
 $a.b$ ne répond Vrai que lorsque les deux sont vrais.
+
+Ici, a et b peuvent être dans 4 configurations qu'on sait énumérer.
 
 | $a$ | $b$ | $a.b$ |
 | --- | --- | ----- |
@@ -130,9 +134,11 @@ $a\oplus b$ n'est vrai que lorsque les deux sont différents.
 
 ### Tables de vérité d'expressions
 
-Lorsqu'on demande d'établir la table de vérité d'une expression booléenne, on commence par écrire toutes les combinaisons possibles de 0 et de 1, puis on décompose l'expression pour trouver progressivement le résultat.
 
- Afin de montrer que deux expressions logiques sont équivalentes, on peut dresser la table de l'une et de l'autre, et conclure selon qu'elles ont la même table de vérité ou non.
+!!! danger "Méthode"
+    Lorsqu'on demande d'établir la table de vérité d'une expression booléenne, on commence par **écrire toutes les combinaisons possibles de 0 et de 1**, puis on décompose l'expression pour trouver progressivement le résultat.
+
+    Afin de montrer que **deux expressions logiques sont équivalentes**, on peut dresser la table de l'une et de l'autre, et conclure selon qu'elles ont la **même table de vérité** ou non.
 
 !!! question "Lois de de Morgan"
     1- Dresser la table de vérité de $\overline{a+b}$ ainsi que de  $\bar{a}.\bar{b}$
@@ -149,6 +155,10 @@ Lorsqu'on demande d'établir la table de vérité d'une expression booléenne, o
     3- Montrer que  $\overline{a.b} = \bar{a}+\bar{b}$
 
     Ces égalités à connaître sont connues sous le nom de lois de de Morgan
+
+!!! question "ou exclusif"
+
+    Montrer que $\bar{x}.y + x.\bar{y} = x \oplus y$
 
 
 !!! question "Propriétés de base"
@@ -214,8 +224,10 @@ Le circuit électtronique précédent se résume entièrement à la porte logiqu
     - Dressez la table de vérité de la porte NAND 
 
     Voici son comment elle est représentée sur un circuit: 
-    
+
     ![alt text](image-5.png)
+
+    Sachant que $\bar{\bar{x}} = x $, à l'aide de la loi de Morgan, exprimez $a+b$ unqiuement grâces aux opérations ET et NON.
 
 
 !!! question "Turing Complete"
@@ -232,6 +244,8 @@ Le circuit électtronique précédent se résume entièrement à la porte logiqu
     - Créer une porte XOR
 
     Pourquoi appelle-t-on une porte NAND une porte universelle?
+
+    Sauvegardez votre circuit, et réalisez le même exercice, cette fois en partant de la porte NOR. Il faudra peut-être réaliser les portes dans un ordre différent.
 
 ```{.logic showonly="in out nand not and or nor xor label" height=500 mode="design"}
 
