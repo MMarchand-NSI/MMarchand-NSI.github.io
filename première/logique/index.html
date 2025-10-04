@@ -3313,16 +3313,16 @@ Si la porte est ouverte, le voyant lumineux s’allume.
 En logique, cela revient à dire : si la porte est NON fermée, alors le voyant est allumé.</p>
 <h3 id="ou-exclusif">OU EXCLUSIF</h3>
 <p><strong>Répond à la question ”Est-ce que les deux sont différents?”</strong></p>
-<p>Imaginons deux interrupteurs pour une lampe : un interrupteur à l’entrée et un autre près du lit. La lampe s’allume seulement si les interrupteurs ne sont pas dans la même position.</p>
-<ul>
-<li>Si les deux interrupteurs sont en position OFF ou les deux en position ON, la lampe reste éteinte.</li>
-<li>Si un interrupteur est ON et l’autre est OFF, alors la lampe s’allume.</li>
-</ul>
-<p>Il existe d'autres opérateurs, mais qui peuvent être construits à partir des précédents. D'ailleurs, il ne suffit que de 2 opérateurs pour construire tous les autres.</p>
+<p>Deux interrupteur dans une pièce actionnent la même lampe.
+- S'ils sont dans la même position, alors la lampe sera éteinte.
+- S'ils sont dans une position différente, alors la lampe sera allumée.</p>
+<p>Le mécanisme qui est derrière ce comportement est un ou exclusif.</p>
 <h2 id="tables-de-verite">Tables de vérité</h2>
 <p>Dans une table de vérité, on énumère toutes les combinaisons possibles de vrais et de faux avec les variables en entrée (ici a et b), puis on répond à la question posée.</p>
+<p>Vous pouvez vérifier la table de vérité de vos expressions sur <a href="https://www.dcode.fr/table-verite-logique">Ce site</a></p>
 <h3 id="table-non">Table NON</h3>
 <p>"NON a" renvoie le "contraire" de a.</p>
+<p>Ici, il n'y a que a qui peut simplement prendre les valeurs 0 et 1.</p>
 <table>
 <thead>
 <tr>
@@ -3344,6 +3344,7 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
 <h3 id="table-et">Table ET</h3>
 <p>La table de vérité donne toutes les possibilités de résultats.</p>
 <p><span class="arithmatex">\(a.b\)</span> ne répond Vrai que lorsque les deux sont vrais.</p>
+<p>Ici, a et b peuvent être dans 4 configurations qu'on sait énumérer.</p>
 <table>
 <thead>
 <tr>
@@ -3441,8 +3442,11 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
 </tbody>
 </table>
 <h3 id="tables-de-verite-dexpressions">Tables de vérité d'expressions</h3>
-<p>Lorsqu'on demande d'établir la table de vérité d'une expression booléenne, on commence par écrire toutes les combinaisons possibles de 0 et de 1, puis on décompose l'expression pour trouver progressivement le résultat.</p>
-<p>Afin de montrer que deux expressions logiques sont équivalentes, on peut dresser la table de l'une et de l'autre, et conclure selon qu'elles ont la même table de vérité ou non.</p>
+<div class="admonition danger">
+<p class="admonition-title">Méthode</p>
+<p>Lorsqu'on demande d'établir la table de vérité d'une expression booléenne, on commence par <strong>écrire toutes les combinaisons possibles de 0 et de 1</strong>, puis on décompose l'expression pour trouver progressivement le résultat.</p>
+<p>Afin de montrer que <strong>deux expressions logiques sont équivalentes</strong>, on peut dresser la table de l'une et de l'autre, et conclure selon qu'elles ont la <strong>même table de vérité</strong> ou non.</p>
+</div>
 <div class="admonition question">
 <p class="admonition-title">Lois de de Morgan</p>
 <p>1- Dresser la table de vérité de <span class="arithmatex">\(\overline{a+b}\)</span> ainsi que de  <span class="arithmatex">\(\bar{a}.\bar{b}\)</span></p>
@@ -3502,6 +3506,10 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
 <p>Ces égalités à connaître sont connues sous le nom de lois de de Morgan</p>
 </div>
 <div class="admonition question">
+<p class="admonition-title">ou exclusif</p>
+<p>Montrer que <span class="arithmatex">\(\bar{x}.y + x.\bar{y} = x \oplus y\)</span></p>
+</div>
+<div class="admonition question">
 <p class="admonition-title">Propriétés de base</p>
 <p>Que valent les expressions suivantes?</p>
 <ol>
@@ -3552,6 +3560,7 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
 </ul>
 <p>Voici son comment elle est représentée sur un circuit: </p>
 <p><img alt="alt text" src="image-5.png" /></p>
+<p>Sachant que $\bar{\bar{x}} = x $, à l'aide de la loi de Morgan, exprimez <span class="arithmatex">\(a+b\)</span> unqiuement grâces aux opérations ET et NON.</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Turing Complete</p>
@@ -3566,6 +3575,7 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
 <li>Créer une porte XOR</li>
 </ul>
 <p>Pourquoi appelle-t-on une porte NAND une porte universelle?</p>
+<p>Sauvegardez votre circuit, et réalisez le même exercice, cette fois en partant de la porte NOR. Il faudra peut-être réaliser les portes dans un ordre différent.</p>
 </div>
 <p><logic-editor exportformat="superfence"  showonly="in out nand not and or nor xor label" style="height: 500px;" mode="design">
     <script type="application/json">
