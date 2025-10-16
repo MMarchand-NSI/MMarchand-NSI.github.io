@@ -1,100 +1,103 @@
+# Environnement de travail
+
 ![Logo](image-6.png){ align=right }
 
-# Setup VSCode
 
-Un IDE (environnement de développement intégré) est un logiciel qui aide les programmeurs à développer.
+## Intro
 
 VSCode est de loin l'IDE le plus utilisé (73,6% des développeurs et 77% des étudiants du monde entier en 2024 d'après la célèbre enquête annuelle de stackoverflow)
 
-## Pré-requis
+## Installer vos utilitaires sur clé USB
 
-Vous avez installé les outils 
+!!! danger "Actions simples à réaliser DANS L'ORDRE"
 
-- VSCode
-- UV
+    1. Branchez votre clé USB
+    2. Télécharger le fichier [`NSI-SCRIPTS.exe`](NSI-SCRIPTS.exe) .
+    3. Le mettre **à la racine** de votre clé USB
+    4. Double-cliquer dessus.
+    5. Dans la petite fenêtre qui s'affiche, appuyer sur extraire
 
-!!! hint "Configurer VSCode pour développer en python"
+    **Je vérifie que tout est OK:**
 
-    Dans VSCode, Cliquez sur l'icône des extensions ![alt text](image-1.png)
+    - Un répertoire `NSI-SCRIPTS` apparaît à la racine votre clé USB
+    - 2 fichiers `NSI-sauver.bat` et `NSI-importer.bat` sont aussi présents à la racine
 
-    Recherchez `python` dans la petite barre de recherche.
-    Cliquez sur le petit bouton bleu "install" à côté de l'extension python
+    Ces fichiers automatisent l'installation des composants nécessaires.
 
-    ![alt text](image-16.png)
+    **N'exécutez aucun de ces scripts sans y avoir été invités. Certains représentent des installations de composants lourds. Si vous êtes curieux, c'est bien, mais posez-moi la question**
 
-    Ca-y-est, VSCode sait maintenant travailler avec Python.
+    Vous pouvez supprimer `NSI-SCRIPTS.exe`
 
-    A l'heure où j'écris ces lignes, on voit que l'extension a été téléchargée 184 millions de fois dans le monde. Vous pouvez remarquer la popularité à la fois de VSCode et de python dans le monde.
+---
 
+## Installer La base
 
-!!! danger "Attention, sinon ça ne fonctionnera pas"
-    __Dans VSCode, on ouvre TOUJOURS un répertoire, JAMAIS un fichier.__
-
-    File > Open Folder
+!!! danger "VSCode et Python"
     
-    Quand vous rouvrez VSCode, vous retrouvez tout comme vous l'avez laissé la dernière fois que vous l'avez ouvert.
+    - **Dans le répertoire NSI-SCRIPTS, double-cliquez sur `1.INSTALL-VSCODE-UV.bat`**
 
+    Une fenêtre s'ouvre et installe les composants requis.
+    A l'issue de l'installation, VSCode s'ouvre dans votre répertoire de développement, et python est prêt à fonctionner.
 
-    Lorsque vous ouvrez un répertoire pour la première fois, VSCode vous demande s'il peut avoir confiance en ce répertoire. Cochez la case et cliquez sur le bouton bleu, "Yes i trust". Il ne vous le redemandera plus pour ce répertoire ni pour le répertoire parent.
+    Lorsque vous ouvrez un répertoire pour la première fois, VSCode vous demande s'il peut avoir confiance en ce répertoire. Cochez la case et cliquez sur le bouton bleu, "Yes i trust".
 
     ![alt text](image-2.png)
 
+    **Je vérifie que tout est OK:**
 
-!!! danger "Configuration initiale de UV"
-    **Ceci n'est à réaliser qu'une seule fois, il ne faut plus le faire chez vous.**
+    1. Dans VSCode, j'ouvre le fichier main.py
+    2. J'appuie sur la flèche en haut à droite pour exécuter le fichier
+    3. Un terminal s'ouvre, et on voit le résultat du print.
+    4. En bas à droite, on voit la version de python utilisée (3.13)
 
-    1. Ouvrez dans VSCode votre répertoire de programmation.
-    2. **Ouvrez un terminal** Menu Terminal > new Terminal
+    ![alt text](image-19.png)
 
-    Exécutez ces 3 commandes dans le terminal:
+---
 
-    ```bash
-    uv python pin 3.13
-    uv init --bare
-    uv sync
-    ```
-    
+## Installer MSYS2
 
-!!! hint "Vérifier que tout est ok"
-    **Lorsque vous avez un fichier python ouvert**, l'image suivante montre une bonne configuration:
+!!! danger "Installation et mise à jour de MSYS2"
+    1. Dans le répertoire `NSI-SCRIPTS`, double-cliquer sur `2.INSTALL-MSYS2.bat`
+    2. Lorsque c'est terminé, Double-cliquez sur `3.MAJ-MSYS2.bat`
+    3. Répétez la dernière opération jusqu'à ce que le script dise qu'il n'y a plus rien à faire.
 
-    1. Vous devez avoir votre venv sélectionné, en bas à droite de VSCode, comme indiqué sur l'image ci-dessous. Si votre venv n'est pas sélectionné, cliquez sur la barre d'état (1 sur l'image) et sélectionnez votre venv dans la liste déroulante.
+    **Explication:** `MAJ-MSYS2.bat` sert à mettre MSYS2 à jour. Ca se fait parfois en plusieurs temps. Il faut donc le faire jusqu'à ce que MSYS2 dise qu'il n'y a plus rien à faire. 
 
-    2. Quand vous ouvrez un terminal, le nom du répertoire doit apparaître comme sur l'image ci-dessous. (2)
+    Parfois ça plante à cause du réseau, ça n'est pas grave, il faut juste relancer.
 
+---
 
-    ![alt text](image-18.png)
+## Utilisation au quotidien et règles d'or
 
+Tout repose sur la synchronisation d'un répertoire `PROG-NSI` dans votre répertoire Documents et sur votre clé USB, que ce soit au lycée ou chez vous.
 
+**Il ne faut pas changer ni le nom ni la localisation de ces répertoires.**
 
-!!! danger "Troubleshooting"
+VSCode s'ouvrira automatiquement dans votre répertoire.
 
-    **En cas de problème**
-
-    exécutez les 3 commandes l'une après l'autre:
-
-    ```bash
-    uv python install 3.13
-    uv venv --clear
-    uv sync --reinstall
-    ```
-
-    - La première s'assure que python 3.13 est installé et l'installe si nécessaire.
-    - La deuxième réinitialise le venv
-    - la troisième se charge de tout mettre à jour avec les paquets que vous auriez déjà installés
+- Lorsque vous voulez sauver votre travail sur votre clé (maison ou lycée):
+    - Double-cliquez sur `NSI-sauver.bat`
+- Lorsque vous voulez importer le contenu de votre clé sur votre ordi (maison ou lycée)
+    - Double cliquez sur `NSI-importer.bat`
 
 
-### Ajouter des modules python
+---
 
-Lorsque vous voulez installer un module python, il faut ouvrir un terminal dans VSCode, en prenant garde à ce que le venv soit bien sélectionné en bas à droite.
+## **TROUBLESHOOTING**
+
+En cas de problème, ou pour repartir propre:
+
+!!! danger "Méthode efficace"
+
+    Ici, on considère que votre PC dispose de vos dernières modifs.
+
+    1. Dans votre répertoire Documents, renommez votre répertoire PROG-NSI en PROG-NSI-OLD
+    2. Recommencez les étapes d'installation `1.INSTALL-VSCODE.bat` et `3.MAJ-MSYS2.bat`
+    4. Copiez vos fichiers de code seulement de `PROG-NSI-OLD` à `PROG-NSI`
+    5. Double cliquez sur `NSI-sauver.bat` afin d'initialiser votre clé USB
+
+    il faudra refaire les `uv add`.
+    Par exemple `uv add pyxel`
 
 
-Imaginons que vous vouliez installer le module pyxel, vous pouvez alors y exécuter cette commande:
 
-`uv add pyxel`
-
-Ca y est, vous pouvez maintenant écrire `import pyxel` dans vos programmes.
-
-
-!!! tip "Au quotidien"
-    Une fois que tout ça est fait, au quotidien, il faut juste s'assurer qu'on est sur le bon environnement en bas à droite de VSCode, écrire ses programmes et les exécuter avec le bouton play en haut à droite de l'écran.
