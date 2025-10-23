@@ -1,0 +1,4735 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mmarchand-nsi.github.io/terminale/langages/fonctionnels/3.elm_pipe/">
+      
+      
+        <link rel="prev" href="../2.elm-maybe/">
+      
+      
+        <link rel="next" href="../4.elm-avance/">
+      
+      
+      <link rel="icon" href="../../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>3. L'Opérateur Pipe |> - Science Informatique - Site en construction</title>
+<script src="/javascripts/bundle.js"></script>
+
+      
+    
+    
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#3-loperateur-pipe" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../../../.." title="Science Informatique - Site en construction" class="md-header__button md-logo" aria-label="Science Informatique - Site en construction" data-md-component="logo">
+      
+  <img src="../../../../assets/logo-tr.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Science Informatique - Site en construction
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              3. L'Opérateur Pipe |&gt;
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../../../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Bienvenue
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../les-outils/1.setup-vscode/" class="md-tabs__link">
+          
+  
+  
+  Les outils
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../premi%C3%A8re/Algorithmique/1.algo/" class="md-tabs__link">
+          
+  
+  
+  Première
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../../../projets/intro-pyxel-nopoo/" class="md-tabs__link">
+          
+  
+  
+  Projets
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../../../architecture_reseau/adressage/" class="md-tabs__link">
+          
+  
+  
+  Terminale
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../../../.." title="Science Informatique - Site en construction" class="md-nav__button md-logo" aria-label="Science Informatique - Site en construction" data-md-component="logo">
+      
+  <img src="../../../../assets/logo-tr.png" alt="logo">
+
+    </a>
+    Science Informatique - Site en construction
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bienvenue
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Les outils
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Les outils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../les-outils/1.setup-vscode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Environnement de travail
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../les-outils/2.elm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Elm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../les-outils/3.vscode_profiles_daemons/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    VSCode : Profils, Daemons et Gestion de la RAM
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Première
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Première
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Algorithmique
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithmique
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/Algorithmique/1.algo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Algorithmique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/Algorithmique/2.tri_selection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tri par Sélection
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/Algorithmique/3.tri_insertion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tri par insertion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/Algorithmique/4.dichotomie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recherche dichotomique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/Algorithmique/5.glouton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Algorithmes gloutons
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/Algorithmique/6.intro_recurrence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction à la récurrence
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/Algorithmique/7.distance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dimensions supérieures et distances
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/Algorithmique/8.knn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Algorithme des k plus proches voisins (KNN)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    IHM
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            IHM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/IHM/flet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interface Homme machine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Numération
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Numération
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/Num%C3%A9ration/1-entiers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Représentation des entiers naturels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/Num%C3%A9ration/2-vers10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Conversions vers la base 10
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/Num%C3%A9ration/3-depuis10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Conversions depuis la base 10
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/Num%C3%A9ration/4-relatifs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Entiers relatifs en binaire (Entiers signés)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/architecture/droits-linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gestion des droits sous linux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/architecture/os/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Systèmes d'exploitation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Logique
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Logique
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/logique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Logique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Prog
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Prog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/prog/bouclefor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bouclefor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/prog/exercices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercices Algorithmique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/prog/listes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le type list (et tuple)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/prog/scope/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Portée des variables (scope)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/prog/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chaînes de caractères (str)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_6" id="__nav_3_6_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Sequences
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            Sequences
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/prog/sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les séquences
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_7" id="__nav_3_6_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Variables
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_7">
+            <span class="md-nav__icon md-icon"></span>
+            Variables
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/prog/variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les variables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/prog/variables/caracteres/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les chaînes de caractère
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/prog/variables/entiers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le type entier
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/prog/variables/recul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prendre un peu de recul
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reseau
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            Reseau
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../premi%C3%A8re/reseau/bit-alterne/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le protocole du bit alterné
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Projets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Projets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../projets/intro-pyxel-nopoo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction à pyxel - Sans POO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../projets/intro-pyxel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction à pyxel - POO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../projets/jeudelavie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The Game Of Life
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../projets/mastermind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MasterMind
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../projets/musique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Créer un clavier musical
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../projets/othello/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Othello
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../projets/pendu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le pendu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../projets/snake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Snake
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../../projets/space_invader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Projet space invader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Terminale
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Terminale
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Architecture reseau
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture reseau
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture_reseau/adressage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Réseaux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture_reseau/bitwise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Opérateurs Bitwise en Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture_reseau/chiffrement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction au chiffrement
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture_reseau/chiffrement2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cryptographie Asymétriques
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture_reseau/reciproque/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mini cours – Fonction réciproque
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../architecture_reseau/routage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le Routage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bdd
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Bdd
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bdd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Base de données et SGBD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bdd/jointure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jointures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bdd/manipulation-integrite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulation et intégrité
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bdd/projet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gestion d'un lycée - Fullstack
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bdd/sql-murder-mystery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQL murder mystery
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../bdd/tp-sgbd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SGBD - Postgresql
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Langages
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Langages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Paradigmes de programmation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../calculabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Calculabilité et Décidabilité
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../complements_python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compléments sur le tri, min et max
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../recursivite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Récursivité
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3_5" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_5_3_5" id="__nav_5_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fonctionnels
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_3_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Fonctionnels
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.elm-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Principes de base
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.elm-maybe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Le Type Maybe
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    3. L'Opérateur Pipe |&gt;
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. L'Opérateur Pipe |&gt;
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#le-probleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Le Problème
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Le Problème">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-difficile-a-lire" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code difficile à lire
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-solution-loperateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      💡 La Solution : L'Opérateur |&gt;
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💡 La Solution : L&#39;Opérateur |&gt;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntaxe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntaxe
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple Simple
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lire-de-gauche-a-droite" class="md-nav__link">
+    <span class="md-ellipsis">
+      📖 Lire de Gauche à Droite
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📖 Lire de Gauche à Droite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chainer-des-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chaîner des Opérations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualisation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comment-ca-marche" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Comment Ça Marche ?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Comment Ça Marche ?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition-de" class="md-nav__link">
+    <span class="md-ellipsis">
+      Définition de |&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transformation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemples-pratiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Exemples Pratiques
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 Exemples Pratiques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemple-1-traitement-de-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 1 : Traitement de Liste
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-2-avec-des-fonctions-a-plusieurs-parametres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 2 : Avec des Fonctions à Plusieurs Paramètres
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-3-pipeline-complexe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 3 : Pipeline Complexe
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-4-avec-des-lambdas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 4 : Avec des Lambdas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#style-et-lisibilite" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎨 Style et Lisibilité
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎨 Style et Lisibilité">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quand-utiliser-le-pipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quand Utiliser le Pipe ?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quand Utiliser le Pipe ?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oui-plusieurs-transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Oui : Plusieurs Transformations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oui-operations-sequentielles" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Oui : Opérations Séquentielles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-une-seule-fonction" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Non : Une Seule Fonction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-fonction-avec-plusieurs-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Non : Fonction Avec Plusieurs Arguments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indentation-et-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Indentation et Format
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Indentation et Format">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#style-recommande" class="md-nav__link">
+    <span class="md-ellipsis">
+      Style Recommandé
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#avec-commentaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avec Commentaires
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#longues-lignes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Longues Lignes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cas-pratiques-dans-tes-exercices" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚡ Cas Pratiques dans Tes Exercices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚡ Cas Pratiques dans Tes Exercices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemple-1-renverse-avec-ajouterfin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 1 : renverse avec ajouterFin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-2-tester-des-fonctions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 2 : Tester des Fonctions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-3-range-avec-take" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 3 : range avec take
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-4-combiner-avec-concat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 4 : Combiner avec concat
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions-frequentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤔 Questions Fréquentes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🤔 Questions Fréquentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-puis-je-melanger-parentheses-et-pipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q1 : Puis-je mélanger parenthèses et pipes ?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2-comment-avec-des-fonctions-a-2-parametres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q2 : Comment avec des fonctions à 2+ paramètres ?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q3-peut-on-utiliser-avec-nos-propres-fonctions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q3 : Peut-on utiliser |&gt; avec nos propres fonctions ?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q4-quelle-est-la-limite" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q4 : Quelle est la limite ?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercices-de-comprehension" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎓 Exercices de Compréhension
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎓 Exercices de Compréhension">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercice-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercice 1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercice 2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercice-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercice 3
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparaison-avec-dautres-langages" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Comparaison avec d'Autres Langages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Comparaison avec d&#39;Autres Langages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#javascript-methodes-chainees" class="md-nav__link">
+    <span class="md-ellipsis">
+      JavaScript (méthodes chaînées)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elm-avec-pipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elm (avec pipe)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unix-pipes-en-ligne-de-commande" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unix (pipes en ligne de commande)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elm
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resume-pourquoi-utiliser" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Résumé : Pourquoi Utiliser |&gt; ?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Résumé : Pourquoi Utiliser |&gt; ?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#avantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avantages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le Pattern
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conseil-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Conseil Final
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pour-aller-plus-loin" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Pour Aller Plus Loin
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.elm-avance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Avancé - Fonctions d'Ordre Supérieur
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../5.catamorphismes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Bien avancé - Catamorphismes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3_6" id="__nav_5_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Oriente objet
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Oriente objet
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../oriente_objet/heritage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Heritage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../oriente_objet/poo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Paradigme orienté objets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Processus
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Processus
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../processus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Processus
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Structures de donnees
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Structures de donnees
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../structures-de-donnees/arbrebinaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arbres enracinés
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../structures-de-donnees/listes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Listes - Paradigme fonctionnel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../structures-de-donnees/listeschainees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Listes chaînées - Approche Orientée Objet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5_4" id="__nav_5_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Graphes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Graphes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../structures-de-donnees/graphes/dijkstra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Algorithme de Dijkstra
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../structures-de-donnees/graphes/graphes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graphes - Généralités et Implémentation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../structures-de-donnees/graphes/parcours/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parcours de graphes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5_5" id="__nav_5_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Piles files
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Piles files
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../structures-de-donnees/piles-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les Piles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../structures-de-donnees/piles-files/file/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Files
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#le-probleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Le Problème
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Le Problème">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#code-difficile-a-lire" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code difficile à lire
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#la-solution-loperateur" class="md-nav__link">
+    <span class="md-ellipsis">
+      💡 La Solution : L'Opérateur |&gt;
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="💡 La Solution : L&#39;Opérateur |&gt;">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#syntaxe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Syntaxe
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple Simple
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lire-de-gauche-a-droite" class="md-nav__link">
+    <span class="md-ellipsis">
+      📖 Lire de Gauche à Droite
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📖 Lire de Gauche à Droite">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chainer-des-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chaîner des Opérations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualisation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualisation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comment-ca-marche" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔧 Comment Ça Marche ?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔧 Comment Ça Marche ?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition-de" class="md-nav__link">
+    <span class="md-ellipsis">
+      Définition de |&gt;
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#transformation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Transformation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exemples-pratiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      📝 Exemples Pratiques
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="📝 Exemples Pratiques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemple-1-traitement-de-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 1 : Traitement de Liste
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-2-avec-des-fonctions-a-plusieurs-parametres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 2 : Avec des Fonctions à Plusieurs Paramètres
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-3-pipeline-complexe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 3 : Pipeline Complexe
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-4-avec-des-lambdas" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 4 : Avec des Lambdas
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#style-et-lisibilite" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎨 Style et Lisibilité
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎨 Style et Lisibilité">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#quand-utiliser-le-pipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Quand Utiliser le Pipe ?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Quand Utiliser le Pipe ?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#oui-plusieurs-transformations" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Oui : Plusieurs Transformations
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#oui-operations-sequentielles" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Oui : Opérations Séquentielles
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-une-seule-fonction" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Non : Une Seule Fonction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#non-fonction-avec-plusieurs-arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ Non : Fonction Avec Plusieurs Arguments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#indentation-et-format" class="md-nav__link">
+    <span class="md-ellipsis">
+      🔄 Indentation et Format
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🔄 Indentation et Format">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#style-recommande" class="md-nav__link">
+    <span class="md-ellipsis">
+      Style Recommandé
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#avec-commentaires" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avec Commentaires
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#longues-lignes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Longues Lignes
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#cas-pratiques-dans-tes-exercices" class="md-nav__link">
+    <span class="md-ellipsis">
+      ⚡ Cas Pratiques dans Tes Exercices
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="⚡ Cas Pratiques dans Tes Exercices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemple-1-renverse-avec-ajouterfin" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 1 : renverse avec ajouterFin
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-2-tester-des-fonctions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 2 : Tester des Fonctions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-3-range-avec-take" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 3 : range avec take
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-4-combiner-avec-concat" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple 4 : Combiner avec concat
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#questions-frequentes" class="md-nav__link">
+    <span class="md-ellipsis">
+      🤔 Questions Fréquentes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🤔 Questions Fréquentes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#q1-puis-je-melanger-parentheses-et-pipes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q1 : Puis-je mélanger parenthèses et pipes ?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q2-comment-avec-des-fonctions-a-2-parametres" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q2 : Comment avec des fonctions à 2+ paramètres ?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q3-peut-on-utiliser-avec-nos-propres-fonctions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q3 : Peut-on utiliser |&gt; avec nos propres fonctions ?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#q4-quelle-est-la-limite" class="md-nav__link">
+    <span class="md-ellipsis">
+      Q4 : Quelle est la limite ?
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exercices-de-comprehension" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎓 Exercices de Compréhension
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎓 Exercices de Compréhension">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exercice-1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercice 1
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercice-2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercice 2
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exercice-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exercice 3
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#comparaison-avec-dautres-langages" class="md-nav__link">
+    <span class="md-ellipsis">
+      🚀 Comparaison avec d'Autres Langages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🚀 Comparaison avec d&#39;Autres Langages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#javascript-methodes-chainees" class="md-nav__link">
+    <span class="md-ellipsis">
+      JavaScript (méthodes chaînées)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elm-avec-pipe" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elm (avec pipe)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#unix-pipes-en-ligne-de-commande" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unix (pipes en ligne de commande)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#elm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Elm
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resume-pourquoi-utiliser" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ Résumé : Pourquoi Utiliser |&gt; ?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="✅ Résumé : Pourquoi Utiliser |&gt; ?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#avantages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Avantages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le Pattern
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#conseil-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Conseil Final
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pour-aller-plus-loin" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Pour Aller Plus Loin
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
+<script src="https://mmarchand-nsi.github.io//js/sqlite_ide.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/sql/sql.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.css">
+<link rel="stylesheet" href="https://mmarchand-nsi.github.io//css/sqlite_ide.css">
+<script>sqljs_base_path="https://mmarchand-nsi.github.io/"</script>
+
+<h1 id="3-loperateur-pipe">3. L'Opérateur Pipe <code>|&gt;</code></h1>
+<h2 id="le-probleme">🎯 Le Problème</h2>
+<h3 id="code-difficile-a-lire">Code difficile à lire</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Calculer la taille de la liste renversée</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]))</span>
+</code></pre></div>
+<p><strong>Problème :</strong> On doit lire <strong>de l'intérieur vers l'extérieur</strong> !</p>
+<div class="highlight"><pre><span></span><code>1. pairs [1, 2, 3, 4, 5]      --&gt; [2, 4]
+2. renverse [2, 4]            --&gt; [4, 2]
+3. taille [4, 2]              --&gt; 2
+</code></pre></div>
+<p><strong>Mais le code s'écrit dans l'ordre inverse de la lecture !</strong> 😵</p>
+<hr />
+<h2 id="la-solution-loperateur">💡 La Solution : L'Opérateur <code>|&gt;</code></h2>
+<h3 id="syntaxe">Syntaxe</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">valeur</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction</span>
+</code></pre></div>
+<p><strong>Se lit :</strong> "Prends <code>valeur</code> et applique-lui <code>fonction</code>"</p>
+<h3 id="exemple-simple">Exemple Simple</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Sans pipe</span>
+<span class="nv">taille</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="c1">--&gt; 3</span>
+
+<span class="c1">-- Avec pipe</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+<span class="c1">--&gt; 3</span>
+</code></pre></div>
+<p><strong>Les deux sont équivalents !</strong></p>
+<hr />
+<h2 id="lire-de-gauche-a-droite">📖 Lire de Gauche à Droite</h2>
+<h3 id="chainer-des-operations">Chaîner des Opérations</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- ❌ Sans pipe : lecture compliquée</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]))</span>
+
+<span class="c1">-- ✅ Avec pipe : lecture naturelle</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span>
+<span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">        </span><span class="c1">-- [2, 4]</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">renverse</span><span class="w">     </span><span class="c1">-- [4, 2]</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span><span class="w">       </span><span class="c1">-- 2</span>
+</code></pre></div>
+<p><strong>Ordre de lecture = ordre d'exécution !</strong> 🎯</p>
+<h3 id="visualisation">Visualisation</h3>
+<div class="highlight"><pre><span></span><code>[1, 2, 3, 4, 5]
+    ↓ pairs
+[2, 4]
+    ↓ renverse
+[4, 2]
+    ↓ taille
+2
+</code></pre></div>
+<hr />
+<h2 id="comment-ca-marche">🔧 Comment Ça Marche ?</h2>
+<h3 id="definition-de">Définition de <code>|&gt;</code></h3>
+<div class="highlight"><pre><span></span><code><span class="nf">(|&gt;)</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
+<span class="nf">(|&gt;)</span><span class="w"> </span><span class="nv">valeur</span><span class="w"> </span><span class="nv">fonction</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">fonction</span><span class="w"> </span><span class="nv">valeur</span>
+</code></pre></div>
+<p><strong>Traduction :</strong> 
+- Prends une valeur de type <code>a</code>
+- Prends une fonction qui accepte <code>a</code> et retourne <code>b</code>
+- Applique la fonction à la valeur
+- Retourne le résultat de type <code>b</code></p>
+<h3 id="transformation">Transformation</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Ceci</span>
+<span class="nv">x</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">f</span>
+
+<span class="c1">-- Est transformé en cela</span>
+<span class="nv">f</span><span class="w"> </span><span class="nv">x</span>
+
+<span class="c1">-- Donc</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+<span class="c1">-- Devient</span>
+<span class="nv">taille</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div>
+<hr />
+<h2 id="exemples-pratiques">📝 Exemples Pratiques</h2>
+<h3 id="exemple-1-traitement-de-liste">Exemple 1 : Traitement de Liste</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Calculer la somme des nombres pairs</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">        </span><span class="c1">-- [2, 4, 6]</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">        </span><span class="c1">-- 12</span>
+
+<span class="c1">-- Équivalent sans pipe</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">somme</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">])</span>
+</code></pre></div>
+<h3 id="exemple-2-avec-des-fonctions-a-plusieurs-parametres">Exemple 2 : Avec des Fonctions à Plusieurs Paramètres</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- take : Int -&gt; Liste a -&gt; Liste a</span>
+<span class="c1">-- On peut l&#39;utiliser avec |&gt; !</span>
+
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w">       </span><span class="c1">-- [1, 2, 3]</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">        </span><span class="c1">-- 6</span>
+
+<span class="c1">-- Équivalent</span>
+<span class="nv">somme</span><span class="w"> </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span>
+</code></pre></div>
+<p><strong>Astuce :</strong> La valeur avant <code>|&gt;</code> devient le <strong>dernier paramètre</strong> de la fonction.</p>
+<h3 id="exemple-3-pipeline-complexe">Exemple 3 : Pipeline Complexe</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">traiterDonnees</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<span class="nv">traiterDonnees</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<span class="w">    </span><span class="nv">lst</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">           </span><span class="c1">-- Garde les pairs</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w">          </span><span class="c1">-- Prends les 3 premiers</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">dupliquer</span><span class="w">       </span><span class="c1">-- Duplique chaque élément</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">           </span><span class="c1">-- Additionne tout</span>
+
+<span class="nv">traiterDonnees</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">]</span>
+<span class="c1">--&gt; (2 + 2 + 4 + 4 + 6 + 6) = 24</span>
+</code></pre></div>
+<h3 id="exemple-4-avec-des-lambdas">Exemple 4 : Avec des Lambdas</h3>
+<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">lst</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nv">lst</span><span class="p">)</span><span class="w">    </span><span class="c1">-- Lambda qui prend 2 éléments</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">                    </span><span class="c1">-- 3</span>
+
+<span class="c1">-- Ou plus simple avec application partielle</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">2</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
+</code></pre></div>
+<hr />
+<h2 id="style-et-lisibilite">🎨 Style et Lisibilité</h2>
+<h3 id="quand-utiliser-le-pipe">Quand Utiliser le Pipe ?</h3>
+<h4 id="oui-plusieurs-transformations">✅ Oui : Plusieurs Transformations</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Lisible avec pipe</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<span class="w">    </span><span class="nv">maListe</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction1</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction2</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction3</span>
+</code></pre></div>
+<h4 id="oui-operations-sequentielles">✅ Oui : Opérations Séquentielles</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Clair et naturel</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">filter</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
+</code></pre></div>
+<h4 id="non-une-seule-fonction">❌ Non : Une Seule Fonction</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">-- ❌ Pas nécessaire</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+
+<span class="c1">-- ✅ Plus simple</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+</code></pre></div>
+<h4 id="non-fonction-avec-plusieurs-arguments">❌ Non : Fonction Avec Plusieurs Arguments</h4>
+<div class="highlight"><pre><span></span><code><span class="c1">-- ❌ Peu clair</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span>
+<span class="w">    </span><span class="nv">liste1</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">concat</span><span class="w"> </span><span class="nv">liste2</span>
+
+<span class="c1">-- ✅ Plus clair</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">concat</span><span class="w"> </span><span class="nv">liste1</span><span class="w"> </span><span class="nv">liste2</span>
+</code></pre></div>
+<hr />
+<h2 id="indentation-et-format">🔄 Indentation et Format</h2>
+<h3 id="style-recommande">Style Recommandé</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Chaque étape sur une ligne</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">renverse</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+</code></pre></div>
+<h3 id="avec-commentaires">Avec Commentaires</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">traiterCommande</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<span class="nv">traiterCommande</span><span class="w"> </span><span class="nv">commande</span><span class="w"> </span><span class="nf">=</span>
+<span class="w">    </span><span class="nv">commande</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">           </span><span class="c1">-- Filtrer les quantités paires</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">10</span><span class="w">         </span><span class="c1">-- Maximum 10 articles</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">           </span><span class="c1">-- Total de la commande</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">   </span><span class="c1">-- Doubler pour promotion</span>
+</code></pre></div>
+<h3 id="longues-lignes">Longues Lignes</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Si les fonctions sont longues, indente plus</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<span class="w">    </span><span class="nv">maDonnee</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonctionAvecUnNomTresLong</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">autreFonctionCompliquee</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">encoreUneFonction</span>
+</code></pre></div>
+<hr />
+<h2 id="cas-pratiques-dans-tes-exercices">⚡ Cas Pratiques dans Tes Exercices</h2>
+<h3 id="exemple-1-renverse-avec-ajouterfin">Exemple 1 : <code>renverse</code> avec <code>ajouterFin</code></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Version compliquée à lire</span>
+<span class="nv">renverse</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
+<span class="nv">renverse</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Vide</span>
+<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">ajouterFin</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="nv">queue</span><span class="p">)</span>
+
+<span class="c1">-- Avec pipe (plus clair dans certains contextes)</span>
+<span class="c1">-- Note: ici le pipe n&#39;aide pas vraiment, </span>
+<span class="c1">-- c&#39;est juste pour montrer qu&#39;on peut l&#39;utiliser</span>
+</code></pre></div>
+<h3 id="exemple-2-tester-des-fonctions">Exemple 2 : Tester des Fonctions</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Au lieu de</span>
+<span class="nv">test1</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="nv">lstEx1</span><span class="p">))</span>
+
+<span class="c1">-- Avec pipe</span>
+<span class="nv">test1</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span>
+<span class="w">    </span><span class="nv">lstEx1</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">renverse</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+
+<span class="c1">-- Beaucoup plus clair ce qu&#39;on teste !</span>
+</code></pre></div>
+<h3 id="exemple-3-range-avec-take">Exemple 3 : <code>range</code> avec <code>take</code></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Créer [0, 1, 2, 3, 4]</span>
+<span class="nv">cinqPremiers</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span>
+<span class="nv">cinqPremiers</span><span class="w"> </span><span class="nf">=</span>
+<span class="w">    </span><span class="nv">range</span><span class="w"> </span><span class="mi">10</span><span class="w">         </span><span class="c1">-- [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">5</span><span class="w">    </span><span class="c1">-- [0, 1, 2, 3, 4]</span>
+</code></pre></div>
+<h3 id="exemple-4-combiner-avec-concat">Exemple 4 : Combiner avec <code>concat</code></h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Concaténer puis traiter</span>
+<span class="nv">combineEtTraite</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<span class="nv">combineEtTraite</span><span class="w"> </span><span class="nv">lst1</span><span class="w"> </span><span class="nv">lst2</span><span class="w"> </span><span class="nf">=</span>
+<span class="w">    </span><span class="nv">concat</span><span class="w"> </span><span class="nv">lst1</span><span class="w"> </span><span class="nv">lst2</span><span class="w">     </span><span class="c1">-- Combine les listes</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">         </span><span class="c1">-- Garde les pairs</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">         </span><span class="c1">-- Additionne</span>
+
+<span class="c1">-- Utilisation</span>
+<span class="nv">combineEtTraite</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span>
+<span class="c1">--&gt; (2 + 4 + 6) = 12</span>
+</code></pre></div>
+<hr />
+<h2 id="questions-frequentes">🤔 Questions Fréquentes</h2>
+<h3 id="q1-puis-je-melanger-parentheses-et-pipes">Q1 : Puis-je mélanger parenthèses et pipes ?</h3>
+<p><strong>Oui !</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<span class="w">    </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1">-- Ou</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="q2-comment-avec-des-fonctions-a-2-parametres">Q2 : Comment avec des fonctions à 2+ paramètres ?</h3>
+<p><strong>Application partielle !</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- concat : Liste a -&gt; Liste a -&gt; Liste a</span>
+<span class="c1">-- On donne le premier argument, pas le deuxième</span>
+
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">concat</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span><span class="w">    </span><span class="c1">-- concat [1,2,3] [4,5,6]</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span><span class="w">               </span><span class="c1">-- 6</span>
+
+<span class="c1">-- La valeur avant |&gt; devient le DERNIER argument</span>
+</code></pre></div>
+<h3 id="q3-peut-on-utiliser-avec-nos-propres-fonctions">Q3 : Peut-on utiliser <code>|&gt;</code> avec nos propres fonctions ?</h3>
+<p><strong>Oui, avec n'importe quelle fonction !</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nv">maFonction</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<span class="nv">maFonction</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="mi">1</span>
+
+<span class="mi">5</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">maFonction</span>
+<span class="c1">--&gt; 11</span>
+
+<span class="c1">-- Même avec des fonctions complexes</span>
+<span class="nv">monTraitement</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Bool</span>
+<span class="nv">monTraitement</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">5</span>
+
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">monTraitement</span>
+<span class="c1">--&gt; True</span>
+</code></pre></div>
+<h3 id="q4-quelle-est-la-limite">Q4 : Quelle est la limite ?</h3>
+<p><strong>Aucune ! Tu peux chaîner autant que tu veux</strong></p>
+<div class="highlight"><pre><span></span><code><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction1</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction2</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction3</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction4</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction5</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction6</span>
+<span class="c1">-- etc...</span>
+</code></pre></div>
+<hr />
+<h2 id="exercices-de-comprehension">🎓 Exercices de Compréhension</h2>
+<p><strong>Transforme ces expressions avec <code>|&gt;</code> :</strong></p>
+<h3 id="exercice-1">Exercice 1</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Sans pipe</span>
+<span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
+
+<span class="c1">-- Avec pipe</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">renverse</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+</code></pre></div>
+<h3 id="exercice-2">Exercice 2</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Sans pipe</span>
+<span class="nv">somme</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]))</span>
+
+<span class="c1">-- Avec pipe</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">5</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
+</code></pre></div>
+<h3 id="exercice-3">Exercice 3</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Sans pipe</span>
+<span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">concat</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span>
+
+<span class="c1">-- Avec pipe</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">concat</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+<span class="c1">-- Résultat : 5</span>
+</code></pre></div>
+<hr />
+<h2 id="comparaison-avec-dautres-langages">🚀 Comparaison avec d'Autres Langages</h2>
+<h3 id="javascript-methodes-chainees">JavaScript (méthodes chaînées)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">// JavaScript</span>
+<span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">]</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="elm-avec-pipe">Elm (avec pipe)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Elm</span>
+<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">filter</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">modBy</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">foldl</span><span class="w"> </span><span class="nf">(+)</span><span class="w"> </span><span class="mi">0</span>
+</code></pre></div>
+<p><strong>Même principe, syntaxe différente !</strong></p>
+<h3 id="unix-pipes-en-ligne-de-commande">Unix (pipes en ligne de commande)</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Bash</span>
+cat<span class="w"> </span>fichier.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;mot&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+</code></pre></div>
+<h3 id="elm">Elm</h3>
+<div class="highlight"><pre><span></span><code><span class="c1">-- Même concept en Elm</span>
+<span class="nv">fichierContenu</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">filtrerLignes</span><span class="w"> </span><span class="s">&quot;mot&quot;</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">compterLignes</span>
+</code></pre></div>
+<hr />
+<h2 id="resume-pourquoi-utiliser">✅ Résumé : Pourquoi Utiliser <code>|&gt;</code> ?</h2>
+<h3 id="avantages">Avantages</h3>
+<ol>
+<li><strong>Lisibilité</strong> : Ordre naturel gauche → droite</li>
+<li><strong>Clarté</strong> : Chaque transformation est explicite</li>
+<li><strong>Débogage</strong> : Facile de commenter/décommenter une étape</li>
+<li><strong>Style</strong> : Code Elm idiomatique</li>
+</ol>
+<h3 id="le-pattern">Le Pattern</h3>
+<div class="highlight"><pre><span></span><code><span class="nv">donnees</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">transformation1</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">transformation2</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">transformation3</span>
+<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">resultat</span>
+</code></pre></div>
+<p><strong>Se lit comme une recette de cuisine !</strong> 👨‍🍳</p>
+<hr />
+<h2 id="conseil-final">🎯 Conseil Final</h2>
+<p><strong>Utilise <code>|&gt;</code> quand tu as 2+ transformations séquentielles.</strong></p>
+<div class="highlight"><pre><span></span><code><span class="c1">-- ✅ Bon usage</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<span class="w">    </span><span class="nv">maListe</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span>
+<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
+
+<span class="c1">-- ❌ Pas nécessaire</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">maListe</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+
+<span class="c1">-- ✅ Mieux</span>
+<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">maListe</span>
+</code></pre></div>
+<p><strong>Le pipe est ton ami pour écrire du code clair et lisible !</strong> 🚀</p>
+<hr />
+<h2 id="pour-aller-plus-loin">📚 Pour Aller Plus Loin</h2>
+<p>Une fois que tu maîtrises <code>|&gt;</code>, tu peux découvrir :
+- <code>&lt;|</code> (pipe inversé, moins courant)
+- <code>&gt;&gt;</code> (composition de fonctions)
+- <code>&lt;&lt;</code> (composition inversée)</p>
+<p>Mais pour l'instant, <strong><code>|&gt;</code> suffit largement !</strong> 💪</p>
+<script src="https://mmarchand-nsi.github.io//js/material-tabbed-fix.js"></script>
+
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2025 14:55:02 UTC">October 23, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Matthieu Marchand
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../../../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="https://mkdocs-logic.forge.apps.education.fr/javascripts/bundle.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/rod2ik/cdn@main/mkdocs/javascripts/mkdocs-graphviz.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjs/lib/browser/math.js"></script>
+      
+        <script src="https://unpkg.com/cytoscape@3.31.2/dist/cytoscape.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+      
+        <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+      
+    
+  </body>
+</html>
