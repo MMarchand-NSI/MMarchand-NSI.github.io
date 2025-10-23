@@ -1,0 +1,4722 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+        <link rel="canonical" href="https://mmarchand-nsi.github.io/les-outils/3.vscode_profiles_daemons/">
+      
+      
+        <link rel="prev" href="../2.elm/">
+      
+      
+        <link rel="next" href="../../premi%C3%A8re/Algorithmique/1.algo/">
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.16">
+    
+    
+      
+        <title>VSCode : Profils, Daemons et Gestion de la RAM - Science Informatique - Site en construction</title>
+<script src="/javascripts/bundle.js"></script>
+
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.7e37652d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.06af60db.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#vscode-profils-daemons-et-gestion-de-la-ram" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Science Informatique - Site en construction" class="md-header__button md-logo" aria-label="Science Informatique - Site en construction" data-md-component="logo">
+      
+  <img src="../../assets/logo-tr.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Science Informatique - Site en construction
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              VSCode : Profils, Daemons et Gestion de la RAM
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="default" data-md-color-primary="teal" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 7H7a5 5 0 0 0-5 5 5 5 0 0 0 5 5h10a5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 8a3 3 0 0 1-3-3 3 3 0 0 1 3-3 3 3 0 0 1 3 3 3 3 0 0 1-3 3"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 6H7c-3.31 0-6 2.69-6 6s2.69 6 6 6h10c3.31 0 6-2.69 6-6s-2.69-6-6-6m0 10H7c-2.21 0-4-1.79-4-4s1.79-4 4-4h10c2.21 0 4 1.79 4 4s-1.79 4-4 4M7 9c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../.." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Bienvenue
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="../1.setup-vscode/" class="md-tabs__link">
+          
+  
+  
+  Les outils
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../premi%C3%A8re/Algorithmique/1.algo/" class="md-tabs__link">
+          
+  
+  
+  Première
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../projets/intro-pyxel-nopoo/" class="md-tabs__link">
+          
+  
+  
+  Projets
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../../terminale/architecture_reseau/adressage/" class="md-tabs__link">
+          
+  
+  
+  Terminale
+
+        </a>
+      </li>
+    
+  
+
+    
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Science Informatique - Site en construction" class="md-nav__button md-logo" aria-label="Science Informatique - Site en construction" data-md-component="logo">
+      
+  <img src="../../assets/logo-tr.png" alt="logo">
+
+    </a>
+    Science Informatique - Site en construction
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bienvenue
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Les outils
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            Les outils
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../1.setup-vscode/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Environnement de travail
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../2.elm/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Elm
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    VSCode : Profils, Daemons et Gestion de la RAM
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    VSCode : Profils, Daemons et Gestion de la RAM
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#le-probleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Le Problème
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-cest-quoi-un-daemon" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. C'est Quoi un Daemon ?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. C&#39;est Quoi un Daemon ?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      Définition Simple
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analogie" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analogie
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemples-de-daemons-systeme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemples de Daemons Système
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-les-daemons-dans-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Les Daemons dans VSCode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Les Daemons dans VSCode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pourquoi-les-extensions-lancent-des-daemons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pourquoi les Extensions Lancent des Daemons ?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemples-de-daemons-dextensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemples de Daemons d'Extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualiser-les-daemons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualiser les Daemons
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-pourquoi-creer-des-profils-par-langage" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Pourquoi Créer des Profils par Langage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Pourquoi Créer des Profils par Langage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-probleme-sans-profils" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le Problème Sans Profils
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-solution-profils" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Solution : Profils
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-creer-des-profils-dans-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Créer des Profils dans VSCode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Créer des Profils dans VSCode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methode-graphique" class="md-nav__link">
+    <span class="md-ellipsis">
+      Méthode Graphique
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methode-ligne-de-commande" class="md-nav__link">
+    <span class="md-ellipsis">
+      Méthode Ligne de Commande
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#structure-recommandee" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure Recommandée
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-configuration-detaillee-par-profil" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Configuration Détaillée par Profil
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Configuration Détaillée par Profil">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#profil-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profil Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#profil-rust" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profil Rust
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#profil-elm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profil Elm
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#profil-minimal-ecriture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profil Minimal (Écriture)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-comment-fonctionnent-les-language-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Comment Fonctionnent les Language Servers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Comment Fonctionnent les Language Servers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-client-serveur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Client-Serveur
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-protocol-lsp-language-server-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le Protocol LSP (Language Server Protocol)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-creer-ton-propre-daemon-exemple-avance" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Créer Ton Propre Daemon (Exemple Avancé)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Créer Ton Propre Daemon (Exemple Avancé)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pourquoi-creer-un-daemon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pourquoi Créer un Daemon ?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-simple-en-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple Simple en Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-dans-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intégration dans VSCode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-gerer-les-daemons-qui-consomment-trop" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Gérer les Daemons qui Consomment Trop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Gérer les Daemons qui Consomment Trop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagnostiquer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagnostiquer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desactiver-temporairement-des-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Désactiver Temporairement des Extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limiter-la-ram-des-language-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limiter la RAM des Language Servers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-bonnes-pratiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Bonnes Pratiques
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Bonnes Pratiques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-faire" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ À Faire
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-eviter" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ À Éviter
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-tableau-recapitulatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Tableau Récapitulatif
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Tableau Récapitulatif">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#impact-sur-la-ram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact sur la RAM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temps-de-demarrage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Temps de Démarrage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Résumé
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Résumé">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daemon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Daemon
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problème
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-profils" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution : Profils
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Action
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ressources" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Ressources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Première
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            Première
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Algorithmique
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            Algorithmique
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/Algorithmique/1.algo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Algorithmique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/Algorithmique/2.tri_selection/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tri par Sélection
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/Algorithmique/3.tri_insertion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Tri par insertion
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/Algorithmique/4.dichotomie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Recherche dichotomique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/Algorithmique/5.glouton/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Algorithmes gloutons
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/Algorithmique/6.intro_recurrence/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction à la récurrence
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/Algorithmique/7.distance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Dimensions supérieures et distances
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/Algorithmique/8.knn/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Algorithme des k plus proches voisins (KNN)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    IHM
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            IHM
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/IHM/flet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Interface Homme machine
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_3" id="__nav_3_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Numération
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_3">
+            <span class="md-nav__icon md-icon"></span>
+            Numération
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/Num%C3%A9ration/1-entiers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Représentation des entiers naturels
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/Num%C3%A9ration/2-vers10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Conversions vers la base 10
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/Num%C3%A9ration/3-depuis10/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Conversions depuis la base 10
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/Num%C3%A9ration/4-relatifs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Entiers relatifs en binaire (Entiers signés)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_4" id="__nav_3_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Architecture
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_4">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/architecture/droits-linux/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gestion des droits sous linux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/architecture/os/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Systèmes d'exploitation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_5" id="__nav_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Logique
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Logique
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/logique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Logique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6" id="__nav_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Prog
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Prog
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/bouclefor/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Bouclefor
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/exercices/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Exercices Algorithmique
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/listes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le type list (et tuple)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/scope/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Portée des variables (scope)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/strings/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Chaînes de caractères (str)
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_6" id="__nav_3_6_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Sequences
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_6">
+            <span class="md-nav__icon md-icon"></span>
+            Sequences
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/sequences/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les séquences
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_6_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_6_7" id="__nav_3_6_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Variables
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_3_6_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_6_7">
+            <span class="md-nav__icon md-icon"></span>
+            Variables
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/variables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les variables
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/variables/caracteres/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les chaînes de caractère
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/variables/entiers/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le type entier
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/prog/variables/recul/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Prendre un peu de recul
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_7" >
+        
+          
+          <label class="md-nav__link" for="__nav_3_7" id="__nav_3_7_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Reseau
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_7">
+            <span class="md-nav__icon md-icon"></span>
+            Reseau
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../premi%C3%A8re/reseau/bit-alterne/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le protocole du bit alterné
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Projets
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            Projets
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projets/intro-pyxel-nopoo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction à pyxel - Sans POO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projets/intro-pyxel/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction à pyxel - POO
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projets/jeudelavie/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    The Game Of Life
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projets/mastermind/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MasterMind
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projets/musique/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Créer un clavier musical
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projets/othello/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Othello
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projets/pendu/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le pendu
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projets/snake/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Snake
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../projets/space_invader/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Projet space invader
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Terminale
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            Terminale
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_1" id="__nav_5_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Architecture reseau
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_1">
+            <span class="md-nav__icon md-icon"></span>
+            Architecture reseau
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/architecture_reseau/adressage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Réseaux
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/architecture_reseau/bitwise/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Opérateurs Bitwise en Python
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/architecture_reseau/chiffrement/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Introduction au chiffrement
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/architecture_reseau/chiffrement2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Cryptographie Asymétriques
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/architecture_reseau/reciproque/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Mini cours – Fonction réciproque
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/architecture_reseau/routage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le Routage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_2" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_2" id="__nav_5_2_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Bdd
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_2">
+            <span class="md-nav__icon md-icon"></span>
+            Bdd
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/bdd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Base de données et SGBD
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/bdd/jointure/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Jointures
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/bdd/manipulation-integrite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Manipulation et intégrité
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/bdd/projet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Gestion d'un lycée - Fullstack
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/bdd/sql-murder-mystery/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SQL murder mystery
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/bdd/tp-sgbd/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    SGBD - Postgresql
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3" id="__nav_5_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Langages
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3">
+            <span class="md-nav__icon md-icon"></span>
+            Langages
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Paradigmes de programmation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/calculabilite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Calculabilité et Décidabilité
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/complements_python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Compléments sur le tri, min et max
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/recursivite/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Récursivité
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3_5" id="__nav_5_3_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Fonctionnels
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_3_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3_5">
+            <span class="md-nav__icon md-icon"></span>
+            Fonctionnels
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/fonctionnels/1.elm-intro/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    1. Principes de base
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/fonctionnels/2.elm-maybe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    2. Le Type Maybe
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/fonctionnels/3.elm_pipe/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    3. L'Opérateur Pipe |&gt;
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/fonctionnels/4.elm-avance/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    4. Avancé - Fonctions d'Ordre Supérieur
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/fonctionnels/5.catamorphismes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    5. Bien avancé - Catamorphismes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_3_6" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_3_6" id="__nav_5_3_6_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Oriente objet
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_3_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_3_6">
+            <span class="md-nav__icon md-icon"></span>
+            Oriente objet
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/oriente_objet/heritage/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Heritage
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/langages/oriente_objet/poo/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Paradigme orienté objets
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_4" id="__nav_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Processus
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Processus
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/processus/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Processus
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5" id="__nav_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Structures de donnees
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Structures de donnees
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/structures-de-donnees/arbrebinaire/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Arbres enracinés
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/structures-de-donnees/listes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Listes - Paradigme fonctionnel
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/structures-de-donnees/listeschainees/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Listes chaînées - Approche Orientée Objet
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5_4" id="__nav_5_5_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Graphes
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_5_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5_4">
+            <span class="md-nav__icon md-icon"></span>
+            Graphes
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/structures-de-donnees/graphes/dijkstra/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Algorithme de Dijkstra
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/structures-de-donnees/graphes/graphes/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Graphes - Généralités et Implémentation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/structures-de-donnees/graphes/parcours/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Parcours de graphes
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5_5_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5_5_5" id="__nav_5_5_5_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Piles files
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_5_5_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5_5_5">
+            <span class="md-nav__icon md-icon"></span>
+            Piles files
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/structures-de-donnees/piles-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Les Piles
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../terminale/structures-de-donnees/piles-files/file/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Files
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#le-probleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Le Problème
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-cest-quoi-un-daemon" class="md-nav__link">
+    <span class="md-ellipsis">
+      1. C'est Quoi un Daemon ?
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="1. C&#39;est Quoi un Daemon ?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#definition-simple" class="md-nav__link">
+    <span class="md-ellipsis">
+      Définition Simple
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#analogie" class="md-nav__link">
+    <span class="md-ellipsis">
+      Analogie
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemples-de-daemons-systeme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemples de Daemons Système
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-les-daemons-dans-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      2. Les Daemons dans VSCode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Les Daemons dans VSCode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pourquoi-les-extensions-lancent-des-daemons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pourquoi les Extensions Lancent des Daemons ?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemples-de-daemons-dextensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemples de Daemons d'Extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#visualiser-les-daemons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Visualiser les Daemons
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-pourquoi-creer-des-profils-par-langage" class="md-nav__link">
+    <span class="md-ellipsis">
+      3. Pourquoi Créer des Profils par Langage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="3. Pourquoi Créer des Profils par Langage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-probleme-sans-profils" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le Problème Sans Profils
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#la-solution-profils" class="md-nav__link">
+    <span class="md-ellipsis">
+      La Solution : Profils
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-creer-des-profils-dans-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      4. Créer des Profils dans VSCode
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="4. Créer des Profils dans VSCode">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#methode-graphique" class="md-nav__link">
+    <span class="md-ellipsis">
+      Méthode Graphique
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methode-ligne-de-commande" class="md-nav__link">
+    <span class="md-ellipsis">
+      Méthode Ligne de Commande
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#structure-recommandee" class="md-nav__link">
+    <span class="md-ellipsis">
+      Structure Recommandée
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-configuration-detaillee-par-profil" class="md-nav__link">
+    <span class="md-ellipsis">
+      5. Configuration Détaillée par Profil
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="5. Configuration Détaillée par Profil">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#profil-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profil Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#profil-rust" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profil Rust
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#profil-elm" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profil Elm
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#profil-minimal-ecriture" class="md-nav__link">
+    <span class="md-ellipsis">
+      Profil Minimal (Écriture)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-comment-fonctionnent-les-language-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      6. Comment Fonctionnent les Language Servers
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="6. Comment Fonctionnent les Language Servers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#architecture-client-serveur" class="md-nav__link">
+    <span class="md-ellipsis">
+      Architecture Client-Serveur
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#le-protocol-lsp-language-server-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      Le Protocol LSP (Language Server Protocol)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-creer-ton-propre-daemon-exemple-avance" class="md-nav__link">
+    <span class="md-ellipsis">
+      7. Créer Ton Propre Daemon (Exemple Avancé)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Créer Ton Propre Daemon (Exemple Avancé)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pourquoi-creer-un-daemon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Pourquoi Créer un Daemon ?
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-simple-en-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exemple Simple en Python
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#integration-dans-vscode" class="md-nav__link">
+    <span class="md-ellipsis">
+      Intégration dans VSCode
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-gerer-les-daemons-qui-consomment-trop" class="md-nav__link">
+    <span class="md-ellipsis">
+      8. Gérer les Daemons qui Consomment Trop
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="8. Gérer les Daemons qui Consomment Trop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#diagnostiquer" class="md-nav__link">
+    <span class="md-ellipsis">
+      Diagnostiquer
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#desactiver-temporairement-des-extensions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Désactiver Temporairement des Extensions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#limiter-la-ram-des-language-servers" class="md-nav__link">
+    <span class="md-ellipsis">
+      Limiter la RAM des Language Servers
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-bonnes-pratiques" class="md-nav__link">
+    <span class="md-ellipsis">
+      9. Bonnes Pratiques
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="9. Bonnes Pratiques">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-faire" class="md-nav__link">
+    <span class="md-ellipsis">
+      ✅ À Faire
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-eviter" class="md-nav__link">
+    <span class="md-ellipsis">
+      ❌ À Éviter
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-tableau-recapitulatif" class="md-nav__link">
+    <span class="md-ellipsis">
+      10. Tableau Récapitulatif
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="10. Tableau Récapitulatif">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#impact-sur-la-ram" class="md-nav__link">
+    <span class="md-ellipsis">
+      Impact sur la RAM
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#temps-de-demarrage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Temps de Démarrage
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#resume" class="md-nav__link">
+    <span class="md-ellipsis">
+      🎯 Résumé
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="🎯 Résumé">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#daemon" class="md-nav__link">
+    <span class="md-ellipsis">
+      Daemon
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#probleme" class="md-nav__link">
+    <span class="md-ellipsis">
+      Problème
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#solution-profils" class="md-nav__link">
+    <span class="md-ellipsis">
+      Solution : Profils
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#action" class="md-nav__link">
+    <span class="md-ellipsis">
+      Action
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ressources" class="md-nav__link">
+    <span class="md-ellipsis">
+      📚 Ressources
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.js"></script>
+<script src="https://mmarchand-nsi.github.io//js/sqlite_ide.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/mode/sql/sql.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.58.1/codemirror.css">
+<link rel="stylesheet" href="https://mmarchand-nsi.github.io//css/sqlite_ide.css">
+<script>sqljs_base_path="https://mmarchand-nsi.github.io/"</script>
+
+<h1 id="vscode-profils-daemons-et-gestion-de-la-ram">VSCode : Profils, Daemons et Gestion de la RAM</h1>
+<h2 id="le-probleme">🎯 Le Problème</h2>
+<p><strong>Situation :</strong> Tu installes 20 extensions dans VSCode (Python, Rust, Elm, C++, etc.)<br />
+<strong>Résultat :</strong> VSCode bouffe 4 GB de RAM et rame 🐌</p>
+<p><strong>Pourquoi ?</strong> Les <strong>daemons</strong> lancés par chaque extension tournent en permanence !</p>
+<hr />
+<h2 id="1-cest-quoi-un-daemon">1. C'est Quoi un Daemon ?</h2>
+<h3 id="definition-simple">Définition Simple</h3>
+<p><strong>Daemon</strong> (ou démon) = <strong>Programme qui tourne en arrière-plan en permanence</strong></p>
+<p><strong>Caractéristiques :</strong>
+- Lance au démarrage
+- Tourne sans interface visible
+- Attend des requêtes
+- Consomme de la RAM même si tu ne l'utilises pas</p>
+<h3 id="analogie">Analogie</h3>
+<p><strong>Un daemon, c'est comme un serveur dans un restaurant :</strong>
+- Il est toujours là, même s'il n'y a pas de clients
+- Il attend qu'on lui demande quelque chose
+- Il reste debout toute la journée (= consomme de la RAM)</p>
+<h3 id="exemples-de-daemons-systeme">Exemples de Daemons Système</h3>
+<table>
+<thead>
+<tr>
+<th>Daemon</th>
+<th>Rôle</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sshd</code></td>
+<td>Serveur SSH (connexions distantes)</td>
+</tr>
+<tr>
+<td><code>httpd</code></td>
+<td>Serveur web Apache</td>
+</tr>
+<tr>
+<td><code>systemd</code></td>
+<td>Gestion des services Linux</td>
+</tr>
+<tr>
+<td><code>Docker daemon</code></td>
+<td>Gestion des conteneurs</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="2-les-daemons-dans-vscode">2. Les Daemons dans VSCode</h2>
+<h3 id="pourquoi-les-extensions-lancent-des-daemons">Pourquoi les Extensions Lancent des Daemons ?</h3>
+<p><strong>Les extensions de langages ont besoin de :</strong>
+1. <strong>Analyser ton code en temps réel</strong>
+2. <strong>Fournir l'autocomplétion</strong>
+3. <strong>Détecter les erreurs</strong>
+4. <strong>Formater le code</strong>
+5. <strong>Naviguer dans les définitions</strong></p>
+<p><strong>Pour être réactives, elles lancent un daemon qui :</strong>
+- Lit ton code
+- L'analyse en permanence
+- Garde le résultat en mémoire
+- Répond instantanément à tes demandes</p>
+<h3 id="exemples-de-daemons-dextensions">Exemples de Daemons d'Extensions</h3>
+<table>
+<thead>
+<tr>
+<th>Extension</th>
+<th>Daemon</th>
+<th>RAM</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Python</strong></td>
+<td>Pylance Language Server</td>
+<td>~200 MB</td>
+</tr>
+<tr>
+<td><strong>Rust</strong></td>
+<td>rust-analyzer</td>
+<td>~300 MB</td>
+</tr>
+<tr>
+<td><strong>C/C++</strong></td>
+<td>clangd</td>
+<td>~150 MB</td>
+</tr>
+<tr>
+<td><strong>Elm</strong></td>
+<td>Elm Language Server</td>
+<td>~100 MB</td>
+</tr>
+<tr>
+<td><strong>Java</strong></td>
+<td>Eclipse JDT LS</td>
+<td>~500 MB</td>
+</tr>
+<tr>
+<td><strong>TypeScript</strong></td>
+<td>tsserver</td>
+<td>~250 MB</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Total si tout installé : 1.5 GB+ de RAM !</strong> 💥</p>
+<h3 id="visualiser-les-daemons">Visualiser les Daemons</h3>
+<p><strong>Dans VSCode :</strong>
+1. Ouvre la palette : <code>Ctrl+Shift+P</code>
+2. Tape : "Developer: Show Running Extensions"
+3. Regarde la colonne "Activation Time" et "Memory"</p>
+<p><strong>En ligne de commande :</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Linux/Mac</span>
+ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;python|rust-analyzer|clangd|elm&quot;</span>
+
+<span class="c1"># Windows</span>
+tasklist<span class="w"> </span><span class="p">|</span><span class="w"> </span>findstr<span class="w"> </span><span class="s2">&quot;python rust clangd&quot;</span>
+</code></pre></div></p>
+<hr />
+<h2 id="3-pourquoi-creer-des-profils-par-langage">3. Pourquoi Créer des Profils par Langage</h2>
+<h3 id="le-probleme-sans-profils">Le Problème Sans Profils</h3>
+<div class="highlight"><pre><span></span><code>VSCode avec TOUTES les extensions
+├── Python extension → lance python daemon (200 MB)
+├── Rust extension → lance rust-analyzer (300 MB)
+├── Elm extension → lance elm daemon (100 MB)
+├── C++ extension → lance clangd (150 MB)
+└── ... 15 autres extensions
+
+Total RAM : 2-4 GB
+</code></pre></div>
+<p><strong>Même si tu codes en Python, les daemons Rust/Elm/C++ tournent quand même !</strong></p>
+<h3 id="la-solution-profils">La Solution : Profils</h3>
+<p><strong>Un profil = un VSCode avec seulement les extensions nécessaires</strong></p>
+<div class="highlight"><pre><span></span><code>Profil Python
+├── Python extension → 200 MB
+└── Extensions générales (Git, etc.)
+Total RAM : 400 MB
+
+Profil Rust
+├── Rust extension → 300 MB
+└── Extensions générales
+Total RAM : 500 MB
+</code></pre></div>
+<p><strong>Économie : 1.5-3 GB de RAM par profil !</strong> 💰</p>
+<hr />
+<h2 id="4-creer-des-profils-dans-vscode">4. Créer des Profils dans VSCode</h2>
+<h3 id="methode-graphique">Méthode Graphique</h3>
+<p><strong>Étape 1 : Ouvrir le menu des profils</strong>
+1. Clique sur l'icône ⚙️ (engrenage) en bas à gauche
+2. Sélectionne "Profiles"
+3. Clique sur "Create Profile"</p>
+<p><strong>Étape 2 : Configurer le profil</strong>
+<div class="highlight"><pre><span></span><code>Nom : Python Development
+Copier depuis : Default Profile (ou None)
+</code></pre></div></p>
+<p><strong>Étape 3 : Activer le profil</strong>
+- Le profil s'active automatiquement après création
+- Tu peux switcher avec : ⚙️ → Profiles → Sélectionne un profil</p>
+<p><strong>Étape 4 : Installer uniquement les extensions nécessaires</strong>
+<div class="highlight"><pre><span></span><code>Pour Python :
+✅ Python
+✅ Pylance
+✅ Python Debugger
+✅ Git (général)
+✅ GitLens (général)
+❌ Rust-analyzer (pas besoin)
+❌ Elm (pas besoin)
+</code></pre></div></p>
+<h3 id="methode-ligne-de-commande">Méthode Ligne de Commande</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># Lancer VSCode avec un profil spécifique</span>
+code<span class="w"> </span>--profile<span class="w"> </span><span class="s2">&quot;Python Development&quot;</span>
+
+<span class="c1"># Créer un profil vide</span>
+code<span class="w"> </span>--profile<span class="w"> </span><span class="s2">&quot;Rust Development&quot;</span><span class="w"> </span>--extensions-dir<span class="w"> </span>~/.vscode-rust/extensions
+</code></pre></div>
+<h3 id="structure-recommandee">Structure Recommandée</h3>
+<div class="highlight"><pre><span></span><code>Profils à créer :
+├── Default (minimal, sans language servers)
+├── Python Development
+├── Rust Development
+├── Web Development (HTML/CSS/JS)
+├── Elm Development
+├── C/C++ Development
+└── Écriture (Markdown, pas de code)
+</code></pre></div>
+<hr />
+<h2 id="5-configuration-detaillee-par-profil">5. Configuration Détaillée par Profil</h2>
+<h3 id="profil-python">Profil Python</h3>
+<p><strong>Extensions à installer :</strong>
+<div class="highlight"><pre><span></span><code>- Python (ms-python.python)
+- Pylance (ms-python.vscode-pylance)
+- Python Debugger (ms-python.debugpy)
+- Black Formatter (optionnel)
+</code></pre></div></p>
+<p><strong>Settings spécifiques :</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;python.languageServer&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Pylance&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;python.analysis.typeCheckingMode&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;basic&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;[python]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ms-python.black-formatter&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="profil-rust">Profil Rust</h3>
+<p><strong>Extensions à installer :</strong>
+<div class="highlight"><pre><span></span><code>- rust-analyzer (rust-lang.rust-analyzer)
+- CodeLLDB (debugger)
+- crates (gestion des dépendances)
+</code></pre></div></p>
+<p><strong>Settings spécifiques :</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;rust-analyzer.checkOnSave.command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;clippy&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;[rust]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">    </span><span class="nt">&quot;editor.defaultFormatter&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;rust-lang.rust-analyzer&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="profil-elm">Profil Elm</h3>
+<p><strong>Extensions à installer :</strong>
+<div class="highlight"><pre><span></span><code>- Elm (Elmtooling.elm-ls-vscode)
+- Elm Format
+</code></pre></div></p>
+<p><strong>Settings spécifiques :</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;[elm]&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;editor.formatOnSave&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<h3 id="profil-minimal-ecriture">Profil Minimal (Écriture)</h3>
+<p><strong>Extensions à installer :</strong>
+<div class="highlight"><pre><span></span><code>- Markdown All in One
+- Spell Checker
+- Git
+</code></pre></div></p>
+<p><strong>Pas de language server = ~50 MB RAM seulement !</strong></p>
+<hr />
+<h2 id="6-comment-fonctionnent-les-language-servers">6. Comment Fonctionnent les Language Servers</h2>
+<h3 id="architecture-client-serveur">Architecture Client-Serveur</h3>
+<div class="highlight"><pre><span></span><code>VSCode (Client)
+    ↓ demande d&#39;autocomplétion
+Language Server (Daemon)
+    ↓ analyse le code
+    ↓ retourne les suggestions
+VSCode affiche les suggestions
+</code></pre></div>
+<h3 id="le-protocol-lsp-language-server-protocol">Le Protocol LSP (Language Server Protocol)</h3>
+<p><strong>Inventé par Microsoft pour VSCode</strong></p>
+<p><strong>Avant LSP :</strong>
+<div class="highlight"><pre><span></span><code>Chaque éditeur × Chaque langage = N × M implémentations
+Vim + Python, Vim + Rust, Emacs + Python, Emacs + Rust...
+</code></pre></div></p>
+<p><strong>Avec LSP :</strong>
+<div class="highlight"><pre><span></span><code>1 Language Server par langage
+× 
+N éditeurs qui parlent LSP
+= N + M implémentations seulement !
+</code></pre></div></p>
+<p><strong>Liste de Language Servers :</strong>
+| Langage | Language Server |
+|---------|-----------------|
+| Python | Pylance, Pyright |
+| Rust | rust-analyzer |
+| C/C++ | clangd, ccls |
+| JavaScript/TypeScript | tsserver |
+| Elm | elm-language-server |
+| Go | gopls |
+| Java | Eclipse JDT LS |</p>
+<hr />
+<h2 id="7-creer-ton-propre-daemon-exemple-avance">7. Créer Ton Propre Daemon (Exemple Avancé)</h2>
+<h3 id="pourquoi-creer-un-daemon">Pourquoi Créer un Daemon ?</h3>
+<p><strong>Cas d'usage :</strong>
+- Surveiller des fichiers
+- Compiler automatiquement
+- Lancer des tests en continu
+- Analyser le code custom</p>
+<h3 id="exemple-simple-en-python">Exemple Simple en Python</h3>
+<div class="highlight"><pre><span></span><code><span class="c1"># mon_daemon.py</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">watchdog.observers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Observer</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">watchdog.events</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileSystemEventHandler</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MonDaemon</span><span class="p">(</span><span class="n">FileSystemEventHandler</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">on_modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.elm&#39;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fichier modifié : </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;elm make </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔄 Daemon Elm lancé...&quot;</span><span class="p">)</span>
+
+    <span class="n">observer</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">()</span>
+    <span class="n">observer</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">MonDaemon</span><span class="p">(),</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./src&quot;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">observer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+        <span class="n">observer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+
+    <span class="n">observer</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</code></pre></div>
+<p><strong>Lancer le daemon :</strong>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>mon_daemon.py<span class="w"> </span><span class="p">&amp;</span><span class="w">  </span><span class="c1"># Le &amp; lance en arrière-plan</span>
+</code></pre></div></p>
+<h3 id="integration-dans-vscode">Intégration dans VSCode</h3>
+<p><strong>Créer une tâche VSCode (<code>.vscode/tasks.json</code>) :</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;tasks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Start Elm Daemon&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;${workspaceFolder}/mon_daemon.py&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="nt">&quot;isBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Lancer avec :</strong> <code>Ctrl+Shift+P</code> → "Tasks: Run Task" → "Start Elm Daemon"</p>
+<hr />
+<h2 id="8-gerer-les-daemons-qui-consomment-trop">8. Gérer les Daemons qui Consomment Trop</h2>
+<h3 id="diagnostiquer">Diagnostiquer</h3>
+<p><strong>1. VSCode Task Manager</strong>
+<div class="highlight"><pre><span></span><code>Ctrl+Shift+P → &quot;Developer: Open Process Explorer&quot;
+</code></pre></div></p>
+<p>Montre tous les processus avec leur RAM.</p>
+<p><strong>2. Ligne de commande</strong>
+<div class="highlight"><pre><span></span><code><span class="c1"># Linux/Mac : Voir les processus VSCode</span>
+ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;vscode\|electron&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-v<span class="w"> </span>grep
+
+<span class="c1"># Trier par RAM</span>
+ps<span class="w"> </span>aux<span class="w"> </span>--sort<span class="o">=</span>-%mem<span class="w"> </span><span class="p">|</span><span class="w"> </span>head<span class="w"> </span>-20
+
+<span class="c1"># Windows : Task Manager</span>
+tasklist<span class="w"> </span><span class="p">|</span><span class="w"> </span>findstr<span class="w"> </span><span class="s2">&quot;Code.exe&quot;</span>
+</code></pre></div></p>
+<h3 id="desactiver-temporairement-des-extensions">Désactiver Temporairement des Extensions</h3>
+<p><strong>Sans changer de profil :</strong>
+1. <code>Ctrl+Shift+X</code> → Extensions
+2. Clique sur l'engrenage de l'extension
+3. "Disable (Workspace)" → désactive uniquement pour ce projet</p>
+<h3 id="limiter-la-ram-des-language-servers">Limiter la RAM des Language Servers</h3>
+<p><strong>Exemple pour Pylance :</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;python.analysis.memory.keepLibraryAst&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;python.analysis.memory.keepLibraryLocalVariables&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<p><strong>Exemple pour rust-analyzer :</strong>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;rust-analyzer.server.extraEnv&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nt">&quot;RA_LOG&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;error&quot;</span><span class="w">  </span><span class="c1">// Moins de logs = moins de RAM</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></p>
+<hr />
+<h2 id="9-bonnes-pratiques">9. Bonnes Pratiques</h2>
+<h3 id="a-faire">✅ À Faire</h3>
+<ol>
+<li><strong>Un profil par langage principal</strong></li>
+<li>
+<p>Python, Rust, Web, etc.</p>
+</li>
+<li>
+<p><strong>Profil minimal pour l'écriture</strong></p>
+</li>
+<li>Markdown, notes, docs</li>
+<li>
+<p>Pas de language server = rapide</p>
+</li>
+<li>
+<p><strong>Désactiver les extensions inutilisées</strong></p>
+</li>
+<li>
+<p>Pas besoin de Rust si tu codes en Python</p>
+</li>
+<li>
+<p><strong>Fermer VSCode entre les projets</strong></p>
+</li>
+<li>
+<p>Libère la RAM des daemons</p>
+</li>
+<li>
+<p><strong>Surveiller la RAM régulièrement</strong></p>
+</li>
+<li>Process Explorer de VSCode</li>
+</ol>
+<h3 id="a-eviter">❌ À Éviter</h3>
+<ol>
+<li><strong>Installer toutes les extensions "au cas où"</strong></li>
+<li>
+<p>Elles tournent même inutilisées</p>
+</li>
+<li>
+<p><strong>Laisser VSCode ouvert H24</strong></p>
+</li>
+<li>
+<p>Les daemons accumulent la RAM</p>
+</li>
+<li>
+<p><strong>Ouvrir plusieurs VSCode avec le même profil</strong></p>
+</li>
+<li>
+<p>Plusieurs instances du même daemon</p>
+</li>
+<li>
+<p><strong>Ignorer les warnings de RAM</strong></p>
+</li>
+<li>VSCode te prévient si ça rame</li>
+</ol>
+<hr />
+<h2 id="10-tableau-recapitulatif">10. Tableau Récapitulatif</h2>
+<h3 id="impact-sur-la-ram">Impact sur la RAM</h3>
+<table>
+<thead>
+<tr>
+<th>Scénario</th>
+<th>RAM Utilisée</th>
+<th>Réactivité</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Toutes extensions</td>
+<td>3-5 GB</td>
+<td>Lent 🐌</td>
+</tr>
+<tr>
+<td>Profil Python seul</td>
+<td>400-600 MB</td>
+<td>Rapide ⚡</td>
+</tr>
+<tr>
+<td>Profil minimal</td>
+<td>50-150 MB</td>
+<td>Très rapide 🚀</td>
+</tr>
+</tbody>
+</table>
+<h3 id="temps-de-demarrage">Temps de Démarrage</h3>
+<table>
+<thead>
+<tr>
+<th>Configuration</th>
+<th>Démarrage</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sans profils (20 extensions)</td>
+<td>10-15s</td>
+</tr>
+<tr>
+<td>Avec profil (5 extensions)</td>
+<td>2-3s</td>
+</tr>
+<tr>
+<td>Profil minimal</td>
+<td>&lt;1s</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="resume">🎯 Résumé</h2>
+<h3 id="daemon">Daemon</h3>
+<ul>
+<li>Programme en arrière-plan permanent</li>
+<li>Consomme de la RAM même inactif</li>
+<li>Nécessaire pour être réactif</li>
+</ul>
+<h3 id="probleme">Problème</h3>
+<ul>
+<li>Chaque extension de langage lance un daemon</li>
+<li>20 extensions = 2-4 GB de RAM gaspillés</li>
+</ul>
+<h3 id="solution-profils">Solution : Profils</h3>
+<ul>
+<li>1 profil = 1 VSCode avec extensions spécifiques</li>
+<li>Économie de 1.5-3 GB par profil</li>
+<li>Démarrage plus rapide</li>
+</ul>
+<h3 id="action">Action</h3>
+<ol>
+<li>Crée un profil par langage</li>
+<li>N'installe que les extensions nécessaires</li>
+<li>Change de profil selon ton travail</li>
+</ol>
+<p><strong>Tu passes de 4 GB à 500 MB de RAM utilisée !</strong> 💪</p>
+<hr />
+<h2 id="ressources">📚 Ressources</h2>
+<p><strong>Documentation VSCode :</strong>
+- <a href="https://code.visualstudio.com/docs/editor/profiles">Profiles Guide</a>
+- <a href="https://code.visualstudio.com/api">Extension API</a></p>
+<p><strong>Language Server Protocol :</strong>
+- <a href="https://microsoft.github.io/language-server-protocol/">Specification officielle</a></p>
+<p><strong>Optimisation :</strong>
+- <a href="https://github.com/microsoft/vscode/wiki/Performance-Issues">Performance Issues Guide</a></p>
+<hr />
+<p><strong>Pro Tip Final :</strong> Active le profil AVANT d'ouvrir un projet. Sinon les daemons se lancent quand même ! 🎯</p>
+<script src="https://mmarchand-nsi.github.io//js/material-tabbed-fix.js"></script>
+
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2025 14:05:38 UTC">October 23, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Matthieu Marchand
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.50899def.min.js"></script>
+      
+        <script src="../../javascripts/katex.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
+      
+        <script src="https://unpkg.com/katex@0/dist/contrib/auto-render.min.js"></script>
+      
+        <script src="https://mkdocs-logic.forge.apps.education.fr/javascripts/bundle.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/gh/rod2ik/cdn@main/mkdocs/javascripts/mkdocs-graphviz.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjs/lib/browser/math.js"></script>
+      
+        <script src="https://unpkg.com/cytoscape@3.31.2/dist/cytoscape.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+      
+        <script src="https://cdn.plot.ly/plotly-3.0.1.min.js"></script>
+      
+    
+  </body>
+</html>
