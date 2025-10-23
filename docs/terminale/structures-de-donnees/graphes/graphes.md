@@ -127,7 +127,7 @@ Pour travailler avec des graphes, différentes représentations peuvent être ut
 
 !!! abstract "Matrice d'adjacence - Graphes non-orientés"
 
-    Une matrice où `mat[i][j]` vaut $1$ si et seulement si il y a une arête entre les sommets `i` et `j`, $0$ sinon. Notez que la matrice est forcément symétrique.
+    Une matrice où $mat[i][j]$ vaut $1$ si et seulement si il y a une arête entre les sommets $i$ et $j$, $0$ sinon. Notez que la matrice est forcément symétrique.
 
 !!! hint "Matrice symétrique"
     Une matrice $M$ est dite symétrique ssi $ \forall (i,j), M_{i,j}=M_{j,i}$
@@ -165,7 +165,7 @@ $$
 
 
 !!! abstract "Matrice d'adjacence - Graphes orientés"
-    Une matrice à deux dimensions où `mat[i][j]` est Vrai si et seulement si il y a une arête allant du sommet `i` au sommet `j`. `i` est l'indice ligne. `j` est l'indice colonnes. 
+    Une matrice à deux dimensions où $mat[i][j]$ est Vrai si et seulement si il y a une arête allant du sommet $i$ au sommet $j$. $i$ est l'indice ligne. $j$ est l'indice colonnes. 
 
 
 <center>
@@ -199,7 +199,7 @@ E & 0 & 0 & 0 & 1 & 0 \\
 $$
 
 !!! abstract "Matrice d'adjacence - Graphes orientés" 
-    Une matrice à deux dimensions où mat[i][j] est égal au poids de l’arête allant du sommet i au sommet j, et 0 s’il n’existe pas d’arête. i est l’indice ligne. j est l’indice colonne.
+    Une matrice à deux dimensions où $mat[i][j]$ est égal au poids de l’arête allant du sommet $i$ au sommet $j$, et 0 s’il n’existe pas d’arête. $i$ est l’indice ligne. $j$ est l’indice colonne.
 
 <center>
 

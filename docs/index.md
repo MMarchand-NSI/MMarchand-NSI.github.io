@@ -1,9 +1,11 @@
 ---
+template: base.html
 hide:
-  - title
+  - navigation
+  - toc
+title: " "
 ---
 
-# Welcome
 
 ![](welcom3.png){ align=right }
 
@@ -11,9 +13,10 @@ Ce site regroupe mes supports de cours en NSI (Numérique et Sciences Informatiq
 
 ## 📚 À propos de ce site
 
-**Un site vivant :** Ce site est en **constante évolution**. Certaines sections sont des supports de cours utilisés en classe, d'autres sont des ressources complémentaires pour aller plus loin. Vous y trouverez aussi des sujets **hors programme** qui m'intéressent ou que j'estime utiles pour la formation générale en informatique.
+**Un site vivant :** Ce site évolue constamment. Certaines sections servent en classe. D'autres vont plus loin. Vous trouverez aussi des sujets hors programme que j'estime utiles.
 
-**Pas un manuel figé :** Les contenus sont régulièrement mis à jour, enrichis, et parfois restructurés en fonction des besoins pédagogiques et de mes découvertes. Certaines pages sont finalisées et éprouvées en classe, d'autres sont des ébauches ou des travaux en cours.
+**Pas un manuel figé :** Les contenus sont régulièrement mis à jour. Certaines pages sont finalisées. D'autres sont en construction.
+
 
 **Pour qui ?**
 

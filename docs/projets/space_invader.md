@@ -125,4 +125,17 @@ def collision(self, other: 'EltGraphique') -> bool:
 
 Pour aller plus loin dans les collisions, vous pouvez vous intéresser au théorème des axes séparateurs (Accessible spé math), ou encore à GJK, qui utilise la somme de Minkowski (Difficile à ce stade, mais je vous le mets quand même parce que c'est beau)
 
-La détection de collisions utilise en fait plusieurs algorithmes. Un algorithme pour voir "en gros" qui pourrait entrer en collision en effectuant un partitionnement de l'espace (Broad phase). Un algorithme pour voir d'un peu plus près ce qui pourrait être en collision d'après le résultat du broad en utilisant la fonction que je vous ai donné, ou SAT, ou autre (Mid phase). Un algorithme pour déterminer au pixel près ce qui entre en collision d'après le résultat du Mid avec par exemple GJK (Narrow phase).
+La détection de collisions utilise plusieurs algorithmes en cascade :
+
+**Broad phase :** Partitionnement spatial (QuadTree, Grid, etc.) 
+pour identifier les paires potentielles. Élimine rapidement les objets 
+trop éloignés.
+
+**Narrow phase :** Détection précise sur les paires candidates.
+
+- AABB/OBB : rectangles/boîtes alignées
+- SAT (Separating Axis Theorem) : polygones convexes
+- GJK : formes convexes quelconques
+
+**Note :** La "Mid phase" existe dans certains moteurs (tri des paires, 
+tests AABB avant SAT), mais n'est pas systématique.
