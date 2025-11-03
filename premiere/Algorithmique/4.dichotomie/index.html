@@ -243,7 +243,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../les-outils/1.setup-vscode/" class="md-tabs__link">
+        <a href="../../../les-outils/0.votreordi/" class="md-tabs__link">
           
   
   
@@ -433,6 +433,29 @@
             Les outils
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../les-outils/0.votreordi/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Le minimum pour gérer son ordi
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -3357,32 +3380,27 @@ Donne moi la valeur de n et choisis un entier dans ta tête
 </div>
 <h2 id="recherche-dichotomique-sur-tableau-trie">Recherche dichotomique sur tableau trié</h2>
 <p>La recherche dichotomique s'inspire de la manière la plus efficace de jouer au "plus ou moins" en divisant l'intervalle de recherche par deux à chaque tentative.</p>
-<p>En voici une <a href="https://www.cs.usfca.edu/~galles/visualization/Search.html">Visualisation</a></p>
-<p>Puis, en voici l'algorithme:</p>
-<p>En première lecture, ignorez les lignes 1 et 2. </p>
+<p><strong>Attention. Les algorithmes trouvés sur internet, ne sont pas formellement corrects, et ne marchent pas dans tous les langages, même sur des sites réputés.</strong></p>
+<p>En voici une <a href="https://www.cs.usfca.edu/~galles/visualization/Search.html">Visualisation</a> mauvaise, mais qui va m'aider à vous expliquer pourquoi c'est mauvais.</p>
+<p>Puis, en voici un algorithme qui marche tout le temps:</p>
 <div class="highlight"><pre><span></span><code><span class="gs">**ENTRÉE**</span> 
-<span class="k">-</span><span class="w"> </span>Un tableau d&#39;entiers T[0..n-1]
+<span class="k">-</span><span class="w"> </span>Un tableau d&#39;entiers de taille n:  T[0..n-1]
 <span class="k">-</span><span class="w"> </span>Un entier à trouver val
 <span class="gs">**SORTIE**</span> 
 <span class="k">-</span><span class="w"> </span>L&#39;indice du premier élément trouvé s&#39;il existe
 <span class="k">-</span><span class="w"> </span>None si la valeur n&#39;appartient pas au tableau.
 
 <span class="gh"># Algorithme DICHOTOMIE(T, val)</span>
-<span class="k">1.</span> SI n==0
-<span class="k">2.</span>      RETOURNER None
-<span class="k">3.</span> gauche ← 0
-<span class="k">4.</span> droite ← n
-<span class="k">5.</span>   res = None
-<span class="k">6.</span> TANT QUE gauche &lt; droite
-<span class="k">7.</span>      milieu ← gauche + (droite - gauche)//2
-<span class="k">8.</span>      SI val &lt; T[milieu]
-<span class="k">9.</span>         droite ← milieu
-<span class="k">10.</span>     SINON SI T[milieu] &lt; val
-<span class="k">11.</span>         gauche ← milieu + 1
-<span class="k">12.</span>     SINON
-<span class="k">13.</span>            res = milieu
-<span class="k">14.</span>            gauche ← droite
-<span class="k">15.</span> RETOURNER res
+  gauche ← 0
+  droite ← n
+  TANT QUE gauche &lt; droite
+       milieu ← gauche + (droite - gauche)//2
+       SI val &lt; T[milieu]
+            droite ← milieu
+       SINON SI T[milieu] &lt; val
+            gauche ← milieu + 1
+       SINON
+   RETOURNER res
 </code></pre></div>
 <h3 id="invariant">INVARIANT</h3>
 <p>À tout instant, on a <span class="arithmatex">\(0 ≤ gauche ≤ droite ≤ n\)</span>.</p>
