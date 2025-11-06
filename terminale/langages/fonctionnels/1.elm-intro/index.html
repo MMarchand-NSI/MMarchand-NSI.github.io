@@ -4824,10 +4824,6 @@ queue = Cons 5 Vide
 <td>"devient" ou "retourne"</td>
 </tr>
 <tr>
-<td><code>\|</code></td>
-<td>"ou" dans une définition de type</td>
-</tr>
-<tr>
 <td><code>_</code></td>
 <td>"je m'en fous" (wildcard)</td>
 </tr>
@@ -4845,16 +4841,20 @@ queue = Cons 5 Vide
 <h2 id="11-comment-aborder-les-exercices">11. Comment Aborder les Exercices</h2>
 <h3 id="demarche-pour-contient">Démarche pour <code>contient</code></h3>
 <p><strong>Objectif :</strong> Vérifier si un élément <code>e</code> est dans la liste.</p>
-<p><strong>Questions à se poser :</strong>
-- Cas de base : Si la liste est vide, est-ce que <code>e</code> peut être dedans ?
-- Cas récursif : Si la tête est égale à <code>e</code>, qu'est-ce que je retourne ?
-- Si la tête n'est pas <code>e</code>, que dois-je faire avec la queue ?</p>
-<p><strong>Astuce :</strong> Utilise l'opérateur <code>||</code> pour combiner les conditions.</p>
+<p><strong>Questions à se poser :</strong></p>
+<ul>
+<li>Cas de base : Si la liste est vide, est-ce que <code>e</code> peut être dedans ?</li>
+<li>Cas récursif : Si la tête est égale à <code>e</code>, qu'est-ce que je retourne ?</li>
+<li>Si la tête n'est pas <code>e</code>, que dois-je faire avec la queue ?</li>
+</ul>
+<p><strong>Astuce :</strong> Utilise l'opérateur OU <code>||</code> pour combiner les conditions.</p>
 <h3 id="demarche-pour-ajouterfin">Démarche pour <code>ajouterFin</code></h3>
 <p><strong>Objectif :</strong> Ajouter un élément à la fin de la liste.</p>
-<p><strong>Questions à se poser :</strong>
-- Cas de base : Si la liste est vide, comment créer une liste avec juste <code>e</code> ?
-- Cas récursif : Je garde la tête, mais que dois-je faire avec la queue ?</p>
+<p><strong>Questions à se poser :</strong></p>
+<ul>
+<li>Cas de base : Si la liste est vide, comment créer une liste avec juste <code>e</code> ?</li>
+<li>Cas récursif : Je garde la tête, mais que dois-je faire avec la queue ?</li>
+</ul>
 <p><strong>Trace mentale :</strong>
 <div class="highlight"><pre><span></span><code>ajouterFin 9 [1, 2, 3]
 = Je garde 1, et j&#39;ajoute 9 à la fin de [2, 3]
@@ -4864,9 +4864,11 @@ queue = Cons 5 Vide
 </code></pre></div></p>
 <h3 id="demarche-pour-range2">Démarche pour <code>range2</code></h3>
 <p><strong>Objectif :</strong> Créer la liste [a, a+1, a+2, ..., b-1]</p>
-<p><strong>Questions à se poser :</strong>
-- Cas de base : Quand est-ce que je dois arrêter ? (quand a &gt;= b)
-- Cas récursif : Je mets <code>a</code> en tête, puis quoi en queue ?</p>
+<p><strong>Questions à se poser :</strong></p>
+<ul>
+<li>Cas de base : Quand est-ce que je dois arrêter ? (quand a &gt;= b)</li>
+<li>Cas récursif : Je mets <code>a</code> en tête, puis quoi en queue ?</li>
+</ul>
 <p><strong>Réflexion :</strong> C'est similaire à une boucle <code>for i in range(a, b)</code> en Python.</p>
 <hr />
 <h2 id="12-methode-de-travail">12. Méthode de Travail</h2>
@@ -4993,11 +4995,12 @@ queue = Cons 5 Vide
 </ol>
 <hr />
 <h2 id="tu-es-pret">🚀 Tu es Prêt !</h2>
-<p>Avec ces concepts, tu peux résoudre TOUS les exercices du fichier. N'oublie pas :
-- Pattern matching pour déconstruire
-- Récursion pour traiter
-- Cas de base pour arrêter</p>
-<p>Bon courage ! 💪</p>
+<p>Avec ces concepts, tu peux résoudre TOUS les exercices du fichier. N'oublie pas :</p>
+<ul>
+<li>Pattern matching pour déconstruire</li>
+<li>Récursion pour traiter</li>
+<li>Cas de base pour arrêter</li>
+</ul>
 <script src="https://mmarchand-nsi.github.io//js/material-tabbed-fix.js"></script>
 
 
