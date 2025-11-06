@@ -1,0 +1,99 @@
+{
+   //! NE PAS TOUCHER CE FICHIER A MOINS QUE VOUS SACHIEZ TRES EXACTEMENT CE QUE VOUS FAITES.
+  "python.defaultInterpreterPath": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+  
+  // Mettre à true pour voir en quoi votre code n'est pas propre (il faudra redémarrer code)
+  "ruff.enable": false,
+
+  // Paramètres de prise en compte des tests
+  "python.testing.autoTestDiscoverOnSaveEnabled": true,
+  "python.testing.pytestEnabled": true,    // On utilise pytest
+  "python.testing.unittestEnabled": false, // Pas unittest
+
+  // Configuration de l'éditeur pour Python
+
+  "workbench.startupEditor": "none",
+  "chat.disableAIFeatures": true,
+  "chat.commandCenter.enabled": false,
+  "terminal.integrated.enablePersistentSessions": false,
+  "terminal.integrated.persistentSessionReviveProcess": "never",
+
+  // Configuration git
+  "git.postCommitCommand": "push",   // push auto juste après chaque commit
+  "git.autofetch": true,             // fetch régulier
+  "git.confirmSync": false,           // pas de popup de confirmation
+
+
+  // Configuration et création des terminaux
+  "python.terminal.activateEnvironment": false,
+  "terminal.integrated.defaultProfile.windows": "CMD venv",
+  "terminal.integrated.fontFamily": "'JetBrains Mono', 'FiraCode Nerd Font Mono', Consolas, 'Courier New', monospace",
+  "terminal.integrated.fontLigatures.enabled": true,
+  "terminal.integrated.profiles.windows": {
+    "CMD venv": {
+      "path": "C:\\Windows\\System32\\cmd.exe",
+      "args": ["/D", "/K", "call .\\.venv\\Scripts\\activate.bat && prompt $E[92m(venv)$E[0m $P$G && echo Terminal activé"],
+      "icon": "python",
+      "color": "terminal.ansiMagenta"
+    },
+    "REPL elm": {
+      "path": "C:\\Windows\\System32\\cmd.exe",
+      "args": ["/D", "/K", "(if not exist elm md elm) && cd /d elm && (if not exist elm.json elm init) && elm repl && exit"],
+      "icon": "star",
+      "color": "terminal.ansiYellow"
+    },
+    "REPL OCaml": {
+      "path": [
+        "C:\\Programmes_Portables\\MSYS2_FR_1500\\usr\\bin\\bash.exe",
+        "C:\\msys64\\usr\\bin\\bash.exe"
+      ],
+      "args": [
+        "-l", "-c", "([ -d ocaml ] || mkdir -p ocaml) && cd ocaml && (command -v ocaml >/dev/null 2>&1 && { ocaml; exit; } || { echo \"ocaml n'est pas installé\"; read -p \"Appuie sur Entrée pour quitter... \" _; exit; })"
+      ],
+      "env": {
+        "MSYSTEM": "UCRT64",
+        "CHERE_INVOKING": "1",
+        "MSYS2_PATH_TYPE": "inherit",
+        "OCAMLLIB": "/ucrt64/lib/ocaml"
+      },
+      "icon": "squirrel",
+      "color": "terminal.ansiRed"
+    },
+    "MSYS2 UCRT64": {
+      "path": ["C:\\Programmes_Portables\\MSYS2_FR_1500\\usr\\bin\\bash.exe", 
+               "C:\\msys64\\usr\\bin\\bash.exe"],
+      "args": [
+        "-l"
+      ],
+      "env": {
+        "MSYSTEM": "UCRT64",
+        "CHERE_INVOKING": "1", // garde le cwd de VS Code
+        "MSYS2_PATH_TYPE": "inherit" // hérite du PATH Windows
+      },
+      "icon": "terminal-bash",
+      "color": "terminal.ansiGreen"
+    }
+  },
+
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/.DS_Store": true,
+    "**/Thumbs.db": true,
+    "**/pyproject.toml": true,
+    "**/.python-version": true,
+    "**/.gitignore": true,
+    "**/uv.lock":true    
+  },
+
+
+  // divers - Installer les polices  'JetBrains Mono'  c'est bien et ça sera pris en compte
+  "editor.fontFamily": "'JetBrains Mono', 'FiraCode Nerd Font', Consolas, 'Courier New', monospace",
+  "editor.fontLigatures": true,
+  "extensions.ignoreRecommendations": true,
+  "continue.telemetryEnabled": false,
+  "telemetry.feedback.enabled": false,
+  "telemetry.editStats.enabled": false
+
+}
