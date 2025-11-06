@@ -3587,9 +3587,9 @@ Si on note <span class="arithmatex">\(n = |lst1| + |lst2|\)</span>, alors n déc
 - On traite 1 élément (on le place dans le résultat)
 - Le problème restant a taille <span class="arithmatex">\(n - 1\)</span></p>
 <p>Le temps qu'in faut pour fusionner, c'est une unité de temps (simplement construire le résultat avec une tete qu'on a déjà), plus le temps qu'il faut pour construire sa queue de taille $ n - 1 $</p>
-<p>On obtient la <strong>suite récurrente</strong> :
-<span class="arithmatex">\(<span class="arithmatex">\(T(n) = 1 + T(n-1)\)</span>\)</span>
-<span class="arithmatex">\(<span class="arithmatex">\(T(0) = 1\)</span>\)</span></p>
+<p>On obtient la <strong>suite récurrente</strong> :</p>
+<div class="arithmatex">\[T(n) = 1 + T(n-1)\]</div>
+<div class="arithmatex">\[T(0) = 1\]</div>
 <p>C'est une <strong>suite arithmétique de raison 1</strong>. Son terme général est :
 <span class="arithmatex">\(<span class="arithmatex">\(T(n) = T(0) + n \times 1 = n + 1\)</span>\)</span></p>
 <p><strong>Conclusion</strong> : La complexité temporelle de la fusion est <span class="arithmatex">\(O(n)\)</span></p>
@@ -3710,7 +3710,9 @@ Il faut rajouter au résultat ce qu'il reste de lst1 ou ce qu'il reste de lst2 s
 <h3 id="tri-fusion_2">Tri Fusion</h3>
 <p>En python, on le fera aussi récursivement, de la même manière.</p>
 <div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">tri_fusion</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+
     <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+
     <span class="k">match</span> <span class="n">lst</span><span class="p">:</span>
         <span class="k">case</span> <span class="p">[]:</span>
             <span class="k">return</span> <span class="p">[]</span>
@@ -3746,7 +3748,7 @@ Ce que je vous présente ici, c'est la base.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 6, 2025 00:10:26 UTC">November 6, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 6, 2025 00:14:28 UTC">November 6, 2025</span>
   </span>
 
     
