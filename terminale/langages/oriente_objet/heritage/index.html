@@ -2452,6 +2452,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../fonctionnels/11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../fonctionnels/2.elm-maybe/" class="md-nav__link">
         
   
@@ -3243,29 +3266,29 @@
 </div>
 <h4 id="exemple-classe-ratonlaveur-heritant-de-animal">Exemple : Classe <code>RatonLaveur</code> héritant de <code>Animal</code></h4>
 <p>Nous pourrions ajouter un attribut <code>espece</code> à la classe Animal pour les distinguer, mais ici, pour introduire le concept, nous allons choisir cette phrase en Français: "Un RatonLaveur EST UN Animal"</p>
-<div class="highlight"><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">RatonLaveur</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">nom</span><span class="p">)</span> <span class="c1"># cette ligne appelle le constructeur de la super classe</span>
-
-    <span class="k">def</span><span class="w"> </span><span class="nf">parler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nom</span><span class="si">}</span><span class="s2"> émet des grognements.&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">RatonLaveur</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">nom</span><span class="p">)</span> <span class="c1"># cette ligne appelle le constructeur de la super classe</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">parler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nom</span><span class="si">}</span><span class="s2"> émet des grognements.&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>La classe <code>RatonLaveur</code> hérite de <code>Animal</code> mais peut redéfinir certaines méthodes (ici, <code>parler</code>), ou encore en créer d'autres. Ainsi, un objet de la classe <code>Chien</code> pourra aboyer au lieu de "faire du bruit". Un Raton laveur pourra émettre das grognements</p>
 <p>En français, on peut très bien dire dès lors "Un Chien <strong>EST UN</strong> Animal"</p>
 <p><em>Programme exemple</em>:
-<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Animal quelconque&quot;</span><span class="p">)</span>
-<span class="n">x</span><span class="o">.</span><span class="n">parler</span><span class="p">()</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">RatonLaveur</span><span class="p">(</span><span class="s2">&quot;Rocket&quot;</span><span class="p">)</span>
-<span class="n">y</span><span class="o">.</span><span class="n">parler</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Animal</span><span class="p">),</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">RatonLaveur</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">Animal</span><span class="p">),</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">RatonLaveur</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">x</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Animal quelconque&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">x</span><span class="o">.</span><span class="n">parler</span><span class="p">()</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">y</span> <span class="o">=</span> <span class="n">RatonLaveur</span><span class="p">(</span><span class="s2">&quot;Rocket&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">y</span><span class="o">.</span><span class="n">parler</span><span class="p">()</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">Animal</span><span class="p">),</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">RatonLaveur</span><span class="p">))</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nb">print</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">Animal</span><span class="p">),</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">RatonLaveur</span><span class="p">))</span>
 </code></pre></div>
 <em>Affichage:</em>
-<div class="highlight"><pre><span></span><code>Animal quelconque fait du bruit
-Rocket émet des grognements
-True False
-True True
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Animal quelconque fait du bruit
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>Rocket émet des grognements
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>True False
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>True True
 </code></pre></div></p>
 <p>La fonction <code>isinstance</code> sert à savoir si un objet est une instance d'une classe.
 Si on a besoin de l'utiliser hors debugging, c'est sûrement du à un défaut de conception. On n'aura pas besoin de l'utiliser.</p>
@@ -3352,7 +3375,7 @@ Si on a besoin de l'utiliser hors debugging, c'est sûrement du à un défaut de
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>

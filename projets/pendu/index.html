@@ -2526,6 +2526,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../terminale/langages/fonctionnels/11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../terminale/langages/fonctionnels/2.elm-maybe/" class="md-nav__link">
         
   
@@ -3322,103 +3345,103 @@ Vous pourrez les tester dans le fichier tests.py.</p>
 <p>Dans le fichier tests.py, vous pouvez appeler des fonctions de pendu.py en utilisant <code>pendu.choisir_mot()</code> par exemple.
 Mais pour ceci, il faut ajouter <code>import pendu</code> au début du fichier tests.</p>
 </div>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">images</span>
-
-<span class="n">MOTS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;ordinateur&quot;</span><span class="p">,</span> <span class="s2">&quot;pendu&quot;</span><span class="p">,</span> <span class="s2">&quot;clavier&quot;</span><span class="p">,</span> <span class="s2">&quot;souris&quot;</span><span class="p">,</span> <span class="s2">&quot;programmation&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">]</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">choisir_mot</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Renvoie un mot aléatoire dans la liste de mots prédéfinis.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">mot_a_afficher</span><span class="p">(</span><span class="n">mot</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lettres_trouvees</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Renvoie le mot avec des lettres révélées si elles ont été devinées,</span>
-<span class="sd">    et des underscores pour les lettres restantes.</span>
-<span class="sd">    &gt;&gt;&gt; get_mot_ecran(&quot;garage&quot;, &quot;u&quot;)</span>
-<span class="sd">    &#39;______&#39;</span>
-<span class="sd">    &gt;&gt;&gt; get_mot_ecran(&quot;garage&quot;, &quot;uae&quot;)</span>
-<span class="sd">    &#39;_a_a_e&#39;</span>
-
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">valider_lettre</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lettres_tentees</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Renvoie:</span>
-<span class="sd">    - 1 si ça n&#39;est pas une lettre</span>
-<span class="sd">    - 2 si la lettre a déjà été tentée</span>
-<span class="sd">    - 0 sinon</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">a_trouve</span><span class="p">(</span><span class="n">mot</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lettres_trouvees</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si le mot est entièrement deviné, False sinon.</span>
-<span class="sd">    &gt;&gt;&gt; a_trouve(&quot;garage&quot;, &quot;&quot;)</span>
-<span class="sd">    False</span>
-<span class="sd">    &gt;&gt;&gt; a_trouve(&quot;garage&quot;, &quot;ae&quot;)</span>
-<span class="sd">    False</span>
-<span class="sd">    &gt;&gt;&gt; a_trouve(&quot;garage&quot;, &quot;gare&quot;)</span>
-<span class="sd">    True</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">intercaller_espaces</span><span class="p">(</span><span class="n">s</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Cette fonction renvoie la chaîne où on a intercallé des espaces entre chaque caractère.</span>
-<span class="sd">    &gt;&gt;&gt; intercaller_espaces(&quot;python&quot;)</span>
-<span class="sd">    &#39;p y t h o n&#39;</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">tour_de_jeu</span><span class="p">(</span><span class="n">mot</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lettre</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lettres_trouvees</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lettres_tentees</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">essais_restants</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-                <span class="n">fn_message</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span><span class="o">=</span><span class="nb">print</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Vérifie si la lettre est dans le mot et renvoie les variables essais_restants, lettres_trouvees et lettres_tentees mises à jour.</span>
-
-<span class="sd">    Utilise la fonction fn_message pour afficher un message à l&#39;utilisateur pour lui indiquer s&#39;il a trouvé ou pas. Par défaut, la fonction est print.</span>
-
-<span class="sd">    &gt;&gt;&gt; tour_de_jeu(&quot;garage&quot;, &quot;a&quot;, &quot;&quot;, &quot;&quot;, 5)</span>
-<span class="sd">    (5, &#39;a&#39;, &#39;a&#39;)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">images</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">MOTS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;ordinateur&quot;</span><span class="p">,</span> <span class="s2">&quot;pendu&quot;</span><span class="p">,</span> <span class="s2">&quot;clavier&quot;</span><span class="p">,</span> <span class="s2">&quot;souris&quot;</span><span class="p">,</span> <span class="s2">&quot;programmation&quot;</span><span class="p">,</span> <span class="s2">&quot;console&quot;</span><span class="p">]</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">choisir_mot</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    Renvoie un mot aléatoire dans la liste de mots prédéfinis.</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="k">pass</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">mot_a_afficher</span><span class="p">(</span><span class="n">mot</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lettres_trouvees</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="sd">    Renvoie le mot avec des lettres révélées si elles ont été devinées,</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="sd">    et des underscores pour les lettres restantes.</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="sd">    &gt;&gt;&gt; get_mot_ecran(&quot;garage&quot;, &quot;u&quot;)</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sd">    &#39;______&#39;</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="sd">    &gt;&gt;&gt; get_mot_ecran(&quot;garage&quot;, &quot;uae&quot;)</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="sd">    &#39;_a_a_e&#39;</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="k">pass</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="k">def</span><span class="w"> </span><span class="nf">valider_lettre</span><span class="p">(</span><span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lettres_tentees</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="sd">    Renvoie:</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="sd">    - 1 si ça n&#39;est pas une lettre</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="sd">    - 2 si la lettre a déjà été tentée</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="sd">    - 0 sinon</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a>    <span class="k">pass</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="k">def</span><span class="w"> </span><span class="nf">a_trouve</span><span class="p">(</span><span class="n">mot</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lettres_trouvees</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si le mot est entièrement deviné, False sinon.</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="sd">    &gt;&gt;&gt; a_trouve(&quot;garage&quot;, &quot;&quot;)</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="sd">    False</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a><span class="sd">    &gt;&gt;&gt; a_trouve(&quot;garage&quot;, &quot;ae&quot;)</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a><span class="sd">    False</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="sd">    &gt;&gt;&gt; a_trouve(&quot;garage&quot;, &quot;gare&quot;)</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="sd">    True</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>    <span class="k">pass</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a><span class="k">def</span><span class="w"> </span><span class="nf">intercaller_espaces</span><span class="p">(</span><span class="n">s</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="sd">    Cette fonction renvoie la chaîne où on a intercallé des espaces entre chaque caractère.</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a><span class="sd">    &gt;&gt;&gt; intercaller_espaces(&quot;python&quot;)</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="sd">    &#39;p y t h o n&#39;</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="k">def</span><span class="w"> </span><span class="nf">tour_de_jeu</span><span class="p">(</span><span class="n">mot</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lettre</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lettres_trouvees</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">lettres_tentees</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">essais_restants</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>                <span class="n">fn_message</span><span class="p">:</span> <span class="n">Callable</span><span class="p">[[</span><span class="nb">str</span><span class="p">],</span> <span class="kc">None</span><span class="p">]</span><span class="o">=</span><span class="nb">print</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a><span class="sd">    Vérifie si la lettre est dans le mot et renvoie les variables essais_restants, lettres_trouvees et lettres_tentees mises à jour.</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a><span class="sd">    Utilise la fonction fn_message pour afficher un message à l&#39;utilisateur pour lui indiquer s&#39;il a trouvé ou pas. Par défaut, la fonction est print.</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a><span class="sd">    &gt;&gt;&gt; tour_de_jeu(&quot;garage&quot;, &quot;a&quot;, &quot;&quot;, &quot;&quot;, 5)</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a><span class="sd">    (5, &#39;a&#39;, &#39;a&#39;)</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>    <span class="k">pass</span>
 </code></pre></div>
 <h2 id="mission-2">Mission 2</h2>
 <p>Ecrire la fonction __partie_pendu()</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">__image_pendu</span><span class="p">(</span><span class="n">essais_restants</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Cette fonction renvoie l&#39;image du pendu correspondant au nombre d&#39;essais restants</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span>
-
-
-<span class="k">def</span><span class="w"> </span><span class="nf">__partie_pendu_console</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Lance une partie de pendu. Renvoie True si le joueur a gagné, False sinon.</span>
-<span class="sd">    Description de ce que doit faire cette fonction:</span>
-<span class="sd">    - Initialise les variables de jeu:</span>
-<span class="sd">        - mot, le mot à trouver</span>
-<span class="sd">        - lettres_trouvees, une str contenant toutes les lettres trouvées par l&#39;utilisateur</span>
-<span class="sd">        - lettres_tentees, une str contenant toutes les lettres tentées par l&#39;utilisateur</span>
-<span class="sd">        - essais_restants  le nombre d&#39;essais restants</span>
-<span class="sd">    - Affiche un message de bienvenue</span>
-<span class="sd">    - Boucle jusqu&#39;au fin de la partie</span>
-<span class="sd">        - Affiche le mot avec des lettres révélées si elles ont été devinées. Les lettres sont séparées par des espaces</span>
-<span class="sd">        - Demande une lettre au joueur, recommence à demander si la lettre est invalide</span>
-<span class="sd">        - Procède à un tour de jeu</span>
-<span class="sd">        - Affiche le pendu.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">__image_pendu</span><span class="p">(</span><span class="n">essais_restants</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="sd">    Cette fonction renvoie l&#39;image du pendu correspondant au nombre d&#39;essais restants</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="k">pass</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">__partie_pendu_console</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="sd">    Lance une partie de pendu. Renvoie True si le joueur a gagné, False sinon.</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="sd">    Description de ce que doit faire cette fonction:</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="sd">    - Initialise les variables de jeu:</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="sd">        - mot, le mot à trouver</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="sd">        - lettres_trouvees, une str contenant toutes les lettres trouvées par l&#39;utilisateur</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="sd">        - lettres_tentees, une str contenant toutes les lettres tentées par l&#39;utilisateur</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="sd">        - essais_restants  le nombre d&#39;essais restants</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="sd">    - Affiche un message de bienvenue</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="sd">    - Boucle jusqu&#39;au fin de la partie</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="sd">        - Affiche le mot avec des lettres révélées si elles ont été devinées. Les lettres sont séparées par des espaces</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="sd">        - Demande une lettre au joueur, recommence à demander si la lettre est invalide</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="sd">        - Procède à un tour de jeu</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="sd">        - Affiche le pendu.</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a>    <span class="k">pass</span>
 </code></pre></div>
 <p>Ecrire la fonction</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">__lancer_jeu_console</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Cette fonction lance une partie et demande si l&#39;utilisateur veut rejouer. Elle maintient un score.</span>
-<span class="sd">    Dès que le joueur a perdu, elle affiche son score (1 point par partie gagnée)</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">__lancer_jeu_console</span><span class="p">():</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="sd">    Cette fonction lance une partie et demande si l&#39;utilisateur veut rejouer. Elle maintient un score.</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="sd">    Dès que le joueur a perdu, elle affiche son score (1 point par partie gagnée)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="sd">    &quot;&quot;&quot;</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Améliorations</p>
@@ -3516,7 +3539,7 @@ Implémentez cette manière de faire. Ceci n'a de sens que si vous avez réalis�
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>

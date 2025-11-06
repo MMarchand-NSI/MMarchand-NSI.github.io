@@ -2458,6 +2458,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../terminale/langages/fonctionnels/11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../terminale/langages/fonctionnels/2.elm-maybe/" class="md-nav__link">
         
   
@@ -3180,73 +3203,73 @@
 <h1 id="introduction-a-pyxel-sans-poo">Introduction à pyxel - Sans POO</h1>
 <p>Vous allez découvrir les bases de la création d'un jeu.</p>
 <p>L'objectif est de créer un carré capable de se dessiner et de se déplacer en fonction de son vecteur directionnel (dx, dy).</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">pyxel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
-
-<span class="c1"># -- CONStANTES</span>
-<span class="n">W</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span>   <span class="c1"># Largeur</span>
-<span class="n">H</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span>   <span class="c1"># Hauteur</span>
-
-
-<span class="c1"># -- Etat du jeu --</span>
-<span class="n">x</span><span class="p">:</span> <span class="nb">float</span>        <span class="c1"># Coordonnée x du pyxel</span>
-<span class="n">y</span><span class="p">:</span> <span class="nb">float</span>        <span class="c1"># Coordonnée y du pyxel </span>
-<span class="n">dx</span><span class="p">:</span> <span class="nb">float</span>       <span class="c1"># Déplacement en x</span>
-<span class="n">dy</span><span class="p">:</span> <span class="nb">float</span>       <span class="c1"># déplacement en y</span>
-<span class="n">color</span><span class="p">:</span> <span class="nb">int</span>    <span class="c1"># Couleur</span>
-
-
-<span class="c1"># -- Initialisation de l&#39;état du jeu -- </span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">reinit</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Initialise un pixel vert avec une position centrale et un vecteur directeur nul.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">global</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">color</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span> 
-    <span class="n">y</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span>
-    <span class="n">dx</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">dy</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="n">color</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">COLOR_GREEN</span>
-
-
-<span class="c1"># -- Mise à jour régulière de l&#39;état du jeu ---</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Gère les événements utilisateur pour déplacer le pixel.</span>
-<span class="sd">    Cette fonction est automatiquement appelée en boucle par pyxel.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">global</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">color</span>
-
-    <span class="c1"># Modification du vecteur directeur selon les touches fléchées</span>
-    <span class="k">if</span> <span class="n">px</span><span class="o">.</span><span class="n">btn</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">KEY_RIGHT</span><span class="p">):</span>
-        <span class="n">dx</span> <span class="o">=</span> <span class="o">...</span>
-        <span class="n">dy</span> <span class="o">=</span> <span class="o">...</span>
-    <span class="k">elif</span> <span class="o">...</span>
-    <span class="o">...</span>
-
-
-
-<span class="c1"># -- Dessin régulier de l&#39;état du jeu à l&#39;écran ---</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Dessine le carré sur l&#39;écran.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">global</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">color</span>
-    <span class="n">px</span><span class="o">.</span><span class="n">cls</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">COLOR_BLACK</span><span class="p">)</span>          <span class="c1"># Efface l&#39;écran</span>
-    <span class="n">px</span><span class="o">.</span><span class="n">pset</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">color</span><span class="p">)</span>  <span class="c1"># Dessine le carré</span>
-
-
-<span class="c1"># 1. Démarrer le moteur de jeu en 10 FPS</span>
-<span class="n">px</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Carré en Mouvement&quot;</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
-<span class="c1"># 2. Initialiser les variables du jeu</span>
-<span class="n">reinit</span><span class="p">()</span>
-<span class="c1"># 3. Lancer le jeu</span>
-<span class="n">px</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">draw</span><span class="p">)</span>
-
-<span class="c1"># Cette dernière instruction lance une boucle infinie,</span>
-<span class="c1"># qui appelle update, puis draw, de manière régulière, à chaque Frame (ici 10 fois par seconde)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pyxel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># -- CONStANTES</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">W</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span>   <span class="c1"># Largeur</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">H</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span>   <span class="c1"># Hauteur</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># -- Etat du jeu --</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">x</span><span class="p">:</span> <span class="nb">float</span>        <span class="c1"># Coordonnée x du pyxel</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">y</span><span class="p">:</span> <span class="nb">float</span>        <span class="c1"># Coordonnée y du pyxel </span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">dx</span><span class="p">:</span> <span class="nb">float</span>       <span class="c1"># Déplacement en x</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="n">dy</span><span class="p">:</span> <span class="nb">float</span>       <span class="c1"># déplacement en y</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="n">color</span><span class="p">:</span> <span class="nb">int</span>    <span class="c1"># Couleur</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1"># -- Initialisation de l&#39;état du jeu -- </span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="k">def</span><span class="w"> </span><span class="nf">reinit</span><span class="p">():</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="sd">    Initialise un pixel vert avec une position centrale et un vecteur directeur nul.</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a>    <span class="k">global</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">color</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span> 
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>    <span class="n">y</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="n">dx</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>    <span class="n">dy</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>    <span class="n">color</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">COLOR_GREEN</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="c1"># -- Mise à jour régulière de l&#39;état du jeu ---</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">():</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="sd">    Gère les événements utilisateur pour déplacer le pixel.</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="sd">    Cette fonction est automatiquement appelée en boucle par pyxel.</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>    <span class="k">global</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">color</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>    <span class="c1"># Modification du vecteur directeur selon les touches fléchées</span>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>    <span class="k">if</span> <span class="n">px</span><span class="o">.</span><span class="n">btn</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">KEY_RIGHT</span><span class="p">):</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>        <span class="n">dx</span> <span class="o">=</span> <span class="o">...</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>        <span class="n">dy</span> <span class="o">=</span> <span class="o">...</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>    <span class="k">elif</span> <span class="o">...</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>    <span class="o">...</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="c1"># -- Dessin régulier de l&#39;état du jeu à l&#39;écran ---</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">():</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="sd">    Dessine le carré sur l&#39;écran.</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>    <span class="k">global</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">color</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>    <span class="n">px</span><span class="o">.</span><span class="n">cls</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">COLOR_BLACK</span><span class="p">)</span>          <span class="c1"># Efface l&#39;écran</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>    <span class="n">px</span><span class="o">.</span><span class="n">pset</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">color</span><span class="p">)</span>  <span class="c1"># Dessine le carré</span>
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a><span class="c1"># 1. Démarrer le moteur de jeu en 10 FPS</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a><span class="n">px</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Carré en Mouvement&quot;</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a><span class="c1"># 2. Initialiser les variables du jeu</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a><span class="n">reinit</span><span class="p">()</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a><span class="c1"># 3. Lancer le jeu</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a><span class="n">px</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">draw</span><span class="p">)</span>
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a><span class="c1"># Cette dernière instruction lance une boucle infinie,</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a><span class="c1"># qui appelle update, puis draw, de manière régulière, à chaque Frame (ici 10 fois par seconde)</span>
 </code></pre></div>
 <div class="admonition question">
 <p class="admonition-title">Exercices de base</p>
@@ -3369,7 +3392,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>

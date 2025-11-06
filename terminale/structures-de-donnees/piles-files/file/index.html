@@ -2448,6 +2448,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../langages/fonctionnels/11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../langages/fonctionnels/2.elm-maybe/" class="md-nav__link">
         
   
@@ -3324,21 +3347,21 @@ Ici, f est une File contenant des éléments e de type T quelconque.</p>
 </ul>
 <p>Toutefois, pop(0) est en O(n), on veut mieux que ça en termes de complexité.</p>
 <p>Pour une première implémentation, on peut utiliser un nouveau type, <code>collections.deque</code>. Les deques offrent les méthodes append et pop, comme <code>list</code>, mais offrent aussi les méthodes appendleft et popleft en O(1).</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">File</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">deque</span><span class="p">()</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">enfiler</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="n">f</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">defiler</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;File Vide&quot;</span>
-    <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">File</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">return</span> <span class="n">deque</span><span class="p">()</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">enfiler</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">f</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">defiler</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;File Vide&quot;</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 </code></pre></div>
 <h2 id="exercices">Exercices</h2>
 <div class="admonition question">
@@ -3347,7 +3370,7 @@ Ici, f est une File contenant des éléments e de type T quelconque.</p>
 <li>Créer le fichier <code>structures/lineaires/file.py</code></li>
 <li>Créer le fichier <code>exos/exos_files.py</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires</span><span class="w"> </span><span class="kn">import</span> <span class="n">file</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires</span><span class="w"> </span><span class="kn">import</span> <span class="n">file</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
@@ -3359,9 +3382,9 @@ Ici, f est une File contenant des éléments e de type T quelconque.</p>
 <div class="admonition question">
 <p class="admonition-title">File exemple</p>
 <p>Créer une fonction <code>file_exemple</code> qui renvoie la pile suivante:</p>
-<div class="highlight"><pre><span></span><code>  --------------------------------------
-&gt; &#39;rouge&#39; &#39;vert&#39; &#39;jaune&#39; &#39;rouge&#39; &#39;jaune&#39; &gt;
-  --------------------------------------
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>  --------------------------------------
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&gt; &#39;rouge&#39; &#39;vert&#39; &#39;jaune&#39; &#39;rouge&#39; &#39;jaune&#39; &gt;
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  --------------------------------------
 </code></pre></div>
 </div>
 <div class="admonition question">
@@ -3372,11 +3395,11 @@ Ici, f est une File contenant des éléments e de type T quelconque.</p>
 <p class="admonition-title">Sans exécuter le code</p>
 <p>On considère la file exemple.
 Dessiner P et F après l’exécution du programme Python suivant.</p>
-<div class="highlight"><pre><span></span><code><span class="n">F</span> <span class="o">=</span> <span class="n">file_exemple</span><span class="p">()</span>
-
-<span class="n">P</span> <span class="o">=</span> <span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">()</span>
-<span class="k">while</span> <span class="ow">not</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">F</span><span class="p">)):</span>
-    <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">defiler</span><span class="p">(</span><span class="n">F</span><span class="p">),</span> <span class="n">P</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">F</span> <span class="o">=</span> <span class="n">file_exemple</span><span class="p">()</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">P</span> <span class="o">=</span> <span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">while</span> <span class="ow">not</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">F</span><span class="p">)):</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">defiler</span><span class="p">(</span><span class="n">F</span><span class="p">),</span> <span class="n">P</span><span class="p">)</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
@@ -3396,25 +3419,25 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
 <div class="admonition question">
 <p class="admonition-title">Occurences</p>
 <p>Écrire une fonction nb_elements qui prend en paramètres une file et un élément de n'importe quel type, et qui renvoie le nombre de fois où l'élément est présent dans la file. Après appel de cette fonction la file doit avoir retrouvé son état d’origine. Vous commencerez bien sûr par prendre le temps d'écrire la signature de la fonction proprement.</p>
-<div class="highlight"><pre><span></span><code><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">&gt;&gt;&gt; F = file_exemple()</span>
-<span class="sd">&gt;&gt;&gt; nb_elements(F, &quot;rouge&quot;)</span>
-<span class="sd">2</span>
-<span class="sd">&gt;&gt;&gt; F == creer_F() #? La file est toujours égale à la file exemple</span>
-<span class="sd">True</span>
-<span class="sd">&gt;&gt;&gt; nb_elements(F, &quot;vert&quot;)</span>
-<span class="sd">1</span>
-<span class="sd">&gt;&gt;&gt; nb_elements(F, &quot;violet&quot;)</span>
-<span class="sd">0</span>
-<span class="sd">&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="sd">&gt;&gt;&gt; F = file_exemple()</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="sd">&gt;&gt;&gt; nb_elements(F, &quot;rouge&quot;)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="sd">2</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="sd">&gt;&gt;&gt; F == creer_F() #? La file est toujours égale à la file exemple</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="sd">True</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="sd">&gt;&gt;&gt; nb_elements(F, &quot;vert&quot;)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="sd">1</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="sd">&gt;&gt;&gt; nb_elements(F, &quot;violet&quot;)</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="sd">0</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="sd">&quot;&quot;&quot;</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Créer une file avec 2 piles</p>
 <p>Implémenter la structure de file avec 2 files.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires</span><span class="w"> </span><span class="kn">import</span> <span class="n">pile</span>
-
-<span class="nb">type</span> <span class="n">File</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">,</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires</span><span class="w"> </span><span class="kn">import</span> <span class="n">pile</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nb">type</span> <span class="n">File</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">,</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">]</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
@@ -3510,7 +3533,7 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>

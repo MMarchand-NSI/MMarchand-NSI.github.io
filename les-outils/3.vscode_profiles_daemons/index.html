@@ -2892,6 +2892,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../terminale/langages/fonctionnels/11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../terminale/langages/fonctionnels/2.elm-maybe/" class="md-nav__link">
         
   
@@ -4140,36 +4163,36 @@
 <li>Regarde la colonne "Activation Time" et "Memory"</li>
 </ol>
 <p><strong>En ligne de commande :</strong>
-<div class="highlight"><pre><span></span><code><span class="c1"># Linux/Mac</span>
-ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;python|rust-analyzer|clangd|elm&quot;</span>
-
-<span class="c1"># Windows</span>
-tasklist<span class="w"> </span><span class="p">|</span><span class="w"> </span>findstr<span class="w"> </span><span class="s2">&quot;python rust clangd&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Linux/Mac</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;python|rust-analyzer|clangd|elm&quot;</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Windows</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>tasklist<span class="w"> </span><span class="p">|</span><span class="w"> </span>findstr<span class="w"> </span><span class="s2">&quot;python rust clangd&quot;</span>
 </code></pre></div></p>
 <hr />
 <h2 id="3-pourquoi-creer-des-profils-par-langage">3. Pourquoi Créer des Profils par Langage</h2>
 <h3 id="le-probleme-sans-profils">Le Problème Sans Profils</h3>
-<div class="highlight"><pre><span></span><code>VSCode avec TOUTES les extensions
-├── Python extension → lance python daemon (200 MB)
-├── Rust extension → lance rust-analyzer (300 MB)
-├── Elm extension → lance elm daemon (100 MB)
-├── C++ extension → lance clangd (150 MB)
-└── ... 15 autres extensions
-
-Total RAM : 2-4 GB
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>VSCode avec TOUTES les extensions
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── Python extension → lance python daemon (200 MB)
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── Rust extension → lance rust-analyzer (300 MB)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── Elm extension → lance elm daemon (100 MB)
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>├── C++ extension → lance clangd (150 MB)
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>└── ... 15 autres extensions
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Total RAM : 2-4 GB
 </code></pre></div>
 <p><strong>Même si tu codes en Python, les daemons Rust/Elm/C++ tournent quand même !</strong></p>
 <h3 id="la-solution-profils">La Solution : Profils</h3>
 <p><strong>Un profil = un VSCode avec seulement les extensions nécessaires</strong></p>
-<div class="highlight"><pre><span></span><code>Profil Python
-├── Python extension → 200 MB
-└── Extensions générales (Git, etc.)
-Total RAM : 400 MB
-
-Profil Rust
-├── Rust extension → 300 MB
-└── Extensions générales
-Total RAM : 500 MB
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Profil Python
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>├── Python extension → 200 MB
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>└── Extensions générales (Git, etc.)
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>Total RAM : 400 MB
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>Profil Rust
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>├── Rust extension → 300 MB
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>└── Extensions générales
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>Total RAM : 500 MB
 </code></pre></div>
 <p><strong>Économie : 1.5-3 GB de RAM par profil !</strong> 💰</p>
 <hr />
@@ -4182,60 +4205,60 @@ Total RAM : 500 MB
 <li>Clique sur "Create Profile"</li>
 </ol>
 <p><strong>Étape 2 : Configurer le profil</strong>
-<div class="highlight"><pre><span></span><code>Nom : Python Development
-Copier depuis : Default Profile (ou None)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Nom : Python Development
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Copier depuis : Default Profile (ou None)
 </code></pre></div></p>
 <p><strong>Étape 3 : Activer le profil</strong>
 - Le profil s'active automatiquement après création
 - Tu peux switcher avec : ⚙️ → Profiles → Sélectionne un profil</p>
 <p><strong>Étape 4 : Installer uniquement les extensions nécessaires</strong>
-<div class="highlight"><pre><span></span><code>Pour Python :
-✅ Python
-✅ Pylance
-✅ Python Debugger
-✅ Git (général)
-✅ GitLens (général)
-❌ Rust-analyzer (pas besoin)
-❌ Elm (pas besoin)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Pour Python :
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>✅ Python
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>✅ Pylance
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>✅ Python Debugger
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>✅ Git (général)
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>✅ GitLens (général)
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>❌ Rust-analyzer (pas besoin)
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>❌ Elm (pas besoin)
 </code></pre></div></p>
 <h3 id="methode-ligne-de-commande">Méthode Ligne de Commande</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Lancer VSCode avec un profil spécifique</span>
-code<span class="w"> </span>--profile<span class="w"> </span><span class="s2">&quot;Python Development&quot;</span>
-
-<span class="c1"># Créer un profil vide</span>
-code<span class="w"> </span>--profile<span class="w"> </span><span class="s2">&quot;Rust Development&quot;</span><span class="w"> </span>--extensions-dir<span class="w"> </span>~/.vscode-rust/extensions
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Lancer VSCode avec un profil spécifique</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>code<span class="w"> </span>--profile<span class="w"> </span><span class="s2">&quot;Python Development&quot;</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># Créer un profil vide</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>code<span class="w"> </span>--profile<span class="w"> </span><span class="s2">&quot;Rust Development&quot;</span><span class="w"> </span>--extensions-dir<span class="w"> </span>~/.vscode-rust/extensions
 </code></pre></div>
 <h3 id="structure-recommandee">Structure Recommandée</h3>
-<div class="highlight"><pre><span></span><code>Profils à créer :
-├── Default (minimal, sans language servers)
-├── Python Development
-├── Rust Development
-├── Web Development (HTML/CSS/JS)
-├── Elm Development
-├── C/C++ Development
-└── Écriture (Markdown, pas de code)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>Profils à créer :
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>├── Default (minimal, sans language servers)
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>├── Python Development
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>├── Rust Development
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>├── Web Development (HTML/CSS/JS)
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>├── Elm Development
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>├── C/C++ Development
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>└── Écriture (Markdown, pas de code)
 </code></pre></div>
 <hr />
 <h2 id="5-comment-fonctionnent-les-language-servers">5. Comment Fonctionnent les Language Servers</h2>
 <h3 id="architecture-client-serveur">Architecture Client-Serveur</h3>
-<div class="highlight"><pre><span></span><code>VSCode (Client)
-    ↓ demande d&#39;autocomplétion
-Language Server (Daemon)
-    ↓ analyse le code
-    ↓ retourne les suggestions
-VSCode affiche les suggestions
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>VSCode (Client)
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    ↓ demande d&#39;autocomplétion
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Language Server (Daemon)
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    ↓ analyse le code
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    ↓ retourne les suggestions
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>VSCode affiche les suggestions
 </code></pre></div>
 <h3 id="le-protocol-lsp-language-server-protocol">Le Protocol LSP (Language Server Protocol)</h3>
 <p><strong>Inventé par Microsoft pour VSCode</strong></p>
 <p><strong>Avant LSP :</strong>
-<div class="highlight"><pre><span></span><code>Chaque éditeur × Chaque langage = N × M implémentations
-Vim + Python, Vim + Rust, Emacs + Python, Emacs + Rust...
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Chaque éditeur × Chaque langage = N × M implémentations
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Vim + Python, Vim + Rust, Emacs + Python, Emacs + Rust...
 </code></pre></div></p>
 <p><strong>Avec LSP :</strong>
-<div class="highlight"><pre><span></span><code>1 Language Server par langage
-× 
-N éditeurs qui parlent LSP
-= N + M implémentations seulement !
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>1 Language Server par langage
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>× 
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>N éditeurs qui parlent LSP
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>= N + M implémentations seulement !
 </code></pre></div></p>
 <p><strong>Liste de Language Servers :</strong>
 | Langage | Language Server |
@@ -4256,58 +4279,58 @@ N éditeurs qui parlent LSP
 - Lancer des tests en continu
 - Analyser le code custom</p>
 <h3 id="exemple-simple-en-python">Exemple Simple en Python</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># mon_daemon.py</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">watchdog.observers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Observer</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">watchdog.events</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileSystemEventHandler</span>
-
-<span class="k">class</span><span class="w"> </span><span class="nc">MonDaemon</span><span class="p">(</span><span class="n">FileSystemEventHandler</span><span class="p">):</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">on_modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.elm&#39;</span><span class="p">):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fichier modifié : </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;elm make </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔄 Daemon Elm lancé...&quot;</span><span class="p">)</span>
-
-    <span class="n">observer</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">()</span>
-    <span class="n">observer</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">MonDaemon</span><span class="p">(),</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./src&quot;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">observer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
-        <span class="n">observer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
-
-    <span class="n">observer</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># mon_daemon.py</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">watchdog.observers</span><span class="w"> </span><span class="kn">import</span> <span class="n">Observer</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">watchdog.events</span><span class="w"> </span><span class="kn">import</span> <span class="n">FileSystemEventHandler</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="k">class</span><span class="w"> </span><span class="nc">MonDaemon</span><span class="p">(</span><span class="n">FileSystemEventHandler</span><span class="p">):</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">on_modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.elm&#39;</span><span class="p">):</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fichier modifié : </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;elm make </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔄 Daemon Elm lancé...&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>    <span class="n">observer</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">()</span>
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>    <span class="n">observer</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">MonDaemon</span><span class="p">(),</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./src&quot;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>    <span class="n">observer</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>
+<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>            <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>    <span class="k">except</span> <span class="ne">KeyboardInterrupt</span><span class="p">:</span>
+<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a>        <span class="n">observer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span>
+<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>
+<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>    <span class="n">observer</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
 </code></pre></div>
 <p><strong>Lancer le daemon :</strong>
-<div class="highlight"><pre><span></span><code>python<span class="w"> </span>mon_daemon.py<span class="w"> </span><span class="p">&amp;</span><span class="w">  </span><span class="c1"># Le &amp; lance en arrière-plan</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>python<span class="w"> </span>mon_daemon.py<span class="w"> </span><span class="p">&amp;</span><span class="w">  </span><span class="c1"># Le &amp; lance en arrière-plan</span>
 </code></pre></div></p>
 <h3 id="integration-dans-vscode">Intégration dans VSCode</h3>
 <p><strong>Créer une tâche VSCode (<code>.vscode/tasks.json</code>) :</strong>
-<div class="highlight"><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;tasks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
-<span class="w">    </span><span class="p">{</span>
-<span class="w">      </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Start Elm Daemon&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;${workspaceFolder}/mon_daemon.py&quot;</span><span class="p">],</span>
-<span class="w">      </span><span class="nt">&quot;isBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
-<span class="w">      </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">  </span><span class="p">]</span>
-<span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">&quot;tasks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="p">{</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">      </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Start Elm Daemon&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">      </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;${workspaceFolder}/mon_daemon.py&quot;</span><span class="p">],</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">      </span><span class="nt">&quot;isBackground&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="w">      </span><span class="nt">&quot;problemMatcher&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">  </span><span class="p">]</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="p">}</span>
 </code></pre></div></p>
 <p><strong>Lancer avec :</strong> <code>Ctrl+Shift+P</code> → "Tasks: Run Task" → "Start Elm Daemon"</p>
 <hr />
 <h2 id="7-gerer-les-daemons-qui-consomment-trop">7. Gérer les Daemons qui Consomment Trop</h2>
 <h3 id="diagnostiquer">Diagnostiquer</h3>
 <p><strong>1. VSCode Task Manager</strong>
-<div class="highlight"><pre><span></span><code>Ctrl+Shift+P → &quot;Developer: Open Process Explorer&quot;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Ctrl+Shift+P → &quot;Developer: Open Process Explorer&quot;
 </code></pre></div></p>
 <h3 id="desactiver-temporairement-des-extensions">Désactiver Temporairement des Extensions</h3>
 <p><strong>Sans changer de profil :</strong>
@@ -4541,7 +4564,7 @@ N éditeurs qui parlent LSP
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>

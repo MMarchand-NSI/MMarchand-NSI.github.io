@@ -2569,6 +2569,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../fonctionnels/11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../fonctionnels/2.elm-maybe/" class="md-nav__link">
         
   
@@ -3376,7 +3399,7 @@
 <p><strong>Exemple 1</strong></p>
 <p>Un exemple bien concret pour s'en rendre compte est le processus de compilation d'un programme.</p>
 <p>Vous avez exécuté cette commande pour compiler du code C++:</p>
-<div class="highlight"><pre><span></span><code>g++<span class="w"> </span>-o<span class="w"> </span>liste<span class="w"> </span>liste.cpp
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>g++<span class="w"> </span>-o<span class="w"> </span>liste<span class="w"> </span>liste.cpp
 </code></pre></div>
 <p>Le compilateur g++ est un programme chargé de traduire votre proramme écrit en C++ en programme écrit en langage machine.</p>
 <p>les programmes prennent en entrée des données. Ici, le programme g++ prend votre programme C++ en entrée. Votre programme C++ est donc une donnée.</p>
@@ -3384,14 +3407,14 @@
 <p>Plus généralement, on peut considérer que toute information est une donnée.</p>
 <p><strong>Exemple 2</strong></p>
 <p>Soit une liste de points, ainsi que la fonction qui renvoie la distance à l'origine d'un point.</p>
-<div class="highlight"><pre><span></span><code><span class="n">points</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">distance_org</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]):</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">points</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">),</span> <span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">9</span><span class="p">)]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">distance_org</span><span class="p">(</span><span class="n">p</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]):</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">**</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>
 </code></pre></div>
 <p>Considérons une fonction comme un sous-programme, donc un programme.</p>
 <p>Vous avez déjà vu qu'en python, on peut trier ces points en fonction de leur distance à l'origine grâce à l'appel:</p>
-<div class="highlight"><pre><span></span><code><span class="n">points_tries</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">distance_org</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">points_tries</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">points</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">distance_org</span><span class="p">)</span>
 </code></pre></div>
 <p>Ici, le programme sorted prend bien en paramètre le programme distance_org.</p>
 <h2 id="definitions">Définitions</h2>
@@ -3420,96 +3443,96 @@ On peut considérer une machine de Turing comme un automate possédant des état
 <p>Non.</p>
 <p>Le problème de l'arrêt est indécidable.</p>
 <h3 id="preuve-la-plus-connue">Preuve la plus connue</h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">arret</span><span class="p">(</span><span class="n">prog</span><span class="p">,</span> <span class="n">donnee</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
-<span class="sd">    #! Supposons que ce programme soit cette fonction</span>
-<span class="sd">    #* Cette fonction renvoie simplement le booléen ARRET en variable globale</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Le programme d&#39;arrêt a calculé que le programme </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;s&#39;arrêtera&quot;</span> <span class="k">if</span> <span class="n">ARRET</span> <span class="k">else</span> <span class="s2">&quot;ne s&#39;arrêtera pas&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; pour la donnée </span><span class="si">{</span><span class="n">donnee</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">ARRET</span>
-
-<span class="c1">#! Définissons maintenant une autre fonction très simple:</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">negation</span><span class="p">(</span><span class="n">prog</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cette fonction doit :</span>
-<span class="sd">        - ne pas s&#39;arrêter si le programme en entrée s&#39;arrête pour lui-même en paramètre</span>
-<span class="sd">        - s&#39;arrêter si le programme en entrée ne s&#39;arrête pas pour lui-même en paramètre&quot;&quot;&quot;</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Début de la fonction </span><span class="si">{</span><span class="n">negation</span><span class="si">}</span><span class="s2"> pour </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">arret</span><span class="p">(</span><span class="n">prog</span><span class="p">,</span> <span class="n">prog</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vu que </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2"> s&#39;arrête pour </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">negation</span><span class="si">}</span><span class="s2"> ne s&#39;arrêtera pas pour </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-            <span class="k">pass</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vu que </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2"> ne s&#39;arrête pas pour </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">negation</span><span class="si">}</span><span class="s2"> s&#39;arrête pour </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-
-<span class="c1">#! Fonctions de test basiques</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">sans_arret</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fonction dont on sait pour sûr qu&#39;elle ne s&#39;arrêtera pas pour elle même en entrée&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">x</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">avec_arret</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Fonction dont on sait pour sûr qu&#39;elle s&#39;arrêtera pour elle même.</span>
-<span class="sd">    Ici, c&#39;est tout simplement la fonction qui renvoie son entrée.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">x</span>
-
-
-<span class="c1">#! Les tests 3 et 4 montrent une contradiction. </span>
-<span class="c1">#! L&#39;hypothèse d&#39;existence d&#39;un algorithme de l&#39;arrêt est donc fausse. </span>
-
-<span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Entrez un numero de test: &quot;</span><span class="p">))</span>
-
-<span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
-    <span class="c1"># print s&#39;arrete pour print, la preuve</span>
-    <span class="nb">print</span><span class="p">(</span><span class="nb">print</span><span class="p">)</span>
-    <span class="n">ARRET</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">negation</span><span class="p">(</span><span class="nb">print</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
-    <span class="c1"># sans_arret ne s&#39;arretera pas quelle que soit l&#39;entrée</span>
-    <span class="n">ARRET</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">negation</span><span class="p">(</span><span class="n">sans_arret</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
-    <span class="c1"># avec_arret s&#39;arretera quelle que soit l&#39;entrée</span>
-    <span class="n">ARRET</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">negation</span><span class="p">(</span><span class="n">avec_arret</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">i</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
-    <span class="c1">#! Contradiction en supposant l&#39;arrêt</span>
-    <span class="n">ARRET</span> <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">negation</span><span class="p">(</span><span class="n">negation</span><span class="p">)</span>
-<span class="k">elif</span> <span class="n">i</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
-    <span class="c1">#! Contradiction en supposant le non-arrêt</span>
-    <span class="n">ARRET</span> <span class="o">=</span> <span class="kc">False</span>
-    <span class="n">negation</span><span class="p">(</span><span class="n">negation</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">arret</span><span class="p">(</span><span class="n">prog</span><span class="p">,</span> <span class="n">donnee</span><span class="p">):</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="sd">    #! Supposons que ce programme soit cette fonction</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="sd">    #* Cette fonction renvoie simplement le booléen ARRET en variable globale</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Le programme d&#39;arrêt a calculé que le programme </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;s&#39;arrêtera&quot;</span> <span class="k">if</span> <span class="n">ARRET</span> <span class="k">else</span> <span class="s2">&quot;ne s&#39;arrêtera pas&quot;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot; pour la donnée </span><span class="si">{</span><span class="n">donnee</span><span class="si">}</span><span class="s2"> &quot;</span><span class="p">)</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="k">return</span> <span class="n">ARRET</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="c1">#! Définissons maintenant une autre fonction très simple:</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">negation</span><span class="p">(</span><span class="n">prog</span><span class="p">):</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Cette fonction doit :</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="sd">        - ne pas s&#39;arrêter si le programme en entrée s&#39;arrête pour lui-même en paramètre</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="sd">        - s&#39;arrêter si le programme en entrée ne s&#39;arrête pas pour lui-même en paramètre&quot;&quot;&quot;</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Début de la fonction </span><span class="si">{</span><span class="n">negation</span><span class="si">}</span><span class="s2"> pour </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>    <span class="k">if</span> <span class="n">arret</span><span class="p">(</span><span class="n">prog</span><span class="p">,</span> <span class="n">prog</span><span class="p">):</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vu que </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2"> s&#39;arrête pour </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">negation</span><span class="si">}</span><span class="s2"> ne s&#39;arrêtera pas pour </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a>            <span class="k">pass</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Vu que </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2"> ne s&#39;arrête pas pour </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">negation</span><span class="si">}</span><span class="s2"> s&#39;arrête pour </span><span class="si">{</span><span class="n">prog</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="c1">#! Fonctions de test basiques</span>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="k">def</span><span class="w"> </span><span class="nf">sans_arret</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Fonction dont on sait pour sûr qu&#39;elle ne s&#39;arrêtera pas pour elle même en entrée&quot;&quot;&quot;</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>    <span class="k">return</span> <span class="n">x</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a><span class="k">def</span><span class="w"> </span><span class="nf">avec_arret</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a><span class="sd">    Fonction dont on sait pour sûr qu&#39;elle s&#39;arrêtera pour elle même.</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a><span class="sd">    Ici, c&#39;est tout simplement la fonction qui renvoie son entrée.</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>    <span class="k">return</span> <span class="n">x</span>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a><span class="c1">#! Les tests 3 et 4 montrent une contradiction. </span>
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a><span class="c1">#! L&#39;hypothèse d&#39;existence d&#39;un algorithme de l&#39;arrêt est donc fausse. </span>
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a><span class="n">i</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Entrez un numero de test: &quot;</span><span class="p">))</span>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>
+<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a><span class="k">if</span> <span class="n">i</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>    <span class="c1"># print s&#39;arrete pour print, la preuve</span>
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>    <span class="nb">print</span><span class="p">(</span><span class="nb">print</span><span class="p">)</span>
+<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>    <span class="n">ARRET</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>    <span class="n">negation</span><span class="p">(</span><span class="nb">print</span><span class="p">)</span>
+<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a><span class="k">elif</span> <span class="n">i</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a>    <span class="c1"># sans_arret ne s&#39;arretera pas quelle que soit l&#39;entrée</span>
+<a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a>    <span class="n">ARRET</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>    <span class="n">negation</span><span class="p">(</span><span class="n">sans_arret</span><span class="p">)</span>
+<a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a><span class="k">elif</span> <span class="n">i</span><span class="o">==</span><span class="mi">2</span><span class="p">:</span>
+<a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>    <span class="c1"># avec_arret s&#39;arretera quelle que soit l&#39;entrée</span>
+<a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a>    <span class="n">ARRET</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a>    <span class="n">negation</span><span class="p">(</span><span class="n">avec_arret</span><span class="p">)</span>
+<a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a><span class="k">elif</span> <span class="n">i</span><span class="o">==</span><span class="mi">3</span><span class="p">:</span>
+<a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a>    <span class="c1">#! Contradiction en supposant l&#39;arrêt</span>
+<a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a>    <span class="n">ARRET</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a>    <span class="n">negation</span><span class="p">(</span><span class="n">negation</span><span class="p">)</span>
+<a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a><span class="k">elif</span> <span class="n">i</span><span class="o">==</span><span class="mi">4</span><span class="p">:</span>
+<a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a>    <span class="c1">#! Contradiction en supposant le non-arrêt</span>
+<a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a>    <span class="n">ARRET</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a>    <span class="n">negation</span><span class="p">(</span><span class="n">negation</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="si-ce-programme-existait">Si ce programme existait</h2>
 <p>Si un tel programme existait, des problèmes comme la conjecture de Collatz trouveraient leur solution.
 Pour tous ces types de problèmes, il suffirait d'écrire un programme testant toutes les possibilités et d'y appliquer la fonction d'arrêt.</p>
 <p>L'output de ce programme nous indiquerait si le programme s'arrête ou pas, ce que nous ne savons pas déterminer en l'état actuel des connaissances.</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">arret</span><span class="p">(</span><span class="n">fonction</span><span class="p">,</span> <span class="n">donnee</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="c1"># Si cette fonction existait</span>
-    <span class="o">...</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">syracuse</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="k">while</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
-    <span class="k">return</span> <span class="kc">True</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">toutes_les</span> <span class="n">possibilites</span><span class="p">():</span>
-    <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
-    <span class="k">while</span> <span class="n">syracuse</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
-        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">arret</span><span class="p">(</span><span class="n">toutes_les</span> <span class="n">possibilites</span><span class="p">,</span> <span class="p">()))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">arret</span><span class="p">(</span><span class="n">fonction</span><span class="p">,</span> <span class="n">donnee</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="c1"># Si cette fonction existait</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="o">...</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">syracuse</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">while</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>            <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="mi">2</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            <span class="n">n</span> <span class="o">=</span> <span class="mi">3</span> <span class="o">*</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="k">return</span> <span class="kc">True</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">toutes_les</span> <span class="n">possibilites</span><span class="p">():</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="n">n</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>    <span class="k">while</span> <span class="n">syracuse</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="nb">print</span><span class="p">(</span><span class="n">arret</span><span class="p">(</span><span class="n">toutes_les</span> <span class="n">possibilites</span><span class="p">,</span> <span class="p">()))</span>
 </code></pre></div>
 <script src="https://mmarchand-nsi.github.io//js/material-tabbed-fix.js"></script>
 
@@ -3594,7 +3617,7 @@ Pour tous ces types de problèmes, il suffirait d'écrire un programme testant t
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>

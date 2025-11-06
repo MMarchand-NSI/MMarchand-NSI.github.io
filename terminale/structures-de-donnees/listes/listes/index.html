@@ -2450,6 +2450,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../langages/fonctionnels/11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../langages/fonctionnels/2.elm-maybe/" class="md-nav__link">
         
   
@@ -3475,12 +3498,12 @@
 <p>Nous matérialiserons la liste vide par un tuple vide.</p>
 <p>Une liste non vide sera un tuple contienant 2 éléments, la tête, ainsi que la queue.</p>
 <p>Le tuple suivant représente une liste où la tête est <code>2</code>, et la queue est une liste dont la tête est <code>3</code>, suivie d'une liste ou la tete est 4, suivie elle-même de la liste vide.</p>
-<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">())))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">())))</span>
 </code></pre></div>
 <h3 id="traduction-de-notre-definition-en-python">Traduction de notre définition en python:</h3>
-<p><div class="highlight"><pre><span></span><code><span class="nb">type</span> <span class="n">Vide</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[()]</span>
-
-<span class="nb">type</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vide</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]]</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">type</span> <span class="n">Vide</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[()]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">type</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vide</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]]</span>
 </code></pre></div>
 Nous créons ici deux types :</p>
 <ul>
@@ -3493,12 +3516,12 @@ Nous créons ici deux types :</p>
 - <strong>Créer Vide</strong> : Créer une liste vide
 - <strong>Créer</strong> : Créer une nouvelle liste à partir d'un élément et d'une autre liste, ce qui revient à <strong>ajouter un élément au début de la liste</strong></p>
 <p>Une fonction pour creer une liste vide</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">creer_vide</span><span class="p">[</span><span class="n">T</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-    <span class="k">return</span> <span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_vide</span><span class="p">[</span><span class="n">T</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">return</span> <span class="p">()</span>
 </code></pre></div>
 <p>Une fonction pour  en paramètre :
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">t</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">t</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
 </code></pre></div>
 Elle prend deux arguments :</p>
 <ul>
@@ -3510,16 +3533,16 @@ Elle prend deux arguments :</p>
 - <strong>Tête</strong> : obtenir le premier élément de la liste.
 - <strong>Queue</strong> : obtenir la sous-liste à partir du deuxième élément.
 - <strong>Est Vide</strong> : Savoir si une liste est vide.</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">tete</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Liste vide&quot;</span>
-    <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">queue</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Liste vide&quot;</span>
-    <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="k">return</span> <span class="n">lst</span> <span class="o">==</span> <span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">tete</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Liste vide&quot;</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">queue</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Liste vide&quot;</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">return</span> <span class="n">lst</span> <span class="o">==</span> <span class="p">()</span>
 </code></pre></div>
 <div class="admonition danger">
 <p class="admonition-title">Attention</p>
@@ -3528,10 +3551,10 @@ Nous n'utiliserons que les fonctions que nous avons définies ainsi que la const
 </div>
 <h2 id="fonctions-en-lecture">Fonctions en lecture</h2>
 <h3 id="calculer-la-taille-dune-liste">Calculer la Taille d'une Liste</h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">taille</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
-        <span class="k">return</span> <span class="mi">0</span>
-    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">taille</span><span class="p">(</span><span class="n">queue</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">taille</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="k">return</span> <span class="mi">0</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">taille</span><span class="p">(</span><span class="n">queue</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>
 </code></pre></div>
 <div class="admonition question">
 <p class="admonition-title">A vous</p>
@@ -3544,11 +3567,11 @@ On réalisera une disjonction de cas au papier avant de coder. </p>
 <p>Bien comprendre que ces listes sont immuables. On ne peut pas les modifier. Par "Insérer", on entendra "Renvoyer une liste dans laquelle on a inséré".</p>
 </div>
 <h3 id="ajouter-un-element-a-la-fin">Ajouter un Élément à la fin</h3>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">ajouter_debut</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="n">liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">liste</span><span class="p">:</span>
-    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">creer</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="p">())</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">creer</span><span class="p">(</span><span class="n">tete</span><span class="p">(</span><span class="n">lst</span><span class="p">),</span> <span class="n">ajouter_fin</span><span class="p">(</span><span class="n">queue</span><span class="p">(</span><span class="n">lst</span><span class="p">)))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">ajouter_debut</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="n">liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">liste</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="k">return</span> <span class="n">creer</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="p">())</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="k">return</span> <span class="n">creer</span><span class="p">(</span><span class="n">tete</span><span class="p">(</span><span class="n">lst</span><span class="p">),</span> <span class="n">ajouter_fin</span><span class="p">(</span><span class="n">queue</span><span class="p">(</span><span class="n">lst</span><span class="p">)))</span>
 </code></pre></div>
 <p>Si on reprend la métaphore des lutins.</p>
 <p><img alt="alt text" src="../image.png" /></p>
@@ -3645,7 +3668,7 @@ On réalisera une disjonction de cas au papier avant de coder. </p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>

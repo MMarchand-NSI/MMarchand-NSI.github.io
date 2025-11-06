@@ -2454,6 +2454,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../2.elm-maybe/" class="md-nav__link">
         
   
@@ -4282,59 +4305,59 @@
 <h1 id="3-loperateur-pipe">3. L'Opérateur Pipe <code>|&gt;</code></h1>
 <h2 id="le-probleme">🎯 Le Problème</h2>
 <h3 id="code-difficile-a-lire">Code difficile à lire</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Calculer la taille de la liste renversée</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- Calculer la taille de la liste renversée</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]))</span>
 </code></pre></div>
 <p><strong>Problème :</strong> On doit lire <strong>de l'intérieur vers l'extérieur</strong> !</p>
-<div class="highlight"><pre><span></span><code>1. pairs [1, 2, 3, 4, 5]      --&gt; [2, 4]
-2. renverse [2, 4]            --&gt; [4, 2]
-3. taille [4, 2]              --&gt; 2
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>1. pairs [1, 2, 3, 4, 5]      --&gt; [2, 4]
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>2. renverse [2, 4]            --&gt; [4, 2]
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>3. taille [4, 2]              --&gt; 2
 </code></pre></div>
 <p><strong>Mais le code s'écrit dans l'ordre inverse de la lecture !</strong> 😵</p>
 <hr />
 <h2 id="la-solution-loperateur">💡 La Solution : L'Opérateur <code>|&gt;</code></h2>
 <h3 id="syntaxe">Syntaxe</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">valeur</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">valeur</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction</span>
 </code></pre></div>
 <p><strong>Se lit :</strong> "Prends <code>valeur</code> et applique-lui <code>fonction</code>"</p>
 <h3 id="exemple-simple">Exemple Simple</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Sans pipe</span>
-<span class="nv">taille</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
-<span class="c1">--&gt; 3</span>
-
-<span class="c1">-- Avec pipe</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
-<span class="c1">--&gt; 3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">-- Sans pipe</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">taille</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1">--&gt; 3</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1">-- Avec pipe</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="c1">--&gt; 3</span>
 </code></pre></div>
 <p><strong>Les deux sont équivalents !</strong></p>
 <hr />
 <h2 id="lire-de-gauche-a-droite">📖 Lire de Gauche à Droite</h2>
 <h3 id="chainer-des-operations">Chaîner des Opérations</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ❌ Sans pipe : lecture compliquée</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]))</span>
-
-<span class="c1">-- ✅ Avec pipe : lecture naturelle</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span>
-<span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">        </span><span class="c1">-- [2, 4]</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">renverse</span><span class="w">     </span><span class="c1">-- [4, 2]</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span><span class="w">       </span><span class="c1">-- 2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">-- ❌ Sans pipe : lecture compliquée</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]))</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1">-- ✅ Avec pipe : lecture naturelle</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">        </span><span class="c1">-- [2, 4]</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">renverse</span><span class="w">     </span><span class="c1">-- [4, 2]</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span><span class="w">       </span><span class="c1">-- 2</span>
 </code></pre></div>
 <p><strong>Ordre de lecture = ordre d'exécution !</strong> 🎯</p>
 <h3 id="visualisation">Visualisation</h3>
-<div class="highlight"><pre><span></span><code>[1, 2, 3, 4, 5]
-    ↓ pairs
-[2, 4]
-    ↓ renverse
-[4, 2]
-    ↓ taille
-2
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>[1, 2, 3, 4, 5]
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    ↓ pairs
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>[2, 4]
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    ↓ renverse
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>[4, 2]
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    ↓ taille
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>2
 </code></pre></div>
 <hr />
 <h2 id="comment-ca-marche">🔧 Comment Ça Marche ?</h2>
 <h3 id="definition-de">Définition de <code>|&gt;</code></h3>
-<div class="highlight"><pre><span></span><code><span class="nf">(|&gt;)</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
-<span class="nf">(|&gt;)</span><span class="w"> </span><span class="nv">valeur</span><span class="w"> </span><span class="nv">fonction</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">fonction</span><span class="w"> </span><span class="nv">valeur</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nf">(|&gt;)</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nf">(|&gt;)</span><span class="w"> </span><span class="nv">valeur</span><span class="w"> </span><span class="nv">fonction</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">fonction</span><span class="w"> </span><span class="nv">valeur</span>
 </code></pre></div>
 <p><strong>Traduction :</strong> </p>
 <ul>
@@ -4344,280 +4367,280 @@
 <li>Retourne le résultat de type <code>b</code></li>
 </ul>
 <h3 id="transformation">Transformation</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Ceci</span>
-<span class="nv">x</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">f</span>
-
-<span class="c1">-- Est transformé en cela</span>
-<span class="nv">f</span><span class="w"> </span><span class="nv">x</span>
-
-<span class="c1">-- Donc</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
-<span class="c1">-- Devient</span>
-<span class="nv">taille</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">-- Ceci</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">x</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">f</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="c1">-- Est transformé en cela</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="nv">f</span><span class="w"> </span><span class="nv">x</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="c1">-- Donc</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="c1">-- Devient</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="nv">taille</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
 </code></pre></div>
 <hr />
 <h2 id="exemples-pratiques">📝 Exemples Pratiques</h2>
 <h3 id="exemple-1-traitement-de-liste">Exemple 1 : Traitement de Liste</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Calculer la somme des nombres pairs</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">        </span><span class="c1">-- [2, 4, 6]</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">        </span><span class="c1">-- 12</span>
-
-<span class="c1">-- Équivalent sans pipe</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">somme</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1">-- Calculer la somme des nombres pairs</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">        </span><span class="c1">-- [2, 4, 6]</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">        </span><span class="c1">-- 12</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="c1">-- Équivalent sans pipe</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">somme</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">])</span>
 </code></pre></div>
 <h3 id="exemple-2-avec-des-fonctions-a-plusieurs-parametres">Exemple 2 : Avec des Fonctions à Plusieurs Paramètres</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- take : Int -&gt; Liste a -&gt; Liste a</span>
-<span class="c1">-- On peut l&#39;utiliser avec |&gt; !</span>
-
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w">       </span><span class="c1">-- [1, 2, 3]</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">        </span><span class="c1">-- 6</span>
-
-<span class="c1">-- Équivalent</span>
-<span class="nv">somme</span><span class="w"> </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">-- take : Int -&gt; Liste a -&gt; Liste a</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="c1">-- On peut l&#39;utiliser avec |&gt; !</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w">       </span><span class="c1">-- [1, 2, 3]</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">        </span><span class="c1">-- 6</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="c1">-- Équivalent</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="nv">somme</span><span class="w"> </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span>
 </code></pre></div>
 <p><strong>Astuce :</strong> La valeur avant <code>|&gt;</code> devient le <strong>dernier paramètre</strong> de la fonction.</p>
 <h3 id="exemple-3-pipeline-complexe">Exemple 3 : Pipeline Complexe</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">traiterDonnees</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">traiterDonnees</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="nv">lst</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">           </span><span class="c1">-- Garde les pairs</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w">          </span><span class="c1">-- Prends les 3 premiers</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">dupliquer</span><span class="w">       </span><span class="c1">-- Duplique chaque élément</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">           </span><span class="c1">-- Additionne tout</span>
-
-<span class="nv">traiterDonnees</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">]</span>
-<span class="c1">--&gt; (2 + 2 + 4 + 4 + 6 + 6) = 24</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">traiterDonnees</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nv">traiterDonnees</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nv">lst</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">           </span><span class="c1">-- Garde les pairs</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w">          </span><span class="c1">-- Prends les 3 premiers</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">dupliquer</span><span class="w">       </span><span class="c1">-- Duplique chaque élément</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">           </span><span class="c1">-- Additionne tout</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="nv">traiterDonnees</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">7</span><span class="p">,</span><span class="w"> </span><span class="mi">8</span><span class="p">]</span>
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="c1">--&gt; (2 + 2 + 4 + 4 + 6 + 6) = 24</span>
 </code></pre></div>
 <h3 id="exemple-4-avec-des-lambdas">Exemple 4 : Avec des Lambdas</h3>
-<div class="highlight"><pre><span></span><code><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">lst</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nv">lst</span><span class="p">)</span><span class="w">    </span><span class="c1">-- Lambda qui prend 2 éléments</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">                    </span><span class="c1">-- 3</span>
-
-<span class="c1">-- Ou plus simple avec application partielle</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">2</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">lst</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nv">lst</span><span class="p">)</span><span class="w">    </span><span class="c1">-- Lambda qui prend 2 éléments</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">                    </span><span class="c1">-- 3</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1">-- Ou plus simple avec application partielle</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
 </code></pre></div>
 <hr />
 <h2 id="style-et-lisibilite">🎨 Style et Lisibilité</h2>
 <h3 id="quand-utiliser-le-pipe">Quand Utiliser le Pipe ?</h3>
 <h4 id="oui-plusieurs-transformations">✅ Oui : Plusieurs Transformations</h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Lisible avec pipe</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="nv">maListe</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction1</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction2</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">-- Lisible avec pipe</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="nv">maListe</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction1</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction2</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction3</span>
 </code></pre></div>
 <h4 id="oui-operations-sequentielles">✅ Oui : Opérations Séquentielles</h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Clair et naturel</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">filter</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">-- Clair et naturel</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">filter</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
 </code></pre></div>
 <h4 id="non-une-seule-fonction">❌ Non : Une Seule Fonction</h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ❌ Pas nécessaire</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
-
-<span class="c1">-- ✅ Plus simple</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1">-- ❌ Pas nécessaire</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1">-- ✅ Plus simple</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
 </code></pre></div>
 <h4 id="non-fonction-avec-plusieurs-arguments">❌ Non : Fonction Avec Plusieurs Arguments</h4>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ❌ Peu clair</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span>
-<span class="w">    </span><span class="nv">liste1</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">concat</span><span class="w"> </span><span class="nv">liste2</span>
-
-<span class="c1">-- ✅ Plus clair</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">concat</span><span class="w"> </span><span class="nv">liste1</span><span class="w"> </span><span class="nv">liste2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1">-- ❌ Peu clair</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="nv">liste1</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">concat</span><span class="w"> </span><span class="nv">liste2</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="c1">-- ✅ Plus clair</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">concat</span><span class="w"> </span><span class="nv">liste1</span><span class="w"> </span><span class="nv">liste2</span>
 </code></pre></div>
 <hr />
 <h2 id="indentation-et-format">🔄 Indentation et Format</h2>
 <h3 id="style-recommande">Style Recommandé</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Chaque étape sur une ligne</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">renverse</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">-- Chaque étape sur une ligne</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">renverse</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
 </code></pre></div>
 <h3 id="avec-commentaires">Avec Commentaires</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">traiterCommande</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">traiterCommande</span><span class="w"> </span><span class="nv">commande</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="nv">commande</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">           </span><span class="c1">-- Filtrer les quantités paires</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">10</span><span class="w">         </span><span class="c1">-- Maximum 10 articles</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">           </span><span class="c1">-- Total de la commande</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">   </span><span class="c1">-- Doubler pour promotion</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nv">traiterCommande</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nv">traiterCommande</span><span class="w"> </span><span class="nv">commande</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="nv">commande</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">           </span><span class="c1">-- Filtrer les quantités paires</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">10</span><span class="w">         </span><span class="c1">-- Maximum 10 articles</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">           </span><span class="c1">-- Total de la commande</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w">   </span><span class="c1">-- Doubler pour promotion</span>
 </code></pre></div>
 <h3 id="longues-lignes">Longues Lignes</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Si les fonctions sont longues, indente plus</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="nv">maDonnee</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonctionAvecUnNomTresLong</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">autreFonctionCompliquee</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">encoreUneFonction</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1">-- Si les fonctions sont longues, indente plus</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="nv">maDonnee</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonctionAvecUnNomTresLong</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">autreFonctionCompliquee</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">encoreUneFonction</span>
 </code></pre></div>
 <hr />
 <h2 id="cas-pratiques-dans-tes-exercices">⚡ Cas Pratiques dans Tes Exercices</h2>
 <h3 id="exemple-1-renverse-avec-ajouterfin">Exemple 1 : <code>renverse</code> avec <code>ajouterFin</code></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Version compliquée à lire</span>
-<span class="nv">renverse</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
-<span class="nv">renverse</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Vide</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">ajouterFin</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="nv">queue</span><span class="p">)</span>
-
-<span class="c1">-- Avec pipe (plus clair dans certains contextes)</span>
-<span class="c1">-- Note: ici le pipe n&#39;aide pas vraiment, </span>
-<span class="c1">-- c&#39;est juste pour montrer qu&#39;on peut l&#39;utiliser</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1">-- Version compliquée à lire</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="nv">renverse</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="nv">renverse</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Vide</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">ajouterFin</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="nv">queue</span><span class="p">)</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="c1">-- Avec pipe (plus clair dans certains contextes)</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="c1">-- Note: ici le pipe n&#39;aide pas vraiment, </span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="c1">-- c&#39;est juste pour montrer qu&#39;on peut l&#39;utiliser</span>
 </code></pre></div>
 <h3 id="exemple-2-tester-des-fonctions">Exemple 2 : Tester des Fonctions</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Au lieu de</span>
-<span class="nv">test1</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="nv">lstEx1</span><span class="p">))</span>
-
-<span class="c1">-- Avec pipe</span>
-<span class="nv">test1</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span>
-<span class="w">    </span><span class="nv">lstEx1</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">renverse</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
-
-<span class="c1">-- Beaucoup plus clair ce qu&#39;on teste !</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1">-- Au lieu de</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nv">test1</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="nv">lstEx1</span><span class="p">))</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="c1">-- Avec pipe</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="nv">test1</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">    </span><span class="nv">lstEx1</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">renverse</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="c1">-- Beaucoup plus clair ce qu&#39;on teste !</span>
 </code></pre></div>
 <h3 id="exemple-3-range-avec-take">Exemple 3 : <code>range</code> avec <code>take</code></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Créer [0, 1, 2, 3, 4]</span>
-<span class="nv">cinqPremiers</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">cinqPremiers</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="nv">range</span><span class="w"> </span><span class="mi">10</span><span class="w">         </span><span class="c1">-- [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">5</span><span class="w">    </span><span class="c1">-- [0, 1, 2, 3, 4]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1">-- Créer [0, 1, 2, 3, 4]</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nv">cinqPremiers</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nv">cinqPremiers</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">    </span><span class="nv">range</span><span class="w"> </span><span class="mi">10</span><span class="w">         </span><span class="c1">-- [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">5</span><span class="w">    </span><span class="c1">-- [0, 1, 2, 3, 4]</span>
 </code></pre></div>
 <h3 id="exemple-4-combiner-avec-concat">Exemple 4 : Combiner avec <code>concat</code></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Concaténer puis traiter</span>
-<span class="nv">combineEtTraite</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">combineEtTraite</span><span class="w"> </span><span class="nv">lst1</span><span class="w"> </span><span class="nv">lst2</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="nv">concat</span><span class="w"> </span><span class="nv">lst1</span><span class="w"> </span><span class="nv">lst2</span><span class="w">     </span><span class="c1">-- Combine les listes</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">         </span><span class="c1">-- Garde les pairs</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">         </span><span class="c1">-- Additionne</span>
-
-<span class="c1">-- Utilisation</span>
-<span class="nv">combineEtTraite</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span>
-<span class="c1">--&gt; (2 + 4 + 6) = 12</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1">-- Concaténer puis traiter</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nv">combineEtTraite</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="nv">combineEtTraite</span><span class="w"> </span><span class="nv">lst1</span><span class="w"> </span><span class="nv">lst2</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">    </span><span class="nv">concat</span><span class="w"> </span><span class="nv">lst1</span><span class="w"> </span><span class="nv">lst2</span><span class="w">     </span><span class="c1">-- Combine les listes</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span><span class="w">         </span><span class="c1">-- Garde les pairs</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span><span class="w">         </span><span class="c1">-- Additionne</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="c1">-- Utilisation</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="nv">combineEtTraite</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="c1">--&gt; (2 + 4 + 6) = 12</span>
 </code></pre></div>
 <hr />
 <h2 id="questions-frequentes">🤔 Questions Fréquentes</h2>
 <h3 id="q1-puis-je-melanger-parentheses-et-pipes">Q1 : Puis-je mélanger parenthèses et pipes ?</h3>
 <p><strong>Oui !</strong></p>
-<div class="highlight"><pre><span></span><code><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-
-<span class="c1">-- Ou</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">    </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="c1">-- Ou</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="q2-comment-avec-des-fonctions-a-2-parametres">Q2 : Comment avec des fonctions à 2+ paramètres ?</h3>
 <p><strong>Application partielle !</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- concat : Liste a -&gt; Liste a -&gt; Liste a</span>
-<span class="c1">-- On donne le premier argument, pas le deuxième</span>
-
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">concat</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span><span class="w">    </span><span class="c1">-- concat [1,2,3] [4,5,6]</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span><span class="w">               </span><span class="c1">-- 6</span>
-
-<span class="c1">-- La valeur avant |&gt; devient le DERNIER argument</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="c1">-- concat : Liste a -&gt; Liste a -&gt; Liste a</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="c1">-- On donne le premier argument, pas le deuxième</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">concat</span><span class="w"> </span><span class="p">[</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span><span class="w">    </span><span class="c1">-- concat [1,2,3] [4,5,6]</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span><span class="w">               </span><span class="c1">-- 6</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="c1">-- La valeur avant |&gt; devient le DERNIER argument</span>
 </code></pre></div>
 <h3 id="q3-peut-on-utiliser-avec-nos-propres-fonctions">Q3 : Peut-on utiliser <code>|&gt;</code> avec nos propres fonctions ?</h3>
 <p><strong>Oui, avec n'importe quelle fonction !</strong></p>
-<div class="highlight"><pre><span></span><code><span class="nv">maFonction</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">maFonction</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="mi">1</span>
-
-<span class="mi">5</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">maFonction</span>
-<span class="c1">--&gt; 11</span>
-
-<span class="c1">-- Même avec des fonctions complexes</span>
-<span class="nv">monTraitement</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Bool</span>
-<span class="nv">monTraitement</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">5</span>
-
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">monTraitement</span>
-<span class="c1">--&gt; True</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nv">maFonction</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="nv">maFonction</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="mi">5</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">maFonction</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="c1">--&gt; 11</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="c1">-- Même avec des fonctions complexes</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="nv">monTraitement</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Bool</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="nv">monTraitement</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">5</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">monTraitement</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a><span class="c1">--&gt; True</span>
 </code></pre></div>
 <h3 id="q4-quelle-est-la-limite">Q4 : Quelle est la limite ?</h3>
 <p><strong>Aucune ! Tu peux chaîner autant que tu veux</strong></p>
-<div class="highlight"><pre><span></span><code><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction1</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction2</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction3</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction4</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction5</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction6</span>
-<span class="c1">-- etc...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction1</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction2</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction3</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction4</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction5</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">fonction6</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="c1">-- etc...</span>
 </code></pre></div>
 <hr />
 <h2 id="exercices-de-comprehension">🎓 Exercices de Compréhension</h2>
 <p><strong>Transforme ces expressions avec <code>|&gt;</code> :</strong></p>
 <h3 id="exercice-1">Exercice 1</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Sans pipe</span>
-<span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
-
-<span class="c1">-- Avec pipe</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">renverse</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1">-- Sans pipe</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">renverse</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="c1">-- Avec pipe</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">renverse</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
 </code></pre></div>
 <h3 id="exercice-2">Exercice 2</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Sans pipe</span>
-<span class="nv">somme</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]))</span>
-
-<span class="c1">-- Avec pipe</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">5</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1">-- Sans pipe</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="nv">somme</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]))</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="c1">-- Avec pipe</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">take</span><span class="w"> </span><span class="mi">5</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
 </code></pre></div>
 <h3 id="exercice-3">Exercice 3</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Sans pipe</span>
-<span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">concat</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span>
-
-<span class="c1">-- Avec pipe</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">concat</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
-<span class="c1">-- Résultat : 5</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1">-- Sans pipe</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="nv">concat</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">])</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="c1">-- Avec pipe</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">]</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">concat</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="c1">-- Résultat : 5</span>
 </code></pre></div>
 <hr />
 <h2 id="comparaison-avec-dautres-langages">🚀 Comparaison avec d'Autres Langages</h2>
 <h3 id="javascript-methodes-chainees">JavaScript (méthodes chaînées)</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">// JavaScript</span>
-<span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">]</span>
-<span class="w">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="p">)</span>
-<span class="w">    </span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1">// JavaScript</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="p">[</span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="mf">2</span><span class="p">,</span><span class="w"> </span><span class="mf">3</span><span class="p">,</span><span class="w"> </span><span class="mf">4</span><span class="p">,</span><span class="w"> </span><span class="mf">5</span><span class="p">]</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">    </span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mf">2</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">    </span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="nx">x</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mf">2</span><span class="p">)</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="w">    </span><span class="p">.</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">a</span><span class="p">,</span><span class="w"> </span><span class="nx">b</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="nx">b</span><span class="p">,</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="elm-avec-pipe">Elm (avec pipe)</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Elm</span>
-<span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">filter</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">modBy</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">foldl</span><span class="w"> </span><span class="nf">(+)</span><span class="w"> </span><span class="mi">0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1">-- Elm</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">filter</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">modBy</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">foldl</span><span class="w"> </span><span class="nf">(+)</span><span class="w"> </span><span class="mi">0</span>
 </code></pre></div>
 <p><strong>Même principe, syntaxe différente !</strong></p>
 <h3 id="unix-pipes-en-ligne-de-commande">Unix (pipes en ligne de commande)</h3>
-<div class="highlight"><pre><span></span><code><span class="c1"># Bash</span>
-cat<span class="w"> </span>fichier.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;mot&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1"># Bash</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>cat<span class="w"> </span>fichier.txt<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span><span class="s2">&quot;mot&quot;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>wc<span class="w"> </span>-l
 </code></pre></div>
 <h3 id="elm">Elm</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Même concept en Elm</span>
-<span class="nv">fichierContenu</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">filtrerLignes</span><span class="w"> </span><span class="s">&quot;mot&quot;</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">compterLignes</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="c1">-- Même concept en Elm</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="nv">fichierContenu</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">filtrerLignes</span><span class="w"> </span><span class="s">&quot;mot&quot;</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">compterLignes</span>
 </code></pre></div>
 <hr />
 <h2 id="resume-pourquoi-utiliser">✅ Résumé : Pourquoi Utiliser <code>|&gt;</code> ?</h2>
@@ -4629,27 +4652,27 @@ cat<span class="w"> </span>fichier.txt<span class="w"> </span><span class="p">|<
 <li><strong>Style</strong> : Code Elm idiomatique</li>
 </ol>
 <h3 id="le-pattern">Le Pattern</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">donnees</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">transformation1</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">transformation2</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">transformation3</span>
-<span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">resultat</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="nv">donnees</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">transformation1</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">transformation2</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">transformation3</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="w">    </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">resultat</span>
 </code></pre></div>
 <p><strong>Se lit comme une recette de cuisine !</strong> 👨‍🍳</p>
 <hr />
 <h2 id="conseil-final">🎯 Conseil Final</h2>
 <p><strong>Utilise <code>|&gt;</code> quand tu as 2+ transformations séquentielles.</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ✅ Bon usage</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="nv">maListe</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
-
-<span class="c1">-- ❌ Pas nécessaire</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">maListe</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
-
-<span class="c1">-- ✅ Mieux</span>
-<span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">maListe</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="c1">-- ✅ Bon usage</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">    </span><span class="nv">maListe</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">pairs</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">somme</span>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a><span class="c1">-- ❌ Pas nécessaire</span>
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">maListe</span><span class="w"> </span><span class="nf">|&gt;</span><span class="w"> </span><span class="nv">taille</span>
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a>
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a><span class="c1">-- ✅ Mieux</span>
+<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">maListe</span>
 </code></pre></div>
 <p><strong>Le pipe est ton ami pour écrire du code clair et lisible !</strong> 🚀</p>
 <hr />
@@ -4681,7 +4704,7 @@ cat<span class="w"> </span>fichier.txt<span class="w"> </span><span class="p">|<
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2025 16:28:07 UTC">October 23, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 6, 2025 19:21:07 UTC">November 6, 2025</span>
   </span>
 
     
@@ -4742,7 +4765,7 @@ cat<span class="w"> </span>fichier.txt<span class="w"> </span><span class="p">|<
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>

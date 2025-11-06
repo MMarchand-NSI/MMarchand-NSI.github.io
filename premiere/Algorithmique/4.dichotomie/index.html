@@ -2581,6 +2581,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../terminale/langages/fonctionnels/11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../terminale/langages/fonctionnels/2.elm-maybe/" class="md-nav__link">
         
   
@@ -3404,8 +3427,8 @@
 <p><strong>Question:</strong> A votre avis, de quelle manière doit jouer l'ordinateur pour gagner le plus vite possible?</p>
 <p><strong>Ecrire un programme qui:</strong> 
 - Demande au joueur:
-    <div class="highlight"><pre><span></span><code>Je vais essayer de deviner un entier compris entre 1 et n
-Donne moi la valeur de n et choisis un entier dans ta tête
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Je vais essayer de deviner un entier compris entre 1 et n
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Donne moi la valeur de n et choisis un entier dans ta tête
 </code></pre></div></p>
 <ul>
 <li>
@@ -3413,7 +3436,7 @@ Donne moi la valeur de n et choisis un entier dans ta tête
 </li>
 <li>
 <p>L'ordinateur boucle alors en affichant une proposition et en demandant (35 est un exemple de proposition de l'ordinateur):</p>
-<div class="highlight"><pre><span></span><code>35. Ton nombre est-il plus grand, moins grand, ou égal? [+/-/=]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>35. Ton nombre est-il plus grand, moins grand, ou égal? [+/-/=]
 </code></pre></div>
 </li>
 <li>
@@ -3429,24 +3452,24 @@ Donne moi la valeur de n et choisis un entier dans ta tête
 <p><strong>Attention. Les algorithmes trouvés sur internet, ne sont pas formellement corrects, et ne marchent pas dans tous les langages, même sur des sites réputés.</strong></p>
 <p>En voici une <a href="https://www.cs.usfca.edu/~galles/visualization/Search.html">Visualisation</a> mauvaise, mais qui va m'aider à vous expliquer pourquoi c'est mauvais.</p>
 <p>Puis, en voici un algorithme qui marche tout le temps:</p>
-<div class="highlight"><pre><span></span><code><span class="gs">**ENTRÉE**</span> 
-<span class="k">-</span><span class="w"> </span>Un tableau d&#39;entiers de taille n:  T[0..n-1]
-<span class="k">-</span><span class="w"> </span>Un entier à trouver val
-<span class="gs">**SORTIE**</span> 
-<span class="k">-</span><span class="w"> </span>L&#39;indice du premier élément trouvé s&#39;il existe
-<span class="k">-</span><span class="w"> </span>None si la valeur n&#39;appartient pas au tableau.
-
-<span class="gh"># Algorithme DICHOTOMIE(T, val)</span>
-  gauche ← 0
-  droite ← n
-  TANT QUE gauche &lt; droite
-       milieu ← gauche + (droite - gauche)//2
-       SI val &lt; T[milieu]
-            droite ← milieu
-       SINON SI T[milieu] &lt; val
-            gauche ← milieu + 1
-       SINON
-   RETOURNER res
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gs">**ENTRÉE**</span> 
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">-</span><span class="w"> </span>Un tableau d&#39;entiers de taille n:  T[0..n-1]
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">-</span><span class="w"> </span>Un entier à trouver val
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="gs">**SORTIE**</span> 
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">-</span><span class="w"> </span>L&#39;indice du premier élément trouvé s&#39;il existe
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">-</span><span class="w"> </span>None si la valeur n&#39;appartient pas au tableau.
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="gh"># Algorithme DICHOTOMIE(T, val)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>  gauche ← 0
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  droite ← n
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>  TANT QUE gauche &lt; droite
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>       milieu ← gauche + (droite - gauche)//2
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>       SI val &lt; T[milieu]
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>            droite ← milieu
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>       SINON SI T[milieu] &lt; val
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>            gauche ← milieu + 1
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>       SINON
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>   RETOURNER res
 </code></pre></div>
 <h3 id="invariant">INVARIANT</h3>
 <p>À tout instant, on a <span class="arithmatex">\(0 ≤ gauche ≤ droite ≤ n\)</span>.</p>
@@ -3501,27 +3524,27 @@ implémentant l'algorithme décrit.</p>
 <hr />
 <h1 id="pour-aller-plus-loin">Pour aller plus loin</h1>
 <p>Etudiez l'algorithme alternatif proposé ci-dessous. Notez qu'il ne possède pas de boucle:</p>
-<div class="highlight"><pre><span></span><code><span class="gs">**ENTRÉE**</span> 
-<span class="k">-</span><span class="w"> </span>Un tableau d&#39;entiers T[0..n-1]
-<span class="k">-</span><span class="w"> </span>Un entier à trouver val
-<span class="k">-</span><span class="w"> </span>un indice de début de recherche gauche
-<span class="k">-</span><span class="w"> </span>un indice de fin de recherche droite
-<span class="gs">**SORTIE**</span> 
-L&#39;indice du premier élément trouvé, None si la valeur n&#39;appartient pas au tableau.
-
-<span class="gh"># Algorithme DICHOTOMIE(T, val, gauche, droite)</span>
-<span class="k">1.</span> SI |T|==0 OU gauche &gt;= droite
-<span class="k">2.</span>      RETOURNER None
-<span class="k">3.</span> milieu ← gauche + (droite - gauche)//2
-<span class="k">4.</span> SI val &lt; T[milieu]
-<span class="k">5.</span>     RETOURNER DICHOTOMIE(T, val, gauche, milieu)
-<span class="k">6.</span> SINON SI T[milieu] &lt; valeur
-<span class="k">7.</span>     RETOURNER DICHOTOMIE(T, val, milieu+1, gauche)
-<span class="k">8.</span> SINON
-<span class="k">9.</span>      RETOURNER milieu
-
-
-DICHOTOMIE(T, val, 0, |T|)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gs">**ENTRÉE**</span> 
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">-</span><span class="w"> </span>Un tableau d&#39;entiers T[0..n-1]
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">-</span><span class="w"> </span>Un entier à trouver val
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">-</span><span class="w"> </span>un indice de début de recherche gauche
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">-</span><span class="w"> </span>un indice de fin de recherche droite
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="gs">**SORTIE**</span> 
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>L&#39;indice du premier élément trouvé, None si la valeur n&#39;appartient pas au tableau.
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="gh"># Algorithme DICHOTOMIE(T, val, gauche, droite)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="k">1.</span> SI |T|==0 OU gauche &gt;= droite
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">2.</span>      RETOURNER None
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="k">3.</span> milieu ← gauche + (droite - gauche)//2
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="k">4.</span> SI val &lt; T[milieu]
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="k">5.</span>     RETOURNER DICHOTOMIE(T, val, gauche, milieu)
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="k">6.</span> SINON SI T[milieu] &lt; valeur
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="k">7.</span>     RETOURNER DICHOTOMIE(T, val, milieu+1, gauche)
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="k">8.</span> SINON
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="k">9.</span>      RETOURNER milieu
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>DICHOTOMIE(T, val, 0, |T|)
 </code></pre></div>
 <script src="https://mmarchand-nsi.github.io//js/material-tabbed-fix.js"></script>
 
@@ -3606,7 +3629,7 @@ DICHOTOMIE(T, val, 0, |T|)
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>

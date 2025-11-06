@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://mmarchand-nsi.github.io/terminale/langages/fonctionnels/2.elm-maybe/">
       
       
-        <link rel="prev" href="../1.elm-intro/">
+        <link rel="prev" href="../11.sites-web/">
       
       
         <link rel="next" href="../3.elm_pipe/">
@@ -2451,6 +2451,29 @@
                 
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
     
   
   
@@ -4174,12 +4197,12 @@
 <h1 id="2-le-type-maybe">2. Le Type <code>Maybe</code></h1>
 <h2 id="le-probleme">🎯 Le Problème</h2>
 <h3 id="que-retourner-quand-ca-echoue">Que Retourner Quand Ça Échoue ?</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Comment écrire cette fonction ?</span>
-<span class="nv">dernierElement</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="err">???</span>
-<span class="nv">dernierElement</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nf">...</span>
-
-<span class="c1">-- Problème : Que retourner si la liste est vide ?</span>
-<span class="nv">dernierElement</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="err">???</span><span class="w">  </span><span class="c1">-- Pas d&#39;élément à retourner !</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1">-- Comment écrire cette fonction ?</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">dernierElement</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="err">???</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nv">dernierElement</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nf">...</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="c1">-- Problème : Que retourner si la liste est vide ?</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nv">dernierElement</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="err">???</span><span class="w">  </span><span class="c1">-- Pas d&#39;élément à retourner !</span>
 </code></pre></div>
 <p><strong>En d'autres langages :</strong></p>
 <ul>
@@ -4191,29 +4214,29 @@
 <hr />
 <h2 id="definition-de-maybe">📦 Définition de <code>Maybe</code></h2>
 <h3 id="le-type">Le Type</h3>
-<div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
-<span class="w">    </span><span class="nf">=</span><span class="w"> </span><span class="kt">Nothing</span><span class="w">       </span><span class="c1">-- Absence de valeur</span>
-<span class="w">    </span><span class="nf">|</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">a</span><span class="w">        </span><span class="c1">-- Présence d&#39;une valeur de type a</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="w">    </span><span class="nf">=</span><span class="w"> </span><span class="kt">Nothing</span><span class="w">       </span><span class="c1">-- Absence de valeur</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="w">    </span><span class="nf">|</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">a</span><span class="w">        </span><span class="c1">-- Présence d&#39;une valeur de type a</span>
 </code></pre></div>
 <p><strong>Lecture :</strong> Un <code>Maybe a</code> est <strong>SOIT</strong> <code>Nothing</code> (rien), <strong>SOIT</strong> <code>Just</code> une valeur de type <code>a</code>.</p>
 <h3 id="exemples-de-valeurs">Exemples de Valeurs</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Maybe Int</span>
-<span class="kt">Nothing</span><span class="w">             </span><span class="c1">-- Pas d&#39;entier</span>
-<span class="kt">Just</span><span class="w"> </span><span class="mi">42</span><span class="w">             </span><span class="c1">-- L&#39;entier 42</span>
-
-<span class="c1">-- Maybe String</span>
-<span class="kt">Nothing</span><span class="w">             </span><span class="c1">-- Pas de chaîne</span>
-<span class="kt">Just</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="w">        </span><span class="c1">-- La chaîne &quot;hello&quot;</span>
-
-<span class="c1">-- Maybe Bool</span>
-<span class="kt">Nothing</span><span class="w">             </span><span class="c1">-- Pas de booléen</span>
-<span class="kt">Just</span><span class="w"> </span><span class="kt">True</span><span class="w">           </span><span class="c1">-- Le booléen True</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">-- Maybe Int</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kt">Nothing</span><span class="w">             </span><span class="c1">-- Pas d&#39;entier</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kt">Just</span><span class="w"> </span><span class="mi">42</span><span class="w">             </span><span class="c1">-- L&#39;entier 42</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="c1">-- Maybe String</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="kt">Nothing</span><span class="w">             </span><span class="c1">-- Pas de chaîne</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="kt">Just</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="w">        </span><span class="c1">-- La chaîne &quot;hello&quot;</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="c1">-- Maybe Bool</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="kt">Nothing</span><span class="w">             </span><span class="c1">-- Pas de booléen</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="kt">Just</span><span class="w"> </span><span class="kt">True</span><span class="w">           </span><span class="c1">-- Le booléen True</span>
 </code></pre></div>
 <hr />
 <h2 id="intuition">💡 Intuition</h2>
 <h3 id="maybe-boite-optionnelle">Maybe = Boîte Optionnelle</h3>
-<div class="highlight"><pre><span></span><code><span class="kt">Just</span><span class="w"> </span><span class="mi">5</span><span class="w">       </span><span class="c1">-- Boîte contenant 5</span>
-<span class="kt">Nothing</span><span class="w">      </span><span class="c1">-- Boîte vide</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kt">Just</span><span class="w"> </span><span class="mi">5</span><span class="w">       </span><span class="c1">-- Boîte contenant 5</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kt">Nothing</span><span class="w">      </span><span class="c1">-- Boîte vide</span>
 </code></pre></div>
 <p><strong>Analogie :</strong></p>
 <ul>
@@ -4265,306 +4288,306 @@
 <hr />
 <h2 id="utilisation-avec-les-listes">🔍 Utilisation avec les Listes</h2>
 <h3 id="exemple-1-premier-head">Exemple 1 : <code>premier</code> (head)</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Renvoie le premier élément d&#39;une liste</span>
-<span class="nv">premier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
-<span class="nv">premier</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span><span class="w">                    </span><span class="c1">-- Pas d&#39;élément</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">tete</span><span class="w">       </span><span class="c1">-- On a un élément !</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">-- Renvoie le premier élément d&#39;une liste</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">premier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nv">premier</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span><span class="w">                    </span><span class="c1">-- Pas d&#39;élément</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">tete</span><span class="w">       </span><span class="c1">-- On a un élément !</span>
 </code></pre></div>
 <p><strong>Utilisation :</strong>
-<div class="highlight"><pre><span></span><code><span class="nv">premier</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
-<span class="c1">--&gt; Just 1</span>
-
-<span class="nv">premier</span><span class="w"> </span><span class="p">[]</span>
-<span class="c1">--&gt; Nothing</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="nv">premier</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="c1">--&gt; Just 1</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="nv">premier</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="c1">--&gt; Nothing</span>
 </code></pre></div></p>
 <h3 id="exemple-2-dernierelement">Exemple 2 : <code>dernierElement</code></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Renvoie le dernier élément d&#39;une liste</span>
-<span class="nv">dernierElement</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
-<span class="nv">dernierElement</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span><span class="w">                              </span><span class="c1">-- Liste vide</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">tete</span><span class="w">                  </span><span class="c1">-- Un seul élément</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">dernierElement</span><span class="w"> </span><span class="nv">queue</span><span class="w">         </span><span class="c1">-- Continue la recherche</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1">-- Renvoie le dernier élément d&#39;une liste</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nv">dernierElement</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nv">dernierElement</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span><span class="w">                              </span><span class="c1">-- Liste vide</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">tete</span><span class="w">                  </span><span class="c1">-- Un seul élément</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">dernierElement</span><span class="w"> </span><span class="nv">queue</span><span class="w">         </span><span class="c1">-- Continue la recherche</span>
 </code></pre></div>
 <p><strong>Utilisation :</strong>
-<div class="highlight"><pre><span></span><code><span class="nv">dernierElement</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
-<span class="c1">--&gt; Just 3</span>
-
-<span class="nv">dernierElement</span><span class="w"> </span><span class="p">[]</span>
-<span class="c1">--&gt; Nothing</span>
-
-<span class="nv">dernierElement</span><span class="w"> </span><span class="p">[</span><span class="mi">42</span><span class="p">]</span>
-<span class="c1">--&gt; Just 42</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">dernierElement</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="c1">--&gt; Just 3</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nv">dernierElement</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1">--&gt; Nothing</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="nv">dernierElement</span><span class="w"> </span><span class="p">[</span><span class="mi">42</span><span class="p">]</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1">--&gt; Just 42</span>
 </code></pre></div></p>
 <p><strong>Trace d'exécution :</strong>
-<div class="highlight"><pre><span></span><code>dernierElement [1, 2, 3]
-= dernierElement [2, 3]          (pas le dernier)
-= dernierElement [3]             (pas le dernier)
-= Just 3                         (un seul élément !)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>dernierElement [1, 2, 3]
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>= dernierElement [2, 3]          (pas le dernier)
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>= dernierElement [3]             (pas le dernier)
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>= Just 3                         (un seul élément !)
 </code></pre></div></p>
 <hr />
 <h2 id="pattern-matching-sur-maybe">🎨 Pattern Matching sur Maybe</h2>
 <h3 id="deconstruire-un-maybe">Déconstruire un Maybe</h3>
-<div class="highlight"><pre><span></span><code><span class="kr">case</span><span class="w"> </span><span class="nv">monMaybe</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">    </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">       </span><span class="c1">-- Cas où il n&#39;y a rien</span>
-<span class="w">    </span><span class="kt">Just</span><span class="w"> </span><span class="nv">valeur</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">   </span><span class="c1">-- Cas où on a une valeur</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kr">case</span><span class="w"> </span><span class="nv">monMaybe</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">       </span><span class="c1">-- Cas où il n&#39;y a rien</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="kt">Just</span><span class="w"> </span><span class="nv">valeur</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">   </span><span class="c1">-- Cas où on a une valeur</span>
 </code></pre></div>
 <h3 id="exemple-afficher-un-resultat">Exemple : Afficher un Résultat</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">afficherResultat</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">String</span>
-<span class="nv">afficherResultat</span><span class="w"> </span><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">resultat</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="s">&quot;Aucun résultat&quot;</span>
-<span class="w">        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="s">&quot;Le résultat est : &quot;</span><span class="w"> </span><span class="nf">++</span><span class="w"> </span><span class="kt">String</span><span class="nf">.</span><span class="nv">fromInt</span><span class="w"> </span><span class="nv">n</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">afficherResultat</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">String</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nv">afficherResultat</span><span class="w"> </span><span class="nv">resultat</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">resultat</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">        </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="s">&quot;Aucun résultat&quot;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="s">&quot;Le résultat est : &quot;</span><span class="w"> </span><span class="nf">++</span><span class="w"> </span><span class="kt">String</span><span class="nf">.</span><span class="nv">fromInt</span><span class="w"> </span><span class="nv">n</span>
 </code></pre></div>
 <p><strong>Utilisation :</strong>
-<div class="highlight"><pre><span></span><code><span class="nv">afficherResultat</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="mi">42</span><span class="p">)</span>
-<span class="c1">--&gt; &quot;Le résultat est : 42&quot;</span>
-
-<span class="nv">afficherResultat</span><span class="w"> </span><span class="kt">Nothing</span>
-<span class="c1">--&gt; &quot;Aucun résultat&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">afficherResultat</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="mi">42</span><span class="p">)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="c1">--&gt; &quot;Le résultat est : 42&quot;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nv">afficherResultat</span><span class="w"> </span><span class="kt">Nothing</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="c1">--&gt; &quot;Aucun résultat&quot;</span>
 </code></pre></div></p>
 <hr />
 <h2 id="fonctions-utiles-sur-maybe">🛠️ Fonctions Utiles sur Maybe</h2>
 <h3 id="maybewithdefault-valeur-par-defaut"><code>Maybe.withDefault</code> : Valeur par Défaut</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Si Nothing, utilise la valeur par défaut</span>
-<span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">a</span>
-
-<span class="c1">-- Exemples</span>
-<span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
-<span class="c1">--&gt; 5</span>
-
-<span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kt">Nothing</span>
-<span class="c1">--&gt; 0</span>
-
-<span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="s">&quot;inconnu&quot;</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">)</span>
-<span class="c1">--&gt; &quot;Alice&quot;</span>
-
-<span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="s">&quot;inconnu&quot;</span><span class="w"> </span><span class="kt">Nothing</span>
-<span class="c1">--&gt; &quot;inconnu&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">-- Si Nothing, utilise la valeur par défaut</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1">-- Exemples</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="c1">--&gt; 5</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kt">Nothing</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="c1">--&gt; 0</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="s">&quot;inconnu&quot;</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="s">&quot;Alice&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="c1">--&gt; &quot;Alice&quot;</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="s">&quot;inconnu&quot;</span><span class="w"> </span><span class="kt">Nothing</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a><span class="c1">--&gt; &quot;inconnu&quot;</span>
 </code></pre></div>
 <p><strong>Utilisation pratique :</strong>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Obtenir le premier élément ou 0 par défaut</span>
-<span class="nv">premierOuZero</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">premierOuZero</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="nv">premier</span><span class="w"> </span><span class="nv">lst</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="mi">0</span>
-
-<span class="nv">premierOuZero</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
-<span class="c1">--&gt; 1</span>
-
-<span class="nv">premierOuZero</span><span class="w"> </span><span class="p">[]</span>
-<span class="c1">--&gt; 0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1">-- Obtenir le premier élément ou 0 par défaut</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nv">premierOuZero</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="nv">premierOuZero</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="nv">premier</span><span class="w"> </span><span class="nv">lst</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="nv">premierOuZero</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="c1">--&gt; 1</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="nv">premierOuZero</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a><span class="c1">--&gt; 0</span>
 </code></pre></div></p>
 <h3 id="maybemap-transformer-la-valeur"><code>Maybe.map</code> : Transformer la Valeur</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Applique une fonction si Just, sinon reste Nothing</span>
-<span class="kt">Maybe</span><span class="nf">.</span><span class="nv">map</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">b</span>
-
-<span class="c1">-- Exemples</span>
-<span class="kt">Maybe</span><span class="nf">.</span><span class="nv">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
-<span class="c1">--&gt; Just 10</span>
-
-<span class="kt">Maybe</span><span class="nf">.</span><span class="nv">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="kt">Nothing</span>
-<span class="c1">--&gt; Nothing</span>
-
-<span class="kt">Maybe</span><span class="nf">.</span><span class="nv">map</span><span class="w"> </span><span class="kt">String</span><span class="nf">.</span><span class="nv">length</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">)</span>
-<span class="c1">--&gt; Just 5</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1">-- Applique une fonction si Just, sinon reste Nothing</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">map</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">b</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1">-- Exemples</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="mi">5</span><span class="p">)</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="c1">--&gt; Just 10</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="kt">Nothing</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="c1">--&gt; Nothing</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">map</span><span class="w"> </span><span class="kt">String</span><span class="nf">.</span><span class="nv">length</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="s">&quot;hello&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="c1">--&gt; Just 5</span>
 </code></pre></div>
 <p><strong>Cas d'usage :</strong>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Doubler le premier élément</span>
-<span class="nv">doublerPremier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">doublerPremier</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="nv">premier</span><span class="w"> </span><span class="nv">lst</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
-
-<span class="nv">doublerPremier</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">]</span>
-<span class="c1">--&gt; Just 10</span>
-
-<span class="nv">doublerPremier</span><span class="w"> </span><span class="p">[]</span>
-<span class="c1">--&gt; Nothing</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1">-- Doubler le premier élément</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nv">doublerPremier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="nv">doublerPremier</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">    </span><span class="nv">premier</span><span class="w"> </span><span class="nv">lst</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">map</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="nv">doublerPremier</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">]</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="c1">--&gt; Just 10</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="nv">doublerPremier</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="c1">--&gt; Nothing</span>
 </code></pre></div></p>
 <hr />
 <h2 id="erreurs-courantes">⚠️ Erreurs Courantes</h2>
 <h3 id="erreur-1-oublier-le-just">Erreur 1 : Oublier le <code>Just</code></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ❌ ERREUR</span>
-<span class="nv">premier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
-<span class="nv">premier</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">tete</span><span class="w">  </span><span class="c1">-- Manque Just !</span>
-
-<span class="c1">-- ✅ CORRECT</span>
-<span class="nv">premier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
-<span class="nv">premier</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">tete</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">-- ❌ ERREUR</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nv">premier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nv">premier</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">tete</span><span class="w">  </span><span class="c1">-- Manque Just !</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="c1">-- ✅ CORRECT</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="nv">premier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="nv">premier</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">tete</span>
 </code></pre></div>
 <h3 id="erreur-2-oublier-le-cas-nothing">Erreur 2 : Oublier le Cas <code>Nothing</code></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ❌ ERREUR : Pattern matching incomplet</span>
-<span class="nv">utiliser</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">utiliser</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span>
-<span class="w">        </span><span class="c1">-- Manque le cas Nothing !</span>
-
-<span class="c1">-- ✅ CORRECT</span>
-<span class="nv">utiliser</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">utiliser</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span>
-<span class="w">        </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="c1">-- Valeur par défaut</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1">-- ❌ ERREUR : Pattern matching incomplet</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nv">utiliser</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="nv">utiliser</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="w">        </span><span class="c1">-- Manque le cas Nothing !</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="c1">-- ✅ CORRECT</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="nv">utiliser</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="nv">utiliser</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="w">        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a><span class="w">        </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="c1">-- Valeur par défaut</span>
 </code></pre></div>
 <h3 id="erreur-3-retourner-nothing-au-lieu-de-just-nothing">Erreur 3 : Retourner <code>Nothing</code> au Lieu de <code>Just Nothing</code></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Type Maybe (Maybe a) : un Maybe dans un Maybe !</span>
-
-<span class="nv">trouverPuis</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="p">(</span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span>
-<span class="nv">trouverPuis</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span><span class="w">           </span><span class="c1">-- Pas de valeur de base</span>
-<span class="w">        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="p">(</span><span class="nv">f</span><span class="w"> </span><span class="nv">x</span><span class="p">)</span><span class="w">         </span><span class="c1">-- Just du résultat (qui peut être Nothing)</span>
-
-<span class="c1">-- Exemple</span>
-<span class="nv">trouverPuis</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
-<span class="c1">--&gt; Just (Just 1)</span>
-
-<span class="nv">trouverPuis</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="p">[])</span>
-<span class="c1">--&gt; Just Nothing  -- ⚠️ Pas juste Nothing !</span>
-
-<span class="nv">trouverPuis</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="kt">Nothing</span>
-<span class="c1">--&gt; Nothing</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1">-- Type Maybe (Maybe a) : un Maybe dans un Maybe !</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nv">trouverPuis</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="p">(</span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nv">trouverPuis</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="w">        </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span><span class="w">           </span><span class="c1">-- Pas de valeur de base</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="w">        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="p">(</span><span class="nv">f</span><span class="w"> </span><span class="nv">x</span><span class="p">)</span><span class="w">         </span><span class="c1">-- Just du résultat (qui peut être Nothing)</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="c1">-- Exemple</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="nv">trouverPuis</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">])</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="c1">--&gt; Just (Just 1)</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="nv">trouverPuis</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="p">(</span><span class="kt">Just</span><span class="w"> </span><span class="p">[])</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="c1">--&gt; Just Nothing  -- ⚠️ Pas juste Nothing !</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="nv">trouverPuis</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="kt">Nothing</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="c1">--&gt; Nothing</span>
 </code></pre></div>
 <hr />
 <h2 id="chainer-des-maybe">🔗 Chaîner des Maybe</h2>
 <h3 id="probleme-maybe-imbriques">Problème : Maybe Imbriqués</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Obtenir le premier élément du dernier élément (si c&#39;est une liste de listes)</span>
-
-<span class="c1">-- Version naïve</span>
-<span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="p">(</span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="p">(</span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span>
-<span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="nv">listes</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">dernierElement</span><span class="w"> </span><span class="nv">listes</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span>
-<span class="w">        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">derniereListe</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="p">(</span><span class="nv">premier</span><span class="w"> </span><span class="nv">derniereListe</span><span class="p">)</span>
-
-<span class="c1">-- Résultat : Maybe (Maybe a) 😕</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1">-- Obtenir le premier élément du dernier élément (si c&#39;est une liste de listes)</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="c1">-- Version naïve</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="p">(</span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="p">(</span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="nv">listes</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">dernierElement</span><span class="w"> </span><span class="nv">listes</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">        </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="w">        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">derniereListe</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="p">(</span><span class="nv">premier</span><span class="w"> </span><span class="nv">derniereListe</span><span class="p">)</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="c1">-- Résultat : Maybe (Maybe a) 😕</span>
 </code></pre></div>
 <h3 id="solution-maybeandthen">Solution : <code>Maybe.andThen</code></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Maybe.andThen : (a -&gt; Maybe b) -&gt; Maybe a -&gt; Maybe b</span>
-<span class="c1">-- &quot;Chaîne&quot; les Maybe sans les imbriquer</span>
-
-<span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="p">(</span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
-<span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="nv">listes</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="nv">dernierElement</span><span class="w"> </span><span class="nv">listes</span>
-<span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">andThen</span><span class="w"> </span><span class="nv">premier</span>
-
-<span class="c1">-- Exemples</span>
-<span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]]</span>
-<span class="c1">--&gt; Just 5  (premier de [5, 6])</span>
-
-<span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="p">[]]</span>
-<span class="c1">--&gt; Nothing  (dernier = [], qui n&#39;a pas de premier)</span>
-
-<span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="p">[]</span>
-<span class="c1">--&gt; Nothing  (pas de dernier)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1">-- Maybe.andThen : (a -&gt; Maybe b) -&gt; Maybe a -&gt; Maybe b</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="c1">-- &quot;Chaîne&quot; les Maybe sans les imbriquer</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="p">(</span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="nv">listes</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">    </span><span class="nv">dernierElement</span><span class="w"> </span><span class="nv">listes</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">        </span><span class="nf">|&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">andThen</span><span class="w"> </span><span class="nv">premier</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="c1">-- Exemples</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">6</span><span class="p">]]</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="c1">--&gt; Just 5  (premier de [5, 6])</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a><span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">],</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">],</span><span class="w"> </span><span class="p">[]]</span>
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a><span class="c1">--&gt; Nothing  (dernier = [], qui n&#39;a pas de premier)</span>
+<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a>
+<a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a><span class="nv">getPremierDuDernier</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a><span class="c1">--&gt; Nothing  (pas de dernier)</span>
 </code></pre></div>
 <hr />
 <h2 id="exemple-complet-minimum">🎓 Exemple Complet : <code>minimum</code></h2>
 <h3 id="trouver-le-minimum-dune-liste">Trouver le Minimum d'une Liste</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Renvoie le plus petit élément (s&#39;il existe)</span>
-<span class="nv">minimum</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">comparable</span>
-<span class="nv">minimum</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="nv">reste</span><span class="w"> </span><span class="nf">-&gt;</span>
-<span class="w">            </span><span class="kr">case</span><span class="w"> </span><span class="nv">minimum</span><span class="w"> </span><span class="nv">reste</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">                </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">premier</span><span class="w">          </span><span class="c1">-- Premier est le seul élément</span>
-<span class="w">                </span><span class="kt">Just</span><span class="w"> </span><span class="nv">minReste</span><span class="w"> </span><span class="nf">-&gt;</span>
-<span class="w">                    </span><span class="kr">if</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="nf">&lt;</span><span class="w"> </span><span class="nv">minReste</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">                        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">premier</span><span class="w">             </span><span class="c1">-- Premier est plus petit</span>
-<span class="w">                    </span><span class="kr">else</span>
-<span class="w">                        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">minReste</span><span class="w">            </span><span class="c1">-- minReste est plus petit</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1">-- Renvoie le plus petit élément (s&#39;il existe)</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nv">minimum</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">comparable</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nv">minimum</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="nv">reste</span><span class="w"> </span><span class="nf">-&gt;</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">            </span><span class="kr">case</span><span class="w"> </span><span class="nv">minimum</span><span class="w"> </span><span class="nv">reste</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="w">                </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">premier</span><span class="w">          </span><span class="c1">-- Premier est le seul élément</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">                </span><span class="kt">Just</span><span class="w"> </span><span class="nv">minReste</span><span class="w"> </span><span class="nf">-&gt;</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="w">                    </span><span class="kr">if</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="nf">&lt;</span><span class="w"> </span><span class="nv">minReste</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a><span class="w">                        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">premier</span><span class="w">             </span><span class="c1">-- Premier est plus petit</span>
+<a id="__codelineno-21-12" name="__codelineno-21-12" href="#__codelineno-21-12"></a><span class="w">                    </span><span class="kr">else</span>
+<a id="__codelineno-21-13" name="__codelineno-21-13" href="#__codelineno-21-13"></a><span class="w">                        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">minReste</span><span class="w">            </span><span class="c1">-- minReste est plus petit</span>
 </code></pre></div>
 <p><strong>Utilisation :</strong>
-<div class="highlight"><pre><span></span><code><span class="nv">minimum</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
-<span class="c1">--&gt; Just 1</span>
-
-<span class="nv">minimum</span><span class="w"> </span><span class="p">[</span><span class="mi">42</span><span class="p">]</span>
-<span class="c1">--&gt; Just 42</span>
-
-<span class="nv">minimum</span><span class="w"> </span><span class="p">[]</span>
-<span class="c1">--&gt; Nothing</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nv">minimum</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="c1">--&gt; Just 1</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="nv">minimum</span><span class="w"> </span><span class="p">[</span><span class="mi">42</span><span class="p">]</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="c1">--&gt; Just 42</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="nv">minimum</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="c1">--&gt; Nothing</span>
 </code></pre></div></p>
 <p><strong>Trace d'exécution :</strong>
-<div class="highlight"><pre><span></span><code><span class="nv">minimum</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
-<span class="nf">=</span><span class="w"> </span><span class="kr">case</span><span class="w"> </span><span class="nv">minimum</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="kr">of</span><span class="w">          </span><span class="c1">-- 3 vs min([1,4])</span>
-<span class="w">    </span><span class="kt">Just</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="nf">&lt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="mi">1</span>
-<span class="nf">=</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="mi">1</span>
-
-<span class="nv">minimum</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
-<span class="nf">=</span><span class="w"> </span><span class="kr">case</span><span class="w"> </span><span class="nv">minimum</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="kr">of</span><span class="w">              </span><span class="c1">-- 5 vs rien</span>
-<span class="w">    </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="mi">5</span>
-<span class="nf">=</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="mi">5</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nv">minimum</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nf">=</span><span class="w"> </span><span class="kr">case</span><span class="w"> </span><span class="nv">minimum</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">]</span><span class="w"> </span><span class="kr">of</span><span class="w">          </span><span class="c1">-- 3 vs min([1,4])</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span><span class="kt">Just</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="nf">&lt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="nf">=</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="nv">minimum</span><span class="w"> </span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="nf">=</span><span class="w"> </span><span class="kr">case</span><span class="w"> </span><span class="nv">minimum</span><span class="w"> </span><span class="p">[]</span><span class="w"> </span><span class="kr">of</span><span class="w">              </span><span class="c1">-- 5 vs rien</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">    </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="mi">5</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="nf">=</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="mi">5</span>
 </code></pre></div></p>
 <hr />
 <h2 id="exercices-a-faire">💪 Exercices (À Faire)</h2>
 <h3 id="exercice-1-elementa">Exercice 1 : <code>elementA</code></h3>
 <p>Écris une fonction qui retourne l'élément à la position <code>n</code> (commence à 0).</p>
-<div class="highlight"><pre><span></span><code><span class="nv">elementA</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
-
-<span class="c1">-- Exemples attendus</span>
-<span class="nv">elementA</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w">  </span><span class="c1">--&gt; Just 1</span>
-<span class="nv">elementA</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w">  </span><span class="c1">--&gt; Just 3</span>
-<span class="nv">elementA</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w">  </span><span class="c1">--&gt; Nothing</span>
-<span class="nv">elementA</span><span class="w"> </span><span class="nf">-</span><span class="mi">1</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="c1">--&gt; Nothing</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nv">elementA</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="c1">-- Exemples attendus</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="nv">elementA</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w">  </span><span class="c1">--&gt; Just 1</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="nv">elementA</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w">  </span><span class="c1">--&gt; Just 3</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="nv">elementA</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w">  </span><span class="c1">--&gt; Nothing</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="nv">elementA</span><span class="w"> </span><span class="nf">-</span><span class="mi">1</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w"> </span><span class="c1">--&gt; Nothing</span>
 </code></pre></div>
 <p><strong>Indice :</strong> Utilise <code>drop</code> et <code>premier</code>.</p>
 <h3 id="exercice-2-maximum">Exercice 2 : <code>maximum</code></h3>
 <p>Écris une fonction qui retourne le plus grand élément.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">maximum</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">comparable</span>
-
-<span class="c1">-- Exemples attendus</span>
-<span class="nv">maximum</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span><span class="w">  </span><span class="c1">--&gt; Just 5</span>
-<span class="nv">maximum</span><span class="w"> </span><span class="p">[]</span><span class="w">               </span><span class="c1">--&gt; Nothing</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nv">maximum</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">comparable</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="c1">-- Exemples attendus</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="nv">maximum</span><span class="w"> </span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span><span class="w">  </span><span class="c1">--&gt; Just 5</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="nv">maximum</span><span class="w"> </span><span class="p">[]</span><span class="w">               </span><span class="c1">--&gt; Nothing</span>
 </code></pre></div>
 <p><strong>Indice :</strong> Similaire à <code>minimum</code>, mais avec <code>&gt;</code> au lieu de <code>&lt;</code>.</p>
 <h3 id="exercice-3-trouver">Exercice 3 : <code>trouver</code></h3>
 <p>Écris une fonction qui retourne le premier élément satisfaisant un prédicat.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">trouver</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Bool</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
-
-<span class="c1">-- Exemples attendus</span>
-<span class="nv">trouver</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span><span class="w">  </span><span class="c1">--&gt; Just 4</span>
-<span class="nv">trouver</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w">       </span><span class="c1">--&gt; Nothing</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="nv">trouver</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Bool</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="c1">-- Exemples attendus</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="nv">trouver</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">5</span><span class="p">]</span><span class="w">  </span><span class="c1">--&gt; Just 4</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="nv">trouver</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">10</span><span class="p">)</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="mi">3</span><span class="p">]</span><span class="w">       </span><span class="c1">--&gt; Nothing</span>
 </code></pre></div>
 <hr />
 <h2 id="pourquoi-maybe-est-important">🎯 Pourquoi Maybe est Important ?</h2>
 <h3 id="1-securite-a-la-compilation">1. Sécurité à la Compilation</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ❌ Impossible en Elm</span>
-<span class="nv">x</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="p">[]</span>
-<span class="nv">y</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="c1">-- Erreur de compilation !</span>
-
-<span class="c1">-- ✅ Elm force à gérer le cas Nothing</span>
-<span class="nv">x</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="p">[]</span>
-<span class="nv">y</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kr">case</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">    </span><span class="kt">Just</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="mi">1</span>
-<span class="w">    </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1">-- ❌ Impossible en Elm</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="nv">x</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="nv">y</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="mi">1</span><span class="w">  </span><span class="c1">-- Erreur de compilation !</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="c1">-- ✅ Elm force à gérer le cas Nothing</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="nv">x</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="p">[]</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="nv">y</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kr">case</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="w">    </span><span class="kt">Just</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="mi">1</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="w">    </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span>
 </code></pre></div>
 <p><strong>Pas de crash à l'exécution !</strong> 🛡️</p>
 <h3 id="2-code-explicite">2. Code Explicite</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- La signature dit tout</span>
-<span class="nv">dernierElement</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
-<span class="c1">--                          ↑</span>
-<span class="c1">--                          &quot;Peut échouer !&quot;</span>
-
-<span class="c1">-- vs en Python</span>
-<span class="nv">def</span><span class="w"> </span><span class="nv">last_element</span><span class="p">(</span><span class="nv">lst</span><span class="p">)</span><span class="nf">:</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="kt">Peut</span><span class="w"> </span><span class="nv">retourner</span><span class="w"> </span><span class="kt">None</span><span class="nf">...</span><span class="w"> </span><span class="nv">ou</span><span class="w"> </span><span class="nv">crasher</span><span class="w"> </span><span class="err">?</span>
-<span class="w">    </span><span class="nf">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1">-- La signature dit tout</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="nv">dernierElement</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="c1">--                          ↑</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="c1">--                          &quot;Peut échouer !&quot;</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="c1">-- vs en Python</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="nv">def</span><span class="w"> </span><span class="nv">last_element</span><span class="p">(</span><span class="nv">lst</span><span class="p">)</span><span class="nf">:</span><span class="w">  </span><span class="err">#</span><span class="w"> </span><span class="kt">Peut</span><span class="w"> </span><span class="nv">retourner</span><span class="w"> </span><span class="kt">None</span><span class="nf">...</span><span class="w"> </span><span class="nv">ou</span><span class="w"> </span><span class="nv">crasher</span><span class="w"> </span><span class="err">?</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="w">    </span><span class="nf">...</span>
 </code></pre></div>
 <h3 id="3-forcer-a-penser-aux-cas-derreur">3. Forcer à Penser aux Cas d'Erreur</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Tu DOIS gérer Nothing</span>
-<span class="kr">case</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="nv">maListe</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">    </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">  </span><span class="c1">-- Obligé de penser à ce cas</span>
-<span class="w">    </span><span class="kt">Just</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1">-- Tu DOIS gérer Nothing</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="kr">case</span><span class="w"> </span><span class="nv">premier</span><span class="w"> </span><span class="nv">maListe</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">  </span><span class="c1">-- Obligé de penser à ce cas</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">    </span><span class="kt">Just</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span>
 </code></pre></div>
 <hr />
 <h2 id="maybe-vs-autres-approches">📊 Maybe vs Autres Approches</h2>
@@ -4602,11 +4625,11 @@
 <hr />
 <h2 id="pattern-recurrent">🔄 Pattern Récurrent</h2>
 <h3 id="le-schema-maybe">Le Schéma Maybe</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">maFonction</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Entr</span><span class="err">é</span><span class="nv">ePeut</span><span class="nf">-</span><span class="err">Ê</span><span class="nv">treVide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">R</span><span class="err">é</span><span class="nv">sultat</span>
-<span class="nv">maFonction</span><span class="w"> </span><span class="nv">entree</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">entree</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">CasVide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span><span class="w">                    </span><span class="c1">-- Échec</span>
-<span class="w">        </span><span class="kt">CasNonVide</span><span class="w"> </span><span class="nv">donn</span><span class="err">é</span><span class="nv">es</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultat</span><span class="w">   </span><span class="c1">-- Succès</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nv">maFonction</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Entr</span><span class="err">é</span><span class="nv">ePeut</span><span class="nf">-</span><span class="err">Ê</span><span class="nv">treVide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="kt">R</span><span class="err">é</span><span class="nv">sultat</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="nv">maFonction</span><span class="w"> </span><span class="nv">entree</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">entree</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">        </span><span class="kt">CasVide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span><span class="w">                    </span><span class="c1">-- Échec</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="w">        </span><span class="kt">CasNonVide</span><span class="w"> </span><span class="nv">donn</span><span class="err">é</span><span class="nv">es</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultat</span><span class="w">   </span><span class="c1">-- Succès</span>
 </code></pre></div>
 <p><strong>Exemples :</strong></p>
 <ul>
@@ -4618,7 +4641,7 @@
 <hr />
 <h2 id="resume">✅ Résumé</h2>
 <h3 id="quest-ce-que-maybe">Qu'est-ce que Maybe ?</h3>
-<div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">a</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">a</span>
 </code></pre></div>
 <ul>
 <li><strong><code>Nothing</code></strong> : Absence de valeur (échec, vide, erreur)</li>
@@ -4632,28 +4655,28 @@
 <li>✅ L'entrée peut être vide</li>
 </ul>
 <h3 id="fonctions-cles">Fonctions Clés</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Valeur par défaut</span>
-<span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">a</span>
-
-<span class="c1">-- Transformer</span>
-<span class="kt">Maybe</span><span class="nf">.</span><span class="nv">map</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">b</span>
-
-<span class="c1">-- Chaîner</span>
-<span class="kt">Maybe</span><span class="nf">.</span><span class="nv">andThen</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">b</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1">-- Valeur par défaut</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="c1">-- Transformer</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">map</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">b</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="c1">-- Chaîner</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="kt">Maybe</span><span class="nf">.</span><span class="nv">andThen</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">b</span>
 </code></pre></div>
 <h3 id="le-pattern">Le Pattern</h3>
-<div class="highlight"><pre><span></span><code><span class="kr">case</span><span class="w"> </span><span class="nv">monMaybe</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">    </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="c1">-- Gérer l&#39;absence</span>
-<span class="w">    </span><span class="kt">Just</span><span class="w"> </span><span class="nv">valeur</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="c1">-- Utiliser la valeur</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="kr">case</span><span class="w"> </span><span class="nv">monMaybe</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">    </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="c1">-- Gérer l&#39;absence</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">    </span><span class="kt">Just</span><span class="w"> </span><span class="nv">valeur</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="c1">-- Utiliser la valeur</span>
 </code></pre></div>
 <hr />
 <h2 id="conseil-final">💡 Conseil Final</h2>
 <p><strong>Si ta fonction peut "échouer" ou "ne rien retourner", utilise <code>Maybe</code> !</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ✅ Bon</span>
-<span class="nv">premier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
-
-<span class="c1">-- ❌ Mauvais (impossible de représenter l&#39;échec)</span>
-<span class="nv">premier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">a</span><span class="w">  </span><span class="c1">-- Et si la liste est vide ???</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="c1">-- ✅ Bon</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="nv">premier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="c1">-- ❌ Mauvais (impossible de représenter l&#39;échec)</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="nv">premier</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">a</span><span class="w">  </span><span class="c1">-- Et si la liste est vide ???</span>
 </code></pre></div>
 <p><strong>Maybe = Sécurité + Clarté + Pas de surprise !</strong> 🎯</p>
 <hr />
@@ -4682,7 +4705,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2025 16:28:07 UTC">October 23, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 6, 2025 19:21:07 UTC">November 6, 2025</span>
   </span>
 
     
@@ -4743,7 +4766,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>

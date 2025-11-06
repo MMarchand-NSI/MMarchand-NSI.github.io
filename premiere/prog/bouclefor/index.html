@@ -2462,6 +2462,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../terminale/langages/fonctionnels/11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../terminale/langages/fonctionnels/2.elm-maybe/" class="md-nav__link">
         
   
@@ -3187,11 +3210,11 @@
 <p class="admonition-title">Itérable</p>
 <p>Un itérable est un ensemble duquel on peut énumérer un par un les éléments.</p>
 <p>Par exemple, la classe est un itérable. Je peux PARCOURIR la liste des élèves pour faire l'appel, et appliquer à chaque élève la même procédure.</p>
-<div class="highlight"><pre><span></span><code>Pour &quot;chaque élève X&quot; dans &quot;la classe&quot;:   -&gt; Enonciation du parcours
-<span class="w">    </span><span class="k">-</span><span class="w"> </span>Appeler X
-<span class="w">    </span><span class="k">-</span><span class="w"> </span>Attendre la réponse de X
-<span class="w">    </span><span class="k">-</span><span class="w"> </span>Si X ne répond pas:
-<span class="w">        </span><span class="k">-</span><span class="w"> </span>Enregistrer X dans la liste des absents    
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Pour &quot;chaque élève X&quot; dans &quot;la classe&quot;:   -&gt; Enonciation du parcours
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="k">-</span><span class="w"> </span>Appeler X
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="k">-</span><span class="w"> </span>Attendre la réponse de X
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">    </span><span class="k">-</span><span class="w"> </span>Si X ne répond pas:
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="k">-</span><span class="w"> </span>Enregistrer X dans la liste des absents    
 </code></pre></div>
 <p>Parmi les itérables, on retrouve les séquences.</p>
 <ul>
@@ -3206,38 +3229,38 @@
 <p><code>for</code> est une boucle qui permet de parcourir un itérable.</p>
 <p>Par exemple, pour dire:
 <code>Pour tous les éléments `elt` du tuple (3, (8, 'a'), 9), afficher `e`</code></p>
-<div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">),</span> <span class="mi">9</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-
-<span class="o">&gt;&gt;&gt;</span> <span class="mi">3</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
-<span class="o">&gt;&gt;&gt;</span> <span class="mi">9</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">for</span> <span class="n">elt</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">),</span> <span class="mi">9</span><span class="p">):</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="o">&gt;&gt;&gt;</span> <span class="mi">3</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="s1">&#39;a&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="o">&gt;&gt;&gt;</span> <span class="mi">9</span>
 </code></pre></div>
 <p>Ici on parcourt le tuple <code>(3, (8, 'a'), 9)</code>.</p>
 <p>A chaque répétition, la variable <code>e</code> prendra les valeurs <code>3</code>, PUIS <code>(8, 'a')</code> PUIS <code>9</code>.</p>
 </div>
 <div class="admonition exercice">
 <p class="admonition-title">Exercice</p>
-<div class="highlight"><pre><span></span><code><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;Dracofeu&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;Dracofeu&quot;</span>
 </code></pre></div>
 <p>Affiche une par une les lettres de <code>mot</code>.</p>
 </div>
 <div class="admonition danger">
 <p class="admonition-title">Parcourir un intervalle d'entiers</p>
 <p>Intervalle se dit <span class="arithmatex">\(range\)</span> en anglais.</p>
-<div class="highlight"><pre><span></span><code><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># [1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
-<span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>   <span class="c1"># [0, 1, 2, 3, 4, 5, 6, 7]</span>
-<span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>      <span class="c1"># [0, 1, 2, 3, 4, 5, 6, 7]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># [1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>   <span class="c1"># [0, 1, 2, 3, 4, 5, 6, 7]</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>      <span class="c1"># [0, 1, 2, 3, 4, 5, 6, 7]</span>
 </code></pre></div>
 <p><code>range(a, b)</code> représente l'intervalle d'entiers de <span class="arithmatex">\(a\)</span> à <span class="arithmatex">\(b\)</span> exclus. </p>
 <p>Si a est supérieur à b, alors range(a, b) est vide.</p>
 <p>range est un itérable, donc, en toute logique:</p>
-<p><div class="highlight"><pre><span></span><code><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </code></pre></div>
 Le code ci-dessus signifie:</p>
-<div class="highlight"><pre><span></span><code>Pour &quot;chaque i&quot; dans &quot;l&#39;intervalle de 5 à 9 exclus&quot;:
-<span class="w">    </span><span class="k">-</span><span class="w"> </span>Afficher i
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Pour &quot;chaque i&quot; dans &quot;l&#39;intervalle de 5 à 9 exclus&quot;:
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="k">-</span><span class="w"> </span>Afficher i
 </code></pre></div>
 </div>
 <script src="https://mmarchand-nsi.github.io//js/material-tabbed-fix.js"></script>
@@ -3323,7 +3346,7 @@ Le code ci-dessus signifie:</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>

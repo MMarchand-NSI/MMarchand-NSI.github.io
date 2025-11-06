@@ -2454,6 +2454,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../2.elm-maybe/" class="md-nav__link">
         
   
@@ -4249,9 +4272,9 @@
 <p><strong>En encore plus simple :</strong> "Transformer une structure récursive en une valeur"</p>
 <hr />
 <h2 id="2-rappel-ta-liste-est-une-structure-recursive">2. Rappel : Ta Liste est une Structure Récursive</h2>
-<div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
-<span class="w">    </span><span class="nf">=</span><span class="w"> </span><span class="kt">Vide</span>
-<span class="w">    </span><span class="nf">|</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="nf">=</span><span class="w"> </span><span class="kt">Vide</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="nf">|</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Une liste, c'est :</strong></p>
 <ul>
@@ -4259,42 +4282,42 @@
 <li>SOIT construite avec <code>Cons</code> + un élément + une autre liste</li>
 </ul>
 <p><strong>C'est récursif</strong> : une liste contient une liste !</p>
-<div class="highlight"><pre><span></span><code>Cons 1 (Cons 2 (Cons 3 Vide))
-  ↑       ↑       ↑      ↑
-  Cons    Cons    Cons   Vide
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Cons 1 (Cons 2 (Cons 3 Vide))
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>  ↑       ↑       ↑      ↑
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>  Cons    Cons    Cons   Vide
 </code></pre></div>
 <hr />
 <h2 id="3-le-catamorphisme-de-construire">3. Le Catamorphisme = "Dé-construire"</h2>
 <h3 id="construction-vs-deconstruction">Construction vs Déconstruction</h3>
 <p><strong>Construction</strong> (créer une liste) :
-<div class="highlight"><pre><span></span><code><span class="c1">-- Je CONSTRUIS avec Cons et Vide</span>
-<span class="nv">maListe</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">-- Je CONSTRUIS avec Cons et Vide</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">maListe</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
 </code></pre></div></p>
 <p><strong>Déconstruction</strong> (détruire une liste pour en extraire une valeur) :
-<div class="highlight"><pre><span></span><code><span class="c1">-- Je DÉCONSTRUIS avec foldr</span>
-<span class="nv">taille</span><span class="w"> </span><span class="nv">maListe</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">_</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">acc</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nv">maListe</span>
-<span class="c1">--&gt; 3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">-- Je DÉCONSTRUIS avec foldr</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="nv">taille</span><span class="w"> </span><span class="nv">maListe</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">_</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">acc</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="nv">maListe</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1">--&gt; 3</span>
 </code></pre></div></p>
 <p><strong>Le catamorphisme, c'est la déconstruction systématique !</strong></p>
 <hr />
 <h2 id="4-lintuition-visuelle">4. L'Intuition Visuelle</h2>
 <h3 id="construction-dune-liste">Construction d'une liste</h3>
-<div class="highlight"><pre><span></span><code>        Cons
-       /    \
-      1     Cons
-           /    \
-          2     Cons
-               /    \
-              3     Vide
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>        Cons
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>       /    \
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>      1     Cons
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>           /    \
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>          2     Cons
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>               /    \
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>              3     Vide
 </code></pre></div>
 <h3 id="catamorphisme-foldr">Catamorphisme (foldr)</h3>
-<div class="highlight"><pre><span></span><code>        f
-       / \
-      1   f
-         / \
-        2   f
-           / \
-          3  acc
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>        f
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>       / \
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>      1   f
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>         / \
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        2   f
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>           / \
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>          3  acc
 </code></pre></div>
 <p><strong>On remplace :</strong></p>
 <ul>
@@ -4305,40 +4328,40 @@
 <h2 id="5-le-pattern-universel">5. Le Pattern Universel</h2>
 <h3 id="toute-structure-recursive-a-son-catamorphisme">Toute structure récursive a son catamorphisme</h3>
 <p><strong>Pour les listes :</strong>
-<div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span>
-
-<span class="c1">-- Son catamorphisme :</span>
-<span class="nv">foldr</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
-<span class="c1">--       ↑ pour Cons    ↑ pour Vide</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="c1">-- Son catamorphisme :</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="nv">foldr</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="c1">--       ↑ pour Cons    ↑ pour Vide</span>
 </code></pre></div></p>
 <p><strong>Pour les arbres binaires :</strong>
-<div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Feuille</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Noeud</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span>
-
-<span class="c1">-- Son catamorphisme :</span>
-<span class="nv">foldArbre</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
-<span class="c1">--          ↑     ↑ pour Noeud          ↑</span>
-<span class="c1">--      pour Feuille              structure à déconstruire</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Feuille</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Noeud</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1">-- Son catamorphisme :</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="nv">foldArbre</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1">--          ↑     ↑ pour Noeud          ↑</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="c1">--      pour Feuille              structure à déconstruire</span>
 </code></pre></div></p>
 <p><strong>Pour les Maybe :</strong>
-<div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">a</span>
-
-<span class="c1">-- Son catamorphisme :</span>
-<span class="nv">foldMaybe</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
-<span class="c1">--          ↑     ↑ pour Just</span>
-<span class="c1">--      pour Nothing</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1">-- Son catamorphisme :</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="nv">foldMaybe</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="c1">--          ↑     ↑ pour Just</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="c1">--      pour Nothing</span>
 </code></pre></div></p>
 <hr />
 <h2 id="6-la-formule-magique-dun-catamorphisme">6. La Formule Magique d'un Catamorphisme</h2>
 <h3 id="etape-1-regarde-ton-type">Étape 1 : Regarde ton type</h3>
-<div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
-<span class="w">    </span><span class="nf">=</span><span class="w"> </span><span class="kt">Vide</span><span class="w">              </span><span class="c1">-- Constructeur 1 (0 argument récursif)</span>
-<span class="w">    </span><span class="nf">|</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span><span class="w">  </span><span class="c1">-- Constructeur 2 (1 argument + 1 récursif)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="nf">=</span><span class="w"> </span><span class="kt">Vide</span><span class="w">              </span><span class="c1">-- Constructeur 1 (0 argument récursif)</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="nf">|</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span><span class="w">  </span><span class="c1">-- Constructeur 2 (1 argument + 1 récursif)</span>
 </code></pre></div>
 <h3 id="etape-2-cree-le-catamorphisme">Étape 2 : Crée le catamorphisme</h3>
 <p><strong>Pour chaque constructeur, fournis un "remplaçant" :</strong></p>
-<div class="highlight"><pre><span></span><code><span class="nv">foldr</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
-<span class="w">        </span><span class="err">↑</span><span class="w">              </span><span class="err">↑</span>
-<span class="w">        </span><span class="nv">remplace</span><span class="w"> </span><span class="kt">Cons</span><span class="w">  </span><span class="nv">remplace</span><span class="w"> </span><span class="kt">Vide</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">foldr</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">        </span><span class="err">↑</span><span class="w">              </span><span class="err">↑</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">        </span><span class="nv">remplace</span><span class="w"> </span><span class="kt">Cons</span><span class="w">  </span><span class="nv">remplace</span><span class="w"> </span><span class="kt">Vide</span>
 </code></pre></div>
 <p><strong>Détail :</strong></p>
 <ul>
@@ -4346,70 +4369,70 @@
 <li><code>Cons a (Liste a)</code> → <code>(a -&gt; b -&gt; b)</code> (fonction qui prend l'élément et le résultat récursif)</li>
 </ul>
 <h3 id="etape-3-implemente">Étape 3 : Implémente</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">foldr</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
-<span class="nv">foldr</span><span class="w"> </span><span class="nv">fCons</span><span class="w"> </span><span class="nv">fVide</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">fVide</span><span class="w">                           </span><span class="c1">-- Applique fVide</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">fCons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="p">(</span><span class="nv">foldr</span><span class="w"> </span><span class="nv">fCons</span><span class="w"> </span><span class="nv">fVide</span><span class="w"> </span><span class="nv">queue</span><span class="p">)</span>
-<span class="w">        </span><span class="c1">--                 ↑     ↑      ↑</span>
-<span class="w">        </span><span class="c1">--                 fonction  élément  résultat récursif</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">foldr</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nv">foldr</span><span class="w"> </span><span class="nv">fCons</span><span class="w"> </span><span class="nv">fVide</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">fVide</span><span class="w">                           </span><span class="c1">-- Applique fVide</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">fCons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="p">(</span><span class="nv">foldr</span><span class="w"> </span><span class="nv">fCons</span><span class="w"> </span><span class="nv">fVide</span><span class="w"> </span><span class="nv">queue</span><span class="p">)</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="w">        </span><span class="c1">--                 ↑     ↑      ↑</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="w">        </span><span class="c1">--                 fonction  élément  résultat récursif</span>
 </code></pre></div>
 <hr />
 <h2 id="7-exemples-concrets">7. Exemples Concrets</h2>
 <h3 id="exemple-1-taille">Exemple 1 : Taille</h3>
 <p><strong>Question :</strong> Comment remplacer les constructeurs ?</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Liste originale</span>
-<span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
-
-<span class="c1">-- Pour calculer la taille :</span>
-<span class="c1">-- - Remplace chaque Cons par &quot;1 +&quot;</span>
-<span class="c1">-- - Remplace Vide par 0</span>
-
-<span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="p">)</span><span class="w"> </span><span class="p">((</span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="p">)</span><span class="w"> </span><span class="p">((</span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
-<span class="nf">=</span><span class="w"> </span><span class="mi">3</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="c1">-- Liste originale</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="c1">-- Pour calculer la taille :</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="c1">-- - Remplace chaque Cons par &quot;1 +&quot;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="c1">-- - Remplace Vide par 0</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="p">)</span><span class="w"> </span><span class="p">((</span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="p">)</span><span class="w"> </span><span class="p">((</span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="nf">=</span><span class="w"> </span><span class="mi">3</span>
 </code></pre></div>
 <p><strong>En code :</strong>
-<div class="highlight"><pre><span></span><code><span class="nv">taille</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">_</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">acc</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span>
-<span class="c1">--             ↑                   ↑</span>
-<span class="c1">--             remplace Cons       remplace Vide</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nv">taille</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">_</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">acc</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="c1">--             ↑                   ↑</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="c1">--             remplace Cons       remplace Vide</span>
 </code></pre></div></p>
 <h3 id="exemple-2-somme">Exemple 2 : Somme</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Liste originale</span>
-<span class="kt">Cons</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
-
-<span class="c1">-- Pour calculer la somme :</span>
-<span class="c1">-- - Remplace chaque Cons par +</span>
-<span class="c1">-- - Remplace Vide par 0</span>
-
-<span class="mi">5</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
-<span class="nf">=</span><span class="w"> </span><span class="mi">10</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1">-- Liste originale</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kt">Cons</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="c1">-- Pour calculer la somme :</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1">-- - Remplace chaque Cons par +</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="c1">-- - Remplace Vide par 0</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="mi">5</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="mi">0</span><span class="p">))</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="nf">=</span><span class="w"> </span><span class="mi">10</span>
 </code></pre></div>
 <p><strong>En code :</strong>
-<div class="highlight"><pre><span></span><code><span class="nv">somme</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="nf">(+)</span><span class="w"> </span><span class="mi">0</span>
-<span class="c1">--            ↑   ↑</span>
-<span class="c1">--            remplace Cons  remplace Vide</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nv">somme</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="nf">(+)</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="c1">--            ↑   ↑</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="c1">--            remplace Cons  remplace Vide</span>
 </code></pre></div></p>
 <h3 id="exemple-3-identite-ne-rien-changer">Exemple 3 : Identité (ne rien changer)</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Que se passe-t-il si je remplace Cons par Cons et Vide par Vide ?</span>
-
-<span class="nv">identite</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="kt">Vide</span>
-
-<span class="c1">-- Trace</span>
-<span class="nv">identite</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
-<span class="nf">=</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="nv">identite</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
-<span class="nf">=</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">(</span><span class="nv">identite</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
-<span class="nf">=</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span>
-
-<span class="c1">-- Je recrée la même liste !</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1">-- Que se passe-t-il si je remplace Cons par Cons et Vide par Vide ?</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nv">identite</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="kt">Vide</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="c1">-- Trace</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="nv">identite</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="nf">=</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="nv">identite</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="nf">=</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">(</span><span class="nv">identite</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="nf">=</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a><span class="c1">-- Je recrée la même liste !</span>
 </code></pre></div>
 <hr />
 <h2 id="8-catamorphisme-vs-recursion-manuelle">8. Catamorphisme vs Récursion Manuelle</h2>
 <h3 id="recursion-manuelle">Récursion manuelle</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">taille</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">queue</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nv">taille</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">queue</span>
 </code></pre></div>
 <p><strong>Ce que tu fais :</strong></p>
 <ol>
@@ -4418,7 +4441,7 @@
 <li>Rappelle récursivement la fonction</li>
 </ol>
 <h3 id="catamorphisme">Catamorphisme</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">taille</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">_</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">acc</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nv">taille</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">_</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">acc</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span>
 </code></pre></div>
 <p><strong>Ce que tu fais :</strong></p>
 <ol>
@@ -4430,33 +4453,33 @@
 <h2 id="9-pourquoi-cest-important">9. Pourquoi C'est Important ?</h2>
 <h3 id="1-abstraction">1. Abstraction</h3>
 <p>Au lieu de réécrire 100 fois :
-<div class="highlight"><pre><span></span><code><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">    </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span>
-<span class="w">    </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w"> </span><span class="p">(</span><span class="nv">r</span><span class="err">é</span><span class="nv">cursion</span><span class="w"> </span><span class="nv">queue</span><span class="p">)</span><span class="w"> </span><span class="nf">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">    </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w"> </span><span class="p">(</span><span class="nv">r</span><span class="err">é</span><span class="nv">cursion</span><span class="w"> </span><span class="nv">queue</span><span class="p">)</span><span class="w"> </span><span class="nf">...</span>
 </code></pre></div></p>
 <p>Tu écris une fois <code>foldr</code> et tu le réutilises !</p>
 <h3 id="2-garanti-sans-bug">2. Garanti Sans Bug</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ❌ Risque d&#39;oublier un cas</span>
-<span class="nv">maFonction</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span>
-<span class="w">        </span><span class="c1">-- Oups, j&#39;ai oublié Vide !</span>
-
-<span class="c1">-- ✅ foldr force à donner les 2 cas</span>
-<span class="nv">maFonction</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="nv">fCons</span><span class="w"> </span><span class="nv">fVide</span>
-<span class="c1">--                 ↑     ↑</span>
-<span class="c1">--                 obligatoires</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="c1">-- ❌ Risque d&#39;oublier un cas</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nv">maFonction</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">        </span><span class="c1">-- Oups, j&#39;ai oublié Vide !</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="c1">-- ✅ foldr force à donner les 2 cas</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="nv">maFonction</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="nv">fCons</span><span class="w"> </span><span class="nv">fVide</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="c1">--                 ↑     ↑</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="c1">--                 obligatoires</span>
 </code></pre></div>
 <h3 id="3-raisonnement-mathematique">3. Raisonnement Mathématique</h3>
 <p>Les catamorphismes ont des <strong>propriétés prouvables</strong> :</p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Fusion law</span>
-<span class="nv">foldr</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="p">(</span><span class="nv">foldr</span><span class="w"> </span><span class="nv">g</span><span class="w"> </span><span class="nv">base</span><span class="w"> </span><span class="nv">lst</span><span class="p">)</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="nv">h</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nv">lst</span>
-<span class="c1">-- (sous certaines conditions)</span>
-
-<span class="c1">-- Universal property</span>
-<span class="nv">h</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nv">acc</span><span class="w">  </span><span class="kt">SI</span><span class="w"> </span><span class="kt">ET</span><span class="w"> </span><span class="kt">SEULEMENT</span><span class="w"> </span><span class="kt">SI</span>
-<span class="w">    </span><span class="nv">h</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">acc</span>
-<span class="w">    </span><span class="nv">h</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nv">xs</span><span class="p">)</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="p">(</span><span class="nv">h</span><span class="w"> </span><span class="nv">xs</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1">-- Fusion law</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nv">foldr</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="p">(</span><span class="nv">foldr</span><span class="w"> </span><span class="nv">g</span><span class="w"> </span><span class="nv">base</span><span class="w"> </span><span class="nv">lst</span><span class="p">)</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="nv">h</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nv">lst</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="c1">-- (sous certaines conditions)</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="c1">-- Universal property</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="nv">h</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nv">acc</span><span class="w">  </span><span class="kt">SI</span><span class="w"> </span><span class="kt">ET</span><span class="w"> </span><span class="kt">SEULEMENT</span><span class="w"> </span><span class="kt">SI</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">    </span><span class="nv">h</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">acc</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="w">    </span><span class="nv">h</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nv">xs</span><span class="p">)</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="p">(</span><span class="nv">h</span><span class="w"> </span><span class="nv">xs</span><span class="p">)</span>
 </code></pre></div>
 <p>Ces propriétés permettent d'<strong>optimiser automatiquement</strong> ton code !</p>
 <hr />
@@ -4474,14 +4497,14 @@
 <li>Construit une structure à partir d'une graine</li>
 <li>Exemple : <code>unfold</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Générer [1, 2, 3, ..., n]</span>
-<span class="nv">range</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">range</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">        </span><span class="kt">Vide</span>
-<span class="w">    </span><span class="kr">else</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="p">(</span><span class="nv">range</span><span class="w"> </span><span class="p">(</span><span class="nv">n</span><span class="w"> </span><span class="nf">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
-<span class="c1">-- C&#39;est un anamorphisme !</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1">-- Générer [1, 2, 3, ..., n]</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nv">range</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="nv">range</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">    </span><span class="kr">if</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">        </span><span class="kt">Vide</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="kr">else</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="p">(</span><span class="nv">range</span><span class="w"> </span><span class="p">(</span><span class="nv">n</span><span class="w"> </span><span class="nf">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="c1">-- C&#39;est un anamorphisme !</span>
 </code></pre></div>
 <p><strong>Hylomorphisme</strong> (les deux) :</p>
 <ul>
@@ -4489,10 +4512,10 @@
 <li>Anamorphisme puis catamorphisme</li>
 <li>Exemple : <code>triFusion</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><span class="nv">triFusion</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span>
-<span class="nv">triFusion</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="c1">-- 1. Déconstruire en sous-listes (ana)</span>
-<span class="w">    </span><span class="c1">-- 2. Reconstruire en fusionnant (cata)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nv">triFusion</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nv">triFusion</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span><span class="c1">-- 1. Déconstruire en sous-listes (ana)</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="c1">-- 2. Reconstruire en fusionnant (cata)</span>
 </code></pre></div>
 <hr />
 <h2 id="11-le-lien-avec-les-mathematiques">11. Le Lien avec les Mathématiques</h2>
@@ -4503,57 +4526,57 @@
 - <code>Vide</code> et <code>Cons</code> sont tes opérations
 - <code>foldr</code> est le morphisme qui transforme cette algèbre en n'importe quelle autre</p>
 <p><strong>Propriété universelle :</strong>
-<div class="highlight"><pre><span></span><code><span class="kt">Pour</span><span class="w"> </span><span class="nv">toute</span><span class="w"> </span><span class="nv">fonction</span><span class="w"> </span><span class="nv">h</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nv">satisfaisant</span>
-<span class="w">    </span><span class="nv">h</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">base</span>
-<span class="w">    </span><span class="nv">h</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nv">xs</span><span class="p">)</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="p">(</span><span class="nv">h</span><span class="w"> </span><span class="nv">xs</span><span class="p">)</span>
-
-<span class="kt">Il</span><span class="w"> </span><span class="nv">existe</span><span class="w"> </span><span class="nv">un</span><span class="w"> </span><span class="kt">UNIQUE</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="nv">tel</span><span class="w"> </span><span class="nv">que</span><span class="w"> </span><span class="nv">h</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nv">base</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="kt">Pour</span><span class="w"> </span><span class="nv">toute</span><span class="w"> </span><span class="nv">fonction</span><span class="w"> </span><span class="nv">h</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nv">satisfaisant</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span><span class="nv">h</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">base</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="nv">h</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nv">xs</span><span class="p">)</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="p">(</span><span class="nv">h</span><span class="w"> </span><span class="nv">xs</span><span class="p">)</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="kt">Il</span><span class="w"> </span><span class="nv">existe</span><span class="w"> </span><span class="nv">un</span><span class="w"> </span><span class="kt">UNIQUE</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="nv">tel</span><span class="w"> </span><span class="nv">que</span><span class="w"> </span><span class="nv">h</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nv">base</span>
 </code></pre></div></p>
 <p><strong>Conséquence :</strong> <code>foldr</code> est LA manière canonique de définir des fonctions sur les listes !</p>
 <hr />
 <h2 id="12-application-ecrire-ton-propre-catamorphisme">12. Application : Écrire Ton Propre Catamorphisme</h2>
 <h3 id="pour-un-type-custom">Pour un type custom</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Type pour les nombres naturels</span>
-<span class="kr">type</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Zero</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Succ</span><span class="w"> </span><span class="kt">Nat</span>
-
-<span class="c1">-- 0, 1, 2, 3 s&#39;écrit :</span>
-<span class="c1">-- Zero, Succ Zero, Succ (Succ Zero), Succ (Succ (Succ Zero))</span>
-
-<span class="c1">-- Son catamorphisme</span>
-<span class="nv">foldNat</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
-<span class="nv">foldNat</span><span class="w"> </span><span class="nv">zero</span><span class="w"> </span><span class="nv">succ</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Zero</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">zero</span>
-<span class="w">        </span><span class="kt">Succ</span><span class="w"> </span><span class="nv">pred</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">succ</span><span class="w"> </span><span class="p">(</span><span class="nv">foldNat</span><span class="w"> </span><span class="nv">zero</span><span class="w"> </span><span class="nv">succ</span><span class="w"> </span><span class="nv">pred</span><span class="p">)</span>
-
-<span class="c1">-- Exemples</span>
-<span class="nv">toInt</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">toInt</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldNat</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
-
-<span class="nv">double</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nat</span>
-<span class="nv">double</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldNat</span><span class="w"> </span><span class="kt">Zero</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Succ</span><span class="w"> </span><span class="p">(</span><span class="kt">Succ</span><span class="w"> </span><span class="nv">acc</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="c1">-- Type pour les nombres naturels</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Zero</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Succ</span><span class="w"> </span><span class="kt">Nat</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="c1">-- 0, 1, 2, 3 s&#39;écrit :</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="c1">-- Zero, Succ Zero, Succ (Succ Zero), Succ (Succ (Succ Zero))</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="c1">-- Son catamorphisme</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="nv">foldNat</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="nv">foldNat</span><span class="w"> </span><span class="nv">zero</span><span class="w"> </span><span class="nv">succ</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="w">        </span><span class="kt">Zero</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">zero</span>
+<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a><span class="w">        </span><span class="kt">Succ</span><span class="w"> </span><span class="nv">pred</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">succ</span><span class="w"> </span><span class="p">(</span><span class="nv">foldNat</span><span class="w"> </span><span class="nv">zero</span><span class="w"> </span><span class="nv">succ</span><span class="w"> </span><span class="nv">pred</span><span class="p">)</span>
+<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a>
+<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a><span class="c1">-- Exemples</span>
+<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a><span class="nv">toInt</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a><span class="nv">toInt</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldNat</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>
+<a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a><span class="nv">double</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nat</span>
+<a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a><span class="nv">double</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldNat</span><span class="w"> </span><span class="kt">Zero</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Succ</span><span class="w"> </span><span class="p">(</span><span class="kt">Succ</span><span class="w"> </span><span class="nv">acc</span><span class="p">))</span>
 </code></pre></div>
 <h3 id="pour-un-arbre-binaire">Pour un arbre binaire</h3>
-<div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span>
-<span class="w">    </span><span class="nf">=</span><span class="w"> </span><span class="kt">Feuille</span>
-<span class="w">    </span><span class="nf">|</span><span class="w"> </span><span class="kt">Noeud</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span>
-
-<span class="c1">-- Son catamorphisme</span>
-<span class="nv">foldArbre</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
-<span class="nv">foldArbre</span><span class="w"> </span><span class="nv">feuille</span><span class="w"> </span><span class="nv">noeud</span><span class="w"> </span><span class="nv">arbre</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">arbre</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Feuille</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">feuille</span>
-<span class="w">        </span><span class="kt">Noeud</span><span class="w"> </span><span class="nv">valeur</span><span class="w"> </span><span class="nv">gauche</span><span class="w"> </span><span class="nv">droite</span><span class="w"> </span><span class="nf">-&gt;</span>
-<span class="w">            </span><span class="nv">noeud</span><span class="w"> </span><span class="nv">valeur</span>
-<span class="w">                </span><span class="p">(</span><span class="nv">foldArbre</span><span class="w"> </span><span class="nv">feuille</span><span class="w"> </span><span class="nv">noeud</span><span class="w"> </span><span class="nv">gauche</span><span class="p">)</span>
-<span class="w">                </span><span class="p">(</span><span class="nv">foldArbre</span><span class="w"> </span><span class="nv">feuille</span><span class="w"> </span><span class="nv">noeud</span><span class="w"> </span><span class="nv">droite</span><span class="p">)</span>
-
-<span class="c1">-- Exemples</span>
-<span class="nv">tailleArbre</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">tailleArbre</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldArbre</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">_</span><span class="w"> </span><span class="nv">g</span><span class="w"> </span><span class="nv">d</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">g</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">d</span><span class="p">)</span>
-
-<span class="nv">sommeArbre</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Arbre</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">sommeArbre</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldArbre</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">val</span><span class="w"> </span><span class="nv">g</span><span class="w"> </span><span class="nv">d</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">val</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">g</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">d</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span><span class="nf">=</span><span class="w"> </span><span class="kt">Feuille</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="nf">|</span><span class="w"> </span><span class="kt">Noeud</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="c1">-- Son catamorphisme</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="nv">foldArbre</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="nv">foldArbre</span><span class="w"> </span><span class="nv">feuille</span><span class="w"> </span><span class="nv">noeud</span><span class="w"> </span><span class="nv">arbre</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">arbre</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="w">        </span><span class="kt">Feuille</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">feuille</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="w">        </span><span class="kt">Noeud</span><span class="w"> </span><span class="nv">valeur</span><span class="w"> </span><span class="nv">gauche</span><span class="w"> </span><span class="nv">droite</span><span class="w"> </span><span class="nf">-&gt;</span>
+<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="w">            </span><span class="nv">noeud</span><span class="w"> </span><span class="nv">valeur</span>
+<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="w">                </span><span class="p">(</span><span class="nv">foldArbre</span><span class="w"> </span><span class="nv">feuille</span><span class="w"> </span><span class="nv">noeud</span><span class="w"> </span><span class="nv">gauche</span><span class="p">)</span>
+<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="w">                </span><span class="p">(</span><span class="nv">foldArbre</span><span class="w"> </span><span class="nv">feuille</span><span class="w"> </span><span class="nv">noeud</span><span class="w"> </span><span class="nv">droite</span><span class="p">)</span>
+<a id="__codelineno-26-14" name="__codelineno-26-14" href="#__codelineno-26-14"></a>
+<a id="__codelineno-26-15" name="__codelineno-26-15" href="#__codelineno-26-15"></a><span class="c1">-- Exemples</span>
+<a id="__codelineno-26-16" name="__codelineno-26-16" href="#__codelineno-26-16"></a><span class="nv">tailleArbre</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Arbre</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-26-17" name="__codelineno-26-17" href="#__codelineno-26-17"></a><span class="nv">tailleArbre</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldArbre</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">_</span><span class="w"> </span><span class="nv">g</span><span class="w"> </span><span class="nv">d</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">g</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">d</span><span class="p">)</span>
+<a id="__codelineno-26-18" name="__codelineno-26-18" href="#__codelineno-26-18"></a>
+<a id="__codelineno-26-19" name="__codelineno-26-19" href="#__codelineno-26-19"></a><span class="nv">sommeArbre</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Arbre</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-26-20" name="__codelineno-26-20" href="#__codelineno-26-20"></a><span class="nv">sommeArbre</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldArbre</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">val</span><span class="w"> </span><span class="nv">g</span><span class="w"> </span><span class="nv">d</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">val</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">g</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">d</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="13-la-recette-pour-creer-un-catamorphisme">13. La Recette pour Créer un Catamorphisme</h2>
@@ -4561,7 +4584,7 @@
 <ol>
 <li>
 <p><strong>Identifie les constructeurs de ton type</strong>
-   <div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">MonType</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Constructeur1</span><span class="w"> </span><span class="nf">...</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Constructeur2</span><span class="w"> </span><span class="nf">...</span>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="kr">type</span><span class="w"> </span><span class="kt">MonType</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Constructeur1</span><span class="w"> </span><span class="nf">...</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Constructeur2</span><span class="w"> </span><span class="nf">...</span>
 </code></pre></div></p>
 </li>
 <li>
@@ -4583,26 +4606,26 @@
 </li>
 </ol>
 <h3 id="exemple-maybe">Exemple : Maybe</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- 1. Type</span>
-<span class="kr">type</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">a</span>
-
-<span class="c1">-- 2. Paramètres</span>
-<span class="c1">-- Nothing → b (valeur)</span>
-<span class="c1">-- Just a → (a -&gt; b) (fonction)</span>
-
-<span class="c1">-- 3. Implémentation</span>
-<span class="nv">foldMaybe</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
-<span class="nv">foldMaybe</span><span class="w"> </span><span class="nv">nothing</span><span class="w"> </span><span class="nv">just</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">nothing</span>
-<span class="w">        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">just</span><span class="w"> </span><span class="nv">x</span>
-
-<span class="c1">-- 4. Utilisation</span>
-<span class="nv">getOr</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">a</span>
-<span class="nv">getOr</span><span class="w"> </span><span class="nv">default</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldMaybe</span><span class="w"> </span><span class="nv">default</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="p">)</span>
-
-<span class="nv">isJust</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Bool</span>
-<span class="nv">isJust</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldMaybe</span><span class="w"> </span><span class="kt">False</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">_</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">True</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1">-- 1. Type</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">|</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="c1">-- 2. Paramètres</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="c1">-- Nothing → b (valeur)</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="c1">-- Just a → (a -&gt; b) (fonction)</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="c1">-- 3. Implémentation</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="nv">foldMaybe</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="nv">foldMaybe</span><span class="w"> </span><span class="nv">nothing</span><span class="w"> </span><span class="nv">just</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a><span class="w">        </span><span class="kt">Nothing</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">nothing</span>
+<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a><span class="w">        </span><span class="kt">Just</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">just</span><span class="w"> </span><span class="nv">x</span>
+<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>
+<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a><span class="c1">-- 4. Utilisation</span>
+<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a><span class="nv">getOr</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a><span class="nv">getOr</span><span class="w"> </span><span class="nv">default</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldMaybe</span><span class="w"> </span><span class="nv">default</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">x</span><span class="p">)</span>
+<a id="__codelineno-28-18" name="__codelineno-28-18" href="#__codelineno-28-18"></a>
+<a id="__codelineno-28-19" name="__codelineno-28-19" href="#__codelineno-28-19"></a><span class="nv">isJust</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Bool</span>
+<a id="__codelineno-28-20" name="__codelineno-28-20" href="#__codelineno-28-20"></a><span class="nv">isJust</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldMaybe</span><span class="w"> </span><span class="kt">False</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">_</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">True</span><span class="p">)</span>
 </code></pre></div>
 <hr />
 <h2 id="14-pourquoi-catamorphisme-et-pas-fold">14. Pourquoi "Catamorphisme" et pas "Fold" ?</h2>
@@ -4648,25 +4671,25 @@
 <hr />
 <h2 id="15-le-schema-de-recursion-universel">15. Le Schéma de Récursion Universel</h2>
 <h3 id="tout-est-un-catamorphisme">Tout est un catamorphisme !</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Addition</span>
-<span class="nv">add</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nat</span>
-<span class="nv">add</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldNat</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="kt">Succ</span><span class="w"> </span><span class="nv">n</span>
-
-<span class="c1">-- Multiplication</span>
-<span class="nv">mult</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nat</span>
-<span class="nv">mult</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldNat</span><span class="w"> </span><span class="kt">Zero</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">add</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nv">acc</span><span class="p">)</span><span class="w"> </span><span class="nv">n</span>
-
-<span class="c1">-- Concaténation</span>
-<span class="nv">concat</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
-<span class="nv">concat</span><span class="w"> </span><span class="nv">xs</span><span class="w"> </span><span class="nv">ys</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">ys</span><span class="w"> </span><span class="nv">xs</span>
-
-<span class="c1">-- Map</span>
-<span class="nv">map</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">b</span>
-<span class="nv">map</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="p">(</span><span class="nv">f</span><span class="w"> </span><span class="nv">x</span><span class="p">)</span><span class="w"> </span><span class="nv">acc</span><span class="p">)</span><span class="w"> </span><span class="kt">Vide</span>
-
-<span class="c1">-- Filter</span>
-<span class="nv">filter</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Bool</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
-<span class="nv">filter</span><span class="w"> </span><span class="nv">p</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">p</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="nv">acc</span><span class="p">)</span><span class="w"> </span><span class="kt">Vide</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1">-- Addition</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="nv">add</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nat</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="nv">add</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldNat</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="kt">Succ</span><span class="w"> </span><span class="nv">n</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="c1">-- Multiplication</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="nv">mult</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nat</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nat</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="nv">mult</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldNat</span><span class="w"> </span><span class="kt">Zero</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">add</span><span class="w"> </span><span class="nv">m</span><span class="w"> </span><span class="nv">acc</span><span class="p">)</span><span class="w"> </span><span class="nv">n</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a>
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="c1">-- Concaténation</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="nv">concat</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="nv">concat</span><span class="w"> </span><span class="nv">xs</span><span class="w"> </span><span class="nv">ys</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">ys</span><span class="w"> </span><span class="nv">xs</span>
+<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a>
+<a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a><span class="c1">-- Map</span>
+<a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a><span class="nv">map</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">b</span>
+<a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a><span class="nv">map</span><span class="w"> </span><span class="nv">f</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="p">(</span><span class="nv">f</span><span class="w"> </span><span class="nv">x</span><span class="p">)</span><span class="w"> </span><span class="nv">acc</span><span class="p">)</span><span class="w"> </span><span class="kt">Vide</span>
+<a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a>
+<a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a><span class="c1">-- Filter</span>
+<a id="__codelineno-29-18" name="__codelineno-29-18" href="#__codelineno-29-18"></a><span class="nv">filter</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Bool</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-29-19" name="__codelineno-29-19" href="#__codelineno-29-19"></a><span class="nv">filter</span><span class="w"> </span><span class="nv">p</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">x</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kr">if</span><span class="w"> </span><span class="nv">p</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="kr">then</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="kr">else</span><span class="w"> </span><span class="nv">acc</span><span class="p">)</span><span class="w"> </span><span class="kt">Vide</span>
 </code></pre></div>
 <p><strong>Presque toutes les fonctions sur des structures récursives peuvent s'écrire comme catamorphismes !</strong></p>
 <hr />
@@ -4684,11 +4707,11 @@
 ✅ Optimisations automatiques<br />
 ✅ Base de la programmation générique</p>
 <h3 id="la-formule-magique">La formule magique</h3>
-<div class="highlight"><pre><span></span><code>Structure récursive
-    ↓
-Catamorphisme (remplace les constructeurs)
-    ↓
-Valeur
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>Structure récursive
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>    ↓
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>Catamorphisme (remplace les constructeurs)
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>    ↓
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>Valeur
 </code></pre></div>
 <hr />
 <h2 id="17-exercice-mental">17. Exercice Mental</h2>
@@ -4750,7 +4773,7 @@ par une opération, et tu obtiens ton plat (résultat)."</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2025 16:28:07 UTC">October 23, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 6, 2025 19:21:07 UTC">November 6, 2025</span>
   </span>
 
     
@@ -4811,7 +4834,7 @@ par une opération, et tu obtiens ton plat (résultat)."</p>
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>

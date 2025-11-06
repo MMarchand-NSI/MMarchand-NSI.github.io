@@ -14,7 +14,7 @@
         <link rel="prev" href="../../recursivite/">
       
       
-        <link rel="next" href="../2.elm-maybe/">
+        <link rel="next" href="../11.sites-web/">
       
       
       <link rel="icon" href="../../../../assets/images/favicon.png">
@@ -3114,6 +3114,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../2.elm-maybe/" class="md-nav__link">
         
   
@@ -4465,11 +4488,11 @@
 <p><strong>Voici la vérité :</strong> Ce cours ne vous enseigne pas vraiment Elm. Il vous enseigne <strong>comment penser les problèmes</strong>.</p>
 <h3 id="ce-que-vous-apprenez-reellement">Ce Que Vous Apprenez Réellement</h3>
 <p>Quand vous écrivez :
-<div class="highlight"><pre><span></span><code><span class="nv">taille</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">queue</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">taille</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">queue</span>
 </code></pre></div></p>
 <p>Vous n'apprenez pas juste à calculer la taille d'une liste. Vous apprenez :</p>
 <ol>
@@ -4481,54 +4504,54 @@
 </ol>
 <p><strong>Ces compétences sont universelles.</strong></p>
 <p><strong>Surprise!</strong> Vous savez déjà programmer en OCaml! (et pas que)</p>
-<div class="highlight"><pre><span></span><code><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">liste</span> <span class="o">=</span> <span class="nc">Vide</span> <span class="o">|</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">liste</span>
-
-<span class="k">let</span> <span class="k">rec</span> <span class="n">taille</span> <span class="o">(</span><span class="n">lst</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">liste</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span>
-    <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
-    <span class="o">|</span> <span class="nc">Vide</span> <span class="o">-&gt;</span> <span class="mi">0</span>
-    <span class="o">|</span> <span class="nc">Cons</span> <span class="o">(_,</span> <span class="n">queue</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">taille</span> <span class="n">queue</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">liste</span> <span class="o">=</span> <span class="nc">Vide</span> <span class="o">|</span> <span class="nc">Cons</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">liste</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">let</span> <span class="k">rec</span> <span class="n">taille</span> <span class="o">(</span><span class="n">lst</span> <span class="o">:</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">liste</span><span class="o">)</span> <span class="o">:</span> <span class="kt">int</span> <span class="o">=</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="k">match</span> <span class="n">lst</span> <span class="k">with</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="o">|</span> <span class="nc">Vide</span> <span class="o">-&gt;</span> <span class="mi">0</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="o">|</span> <span class="nc">Cons</span> <span class="o">(_,</span> <span class="n">queue</span><span class="o">)</span> <span class="o">-&gt;</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">taille</span> <span class="n">queue</span>
 </code></pre></div>
 <hr />
 <h2 id="0-syntaxe-de-base">0. Syntaxe de base</h2>
 <p>Je ne m'étendrai pas sur l'indentation qui est nécessaire comme en python, contentez vous de faire comme je fais.</p>
 <h2 id="appeler-des-fonctions-en-elm">Appeler des Fonctions en Elm</h2>
 <h3 id="syntaxe-de-base-pas-de-parentheses">Syntaxe de base (PAS de parenthèses !)</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ❌ PAS comme en Python</span>
-<span class="nv">fonction</span><span class="p">(</span><span class="nv">arg1</span><span class="p">,</span><span class="w"> </span><span class="nv">arg2</span><span class="p">)</span>
-
-<span class="c1">-- ✅ En Elm : juste des espaces</span>
-<span class="nv">fonction</span><span class="w"> </span><span class="nv">arg1</span><span class="w"> </span><span class="nv">arg2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1">-- ❌ PAS comme en Python</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">fonction</span><span class="p">(</span><span class="nv">arg1</span><span class="p">,</span><span class="w"> </span><span class="nv">arg2</span><span class="p">)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="c1">-- ✅ En Elm : juste des espaces</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nv">fonction</span><span class="w"> </span><span class="nv">arg1</span><span class="w"> </span><span class="nv">arg2</span>
 </code></pre></div>
 <h3 id="exemples-concrets">Exemples concrets</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Python: max(5, 3)</span>
-<span class="c1">-- Elm:</span>
-<span class="nv">max</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">3</span>
-
-<span class="c1">-- Python: range(0, 10)</span>
-<span class="c1">-- Elm:</span>
-<span class="nv">range2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span>
-
-<span class="c1">-- Python: taille(liste)</span>
-<span class="c1">-- Elm:</span>
-<span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1">-- Python: max(5, 3)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="c1">-- Elm:</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">max</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="mi">3</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="c1">-- Python: range(0, 10)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="c1">-- Elm:</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nv">range2</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="mi">10</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="c1">-- Python: taille(liste)</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="c1">-- Elm:</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span>
 </code></pre></div>
 <h3 id="role-des-parentheses">Rôle des Parenthèses</h3>
 <p><strong>Les parenthèses servent à GROUPER, pas à appeler !</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Si l&#39;argument est une expression complexe</span>
-<span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span>
-<span class="c1">--     ↑            ↑</span>
-<span class="c1">--     Sans ces parenthèses, Elm lirait: taille Cons 1 Vide (3 arguments!)</span>
-
-<span class="c1">-- Appels imbriqués</span>
-<span class="nv">somme</span><span class="w"> </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="nv">lst</span><span class="p">)</span>
-<span class="c1">--    ↑          ↑</span>
-<span class="c1">--    Groupe &quot;take 3 lst&quot; comme UN argument</span>
-
-<span class="c1">-- Plusieurs niveaux</span>
-<span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="p">(</span><span class="nv">n</span><span class="w"> </span><span class="nf">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="nv">queue</span><span class="p">)</span>
-<span class="c1">--        ↑                  ↑</span>
-<span class="c1">--        Sans ça: Cons tete take (n - 1) queue (Cons avec 4 arguments: erreur)</span>
-<span class="c1">-- pareil pour le (n - 1)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">-- Si l&#39;argument est une expression complexe</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nv">taille</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1">--     ↑            ↑</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1">--     Sans ces parenthèses, Elm lirait: taille Cons 1 Vide (3 arguments!)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="c1">-- Appels imbriqués</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="nv">somme</span><span class="w"> </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="nv">lst</span><span class="p">)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1">--    ↑          ↑</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="c1">--    Groupe &quot;take 3 lst&quot; comme UN argument</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="c1">-- Plusieurs niveaux</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="p">(</span><span class="nv">n</span><span class="w"> </span><span class="nf">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="nv">queue</span><span class="p">)</span>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="c1">--        ↑                  ↑</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="c1">--        Sans ça: Cons tete take (n - 1) queue (Cons avec 4 arguments: erreur)</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="c1">-- pareil pour le (n - 1)</span>
 </code></pre></div>
 <h3 id="regle-simple">Règle Simple</h3>
 <ul>
@@ -4539,85 +4562,85 @@
 <hr />
 <h2 id="creer-des-fonctions-en-elm">Créer des Fonctions en Elm</h2>
 <h3 id="structure-complete">Structure Complète</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- 1. Signature de type (optionnelle mais recommandée)</span>
-<span class="nv">doublerValeur</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="c1">--  ↑           ↑      ↑</span>
-<span class="c1">--  nom      entrée  sortie</span>
-
-<span class="c1">-- 2. Définition</span>
-<span class="nv">doublerValeur</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span>
-<span class="c1">--  ↑         ↑   ↑</span>
-<span class="c1">--  nom    param  corps</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1">-- 1. Signature de type (optionnelle mais recommandée)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nv">doublerValeur</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="c1">--  ↑           ↑      ↑</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1">--  nom      entrée  sortie</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="c1">-- 2. Définition</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nv">doublerValeur</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="c1">--  ↑         ↑   ↑</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="c1">--  nom    param  corps</span>
 </code></pre></div>
 <hr />
 <h2 id="la-signature-de-type">🔍 La Signature de Type</h2>
 <h3 id="format">Format</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">nomFonction</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Type1</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Type2</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">TypeRetour</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">nomFonction</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Type1</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Type2</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">TypeRetour</span>
 </code></pre></div>
 <p><strong>Lecture :</strong> La fonction prend des paramètres de <code>Type1</code>, <code>Type2</code>, etc., et retourne un <code>TypeRetour</code>.</p>
 <h3 id="exemples-simples">Exemples Simples</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Fonction sans paramètre (constante)</span>
-<span class="nv">reponse</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">reponse</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="mi">42</span>
-
-<span class="c1">-- Fonction à 1 paramètre</span>
-<span class="nv">doublerValeur</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">doublerValeur</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span>
-
-<span class="c1">-- Fonction à 2 paramètres</span>
-<span class="nv">additionner</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">additionner</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">y</span>
-
-<span class="c1">-- Fonction à 3 paramètres</span>
-<span class="nv">calculer</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">calculer</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="nv">c</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1">-- Fonction sans paramètre (constante)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nv">reponse</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="nv">reponse</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="mi">42</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="c1">-- Fonction à 1 paramètre</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="nv">doublerValeur</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="nv">doublerValeur</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="mi">2</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="c1">-- Fonction à 2 paramètres</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="nv">additionner</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="nv">additionner</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nv">y</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">y</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="c1">-- Fonction à 3 paramètres</span>
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a><span class="nv">calculer</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a><span class="nv">calculer</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nv">c</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">*</span><span class="w"> </span><span class="nv">c</span>
 </code></pre></div>
 <h2 id="1-types-de-donnees-personnalises">1. Types de Données Personnalisés</h2>
 <h3 id="definir-un-type-personnalise">Définir un type personnalisé</h3>
-<div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w">            </span><span class="c1">-- &#39;a&#39; est un type générique (Int, String, Bool, etc.)</span>
-<span class="w">    </span><span class="nf">=</span><span class="w"> </span><span class="kt">Vide</span><span class="w">              </span><span class="c1">-- Premier cas : liste vide</span>
-<span class="w">    </span><span class="nf">|</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span><span class="w">  </span><span class="c1">-- Deuxième cas : tête + queue</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kr">type</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w">            </span><span class="c1">-- &#39;a&#39; est un type générique (Int, String, Bool, etc.)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="nf">=</span><span class="w"> </span><span class="kt">Vide</span><span class="w">              </span><span class="c1">-- Premier cas : liste vide</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="nf">|</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span><span class="w">  </span><span class="c1">-- Deuxième cas : tête + queue</span>
 </code></pre></div>
 <p><strong>Lecture :</strong> Une Liste de <code>a</code> est <strong>SOIT</strong> Vide <strong>SOIT</strong> Construite avec un élément de type <code>a</code> et une autre Liste.</p>
 <h3 id="exemples">Exemples</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Liste d&#39;entiers : [42, 5, 4]</span>
-<span class="kt">Cons</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
-
-<span class="c1">-- Liste de booléens : [True, False]</span>
-<span class="kt">Cons</span><span class="w"> </span><span class="kt">True</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="kt">False</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span>
-
-<span class="c1">-- Liste vide</span>
-<span class="kt">Vide</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="c1">-- Liste d&#39;entiers : [42, 5, 4]</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kt">Cons</span><span class="w"> </span><span class="mi">42</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">5</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="mi">4</span><span class="w"> </span><span class="kt">Vide</span><span class="p">))</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="c1">-- Liste de booléens : [True, False]</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="kt">Cons</span><span class="w"> </span><span class="kt">True</span><span class="w"> </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="kt">False</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="c1">-- Liste vide</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="kt">Vide</span>
 </code></pre></div>
 <hr />
 <h2 id="2-pattern-matching-avec-case">2. Pattern Matching avec <code>case</code></h2>
 <h3 id="syntaxe-de-base">Syntaxe de base</h3>
-<div class="highlight"><pre><span></span><code><span class="kr">case</span><span class="w"> </span><span class="nv">expression</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">    </span><span class="nv">motif1</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultat1</span>
-<span class="w">    </span><span class="nv">motif2</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultat2</span>
-<span class="w">    </span><span class="nv">_</span><span class="w">      </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultatParD</span><span class="err">é</span><span class="nv">faut</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kr">case</span><span class="w"> </span><span class="nv">expression</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="nv">motif1</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultat1</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="nv">motif2</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultat2</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="nv">_</span><span class="w">      </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultatParD</span><span class="err">é</span><span class="nv">faut</span>
 </code></pre></div>
 <h3 id="exemple-simple">Exemple simple</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">taille</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w">                           </span><span class="c1">-- Cas 1 : liste vide</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="c1">-- Cas 2 : déconstruit la liste</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nv">taille</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w">                           </span><span class="c1">-- Cas 1 : liste vide</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="c1">-- Cas 2 : déconstruit la liste</span>
 </code></pre></div>
 <p><strong>Décomposition :</strong>
-<div class="highlight"><pre><span></span><code>Cons 42 (Cons 5 Vide)
-  ↓       ↓
- tete    queue
-
-tete = 42
-queue = Cons 5 Vide
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>Cons 42 (Cons 5 Vide)
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>  ↓       ↓
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a> tete    queue
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>tete = 42
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>queue = Cons 5 Vide
 </code></pre></div></p>
 <h3 id="pattern-matching-sur-un-tuple">Pattern matching sur un tuple</h3>
-<div class="highlight"><pre><span></span><code><span class="kr">case</span><span class="w"> </span><span class="p">(</span><span class="nv">lst1</span><span class="p">,</span><span class="w"> </span><span class="nv">lst2</span><span class="p">)</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">    </span><span class="p">(</span><span class="kt">Vide</span><span class="p">,</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">    </span><span class="c1">-- Les deux sont vides</span>
-<span class="w">    </span><span class="p">(</span><span class="kt">Vide</span><span class="p">,</span><span class="w"> </span><span class="nv">_</span><span class="p">)</span><span class="w">    </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">    </span><span class="c1">-- Première vide, deuxième peu importe</span>
-<span class="w">    </span><span class="p">(</span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span><span class="w">    </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">    </span><span class="c1">-- Deuxième vide, première peu importe</span>
-<span class="w">    </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nv">q1</span><span class="p">,</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="nv">q2</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">  </span><span class="c1">-- Les deux non-vides</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kr">case</span><span class="w"> </span><span class="p">(</span><span class="nv">lst1</span><span class="p">,</span><span class="w"> </span><span class="nv">lst2</span><span class="p">)</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="p">(</span><span class="kt">Vide</span><span class="p">,</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">    </span><span class="c1">-- Les deux sont vides</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="w">    </span><span class="p">(</span><span class="kt">Vide</span><span class="p">,</span><span class="w"> </span><span class="nv">_</span><span class="p">)</span><span class="w">    </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">    </span><span class="c1">-- Première vide, deuxième peu importe</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="w">    </span><span class="p">(</span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span><span class="w">    </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">    </span><span class="c1">-- Deuxième vide, première peu importe</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="w">    </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nv">q1</span><span class="p">,</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="nv">q2</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span><span class="w">  </span><span class="c1">-- Les deux non-vides</span>
 </code></pre></div>
 <p><strong>Le symbole <code>_</code></strong> = "je m'en fiche de cette valeur"</p>
 <hr />
@@ -4626,176 +4649,176 @@ queue = Cons 5 Vide
 <p><strong>Ne JAMAIS penser à TOUTE la liste !</strong> Pense seulement au premier élément.</p>
 <h4 id="etape-1-identifier-les-cas-de-base">Étape 1 : Identifier le(s) CAS DE BASE</h4>
 <p>Le cas de base, c'est quand on peut répondre <strong>immédiatement</strong> sans récursion.</p>
-<div class="highlight"><pre><span></span><code><span class="nv">taille</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="c1">-- ✅ CAS DE BASE : liste vide = 0</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nv">taille</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="c1">-- ✅ CAS DE BASE : liste vide = 0</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span>
 </code></pre></div>
 <h4 id="etape-2-le-cas-recursif">Étape 2 : Le Cas Récursif</h4>
 <p>"Je suis un lutin, je ne traite QUE le premier élément, puis je délègue le reste à un autre lutin."</p>
-<div class="highlight"><pre><span></span><code><span class="nv">somme</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">somme</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w">                      </span><span class="c1">-- CAS DE BASE</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span>
-<span class="w">            </span><span class="nv">tete</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">somme</span><span class="w"> </span><span class="nv">queue</span><span class="w">         </span><span class="c1">-- Je traite tete, je délègue queue</span>
-<span class="w">            </span><span class="c1">--↑          ↑</span>
-<span class="w">            </span><span class="c1">-- moi    autre lutin</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="nv">somme</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nv">somme</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w">                      </span><span class="c1">-- CAS DE BASE</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">            </span><span class="nv">tete</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">somme</span><span class="w"> </span><span class="nv">queue</span><span class="w">         </span><span class="c1">-- Je traite tete, je délègue queue</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="w">            </span><span class="c1">--↑          ↑</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">            </span><span class="c1">-- moi    autre lutin</span>
 </code></pre></div>
 <p><strong>Visualisation :</strong>
-<div class="highlight"><pre><span></span><code>somme [42, 5, 4]
-= 42 + somme [5, 4]
-     = 5 + somme [4]
-          = 4 + somme []
-               = 0
-
-= 42 + 5 + 4 + 0
-= 51
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>somme [42, 5, 4]
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>= 42 + somme [5, 4]
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>     = 5 + somme [4]
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>          = 4 + somme []
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>               = 0
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>= 42 + 5 + 4 + 0
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>= 51
 </code></pre></div></p>
 <hr />
 <h2 id="4-conditions-avec-if-then-else">4. Conditions avec <code>if-then-else</code></h2>
 <p>⚠️ Attention, contrairement à python, les conditions représentent une valeur renvoyée</p>
 <h3 id="syntaxe">Syntaxe</h3>
-<div class="highlight"><pre><span></span><code><span class="kr">if</span><span class="w"> </span><span class="nv">condition</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">    </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultatSiVrai</span>
-<span class="kr">else</span>
-<span class="w">    </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultatSiFaux</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kr">if</span><span class="w"> </span><span class="nv">condition</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultatSiVrai</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="kr">else</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="w">    </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultatSiFaux</span>
 </code></pre></div>
 <p><strong>⚠️ OBLIGATOIRE : Toujours un <code>else</code> en Elm !</strong></p>
 <h3 id="exemples_1">Exemples</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Test d&#39;égalité</span>
-<span class="kr">if</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="nv">e</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">    </span><span class="nf">...</span>
-<span class="kr">else</span>
-<span class="w">    </span><span class="nf">...</span>
-
-<span class="c1">-- Test numérique</span>
-<span class="kr">if</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">    </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="p">(</span><span class="nv">n</span><span class="w"> </span><span class="nf">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="nv">queue</span><span class="p">)</span>
-<span class="kr">else</span>
-<span class="w">    </span><span class="kt">Vide</span>
-
-<span class="c1">-- Modulo (reste de division)</span>
-<span class="kr">if</span><span class="w"> </span><span class="nv">modBy</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">    </span><span class="s">&quot;pair&quot;</span>
-<span class="kr">else</span>
-<span class="w">    </span><span class="s">&quot;impair&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="c1">-- Test d&#39;égalité</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="kr">if</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="nv">e</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="w">    </span><span class="nf">...</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="kr">else</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="w">    </span><span class="nf">...</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="c1">-- Test numérique</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="kr">if</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="w">    </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="p">(</span><span class="nv">n</span><span class="w"> </span><span class="nf">-</span><span class="w"> </span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="nv">queue</span><span class="p">)</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="kr">else</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="w">    </span><span class="kt">Vide</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a><span class="c1">-- Modulo (reste de division)</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="kr">if</span><span class="w"> </span><span class="nv">modBy</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="w">    </span><span class="s">&quot;pair&quot;</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="kr">else</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="w">    </span><span class="s">&quot;impair&quot;</span>
 </code></pre></div>
 <hr />
 <h2 id="5-operateurs-booleens">5. Opérateurs Booléens</h2>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ET logique</span>
-<span class="kt">True</span><span class="w"> </span><span class="nf">&amp;&amp;</span><span class="w"> </span><span class="kt">True</span><span class="w">   </span><span class="c1">--&gt; True</span>
-<span class="kt">True</span><span class="w"> </span><span class="nf">&amp;&amp;</span><span class="w"> </span><span class="kt">False</span><span class="w">  </span><span class="c1">--&gt; False</span>
-
-<span class="c1">-- OU logique</span>
-<span class="kt">True</span><span class="w"> </span><span class="nf">||</span><span class="w"> </span><span class="kt">False</span><span class="w">  </span><span class="c1">--&gt; True</span>
-<span class="kt">False</span><span class="w"> </span><span class="nf">||</span><span class="w"> </span><span class="kt">False</span><span class="w"> </span><span class="c1">--&gt; False</span>
-
-<span class="c1">-- Égalité</span>
-<span class="mi">42</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">42</span><span class="w">  </span><span class="c1">--&gt; True</span>
-<span class="mi">42</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">5</span><span class="w">   </span><span class="c1">--&gt; False</span>
-
-<span class="c1">-- Différence</span>
-<span class="mi">42</span><span class="w"> </span><span class="nf">/=</span><span class="w"> </span><span class="mi">5</span><span class="w">   </span><span class="c1">--&gt; True</span>
-
-<span class="c1">-- Comparaisons</span>
-<span class="mi">5</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="w">   </span><span class="c1">--&gt; True</span>
-<span class="mi">5</span><span class="w"> </span><span class="nf">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="w">  </span><span class="c1">--&gt; True</span>
-<span class="mi">5</span><span class="w"> </span><span class="nf">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="w">  </span><span class="c1">--&gt; True</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="c1">-- ET logique</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="kt">True</span><span class="w"> </span><span class="nf">&amp;&amp;</span><span class="w"> </span><span class="kt">True</span><span class="w">   </span><span class="c1">--&gt; True</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="kt">True</span><span class="w"> </span><span class="nf">&amp;&amp;</span><span class="w"> </span><span class="kt">False</span><span class="w">  </span><span class="c1">--&gt; False</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="c1">-- OU logique</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="kt">True</span><span class="w"> </span><span class="nf">||</span><span class="w"> </span><span class="kt">False</span><span class="w">  </span><span class="c1">--&gt; True</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="kt">False</span><span class="w"> </span><span class="nf">||</span><span class="w"> </span><span class="kt">False</span><span class="w"> </span><span class="c1">--&gt; False</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="c1">-- Égalité</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="mi">42</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">42</span><span class="w">  </span><span class="c1">--&gt; True</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a><span class="mi">42</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">5</span><span class="w">   </span><span class="c1">--&gt; False</span>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a><span class="c1">-- Différence</span>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a><span class="mi">42</span><span class="w"> </span><span class="nf">/=</span><span class="w"> </span><span class="mi">5</span><span class="w">   </span><span class="c1">--&gt; True</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="c1">-- Comparaisons</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="mi">5</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">3</span><span class="w">   </span><span class="c1">--&gt; True</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="mi">5</span><span class="w"> </span><span class="nf">&gt;=</span><span class="w"> </span><span class="mi">5</span><span class="w">  </span><span class="c1">--&gt; True</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="mi">5</span><span class="w"> </span><span class="nf">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="w">  </span><span class="c1">--&gt; True</span>
 </code></pre></div>
 <hr />
 <h2 id="6-strategies-de-resolution">6. Stratégies de Résolution</h2>
 <h3 id="strategie-1-fonction-de-lecture-compte-contient-etc">Stratégie 1 : Fonction de Lecture (compte, contient, etc.)</h3>
 <p><strong>Question :</strong> Que faire de la tête ? Que faire de la queue ?</p>
-<div class="highlight"><pre><span></span><code><span class="nv">compte</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">compte</span><span class="w"> </span><span class="nv">e</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="c1">-- CAS DE BASE</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span>
-<span class="w">            </span><span class="kr">if</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="nv">e</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">                </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">compte</span><span class="w"> </span><span class="nv">e</span><span class="w"> </span><span class="nv">queue</span><span class="w">  </span><span class="c1">-- J&#39;ai trouvé e, j&#39;ajoute 1 au reste</span>
-<span class="w">            </span><span class="kr">else</span>
-<span class="w">                </span><span class="nv">compte</span><span class="w"> </span><span class="nv">e</span><span class="w"> </span><span class="nv">queue</span><span class="w">      </span><span class="c1">-- Pas trouvé, je demande juste le reste</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nv">compte</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nv">compte</span><span class="w"> </span><span class="nv">e</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w">  </span><span class="c1">-- CAS DE BASE</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="w">            </span><span class="kr">if</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="nv">e</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="w">                </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">compte</span><span class="w"> </span><span class="nv">e</span><span class="w"> </span><span class="nv">queue</span><span class="w">  </span><span class="c1">-- J&#39;ai trouvé e, j&#39;ajoute 1 au reste</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="w">            </span><span class="kr">else</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="w">                </span><span class="nv">compte</span><span class="w"> </span><span class="nv">e</span><span class="w"> </span><span class="nv">queue</span><span class="w">      </span><span class="c1">-- Pas trouvé, je demande juste le reste</span>
 </code></pre></div>
 <h3 id="strategie-2-predicat-renvoie-bool">Stratégie 2 : Prédicat (renvoie Bool)</h3>
 <p><strong>Question :</strong> Quelle condition casse la promesse du prédicat ?</p>
 <p><strong>Cette manière de faire n'est pas bonne (bien que correcte), elle montre que vous n'avez pas encore bien assimilé le calcul booléen</strong>
-<div class="highlight"><pre><span></span><code><span class="c1">-- &quot;Tous vrais&quot; : un seul False casse la promesse</span>
-<span class="nv">tousVrais</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Bool</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Bool</span>
-<span class="nv">tousVrais</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">True</span><span class="w">  </span><span class="c1">-- Promesse non violée (rien à vérifier)</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span>
-<span class="w">            </span><span class="kr">if</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="kt">False</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">                </span><span class="kt">False</span><span class="w">  </span><span class="c1">-- Promesse cassée !</span>
-<span class="w">            </span><span class="kr">else</span>
-<span class="w">                </span><span class="nv">tousVrais</span><span class="w"> </span><span class="nv">queue</span><span class="w">  </span><span class="c1">-- Continue de vérifier</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="c1">-- &quot;Tous vrais&quot; : un seul False casse la promesse</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="nv">tousVrais</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Bool</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Bool</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nv">tousVrais</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">True</span><span class="w">  </span><span class="c1">-- Promesse non violée (rien à vérifier)</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="w">            </span><span class="kr">if</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="kt">False</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="w">                </span><span class="kt">False</span><span class="w">  </span><span class="c1">-- Promesse cassée !</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="w">            </span><span class="kr">else</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="w">                </span><span class="nv">tousVrais</span><span class="w"> </span><span class="nv">queue</span><span class="w">  </span><span class="c1">-- Continue de vérifier</span>
 </code></pre></div>
 <strong>Cette manière de faire montre que vous avez assimilé le calcul booléen.</strong></p>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Ici la promesse est violée quand dès que tete est False</span>
-<span class="nv">tousVrais</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Bool</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Bool</span>
-<span class="nv">tousVrais</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">True</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nf">&amp;&amp;</span><span class="w"> </span><span class="nv">tousVrais</span><span class="w"> </span><span class="nv">queue</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="c1">-- Ici la promesse est violée quand dès que tete est False</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nv">tousVrais</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Bool</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Bool</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="nv">tousVrais</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">True</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nf">&amp;&amp;</span><span class="w"> </span><span class="nv">tousVrais</span><span class="w"> </span><span class="nv">queue</span>
 </code></pre></div>
 <p><strong>Note:</strong> Les opérateurs booléens sont dits "lazy". Lors de l'évaluation de <code>x &amp;&amp; y</code>, si x est False, alors y ne sera pas évalué. Pareil pour <code>x||y</code>. si x est vrai, y ne sera pas évalué.</p>
 <h3 id="strategie-3-fonction-de-creation-pairs-dupliquer-etc">Stratégie 3 : Fonction de Création (pairs, dupliquer, etc.)</h3>
 <p><strong>Question :</strong> Dois-je inclure la tête ? Comment construire avec Cons ?</p>
-<div class="highlight"><pre><span></span><code><span class="nv">pairs</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span>
-<span class="nv">pairs</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Vide</span><span class="w">  </span><span class="c1">-- CAS DE BASE</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span>
-<span class="w">            </span><span class="kr">if</span><span class="w"> </span><span class="nv">modBy</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">                </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="nv">queue</span><span class="p">)</span><span class="w">  </span><span class="c1">-- Tête paire : je la garde  et je demande le reste</span>
-<span class="w">            </span><span class="kr">else</span>
-<span class="w">                </span><span class="nv">pairs</span><span class="w"> </span><span class="nv">queue</span><span class="w">              </span><span class="c1">-- Tête impaire : je la jette, je demande juste le reste</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nv">pairs</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nv">pairs</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Vide</span><span class="w">  </span><span class="c1">-- CAS DE BASE</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="w">            </span><span class="kr">if</span><span class="w"> </span><span class="nv">modBy</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="w">                </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="p">(</span><span class="nv">pairs</span><span class="w"> </span><span class="nv">queue</span><span class="p">)</span><span class="w">  </span><span class="c1">-- Tête paire : je la garde  et je demande le reste</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="w">            </span><span class="kr">else</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a><span class="w">                </span><span class="nv">pairs</span><span class="w"> </span><span class="nv">queue</span><span class="w">              </span><span class="c1">-- Tête impaire : je la jette, je demande juste le reste</span>
 </code></pre></div>
 <hr />
 <h2 id="7-pattern-matching-avance">7. Pattern Matching Avancé</h2>
 <h3 id="cas-avec-plusieurs-niveaux">Cas avec plusieurs niveaux</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">supprimerFin</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
-<span class="nv">supprimerFin</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Vide</span><span class="w">              </span><span class="c1">-- Liste vide</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Vide</span><span class="w">       </span><span class="c1">-- Un seul élément, on renvoie Vide</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="nv">q</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="p">(</span><span class="nv">supprimerFin</span><span class="w"> </span><span class="nv">q</span><span class="p">)</span><span class="w">  </span><span class="c1">-- Plusieurs éléments</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nv">supprimerFin</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="nv">supprimerFin</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Vide</span><span class="w">              </span><span class="c1">-- Liste vide</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Vide</span><span class="w">       </span><span class="c1">-- Un seul élément, on renvoie Vide</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="nv">q</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="p">(</span><span class="nv">supprimerFin</span><span class="w"> </span><span class="nv">q</span><span class="p">)</span><span class="w">  </span><span class="c1">-- Plusieurs éléments</span>
 </code></pre></div>
 <h3 id="tuple-de-listes">Tuple de listes</h3>
-<div class="highlight"><pre><span></span><code><span class="nv">egales</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
-<span class="nv">egales</span><span class="w"> </span><span class="nv">lst1</span><span class="w"> </span><span class="nv">lst2</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="p">(</span><span class="nv">lst1</span><span class="p">,</span><span class="w"> </span><span class="nv">lst2</span><span class="p">)</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="p">(</span><span class="kt">Vide</span><span class="p">,</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">True</span><span class="w">         </span><span class="c1">-- Les deux sont vides</span>
-<span class="w">        </span><span class="p">(</span><span class="kt">Vide</span><span class="p">,</span><span class="w"> </span><span class="nv">_</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">False</span><span class="w">           </span><span class="c1">-- Première vide, deuxième non vide (sinon on serait dans le cas 1)</span>
-<span class="w">        </span><span class="p">(</span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">False</span><span class="w">           </span><span class="c1">-- Deuxième vide : première non vide (idem)</span>
-<span class="w">        </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nv">q1</span><span class="p">,</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="nv">q2</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w">  </span><span class="c1">-- Cas récursif</span>
-<span class="w">                </span><span class="p">(</span><span class="nv">t1</span><span class="nf">==</span><span class="nv">t2</span><span class="p">)</span><span class="w"> </span><span class="nf">&amp;&amp;</span><span class="w"> </span><span class="nv">egales</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nv">t2</span><span class="w">  </span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nv">egales</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="nv">egales</span><span class="w"> </span><span class="nv">lst1</span><span class="w"> </span><span class="nv">lst2</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="p">(</span><span class="nv">lst1</span><span class="p">,</span><span class="w"> </span><span class="nv">lst2</span><span class="p">)</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">        </span><span class="p">(</span><span class="kt">Vide</span><span class="p">,</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">True</span><span class="w">         </span><span class="c1">-- Les deux sont vides</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">        </span><span class="p">(</span><span class="kt">Vide</span><span class="p">,</span><span class="w"> </span><span class="nv">_</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">False</span><span class="w">           </span><span class="c1">-- Première vide, deuxième non vide (sinon on serait dans le cas 1)</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">        </span><span class="p">(</span><span class="nv">_</span><span class="p">,</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">False</span><span class="w">           </span><span class="c1">-- Deuxième vide : première non vide (idem)</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">        </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nv">q1</span><span class="p">,</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="nv">q2</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w">  </span><span class="c1">-- Cas récursif</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="w">                </span><span class="p">(</span><span class="nv">t1</span><span class="nf">==</span><span class="nv">t2</span><span class="p">)</span><span class="w"> </span><span class="nf">&amp;&amp;</span><span class="w"> </span><span class="nv">egales</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nv">t2</span><span class="w">  </span>
 </code></pre></div>
 <hr />
 <h2 id="9-erreurs-courantes">9. Erreurs Courantes</h2>
 <h3 id="oublier-le-cas-de-base">❌ Oublier le cas de base</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ERREUR : boucle infinie !</span>
-<span class="nv">somme</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="nv">q</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">somme</span><span class="w"> </span><span class="nv">q</span><span class="w">  </span><span class="c1">-- Et si lst est Vide ???</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1">-- ERREUR : boucle infinie !</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="nv">somme</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="nv">q</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">somme</span><span class="w"> </span><span class="nv">q</span><span class="w">  </span><span class="c1">-- Et si lst est Vide ???</span>
 </code></pre></div>
 <h3 id="oublier-le-else">❌ Oublier le <code>else</code></h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ERREUR : else obligatoire en Elm !</span>
-<span class="kr">if</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span>
-<span class="w">    </span><span class="nv">n</span>
-<span class="c1">-- Manque else !</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1">-- ERREUR : else obligatoire en Elm !</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="kr">if</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="kr">then</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">    </span><span class="nv">n</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="c1">-- Manque else !</span>
 </code></pre></div>
 <h3 id="confondre-et">❌ Confondre <code>=</code> et <code>==</code></h3>
-<div class="highlight"><pre><span></span><code><span class="nv">x</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="mi">5</span><span class="w">      </span><span class="c1">-- Définition (créer une variable)</span>
-<span class="nv">x</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">5</span><span class="w">     </span><span class="c1">-- Comparaison (tester l&#39;égalité)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nv">x</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="mi">5</span><span class="w">      </span><span class="c1">-- Définition (créer une variable)</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="nv">x</span><span class="w"> </span><span class="nf">==</span><span class="w"> </span><span class="mi">5</span><span class="w">     </span><span class="c1">-- Comparaison (tester l&#39;égalité)</span>
 </code></pre></div>
 <h3 id="mauvais-pattern-matching">❌ Mauvais pattern matching</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- ERREUR : les cas ne couvrent pas tout</span>
-<span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">    </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span>
-<span class="w">    </span><span class="c1">-- Manque le cas Cons !</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1">-- ERREUR : les cas ne couvrent pas tout</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">    </span><span class="c1">-- Manque le cas Cons !</span>
 </code></pre></div>
 <hr />
 <h2 id="10-vocabulaire-elm">10. Vocabulaire Elm</h2>
@@ -4856,11 +4879,11 @@ queue = Cons 5 Vide
 <li>Cas récursif : Je garde la tête, mais que dois-je faire avec la queue ?</li>
 </ul>
 <p><strong>Trace mentale :</strong>
-<div class="highlight"><pre><span></span><code>ajouterFin 9 [1, 2, 3]
-= Je garde 1, et j&#39;ajoute 9 à la fin de [2, 3]
-  = Je garde 2, et j&#39;ajoute 9 à la fin de [3]
-    = Je garde 3, et j&#39;ajoute 9 à la fin de []
-      = Cas de base : créer [9]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>ajouterFin 9 [1, 2, 3]
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>= Je garde 1, et j&#39;ajoute 9 à la fin de [2, 3]
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>  = Je garde 2, et j&#39;ajoute 9 à la fin de [3]
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>    = Je garde 3, et j&#39;ajoute 9 à la fin de []
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>      = Cas de base : créer [9]
 </code></pre></div></p>
 <h3 id="demarche-pour-range2">Démarche pour <code>range2</code></h3>
 <p><strong>Objectif :</strong> Créer la liste [a, a+1, a+2, ..., b-1]</p>
@@ -4881,9 +4904,9 @@ queue = Cons 5 Vide
 </li>
 <li>
 <p><strong>Déconstruire avec pattern matching</strong>
-   <div class="highlight"><pre><span></span><code><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<span class="w">    </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span>
-<span class="w">    </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">    </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nf">...</span>
 </code></pre></div></p>
 </li>
 <li>
@@ -4903,46 +4926,46 @@ queue = Cons 5 Vide
 <hr />
 <h2 id="13-tests-dans-elm">13. Tests dans Elm</h2>
 <h3 id="utiliser-les-exemples-fournis">Utiliser les exemples fournis</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Exemple dans le fichier</span>
-<span class="c1">-- taille lstEx1 --&gt; 3</span>
-
-<span class="c1">-- Pour tester dans elm repl :</span>
-<span class="err">$</span><span class="w"> </span><span class="nv">elm</span><span class="w"> </span><span class="nv">repl</span>
-<span class="nf">&gt;</span><span class="w"> </span><span class="kr">import</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">exposing</span><span class="w"> </span><span class="nf">(..)</span>
-<span class="nf">&gt;</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">lstEx1</span>
-<span class="mi">3</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1">-- Exemple dans le fichier</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="c1">-- taille lstEx1 --&gt; 3</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="c1">-- Pour tester dans elm repl :</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="err">$</span><span class="w"> </span><span class="nv">elm</span><span class="w"> </span><span class="nv">repl</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="nf">&gt;</span><span class="w"> </span><span class="kr">import</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">exposing</span><span class="w"> </span><span class="nf">(..)</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="nf">&gt;</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">lstEx1</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="mi">3</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span>
 </code></pre></div>
 <h3 id="debugtodo">Debug.todo</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Pendant le développement</span>
-<span class="nv">maFonction</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kt">Debug</span><span class="nf">.</span><span class="nv">todo</span><span class="w"> </span><span class="s">&quot;À implémenter&quot;</span>
-
-<span class="c1">-- Remplacer progressivement les Debug.todo par du vrai code</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="c1">-- Pendant le développement</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="nv">maFonction</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">    </span><span class="kt">Debug</span><span class="nf">.</span><span class="nv">todo</span><span class="w"> </span><span class="s">&quot;À implémenter&quot;</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a>
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="c1">-- Remplacer progressivement les Debug.todo par du vrai code</span>
 </code></pre></div>
 <hr />
 <h2 id="14-astuces-de-debogage">14. Astuces de Débogage</h2>
 <h3 id="afficher-des-valeurs">Afficher des valeurs</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Pendant le développement</span>
-<span class="nv">maFonction</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">=</span>
-<span class="w">    </span><span class="kr">let</span>
-<span class="w">        </span><span class="nv">_</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Debug</span><span class="nf">.</span><span class="nv">log</span><span class="w"> </span><span class="s">&quot;x vaut&quot;</span><span class="w"> </span><span class="nv">x</span><span class="w">  </span><span class="c1">-- Affiche dans la console</span>
-<span class="w">    </span><span class="kr">in</span>
-<span class="w">    </span><span class="nf">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="c1">-- Pendant le développement</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="nv">maFonction</span><span class="w"> </span><span class="nv">x</span><span class="w"> </span><span class="nf">=</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="w">    </span><span class="kr">let</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="w">        </span><span class="nv">_</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="kt">Debug</span><span class="nf">.</span><span class="nv">log</span><span class="w"> </span><span class="s">&quot;x vaut&quot;</span><span class="w"> </span><span class="nv">x</span><span class="w">  </span><span class="c1">-- Affiche dans la console</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="w">    </span><span class="kr">in</span>
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a><span class="w">    </span><span class="nf">...</span>
 </code></pre></div>
 <h3 id="simplifier-le-probleme">Simplifier le problème</h3>
-<div class="highlight"><pre><span></span><code><span class="c1">-- Au lieu de résoudre tout de suite [1,2,3,4,5]</span>
-<span class="c1">-- Teste d&#39;abord avec :</span>
-<span class="c1">-- []</span>
-<span class="c1">-- [1]</span>
-<span class="c1">-- [1, 2]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="c1">-- Au lieu de résoudre tout de suite [1,2,3,4,5]</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="c1">-- Teste d&#39;abord avec :</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="c1">-- []</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="c1">-- [1]</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="c1">-- [1, 2]</span>
 </code></pre></div>
 <h3 id="ecrire-la-trace">Écrire la trace</h3>
-<div class="highlight"><pre><span></span><code>somme [42, 5]
-= 42 + somme [5]
-     = 5 + somme []
-          = 0
-= 42 + 5 + 0
-= 47
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a>somme [42, 5]
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a>= 42 + somme [5]
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a>     = 5 + somme []
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a>          = 0
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a>= 42 + 5 + 0
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>= 47
 </code></pre></div>
 <hr />
 <h2 id="15-complexite-pour-information">15. Complexité (Pour Information)</h2>
@@ -5023,7 +5046,7 @@ queue = Cons 5 Vide
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2025 16:28:07 UTC">October 23, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 6, 2025 19:21:07 UTC">November 6, 2025</span>
   </span>
 
     
@@ -5084,7 +5107,7 @@ queue = Cons 5 Vide
     
     
       
-      <script id="__config" type="application/json">{"base": "../../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../../assets/javascripts/bundle.f55a23d4.min.js"></script>

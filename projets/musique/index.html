@@ -2646,6 +2646,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../terminale/langages/fonctionnels/11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../terminale/langages/fonctionnels/2.elm-maybe/" class="md-nav__link">
         
   
@@ -3560,8 +3583,8 @@ C'est un principe fondamental et omniprésent de la science informatique.</stron
 <hr />
 <h2 id="setup-python">Setup python</h2>
 <p>Dans votre environnement conda:
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>install<span class="w"> </span>mido<span class="w"> </span>pygame
-pip<span class="w"> </span>install<span class="w"> </span>pynput<span class="w"> </span>pyttsx3
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>conda<span class="w"> </span>install<span class="w"> </span>mido<span class="w"> </span>pygame
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>pip<span class="w"> </span>install<span class="w"> </span>pynput<span class="w"> </span>pyttsx3
 </code></pre></div></p>
 <ul>
 <li>
@@ -3607,45 +3630,45 @@ Vous avez à disposition 3 fichiers:</p>
 <h2 id="code-de-depart">Code de départ</h2>
 <p>Voici le code initial du fichier clavier.py que vous venez de créer.
 Il ne permet pas encore de produire de la musique, juste de gérer les évènements clavier/souris.</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">evenements</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">info</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">appuie_touche</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Key</span><span class="p">):</span>
-    <span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Touche </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">char</span><span class="p">)</span><span class="si">}</span><span class="s1"> appuyée&#39;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">relache_touche</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Key</span><span class="p">):</span>
-    <span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Touche </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> relâchée&#39;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">click</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">bouton</span><span class="p">:</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Button</span><span class="p">,</span> <span class="n">etat</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
-    <span class="k">if</span> <span class="n">bouton</span> <span class="o">==</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Button</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
-        <span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">y</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">bouton</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">etat</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">bouton</span> <span class="o">==</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Button</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
-        <span class="n">info</span><span class="p">(</span><span class="s2">&quot;click droit&quot;</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">bouton</span> <span class="o">==</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Button</span><span class="o">.</span><span class="n">middle</span><span class="p">:</span>
-        <span class="n">info</span><span class="p">(</span><span class="s2">&quot;molette&quot;</span><span class="p">)</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">bouge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
-    <span class="c1"># pass veut dire: &quot;ne rien faire&quot;.</span>
-    <span class="k">pass</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot; Fonction principale </span>
-<span class="sd">    Python reste à cette ligne jusqu&#39;à la fin du programme.</span>
-<span class="sd">    On indique à python qu&#39;il faut exécuter:</span>
-<span class="sd">    - appuie_touche lorsqu&#39;une touche est appuyée</span>
-<span class="sd">    - relache_touche lorsqu&#39;une touche est relachée</span>
-<span class="sd">    - click quand un bouton de souris est cliquée</span>
-<span class="sd">    - bouge lorsque la souris est bougée.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">evenements</span><span class="o">.</span><span class="n">demarre_listeners</span><span class="p">(</span><span class="n">appuie_touche</span><span class="p">,</span> <span class="n">relache_touche</span><span class="p">,</span> <span class="n">click</span><span class="p">,</span> <span class="n">bouge</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
-    <span class="c1">#Pour supprimer les infos de log dans la console, vous pouvez utiliser NOTSET à la place de INFO.</span>
-    <span class="c1">#Pour voir des informations supplémentaires de log dans la console, vous pouvez utiliser DEBUG à la place de INFO.</span>
-
-    <span class="n">main</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">evenements</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">logging</span><span class="w"> </span><span class="kn">import</span> <span class="n">info</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">appuie_touche</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Key</span><span class="p">):</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Touche </span><span class="si">{</span><span class="nb">repr</span><span class="p">(</span><span class="n">key</span><span class="o">.</span><span class="n">char</span><span class="p">)</span><span class="si">}</span><span class="s1"> appuyée&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">relache_touche</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Key</span><span class="p">):</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Touche </span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s1"> relâchée&#39;</span><span class="p">)</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">click</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">bouton</span><span class="p">:</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Button</span><span class="p">,</span> <span class="n">etat</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>    <span class="k">if</span> <span class="n">bouton</span> <span class="o">==</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Button</span><span class="o">.</span><span class="n">left</span><span class="p">:</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>        <span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">x</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">y</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">bouton</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">etat</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="k">elif</span> <span class="n">bouton</span> <span class="o">==</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Button</span><span class="o">.</span><span class="n">right</span><span class="p">:</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>        <span class="n">info</span><span class="p">(</span><span class="s2">&quot;click droit&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>    <span class="k">elif</span> <span class="n">bouton</span> <span class="o">==</span> <span class="n">evenements</span><span class="o">.</span><span class="n">Button</span><span class="o">.</span><span class="n">middle</span><span class="p">:</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>        <span class="n">info</span><span class="p">(</span><span class="s2">&quot;molette&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="k">def</span><span class="w"> </span><span class="nf">bouge</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">):</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    <span class="c1"># pass veut dire: &quot;ne rien faire&quot;.</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>    <span class="k">pass</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot; Fonction principale </span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="sd">    Python reste à cette ligne jusqu&#39;à la fin du programme.</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="sd">    On indique à python qu&#39;il faut exécuter:</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="sd">    - appuie_touche lorsqu&#39;une touche est appuyée</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a><span class="sd">    - relache_touche lorsqu&#39;une touche est relachée</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a><span class="sd">    - click quand un bouton de souris est cliquée</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a><span class="sd">    - bouge lorsque la souris est bougée.</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    <span class="n">evenements</span><span class="o">.</span><span class="n">demarre_listeners</span><span class="p">(</span><span class="n">appuie_touche</span><span class="p">,</span> <span class="n">relache_touche</span><span class="p">,</span> <span class="n">click</span><span class="p">,</span> <span class="n">bouge</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>    <span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span><span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>    <span class="c1">#Pour supprimer les infos de log dans la console, vous pouvez utiliser NOTSET à la place de INFO.</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>    <span class="c1">#Pour voir des informations supplémentaires de log dans la console, vous pouvez utiliser DEBUG à la place de INFO.</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>
+<a id="__codelineno-1-39" name="__codelineno-1-39" href="#__codelineno-1-39"></a>    <span class="n">main</span><span class="p">()</span>
 </code></pre></div>
 <div class="admonition question">
 <p class="admonition-title">Exercices</p>
@@ -3679,12 +3702,12 @@ Par exemple, maintenant qu'on a importé le module evenements, on peut accéder 
 <div class="admonition question">
 <p class="admonition-title">Adaptation du code</p>
 <p>Modifiez la fonction main ainsi.</p>
-<div class="highlight"><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
-    <span class="n">midiutils</span><span class="o">.</span><span class="n">debut_environnement_sonore</span><span class="p">()</span>
-    <span class="c1"># Démarrage de la boucle principale</span>
-    <span class="n">evenements</span><span class="o">.</span><span class="n">demarre_listeners</span><span class="p">(</span><span class="n">appuie_touche</span><span class="p">,</span> <span class="n">relache_touche</span><span class="p">,</span> <span class="n">click</span><span class="p">,</span> <span class="n">bouge</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
-    <span class="c1"># Sortie de la boucle principale</span>
-    <span class="n">midiutils</span><span class="o">.</span><span class="n">fin_environnement_sonore</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">main</span><span class="p">():</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">midiutils</span><span class="o">.</span><span class="n">debut_environnement_sonore</span><span class="p">()</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="c1"># Démarrage de la boucle principale</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">evenements</span><span class="o">.</span><span class="n">demarre_listeners</span><span class="p">(</span><span class="n">appuie_touche</span><span class="p">,</span> <span class="n">relache_touche</span><span class="p">,</span> <span class="n">click</span><span class="p">,</span> <span class="n">bouge</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="c1"># Sortie de la boucle principale</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">midiutils</span><span class="o">.</span><span class="n">fin_environnement_sonore</span><span class="p">()</span>
 </code></pre></div>
 <p>Lancez le programme. Il vous demande de choisir quel synthétiseur utiliser s'il en existe plusieurs. Choisissez celui de windows le cas échéant.</p>
 </div>
@@ -4343,7 +4366,7 @@ Par exemple, maintenant qu'on a importé le module evenements, on peut accéder 
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>

@@ -2659,6 +2659,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../terminale/langages/fonctionnels/11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../terminale/langages/fonctionnels/2.elm-maybe/" class="md-nav__link">
         
   
@@ -3567,7 +3590,7 @@
 <li><strong>x</strong> (execute) : exécution</li>
 </ul>
 <p>Cela se traduit dans les attributs d’un fichier ou d’un dossier sous la forme suivante (dans la sortie de <code>ls -l</code>) :</p>
-<div class="highlight"><pre><span></span><code>-rwxr-xr--
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>-rwxr-xr--
 </code></pre></div>
 <p>Chaque position a une signification :</p>
 <ul>
@@ -3592,12 +3615,12 @@
 <hr />
 <h2 id="2-affichage-des-droits-avec-ls">2. Affichage des droits avec <code>ls</code></h2>
 <p>La commande <strong><code>ls -l</code></strong> (ou <code>ls -lh</code> pour avoir des tailles plus lisibles) est utilisée pour afficher les détails des fichiers et répertoires, incluant les droits, l’utilisateur propriétaire et le groupe. Par exemple :</p>
-<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-l
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>ls<span class="w"> </span>-l
 </code></pre></div>
 <p>Retour possible :</p>
-<div class="highlight"><pre><span></span><code>drwxr-xr-x  2 alice   dev   4096 mar  1 10:00 dossier_test
--rw-r--r--  1 alice   dev    234 mar  1 09:58 fichier1.txt
--rwxr-xr--  1 bob     admin 8764 mar  1 09:59 script.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>drwxr-xr-x  2 alice   dev   4096 mar  1 10:00 dossier_test
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>-rw-r--r--  1 alice   dev    234 mar  1 09:58 fichier1.txt
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>-rwxr-xr--  1 bob     admin 8764 mar  1 09:59 script.sh
 </code></pre></div>
 <p>Ici :
 - <code>d</code> au début de la ligne indique un <strong>dossier</strong>.<br />
@@ -3608,7 +3631,7 @@
 <p>La commande <code>chmod</code> (change mode) permet de modifier les droits d’un fichier ou dossier de deux façons : <strong>notation symbolique</strong> ou <strong>notation octale</strong>.</p>
 <h3 id="31-notation-symbolique">3.1. Notation symbolique</h3>
 <p>La forme générale est :
-<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="o">[</span>qui<span class="o">][</span>+/-/<span class="o">=][</span>droit<span class="o">]</span><span class="w"> </span>fichier
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>chmod<span class="w"> </span><span class="o">[</span>qui<span class="o">][</span>+/-/<span class="o">=][</span>droit<span class="o">]</span><span class="w"> </span>fichier
 </code></pre></div>
 où :
 - <code>qui</code> peut être :<br />
@@ -3622,16 +3645,16 @@ où :
 - <code>droit</code> peut être : <code>r</code> (lecture), <code>w</code> (écriture), <code>x</code> (exécution).</p>
 <h4 id="exemple-1">Exemple 1</h4>
 <p>Ajouter le droit d’exécution pour le propriétaire (u) sur un fichier :
-<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>u+x<span class="w"> </span>mon_script.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>chmod<span class="w"> </span>u+x<span class="w"> </span>mon_script.sh
 </code></pre></div>
 Désormais, le propriétaire peut exécuter le fichier <code>mon_script.sh</code>.</p>
 <h4 id="exemple-2">Exemple 2</h4>
 <p>Retirer le droit d’écriture pour le groupe :
-<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>g-w<span class="w"> </span>mon_fichier.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>chmod<span class="w"> </span>g-w<span class="w"> </span>mon_fichier.txt
 </code></pre></div></p>
 <h4 id="exemple-3">Exemple 3</h4>
 <p>Donner à tous (<code>a</code>) uniquement la lecture (<code>r</code>), et rien d’autre :
-<div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="nv">a</span><span class="o">=</span>r<span class="w"> </span>mon_fichier.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>chmod<span class="w"> </span><span class="nv">a</span><span class="o">=</span>r<span class="w"> </span>mon_fichier.txt
 </code></pre></div>
 Cela va <strong>remplacer</strong> tous les droits existants, pour tout le monde, par lecture seule.</p>
 <h3 id="32-notation-octale-ou-numerique">3.2. Notation octale (ou numérique)</h3>
@@ -3653,7 +3676,7 @@ Cela va <strong>remplacer</strong> tous les droits existants, pour tout le monde
 <h4 id="exemples-concrets">Exemples concrets</h4>
 <ol>
 <li><strong>Donner tous les droits au propriétaire</strong>, lecture et exécution au groupe et lecture seule aux autres :
-   <div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="m">754</span><span class="w"> </span>mon_script.sh
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>chmod<span class="w"> </span><span class="m">754</span><span class="w"> </span>mon_script.sh
 </code></pre></div></li>
 <li>Propriétaire (u) → 7 = rwx</li>
 <li>Groupe (g) → 5 = r-x</li>
@@ -3662,7 +3685,7 @@ Cela va <strong>remplacer</strong> tous les droits existants, pour tout le monde
 </li>
 <li>
 <p><strong>Lire/Écrire pour le propriétaire</strong>, rien pour le groupe et les autres :
-   <div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>mon_fichier.txt
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>mon_fichier.txt
 </code></pre></div></p>
 </li>
 <li>Propriétaire → 6 = rw-</li>
@@ -3672,7 +3695,7 @@ Cela va <strong>remplacer</strong> tous les droits existants, pour tout le monde
 </li>
 <li>
 <p><strong>Tous droits pour le propriétaire, aucun droit pour les autres</strong> :
-   <div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>dossier_test
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>chmod<span class="w"> </span><span class="m">700</span><span class="w"> </span>dossier_test
 </code></pre></div></p>
 </li>
 <li>Propriétaire → 7 = rwx</li>
@@ -3682,10 +3705,10 @@ Cela va <strong>remplacer</strong> tous les droits existants, pour tout le monde
 <hr />
 <h2 id="4-exemples-concrets">4. Exemples concrets</h2>
 <p>Imaginons que vous avez un fichier <code>exemple.sh</code> dont les droits sont :</p>
-<p><div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-l<span class="w"> </span>exemple.sh
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>ls<span class="w"> </span>-l<span class="w"> </span>exemple.sh
 </code></pre></div>
 Retour possible :
-<div class="highlight"><pre><span></span><code>-rw-r--r-- 1 alice dev  1234 mar 26 10:00 exemple.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>-rw-r--r-- 1 alice dev  1234 mar 26 10:00 exemple.sh
 </code></pre></div></p>
 <ul>
 <li>Actuellement :  </li>
@@ -3695,14 +3718,14 @@ Retour possible :
 </ul>
 <h3 id="41-rendre-ce-script-executable-pour-tout-le-monde-u-g-o">4.1 Rendre ce script exécutable pour tout le monde (u, g, o)</h3>
 <h4 id="methode-symbolique">Méthode symbolique</h4>
-<p><div class="highlight"><pre><span></span><code>chmod<span class="w"> </span>a+x<span class="w"> </span>exemple.sh
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>chmod<span class="w"> </span>a+x<span class="w"> </span>exemple.sh
 </code></pre></div>
 Après vérification <code>ls -l exemple.sh</code> :
-<div class="highlight"><pre><span></span><code>-rwxr-xr-x 1 alice dev  1234 mar 26 10:01 exemple.sh
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>-rwxr-xr-x 1 alice dev  1234 mar 26 10:01 exemple.sh
 </code></pre></div>
 (Le script est désormais exécutable par tous.)</p>
 <h4 id="methode-octale">Méthode octale</h4>
-<p><div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>exemple.sh
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>chmod<span class="w"> </span><span class="m">755</span><span class="w"> </span>exemple.sh
 </code></pre></div>
 Le résultat est le même :
 - 7 (rwx) pour l’utilisateur
@@ -3710,7 +3733,7 @@ Le résultat est le même :
 - 5 (r-x) pour les autres</p>
 <h3 id="42-retirer-totalement-les-droits-pour-le-groupe-et-les-autres">4.2 Retirer totalement les droits pour le groupe et les autres</h3>
 <p>Supposons qu’on veuille rendre un fichier <strong>strictement privé</strong> pour l’utilisateur propriétaire, avec lecture et écriture seulement (pas besoin d’exécution). On veut donc <code>rw</code> pour le propriétaire, et rien pour les autres :</p>
-<p><div class="highlight"><pre><span></span><code>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>exemple.sh
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>chmod<span class="w"> </span><span class="m">600</span><span class="w"> </span>exemple.sh
 </code></pre></div>
 Cela signifie :
 - Propriétaire → 6 (rw-)
@@ -3811,7 +3834,7 @@ Cela signifie :
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>

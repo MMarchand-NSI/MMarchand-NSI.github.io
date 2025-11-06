@@ -2499,6 +2499,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../terminale/langages/fonctionnels/11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../terminale/langages/fonctionnels/2.elm-maybe/" class="md-nav__link">
         
   
@@ -3242,7 +3265,7 @@
 <p>Un snake est une File de Coordonnées entières.</p>
 <p><img alt="alt text" src="../image-11.png" /></p>
 <p>Par exemple, dans cette grille, voici l'état du snake:</p>
-<div class="highlight"><pre><span></span><code>&gt; (4, 2), (3, 2), (3, 3), (3, 4), (2, 4), (1, 4) &gt;
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt; (4, 2), (3, 2), (3, 3), (3, 4), (2, 4), (1, 4) &gt;
 </code></pre></div>
 <p>La flèche rouge représente le vecteur directeur du snake. Ici, <code>direction = (1, 0)</code>. On avance de 1 en x et de 0 en y.</p>
 <div class="admonition question">
@@ -3261,44 +3284,44 @@
 </ol>
 </div>
 <p>Voici le code de départ du snake</p>
-<div class="highlight"><pre><span></span><code><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires</span><span class="w"> </span><span class="kn">import</span> <span class="n">file</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">pyxel</span>     <span class="c1"># uv add pyxel</span>
-
-<span class="nb">type</span> <span class="n">Coord</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>   <span class="c1"># Une coordonnée est un tuple constitué de deux ints</span>
-<span class="nb">type</span> <span class="n">Snake</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">File</span><span class="p">[</span><span class="n">Coord</span><span class="p">]</span>  <span class="c1"># Un snake est une file de coordonnées</span>
-
-<span class="c1"># --- Constantes ---</span>
-<span class="n">W</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span>       <span class="c1"># Largeur et Hauteur de la grille</span>
-<span class="n">STEP_FRAMES</span> <span class="o">=</span> <span class="mi">4</span>     <span class="c1"># Vitesse (Mise à jour toutes les 4 frames)</span>
-
-
-<span class="c1"># --- État global --- Déclaration de toutes les variables --- </span>
-<span class="n">serpent</span><span class="p">:</span> <span class="n">Snake</span>                  <span class="c1"># File de coordonnées</span>
-<span class="n">tete</span><span class="p">:</span> <span class="n">Coord</span>                     <span class="c1"># Tete du serpent</span>
-<span class="n">queue_supprimee</span><span class="p">:</span> <span class="n">Coord</span> <span class="o">|</span> <span class="kc">None</span>   <span class="c1"># Dernière queue du serpent supprimée</span>
-<span class="n">direction</span><span class="p">:</span> <span class="n">Coord</span>                <span class="c1"># vecteur de déplacement du serpent</span>
-<span class="n">pomme</span><span class="p">:</span> <span class="n">Coord</span>                    <span class="c1"># coordonnée de la pomme</span>
-<span class="n">score</span><span class="p">:</span> <span class="nb">int</span>                      <span class="c1"># score de l&#39;utilisateur</span>
-<span class="n">game_over</span><span class="p">:</span> <span class="nb">bool</span>                 <span class="c1"># indicateur de game over</span>
-<span class="n">frames</span><span class="p">:</span> <span class="nb">int</span>                     <span class="c1"># compteur de frames (augmente de 1 dès que update est appelé)</span>
-
-<span class="c1"># --- Initialisation ---</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">reinit</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Initialisation de TOUTES les variables globales</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">global</span> <span class="n">serpent</span><span class="p">,</span> <span class="n">tete</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">game_over</span><span class="p">,</span> <span class="n">frames</span><span class="p">,</span> <span class="n">queue_supprimee</span>
-    <span class="n">serpent</span> <span class="o">=</span> <span class="o">...</span>
-    <span class="n">tete</span> <span class="o">=</span> <span class="o">...</span>
-    <span class="o">...........</span>  <span class="c1"># Initialiser le serpent avec sa tete</span>
-    <span class="n">direction</span> <span class="o">=</span> <span class="o">......</span>   <span class="c1"># droite</span>
-    <span class="n">score</span> <span class="o">=</span> <span class="o">......</span>
-    <span class="n">game_over</span> <span class="o">=</span> <span class="o">......</span>
-    <span class="n">frames</span> <span class="o">=</span> <span class="mi">0</span>    <span class="c1"># Ne vous souciez pas de ça pour le moment</span>
-    <span class="n">queue_supprimee</span> <span class="o">=</span> <span class="o">....</span>
-    <span class="c1"># Il faut aussi spawner une pomme</span>
-    <span class="c1"># on le fera grâce à une fonction spécifique qu&#39;il faudra appeler ici</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires</span><span class="w"> </span><span class="kn">import</span> <span class="n">file</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pyxel</span>     <span class="c1"># uv add pyxel</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="nb">type</span> <span class="n">Coord</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span>   <span class="c1"># Une coordonnée est un tuple constitué de deux ints</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nb">type</span> <span class="n">Snake</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">File</span><span class="p">[</span><span class="n">Coord</span><span class="p">]</span>  <span class="c1"># Un snake est une file de coordonnées</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="c1"># --- Constantes ---</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="n">W</span><span class="p">,</span> <span class="n">H</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">20</span>       <span class="c1"># Largeur et Hauteur de la grille</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">STEP_FRAMES</span> <span class="o">=</span> <span class="mi">4</span>     <span class="c1"># Vitesse (Mise à jour toutes les 4 frames)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="c1"># --- État global --- Déclaration de toutes les variables --- </span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="n">serpent</span><span class="p">:</span> <span class="n">Snake</span>                  <span class="c1"># File de coordonnées</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="n">tete</span><span class="p">:</span> <span class="n">Coord</span>                     <span class="c1"># Tete du serpent</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="n">queue_supprimee</span><span class="p">:</span> <span class="n">Coord</span> <span class="o">|</span> <span class="kc">None</span>   <span class="c1"># Dernière queue du serpent supprimée</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="n">direction</span><span class="p">:</span> <span class="n">Coord</span>                <span class="c1"># vecteur de déplacement du serpent</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="n">pomme</span><span class="p">:</span> <span class="n">Coord</span>                    <span class="c1"># coordonnée de la pomme</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="n">score</span><span class="p">:</span> <span class="nb">int</span>                      <span class="c1"># score de l&#39;utilisateur</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="n">game_over</span><span class="p">:</span> <span class="nb">bool</span>                 <span class="c1"># indicateur de game over</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">frames</span><span class="p">:</span> <span class="nb">int</span>                     <span class="c1"># compteur de frames (augmente de 1 dès que update est appelé)</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="c1"># --- Initialisation ---</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="k">def</span><span class="w"> </span><span class="nf">reinit</span><span class="p">():</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="sd">    Initialisation de TOUTES les variables globales</span>
+<a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-1-28" name="__codelineno-1-28" href="#__codelineno-1-28"></a>    <span class="k">global</span> <span class="n">serpent</span><span class="p">,</span> <span class="n">tete</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">game_over</span><span class="p">,</span> <span class="n">frames</span><span class="p">,</span> <span class="n">queue_supprimee</span>
+<a id="__codelineno-1-29" name="__codelineno-1-29" href="#__codelineno-1-29"></a>    <span class="n">serpent</span> <span class="o">=</span> <span class="o">...</span>
+<a id="__codelineno-1-30" name="__codelineno-1-30" href="#__codelineno-1-30"></a>    <span class="n">tete</span> <span class="o">=</span> <span class="o">...</span>
+<a id="__codelineno-1-31" name="__codelineno-1-31" href="#__codelineno-1-31"></a>    <span class="o">...........</span>  <span class="c1"># Initialiser le serpent avec sa tete</span>
+<a id="__codelineno-1-32" name="__codelineno-1-32" href="#__codelineno-1-32"></a>    <span class="n">direction</span> <span class="o">=</span> <span class="o">......</span>   <span class="c1"># droite</span>
+<a id="__codelineno-1-33" name="__codelineno-1-33" href="#__codelineno-1-33"></a>    <span class="n">score</span> <span class="o">=</span> <span class="o">......</span>
+<a id="__codelineno-1-34" name="__codelineno-1-34" href="#__codelineno-1-34"></a>    <span class="n">game_over</span> <span class="o">=</span> <span class="o">......</span>
+<a id="__codelineno-1-35" name="__codelineno-1-35" href="#__codelineno-1-35"></a>    <span class="n">frames</span> <span class="o">=</span> <span class="mi">0</span>    <span class="c1"># Ne vous souciez pas de ça pour le moment</span>
+<a id="__codelineno-1-36" name="__codelineno-1-36" href="#__codelineno-1-36"></a>    <span class="n">queue_supprimee</span> <span class="o">=</span> <span class="o">....</span>
+<a id="__codelineno-1-37" name="__codelineno-1-37" href="#__codelineno-1-37"></a>    <span class="c1"># Il faut aussi spawner une pomme</span>
+<a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>    <span class="c1"># on le fera grâce à une fonction spécifique qu&#39;il faudra appeler ici</span>
 </code></pre></div>
 <div class="admonition question">
 <p class="admonition-title">Initialisation</p>
@@ -3318,37 +3341,37 @@
 <li>PUIS une fonction <code>draw()</code>, chargée de dessiner l'état du jeu.</li>
 </ol>
 <p>Voici comment se lancera notre jeu (<strong>fin du fichier</strong>):</p>
-<div class="highlight"><pre><span></span><code><span class="c1"># -- Mise à jour régulière de l&#39;état --</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Appelée automatiquement par pyxel.</span>
-<span class="sd">    si on appuie sur &lt;R&gt;, on réinitialise</span>
-<span class="sd">    Si on appuie sur &lt;Q, Z, S, D&gt;, on met à jour la direction</span>
-<span class="sd">    On avance</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="o">...</span>
-
-<span class="c1"># -- Dessin régulier après mise à jour --</span>
-<span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Appelée automatiquement par pyxel.</span>
-<span class="sd">    Dessine le snake à l&#39;écran.</span>
-<span class="sd">    La seule fonction pyxel nécessaire est pset</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-
-<span class="c1"># -- Lancement --</span>
-
-<span class="k">def</span><span class="w"> </span><span class="nf">lancer_jeu</span><span class="p">():</span>
-    <span class="c1"># Initialiser pyxel, le moteur graphique</span>
-    <span class="n">pyxel</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Snake&quot;</span><span class="p">)</span>
-    <span class="c1"># Initialisaer l&#39;état du jeu</span>
-    <span class="n">reinit</span><span class="p">()</span>
-    <span class="c1"># lancer la boucle d&#39;appels permanents à update puis draw</span>
-    <span class="n">pyxel</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">draw</span><span class="p">)</span>  
-
-
-<span class="n">lancer_jeu</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># -- Mise à jour régulière de l&#39;état --</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">():</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="sd">    Appelée automatiquement par pyxel.</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="sd">    si on appuie sur &lt;R&gt;, on réinitialise</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="sd">    Si on appuie sur &lt;Q, Z, S, D&gt;, on met à jour la direction</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="sd">    On avance</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="o">...</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># -- Dessin régulier après mise à jour --</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">():</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="sd">    Appelée automatiquement par pyxel.</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="sd">    Dessine le snake à l&#39;écran.</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="sd">    La seule fonction pyxel nécessaire est pset</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="c1"># -- Lancement --</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="k">def</span><span class="w"> </span><span class="nf">lancer_jeu</span><span class="p">():</span>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    <span class="c1"># Initialiser pyxel, le moteur graphique</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    <span class="n">pyxel</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Snake&quot;</span><span class="p">)</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    <span class="c1"># Initialisaer l&#39;état du jeu</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>    <span class="n">reinit</span><span class="p">()</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>    <span class="c1"># lancer la boucle d&#39;appels permanents à update puis draw</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>    <span class="n">pyxel</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">draw</span><span class="p">)</span>  
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="n">lancer_jeu</span><span class="p">()</span>
 </code></pre></div>
 <div class="admonition question">
 <p class="admonition-title">Amélioration</p>
@@ -3445,7 +3468,7 @@
     
     
       
-      <script id="__config" type="application/json">{"base": "../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../assets/javascripts/bundle.f55a23d4.min.js"></script>

@@ -2599,6 +2599,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../langages/fonctionnels/11.sites-web/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Sites webs
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../langages/fonctionnels/2.elm-maybe/" class="md-nav__link">
         
   
@@ -3443,9 +3466,9 @@
 Par contre, c'est juste inimaginable en production car toute la sécurité est levée.</p>
 <p>Tout ce qui suit se fait dans le Miniforge Prompt.</p>
 <h3 id="1-creation-et-activation-dun-environnement-a-part-qui-sappelle-outils">1. Création et activation d'un environnement à part qui s'appelle <code>outils</code></h3>
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>outils
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>outils
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>activate<span class="w"> </span>outils
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>outils
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Pas dans base</p>
@@ -3453,34 +3476,34 @@ Par contre, c'est juste inimaginable en production car toute la sécurité est l
 Votre première action dans un prompt conda doit être d'activer un environnement spécifique.</p>
 </div>
 <h3 id="2-installation-de-postgresql">2. Installation de postgresql</h3>
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>install<span class="w"> </span>postgresql
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>conda<span class="w"> </span>install<span class="w"> </span>postgresql
 </code></pre></div>
 <p>Maintenant, nous disposons d'un tas d'outils pour interagir avec postgresql.</p>
 <h3 id="3-initialisation-de-postgresql-avec-un-repertoire-de-donnees">3. Initialisation de Postgresql avec un répertoire de données</h3>
 <p><strong>Chez vous</strong>, remplacez <code>P:\\data</code> partout par un autre chemin que vous connaissez sur votre disque.
 Pour le mettre à la racine de votre répertoire utilisateur, vous pouvez utiliser <code>%USERPROFILE%\\data</code> à la place.</p>
-<div class="highlight"><pre><span></span><code>initdb<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>initdb<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data
 </code></pre></div>
 <p>Toutes vos bases de données seront stockées dans ce dossier.</p>
 <h3 id="4-lancement-du-service-postgresql">4. Lancement du service Postgresql</h3>
-<div class="highlight"><pre><span></span><code>pg_ctl<span class="w"> </span>start<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>pg_ctl<span class="w"> </span>start<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data
 </code></pre></div>
 <p>A partir de cet instant, un service tourne sur votre machine sur le port 5432. C'est le port par défaut de Postgresql.</p>
 <div class="admonition warning">
 <p class="admonition-title">Avant de quitter votre ordi</p>
 <p>Attention, il faudra quitter proprement le SGBD à l'aide de la commande </p>
-<div class="highlight"><pre><span></span><code>pg_ctl<span class="w"> </span>stop<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>pg_ctl<span class="w"> </span>stop<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data
 </code></pre></div>
 </div>
 <h3 id="5-creation-dun-superutilisateur">5. Création d'un superutilisateur</h3>
 <p>Nous allons créer un utilisteur qui a le droit de tout faire sur postgresql.
 Ce super utilisateur s'appelle <code>admin</code> et son mot de passe sera <code>password</code>.
 (bien entendu c'est la plus over nulle des sécurisations)</p>
-<div class="highlight"><pre><span></span><code>createuser<span class="w"> </span>--superuser<span class="w"> </span>--password<span class="w"> </span>admin
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>createuser<span class="w"> </span>--superuser<span class="w"> </span>--password<span class="w"> </span>admin
 </code></pre></div>
 <p>Indiquer le mot de passe password</p>
 <h3 id="6-creation-dune-base-de-donnees">6. Création d'une base de données</h3>
-<div class="highlight"><pre><span></span><code>createdb<span class="w"> </span>lycee
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>createdb<span class="w"> </span>lycee
 </code></pre></div>
 <h3 id="7-connexion-a-la-base-de-donnees-avec-dbeaver">7. Connexion à la base de données avec DBeaver</h3>
 <p>Maintenant, on peut ouvrir dBeaver pour interagir avec l'instance de postgresql que nous avous lancée.
@@ -3505,22 +3528,22 @@ Il existe beaucoup de drivers pour diverses bases de données. dBeaver ne les r�
 <p>L'arborescence de gauche ne se met pas à jour automatiquement quand vous créez ou supprimez de nouveaux objets.
 Il faudra lui demander de se rafraîchir. (F5 ou menu contextuel)</p>
 <h3 id="8-creer-les-donnees-de-base-pour-le-projet">8. Créer les données de base pour le projet:</h3>
-<div class="highlight"><pre><span></span><code><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="k">exists</span><span class="w"> </span><span class="n">eleves</span><span class="p">;</span>
-
-<span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">eleves</span><span class="p">(</span>
-<span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">,</span><span class="w">  </span><span class="c1">-- Avec SERIAL, si on ajoute un enregistrement, l&#39;id est automatiquement créée </span>
-<span class="w">    </span><span class="n">nom</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
-<span class="w">    </span><span class="n">prenom</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
-<span class="w">    </span><span class="n">age</span><span class="w"> </span><span class="nb">integer</span>
-<span class="p">);</span>
-
-
-<span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">eleves</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span>
-<span class="k">values</span>
-<span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Dupont&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Jean&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">),</span>
-<span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Durand&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Pierre&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">),</span>
-<span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Dufour&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Paul&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span>
-<span class="p">;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">drop</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="k">exists</span><span class="w"> </span><span class="n">eleves</span><span class="p">;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">eleves</span><span class="p">(</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="n">id</span><span class="w"> </span><span class="nb">SERIAL</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">,</span><span class="w">  </span><span class="c1">-- Avec SERIAL, si on ajoute un enregistrement, l&#39;id est automatiquement créée </span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="n">nom</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="n">prenom</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">    </span><span class="n">age</span><span class="w"> </span><span class="nb">integer</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">);</span>
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>
+<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="k">insert</span><span class="w"> </span><span class="k">into</span><span class="w"> </span><span class="n">eleves</span><span class="p">(</span><span class="n">id</span><span class="p">,</span><span class="w"> </span><span class="n">nom</span><span class="p">,</span><span class="w"> </span><span class="n">prenom</span><span class="p">,</span><span class="w"> </span><span class="n">age</span><span class="p">)</span><span class="w"> </span>
+<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="k">values</span>
+<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Dupont&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Jean&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">),</span>
+<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Durand&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Pierre&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">16</span><span class="p">),</span>
+<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Dufour&#39;</span><span class="p">,</span><span class="w"> </span><span class="s1">&#39;Paul&#39;</span><span class="p">,</span><span class="w"> </span><span class="mi">15</span><span class="p">)</span>
+<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="p">;</span>
 </code></pre></div>
 <p>Voilà à quoi doit ressembler votre arborescence une fois que vous avez exécuté les requêtes ci-dessus:</p>
 <p><img alt="alt text" src="../image-6.png" /></p>
@@ -3528,12 +3551,12 @@ Il faudra lui demander de se rafraîchir. (F5 ou menu contextuel)</p>
 <p class="admonition-title">Utilisation au quotidien</p>
 <ul>
 <li>Démarrer la base de données:
-<div class="highlight"><pre><span></span><code>conda<span class="w"> </span>activate<span class="w"> </span>outils
-pg_ctl<span class="w"> </span>start<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>conda<span class="w"> </span>activate<span class="w"> </span>outils
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>pg_ctl<span class="w"> </span>start<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data
 </code></pre></div></li>
 <li>Bosser</li>
 <li>Arreter la base de données:
-<div class="highlight"><pre><span></span><code>pg_ctl<span class="w"> </span>stop<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>pg_ctl<span class="w"> </span>stop<span class="w"> </span>-D<span class="w"> </span>P:<span class="se">\\</span>data
 </code></pre></div></li>
 </ul>
 </div>
@@ -3662,7 +3685,7 @@ pg_ctl<span class="w"> </span>start<span class="w"> </span>-D<span class="w"> </
     
     
       
-      <script id="__config" type="application/json">{"base": "../../..", "features": ["navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"base": "../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.instant", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.973d3a69.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../../../assets/javascripts/bundle.f55a23d4.min.js"></script>
