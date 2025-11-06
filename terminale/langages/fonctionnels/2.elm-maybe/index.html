@@ -4181,10 +4181,12 @@
 <span class="c1">-- Problème : Que retourner si la liste est vide ?</span>
 <span class="nv">dernierElement</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="err">???</span><span class="w">  </span><span class="c1">-- Pas d&#39;élément à retourner !</span>
 </code></pre></div>
-<p><strong>En d'autres langages :</strong>
-- <strong>Python/Java</strong> : <code>None</code> ou <code>null</code> → crashes possibles
-- <strong>C</strong> : Valeur spéciale (-1, 0) → ambiguë
-- <strong>Exceptions</strong> : Lourd et imprévisible</p>
+<p><strong>En d'autres langages :</strong></p>
+<ul>
+<li><strong>Python/Java</strong> : <code>None</code> ou <code>null</code> → crashes possibles</li>
+<li><strong>C</strong> : Valeur spéciale (-1, 0) → ambiguë</li>
+<li><strong>Exceptions</strong> : Lourd et imprévisible</li>
+</ul>
 <p><strong>En Elm : Le type <code>Maybe</code> !</strong> ✨</p>
 <hr />
 <h2 id="definition-de-maybe">📦 Définition de <code>Maybe</code></h2>
@@ -4213,9 +4215,11 @@
 <div class="highlight"><pre><span></span><code><span class="kt">Just</span><span class="w"> </span><span class="mi">5</span><span class="w">       </span><span class="c1">-- Boîte contenant 5</span>
 <span class="kt">Nothing</span><span class="w">      </span><span class="c1">-- Boîte vide</span>
 </code></pre></div>
-<p><strong>Analogie :</strong>
-- <strong>Boîte fermée avec un cadeau</strong> → <code>Just valeur</code>
-- <strong>Boîte vide</strong> → <code>Nothing</code></p>
+<p><strong>Analogie :</strong></p>
+<ul>
+<li><strong>Boîte fermée avec un cadeau</strong> → <code>Just valeur</code></li>
+<li><strong>Boîte vide</strong> → <code>Nothing</code></li>
+</ul>
 <h3 id="en-comparaison-avec-dautres-langages">En Comparaison avec d'Autres Langages</h3>
 <table>
 <thead>
@@ -4604,11 +4608,13 @@
 <span class="w">        </span><span class="kt">CasVide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Nothing</span><span class="w">                    </span><span class="c1">-- Échec</span>
 <span class="w">        </span><span class="kt">CasNonVide</span><span class="w"> </span><span class="nv">donn</span><span class="err">é</span><span class="nv">es</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Just</span><span class="w"> </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultat</span><span class="w">   </span><span class="c1">-- Succès</span>
 </code></pre></div>
-<p><strong>Exemples :</strong>
-- Liste vide → <code>Nothing</code>
-- Division par zéro → <code>Nothing</code>
-- Clé inexistante dans dictionnaire → <code>Nothing</code>
-- Parsing échoué → <code>Nothing</code></p>
+<p><strong>Exemples :</strong></p>
+<ul>
+<li>Liste vide → <code>Nothing</code></li>
+<li>Division par zéro → <code>Nothing</code></li>
+<li>Clé inexistante dans dictionnaire → <code>Nothing</code></li>
+<li>Parsing échoué → <code>Nothing</code></li>
+</ul>
 <hr />
 <h2 id="resume">✅ Résumé</h2>
 <h3 id="quest-ce-que-maybe">Qu'est-ce que Maybe ?</h3>
@@ -4619,10 +4625,12 @@
 <li><strong><code>Just valeur</code></strong> : Présence d'une valeur</li>
 </ul>
 <h3 id="quand-utiliser-maybe">Quand Utiliser Maybe ?</h3>
-<p>Utilise <code>Maybe a</code> pour le type de retour d'une fonction quand :
-- ✅ La fonction peut échouer
-- ✅ Il peut ne pas y avoir de résultat
-- ✅ L'entrée peut être vide</p>
+<p>Utilise <code>Maybe a</code> pour le type de retour d'une fonction quand :</p>
+<ul>
+<li>✅ La fonction peut échouer</li>
+<li>✅ Il peut ne pas y avoir de résultat</li>
+<li>✅ L'entrée peut être vide</li>
+</ul>
 <h3 id="fonctions-cles">Fonctions Clés</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Valeur par défaut</span>
 <span class="kt">Maybe</span><span class="nf">.</span><span class="nv">withDefault</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Maybe</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">a</span>

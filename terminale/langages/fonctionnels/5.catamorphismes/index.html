@@ -4253,9 +4253,11 @@
 <span class="w">    </span><span class="nf">=</span><span class="w"> </span><span class="kt">Vide</span>
 <span class="w">    </span><span class="nf">|</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="p">(</span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Une liste, c'est :</strong>
-- SOIT <code>Vide</code>
-- SOIT construite avec <code>Cons</code> + un élément + une autre liste</p>
+<p><strong>Une liste, c'est :</strong></p>
+<ul>
+<li>SOIT <code>Vide</code></li>
+<li>SOIT construite avec <code>Cons</code> + un élément + une autre liste</li>
+</ul>
 <p><strong>C'est récursif</strong> : une liste contient une liste !</p>
 <div class="highlight"><pre><span></span><code>Cons 1 (Cons 2 (Cons 3 Vide))
   ↑       ↑       ↑      ↑
@@ -4294,9 +4296,11 @@
            / \
           3  acc
 </code></pre></div>
-<p><strong>On remplace :</strong>
-- Chaque <code>Cons</code> par notre fonction <code>f</code>
-- <code>Vide</code> par notre accumulator <code>acc</code></p>
+<p><strong>On remplace :</strong></p>
+<ul>
+<li>Chaque <code>Cons</code> par notre fonction <code>f</code></li>
+<li><code>Vide</code> par notre accumulator <code>acc</code></li>
+</ul>
 <hr />
 <h2 id="5-le-pattern-universel">5. Le Pattern Universel</h2>
 <h3 id="toute-structure-recursive-a-son-catamorphisme">Toute structure récursive a son catamorphisme</h3>
@@ -4336,9 +4340,11 @@
 <span class="w">        </span><span class="err">↑</span><span class="w">              </span><span class="err">↑</span>
 <span class="w">        </span><span class="nv">remplace</span><span class="w"> </span><span class="kt">Cons</span><span class="w">  </span><span class="nv">remplace</span><span class="w"> </span><span class="kt">Vide</span>
 </code></pre></div>
-<p><strong>Détail :</strong>
-- <code>Vide</code> → <code>b</code> (juste une valeur)
-- <code>Cons a (Liste a)</code> → <code>(a -&gt; b -&gt; b)</code> (fonction qui prend l'élément et le résultat récursif)</p>
+<p><strong>Détail :</strong></p>
+<ul>
+<li><code>Vide</code> → <code>b</code> (juste une valeur)</li>
+<li><code>Cons a (Liste a)</code> → <code>(a -&gt; b -&gt; b)</code> (fonction qui prend l'élément et le résultat récursif)</li>
+</ul>
 <h3 id="etape-3-implemente">Étape 3 : Implémente</h3>
 <div class="highlight"><pre><span></span><code><span class="nv">foldr</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
 <span class="nv">foldr</span><span class="w"> </span><span class="nv">fCons</span><span class="w"> </span><span class="nv">fVide</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
@@ -4405,16 +4411,20 @@
 <span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span>
 <span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">queue</span>
 </code></pre></div>
-<p><strong>Ce que tu fais :</strong>
-1. Pattern matching sur les constructeurs
-2. Pour chaque constructeur, dis quoi faire
-3. Rappelle récursivement la fonction</p>
+<p><strong>Ce que tu fais :</strong></p>
+<ol>
+<li>Pattern matching sur les constructeurs</li>
+<li>Pour chaque constructeur, dis quoi faire</li>
+<li>Rappelle récursivement la fonction</li>
+</ol>
 <h3 id="catamorphisme">Catamorphisme</h3>
 <div class="highlight"><pre><span></span><code><span class="nv">taille</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">foldr</span><span class="w"> </span><span class="p">(</span><span class="nf">\</span><span class="nv">_</span><span class="w"> </span><span class="nv">acc</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">acc</span><span class="p">)</span><span class="w"> </span><span class="mi">0</span>
 </code></pre></div>
-<p><strong>Ce que tu fais :</strong>
-1. Fournis un "remplaçant" pour chaque constructeur
-2. Le catamorphisme fait la récursion pour toi</p>
+<p><strong>Ce que tu fais :</strong></p>
+<ol>
+<li>Fournis un "remplaçant" pour chaque constructeur</li>
+<li>Le catamorphisme fait la récursion pour toi</li>
+</ol>
 <p><strong>Avantage :</strong> Tu n'écris plus le pattern matching, c'est fait une fois pour toutes !</p>
 <hr />
 <h2 id="9-pourquoi-cest-important">9. Pourquoi C'est Important ?</h2>
@@ -4458,10 +4468,12 @@
 <li><strong>Catamorphisme</strong> = transformer en descendant (déconstruire)</li>
 </ul>
 <h3 id="autres-morphismes">Autres morphismes</h3>
-<p><strong>Anamorphisme</strong> (le contraire) :
-- <strong>Ana</strong> = vers le haut
-- Construit une structure à partir d'une graine
-- Exemple : <code>unfold</code></p>
+<p><strong>Anamorphisme</strong> (le contraire) :</p>
+<ul>
+<li><strong>Ana</strong> = vers le haut</li>
+<li>Construit une structure à partir d'une graine</li>
+<li>Exemple : <code>unfold</code></li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="c1">-- Générer [1, 2, 3, ..., n]</span>
 <span class="nv">range</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span>
 <span class="nv">range</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">=</span>
@@ -4471,10 +4483,12 @@
 <span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="p">(</span><span class="nv">range</span><span class="w"> </span><span class="p">(</span><span class="nv">n</span><span class="w"> </span><span class="nf">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
 <span class="c1">-- C&#39;est un anamorphisme !</span>
 </code></pre></div>
-<p><strong>Hylomorphisme</strong> (les deux) :
-- <strong>Hylo</strong> = tout ensemble
-- Anamorphisme puis catamorphisme
-- Exemple : <code>triFusion</code></p>
+<p><strong>Hylomorphisme</strong> (les deux) :</p>
+<ul>
+<li><strong>Hylo</strong> = tout ensemble</li>
+<li>Anamorphisme puis catamorphisme</li>
+<li>Exemple : <code>triFusion</code></li>
+</ul>
 <div class="highlight"><pre><span></span><code><span class="nv">triFusion</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span>
 <span class="nv">triFusion</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
 <span class="w">    </span><span class="c1">-- 1. Déconstruire en sous-listes (ana)</span>

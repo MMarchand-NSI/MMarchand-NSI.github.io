@@ -4188,9 +4188,11 @@
 <hr />
 <h2 id="3-fonctions-dordre-superieur">3. Fonctions d'Ordre Supérieur</h2>
 <h3 id="definition">Définition</h3>
-<p>Une <strong>fonction d'ordre supérieur</strong> est une fonction qui :
-- Prend une ou plusieurs fonctions en paramètres, ET/OU
-- Retourne une fonction</p>
+<p>Une <strong>fonction d'ordre supérieur</strong> est une fonction qui :</p>
+<ul>
+<li>Prend une ou plusieurs fonctions en paramètres, ET/OU</li>
+<li>Retourne une fonction</li>
+</ul>
 <h3 id="exemples-que-tu-connais-deja">Exemples que tu connais déjà !</h3>
 <div class="highlight"><pre><span></span><code><span class="c1">-- take : prend n et une liste</span>
 <span class="nv">take</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
@@ -4222,18 +4224,22 @@
 <span class="w">        </span><span class="p">(</span><span class="kt">Vide</span><span class="p">,</span><span class="w"> </span><span class="nv">_</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">lst2</span>
 <span class="w">        </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="nv">q</span><span class="p">,</span><span class="w"> </span><span class="nv">_</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="p">(</span><span class="nv">concat</span><span class="w"> </span><span class="nv">q</span><span class="w"> </span><span class="nv">lst2</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Elles suivent TOUTES le même pattern !</strong>
-1. Cas de base : <code>Vide -&gt; valeur</code>
-2. Cas récursif : <code>Cons tete queue -&gt; combiner tete (récursion queue)</code></p>
+<p><strong>Elles suivent TOUTES le même pattern !</strong></p>
+<ol>
+<li>Cas de base : <code>Vide -&gt; valeur</code></li>
+<li>Cas récursif : <code>Cons tete queue -&gt; combiner tete (récursion queue)</code></li>
+</ol>
 <h3 id="foldr-capture-ce-pattern"><code>foldr</code> capture ce pattern</h3>
 <div class="highlight"><pre><span></span><code><span class="nv">foldr</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
 <span class="nv">foldr</span><span class="w">   </span><span class="nv">combiner</span><span class="w">         </span><span class="nv">base</span><span class="w">   </span><span class="nv">liste</span><span class="w">     </span><span class="nf">=</span><span class="w"> </span><span class="nv">r</span><span class="err">é</span><span class="nv">sultat</span>
 </code></pre></div>
-<p><strong>Lecture :</strong> 
-- <code>combiner</code> : fonction qui combine un élément avec le résultat du reste
-- <code>base</code> : valeur à retourner pour la liste vide
-- <code>liste</code> : la liste à traiter
-- <code>résultat</code> : le résultat final</p>
+<p><strong>Lecture :</strong> </p>
+<ul>
+<li><code>combiner</code> : fonction qui combine un élément avec le résultat du reste</li>
+<li><code>base</code> : valeur à retourner pour la liste vide</li>
+<li><code>liste</code> : la liste à traiter</li>
+<li><code>résultat</code> : le résultat final</li>
+</ul>
 <h3 id="implementation-de-foldr">Implémentation de <code>foldr</code></h3>
 <div class="highlight"><pre><span></span><code><span class="nv">foldr</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="p">(</span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">b</span>
 <span class="nv">foldr</span><span class="w"> </span><span class="nv">combiner</span><span class="w"> </span><span class="nv">base</span><span class="w"> </span><span class="nv">liste</span><span class="w"> </span><span class="nf">=</span>
@@ -4264,10 +4270,12 @@
 <span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span>
 <span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">queue</span>
 </code></pre></div></p>
-<p><strong>Identifions le pattern :</strong>
-- Valeur de base : <code>0</code>
-- Combinaison : <code>1 + résultat_du_reste</code>
-- La tête ne nous intéresse pas : on l'ignore</p>
+<p><strong>Identifions le pattern :</strong></p>
+<ul>
+<li>Valeur de base : <code>0</code></li>
+<li>Combinaison : <code>1 + résultat_du_reste</code></li>
+<li>La tête ne nous intéresse pas : on l'ignore</li>
+</ul>
 <p><strong>Avec <code>foldr</code> :</strong>
 <div class="highlight"><pre><span></span><code><span class="nv">taille</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
 <span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
@@ -4296,9 +4304,11 @@
 <span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="mi">0</span>
 <span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nv">queue</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">tete</span><span class="w"> </span><span class="nf">+</span><span class="w"> </span><span class="nv">somme</span><span class="w"> </span><span class="nv">queue</span>
 </code></pre></div></p>
-<p><strong>Pattern :</strong>
-- Base : <code>0</code>
-- Combinaison : <code>tete + résultat</code></p>
+<p><strong>Pattern :</strong></p>
+<ul>
+<li>Base : <code>0</code></li>
+<li>Combinaison : <code>tete + résultat</code></li>
+</ul>
 <p><strong>Avec <code>foldr</code> :</strong>
 <div class="highlight"><pre><span></span><code><span class="nv">somme</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="kt">Int</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Int</span>
 <span class="nv">somme</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
@@ -4327,9 +4337,11 @@
 <span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">lst2</span>
 <span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="nv">q</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="p">(</span><span class="nv">concat</span><span class="w"> </span><span class="nv">q</span><span class="w"> </span><span class="nv">lst2</span><span class="p">)</span>
 </code></pre></div></p>
-<p><strong>Pattern :</strong>
-- Base : <code>lst2</code> (pas <code>Vide</code> !)
-- Combinaison : <code>Cons tete résultat</code></p>
+<p><strong>Pattern :</strong></p>
+<ul>
+<li>Base : <code>lst2</code> (pas <code>Vide</code> !)</li>
+<li>Combinaison : <code>Cons tete résultat</code></li>
+</ul>
 <p><strong>Avec <code>foldr</code> :</strong>
 <div class="highlight"><pre><span></span><code><span class="nv">concat</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">a</span>
 <span class="nv">concat</span><span class="w"> </span><span class="nv">lst1</span><span class="w"> </span><span class="nv">lst2</span><span class="w"> </span><span class="nf">=</span>
