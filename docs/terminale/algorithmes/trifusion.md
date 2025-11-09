@@ -73,7 +73,7 @@ ce qui nous donne au final:
 
 ```elm
 fusion : Liste comparable -> Liste comparable -> Liste comparable
-fusion : lst1                lst2 =
+fusion   lst1                lst2 =
     case (lst1, lst2) of
         (Vide, Vide) -> Vide
         (Vide, Cons t q) -> lst2
@@ -101,6 +101,7 @@ Soit $n = n_1 + n_2$ la taille totale du problème (somme des tailles des deux l
 Soit $T_n$ le temps qu'il faut pour effectuer cette fusion.
 
 À chaque étape de la fusion :
+
 - On traite 1 élément (on le place dans le résultat)
 - Le problème restant a taille $n - 1$
 
@@ -109,10 +110,10 @@ Le temps qu'in faut pour fusionner, c'est une unité de temps (simplement constr
 On obtient la **suite récurrente** :
 
 $$T(n) = 1 + T(n-1)$$
-
 $$T(0) = 1$$
 
 C'est une **suite arithmétique de raison 1**. Son terme général est :
+
 $$T(n) = T(0) + n \times 1 = n + 1$$
 
 **Conclusion** : La complexité temporelle de la fusion est $O(n)$
@@ -169,9 +170,7 @@ On rappelle à chaque fois `tri_fusion` sur des listes de taille strictement inf
 
 ### Complexité
 
-Le pire des cas pour le tri fusion est tordu, c'est celui où il y a un nombre de comparaisons maximal pendant les fusions.
-
-De toute façon, la grande force du tri fusion, c'est que tous les cas se valent en terme de complexité.
+La grande force du tri fusion, c'est que tous les cas se valent en terme de complexité.
 
 L'idée générale, c'est que le tri fusion divise toujours le tableau en deux moitiés égales (ou presque), récursivement :
 
@@ -213,7 +212,7 @@ def fusion[T: Comparable](lst1: list[T], lst2: list[T]) -> list[T]:
 
 On va simuler la consommation progressive des listes avec des indices $i_1$ et $i_2$. i1, c'est la position de la tete courante de lst1, et i2 c'est la position de la tete courante de lst2.
 
-TODO Mettre un dessin
+![fusion_indices](fusion_indices.webp)
 
 Donc nos têtes sont `lst1[i1]` et `lst2[i2]`
 
@@ -287,7 +286,7 @@ def tri_fusion[T: Comparable](lst: list[T]) -> list[T]:
         case [_]:
             return lst
         case [t, *q]:
-            return fusion(tri_fusion(lst[:]n), tri_fusion(lst[n:]))
+            return fusion(tri_fusion(lst[:n]), tri_fusion(lst[n:]))
 ```
 
 je vous laisse réécrire ça avec des if en vous basant sur la taille de la liste.
