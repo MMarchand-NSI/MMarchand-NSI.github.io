@@ -3326,33 +3326,11 @@
 <p>Donc l'invariant est vrai au début.</p>
 <p><strong>CONSERVATION</strong></p>
 <p>Supposons l'invariant vrai au début de l'itération <span class="arithmatex">\(i\)</span> :</p>
-<table>
-<thead>
-<tr>
-<th>Indice</th>
-<th><span class="arithmatex">\(0\)</span></th>
-<th>…</th>
-<th><span class="arithmatex">\(i‑1\)</span></th>
-<th><span class="arithmatex">\(i\)</span></th>
-<th>…</th>
-<th><span class="arithmatex">\(n‑1\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Zone</strong></td>
-<td>←</td>
-<td><span class="arithmatex">\(T[0:i)\)</span> trié</td>
-<td>→</td>
-<td>←</td>
-<td><span class="arithmatex">\(T[i:n)\)</span> non trié</td>
-<td>→</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Hypothèse (avant itération i) :</strong>
-1. <span class="arithmatex">\(T[0:i)\)</span> est trié
-2. <span class="arithmatex">\(T[0:n)\)</span> est une permutation du tableau initial</p>
+<p><strong>Hypothèse (avant itération i) :</strong></p>
+<ol>
+<li><span class="arithmatex">\(T[0:i)\)</span> est trié</li>
+<li><span class="arithmatex">\(T[0:n)\)</span> est une permutation du tableau initial</li>
+</ol>
 <p>Nous voulons montrer qu'à l'issue de la boucle transformant <span class="arithmatex">\(T\)</span> en <span class="arithmatex">\(T'\)</span> :</p>
 <ul>
 <li><span class="arithmatex">\(T'[0:i+1)\)</span> est trié</li>
@@ -3414,84 +3392,25 @@
 <li><span class="arithmatex">\(T[0:j)\)</span> est trié et inchangé par rapport à l'entrée</li>
 <li>Le tableau reste une permutation de l'entrée</li>
 </ol>
-<p><strong>Initialisation (<span class="arithmatex">\(j = i\)</span>) :</strong>
-- <span class="arithmatex">\(T[j+1:i+1) = T[i+1:i+1) = \emptyset\)</span> : trivialement vrai
-- <span class="arithmatex">\(T[0:i)\)</span> est trié par précondition
-- Aucune modification n'a été faite</p>
-<p><strong>Conservation :</strong> Si <span class="arithmatex">\(j &gt; 0\)</span> et <span class="arithmatex">\(T[j-1] &gt; a\_deplacer\)</span> :
-- On copie <span class="arithmatex">\(T[j-1]\)</span> vers <span class="arithmatex">\(T[j]\)</span> : les éléments de <span class="arithmatex">\(T[j:i+1)\)</span> sont décalés
-- On décrémente <span class="arithmatex">\(j\)</span>
-- Les propriétés restent vraies pour le nouveau <span class="arithmatex">\(j\)</span></p>
+<p><strong>Initialisation (<span class="arithmatex">\(j = i\)</span>) :</strong></p>
+<ul>
+<li><span class="arithmatex">\(T[j+1:i+1) = T[i+1:i+1) = \emptyset\)</span> : trivialement vrai</li>
+<li><span class="arithmatex">\(T[0:i)\)</span> est trié par précondition</li>
+<li>Aucune modification n'a été faite</li>
+</ul>
+<p><strong>Conservation :</strong> Si <span class="arithmatex">\(j &gt; 0\)</span> et <span class="arithmatex">\(T[j-1] &gt; a\_deplacer\)</span> :</p>
+<ul>
+<li>On copie <span class="arithmatex">\(T[j-1]\)</span> vers <span class="arithmatex">\(T[j]\)</span> : les éléments de <span class="arithmatex">\(T[j:i+1)\)</span> sont décalés</li>
+<li>On décrémente <span class="arithmatex">\(j\)</span></li>
+<li>Les propriétés restent vraies pour le nouveau <span class="arithmatex">\(j\)</span></li>
+</ul>
 <p><strong>Terminaison :</strong> La boucle termine car <span class="arithmatex">\(j\)</span> décroît strictement et <span class="arithmatex">\(j \geq 0\)</span></p>
-<p>Lorsque la boucle se termine :
-- Soit <span class="arithmatex">\(j = 0\)</span> : on insère <span class="arithmatex">\(a\_deplacer\)</span> en première position
-- Soit <span class="arithmatex">\(T[j-1] \leq a\_deplacer\)</span> : on insère <span class="arithmatex">\(a\_deplacer\)</span> à la position <span class="arithmatex">\(j\)</span></p>
+<p>Lorsque la boucle se termine :</p>
+<ul>
+<li>Soit <span class="arithmatex">\(j = 0\)</span> : on insère <span class="arithmatex">\(a\_deplacer\)</span> en première position</li>
+<li>Soit <span class="arithmatex">\(T[j-1] \leq a\_deplacer\)</span> : on insère <span class="arithmatex">\(a\_deplacer\)</span> à la position <span class="arithmatex">\(j\)</span></li>
+</ul>
 <p>Dans les deux cas, <span class="arithmatex">\(T[0:i+1)\)</span> est trié et reste une permutation. <span class="arithmatex">\(\square\)</span></p>
-<div class="admonition success">
-<p class="admonition-title">Avantages de la notation avec intervalles semi-ouverts</p>
-<p>Pour l'algorithme d'insertion :</p>
-<ol>
-<li>
-<p><strong>Clarté de l'invariant</strong> : "<span class="arithmatex">\(T[0:i)\)</span> est trié" est plus direct que "<span class="arithmatex">\(T[0..i-1]\)</span> est trié"</p>
-</li>
-<li>
-<p><strong>Cohérence des tailles</strong> : Après insertion à la position <span class="arithmatex">\(i\)</span>, on a trié exactement <span class="arithmatex">\(i+1\)</span> éléments, soit <span class="arithmatex">\(T[0:i+1)\)</span> de taille <span class="arithmatex">\(i+1-0 = i+1\)</span></p>
-</li>
-<li>
-<p><strong>Pas d'ambiguïté sur les bornes</strong> : <span class="arithmatex">\(T[j+1:i+1)\)</span> décrit sans équivoque le sous-tableau décalé</p>
-</li>
-<li>
-<p><strong>Décomposition naturelle</strong> : <span class="arithmatex">\(T[0:n) = T[0:i) + T[i:i+1) + T[i+1:n)\)</span> sans indices répétés</p>
-</li>
-<li>
-<p><strong>Alignement avec l'implémentation</strong> : Le code Python naturel <code>T[0:i]</code> correspond exactement à la notation mathématique</p>
-</li>
-</ol>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Complexité</p>
-<p><strong>Complexité de INSERER_BONNE_PLACE :</strong></p>
-<ul>
-<li>
-<p><strong>Meilleur cas</strong> : L'élément <span class="arithmatex">\(T[i]\)</span> est déjà à sa place (plus grand que tous les éléments de <span class="arithmatex">\(T[0:i)\)</span>)</p>
-<ul>
-<li>La boucle TANT QUE ne s'exécute pas</li>
-<li>Complexité : <span class="arithmatex">\(\mathcal{O}(1)\)</span></li>
-</ul>
-</li>
-<li>
-<p><strong>Pire cas</strong> : L'élément <span class="arithmatex">\(T[i]\)</span> doit être inséré en première position</p>
-<ul>
-<li>La boucle TANT QUE s'exécute <span class="arithmatex">\(i\)</span> fois</li>
-<li>Complexité : <span class="arithmatex">\(\mathcal{O}(i)\)</span></li>
-</ul>
-</li>
-</ul>
-<p><strong>Complexité du tri par insertion :</strong></p>
-<ul>
-<li>
-<p><strong>Meilleur cas</strong> : Le tableau est déjà trié</p>
-<ul>
-<li>Chaque appel à <code>INSERER_BONNE_PLACE(T, i)</code> est en <span class="arithmatex">\(\mathcal{O}(1)\)</span></li>
-<li>Complexité totale : <span class="arithmatex">\(\sum_{i=1}^{n-1} 1 = \mathcal{O}(n)\)</span></li>
-</ul>
-</li>
-<li>
-<p><strong>Pire cas</strong> : Le tableau est trié en ordre décroissant</p>
-<ul>
-<li>Chaque appel à <code>INSERER_BONNE_PLACE(T, i)</code> est en <span class="arithmatex">\(\mathcal{O}(i)\)</span></li>
-<li>Complexité totale : <span class="arithmatex">\(\sum_{i=1}^{n-1} i = \frac{(n-1)n}{2} = \mathcal{O}(n^2)\)</span></li>
-</ul>
-</li>
-<li>
-<p><strong>Cas moyen</strong> : En moyenne, on insère à mi-chemin</p>
-<ul>
-<li>Complexité : <span class="arithmatex">\(\mathcal{O}(n^2)\)</span></li>
-</ul>
-</li>
-</ul>
-<p><strong>Remarque :</strong> Contrairement au tri par sélection qui est toujours en <span class="arithmatex">\(\mathcal{O}(n^2)\)</span>, le tri par insertion est <strong>adaptatif</strong> : il est très efficace (<span class="arithmatex">\(\mathcal{O}(n)\)</span>) sur des tableaux presque triés.</p>
-</div>
 <h2 id="algorithme-final-anime">Algorithme final animé</h2>
 <iframe width="315" height="560"
 src="https://www.youtube.com/embed/0GQoqfyIgdA"
