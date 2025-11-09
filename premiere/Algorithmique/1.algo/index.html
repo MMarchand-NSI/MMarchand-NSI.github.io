@@ -3649,7 +3649,7 @@ On ne peut pas savoir a priori combien de fois elle va s'exécuter : cela dépen
 </ol>
 </div>
 <p>Pour le problème FIND-MIN, l'invariant de boucle est la propriété:</p>
-<p>"Au début de l'itération <span class="arithmatex">\(i\)</span>, <span class="arithmatex">\(mini\)</span> contient le minimum de <span class="arithmatex">\(T[0..i-1]\)</span>"</p>
+<p>"Au début de l'itération <span class="arithmatex">\(i\)</span>, <span class="arithmatex">\(mini\)</span> contient le minimum de <span class="arithmatex">\(T[0..i)\)</span>"</p>
 <h3 id="correction-totale">Correction totale</h3>
 <div class="admonition abstract">
 <p class="admonition-title">Correction totale</p>
@@ -3667,9 +3667,13 @@ On ne peut pas savoir a priori combien de fois elle va s'exécuter : cela dépen
 <div class="admonition hint">
 <p class="admonition-title">Notations</p>
 <ul>
-<li><span class="arithmatex">\(T[i..j]\)</span> représente le sous-tableau de <span class="arithmatex">\(T\)</span> de l'indice <span class="arithmatex">\(i\)</span> à l'indice <span class="arithmatex">\(j\)</span> inclus.</li>
-<li><span class="arithmatex">\(T[i..i]\)</span> reprrésente le sous-tableau de <span class="arithmatex">\(T\)</span> ne comportant que <span class="arithmatex">\(T[i]\)</span>.</li>
-<li>Attention, contrairement aux slices, la borne supérieure est incluse.</li>
+<li><span class="arithmatex">\(T[i..j)\)</span> représente le sous-tableau de <span class="arithmatex">\(T\)</span> de l'indice <span class="arithmatex">\(i\)</span> à l'indice <span class="arithmatex">\(j\)</span> exclus.
+Parc onséquent:<ul>
+<li><span class="arithmatex">\(T[i..i+1)\)</span> représente le sous-tableau de <span class="arithmatex">\(T\)</span> ne comportant que <span class="arithmatex">\(T[i]\)</span>.</li>
+<li>Pour un tableau <span class="arithmatex">\(T\)</span> de taille <span class="arithmatex">\(n\)</span>, <span class="arithmatex">\(T=T[0..n)\)</span></li>
+<li>Quel que soit <span class="arithmatex">\(i\)</span>, <span class="arithmatex">\(T[i..i]\)</span> est le tableau vide</li>
+</ul>
+</li>
 </ul>
 </div>
 <p><strong>INITIALISATION</strong></p>
@@ -3678,25 +3682,25 @@ On ne peut pas savoir a priori combien de fois elle va s'exécuter : cela dépen
 <p>Si le tableau n'a qu'un élément, la boucle est vide d'exécution et le minimum est correctement renvoyé. </p>
 </li>
 <li>
-<p>Si le tableau a au moins un élément, <span class="arithmatex">\(i=1\)</span> et <span class="arithmatex">\(mini\)</span> est bien le minimum de <span class="arithmatex">\(T[0..0]\)</span>, le tableau constitué d'un seul élément.</p>
+<p>Si le tableau a au moins un élément, <span class="arithmatex">\(i=1\)</span> et <span class="arithmatex">\(mini\)</span> est bien le minimum de <span class="arithmatex">\(T[0..1)\)</span>, le tableau constitué d'un seul élément.</p>
 </li>
 </ol>
 <p><strong>L'invariant est donc vérifié pour <span class="arithmatex">\(\bold{i=1}\)</span>.</strong></p>
 <p><strong>CONSERVATION</strong>
 On suppose que pour <span class="arithmatex">\(i\ge1\)</span> quelconque, l'invariant est vrai.</p>
-<p>Donc en début d'itération <span class="arithmatex">\(i\)</span>, "<span class="arithmatex">\(mini\)</span> est le minimum de <span class="arithmatex">\(T[0..i-1]\)</span>" est vrai</p>
-<p>On veut alors prouver qu'après une itération, "<span class="arithmatex">\(mini\)</span> est le minimum de <span class="arithmatex">\(T[0..i]\)</span>" est vrai</p>
+<p>Donc en début d'itération <span class="arithmatex">\(i\)</span>, "<span class="arithmatex">\(mini\)</span> est le minimum de <span class="arithmatex">\(T[0..i)\)</span>" est vrai</p>
+<p>On veut alors prouver qu'après une itération, "<span class="arithmatex">\(mini\)</span> est le minimum de <span class="arithmatex">\(T[0..i)\)</span>" est vrai</p>
 <p>Déroulons l'algorithme:</p>
 <ul>
-<li>Si <span class="arithmatex">\(T[i] \gt mini\)</span>, alors <span class="arithmatex">\(mini\)</span> est aussi le <span class="arithmatex">\(minimum\)</span> de <span class="arithmatex">\(T[0..i]\)</span> et l'invariant est vérifié en sortie d'itération, car on ne fait rien dans ce cas.</li>
-<li>Sinon, <span class="arithmatex">\(T[i] \le mini\)</span>, et donc <span class="arithmatex">\(mini\)</span> n'est pas le minimum de <span class="arithmatex">\(T[0..i]\)</span>. Mais nous rétablissons immédiatement l'invariant en affectant <span class="arithmatex">\(T[i]\)</span> à <span class="arithmatex">\(mini\)</span> qui devient bien le minimum de <span class="arithmatex">\(T[0..i]\)</span>.</li>
+<li>Si <span class="arithmatex">\(T[i] \gt mini\)</span>, alors <span class="arithmatex">\(mini\)</span> est aussi le <span class="arithmatex">\(minimum\)</span> de <span class="arithmatex">\(T[0..i+1)\)</span> et l'invariant est vérifié en sortie d'itération, car on ne fait rien dans ce cas.</li>
+<li>Sinon, <span class="arithmatex">\(T[i] \le mini\)</span>, et donc <span class="arithmatex">\(mini\)</span> n'est pas le minimum de <span class="arithmatex">\(T[0..i+1)\)</span>. Mais nous rétablissons immédiatement l'invariant en affectant <span class="arithmatex">\(T[i]\)</span> à <span class="arithmatex">\(mini\)</span> qui devient bien le minimum de <span class="arithmatex">\(T[0..i+1)\)</span>.</li>
 </ul>
-<p>Dans tous les cas, en sortie de boucle, "<span class="arithmatex">\(mini\)</span> est le minimum de T[0..i]" est vrai, ce que nous voulions démontrer.</p>
+<p>Dans tous les cas, en sortie de boucle, "<span class="arithmatex">\(mini\)</span> est le minimum de <span class="arithmatex">\(T[0..i+1)\)</span>" est vrai, ce que nous voulions démontrer.</p>
 <p>L'invariant est donc conservé. L'algorithme est partiellement correct.</p>
-<p><strong>TERMINAISON</strong>
-L'algorithme est composé d'une boucle bornée dont les instructions se terminent. Donc Il se termine.</p>
+<p><strong>TERMINAISON</strong></p>
+<p>L'algorithme est composé d'une boucle bornée dont les instructions se terminent. Donc Il se termine.</p>
 <p>Lors de sa dernière itération, <span class="arithmatex">\(i=n-1\)</span> et l'invariant reste vrai pour <span class="arithmatex">\(i=n\)</span> par conservation.</p>
-<p>Donc mini est le minimum de <span class="arithmatex">\(T[0..n-1]\)</span></p>
+<p>Donc mini est le minimum de <span class="arithmatex">\(T[0..n)\)</span></p>
 <p>Notre algorithme de recherche de minimum est donc totalement correct.</p>
 <hr />
 <h2 id="le-probleme-de-lindice-du-minimum-argmin">Le problème de l'indice du minimum - ARGMIN</h2>
@@ -3708,7 +3712,7 @@ L'algorithme est composé d'une boucle bornée dont les instructions se terminen
 <p><strong>Post-condition</strong>
 Si <span class="arithmatex">\(imin\)</span> est le résultat, alors voici la notation utilisée
 $$ \huge
-  imin^{\star} \; \in \; \argmin_{k \le {\color{red}i} &lt; n}\, T[i]
+    imin^{\star} \; \in \; \argmin_{k \le {\color{red}i} &lt; n}\, T[i]
 $$</p>
 <p>Qui signifie que <span class="arithmatex">\(imin\)</span> est le plus petit minimisant de l'ensemble des minimisants.</p>
 <p>Par exemple, si <span class="arithmatex">\(T=[4, 1, 1, 5, 9, 1]\)</span>, alors l'ensemble des indices minimisants à partir de <span class="arithmatex">\(k=0\)</span> est <span class="arithmatex">\([1, 2, 5]\)</span>, et donc <span class="arithmatex">\(imin\)</span> vaudra <span class="arithmatex">\(1\)</span>.</p>
@@ -3719,7 +3723,7 @@ $$</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="gh"># Algorithme - Calculer l&#39;indice du minimum de T à partir de l&#39;indice k</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="gh"># Entrées:</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>   Un tableau T de taille n
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>   Un indice de départ k
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>   Un indice de départ 0 &lt; k &lt;= |T|
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="gh"># Sortie: L&#39;indice imin du minimum de T à partir de l&#39;indice k</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="gh"># Pré-condition: n&gt;0 et 0&lt;=k&lt;n</span>
 <a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">1.</span> imini ← k
@@ -3749,7 +3753,7 @@ $$</p>
 <p>En pratique, la taille est souvent notée <span class="arithmatex">\(n\)</span>. <span class="arithmatex">\(n\)</span> est choisie de façon à être fonction de la quantité de travail que doit effectuer l'algorithme.</p>
 <p>Pour le problème du minimum, la taille de l'instance est celle du tableau en entrée.</p>
 </div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="gh"># Algorithme - Calculer le minimum de T[0..n-1]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="gh"># Algorithme - Calculer le minimum de T[0..n)</span>
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">1.</span> mini ← T[0]
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">2.</span> Pour i allant de 1 à n-1:
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="k">3.</span>     Si T[i] &lt; e
@@ -4185,7 +4189,7 @@ $$</p>
 <a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>  <span class="k">let</span> <span class="n">ref</span> <span class="n">res</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="k">in</span>
 <a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>  <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span> <span class="k">to</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span> <span class="k">do</span>
 <a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>    <span class="n">invariant</span> <span class="o">{</span><span class="n">exists</span> <span class="n">j</span><span class="o">.</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">&amp;&amp;</span> <span class="n">res</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">j</span><span class="o">]}</span>
-<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>    <span class="n">invariant</span> <span class="o">{</span><span class="n">forall</span> <span class="n">j</span><span class="o">.</span> <span class="mi">0</span><span class="o">&lt;=</span><span class="n">j</span><span class="o">&lt;</span><span class="n">i</span> <span class="o">-&gt;</span> <span class="n">res</span><span class="o">&lt;=</span><span class="n">a</span><span class="o">[</span><span class="n">j</span><span class="o">]}</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>    <span class="n">invariant</span> <span class="o">{</span><span class="n">forall</span> <span class="n">j</span><span class="o">.</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">i</span> <span class="o">-&gt;</span> <span class="n">res</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="o">[</span><span class="n">j</span><span class="o">]}</span>
 <a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>    <span class="k">if</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]&lt;</span><span class="n">res</span> <span class="k">then</span> <span class="n">res</span> <span class="o">:=</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span>
 <a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>  <span class="k">done</span><span class="o">;</span>
 <a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>  <span class="n">return</span> <span class="n">res</span>
@@ -4193,7 +4197,7 @@ $$</p>
 <p>Lors de la vérification, la console affiche</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Prover result is: Valid (0.05s, 82 steps).
 </code></pre></div>
-<p>Ce qui nous indique que notre algo est totalement correct.</p>
+<p>Ce qui nous indique que le prouveur a déterminé que notre algo est totalement correct.</p>
 <p>Why3 et Alt-Ergo sont issus du travail de recherche du Laboratoire de Méthodes Formelles du CNRS. Le LMF est formé du Laboratoire Spécification et Vérification (LSV, ENS Paris-Saclay, CNRS, Inria) et de l’équipe Vals du Laboratoire de Recherche en Informatique (LRI, Université Paris-Saclay, CNRS, Inria, CentraleSupélec) soit une centaine de personnes.</p>
 <script src="https://mmarchand-nsi.github.io//js/material-tabbed-fix.js"></script>
 
