@@ -3450,16 +3450,14 @@
 <h2 id="recherche-dichotomique-sur-tableau-trie">Recherche dichotomique sur tableau trié</h2>
 <p>La recherche dichotomique s'inspire de la manière la plus efficace de jouer au "plus ou moins" en divisant l'intervalle de recherche par deux à chaque tentative.</p>
 <p><strong>Attention. Les algorithmes trouvés sur internet, ne sont pas formellement corrects, et ne marchent pas dans tous les langages, même sur des sites réputés.</strong></p>
-<p>En voici une <a href="https://www.cs.usfca.edu/~galles/visualization/Search.html">Visualisation</a> mauvaise, mais qui va m'aider à vous expliquer pourquoi c'est mauvais.</p>
-<p>Puis, en voici un algorithme qui marche tout le temps:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="gs">**ENTRÉE**</span> 
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">-</span><span class="w"> </span>Un tableau d&#39;entiers de taille n:  T[0..n-1]
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">-</span><span class="w"> </span>Un entier à trouver val
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">-</span><span class="w"> </span>Un tableau de taille n:  T[0..n-1]
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">-</span><span class="w"> </span>Un élément comparable à trouver: val
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="gs">**SORTIE**</span> 
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">-</span><span class="w"> </span>L&#39;indice du premier élément trouvé s&#39;il existe
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">-</span><span class="w"> </span>None si la valeur n&#39;appartient pas au tableau.
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="gh"># Algorithme DICHOTOMIE(T, val)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="gh"># Algorithme DICHOTOMIE(val, T)</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>  gauche ← 0
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>  droite ← n
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>  TANT QUE gauche &lt; droite
@@ -3469,29 +3467,31 @@
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>       SINON SI T[milieu] &lt; val
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>            gauche ← milieu + 1
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>       SINON
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>   RETOURNER res
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>            RETOURNER milieu
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>   RETOURNER None
 </code></pre></div>
 <h3 id="invariant">INVARIANT</h3>
 <p>À tout instant, on a <span class="arithmatex">\(0 ≤ gauche ≤ droite ≤ n\)</span>.</p>
 <p><strong>Zone candidate</strong>
-<span class="arithmatex">\(val\)</span> ne peut se trouver qu'à l'indice dans l’intervalle <span class="arithmatex">\([gauche, droite[\)</span>. Autrement dit :</p>
+Si elle est présente, <span class="arithmatex">\(val\)</span> ne peut se trouver qu'à l'indice dans l’intervalle <span class="arithmatex">\([gauche, droite[\)</span>. Autrement dit :</p>
 <ul>
 <li>tous les indices strictement avant gauche <span class="arithmatex">\([0, gauche[\)</span> ne contiennent pas <span class="arithmatex">\(val\)</span></li>
 <li>tous les indices à partir de droite <span class="arithmatex">\([droite, n[\)</span> ne contiennent pas <span class="arithmatex">\(val\)</span>.</li>
 </ul>
+<p>Cette formulation embarque le cas où val n'est pas dans le tableau</p>
 <p><strong>Cas trouvé</strong>
 Si on a déjà trouvé une position r, alors 0 ≤ r &lt; n et q[r] = key.</p>
 <h3 id="initialisation">INITIALISATION</h3>
-<p>A l'origine, <span class="arithmatex">\(gauche=0\)</span> et <span class="arithmatex">\(droite=n\)</span>. La valeur recherchée n'est pas en dehors de cet intervalle d'indice.</p>
+<p>A l'origine, <span class="arithmatex">\(gauche=0\)</span> et <span class="arithmatex">\(droite=n\)</span>. La valeur recherchée n'est pas en dehors de cet intervalle semi-ouvert.</p>
 <h3 id="conservation">CONSERVATION**</h3>
 <p>Faisons l'hypothèse de l'invariant à l'entrée d'une itération et vérifions qu'il est toujours vrai à l'itération suivante.</p>
-<p>Nous commençons par calculer l'indice milieu de l'intervalle <span class="arithmatex">\([gauche; droite]\)</span>.</p>
+<p>Nous commençons par calculer l'indice milieu de l'intervalle <span class="arithmatex">\([gauche; droite[\)</span>.</p>
 <p>Nous pouvons donc décomposer notre tableau ainsi:</p>
-<div class="arithmatex">\[T[gauche..milieu] + T[milieu..milieu] + T[milieu+1..droite]\]</div>
+<div class="arithmatex">\[T[gauche..milieu[ + T[milieu..droite[\]</div>
 <p>Nous avons alors <strong>exactement</strong> 3 possibilités:</p>
 <ul>
-<li>Si <span class="arithmatex">\(T[milieu]\)</span> est plus grand que la valeur recherchée, vu que <span class="arithmatex">\(T\)</span> est trié, c'est que la valeur recherchée n'est pas hors de <span class="arithmatex">\(T[gauche..milieu]\)</span> et justement, on valorise <span class="arithmatex">\(droite\)</span> à <span class="arithmatex">\(milieu\)</span> pour la prochaine itération.</li>
-<li>Sinon, c'est que la valeur recherchée n'est pas hors de <span class="arithmatex">\(T[milieu+1 .. droite]\)</span> et justement, on valorise <span class="arithmatex">\(gauche\)</span> à <span class="arithmatex">\(milieu+1\)</span> pour la prochaine itération</li>
+<li>Si <span class="arithmatex">\(T[milieu]\)</span> est plus grand que la valeur recherchée, vu que <span class="arithmatex">\(T\)</span> est trié, c'est que la valeur recherchée n'est pas hors de <span class="arithmatex">\(T[gauche..milieu[\)</span> et justement, on valorise <span class="arithmatex">\(droite\)</span> à <span class="arithmatex">\(milieu\)</span> pour la prochaine itération.</li>
+<li>Sinon si <span class="arithmatex">\(T[milieu]\)</span> est plus grand, c'est que la valeur recherchée n'est pas hors de <span class="arithmatex">\(T[milieu+1 .. droite[\)</span> et justement, on valorise <span class="arithmatex">\(gauche\)</span> à <span class="arithmatex">\(milieu+1\)</span> pour la prochaine itération</li>
 <li>Sinon <span class="arithmatex">\(T[milieu]\)</span> porte la valeur recherchée, on retourne l'indice milieu et l'algorithme se termine. (invariant "cas trouvé" conservé)</li>
 </ul>
 <p>Dans les cas où l'algorithme se poursuit, l'invariant est donc conservé.</p>
@@ -3517,35 +3517,11 @@ implémentant l'algorithme décrit.</p>
 </div>
 <h2 id="complexite">Complexité</h2>
 <p>On s'intéresse à la phrase:</p>
-<p>"Dans le pire des cas, la taille de l'intervalle <span class="arithmatex">\([gauche;droite]\)</span> va être divisée par deux de manière continue jusqu'à atteindre 1."</p>
+<p>"Dans le pire des cas, la taille de l'intervalle <span class="arithmatex">\([gauche;droite[\)</span> va être divisée par deux de manière continue jusqu'à atteindre 1."</p>
 <p>Ce qui nous intéresse pour la complexité, c'est ce <strong>nombre de divisions entières par 2</strong>, car toutes les opérations au sein de la boucle sont en temps constant (Elles comptent donc pour 1)</p>
 <p>Il existe une fonction mathématique qui nous donne le nombre de fois qu'il faut diviser un nombre entier <span class="arithmatex">\(n\)</span> par 2 pour obtenir 1. Il s'agit de la fonction logarithme entier de base 2. Il faut diviser <span class="arithmatex">\(n\)</span> <span class="arithmatex">\(\lfloor \log_2(n) \rfloor\)</span> fois par 2 pour obtenir 1.</p>
 <p>On dit que l'algorithme est en <span class="arithmatex">\(\mathcal{O}(log(n))\)</span>.</p>
 <hr />
-<h1 id="pour-aller-plus-loin">Pour aller plus loin</h1>
-<p>Etudiez l'algorithme alternatif proposé ci-dessous. Notez qu'il ne possède pas de boucle:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="gs">**ENTRÉE**</span> 
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">-</span><span class="w"> </span>Un tableau d&#39;entiers T[0..n-1]
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">-</span><span class="w"> </span>Un entier à trouver val
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">-</span><span class="w"> </span>un indice de début de recherche gauche
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">-</span><span class="w"> </span>un indice de fin de recherche droite
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="gs">**SORTIE**</span> 
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>L&#39;indice du premier élément trouvé, None si la valeur n&#39;appartient pas au tableau.
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="gh"># Algorithme DICHOTOMIE(T, val, gauche, droite)</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="k">1.</span> SI |T|==0 OU gauche &gt;= droite
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="k">2.</span>      RETOURNER None
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="k">3.</span> milieu ← gauche + (droite - gauche)//2
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="k">4.</span> SI val &lt; T[milieu]
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="k">5.</span>     RETOURNER DICHOTOMIE(T, val, gauche, milieu)
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="k">6.</span> SINON SI T[milieu] &lt; valeur
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="k">7.</span>     RETOURNER DICHOTOMIE(T, val, milieu+1, gauche)
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="k">8.</span> SINON
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="k">9.</span>      RETOURNER milieu
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
-<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>DICHOTOMIE(T, val, 0, |T|)
-</code></pre></div>
 <script src="https://mmarchand-nsi.github.io//js/material-tabbed-fix.js"></script>
 
 
