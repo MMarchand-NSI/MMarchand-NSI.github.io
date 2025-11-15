@@ -109,12 +109,14 @@ Le temps qu'in faut pour fusionner, c'est une unité de temps (simplement constr
 
 On obtient la **suite récurrente** :
 
-$$T(n) = 1 + T(n-1)$$
-$$T(0) = 1$$
+$$\begin{cases}
+T_n = 1 + T_{n-1} \\
+T_0 = 1
+\end{cases}$$
 
 C'est une **suite arithmétique de raison 1**. Son terme général est :
 
-$$T(n) = T(0) + n \times 1 = n + 1$$
+$$T_n = T_0 + n \times 1 = n + 1$$
 
 **Conclusion** : La complexité temporelle de la fusion est $O(n)$
 
