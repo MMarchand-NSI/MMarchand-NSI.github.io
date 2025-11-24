@@ -86,3 +86,238 @@ p code, li code, td code {
   margin-top: 0.8em;
   margin-bottom: 0.4em;
 }
+
+h1#accueil {
+  display: none;
+}
+
+
+
+/* Hero section modifié */
+.hero {
+  padding: 2rem;
+  background: linear-gradient(135deg, var(--md-primary-fg-color) 0%, var(--md-accent-fg-color) 100%);
+  color: white;
+  border-radius: 10px;
+  margin-bottom: 2rem;
+}
+
+.hero-content {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+.hero-text {
+  flex: 1;
+  max-width: calc(100% - 170px); /* laisse la place pour l'image */
+}
+
+.hero-image {
+  flex-shrink: 0;
+}
+
+.hero-image img {
+  width: 150px;
+  height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.tagline {
+  font-size: 1.3em;
+  margin: 0;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+/* Responsive - seulement sur très petits écrans */
+@media (max-width: 600px) {
+  .hero-content {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .hero-text {
+    max-width: 100%;
+  }
+  
+  .hero-image img {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .tagline {
+    font-size: 1.1em;
+  }
+}
+
+
+
+
+/* Cards grid */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin: 2rem 0;
+}
+
+.card {
+  background: var(--md-default-bg-color);
+  border: 2px solid var(--md-default-fg-color--lightest);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  border-color: var(--md-primary-fg-color);
+}
+
+.card h3 {
+  margin-top: 0;
+  color: var(--md-primary-fg-color);
+}
+
+.card h3::before {
+  content: none;
+}
+
+.card a {
+  display: inline-block;
+  margin-top: 1rem;
+  color: var(--md-primary-fg-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.card a:hover {
+  text-decoration: underline;
+}
+
+/* Philosophy section */
+.philosophy {
+  background: var(--md-code-bg-color);
+  padding: 2rem;
+  border-radius: 8px;
+  margin: 2rem 0;
+}
+
+.philosophy h2 {
+  margin-top: 0;
+  border: none;
+  padding: 0;
+}
+
+.philosophy ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.philosophy li {
+  padding: 0.5rem 0;
+  border-left: 3px solid var(--md-primary-fg-color);
+  padding-left: 1rem;
+  margin: 0.5rem 0;
+}
+
+.philosophy strong {
+  color: var(--md-primary-fg-color);
+}
+
+
+
+
+
+/* Conteneur côte à côte */
+.side-by-side {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 2rem 0;
+}
+
+/* Style des boîtes */
+.box {
+  background: var(--md-code-bg-color);
+  border: 2px solid var(--md-default-fg-color--lightest);
+  border-radius: 10px;
+  padding: 2rem;
+  transition: all 0.3s;
+}
+
+.box:hover {
+  border-color: var(--md-primary-fg-color);
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+.box h3 {
+  margin-top: 0;
+  color: var(--md-primary-fg-color);
+  border: none;
+  padding: 0;
+  font-size: 1.3em;
+}
+
+.box h3::before {
+  content: none;
+}
+
+/* Style spécifique citation */
+.citation-box blockquote {
+  margin: 1rem 0 0 0;
+  padding: 0;
+  border-left: none;
+  font-style: italic;
+  color: var(--md-default-fg-color--light);
+  line-height: 1.6;
+}
+
+.citation-box blockquote p {
+  margin: 0;
+}
+
+/* Style spécifique à propos */
+.about-box p {
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+/* Warning box à l'intérieur */
+.warning-box {
+  background: rgba(255, 152, 0, 0.1);
+  border-left: 4px solid #ff9800;
+  padding: 1rem;
+  margin-top: 1.5rem;
+  border-radius: 5px;
+}
+
+.warning-box p {
+  margin: 0.5rem 0;
+}
+
+.warning-box p:first-child {
+  margin-top: 0;
+}
+
+.warning-box p:last-child {
+  margin-bottom: 0;
+}
+
+.warning-box strong {
+  color: #ff9800;
+}
+
+/* Responsive - passe en colonne sur petits écrans */
+@media (max-width: 768px) {
+  .side-by-side {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
