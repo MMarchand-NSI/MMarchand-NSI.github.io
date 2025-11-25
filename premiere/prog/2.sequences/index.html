@@ -243,7 +243,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../les-outils/0.votreordi/" class="md-tabs__link">
+        <a href="../../../les-outils/0.1cleusb/" class="md-tabs__link">
           
   
   
@@ -433,6 +433,29 @@
             Les outils
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../les-outils/0.1cleusb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    ⚠️ Le problème des clés USB
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
             
               
                 
@@ -3997,15 +4020,17 @@
 <li>Affiche le "u" de "chou"</li>
 <li>Affiche la chaîne "chouette" en concaténant deux éléments de <code>mots</code>.</li>
 </ol>
-<p><strong>Réponses :</strong></p>
+<details class="success">
+<summary>Solutions</summary>
 <ol>
 <li><code>mots</code> a <strong>3 éléments</strong> (3 listes internes)</li>
 <li>Type complet : <code>list[list[str]]</code> (liste de listes de chaînes)</li>
 <li><code>print(mots[0][1][2])</code> → affiche <code>"u"</code></li>
 <li><code>print(mots[1][0][0])</code> → affiche <code>"m"</code></li>
-<li><code>print(mots[2][0][2])</code> → affiche <code>"u"</code></li>
+<li><code>print(mots[2][0][3])</code> → affiche <code>"u"</code></li>
 <li><code>print(mots[2][0] + mots[2][1])</code> → affiche <code>"chouette"</code></li>
 </ol>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Imbrication - Exercice autonome</p>
@@ -4161,80 +4186,66 @@ On ne peut pas remplacer "p" par "P". On est obligé de remplacer tout le mot:</
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
 <a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
 </code></pre></div>
-<div class="admonition tip">
-<p class="admonition-title">Slices avancés (optionnel)</p>
-<p>On peut aussi utiliser un <strong>pas</strong> (step) pour sauter des éléments :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># Prendre un élément sur deux</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">[::</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># Début:Fin:Pas</span>
-<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
-<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>
-<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="c1"># Inverser une séquence</span>
-<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;Python&quot;</span>
-<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">mot</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="o">&gt;&gt;&gt;</span> <span class="s2">&quot;nohtyP&quot;</span>
-</code></pre></div>
-</div>
 <hr />
 <h2 id="erreurs-frequentes">⚠️ Erreurs Fréquentes</h2>
 <p>Voici les erreurs les plus courantes avec les séquences :</p>
 <h3 id="erreur-1-index-hors-limites">Erreur 1 : Index hors limites</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># ❌ ERREUR</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># IndexError: list index out of range</span>
-<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>
-<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="c1"># ✅ CORRECT</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># Dernier élément (indice = taille - 1)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="c1"># ❌ ERREUR</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="mi">5</span><span class="p">])</span>  <span class="c1"># IndexError: list index out of range</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="c1"># ✅ CORRECT</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>  <span class="c1"># Dernier élément (indice = taille - 1)</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Astuce</p>
 <p>L'indice maximum est toujours <code>len(seq) - 1</code> !</p>
 </div>
 <h3 id="erreur-2-modifier-un-immuable">Erreur 2 : Modifier un immuable</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="c1"># ❌ ERREUR</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="n">mot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;T&quot;</span>  <span class="c1"># TypeError: &#39;str&#39; object does not support item assignment</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="c1"># ✅ CORRECT</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;Test&quot;</span>  <span class="c1"># Créer un nouveau str</span>
+</code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="c1"># ❌ ERREUR</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span>
-<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="n">mot</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;T&quot;</span>  <span class="c1"># TypeError: &#39;str&#39; object does not support item assignment</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="n">coords</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># TypeError: &#39;tuple&#39; object does not support item assignment</span>
 <a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>
 <a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="c1"># ✅ CORRECT</span>
-<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;Test&quot;</span>  <span class="c1"># Créer un nouveau str</span>
-</code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1"># ❌ ERREUR</span>
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">coords</span> <span class="o">=</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="n">coords</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># TypeError: &#39;tuple&#39; object does not support item assignment</span>
-<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>
-<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="c1"># ✅ CORRECT</span>
-<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="n">coords</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Créer un nouveau tuple</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="n">coords</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>  <span class="c1"># Créer un nouveau tuple</span>
 </code></pre></div>
 <h3 id="erreur-3-confusion-sur-les-slices">Erreur 3 : Confusion sur les slices</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1"># ⚠️ ATTENTION</span>
-<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
-<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>  
-<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>  <span class="c1"># Pas [1, 2, 3, 4] !</span>
-<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>
-<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="c1"># L&#39;indice de fin est EXCLUS</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1"># ⚠️ ATTENTION</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>  
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="o">&gt;&gt;&gt;</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>  <span class="c1"># Pas [1, 2, 3, 4] !</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="c1"># L&#39;indice de fin est EXCLUS</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Mnémotechnique</p>
 <p><code>[début:fin]</code> signifie : <strong>de début INCLUS à fin EXCLUS</strong></p>
 </div>
 <h3 id="erreur-4-confondre-indice-et-valeur">Erreur 4 : Confondre indice et valeur</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="c1"># ❌ ERREUR</span>
-<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>
-<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">notes</span><span class="p">[</span><span class="mi">15</span><span class="p">])</span>  <span class="c1"># IndexError (15 est une valeur, pas un indice !)</span>
-<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>
-<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="c1"># ✅ CORRECT</span>
-<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># 15 (accéder par l&#39;indice)</span>
-<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="nb">print</span><span class="p">(</span><span class="mi">15</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">)</span>  <span class="c1"># True (tester l&#39;appartenance d&#39;une valeur)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="c1"># ❌ ERREUR</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="n">notes</span> <span class="o">=</span> <span class="p">[</span><span class="mi">15</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">18</span><span class="p">]</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">notes</span><span class="p">[</span><span class="mi">15</span><span class="p">])</span>  <span class="c1"># IndexError (15 est une valeur, pas un indice !)</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="c1"># ✅ CORRECT</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">notes</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>  <span class="c1"># 15 (accéder par l&#39;indice)</span>
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="nb">print</span><span class="p">(</span><span class="mi">15</span> <span class="ow">in</span> <span class="n">notes</span><span class="p">)</span>  <span class="c1"># True (tester l&#39;appartenance d&#39;une valeur)</span>
 </code></pre></div>
 <h3 id="erreur-5-oublier-que-len-compte-a-partir-de-1">Erreur 5 : Oublier que <code>len()</code> compte à partir de 1</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
-<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>  <span class="c1"># 3</span>
-<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>
-<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="c1"># ❌ ERREUR</span>
-<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)])</span>  <span class="c1"># IndexError: list index out of range</span>
-<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a>
-<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="c1"># ✅ CORRECT</span>
-<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># 30 (dernier élément)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="n">lst</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>  <span class="c1"># 3</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="c1"># ❌ ERREUR</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)])</span>  <span class="c1"># IndexError: list index out of range</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="c1"># ✅ CORRECT</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># 30 (dernier élément)</span>
 </code></pre></div>
 <hr />
 <h2 id="pour-aller-plus-loin">📚 Pour Aller Plus Loin</h2>
@@ -4242,26 +4253,26 @@ On ne peut pas remplacer "p" par "P". On est obligé de remplacer tout le mot:</
 <div class="admonition abstract">
 <p class="admonition-title">Déconstruction</p>
 <p>Certains d'entre vous vont tomber sur cette syntaxe, donc je préfère l'expliquer:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span>
 </code></pre></div>
 <p>Ce qui signifie que les variables <code>a</code>, <code>b</code> et <code>c</code> seront affectées respectivement aux valeurs 3, 7 et 9.</p>
 <p>On appelle ça une déstructuration ou déconstruction.</p>
 <p>La forme du tuple <code>(3, 7, 9)</code> est comparée à la forme du tuple <code>(a, b, c)</code> et les valeurs 3, 7 et 9 seront affectées respectivement aux variables a, b et c.</p>
 <p><strong>Exemple pratique :</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="n">personne</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;Paris&quot;</span><span class="p">)</span>
-<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="n">nom</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">ville</span> <span class="o">=</span> <span class="n">personne</span>
-<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">nom</span><span class="p">)</span>    <span class="c1"># &quot;Alice&quot;</span>
-<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>    <span class="c1"># 25</span>
-<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">ville</span><span class="p">)</span>  <span class="c1"># &quot;Paris&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="n">personne</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;Paris&quot;</span><span class="p">)</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="n">nom</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">ville</span> <span class="o">=</span> <span class="n">personne</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">nom</span><span class="p">)</span>    <span class="c1"># &quot;Alice&quot;</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">age</span><span class="p">)</span>    <span class="c1"># 25</span>
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">ville</span><span class="p">)</span>  <span class="c1"># &quot;Paris&quot;</span>
 </code></pre></div></p>
 <p><strong>Ça n'est que la partie émergée de l'iceberg.</strong></p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="n">a</span><span class="p">,</span> <span class="o">*</span><span class="n">b</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span>
 </code></pre></div>
 Ce code va affecter <code>a</code> à 3, et le reste (*) dans <code>b</code>, sous forme de liste <code>[7, 9]</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">premier</span><span class="p">,</span> <span class="o">*</span><span class="n">milieu</span><span class="p">,</span> <span class="n">dernier</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">premier</span><span class="p">)</span>  <span class="c1"># 1</span>
-<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">milieu</span><span class="p">)</span>   <span class="c1"># [2, 3, 4]</span>
-<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">dernier</span><span class="p">)</span>  <span class="c1"># 5</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">premier</span><span class="p">,</span> <span class="o">*</span><span class="n">milieu</span><span class="p">,</span> <span class="n">dernier</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">premier</span><span class="p">)</span>  <span class="c1"># 1</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">milieu</span><span class="p">)</span>   <span class="c1"># [2, 3, 4]</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">dernier</span><span class="p">)</span>  <span class="c1"># 5</span>
 </code></pre></div>
 <p>Ce n'est pas une astuce de langage, c'est un outil très puissant dans la résolution de problèmes.</p>
 </div>
@@ -4297,18 +4308,22 @@ Ce code va affecter <code>a</code> à 3, et le reste (*) dans <code>b</code>, so
 </tr>
 </tbody>
 </table>
-<p><strong>Opérations communes :</strong>
-- Accès : <code>seq[i]</code>
-- Longueur : <code>len(seq)</code>
-- Appartenance : <code>x in seq</code>
-- Slice : <code>seq[début:fin]</code>
-- Concaténation : <code>seq1 + seq2</code>
-- Répétition : <code>seq * n</code></p>
-<p><strong>À retenir :</strong>
-- Les indices commencent à <strong>0</strong>
-- Le dernier indice est <strong><code>len(seq) - 1</code></strong>
-- Les slices excluent l'indice de fin
-- Seules les listes sont modifiables</p>
+<p><strong>Opérations communes :</strong></p>
+<ul>
+<li>Accès : <code>seq[i]</code></li>
+<li>Longueur : <code>len(seq)</code></li>
+<li>Appartenance : <code>x in seq</code></li>
+<li>Slice : <code>seq[début:fin]</code></li>
+<li>Concaténation : <code>seq1 + seq2</code></li>
+<li>Répétition : <code>seq * n</code></li>
+</ul>
+<p><strong>À retenir :</strong></p>
+<ul>
+<li>Les indices commencent à <strong>0</strong></li>
+<li>Le dernier indice est <strong><code>len(seq) - 1</code></strong></li>
+<li>Les slices excluent l'indice de fin</li>
+<li>Seules les listes sont mutables (modifiables en mémoire)</li>
+</ul>
 <h2 id="-">---</h2>
 <h2 id="exercices-sur-les-sequences-en-python">Exercices sur les séquences en Python</h2>
 <div class="admonition question">
@@ -4331,18 +4346,19 @@ Ce code va affecter <code>a</code> à 3, et le reste (*) dans <code>b</code>, so
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 3 : Slicing (tranches)</p>
-<p>Soit la liste <code>notes = [12, 15, 8, 14, 16, 11, 13]</code>
-1. Extraire les 3 premières notes
-2. Extraire les 2 dernières notes
-3. Extraire les notes de l'indice 2 à 4 (inclus)
-4. Extraire toutes les notes sauf la première et la dernière</p>
+<p>Soit la liste <code>notes = [12, 15, 8, 14, 16, 11, 13]</code>:</p>
+<ol>
+<li>Extraire les 3 premières notes</li>
+<li>Extraire les 2 dernières notes</li>
+<li>Extraire les notes de l'indice 2 à 4 (inclus)</li>
+<li>Extraire toutes les notes sauf la première et la dernière</li>
+</ol>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 4 : Modification de listes</p>
 <ol>
 <li>Créer une liste <code>fruits = ["pomme", "banane", "orange"]</code></li>
 <li>Remplacer "banane" par "kiwi"</li>
-<li>Ajouter "fraise" à la fin de la liste avec <code>.append()</code></li>
 <li>Afficher la liste finale</li>
 </ol>
 </div>
@@ -4357,25 +4373,29 @@ Ce code va affecter <code>a</code> à 3, et le reste (*) dans <code>b</code>, so
 <div class="admonition question">
 <p class="admonition-title">Exercice 6 : Répétition</p>
 <ol>
-<li>Créer une liste contenant 5 fois le nombre 0</li>
-<li>Créer un tuple contenant 3 fois la chaîne "NSI"</li>
+<li>Créer une liste contenant 60 fois le nombre 0</li>
+<li>Créer un tuple contenant 42 fois la chaîne "NSI"</li>
 <li>Afficher les résultats</li>
 </ol>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 7 : Test d'appartenance</p>
-<p>Soit <code>prenoms = ["Alice", "Bob", "Charlie", "David"]</code>
-1. Vérifier si "Bob" est dans la liste
-2. Vérifier si "Eve" est dans la liste
-3. Afficher les résultats avec des messages explicites</p>
+<p>Soit <code>prenoms = ["Alice", "Bob", "Charlie", "David"]</code></p>
+<ol>
+<li>Vérifier si "Bob" est dans la liste</li>
+<li>Vérifier si "Eve" est dans la liste</li>
+<li>Afficher les résultats avec des messages explicites</li>
+</ol>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Exercice 8 : Min, max, sum</p>
-<p>Soit <code>scores = [85, 92, 78, 95, 88]</code>
-1. Afficher le score minimum
-2. Afficher le score maximum
-3. Calculer et afficher la somme des scores
-4. Calculer et afficher la moyenne des scores</p>
+<p class="admonition-title">Exercice 8 : Fonctions natives min, max, sum</p>
+<p>Soit <code>scores = [85, 92, 78, 95, 88]</code></p>
+<ol>
+<li>Afficher le score minimum</li>
+<li>Afficher le score maximum</li>
+<li>Calculer et afficher la somme des scores</li>
+<li>Calculer et afficher la moyenne des scores</li>
+</ol>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 9 : Immuabilité des tuples</p>
@@ -4388,26 +4408,28 @@ Ce code va affecter <code>a</code> à 3, et le reste (*) dans <code>b</code>, so
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 10 : Mini-projet - Bulletin de notes</p>
-<p>Créer un programme qui :
-1. Stocke dans une liste les notes suivantes : 14, 16, 12, 15, 13
-2. Stocke dans un tuple les coefficients : 1, 2, 1, 1, 2
-3. Calcule la moyenne pondérée (sans boucle, en accédant directement aux indices)
-- Formule : (note0×coef0 + note1×coef1 + ...) / (somme des coefficients)
-4. Affiche la moyenne avec un message approprié</p>
+<p>Créer un programme qui :</p>
+<ol>
+<li>Stocke dans une liste les notes suivantes : 14, 16, 12, 15, 13</li>
+<li>Stocke dans un tuple les coefficients : 1, 2, 1, 1, 2</li>
+<li>Calcule la moyenne pondérée (sans boucle, en accédant directement aux indices)</li>
+<li>Formule : (note0×coef0 + note1×coef1 + ...) / (somme des coefficients)</li>
+<li>Affiche la moyenne avec un message approprié</li>
+</ol>
 </div>
 <h2 id="fonctions-avec-des-sequences">Fonctions avec des séquences</h2>
 <div class="admonition hint">
 <p class="admonition-title">Utiliser les doctests (tests unitaires automatiques)</p>
 <p>Mettez le code suivant à la fin de votre fichier:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a>    <span class="kn">import</span><span class="w"> </span><span class="nn">doctest</span>
-<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>  <span class="c1"># Exécute tous les doctests</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a>    <span class="kn">import</span><span class="w"> </span><span class="nn">doctest</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a>    <span class="n">doctest</span><span class="o">.</span><span class="n">testmod</span><span class="p">()</span>  <span class="c1"># Exécute tous les doctests</span>
 </code></pre></div>
 <p>Il permet d'exécuter automatiquement les doctests lorsque vous exécutez le programme python.</p>
 <p>Les doctests sont les instructions précédées de <code>&gt;&gt;&gt;</code> dans la docstring.</p>
 <p>Le code suivant veut dire que quand on exécutera premier_element([18.5, 20.0, 19.3]), on attend que la fonction renvoie 18.5</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">premier_element</span><span class="p">([</span><span class="mf">18.5</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">19.3</span><span class="p">])</span>
-<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="mf">18.5</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">premier_element</span><span class="p">([</span><span class="mf">18.5</span><span class="p">,</span> <span class="mf">20.0</span><span class="p">,</span> <span class="mf">19.3</span><span class="p">])</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="mf">18.5</span>
 </code></pre></div>
 <p>Si le test est passant (il marche), alors python ne dira rien du tout. Sinon il râle.</p>
 <p>Dans le code que je vous fournis, j'annule l'exécution des doctests en indiquant <code># doctest: +SKIP</code></p>
@@ -4416,481 +4438,481 @@ Ce code va affecter <code>a</code> à 3, et le reste (*) dans <code>b</code>, so
 <div class="admonition question">
 <p class="admonition-title">Exercice 1 : Fonctions d'accès aux éléments</p>
 <p>Écrire les fonctions suivantes :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">premier_element</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le premier élément d&#39;une séquence</span>
-<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>
-<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="sd">    &gt;&gt;&gt; premier_element([18.5, 20.0, 19.3])     # doctest: +SKIP</span>
-<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="sd">    18.5</span>
-<a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a><span class="sd">    &gt;&gt;&gt; premier_element([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])     # doctest: +SKIP</span>
-<a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a><span class="sd">    &#39;a&#39;</span>
-<a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a>    <span class="k">pass</span>
-<a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a>
-<a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">dernier_element</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-40-12" name="__codelineno-40-12" href="#__codelineno-40-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le dernier élément</span>
-<a id="__codelineno-40-13" name="__codelineno-40-13" href="#__codelineno-40-13"></a>
-<a id="__codelineno-40-14" name="__codelineno-40-14" href="#__codelineno-40-14"></a><span class="sd">    &gt;&gt;&gt; dernier_element([18.5, 20.0, 19.3])     # doctest: +SKIP</span>
-<a id="__codelineno-40-15" name="__codelineno-40-15" href="#__codelineno-40-15"></a><span class="sd">    19.3</span>
-<a id="__codelineno-40-16" name="__codelineno-40-16" href="#__codelineno-40-16"></a><span class="sd">    &gt;&gt;&gt; dernier_element([1, 2, 3, 4, 5])     # doctest: +SKIP</span>
-<a id="__codelineno-40-17" name="__codelineno-40-17" href="#__codelineno-40-17"></a><span class="sd">    5</span>
-<a id="__codelineno-40-18" name="__codelineno-40-18" href="#__codelineno-40-18"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-40-19" name="__codelineno-40-19" href="#__codelineno-40-19"></a>    <span class="k">pass</span>
-<a id="__codelineno-40-20" name="__codelineno-40-20" href="#__codelineno-40-20"></a>
-<a id="__codelineno-40-21" name="__codelineno-40-21" href="#__codelineno-40-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">element_milieu</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-40-22" name="__codelineno-40-22" href="#__codelineno-40-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie l&#39;élément du milieu (longueur impaire)</span>
-<a id="__codelineno-40-23" name="__codelineno-40-23" href="#__codelineno-40-23"></a>
-<a id="__codelineno-40-24" name="__codelineno-40-24" href="#__codelineno-40-24"></a><span class="sd">    &gt;&gt;&gt; element_milieu([18.5, 20.0, 19.3, 21.2, 17.8])     # doctest: +SKIP</span>
-<a id="__codelineno-40-25" name="__codelineno-40-25" href="#__codelineno-40-25"></a><span class="sd">    19.3</span>
-<a id="__codelineno-40-26" name="__codelineno-40-26" href="#__codelineno-40-26"></a><span class="sd">    &gt;&gt;&gt; element_milieu([1, 2, 3])     # doctest: +SKIP</span>
-<a id="__codelineno-40-27" name="__codelineno-40-27" href="#__codelineno-40-27"></a><span class="sd">    2</span>
-<a id="__codelineno-40-28" name="__codelineno-40-28" href="#__codelineno-40-28"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-40-29" name="__codelineno-40-29" href="#__codelineno-40-29"></a>    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">premier_element</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le premier élément d&#39;une séquence</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a>
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="sd">    &gt;&gt;&gt; premier_element([18.5, 20.0, 19.3])     # doctest: +SKIP</span>
+<a id="__codelineno-39-5" name="__codelineno-39-5" href="#__codelineno-39-5"></a><span class="sd">    18.5</span>
+<a id="__codelineno-39-6" name="__codelineno-39-6" href="#__codelineno-39-6"></a><span class="sd">    &gt;&gt;&gt; premier_element([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])     # doctest: +SKIP</span>
+<a id="__codelineno-39-7" name="__codelineno-39-7" href="#__codelineno-39-7"></a><span class="sd">    &#39;a&#39;</span>
+<a id="__codelineno-39-8" name="__codelineno-39-8" href="#__codelineno-39-8"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-39-9" name="__codelineno-39-9" href="#__codelineno-39-9"></a>    <span class="k">pass</span>
+<a id="__codelineno-39-10" name="__codelineno-39-10" href="#__codelineno-39-10"></a>
+<a id="__codelineno-39-11" name="__codelineno-39-11" href="#__codelineno-39-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">dernier_element</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-39-12" name="__codelineno-39-12" href="#__codelineno-39-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le dernier élément</span>
+<a id="__codelineno-39-13" name="__codelineno-39-13" href="#__codelineno-39-13"></a>
+<a id="__codelineno-39-14" name="__codelineno-39-14" href="#__codelineno-39-14"></a><span class="sd">    &gt;&gt;&gt; dernier_element([18.5, 20.0, 19.3])     # doctest: +SKIP</span>
+<a id="__codelineno-39-15" name="__codelineno-39-15" href="#__codelineno-39-15"></a><span class="sd">    19.3</span>
+<a id="__codelineno-39-16" name="__codelineno-39-16" href="#__codelineno-39-16"></a><span class="sd">    &gt;&gt;&gt; dernier_element([1, 2, 3, 4, 5])     # doctest: +SKIP</span>
+<a id="__codelineno-39-17" name="__codelineno-39-17" href="#__codelineno-39-17"></a><span class="sd">    5</span>
+<a id="__codelineno-39-18" name="__codelineno-39-18" href="#__codelineno-39-18"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-39-19" name="__codelineno-39-19" href="#__codelineno-39-19"></a>    <span class="k">pass</span>
+<a id="__codelineno-39-20" name="__codelineno-39-20" href="#__codelineno-39-20"></a>
+<a id="__codelineno-39-21" name="__codelineno-39-21" href="#__codelineno-39-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">element_milieu</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-39-22" name="__codelineno-39-22" href="#__codelineno-39-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie l&#39;élément du milieu (longueur impaire)</span>
+<a id="__codelineno-39-23" name="__codelineno-39-23" href="#__codelineno-39-23"></a>
+<a id="__codelineno-39-24" name="__codelineno-39-24" href="#__codelineno-39-24"></a><span class="sd">    &gt;&gt;&gt; element_milieu([18.5, 20.0, 19.3, 21.2, 17.8])     # doctest: +SKIP</span>
+<a id="__codelineno-39-25" name="__codelineno-39-25" href="#__codelineno-39-25"></a><span class="sd">    19.3</span>
+<a id="__codelineno-39-26" name="__codelineno-39-26" href="#__codelineno-39-26"></a><span class="sd">    &gt;&gt;&gt; element_milieu([1, 2, 3])     # doctest: +SKIP</span>
+<a id="__codelineno-39-27" name="__codelineno-39-27" href="#__codelineno-39-27"></a><span class="sd">    2</span>
+<a id="__codelineno-39-28" name="__codelineno-39-28" href="#__codelineno-39-28"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-39-29" name="__codelineno-39-29" href="#__codelineno-39-29"></a>    <span class="k">pass</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 2 : Fonctions de vérification</p>
 <p>Écrire les fonctions suivantes :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si la séquence est vide, False sinon</span>
-<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>
-<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="sd">    &gt;&gt;&gt; est_vide([])     # doctest: +SKIP</span>
-<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="sd">    True</span>
-<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="sd">    &gt;&gt;&gt; est_vide([1, 2, 3])     # doctest: +SKIP</span>
-<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="sd">    False</span>
-<a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a><span class="sd">    &gt;&gt;&gt; est_vide(())     # doctest: +SKIP</span>
-<a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a><span class="sd">    True</span>
-<a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-41-11" name="__codelineno-41-11" href="#__codelineno-41-11"></a>    <span class="k">pass</span>
-<a id="__codelineno-41-12" name="__codelineno-41-12" href="#__codelineno-41-12"></a>
-<a id="__codelineno-41-13" name="__codelineno-41-13" href="#__codelineno-41-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">longueur_paire</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-41-14" name="__codelineno-41-14" href="#__codelineno-41-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si la longueur est paire</span>
-<a id="__codelineno-41-15" name="__codelineno-41-15" href="#__codelineno-41-15"></a>
-<a id="__codelineno-41-16" name="__codelineno-41-16" href="#__codelineno-41-16"></a><span class="sd">    &gt;&gt;&gt; longueur_paire([1, 2, 3, 4])     # doctest: +SKIP</span>
-<a id="__codelineno-41-17" name="__codelineno-41-17" href="#__codelineno-41-17"></a><span class="sd">    True</span>
-<a id="__codelineno-41-18" name="__codelineno-41-18" href="#__codelineno-41-18"></a><span class="sd">    &gt;&gt;&gt; longueur_paire([1, 2, 3])     # doctest: +SKIP</span>
-<a id="__codelineno-41-19" name="__codelineno-41-19" href="#__codelineno-41-19"></a><span class="sd">    False</span>
-<a id="__codelineno-41-20" name="__codelineno-41-20" href="#__codelineno-41-20"></a><span class="sd">    &gt;&gt;&gt; longueur_paire([])     # doctest: +SKIP</span>
-<a id="__codelineno-41-21" name="__codelineno-41-21" href="#__codelineno-41-21"></a><span class="sd">    True</span>
-<a id="__codelineno-41-22" name="__codelineno-41-22" href="#__codelineno-41-22"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-41-23" name="__codelineno-41-23" href="#__codelineno-41-23"></a>    <span class="k">pass</span>
-<a id="__codelineno-41-24" name="__codelineno-41-24" href="#__codelineno-41-24"></a>
-<a id="__codelineno-41-25" name="__codelineno-41-25" href="#__codelineno-41-25"></a><span class="k">def</span><span class="w"> </span><span class="nf">contient</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">element</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-41-26" name="__codelineno-41-26" href="#__codelineno-41-26"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si l&#39;élément est dans la séquence</span>
-<a id="__codelineno-41-27" name="__codelineno-41-27" href="#__codelineno-41-27"></a>
-<a id="__codelineno-41-28" name="__codelineno-41-28" href="#__codelineno-41-28"></a><span class="sd">    &gt;&gt;&gt; contient([1, 2, 3], 2)     # doctest: +SKIP</span>
-<a id="__codelineno-41-29" name="__codelineno-41-29" href="#__codelineno-41-29"></a><span class="sd">    True</span>
-<a id="__codelineno-41-30" name="__codelineno-41-30" href="#__codelineno-41-30"></a><span class="sd">    &gt;&gt;&gt; contient([1, 2, 3], 5)     # doctest: +SKIP</span>
-<a id="__codelineno-41-31" name="__codelineno-41-31" href="#__codelineno-41-31"></a><span class="sd">    False</span>
-<a id="__codelineno-41-32" name="__codelineno-41-32" href="#__codelineno-41-32"></a><span class="sd">    &gt;&gt;&gt; contient([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], &#39;b&#39;)     # doctest: +SKIP</span>
-<a id="__codelineno-41-33" name="__codelineno-41-33" href="#__codelineno-41-33"></a><span class="sd">    True</span>
-<a id="__codelineno-41-34" name="__codelineno-41-34" href="#__codelineno-41-34"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-41-35" name="__codelineno-41-35" href="#__codelineno-41-35"></a>    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si la séquence est vide, False sinon</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a>
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="sd">    &gt;&gt;&gt; est_vide([])     # doctest: +SKIP</span>
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="sd">    True</span>
+<a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a><span class="sd">    &gt;&gt;&gt; est_vide([1, 2, 3])     # doctest: +SKIP</span>
+<a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a><span class="sd">    False</span>
+<a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a><span class="sd">    &gt;&gt;&gt; est_vide(())     # doctest: +SKIP</span>
+<a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a><span class="sd">    True</span>
+<a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a>    <span class="k">pass</span>
+<a id="__codelineno-40-12" name="__codelineno-40-12" href="#__codelineno-40-12"></a>
+<a id="__codelineno-40-13" name="__codelineno-40-13" href="#__codelineno-40-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">longueur_paire</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-40-14" name="__codelineno-40-14" href="#__codelineno-40-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si la longueur est paire</span>
+<a id="__codelineno-40-15" name="__codelineno-40-15" href="#__codelineno-40-15"></a>
+<a id="__codelineno-40-16" name="__codelineno-40-16" href="#__codelineno-40-16"></a><span class="sd">    &gt;&gt;&gt; longueur_paire([1, 2, 3, 4])     # doctest: +SKIP</span>
+<a id="__codelineno-40-17" name="__codelineno-40-17" href="#__codelineno-40-17"></a><span class="sd">    True</span>
+<a id="__codelineno-40-18" name="__codelineno-40-18" href="#__codelineno-40-18"></a><span class="sd">    &gt;&gt;&gt; longueur_paire([1, 2, 3])     # doctest: +SKIP</span>
+<a id="__codelineno-40-19" name="__codelineno-40-19" href="#__codelineno-40-19"></a><span class="sd">    False</span>
+<a id="__codelineno-40-20" name="__codelineno-40-20" href="#__codelineno-40-20"></a><span class="sd">    &gt;&gt;&gt; longueur_paire([])     # doctest: +SKIP</span>
+<a id="__codelineno-40-21" name="__codelineno-40-21" href="#__codelineno-40-21"></a><span class="sd">    True</span>
+<a id="__codelineno-40-22" name="__codelineno-40-22" href="#__codelineno-40-22"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-40-23" name="__codelineno-40-23" href="#__codelineno-40-23"></a>    <span class="k">pass</span>
+<a id="__codelineno-40-24" name="__codelineno-40-24" href="#__codelineno-40-24"></a>
+<a id="__codelineno-40-25" name="__codelineno-40-25" href="#__codelineno-40-25"></a><span class="k">def</span><span class="w"> </span><span class="nf">contient</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">element</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-40-26" name="__codelineno-40-26" href="#__codelineno-40-26"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si l&#39;élément est dans la séquence</span>
+<a id="__codelineno-40-27" name="__codelineno-40-27" href="#__codelineno-40-27"></a>
+<a id="__codelineno-40-28" name="__codelineno-40-28" href="#__codelineno-40-28"></a><span class="sd">    &gt;&gt;&gt; contient([1, 2, 3], 2)     # doctest: +SKIP</span>
+<a id="__codelineno-40-29" name="__codelineno-40-29" href="#__codelineno-40-29"></a><span class="sd">    True</span>
+<a id="__codelineno-40-30" name="__codelineno-40-30" href="#__codelineno-40-30"></a><span class="sd">    &gt;&gt;&gt; contient([1, 2, 3], 5)     # doctest: +SKIP</span>
+<a id="__codelineno-40-31" name="__codelineno-40-31" href="#__codelineno-40-31"></a><span class="sd">    False</span>
+<a id="__codelineno-40-32" name="__codelineno-40-32" href="#__codelineno-40-32"></a><span class="sd">    &gt;&gt;&gt; contient([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], &#39;b&#39;)     # doctest: +SKIP</span>
+<a id="__codelineno-40-33" name="__codelineno-40-33" href="#__codelineno-40-33"></a><span class="sd">    True</span>
+<a id="__codelineno-40-34" name="__codelineno-40-34" href="#__codelineno-40-34"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-40-35" name="__codelineno-40-35" href="#__codelineno-40-35"></a>    <span class="k">pass</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 3 : Fonctions de découpage</p>
 <p>Écrire les fonctions suivantes :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">trois_premiers</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie les 3 premiers éléments</span>
-<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a>
-<a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="sd">    &gt;&gt;&gt; trois_premiers([12, 15, 8, 14, 16, 11, 13])     # doctest: +SKIP</span>
-<a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a><span class="sd">    [12, 15, 8]</span>
-<a id="__codelineno-42-6" name="__codelineno-42-6" href="#__codelineno-42-6"></a><span class="sd">    &gt;&gt;&gt; trois_premiers([1, 2, 3, 4, 5])     # doctest: +SKIP</span>
-<a id="__codelineno-42-7" name="__codelineno-42-7" href="#__codelineno-42-7"></a><span class="sd">    [1, 2, 3]</span>
-<a id="__codelineno-42-8" name="__codelineno-42-8" href="#__codelineno-42-8"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-42-9" name="__codelineno-42-9" href="#__codelineno-42-9"></a>    <span class="k">pass</span>
-<a id="__codelineno-42-10" name="__codelineno-42-10" href="#__codelineno-42-10"></a>
-<a id="__codelineno-42-11" name="__codelineno-42-11" href="#__codelineno-42-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">deux_derniers</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<a id="__codelineno-42-12" name="__codelineno-42-12" href="#__codelineno-42-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie les 2 derniers éléments</span>
-<a id="__codelineno-42-13" name="__codelineno-42-13" href="#__codelineno-42-13"></a>
-<a id="__codelineno-42-14" name="__codelineno-42-14" href="#__codelineno-42-14"></a><span class="sd">    &gt;&gt;&gt; deux_derniers([12, 15, 8, 14, 16, 11, 13])     # doctest: +SKIP</span>
-<a id="__codelineno-42-15" name="__codelineno-42-15" href="#__codelineno-42-15"></a><span class="sd">    [11, 13]</span>
-<a id="__codelineno-42-16" name="__codelineno-42-16" href="#__codelineno-42-16"></a><span class="sd">    &gt;&gt;&gt; deux_derniers([1, 2, 3, 4, 5])     # doctest: +SKIP</span>
-<a id="__codelineno-42-17" name="__codelineno-42-17" href="#__codelineno-42-17"></a><span class="sd">    [4, 5]</span>
-<a id="__codelineno-42-18" name="__codelineno-42-18" href="#__codelineno-42-18"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-42-19" name="__codelineno-42-19" href="#__codelineno-42-19"></a>    <span class="k">pass</span>
-<a id="__codelineno-42-20" name="__codelineno-42-20" href="#__codelineno-42-20"></a>
-<a id="__codelineno-42-21" name="__codelineno-42-21" href="#__codelineno-42-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">sans_extremes</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<a id="__codelineno-42-22" name="__codelineno-42-22" href="#__codelineno-42-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la séquence sans le premier et le dernier élément</span>
-<a id="__codelineno-42-23" name="__codelineno-42-23" href="#__codelineno-42-23"></a>
-<a id="__codelineno-42-24" name="__codelineno-42-24" href="#__codelineno-42-24"></a><span class="sd">    &gt;&gt;&gt; sans_extremes([12, 15, 8, 14, 16, 11, 13])     # doctest: +SKIP</span>
-<a id="__codelineno-42-25" name="__codelineno-42-25" href="#__codelineno-42-25"></a><span class="sd">    [15, 8, 14, 16, 11]</span>
-<a id="__codelineno-42-26" name="__codelineno-42-26" href="#__codelineno-42-26"></a><span class="sd">    &gt;&gt;&gt; sans_extremes([1, 2, 3, 4])     # doctest: +SKIP</span>
-<a id="__codelineno-42-27" name="__codelineno-42-27" href="#__codelineno-42-27"></a><span class="sd">    [2, 3]</span>
-<a id="__codelineno-42-28" name="__codelineno-42-28" href="#__codelineno-42-28"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-42-29" name="__codelineno-42-29" href="#__codelineno-42-29"></a>    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">trois_premiers</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie les 3 premiers éléments</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a>
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="sd">    &gt;&gt;&gt; trois_premiers([12, 15, 8, 14, 16, 11, 13])     # doctest: +SKIP</span>
+<a id="__codelineno-41-5" name="__codelineno-41-5" href="#__codelineno-41-5"></a><span class="sd">    [12, 15, 8]</span>
+<a id="__codelineno-41-6" name="__codelineno-41-6" href="#__codelineno-41-6"></a><span class="sd">    &gt;&gt;&gt; trois_premiers([1, 2, 3, 4, 5])     # doctest: +SKIP</span>
+<a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="sd">    [1, 2, 3]</span>
+<a id="__codelineno-41-8" name="__codelineno-41-8" href="#__codelineno-41-8"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-41-9" name="__codelineno-41-9" href="#__codelineno-41-9"></a>    <span class="k">pass</span>
+<a id="__codelineno-41-10" name="__codelineno-41-10" href="#__codelineno-41-10"></a>
+<a id="__codelineno-41-11" name="__codelineno-41-11" href="#__codelineno-41-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">deux_derniers</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<a id="__codelineno-41-12" name="__codelineno-41-12" href="#__codelineno-41-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie les 2 derniers éléments</span>
+<a id="__codelineno-41-13" name="__codelineno-41-13" href="#__codelineno-41-13"></a>
+<a id="__codelineno-41-14" name="__codelineno-41-14" href="#__codelineno-41-14"></a><span class="sd">    &gt;&gt;&gt; deux_derniers([12, 15, 8, 14, 16, 11, 13])     # doctest: +SKIP</span>
+<a id="__codelineno-41-15" name="__codelineno-41-15" href="#__codelineno-41-15"></a><span class="sd">    [11, 13]</span>
+<a id="__codelineno-41-16" name="__codelineno-41-16" href="#__codelineno-41-16"></a><span class="sd">    &gt;&gt;&gt; deux_derniers([1, 2, 3, 4, 5])     # doctest: +SKIP</span>
+<a id="__codelineno-41-17" name="__codelineno-41-17" href="#__codelineno-41-17"></a><span class="sd">    [4, 5]</span>
+<a id="__codelineno-41-18" name="__codelineno-41-18" href="#__codelineno-41-18"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-41-19" name="__codelineno-41-19" href="#__codelineno-41-19"></a>    <span class="k">pass</span>
+<a id="__codelineno-41-20" name="__codelineno-41-20" href="#__codelineno-41-20"></a>
+<a id="__codelineno-41-21" name="__codelineno-41-21" href="#__codelineno-41-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">sans_extremes</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<a id="__codelineno-41-22" name="__codelineno-41-22" href="#__codelineno-41-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la séquence sans le premier et le dernier élément</span>
+<a id="__codelineno-41-23" name="__codelineno-41-23" href="#__codelineno-41-23"></a>
+<a id="__codelineno-41-24" name="__codelineno-41-24" href="#__codelineno-41-24"></a><span class="sd">    &gt;&gt;&gt; sans_extremes([12, 15, 8, 14, 16, 11, 13])     # doctest: +SKIP</span>
+<a id="__codelineno-41-25" name="__codelineno-41-25" href="#__codelineno-41-25"></a><span class="sd">    [15, 8, 14, 16, 11]</span>
+<a id="__codelineno-41-26" name="__codelineno-41-26" href="#__codelineno-41-26"></a><span class="sd">    &gt;&gt;&gt; sans_extremes([1, 2, 3, 4])     # doctest: +SKIP</span>
+<a id="__codelineno-41-27" name="__codelineno-41-27" href="#__codelineno-41-27"></a><span class="sd">    [2, 3]</span>
+<a id="__codelineno-41-28" name="__codelineno-41-28" href="#__codelineno-41-28"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-41-29" name="__codelineno-41-29" href="#__codelineno-41-29"></a>    <span class="k">pass</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 4 : Fonctions de statistiques simples</p>
 <p>Écrire les fonctions suivantes :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">minimum</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">:</span>
-<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le plus petit élément</span>
-<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>
-<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="sd">    &gt;&gt;&gt; minimum([85, 92, 78, 95, 88])     # doctest: +SKIP</span>
-<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a><span class="sd">    78</span>
-<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a><span class="sd">    &gt;&gt;&gt; minimum([3.5, 2.1, 4.8])     # doctest: +SKIP</span>
-<a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a><span class="sd">    2.1</span>
-<a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a>    <span class="k">pass</span>
-<a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a>
-<a id="__codelineno-43-11" name="__codelineno-43-11" href="#__codelineno-43-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">maximum</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">:</span>
-<a id="__codelineno-43-12" name="__codelineno-43-12" href="#__codelineno-43-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le plus grand élément</span>
-<a id="__codelineno-43-13" name="__codelineno-43-13" href="#__codelineno-43-13"></a>
-<a id="__codelineno-43-14" name="__codelineno-43-14" href="#__codelineno-43-14"></a><span class="sd">    &gt;&gt;&gt; maximum([85, 92, 78, 95, 88])     # doctest: +SKIP</span>
-<a id="__codelineno-43-15" name="__codelineno-43-15" href="#__codelineno-43-15"></a><span class="sd">    95</span>
-<a id="__codelineno-43-16" name="__codelineno-43-16" href="#__codelineno-43-16"></a><span class="sd">    &gt;&gt;&gt; maximum([3.5, 2.1, 4.8])     # doctest: +SKIP</span>
-<a id="__codelineno-43-17" name="__codelineno-43-17" href="#__codelineno-43-17"></a><span class="sd">    4.8</span>
-<a id="__codelineno-43-18" name="__codelineno-43-18" href="#__codelineno-43-18"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-43-19" name="__codelineno-43-19" href="#__codelineno-43-19"></a>    <span class="k">pass</span>
-<a id="__codelineno-43-20" name="__codelineno-43-20" href="#__codelineno-43-20"></a>
-<a id="__codelineno-43-21" name="__codelineno-43-21" href="#__codelineno-43-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">etendue</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">:</span>
-<a id="__codelineno-43-22" name="__codelineno-43-22" href="#__codelineno-43-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la différence entre le max et le min</span>
-<a id="__codelineno-43-23" name="__codelineno-43-23" href="#__codelineno-43-23"></a>
-<a id="__codelineno-43-24" name="__codelineno-43-24" href="#__codelineno-43-24"></a><span class="sd">    &gt;&gt;&gt; etendue([85, 92, 78, 95, 88])     # doctest: +SKIP</span>
-<a id="__codelineno-43-25" name="__codelineno-43-25" href="#__codelineno-43-25"></a><span class="sd">    17</span>
-<a id="__codelineno-43-26" name="__codelineno-43-26" href="#__codelineno-43-26"></a><span class="sd">    &gt;&gt;&gt; etendue([10, 20, 30])     # doctest: +SKIP</span>
-<a id="__codelineno-43-27" name="__codelineno-43-27" href="#__codelineno-43-27"></a><span class="sd">    20</span>
-<a id="__codelineno-43-28" name="__codelineno-43-28" href="#__codelineno-43-28"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-43-29" name="__codelineno-43-29" href="#__codelineno-43-29"></a>    <span class="k">pass</span>
-<a id="__codelineno-43-30" name="__codelineno-43-30" href="#__codelineno-43-30"></a>
-<a id="__codelineno-43-31" name="__codelineno-43-31" href="#__codelineno-43-31"></a><span class="k">def</span><span class="w"> </span><span class="nf">moyenne</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<a id="__codelineno-43-32" name="__codelineno-43-32" href="#__codelineno-43-32"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule la moyenne des éléments</span>
-<a id="__codelineno-43-33" name="__codelineno-43-33" href="#__codelineno-43-33"></a>
-<a id="__codelineno-43-34" name="__codelineno-43-34" href="#__codelineno-43-34"></a><span class="sd">    &gt;&gt;&gt; moyenne([85, 92, 78, 95, 88])     # doctest: +SKIP</span>
-<a id="__codelineno-43-35" name="__codelineno-43-35" href="#__codelineno-43-35"></a><span class="sd">    87.6</span>
-<a id="__codelineno-43-36" name="__codelineno-43-36" href="#__codelineno-43-36"></a><span class="sd">    &gt;&gt;&gt; moyenne([10, 20, 30])     # doctest: +SKIP</span>
-<a id="__codelineno-43-37" name="__codelineno-43-37" href="#__codelineno-43-37"></a><span class="sd">    20.0</span>
-<a id="__codelineno-43-38" name="__codelineno-43-38" href="#__codelineno-43-38"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-43-39" name="__codelineno-43-39" href="#__codelineno-43-39"></a>    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">minimum</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le plus petit élément</span>
+<a id="__codelineno-42-3" name="__codelineno-42-3" href="#__codelineno-42-3"></a>
+<a id="__codelineno-42-4" name="__codelineno-42-4" href="#__codelineno-42-4"></a><span class="sd">    &gt;&gt;&gt; minimum([85, 92, 78, 95, 88])     # doctest: +SKIP</span>
+<a id="__codelineno-42-5" name="__codelineno-42-5" href="#__codelineno-42-5"></a><span class="sd">    78</span>
+<a id="__codelineno-42-6" name="__codelineno-42-6" href="#__codelineno-42-6"></a><span class="sd">    &gt;&gt;&gt; minimum([3.5, 2.1, 4.8])     # doctest: +SKIP</span>
+<a id="__codelineno-42-7" name="__codelineno-42-7" href="#__codelineno-42-7"></a><span class="sd">    2.1</span>
+<a id="__codelineno-42-8" name="__codelineno-42-8" href="#__codelineno-42-8"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-42-9" name="__codelineno-42-9" href="#__codelineno-42-9"></a>    <span class="k">pass</span>
+<a id="__codelineno-42-10" name="__codelineno-42-10" href="#__codelineno-42-10"></a>
+<a id="__codelineno-42-11" name="__codelineno-42-11" href="#__codelineno-42-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">maximum</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-42-12" name="__codelineno-42-12" href="#__codelineno-42-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le plus grand élément</span>
+<a id="__codelineno-42-13" name="__codelineno-42-13" href="#__codelineno-42-13"></a>
+<a id="__codelineno-42-14" name="__codelineno-42-14" href="#__codelineno-42-14"></a><span class="sd">    &gt;&gt;&gt; maximum([85, 92, 78, 95, 88])     # doctest: +SKIP</span>
+<a id="__codelineno-42-15" name="__codelineno-42-15" href="#__codelineno-42-15"></a><span class="sd">    95</span>
+<a id="__codelineno-42-16" name="__codelineno-42-16" href="#__codelineno-42-16"></a><span class="sd">    &gt;&gt;&gt; maximum([3.5, 2.1, 4.8])     # doctest: +SKIP</span>
+<a id="__codelineno-42-17" name="__codelineno-42-17" href="#__codelineno-42-17"></a><span class="sd">    4.8</span>
+<a id="__codelineno-42-18" name="__codelineno-42-18" href="#__codelineno-42-18"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-42-19" name="__codelineno-42-19" href="#__codelineno-42-19"></a>    <span class="k">pass</span>
+<a id="__codelineno-42-20" name="__codelineno-42-20" href="#__codelineno-42-20"></a>
+<a id="__codelineno-42-21" name="__codelineno-42-21" href="#__codelineno-42-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">etendue</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-42-22" name="__codelineno-42-22" href="#__codelineno-42-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la différence entre le max et le min</span>
+<a id="__codelineno-42-23" name="__codelineno-42-23" href="#__codelineno-42-23"></a>
+<a id="__codelineno-42-24" name="__codelineno-42-24" href="#__codelineno-42-24"></a><span class="sd">    &gt;&gt;&gt; etendue([85, 92, 78, 95, 88])     # doctest: +SKIP</span>
+<a id="__codelineno-42-25" name="__codelineno-42-25" href="#__codelineno-42-25"></a><span class="sd">    17</span>
+<a id="__codelineno-42-26" name="__codelineno-42-26" href="#__codelineno-42-26"></a><span class="sd">    &gt;&gt;&gt; etendue([10, 20, 30])     # doctest: +SKIP</span>
+<a id="__codelineno-42-27" name="__codelineno-42-27" href="#__codelineno-42-27"></a><span class="sd">    20</span>
+<a id="__codelineno-42-28" name="__codelineno-42-28" href="#__codelineno-42-28"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-42-29" name="__codelineno-42-29" href="#__codelineno-42-29"></a>    <span class="k">pass</span>
+<a id="__codelineno-42-30" name="__codelineno-42-30" href="#__codelineno-42-30"></a>
+<a id="__codelineno-42-31" name="__codelineno-42-31" href="#__codelineno-42-31"></a><span class="k">def</span><span class="w"> </span><span class="nf">moyenne</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-42-32" name="__codelineno-42-32" href="#__codelineno-42-32"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule la moyenne des éléments</span>
+<a id="__codelineno-42-33" name="__codelineno-42-33" href="#__codelineno-42-33"></a>
+<a id="__codelineno-42-34" name="__codelineno-42-34" href="#__codelineno-42-34"></a><span class="sd">    &gt;&gt;&gt; moyenne([85, 92, 78, 95, 88])     # doctest: +SKIP</span>
+<a id="__codelineno-42-35" name="__codelineno-42-35" href="#__codelineno-42-35"></a><span class="sd">    87.6</span>
+<a id="__codelineno-42-36" name="__codelineno-42-36" href="#__codelineno-42-36"></a><span class="sd">    &gt;&gt;&gt; moyenne([10, 20, 30])     # doctest: +SKIP</span>
+<a id="__codelineno-42-37" name="__codelineno-42-37" href="#__codelineno-42-37"></a><span class="sd">    20.0</span>
+<a id="__codelineno-42-38" name="__codelineno-42-38" href="#__codelineno-42-38"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-42-39" name="__codelineno-42-39" href="#__codelineno-42-39"></a>    <span class="k">pass</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 5 : Fonctions de création</p>
 <p>Écrire les fonctions suivantes :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_liste_zeros</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie une liste de n zéros</span>
-<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>
-<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="sd">    &gt;&gt;&gt; creer_liste_zeros(5)     # doctest: +SKIP</span>
-<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="sd">    [0, 0, 0, 0, 0]</span>
-<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a><span class="sd">    &gt;&gt;&gt; creer_liste_zeros(3)     # doctest: +SKIP</span>
-<a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a><span class="sd">    [0, 0, 0]</span>
-<a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a>    <span class="k">pass</span>
-<a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a>
-<a id="__codelineno-44-11" name="__codelineno-44-11" href="#__codelineno-44-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_liste_constante</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">valeur</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<a id="__codelineno-44-12" name="__codelineno-44-12" href="#__codelineno-44-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie une liste de n fois la même valeur</span>
-<a id="__codelineno-44-13" name="__codelineno-44-13" href="#__codelineno-44-13"></a>
-<a id="__codelineno-44-14" name="__codelineno-44-14" href="#__codelineno-44-14"></a><span class="sd">    &gt;&gt;&gt; creer_liste_constante(4, 7)     # doctest: +SKIP</span>
-<a id="__codelineno-44-15" name="__codelineno-44-15" href="#__codelineno-44-15"></a><span class="sd">    [7, 7, 7, 7]</span>
-<a id="__codelineno-44-16" name="__codelineno-44-16" href="#__codelineno-44-16"></a><span class="sd">    &gt;&gt;&gt; creer_liste_constante(3, &#39;NSI&#39;)     # doctest: +SKIP</span>
-<a id="__codelineno-44-17" name="__codelineno-44-17" href="#__codelineno-44-17"></a><span class="sd">    [&#39;NSI&#39;, &#39;NSI&#39;, &#39;NSI&#39;]</span>
-<a id="__codelineno-44-18" name="__codelineno-44-18" href="#__codelineno-44-18"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-44-19" name="__codelineno-44-19" href="#__codelineno-44-19"></a>    <span class="k">pass</span>
-<a id="__codelineno-44-20" name="__codelineno-44-20" href="#__codelineno-44-20"></a>
-<a id="__codelineno-44-21" name="__codelineno-44-21" href="#__codelineno-44-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">concatener</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">seq2</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<a id="__codelineno-44-22" name="__codelineno-44-22" href="#__codelineno-44-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la concaténation de deux séquences</span>
-<a id="__codelineno-44-23" name="__codelineno-44-23" href="#__codelineno-44-23"></a>
-<a id="__codelineno-44-24" name="__codelineno-44-24" href="#__codelineno-44-24"></a><span class="sd">    &gt;&gt;&gt; concatener([1, 2, 3], [4, 5, 6])     # doctest: +SKIP</span>
-<a id="__codelineno-44-25" name="__codelineno-44-25" href="#__codelineno-44-25"></a><span class="sd">    [1, 2, 3, 4, 5, 6]</span>
-<a id="__codelineno-44-26" name="__codelineno-44-26" href="#__codelineno-44-26"></a><span class="sd">    &gt;&gt;&gt; concatener([&#39;a&#39;, &#39;b&#39;], [&#39;c&#39;, &#39;d&#39;])     # doctest: +SKIP</span>
-<a id="__codelineno-44-27" name="__codelineno-44-27" href="#__codelineno-44-27"></a><span class="sd">    [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]</span>
-<a id="__codelineno-44-28" name="__codelineno-44-28" href="#__codelineno-44-28"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-44-29" name="__codelineno-44-29" href="#__codelineno-44-29"></a>    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_liste_zeros</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie une liste de n zéros</span>
+<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a>
+<a id="__codelineno-43-4" name="__codelineno-43-4" href="#__codelineno-43-4"></a><span class="sd">    &gt;&gt;&gt; creer_liste_zeros(5)     # doctest: +SKIP</span>
+<a id="__codelineno-43-5" name="__codelineno-43-5" href="#__codelineno-43-5"></a><span class="sd">    [0, 0, 0, 0, 0]</span>
+<a id="__codelineno-43-6" name="__codelineno-43-6" href="#__codelineno-43-6"></a><span class="sd">    &gt;&gt;&gt; creer_liste_zeros(3)     # doctest: +SKIP</span>
+<a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a><span class="sd">    [0, 0, 0]</span>
+<a id="__codelineno-43-8" name="__codelineno-43-8" href="#__codelineno-43-8"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-43-9" name="__codelineno-43-9" href="#__codelineno-43-9"></a>    <span class="k">pass</span>
+<a id="__codelineno-43-10" name="__codelineno-43-10" href="#__codelineno-43-10"></a>
+<a id="__codelineno-43-11" name="__codelineno-43-11" href="#__codelineno-43-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_liste_constante</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">valeur</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<a id="__codelineno-43-12" name="__codelineno-43-12" href="#__codelineno-43-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie une liste de n fois la même valeur</span>
+<a id="__codelineno-43-13" name="__codelineno-43-13" href="#__codelineno-43-13"></a>
+<a id="__codelineno-43-14" name="__codelineno-43-14" href="#__codelineno-43-14"></a><span class="sd">    &gt;&gt;&gt; creer_liste_constante(4, 7)     # doctest: +SKIP</span>
+<a id="__codelineno-43-15" name="__codelineno-43-15" href="#__codelineno-43-15"></a><span class="sd">    [7, 7, 7, 7]</span>
+<a id="__codelineno-43-16" name="__codelineno-43-16" href="#__codelineno-43-16"></a><span class="sd">    &gt;&gt;&gt; creer_liste_constante(3, &#39;NSI&#39;)     # doctest: +SKIP</span>
+<a id="__codelineno-43-17" name="__codelineno-43-17" href="#__codelineno-43-17"></a><span class="sd">    [&#39;NSI&#39;, &#39;NSI&#39;, &#39;NSI&#39;]</span>
+<a id="__codelineno-43-18" name="__codelineno-43-18" href="#__codelineno-43-18"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-43-19" name="__codelineno-43-19" href="#__codelineno-43-19"></a>    <span class="k">pass</span>
+<a id="__codelineno-43-20" name="__codelineno-43-20" href="#__codelineno-43-20"></a>
+<a id="__codelineno-43-21" name="__codelineno-43-21" href="#__codelineno-43-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">concatener</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">seq2</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<a id="__codelineno-43-22" name="__codelineno-43-22" href="#__codelineno-43-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la concaténation de deux séquences</span>
+<a id="__codelineno-43-23" name="__codelineno-43-23" href="#__codelineno-43-23"></a>
+<a id="__codelineno-43-24" name="__codelineno-43-24" href="#__codelineno-43-24"></a><span class="sd">    &gt;&gt;&gt; concatener([1, 2, 3], [4, 5, 6])     # doctest: +SKIP</span>
+<a id="__codelineno-43-25" name="__codelineno-43-25" href="#__codelineno-43-25"></a><span class="sd">    [1, 2, 3, 4, 5, 6]</span>
+<a id="__codelineno-43-26" name="__codelineno-43-26" href="#__codelineno-43-26"></a><span class="sd">    &gt;&gt;&gt; concatener([&#39;a&#39;, &#39;b&#39;], [&#39;c&#39;, &#39;d&#39;])     # doctest: +SKIP</span>
+<a id="__codelineno-43-27" name="__codelineno-43-27" href="#__codelineno-43-27"></a><span class="sd">    [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;, &#39;d&#39;]</span>
+<a id="__codelineno-43-28" name="__codelineno-43-28" href="#__codelineno-43-28"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-43-29" name="__codelineno-43-29" href="#__codelineno-43-29"></a>    <span class="k">pass</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 6 : Fonctions de modification</p>
 <p>Écrire les fonctions suivantes :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">remplacer_premier</span><span class="p">(</span><span class="n">liste</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">nouvelle_valeur</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Remplace le premier élément et renvoie la liste modifiée</span>
-<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>
-<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="sd">    &gt;&gt;&gt; remplacer_premier([1, 2, 3], 10)     # doctest: +SKIP</span>
-<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="sd">    [10, 2, 3]</span>
-<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="sd">    &gt;&gt;&gt; remplacer_premier([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], &#39;z&#39;)     # doctest: +SKIP</span>
-<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a><span class="sd">    [&#39;z&#39;, &#39;b&#39;, &#39;c&#39;]</span>
-<a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a>    <span class="k">pass</span>
-<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a>
-<a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">remplacer_dernier</span><span class="p">(</span><span class="n">liste</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">nouvelle_valeur</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<a id="__codelineno-45-12" name="__codelineno-45-12" href="#__codelineno-45-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Remplace le dernier élément</span>
-<a id="__codelineno-45-13" name="__codelineno-45-13" href="#__codelineno-45-13"></a>
-<a id="__codelineno-45-14" name="__codelineno-45-14" href="#__codelineno-45-14"></a><span class="sd">    &gt;&gt;&gt; remplacer_dernier([1, 2, 3], 10)     # doctest: +SKIP</span>
-<a id="__codelineno-45-15" name="__codelineno-45-15" href="#__codelineno-45-15"></a><span class="sd">    [1, 2, 10]</span>
-<a id="__codelineno-45-16" name="__codelineno-45-16" href="#__codelineno-45-16"></a><span class="sd">    &gt;&gt;&gt; remplacer_dernier([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], &#39;z&#39;)     # doctest: +SKIP</span>
-<a id="__codelineno-45-17" name="__codelineno-45-17" href="#__codelineno-45-17"></a><span class="sd">    [&#39;a&#39;, &#39;b&#39;, &#39;z&#39;]</span>
-<a id="__codelineno-45-18" name="__codelineno-45-18" href="#__codelineno-45-18"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-45-19" name="__codelineno-45-19" href="#__codelineno-45-19"></a>    <span class="k">pass</span>
-<a id="__codelineno-45-20" name="__codelineno-45-20" href="#__codelineno-45-20"></a>
-<a id="__codelineno-45-21" name="__codelineno-45-21" href="#__codelineno-45-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">ajouter_element</span><span class="p">(</span><span class="n">liste</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">element</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<a id="__codelineno-45-22" name="__codelineno-45-22" href="#__codelineno-45-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Ajoute un élément à la fin et renvoie la liste</span>
-<a id="__codelineno-45-23" name="__codelineno-45-23" href="#__codelineno-45-23"></a>
-<a id="__codelineno-45-24" name="__codelineno-45-24" href="#__codelineno-45-24"></a><span class="sd">    &gt;&gt;&gt; ajouter_element([1, 2, 3], 4)     # doctest: +SKIP</span>
-<a id="__codelineno-45-25" name="__codelineno-45-25" href="#__codelineno-45-25"></a><span class="sd">    [1, 2, 3, 4]</span>
-<a id="__codelineno-45-26" name="__codelineno-45-26" href="#__codelineno-45-26"></a><span class="sd">    &gt;&gt;&gt; ajouter_element([&#39;a&#39;, &#39;b&#39;], &#39;c&#39;)     # doctest: +SKIP</span>
-<a id="__codelineno-45-27" name="__codelineno-45-27" href="#__codelineno-45-27"></a><span class="sd">    [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</span>
-<a id="__codelineno-45-28" name="__codelineno-45-28" href="#__codelineno-45-28"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-45-29" name="__codelineno-45-29" href="#__codelineno-45-29"></a>    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">remplacer_premier</span><span class="p">(</span><span class="n">liste</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">nouvelle_valeur</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Remplace le premier élément et renvoie la liste modifiée</span>
+<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a>
+<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="sd">    &gt;&gt;&gt; remplacer_premier([1, 2, 3], 10)     # doctest: +SKIP</span>
+<a id="__codelineno-44-5" name="__codelineno-44-5" href="#__codelineno-44-5"></a><span class="sd">    [10, 2, 3]</span>
+<a id="__codelineno-44-6" name="__codelineno-44-6" href="#__codelineno-44-6"></a><span class="sd">    &gt;&gt;&gt; remplacer_premier([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], &#39;z&#39;)     # doctest: +SKIP</span>
+<a id="__codelineno-44-7" name="__codelineno-44-7" href="#__codelineno-44-7"></a><span class="sd">    [&#39;z&#39;, &#39;b&#39;, &#39;c&#39;]</span>
+<a id="__codelineno-44-8" name="__codelineno-44-8" href="#__codelineno-44-8"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-44-9" name="__codelineno-44-9" href="#__codelineno-44-9"></a>    <span class="k">pass</span>
+<a id="__codelineno-44-10" name="__codelineno-44-10" href="#__codelineno-44-10"></a>
+<a id="__codelineno-44-11" name="__codelineno-44-11" href="#__codelineno-44-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">remplacer_dernier</span><span class="p">(</span><span class="n">liste</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">nouvelle_valeur</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<a id="__codelineno-44-12" name="__codelineno-44-12" href="#__codelineno-44-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Remplace le dernier élément</span>
+<a id="__codelineno-44-13" name="__codelineno-44-13" href="#__codelineno-44-13"></a>
+<a id="__codelineno-44-14" name="__codelineno-44-14" href="#__codelineno-44-14"></a><span class="sd">    &gt;&gt;&gt; remplacer_dernier([1, 2, 3], 10)     # doctest: +SKIP</span>
+<a id="__codelineno-44-15" name="__codelineno-44-15" href="#__codelineno-44-15"></a><span class="sd">    [1, 2, 10]</span>
+<a id="__codelineno-44-16" name="__codelineno-44-16" href="#__codelineno-44-16"></a><span class="sd">    &gt;&gt;&gt; remplacer_dernier([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], &#39;z&#39;)     # doctest: +SKIP</span>
+<a id="__codelineno-44-17" name="__codelineno-44-17" href="#__codelineno-44-17"></a><span class="sd">    [&#39;a&#39;, &#39;b&#39;, &#39;z&#39;]</span>
+<a id="__codelineno-44-18" name="__codelineno-44-18" href="#__codelineno-44-18"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-44-19" name="__codelineno-44-19" href="#__codelineno-44-19"></a>    <span class="k">pass</span>
+<a id="__codelineno-44-20" name="__codelineno-44-20" href="#__codelineno-44-20"></a>
+<a id="__codelineno-44-21" name="__codelineno-44-21" href="#__codelineno-44-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">ajouter_element</span><span class="p">(</span><span class="n">liste</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">element</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<a id="__codelineno-44-22" name="__codelineno-44-22" href="#__codelineno-44-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Ajoute un élément à la fin et renvoie la liste</span>
+<a id="__codelineno-44-23" name="__codelineno-44-23" href="#__codelineno-44-23"></a>
+<a id="__codelineno-44-24" name="__codelineno-44-24" href="#__codelineno-44-24"></a><span class="sd">    &gt;&gt;&gt; ajouter_element([1, 2, 3], 4)     # doctest: +SKIP</span>
+<a id="__codelineno-44-25" name="__codelineno-44-25" href="#__codelineno-44-25"></a><span class="sd">    [1, 2, 3, 4]</span>
+<a id="__codelineno-44-26" name="__codelineno-44-26" href="#__codelineno-44-26"></a><span class="sd">    &gt;&gt;&gt; ajouter_element([&#39;a&#39;, &#39;b&#39;], &#39;c&#39;)     # doctest: +SKIP</span>
+<a id="__codelineno-44-27" name="__codelineno-44-27" href="#__codelineno-44-27"></a><span class="sd">    [&#39;a&#39;, &#39;b&#39;, &#39;c&#39;]</span>
+<a id="__codelineno-44-28" name="__codelineno-44-28" href="#__codelineno-44-28"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-44-29" name="__codelineno-44-29" href="#__codelineno-44-29"></a>    <span class="k">pass</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 7 : Fonctions de comparaison</p>
 <p>Écrire les fonctions suivantes :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">meme_longueur</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">seq2</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si les deux séquences ont la même longueur</span>
-<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>
-<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="sd">    &gt;&gt;&gt; meme_longueur([1, 2, 3], [4, 5, 6])     # doctest: +SKIP</span>
-<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="sd">    True</span>
-<a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a><span class="sd">    &gt;&gt;&gt; meme_longueur([1, 2], [3, 4, 5])     # doctest: +SKIP</span>
-<a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a><span class="sd">    False</span>
-<a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a><span class="sd">    &gt;&gt;&gt; meme_longueur((1, 2), [3, 4])     # doctest: +SKIP</span>
-<a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a><span class="sd">    True</span>
-<a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a>    <span class="k">pass</span>
-<a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a>
-<a id="__codelineno-46-13" name="__codelineno-46-13" href="#__codelineno-46-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">plus_longue</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">seq2</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<a id="__codelineno-46-14" name="__codelineno-46-14" href="#__codelineno-46-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la séquence la plus longue</span>
-<a id="__codelineno-46-15" name="__codelineno-46-15" href="#__codelineno-46-15"></a>
-<a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a><span class="sd">    &gt;&gt;&gt; plus_longue([1, 2, 3], [4, 5])     # doctest: +SKIP</span>
-<a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a><span class="sd">    [1, 2, 3]</span>
-<a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a><span class="sd">    &gt;&gt;&gt; plus_longue([1], [2, 3, 4, 5])     # doctest: +SKIP</span>
-<a id="__codelineno-46-19" name="__codelineno-46-19" href="#__codelineno-46-19"></a><span class="sd">    [2, 3, 4, 5]</span>
-<a id="__codelineno-46-20" name="__codelineno-46-20" href="#__codelineno-46-20"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-46-21" name="__codelineno-46-21" href="#__codelineno-46-21"></a>    <span class="k">pass</span>
-<a id="__codelineno-46-22" name="__codelineno-46-22" href="#__codelineno-46-22"></a>
-<a id="__codelineno-46-23" name="__codelineno-46-23" href="#__codelineno-46-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">ont_element_commun</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">seq2</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-46-24" name="__codelineno-46-24" href="#__codelineno-46-24"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si au moins un élément est présent dans les deux séquences</span>
-<a id="__codelineno-46-25" name="__codelineno-46-25" href="#__codelineno-46-25"></a>
-<a id="__codelineno-46-26" name="__codelineno-46-26" href="#__codelineno-46-26"></a><span class="sd">    &gt;&gt;&gt; ont_element_commun([1, 2, 3], [3, 4, 5])     # doctest: +SKIP</span>
-<a id="__codelineno-46-27" name="__codelineno-46-27" href="#__codelineno-46-27"></a><span class="sd">    True</span>
-<a id="__codelineno-46-28" name="__codelineno-46-28" href="#__codelineno-46-28"></a><span class="sd">    &gt;&gt;&gt; ont_element_commun([1, 2], [3, 4])     # doctest: +SKIP</span>
-<a id="__codelineno-46-29" name="__codelineno-46-29" href="#__codelineno-46-29"></a><span class="sd">    False</span>
-<a id="__codelineno-46-30" name="__codelineno-46-30" href="#__codelineno-46-30"></a><span class="sd">    &gt;&gt;&gt; ont_element_commun([&#39;a&#39;, &#39;b&#39;], [&#39;b&#39;, &#39;c&#39;])     # doctest: +SKIP</span>
-<a id="__codelineno-46-31" name="__codelineno-46-31" href="#__codelineno-46-31"></a><span class="sd">    True</span>
-<a id="__codelineno-46-32" name="__codelineno-46-32" href="#__codelineno-46-32"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-46-33" name="__codelineno-46-33" href="#__codelineno-46-33"></a>    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">meme_longueur</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">,</span> <span class="n">seq2</span><span class="p">:</span> <span class="nb">list</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si les deux séquences ont la même longueur</span>
+<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a>
+<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="sd">    &gt;&gt;&gt; meme_longueur([1, 2, 3], [4, 5, 6])     # doctest: +SKIP</span>
+<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="sd">    True</span>
+<a id="__codelineno-45-6" name="__codelineno-45-6" href="#__codelineno-45-6"></a><span class="sd">    &gt;&gt;&gt; meme_longueur([1, 2], [3, 4, 5])     # doctest: +SKIP</span>
+<a id="__codelineno-45-7" name="__codelineno-45-7" href="#__codelineno-45-7"></a><span class="sd">    False</span>
+<a id="__codelineno-45-8" name="__codelineno-45-8" href="#__codelineno-45-8"></a><span class="sd">    &gt;&gt;&gt; meme_longueur((1, 2), [3, 4])     # doctest: +SKIP</span>
+<a id="__codelineno-45-9" name="__codelineno-45-9" href="#__codelineno-45-9"></a><span class="sd">    True</span>
+<a id="__codelineno-45-10" name="__codelineno-45-10" href="#__codelineno-45-10"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-45-11" name="__codelineno-45-11" href="#__codelineno-45-11"></a>    <span class="k">pass</span>
+<a id="__codelineno-45-12" name="__codelineno-45-12" href="#__codelineno-45-12"></a>
+<a id="__codelineno-45-13" name="__codelineno-45-13" href="#__codelineno-45-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">plus_longue</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">seq2</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<a id="__codelineno-45-14" name="__codelineno-45-14" href="#__codelineno-45-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la séquence la plus longue</span>
+<a id="__codelineno-45-15" name="__codelineno-45-15" href="#__codelineno-45-15"></a>
+<a id="__codelineno-45-16" name="__codelineno-45-16" href="#__codelineno-45-16"></a><span class="sd">    &gt;&gt;&gt; plus_longue([1, 2, 3], [4, 5])     # doctest: +SKIP</span>
+<a id="__codelineno-45-17" name="__codelineno-45-17" href="#__codelineno-45-17"></a><span class="sd">    [1, 2, 3]</span>
+<a id="__codelineno-45-18" name="__codelineno-45-18" href="#__codelineno-45-18"></a><span class="sd">    &gt;&gt;&gt; plus_longue([1], [2, 3, 4, 5])     # doctest: +SKIP</span>
+<a id="__codelineno-45-19" name="__codelineno-45-19" href="#__codelineno-45-19"></a><span class="sd">    [2, 3, 4, 5]</span>
+<a id="__codelineno-45-20" name="__codelineno-45-20" href="#__codelineno-45-20"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-45-21" name="__codelineno-45-21" href="#__codelineno-45-21"></a>    <span class="k">pass</span>
+<a id="__codelineno-45-22" name="__codelineno-45-22" href="#__codelineno-45-22"></a>
+<a id="__codelineno-45-23" name="__codelineno-45-23" href="#__codelineno-45-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">ont_element_commun</span><span class="p">(</span><span class="n">seq1</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">seq2</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-45-24" name="__codelineno-45-24" href="#__codelineno-45-24"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si au moins un élément est présent dans les deux séquences</span>
+<a id="__codelineno-45-25" name="__codelineno-45-25" href="#__codelineno-45-25"></a>
+<a id="__codelineno-45-26" name="__codelineno-45-26" href="#__codelineno-45-26"></a><span class="sd">    &gt;&gt;&gt; ont_element_commun([1, 2, 3], [3, 4, 5])     # doctest: +SKIP</span>
+<a id="__codelineno-45-27" name="__codelineno-45-27" href="#__codelineno-45-27"></a><span class="sd">    True</span>
+<a id="__codelineno-45-28" name="__codelineno-45-28" href="#__codelineno-45-28"></a><span class="sd">    &gt;&gt;&gt; ont_element_commun([1, 2], [3, 4])     # doctest: +SKIP</span>
+<a id="__codelineno-45-29" name="__codelineno-45-29" href="#__codelineno-45-29"></a><span class="sd">    False</span>
+<a id="__codelineno-45-30" name="__codelineno-45-30" href="#__codelineno-45-30"></a><span class="sd">    &gt;&gt;&gt; ont_element_commun([&#39;a&#39;, &#39;b&#39;], [&#39;b&#39;, &#39;c&#39;])     # doctest: +SKIP</span>
+<a id="__codelineno-45-31" name="__codelineno-45-31" href="#__codelineno-45-31"></a><span class="sd">    True</span>
+<a id="__codelineno-45-32" name="__codelineno-45-32" href="#__codelineno-45-32"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-45-33" name="__codelineno-45-33" href="#__codelineno-45-33"></a>    <span class="k">pass</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 8 : Fonctions avec indices</p>
 <p>Écrire les fonctions suivantes :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">element_a_position</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie l&#39;élément à la position donnée, None si position invalide</span>
-<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>
-<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a><span class="sd">    &gt;&gt;&gt; element_a_position([10, 20, 30, 40], 2)     # doctest: +SKIP</span>
-<a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a><span class="sd">    30</span>
-<a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a><span class="sd">    &gt;&gt;&gt; element_a_position([10, 20, 30], 5)     # doctest: +SKIP</span>
-<a id="__codelineno-47-7" name="__codelineno-47-7" href="#__codelineno-47-7"></a>
-<a id="__codelineno-47-8" name="__codelineno-47-8" href="#__codelineno-47-8"></a><span class="sd">    &gt;&gt;&gt; element_a_position([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], 0)     # doctest: +SKIP</span>
-<a id="__codelineno-47-9" name="__codelineno-47-9" href="#__codelineno-47-9"></a><span class="sd">    &#39;a&#39;</span>
-<a id="__codelineno-47-10" name="__codelineno-47-10" href="#__codelineno-47-10"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-47-11" name="__codelineno-47-11" href="#__codelineno-47-11"></a>    <span class="k">pass</span>
-<a id="__codelineno-47-12" name="__codelineno-47-12" href="#__codelineno-47-12"></a>
-<a id="__codelineno-47-13" name="__codelineno-47-13" href="#__codelineno-47-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">echanger_extremes</span><span class="p">(</span><span class="n">liste</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<a id="__codelineno-47-14" name="__codelineno-47-14" href="#__codelineno-47-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Échange le premier et le dernier élément</span>
-<a id="__codelineno-47-15" name="__codelineno-47-15" href="#__codelineno-47-15"></a>
-<a id="__codelineno-47-16" name="__codelineno-47-16" href="#__codelineno-47-16"></a><span class="sd">    &gt;&gt;&gt; echanger_extremes([1, 2, 3, 4, 5])     # doctest: +SKIP</span>
-<a id="__codelineno-47-17" name="__codelineno-47-17" href="#__codelineno-47-17"></a><span class="sd">    [5, 2, 3, 4, 1]</span>
-<a id="__codelineno-47-18" name="__codelineno-47-18" href="#__codelineno-47-18"></a><span class="sd">    &gt;&gt;&gt; echanger_extremes([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])     # doctest: +SKIP</span>
-<a id="__codelineno-47-19" name="__codelineno-47-19" href="#__codelineno-47-19"></a><span class="sd">    [&#39;c&#39;, &#39;b&#39;, &#39;a&#39;]</span>
-<a id="__codelineno-47-20" name="__codelineno-47-20" href="#__codelineno-47-20"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-47-21" name="__codelineno-47-21" href="#__codelineno-47-21"></a>    <span class="k">pass</span>
-<a id="__codelineno-47-22" name="__codelineno-47-22" href="#__codelineno-47-22"></a>
-<a id="__codelineno-47-23" name="__codelineno-47-23" href="#__codelineno-47-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">inverser_paire</span><span class="p">(</span><span class="n">liste</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
-<a id="__codelineno-47-24" name="__codelineno-47-24" href="#__codelineno-47-24"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Inverse les deux premiers éléments</span>
-<a id="__codelineno-47-25" name="__codelineno-47-25" href="#__codelineno-47-25"></a>
-<a id="__codelineno-47-26" name="__codelineno-47-26" href="#__codelineno-47-26"></a><span class="sd">    &gt;&gt;&gt; inverser_paire([1, 2, 3, 4])     # doctest: +SKIP</span>
-<a id="__codelineno-47-27" name="__codelineno-47-27" href="#__codelineno-47-27"></a><span class="sd">    [2, 1, 3, 4]</span>
-<a id="__codelineno-47-28" name="__codelineno-47-28" href="#__codelineno-47-28"></a><span class="sd">    &gt;&gt;&gt; inverser_paire([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])     # doctest: +SKIP</span>
-<a id="__codelineno-47-29" name="__codelineno-47-29" href="#__codelineno-47-29"></a><span class="sd">    [&#39;b&#39;, &#39;a&#39;, &#39;c&#39;]</span>
-<a id="__codelineno-47-30" name="__codelineno-47-30" href="#__codelineno-47-30"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-47-31" name="__codelineno-47-31" href="#__codelineno-47-31"></a>    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">element_a_position</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">position</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span> <span class="o">|</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie l&#39;élément à la position donnée, None si position invalide</span>
+<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a>
+<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="sd">    &gt;&gt;&gt; element_a_position([10, 20, 30, 40], 2)     # doctest: +SKIP</span>
+<a id="__codelineno-46-5" name="__codelineno-46-5" href="#__codelineno-46-5"></a><span class="sd">    30</span>
+<a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a><span class="sd">    &gt;&gt;&gt; element_a_position([10, 20, 30], 5)     # doctest: +SKIP</span>
+<a id="__codelineno-46-7" name="__codelineno-46-7" href="#__codelineno-46-7"></a>
+<a id="__codelineno-46-8" name="__codelineno-46-8" href="#__codelineno-46-8"></a><span class="sd">    &gt;&gt;&gt; element_a_position([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;], 0)     # doctest: +SKIP</span>
+<a id="__codelineno-46-9" name="__codelineno-46-9" href="#__codelineno-46-9"></a><span class="sd">    &#39;a&#39;</span>
+<a id="__codelineno-46-10" name="__codelineno-46-10" href="#__codelineno-46-10"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-46-11" name="__codelineno-46-11" href="#__codelineno-46-11"></a>    <span class="k">pass</span>
+<a id="__codelineno-46-12" name="__codelineno-46-12" href="#__codelineno-46-12"></a>
+<a id="__codelineno-46-13" name="__codelineno-46-13" href="#__codelineno-46-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">echanger_extremes</span><span class="p">(</span><span class="n">liste</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<a id="__codelineno-46-14" name="__codelineno-46-14" href="#__codelineno-46-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Échange le premier et le dernier élément</span>
+<a id="__codelineno-46-15" name="__codelineno-46-15" href="#__codelineno-46-15"></a>
+<a id="__codelineno-46-16" name="__codelineno-46-16" href="#__codelineno-46-16"></a><span class="sd">    &gt;&gt;&gt; echanger_extremes([1, 2, 3, 4, 5])     # doctest: +SKIP</span>
+<a id="__codelineno-46-17" name="__codelineno-46-17" href="#__codelineno-46-17"></a><span class="sd">    [5, 2, 3, 4, 1]</span>
+<a id="__codelineno-46-18" name="__codelineno-46-18" href="#__codelineno-46-18"></a><span class="sd">    &gt;&gt;&gt; echanger_extremes([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])     # doctest: +SKIP</span>
+<a id="__codelineno-46-19" name="__codelineno-46-19" href="#__codelineno-46-19"></a><span class="sd">    [&#39;c&#39;, &#39;b&#39;, &#39;a&#39;]</span>
+<a id="__codelineno-46-20" name="__codelineno-46-20" href="#__codelineno-46-20"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-46-21" name="__codelineno-46-21" href="#__codelineno-46-21"></a>    <span class="k">pass</span>
+<a id="__codelineno-46-22" name="__codelineno-46-22" href="#__codelineno-46-22"></a>
+<a id="__codelineno-46-23" name="__codelineno-46-23" href="#__codelineno-46-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">inverser_paire</span><span class="p">(</span><span class="n">liste</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">:</span>
+<a id="__codelineno-46-24" name="__codelineno-46-24" href="#__codelineno-46-24"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Inverse les deux premiers éléments</span>
+<a id="__codelineno-46-25" name="__codelineno-46-25" href="#__codelineno-46-25"></a>
+<a id="__codelineno-46-26" name="__codelineno-46-26" href="#__codelineno-46-26"></a><span class="sd">    &gt;&gt;&gt; inverser_paire([1, 2, 3, 4])     # doctest: +SKIP</span>
+<a id="__codelineno-46-27" name="__codelineno-46-27" href="#__codelineno-46-27"></a><span class="sd">    [2, 1, 3, 4]</span>
+<a id="__codelineno-46-28" name="__codelineno-46-28" href="#__codelineno-46-28"></a><span class="sd">    &gt;&gt;&gt; inverser_paire([&#39;a&#39;, &#39;b&#39;, &#39;c&#39;])     # doctest: +SKIP</span>
+<a id="__codelineno-46-29" name="__codelineno-46-29" href="#__codelineno-46-29"></a><span class="sd">    [&#39;b&#39;, &#39;a&#39;, &#39;c&#39;]</span>
+<a id="__codelineno-46-30" name="__codelineno-46-30" href="#__codelineno-46-30"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-46-31" name="__codelineno-46-31" href="#__codelineno-46-31"></a>    <span class="k">pass</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 9 : Fonctions de validation</p>
 <p>Écrire les fonctions suivantes :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">tous_positifs</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Vérifie que tous les nombres sont positifs</span>
-<a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a>
-<a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a><span class="sd">    &gt;&gt;&gt; tous_positifs([1, 2, 3, 4])     # doctest: +SKIP</span>
-<a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a><span class="sd">    True</span>
-<a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="sd">    &gt;&gt;&gt; tous_positifs([1, -2, 3])     # doctest: +SKIP</span>
-<a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="sd">    False</span>
-<a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a><span class="sd">    &gt;&gt;&gt; tous_positifs([0, 5, 10])     # doctest: +SKIP</span>
-<a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a><span class="sd">    True</span>
-<a id="__codelineno-48-10" name="__codelineno-48-10" href="#__codelineno-48-10"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-48-11" name="__codelineno-48-11" href="#__codelineno-48-11"></a>    <span class="k">pass</span>
-<a id="__codelineno-48-12" name="__codelineno-48-12" href="#__codelineno-48-12"></a>
-<a id="__codelineno-48-13" name="__codelineno-48-13" href="#__codelineno-48-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">au_moins_un_negatif</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-48-14" name="__codelineno-48-14" href="#__codelineno-48-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Vérifie s&#39;il y a au moins un nombre négatif</span>
-<a id="__codelineno-48-15" name="__codelineno-48-15" href="#__codelineno-48-15"></a>
-<a id="__codelineno-48-16" name="__codelineno-48-16" href="#__codelineno-48-16"></a><span class="sd">    &gt;&gt;&gt; au_moins_un_negatif([5, -3, 12, 8])     # doctest: +SKIP</span>
-<a id="__codelineno-48-17" name="__codelineno-48-17" href="#__codelineno-48-17"></a><span class="sd">    True</span>
-<a id="__codelineno-48-18" name="__codelineno-48-18" href="#__codelineno-48-18"></a><span class="sd">    &gt;&gt;&gt; au_moins_un_negatif([1, 2, 3])     # doctest: +SKIP</span>
-<a id="__codelineno-48-19" name="__codelineno-48-19" href="#__codelineno-48-19"></a><span class="sd">    False</span>
-<a id="__codelineno-48-20" name="__codelineno-48-20" href="#__codelineno-48-20"></a><span class="sd">    &gt;&gt;&gt; au_moins_un_negatif([0, -1, 5])     # doctest: +SKIP</span>
-<a id="__codelineno-48-21" name="__codelineno-48-21" href="#__codelineno-48-21"></a><span class="sd">    True</span>
-<a id="__codelineno-48-22" name="__codelineno-48-22" href="#__codelineno-48-22"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-48-23" name="__codelineno-48-23" href="#__codelineno-48-23"></a>    <span class="k">pass</span>
-<a id="__codelineno-48-24" name="__codelineno-48-24" href="#__codelineno-48-24"></a>
-<a id="__codelineno-48-25" name="__codelineno-48-25" href="#__codelineno-48-25"></a><span class="k">def</span><span class="w"> </span><span class="nf">dans_intervalle</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">],</span> <span class="n">min_val</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_val</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-48-26" name="__codelineno-48-26" href="#__codelineno-48-26"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Vérifie que tous les éléments sont entre min_val et max_val</span>
-<a id="__codelineno-48-27" name="__codelineno-48-27" href="#__codelineno-48-27"></a>
-<a id="__codelineno-48-28" name="__codelineno-48-28" href="#__codelineno-48-28"></a><span class="sd">    &gt;&gt;&gt; dans_intervalle([5, 8, 12, 15], 0, 20)     # doctest: +SKIP</span>
-<a id="__codelineno-48-29" name="__codelineno-48-29" href="#__codelineno-48-29"></a><span class="sd">    True</span>
-<a id="__codelineno-48-30" name="__codelineno-48-30" href="#__codelineno-48-30"></a><span class="sd">    &gt;&gt;&gt; dans_intervalle([5, -3, 12], 0, 20)     # doctest: +SKIP</span>
-<a id="__codelineno-48-31" name="__codelineno-48-31" href="#__codelineno-48-31"></a><span class="sd">    False</span>
-<a id="__codelineno-48-32" name="__codelineno-48-32" href="#__codelineno-48-32"></a><span class="sd">    &gt;&gt;&gt; dans_intervalle([10, 12, 15], 10, 15)     # doctest: +SKIP</span>
-<a id="__codelineno-48-33" name="__codelineno-48-33" href="#__codelineno-48-33"></a><span class="sd">    True</span>
-<a id="__codelineno-48-34" name="__codelineno-48-34" href="#__codelineno-48-34"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-48-35" name="__codelineno-48-35" href="#__codelineno-48-35"></a>    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">tous_positifs</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Vérifie que tous les nombres sont positifs</span>
+<a id="__codelineno-47-3" name="__codelineno-47-3" href="#__codelineno-47-3"></a>
+<a id="__codelineno-47-4" name="__codelineno-47-4" href="#__codelineno-47-4"></a><span class="sd">    &gt;&gt;&gt; tous_positifs([1, 2, 3, 4])     # doctest: +SKIP</span>
+<a id="__codelineno-47-5" name="__codelineno-47-5" href="#__codelineno-47-5"></a><span class="sd">    True</span>
+<a id="__codelineno-47-6" name="__codelineno-47-6" href="#__codelineno-47-6"></a><span class="sd">    &gt;&gt;&gt; tous_positifs([1, -2, 3])     # doctest: +SKIP</span>
+<a id="__codelineno-47-7" name="__codelineno-47-7" href="#__codelineno-47-7"></a><span class="sd">    False</span>
+<a id="__codelineno-47-8" name="__codelineno-47-8" href="#__codelineno-47-8"></a><span class="sd">    &gt;&gt;&gt; tous_positifs([0, 5, 10])     # doctest: +SKIP</span>
+<a id="__codelineno-47-9" name="__codelineno-47-9" href="#__codelineno-47-9"></a><span class="sd">    True</span>
+<a id="__codelineno-47-10" name="__codelineno-47-10" href="#__codelineno-47-10"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-47-11" name="__codelineno-47-11" href="#__codelineno-47-11"></a>    <span class="k">pass</span>
+<a id="__codelineno-47-12" name="__codelineno-47-12" href="#__codelineno-47-12"></a>
+<a id="__codelineno-47-13" name="__codelineno-47-13" href="#__codelineno-47-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">au_moins_un_negatif</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-47-14" name="__codelineno-47-14" href="#__codelineno-47-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Vérifie s&#39;il y a au moins un nombre négatif</span>
+<a id="__codelineno-47-15" name="__codelineno-47-15" href="#__codelineno-47-15"></a>
+<a id="__codelineno-47-16" name="__codelineno-47-16" href="#__codelineno-47-16"></a><span class="sd">    &gt;&gt;&gt; au_moins_un_negatif([5, -3, 12, 8])     # doctest: +SKIP</span>
+<a id="__codelineno-47-17" name="__codelineno-47-17" href="#__codelineno-47-17"></a><span class="sd">    True</span>
+<a id="__codelineno-47-18" name="__codelineno-47-18" href="#__codelineno-47-18"></a><span class="sd">    &gt;&gt;&gt; au_moins_un_negatif([1, 2, 3])     # doctest: +SKIP</span>
+<a id="__codelineno-47-19" name="__codelineno-47-19" href="#__codelineno-47-19"></a><span class="sd">    False</span>
+<a id="__codelineno-47-20" name="__codelineno-47-20" href="#__codelineno-47-20"></a><span class="sd">    &gt;&gt;&gt; au_moins_un_negatif([0, -1, 5])     # doctest: +SKIP</span>
+<a id="__codelineno-47-21" name="__codelineno-47-21" href="#__codelineno-47-21"></a><span class="sd">    True</span>
+<a id="__codelineno-47-22" name="__codelineno-47-22" href="#__codelineno-47-22"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-47-23" name="__codelineno-47-23" href="#__codelineno-47-23"></a>    <span class="k">pass</span>
+<a id="__codelineno-47-24" name="__codelineno-47-24" href="#__codelineno-47-24"></a>
+<a id="__codelineno-47-25" name="__codelineno-47-25" href="#__codelineno-47-25"></a><span class="k">def</span><span class="w"> </span><span class="nf">dans_intervalle</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">],</span> <span class="n">min_val</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">,</span> <span class="n">max_val</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-47-26" name="__codelineno-47-26" href="#__codelineno-47-26"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Vérifie que tous les éléments sont entre min_val et max_val</span>
+<a id="__codelineno-47-27" name="__codelineno-47-27" href="#__codelineno-47-27"></a>
+<a id="__codelineno-47-28" name="__codelineno-47-28" href="#__codelineno-47-28"></a><span class="sd">    &gt;&gt;&gt; dans_intervalle([5, 8, 12, 15], 0, 20)     # doctest: +SKIP</span>
+<a id="__codelineno-47-29" name="__codelineno-47-29" href="#__codelineno-47-29"></a><span class="sd">    True</span>
+<a id="__codelineno-47-30" name="__codelineno-47-30" href="#__codelineno-47-30"></a><span class="sd">    &gt;&gt;&gt; dans_intervalle([5, -3, 12], 0, 20)     # doctest: +SKIP</span>
+<a id="__codelineno-47-31" name="__codelineno-47-31" href="#__codelineno-47-31"></a><span class="sd">    False</span>
+<a id="__codelineno-47-32" name="__codelineno-47-32" href="#__codelineno-47-32"></a><span class="sd">    &gt;&gt;&gt; dans_intervalle([10, 12, 15], 10, 15)     # doctest: +SKIP</span>
+<a id="__codelineno-47-33" name="__codelineno-47-33" href="#__codelineno-47-33"></a><span class="sd">    True</span>
+<a id="__codelineno-47-34" name="__codelineno-47-34" href="#__codelineno-47-34"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-47-35" name="__codelineno-47-35" href="#__codelineno-47-35"></a>    <span class="k">pass</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 11 : Fonctions avancées - Coordonnées 2D</p>
 <p>Créer un système de gestion de points dans un plan :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_point</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Crée un point sous forme de tuple (x, y)</span>
-<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>
-<a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a><span class="sd">    &gt;&gt;&gt; creer_point(3.0, 4.0)     # doctest: +SKIP</span>
-<a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a><span class="sd">    (3.0, 4.0)</span>
-<a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a><span class="sd">    &gt;&gt;&gt; creer_point(-2.5, 1.5)     # doctest: +SKIP</span>
-<a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a><span class="sd">    (-2.5, 1.5)</span>
-<a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a>    <span class="k">pass</span>
-<a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a>
-<a id="__codelineno-49-11" name="__codelineno-49-11" href="#__codelineno-49-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">abscisse</span><span class="p">(</span><span class="n">point</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<a id="__codelineno-49-12" name="__codelineno-49-12" href="#__codelineno-49-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie l&#39;abscisse du point</span>
-<a id="__codelineno-49-13" name="__codelineno-49-13" href="#__codelineno-49-13"></a>
-<a id="__codelineno-49-14" name="__codelineno-49-14" href="#__codelineno-49-14"></a><span class="sd">    &gt;&gt;&gt; abscisse((3.0, 4.0))     # doctest: +SKIP</span>
-<a id="__codelineno-49-15" name="__codelineno-49-15" href="#__codelineno-49-15"></a><span class="sd">    3.0</span>
-<a id="__codelineno-49-16" name="__codelineno-49-16" href="#__codelineno-49-16"></a><span class="sd">    &gt;&gt;&gt; abscisse((-2.5, 1.5))     # doctest: +SKIP</span>
-<a id="__codelineno-49-17" name="__codelineno-49-17" href="#__codelineno-49-17"></a><span class="sd">    -2.5</span>
-<a id="__codelineno-49-18" name="__codelineno-49-18" href="#__codelineno-49-18"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-49-19" name="__codelineno-49-19" href="#__codelineno-49-19"></a>    <span class="k">pass</span>
-<a id="__codelineno-49-20" name="__codelineno-49-20" href="#__codelineno-49-20"></a>
-<a id="__codelineno-49-21" name="__codelineno-49-21" href="#__codelineno-49-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">ordonnee</span><span class="p">(</span><span class="n">point</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<a id="__codelineno-49-22" name="__codelineno-49-22" href="#__codelineno-49-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie l&#39;ordonnée du point</span>
-<a id="__codelineno-49-23" name="__codelineno-49-23" href="#__codelineno-49-23"></a>
-<a id="__codelineno-49-24" name="__codelineno-49-24" href="#__codelineno-49-24"></a><span class="sd">    &gt;&gt;&gt; ordonnee((3.0, 4.0))     # doctest: +SKIP</span>
-<a id="__codelineno-49-25" name="__codelineno-49-25" href="#__codelineno-49-25"></a><span class="sd">    4.0</span>
-<a id="__codelineno-49-26" name="__codelineno-49-26" href="#__codelineno-49-26"></a><span class="sd">    &gt;&gt;&gt; ordonnee((-2.5, 1.5))     # doctest: +SKIP</span>
-<a id="__codelineno-49-27" name="__codelineno-49-27" href="#__codelineno-49-27"></a><span class="sd">    1.5</span>
-<a id="__codelineno-49-28" name="__codelineno-49-28" href="#__codelineno-49-28"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-49-29" name="__codelineno-49-29" href="#__codelineno-49-29"></a>    <span class="k">pass</span>
-<a id="__codelineno-49-30" name="__codelineno-49-30" href="#__codelineno-49-30"></a>
-<a id="__codelineno-49-31" name="__codelineno-49-31" href="#__codelineno-49-31"></a><span class="k">def</span><span class="w"> </span><span class="nf">distance_origine</span><span class="p">(</span><span class="n">point</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<a id="__codelineno-49-32" name="__codelineno-49-32" href="#__codelineno-49-32"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule la distance du point à l&#39;origine</span>
-<a id="__codelineno-49-33" name="__codelineno-49-33" href="#__codelineno-49-33"></a>
-<a id="__codelineno-49-34" name="__codelineno-49-34" href="#__codelineno-49-34"></a><span class="sd">    &gt;&gt;&gt; distance_origine((3.0, 4.0))     # doctest: +SKIP</span>
-<a id="__codelineno-49-35" name="__codelineno-49-35" href="#__codelineno-49-35"></a><span class="sd">    5.0</span>
-<a id="__codelineno-49-36" name="__codelineno-49-36" href="#__codelineno-49-36"></a><span class="sd">    &gt;&gt;&gt; distance_origine((0.0, 0.0))     # doctest: +SKIP</span>
-<a id="__codelineno-49-37" name="__codelineno-49-37" href="#__codelineno-49-37"></a><span class="sd">    0.0</span>
-<a id="__codelineno-49-38" name="__codelineno-49-38" href="#__codelineno-49-38"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-49-39" name="__codelineno-49-39" href="#__codelineno-49-39"></a>    <span class="c1"># Utiliser la formule: racine(x² + y²)</span>
-<a id="__codelineno-49-40" name="__codelineno-49-40" href="#__codelineno-49-40"></a>    <span class="k">pass</span>
-<a id="__codelineno-49-41" name="__codelineno-49-41" href="#__codelineno-49-41"></a>
-<a id="__codelineno-49-42" name="__codelineno-49-42" href="#__codelineno-49-42"></a><span class="k">def</span><span class="w"> </span><span class="nf">milieu</span><span class="p">(</span><span class="n">point1</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">point2</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
-<a id="__codelineno-49-43" name="__codelineno-49-43" href="#__codelineno-49-43"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule le point milieu entre deux points</span>
-<a id="__codelineno-49-44" name="__codelineno-49-44" href="#__codelineno-49-44"></a>
-<a id="__codelineno-49-45" name="__codelineno-49-45" href="#__codelineno-49-45"></a><span class="sd">    &gt;&gt;&gt; milieu((0.0, 0.0), (4.0, 6.0))     # doctest: +SKIP</span>
-<a id="__codelineno-49-46" name="__codelineno-49-46" href="#__codelineno-49-46"></a><span class="sd">    (2.0, 3.0)</span>
-<a id="__codelineno-49-47" name="__codelineno-49-47" href="#__codelineno-49-47"></a><span class="sd">    &gt;&gt;&gt; milieu((1.0, 2.0), (3.0, 4.0))     # doctest: +SKIP</span>
-<a id="__codelineno-49-48" name="__codelineno-49-48" href="#__codelineno-49-48"></a><span class="sd">    (2.0, 3.0)</span>
-<a id="__codelineno-49-49" name="__codelineno-49-49" href="#__codelineno-49-49"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-49-50" name="__codelineno-49-50" href="#__codelineno-49-50"></a>    <span class="k">pass</span>
-<a id="__codelineno-49-51" name="__codelineno-49-51" href="#__codelineno-49-51"></a>
-<a id="__codelineno-49-52" name="__codelineno-49-52" href="#__codelineno-49-52"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_rectangle</span><span class="p">(</span><span class="n">point1</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">point2</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
-<a id="__codelineno-49-53" name="__codelineno-49-53" href="#__codelineno-49-53"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Crée une liste de 4 points formant un rectangle</span>
-<a id="__codelineno-49-54" name="__codelineno-49-54" href="#__codelineno-49-54"></a>
-<a id="__codelineno-49-55" name="__codelineno-49-55" href="#__codelineno-49-55"></a><span class="sd">    &gt;&gt;&gt; creer_rectangle((0.0, 0.0), (2.0, 3.0))     # doctest: +SKIP</span>
-<a id="__codelineno-49-56" name="__codelineno-49-56" href="#__codelineno-49-56"></a><span class="sd">    [(0.0, 0.0), (2.0, 0.0), (2.0, 3.0), (0.0, 3.0)]</span>
-<a id="__codelineno-49-57" name="__codelineno-49-57" href="#__codelineno-49-57"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-49-58" name="__codelineno-49-58" href="#__codelineno-49-58"></a>    <span class="c1"># Les deux points donnés sont des coins opposés</span>
-<a id="__codelineno-49-59" name="__codelineno-49-59" href="#__codelineno-49-59"></a>    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_point</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Crée un point sous forme de tuple (x, y)</span>
+<a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a>
+<a id="__codelineno-48-4" name="__codelineno-48-4" href="#__codelineno-48-4"></a><span class="sd">    &gt;&gt;&gt; creer_point(3.0, 4.0)     # doctest: +SKIP</span>
+<a id="__codelineno-48-5" name="__codelineno-48-5" href="#__codelineno-48-5"></a><span class="sd">    (3.0, 4.0)</span>
+<a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="sd">    &gt;&gt;&gt; creer_point(-2.5, 1.5)     # doctest: +SKIP</span>
+<a id="__codelineno-48-7" name="__codelineno-48-7" href="#__codelineno-48-7"></a><span class="sd">    (-2.5, 1.5)</span>
+<a id="__codelineno-48-8" name="__codelineno-48-8" href="#__codelineno-48-8"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-48-9" name="__codelineno-48-9" href="#__codelineno-48-9"></a>    <span class="k">pass</span>
+<a id="__codelineno-48-10" name="__codelineno-48-10" href="#__codelineno-48-10"></a>
+<a id="__codelineno-48-11" name="__codelineno-48-11" href="#__codelineno-48-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">abscisse</span><span class="p">(</span><span class="n">point</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-48-12" name="__codelineno-48-12" href="#__codelineno-48-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie l&#39;abscisse du point</span>
+<a id="__codelineno-48-13" name="__codelineno-48-13" href="#__codelineno-48-13"></a>
+<a id="__codelineno-48-14" name="__codelineno-48-14" href="#__codelineno-48-14"></a><span class="sd">    &gt;&gt;&gt; abscisse((3.0, 4.0))     # doctest: +SKIP</span>
+<a id="__codelineno-48-15" name="__codelineno-48-15" href="#__codelineno-48-15"></a><span class="sd">    3.0</span>
+<a id="__codelineno-48-16" name="__codelineno-48-16" href="#__codelineno-48-16"></a><span class="sd">    &gt;&gt;&gt; abscisse((-2.5, 1.5))     # doctest: +SKIP</span>
+<a id="__codelineno-48-17" name="__codelineno-48-17" href="#__codelineno-48-17"></a><span class="sd">    -2.5</span>
+<a id="__codelineno-48-18" name="__codelineno-48-18" href="#__codelineno-48-18"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-48-19" name="__codelineno-48-19" href="#__codelineno-48-19"></a>    <span class="k">pass</span>
+<a id="__codelineno-48-20" name="__codelineno-48-20" href="#__codelineno-48-20"></a>
+<a id="__codelineno-48-21" name="__codelineno-48-21" href="#__codelineno-48-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">ordonnee</span><span class="p">(</span><span class="n">point</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-48-22" name="__codelineno-48-22" href="#__codelineno-48-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie l&#39;ordonnée du point</span>
+<a id="__codelineno-48-23" name="__codelineno-48-23" href="#__codelineno-48-23"></a>
+<a id="__codelineno-48-24" name="__codelineno-48-24" href="#__codelineno-48-24"></a><span class="sd">    &gt;&gt;&gt; ordonnee((3.0, 4.0))     # doctest: +SKIP</span>
+<a id="__codelineno-48-25" name="__codelineno-48-25" href="#__codelineno-48-25"></a><span class="sd">    4.0</span>
+<a id="__codelineno-48-26" name="__codelineno-48-26" href="#__codelineno-48-26"></a><span class="sd">    &gt;&gt;&gt; ordonnee((-2.5, 1.5))     # doctest: +SKIP</span>
+<a id="__codelineno-48-27" name="__codelineno-48-27" href="#__codelineno-48-27"></a><span class="sd">    1.5</span>
+<a id="__codelineno-48-28" name="__codelineno-48-28" href="#__codelineno-48-28"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-48-29" name="__codelineno-48-29" href="#__codelineno-48-29"></a>    <span class="k">pass</span>
+<a id="__codelineno-48-30" name="__codelineno-48-30" href="#__codelineno-48-30"></a>
+<a id="__codelineno-48-31" name="__codelineno-48-31" href="#__codelineno-48-31"></a><span class="k">def</span><span class="w"> </span><span class="nf">distance_origine</span><span class="p">(</span><span class="n">point</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-48-32" name="__codelineno-48-32" href="#__codelineno-48-32"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule la distance du point à l&#39;origine</span>
+<a id="__codelineno-48-33" name="__codelineno-48-33" href="#__codelineno-48-33"></a>
+<a id="__codelineno-48-34" name="__codelineno-48-34" href="#__codelineno-48-34"></a><span class="sd">    &gt;&gt;&gt; distance_origine((3.0, 4.0))     # doctest: +SKIP</span>
+<a id="__codelineno-48-35" name="__codelineno-48-35" href="#__codelineno-48-35"></a><span class="sd">    5.0</span>
+<a id="__codelineno-48-36" name="__codelineno-48-36" href="#__codelineno-48-36"></a><span class="sd">    &gt;&gt;&gt; distance_origine((0.0, 0.0))     # doctest: +SKIP</span>
+<a id="__codelineno-48-37" name="__codelineno-48-37" href="#__codelineno-48-37"></a><span class="sd">    0.0</span>
+<a id="__codelineno-48-38" name="__codelineno-48-38" href="#__codelineno-48-38"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-48-39" name="__codelineno-48-39" href="#__codelineno-48-39"></a>    <span class="c1"># Utiliser la formule: racine(x² + y²)</span>
+<a id="__codelineno-48-40" name="__codelineno-48-40" href="#__codelineno-48-40"></a>    <span class="k">pass</span>
+<a id="__codelineno-48-41" name="__codelineno-48-41" href="#__codelineno-48-41"></a>
+<a id="__codelineno-48-42" name="__codelineno-48-42" href="#__codelineno-48-42"></a><span class="k">def</span><span class="w"> </span><span class="nf">milieu</span><span class="p">(</span><span class="n">point1</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">point2</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]:</span>
+<a id="__codelineno-48-43" name="__codelineno-48-43" href="#__codelineno-48-43"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule le point milieu entre deux points</span>
+<a id="__codelineno-48-44" name="__codelineno-48-44" href="#__codelineno-48-44"></a>
+<a id="__codelineno-48-45" name="__codelineno-48-45" href="#__codelineno-48-45"></a><span class="sd">    &gt;&gt;&gt; milieu((0.0, 0.0), (4.0, 6.0))     # doctest: +SKIP</span>
+<a id="__codelineno-48-46" name="__codelineno-48-46" href="#__codelineno-48-46"></a><span class="sd">    (2.0, 3.0)</span>
+<a id="__codelineno-48-47" name="__codelineno-48-47" href="#__codelineno-48-47"></a><span class="sd">    &gt;&gt;&gt; milieu((1.0, 2.0), (3.0, 4.0))     # doctest: +SKIP</span>
+<a id="__codelineno-48-48" name="__codelineno-48-48" href="#__codelineno-48-48"></a><span class="sd">    (2.0, 3.0)</span>
+<a id="__codelineno-48-49" name="__codelineno-48-49" href="#__codelineno-48-49"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-48-50" name="__codelineno-48-50" href="#__codelineno-48-50"></a>    <span class="k">pass</span>
+<a id="__codelineno-48-51" name="__codelineno-48-51" href="#__codelineno-48-51"></a>
+<a id="__codelineno-48-52" name="__codelineno-48-52" href="#__codelineno-48-52"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_rectangle</span><span class="p">(</span><span class="n">point1</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">],</span> <span class="n">point2</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
+<a id="__codelineno-48-53" name="__codelineno-48-53" href="#__codelineno-48-53"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Crée une liste de 4 points formant un rectangle</span>
+<a id="__codelineno-48-54" name="__codelineno-48-54" href="#__codelineno-48-54"></a>
+<a id="__codelineno-48-55" name="__codelineno-48-55" href="#__codelineno-48-55"></a><span class="sd">    &gt;&gt;&gt; creer_rectangle((0.0, 0.0), (2.0, 3.0))     # doctest: +SKIP</span>
+<a id="__codelineno-48-56" name="__codelineno-48-56" href="#__codelineno-48-56"></a><span class="sd">    [(0.0, 0.0), (2.0, 0.0), (2.0, 3.0), (0.0, 3.0)]</span>
+<a id="__codelineno-48-57" name="__codelineno-48-57" href="#__codelineno-48-57"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-48-58" name="__codelineno-48-58" href="#__codelineno-48-58"></a>    <span class="c1"># Les deux points donnés sont des coins opposés</span>
+<a id="__codelineno-48-59" name="__codelineno-48-59" href="#__codelineno-48-59"></a>    <span class="k">pass</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 12 : Fonctions de formatage</p>
 <p>Écrire les fonctions suivantes :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">formater_liste</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie une chaîne du type: &#39;[elem1, elem2, elem3]&#39;</span>
-<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>
-<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a><span class="sd">    &gt;&gt;&gt; formater_liste([1, 2, 3])     # doctest: +SKIP</span>
-<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a><span class="sd">    &#39;[1, 2, 3]&#39;</span>
-<a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a><span class="sd">    &gt;&gt;&gt; formater_liste([&#39;a&#39;, &#39;b&#39;])     # doctest: +SKIP</span>
-<a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a><span class="sd">    &#39;[a, b]&#39;</span>
-<a id="__codelineno-50-8" name="__codelineno-50-8" href="#__codelineno-50-8"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-50-9" name="__codelineno-50-9" href="#__codelineno-50-9"></a>    <span class="k">pass</span>
-<a id="__codelineno-50-10" name="__codelineno-50-10" href="#__codelineno-50-10"></a>
-<a id="__codelineno-50-11" name="__codelineno-50-11" href="#__codelineno-50-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_email</span><span class="p">(</span><span class="n">prenom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">domaine</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-50-12" name="__codelineno-50-12" href="#__codelineno-50-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Crée une adresse email</span>
-<a id="__codelineno-50-13" name="__codelineno-50-13" href="#__codelineno-50-13"></a>
-<a id="__codelineno-50-14" name="__codelineno-50-14" href="#__codelineno-50-14"></a><span class="sd">    &gt;&gt;&gt; creer_email(&quot;Jean&quot;, &quot;Dupont&quot;, &quot;lycee.fr&quot;)     # doctest: +SKIP</span>
-<a id="__codelineno-50-15" name="__codelineno-50-15" href="#__codelineno-50-15"></a><span class="sd">    &#39;jean.dupont@lycee.fr&#39;</span>
-<a id="__codelineno-50-16" name="__codelineno-50-16" href="#__codelineno-50-16"></a><span class="sd">    &gt;&gt;&gt; creer_email(&quot;Marie&quot;, &quot;Martin&quot;, &quot;ecole.org&quot;)     # doctest: +SKIP</span>
-<a id="__codelineno-50-17" name="__codelineno-50-17" href="#__codelineno-50-17"></a><span class="sd">    &#39;marie.martin@ecole.org&#39;</span>
-<a id="__codelineno-50-18" name="__codelineno-50-18" href="#__codelineno-50-18"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-50-19" name="__codelineno-50-19" href="#__codelineno-50-19"></a>    <span class="c1"># Penser à utiliser .lower() pour mettre en minuscules</span>
-<a id="__codelineno-50-20" name="__codelineno-50-20" href="#__codelineno-50-20"></a>    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">formater_liste</span><span class="p">(</span><span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie une chaîne du type: &#39;[elem1, elem2, elem3]&#39;</span>
+<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a>
+<a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a><span class="sd">    &gt;&gt;&gt; formater_liste([1, 2, 3])     # doctest: +SKIP</span>
+<a id="__codelineno-49-5" name="__codelineno-49-5" href="#__codelineno-49-5"></a><span class="sd">    &#39;[1, 2, 3]&#39;</span>
+<a id="__codelineno-49-6" name="__codelineno-49-6" href="#__codelineno-49-6"></a><span class="sd">    &gt;&gt;&gt; formater_liste([&#39;a&#39;, &#39;b&#39;])     # doctest: +SKIP</span>
+<a id="__codelineno-49-7" name="__codelineno-49-7" href="#__codelineno-49-7"></a><span class="sd">    &#39;[a, b]&#39;</span>
+<a id="__codelineno-49-8" name="__codelineno-49-8" href="#__codelineno-49-8"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a>    <span class="k">pass</span>
+<a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a>
+<a id="__codelineno-49-11" name="__codelineno-49-11" href="#__codelineno-49-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_email</span><span class="p">(</span><span class="n">prenom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">domaine</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-49-12" name="__codelineno-49-12" href="#__codelineno-49-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Crée une adresse email</span>
+<a id="__codelineno-49-13" name="__codelineno-49-13" href="#__codelineno-49-13"></a>
+<a id="__codelineno-49-14" name="__codelineno-49-14" href="#__codelineno-49-14"></a><span class="sd">    &gt;&gt;&gt; creer_email(&quot;Jean&quot;, &quot;Dupont&quot;, &quot;lycee.fr&quot;)     # doctest: +SKIP</span>
+<a id="__codelineno-49-15" name="__codelineno-49-15" href="#__codelineno-49-15"></a><span class="sd">    &#39;jean.dupont@lycee.fr&#39;</span>
+<a id="__codelineno-49-16" name="__codelineno-49-16" href="#__codelineno-49-16"></a><span class="sd">    &gt;&gt;&gt; creer_email(&quot;Marie&quot;, &quot;Martin&quot;, &quot;ecole.org&quot;)     # doctest: +SKIP</span>
+<a id="__codelineno-49-17" name="__codelineno-49-17" href="#__codelineno-49-17"></a><span class="sd">    &#39;marie.martin@ecole.org&#39;</span>
+<a id="__codelineno-49-18" name="__codelineno-49-18" href="#__codelineno-49-18"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-49-19" name="__codelineno-49-19" href="#__codelineno-49-19"></a>    <span class="c1"># Penser à utiliser .lower() pour mettre en minuscules</span>
+<a id="__codelineno-49-20" name="__codelineno-49-20" href="#__codelineno-49-20"></a>    <span class="k">pass</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 13 : Fonctions avec tuples de taille fixe</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_date</span><span class="p">(</span><span class="n">jour</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mois</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">annee</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Crée un tuple représentant une date</span>
-<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a>
-<a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a><span class="sd">    &gt;&gt;&gt; creer_date(15, 3, 2024)     # doctest: +SKIP</span>
-<a id="__codelineno-51-5" name="__codelineno-51-5" href="#__codelineno-51-5"></a><span class="sd">    (15, 3, 2024)</span>
-<a id="__codelineno-51-6" name="__codelineno-51-6" href="#__codelineno-51-6"></a><span class="sd">    &gt;&gt;&gt; creer_date(1, 1, 2000)     # doctest: +SKIP</span>
-<a id="__codelineno-51-7" name="__codelineno-51-7" href="#__codelineno-51-7"></a><span class="sd">    (1, 1, 2000)</span>
-<a id="__codelineno-51-8" name="__codelineno-51-8" href="#__codelineno-51-8"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-51-9" name="__codelineno-51-9" href="#__codelineno-51-9"></a>    <span class="k">pass</span>
-<a id="__codelineno-51-10" name="__codelineno-51-10" href="#__codelineno-51-10"></a>
-<a id="__codelineno-51-11" name="__codelineno-51-11" href="#__codelineno-51-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">jour_de</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-51-12" name="__codelineno-51-12" href="#__codelineno-51-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Extrait le jour d&#39;une date</span>
-<a id="__codelineno-51-13" name="__codelineno-51-13" href="#__codelineno-51-13"></a>
-<a id="__codelineno-51-14" name="__codelineno-51-14" href="#__codelineno-51-14"></a><span class="sd">    &gt;&gt;&gt; jour_de((15, 3, 2024))     # doctest: +SKIP</span>
-<a id="__codelineno-51-15" name="__codelineno-51-15" href="#__codelineno-51-15"></a><span class="sd">    15</span>
-<a id="__codelineno-51-16" name="__codelineno-51-16" href="#__codelineno-51-16"></a><span class="sd">    &gt;&gt;&gt; jour_de((1, 12, 2023))     # doctest: +SKIP</span>
-<a id="__codelineno-51-17" name="__codelineno-51-17" href="#__codelineno-51-17"></a><span class="sd">    1</span>
-<a id="__codelineno-51-18" name="__codelineno-51-18" href="#__codelineno-51-18"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-51-19" name="__codelineno-51-19" href="#__codelineno-51-19"></a>    <span class="k">pass</span>
-<a id="__codelineno-51-20" name="__codelineno-51-20" href="#__codelineno-51-20"></a>
-<a id="__codelineno-51-21" name="__codelineno-51-21" href="#__codelineno-51-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">mois_de</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-51-22" name="__codelineno-51-22" href="#__codelineno-51-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Extrait le mois d&#39;une date</span>
-<a id="__codelineno-51-23" name="__codelineno-51-23" href="#__codelineno-51-23"></a>
-<a id="__codelineno-51-24" name="__codelineno-51-24" href="#__codelineno-51-24"></a><span class="sd">    &gt;&gt;&gt; mois_de((15, 3, 2024))     # doctest: +SKIP</span>
-<a id="__codelineno-51-25" name="__codelineno-51-25" href="#__codelineno-51-25"></a><span class="sd">    3</span>
-<a id="__codelineno-51-26" name="__codelineno-51-26" href="#__codelineno-51-26"></a><span class="sd">    &gt;&gt;&gt; mois_de((1, 12, 2023))     # doctest: +SKIP</span>
-<a id="__codelineno-51-27" name="__codelineno-51-27" href="#__codelineno-51-27"></a><span class="sd">    12</span>
-<a id="__codelineno-51-28" name="__codelineno-51-28" href="#__codelineno-51-28"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-51-29" name="__codelineno-51-29" href="#__codelineno-51-29"></a>    <span class="k">pass</span>
-<a id="__codelineno-51-30" name="__codelineno-51-30" href="#__codelineno-51-30"></a>
-<a id="__codelineno-51-31" name="__codelineno-51-31" href="#__codelineno-51-31"></a><span class="k">def</span><span class="w"> </span><span class="nf">annee_de</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-51-32" name="__codelineno-51-32" href="#__codelineno-51-32"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Extrait l&#39;année d&#39;une date</span>
-<a id="__codelineno-51-33" name="__codelineno-51-33" href="#__codelineno-51-33"></a>
-<a id="__codelineno-51-34" name="__codelineno-51-34" href="#__codelineno-51-34"></a><span class="sd">    &gt;&gt;&gt; annee_de((15, 3, 2024))     # doctest: +SKIP</span>
-<a id="__codelineno-51-35" name="__codelineno-51-35" href="#__codelineno-51-35"></a><span class="sd">    2024</span>
-<a id="__codelineno-51-36" name="__codelineno-51-36" href="#__codelineno-51-36"></a><span class="sd">    &gt;&gt;&gt; annee_de((1, 12, 2023))     # doctest: +SKIP</span>
-<a id="__codelineno-51-37" name="__codelineno-51-37" href="#__codelineno-51-37"></a><span class="sd">    2023</span>
-<a id="__codelineno-51-38" name="__codelineno-51-38" href="#__codelineno-51-38"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-51-39" name="__codelineno-51-39" href="#__codelineno-51-39"></a>    <span class="k">pass</span>
-<a id="__codelineno-51-40" name="__codelineno-51-40" href="#__codelineno-51-40"></a>
-<a id="__codelineno-51-41" name="__codelineno-51-41" href="#__codelineno-51-41"></a><span class="k">def</span><span class="w"> </span><span class="nf">date_valide</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-51-42" name="__codelineno-51-42" href="#__codelineno-51-42"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Vérifie si une date est valide (jours entre 1-31, mois entre 1-12)</span>
-<a id="__codelineno-51-43" name="__codelineno-51-43" href="#__codelineno-51-43"></a>
-<a id="__codelineno-51-44" name="__codelineno-51-44" href="#__codelineno-51-44"></a><span class="sd">    &gt;&gt;&gt; date_valide((15, 3, 2024))     # doctest: +SKIP</span>
-<a id="__codelineno-51-45" name="__codelineno-51-45" href="#__codelineno-51-45"></a><span class="sd">    True</span>
-<a id="__codelineno-51-46" name="__codelineno-51-46" href="#__codelineno-51-46"></a><span class="sd">    &gt;&gt;&gt; date_valide((32, 1, 2024))     # doctest: +SKIP</span>
-<a id="__codelineno-51-47" name="__codelineno-51-47" href="#__codelineno-51-47"></a><span class="sd">    False</span>
-<a id="__codelineno-51-48" name="__codelineno-51-48" href="#__codelineno-51-48"></a><span class="sd">    &gt;&gt;&gt; date_valide((15, 13, 2024))     # doctest: +SKIP</span>
-<a id="__codelineno-51-49" name="__codelineno-51-49" href="#__codelineno-51-49"></a><span class="sd">    False</span>
-<a id="__codelineno-51-50" name="__codelineno-51-50" href="#__codelineno-51-50"></a><span class="sd">    &gt;&gt;&gt; date_valide((0, 5, 2024))     # doctest: +SKIP</span>
-<a id="__codelineno-51-51" name="__codelineno-51-51" href="#__codelineno-51-51"></a><span class="sd">    False</span>
-<a id="__codelineno-51-52" name="__codelineno-51-52" href="#__codelineno-51-52"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-51-53" name="__codelineno-51-53" href="#__codelineno-51-53"></a>    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_date</span><span class="p">(</span><span class="n">jour</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">mois</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">annee</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Crée un tuple représentant une date</span>
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a>
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a><span class="sd">    &gt;&gt;&gt; creer_date(15, 3, 2024)     # doctest: +SKIP</span>
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a><span class="sd">    (15, 3, 2024)</span>
+<a id="__codelineno-50-6" name="__codelineno-50-6" href="#__codelineno-50-6"></a><span class="sd">    &gt;&gt;&gt; creer_date(1, 1, 2000)     # doctest: +SKIP</span>
+<a id="__codelineno-50-7" name="__codelineno-50-7" href="#__codelineno-50-7"></a><span class="sd">    (1, 1, 2000)</span>
+<a id="__codelineno-50-8" name="__codelineno-50-8" href="#__codelineno-50-8"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-50-9" name="__codelineno-50-9" href="#__codelineno-50-9"></a>    <span class="k">pass</span>
+<a id="__codelineno-50-10" name="__codelineno-50-10" href="#__codelineno-50-10"></a>
+<a id="__codelineno-50-11" name="__codelineno-50-11" href="#__codelineno-50-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">jour_de</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-50-12" name="__codelineno-50-12" href="#__codelineno-50-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Extrait le jour d&#39;une date</span>
+<a id="__codelineno-50-13" name="__codelineno-50-13" href="#__codelineno-50-13"></a>
+<a id="__codelineno-50-14" name="__codelineno-50-14" href="#__codelineno-50-14"></a><span class="sd">    &gt;&gt;&gt; jour_de((15, 3, 2024))     # doctest: +SKIP</span>
+<a id="__codelineno-50-15" name="__codelineno-50-15" href="#__codelineno-50-15"></a><span class="sd">    15</span>
+<a id="__codelineno-50-16" name="__codelineno-50-16" href="#__codelineno-50-16"></a><span class="sd">    &gt;&gt;&gt; jour_de((1, 12, 2023))     # doctest: +SKIP</span>
+<a id="__codelineno-50-17" name="__codelineno-50-17" href="#__codelineno-50-17"></a><span class="sd">    1</span>
+<a id="__codelineno-50-18" name="__codelineno-50-18" href="#__codelineno-50-18"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-50-19" name="__codelineno-50-19" href="#__codelineno-50-19"></a>    <span class="k">pass</span>
+<a id="__codelineno-50-20" name="__codelineno-50-20" href="#__codelineno-50-20"></a>
+<a id="__codelineno-50-21" name="__codelineno-50-21" href="#__codelineno-50-21"></a><span class="k">def</span><span class="w"> </span><span class="nf">mois_de</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-50-22" name="__codelineno-50-22" href="#__codelineno-50-22"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Extrait le mois d&#39;une date</span>
+<a id="__codelineno-50-23" name="__codelineno-50-23" href="#__codelineno-50-23"></a>
+<a id="__codelineno-50-24" name="__codelineno-50-24" href="#__codelineno-50-24"></a><span class="sd">    &gt;&gt;&gt; mois_de((15, 3, 2024))     # doctest: +SKIP</span>
+<a id="__codelineno-50-25" name="__codelineno-50-25" href="#__codelineno-50-25"></a><span class="sd">    3</span>
+<a id="__codelineno-50-26" name="__codelineno-50-26" href="#__codelineno-50-26"></a><span class="sd">    &gt;&gt;&gt; mois_de((1, 12, 2023))     # doctest: +SKIP</span>
+<a id="__codelineno-50-27" name="__codelineno-50-27" href="#__codelineno-50-27"></a><span class="sd">    12</span>
+<a id="__codelineno-50-28" name="__codelineno-50-28" href="#__codelineno-50-28"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-50-29" name="__codelineno-50-29" href="#__codelineno-50-29"></a>    <span class="k">pass</span>
+<a id="__codelineno-50-30" name="__codelineno-50-30" href="#__codelineno-50-30"></a>
+<a id="__codelineno-50-31" name="__codelineno-50-31" href="#__codelineno-50-31"></a><span class="k">def</span><span class="w"> </span><span class="nf">annee_de</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-50-32" name="__codelineno-50-32" href="#__codelineno-50-32"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Extrait l&#39;année d&#39;une date</span>
+<a id="__codelineno-50-33" name="__codelineno-50-33" href="#__codelineno-50-33"></a>
+<a id="__codelineno-50-34" name="__codelineno-50-34" href="#__codelineno-50-34"></a><span class="sd">    &gt;&gt;&gt; annee_de((15, 3, 2024))     # doctest: +SKIP</span>
+<a id="__codelineno-50-35" name="__codelineno-50-35" href="#__codelineno-50-35"></a><span class="sd">    2024</span>
+<a id="__codelineno-50-36" name="__codelineno-50-36" href="#__codelineno-50-36"></a><span class="sd">    &gt;&gt;&gt; annee_de((1, 12, 2023))     # doctest: +SKIP</span>
+<a id="__codelineno-50-37" name="__codelineno-50-37" href="#__codelineno-50-37"></a><span class="sd">    2023</span>
+<a id="__codelineno-50-38" name="__codelineno-50-38" href="#__codelineno-50-38"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-50-39" name="__codelineno-50-39" href="#__codelineno-50-39"></a>    <span class="k">pass</span>
+<a id="__codelineno-50-40" name="__codelineno-50-40" href="#__codelineno-50-40"></a>
+<a id="__codelineno-50-41" name="__codelineno-50-41" href="#__codelineno-50-41"></a><span class="k">def</span><span class="w"> </span><span class="nf">date_valide</span><span class="p">(</span><span class="n">date</span><span class="p">:</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-50-42" name="__codelineno-50-42" href="#__codelineno-50-42"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Vérifie si une date est valide (jours entre 1-31, mois entre 1-12)</span>
+<a id="__codelineno-50-43" name="__codelineno-50-43" href="#__codelineno-50-43"></a>
+<a id="__codelineno-50-44" name="__codelineno-50-44" href="#__codelineno-50-44"></a><span class="sd">    &gt;&gt;&gt; date_valide((15, 3, 2024))     # doctest: +SKIP</span>
+<a id="__codelineno-50-45" name="__codelineno-50-45" href="#__codelineno-50-45"></a><span class="sd">    True</span>
+<a id="__codelineno-50-46" name="__codelineno-50-46" href="#__codelineno-50-46"></a><span class="sd">    &gt;&gt;&gt; date_valide((32, 1, 2024))     # doctest: +SKIP</span>
+<a id="__codelineno-50-47" name="__codelineno-50-47" href="#__codelineno-50-47"></a><span class="sd">    False</span>
+<a id="__codelineno-50-48" name="__codelineno-50-48" href="#__codelineno-50-48"></a><span class="sd">    &gt;&gt;&gt; date_valide((15, 13, 2024))     # doctest: +SKIP</span>
+<a id="__codelineno-50-49" name="__codelineno-50-49" href="#__codelineno-50-49"></a><span class="sd">    False</span>
+<a id="__codelineno-50-50" name="__codelineno-50-50" href="#__codelineno-50-50"></a><span class="sd">    &gt;&gt;&gt; date_valide((0, 5, 2024))     # doctest: +SKIP</span>
+<a id="__codelineno-50-51" name="__codelineno-50-51" href="#__codelineno-50-51"></a><span class="sd">    False</span>
+<a id="__codelineno-50-52" name="__codelineno-50-52" href="#__codelineno-50-52"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-50-53" name="__codelineno-50-53" href="#__codelineno-50-53"></a>    <span class="k">pass</span>
 </code></pre></div>
 </div>
 
@@ -4913,7 +4935,7 @@ Ce code va affecter <code>a</code> à 3, et le reste (*) dans <code>b</code>, so
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 6, 2025 18:31:00 UTC">November 6, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 25, 2025 19:23:18 UTC">November 25, 2025</span>
   </span>
 
     
