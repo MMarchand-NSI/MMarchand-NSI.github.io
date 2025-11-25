@@ -18,14 +18,14 @@ class Pixel:
     
     def update(self):
         """
-        Le pyxel se déplace toujours de son vecteur directeur
+        Le pyxel sait se déplacer toujours de son vecteur directeur
         """
         pass
 
 
     def draw(self):
         """
-        Dessine le pixel sur l'écran.
+        Le pixel sait se dessiner.
         """
         px.pset(int(self.x), int(self.y), self.color)
 
@@ -66,9 +66,9 @@ class Jeu:
 
 if __name__ == "__main__":
     # Démarre l'application
-    pyxel.init(30, 30, title="Pixel en Mouvement", fps = 10)
+    px.init(30, 30, title="Pixel en Mouvement", fps = 10)
     appli = Jeu()
-    pyxel.run(appli.update, appli.draw)
+    px.run(appli.update, appli.draw)
 ```
 
 !!! question "Exercices de base"
@@ -89,7 +89,7 @@ if __name__ == "__main__":
 
 
 !!! question "Remplacer un pixel par un sprite"
-    1. Téléchargez le fichier 1.pyxres sur [le site de la nuit du code](https://depot.nuitducode.net)
+    1. Téléchargez le fichier 2.pyxres sur [le site de la nuit du code](https://depot.nuitducode.net)
         - Il s'agit d'un fichier contenant des ressources visuelles et sonores.
         - Placez le **dans le même répertoire** que votre fichier python.
         - Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources du jeu, exécutez la commande suivante dans un terminal:
