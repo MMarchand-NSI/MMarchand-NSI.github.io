@@ -31,8 +31,8 @@ Un maillon a donc deux attributs :
 2. **`next`** : Une référence vers le maillon suivant.
 
 ```python
-class Maillon:
-    def __init__(self, data: int, next: 'Maillon'):
+class Maillon[T]:
+    def __init__(self, data: T, next: 'Maillon[T]'):
         self.data = data
         self.next = next
 ```
@@ -135,13 +135,55 @@ Lorsqu'elle est créée (donc vide), c'est un maillon pointant sur lui-même et 
 
 #### Attributs de `Liste`
 - **`__taille`** : Stocke la taille de la liste.
-- **`ajouter_tete`** : Ajoute un nouvel élément en tête de la liste.
+- Ceux hérités de Maillon (`data` et `next`)
+
+#### méthode initiale:
+
+**`ajouter_tete`** : Ajoute un nouvel élément en tête de la liste.
 
 ```python
-class Liste(Maillon):
+class Liste[T](Maillon[T]): 
+    """
+    Une liste est un maillon, son propre maillon sentinelle.
+    self est donc toujours le maillon sentinelle.
+    self.next est le premier maillon de la liste.
+    
+    Design clé : Liste hérite de Maillon pour garantir que None n'est JAMAIS 
+    utilisé dans la structure chaînée. La liste circulaire élimine tous les 
+    cas spéciaux.
+    """
+
     def __init__(self):
-        super().__init__(0, self)
-        self.__taille = 0
+        """
+        On instancie un Maillon dont le maillon suivant est lui-même.
+        
+        Explication du mécanisme d'instanciation :
+        1. super().__init__() appelle Maillon.__init__()
+        2. On passe T.__default__ (la valeur par défaut du type T) comme data 
+           La sentinelle n'a pas de donnée utile et on ne peut et veut pas mettre None.
+        3. On passe self comme next, mais self n'est pas encore complètement 
+           initialisé à ce moment
+        4. Python permet cette référence circulaire car l'objet existe déjà 
+           en mémoire.
+        5. Résultat : self.next == self, une liste circulaire vide
+        
+        >>> lst = Liste()
+        >>> lst.next is lst
+        True
+        """
+        
+        super().__init__(T.__default__, self)  # pyright: ignore[reportAny]
+        self.__taille: int = 0
+
+
+    def __len__(self) -> int:
+        """
+        Renvoie la longueur de la chaine démarrant par le Maillon.
+        grâce au dunder, on peut maintenant appeler la fonction len.
+        >>> len(exemple())
+        3
+        """
+        return self.__taille
 ```
 
 Dans une méthode, self.next représente toujours le premier Maillon, à moins que la liste ne soit vide, auquel cas elle pointe sur elle même.
@@ -195,10 +237,19 @@ graph LR
 La méthode `ajouter_tete` écrite en conséquence insère un nouveau maillon juste après la sentinelle.
 
 ```python
-def ajouter_tete(self, e: int):
-    m = Maillon(e, self.next)     # 1
-    self.next = m                 # 2
-    self.__taille += 1            # 3
+    def ajouter_debut(self, e: T):
+        """
+        il faut ajouter un maillon entre la sentinelle (self) et son maillon suivant (self.next).
+        >>> lst = Liste()
+        >>> lst.ajouter_debut(1)
+        >>> lst.ajouter_debut(2)
+        >>> lst.ajouter_debut(3)
+        >>> str(lst)
+        '3 -> 2 -> 1 -> _|_'
+        """
+        m: Maillon[T] = Maillon[T](e, self.next)  #1
+        self.next = m                             #2
+        self.__taille +=1                         #3
 ```
 
 L'approche proposée permet de simplifier le code des méthodes.
@@ -257,8 +308,8 @@ def longueur(self) -> int:
     Renvoie la taille calculée de la liste.
     """
     acc = 0
-    courant = self.next
-    while courant is not self:
+    courant: Maillon[T] = self.next
+    while courant is not self: # tant qu'on est pas "revenus" à la sentinelle
         acc += 1
         courant = courant.next
     return acc
@@ -272,5 +323,4 @@ def longueur(self) -> int:
 !!! question Défi 
     A vous maintenant de recréer les fonctions que vous avez vues en programmation fonctionnelles en tant que méthodes de la classe liste en commençant par la méthode ajouter_fin. Vous n'utiliserez pas la récursivité.
 
-    Tout comme nous l'avons fait avec OCaml en programmation fonctionnelle, complétez aussi le programme en C++.
 

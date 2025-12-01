@@ -1,6 +1,5 @@
 # Parcourir des itérables
 
-![alt text](image-1.png)
 
 
 A partir de ce cours, nous allons pouvoir commencer à résoudre des problèmes plus réalistes.
@@ -188,9 +187,9 @@ Exemple, pas à pas, pour le calcul de la somme des entiers de 1 à $n$ dans une
         """
         Affiche un à un les éléments d'une séquence
 
-        >>> affiche_seq("ab")
-        'a'
-        'b'
+        >>> afficher_seq("ab")
+        a
+        b
         >>> afficher_seq((3, 9, 2))
         3
         9
@@ -209,7 +208,7 @@ Exemple, pas à pas, pour le calcul de la somme des entiers de 1 à $n$ dans une
     ```python
     def un_sur_2(txt: str) -> str:
         """
-        Affiche un à un les éléments d'une séquence
+        revoie la str contenant un élément sur 2
 
         >>> un_sur_2("abcdef")
         'ace'
@@ -229,7 +228,7 @@ Exemple, pas à pas, pour le calcul de la somme des entiers de 1 à $n$ dans une
     ```python
     def nb_voyelles(txt: str) -> ...:
         """
-        Affiche un à un les éléments d'une séquence
+        renvoie le nombre de voyelles de txt
 
         >>> nb_voyelles("bonjour")
         3
@@ -241,31 +240,12 @@ Exemple, pas à pas, pour le calcul de la somme des entiers de 1 à $n$ dans une
         voyelles = ('a', 'e', 'i', 'o', 'u')        
     ```
 
-!!! question "4 - contient"
-    Complétez la fonction qui lit une chaîne de caractères et retourne le nombre de voyelles présentes dans cette chaîne. (complétez le type de retour)
-
-    (On sait qu'on veut COMPTER le nombre de voyelles. De quel type est le résultat? Que vaut le résultat au début de la fonction?)
-
-    ```python
-    def nb_voyelles(txt: str) -> ...:
-        """
-        Compte le nombre de voyelles d'une chaîne de caractères
-
-        >>> nb_voyelles("bonjour")
-        3
-        >>> nb_voyelles("")
-        0
-        >>> nb_voyelles("aeiouy")
-        6
-        """
-        voyelles = ('a', 'e', 'i', 'o', 'u')
-    ```
 
 !!! question "Renverser"
     Ecrire une fonction qui renvoie les caractères d'une chaîne de caractères dans l'autre sens.
 
     ```python
-    def renverser(txt: str):
+    def renverser(txt: str) -> str:
         """
         Renverse une chaîne de caractères.
 
@@ -283,7 +263,7 @@ Exemple, pas à pas, pour le calcul de la somme des entiers de 1 à $n$ dans une
     Ecrire la fonction suivante. On n'utilisera pas l'opérateur `in`.
 
     ```python
-    def contient(e: int, lst: list[int]) -> int:
+    def contient(e: int, lst: list[int]) -> bool:
         """
         Renvoie si l'élément e est dans la liste lst
         >>> liste = [2, 5, 8, 9]
@@ -329,17 +309,35 @@ Exemple, pas à pas, pour le calcul de la somme des entiers de 1 à $n$ dans une
     """
     ```
 
+!!! question "Somme"
+    Ecrire et tester une fonction `somme` qui prend en paramètres une liste d'entiers et qui renvoie leur somme.
+
 !!! question "Produit"
-    Ecrire et tester une fonction `produit` qui prend en paramètres une liste de floats et qui renvoie leur produit.
+    Ecrire et tester une fonction `produit` qui prend en paramètres une liste d'entiers et qui renvoie leur produit.
 
 !!! question "Factorielle"
     1. Ecrire et tester une fonction qui calcule $1 \times 2 \times 3 \times ... \times n$, pour un $n$ entier. On appelle cette opération la factorielle de n. On la note $n!$  (qui se lit "n factorielle")
     2. Calculez $0!$ avec votre fonction. que trouvez-vous?
 
+## Problème
+
+ici, il s'agit de créer une fonction bin2dec qui prend en paramètre une chaîne de caractères constituée de 0 et de 1, et qui convertit cette écriture binaire en entier décimal.
+
+Par exemple:
+```python
+>>> bin2dec("1101")
+13
+>>> bin2dec("10001000101111")
+8751
+```
+
+- Dans la fonction, on commencera par renverser la chaîne de caractères, afin que l'indice de chaque chiffre corresponde à sa puissance de 2 dans la décomposition.
+- On s'appuiera sur un parcours par indice pour calculer la somme de puissances de 2 par accumulation.
+
 ## Algo 1
 
-Les exercices suivants seront repris comme exemples pour le cours d'algorithmique.
-Il faut donc comprendre ce qu'il se passe là dedans.
+Les exercices suivants seront repris comme base pour le cours d'algorithmique.
+Il faut donc bien comprendre ce qu'il se passe là dedans.
 
 !!! question "Minimum"
     1. Sans utiliser la fonction min, écrire la fonction suivante:
@@ -359,7 +357,7 @@ Il faut donc comprendre ce qu'il se passe là dedans.
 
 !!! question "Indice minimum"
     1. Ecrire la fonction suivante
-    2. Peut-il y avoir des valeurs différetnes pour l'indice du minimum?
+    2. Peut-il y avoir des valeurs différentes pour l'indice du minimum?
 
     ```python
     def i_minimum(lst: list[int]) -> int:
@@ -375,7 +373,6 @@ Il faut donc comprendre ce qu'il se passe là dedans.
     ```
 
     3. Testez votre fonction sur cette liste: [ 2, 5, 1, 6, 1, 9, 1, 7]
-    4. Changez l'inégalité au sens strict pour unne inégalité au sens large (ou inversement)
-    5. Expliquez plus précisément la description de la fonction pour chacun des 2 cas.
-    6. Bonus: Ecrivez une fonction qui renvoie la liste des indices minimum
-
+    4. Changez l'inégalité au sens strict pour une inégalité au sens large (ou inversement)
+    5. Expliquez plus précisément la description de ce que fait la fonction pour chacun des 2 cas (strict ou large).
+    6. Bonus: Ecrivez une fonction qui renvoie la liste des indices minimum (appelé l'ensemble des minorants)
