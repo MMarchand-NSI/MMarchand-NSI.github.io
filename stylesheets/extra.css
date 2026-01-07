@@ -1,19 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&display=swap');
 
+/* =========================
+   TYPOGRAPHIE ET CODE
+   ========================= */
+
 .md-typeset .admonition,
 .md-typeset details {
-  font-size: 16px
+  font-size: 16px;
 }
-
-input[type="text"].bin {
-  max-width: 20px;
-}
-
-.md-header__button.md-logo img {
-  height: 50px; /* ajuste la hauteur ici */
-  width: auto;  /* garde les proportions */
-}
-
 
 code, pre, .highlight code {
   font-family: 'JetBrains Mono', monospace !important;
@@ -25,19 +19,16 @@ code, pre, .highlight code {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Code inline */
 p code, li code, td code {
   font-family: 'JetBrains Mono', monospace !important;
   font-variant-ligatures: common-ligatures;
   font-feature-settings: 'liga' 1, 'calt' 1;
 }
 
+/* =========================
+   TITRES
+   ========================= */
 
-
-
-
-
-/* Titres de niveau 1 - Style distinctif */
 .md-typeset h1 {
   font-size: 2.5em;
   font-weight: 700;
@@ -48,7 +39,10 @@ p code, li code, td code {
   margin-bottom: 1em;
 }
 
-/* Titres de niveau 2 - Avec barre latérale */
+h1#accueil {
+  display: none;
+}
+
 .md-typeset h2 {
   font-size: 1.8em;
   font-weight: 600;
@@ -59,7 +53,6 @@ p code, li code, td code {
   margin-bottom: 0.8em;
 }
 
-/* Titres de niveau 3 - Plus subtil */
 .md-typeset h3 {
   font-size: 1.4em;
   font-weight: 600;
@@ -76,7 +69,6 @@ p code, li code, td code {
   font-weight: bold;
 }
 
-/* Titres de niveau 4 - Minimaliste */
 .md-typeset h4 {
   font-size: 1.15em;
   font-weight: 600;
@@ -87,13 +79,19 @@ p code, li code, td code {
   margin-bottom: 0.4em;
 }
 
-h1#accueil {
-  display: none;
+/* =========================
+   HEADER
+   ========================= */
+
+.md-header__button.md-logo img {
+  height: 50px;
+  width: auto;
 }
 
+/* =========================
+   HERO SECTION
+   ========================= */
 
-
-/* Hero section modifié */
 .hero {
   padding: 2rem;
   background: linear-gradient(135deg, var(--md-primary-fg-color) 0%, var(--md-accent-fg-color) 100%);
@@ -111,7 +109,7 @@ h1#accueil {
 
 .hero-text {
   flex: 1;
-  max-width: calc(100% - 170px); /* laisse la place pour l'image */
+  max-width: calc(100% - 170px);
 }
 
 .hero-image {
@@ -133,7 +131,6 @@ h1#accueil {
   line-height: 1.4;
 }
 
-/* Responsive - seulement sur très petits écrans */
 @media (max-width: 600px) {
   .hero-content {
     flex-direction: column;
@@ -154,10 +151,10 @@ h1#accueil {
   }
 }
 
+/* =========================
+   CARDS
+   ========================= */
 
-
-
-/* Cards grid */
 .cards {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -200,7 +197,10 @@ h1#accueil {
   text-decoration: underline;
 }
 
-/* Philosophy section */
+/* =========================
+   PHILOSOPHY
+   ========================= */
+
 .philosophy {
   background: var(--md-code-bg-color);
   padding: 2rem;
@@ -230,11 +230,10 @@ h1#accueil {
   color: var(--md-primary-fg-color);
 }
 
+/* =========================
+   SIDE BY SIDE BOXES
+   ========================= */
 
-
-
-
-/* Conteneur côte à côte */
 .side-by-side {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -242,7 +241,6 @@ h1#accueil {
   margin: 2rem 0;
 }
 
-/* Style des boîtes */
 .box {
   background: var(--md-code-bg-color);
   border: 2px solid var(--md-default-fg-color--lightest);
@@ -269,7 +267,6 @@ h1#accueil {
   content: none;
 }
 
-/* Style spécifique citation */
 .citation-box blockquote {
   margin: 1rem 0 0 0;
   padding: 0;
@@ -283,13 +280,11 @@ h1#accueil {
   margin: 0;
 }
 
-/* Style spécifique à propos */
 .about-box p {
   line-height: 1.6;
   margin-bottom: 1rem;
 }
 
-/* Warning box à l'intérieur */
 .warning-box {
   background: rgba(255, 152, 0, 0.1);
   border-left: 4px solid #ff9800;
@@ -314,10 +309,368 @@ h1#accueil {
   color: #ff9800;
 }
 
-/* Responsive - passe en colonne sur petits écrans */
 @media (max-width: 768px) {
   .side-by-side {
     grid-template-columns: 1fr;
     gap: 1.5rem;
+  }
+}
+
+/* =========================
+   FLOATING CONSOLE PYTHON
+   ========================= */
+
+#floating-console {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 500px;
+  height: 400px;
+  background: white;
+  border: 2px solid #009688;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+[data-md-color-scheme="slate"] #floating-console {
+  background: #1e1e1e;
+  border-color: #26a69a;
+}
+
+.console-header {
+  background: linear-gradient(135deg, #009688, #26a69a);
+  color: white;
+  padding: 8px 12px;
+  cursor: move;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+  user-select: none;
+  font-size: 14px;
+}
+
+.console-header button {
+  background: rgba(255,255,255,0.2);
+  border: none;
+  color: white;
+  cursor: pointer;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 13px;
+  margin-left: 4px;
+  transition: background 0.2s;
+}
+
+.console-header button:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.console-header button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+#run-code {
+  font-weight: 700;
+}
+
+#console-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-height: 0;
+}
+
+#console-input {
+  flex: 0 0 50%;
+  border: none;
+  outline: none;
+  padding: 12px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  resize: none;
+  background: #fafafa;
+  color: #000;
+  min-height: 0;
+}
+
+[data-md-color-scheme="slate"] #console-input {
+  background: #252525;
+  color: #e0e0e0;
+}
+
+#resize-handle {
+  height: 4px;
+  background: #e0e0e0;
+  cursor: ns-resize;
+  flex-shrink: 0;
+  position: relative;
+  transition: background 0.2s;
+}
+
+#resize-handle:hover {
+  background: #009688;
+}
+
+[data-md-color-scheme="slate"] #resize-handle {
+  background: #404040;
+}
+
+[data-md-color-scheme="slate"] #resize-handle:hover {
+  background: #26a69a;
+}
+
+#resize-handle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 2px;
+  background: #999;
+  border-radius: 1px;
+}
+
+#console-output-wrapper {
+  flex: 1 1 50%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: white;
+  min-height: 0;
+}
+
+[data-md-color-scheme="slate"] #console-output-wrapper {
+  background: #1e1e1e;
+}
+
+.output-label {
+  padding: 6px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid #e0e0e0;
+  flex-shrink: 0;
+}
+
+[data-md-color-scheme="slate"] .output-label {
+  color: #999;
+  border-bottom-color: #404040;
+}
+
+#console-output {
+  flex: 1;
+  overflow-y: auto;
+  padding: 10px 12px;
+  font-size: 13px;
+  line-height: 1.5;
+  min-height: 0;
+}
+
+.output-separator {
+  height: 1px;
+  background: linear-gradient(to right, transparent, #e0e0e0 20%, #e0e0e0 80%, transparent);
+  margin: 12px 0;
+}
+
+[data-md-color-scheme="slate"] .output-separator {
+  background: linear-gradient(to right, transparent, #404040 20%, #404040 80%, transparent);
+}
+
+.output-line {
+  margin: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.output-line.command {
+  color: #1565c0;
+  background: #e3f2fd;
+  padding: 8px;
+  border-left: 3px solid #1976d2;
+  margin: 8px 0;
+  border-radius: 4px;
+}
+
+[data-md-color-scheme="slate"] .output-line.command {
+  color: #64b5f6;
+  background: #1a237e;
+  border-left-color: #2196f3;
+}
+
+.output-line.result {
+  color: #2e7d32;
+  padding: 4px 0;
+  margin: 4px 0;
+}
+
+[data-md-color-scheme="slate"] .output-line.result {
+  color: #81c784;
+}
+
+.output-line.error {
+  color: #c62828;
+  background: #ffebee;
+  padding: 8px;
+  border-left: 3px solid #d32f2f;
+  margin: 8px 0;
+  border-radius: 4px;
+}
+
+[data-md-color-scheme="slate"] .output-line.error {
+  color: #ef5350;
+  background: #311b1b;
+  border-left-color: #e53935;
+}
+
+.output-line.empty {
+  color: #999;
+  font-style: italic;
+  padding: 4px 0;
+}
+
+#console-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  color: #666;
+  font-size: 13px;
+}
+
+[data-md-color-scheme="slate"] #console-loading {
+  color: #999;
+}
+
+#show-console-btn {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background: #009688;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 24px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  z-index: 9998;
+  display: none;
+  transition: transform 0.2s;
+}
+
+#show-console-btn:hover {
+  transform: scale(1.1);
+}
+
+/* Poignées de redimensionnement */
+.resizer {
+  position: absolute;
+  z-index: 10000;
+}
+
+.resizer-n {
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  cursor: ns-resize;
+}
+
+.resizer-s {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  cursor: ns-resize;
+}
+
+.resizer-e {
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  cursor: ew-resize;
+}
+
+.resizer-w {
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 5px;
+  cursor: ew-resize;
+}
+
+.resizer-nw {
+  top: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nwse-resize;
+}
+
+.resizer-ne {
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nesw-resize;
+}
+
+.resizer-sw {
+  bottom: 0;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nesw-resize;
+}
+
+.resizer-se {
+  bottom: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  cursor: nwse-resize;
+  background: linear-gradient(135deg, transparent 0%, transparent 50%, rgba(0,150,136,0.3) 50%, rgba(0,150,136,0.3) 100%);
+}
+
+[data-md-color-scheme="slate"] .resizer-se {
+  background: linear-gradient(135deg, transparent 0%, transparent 50%, rgba(38,166,154,0.3) 50%, rgba(38,166,154,0.3) 100%);
+}
+
+.resizer-se::after {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 0 0 6px 6px;
+  border-color: transparent transparent #009688 transparent;
+}
+
+[data-md-color-scheme="slate"] .resizer-se::after {
+  border-color: transparent transparent #26a69a transparent;
+}
+
+@media (max-width: 768px) {
+  #floating-console {
+    width: calc(100vw - 40px);
+    height: 350px;
+    bottom: 10px;
+    right: 20px;
   }
 }
