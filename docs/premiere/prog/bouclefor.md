@@ -293,7 +293,7 @@ Exemple, pas à pas, pour le calcul de la somme des entiers de 1 à $n$ dans une
     ```
 
 !!! question "Drop"
-    Ecrire une fonction qui renvoie la chaine de caractère sans ses n premiers caractères, de telle manière que les tests suivants soient passants.
+    Ecrire une fonction  qui renvoie la chaine de caractère sans ses n premiers caractères, de telle manière que les tests suivants soient passants.
 
     ```python
     """
