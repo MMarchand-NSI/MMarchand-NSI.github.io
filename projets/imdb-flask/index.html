@@ -2221,6 +2221,45 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#exercice-6-classement-des-films-par-score-moyenne-bayesienne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercice 6 : Classement des films par score (moyenne bayesienne)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercice 6 : Classement des films par score (moyenne bayesienne)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-principe-de-la-moyenne-bayesienne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le principe de la moyenne bayesienne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mission
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4603,6 +4642,45 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#exercice-6-classement-des-films-par-score-moyenne-bayesienne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exercice 6 : Classement des films par score (moyenne bayesienne)
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Exercice 6 : Classement des films par score (moyenne bayesienne)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#le-principe-de-la-moyenne-bayesienne" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le principe de la moyenne bayesienne
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mission" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mission
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -5103,6 +5181,140 @@ Ainsi, la route <code>/</code> du blueprint devient <code>/acteurs/</code>.</p>
 <p>C'est plus complexe. La vraie solution serait de modifier <code>get_all_acteurs()</code>
 pour faire une jointure avec COUNT.</p>
 </details>
+<h3 id="exercice-6-classement-des-films-par-score-moyenne-bayesienne">Exercice 6 : Classement des films par score (moyenne bayesienne)</h3>
+<div class="admonition question">
+<p class="admonition-title">Pourquoi la moyenne simple ne suffit pas ?</p>
+<p>Imaginez deux films :</p>
+<ul>
+<li><strong>Film A</strong> : note moyenne de 9.5/10 avec 3 votes</li>
+<li><strong>Film B</strong> : note moyenne de 8.2/10 avec 50 000 votes</li>
+</ul>
+<p>Lequel est vraiment le meilleur ? Le film A a une meilleure moyenne, mais avec seulement 3 votes, cette note n'est pas fiable. Le film B a une note legerement inferieure, mais basee sur beaucoup plus d'avis.</p>
+<p>C'est le probleme que resout la <strong>moyenne bayesienne</strong>.</p>
+</div>
+<h4 id="le-principe-de-la-moyenne-bayesienne">Le principe de la moyenne bayesienne</h4>
+<p>IMDB utilise cette formule pour calculer un score pondere :</p>
+<div class="arithmatex">\[
+\text{score} = \frac{v}{v + m} \times R + \frac{m}{v + m} \times C
+\]</div>
+<p>Ou :</p>
+<table>
+<thead>
+<tr>
+<th>Variable</th>
+<th>Signification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>R</strong></td>
+<td>Note moyenne du film (<code>average_rating</code>)</td>
+</tr>
+<tr>
+<td><strong>v</strong></td>
+<td>Nombre de votes du film (<code>num_votes</code>)</td>
+</tr>
+<tr>
+<td><strong>m</strong></td>
+<td>Seuil minimum de votes (ex: 1000)</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>Moyenne globale de tous les films</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Interpretation intuitive :</strong></p>
+<ul>
+<li>Si un film a <strong>peu de votes</strong> (v petit), son score est "tire" vers la moyenne globale C</li>
+<li>Si un film a <strong>beaucoup de votes</strong> (v grand), son score se rapproche de sa vraie moyenne R</li>
+<li>Le parametre <strong>m</strong> controle a partir de combien de votes on fait confiance a la note</li>
+</ul>
+<p><strong>Exemple concret :</strong></p>
+<p>Supposons C = 7.0 (moyenne globale) et m = 1000 (seuil).</p>
+<table>
+<thead>
+<tr>
+<th>Film</th>
+<th>R (moyenne)</th>
+<th>v (votes)</th>
+<th>Calcul</th>
+<th>Score</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Film A</td>
+<td>9.5</td>
+<td>3</td>
+<td>(3/1003)<em>9.5 + (1000/1003)</em>7.0</td>
+<td><strong>7.01</strong></td>
+</tr>
+<tr>
+<td>Film B</td>
+<td>8.2</td>
+<td>50000</td>
+<td>(50000/51000)<em>8.2 + (1000/51000)</em>7.0</td>
+<td><strong>8.18</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Le film B obtient un meilleur score car sa note est basee sur beaucoup plus de votes !</p>
+<h4 id="mission">Mission</h4>
+<p><strong>Etape 1 : Calculer la moyenne globale</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="k">AVG</span><span class="p">(</span><span class="n">average_rating</span><span class="p">)</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">rating</span><span class="p">;</span>
+</code></pre></div>
+<p>Notez cette valeur (environ 6.9 pour IMDB).</p>
+<p><strong>Etape 2 : Ajouter une colonne score a la table title</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">ALTER</span><span class="w"> </span><span class="k">TABLE</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">ADD</span><span class="w"> </span><span class="k">COLUMN</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="nb">FLOAT</span><span class="p">;</span>
+</code></pre></div>
+<p><strong>Etape 3 : Mettre a jour les scores avec la formule bayesienne</strong>
+Cet update s'appelle un subcorrelated update. c'est completement hors programme. Ca permet de mettre à jour une colonne en fonction de données dans plusieurs tables en effectuant des jointures.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">UPDATE</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="n">t</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">SET</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="k">SELECT</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">        </span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">num_votes</span><span class="p">::</span><span class="nb">float</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">num_votes</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1000</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">average_rating</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">        </span><span class="o">+</span><span class="w"> </span><span class="p">(</span><span class="mi">1000</span><span class="p">.</span><span class="mi">0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="p">(</span><span class="n">r</span><span class="p">.</span><span class="n">num_votes</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1000</span><span class="p">))</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">6</span><span class="p">.</span><span class="mi">9</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">    </span><span class="k">FROM</span><span class="w"> </span><span class="n">rating</span><span class="w"> </span><span class="n">r</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">    </span><span class="k">WHERE</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">tconst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">tconst</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="p">)</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="k">WHERE</span><span class="w"> </span><span class="k">EXISTS</span><span class="w"> </span><span class="p">(</span><span class="k">SELECT</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="n">rating</span><span class="w"> </span><span class="n">r</span><span class="w"> </span><span class="k">WHERE</span><span class="w"> </span><span class="n">r</span><span class="p">.</span><span class="n">tconst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">t</span><span class="p">.</span><span class="n">tconst</span><span class="p">);</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Explication du SQL</p>
+<ul>
+<li><code>::float</code> : convertit en nombre decimal (PostgreSQL)</li>
+<li><code>1000</code> : notre seuil m</li>
+<li><code>6.9</code> : la moyenne globale C (a adapter selon votre base)</li>
+<li><code>WHERE EXISTS</code> : ne met a jour que les films qui ont une note</li>
+</ul>
+</div>
+<p><strong>Etape 4 : Verifier le resultat</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">SELECT</span><span class="w"> </span><span class="n">primary_title</span><span class="p">,</span><span class="w"> </span><span class="n">start_year</span><span class="p">,</span><span class="w"> </span><span class="n">score</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">FROM</span><span class="w"> </span><span class="n">title</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">WHERE</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="k">IS</span><span class="w"> </span><span class="k">NOT</span><span class="w"> </span><span class="k">NULL</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="k">ORDER</span><span class="w"> </span><span class="k">BY</span><span class="w"> </span><span class="n">score</span><span class="w"> </span><span class="k">DESC</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="k">LIMIT</span><span class="w"> </span><span class="mi">20</span><span class="p">;</span>
+</code></pre></div>
+<details class="success">
+<summary>Films attendus dans le top</summary>
+<p>Vous devriez voir des films celebres et bien notes avec beaucoup de votes :
+The Shawshank Redemption, The Godfather, The Dark Knight, etc.</p>
+</details>
+<p><strong>Etape 5 : Integrer dans l'application</strong></p>
+<ol>
+<li>Modifier la dataclass <code>Film</code> dans <code>modele.py</code> pour ajouter l'attribut <code>score</code></li>
+<li>Modifier les requetes SQL dans <code>films_db.py</code> pour inclure le score</li>
+<li>Ajouter une option de tri par score dans la liste des films</li>
+</ol>
+<div class="admonition tip">
+<p class="admonition-title">Pour aller plus loin</p>
+<ul>
+<li>Experimentez avec differentes valeurs de m (500, 2000, 5000...)</li>
+<li>Observez comment cela change le classement</li>
+<li>Reflechissez : quel m serait adapte pour un site avec peu d'utilisateurs ?</li>
+</ul>
+</div>
 <hr />
 <h2 id="mission-finale-creer-une-page-de-recherche-de-films">Mission finale : Creer une page de recherche de films</h2>
 <p>Maintenant que vous avez compris l'architecture, votre mission est de creer une fonctionnalite complete : <strong>la recherche et l'affichage des films</strong>.</p>
@@ -5115,32 +5327,32 @@ pour faire une jointure avec COUNT.</p>
 <h3 id="etapes-guidees">Etapes guidees</h3>
 <h4 id="etape-1-creer-le-service-servicesfilms_dbpy">Etape 1 : Creer le service <code>services/films_db.py</code></h4>
 <p>Creez un nouveau fichier avec les fonctions :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">database</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">modele</span><span class="w"> </span><span class="kn">import</span> <span class="n">Film</span><span class="p">,</span> <span class="n">Principal</span><span class="p">,</span> <span class="n">Acteur</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_all_films</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Film</span><span class="p">]:</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retourne une liste paginee de films&quot;&quot;&quot;</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="c1"># A completer : similaire a get_all_acteurs</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">count_films</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retourne le nombre total de films&quot;&quot;&quot;</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    <span class="c1"># A completer</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">search_films</span><span class="p">(</span><span class="n">search</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Film</span><span class="p">]:</span>
-<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Recherche des films par titre&quot;&quot;&quot;</span>
-<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>    <span class="c1"># A completer</span>
-<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>
-<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">count_films_search</span><span class="p">(</span><span class="n">search</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Compte les films correspondant a la recherche&quot;&quot;&quot;</span>
-<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>    <span class="c1"># A completer</span>
-<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a>
-<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_film</span><span class="p">(</span><span class="n">tconst</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Film</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retourne un film par son ID&quot;&quot;&quot;</span>
-<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>    <span class="c1"># A completer</span>
-<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a>
-<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_acteurs_film</span><span class="p">(</span><span class="n">tconst</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">Acteur</span><span class="p">,</span> <span class="n">Principal</span><span class="p">]]:</span>
-<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retourne les acteurs d&#39;un film avec leur role&quot;&quot;&quot;</span>
-<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>    <span class="c1"># A completer : similaire a get_films_acteur mais inverse</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">database</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">modele</span><span class="w"> </span><span class="kn">import</span> <span class="n">Film</span><span class="p">,</span> <span class="n">Principal</span><span class="p">,</span> <span class="n">Acteur</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_all_films</span><span class="p">(</span><span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Film</span><span class="p">]:</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retourne une liste paginee de films&quot;&quot;&quot;</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>    <span class="c1"># A completer : similaire a get_all_acteurs</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">count_films</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retourne le nombre total de films&quot;&quot;&quot;</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>    <span class="c1"># A completer</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">search_films</span><span class="p">(</span><span class="n">search</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">page</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">limit</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Film</span><span class="p">]:</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Recherche des films par titre&quot;&quot;&quot;</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>    <span class="c1"># A completer</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">count_films_search</span><span class="p">(</span><span class="n">search</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Compte les films correspondant a la recherche&quot;&quot;&quot;</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>    <span class="c1"># A completer</span>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_film</span><span class="p">(</span><span class="n">tconst</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Film</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retourne un film par son ID&quot;&quot;&quot;</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>    <span class="c1"># A completer</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_acteurs_film</span><span class="p">(</span><span class="n">tconst</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="n">Acteur</span><span class="p">,</span> <span class="n">Principal</span><span class="p">]]:</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retourne les acteurs d&#39;un film avec leur role&quot;&quot;&quot;</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>    <span class="c1"># A completer : similaire a get_films_acteur mais inverse</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Tables utiles</p>
@@ -5151,25 +5363,25 @@ pour faire une jointure avec COUNT.</p>
 </ul>
 </div>
 <h4 id="etape-2-creer-le-controleur-controlersfilms_controlerpy">Etape 2 : Creer le controleur <code>controlers/films_controler.py</code></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">abort</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">services.films_db</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">svc</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="n">films_bp</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;films_bp&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="nd">@films_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">liste_films</span><span class="p">():</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Liste paginee des films avec recherche&quot;&quot;&quot;</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    <span class="c1"># A completer : similaire a liste_acteurs</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a><span class="nd">@films_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&lt;string:tconst&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">detail_film</span><span class="p">(</span><span class="n">tconst</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Detail d&#39;un film&quot;&quot;&quot;</span>
-<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>    <span class="c1"># A completer : similaire a detail_acteur</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">flask</span><span class="w"> </span><span class="kn">import</span> <span class="n">Blueprint</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">render_template</span><span class="p">,</span> <span class="n">abort</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">services.films_db</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">svc</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="n">films_bp</span> <span class="o">=</span> <span class="n">Blueprint</span><span class="p">(</span><span class="s1">&#39;films_bp&#39;</span><span class="p">,</span> <span class="vm">__name__</span><span class="p">)</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="nd">@films_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">liste_films</span><span class="p">():</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Liste paginee des films avec recherche&quot;&quot;&quot;</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>    <span class="c1"># A completer : similaire a liste_acteurs</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="nd">@films_bp</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s1">&#39;/&lt;string:tconst&gt;&#39;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;GET&#39;</span><span class="p">])</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">detail_film</span><span class="p">(</span><span class="n">tconst</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Detail d&#39;un film&quot;&quot;&quot;</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>    <span class="c1"># A completer : similaire a detail_acteur</span>
 </code></pre></div>
 <h4 id="etape-3-enregistrer-le-blueprint-dans-apppy">Etape 3 : Enregistrer le blueprint dans <code>app.py</code></h4>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">controlers.films_controler</span><span class="w"> </span><span class="kn">import</span> <span class="n">films_bp</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">films_bp</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s1">&#39;/films&#39;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">controlers.films_controler</span><span class="w"> </span><span class="kn">import</span> <span class="n">films_bp</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">app</span><span class="o">.</span><span class="n">register_blueprint</span><span class="p">(</span><span class="n">films_bp</span><span class="p">,</span> <span class="n">url_prefix</span><span class="o">=</span><span class="s1">&#39;/films&#39;</span><span class="p">)</span>
 </code></pre></div>
 <h4 id="etape-4-creer-les-templates">Etape 4 : Creer les templates</h4>
 <ul>
@@ -5254,7 +5466,7 @@ pour faire une jointure avec COUNT.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 1, 2026 16:19:08 UTC">February 1, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 1, 2026 17:03:24 UTC">February 1, 2026</span>
   </span>
 
     
