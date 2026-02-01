@@ -308,6 +308,114 @@ Le template Jinja :
     C'est plus complexe. La vraie solution serait de modifier `get_all_acteurs()`
     pour faire une jointure avec COUNT.
 
+### Exercice 6 : Classement des films par score (moyenne bayesienne)
+
+!!! question "Pourquoi la moyenne simple ne suffit pas ?"
+    Imaginez deux films :
+
+    - **Film A** : note moyenne de 9.5/10 avec 3 votes
+    - **Film B** : note moyenne de 8.2/10 avec 50 000 votes
+
+    Lequel est vraiment le meilleur ? Le film A a une meilleure moyenne, mais avec seulement 3 votes, cette note n'est pas fiable. Le film B a une note legerement inferieure, mais basee sur beaucoup plus d'avis.
+
+    C'est le probleme que resout la **moyenne bayesienne**.
+
+#### Le principe de la moyenne bayesienne
+
+IMDB utilise cette formule pour calculer un score pondere :
+
+$$
+\text{score} = \frac{v}{v + m} \times R + \frac{m}{v + m} \times C
+$$
+
+Ou :
+
+| Variable | Signification |
+|----------|---------------|
+| **R** | Note moyenne du film (`average_rating`) |
+| **v** | Nombre de votes du film (`num_votes`) |
+| **m** | Seuil minimum de votes (ex: 1000) |
+| **C** | Moyenne globale de tous les films |
+
+**Interpretation intuitive :**
+
+- Si un film a **peu de votes** (v petit), son score est "tire" vers la moyenne globale C
+- Si un film a **beaucoup de votes** (v grand), son score se rapproche de sa vraie moyenne R
+- Le parametre **m** controle a partir de combien de votes on fait confiance a la note
+
+**Exemple concret :**
+
+Supposons C = 7.0 (moyenne globale) et m = 1000 (seuil).
+
+| Film | R (moyenne) | v (votes) | Calcul | Score |
+|------|-------------|-----------|--------|-------|
+| Film A | 9.5 | 3 | (3/1003)*9.5 + (1000/1003)*7.0 | **7.01** |
+| Film B | 8.2 | 50000 | (50000/51000)*8.2 + (1000/51000)*7.0 | **8.18** |
+
+Le film B obtient un meilleur score car sa note est basee sur beaucoup plus de votes !
+
+#### Mission
+
+**Etape 1 : Calculer la moyenne globale**
+
+```sql
+SELECT AVG(average_rating) FROM rating;
+```
+
+Notez cette valeur (environ 6.9 pour IMDB).
+
+**Etape 2 : Ajouter une colonne score a la table title**
+
+```sql
+ALTER TABLE title ADD COLUMN score FLOAT;
+```
+
+**Etape 3 : Mettre a jour les scores avec la formule bayesienne**
+Cet update s'appelle un subcorrelated update. c'est completement hors programme. Ca permet de mettre à jour une colonne en fonction de données dans plusieurs tables en effectuant des jointures.
+
+```sql
+UPDATE title t
+SET score = (
+    SELECT
+        (r.num_votes::float / (r.num_votes + 1000)) * r.average_rating
+        + (1000.0 / (r.num_votes + 1000)) * 6.9
+    FROM rating r
+    WHERE r.tconst = t.tconst
+)
+WHERE EXISTS (SELECT 1 FROM rating r WHERE r.tconst = t.tconst);
+```
+
+!!! note "Explication du SQL"
+    - `::float` : convertit en nombre decimal (PostgreSQL)
+    - `1000` : notre seuil m
+    - `6.9` : la moyenne globale C (a adapter selon votre base)
+    - `WHERE EXISTS` : ne met a jour que les films qui ont une note
+
+**Etape 4 : Verifier le resultat**
+
+```sql
+SELECT primary_title, start_year, score
+FROM title
+WHERE score IS NOT NULL
+ORDER BY score DESC
+LIMIT 20;
+```
+
+??? success "Films attendus dans le top"
+    Vous devriez voir des films celebres et bien notes avec beaucoup de votes :
+    The Shawshank Redemption, The Godfather, The Dark Knight, etc.
+
+**Etape 5 : Integrer dans l'application**
+
+1. Modifier la dataclass `Film` dans `modele.py` pour ajouter l'attribut `score`
+2. Modifier les requetes SQL dans `films_db.py` pour inclure le score
+3. Ajouter une option de tri par score dans la liste des films
+
+!!! tip "Pour aller plus loin"
+    - Experimentez avec differentes valeurs de m (500, 2000, 5000...)
+    - Observez comment cela change le classement
+    - Reflechissez : quel m serait adapte pour un site avec peu d'utilisateurs ?
+
 ---
 
 ## Mission finale : Creer une page de recherche de films
