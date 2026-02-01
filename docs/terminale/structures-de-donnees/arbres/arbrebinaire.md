@@ -49,8 +49,6 @@
     [21, 12, 9, 15, 27, 19, 25, 32]
     ```
 
-    **Indication:** L'ordre des éléments dans la liste dépend du parcours choisi. Ici, on propose un parcours préfixe (racine, puis sag, puis sad).
-
     ??? warning "Correction"
         ```python
         def to_list[T](a: ArbreBin[T]) -> list[T]:
@@ -115,7 +113,7 @@
     5
     ```
 
-    **Indication:** Attention, cette fonction a **trois** cas de base à considérer : l'arbre vide, la feuille, et le cas général.
+    **Indication:** Attention, cette fonction a **trois** cas à considérer : l'arbre vide, la feuille, et le cas général.
 
     ??? warning "Correction"
         ```python
