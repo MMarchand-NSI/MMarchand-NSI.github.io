@@ -2,7 +2,12 @@
 
 ## 1. Introduction : Pourquoi a-t-on besoin d'un système d'exploitation ?
 
-Imaginez un ordinateur sans système d'exploitation : chaque programme devrait savoir comment communiquer directement avec le processeur, la mémoire, le disque dur, la carte graphique... Chaque développeur devrait réécrire le code pour afficher un pixel à l'écran, lire un fichier, ou gérer plusieurs programmes simultanément. Ce serait un **cauchemar**.
+Imaginons un ordinateur sans système d'exploitation : chaque programme devrait savoir comment communiquer directement avec le processeur, la mémoire, le disque dur, la carte graphique... Chaque développeur devrait réécrire le code pour afficher un pixel à l'écran, lire un fichier, ou gérer plusieurs programmes simultanément. Ce serait un **cauchemar**.
+
+Voici une vidéo de l'institut national de recherche en intelligence artificielle (INRIA), qui explique les principales fonctions d'un OS.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/SpCP2oaCx8A" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 
 Le **système d'exploitation** (OS, *Operating System*) est le **chef d'orchestre** de l'ordinateur. C'est un logiciel qui :
 
@@ -421,13 +426,13 @@ Nous allons installer **Alpine Linux**, une distribution légère, dans une **ma
 
 Nous utilisons **MSYS2** (un environnement Linux pour Windows) et **QEMU** (un émulateur de machine virtuelle).
 
-1. **Ouvrir MSYS2 MINGW64** (chercher avec la loupe Windows)
+1. **Ouvrir MSYS2 UCRT64** (chercher avec la loupe Windows)
 
 2. **Mettre à jour MSYS2** :
    ```bash
    pacman -Syu
    ```
-   Répétez jusqu'à voir "there is nothing to do". Si le terminal demande à être fermé, fermez-le et relancez MINGW64.
+   Répétez jusqu'à voir "there is nothing to do". Si le terminal demande à être fermé, fermez-le et relancez UCRT64.
 
 3. **Installer QEMU** :
    ```bash
