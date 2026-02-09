@@ -5694,82 +5694,10 @@ Pour chaque nœud d'un ABR :</p>
 </details>
 <h3 id="exercice-2-verifier-quun-arbre-est-un-abr">Exercice 2 : Vérifier qu'un arbre est un ABR</h3>
 <p>Implémentez la fonction <code>est_abr(arbre: ArbreBin[T]) -&gt; bool</code> qui vérifie qu'un arbre binaire est un ABR.</p>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_abr</span><span class="p">(</span><span class="n">arbre</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">],</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>            <span class="n">min_val</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;-inf&#39;</span><span class="p">),</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>            <span class="n">max_val</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s1">&#39;inf&#39;</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Vérifie qu&#39;un arbre binaire est un ABR.&quot;&quot;&quot;</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>        <span class="k">return</span> <span class="kc">True</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="c1"># La valeur doit être dans l&#39;intervalle [min_val, max_val]</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">min_val</span> <span class="o">&lt;</span> <span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">max_val</span><span class="p">):</span>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>        <span class="k">return</span> <span class="kc">False</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>    <span class="c1"># Vérifier récursivement</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">est_abr</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">arbre</span><span class="p">),</span> <span class="n">min_val</span><span class="p">,</span> <span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span> <span class="ow">and</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>            <span class="n">est_abr</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">arbre</span><span class="p">),</span> <span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">),</span> <span class="n">max_val</span><span class="p">))</span>
-</code></pre></div>
-<p><strong>Test :</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># ABR valide</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">arbre1</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">creer</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()),</span> <span class="n">creer</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()))</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">est_abr</span><span class="p">(</span><span class="n">arbre1</span><span class="p">))</span>  <span class="c1"># True</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="c1"># Pas un ABR (6 &gt; 5 mais dans le sous-arbre gauche)</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">arbre2</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>               <span class="n">creer</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">creer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()),</span> <span class="n">creer</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">(),</span> <span class="p">())),</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>               <span class="n">creer</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()))</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">est_abr</span><span class="p">(</span><span class="n">arbre2</span><span class="p">))</span>  <span class="c1"># False</span>
-</code></pre></div>
-</details>
 <h3 id="exercice-3-insertion-dans-un-abr">Exercice 3 : Insertion dans un ABR</h3>
 <p>Implémentez la fonction <code>insere_abr(element: T, arbre: ArbreBin[T]) -&gt; ArbreBin[T]</code> qui insère un élément dans un ABR.</p>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">insere_abr</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">element</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">arbre</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Insère un élément dans un ABR.&quot;&quot;&quot;</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>        <span class="k">return</span> <span class="n">creer</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="p">(),</span> <span class="p">())</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="k">if</span> <span class="n">element</span> <span class="o">&lt;</span> <span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>        <span class="k">return</span> <span class="n">creer</span><span class="p">(</span><span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">),</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>                    <span class="n">insere_abr</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">sag</span><span class="p">(</span><span class="n">arbre</span><span class="p">)),</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>                    <span class="n">sad</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="k">elif</span> <span class="n">element</span> <span class="o">&gt;</span> <span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>        <span class="k">return</span> <span class="n">creer</span><span class="p">(</span><span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">),</span>
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>                    <span class="n">sag</span><span class="p">(</span><span class="n">arbre</span><span class="p">),</span>
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>                    <span class="n">insere_abr</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">sad</span><span class="p">(</span><span class="n">arbre</span><span class="p">)))</span>
-<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>        <span class="k">return</span> <span class="n">arbre</span>  <span class="c1"># Élément déjà présent</span>
-</code></pre></div>
-<p><strong>Test :</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">arbre</span> <span class="o">=</span> <span class="p">()</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">arbre</span> <span class="o">=</span> <span class="n">insere_abr</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">arbre</span><span class="p">)</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">arbre</span> <span class="o">=</span> <span class="n">insere_abr</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">arbre</span><span class="p">)</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">arbre</span> <span class="o">=</span> <span class="n">insere_abr</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">arbre</span><span class="p">)</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="n">arbre</span> <span class="o">=</span> <span class="n">insere_abr</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">arbre</span><span class="p">)</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">parcours_infixe</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span>  <span class="c1"># [1, 3, 5, 7]</span>
-</code></pre></div>
-</details>
 <h3 id="exercice-4-recherche-dans-un-abr">Exercice 4 : Recherche dans un ABR</h3>
 <p>Implémentez la fonction <code>recherche_abr(element: T, arbre: ArbreBin[T]) -&gt; bool</code>.</p>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">recherche_abr</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">element</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">arbre</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Recherche un élément dans un ABR.&quot;&quot;&quot;</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>        <span class="k">return</span> <span class="kc">False</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>        <span class="k">return</span> <span class="kc">True</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>    <span class="k">elif</span> <span class="n">element</span> <span class="o">&lt;</span> <span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>        <span class="k">return</span> <span class="n">recherche_abr</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">sag</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>        <span class="k">return</span> <span class="n">recherche_abr</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">sad</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span>
-</code></pre></div>
-</details>
 <h3 id="exercice-5-complexite">Exercice 5 : Complexité</h3>
 <ol>
 <li>Quelle est la complexité de <code>recherche_abr</code> pour un <strong>arbre filiforme</strong> de n éléments ?</li>
@@ -5806,80 +5734,10 @@ Pour chaque nœud d'un ABR :</p>
 </details>
 <h3 id="exercice-6-minimum-et-maximum">Exercice 6 : Minimum et maximum</h3>
 <p>Implémentez les fonctions <code>min_abr(arbre: ArbreBin[T]) -&gt; T</code> et <code>max_abr(arbre: ArbreBin[T]) -&gt; T</code>.</p>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">min_abr</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">arbre</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Trouve le minimum d&#39;un ABR (nœud le plus à gauche).&quot;&quot;&quot;</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">arbre</span><span class="p">),</span> <span class="s2">&quot;Arbre vide&quot;</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">arbre</span><span class="p">)):</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>        <span class="k">return</span> <span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">)</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>    <span class="k">return</span> <span class="n">min_abr</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span>
-<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
-<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">max_abr</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">arbre</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Trouve le maximum d&#39;un ABR (nœud le plus à droite).&quot;&quot;&quot;</span>
-<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">arbre</span><span class="p">),</span> <span class="s2">&quot;Arbre vide&quot;</span>
-<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>
-<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">arbre</span><span class="p">)):</span>
-<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>        <span class="k">return</span> <span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">)</span>
-<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>    <span class="k">return</span> <span class="n">max_abr</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span>
-</code></pre></div>
-<p><strong>Test :</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">arbre</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>              <span class="n">creer</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">creer</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()),</span> <span class="n">creer</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">(),</span> <span class="p">())),</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>              <span class="n">creer</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()),</span> <span class="n">creer</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="p">(),</span> <span class="p">())))</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">min_abr</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span>  <span class="c1"># 2</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">max_abr</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span>  <span class="c1"># 14</span>
-</code></pre></div>
-</details>
 <h3 id="exercice-7-parcours-infixe">Exercice 7 : Parcours infixe</h3>
 <p>Implémentez la fonction <code>parcours_infixe(arbre: ArbreBin[T]) -&gt; list[T]</code> qui retourne les clés dans l'ordre croissant.</p>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">parcours_infixe</span><span class="p">(</span><span class="n">arbre</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Parcours infixe : retourne les clés triées.&quot;&quot;&quot;</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>        <span class="k">return</span> <span class="p">[]</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">parcours_infixe</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span> <span class="o">+</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>            <span class="p">[</span><span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">)]</span> <span class="o">+</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>            <span class="n">parcours_infixe</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">arbre</span><span class="p">)))</span>
-</code></pre></div>
-<p><strong>Test :</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">arbre</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>              <span class="n">creer</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">creer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()),</span> <span class="n">creer</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">(),</span> <span class="p">())),</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>              <span class="n">creer</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">creer</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()),</span> <span class="n">creer</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="p">(),</span> <span class="p">())))</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">parcours_infixe</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span>  <span class="c1"># [1, 3, 4, 5, 7, 8, 9]</span>
-</code></pre></div>
-<p><strong>Propriété importante :</strong> Le parcours infixe d'un ABR donne <strong>toujours</strong> les éléments triés !</p>
-</details>
 <h3 id="exercice-8-taille-et-hauteur">Exercice 8 : Taille et hauteur</h3>
 <p>Implémentez les fonctions <code>taille(arbre: ArbreBin[T]) -&gt; int</code> et <code>hauteur(arbre: ArbreBin[T]) -&gt; int</code>.</p>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">taille</span><span class="p">(</span><span class="n">arbre</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule le nombre de nœuds d&#39;un arbre.&quot;&quot;&quot;</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>        <span class="k">return</span> <span class="mi">0</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">taille</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span> <span class="o">+</span> <span class="n">taille</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
-<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">hauteur</span><span class="p">(</span><span class="n">arbre</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule la hauteur d&#39;un arbre.&quot;&quot;&quot;</span>
-<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
-<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>        <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="nb">max</span><span class="p">(</span><span class="n">hauteur</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">arbre</span><span class="p">)),</span> <span class="n">hauteur</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">arbre</span><span class="p">)))</span>
-</code></pre></div>
-<p><strong>Test :</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">arbre</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>              <span class="n">creer</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">creer</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()),</span> <span class="n">creer</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="p">(),</span> <span class="p">())),</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>              <span class="n">creer</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()))</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">taille</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span>    <span class="c1"># 5</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">hauteur</span><span class="p">(</span><span class="n">arbre</span><span class="p">))</span>   <span class="c1"># 2</span>
-</code></pre></div>
-</details>
 <h2 id="7-version-mutable-des-algorithmes">7. Version mutable des algorithmes</h2>
 <p>Jusqu'à présent, nous avons utilisé une <strong>approche fonctionnelle immuable</strong> avec des tuples. Chaque modification (insertion, suppression) créait un <strong>nouvel arbre</strong> sans modifier l'ancien.</p>
 <p>Dans cette section, nous allons explorer une <strong>approche mutable orientée objet</strong> où :</p>
@@ -5907,32 +5765,32 @@ Pour chaque nœud d'un ABR :</p>
 <div class="admonition example">
 <p class="admonition-title">Illustration de la différence</p>
 <p><strong>Immuable</strong> : "L'arbre a un sous-arbre gauche qui est lui-même un arbre complet"
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">sag</span><span class="p">(</span><span class="n">arbre</span><span class="p">)</span>  <span class="c1"># Retourne un ArbreBin[T] (un arbre complet)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">sag</span><span class="p">(</span><span class="n">arbre</span><span class="p">)</span>  <span class="c1"># Retourne un ArbreBin[T] (un arbre complet)</span>
 </code></pre></div></p>
 <p><strong>Mutable</strong> : "Le nœud a un lien vers un autre nœud à gauche"
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">noeud</span><span class="o">.</span><span class="n">gauche</span>  <span class="c1"># Référence vers un autre Noeud[T]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">noeud</span><span class="o">.</span><span class="n">gauche</span>  <span class="c1"># Référence vers un autre Noeud[T]</span>
 </code></pre></div></p>
 </div>
 <p>Cette différence explique pourquoi les algorithmes mutables sont plus <strong>impératifs</strong> (on modifie des liens) tandis que les algorithmes immuables sont plus <strong>fonctionnels</strong> (on construit de nouveaux arbres).</p>
 <h3 id="le-pattern-sentinelle">Le pattern Sentinelle</h3>
 <p>Au lieu d'utiliser <code>None</code> pour représenter l'absence de nœud, on utilise un <strong>objet sentinelle</strong> qui pointe vers lui-même. Cela évite de nombreux tests <code>if noeud is None</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cle</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">gauche</span><span class="p">:</span> <span class="s2">&quot;Noeud[T]&quot;</span><span class="p">,</span> <span class="n">droite</span><span class="p">:</span> <span class="s2">&quot;Noeud[T]&quot;</span><span class="p">):</span>
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cle</span> <span class="o">=</span> <span class="n">cle</span>
-<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="o">=</span> <span class="n">gauche</span>
-<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">droite</span> <span class="o">=</span> <span class="n">droite</span>
-<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
-<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>
-<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">Sentinelle</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
-<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span> <span class="c1">#type: ignore</span>
-<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>
-<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a><span class="n">ARBRE_VIDE</span> <span class="o">=</span> <span class="n">Sentinelle</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cle</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">gauche</span><span class="p">:</span> <span class="s2">&quot;Noeud[T]&quot;</span><span class="p">,</span> <span class="n">droite</span><span class="p">:</span> <span class="s2">&quot;Noeud[T]&quot;</span><span class="p">):</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cle</span> <span class="o">=</span> <span class="n">cle</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="o">=</span> <span class="n">gauche</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">droite</span> <span class="o">=</span> <span class="n">droite</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">Sentinelle</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="kc">None</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span> <span class="c1">#type: ignore</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="n">ARBRE_VIDE</span> <span class="o">=</span> <span class="n">Sentinelle</span><span class="p">()</span>
 </code></pre></div>
 <h3 id="exemple-dutilisation_1">Exemple d'utilisation</h3>
 <p>Vérifier si un nœud est une sentinelle
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_sentinelle</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">noeud</span><span class="p">:</span> <span class="n">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>    <span class="k">return</span> <span class="n">noeud</span><span class="o">.</span><span class="n">gauche</span> <span class="ow">is</span> <span class="n">noeud</span> <span class="ow">and</span> <span class="n">noeud</span><span class="o">.</span><span class="n">droite</span> <span class="ow">is</span> <span class="n">noeud</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_sentinelle</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">noeud</span><span class="p">:</span> <span class="n">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="k">return</span> <span class="n">noeud</span><span class="o">.</span><span class="n">gauche</span> <span class="ow">is</span> <span class="n">noeud</span> <span class="ow">and</span> <span class="n">noeud</span><span class="o">.</span><span class="n">droite</span> <span class="ow">is</span> <span class="n">noeud</span>
 </code></pre></div></p>
 <h3 id="recherche-dans-un-abr-mutable">Recherche dans un ABR mutable</h3>
 <div class="admonition example">
@@ -5940,40 +5798,6 @@ Pour chaque nœud d'un ABR :</p>
 <p>Implémentez la fonction <code>recherche_abr_mut</code> qui recherche un élément dans un ABR mutable.</p>
 <p><strong>Indication</strong> : Au lieu de tester <code>if est_vide(arbre)</code>, testez <code>if est_sentinelle(noeud)</code>.</p>
 </div>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">recherche_abr_mut</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">element</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">noeud</span><span class="p">:</span> <span class="n">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Recherche un élément dans un ABR mutable.</span>
-<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
-<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="sd">    Args:</span>
-<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="sd">        element: L&#39;élément à rechercher</span>
-<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="sd">        noeud: Le nœud racine de l&#39;ABR</span>
-<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>
-<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-24-9" name="__codelineno-24-9" href="#__codelineno-24-9"></a><span class="sd">        True si l&#39;élément est présent, False sinon</span>
-<a id="__codelineno-24-10" name="__codelineno-24-10" href="#__codelineno-24-10"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-24-11" name="__codelineno-24-11" href="#__codelineno-24-11"></a>    <span class="c1"># Cas de base : nœud sentinelle (arbre vide)</span>
-<a id="__codelineno-24-12" name="__codelineno-24-12" href="#__codelineno-24-12"></a>    <span class="k">if</span> <span class="n">est_sentinelle</span><span class="p">(</span><span class="n">noeud</span><span class="p">):</span>
-<a id="__codelineno-24-13" name="__codelineno-24-13" href="#__codelineno-24-13"></a>        <span class="k">return</span> <span class="kc">False</span>
-<a id="__codelineno-24-14" name="__codelineno-24-14" href="#__codelineno-24-14"></a>
-<a id="__codelineno-24-15" name="__codelineno-24-15" href="#__codelineno-24-15"></a>    <span class="c1"># Cas de base : élément trouvé</span>
-<a id="__codelineno-24-16" name="__codelineno-24-16" href="#__codelineno-24-16"></a>    <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="n">noeud</span><span class="o">.</span><span class="n">cle</span><span class="p">:</span>
-<a id="__codelineno-24-17" name="__codelineno-24-17" href="#__codelineno-24-17"></a>        <span class="k">return</span> <span class="kc">True</span>
-<a id="__codelineno-24-18" name="__codelineno-24-18" href="#__codelineno-24-18"></a>
-<a id="__codelineno-24-19" name="__codelineno-24-19" href="#__codelineno-24-19"></a>    <span class="c1"># Recherche récursive</span>
-<a id="__codelineno-24-20" name="__codelineno-24-20" href="#__codelineno-24-20"></a>    <span class="k">if</span> <span class="n">element</span> <span class="o">&lt;</span> <span class="n">noeud</span><span class="o">.</span><span class="n">cle</span><span class="p">:</span>
-<a id="__codelineno-24-21" name="__codelineno-24-21" href="#__codelineno-24-21"></a>        <span class="k">return</span> <span class="n">recherche_abr_mut</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">noeud</span><span class="o">.</span><span class="n">gauche</span><span class="p">)</span>
-<a id="__codelineno-24-22" name="__codelineno-24-22" href="#__codelineno-24-22"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-24-23" name="__codelineno-24-23" href="#__codelineno-24-23"></a>        <span class="k">return</span> <span class="n">recherche_abr_mut</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">noeud</span><span class="o">.</span><span class="n">droite</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Comparaison avec la version immuable</strong> :</p>
-<ul>
-<li>Immuable : <code>if est_vide(arbre): return False</code></li>
-<li>Mutable : <code>if est_sentinelle(noeud): return False</code></li>
-<li>Immuable : accès via <code>cle(arbre)</code>, <code>sag(arbre)</code>, <code>sad(arbre)</code></li>
-<li>Mutable : accès direct via <code>noeud.cle</code>, <code>noeud.gauche</code>, <code>noeud.droite</code></li>
-</ul>
-</details>
 <h3 id="insertion-dans-un-abr-mutable">Insertion dans un ABR mutable</h3>
 <p>L'insertion mutable est <strong>plus complexe</strong> que la version immuable car on doit <strong>modifier l'arbre existant</strong> au lieu d'en créer un nouveau.</p>
 <div class="admonition example">
@@ -5981,88 +5805,11 @@ Pour chaque nœud d'un ABR :</p>
 <p>Implémentez la fonction <code>insere_abr_mut</code> qui insère un élément dans un ABR mutable.</p>
 <p><strong>Différence majeure</strong> : Au lieu de retourner un nouvel arbre, on modifie directement les attributs <code>gauche</code> et <code>droite</code> du nœud parent.</p>
 </div>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">insere_abr_mut</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">element</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">noeud</span><span class="p">:</span> <span class="n">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">sentinelle</span><span class="p">:</span> <span class="n">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Insère un élément dans un ABR mutable.</span>
-<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>
-<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="sd">    Args:</span>
-<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="sd">        element: L&#39;élément à insérer</span>
-<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="sd">        noeud: Le nœud courant</span>
-<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="sd">        sentinelle: La sentinelle utilisée pour les feuilles vides</span>
-<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a>
-<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="sd">        Le nœud racine de l&#39;arbre (peut changer si l&#39;arbre était vide)</span>
-<a id="__codelineno-25-11" name="__codelineno-25-11" href="#__codelineno-25-11"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-25-12" name="__codelineno-25-12" href="#__codelineno-25-12"></a>    <span class="c1"># Cas de base : on a trouvé la position d&#39;insertion</span>
-<a id="__codelineno-25-13" name="__codelineno-25-13" href="#__codelineno-25-13"></a>    <span class="k">if</span> <span class="n">est_sentinelle</span><span class="p">(</span><span class="n">noeud</span><span class="p">):</span>
-<a id="__codelineno-25-14" name="__codelineno-25-14" href="#__codelineno-25-14"></a>        <span class="c1"># Créer un nouveau nœud avec des sentinelles comme fils</span>
-<a id="__codelineno-25-15" name="__codelineno-25-15" href="#__codelineno-25-15"></a>        <span class="k">return</span> <span class="n">Noeud</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">sentinelle</span><span class="p">,</span> <span class="n">sentinelle</span><span class="p">)</span>
-<a id="__codelineno-25-16" name="__codelineno-25-16" href="#__codelineno-25-16"></a>
-<a id="__codelineno-25-17" name="__codelineno-25-17" href="#__codelineno-25-17"></a>    <span class="c1"># Si l&#39;élément est déjà présent, ne rien faire</span>
-<a id="__codelineno-25-18" name="__codelineno-25-18" href="#__codelineno-25-18"></a>    <span class="k">if</span> <span class="n">element</span> <span class="o">==</span> <span class="n">noeud</span><span class="o">.</span><span class="n">cle</span><span class="p">:</span>
-<a id="__codelineno-25-19" name="__codelineno-25-19" href="#__codelineno-25-19"></a>        <span class="k">return</span> <span class="n">noeud</span>
-<a id="__codelineno-25-20" name="__codelineno-25-20" href="#__codelineno-25-20"></a>
-<a id="__codelineno-25-21" name="__codelineno-25-21" href="#__codelineno-25-21"></a>    <span class="c1"># Insertion récursive</span>
-<a id="__codelineno-25-22" name="__codelineno-25-22" href="#__codelineno-25-22"></a>    <span class="k">if</span> <span class="n">element</span> <span class="o">&lt;</span> <span class="n">noeud</span><span class="o">.</span><span class="n">cle</span><span class="p">:</span>
-<a id="__codelineno-25-23" name="__codelineno-25-23" href="#__codelineno-25-23"></a>        <span class="n">noeud</span><span class="o">.</span><span class="n">gauche</span> <span class="o">=</span> <span class="n">insere_abr_mut</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">noeud</span><span class="o">.</span><span class="n">gauche</span><span class="p">,</span> <span class="n">sentinelle</span><span class="p">)</span>
-<a id="__codelineno-25-24" name="__codelineno-25-24" href="#__codelineno-25-24"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-25-25" name="__codelineno-25-25" href="#__codelineno-25-25"></a>        <span class="n">noeud</span><span class="o">.</span><span class="n">droite</span> <span class="o">=</span> <span class="n">insere_abr_mut</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">noeud</span><span class="o">.</span><span class="n">droite</span><span class="p">,</span> <span class="n">sentinelle</span><span class="p">)</span>
-<a id="__codelineno-25-26" name="__codelineno-25-26" href="#__codelineno-25-26"></a>
-<a id="__codelineno-25-27" name="__codelineno-25-27" href="#__codelineno-25-27"></a>    <span class="k">return</span> <span class="n">noeud</span>
-</code></pre></div>
-<p><strong>Exemple d'utilisation</strong> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="c1"># Créer un arbre vide</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="n">sentinelle</span><span class="p">:</span> <span class="n">Noeud</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Sentinelle</span><span class="p">()</span>
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="n">arbre</span> <span class="o">=</span> <span class="n">sentinelle</span>
-<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>
-<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="c1"># Insérer des éléments</span>
-<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="n">arbre</span> <span class="o">=</span> <span class="n">insere_abr_mut</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="n">arbre</span><span class="p">,</span> <span class="n">sentinelle</span><span class="p">)</span>
-<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="n">arbre</span> <span class="o">=</span> <span class="n">insere_abr_mut</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">arbre</span><span class="p">,</span> <span class="n">sentinelle</span><span class="p">)</span>
-<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="n">arbre</span> <span class="o">=</span> <span class="n">insere_abr_mut</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">arbre</span><span class="p">,</span> <span class="n">sentinelle</span><span class="p">)</span>
-<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="n">arbre</span> <span class="o">=</span> <span class="n">insere_abr_mut</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">arbre</span><span class="p">,</span> <span class="n">sentinelle</span><span class="p">)</span>
-<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a>
-<a id="__codelineno-26-11" name="__codelineno-26-11" href="#__codelineno-26-11"></a><span class="c1"># Recherche</span>
-<a id="__codelineno-26-12" name="__codelineno-26-12" href="#__codelineno-26-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">recherche_abr_mut</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">arbre</span><span class="p">))</span>   <span class="c1"># True</span>
-<a id="__codelineno-26-13" name="__codelineno-26-13" href="#__codelineno-26-13"></a><span class="nb">print</span><span class="p">(</span><span class="n">recherche_abr_mut</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="n">arbre</span><span class="p">))</span>   <span class="c1"># False</span>
-</code></pre></div>
-</details>
 <h3 id="parcours-infixe-mutable">Parcours infixe mutable</h3>
 <div class="admonition example">
 <p class="admonition-title">Exercice 12 : Parcours infixe mutable</p>
 <p>Implémentez <code>parcours_infixe_mut</code> qui affiche les éléments d'un ABR mutable dans l'ordre croissant.</p>
 </div>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">parcours_infixe_mut</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">noeud</span><span class="p">:</span> <span class="n">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Affiche les éléments d&#39;un ABR mutable dans l&#39;ordre infixe.</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
-<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="sd">    Args:</span>
-<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="sd">        noeud: Le nœud racine de l&#39;ABR</span>
-<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>    <span class="k">if</span> <span class="ow">not</span> <span class="n">est_sentinelle</span><span class="p">(</span><span class="n">noeud</span><span class="p">):</span>
-<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>        <span class="n">parcours_infixe_mut</span><span class="p">(</span><span class="n">noeud</span><span class="o">.</span><span class="n">gauche</span><span class="p">)</span>
-<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>        <span class="nb">print</span><span class="p">(</span><span class="n">noeud</span><span class="o">.</span><span class="n">cle</span><span class="p">)</span>
-<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>        <span class="n">parcours_infixe_mut</span><span class="p">(</span><span class="n">noeud</span><span class="o">.</span><span class="n">droite</span><span class="p">)</span>
-</code></pre></div>
-<p><strong>Version qui retourne une liste</strong> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">parcours_infixe_liste_mut</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">noeud</span><span class="p">:</span> <span class="n">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Retourne les éléments d&#39;un ABR mutable dans l&#39;ordre infixe.</span>
-<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>
-<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="sd">    Args:</span>
-<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="sd">        noeud: Le nœud racine de l&#39;ABR</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>
-<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="sd">        Liste des éléments dans l&#39;ordre croissant</span>
-<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>    <span class="k">if</span> <span class="n">est_sentinelle</span><span class="p">(</span><span class="n">noeud</span><span class="p">):</span>
-<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>        <span class="k">return</span> <span class="p">[]</span>
-<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>
-<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">parcours_infixe_liste_mut</span><span class="p">(</span><span class="n">noeud</span><span class="o">.</span><span class="n">gauche</span><span class="p">)</span> <span class="o">+</span>
-<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a>            <span class="p">[</span><span class="n">noeud</span><span class="o">.</span><span class="n">cle</span><span class="p">]</span> <span class="o">+</span>
-<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a>            <span class="n">parcours_infixe_liste_mut</span><span class="p">(</span><span class="n">noeud</span><span class="o">.</span><span class="n">droite</span><span class="p">))</span>
-</code></pre></div>
-</details>
 <h3 id="comparaison-des-deux-approches">Comparaison des deux approches</h3>
 <table>
 <thead>
@@ -6122,42 +5869,6 @@ Pour chaque nœud d'un ABR :</p>
 <p class="admonition-title">Exercice 13 : Conversion d'un ABR immuable en mutable</p>
 <p>Écrivez une fonction qui convertit un ABR immuable (tuple) en ABR mutable (Noeud/Sentinelle).</p>
 </div>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">tuple_vers_mut</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">arbre</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">sentinelle</span><span class="p">:</span> <span class="n">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convertit un ABR tuple en ABR mutable.</span>
-<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>
-<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="sd">    Args:</span>
-<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="sd">        arbre: L&#39;ABR immuable (tuple)</span>
-<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="sd">        sentinelle: La sentinelle à utiliser pour les feuilles vides</span>
-<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a>
-<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="sd">    Returns:</span>
-<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="sd">        L&#39;ABR mutable équivalent</span>
-<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">arbre</span><span class="p">):</span>
-<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a>        <span class="k">return</span> <span class="n">sentinelle</span>
-<a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a>
-<a id="__codelineno-29-14" name="__codelineno-29-14" href="#__codelineno-29-14"></a>    <span class="k">return</span> <span class="n">Noeud</span><span class="p">(</span>
-<a id="__codelineno-29-15" name="__codelineno-29-15" href="#__codelineno-29-15"></a>        <span class="n">cle</span><span class="p">(</span><span class="n">arbre</span><span class="p">),</span>
-<a id="__codelineno-29-16" name="__codelineno-29-16" href="#__codelineno-29-16"></a>        <span class="n">tuple_vers_mut</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">arbre</span><span class="p">),</span> <span class="n">sentinelle</span><span class="p">),</span>
-<a id="__codelineno-29-17" name="__codelineno-29-17" href="#__codelineno-29-17"></a>        <span class="n">tuple_vers_mut</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">arbre</span><span class="p">),</span> <span class="n">sentinelle</span><span class="p">)</span>
-<a id="__codelineno-29-18" name="__codelineno-29-18" href="#__codelineno-29-18"></a>    <span class="p">)</span>
-</code></pre></div>
-<p><strong>Exemple</strong> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="c1"># Créer un ABR immuable</span>
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="n">arbre_tuple</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span>
-<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>                    <span class="n">creer</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">creer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()),</span> <span class="p">()),</span>
-<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>                    <span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()))</span>
-<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>
-<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="c1"># Convertir en ABR mutable</span>
-<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="n">sentinelle</span><span class="p">:</span> <span class="n">Noeud</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Sentinelle</span><span class="p">()</span>
-<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="n">arbre_mut</span> <span class="o">=</span> <span class="n">tuple_vers_mut</span><span class="p">(</span><span class="n">arbre_tuple</span><span class="p">,</span> <span class="n">sentinelle</span><span class="p">)</span>
-<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a>
-<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="c1"># Utiliser l&#39;ABR mutable</span>
-<a id="__codelineno-30-11" name="__codelineno-30-11" href="#__codelineno-30-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">recherche_abr_mut</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">arbre_mut</span><span class="p">))</span>  <span class="c1"># True</span>
-<a id="__codelineno-30-12" name="__codelineno-30-12" href="#__codelineno-30-12"></a><span class="n">parcours_infixe_mut</span><span class="p">(</span><span class="n">arbre_mut</span><span class="p">)</span>          <span class="c1"># Affiche : 1 3 8 10</span>
-</code></pre></div>
-</details>
 <h2 id="8-resume">8. Résumé</h2>
 <ul>
 <li>Un <strong>ABR</strong> est un arbre binaire où chaque nœud est plus grand que tous les nœuds de son sous-arbre gauche et plus petit que tous ceux de son sous-arbre droit</li>
