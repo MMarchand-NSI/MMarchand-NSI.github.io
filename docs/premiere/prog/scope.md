@@ -1,250 +1,380 @@
 # Portée des variables (scope)
 
-## 1. Qu’est-ce que la portée (*scope*) ?
+La **portée** (*scope*) d'une variable détermine les parties du code où cette variable est accessible. Comprendre la portée permet d'éviter des bugs subtils et d'écrire du code plus clair.
 
-La **portée** d’une variable détermine les parties du code où cette variable est accessible. En Python, on distingue principalement:
+## 1. Variables locales
 
-1. **Portée locale** : Les variables déclarées à l’intérieur d’une fonction, accessibles uniquement dans cette fonction.  
-2. **Portée globale** : Les variables déclarées en dehors de toute fonction (au niveau du module, par exemple). Elles sont accessibles partout dans le module.
+Une variable **locale** est créée à l'intérieur d'une fonction. Elle n'existe que **pendant l'exécution** de cette fonction et n'est accessible que dans son corps.
 
----
-
-## 2. Variables locales
-
-Une variable locale est **créée et utilisée** à l’intérieur d’une fonction. Elle n’existe qu’**au moment de l’exécution** de la fonction et n’est pas accessible en dehors.
+### Exemple de base
 
 ```python
 def ma_fonction():
-    x = 10  # Variable locale "x"
+    x = 10  # Variable locale
     print("Dans la fonction, x =", x)
 
-ma_fonction()
-
-print(x)  # Erreur, car x n'existe pas en dehors de la fonction
+ma_fonction()       # Affiche 10
+print(x)            # ❌ ERREUR : x n'existe pas ici
 ```
 
-Dans cet exemple :  
-- `x` est créée à l’appel de `ma_fonction()`.  
-- Après la fin de `ma_fonction()`, `x` est détruite et n’est plus accessible.
+**Que se passe-t-il ?**
 
----
+1. Quand `ma_fonction()` est appelée, Python crée une variable `x` locale
+2. À la fin de l'exécution de la fonction, `x` est détruite
+3. `print(x)` cherche `x` et ne la trouve pas → erreur `NameError`
 
-## 3. Variables globales
+### Les paramètres sont aussi des variables locales
 
-Une variable globale est définie **au niveau du script**, en dehors de toute fonction. Elle est donc potentiellement accessible **dans tout le script**, y compris dans les fonctions (sous certaines conditions, comme on va le voir).
+```python
+def calculer(a, b):
+    # a et b sont des variables locales
+    resultat = a + b  # resultat est aussi locale
+    return resultat
+
+somme = calculer(5, 3)
+print(somme)        # 8
+print(a)            # ❌ ERREUR : a n'existe que dans calculer()
+```
+
+!!! info "Pourquoi les variables locales ?"
+    Les variables locales permettent d'**isoler** le code de chaque fonction. Deux fonctions peuvent avoir des variables du même nom sans conflit :
+
+    ```python
+    def fonction_a():
+        x = 10
+        print("Fonction A, x =", x)
+
+    def fonction_b():
+        x = 20
+        print("Fonction B, x =", x)
+
+    fonction_a()  # x = 10
+    fonction_b()  # x = 20 (un autre x !)
+    ```
+
+## 2. Variables globales
+
+Une variable **globale** est définie en dehors de toute fonction, au niveau principal du script. Elle est accessible partout dans le fichier.
+
+### Lire une variable globale
 
 ```python
 a = 5  # Variable globale
 
 def afficher_a():
-    print("Dans la fonction, a =", a)
+    print("Dans la fonction, a =", a)  # On peut lire a
 
-afficher_a()
-print("En dehors de la fonction, a =", a)
+afficher_a()                            # 5
+print("En dehors, a =", a)              # 5
 ```
 
-- Ici, `a` est **globale** et peut être lue depuis `afficher_a()`.  
-- Il n’y a pas de conflit particulier parce qu’on se contente de **lire** la valeur.
+Ici, pas de problème : on **lit** simplement la valeur de `a`.
 
-### 3.1. Modifier une variable globale dans une fonction
-
-Si l’on veut **assigner** (modifier) la variable globale depuis l’intérieur d’une fonction, il faut déclarer cette variable comme `global` dans la fonction. Sinon, Python créera par défaut **une variable locale** du même nom.
+### Le piège : essayer de modifier sans `global`
 
 ```python
 x = 10  # Variable globale
 
 def incrementer_x():
-    global x
-    x = x + 1  # Modification de la variable globale
+    x = x + 1  # ❌ ERREUR : UnboundLocalError
+    print(x)
 
-print("Avant :", x)
 incrementer_x()
-print("Après :", x)
 ```
 
-- Sans le mot-clé `global`, l’affectation `x = x + 1` à l’intérieur de la fonction créerait une **nouvelle variable locale `x`**, et la variable globale `x` ne serait pas modifiée, comme le montre ce code.
+**Que se passe-t-il ?**
 
+Python voit `x = ...` dans la fonction et décide que `x` est une **variable locale** pour toute la fonction. Donc quand il lit `x + 1`, il cherche une variable locale `x` qui n'a pas encore été créée → **erreur**.
+
+!!! danger "Erreur conceptuelle courante"
+    Beaucoup pensent que Python "lit d'abord la variable globale puis crée une locale", mais c'est **faux**. Python analyse la fonction **avant** de l'exécuter et décide que toute variable assignée (`=`) est locale. L'erreur se produit **avant** la lecture.
+
+### Modifier une variable globale avec `global`
+
+Pour modifier une variable globale depuis une fonction, il faut déclarer explicitement `global` :
 
 ```python
 x = 10  # Variable globale
 
 def incrementer_x():
-    x = x + 1  
-    # La variable globale est lue, python lui additionne 1 et créé une variable LOCALE du meême nom. La valeur de la varaible GLOBALE n'est pas modifiée.
+    global x      # Déclare qu'on veut utiliser la variable globale
+    x = x + 1     # Maintenant ça marche
 
-print("Avant :", x)
+print("Avant :", x)   # 10
 incrementer_x()
-print("Après :", x)
+print("Après :", x)   # 11
 ```
 
----
-
-## 4. Bonnes pratiques
-
-En réalité, vous découvrirez des manières de programmer qui nous permettent de ne pas avoir recours à des variables globales. Si elles paraissent pratiques de prime abord, elles complexifient le code à mesure qu'il prend en taille.
-
----
-
-## 5. Petits exemples
-
-### Exemple 1 : Lecture d’une variable globale sans la modifier
+### Conflit de nommage : créer une variable locale masque la globale
 
 ```python
-titre = "Introduction à Python"
-
-def afficher_titre():
-    print("Titre :", titre)
-
-afficher_titre()  # Utilise la variable globale titre
-```
-
-### Exemple 2 : Conflit de nommage global/local
-
-```python
-compteur = 0
+compteur = 0  # Variable globale
 
 def incrementer_compteur():
-    compteur = 5  # Cette affectation crée une variable locale "compteur"
+    compteur = 5  # Crée une variable LOCALE "compteur"
     print("Dans la fonction, compteur =", compteur)
 
-incrementer_compteur()
-print("Global, compteur =", compteur)  # Valeur inchangée (0)
+incrementer_compteur()              # Affiche 5
+print("Global, compteur =", compteur)  # Affiche 0 (inchangé)
 ```
 
-Ici, la variable globale `compteur` **n’est pas modifiée** par la fonction, car Python a créé une variable locale du même nom.
+Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la globale. La variable globale reste à 0.
+
+## 3. Bonnes pratiques
+
+!!! warning "Éviter les variables globales modifiables"
+    Les variables globales **modifiables** rendent le code difficile à comprendre et à débugger :
+
+    - N'importe quelle fonction peut changer leur valeur
+    - Difficile de savoir qui a modifié quoi
+    - Crée des **dépendances cachées** entre fonctions
+
+    **Préférez :**
+
+    - Passer les valeurs en **paramètres**
+    - Retourner les résultats avec **return**
+
+    ```python
+    # ❌ Mauvais : variable globale modifiable
+    stock = 10
+
+    def acheter():
+        global stock
+        stock -= 1
+
+    # ✅ Bon : paramètres et return
+    def acheter(stock):
+        return stock - 1
+
+    stock = 10
+    stock = acheter(stock)
+    ```
+
+!!! tip "Les constantes globales sont OK"
+    Les variables globales **en lecture seule** (constantes) sont acceptables :
+
+    ```python
+    PI = 3.14159
+    TVA = 0.20
+    MAX_TENTATIVES = 3
+
+    def calculer_prix_ttc(prix_ht):
+        return prix_ht * (1 + TVA)  # Lecture de TVA : OK
+    ```
+
+    Par convention, on les écrit en MAJUSCULES.
+
+!!! note "Exception : Programmation événementielle"
+    En **programmation événementielle** (interfaces graphiques, jeux vidéo), il est **difficile d'éviter** les variables globales modifiables. Les fonctions de callback (réactions aux événements) doivent accéder à l'état de l'application.
+
+    **Exemple avec tkinter (interface graphique) :**
+
+    ```python
+    import tkinter as tk
+
+    compteur = 0  # Variable globale nécessaire
+
+    def clic():
+        global compteur
+        compteur += 1
+        label.config(text=f"Clics : {compteur}")
+
+    fenetre = tk.Tk()
+    label = tk.Label(fenetre, text="Clics : 0")
+    label.pack()
+    bouton = tk.Button(fenetre, text="Cliquer", command=clic)
+    bouton.pack()
+    fenetre.mainloop()
+    ```
+
+    **Pourquoi c'est acceptable ici ?**
+
+    - La fonction `clic()` est appelée par le framework (pas par vous)
+    - On ne peut pas passer de paramètres à `clic()` directement
+    - Les variables globales modélisent **l'état de l'application**
+
+    Dans ce contexte, c'est un **compromis nécessaire** pour les débutants. Les programmeurs avancés utilisent des classes (programmation orientée objet) pour mieux gérer l'état, mais en première, les variables globales sont acceptables pour la programmation événementielle.
+
+## 4. Exercices
+
+!!! question "Exercice 1 : Prédire le résultat"
+    Sans exécuter le code, prédisez ce qui sera affiché :
+
+    ```python
+    y = 100
+
+    def tester():
+        y = 50
+        print("Dans tester, y =", y)
+
+    tester()
+    print("En dehors, y =", y)
+    ```
+
+    Puis exécutez pour vérifier.
+
+??? success "Solution"
+    ```
+    Dans tester, y = 50
+    En dehors, y = 100
+    ```
+
+    **Explication :** La fonction crée une variable **locale** `y = 50` qui masque la globale. La variable globale `y` reste à 100.
+
+!!! question "Exercice 2 : Identifier l'erreur"
+    Ce code provoque une erreur. Pourquoi ? Comment la corriger ?
+
+    ```python
+    total = 0
+
+    def ajouter(valeur):
+        total = total + valeur
+
+    ajouter(5)
+    print(total)
+    ```
+
+??? success "Solution"
+    **Erreur :** `UnboundLocalError: local variable 'total' referenced before assignment`
+
+    **Pourquoi :** Python voit `total = ...` et décide que `total` est locale. Quand il lit `total + valeur`, il cherche une variable locale qui n'existe pas encore.
+
+    **Correction 1 (avec `global`) :**
+
+    ```python
+    total = 0
+
+    def ajouter(valeur):
+        global total
+        total = total + valeur
+
+    ajouter(5)
+    print(total)  # 5
+    ```
+
+    **Correction 2 (meilleure : sans global) :**
+
+    ```python
+    def ajouter(total, valeur):
+        return total + valeur
+
+    total = 0
+    total = ajouter(total, 5)
+    print(total)  # 5
+    ```
+
+!!! question "Exercice 3 : Gestion de stock"
+    Créez un fichier `stock.py` avec :
+
+    - Une fonction `acheter(stock)` qui diminue le stock de 1 et le retourne
+    - Une fonction `livraison(stock, quantite)` qui augmente le stock et le retourne
+
+    Testez avec un stock initial de 10, 2 achats, puis une livraison de 5.
+
+??? success "Solution"
+    ```python
+    def acheter(stock):
+        """Diminue le stock de 1."""
+        return stock - 1
+
+    def livraison(stock, quantite):
+        """Augmente le stock de la quantité livrée."""
+        return stock + quantite
+
+    # Test
+    stock = 10
+    print("Stock initial :", stock)
+
+    stock = acheter(stock)
+    stock = acheter(stock)
+    print("Après 2 achats :", stock)  # 8
+
+    stock = livraison(stock, 5)
+    print("Après livraison de 5 :", stock)  # 13
+    ```
+
+!!! question "Exercice 4 : Portée dans les boucles (piège)"
+    Que va afficher ce code ?
+
+    ```python
+    def mystere():
+        for i in range(3):
+            x = i * 2
+        print("x =", x)
+        print("i =", i)
+
+    mystere()
+    ```
+
+    Puis exécutez pour vérifier. Que se passe-t-il avec `x` et `i` ?
+
+??? success "Solution"
+    ```
+    x = 4
+    i = 2
+    ```
+
+    **Attention :** En Python, les variables créées dans une boucle `for` **ne sont pas locales à la boucle**, elles sont locales à la **fonction**. Donc `x` et `i` existent encore après la boucle.
+
+    C'est différent de langages comme C, Java ou Rust où les variables de boucle sont détruites après la boucle.
+
+!!! question "Exercice 5 : Accumulateur"
+    Sans utiliser de variable globale, écrivez une fonction `somme_liste(liste)` qui calcule la somme des éléments d'une liste.
+
+    Testez avec `[1, 2, 3, 4, 5]`.
+
+??? success "Solution"
+    ```python
+    def somme_liste(liste):
+        """Calcule la somme des éléments d'une liste."""
+        total = 0  # Variable locale
+        for nombre in liste:
+            total += nombre
+        return total
+
+    # Test
+    valeurs = [1, 2, 3, 4, 5]
+    resultat = somme_liste(valeurs)
+    print("Somme :", resultat)  # 15
+    ```
+
+## 5. Résumé
+
+| Type | Où est-elle définie ? | Accessible où ? | Exemple |
+|------|----------------------|-----------------|---------|
+| **Locale** | Dans une fonction | Uniquement dans cette fonction | `def f(): x = 5` |
+| **Globale** | Hors de toute fonction | Partout (lecture) | `x = 5` (au niveau principal) |
+| **Globale modifiable** | Hors de toute fonction | Partout (écriture avec `global`) | `global x; x = 10` |
+
+**Règles importantes :**
+
+1. Les **paramètres** d'une fonction sont des variables locales
+2. Une assignation `x = ...` dans une fonction crée une variable **locale** (sauf si `global x`)
+3. Préférez **paramètres + return** aux variables globales modifiables
+4. Les variables de boucle `for` en Python **ne sont pas détruites** après la boucle
 
 ---
 
-## 6. Exercices pratiques
+!!! note "Pour aller plus loin : Autres langages"
+    D'autres langages ont des règles de portée plus strictes. Par exemple, en **Rust**, même les variables dans une boucle ont leur propre portée :
 
-### Exercice 1
-
-```python
-# 1. Déclare une variable globale "stock" (par exemple stock = 10).
-# 2. Écris une fonction "acheter_un_produit()" qui réduit la variable "stock" de 1
-#    et affiche "Achat effectué, stock = <valeur>".
-# 3. Appelle la fonction plusieurs fois et vérifie la valeur de "stock".
-
-# Complète le code ci-dessous :
-stock = ...
-
-def acheter_un_produit():
-    # Déclare si besoin la variable globale
-    # Diminue stock de 1 et affiche la valeur
-    ...
-
-acheter_un_produit()
-acheter_un_produit()
-print(stock)  # Quelle est la valeur ?
-```
-
----
-
-### Exercice 2
-
-```python
-# Écris un programme avec :
-# - Une variable globale "message" = "Bonjour tout le monde !"
-# - Une fonction "afficher_local()" qui définit une variable locale "message" = "Salut !"
-#   et l'affiche, puis affiche la variable globale "message".
-#
-# Exécute la fonction et analyse la sortie. Quelles valeurs sont affichées ?
-# Essaie ensuite d'utiliser la variable locale en dehors de la fonction : que se passe-t-il ?
-
-message = ...
-
-def afficher_local():
-    message = ...
-    print("message local =", message)
-    # Comment accéder à la variable globale "message" ? Pistes :
-    # 1) Ne pas faire 'message = ...' (car ça cache la globale)
-    # 2) Ou utiliser un autre nom
-    # 3) Ou le mot-clé 'global' si tu veux vraiment la modifier
-
-    print("message global =", ...)
-
-afficher_local()
-# print(message local) # Qu'arrive-t-il si on essaie d'afficher la variable locale ?
-```
-
----
-
-## 7. Synthèse
-
-- Les variables **locales** existent uniquement dans le bloc (souvent une fonction) où elles sont définies.  
-- Les variables **globales** sont accessibles dans tout le module, mais sont **seulement modifiables** dans une fonction si on utilise le mot-clé `global`.
-
----
-
-## Pour aller plus loin
-
-Le mécanisme de portée des variables est simple en python, mais il préfigure des mécanismes plus complexes, 
-comme dans l'exemple suivant en rust, où on se rend compte que même à l'intérieur d'une fonction,
-il faut tenir compte de la portée des variables.
-
-```rust
-fn main() {
-    let x = 10;
-    println!("Au début, x = {}", x);
-
-    for i in 0..3 {
-        // À chaque itération de la boucle, on définit une nouvelle variable "x" propre au scope de la boucle.
-        let x = x + i;
-        println!("Itération {}, x = {}", i, x);
+    ```rust
+    fn main() {
+        let x = 10;
+        for i in 0..3 {
+            let x = x + i;  // Nouvelle variable locale à la boucle
+            println!("Boucle : x = {}", x);
+        }
+        println!("Après : x = {}", x);  // x = 10 (inchangé)
     }
+    ```
 
-    // Après la boucle, la variable "x" est toujours celle définie hors de la boucle
-    println!("Après la boucle, x = {}", x);
-}
+    Sortie :
+    ```
+    Boucle : x = 10
+    Boucle : x = 11
+    Boucle : x = 12
+    Après : x = 10
+    ```
 
-```
-
-L'affichage du code précédent est: 
-
-```text
-Au début, x = 10
-Itération 0, x = 10
-Itération 1, x = 11
-Itération 2, x = 12
-Après la boucle, x = 10
-```
-
-En Rust, pour simuler le comportement de python avec les variables locales et globales,
-on est obligé de déclarer explicitement qu'on veut écrire du code non sécurisé.
-
-```rust
-static mut COMPTEUR: i32 = 0;
-
-fn incrementer() {
-    unsafe {
-        COMPTEUR += 1;
-        println!("Compteur global : {}", COMPTEUR);
-    }
-}
-
-fn main() {
-    incrementer(); // 1
-    incrementer(); // 2
-
-    // En dehors de la zone unsafe, on ne peut pas accéder directement à GLOBAL_COUNTER
-}
-```
-
-!!! tip "Fun Fact"
-    Diverses agences (notamment la NSA, en novembre 2022) ont publié des recommandations visant à favoriser l’usage de langages “memory-safe”, 
-    (comme Rust) lorsqu’un nouveau projet s’y prête. En d’autres termes, des organes gouvernementaux américains encouragent plus fortement
-    l’usage de langages offrant une meilleure sûreté mémoire, car de nombreuses failles proviennent de bugs de gestion de mémoire
-    (buffer overflows, use-after-free, etc.) dans des logiciels écrits en C ou C++.
-
-    Microsoft a régulièrement communiqué qu’environ 70 % des failles critiques de sécurité recensées dans ses produits résultaient de problèmes 
-    de gestion de mémoire. Google a indiqué des chiffres similaires pour certaines de ses applications critiques (Chrome, par exemple), soulignant 
-    que 70 % des vulnérabilités sérieuses venaient également de cette catégorie.
-
-    Si vous voulez continuer en informatique, il sera important de comprendre C, car il est proche du processeur.
-    Cependant, il sera important de ne pas l'utiliser et de privilégier des langages memory safe comme Rust (tout aussi performant).
-    Quelle que soit la performance d'un développeur en langage C, il peut toujours faire une étourderie. 
-    
-    Il faut bien comprendre qu'une mauvaise gestion de mémoire, même ponctuelle, ne provoque pas d'erreur dans le code, 
-    mais elle provoque des failles critiques qui permettent à une personne malveillante de prendre le contrôle du système entier.
-    
-    Loi de Murphy: "La probabilité que quelque chose arrive est inversement proportionnelle à sa désirabilité".
+    En Rust, les variables globales modifiables nécessitent un bloc `unsafe` car elles sont considérées dangereuses. Python est plus permissif, mais cela ne signifie pas qu'il faut en abuser !

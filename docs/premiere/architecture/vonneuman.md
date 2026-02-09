@@ -71,6 +71,18 @@ Les **périphériques d'entrée/sortie** permettent la communication avec l'ext�
 - **Entrée** : clavier, souris, capteurs, réseau
 - **Sortie** : écran, imprimante, haut-parleurs
 
+#### Et le disque dur ?
+
+Le **disque dur** (HDD) et le **SSD** sont des **dispositifs d'entrée/sortie**, même si on les appelle souvent "mémoire de stockage". Pourquoi ?
+
+- Ils permettent de **lire** des données (entrée) et d'**écrire** des données (sortie)
+- Ils sont **externes au modèle de base** de von Neumann : ni le CPU ne peut les utiliser directement pour exécuter des instructions, ni ils ne font partie de la mémoire vive
+- Avant d'exécuter un programme stocké sur disque, il faut le **charger en RAM**
+
+!!! info "Distinction mémoire vs stockage"
+    - **Mémoire (RAM)** : rapide, volatile, directement accessible par le CPU pour lire les instructions et les données
+    - **Stockage (disque dur, SSD)** : lent, persistant, accessible via les bus d'E/S. Le CPU ne peut pas exécuter directement du code sur le disque.
+
 ### 2.4 Les bus
 
 Les **bus** sont les canaux de communication qui relient les composants. Un bus n'est pas un tuyau dans lequel les informations circulent les unes après les autres : c'est un **groupe de fils parallèles** qui portent chacun un signal électrique (0 ou 1) **en permanence**.
