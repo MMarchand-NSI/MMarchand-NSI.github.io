@@ -4646,6 +4646,11 @@
 <p class="admonition-title">Exercice</p>
 <p>Proposez une implémentation python immuable du type ArbreBin.</p>
 </div>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">type</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[()]</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">]]</span>
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercices</p>
@@ -4672,58 +4677,123 @@
 <div class="admonition question">
 <p class="admonition-title">Conversion en liste</p>
 <p>Écrire une fonction <code>to_list[T](a: ArbreBin[T]) -&gt; list[T]</code> qui renvoie une liste (python) comportant toutes les clés d'un arbre.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">to_list</span><span class="p">(</span><span class="n">ARBRE_VIDE</span><span class="p">)</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="p">[]</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">to_list</span><span class="p">(</span><span class="n">creer_feuille</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">[</span><span class="mi">42</span><span class="p">]</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">to_list</span><span class="p">(</span><span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">15</span><span class="p">)))</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">to_list</span><span class="p">(</span><span class="n">exemple</span><span class="p">())</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">to_list</span><span class="p">(</span><span class="n">ARBRE_VIDE</span><span class="p">)</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="p">[]</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">to_list</span><span class="p">(</span><span class="n">creer_feuille</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="p">[</span><span class="mi">42</span><span class="p">]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">to_list</span><span class="p">(</span><span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">15</span><span class="p">)))</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">to_list</span><span class="p">(</span><span class="n">exemple</span><span class="p">())</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="p">[</span><span class="mi">21</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">27</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
 </code></pre></div>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">to_list</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">a</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        <span class="k">return</span> <span class="p">[]</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">cle</span><span class="p">(</span><span class="n">a</span><span class="p">)]</span> <span class="o">+</span> <span class="n">to_list</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">+</span> <span class="n">to_list</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Explication:</strong></p>
+<ul>
+<li>Si l'arbre est vide, on renvoie une liste vide.</li>
+<li>Sinon, on construit une liste avec la clé de la racine, suivie des éléments du sous-arbre gauche, puis du sous-arbre droit (on peut concatener dans un ordre différent).</li>
+</ul>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Recherche dans un arbre binaire</p>
 <p>Écrire une fonction <code>recherche[T](i: T, a: ArbreBin[T]) -&gt; bool</code> qui recherche une valeur dans un arbre binaire quelconque (parcours exhaustif).</p>
 <p>La fonction doit renvoyer <code>True</code> si la valeur <code>i</code> est présente dans l'arbre, <code>False</code> sinon.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">recherche</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="n">exemple</span><span class="p">())</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kc">True</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">recherche</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">exemple</span><span class="p">())</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kc">True</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">recherche</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">exemple</span><span class="p">())</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="kc">False</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">recherche</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="n">ARBRE_VIDE</span><span class="p">)</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="kc">False</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">recherche</span><span class="p">(</span><span class="mi">21</span><span class="p">,</span> <span class="n">exemple</span><span class="p">())</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="kc">True</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">recherche</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="n">exemple</span><span class="p">())</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kc">True</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">recherche</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="n">exemple</span><span class="p">())</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="kc">False</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">recherche</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="n">ARBRE_VIDE</span><span class="p">)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="kc">False</span>
 </code></pre></div>
 <p><strong>Indication:</strong> Réfléchissez aux cas de base et au cas récursif. Si l'arbre n'est pas vide et que la clé de la racine n'est pas celle recherchée, où peut-elle se trouver ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">recherche</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">i</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        <span class="k">return</span> <span class="kc">False</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">elif</span> <span class="n">cle</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">i</span><span class="p">:</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="k">return</span> <span class="kc">True</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="k">return</span> <span class="n">recherche</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">sag</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="ow">or</span> <span class="n">recherche</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">sad</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Explication:</strong></p>
+<ul>
+<li>Si l'arbre est vide, la valeur n'est pas présente.</li>
+<li>Si la clé de la racine est celle recherchée, on a trouvé.</li>
+<li>Sinon, on cherche récursivement dans le sous-arbre gauche <strong>ou</strong> dans le sous-arbre droit. L'opérateur <code>or</code> permet d'arrêter la recherche dès qu'on a trouvé la valeur (évaluation paresseuse).</li>
+</ul>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Compter les feuilles</p>
 <p>Écrire une fonction <code>compter_feuilles[T](a: ArbreBin[T]) -&gt; int</code> qui compte le nombre de feuilles dans l'arbre.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">compter_feuilles</span><span class="p">(</span><span class="n">ARBRE_VIDE</span><span class="p">)</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="mi">0</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">compter_feuilles</span><span class="p">(</span><span class="n">creer_feuille</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="mi">1</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">compter_feuilles</span><span class="p">(</span><span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">15</span><span class="p">)))</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="mi">2</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">compter_feuilles</span><span class="p">(</span><span class="n">exemple</span><span class="p">())</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="mi">5</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">compter_feuilles</span><span class="p">(</span><span class="n">ARBRE_VIDE</span><span class="p">)</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="mi">0</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">compter_feuilles</span><span class="p">(</span><span class="n">creer_feuille</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="mi">1</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">compter_feuilles</span><span class="p">(</span><span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">15</span><span class="p">)))</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="mi">2</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">compter_feuilles</span><span class="p">(</span><span class="n">exemple</span><span class="p">())</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="mi">5</span>
 </code></pre></div>
 <p><strong>Indication:</strong> Attention, cette fonction a <strong>trois</strong> cas à considérer : l'arbre vide, la feuille, et le cas général.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">compter_feuilles</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">a</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="k">return</span> <span class="mi">0</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">elif</span> <span class="n">est_feuille</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="k">return</span> <span class="mi">1</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="k">return</span> <span class="n">compter_feuilles</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">+</span> <span class="n">compter_feuilles</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Explication:</strong></p>
+<ul>
+<li>Si l'arbre est vide, il n'y a pas de feuilles.</li>
+<li>Si l'arbre est une feuille, on en compte 1.</li>
+<li>Sinon, on additionne le nombre de feuilles du sous-arbre gauche et du sous-arbre droit.</li>
+</ul>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Liste des feuilles</p>
 <p>Écrire une fonction <code>liste_feuilles[T](a: ArbreBin[T]) -&gt; list[T]</code> qui renvoie la liste des clés des feuilles de l'arbre, parcourues de gauche à droite.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">liste_feuilles</span><span class="p">(</span><span class="n">ARBRE_VIDE</span><span class="p">)</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="p">[]</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">liste_feuilles</span><span class="p">(</span><span class="n">creer_feuille</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">[</span><span class="mi">42</span><span class="p">]</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">liste_feuilles</span><span class="p">(</span><span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">15</span><span class="p">)))</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">liste_feuilles</span><span class="p">(</span><span class="n">exemple</span><span class="p">())</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">liste_feuilles</span><span class="p">(</span><span class="n">ARBRE_VIDE</span><span class="p">)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">[]</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">liste_feuilles</span><span class="p">(</span><span class="n">creer_feuille</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">[</span><span class="mi">42</span><span class="p">]</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">liste_feuilles</span><span class="p">(</span><span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">15</span><span class="p">)))</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">15</span><span class="p">]</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">liste_feuilles</span><span class="p">(</span><span class="n">exemple</span><span class="p">())</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">19</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="mi">32</span><span class="p">]</span>
 </code></pre></div>
 <p><strong>Indication:</strong> La structure est similaire à <code>compter_feuilles</code>, mais au lieu de compter, on construit des listes.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">liste_feuilles</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">a</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>        <span class="k">return</span> <span class="p">[]</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="k">elif</span> <span class="n">est_feuille</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        <span class="k">return</span> <span class="p">[</span><span class="n">cle</span><span class="p">(</span><span class="n">a</span><span class="p">)]</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        <span class="k">return</span> <span class="n">liste_feuilles</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">+</span> <span class="n">liste_feuilles</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Explication:</strong></p>
+<ul>
+<li>Si l'arbre est vide, on renvoie une liste vide.</li>
+<li>Si l'arbre est une feuille, on renvoie une liste contenant uniquement sa clé.</li>
+<li>Sinon, on concatène les listes des feuilles du sous-arbre gauche et du sous-arbre droit. L'ordre de concaténation garantit le parcours de gauche à droite.</li>
+</ul>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Arbre aléatoire</p>
@@ -4771,18 +4841,38 @@
     style C fill:none,stroke:none
     style E fill:none,stroke:none</code></pre>
 <p>Écrire une fonction <code>est_equilibre[T](a: ArbreBin[T]) -&gt; bool</code> qui teste si un arbre est équilibré.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_equilibre</span><span class="p">(</span><span class="n">ARBRE_VIDE</span><span class="p">)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="kc">True</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_equilibre</span><span class="p">(</span><span class="n">creer_feuille</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="kc">True</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_equilibre</span><span class="p">(</span><span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">15</span><span class="p">)))</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="kc">True</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="c1"># Arbre déséquilibré : chaîne à gauche</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">desequilibre</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">creer</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ARBRE_VIDE</span><span class="p">),</span> <span class="n">ARBRE_VIDE</span><span class="p">)</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_equilibre</span><span class="p">(</span><span class="n">desequilibre</span><span class="p">)</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="kc">False</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_equilibre</span><span class="p">(</span><span class="n">ARBRE_VIDE</span><span class="p">)</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kc">True</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_equilibre</span><span class="p">(</span><span class="n">creer_feuille</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="kc">True</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_equilibre</span><span class="p">(</span><span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">15</span><span class="p">)))</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="kc">True</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="c1"># Arbre déséquilibré : chaîne à gauche</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">desequilibre</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">creer</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">ARBRE_VIDE</span><span class="p">),</span> <span class="n">ARBRE_VIDE</span><span class="p">)</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_equilibre</span><span class="p">(</span><span class="n">desequilibre</span><span class="p">)</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="kc">False</span>
 </code></pre></div>
 <p><strong>Indication:</strong> Utilisez la fonction <code>hauteur</code> et la valeur absolue (<code>abs</code>).</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_equilibre</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">a</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>        <span class="k">return</span> <span class="kc">True</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">hauteur</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">-</span> <span class="n">hauteur</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="ow">and</span> <span class="n">est_equilibre</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="ow">and</span> <span class="n">est_equilibre</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Explication:</strong></p>
+<ul>
+<li>Si l'arbre est vide, il est équilibré par définition.</li>
+<li>Sinon, on vérifie trois conditions :<ol>
+<li>La différence de hauteur entre le sag et le sad est strictement inférieure à 2 (donc 0 ou 1).</li>
+<li>Le sous-arbre gauche est équilibré.</li>
+<li>Le sous-arbre droit est équilibré.</li>
+</ol>
+</li>
+<li>Les trois conditions doivent être vraies simultanément (<code>and</code>).</li>
+</ul>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Arbres miroirs</p>
@@ -4810,16 +4900,33 @@
     A3 --&gt; A7((18))
     end</code></pre>
 <p>Écrire une fonction <code>sont_miroirs[T](a: ArbreBin[T], b: ArbreBin[T]) -&gt; bool</code> qui teste si deux arbres sont miroirs l'un de l'autre.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">sont_miroirs</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="kc">True</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">sont_miroirs</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="kc">False</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">sont_miroirs</span><span class="p">(</span><span class="n">ARBRE_VIDE</span><span class="p">,</span> <span class="n">ARBRE_VIDE</span><span class="p">)</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="kc">True</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">sont_miroirs</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="kc">True</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">sont_miroirs</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="kc">False</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">sont_miroirs</span><span class="p">(</span><span class="n">ARBRE_VIDE</span><span class="p">,</span> <span class="n">ARBRE_VIDE</span><span class="p">)</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="kc">True</span>
 </code></pre></div>
 <p><strong>Indication:</strong> Attention à bien croiser les sous-arbres : le sag de <code>a</code> doit être miroir du sad de <code>b</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">sont_miroirs</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">a</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">b</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">and</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>        <span class="k">return</span> <span class="kc">True</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="k">elif</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="ow">or</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">b</span><span class="p">):</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        <span class="k">return</span> <span class="kc">False</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>        <span class="k">return</span> <span class="n">cle</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="n">cle</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="ow">and</span> <span class="n">sont_miroirs</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">sad</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="ow">and</span> <span class="n">sont_miroirs</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">sag</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+</code></pre></div>
+<p><strong>Explication:</strong></p>
+<ul>
+<li>Si les deux arbres sont vides, ils sont miroirs.</li>
+<li>Si un seul est vide, ils ne sont pas miroirs.</li>
+<li>Sinon, les clés doivent être égales, et on vérifie récursivement que le sag de <code>a</code> est miroir du sad de <code>b</code>, et que le sad de <code>a</code> est miroir du sag de <code>b</code>.</li>
+</ul>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Arbre symétrique</p>
@@ -4833,83 +4940,118 @@
     C --&gt; F((7))
     C --&gt; G((3))</code></pre>
 <p>Écrire une fonction <code>est_symetrique[T](a: ArbreBin[T]) -&gt; bool</code> qui teste si un arbre est symétrique.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_symetrique</span><span class="p">(</span><span class="n">ARBRE_VIDE</span><span class="p">)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kc">True</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_symetrique</span><span class="p">(</span><span class="n">creer_feuille</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="kc">True</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">sym</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">7</span><span class="p">)),</span> <span class="n">creer</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_symetrique</span><span class="p">(</span><span class="n">sym</span><span class="p">)</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="kc">True</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">non_sym</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_symetrique</span><span class="p">(</span><span class="n">non_sym</span><span class="p">)</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="kc">False</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_symetrique</span><span class="p">(</span><span class="n">ARBRE_VIDE</span><span class="p">)</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="kc">True</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_symetrique</span><span class="p">(</span><span class="n">creer_feuille</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="kc">True</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">sym</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">7</span><span class="p">)),</span> <span class="n">creer</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">7</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">3</span><span class="p">)))</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_symetrique</span><span class="p">(</span><span class="n">sym</span><span class="p">)</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="kc">True</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">non_sym</span> <span class="o">=</span> <span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">15</span><span class="p">))</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">est_symetrique</span><span class="p">(</span><span class="n">non_sym</span><span class="p">)</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="kc">False</span>
 </code></pre></div>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_symetrique</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">a</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="k">return</span> <span class="n">sont_miroirs</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Explication:</strong></p>
+<p>Un arbre est symétrique si et seulement s'il est miroir de lui-même. On réutilise donc simplement la fonction <code>sont_miroirs</code> avec le même arbre en paramètre deux fois.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Minimum d'un arbre</p>
 <p>Écrire une fonction <code>minimum[T: Comparable](a: ArbreBin[T]) -&gt; T</code> qui renvoie la clé minimum d'un arbre binaire (non vide).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">minimum</span><span class="p">(</span><span class="n">creer_feuille</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="mi">42</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">minimum</span><span class="p">(</span><span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">15</span><span class="p">)))</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="mi">5</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">minimum</span><span class="p">(</span><span class="n">exemple</span><span class="p">())</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="mi">9</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">minimum</span><span class="p">(</span><span class="n">creer_feuille</span><span class="p">(</span><span class="mi">42</span><span class="p">))</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="mi">42</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">minimum</span><span class="p">(</span><span class="n">creer</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">creer_feuille</span><span class="p">(</span><span class="mi">15</span><span class="p">)))</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a><span class="mi">5</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">minimum</span><span class="p">(</span><span class="n">exemple</span><span class="p">())</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="mi">9</span>
 </code></pre></div>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">minimum</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">a</span><span class="p">:</span> <span class="n">ArbreBin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;L&#39;arbre est vide&quot;</span><span class="p">)</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="k">elif</span> <span class="n">est_feuille</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>        <span class="k">return</span> <span class="n">cle</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    <span class="k">elif</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>        <span class="n">min_d</span> <span class="o">=</span> <span class="n">minimum</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>        <span class="k">return</span> <span class="n">cle</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">if</span> <span class="n">cle</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_d</span> <span class="k">else</span> <span class="n">min_d</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>    <span class="k">elif</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">a</span><span class="p">)):</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>        <span class="n">min_g</span> <span class="o">=</span> <span class="n">minimum</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>        <span class="k">return</span> <span class="n">cle</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">if</span> <span class="n">cle</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">min_g</span> <span class="k">else</span> <span class="n">min_g</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>        <span class="n">min_g</span> <span class="o">=</span> <span class="n">minimum</span><span class="p">(</span><span class="n">sag</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>        <span class="n">min_d</span> <span class="o">=</span> <span class="n">minimum</span><span class="p">(</span><span class="n">sad</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>        <span class="n">m</span> <span class="o">=</span> <span class="n">min_g</span> <span class="k">if</span> <span class="n">min_g</span> <span class="o">&lt;</span> <span class="n">min_d</span> <span class="k">else</span> <span class="n">min_d</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>        <span class="k">return</span> <span class="n">cle</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="k">if</span> <span class="n">cle</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">m</span> <span class="k">else</span> <span class="n">m</span>
+</code></pre></div>
+<p><strong>Explication:</strong></p>
+<ul>
+<li>Si l'arbre est vide, on lève une erreur (pas de minimum).</li>
+<li>Si l'arbre est une feuille, la clé est le minimum.</li>
+<li>Sinon, on calcule récursivement le minimum de chaque sous-arbre non vide.</li>
+<li>On compare la clé de la racine avec les minimums des sous-arbres pour trouver le plus petit.</li>
+</ul>
+</details>
 </div>
 <div class="admonition hint">
 <p class="admonition-title">Implémentation mutable</p>
 <p>L'implémentation ci-dessous utilise aussi une sentinelle, mais ne l'utilise pas de manière aussi sioux que pour les listes. Rien dde circulaire. Elle signifie seulement l'arbre vide. La création d'une sentinelle nous permet de ne pas utiliser la valeur générique None, qui pourrait signifier bien autre chose qu'une absence d'enfant, car None n'est pas propre à notre structure.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">ArbreBin</span><span class="p">:</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cle</span><span class="p">,</span> <span class="n">gauche</span><span class="p">:</span> <span class="s1">&#39;ArbreBin&#39;</span><span class="p">,</span> <span class="n">droit</span><span class="p">:</span> <span class="s1">&#39;ArbreBin&#39;</span><span class="p">):</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cle</span> <span class="o">=</span> <span class="n">cle</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="o">=</span> <span class="n">gauche</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">droit</span> <span class="o">=</span> <span class="n">droit</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">est_feuille</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="ow">is</span> <span class="n">ARBRE_VIDE</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span> <span class="ow">is</span> <span class="n">ARBRE_VIDE</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="ow">is</span> <span class="n">ARBRE_VIDE</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span> <span class="ow">is</span> <span class="n">ARBRE_VIDE</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">taille</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">est_vide</span><span class="p">():</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
-<a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a>        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span><span class="o">.</span><span class="n">taille</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">droit</span><span class="o">.</span><span class="n">taille</span><span class="p">()</span>
-<a id="__codelineno-8-17" name="__codelineno-8-17" href="#__codelineno-8-17"></a>
-<a id="__codelineno-8-18" name="__codelineno-8-18" href="#__codelineno-8-18"></a>
-<a id="__codelineno-8-19" name="__codelineno-8-19" href="#__codelineno-8-19"></a><span class="k">class</span><span class="w"> </span><span class="nc">Sentinelle</span><span class="p">(</span><span class="n">ArbreBin</span><span class="p">):</span>
-<a id="__codelineno-8-20" name="__codelineno-8-20" href="#__codelineno-8-20"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-8-21" name="__codelineno-8-21" href="#__codelineno-8-21"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
-<a id="__codelineno-8-22" name="__codelineno-8-22" href="#__codelineno-8-22"></a>
-<a id="__codelineno-8-23" name="__codelineno-8-23" href="#__codelineno-8-23"></a><span class="n">ARBRE_VIDE</span> <span class="o">=</span> <span class="n">Sentinelle</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">ArbreBin</span><span class="p">:</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cle</span><span class="p">,</span> <span class="n">gauche</span><span class="p">:</span> <span class="s1">&#39;ArbreBin&#39;</span><span class="p">,</span> <span class="n">droit</span><span class="p">:</span> <span class="s1">&#39;ArbreBin&#39;</span><span class="p">):</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cle</span> <span class="o">=</span> <span class="n">cle</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="o">=</span> <span class="n">gauche</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">droit</span> <span class="o">=</span> <span class="n">droit</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">est_feuille</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="ow">is</span> <span class="n">ARBRE_VIDE</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span> <span class="ow">is</span> <span class="n">ARBRE_VIDE</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="ow">is</span> <span class="n">ARBRE_VIDE</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span> <span class="ow">is</span> <span class="n">ARBRE_VIDE</span>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">taille</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">est_vide</span><span class="p">():</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>            <span class="k">return</span> <span class="o">-</span><span class="mi">1</span>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span><span class="o">.</span><span class="n">taille</span><span class="p">()</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">droit</span><span class="o">.</span><span class="n">taille</span><span class="p">()</span>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a><span class="k">class</span><span class="w"> </span><span class="nc">Sentinelle</span><span class="p">(</span><span class="n">ArbreBin</span><span class="p">):</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a><span class="n">ARBRE_VIDE</span> <span class="o">=</span> <span class="n">Sentinelle</span><span class="p">()</span>
 </code></pre></div>
 <p>Un autre possibilté est celle-ci, cette fois-ci avec l'utilisation de None:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cle</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">gauche</span><span class="p">:</span> <span class="s1">&#39;Noeud[T]|None&#39;</span><span class="p">,</span> <span class="n">droit</span><span class="p">:</span> <span class="s1">&#39;Noeud[T]|None&#39;</span><span class="p">):</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cle</span> <span class="o">=</span> <span class="n">cle</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="o">=</span> <span class="n">gauche</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">droit</span> <span class="o">=</span> <span class="n">droit</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">est_feuille</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span> <span class="ow">is</span> <span class="kc">None</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="c1">## Ici, on ne peut pas avoir de méthode est_vide() car self ne peut jamais être None. </span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="c1">## Si self existe, c&#39;est qu&#39;un objet a été instancié, donc qu&#39;il n&#39;est nécessairement pas rien.</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">taille</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="sd">        self ne pouvant pas être None, le cas de base est qu&#39;il est une feuille.</span>
-<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="sd">        Ca nous oblige à tester que self.gauche et self.droite ne sont pas None, car None n&#39;a pas de méthode taille()</span>
-<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a><span class="sd">        Comparez ceci avec l&#39;implémentation ci-dessus. </span>
-<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_feuille</span><span class="p">():</span>
-<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>            <span class="k">return</span> <span class="mi">0</span>
-<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>        <span class="n">tg</span><span class="p">,</span> <span class="n">td</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
-<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span><span class="p">:</span>
-<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>            <span class="n">td</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span><span class="o">.</span><span class="n">taille</span><span class="p">()</span>
-<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span><span class="p">:</span>
-<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>            <span class="n">tg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span><span class="o">.</span><span class="n">taille</span><span class="p">()</span>
-<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">tg</span> <span class="o">+</span> <span class="n">td</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Noeud</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cle</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">gauche</span><span class="p">:</span> <span class="s1">&#39;Noeud[T]|None&#39;</span><span class="p">,</span> <span class="n">droit</span><span class="p">:</span> <span class="s1">&#39;Noeud[T]|None&#39;</span><span class="p">):</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">cle</span> <span class="o">=</span> <span class="n">cle</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="o">=</span> <span class="n">gauche</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">droit</span> <span class="o">=</span> <span class="n">droit</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">est_feuille</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span> <span class="ow">is</span> <span class="kc">None</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>    <span class="c1">## Ici, on ne peut pas avoir de méthode est_vide() car self ne peut jamais être None. </span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>    <span class="c1">## Si self existe, c&#39;est qu&#39;un objet a été instancié, donc qu&#39;il n&#39;est nécessairement pas rien.</span>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>
+<a id="__codelineno-18-13" name="__codelineno-18-13" href="#__codelineno-18-13"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">taille</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-18-14" name="__codelineno-18-14" href="#__codelineno-18-14"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-18-15" name="__codelineno-18-15" href="#__codelineno-18-15"></a><span class="sd">        self ne pouvant pas être None, le cas de base est qu&#39;il est une feuille.</span>
+<a id="__codelineno-18-16" name="__codelineno-18-16" href="#__codelineno-18-16"></a><span class="sd">        Ca nous oblige à tester que self.gauche et self.droite ne sont pas None, car None n&#39;a pas de méthode taille()</span>
+<a id="__codelineno-18-17" name="__codelineno-18-17" href="#__codelineno-18-17"></a><span class="sd">        Comparez ceci avec l&#39;implémentation ci-dessus. </span>
+<a id="__codelineno-18-18" name="__codelineno-18-18" href="#__codelineno-18-18"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-18-19" name="__codelineno-18-19" href="#__codelineno-18-19"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_feuille</span><span class="p">():</span>
+<a id="__codelineno-18-20" name="__codelineno-18-20" href="#__codelineno-18-20"></a>            <span class="k">return</span> <span class="mi">0</span>
+<a id="__codelineno-18-21" name="__codelineno-18-21" href="#__codelineno-18-21"></a>        <span class="n">tg</span><span class="p">,</span> <span class="n">td</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+<a id="__codelineno-18-22" name="__codelineno-18-22" href="#__codelineno-18-22"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span><span class="p">:</span>
+<a id="__codelineno-18-23" name="__codelineno-18-23" href="#__codelineno-18-23"></a>            <span class="n">td</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gauche</span><span class="o">.</span><span class="n">taille</span><span class="p">()</span>
+<a id="__codelineno-18-24" name="__codelineno-18-24" href="#__codelineno-18-24"></a>        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span><span class="p">:</span>
+<a id="__codelineno-18-25" name="__codelineno-18-25" href="#__codelineno-18-25"></a>            <span class="n">tg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">droite</span><span class="o">.</span><span class="n">taille</span><span class="p">()</span>
+<a id="__codelineno-18-26" name="__codelineno-18-26" href="#__codelineno-18-26"></a>        <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">tg</span> <span class="o">+</span> <span class="n">td</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
@@ -4956,35 +5098,35 @@
 <li>https://www.csfieldguide.org.nz/en/interactives/huffman-tree/</li>
 </ul>
 <p>Créez un package "projets" à la racine de votre repo. N'oubliez pas de mettre <code>__init__.py</code> dans le dossier.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.hierarchiques</span><span class="w"> </span><span class="kn">import</span> <span class="n">arbrebin_mutable</span> <span class="k">as</span> <span class="n">ab</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.hierarchiques</span><span class="w"> </span><span class="kn">import</span> <span class="n">dessin</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_dicofreq</span><span class="p">(</span><span class="n">texte</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie un dictionnaire de fréquence des lettres du texte en entrée&quot;&quot;&quot;</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="k">pass</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_arbre_huffman</span><span class="p">(</span><span class="n">dicofreq</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ab</span><span class="o">.</span><span class="n">ArbreBin</span><span class="p">:</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie un arbre de Huffman d&#39;après le dictionnaire de fréquences des lettres&quot;&quot;&quot;</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    <span class="c1"># Etape 1: Construire EN COMPREHENSION une liste de feuilles d&#39;après le dictionnaire de fréquences</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>    <span class="c1"># Etape 2: Construire l&#39;arbre de Huffman en agrégeant progresivement les arbres de la liste</span>
-<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>
-<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>    <span class="k">pass</span>
-<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>
-<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_codes</span><span class="p">(</span><span class="n">arbre</span><span class="p">:</span> <span class="n">ab</span><span class="o">.</span><span class="n">ArbreBin</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="sd">    Fonction récursive.</span>
-<a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="sd">    Renvoie un dictionnaire contenant la codification binaire de chaque caractère</span>
-<a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a>    <span class="k">pass</span>
-<a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a>
-<a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">compresser</span><span class="p">(</span><span class="n">texte</span><span class="p">,</span> <span class="n">codes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-10-24" name="__codelineno-10-24" href="#__codelineno-10-24"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Compresse un texte en utilisant le dictionnaire d&#39;encodage&quot;&quot;&quot;</span>
-<a id="__codelineno-10-25" name="__codelineno-10-25" href="#__codelineno-10-25"></a>    <span class="k">pass</span>
-<a id="__codelineno-10-26" name="__codelineno-10-26" href="#__codelineno-10-26"></a>
-<a id="__codelineno-10-27" name="__codelineno-10-27" href="#__codelineno-10-27"></a><span class="k">def</span><span class="w"> </span><span class="nf">decompresser</span><span class="p">(</span><span class="n">texte</span><span class="p">,</span> <span class="n">codes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-10-28" name="__codelineno-10-28" href="#__codelineno-10-28"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Décompresse un texte en utilisant le dictionnaire d&#39;encodage&quot;&quot;&quot;</span>
-<a id="__codelineno-10-29" name="__codelineno-10-29" href="#__codelineno-10-29"></a>    <span class="k">pass</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.hierarchiques</span><span class="w"> </span><span class="kn">import</span> <span class="n">arbrebin_mutable</span> <span class="k">as</span> <span class="n">ab</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.hierarchiques</span><span class="w"> </span><span class="kn">import</span> <span class="n">dessin</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_dicofreq</span><span class="p">(</span><span class="n">texte</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie un dictionnaire de fréquence des lettres du texte en entrée&quot;&quot;&quot;</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a>    <span class="k">pass</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_arbre_huffman</span><span class="p">(</span><span class="n">dicofreq</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ab</span><span class="o">.</span><span class="n">ArbreBin</span><span class="p">:</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie un arbre de Huffman d&#39;après le dictionnaire de fréquences des lettres&quot;&quot;&quot;</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a>    <span class="c1"># Etape 1: Construire EN COMPREHENSION une liste de feuilles d&#39;après le dictionnaire de fréquences</span>
+<a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>
+<a id="__codelineno-19-12" name="__codelineno-19-12" href="#__codelineno-19-12"></a>    <span class="c1"># Etape 2: Construire l&#39;arbre de Huffman en agrégeant progresivement les arbres de la liste</span>
+<a id="__codelineno-19-13" name="__codelineno-19-13" href="#__codelineno-19-13"></a>
+<a id="__codelineno-19-14" name="__codelineno-19-14" href="#__codelineno-19-14"></a>    <span class="k">pass</span>
+<a id="__codelineno-19-15" name="__codelineno-19-15" href="#__codelineno-19-15"></a>
+<a id="__codelineno-19-16" name="__codelineno-19-16" href="#__codelineno-19-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">get_codes</span><span class="p">(</span><span class="n">arbre</span><span class="p">:</span> <span class="n">ab</span><span class="o">.</span><span class="n">ArbreBin</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
+<a id="__codelineno-19-17" name="__codelineno-19-17" href="#__codelineno-19-17"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-19-18" name="__codelineno-19-18" href="#__codelineno-19-18"></a><span class="sd">    Fonction récursive.</span>
+<a id="__codelineno-19-19" name="__codelineno-19-19" href="#__codelineno-19-19"></a><span class="sd">    Renvoie un dictionnaire contenant la codification binaire de chaque caractère</span>
+<a id="__codelineno-19-20" name="__codelineno-19-20" href="#__codelineno-19-20"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-19-21" name="__codelineno-19-21" href="#__codelineno-19-21"></a>    <span class="k">pass</span>
+<a id="__codelineno-19-22" name="__codelineno-19-22" href="#__codelineno-19-22"></a>
+<a id="__codelineno-19-23" name="__codelineno-19-23" href="#__codelineno-19-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">compresser</span><span class="p">(</span><span class="n">texte</span><span class="p">,</span> <span class="n">codes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-19-24" name="__codelineno-19-24" href="#__codelineno-19-24"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Compresse un texte en utilisant le dictionnaire d&#39;encodage&quot;&quot;&quot;</span>
+<a id="__codelineno-19-25" name="__codelineno-19-25" href="#__codelineno-19-25"></a>    <span class="k">pass</span>
+<a id="__codelineno-19-26" name="__codelineno-19-26" href="#__codelineno-19-26"></a>
+<a id="__codelineno-19-27" name="__codelineno-19-27" href="#__codelineno-19-27"></a><span class="k">def</span><span class="w"> </span><span class="nf">decompresser</span><span class="p">(</span><span class="n">texte</span><span class="p">,</span> <span class="n">codes</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-19-28" name="__codelineno-19-28" href="#__codelineno-19-28"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Décompresse un texte en utilisant le dictionnaire d&#39;encodage&quot;&quot;&quot;</span>
+<a id="__codelineno-19-29" name="__codelineno-19-29" href="#__codelineno-19-29"></a>    <span class="k">pass</span>
 </code></pre></div>
 </div>
 <div class="admonition info">
@@ -5045,31 +5187,31 @@ Cet arbre de hauteur 3 a <span class="arithmatex">\(2^0 + 2^1 + 2^2 + 2^3 = 15\)
 <div class="admonition question">
 <p class="admonition-title">Recherche - Python avancé</p>
 <p>Sans l'exécuter, étudier ce que fait la fonction suivante:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="nb">type</span> <span class="n">vide</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[()]</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="nb">type</span> <span class="n">arbrebin</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">vide</span><span class="o">|</span><span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">arbrebin</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">arbrebin</span><span class="p">[</span><span class="n">T</span><span class="p">]]</span> 
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">ARBRE_VIDE</span> <span class="o">=</span> <span class="p">()</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">mystere</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">a</span><span class="p">:</span> <span class="n">arbrebin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">aux</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">arbrebin</span><span class="p">[</span><span class="n">T</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>        <span class="k">match</span> <span class="n">f</span><span class="p">:</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>            <span class="k">case</span> <span class="p">[]:</span>     <span class="c1"># cas où f est la liste vide</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>                <span class="k">return</span> <span class="p">[]</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>            <span class="k">case</span> <span class="p">(),</span> <span class="o">*</span><span class="n">reste</span><span class="p">:</span>   <span class="c1"># cas ou le premier element de f est l&#39;arbre vide (), et on affecte le reste de la liste à la variable reste.</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>                <span class="k">return</span> <span class="n">aux</span><span class="p">(</span><span class="n">reste</span><span class="p">)</span>
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>            <span class="k">case</span> <span class="p">(</span><span class="n">cle</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()),</span> <span class="o">*</span><span class="n">reste</span><span class="p">:</span> <span class="c1"># cas où le premier élément est une feuille</span>
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>                <span class="k">return</span> <span class="p">[</span><span class="n">cle</span><span class="p">]</span> <span class="o">+</span> <span class="n">aux</span><span class="p">(</span><span class="n">reste</span><span class="p">)</span>
-<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>            <span class="k">case</span> <span class="p">(</span><span class="n">cle</span><span class="p">,</span> <span class="n">sag</span><span class="p">,</span> <span class="n">sad</span><span class="p">),</span> <span class="o">*</span><span class="n">reste</span><span class="p">:</span> <span class="c1"># cas où le premier élément est un noeud quelconque.</span>
-<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>                <span class="k">return</span> <span class="p">[</span><span class="n">cle</span><span class="p">]</span> <span class="o">+</span> <span class="n">aux</span><span class="p">(</span><span class="n">reste</span> <span class="o">+</span> <span class="p">[</span><span class="n">sag</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">sad</span><span class="p">])</span>
-<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>  <span class="c1"># spécial python, car python n&#39;étant pas fortement typé, la fonction accepte n&#39;importe quoi en paramètre.</span>
-<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Ce cas ne peut pas arriver, le type de a doit être arbrebin[T], vous avez mis n&#39;importe quoi dans la fonction&quot;</span><span class="p">)</span>
-<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>    <span class="k">return</span> <span class="n">aux</span><span class="p">([</span><span class="n">a</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="nb">type</span> <span class="n">vide</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[()]</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="nb">type</span> <span class="n">arbrebin</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">vide</span><span class="o">|</span><span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">arbrebin</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">arbrebin</span><span class="p">[</span><span class="n">T</span><span class="p">]]</span> 
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">ARBRE_VIDE</span> <span class="o">=</span> <span class="p">()</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">mystere</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">a</span><span class="p">:</span> <span class="n">arbrebin</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">aux</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">arbrebin</span><span class="p">[</span><span class="n">T</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>        <span class="k">match</span> <span class="n">f</span><span class="p">:</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>            <span class="k">case</span> <span class="p">[]:</span>     <span class="c1"># cas où f est la liste vide</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>                <span class="k">return</span> <span class="p">[]</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>            <span class="k">case</span> <span class="p">(),</span> <span class="o">*</span><span class="n">reste</span><span class="p">:</span>   <span class="c1"># cas ou le premier element de f est l&#39;arbre vide (), et on affecte le reste de la liste à la variable reste.</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>                <span class="k">return</span> <span class="n">aux</span><span class="p">(</span><span class="n">reste</span><span class="p">)</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>            <span class="k">case</span> <span class="p">(</span><span class="n">cle</span><span class="p">,</span> <span class="p">(),</span> <span class="p">()),</span> <span class="o">*</span><span class="n">reste</span><span class="p">:</span> <span class="c1"># cas où le premier élément est une feuille</span>
+<a id="__codelineno-20-13" name="__codelineno-20-13" href="#__codelineno-20-13"></a>                <span class="k">return</span> <span class="p">[</span><span class="n">cle</span><span class="p">]</span> <span class="o">+</span> <span class="n">aux</span><span class="p">(</span><span class="n">reste</span><span class="p">)</span>
+<a id="__codelineno-20-14" name="__codelineno-20-14" href="#__codelineno-20-14"></a>            <span class="k">case</span> <span class="p">(</span><span class="n">cle</span><span class="p">,</span> <span class="n">sag</span><span class="p">,</span> <span class="n">sad</span><span class="p">),</span> <span class="o">*</span><span class="n">reste</span><span class="p">:</span> <span class="c1"># cas où le premier élément est un noeud quelconque.</span>
+<a id="__codelineno-20-15" name="__codelineno-20-15" href="#__codelineno-20-15"></a>                <span class="k">return</span> <span class="p">[</span><span class="n">cle</span><span class="p">]</span> <span class="o">+</span> <span class="n">aux</span><span class="p">(</span><span class="n">reste</span> <span class="o">+</span> <span class="p">[</span><span class="n">sag</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">sad</span><span class="p">])</span>
+<a id="__codelineno-20-16" name="__codelineno-20-16" href="#__codelineno-20-16"></a>            <span class="k">case</span><span class="w"> </span><span class="k">_</span><span class="p">:</span>  <span class="c1"># spécial python, car python n&#39;étant pas fortement typé, la fonction accepte n&#39;importe quoi en paramètre.</span>
+<a id="__codelineno-20-17" name="__codelineno-20-17" href="#__codelineno-20-17"></a>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Ce cas ne peut pas arriver, le type de a doit être arbrebin[T], vous avez mis n&#39;importe quoi dans la fonction&quot;</span><span class="p">)</span>
+<a id="__codelineno-20-18" name="__codelineno-20-18" href="#__codelineno-20-18"></a>    <span class="k">return</span> <span class="n">aux</span><span class="p">([</span><span class="n">a</span><span class="p">])</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">MP2I</p>
 <p>Implémentez doctement toutes les fonctions en OCaml. (seulement la version immuable. Il est aussi possible d'implémenter la version mutable en OCaml, mais chaque chose en son temps)</p>
 <p>On utilisera cette définition d'un arbre binaire:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">arbrebin</span> <span class="o">=</span> <span class="nc">Vide</span> <span class="o">|</span> <span class="nc">Noeud</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">arbrebin</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">arbrebin</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">type</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">arbrebin</span> <span class="o">=</span> <span class="nc">Vide</span> <span class="o">|</span> <span class="nc">Noeud</span> <span class="k">of</span> <span class="k">&#39;</span><span class="n">a</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">arbrebin</span> <span class="o">*</span> <span class="k">&#39;</span><span class="n">a</span> <span class="n">arbrebin</span>
 </code></pre></div>
 <p><code>'a</code> est l'équivalent du type générique T qu'on a utilisé en python.
 <code>'a arbrebin</code> veut dire arbre binaire portant des données de type <code>'a</code></p>
