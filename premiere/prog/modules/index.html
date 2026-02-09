@@ -8,13 +8,13 @@
       
       
       
-        <link rel="canonical" href="https://mmarchand-nsi.github.io/premiere/prog/scope/">
+        <link rel="canonical" href="https://mmarchand-nsi.github.io/premiere/prog/modules/">
       
       
-        <link rel="prev" href="../modules/">
+        <link rel="prev" href="../exercices/">
       
       
-        <link rel="next" href="../tuples/">
+        <link rel="next" href="../scope/">
       
       
         
@@ -25,7 +25,7 @@
     
     
       
-        <title>Portée des variables (scope) - Science Informatique</title>
+        <title>Modules Python - Science Informatique</title>
 <script src="/javascripts/bundle.js"></script>
 
       
@@ -92,7 +92,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#portee-des-variables-scope" class="md-skip">
+        <a href="#modules-python" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Portée des variables (scope)
+              Modules Python
             
           </span>
         </div>
@@ -1698,34 +1698,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../modules/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Modules Python
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -1745,7 +1717,7 @@
   <span class="md-ellipsis">
     
   
-    Portée des variables (scope)
+    Modules Python
   
 
     
@@ -1763,7 +1735,7 @@
   <span class="md-ellipsis">
     
   
-    Portée des variables (scope)
+    Modules Python
   
 
     
@@ -1789,22 +1761,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-variables-locales" class="md-nav__link">
+  <a href="#1-quest-ce-qui-se-cache-derriere-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Variables locales
+        1. Qu'est-ce qui se cache derrière import
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Variables locales">
+    <nav class="md-nav" aria-label="1. Qu&#39;est-ce qui se cache derrière import">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#exemple-de-base" class="md-nav__link">
+  <a href="#exemple-de-depart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Exemple de base
+        Exemple de départ
       
     </span>
   </a>
@@ -1812,10 +1784,110 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#les-parametres-sont-aussi-des-variables-locales" class="md-nav__link">
+  <a href="#explication-de-limport" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Les paramètres sont aussi des variables locales
+        Explication de l'import
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variantes-de-limport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variantes de l'import
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variantes de l&#39;import">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-avec-alias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import avec alias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-dune-fonction-specifique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import d'une fonction spécifique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-de-tout-mauvaise-pratique-ne-pas-faire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import de tout (MAUVAISE PRATIQUE - NE PAS FAIRE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-importer-un-fichier-dans-le-meme-repertoire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Importer un fichier dans le même répertoire
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Importer un fichier dans le même répertoire">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemple-module-de-calculs-geometriques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemple : Module de calculs géométriques
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-module-de-jeux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemple : Module de jeux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organisation-des-fichiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Organisation des fichiers
       
     </span>
   </a>
@@ -1828,22 +1900,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-variables-globales" class="md-nav__link">
+  <a href="#3-installer-de-nouveaux-modules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Variables globales
+        3. Installer de nouveaux modules
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Variables globales">
+    <nav class="md-nav" aria-label="3. Installer de nouveaux modules">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#lire-une-variable-globale" class="md-nav__link">
+  <a href="#la-bibliotheque-pypi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lire une variable globale
+        La bibliothèque PyPI
       
     </span>
   </a>
@@ -1851,10 +1923,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#le-piege-essayer-de-modifier-sans-global" class="md-nav__link">
+  <a href="#installation-avec-uv" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Le piège : essayer de modifier sans global
+        Installation avec uv
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation avec uv">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installer-un-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installer un module
       
     </span>
   </a>
@@ -1862,10 +1946,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#modifier-une-variable-globale-avec-global" class="md-nav__link">
+  <a href="#utiliser-le-module-installe" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Modifier une variable globale avec global
+        Utiliser le module installé
       
     </span>
   </a>
@@ -1873,10 +1957,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#conflit-de-nommage-creer-une-variable-locale-masque-la-globale" class="md-nav__link">
+  <a href="#desinstaller-un-module" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conflit de nommage : créer une variable locale masque la globale
+        Désinstaller un module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installer-les-dependances-dun-projet-existant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installer les dépendances d'un projet existant
       
     </span>
   </a>
@@ -1887,15 +1982,9 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#3-bonnes-pratiques" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Bonnes pratiques
-      
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -1925,6 +2014,34 @@
   
 </nav>
       
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../scope/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Portée des variables (scope)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
     </li>
   
 
@@ -4354,22 +4471,22 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#1-variables-locales" class="md-nav__link">
+  <a href="#1-quest-ce-qui-se-cache-derriere-import" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Variables locales
+        1. Qu'est-ce qui se cache derrière import
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="1. Variables locales">
+    <nav class="md-nav" aria-label="1. Qu&#39;est-ce qui se cache derrière import">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#exemple-de-base" class="md-nav__link">
+  <a href="#exemple-de-depart" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Exemple de base
+        Exemple de départ
       
     </span>
   </a>
@@ -4377,10 +4494,110 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#les-parametres-sont-aussi-des-variables-locales" class="md-nav__link">
+  <a href="#explication-de-limport" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Les paramètres sont aussi des variables locales
+        Explication de l'import
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variantes-de-limport" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variantes de l'import
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Variantes de l&#39;import">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#import-avec-alias" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import avec alias
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-dune-fonction-specifique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import d'une fonction spécifique
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#import-de-tout-mauvaise-pratique-ne-pas-faire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Import de tout (MAUVAISE PRATIQUE - NE PAS FAIRE)
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-importer-un-fichier-dans-le-meme-repertoire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Importer un fichier dans le même répertoire
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="2. Importer un fichier dans le même répertoire">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#exemple-module-de-calculs-geometriques" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemple : Module de calculs géométriques
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exemple-module-de-jeux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Exemple : Module de jeux
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#organisation-des-fichiers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Organisation des fichiers
       
     </span>
   </a>
@@ -4393,22 +4610,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-variables-globales" class="md-nav__link">
+  <a href="#3-installer-de-nouveaux-modules" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Variables globales
+        3. Installer de nouveaux modules
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Variables globales">
+    <nav class="md-nav" aria-label="3. Installer de nouveaux modules">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#lire-une-variable-globale" class="md-nav__link">
+  <a href="#la-bibliotheque-pypi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Lire une variable globale
+        La bibliothèque PyPI
       
     </span>
   </a>
@@ -4416,10 +4633,22 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#le-piege-essayer-de-modifier-sans-global" class="md-nav__link">
+  <a href="#installation-avec-uv" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Le piège : essayer de modifier sans global
+        Installation avec uv
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Installation avec uv">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#installer-un-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installer un module
       
     </span>
   </a>
@@ -4427,10 +4656,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#modifier-une-variable-globale-avec-global" class="md-nav__link">
+  <a href="#utiliser-le-module-installe" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Modifier une variable globale avec global
+        Utiliser le module installé
       
     </span>
   </a>
@@ -4438,10 +4667,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#conflit-de-nommage-creer-une-variable-locale-masque-la-globale" class="md-nav__link">
+  <a href="#desinstaller-un-module" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Conflit de nommage : créer une variable locale masque la globale
+        Désinstaller un module
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#installer-les-dependances-dun-projet-existant" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Installer les dépendances d'un projet existant
       
     </span>
   </a>
@@ -4452,15 +4692,9 @@
     </nav>
   
 </li>
-      
-        <li class="md-nav__item">
-  <a href="#3-bonnes-pratiques" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Bonnes pratiques
-      
-    </span>
-  </a>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -4577,356 +4811,317 @@
 
 
 
-<h1 id="portee-des-variables-scope">Portée des variables (scope)</h1>
-<p>La <strong>portée</strong> (<em>scope</em>) d'une variable détermine les parties du code où cette variable est accessible. Comprendre la portée permet d'éviter des bugs subtils et d'écrire du code plus clair.</p>
-<h2 id="1-variables-locales">1. Variables locales</h2>
-<p>Une variable <strong>locale</strong> est créée à l'intérieur d'une fonction. Elle n'existe que <strong>pendant l'exécution</strong> de cette fonction et n'est accessible que dans son corps.</p>
-<h3 id="exemple-de-base">Exemple de base</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">ma_fonction</span><span class="p">():</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Variable locale</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dans la fonction, x =&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">ma_fonction</span><span class="p">()</span>       <span class="c1"># Affiche 10</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>            <span class="c1"># ❌ ERREUR : x n&#39;existe pas ici</span>
+<h1 id="modules-python">Modules Python</h1>
+<p>Un <strong>module</strong> est un fichier Python (<code>.py</code>) qui contient du code réutilisable : des fonctions, des classes, des variables. Les modules permettent d'<strong>organiser</strong> le code et d'<strong>éviter la répétition</strong>.</p>
+<p>Python propose des centaines de modules intégrés (comme <code>random</code>, <code>math</code>, <code>os</code>...), permet d'en télécharger des milliers d'autres, et vous pouvez aussi créer vos propres modules.</p>
+<h2 id="1-quest-ce-qui-se-cache-derriere-import">1. Qu'est-ce qui se cache derrière <code>import</code></h2>
+<h3 id="exemple-de-depart">Exemple de départ</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 </code></pre></div>
-<p><strong>Que se passe-t-il ?</strong></p>
+<p>Ce programme affiche un nombre aléatoire entre 1 et 6 (comme un dé).</p>
+<h3 id="explication-de-limport">Explication de l'import</h3>
+<p>Quand vous écrivez <code>import random</code>, Python :</p>
 <ol>
-<li>Quand <code>ma_fonction()</code> est appelée, Python crée une variable <code>x</code> locale</li>
-<li>À la fin de l'exécution de la fonction, <code>x</code> est détruite</li>
-<li><code>print(x)</code> cherche <code>x</code> et ne la trouve pas → erreur <code>NameError</code></li>
+<li><strong>Cherche</strong> un fichier nommé <code>random.py</code> dans ses bibliothèques standard</li>
+<li><strong>Exécute</strong> tout le code de ce fichier (définitions de fonctions, de variables, etc.)</li>
+<li><strong>Crée</strong> un objet <code>random</code> qui contient tout ce qui a été défini dans le fichier</li>
 </ol>
-<h3 id="les-parametres-sont-aussi-des-variables-locales">Les paramètres sont aussi des variables locales</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">calculer</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="c1"># a et b sont des variables locales</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="n">resultat</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>  <span class="c1"># resultat est aussi locale</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="k">return</span> <span class="n">resultat</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">somme</span> <span class="o">=</span> <span class="n">calculer</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">somme</span><span class="p">)</span>        <span class="c1"># 8</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>            <span class="c1"># ❌ ERREUR : a n&#39;existe que dans calculer()</span>
+<p>Ensuite, vous pouvez accéder aux fonctions du module avec la <strong>notation pointée</strong> : <code>random.randint()</code>, <code>random.choice()</code>, etc.</p>
+<div class="admonition example">
+<p class="admonition-title">Autres modules courants</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">16</span><span class="p">))</span>  <span class="c1"># Racine carrée : 4.0</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span>        <span class="c1"># Constante pi : 3.141592653589793</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Attends 2 secondes...&quot;</span><span class="p">)</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C&#39;est bon !&quot;</span><span class="p">)</span>
+</code></pre></div>
+</div>
+<h3 id="variantes-de-limport">Variantes de l'import</h3>
+<h4 id="import-avec-alias">Import avec alias</h4>
+<p>c'est une fonctionnalité qui sert à renommer un module pour que le code soit plus léger.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rd</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">rd</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>  <span class="c1"># Plus court à écrire</span>
+</code></pre></div>
+<h4 id="import-dune-fonction-specifique">Import d'une fonction spécifique</h4>
+<p>Lorsqu'on a besoin que d'une seule fonction.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">randint</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>  <span class="c1"># Pas besoin de préfixer par &quot;random.&quot;</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Attention</p>
+<p>Avec <code>from random import randint</code>, vous ne pouvez utiliser que <code>randint</code>. Pour utiliser d'autres fonctions du module, il faudrait les importer aussi.</p>
+</div>
+<h4 id="import-de-tout-mauvaise-pratique-ne-pas-faire">Import de tout (MAUVAISE PRATIQUE - NE PAS FAIRE)</h4>
+<p>J'ajoute uniquement ce paragraphe pour que vous ne fassiez pas ça.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">choice</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]))</span>
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Mauvaise pratique</p>
+<p><code>from module import *</code> importe <strong>tout</strong> et peut créer des conflits de noms. La dernière version importée écrase les précédentes.</p>
+<p><strong>Exemple concret du problème :</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="c1"># La fonction exp de numpy a écrasé celle de math</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>           <span class="c1"># Fonctionne : 2.718...</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="n">j</span><span class="p">))</span>      <span class="c1"># Fonctionne : numpy accepte les complexes</span>
+</code></pre></div>
+<p>Maintenant, inversons l'ordre :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="c1"># La fonction exp de math a écrasé celle de numpy</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>           <span class="c1"># Fonctionne : 2.718...</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="mi">2</span><span class="n">j</span><span class="p">))</span>      <span class="c1"># ❌ ERREUR : math n&#39;accepte pas les complexes</span>
+</code></pre></div>
+<p><strong>Le même code produit des résultats différents selon l'ordre des imports !</strong> C'est pourquoi il faut éviter <code>import *</code>.</p>
+</div>
+<h2 id="2-importer-un-fichier-dans-le-meme-repertoire">2. Importer un fichier dans le même répertoire</h2>
+<p>Vous pouvez créer vos propres modules en écrivant un fichier Python, puis l'importer dans un autre fichier.</p>
+<h3 id="exemple-module-de-calculs-geometriques">Exemple : Module de calculs géométriques</h3>
+<p><strong>Fichier <code>geometrie.py</code> (le module) :</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">aire_rectangle</span><span class="p">(</span><span class="n">longueur</span><span class="p">,</span> <span class="n">largeur</span><span class="p">):</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule l&#39;aire d&#39;un rectangle.&quot;&quot;&quot;</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="k">return</span> <span class="n">longueur</span> <span class="o">*</span> <span class="n">largeur</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">aire_cercle</span><span class="p">(</span><span class="n">rayon</span><span class="p">):</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule l&#39;aire d&#39;un cercle.&quot;&quot;&quot;</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">rayon</span> <span class="o">**</span> <span class="mi">2</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">perimetre_rectangle</span><span class="p">(</span><span class="n">longueur</span><span class="p">,</span> <span class="n">largeur</span><span class="p">):</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule le périmètre d&#39;un rectangle.&quot;&quot;&quot;</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">longueur</span> <span class="o">+</span> <span class="n">largeur</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Fichier <code>programme.py</code> (utilise le module) :</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">geometrie</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="c1"># Utiliser les fonctions du module geometrie</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">geometrie</span><span class="o">.</span><span class="n">aire_rectangle</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>       <span class="c1"># 15</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">geometrie</span><span class="o">.</span><span class="n">aire_cercle</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>            <span class="c1"># 314.159...</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">geometrie</span><span class="o">.</span><span class="n">perimetre_rectangle</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># 16</span>
 </code></pre></div>
 <div class="admonition info">
-<p class="admonition-title">Pourquoi les variables locales ?</p>
-<p>Les variables locales permettent d'<strong>isoler</strong> le code de chaque fonction. Deux fonctions peuvent avoir des variables du même nom sans conflit :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">fonction_a</span><span class="p">():</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fonction A, x =&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">fonction_b</span><span class="p">():</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fonction B, x =&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="n">fonction_a</span><span class="p">()</span>  <span class="c1"># x = 10</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="n">fonction_b</span><span class="p">()</span>  <span class="c1"># x = 20 (un autre x !)</span>
-</code></pre></div>
+<p class="admonition-title">Comment ça marche ?</p>
+<p>Quand Python voit <code>import geometrie</code>, il cherche un fichier <code>geometrie.py</code> dans le <strong>même répertoire</strong> que <code>programme.py</code>, l'exécute, et vous donne accès à tout ce qui y est défini.</p>
 </div>
-<h2 id="2-variables-globales">2. Variables globales</h2>
-<p>Une variable <strong>globale</strong> est définie en dehors de toute fonction, au niveau principal du script. Elle est accessible partout dans le fichier.</p>
-<h3 id="lire-une-variable-globale">Lire une variable globale</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># Variable globale</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">afficher_a</span><span class="p">():</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dans la fonction, a =&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>  <span class="c1"># On peut lire a</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="n">afficher_a</span><span class="p">()</span>                            <span class="c1"># 5</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;En dehors, a =&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>              <span class="c1"># 5</span>
-</code></pre></div>
-<p>Ici, pas de problème : on <strong>lit</strong> simplement la valeur de <code>a</code>.</p>
-<h3 id="le-piege-essayer-de-modifier-sans-global">Le piège : essayer de modifier sans <code>global</code></h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Variable globale</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">incrementer_x</span><span class="p">():</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>  <span class="c1"># ❌ ERREUR : UnboundLocalError</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">incrementer_x</span><span class="p">()</span>
-</code></pre></div>
-<p><strong>Que se passe-t-il ?</strong></p>
-<p>Python voit <code>x = ...</code> dans la fonction et décide que <code>x</code> est une <strong>variable locale</strong> pour toute la fonction. Donc quand il lit <code>x + 1</code>, il cherche une variable locale <code>x</code> qui n'a pas encore été créée → <strong>erreur</strong>.</p>
-<div class="admonition danger">
-<p class="admonition-title">Erreur conceptuelle courante</p>
-<p>Beaucoup pensent que Python "lit d'abord la variable globale puis crée une locale", mais c'est <strong>faux</strong>. Python analyse la fonction <strong>avant</strong> de l'exécuter et décide que toute variable assignée (<code>=</code>) est locale. L'erreur se produit <strong>avant</strong> la lecture.</p>
-</div>
-<h3 id="modifier-une-variable-globale-avec-global">Modifier une variable globale avec <code>global</code></h3>
-<p>Pour modifier une variable globale depuis une fonction, il faut déclarer explicitement <code>global</code> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>  <span class="c1"># Variable globale</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">incrementer_x</span><span class="p">():</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">global</span> <span class="n">x</span>      <span class="c1"># Déclare qu&#39;on veut utiliser la variable globale</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">1</span>     <span class="c1"># Maintenant ça marche</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Avant :&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>   <span class="c1"># 10</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="n">incrementer_x</span><span class="p">()</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Après :&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>   <span class="c1"># 11</span>
-</code></pre></div>
-<h3 id="conflit-de-nommage-creer-une-variable-locale-masque-la-globale">Conflit de nommage : créer une variable locale masque la globale</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">compteur</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Variable globale</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">incrementer_compteur</span><span class="p">():</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">compteur</span> <span class="o">=</span> <span class="mi">5</span>  <span class="c1"># Crée une variable LOCALE &quot;compteur&quot;</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dans la fonction, compteur =&quot;</span><span class="p">,</span> <span class="n">compteur</span><span class="p">)</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="n">incrementer_compteur</span><span class="p">()</span>              <span class="c1"># Affiche 5</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Global, compteur =&quot;</span><span class="p">,</span> <span class="n">compteur</span><span class="p">)</span>  <span class="c1"># Affiche 0 (inchangé)</span>
-</code></pre></div>
-<p>Ici, la fonction crée une <strong>nouvelle variable locale</strong> <code>compteur</code> qui masque la globale. La variable globale reste à 0.</p>
-<h2 id="3-bonnes-pratiques">3. Bonnes pratiques</h2>
-<div class="admonition warning">
-<p class="admonition-title">Éviter les variables globales modifiables</p>
-<p>Les variables globales <strong>modifiables</strong> rendent le code difficile à comprendre et à débugger :</p>
-<ul>
-<li>N'importe quelle fonction peut changer leur valeur</li>
-<li>Difficile de savoir qui a modifié quoi</li>
-<li>Crée des <strong>dépendances cachées</strong> entre fonctions</li>
-</ul>
-<p><strong>Préférez :</strong></p>
-<ul>
-<li>Passer les valeurs en <strong>paramètres</strong></li>
-<li>Retourner les résultats avec <strong>return</strong></li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># ❌ Mauvais : variable globale modifiable</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">stock</span> <span class="o">=</span> <span class="mi">10</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">acheter</span><span class="p">():</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="k">global</span> <span class="n">stock</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="n">stock</span> <span class="o">-=</span> <span class="mi">1</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="c1"># ✅ Bon : paramètres et return</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">acheter</span><span class="p">(</span><span class="n">stock</span><span class="p">):</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="k">return</span> <span class="n">stock</span> <span class="o">-</span> <span class="mi">1</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="n">stock</span> <span class="o">=</span> <span class="mi">10</span>
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a><span class="n">stock</span> <span class="o">=</span> <span class="n">acheter</span><span class="p">(</span><span class="n">stock</span><span class="p">)</span>
-</code></pre></div>
-</div>
-<div class="admonition tip">
-<p class="admonition-title">Les constantes globales sont OK</p>
-<p>Les variables globales <strong>en lecture seule</strong> (constantes) sont acceptables :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">PI</span> <span class="o">=</span> <span class="mf">3.14159</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">TVA</span> <span class="o">=</span> <span class="mf">0.20</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">MAX_TENTATIVES</span> <span class="o">=</span> <span class="mi">3</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">calculer_prix_ttc</span><span class="p">(</span><span class="n">prix_ht</span><span class="p">):</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="k">return</span> <span class="n">prix_ht</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">TVA</span><span class="p">)</span>  <span class="c1"># Lecture de TVA : OK</span>
-</code></pre></div>
-<p>Par convention, on les écrit en MAJUSCULES.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Exception : Programmation événementielle</p>
-<p>En <strong>programmation événementielle</strong> (interfaces graphiques, jeux vidéo), il est <strong>difficile d'éviter</strong> les variables globales modifiables. Les fonctions de callback (réactions aux événements) doivent accéder à l'état de l'application.</p>
-<p><strong>Exemple avec tkinter (interface graphique) :</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">tkinter</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">tk</span>
+<h3 id="exemple-module-de-jeux">Exemple : Module de jeux</h3>
+<p><strong>Fichier <code>jeux.py</code> :</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">compteur</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Variable globale nécessaire</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">clic</span><span class="p">():</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="k">global</span> <span class="n">compteur</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">compteur</span> <span class="o">+=</span> <span class="mi">1</span>
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="n">label</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="n">text</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Clics : </span><span class="si">{</span><span class="n">compteur</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>
-<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">fenetre</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">fenetre</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Clics : 0&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="n">label</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
-<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="n">bouton</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="n">fenetre</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s2">&quot;Cliquer&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="n">clic</span><span class="p">)</span>
-<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a><span class="n">bouton</span><span class="o">.</span><span class="n">pack</span><span class="p">()</span>
-<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a><span class="n">fenetre</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">lancer_de</span><span class="p">(</span><span class="n">nombre_faces</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Simule le lancer d&#39;un dé.&quot;&quot;&quot;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nombre_faces</span><span class="p">)</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">pile_ou_face</span><span class="p">():</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Simule un pile ou face.&quot;&quot;&quot;</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">&quot;Pile&quot;</span><span class="p">,</span> <span class="s2">&quot;Face&quot;</span><span class="p">])</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">tirage_loto</span><span class="p">(</span><span class="n">nb_numeros</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mi">49</span><span class="p">):</span>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Tire des numéros aléatoires sans répétition.&quot;&quot;&quot;</span>
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">maximum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">nb_numeros</span><span class="p">)</span>
 </code></pre></div>
-<p><strong>Pourquoi c'est acceptable ici ?</strong></p>
+<p><strong>Fichier <code>mon_jeu.py</code> :</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">jeux</span><span class="w"> </span><span class="kn">import</span> <span class="n">lancer_de</span><span class="p">,</span> <span class="n">pile_ou_face</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lancer de dé:&quot;</span><span class="p">,</span> <span class="n">lancer_de</span><span class="p">())</span>        <span class="c1"># ex: 4</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Pile ou face:&quot;</span><span class="p">,</span> <span class="n">pile_ou_face</span><span class="p">())</span>     <span class="c1"># ex: Pile</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dé à 20 faces:&quot;</span><span class="p">,</span> <span class="n">lancer_de</span><span class="p">(</span><span class="mi">20</span><span class="p">))</span>     <span class="c1"># ex: 17</span>
+</code></pre></div>
+<h3 id="organisation-des-fichiers">Organisation des fichiers</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>mon_projet/
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>├── geometrie.py      ← Module
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>├── jeux.py           ← Module
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>├── programme.py      ← Utilise geometrie
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>└── mon_jeu.py        ← Utilise jeux
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Bonnes pratiques</p>
 <ul>
-<li>La fonction <code>clic()</code> est appelée par le framework (pas par vous)</li>
-<li>On ne peut pas passer de paramètres à <code>clic()</code> directement</li>
-<li>Les variables globales modélisent <strong>l'état de l'application</strong></li>
+<li>Un module = un fichier avec des <strong>fonctions liées</strong> (géométrie, jeux, calculs...)</li>
+<li>Donnez des <strong>noms clairs</strong> aux modules (évitez <code>module1.py</code>, <code>truc.py</code>)</li>
+<li><strong>Documentez</strong> vos fonctions avec des docstrings (<code>"""..."""</code>)</li>
 </ul>
-<p>Dans ce contexte, c'est un <strong>compromis nécessaire</strong> pour les débutants. Les programmeurs avancés utilisent des classes (programmation orientée objet) pour mieux gérer l'état, mais en première, les variables globales sont acceptables pour la programmation événementielle.</p>
+</div>
+<h2 id="3-installer-de-nouveaux-modules">3. Installer de nouveaux modules</h2>
+<p>Python a une immense <strong>bibliothèque</strong> de modules créés par la communauté. Pour les utiliser, il faut d'abord les <strong>installer</strong>.</p>
+<h3 id="la-bibliotheque-pypi">La bibliothèque PyPI</h3>
+<p><a href="https://pypi.org/">PyPI</a> (<em>Python Package Index</em>) est le dépôt officiel qui contient plus de 500 000 modules Python : pour faire des graphiques, des sites web, de l'intelligence artificielle, des jeux...</p>
+<p>Exemples de modules populaires :</p>
+<ul>
+<li><code>requests</code> : pour faire des requêtes HTTP</li>
+<li><code>flask</code> : pour créer des applications web</li>
+<li><code>numpy</code> : pour les calculs scientifiques</li>
+<li><code>pygame</code> : pour créer des jeux</li>
+</ul>
+<h3 id="installation-avec-uv">Installation avec <code>uv</code></h3>
+<p><code>uv</code> est un outil moderne pour gérer les dépendances Python. Il est <strong>beaucoup plus rapide</strong> que <code>pip</code> (l'outil classique).</p>
+<h4 id="installer-un-module">Installer un module</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>uv<span class="w"> </span>add<span class="w"> </span>requests
+</code></pre></div>
+<p><strong>Ce qu'il se passe :</strong></p>
+<ol>
+<li><strong><code>uv</code> cherche</strong> le module <code>requests</code> sur PyPI</li>
+<li><strong>Télécharge</strong> le module et toutes ses dépendances (autres modules dont il a besoin)</li>
+<li><strong>Installe</strong> le module dans votre projet</li>
+<li><strong>Met à jour</strong> le fichier <code>pyproject.toml</code> (qui liste tous les modules de votre projet)</li>
+<li><strong>Met à jour</strong> le fichier <code>uv.lock</code> (qui verrouille les versions exactes)</li>
+</ol>
+<div class="admonition info">
+<p class="admonition-title">Fichiers créés</p>
+<ul>
+<li><strong><code>pyproject.toml</code></strong> : liste les modules dont votre projet a besoin</li>
+<li><strong><code>uv.lock</code></strong> : verrouille les versions exactes pour garantir la reproductibilité</li>
+<li><strong><code>.venv/</code></strong> : dossier contenant tous les modules installés (environnement virtuel)</li>
+</ul>
+</div>
+<h4 id="utiliser-le-module-installe">Utiliser le module installé</h4>
+<p>Après <code>uv add requests</code>, vous pouvez l'importer normalement :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://api.github.com&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>  <span class="c1"># 200 si tout va bien</span>
+</code></pre></div>
+<h4 id="desinstaller-un-module">Désinstaller un module</h4>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>uv<span class="w"> </span>remove<span class="w"> </span>requests
+</code></pre></div>
+<h4 id="installer-les-dependances-dun-projet-existant">Installer les dépendances d'un projet existant</h4>
+<p>Si vous récupérez un projet Python qui a un fichier <code>pyproject.toml</code>, installez toutes les dépendances avec :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>uv<span class="w"> </span>sync
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Recommandation</p>
+<p>Utilisez <code>uv</code> pour tous vos nouveaux projets. C'est l'avenir de la gestion de dépendances en Python.</p>
 </div>
 <h2 id="4-exercices">4. Exercices</h2>
 <div class="admonition question">
-<p class="admonition-title">Exercice 1 : Prédire le résultat</p>
-<p>Sans exécuter le code, prédisez ce qui sera affiché :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">y</span> <span class="o">=</span> <span class="mi">100</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">tester</span><span class="p">():</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">y</span> <span class="o">=</span> <span class="mi">50</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Dans tester, y =&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">tester</span><span class="p">()</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;En dehors, y =&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</code></pre></div>
-<p>Puis exécutez pour vérifier.</p>
-</div>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>Dans tester, y = 50
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>En dehors, y = 100
-</code></pre></div>
-<p><strong>Explication :</strong> La fonction crée une variable <strong>locale</strong> <code>y = 50</code> qui masque la globale. La variable globale <code>y</code> reste à 100.</p>
-</details>
-<div class="admonition question">
-<p class="admonition-title">Exercice 2 : Identifier l'erreur</p>
-<p>Ce code provoque une erreur. Pourquoi ? Comment la corriger ?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">ajouter</span><span class="p">(</span><span class="n">valeur</span><span class="p">):</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">valeur</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="n">ajouter</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
-</code></pre></div>
-</div>
-<details class="success">
-<summary>Solution</summary>
-<p><strong>Erreur :</strong> <code>UnboundLocalError: local variable 'total' referenced before assignment</code></p>
-<p><strong>Pourquoi :</strong> Python voit <code>total = ...</code> et décide que <code>total</code> est locale. Quand il lit <code>total + valeur</code>, il cherche une variable locale qui n'existe pas encore.</p>
-<p><strong>Correction 1 (avec <code>global</code>) :</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">ajouter</span><span class="p">(</span><span class="n">valeur</span><span class="p">):</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="k">global</span> <span class="n">total</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">valeur</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="n">ajouter</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>  <span class="c1"># 5</span>
-</code></pre></div>
-<p><strong>Correction 2 (meilleure : sans global) :</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">ajouter</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="n">valeur</span><span class="p">):</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="k">return</span> <span class="n">total</span> <span class="o">+</span> <span class="n">valeur</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="n">total</span> <span class="o">=</span> <span class="n">ajouter</span><span class="p">(</span><span class="n">total</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>  <span class="c1"># 5</span>
-</code></pre></div>
-</details>
-<div class="admonition question">
-<p class="admonition-title">Exercice 3 : Gestion de stock</p>
-<p>Créez un fichier <code>stock.py</code> avec :</p>
+<p class="admonition-title">Exercice 1 : Module de conversions</p>
+<p>Créez un fichier <code>conversions.py</code> avec les fonctions suivantes :</p>
 <ul>
-<li>Une fonction <code>acheter(stock)</code> qui diminue le stock de 1 et le retourne</li>
-<li>Une fonction <code>livraison(stock, quantite)</code> qui augmente le stock et le retourne</li>
+<li><code>celsius_vers_fahrenheit(c)</code> : convertit des degrés Celsius en Fahrenheit</li>
+<li><code>fahrenheit_vers_celsius(f)</code> : convertit des degrés Fahrenheit en Celsius</li>
+<li><code>km_vers_miles(km)</code> : convertit des kilomètres en miles (1 km = 0.621371 miles)</li>
 </ul>
-<p>Testez avec un stock initial de 10, 2 achats, puis une livraison de 5.</p>
+<p>Créez ensuite un fichier <code>test_conversions.py</code> qui importe ce module et teste les trois fonctions.</p>
 </div>
 <details class="success">
 <summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">acheter</span><span class="p">(</span><span class="n">stock</span><span class="p">):</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Diminue le stock de 1.&quot;&quot;&quot;</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="k">return</span> <span class="n">stock</span> <span class="o">-</span> <span class="mi">1</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">livraison</span><span class="p">(</span><span class="n">stock</span><span class="p">,</span> <span class="n">quantite</span><span class="p">):</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Augmente le stock de la quantité livrée.&quot;&quot;&quot;</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>    <span class="k">return</span> <span class="n">stock</span> <span class="o">+</span> <span class="n">quantite</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a><span class="c1"># Test</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a><span class="n">stock</span> <span class="o">=</span> <span class="mi">10</span>
-<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Stock initial :&quot;</span><span class="p">,</span> <span class="n">stock</span><span class="p">)</span>
-<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>
-<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a><span class="n">stock</span> <span class="o">=</span> <span class="n">acheter</span><span class="p">(</span><span class="n">stock</span><span class="p">)</span>
-<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a><span class="n">stock</span> <span class="o">=</span> <span class="n">acheter</span><span class="p">(</span><span class="n">stock</span><span class="p">)</span>
-<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Après 2 achats :&quot;</span><span class="p">,</span> <span class="n">stock</span><span class="p">)</span>  <span class="c1"># 8</span>
-<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>
-<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a><span class="n">stock</span> <span class="o">=</span> <span class="n">livraison</span><span class="p">(</span><span class="n">stock</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
-<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Après livraison de 5 :&quot;</span><span class="p">,</span> <span class="n">stock</span><span class="p">)</span>  <span class="c1"># 13</span>
+<p><strong>Fichier <code>conversions.py</code> :</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">celsius_vers_fahrenheit</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convertit des degrés Celsius en Fahrenheit.&quot;&quot;&quot;</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="k">return</span> <span class="n">c</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">fahrenheit_vers_celsius</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convertit des degrés Fahrenheit en Celsius.&quot;&quot;&quot;</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">f</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">km_vers_miles</span><span class="p">(</span><span class="n">km</span><span class="p">):</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convertit des kilomètres en miles.&quot;&quot;&quot;</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>    <span class="k">return</span> <span class="n">km</span> <span class="o">*</span> <span class="mf">0.621371</span>
+</code></pre></div>
+<p><strong>Fichier <code>test_conversions.py</code> :</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">conversions</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">conversions</span><span class="o">.</span><span class="n">celsius_vers_fahrenheit</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>    <span class="c1"># 32.0</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">conversions</span><span class="o">.</span><span class="n">fahrenheit_vers_celsius</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>   <span class="c1"># 0.0</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">conversions</span><span class="o">.</span><span class="n">km_vers_miles</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>             <span class="c1"># 6.21371</span>
 </code></pre></div>
 </details>
 <div class="admonition question">
-<p class="admonition-title">Exercice 4 : Portée dans les boucles (piège)</p>
-<p>Que va afficher ce code ?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">mystere</span><span class="p">():</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x =&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;i =&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="n">mystere</span><span class="p">()</span>
+<p class="admonition-title">Exercice 2 : Utiliser le module <code>math</code></p>
+<p>Sans regarder la documentation, essayez de deviner ce que font ces fonctions du module <code>math</code> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mf">3.7</span><span class="p">))</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mf">3.2</span><span class="p">))</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">25</span><span class="p">))</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </code></pre></div>
-<p>Puis exécutez pour vérifier. Que se passe-t-il avec <code>x</code> et <code>i</code> ?</p>
+<p>Exécutez le code pour vérifier vos hypothèses.</p>
 </div>
 <details class="success">
 <summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>x = 4
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>i = 2
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mf">3.7</span><span class="p">))</span>  <span class="c1"># 3 (arrondi à l&#39;entier inférieur)</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="mf">3.2</span><span class="p">))</span>   <span class="c1"># 4 (arrondi à l&#39;entier supérieur)</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">25</span><span class="p">))</span>    <span class="c1"># 5.0 (racine carrée)</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>   <span class="c1"># 8.0 (puissance : 2³)</span>
 </code></pre></div>
-<p><strong>Attention :</strong> En Python, les variables créées dans une boucle <code>for</code> <strong>ne sont pas locales à la boucle</strong>, elles sont locales à la <strong>fonction</strong>. Donc <code>x</code> et <code>i</code> existent encore après la boucle.</p>
-<p>C'est différent de langages comme C, Java ou Rust où les variables de boucle sont détruites après la boucle.</p>
 </details>
 <div class="admonition question">
-<p class="admonition-title">Exercice 5 : Accumulateur</p>
-<p>Sans utiliser de variable globale, écrivez une fonction <code>somme_liste(liste)</code> qui calcule la somme des éléments d'une liste.</p>
-<p>Testez avec <code>[1, 2, 3, 4, 5]</code>.</p>
+<p class="admonition-title">Exercice 3 : Import sélectif</p>
+<p>Réécrivez ce code en important <strong>seulement</strong> les fonctions nécessaires (avec <code>from ... import ...</code>) :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">rayon</span> <span class="o">=</span> <span class="mi">5</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="n">aire</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="n">rayon</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">aire</span><span class="p">)</span>
+</code></pre></div>
 </div>
 <details class="success">
 <summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">somme_liste</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule la somme des éléments d&#39;une liste.&quot;&quot;&quot;</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Variable locale</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    <span class="k">for</span> <span class="n">nombre</span> <span class="ow">in</span> <span class="n">liste</span><span class="p">:</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>        <span class="n">total</span> <span class="o">+=</span> <span class="n">nombre</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>    <span class="k">return</span> <span class="n">total</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>
-<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="c1"># Test</span>
-<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="n">valeurs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
-<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="n">resultat</span> <span class="o">=</span> <span class="n">somme_liste</span><span class="p">(</span><span class="n">valeurs</span><span class="p">)</span>
-<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Somme :&quot;</span><span class="p">,</span> <span class="n">resultat</span><span class="p">)</span>  <span class="c1"># 15</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">pi</span><span class="p">,</span> <span class="nb">pow</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="n">rayon</span> <span class="o">=</span> <span class="mi">5</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="n">aire</span> <span class="o">=</span> <span class="n">pi</span> <span class="o">*</span> <span class="nb">pow</span><span class="p">(</span><span class="n">rayon</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">aire</span><span class="p">)</span>
+</code></pre></div>
+</details>
+<div class="admonition question">
+<p class="admonition-title">Exercice 4 : Module de statistiques</p>
+<p>Créez un fichier <code>stats.py</code> avec les fonctions :</p>
+<ul>
+<li><code>moyenne(liste)</code> : calcule la moyenne d'une liste de nombres</li>
+<li><code>minimum(liste)</code> : renvoie le plus petit élément</li>
+<li><code>maximum(liste)</code> : renvoie le plus grand élément</li>
+</ul>
+<p>Testez votre module avec <code>[10, 15, 8, 22, 19]</code>.</p>
+</div>
+<details class="success">
+<summary>Solution</summary>
+<p><strong>Fichier <code>stats.py</code> :</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">moyenne</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule la moyenne d&#39;une liste de nombres.&quot;&quot;&quot;</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">minimum</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le plus petit élément.&quot;&quot;&quot;</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">maximum</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span>
+<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le plus grand élément.&quot;&quot;&quot;</span>
+<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Test :</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">stats</span><span class="w"> </span><span class="kn">import</span> <span class="n">moyenne</span><span class="p">,</span> <span class="n">minimum</span><span class="p">,</span> <span class="n">maximum</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="n">valeurs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">19</span><span class="p">]</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">moyenne</span><span class="p">(</span><span class="n">valeurs</span><span class="p">))</span>  <span class="c1"># 14.8</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">minimum</span><span class="p">(</span><span class="n">valeurs</span><span class="p">))</span>  <span class="c1"># 8</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">maximum</span><span class="p">(</span><span class="n">valeurs</span><span class="p">))</span>  <span class="c1"># 22</span>
 </code></pre></div>
 </details>
 <h2 id="5-resume">5. Résumé</h2>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Où est-elle définie ?</th>
-<th>Accessible où ?</th>
-<th>Exemple</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Locale</strong></td>
-<td>Dans une fonction</td>
-<td>Uniquement dans cette fonction</td>
-<td><code>def f(): x = 5</code></td>
-</tr>
-<tr>
-<td><strong>Globale</strong></td>
-<td>Hors de toute fonction</td>
-<td>Partout (lecture)</td>
-<td><code>x = 5</code> (au niveau principal)</td>
-</tr>
-<tr>
-<td><strong>Globale modifiable</strong></td>
-<td>Hors de toute fonction</td>
-<td>Partout (écriture avec <code>global</code>)</td>
-<td><code>global x; x = 10</code></td>
-</tr>
-</tbody>
-</table>
-<p><strong>Règles importantes :</strong></p>
-<ol>
-<li>Les <strong>paramètres</strong> d'une fonction sont des variables locales</li>
-<li>Une assignation <code>x = ...</code> dans une fonction crée une variable <strong>locale</strong> (sauf si <code>global x</code>)</li>
-<li>Préférez <strong>paramètres + return</strong> aux variables globales modifiables</li>
-<li>Les variables de boucle <code>for</code> en Python <strong>ne sont pas détruites</strong> après la boucle</li>
-</ol>
-<hr />
-<div class="admonition note">
-<p class="admonition-title">Pour aller plus loin : Autres langages</p>
-<p>D'autres langages ont des règles de portée plus strictes. Par exemple, en <strong>Rust</strong>, même les variables dans une boucle ont leur propre portée :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="mi">3</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">  </span><span class="c1">// Nouvelle variable locale à la boucle</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Boucle : x = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Après : x = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w">  </span><span class="c1">// x = 10 (inchangé)</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="p">}</span>
-</code></pre></div>
-<p>Sortie :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a>Boucle : x = 10
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>Boucle : x = 11
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>Boucle : x = 12
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>Après : x = 10
-</code></pre></div></p>
-<p>En Rust, les variables globales modifiables nécessitent un bloc <code>unsafe</code> car elles sont considérées dangereuses. Python est plus permissif, mais cela ne signifie pas qu'il faut en abuser !</p>
-</div>
+<ul>
+<li>Un <strong>module</strong> est un fichier Python (<code>.py</code>) contenant du code réutilisable</li>
+<li><strong><code>import module</code></strong> charge un module (standard ou local)</li>
+<li><strong>Modules standard</strong> : <code>random</code>, <code>math</code>, <code>time</code>, etc. (fournis avec Python)</li>
+<li><strong>Modules locaux</strong> : vos propres fichiers <code>.py</code> dans le même répertoire</li>
+<li><strong>PyPI</strong> : bibliothèque en ligne avec 500 000+ modules</li>
+<li><strong><code>uv add</code></strong> : installe un module depuis PyPI (rapide et moderne)</li>
+<li><strong><code>uv sync</code></strong> : installe toutes les dépendances d'un projet existant</li>
+</ul>
 
 
 
