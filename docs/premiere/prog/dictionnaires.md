@@ -108,9 +108,9 @@ for cle, valeur in mon_dictionnaire.items():
 
 
 ### Par valeurs
-On peut aussi parcourir le dictionnaire en récupérant à la fois la clé et sa valeur associée :
+On peut aussi parcourir le dictionnaire en récupérant seulement les valeurs :
 ```python
-for cle, valeur in mon_dictionnaire.items():
+for valeur in mon_dictionnaire.values():
     print(cle, "->", valeur)
 ```
 
