@@ -1817,6 +1817,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Exercices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preuve-calculatoire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preuve calculatoire
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -4964,6 +4981,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Exercices">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#preuve-calculatoire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Preuve calculatoire
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
     </ul>
@@ -5404,70 +5438,40 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
 </ul>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Ou exclusif</p>
-<p>Montrer que <span class="arithmatex">\(\bar{x}.y + x.\bar{y} = x \oplus y\)</span></p>
+<p class="admonition-title">Egalités remarquables</p>
+<p>Montrer que:</p>
+<ol>
+<li><span class="arithmatex">\(\bar{x}.y + x.\bar{y} = x \oplus y\)</span></li>
+<li>
+<div class="arithmatex">\[\overline{x + y} = \bar{x} . \bar{y}\]</div>
+</li>
+<li>
+<div class="arithmatex">\[\overline{x . y} = \bar{x} + \bar{y}\]</div>
+</li>
+<li>
+<div class="arithmatex">\[x + x.y = x\]</div>
+</li>
+<li>
+<div class="arithmatex">\[x.(x + y) = x\]</div>
+</li>
+<li>
+<div class="arithmatex">\[\bar{x} + x.y = \bar{x} + y\]</div>
+</li>
+</ol>
 </div>
 <div class="admonition question">
-<p class="admonition-title">implication logique</p>
+<p class="admonition-title">Distributivité</p>
+<p>Montrer que :</p>
+<ol>
+<li><span class="arithmatex">\(x.(y + z) = x.y + x.z\)</span> — autrement dit, <span class="arithmatex">\(.\)</span> est distributif sur <span class="arithmatex">\(+\)</span></li>
+<li><span class="arithmatex">\(x + y.z = (x + y).(x + z)\)</span> — autrement dit, <span class="arithmatex">\(+\)</span> est distributif sur <span class="arithmatex">\(.\)</span></li>
+<li><span class="arithmatex">\(x.(y \oplus z) = x.y \oplus x.z\)</span> — autrement dit, <span class="arithmatex">\(.\)</span> est distributif sur <span class="arithmatex">\(\oplus\)</span></li>
+</ol>
 </div>
-<div class="admonition question">
-<p class="admonition-title">Lois de de Morgan</p>
-<p>1- Dresser la table de vérité de <span class="arithmatex">\(\overline{a+b}\)</span> ainsi que de  <span class="arithmatex">\(\bar{a}.\bar{b}\)</span></p>
-<table>
-<thead>
-<tr>
-<th><span class="arithmatex">\(a\)</span></th>
-<th><span class="arithmatex">\(b\)</span></th>
-<th><span class="arithmatex">\(a+b\)</span></th>
-<th><span class="arithmatex">\(\color{red}\overline{a+b}\)</span></th>
-<th><span class="arithmatex">\(\bar{a}\)</span></th>
-<th><span class="arithmatex">\(\bar{b}\)</span></th>
-<th><span class="arithmatex">\(\color{red}\bar{a}.\bar{b}\)</span></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>0</td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-</tr>
-<tr>
-<td>0</td>
-<td>1</td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-</tr>
-<tr>
-<td>1</td>
-<td>0</td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-</tr>
-<tr>
-<td>1</td>
-<td>1</td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-<td><input type="text" class="bin"/></td>
-</tr>
-</tbody>
-</table>
-<p>2- Conclure sur une égalité</p>
-<p>3- Montrer que  <span class="arithmatex">\(\overline{a.b} = \bar{a}+\bar{b}\)</span></p>
-<p>Ces égalités à connaître sont connues sous le nom de lois de de Morgan</p>
-</div>
+<h3 id="preuve-calculatoire">Preuve calculatoire</h3>
+<p>Maintenant que l'on dispose de la distributivité, il est possible de <strong>démontrer certaines égalités par le calcul</strong> plutôt que par table de vérité. Par exemple, pour montrer que <span class="arithmatex">\(x + x.y = x\)</span> :</p>
+<div class="arithmatex">\[x + x.y = x.1 + x.y = x.(1 + y) = x.1 = x\]</div>
+<p>On a utilisé successivement : l'élément neutre du <span class="arithmatex">\(.\)</span>, la distributivité de <span class="arithmatex">\(.\)</span> sur <span class="arithmatex">\(+\)</span>, puis le fait que <span class="arithmatex">\(1 + y = 1\)</span>.</p>
 
 
 
