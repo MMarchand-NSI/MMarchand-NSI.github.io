@@ -209,6 +209,8 @@ Ce n'est pas évident à première vue, mais la table de vérité le prouve !
     - Une fois en français d'après les définitions de ET, OU, NON
     - Une fois par table de vérité
 
+
+
     1. $1+a$
     2. $1.a$
     3. $0+a$
@@ -216,28 +218,32 @@ Ce n'est pas évident à première vue, mais la table de vérité le prouve !
     5. $a.\bar{a}$
     6. $a+\bar{a}$
 
-!!! question "Ou exclusif"
+!!! question "Egalités remarquables"
 
-    Montrer que $\bar{x}.y + x.\bar{y} = x \oplus y$
+    Montrer que:
+    
+    1. $\bar{x}.y + x.\bar{y} = x \oplus y$
+    2. $$\overline{x + y} = \bar{x} . \bar{y}$$
+    3. $$\overline{x . y} = \bar{x} + \bar{y}$$
+    4. $$x + x.y = x$$
+    5. $$x.(x + y) = x$$
+    6. $$\bar{x} + x.y = \bar{x} + y$$
 
 
-!!! question "implication logique"
+!!! question "Distributivité"
+
+    Montrer que :
+
+    1. $x.(y + z) = x.y + x.z$ — autrement dit, $.$ est distributif sur $+$
+    2. $x + y.z = (x + y).(x + z)$ — autrement dit, $+$ est distributif sur $.$
+    3. $x.(y \oplus z) = x.y \oplus x.z$ — autrement dit, $.$ est distributif sur $\oplus$
 
 
-!!! question "Lois de de Morgan"
-    1- Dresser la table de vérité de $\overline{a+b}$ ainsi que de  $\bar{a}.\bar{b}$
+### Preuve calculatoire
 
-    | $a$ | $b$ | $a+b$                            | $\color{red}\overline{a+b}$      | $\bar{a}$                        | $\bar{b}$                        | $\color{red}\bar{a}.\bar{b}$     |
-    | --- | --- | -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- | -------------------------------- |
-    | 0   | 0   | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> |
-    | 0   | 1   | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> |
-    | 1   | 0   | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> |
-    | 1   | 1   | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> | <input type="text" class="bin"/> |
+Maintenant que l'on dispose de la distributivité, il est possible de **démontrer certaines égalités par le calcul** plutôt que par table de vérité. Par exemple, pour montrer que $x + x.y = x$ :
 
-    2- Conclure sur une égalité
+$$x + x.y = x.1 + x.y = x.(1 + y) = x.1 = x$$
 
-    3- Montrer que  $\overline{a.b} = \bar{a}+\bar{b}$
-
-    Ces égalités à connaître sont connues sous le nom de lois de de Morgan
-
+On a utilisé successivement : l'élément neutre du $.$, la distributivité de $.$ sur $+$, puis le fait que $1 + y = 1$.
 

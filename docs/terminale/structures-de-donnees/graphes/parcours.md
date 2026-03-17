@@ -15,8 +15,10 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     - Ecrire une méthode de parcours itératif en largeur des sommets d'un graphe. Le comportement de visite est l'accumulation du sommet dans une liste renvoyée.
 
     ```python
+    from structures.graphes import graphe_no as gr
     from structures.lineaires import file
-    def bfs(depart: str, g: graphe) -> list[str]
+
+    def bfs(depart: str, g: gr.Graphe) -> list[str]
     ```
 
 
@@ -27,7 +29,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     On se souviendra que la différence entre un parcours en largeur et en profondeur ne tient pas à grand chose dans le code. 
 
     ```python
-    def dfs(depart: str, g: graphe) -> list[str]
+    def dfs(depart: str, g: gr.Graphe) -> list[str]
     ```
 
 
@@ -36,17 +38,24 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     En utilisant une des fonctions précédentes, écrire la fonction suivante:
 
     ```python
-        def est_connexe(g: graphe) -> bool
+        def est_connexe(g: gr.Graphe) -> bool
     ```
 
     On pourra tester avec le graphe non connexe du cours, cette fonction peut faire une ligne.
+
+!!! question "Cyclicité"
+    En vous appuyant sur le BFS, écrire la fonction suivante:
+
+    ```python
+        def est_cyclique(g: gr.Graphe) -> bool
+    ```
 
 
 !!! question "Sous graphe"
     - Ecrire une fonction qui renvoie le sous graphe constitué des sommets dans la liste:
 
     ```python
-        def sous_graphe(sommets: list[str], g: graphe) -> graphe
+        def sous_graphe(sommets: list[str], g: gr.Graphe) -> gr.Graphe
     ```
 
 
@@ -57,13 +66,13 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     - En utilisant des fonctions précédentes, écrire une fonction permettant de récupérer la liste des composantes connexe.
 
     ```python
-        def composantes_connexes(g: graphe) -> list[graph]
+        def composantes_connexes(g: gr.Graphe) -> list[gr.Graphe]
     ```
 
 
 
 !!! question "Plus court chemins - Non pondéré"
-    On peut trouver le plus court chemin entre 2 sommets d'un graphe **non pondéré** en réalisant un parcours en largeur qui renvoie un dictionnaire des prédécessurs.
+    On peut trouver le plus court chemin entre 2 sommets d'un graphe **non pondéré** en réalisant un parcours en largeur qui renvoie un dictionnaire des prédécesseurs.
     Dès qu'on découvre un sommet non visité, on le découvre forcément depuis son prédécesseur sur son plus court chemin à la source.
 
     Ensuite, en examinant le dictionnaire des prédécesseurs, on peut en déduire le plus court chemin
@@ -71,45 +80,46 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     1. Ecrire une fonction:
 
     ```python
-        def predecesseurs_bfs(g: graphe, s1: str) -> dict[str, str]
+        def predecesseurs_bfs(g: gr.Graphe, s1: str) -> dict[str, str]
     ```
 
     2. Ecrire une fonction:
 
     ```python
-        def shortest_path(g: graphe, s1: str, s2: str) -> dict[str, str]
+        def shortest_path(g: gr.Graphe, s1: str, s2: str) -> list[str]
     ```
 
     3. Ecrire une fonction distance qui renvoie la longueur du plus court chemin entre $s1$ et $s2$ dans le graphe $g$
 
     ```python
-        def distance(g: graphe, s1: str, s2: str) -> int
+        def distance(g: gr.Graphe, s1: str, s2: str) -> int
     ```
 
 
 ??? warning "Corrigé prédécesseurs"
     
     ```python
-    def predecesseurs_bfs(g: gr.graphe, s1: str) -> dict[str, str]:
-    """
-    Retourne le dictionnaire des prédéceesseurs de voisins découverts
-    en partant de s1 par un parcours en largeur dans le graphe non
-    pondéré g.
-    """
-    f = file.creer()
-    π: dict[str, str] = {s1: ""}
-    while len(f) > 0:
-        u = file.defiler(f)
-        for v in gr.get_voisins(u, g):
-            if v not in π:
-                π[v] = u
-                file.enfiler(f, v)
-    return π
+    def predecesseurs_bfs(g: gr.Graphe, s1: str) -> dict[str, str]:
+        """
+        Retourne le dictionnaire des prédécesseurs de voisins découverts
+        en partant de s1 par un parcours en largeur dans le graphe non
+        pondéré g.
+        """
+        f = file.creer()
+        file.enfiler(s1, f)
+        π: dict[str, str] = {s1: ""}        # Plugin prédécesseur
+        while not file.est_vide(f):
+            u = file.defiler(f)
+            for v in gr.get_voisins(u, g):
+                if v not in π:
+                    π[v] = u                # Plugin prédécesseur
+                    file.enfiler(v, f)
+        return π
     ```
 
-    On définit la distance entre 2 sommets comme la longueur du plus court chemin entre ces arêtes.
+    On définit la distance entre 2 sommets comme la longueur du plus court chemin entre ces sommets.
     On veut montrer que pour n'importe quel sommet $s2$, en remontant $\pi$, on
-    obtient le plus court chemin $s1$
+    obtient le plus court chemin de $s2$ à $s1$.
 
 
 !!! question "Indicateurs courants sur les graphes"
@@ -122,25 +132,25 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     La fonction distance de l'exercice précédent est nécessaire.
 
     ```python
-    def excentricite(g: gr.graphe, s: str) -> int:
+    def excentricite(g: gr.Graphe, s: str) -> int:
         """
         Retourne l'excentricité du sommet s dans le graphe non pondéré g.
         L'excentricité d'un sommet est la distance à son sommet le plus éloigné.
         """
         return ...
 
-    def centre(g: gr.graphe) -> list[str]:
+    def centre(g: gr.Graphe) -> list[str]:
         """
         Retourne le centre du graphe g.
         Le centre du graphe est l'ensemble des sommets ayant la plus petite excentricité.
-        On appelle de tels sommets des somemts centraux.
+        On appelle de tels sommets des sommets centraux.
         Les sommets centraux sont stratégiquement importants, par exemple pour placer un serveur, un relais,
         un entrepôt. Ils minimisent la distance maximale à tous les autres sommets.
         """
         ...
         return ...
 
-    def rayon(g: gr.graphe) -> int:
+    def rayon(g: gr.Graphe) -> int:
         """
         Retourne le rayon du graphe non pondéré g.
         Le rayon d'un graphe est l'excentricité des sommets centraux.
@@ -148,7 +158,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
         """
         return ...
 
-    def diametre(g: gr.graphe) -> int:
+    def diametre(g: gr.Graphe) -> int:
         """
         Retourne le diamètre du graphe non pondéré g.
         Le diamètre d'un graphe est la distance maximum entre 2 sommets du graphe.
@@ -167,7 +177,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     Construire un arbre à partir du dictionnaire des prédécesseurs. On appelle ce graphe un arbre couvrant.
 
     ```python
-    def get_arbre_couvrant(g: graphe) -> graphe:
+    def get_arbre_couvrant(g: gr.Graphe) -> gr.Graphe:
     ```
 
     Sur les graphes pondérés, il est fréquent de rechercher l'arbre couvrant de poids minimum (Minimum Spanning Tree).

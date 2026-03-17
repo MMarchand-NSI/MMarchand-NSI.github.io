@@ -80,8 +80,8 @@ Par exemple, le circuit suivant réalise l'expression $\overline{a.b}$ (c'est un
     Réalisez chacun de ces exercices les uns sous les autres dans l'interface suivante et sauvegardez votre travail avec le bouton "télécharger le circuit".
 
     - Créer une porte NOT. Seule porte autorisée: NAND
-    - Créer une porte AND
-    - Créer une porte OR
+    - Créer une porte AND (on utilisera les lois de de Morgan pour exprimer AND à partir de NAND et NOT)
+    - Créer une porte OR (on utilisera aussi les lois de de Morgan)
     - Créer une porte NOR
     - Créer une porte XOR
 
