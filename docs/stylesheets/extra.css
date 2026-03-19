@@ -1,6 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;1,400&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&family=Caveat:wght@400;500&display=swap');
 
 /* =========================
+   COULEURS GLOBALES
+   ========================= */
+
+[data-md-color-scheme="default"] {
+  --md-default-bg-color: #f8f8f8;
+}
+
+/* =========================
    TYPOGRAPHIE ET CODE
    ========================= */
 
@@ -260,11 +268,13 @@ h1#accueil {
 }
 
 .article-with-sidebar {
-  display: grid;
-  grid-template-columns: 3fr 2fr;
-  column-gap: 2.5rem;
-  align-items: start;
   margin-bottom: 2rem;
+}
+
+.article-with-sidebar::after {
+  content: '';
+  display: block;
+  clear: both;
 }
 
 .article-main > h2:first-child {
@@ -272,6 +282,10 @@ h1#accueil {
 }
 
 .sidebar {
+  float: right;
+  width: 38%;
+  margin-left: 2.5rem;
+  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
   gap: 1rem;
@@ -283,15 +297,19 @@ h1#accueil {
   gap: 1rem;
 }
 
-.crossfade {
-  position: relative;
-  width: 100%;
-  border-radius: 8px;
-  overflow: hidden;
-  margin: 0;
+.sidebar-image {
+  border-left: 4px solid var(--md-primary-fg-color);
 }
 
 .sidebar-image > p {
+  margin: 0;
+}
+
+.crossfade {
+  position: relative;
+  width: 100%;
+  border-radius: 0 8px 8px 0;
+  overflow: hidden;
   margin: 0;
 }
 
@@ -300,7 +318,7 @@ h1#accueil {
   display: block;
   width: 100%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 0 8px 8px 0;
 }
 
 /* img1 superposée en absolu par-dessus */
@@ -311,7 +329,7 @@ h1#accueil {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 0 8px 8px 0;
   z-index: 1;
   animation: cf-fade 8s ease-in-out infinite;
 }
@@ -323,24 +341,10 @@ h1#accueil {
 }
 
 @media (max-width: 900px) {
-  .article-with-sidebar {
-    grid-template-columns: 1fr;
-  }
-
   .sidebar {
-    display: contents;
-  }
-
-  .sidebar-image {
-    order: 1;
-  }
-
-  .article-main {
-    order: 2;
-  }
-
-  .sidebar-boxes {
-    order: 3;
+    float: none;
+    width: 100%;
+    margin-left: 0;
   }
 }
 
@@ -373,6 +377,18 @@ h1#accueil {
 .box h3::before,
 .box h4::before {
   content: none;
+}
+
+.box.citation-box {
+  border: none;
+  border-left: 4px solid var(--md-primary-fg-color);
+  border-radius: 0 8px 8px 0;
+  box-shadow: none;
+}
+
+.box.citation-box:hover {
+  transform: none;
+  box-shadow: none;
 }
 
 .box.citation-box blockquote,
@@ -427,6 +443,32 @@ h1#accueil {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
+}
+
+/* =========================
+   ADMONITION PERSONNALISÉE : PROMPT IA
+   ========================= */
+
+:root {
+  --md-admonition-icon--prompt: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4 6.5 9.5 1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z'/%3E%3C/svg%3E");
+}
+
+.md-typeset .admonition.prompt,
+.md-typeset details.prompt {
+  border-color: #7c4dff;
+}
+
+.md-typeset .prompt > .admonition-title,
+.md-typeset .prompt > summary {
+  background-color: rgba(124, 77, 255, 0.1);
+  font-style: italic;
+}
+
+.md-typeset .prompt > .admonition-title::before,
+.md-typeset .prompt > summary::before {
+  background-color: #7c4dff;
+  -webkit-mask-image: var(--md-admonition-icon--prompt);
+          mask-image: var(--md-admonition-icon--prompt);
 }
 
 /* =========================

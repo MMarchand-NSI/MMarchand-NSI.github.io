@@ -14,7 +14,7 @@ Les graphes sont des structures de données essentielles en informatique, permet
 
 3. **Arcs** : Dans le cas des graphes orientés, les connexions entre les sommets sont appelées arcs. Ils ont une direction, ce qui signifie qu'ils vont d'un sommet source à un sommet destination.
 
-3. **Poids** : Parfois, les arêtes portent une information appelée poids. Dans un graphe représentant des interconnexions entre des villes, il peut s'agir d'une distance. Dans un graphe de neurones, il peut s'agir de l'importance à accorder à une connexion entre deux neurones. Dans un graphe de routage, il peut s'agir de la vitesse de connexion entre 2 routeurs. On appelle graphe pondéré un graphe dont les arêtes portent un poids.
+4. **Poids** : Parfois, les arêtes portent une information appelée poids. Dans un graphe représentant des interconnexions entre des villes, il peut s'agir d'une distance. Dans un graphe de neurones, il peut s'agir de l'importance à accorder à une connexion entre deux neurones. Dans un graphe de routage, il peut s'agir de la vitesse de connexion entre 2 routeurs. On appelle graphe pondéré un graphe dont les arêtes portent un poids.
 
 ### B. Graphes Orientés et Non Orientés
 
@@ -90,13 +90,13 @@ Les graphes peuvent être utilisés pour représenter diverses situations, notam
 
 - **Sommets** : Utilisateurs.
 - **Arêtes** : Amitiés ou relations entre utilisateurs.
-- **Graphes Non Orientés** : Les relations peuvent être mutuelles.
+- **Graphes Non Orientés** : Les relations sont mutuelles.
 - **Graphes Orientés** : On peut follow quelqu'un sans être followed.
 
 ### E. Réseaux de neurones (Intelligence artificielle)
 - **Sommets** : Neurones
 - **Arêtes** : Connexions entre neurones.
-- **Graphes Non Orientés** : Les relations peuvent être mutuelles.
+- **Graphes Orientés** : Le signal circule dans une direction définie, des couches d'entrée vers les couches de sortie.
 
 
 ## III. Implémentations des Graphes
@@ -193,13 +193,13 @@ $$
 A & 0 & 1 & 0 & 0 & 1 \\
 B & 0 & 0 & 1 & 1 & 0 \\
 C & 1 & 0 & 0 & 1 & 0 \\
-D & 0 & 0 & 0 & 0 & 1 \\
+D & 0 & 0 & 0 & 0 & 0 \\
 E & 0 & 0 & 0 & 1 & 0 \\
 \end{array}
 $$
 
-!!! abstract "Matrice d'adjacence - Graphes orientés" 
-    Une matrice à deux dimensions où $mat[i][j]$ est égal au poids de l’arête allant du sommet $i$ au sommet $j$, et 0 s’il n’existe pas d’arête. $i$ est l’indice ligne. $j$ est l’indice colonne.
+!!! abstract "Matrice d’adjacence - Graphes orientés pondérés"
+    Une matrice à deux dimensions où $mat[i][j]$ est égal au poids de l’arête allant du sommet $i$ au sommet $j$, et `None` s’il n’existe pas d’arête. $i$ est l’indice ligne. $j$ est l’indice colonne.
 
 <center>
 
@@ -223,61 +223,34 @@ $$
 \begin{array}{c|ccccc}
  & A & B & C & D & E \\
 \hline
-A & 0 & 2 & 0 & 0 & 6 \\
-B & 0 & 0 & 2 & 3 & 0 \\
-C & 5 & 0 & 0 & 1 & 0 \\
-D & 0 & 0 & 0 & 0 & 0 \\
-E & 0 & 0 & 0 & 4 & 0 \\
+A & - & 2 & - & - & 6 \\
+B & - & - & 2 & 3 & - \\
+C & 5 & - & - & 1 & - \\
+D & - & - & - & - & - \\
+E & - & - & - & 4 & - \\
 \end{array}
 $$
 
-!!! example "Implémentations possible"
-    On peut utiliser une liste de listes  pour matérialiser la matrice et assimiler le graphe à la matrice, sans considération des étiquettes.
-    
-    ```python
-        type num = int|float
-        type graphe = list[list[num]]
-    ```
+!!! example "Implémentation python"
+    Nous avons balayé diverses manières de représenter un graphe selon ses caractéristiques en classe.
 
-    On peut vouloir aussi intégrer l'étiquette des sommets.
+    Voici ce que nous allons retenir pour l'implémenter:
 
     ```python
-        type num = int|float
-        type matrice = list[list[num]]
-        type graphe = tuple[list[str], matrice]
+    type Poids = int|float
 
-        def creer_vide() -> graphe:
-            return ([], [])
-        
-        def sommets(g: graphe) -> list[str]:
-            return g[0]
+    type MatriceAdj = list[list[Poids | None]]
 
-        def matrice(g: graphe) -> matrice:
-            return g[1]
+    type ListeAdj = dict[str, dict[str, Poids]]
 
-        def poids(i: int, j: int, g: graphe) -> matrice:
-            return matrice(g)[i][j]
-
-        def index_sommet(g: graphe, s: str) -> int:
-            return sommets(g).index(s)
+    type Graphe = tuple[list[str], MatriceAdj]
     ```
 
-    L'implémentation des graphes est rarement effectuée en POO, ou alors tout simplement pour encapsuler les méthodes précédentes pour être raccord avec le paradigme du langage d'implémentation.
+    *Remarque*: L'implémentation des graphes est rarement effectuée en POO, ou alors tout simplement pour encapsuler cette manière de faire, afin d'être raccord avec le paradigme du langage d'implémentation.
 
-    ```python
-    class GrapheNO:
-        """Graphe non orienté"""
-        def __init__(self, mat: list[list[int]], sommets: list[str]):
-            self.mat = mat
-            self.sommets = sommets
-        
-        def nb_voisins(self, s: str) -> int:
-            return sum(self.mat[self.sommets.index[s]])
-    ```
 
 !!! question "Graphes non orientés"
     Complétez le code du fichier python fourni implémentant un graphe non orienté pondéré.
-
 
 ### B. Listes d'adjacence
 
@@ -292,28 +265,7 @@ Chaque sommet est représenté par une liste contenant les sommets adjacents. Da
 
     Chaque clé sera un sommet, chaque valeur sera un dictionnaire contenant les sommets sortants assortis de leur poids.
 
-!!! question Application
-    Compléter le code suivant pour le graphe orienté, et aussi pour le graphe non orienté:
-
-    ```python
-    listes_adj_NO = {
-        "A": [...],
-        "B": [...],
-        ...
-    }
-    ```
-
-    ```python
-    listes_adj_O = {
-        "A": [...],
-        "B": [...],
-        ...
-    }
-    ```
-
-!!! question "Graphes orientés pondérés"
-    Complétez le code du fichier python fourni implémentant un graphe orienté pondéré.
-
+    Les
 
 !!! question "Graphes complets et densité:"
     On ne parlera ici de de graphes non orientés.

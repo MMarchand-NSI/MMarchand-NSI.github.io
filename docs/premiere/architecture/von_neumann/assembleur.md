@@ -10,7 +10,7 @@ Le **Little Man Computer (LMC)** est un simulateur pédagogique qui modélise un
 
 ### Le simulateur
 
-**URL du simulateur :** [https://www.101computing.net/lmc/](https://www.101computing.net/lmc/)
+**URL du simulateur :** [https://wellingborough.github.io/LMC/LMC0.3.html](https://wellingborough.github.io/LMC/LMC0.3.html)
 
 Le LMC est construit autour d'une **architecture simplifiée** :
 
@@ -65,7 +65,7 @@ Le LMC possède **11 instructions** simples. Chaque instruction est codée sur *
 
 !!! note "Utilisation de DAT"
     `DAT` n'est pas une instruction exécutable, c'est une **directive** pour l'assembleur. Elle permet de définir des variables avec un nom symbolique.
-    
+
     Exemples :
 ```
     nombre DAT      # Réserve un emplacement nommé "nombre" (valeur initiale 0)
@@ -113,6 +113,13 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
 
     **Instructions à utiliser :** `INP`, `OUT`, `HLT`
 
+??? success "Correction — Défi 1"
+    ```assembly
+            INP       # Lire l'entrée → ACC
+            OUT       # Afficher ACC
+            HLT       # Fin
+    ```
+
 !!! question "Défi 2 : Deux nombres"
     **Objectif :** Demander deux nombres à l'utilisateur et les afficher dans le même ordre.
 
@@ -124,6 +131,21 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Afficher le deuxième nombre
 
     **Instructions à utiliser :** `INP`, `OUT`, `STA`, `LDA`, `HLT`, `DAT`
+
+??? success "Correction — Défi 2"
+    ```assembly
+            INP       # Lire le premier nombre → ACC
+            STA nb1   # Stocker dans nb1
+            INP       # Lire le deuxième nombre → ACC
+            STA nb2   # Stocker dans nb2
+            LDA nb1   # Charger nb1
+            OUT       # Afficher nb1
+            LDA nb2   # Charger nb2
+            OUT       # Afficher nb2
+            HLT
+    nb1     DAT
+    nb2     DAT
+    ```
 
 !!! question "Défi 3 : Addition"
     **Objectif :** Demander deux nombres à l'utilisateur et afficher leur somme.
@@ -137,6 +159,17 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
 
     **Instructions à utiliser :** `INP`, `OUT`, `STA`, `ADD`, `HLT`, `DAT`
 
+??? success "Correction — Défi 3"
+    ```assembly
+            INP       # Lire le premier nombre → ACC
+            STA nb1   # Stocker dans nb1
+            INP       # Lire le deuxième nombre → ACC
+            ADD nb1   # ACC = ACC + nb1
+            OUT       # Afficher la somme
+            HLT
+    nb1     DAT
+    ```
+
 !!! question "Défi 4 : Soustraction"
     **Objectif :** Demander deux nombres à l'utilisateur et afficher leur différence (premier - deuxième).
 
@@ -148,6 +181,20 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Afficher le résultat
 
     **Instructions à utiliser :** `INP`, `OUT`, `STA`, `LDA`, `SUB`, `HLT`, `DAT`
+
+??? success "Correction — Défi 4"
+    ```assembly
+            INP       # Lire le premier nombre → ACC
+            STA nb1   # Stocker dans nb1
+            INP       # Lire le deuxième nombre → ACC
+            STA nb2   # Stocker dans nb2
+            LDA nb1   # Charger nb1 dans ACC
+            SUB nb2   # ACC = nb1 - nb2
+            OUT       # Afficher le résultat
+            HLT
+    nb1     DAT
+    nb2     DAT
+    ```
 
 !!! question "Défi 5 : Moyenne de trois nombres"
     **Objectif :** Demander trois nombres à l'utilisateur et afficher leur moyenne (somme divisée par 3).
@@ -165,6 +212,43 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Les additionner un par un
     - Pour diviser par 3, utiliser une boucle qui soustrait 3 et compte le nombre de soustractions
 
+??? success "Correction — Défi 5"
+    La division par 3 est simulée par soustractions successives : on soustrait 3 à la somme en comptant chaque opération jusqu'à ce que le résultat devienne négatif.
+
+    ```assembly
+            INP
+            STA nb1
+            INP
+            STA nb2
+            INP
+            STA nb3
+            LDA nb1       # Calculer la somme
+            ADD nb2
+            ADD nb3
+            STA somme
+            LDA zero
+            STA moy
+    boucle  LDA somme     # Tester si somme - 3 >= 0
+            SUB trois
+            BRP suite     # Si oui, continuer la division
+            LDA moy       # Sinon, afficher le quotient
+            OUT
+            HLT
+    suite   STA somme     # somme = somme - 3
+            LDA moy
+            ADD un        # moy = moy + 1
+            STA moy
+            BRA boucle
+    nb1     DAT
+    nb2     DAT
+    nb3     DAT
+    somme   DAT
+    moy     DAT
+    zero    DAT 0
+    un      DAT 1
+    trois   DAT 3
+    ```
+
 ### Niveau 2 : Sélection (Structures conditionnelles)
 
 !!! question "Défi 6 : Maximum de deux nombres"
@@ -177,9 +261,27 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Si le résultat est positif ou nul : afficher A
     - Sinon : afficher B
 
-    **Instructions à utiliser :** `INP`, `OUT`, `STA`, `LDA`, `SUB`, `BRP`, `HLT`, `DAT`
 
     **Astuce :** Utiliser `SUB` puis `BRP` pour tester quel nombre est le plus grand.
+
+??? success "Correction — Défi 6"
+    ```assembly
+            INP
+            STA a
+            INP
+            STA b
+            LDA a
+            SUB b
+            BRP affA    # Si A - B >= 0, afficher A
+            LDA b       # Sinon afficher B
+            OUT
+            HLT
+    affA    LDA a
+            OUT
+            HLT
+    a       DAT
+    b       DAT
+    ```
 
 !!! question "Défi 7 : Test de positivité"
     **Objectif :** Demander un nombre à l'utilisateur. Afficher 1 s'il est positif ou nul, afficher 0 s'il est négatif.
@@ -190,7 +292,20 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Tester s'il est positif (≥ 0)
     - Afficher 1 ou 0 selon le cas
 
-    **Instructions à utiliser :** `INP`, `OUT`, `BRP`, `BRA`, `HLT`, `DAT`
+
+??? success "Correction — Défi 7"
+    ```assembly
+            INP
+            BRP positif # Si ACC >= 0, sauter à "positif"
+            LDA zero    # Sinon charger 0
+            OUT
+            HLT
+    positif LDA un      # Charger 1
+            OUT
+            HLT
+    zero    DAT 0
+    un      DAT 1
+    ```
 
 !!! question "Défi 8 : Maximum de trois nombres"
     **Objectif :** Demander trois nombres à l'utilisateur et afficher le plus grand des trois.
@@ -202,7 +317,36 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Comparer ce max avec C
     - Afficher le résultat final
 
-    **Instructions à utiliser :** `INP`, `OUT`, `STA`, `LDA`, `SUB`, `BRP`, `BRA`, `HLT`, `DAT`
+
+??? success "Correction — Défi 8"
+    ```assembly
+            INP
+            STA a
+            INP
+            STA b
+            INP
+            STA c
+            LDA a
+            SUB b
+            BRP aGb     # Si A >= B, max = A
+            LDA b       # Sinon max = B
+            STA max
+            BRA cmpC
+    aGb     LDA a
+            STA max
+    cmpC    LDA max
+            SUB c
+            BRP fin     # Si max >= C, max est déjà bon
+            LDA c       # Sinon max = C
+            STA max
+    fin     LDA max
+            OUT
+            HLT
+    a       DAT
+    b       DAT
+    c       DAT
+    max     DAT
+    ```
 
 ### Niveau 3 : Itération (Boucles)
 
@@ -216,9 +360,23 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Décrémenter le compteur (soustraire 1)
     - Répéter tant que le compteur n'est pas à 0
 
-    **Instructions à utiliser :** `OUT`, `LDA`, `STA`, `SUB`, `BRZ`, `BRA`, `HLT`, `DAT`
-
     **Concept clé :** Utilisation d'une **boucle** avec un test de fin (`BRZ`).
+
+??? success "Correction — Défi 9"
+    ```assembly
+            LDA dix
+            STA cpt
+    boucle  LDA cpt
+            OUT         # Afficher le compteur
+            SUB un
+            STA cpt
+            BRZ fin     # Si cpt = 0, terminer
+            BRA boucle
+    fin     HLT
+    cpt     DAT
+    dix     DAT 10
+    un      DAT 1
+    ```
 
 !!! question "Défi 10 : Compteur croissant"
     **Objectif :** Afficher les nombres de 1 à 10.
@@ -230,7 +388,23 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Incrémenter le compteur (ajouter 1)
     - Répéter jusqu'à 10
 
-    **Instructions à utiliser :** `OUT`, `LDA`, `STA`, `ADD`, `SUB`, `BRP`, `BRA`, `HLT`, `DAT`
+??? success "Correction — Défi 10"
+    ```assembly
+            LDA un
+            STA cpt
+    boucle  LDA cpt
+            OUT         # Afficher le compteur
+            SUB dix
+            BRZ fin     # Si cpt = 10, terminer
+            LDA cpt
+            ADD un
+            STA cpt
+            BRA boucle
+    fin     HLT
+    cpt     DAT
+    un      DAT 1
+    dix     DAT 10
+    ```
 
 !!! question "Défi 11 : Table de multiplication"
     **Objectif :** Demander un nombre N à l'utilisateur, puis afficher sa table de multiplication de 1 à 10.
@@ -251,6 +425,34 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
 
     **Concept clé :** La multiplication est réalisée par **additions successives**.
 
+??? success "Correction — Défi 11"
+    ```assembly
+            INP
+            STA n
+            LDA zero
+            STA res
+            LDA un
+            STA cpt
+    boucle  LDA res
+            ADD n       # res = res + N
+            STA res
+            OUT         # Afficher res (= N × cpt)
+            LDA cpt
+            SUB dix
+            BRZ fin     # Si cpt = 10, terminer
+            LDA cpt
+            ADD un
+            STA cpt
+            BRA boucle
+    fin     HLT
+    n       DAT
+    res     DAT
+    cpt     DAT
+    zero    DAT 0
+    un      DAT 1
+    dix     DAT 10
+    ```
+
 !!! question "Défi 12 : Somme des N premiers entiers"
     **Objectif :** Demander un nombre N à l'utilisateur et afficher la somme 1 + 2 + 3 + ... + N.
 
@@ -267,9 +469,30 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
         - Répéter tant que le compteur n'est pas à 0
     - Afficher la somme
 
-    **Instructions à utiliser :** `INP`, `OUT`, `LDA`, `STA`, `ADD`, `SUB`, `BRZ`, `BRA`, `HLT`, `DAT`
-
     **Concept clé :** Utilisation d'un **accumulateur** et d'une **boucle décrémentale**.
+
+??? success "Correction — Défi 12"
+    ```assembly
+            INP
+            STA cpt     # cpt = N (on décompte de N à 1)
+            LDA zero
+            STA somme
+    boucle  LDA somme
+            ADD cpt     # somme = somme + cpt
+            STA somme
+            LDA cpt
+            SUB un
+            STA cpt
+            BRZ fin     # Si cpt = 0, terminer
+            BRA boucle
+    fin     LDA somme
+            OUT
+            HLT
+    cpt     DAT
+    somme   DAT
+    zero    DAT 0
+    un      DAT 1
+    ```
 
 ---
 
