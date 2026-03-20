@@ -5090,7 +5090,7 @@
 <li>Le rôle du <strong>compteur ordinal (PC)</strong></li>
 </ul>
 <h3 id="le-simulateur">Le simulateur</h3>
-<p><strong>URL du simulateur :</strong> <a href="https://www.101computing.net/lmc/">https://www.101computing.net/lmc/</a></p>
+<p><strong>URL du simulateur :</strong> <a href="https://wellingborough.github.io/LMC/LMC0.3.html">https://wellingborough.github.io/LMC/LMC0.3.html</a></p>
 <p>Le LMC est construit autour d'une <strong>architecture simplifiée</strong> :</p>
 <ul>
 <li><strong>100 emplacements mémoire</strong> (adresses 00 à 99)</li>
@@ -5274,6 +5274,13 @@
 </ul>
 <p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>HLT</code></p>
 </div>
+<details class="success">
+<summary>Correction — Défi 1</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>        INP       # Lire l&#39;entrée → ACC
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>        OUT       # Afficher ACC
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        HLT       # Fin
+</code></pre></div>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Défi 2 : Deux nombres</p>
 <p><strong>Objectif :</strong> Demander deux nombres à l'utilisateur et les afficher dans le même ordre.</p>
@@ -5286,6 +5293,21 @@
 </ul>
 <p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>STA</code>, <code>LDA</code>, <code>HLT</code>, <code>DAT</code></p>
 </div>
+<details class="success">
+<summary>Correction — Défi 2</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>        INP       # Lire le premier nombre → ACC
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>        STA nb1   # Stocker dans nb1
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        INP       # Lire le deuxième nombre → ACC
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        STA nb2   # Stocker dans nb2
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        LDA nb1   # Charger nb1
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        OUT       # Afficher nb1
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        LDA nb2   # Charger nb2
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        OUT       # Afficher nb2
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        HLT
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>nb1     DAT
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>nb2     DAT
+</code></pre></div>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Défi 3 : Addition</p>
 <p><strong>Objectif :</strong> Demander deux nombres à l'utilisateur et afficher leur somme.</p>
@@ -5298,6 +5320,17 @@
 </ul>
 <p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>STA</code>, <code>ADD</code>, <code>HLT</code>, <code>DAT</code></p>
 </div>
+<details class="success">
+<summary>Correction — Défi 3</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>        INP       # Lire le premier nombre → ACC
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>        STA nb1   # Stocker dans nb1
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        INP       # Lire le deuxième nombre → ACC
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        ADD nb1   # ACC = ACC + nb1
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        OUT       # Afficher la somme
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        HLT
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>nb1     DAT
+</code></pre></div>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Défi 4 : Soustraction</p>
 <p><strong>Objectif :</strong> Demander deux nombres à l'utilisateur et afficher leur différence (premier - deuxième).</p>
@@ -5310,6 +5343,20 @@
 </ul>
 <p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>STA</code>, <code>LDA</code>, <code>SUB</code>, <code>HLT</code>, <code>DAT</code></p>
 </div>
+<details class="success">
+<summary>Correction — Défi 4</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>        INP       # Lire le premier nombre → ACC
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>        STA nb1   # Stocker dans nb1
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        INP       # Lire le deuxième nombre → ACC
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        STA nb2   # Stocker dans nb2
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        LDA nb1   # Charger nb1 dans ACC
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        SUB nb2   # ACC = nb1 - nb2
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        OUT       # Afficher le résultat
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        HLT
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>nb1     DAT
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>nb2     DAT
+</code></pre></div>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Défi 5 : Moyenne de trois nombres</p>
 <p><strong>Objectif :</strong> Demander trois nombres à l'utilisateur et afficher leur moyenne (somme divisée par 3).</p>
@@ -5327,6 +5374,42 @@
 <li>Pour diviser par 3, utiliser une boucle qui soustrait 3 et compte le nombre de soustractions</li>
 </ul>
 </div>
+<details class="success">
+<summary>Correction — Défi 5</summary>
+<p>La division par 3 est simulée par soustractions successives : on soustrait 3 à la somme en comptant chaque opération jusqu'à ce que le résultat devienne négatif.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>        INP
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>        STA nb1
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        INP
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        STA nb2
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        INP
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        STA nb3
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        LDA nb1       # Calculer la somme
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        ADD nb2
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        ADD nb3
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        STA somme
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>        LDA zero
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>        STA moy
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>boucle  LDA somme     # Tester si somme - 3 &gt;= 0
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        SUB trois
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>        BRP suite     # Si oui, continuer la division
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>        LDA moy       # Sinon, afficher le quotient
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>        OUT
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>        HLT
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>suite   STA somme     # somme = somme - 3
+<a id="__codelineno-6-20" name="__codelineno-6-20" href="#__codelineno-6-20"></a>        LDA moy
+<a id="__codelineno-6-21" name="__codelineno-6-21" href="#__codelineno-6-21"></a>        ADD un        # moy = moy + 1
+<a id="__codelineno-6-22" name="__codelineno-6-22" href="#__codelineno-6-22"></a>        STA moy
+<a id="__codelineno-6-23" name="__codelineno-6-23" href="#__codelineno-6-23"></a>        BRA boucle
+<a id="__codelineno-6-24" name="__codelineno-6-24" href="#__codelineno-6-24"></a>nb1     DAT
+<a id="__codelineno-6-25" name="__codelineno-6-25" href="#__codelineno-6-25"></a>nb2     DAT
+<a id="__codelineno-6-26" name="__codelineno-6-26" href="#__codelineno-6-26"></a>nb3     DAT
+<a id="__codelineno-6-27" name="__codelineno-6-27" href="#__codelineno-6-27"></a>somme   DAT
+<a id="__codelineno-6-28" name="__codelineno-6-28" href="#__codelineno-6-28"></a>moy     DAT
+<a id="__codelineno-6-29" name="__codelineno-6-29" href="#__codelineno-6-29"></a>zero    DAT 0
+<a id="__codelineno-6-30" name="__codelineno-6-30" href="#__codelineno-6-30"></a>un      DAT 1
+<a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>trois   DAT 3
+</code></pre></div>
+</details>
 <h3 id="niveau-2-selection-structures-conditionnelles">Niveau 2 : Sélection (Structures conditionnelles)</h3>
 <div class="admonition question">
 <p class="admonition-title">Défi 6 : Maximum de deux nombres</p>
@@ -5338,9 +5421,27 @@
 <li>Si le résultat est positif ou nul : afficher A</li>
 <li>Sinon : afficher B</li>
 </ul>
-<p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>STA</code>, <code>LDA</code>, <code>SUB</code>, <code>BRP</code>, <code>HLT</code>, <code>DAT</code></p>
 <p><strong>Astuce :</strong> Utiliser <code>SUB</code> puis <code>BRP</code> pour tester quel nombre est le plus grand.</p>
 </div>
+<details class="success">
+<summary>Correction — Défi 6</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>        INP
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>        STA a
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        INP
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>        STA b
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        LDA a
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        SUB b
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        BRP affA    # Si A - B &gt;= 0, afficher A
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        LDA b       # Sinon afficher B
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        OUT
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        HLT
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>affA    LDA a
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>        OUT
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>        HLT
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>a       DAT
+<a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>b       DAT
+</code></pre></div>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Défi 7 : Test de positivité</p>
 <p><strong>Objectif :</strong> Demander un nombre à l'utilisateur. Afficher 1 s'il est positif ou nul, afficher 0 s'il est négatif.</p>
@@ -5350,8 +5451,21 @@
 <li>Tester s'il est positif (≥ 0)</li>
 <li>Afficher 1 ou 0 selon le cas</li>
 </ul>
-<p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>BRP</code>, <code>BRA</code>, <code>HLT</code>, <code>DAT</code></p>
 </div>
+<details class="success">
+<summary>Correction — Défi 7</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>        INP
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>        BRP positif # Si ACC &gt;= 0, sauter à &quot;positif&quot;
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>        LDA zero    # Sinon charger 0
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        OUT
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        HLT
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>positif LDA un      # Charger 1
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        OUT
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        HLT
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>zero    DAT 0
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>un      DAT 1
+</code></pre></div>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Défi 8 : Maximum de trois nombres</p>
 <p><strong>Objectif :</strong> Demander trois nombres à l'utilisateur et afficher le plus grand des trois.</p>
@@ -5362,8 +5476,37 @@
 <li>Comparer ce max avec C</li>
 <li>Afficher le résultat final</li>
 </ul>
-<p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>STA</code>, <code>LDA</code>, <code>SUB</code>, <code>BRP</code>, <code>BRA</code>, <code>HLT</code>, <code>DAT</code></p>
 </div>
+<details class="success">
+<summary>Correction — Défi 8</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>        INP
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>        STA a
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>        INP
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>        STA b
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        INP
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>        STA c
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>        LDA a
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>        SUB b
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>        BRP aGb     # Si A &gt;= B, max = A
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>        LDA b       # Sinon max = B
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>        STA max
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>        BRA cmpC
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>aGb     LDA a
+<a id="__codelineno-9-14" name="__codelineno-9-14" href="#__codelineno-9-14"></a>        STA max
+<a id="__codelineno-9-15" name="__codelineno-9-15" href="#__codelineno-9-15"></a>cmpC    LDA max
+<a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a>        SUB c
+<a id="__codelineno-9-17" name="__codelineno-9-17" href="#__codelineno-9-17"></a>        BRP fin     # Si max &gt;= C, max est déjà bon
+<a id="__codelineno-9-18" name="__codelineno-9-18" href="#__codelineno-9-18"></a>        LDA c       # Sinon max = C
+<a id="__codelineno-9-19" name="__codelineno-9-19" href="#__codelineno-9-19"></a>        STA max
+<a id="__codelineno-9-20" name="__codelineno-9-20" href="#__codelineno-9-20"></a>fin     LDA max
+<a id="__codelineno-9-21" name="__codelineno-9-21" href="#__codelineno-9-21"></a>        OUT
+<a id="__codelineno-9-22" name="__codelineno-9-22" href="#__codelineno-9-22"></a>        HLT
+<a id="__codelineno-9-23" name="__codelineno-9-23" href="#__codelineno-9-23"></a>a       DAT
+<a id="__codelineno-9-24" name="__codelineno-9-24" href="#__codelineno-9-24"></a>b       DAT
+<a id="__codelineno-9-25" name="__codelineno-9-25" href="#__codelineno-9-25"></a>c       DAT
+<a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>max     DAT
+</code></pre></div>
+</details>
 <h3 id="niveau-3-iteration-boucles">Niveau 3 : Itération (Boucles)</h3>
 <div class="admonition question">
 <p class="admonition-title">Défi 9 : Compte à rebours</p>
@@ -5375,9 +5518,24 @@
 <li>Décrémenter le compteur (soustraire 1)</li>
 <li>Répéter tant que le compteur n'est pas à 0</li>
 </ul>
-<p><strong>Instructions à utiliser :</strong> <code>OUT</code>, <code>LDA</code>, <code>STA</code>, <code>SUB</code>, <code>BRZ</code>, <code>BRA</code>, <code>HLT</code>, <code>DAT</code></p>
 <p><strong>Concept clé :</strong> Utilisation d'une <strong>boucle</strong> avec un test de fin (<code>BRZ</code>).</p>
 </div>
+<details class="success">
+<summary>Correction — Défi 9</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>        LDA dix
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>        STA cpt
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>boucle  LDA cpt
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>        OUT         # Afficher le compteur
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        SUB un
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        STA cpt
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        BRZ fin     # Si cpt = 0, terminer
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>        BRA boucle
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>fin     HLT
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>cpt     DAT
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>dix     DAT 10
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>un      DAT 1
+</code></pre></div>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Défi 10 : Compteur croissant</p>
 <p><strong>Objectif :</strong> Afficher les nombres de 1 à 10.</p>
@@ -5388,8 +5546,25 @@
 <li>Incrémenter le compteur (ajouter 1)</li>
 <li>Répéter jusqu'à 10</li>
 </ul>
-<p><strong>Instructions à utiliser :</strong> <code>OUT</code>, <code>LDA</code>, <code>STA</code>, <code>ADD</code>, <code>SUB</code>, <code>BRP</code>, <code>BRA</code>, <code>HLT</code>, <code>DAT</code></p>
 </div>
+<details class="success">
+<summary>Correction — Défi 10</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>        LDA un
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>        STA cpt
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>boucle  LDA cpt
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>        OUT         # Afficher le compteur
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>        SUB dix
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>        BRZ fin     # Si cpt = 10, terminer
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>        LDA cpt
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>        ADD un
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>        STA cpt
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>        BRA boucle
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>fin     HLT
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>cpt     DAT
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>un      DAT 1
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>dix     DAT 10
+</code></pre></div>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Défi 11 : Table de multiplication</p>
 <p><strong>Objectif :</strong> Demander un nombre N à l'utilisateur, puis afficher sa table de multiplication de 1 à 10.</p>
@@ -5409,6 +5584,34 @@
 <p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>LDA</code>, <code>STA</code>, <code>ADD</code>, <code>SUB</code>, <code>BRZ</code>, <code>BRA</code>, <code>HLT</code>, <code>DAT</code></p>
 <p><strong>Concept clé :</strong> La multiplication est réalisée par <strong>additions successives</strong>.</p>
 </div>
+<details class="success">
+<summary>Correction — Défi 11</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>        INP
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>        STA n
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>        LDA zero
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>        STA res
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        LDA un
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>        STA cpt
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>boucle  LDA res
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>        ADD n       # res = res + N
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>        STA res
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>        OUT         # Afficher res (= N × cpt)
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>        LDA cpt
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>        SUB dix
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>        BRZ fin     # Si cpt = 10, terminer
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>        LDA cpt
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>        ADD un
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>        STA cpt
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>        BRA boucle
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>fin     HLT
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>n       DAT
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>res     DAT
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>cpt     DAT
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>zero    DAT 0
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>un      DAT 1
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>dix     DAT 10
+</code></pre></div>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Défi 12 : Somme des N premiers entiers</p>
 <p><strong>Objectif :</strong> Demander un nombre N à l'utilisateur et afficher la somme 1 + 2 + 3 + ... + N.</p>
@@ -5426,9 +5629,31 @@
 </li>
 <li>Afficher la somme</li>
 </ul>
-<p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>LDA</code>, <code>STA</code>, <code>ADD</code>, <code>SUB</code>, <code>BRZ</code>, <code>BRA</code>, <code>HLT</code>, <code>DAT</code></p>
 <p><strong>Concept clé :</strong> Utilisation d'un <strong>accumulateur</strong> et d'une <strong>boucle décrémentale</strong>.</p>
 </div>
+<details class="success">
+<summary>Correction — Défi 12</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>        INP
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>        STA cpt     # cpt = N (on décompte de N à 1)
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>        LDA zero
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>        STA somme
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>boucle  LDA somme
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>        ADD cpt     # somme = somme + cpt
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>        STA somme
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>        LDA cpt
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>        SUB un
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>        STA cpt
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>        BRZ fin     # Si cpt = 0, terminer
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>        BRA boucle
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>fin     LDA somme
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>        OUT
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>        HLT
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>cpt     DAT
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>somme   DAT
+<a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>zero    DAT 0
+<a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>un      DAT 1
+</code></pre></div>
+</details>
 <hr />
 <h2 id="conseils-pour-reussir">Conseils pour réussir</h2>
 <h3 id="1-observer-avant-de-coder">1. Observer avant de coder</h3>
@@ -5499,7 +5724,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 8, 2026 16:46:51 UTC">February 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 19, 2026 23:49:51 UTC">March 19, 2026</span>
   </span>
 
     
