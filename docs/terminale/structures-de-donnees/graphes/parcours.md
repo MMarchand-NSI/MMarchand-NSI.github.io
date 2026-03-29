@@ -22,6 +22,26 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     ```
 
 
+??? warning "Corrigé BFS"
+
+    ```python
+    def bfs(depart: str, g: gr.Graphe) -> list[str]:
+        f = file.creer()
+        file.enfiler(depart, f)
+        visites = {depart}
+        ordre = []
+        while not file.est_vide(f):
+            u = file.defiler(f)
+            ordre.append(u)   # Zone 1 - traitement du noeud dans l'ordre
+            for v in gr.get_voisins(u, g):
+                # Zone 2 - Découverte d'un voisin
+                if v not in visites:
+                    # Zone 3 - Le voisin découvert n'a jamais été vu
+                    visites.add(v)
+                    file.enfiler(v, f)
+        return ordre
+    ```
+
 !!! question "Parcours en profondeur - Depth First Search (DFS)"
 
     De la même manière, en vous inspirant du travail sur les arbres binaires, écrire une fonction qui réalise le parcours en profondeur d'un graphe.
@@ -34,6 +54,28 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
 
 
 
+??? warning "Corrigé DFS"
+
+    La seule différence avec le BFS est l'utilisation d'une pile au lieu d'une file.
+
+    ```python
+    from structures.lineaires import pile
+
+    def dfs(depart: str, g: gr.Graphe) -> list[str]:
+        p = pile.creer()
+        pile.empiler(depart, p)
+        visites = {depart}
+        ordre = []
+        while not pile.est_vide(p):
+            u = pile.depiler(p)
+            ordre.append(u)
+            for v in gr.get_voisins(u, g):
+                if v not in visites:
+                    visites.add(v)
+                    pile.empiler(v, p)
+        return ordre
+    ```
+
 !!! question "Connexité"
     En utilisant une des fonctions précédentes, écrire la fonction suivante:
 
@@ -43,6 +85,15 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
 
     On pourra tester avec le graphe non connexe du cours, cette fonction peut faire une ligne.
 
+??? warning "Corrigé Connexité"
+
+    Un graphe est connexe si, en partant d'un sommet quelconque, on peut atteindre tous les autres sommets.
+
+    ```python
+    def est_connexe(g: gr.Graphe) -> bool:
+        return len(bfs(gr.sommets(g)[0], g)) == gr.nb_sommets(g)
+    ```
+
 !!! question "Cyclicité"
     En vous appuyant sur le BFS, écrire la fonction suivante:
 
@@ -51,6 +102,27 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     ```
 
 
+??? warning "Corrigé Cyclicité"
+
+    Un graphe non orienté est cyclique si, lors d'un BFS, on tente d'enfiler un sommet déjà visité qui n'est pas le parent du sommet courant.
+
+    ```python
+    def est_cyclique(g: gr.Graphe) -> bool:
+        depart = gr.sommets(g)[0]
+        f = file.creer()
+        file.enfiler(depart, f)
+        parent: dict[str, str] = {depart: ""}
+        while not file.est_vide(f):
+            u = file.defiler(f)
+            for v in gr.get_voisins(u, g):
+                if v not in parent:
+                    parent[v] = u
+                    file.enfiler(v, f)
+                elif v != parent[u]:
+                    return True
+        return False
+    ```
+
 !!! question "Sous graphe"
     - Ecrire une fonction qui renvoie le sous graphe constitué des sommets dans la liste:
 
@@ -58,6 +130,20 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
         def sous_graphe(sommets: list[str], g: gr.Graphe) -> gr.Graphe
     ```
 
+
+??? warning "Corrigé Sous graphe"
+
+    ```python
+    def sous_graphe(sommets: list[str], g: gr.Graphe) -> gr.Graphe:
+        sg = gr.creer()
+        for s in sommets:
+            gr.ajouter_sommet(s, sg)
+        for s in sommets:
+            for v in gr.get_voisins(s, g):
+                if v in sommets:
+                    gr.set_arete(s, v, sg, gr.poids(s, v, g))
+        return sg
+    ```
 
 !!! question "Composantes connexes"
 
@@ -70,6 +156,24 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     ```
 
 
+
+??? warning "Corrigé Composantes connexes"
+
+    L'opérateur `-` sur les ensembles (`set`) réalise la **différence ensembliste** : `A - B` renvoie les éléments de `A` qui ne sont pas dans `B`.
+
+    `reste -= set(cc)` retire donc de `reste` tous les sommets de la composante connexe qu'on vient de découvrir.
+
+    ```python
+    def composantes_connexes(g: gr.Graphe) -> list[gr.Graphe]:
+        reste = set(gr.sommets(g))
+        composantes = []
+        while len(reste) > 0:
+            depart = next(iter(reste))
+            cc = bfs(depart, g)
+            reste -= set(cc)
+            composantes.append(sous_graphe(cc, g))
+        return composantes
+    ```
 
 !!! question "Plus court chemins - Non pondéré"
     On peut trouver le plus court chemin entre 2 sommets d'un graphe **non pondéré** en réalisant un parcours en largeur qui renvoie un dictionnaire des prédécesseurs.
@@ -121,6 +225,28 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     On veut montrer que pour n'importe quel sommet $s2$, en remontant $\pi$, on
     obtient le plus court chemin de $s2$ à $s1$.
 
+??? warning "Corrigé shortest_path"
+
+    ```python
+    def shortest_path(g: gr.Graphe, s1: str, s2: str) -> list[str]:
+        π = predecesseurs_bfs(g, s1)
+        if s2 not in π:
+            return []
+        chemin = []
+        courant = s2
+        while courant != "":
+            chemin.append(courant)
+            courant = π[courant]
+        chemin.reverse()
+        return chemin
+    ```
+
+??? warning "Corrigé distance"
+
+    ```python
+    def distance(g: gr.Graphe, s1: str, s2: str) -> int:
+        return len(shortest_path(g, s1, s2)) - 1
+    ```
 
 !!! question "Indicateurs courants sur les graphes"
     
@@ -167,6 +293,23 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
         return ...
     ```
 
+??? warning "Corrigé Indicateurs"
+
+    ```python
+    def excentricite(g: gr.Graphe, s: str) -> int:
+        return max(distance(g, s, v) for v in gr.sommets(g) if v != s)
+
+    def centre(g: gr.Graphe) -> list[str]:
+        r = rayon(g)
+        return [s for s in gr.sommets(g) if excentricite(g, s) == r]
+
+    def rayon(g: gr.Graphe) -> int:
+        return min(excentricite(g, s) for s in gr.sommets(g))
+
+    def diametre(g: gr.Graphe) -> int:
+        return max(excentricite(g, s) for s in gr.sommets(g))
+    ```
+
 !!! question "Arbre couvrant"
 
     On supposera le graphe connexe.
@@ -183,9 +326,48 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     Sur les graphes pondérés, il est fréquent de rechercher l'arbre couvrant de poids minimum (Minimum Spanning Tree).
     Il représente le minimum de ce qui peut tout connecter au moindre coût.
 
+??? warning "Corrigé Arbre couvrant"
 
-!!! tip "Graphe exemple"
-    
+    On construit l'arbre couvrant à partir du dictionnaire des prédécesseurs : chaque entrée `π[v] = u` donne une arête de l'arbre.
+
+    ```python
+    def get_arbre_couvrant(g: gr.Graphe) -> gr.Graphe:
+        depart = gr.sommets(g)[0]
+        π = predecesseurs_bfs(g, depart)
+        arbre = gr.creer()
+        for s in π:
+            gr.ajouter_sommet(s, arbre)
+        for v, u in π.items():
+            if u != "":
+                gr.set_arete(u, v, arbre, gr.poids(u, v, g))
+        return arbre
+    ```
+
+!!! question "Plugin distances"
+    Reprendre la question sur les distances à partir de l'algorithme sur les prédécesseurs.
+    En modifiant le bfs, créer un plugin distance qui renvoie le dictionnaire des distances au sommet de départ.
+
+
+??? warning "Corrigé Plugin distances"
+
+    La distance d'un voisin découvert est celle de son parent + 1.
+
+    ```python
+    def distances_bfs(g: gr.Graphe, s1: str) -> dict[str, int]:
+        f = file.creer()
+        file.enfiler(s1, f)
+        dist: dict[str, int] = {s1: 0}       # Plugin distance
+        while not file.est_vide(f):
+            u = file.defiler(f)
+            for v in gr.get_voisins(u, g):
+                if v not in dist:
+                    dist[v] = dist[u] + 1    # Plugin distance
+                    file.enfiler(v, f)
+        return dist
+    ```
+
+!!! tip "Graphe exemple (pondéré)"
+
     ```graphviz dot g6.png
     graph G {
         rankdir=LR;
@@ -205,7 +387,24 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     }
     ```
 
-!!! tip "Graphe exemple2"
+    ```python
+    def graphe_exemple() -> gr.Graphe:
+        g = gr.creer()
+        gr.set_arete("A", "B", g, 85)
+        gr.set_arete("A", "C", g, 217)
+        gr.set_arete("A", "E", g, 173)
+        gr.set_arete("B", "F", g, 80)
+        gr.set_arete("C", "G", g, 186)
+        gr.set_arete("C", "H", g, 103)
+        gr.set_arete("H", "D", g, 183)
+        gr.set_arete("H", "J", g, 167)
+        gr.set_arete("F", "I", g, 250)
+        gr.set_arete("E", "J", g, 502)
+        gr.set_arete("I", "J", g, 84)
+        return g
+    ```
+
+!!! tip "Graphe exemple2 (non pondéré)"
     ```graphviz dot g7.png
     graph G {
         rankdir=LR;
@@ -228,4 +427,26 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
         G -- J;
         J -- L;
     }
+    ```
+
+    ```python
+    def graphe_exemple2() -> gr.Graphe:
+        g = gr.creer()
+        gr.set_arete("A", "J", g)
+        gr.set_arete("A", "M", g)
+        gr.set_arete("B", "G", g)
+        gr.set_arete("B", "J", g)
+        gr.set_arete("B", "L", g)
+        gr.set_arete("B", "M", g)
+        gr.set_arete("C", "G", g)
+        gr.set_arete("C", "L", g)
+        gr.set_arete("D", "E", g)
+        gr.set_arete("E", "K", g)
+        gr.set_arete("E", "L", g)
+        gr.set_arete("F", "G", g)
+        gr.set_arete("G", "H", g)
+        gr.set_arete("G", "I", g)
+        gr.set_arete("G", "J", g)
+        gr.set_arete("J", "L", g)
+        return g
     ```
