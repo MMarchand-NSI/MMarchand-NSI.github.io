@@ -1501,15 +1501,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-installation" class="md-nav__link">
+  <a href="#2-installation-de-los" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Installation
+        2. Installation de l'OS
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Installation">
+    <nav class="md-nav" aria-label="2. Installation de l&#39;OS">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -1589,6 +1589,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#28-reflexe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 Réflexe
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1606,15 +1617,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-exercices-pratiques" class="md-nav__link">
+  <a href="#4-exercices-pratiques-commandes-linux" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Exercices pratiques
+        4. Exercices pratiques - Commandes linux
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Exercices pratiques">
+    <nav class="md-nav" aria-label="4. Exercices pratiques - Commandes linux">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4745,15 +4756,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-installation" class="md-nav__link">
+  <a href="#2-installation-de-los" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Installation
+        2. Installation de l'OS
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="2. Installation">
+    <nav class="md-nav" aria-label="2. Installation de l&#39;OS">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -4833,6 +4844,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#28-reflexe" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2.8 Réflexe
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -4850,15 +4872,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-exercices-pratiques" class="md-nav__link">
+  <a href="#4-exercices-pratiques-commandes-linux" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Exercices pratiques
+        4. Exercices pratiques - Commandes linux
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="4. Exercices pratiques">
+    <nav class="md-nav" aria-label="4. Exercices pratiques - Commandes linux">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -5054,7 +5076,7 @@
 <p>Les ordinateurs du lycée ne sont pas très puissants. <strong>Fermez tous les programmes inutiles</strong> (Pronote, navigateurs...) pendant le TP pour libérer de la RAM.</p>
 </div>
 <h2 id="1-preparation-msys2-qemu">1. Préparation (MSYS2 + QEMU)</h2>
-<p>Nous utilisons <strong>MSYS2</strong> (un environnement Linux pour Windows) et <strong>QEMU</strong> (un émulateur de machine virtuelle).</p>
+<p>Nous utilisons <strong>MSYS2</strong> (un environnement Linux pour Windows) et <strong>QEMU</strong> (un émulateur de machine virtuelle). Si des erreurs apparaissent lors de l'exécution des commandes suivantes, il s'agit très certainement d'un problème de connexion. Relancez.</p>
 <ol>
 <li>
 <p><strong>Ouvrir MSYS2 UCRT64</strong> (chercher avec la loupe Windows)</p>
@@ -5065,24 +5087,57 @@
 </code></pre></div>
    Répétez jusqu'à voir "there is nothing to do". Si le terminal demande à être fermé, fermez-le et relancez UCRT64.</p>
 </li>
-<li>
-<p><strong>Installer QEMU</strong> :
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pacman<span class="w"> </span>-S<span class="w"> </span>mingw-w64-x86_64-qemu
-</code></pre></div></p>
-</li>
-<li>
-<p><strong>Télécharger Alpine Linux</strong> :
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>wget<span class="w"> </span>https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/x86_64/alpine-virt-3.21.3-x86_64.iso
-</code></pre></div></p>
-</li>
 </ol>
-<h2 id="2-installation">2. Installation</h2>
-<h3 id="21-creer-un-disque-dur-virtuel-de-5-go">2.1 Créer un disque dur virtuel de 5 Go</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>qemu-img<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>qcow2<span class="w"> </span>disquedur.qcow2<span class="w"> </span>5G
+<p>!!! hint "Gestionnaire de paquet"
+      <code>pacman</code> est un gestionnaire de paquets (package manager). Il permet d'installer des applications en ligne de commande en assurant que tout ce qui est installé sur la machine reste compatible. Sous alpine, on aura <code>apk</code>, sous debian et dérivées, on a <code>apt</code>, sous fédora, <code>dnf</code>, sous windows, <code>winget</code>.</p>
+<ol>
+<li><strong>Installer QEMU</strong> :
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>pacman<span class="w"> </span>-S<span class="w"> </span>--needed<span class="w"> </span>mingw-w64-ucrt-x86_64-qemu
+</code></pre></div></li>
+</ol>
+<p>!!! hint "Gestionnaire de machines virtuelle"
+      <code>qemu</code> permet de créer et d'exécuter des machines virtuelles sur un ordinateur. On peut voir une machine virtuelle est un vrai ordinateur qui tourne sur votre ordinateur, et elle en emprunte les ressources pour fonctionner. Il ne s'agit pas d'une simulation, il s'agit véritablement d'un système qui tourne sur votre PC.</p>
+<p>!!! tip "Vérifier que ça a marché"
+      Lancez la commande suivante:</p>
+<div class="highlight"><pre><span></span><code>  ```bash
+  pacman -S --needed mingw-w64-ucrt-x86_64-qemu
+  ```
+
+  L&#39;écran suivant doit apparaître
+
+  ![alt text](image-1.png)
+
+  Un ordinateur s&#39;est lancé. Cet ordinateur n&#39;a aucun système d&#39;exploitation d&#39;installé, il n&#39;a que les composants de base de l&#39;architecture de von Veumann. Il cherche à lancer un système d&#39;exploitation. Il cherche partout, mais il ne trouve pas de matériel sur lequel réside un OS: `No bootable device`
+
+  Vous pouvez fermer la fenêtre (=débrancher la prise de courant de l&#39;ordinateur)
 </code></pre></div>
-<p>Cette commande crée un fichier <code>disquedur.qcow2</code> qui simule un disque dur de 5 Go.</p>
+<ol>
+<li><strong>Télécharger Alpine Linux</strong> :
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>wget<span class="w"> </span>https://dl-cdn.alpinelinux.org/alpine/v3.21/releases/x86_64/alpine-virt-3.21.3-x86_64.iso
+</code></pre></div></li>
+</ol>
+<p>On télécharge l'image du disque d'installation de Linux Alpine. On pourrait très bien la graver sur un vrai disque ou une vraie clé usb en la rendant bootable (avec des logiciels comme <code>balena etcher</code>), mais ici, on n'en aura pas besoin.</p>
+<p>!!! hint "wget"
+      <code>wget</code>est une commande linux standard disponible dans la quasi totalité des distributions par défaut. Elle permet tout simplement de télécharger un fichier dans le répertoire courant.</p>
+<h2 id="2-installation-de-los">2. Installation de l'OS</h2>
+<p>Grâce à <code>qemu</code>, on va créer un PC de toute pièce. On va commencer par créer un disque dur afin de pouvoir rendre persistantes nos modifications (souvenez vous, sans mémoire de stackage, rien ne peut être persistent entre deux allumages de PC, y compris le système d'exploitation).</p>
+<h3 id="21-creer-un-disque-dur-virtuel-de-5-go">2.1 Créer un disque dur virtuel de 5 Go</h3>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>qemu-img<span class="w"> </span>create<span class="w"> </span>-f<span class="w"> </span>qcow2<span class="w"> </span>disquedur.qcow2<span class="w"> </span>5G
+</code></pre></div>
+<p>Cette commande crée un fichier <code>disquedur.qcow2</code> qui représente un disque dur vierge de 5 Go.</p>
 <h3 id="22-demarrer-la-machine-virtuelle-avec-le-cd-dinstallation">2.2 Démarrer la machine virtuelle avec le CD d'installation</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>qemu-system-x86_64<span class="w"> </span>-boot<span class="w"> </span>d<span class="w"> </span>-cdrom<span class="w"> </span>alpine-virt-3.21.3-x86_64.iso<span class="w"> </span>-hda<span class="w"> </span>disquedur.qcow2<span class="w"> </span>-m<span class="w"> </span><span class="m">256</span><span class="w"> </span>-net<span class="w"> </span>nic<span class="w"> </span>-net<span class="w"> </span>user
+<p>Ici, on va lancer un ordinateur possédant l'architecture x86_64</p>
+<div class="admonition hint">
+<p class="admonition-title">Architecture x86_64</p>
+</div>
+<p><strong>Le 86</strong></p>
+<p>Intel lance en 1978 le processeur 8086, premier d'une longue lignée. Les suivants (80186, 80286, 80386, 80486...) prolongent cette famille en restant compatibles entre eux — un programme compilé pour le 8086 tourne sur un 80486.</p>
+<p>Par abus de langage, toute cette famille s'appelle x86 (le "x" remplaçant le préfixe variable 80/...). C'est une architecture 32 bits : les registres (les ACC du LCM, car en vrai il y a "plusieurs ACC") font 32 bits, on peut adresser au max 2³² = 4 Go de RAM.</p>
+<p><strong>Le "64"</strong></p>
+<p>En 2003, AMD étend l'architecture x86 à 64 bits (registres 64 bits, espace d'adressage 2⁶⁴). Intel adopte ensuite le même standard.</p>
+<p>Le nom complet est x86-64 (ou AMD64, ou x64) : c'est l'architecture x86, étendue à 64 bits.</p>
+<p>La commande suivante lance un ordinateur x86_64 muni d'un CDROM dans lequel on a inséré le CD d'installation d'Alpine. On dit de plus qu'il faut booter sur ce CD-ROM. On y branche aussi notre disque dur.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>qemu-system-x86_64<span class="w"> </span>-boot<span class="w"> </span>d<span class="w"> </span>-cdrom<span class="w"> </span>alpine-virt-3.21.3-x86_64.iso<span class="w"> </span>-hda<span class="w"> </span>disquedur.qcow2<span class="w"> </span>-m<span class="w"> </span><span class="m">256</span><span class="w"> </span>-net<span class="w"> </span>nic<span class="w"> </span>-net<span class="w"> </span>user
 </code></pre></div>
 <p><strong>Explication</strong> :</p>
 <ul>
@@ -5090,39 +5145,50 @@
 <li><code>-cdrom ...</code> : insère le fichier ISO comme CD</li>
 <li><code>-hda disquedur.qcow2</code> : branche le disque dur virtuel</li>
 <li><code>-m 256</code> : alloue 256 Mo de RAM (256M)</li>
-<li><code>-net nic -net user</code> : active le réseau</li>
+<li><code>-net nic -net user</code> : active une carte réseau</li>
 </ul>
 <h3 id="23-login">2.3 Login</h3>
-<p>Une fois le système démarré, login : <code>root</code> (pas de mot de passe pour l'instant)</p>
+<p>Le système d'exploitation se charge en RAM depuis le disque d'installation. Maintenant l'objectif c'est de ne plus avoir besoin du disque d'installation. </p>
+<p>Installer un système d'exploitation, c'est tout simplement le faire persister sur un disque dur avec des paramètres que nous allons indiquer.</p>
+<p>Une fois le système démarré, se connecter avec le login : <code>root</code> (pas de mot de passe pour l'instant)</p>
+<p>Une version minimaliste d'Alpine est maintenant disponible. Un prompt attend alors que vous lui donniez des commandes.</p>
 <h3 id="24-lancer-linstallation">2.4 Lancer l'installation</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>setup-alpine
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>setup-alpine
 </code></pre></div>
+<p>Attention, le clavier est configuré en QWERTY par défaut. C'est souvent le cas à l'installation. Il faut écrire <code>setup)qlpine</code>. Une des premières questions sera la configuration du clavier.</p>
 <h3 id="25-repondre-aux-questions">2.5 Répondre aux questions</h3>
 <p>Suivez ces réponses (appuyez sur Entrée pour accepter les valeurs par défaut) :</p>
 <ul>
-<li><strong>Keyboard layout</strong> : <code>fr</code> puis <code>fr</code> (clavier français)</li>
-<li><strong>Hostname</strong> : <code>localhost</code> (ou un nom de votre choix)</li>
-<li><strong>Network</strong> : Entrée (accepter DHCP automatique)</li>
-<li><strong>Root password</strong> : <code>root</code> (simple pour le TP)</li>
+<li><strong>Keyboard layout</strong> : <code>fr</code> puis <code>fr</code> (clavier français). Le clavier se comportera maintenant 'normalement'</li>
+<li><strong>Interfaces</strong> : Entrée (tout accepter en appuyant sur Entrée)</li>
+<li><strong>Root password</strong> : <code>root</code> (simple pour le TP. Par sécurité, vous ne verrez pas les caractères que vous tapez, c'est normal)</li>
 <li><strong>Timezone</strong> : <code>Europe/Paris</code></li>
 <li><strong>Proxy</strong> : Entrée (aucun)</li>
 <li><strong>NTP client</strong> : <code>chrony</code> (par défaut)</li>
-<li><strong>Mirror</strong> : <code>f</code> puis Entrée (choix rapide)</li>
+<li><strong>Mirror</strong> : <code>f</code> puis Entrée (choix di mirror le plus rapide)</li>
+<li><strong>User</strong> : <code>padawan</code> puis Entrée (création de l'utilisateur padawan, mettez aussi padawan en mot de passe)</li>
 <li><strong>SSH server</strong> : <code>openssh</code> (par défaut)</li>
 <li><strong>Disk</strong> : <code>sda</code> (le disque virtuel créé)</li>
 <li><strong>Mode</strong> : <code>sys</code> (installation complète sur disque)</li>
-<li><strong>Erase disk ?</strong> : <code>y</code> (oui, confirmer)</li>
+<li><strong>Erase disk ?</strong> : <code>y</code> (oui, confirmer, sinon le processus s'arrête et vous devez tout refaire)</li>
 </ul>
 <p>L'installation démarre. Attendez quelques minutes.</p>
 <h3 id="26-eteindre">2.6 Éteindre</h3>
 <p>Une fois l'installation terminée :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>doas<span class="w"> </span>poweroff
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>poweroff
 </code></pre></div>
+<div class="admonition hint">
+<p class="admonition-title">Mise hors tension</p>
+</div>
+<p>Il faut demander à la machine de s'éteindre avec cette commande, il ne faut plus simplement fermer la fenêtre ou vous risquez très probablement de corrompre votre système d'exploitation et de devoir tout réinstaller.</p>
 <h3 id="27-redemarrer-sans-le-cd">2.7 Redémarrer sans le CD</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>qemu-system-x86_64<span class="w"> </span>-hda<span class="w"> </span>disquedur.qcow2<span class="w"> </span>-m<span class="w"> </span><span class="m">256</span><span class="w"> </span>-nic<span class="w"> </span>user,ipv6<span class="o">=</span>off,hostfwd<span class="o">=</span>tcp::22022-:22
+<p>Maintenant le système bootera <strong>depuis le disque dur</strong> (plus besoin du CD).</p>
+<p>On modifie donc la configuration de la machine. On lui rattache le disque dur, et dans la phase de démarrage, le PC verra qu'il y a un système d'exploitation dessus qu'il faut charger.</p>
+<p>Voici la <strong>commande définitive</strong> pour maintenant lancer votre PC avec une distribution Alpine:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>qemu-system-x86_64<span class="w"> </span>-hda<span class="w"> </span>disquedur.qcow2<span class="w"> </span>-m<span class="w"> </span><span class="m">256</span><span class="w"> </span>-nic<span class="w"> </span>user,ipv6<span class="o">=</span>off,hostfwd<span class="o">=</span>tcp::22022-:22
 </code></pre></div>
-<p>Maintenant le système boot <strong>depuis le disque virtuel</strong> (plus besoin du CD).</p>
-<p>Login : <code>root</code> / mot de passe : <code>root</code></p>
+<p>J'ai aussi modifié la configuration de la carte réseau, mais je ne m'étendrai pas là dessus.</p>
+<p>Login : <code>padawan</code> / mot de passe : <code>padawan</code></p>
 <div class="admonition success">
 <p class="admonition-title">Vous avez installé Linux !</p>
 <p>Votre machine virtuelle Alpine Linux est prête. Vous pouvez maintenant :</p>
@@ -5132,19 +5198,33 @@
 <li>Apprendre les commandes Linux dans un environnement réel</li>
 </ul>
 </div>
+<h3 id="28-reflexe">2.8 Réflexe</h3>
+<p>Il faut avoir le réflexe de mettre à jour régulièrement le système. Y compris à la première utilisation.</p>
+<p>Récupération de la liste des paquets qu'on peut mettre à jour</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>doas<span class="w"> </span>apk<span class="w"> </span>update
+</code></pre></div>
+<p>Mise à jour</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>doas<span class="w"> </span>apk<span class="w"> </span>upgrade
+</code></pre></div>
+<div class="admonition hint">
+<p class="admonition-title">doas</p>
+</div>
+<p>Les opérations qu'on a demandé sont sensibles. Seul un super utilisateur peut les exécuter. Lorsqu'on a créé le user padawan, on lui a donné le droit d'exécuter des commandes comme s'il était le super utilisateur. Mais ça requiert de préfixer ces commandes avec <code>doas</code>pour réaliser ce qu'on appelle une élévation de privilèges.</p>
+<p>doas est une spécificité alpine. Dans beaucoup d'autres distributions, la commande équivalente est <code>sudo</code>. Il est d'ailleurs possible de configurer sudo sous alpine.</p>
 <h2 id="3-interface-graphique-optionnel">3. Interface graphique (optionnel)</h2>
 <p>Alpine peut avoir une interface graphique, mais ça consomme beaucoup de ressources. <strong>À la maison</strong>, si vous avez plus de RAM (4 Go ou plus), vous pouvez :</p>
 <ol>
-<li>Allouer plus de RAM à la VM : <code>-m 2G</code> au lieu de <code>-m 256</code></li>
+<li>Allouer plus de RAM à la VM : <code>-m 4G</code> au lieu de <code>-m 256</code></li>
 <li>Installer un environnement graphique :
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>setup-desktop
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>setup-desktop
 </code></pre></div>
    Choisir <strong>xfce</strong> (le plus léger)</li>
 <li>Redémarrer</li>
 </ol>
 <p>Vous aurez alors une interface similaire à Windows :</p>
 <p><img alt="Interface XFCE" src="../image-6.png" /></p>
-<h2 id="4-exercices-pratiques">4. Exercices pratiques</h2>
+<p>Ca n'a pas d'intérêt en virtualisation où on cherche justement à limiter au maximum l'utilisation de ressources inutiles.</p>
+<h2 id="4-exercices-pratiques-commandes-linux">4. Exercices pratiques - Commandes linux</h2>
 <h3 id="exercice-1-premiers-pas">Exercice 1 : Premiers pas</h3>
 <p>Connectez-vous à votre machine virtuelle Alpine et :</p>
 <ol>
@@ -5156,8 +5236,6 @@
 </ol>
 <h3 id="exercice-2-mise-a-jour-et-installation">Exercice 2 : Mise à jour et installation</h3>
 <ol>
-<li>Mettez à jour la liste des paquets : <code>doas apk update</code></li>
-<li>Mettez à jour tous les paquets : <code>doas apk upgrade</code></li>
 <li>Installez Python et nano : <code>doas apk add python3 nano</code></li>
 <li>Vérifiez l'installation : <code>python3 --version</code></li>
 </ol>
@@ -5165,9 +5243,9 @@
 <ol>
 <li>Créez un fichier <code>test.py</code> avec nano : <code>nano test.py</code></li>
 <li>Écrivez ce contenu :
-   <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="ch">#!/usr/bin/python3</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Voici un entier aléatoire : </span><span class="si">{</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+   <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="ch">#!/usr/bin/python3</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Voici un entier aléatoire : </span><span class="si">{</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </code></pre></div></li>
 <li>Sauvegardez (Ctrl+O) et quittez (Ctrl+X)</li>
 <li>Essayez d'exécuter : <code>./test.py</code></li>
@@ -5177,29 +5255,29 @@
 </ol>
 <h3 id="exercice-4-creation-darborescence">Exercice 4 : Création d'arborescence</h3>
 <p>Créez un fichier <code>arbo.sh</code> qui contient toutes les commandes pour créer l'arborescence suivante :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>Mon_Site/
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>├── index.html
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>├── css/
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>│   └── style.css
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>├── js/
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>│   └── script.js
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>└── images/
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    ├── logo.png
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    └── banniere.jpg
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Mon_Site/
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>├── index.html
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>├── css/
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>│   └── style.css
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>├── js/
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>│   └── script.js
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>└── images/
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>    ├── logo.png
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>    └── banniere.jpg
 </code></pre></div>
 <p><strong>Solution</strong> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="ch">#!/bin/bash</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>Mon_Site/css<span class="w"> </span>Mon_Site/js<span class="w"> </span>Mon_Site/images
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>touch<span class="w"> </span>Mon_Site/index.html
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>touch<span class="w"> </span>Mon_Site/css/style.css
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>touch<span class="w"> </span>Mon_Site/js/script.js
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>touch<span class="w"> </span>Mon_Site/images/logo.png
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>touch<span class="w"> </span>Mon_Site/images/banniere.jpg
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="ch">#!/bin/bash</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>Mon_Site/css<span class="w"> </span>Mon_Site/js<span class="w"> </span>Mon_Site/images
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>touch<span class="w"> </span>Mon_Site/index.html
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>touch<span class="w"> </span>Mon_Site/css/style.css
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>touch<span class="w"> </span>Mon_Site/js/script.js
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>touch<span class="w"> </span>Mon_Site/images/logo.png
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>touch<span class="w"> </span>Mon_Site/images/banniere.jpg
 </code></pre></div>
 <p>Rendez le script exécutable et exécutez-le :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>arbo.sh
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>./arbo.sh
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>ls<span class="w"> </span>-R<span class="w"> </span>Mon_Site/
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>chmod<span class="w"> </span>+x<span class="w"> </span>arbo.sh
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>./arbo.sh
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>ls<span class="w"> </span>-R<span class="w"> </span>Mon_Site/
 </code></pre></div>
 <h3 id="exercice-5-questions-de-comprehension">Exercice 5 : Questions de compréhension</h3>
 <ol>
@@ -5367,7 +5445,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 9, 2026 19:02:41 UTC">February 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 29, 2026 14:14:17 UTC">March 29, 2026</span>
   </span>
 
     
