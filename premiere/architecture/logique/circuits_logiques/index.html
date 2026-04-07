@@ -4863,6 +4863,65 @@
 <li>Proposez une simplification drastique de ce circuit.</li>
 </ul>
 </div>
+<details class="success">
+<summary>Correction — Interrupteurs et lampe</summary>
+<p>L'expression booléenne du circuit est :</p>
+<div class="arithmatex">\[S = \bar{a}.b + a.\bar{b}\]</div>
+<p><strong>Table de vérité :</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(a\)</span></th>
+<th><span class="arithmatex">\(b\)</span></th>
+<th><span class="arithmatex">\(\bar{a}\)</span></th>
+<th><span class="arithmatex">\(\bar{b}\)</span></th>
+<th><span class="arithmatex">\(\bar{a}.b\)</span></th>
+<th><span class="arithmatex">\(a.\bar{b}\)</span></th>
+<th><span class="arithmatex">\(S\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Simplification :</strong> On reconnaît exactement la table de vérité du OU EXCLUSIF. Le circuit entier se simplifie en une seule porte :</p>
+<div class="arithmatex">\[S = a \oplus b\]</div>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Porte NAND</p>
 <p>La porte NAND réalise l'opération NON(A ET B), i.e. <span class="arithmatex">\(\overline{a.b}\)</span></p>
@@ -4873,6 +4932,50 @@
 <p><img alt="alt text" src="../image-5.png" /></p>
 <p>Sachant que $\bar{\bar{x}} = x $, à l'aide de la loi de Morgan, exprimez <span class="arithmatex">\(a+b\)</span> unqiuement grâces aux opérations ET et NON.</p>
 </div>
+<details class="success">
+<summary>Correction — Porte NAND</summary>
+<p><strong>Table de vérité :</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(a\)</span></th>
+<th><span class="arithmatex">\(b\)</span></th>
+<th><span class="arithmatex">\(a.b\)</span></th>
+<th><span class="arithmatex">\(\overline{a.b}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Expression de <span class="arithmatex">\(a+b\)</span> avec ET et NON uniquement :</strong></p>
+<p>On applique la double négation puis la loi de De Morgan :</p>
+<div class="arithmatex">\[a + b = \overline{\overline{a + b}} = \overline{\bar{a}.\bar{b}}\]</div>
+<p>Soit : <span class="arithmatex">\(a + b = \text{NON}\bigl(\text{NON}(a)\ \text{ET}\ \text{NON}(b)\bigr)\)</span></p>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Turing Complete</p>
 <p>Ces exercices sont les premiers niveaux d'un jeu nommé "<a href="https://store.steampowered.com/app/1444480/Turing_Complete/">turing complete</a>". Ce jeu, partant de la simple porte NAND, vous emmène jsuqu'à construire un ordinateur entier.</p>
@@ -4900,6 +5003,20 @@ components: {
 }
     </script>
     </logic-editor></p>
+<details class="success">
+<summary>Correction — Turing Complete</summary>
+<p><a href="../turing.json">Télécharger la correction (turing.json)</a></p>
+<p><strong>Pourquoi NAND est-elle une porte universelle ?</strong></p>
+<p>En partant uniquement de NAND, on peut reconstruire toutes les portes :</p>
+<ul>
+<li><strong>NOT</strong> : <span class="arithmatex">\(\overline{a.a} = \bar{a}\)</span> → NAND(a, a)</li>
+<li><strong>AND</strong> : NOT(NAND(a, b))</li>
+<li><strong>OR</strong> : NAND(<span class="arithmatex">\(\bar{a}\)</span>, <span class="arithmatex">\(\bar{b}\)</span>) = <span class="arithmatex">\(\overline{\bar{a}.\bar{b}} = a + b\)</span> (De Morgan)</li>
+<li><strong>NOR</strong> : NOT(OR(a, b))</li>
+<li><strong>XOR</strong> : construit à partir des portes précédentes</li>
+</ul>
+<p>Toute expression booléenne pouvant s'écrire avec NOT, AND, OR, la porte NAND suffit à tout réaliser : c'est une <strong>porte universelle</strong>. La porte NOR l'est également.</p>
+</details>
 <h3 id="circuit-demi-additionneur">Circuit demi-additionneur</h3>
 <p>Ce circuit prend 2 bits en entrée et les additionne, comme s'il s'agissait d'entiers binaires dont on <strong>pose l'addition</strong>.</p>
 <p>Le circuit prend en entrée deux bits <span class="arithmatex">\(a\)</span> et <span class="arithmatex">\(b\)</span>. Il renvoie la somme <span class="arithmatex">\(S\)</span>, ainsi que la retenue <span class="arithmatex">\(C_{out}\)</span></p>
@@ -4953,6 +5070,10 @@ components: {
 <p class="admonition-title">Réalisation du demi-additionneur</p>
 <p>Réalisez le circuit demi-additionneur dans l'interface et téléchargez le résultat.</p>
 </div>
+<details class="success">
+<summary>Correction — Demi-additionneur</summary>
+<p><a href="../half-adder.json">Télécharger la correction (half-adder.json)</a></p>
+</details>
 <h3 id="circuit-additionneur-complet-full-adder">Circuit additionneur complet (Full Adder)</h3>
 <p>Le circuite additionneur prend en entrée deux bits <span class="arithmatex">\(a\)</span> et <span class="arithmatex">\(b\)</span> ainsi qu'une retenue <span class="arithmatex">\(C_{in}\)</span>.</p>
 <p>Il émet 2 informations en sortie, la somme obtenue <span class="arithmatex">\(S\)</span>, ainsi que la retenue <span class="arithmatex">\(C_{out}\)</span></p>
@@ -5045,6 +5166,267 @@ components: {
 <li>Réalisez alors le circuit de l'additionneur complet et sauvegardez-le.</li>
 </ul>
 </div>
+<details class="success">
+<summary>Correction — Full-Adder</summary>
+<p><strong>Table de vérité complète :</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(a\)</span></th>
+<th><span class="arithmatex">\(b\)</span></th>
+<th><span class="arithmatex">\(C_{in}\)</span></th>
+<th><span class="arithmatex">\(S\)</span></th>
+<th><span class="arithmatex">\(C_{out}\)</span></th>
+<th>Commentaire</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0+0+0=0 et je retiens 0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0+0+1=1 et je retiens 0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0+1+0=1 et je retiens 0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0+1+1=2 et je retiens 1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1+0+0=1 et je retiens 0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1+0+1=2 et je retiens 1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1+1+0=2 et je retiens 1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1+1+1=3 et je retiens 1</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Preuve que <span class="arithmatex">\(S = a \oplus b \oplus C_{in}\)</span> :</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(a\)</span></th>
+<th><span class="arithmatex">\(b\)</span></th>
+<th><span class="arithmatex">\(C_{in}\)</span></th>
+<th><span class="arithmatex">\(a \oplus b\)</span></th>
+<th><span class="arithmatex">\(a \oplus b \oplus C_{in}\)</span></th>
+<th><span class="arithmatex">\(S\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Les colonnes <span class="arithmatex">\(a \oplus b \oplus C_{in}\)</span> et <span class="arithmatex">\(S\)</span> sont identiques. ✓</p>
+<p><strong>Preuve que <span class="arithmatex">\(C_{out} = (a \oplus b).C_{in} + a.b\)</span> :</strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(a\)</span></th>
+<th><span class="arithmatex">\(b\)</span></th>
+<th><span class="arithmatex">\(C_{in}\)</span></th>
+<th><span class="arithmatex">\(a \oplus b\)</span></th>
+<th><span class="arithmatex">\((a \oplus b).C_{in}\)</span></th>
+<th><span class="arithmatex">\(a.b\)</span></th>
+<th><span class="arithmatex">\((a \oplus b).C_{in} + a.b\)</span></th>
+<th><span class="arithmatex">\(C_{out}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Les deux dernières colonnes sont identiques. ✓</p>
+<p><strong>Circuit :</strong> <a href="../full-adder.json">Télécharger la correction (full-adder.json)</a></p>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Additionneur 4 bits</p>
 <p>Un additionneur 4 bits est composé d'un Half-Adder et de 3 Full-Adders en chaîne.
@@ -5080,6 +5462,10 @@ Le but est d'additionner le nombre formé par les bits de la première colonne a
 }
     </script>
     </logic-editor></p>
+<details class="success">
+<summary>Correction — Additionneur 4 bits</summary>
+<p><a href="../4-bits-adder.json">Télécharger la correction (4-bits-adder.json)</a></p>
+</details>
 
 
 
@@ -5100,7 +5486,7 @@ Le but est d'additionner le nombre formé par les bits de la première colonne a
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 17, 2026 21:58:20 UTC">March 17, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 7, 2026 16:54:04 UTC">April 7, 2026</span>
   </span>
 
     

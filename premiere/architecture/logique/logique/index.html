@@ -5437,6 +5437,140 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
 <li><span class="arithmatex">\(a+\bar{a}\)</span></li>
 </ul>
 </div>
+<details class="success">
+<summary>Correction — Propriétés de base</summary>
+<p><strong>1. <span class="arithmatex">\(1 + a = 1\)</span></strong></p>
+<p>En français : "1 OU a" — le OU est vrai dès qu'au moins une entrée est vraie. 1 est toujours vrai, donc le résultat est toujours 1.</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(a\)</span></th>
+<th><span class="arithmatex">\(1 + a\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>2. <span class="arithmatex">\(1.a = a\)</span></strong></p>
+<p>En français : "1 ET a" — le ET est vrai seulement si les deux sont vrais. 1 est toujours vrai, donc le résultat dépend uniquement de <span class="arithmatex">\(a\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(a\)</span></th>
+<th><span class="arithmatex">\(1.a\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>3. <span class="arithmatex">\(0 + a = a\)</span></strong></p>
+<p>En français : "0 OU a" — 0 est toujours faux, donc le résultat dépend uniquement de <span class="arithmatex">\(a\)</span>.</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(a\)</span></th>
+<th><span class="arithmatex">\(0 + a\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>4. <span class="arithmatex">\(0.a = 0\)</span></strong></p>
+<p>En français : "0 ET a" — le ET exige que les deux soient vrais. 0 est toujours faux, donc le résultat est toujours 0.</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(a\)</span></th>
+<th><span class="arithmatex">\(0.a\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>5. <span class="arithmatex">\(a.\bar{a} = 0\)</span></strong></p>
+<p>En français : "<span class="arithmatex">\(a\)</span> ET (NON <span class="arithmatex">\(a\)</span>)" — <span class="arithmatex">\(a\)</span> et <span class="arithmatex">\(\bar{a}\)</span> sont toujours opposés, ils ne peuvent jamais être vrais simultanément.</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(a\)</span></th>
+<th><span class="arithmatex">\(\bar{a}\)</span></th>
+<th><span class="arithmatex">\(a.\bar{a}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p><strong>6. <span class="arithmatex">\(a + \bar{a} = 1\)</span></strong></p>
+<p>En français : "<span class="arithmatex">\(a\)</span> OU (NON <span class="arithmatex">\(a\)</span>)" — l'un des deux est toujours vrai, donc le résultat est toujours 1.</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(a\)</span></th>
+<th><span class="arithmatex">\(\bar{a}\)</span></th>
+<th><span class="arithmatex">\(a + \bar{a}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Egalités remarquables</p>
 <p>Montrer que:</p>
@@ -5459,6 +5593,302 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
 </li>
 </ol>
 </div>
+<details class="success">
+<summary>Correction — Égalités remarquables</summary>
+<p><strong>1. <span class="arithmatex">\(\bar{x}.y + x.\bar{y} = x \oplus y\)</span></strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(y\)</span></th>
+<th><span class="arithmatex">\(\bar{x}\)</span></th>
+<th><span class="arithmatex">\(\bar{y}\)</span></th>
+<th><span class="arithmatex">\(\bar{x}.y\)</span></th>
+<th><span class="arithmatex">\(x.\bar{y}\)</span></th>
+<th><span class="arithmatex">\(\bar{x}.y + x.\bar{y}\)</span></th>
+<th><span class="arithmatex">\(x \oplus y\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Les deux dernières colonnes sont identiques. ✓</p>
+<hr />
+<p><strong>2. <span class="arithmatex">\(\overline{x + y} = \bar{x}.\bar{y}\)</span></strong> (1ère loi de De Morgan)</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(y\)</span></th>
+<th><span class="arithmatex">\(x+y\)</span></th>
+<th><span class="arithmatex">\(\overline{x+y}\)</span></th>
+<th><span class="arithmatex">\(\bar{x}\)</span></th>
+<th><span class="arithmatex">\(\bar{y}\)</span></th>
+<th><span class="arithmatex">\(\bar{x}.\bar{y}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Les deux dernières colonnes sont identiques. ✓</p>
+<hr />
+<p><strong>3. <span class="arithmatex">\(\overline{x.y} = \bar{x} + \bar{y}\)</span></strong> (2ème loi de De Morgan)</p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(y\)</span></th>
+<th><span class="arithmatex">\(x.y\)</span></th>
+<th><span class="arithmatex">\(\overline{x.y}\)</span></th>
+<th><span class="arithmatex">\(\bar{x}\)</span></th>
+<th><span class="arithmatex">\(\bar{y}\)</span></th>
+<th><span class="arithmatex">\(\bar{x}+\bar{y}\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Les deux dernières colonnes sont identiques. ✓</p>
+<hr />
+<p><strong>4. <span class="arithmatex">\(x + x.y = x\)</span></strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(y\)</span></th>
+<th><span class="arithmatex">\(x.y\)</span></th>
+<th><span class="arithmatex">\(x + x.y\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>La colonne <span class="arithmatex">\(x + x.y\)</span> est identique à la colonne <span class="arithmatex">\(x\)</span>. ✓</p>
+<hr />
+<p><strong>5. <span class="arithmatex">\(x.(x + y) = x\)</span></strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(y\)</span></th>
+<th><span class="arithmatex">\(x+y\)</span></th>
+<th><span class="arithmatex">\(x.(x+y)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>La colonne <span class="arithmatex">\(x.(x+y)\)</span> est identique à la colonne <span class="arithmatex">\(x\)</span>. ✓</p>
+<hr />
+<p><strong>6. <span class="arithmatex">\(\bar{x} + x.y = \bar{x} + y\)</span></strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(y\)</span></th>
+<th><span class="arithmatex">\(\bar{x}\)</span></th>
+<th><span class="arithmatex">\(x.y\)</span></th>
+<th><span class="arithmatex">\(\bar{x} + x.y\)</span></th>
+<th><span class="arithmatex">\(\bar{x} + y\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Les deux dernières colonnes sont identiques. ✓</p>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Distributivité</p>
 <p>Montrer que :</p>
@@ -5468,6 +5898,305 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
 <li><span class="arithmatex">\(x.(y \oplus z) = x.y \oplus x.z\)</span> — autrement dit, <span class="arithmatex">\(.\)</span> est distributif sur <span class="arithmatex">\(\oplus\)</span></li>
 </ol>
 </div>
+<details class="success">
+<summary>Correction — Distributivité</summary>
+<p><strong>1. <span class="arithmatex">\(x.(y + z) = x.y + x.z\)</span></strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(y\)</span></th>
+<th><span class="arithmatex">\(z\)</span></th>
+<th><span class="arithmatex">\(y+z\)</span></th>
+<th><span class="arithmatex">\(x.(y+z)\)</span></th>
+<th><span class="arithmatex">\(x.y\)</span></th>
+<th><span class="arithmatex">\(x.z\)</span></th>
+<th><span class="arithmatex">\(x.y+x.z\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Les colonnes <span class="arithmatex">\(x.(y+z)\)</span> et <span class="arithmatex">\(x.y+x.z\)</span> sont identiques. ✓</p>
+<hr />
+<p><strong>2. <span class="arithmatex">\(x + y.z = (x + y).(x + z)\)</span></strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(y\)</span></th>
+<th><span class="arithmatex">\(z\)</span></th>
+<th><span class="arithmatex">\(y.z\)</span></th>
+<th><span class="arithmatex">\(x+y.z\)</span></th>
+<th><span class="arithmatex">\(x+y\)</span></th>
+<th><span class="arithmatex">\(x+z\)</span></th>
+<th><span class="arithmatex">\((x+y).(x+z)\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>Les colonnes <span class="arithmatex">\(x+y.z\)</span> et <span class="arithmatex">\((x+y).(x+z)\)</span> sont identiques. ✓</p>
+<hr />
+<p><strong>3. <span class="arithmatex">\(x.(y \oplus z) = x.y \oplus x.z\)</span></strong></p>
+<table>
+<thead>
+<tr>
+<th><span class="arithmatex">\(x\)</span></th>
+<th><span class="arithmatex">\(y\)</span></th>
+<th><span class="arithmatex">\(z\)</span></th>
+<th><span class="arithmatex">\(y \oplus z\)</span></th>
+<th><span class="arithmatex">\(x.(y \oplus z)\)</span></th>
+<th><span class="arithmatex">\(x.y\)</span></th>
+<th><span class="arithmatex">\(x.z\)</span></th>
+<th><span class="arithmatex">\(x.y \oplus x.z\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+<td>0</td>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Les colonnes <span class="arithmatex">\(x.(y \oplus z)\)</span> et <span class="arithmatex">\(x.y \oplus x.z\)</span> sont identiques. ✓</p>
+</details>
 <h3 id="preuve-calculatoire">Preuve calculatoire</h3>
 <p>Maintenant que l'on dispose de la distributivité, il est possible de <strong>démontrer certaines égalités par le calcul</strong> plutôt que par table de vérité. Par exemple, pour montrer que <span class="arithmatex">\(x + x.y = x\)</span> :</p>
 <div class="arithmatex">\[x + x.y = x.1 + x.y = x.(1 + y) = x.1 = x\]</div>
@@ -5492,7 +6221,7 @@ En logique, cela revient à dire : si la porte est NON fermée, alors le voyant 
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="March 17, 2026 21:58:20 UTC">March 17, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 7, 2026 16:07:26 UTC">April 7, 2026</span>
   </span>
 
     
