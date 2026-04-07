@@ -59,6 +59,25 @@ Par exemple, le circuit suivant réalise l'expression $\overline{a.b}$ (c'est un
     - Etudiez la table de vérité de S
     - Proposez une simplification drastique de ce circuit.
 
+??? success "Correction — Interrupteurs et lampe"
+
+    L'expression booléenne du circuit est :
+
+    $$S = \bar{a}.b + a.\bar{b}$$
+
+    **Table de vérité :**
+
+    | $a$ | $b$ | $\bar{a}$ | $\bar{b}$ | $\bar{a}.b$ | $a.\bar{b}$ | $S$ |
+    | --- | --- | --------- | --------- | ----------- | ----------- | --- |
+    | 0   | 0   | 1         | 1         | 0           | 0           | 0   |
+    | 0   | 1   | 1         | 0         | 1           | 0           | 1   |
+    | 1   | 0   | 0         | 1         | 0           | 1           | 1   |
+    | 1   | 1   | 0         | 0         | 0           | 0           | 0   |
+
+    **Simplification :** On reconnaît exactement la table de vérité du OU EXCLUSIF. Le circuit entier se simplifie en une seule porte :
+
+    $$S = a \oplus b$$
+
 
 !!! question "Porte NAND"
     La porte NAND réalise l'opération NON(A ET B), i.e. $\overline{a.b}$
@@ -70,6 +89,25 @@ Par exemple, le circuit suivant réalise l'expression $\overline{a.b}$ (c'est un
     ![alt text](image-5.png)
 
     Sachant que $\bar{\bar{x}} = x $, à l'aide de la loi de Morgan, exprimez $a+b$ unqiuement grâces aux opérations ET et NON.
+
+??? success "Correction — Porte NAND"
+
+    **Table de vérité :**
+
+    | $a$ | $b$ | $a.b$ | $\overline{a.b}$ |
+    | --- | --- | ----- | ---------------- |
+    | 0   | 0   | 0     | 1                |
+    | 0   | 1   | 0     | 1                |
+    | 1   | 0   | 0     | 1                |
+    | 1   | 1   | 1     | 0                |
+
+    **Expression de $a+b$ avec ET et NON uniquement :**
+
+    On applique la double négation puis la loi de De Morgan :
+
+    $$a + b = \overline{\overline{a + b}} = \overline{\bar{a}.\bar{b}}$$
+
+    Soit : $a + b = \text{NON}\bigl(\text{NON}(a)\ \text{ET}\ \text{NON}(b)\bigr)$
 
 
 !!! question "Turing Complete"
@@ -100,6 +138,22 @@ components: {
 }
 ```
 
+??? success "Correction — Turing Complete"
+
+    [Télécharger la correction (turing.json)](turing.json)
+
+    **Pourquoi NAND est-elle une porte universelle ?**
+
+    En partant uniquement de NAND, on peut reconstruire toutes les portes :
+
+    - **NOT** : $\overline{a.a} = \bar{a}$ → NAND(a, a)
+    - **AND** : NOT(NAND(a, b))
+    - **OR** : NAND($\bar{a}$, $\bar{b}$) = $\overline{\bar{a}.\bar{b}} = a + b$ (De Morgan)
+    - **NOR** : NOT(OR(a, b))
+    - **XOR** : construit à partir des portes précédentes
+
+    Toute expression booléenne pouvant s'écrire avec NOT, AND, OR, la porte NAND suffit à tout réaliser : c'est une **porte universelle**. La porte NOR l'est également.
+
 ### Circuit demi-additionneur
 
 Ce circuit prend 2 bits en entrée et les additionne, comme s'il s'agissait d'entiers binaires dont on **pose l'addition**.
@@ -120,6 +174,10 @@ Ainsi, on peut directement construire la table de vérité du circuit résultant
 
 !!! question "Réalisation du demi-additionneur"
     Réalisez le circuit demi-additionneur dans l'interface et téléchargez le résultat.
+
+??? success "Correction — Demi-additionneur"
+
+    [Télécharger la correction (half-adder.json)](half-adder.json)
 
 ### Circuit additionneur complet (Full Adder)
 
@@ -145,6 +203,53 @@ Il émet 2 informations en sortie, la somme obtenue $S$, ainsi que la retenue $C
     - Montrer que $S = a \oplus b \oplus C_{in}$
     - Montrer que $C_{out} = (a \oplus b) . C_{in} + a . b$
     - Réalisez alors le circuit de l'additionneur complet et sauvegardez-le.
+
+??? success "Correction — Full-Adder"
+
+    **Table de vérité complète :**
+
+    | $a$ | $b$ | $C_{in}$ | $S$ | $C_{out}$ | Commentaire             |
+    | --- | --- | -------- | --- | --------- | ----------------------- |
+    | 0   | 0   | 0        | 0   | 0         | 0+0+0=0 et je retiens 0 |
+    | 0   | 0   | 1        | 1   | 0         | 0+0+1=1 et je retiens 0 |
+    | 0   | 1   | 0        | 1   | 0         | 0+1+0=1 et je retiens 0 |
+    | 0   | 1   | 1        | 0   | 1         | 0+1+1=2 et je retiens 1 |
+    | 1   | 0   | 0        | 1   | 0         | 1+0+0=1 et je retiens 0 |
+    | 1   | 0   | 1        | 0   | 1         | 1+0+1=2 et je retiens 1 |
+    | 1   | 1   | 0        | 0   | 1         | 1+1+0=2 et je retiens 1 |
+    | 1   | 1   | 1        | 1   | 1         | 1+1+1=3 et je retiens 1 |
+
+    **Preuve que $S = a \oplus b \oplus C_{in}$ :**
+
+    | $a$ | $b$ | $C_{in}$ | $a \oplus b$ | $a \oplus b \oplus C_{in}$ | $S$ |
+    | --- | --- | -------- | ------------ | -------------------------- | --- |
+    | 0   | 0   | 0        | 0            | 0                          | 0   |
+    | 0   | 0   | 1        | 0            | 1                          | 1   |
+    | 0   | 1   | 0        | 1            | 1                          | 1   |
+    | 0   | 1   | 1        | 1            | 0                          | 0   |
+    | 1   | 0   | 0        | 1            | 1                          | 1   |
+    | 1   | 0   | 1        | 1            | 0                          | 0   |
+    | 1   | 1   | 0        | 0            | 0                          | 0   |
+    | 1   | 1   | 1        | 0            | 1                          | 1   |
+
+    Les colonnes $a \oplus b \oplus C_{in}$ et $S$ sont identiques. ✓
+
+    **Preuve que $C_{out} = (a \oplus b).C_{in} + a.b$ :**
+
+    | $a$ | $b$ | $C_{in}$ | $a \oplus b$ | $(a \oplus b).C_{in}$ | $a.b$ | $(a \oplus b).C_{in} + a.b$ | $C_{out}$ |
+    | --- | --- | -------- | ------------ | --------------------- | ----- | --------------------------- | --------- |
+    | 0   | 0   | 0        | 0            | 0                     | 0     | 0                           | 0         |
+    | 0   | 0   | 1        | 0            | 0                     | 0     | 0                           | 0         |
+    | 0   | 1   | 0        | 1            | 0                     | 0     | 0                           | 0         |
+    | 0   | 1   | 1        | 1            | 1                     | 0     | 1                           | 1         |
+    | 1   | 0   | 0        | 1            | 0                     | 0     | 0                           | 0         |
+    | 1   | 0   | 1        | 1            | 1                     | 0     | 1                           | 1         |
+    | 1   | 1   | 0        | 0            | 0                     | 1     | 1                           | 1         |
+    | 1   | 1   | 1        | 0            | 0                     | 1     | 1                           | 1         |
+
+    Les deux dernières colonnes sont identiques. ✓
+
+    **Circuit :** [Télécharger la correction (full-adder.json)](full-adder.json)
 
 !!! question "Additionneur 4 bits"
     Un additionneur 4 bits est composé d'un Half-Adder et de 3 Full-Adders en chaîne.
@@ -182,3 +287,7 @@ Il émet 2 informations en sortie, la somme obtenue $S$, ainsi que la retenue $C
   }
 }
 ```
+
+??? success "Correction — Additionneur 4 bits"
+
+    [Télécharger la correction (4-bits-adder.json)](4-bits-adder.json)
