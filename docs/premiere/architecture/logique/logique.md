@@ -218,6 +218,72 @@ Ce n'est pas évident à première vue, mais la table de vérité le prouve !
     5. $a.\bar{a}$
     6. $a+\bar{a}$
 
+??? success "Correction — Propriétés de base"
+
+    **1. $1 + a = 1$**
+
+    En français : "1 OU a" — le OU est vrai dès qu'au moins une entrée est vraie. 1 est toujours vrai, donc le résultat est toujours 1.
+
+    | $a$ | $1 + a$ |
+    | --- | ------- |
+    | 0   | 1       |
+    | 1   | 1       |
+
+    ---
+
+    **2. $1.a = a$**
+
+    En français : "1 ET a" — le ET est vrai seulement si les deux sont vrais. 1 est toujours vrai, donc le résultat dépend uniquement de $a$.
+
+    | $a$ | $1.a$ |
+    | --- | ----- |
+    | 0   | 0     |
+    | 1   | 1     |
+
+    ---
+
+    **3. $0 + a = a$**
+
+    En français : "0 OU a" — 0 est toujours faux, donc le résultat dépend uniquement de $a$.
+
+    | $a$ | $0 + a$ |
+    | --- | ------- |
+    | 0   | 0       |
+    | 1   | 1       |
+
+    ---
+
+    **4. $0.a = 0$**
+
+    En français : "0 ET a" — le ET exige que les deux soient vrais. 0 est toujours faux, donc le résultat est toujours 0.
+
+    | $a$ | $0.a$ |
+    | --- | ----- |
+    | 0   | 0     |
+    | 1   | 0     |
+
+    ---
+
+    **5. $a.\bar{a} = 0$**
+
+    En français : "$a$ ET (NON $a$)" — $a$ et $\bar{a}$ sont toujours opposés, ils ne peuvent jamais être vrais simultanément.
+
+    | $a$ | $\bar{a}$ | $a.\bar{a}$ |
+    | --- | --------- | ----------- |
+    | 0   | 1         | 0           |
+    | 1   | 0         | 0           |
+
+    ---
+
+    **6. $a + \bar{a} = 1$**
+
+    En français : "$a$ OU (NON $a$)" — l'un des deux est toujours vrai, donc le résultat est toujours 1.
+
+    | $a$ | $\bar{a}$ | $a + \bar{a}$ |
+    | --- | --------- | ------------- |
+    | 0   | 1         | 1             |
+    | 1   | 0         | 1             |
+
 !!! question "Egalités remarquables"
 
     Montrer que:
@@ -229,6 +295,83 @@ Ce n'est pas évident à première vue, mais la table de vérité le prouve !
     5. $$x.(x + y) = x$$
     6. $$\bar{x} + x.y = \bar{x} + y$$
 
+??? success "Correction — Égalités remarquables"
+
+    **1. $\bar{x}.y + x.\bar{y} = x \oplus y$**
+
+    | $x$ | $y$ | $\bar{x}$ | $\bar{y}$ | $\bar{x}.y$ | $x.\bar{y}$ | $\bar{x}.y + x.\bar{y}$ | $x \oplus y$ |
+    | --- | --- | --------- | --------- | ----------- | ----------- | ----------------------- | ------------ |
+    | 0   | 0   | 1         | 1         | 0           | 0           | 0                       | 0            |
+    | 0   | 1   | 1         | 0         | 1           | 0           | 1                       | 1            |
+    | 1   | 0   | 0         | 1         | 0           | 1           | 1                       | 1            |
+    | 1   | 1   | 0         | 0         | 0           | 0           | 0                       | 0            |
+
+    Les deux dernières colonnes sont identiques. ✓
+
+    ---
+
+    **2. $\overline{x + y} = \bar{x}.\bar{y}$** (1ère loi de De Morgan)
+
+    | $x$ | $y$ | $x+y$ | $\overline{x+y}$ | $\bar{x}$ | $\bar{y}$ | $\bar{x}.\bar{y}$ |
+    | --- | --- | ------ | ---------------- | --------- | --------- | ----------------- |
+    | 0   | 0   | 0      | 1                | 1         | 1         | 1                 |
+    | 0   | 1   | 1      | 0                | 1         | 0         | 0                 |
+    | 1   | 0   | 1      | 0                | 0         | 1         | 0                 |
+    | 1   | 1   | 1      | 0                | 0         | 0         | 0                 |
+
+    Les deux dernières colonnes sont identiques. ✓
+
+    ---
+
+    **3. $\overline{x.y} = \bar{x} + \bar{y}$** (2ème loi de De Morgan)
+
+    | $x$ | $y$ | $x.y$ | $\overline{x.y}$ | $\bar{x}$ | $\bar{y}$ | $\bar{x}+\bar{y}$ |
+    | --- | --- | ------ | ---------------- | --------- | --------- | ----------------- |
+    | 0   | 0   | 0      | 1                | 1         | 1         | 1                 |
+    | 0   | 1   | 0      | 1                | 1         | 0         | 1                 |
+    | 1   | 0   | 0      | 1                | 0         | 1         | 1                 |
+    | 1   | 1   | 1      | 0                | 0         | 0         | 0                 |
+
+    Les deux dernières colonnes sont identiques. ✓
+
+    ---
+
+    **4. $x + x.y = x$**
+
+    | $x$ | $y$ | $x.y$ | $x + x.y$ |
+    | --- | --- | ------ | --------- |
+    | 0   | 0   | 0      | 0         |
+    | 0   | 1   | 0      | 0         |
+    | 1   | 0   | 0      | 1         |
+    | 1   | 1   | 1      | 1         |
+
+    La colonne $x + x.y$ est identique à la colonne $x$. ✓
+
+    ---
+
+    **5. $x.(x + y) = x$**
+
+    | $x$ | $y$ | $x+y$ | $x.(x+y)$ |
+    | --- | --- | ------ | --------- |
+    | 0   | 0   | 0      | 0         |
+    | 0   | 1   | 1      | 0         |
+    | 1   | 0   | 1      | 1         |
+    | 1   | 1   | 1      | 1         |
+
+    La colonne $x.(x+y)$ est identique à la colonne $x$. ✓
+
+    ---
+
+    **6. $\bar{x} + x.y = \bar{x} + y$**
+
+    | $x$ | $y$ | $\bar{x}$ | $x.y$ | $\bar{x} + x.y$ | $\bar{x} + y$ |
+    | --- | --- | --------- | ----- | --------------- | ------------- |
+    | 0   | 0   | 1         | 0     | 1               | 1             |
+    | 0   | 1   | 1         | 0     | 1               | 1             |
+    | 1   | 0   | 0         | 0     | 0               | 0             |
+    | 1   | 1   | 0         | 1     | 1               | 1             |
+
+    Les deux dernières colonnes sont identiques. ✓
 
 !!! question "Distributivité"
 
@@ -238,6 +381,56 @@ Ce n'est pas évident à première vue, mais la table de vérité le prouve !
     2. $x + y.z = (x + y).(x + z)$ — autrement dit, $+$ est distributif sur $.$
     3. $x.(y \oplus z) = x.y \oplus x.z$ — autrement dit, $.$ est distributif sur $\oplus$
 
+??? success "Correction — Distributivité"
+
+    **1. $x.(y + z) = x.y + x.z$**
+
+    | $x$ | $y$ | $z$ | $y+z$ | $x.(y+z)$ | $x.y$ | $x.z$ | $x.y+x.z$ |
+    | --- | --- | --- | ----- | --------- | ----- | ----- | --------- |
+    | 0   | 0   | 0   | 0     | 0         | 0     | 0     | 0         |
+    | 0   | 0   | 1   | 1     | 0         | 0     | 0     | 0         |
+    | 0   | 1   | 0   | 1     | 0         | 0     | 0     | 0         |
+    | 0   | 1   | 1   | 1     | 0         | 0     | 0     | 0         |
+    | 1   | 0   | 0   | 0     | 0         | 0     | 0     | 0         |
+    | 1   | 0   | 1   | 1     | 1         | 0     | 1     | 1         |
+    | 1   | 1   | 0   | 1     | 1         | 1     | 0     | 1         |
+    | 1   | 1   | 1   | 1     | 1         | 1     | 1     | 1         |
+
+    Les colonnes $x.(y+z)$ et $x.y+x.z$ sont identiques. ✓
+
+    ---
+
+    **2. $x + y.z = (x + y).(x + z)$**
+
+    | $x$ | $y$ | $z$ | $y.z$ | $x+y.z$ | $x+y$ | $x+z$ | $(x+y).(x+z)$ |
+    | --- | --- | --- | ----- | ------- | ----- | ----- | ------------- |
+    | 0   | 0   | 0   | 0     | 0       | 0     | 0     | 0             |
+    | 0   | 0   | 1   | 0     | 0       | 0     | 1     | 0             |
+    | 0   | 1   | 0   | 0     | 0       | 1     | 0     | 0             |
+    | 0   | 1   | 1   | 1     | 1       | 1     | 1     | 1             |
+    | 1   | 0   | 0   | 0     | 1       | 1     | 1     | 1             |
+    | 1   | 0   | 1   | 0     | 1       | 1     | 1     | 1             |
+    | 1   | 1   | 0   | 0     | 1       | 1     | 1     | 1             |
+    | 1   | 1   | 1   | 1     | 1       | 1     | 1     | 1             |
+
+    Les colonnes $x+y.z$ et $(x+y).(x+z)$ sont identiques. ✓
+
+    ---
+
+    **3. $x.(y \oplus z) = x.y \oplus x.z$**
+
+    | $x$ | $y$ | $z$ | $y \oplus z$ | $x.(y \oplus z)$ | $x.y$ | $x.z$ | $x.y \oplus x.z$ |
+    | --- | --- | --- | ------------ | ---------------- | ----- | ----- | ---------------- |
+    | 0   | 0   | 0   | 0            | 0                | 0     | 0     | 0                |
+    | 0   | 0   | 1   | 1            | 0                | 0     | 0     | 0                |
+    | 0   | 1   | 0   | 1            | 0                | 0     | 0     | 0                |
+    | 0   | 1   | 1   | 0            | 0                | 0     | 0     | 0                |
+    | 1   | 0   | 0   | 0            | 0                | 0     | 0     | 0                |
+    | 1   | 0   | 1   | 1            | 1                | 0     | 1     | 1                |
+    | 1   | 1   | 0   | 1            | 1                | 1     | 0     | 1                |
+    | 1   | 1   | 1   | 0            | 0                | 1     | 1     | 0                |
+
+    Les colonnes $x.(y \oplus z)$ et $x.y \oplus x.z$ sont identiques. ✓
 
 ### Preuve calculatoire
 
