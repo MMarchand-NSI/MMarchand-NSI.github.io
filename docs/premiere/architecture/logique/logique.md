@@ -306,7 +306,7 @@ Ce n'est pas évident à première vue, mais la table de vérité le prouve !
     | 1   | 0   | 0         | 1         | 0           | 1           | 1                       | 1            |
     | 1   | 1   | 0         | 0         | 0           | 0           | 0                       | 0            |
 
-    Les deux dernières colonnes sont identiques. ✓
+    Les colonnes $\bar{x}.y + x.\bar{y}$ et $x \oplus y$ sont identiques. ✓
 
     ---
 
@@ -319,7 +319,7 @@ Ce n'est pas évident à première vue, mais la table de vérité le prouve !
     | 1   | 0   | 1      | 0                | 0         | 1         | 0                 |
     | 1   | 1   | 1      | 0                | 0         | 0         | 0                 |
 
-    Les deux dernières colonnes sont identiques. ✓
+    Les colonnes $\overline{x+y}$ et $\bar{x}.\bar{y}$ sont identiques. ✓
 
     ---
 
@@ -332,7 +332,7 @@ Ce n'est pas évident à première vue, mais la table de vérité le prouve !
     | 1   | 0   | 0      | 1                | 0         | 1         | 1                 |
     | 1   | 1   | 1      | 0                | 0         | 0         | 0                 |
 
-    Les deux dernières colonnes sont identiques. ✓
+    Les colonnes $\overline{x.y}$ et $\bar{x}+\bar{y}$ sont identiques. ✓
 
     ---
 
@@ -371,7 +371,7 @@ Ce n'est pas évident à première vue, mais la table de vérité le prouve !
     | 1   | 0   | 0         | 0     | 0               | 0             |
     | 1   | 1   | 0         | 1     | 1               | 1             |
 
-    Les deux dernières colonnes sont identiques. ✓
+    Les colonnes $\bar{x} + x.y$ et $\bar{x} + y$ sont identiques. ✓
 
 !!! question "Distributivité"
 
