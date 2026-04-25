@@ -1,79 +1,60 @@
-# Mini cours – Fonction réciproque
+# Mini cours - Fonction réciproque
 
-## 1. Définition
+## 1. Le problème
 
-Une **fonction réciproque** $f^{-1}$ permet de revenir à l’entrée d’une fonction $f$.
-Attention, **il n'existe pas de réciproque à toute fonction**, cependant on ne s'étendra pas dessus.
+$f(x) = 3x + 2$ nous donne la valeur de $f(x)$ quand on connaît $x$.
 
-> Si $y = f(x)$, alors $x = f^{-1}(y)$
+Mais parfois on dispose de $f(x)$ et on veut retrouver $x$. Par exemple :
 
-Cela signifie que :
+- $f(x) = 14$, quel est $x$ ?
+- $f(x) = 8$, quel est $x$ ?
 
-- $f(f^{-1}(x)) = x$
-- $f^{-1}(f(x)) = x$
+C'est le rôle de la **fonction réciproque** $f^{-1}$ : elle prend $f(x)$ en entrée et rend $x$.
 
-Conséquence: si on connaît la valeur de $f(x)$, alors ils faut calculer $f^{-1}(f(x))$ pour retrouver x.
+$$f^{-1}(f(x)) = x$$
 
-Si Alice envoie $A=f(x)$, alors si Eve sniffe A et connaît $f$ (publique), elle cherche sa réciproque $f^{-1}$, et calcule $f^{-1}(A)=f^{-1}(f(x))=x$ pour trouver $x$
+## 2. Comment la calculer ?
 
----
+On pose $y = f(x)$ et on isole $x$.
 
-## 2. Méthode pour trouver une fonction réciproque
+**Exemple** avec $f(x) = 3x + 2$ :
 
-### Étapes générales :
-1. Écrire $y = f(x)$  
-2. Isoler $x$  
-3. Inverser les rôles de $x$ et $y$
+$$y = 3x + 2 \implies 3x = y - 2 \implies x = \frac{y-2}{3}$$
 
-### Exemple :
-Soit $f(x) = 2x + 3$
+Donc $\displaystyle f^{-1}(y) = \frac{y-2}{3}$.
 
-1. $y = 2x + 3$  
-2. $x = \frac{y - 3}{2}$  
-3. Donc : $f^{-1}(x) = \frac{x - 3}{2}$
+**Vérification :**
 
-Si Eve reçoit 11, elle calcule $f^{-1}(11)=4$, et on a bien $f(4)=11$. Elle a bien retrouvé la clé secrète 4.
+- $f(4) = 3 \times 4 + 2 = 14$, et $f^{-1}(14) = \dfrac{14-2}{3} = 4$ ✓
+- $f(2) = 8$, et $f^{-1}(8) = \dfrac{8-2}{3} = 2$ ✓
+
+Si Eve intercepte la valeur $14$, elle calcule $f^{-1}(14) = 4$ et retrouve la clé secrète $x = 4$.
 
 ---
 
-## 3. Application à la cryptographie (Diffie-Hellman)
+## 3. Application à la cryptographie
 
-La fonction utilisée est :
+La fonction utilisée dans Diffie-Hellman est :
 
-$$
-f(x) = g^x \mod p
-$$
+$$f_k(x) = x^k \bmod p$$
 
-- $g$ : base (générateur)
-- $p$ : nombre premier
-- $x$ : secret
+Pour casser le protocole, Eve reçoit $A = g^a \bmod p$ et veut retrouver $a$.
 
-Eve connaît $g$, $p$, et $f(x) = g^x \mod p$,  
-elle veut retrouver $x$, donc elle cherche la **fonction réciproque** :
+Il lui faudrait calculer $f_g^{-1}(A)$, c'est-à-dire trouver $x$ tel que $g^x \equiv A \pmod p$.
 
-$$
-f^{-1}(y) = \log_g y \mod p
-$$
+Ce problème s'appelle le **logarithme discret**.
 
 ---
 
 ## 4. Problème du logarithme discret
 
-Trouver $x$ tel que $g^x \equiv y \mod p$ est appelé le **logarithme discret**.
+Contrairement à $f(x) = 3x + 2$, il n'existe **pas de formule** pour calculer $f_g^{-1}$.
 
-- Ce problème est **très difficile**
-- Il n'existe **pas de méthode rapide** connue
-- C’est ce qui **garantit la sécurité** de Diffie-Hellman
+On est obligé de procéder par essais algorithmiques, et quand $p$ est un grand nombre premier (2048 bits), aucun algorithme connu ne peut le faire en temps raisonnable.
 
----
+C'est ce qui **garantit la sécurité** de Diffie-Hellman.
 
-## 5. Tableau récapitulatif
-
-| Élément                   | Description                          |
-|--------------------------|--------------------------------------|
-| Fonction directe         | $f(x) = g^x \mod p$                  |
-| Fonction réciproque      | $f^{-1}(y) = \log_g y \mod p$        |
-| Calcul de $f(x)$         | Facile                               |
-| Calcul de $f^{-1}(x)$    | Très difficile                       |
-
----
+| | $f(x) = 3x+2$ | $f_g(x) = g^x \bmod p$ |
+|--|--|--|
+| Calculer $f(x)$ depuis $x$ | Facile | Facile |
+| Retrouver $x$ depuis $f(x)$ | Facile | Impossible en pratique |

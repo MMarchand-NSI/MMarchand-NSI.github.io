@@ -167,6 +167,28 @@ def chiffrement_symetrique(message: bytes, cle: bytes) -> bytes:
     return resultat_bytes
 ```
 
+??? success "Solution"
+    ```python
+    def chiffrement_symetrique(message: bytes, cle: bytes) -> bytes:
+        # Nombre de répétitions de la clé
+        repetitions = len(message) // len(cle)
+        # Nombre d'octets restants
+        reste = len(message) % len(cle)
+
+        # On récupère l'entier correspondant au message
+        message_int = int.from_bytes(message, byteorder='big')
+
+        # On fait pareil pour la clé qu'on répète
+        cle_int = int.from_bytes(cle * repetitions + cle[:reste], byteorder='big')
+
+        # Application de l'opérateur XOR
+        resultat_int = message_int ^ cle_int
+
+        # Conversion du résultat en bytes
+        resultat_bytes = resultat_int.to_bytes(len(message), byteorder='big')
+
+        return resultat_bytes
+    ```
 
 ### Lecture et écriture en binaire
 

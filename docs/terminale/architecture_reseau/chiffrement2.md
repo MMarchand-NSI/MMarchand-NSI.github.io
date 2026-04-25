@@ -1,12 +1,12 @@
-# Cryptographie Asymétriques
+# Cryptographie Asymétrique
 
 !!! abstract "Définition"
     Les protocoles de sécurisation asymétriques font appel à:
     
     - Une clé publique: un ensemble d'informations auxquelles tout le monde peut avoir accès
-    - Une clé privée: un ensemble d'informations secrétes qu'une seule personne connaît.
+    - Une clé privée: un ensemble d'informations secrètes qu'une seule personne connaît.
 
-    Dans les protocoles symétriques, le secret (la clé) est connue des deux communiquants. Dans les protocoles asymétriques, il n'y a aucun secret partagé. Chaque communiquant a son propre secret qu'il ne partagera jamais avec personne. (Nous allons bien sûr exmplorer cette sorcellerie)
+    Dans les protocoles symétriques, le secret (la clé) est connu des deux communiquants. Dans les protocoles asymétriques, il n'y a aucun secret partagé. Chaque communiquant a son propre secret qu'il ne partagera jamais avec personne. (Nous allons bien sûr explorer cette sorcellerie)
 
     Ce type de protocole permet entre autre de :
 
@@ -18,14 +18,14 @@
 C'est sur le dernier point que nous allons nous attarder.
 
 
-Voici le principe qui, comme d'habitude en crypto, va vous êtes présenté par 2 stars interplanétaires: [Alice et Bob](https://en.wikipedia.org/wiki/Alice_and_Bob).
+Voici le principe qui, comme d'habitude en crypto, va vous être présenté par 2 stars interplanétaires: [Alice et Bob](https://en.wikipedia.org/wiki/Alice_and_Bob).
 
 
-Le but de la vie d'Alice et Bob c'est de s'échanger des messages secret sans que leur ennemie jurée, la terrifiante Eve, ne puisse lire ces message. Eve est très très forte en hacking, c'est la déesse vénérée des hackers. Un hacker, c'est un peu une instance de Eve.
+Le but de la vie d'Alice et Bob c'est de s'échanger des messages secret sans que leur ennemie jurée, la terrifiante Eve, ne puisse lire ces messages. Eve est très très forte en hacking, c'est la déesse vénérée des hackers. Un hacker, c'est un peu une instance de Eve.
 
 ![alt text](image-2.png)
 
-Alice et Bob veulent continuer de pouvoir faire du chiffrement symétrique, mais Eve trouve toujours un moyen de leur chourrer la clé. Qu'à celà ne tienne, ils ont soumi leur problème à Diffie et Hellman qui leur ont trouvé une solution. (Alice et Bob ne résolvent pas vraiment tout seuls leurs problèmes, ils demandent toujours de l'aide à des gens qui n'ont que ça à faire).
+Alice et Bob veulent continuer de pouvoir faire du chiffrement symétrique, mais Eve trouve toujours un moyen de leur chourrer la clé. Qu'à cela ne tienne, ils ont soumis leur problème à Diffie et Hellman qui leur ont trouvé une solution. (Alice et Bob ne résolvent pas vraiment tout seuls leurs problèmes, ils demandent toujours de l'aide à des gens qui n'ont que ça à faire).
 
 ![alt text](image-6.png)
 
@@ -101,7 +101,7 @@ En interceptant B, elle peut en déduire b de la même façon et reconstruire la
 
 Si on veut aller plus loin, Bob peut tout à fait aussi reconstituer la clé d'Alice par le même moyen.
 
-**Tout le problème est donc de trouver une fonction $\bold{f_k}$ dont la réciproque est très difficile à calculer**
+**Tout le problème est donc de trouver une fonction $\mathbf{f_k}$ dont la réciproque est très difficile à calculer**
 
 De telles fonctions existent, elles sont au coeur de la cryptographie moderne. On les appelle des **Fonctions à sens unique**
 
@@ -140,24 +140,87 @@ Note over Alice: K=fa(B)=B^a mod p
 
 Ainsi, même si Eve intercepte $A$ et $B$, elle est dans l'incapacité de retrouver $a$ et $b$ pour ainsi reconstituer $K$
 
-Aussi, il faut quand même montrer qu'on a effectivement un $K$ identique de chaque côté. Ca tient en une ligne quand on a fait un peu d'arithmétique.
+Aussi, il faut quand même montrer qu'on a effectivement un $K$ identique de chaque côté. Ça tient en une ligne quand on a fait un peu d'arithmétique.
 
-$$f_a(B) \equiv B^a \equiv (g^b)^a \equiv g^{ab} \equiv (g^a)^b \equiv A^b \equiv f_b(A) \pmod p$$
+$$f_a(B) \equiv B^a \overset{(1)}{\equiv} (g^b)^a \equiv g^{ab} \equiv (g^a)^b \overset{(1)}{\equiv} A^b \equiv f_b(A) \pmod p$$
+
+Avec :
+
+- Les congruences sans annotation ne font qu'égaliser des expressions : définition de $f_k(x) = x^k \bmod p$ et propriété des puissances $(x^m)^n = x^{mn}$
+- **(1)** Si $x \equiv y \pmod p$, alors $x^n \equiv y^n \pmod p$, appliquée avec $B \equiv g^b \pmod p$ puis avec $A \equiv g^a \pmod p$
+
+??? info "Math experte - Preuve de la propriété (1)"
+    On veut montrer que si $x \equiv y \pmod p$, alors $x^n \equiv y^n \pmod p$.
+
+    Par hypothèse, $p \mid (x - y)$, donc il existe un entier $k$ tel que $x - y = kp$.
+
+    On utilise l'identité algébrique :
+
+    $$x^n - y^n = (x - y)\left(x^{n-1} + x^{n-2}y + \cdots + xy^{n-2} + y^{n-1}\right)$$
+
+    Puisque $p \mid (x - y)$, on a $p \mid (x^n - y^n)$, ce qui signifie exactement $x^n \equiv y^n \pmod p$. $\blacksquare$
 
 
 # La pratique
 
-Pour cette activité, vous vous mettrez en binôme. Toutes les lectures/écriture de fichier sont en bytes.
+Pour cette activité, vous travaillez en binôme. Tous les fichiers sont lus et écrits en bytes. Chaque entier est stocké sur **256 octets** en big-endian (`byteorder='big'`), ce qui correspond à la taille d'un entier de 2048 bits.
 
-1. Dans MSYS2, générez un grand nombre premier grâce à openssl (boîte à outils de crypto), ça sera votre $p$ commun (on génère des clés à 2048 bits). Si vous n'avez pas openssl, `pacman -S openssl`
+**Étape 0 - Générer le nombre premier commun**
+
+Dans MSYS2, générez un grand nombre premier $p$ à 2048 bits. Les deux membres du binôme utilisent le même $p$. Si vous n'avez pas openssl : `pacman -S openssl`
+
 ```bash
 openssl prime -generate -bits 2048
 ```
-2. Ecrire une fonction qui génère un fichier public_prenom.key (où prenom est votre prenom), contenant votre entier, ainsi que $g=2$, à la suite (bytes)
-3. Ecrire une fonction qui lit un fichier public_prenom.key, et qui renvoie un tuple constitué de p et de g.
-4. Pour constituer votre clé privée, vous utiliserez le module secrets, qui est l'équivalent de random pour faire de la crypto. et vous utiliserez sa fonction secrets.randbits afin de générer une clé privée de la taille de la clé publique, mais strictement inférieure à la clé publique. Ecrire une fonction qui génère le fichier private_prenom.key (bytes).
-5. Pour un p, un g et un a donné, écrire une fonction qui génère modpow_prenom.key, contenant $g^a \mod p$ (voir fonction fournie ci-après)
-6. Organisez-vous à 2 pour échanger les informations nécessaires à la création d'une clé commune de chiffrement symétrique (les fichiers seront transmis par clé USB) et reproduisez l'échange que vous avez déjà réalisé, cette fois en utilisant le chiffrement asymétrique.
+
+**Étape 1 - Clé publique**
+
+La clé publique contient $p$ et $g = 2$, stockés l'un après l'autre dans un fichier binaire. Implémentez les deux fonctions suivantes :
+
+```python
+def ecrire_cle_publique(prenom: str, p: int, g: int) -> None:
+    """Écrit p puis g dans le fichier public_prenom.key, chacun encodé sur 256 octets."""
+    ...
+
+def lire_cle_publique(prenom: str) -> tuple[int, int]:
+    """Lit public_prenom.key et renvoie le tuple (p, g)."""
+    ...
+```
+
+**Étape 2 - Clé privée**
+
+Votre clé privée est un entier secret aléatoire strictement inférieur à $p$. Utilisez `secrets.randbelow(p)` : le module `secrets` est l'équivalent cryptographique de `random`.
+
+```python
+def ecrire_cle_privee(prenom: str, p: int) -> None:
+    """Génère une clé privée aléatoire dans [0, p[ et l'écrit dans private_prenom.key."""
+    ...
+
+def lire_cle_privee(prenom: str) -> int:
+    """Lit private_prenom.key et renvoie la clé privée."""
+    ...
+```
+
+**Étape 3 - Calcul et stockage de $g^a \bmod p$**
+
+C'est la valeur que vous transmettrez à votre binôme. Utilisez la fonction `modpow` fournie ci-dessous.
+
+```python
+def ecrire_modpow(prenom: str, g: int, a: int, p: int) -> None:
+    """Calcule g^a mod p et écrit le résultat dans modpow_prenom.key."""
+    ...
+
+def lire_modpow(prenom: str) -> int:
+    """Lit modpow_prenom.key et renvoie la valeur."""
+    ...
+```
+
+**Étape 4 - Échange et clé commune**
+
+- Transmettez votre fichier `modpow_prenom.key` à votre binôme par clé USB.
+- Chacun calcule $K$ en appelant `modpow` sur la valeur reçue avec sa propre clé privée.
+- Vérifiez que vous obtenez bien le même $K$.
+- Utilisez ce $K$ comme clé pour chiffrer un fichier de votre choix avec la fonction `chiffrement_symetrique` de l'activité précédente.
 
 
 !!! tip "Exponentielle modulaire"
