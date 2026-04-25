@@ -14,7 +14,7 @@
         <link rel="prev" href="../4.dichotomie/">
       
       
-        <link rel="next" href="../6.intro_recurrence/">
+        <link rel="next" href="../../IHM/flet/">
       
       
         
@@ -849,7 +849,7 @@
   <span class="md-ellipsis">
     
   
-    Algorithmique
+    Algorithmique (simplifié)
   
 
     
@@ -865,7 +865,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Algorithmique
+    Algorithmique (simplifié)
   
 
           </label>
@@ -913,7 +913,7 @@
   <span class="md-ellipsis">
     
   
-    Tri par Sélection
+    Tri par sélection
   
 
     
@@ -1050,10 +1050,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#systeme-monetaire" class="md-nav__link">
+  <a href="#le-rendu-de-monnaie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Système monétaire
+        Le rendu de monnaie
       
     </span>
   </a>
@@ -1061,10 +1061,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#le-probleme-du-rendu-de-monnaie-cmp" class="md-nav__link">
+  <a href="#definition" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Le problème du rendu de monnaie - CMP
+        Définition
       
     </span>
   </a>
@@ -1072,10 +1072,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#algorithme-glouton" class="md-nav__link">
+  <a href="#lalgorithme-du-rendu-de-monnaie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Algorithme glouton
+        L'algorithme du rendu de monnaie
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quand-lalgorithme-glouton-echoue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quand l'algorithme glouton échoue
       
     </span>
   </a>
@@ -1086,90 +1097,6 @@
   
 </nav>
       
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../6.intro_recurrence/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Introduction à la récurrence
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../7.distance/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Dimensions supérieures et distances
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../8.knn/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Algorithme des k plus proches voisins (KNN)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
     </li>
   
 
@@ -4649,10 +4576,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#systeme-monetaire" class="md-nav__link">
+  <a href="#le-rendu-de-monnaie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Système monétaire
+        Le rendu de monnaie
       
     </span>
   </a>
@@ -4660,10 +4587,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#le-probleme-du-rendu-de-monnaie-cmp" class="md-nav__link">
+  <a href="#definition" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Le problème du rendu de monnaie - CMP
+        Définition
       
     </span>
   </a>
@@ -4671,10 +4598,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#algorithme-glouton" class="md-nav__link">
+  <a href="#lalgorithme-du-rendu-de-monnaie" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Algorithme glouton
+        L'algorithme du rendu de monnaie
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#quand-lalgorithme-glouton-echoue" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Quand l'algorithme glouton échoue
       
     </span>
   </a>
@@ -4745,7 +4683,7 @@
         <a href="../1.algo/" class="md-path__link">
           
   <span class="md-ellipsis">
-    Algorithmique
+    Algorithmique (simplifié)
   </span>
 
         </a>
@@ -4765,82 +4703,216 @@
 
 
 <h1 id="algorithmes-gloutons">Algorithmes gloutons</h1>
-<h2 id="systeme-monetaire">Système monétaire</h2>
-<div class="admonition abstract">
-<p class="admonition-title">Définition</p>
-<p>Un système monétaire est un tableau trié dans l'ordre croissant dont le premier élément est 1.
-L'unité 1 correspond à la plus petite division du système (pour le système monétaire euro, c'est le centime).
-Réaliser une somme dans un système monétaire, c'est trouver des pièces et des billets pour faire cette somme.</p>
-</div>
+<h2 id="le-rendu-de-monnaie">Le rendu de monnaie</h2>
+<p>Imaginez une caissière qui doit rendre 2,37 € avec le moins de pièces et billets possible. Comment fait-elle ?</p>
+<p>Elle commence par la plus grosse pièce qu'elle peut rendre, puis recommence avec le reste, et ainsi de suite.</p>
+<table>
+<thead>
+<tr>
+<th>Reste à rendre</th>
+<th>Pièce choisie</th>
+<th>Reste après</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>237 centimes</td>
+<td>200 (2 €)</td>
+<td>37</td>
+</tr>
+<tr>
+<td>37 centimes</td>
+<td>20</td>
+<td>17</td>
+</tr>
+<tr>
+<td>17 centimes</td>
+<td>10</td>
+<td>7</td>
+</tr>
+<tr>
+<td>7 centimes</td>
+<td>5</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2 centimes</td>
+<td>2</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Résultat : 5 pièces. C'est optimal.</p>
+<p>Cette stratégie s'appelle un <strong>algorithme glouton</strong> : à chaque étape, on prend la meilleure décision locale sans jamais revenir en arrière.</p>
 <div class="admonition question">
-<p class="admonition-title">Réalisation d'une somme</p>
-<p>Expliquer pourquoi une somme d'argent peut toujours être réalisée dans un système monétaire.</p>
+<p class="admonition-title">Exercice 1 - Appliquer le rendu de monnaie</p>
+<p>Rendre <strong>1,73 €</strong> (173 centimes) avec le système euro <code>[200, 100, 50, 20, 10, 5, 2, 1]</code>.
+Remplir le tableau étape par étape.</p>
 </div>
-<div class="admonition danger">
-<p class="admonition-title">Le système Euro</p>
-<p>Nous travaillerons avec ces systèmes:</p>
-<ul>
-<li>Les Euros actuels (en centimes)</li>
-<li>L'ancien système monétaire du royaume uni (en pence) définitivement abandonné le lundi 15 février 1971, jour baptisé Decimal Day.<ul>
-<li>12 pence correspondaient à une pièce de 1 shilling.</li>
-<li>24 pence correspondaient à une pièce de 2 shilling.</li>
-<li>30 pence correspondait à une pièce de 1 half-crown.</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">EUROS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">1_00</span><span class="p">,</span> <span class="mi">2_00</span><span class="p">,</span> <span class="mi">5_00</span><span class="p">,</span> <span class="mi">10_00</span><span class="p">,</span> <span class="mi">20_00</span><span class="p">,</span> <span class="mi">50_00</span><span class="p">]</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">RU_VIEUX</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
-</code></pre></div>
-</div>
-<h2 id="le-probleme-du-rendu-de-monnaie-cmp">Le problème du rendu de monnaie - CMP</h2>
-<div class="admonition abstract">
-<p class="admonition-title">Définition</p>
-<p><strong>Le problème CMP (Change-Making Problem) est celui de la réalisation d'une somme monétaire avec le nombre minimum de pièces (ou de billets).</strong> </p>
-<p>Avant que cet algorithme soit intégré aux caisses enregistreuses, les caissières exécutaient tous les jours l'algorithme glouton permettant de rendre optimalement une somme d'argent avec le moins de pièces possibles.</p>
-</div>
-<h2 id="algorithme-glouton">Algorithme glouton</h2>
-<div class="admonition abstract">
-<p class="admonition-title">Définition</p>
-<p><strong>Un algorithme glouton est un procédé qui, à chaque étape, choisit la décision localement optimale et ne la remet jamais en question.</strong></p>
-<p>L'usage veut que le terme 'glouton' ne s'applique qu'aux problèmes d'optimisation.</p>
-<p>Il est important de noter que, bien que les algorithmes gloutons soient simples et rapides, <strong>ils ne garantissent pas toujours la meilleure solution globale pour un problème d'optimisation donné</strong>. Cependant, dans de nombreux cas, ils fournissent une solution approchée suffisamment bonne dans un temps raisonnable.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Résolution gloutonne du CMP</p>
-<p>Voici le choix optimal local par la méthode gloutonne:</p>
-<p>Tant qu'on peut encore rendre, <strong>on rend toujours la plus grosse pièce qu'on peut rendre.</strong></p>
-<p>Complétez la fonction suivante en conséquence</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">SYSTEME</span> <span class="o">=</span> <span class="n">EUROS</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">realiser_somme_glouton</span><span class="p">(</span><span class="n">somme</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">sys</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="sd">    &gt;&gt;&gt; realiser_somme_glouton(237, EUROS)</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="sd">    [200, 20, 10, 5, 2]</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">assert</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">sys</span>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="k">while</span> <span class="o">...</span><span class="p">:</span>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="o">...</span><span class="n">instructions</span><span class="o">...</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="k">return</span> <span class="n">res</span>
-</code></pre></div>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Optimal?</p>
-<p>Essayez de rendre 48 avec l'approche gloutonne dans le vieux système du royaume-uni.</p>
-<ul>
-<li>La solution renvoyée est-elle la solution optimale?</li>
-<li>Quelle est la solution optimale dans ce système?</li>
-</ul>
-</div>
-<div class="admonition abstract">
-<p class="admonition-title">Système monétaire canonique</p>
-<p>On appelle <strong>canonique</strong> un système monétaire si et seulement si l'approche gloutonne renvoie la décomposition minimum de toute somme. Le système Euros est canonique. L'autre système ne l'est pas (il suffisait d'un contre-exemple pour le prouver).</p>
-</div>
-<p>Il existe des façons de résoudre CMP, que le système soit canonique ou non, que nous verrons l'année prochaine.</p>
+<details class="success">
+<summary>Correction</summary>
+<table>
+<thead>
+<tr>
+<th>Reste à rendre</th>
+<th>Pièce choisie</th>
+<th>Reste après</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>173</td>
+<td>100</td>
+<td>73</td>
+</tr>
+<tr>
+<td>73</td>
+<td>50</td>
+<td>23</td>
+</tr>
+<tr>
+<td>23</td>
+<td>20</td>
+<td>3</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Résultat : <strong>5 pièces</strong> [100, 50, 20, 2, 1].</p>
+</details>
 <hr />
-<p>TODO: Ajouter Fractional Knapsack (FKP)</p>
+<h2 id="definition">Définition</h2>
+<div class="admonition abstract">
+<p class="admonition-title">Algorithme glouton</p>
+<p>Un algorithme glouton résout un problème d'optimisation en faisant, à chaque étape, <strong>le meilleur choix possible à cet instant</strong>, sans remettre en question les choix précédents.</p>
+<p>Avantages : simple, rapide.</p>
+<p>Limite : <strong>ne garantit pas toujours la solution optimale</strong>.</p>
+</div>
+<hr />
+<h2 id="lalgorithme-du-rendu-de-monnaie">L'algorithme du rendu de monnaie</h2>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>Entrée : une somme à rendre (en centimes), un système de pièces trié dans l&#39;ordre décroissant
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>Sortie : la liste des pièces rendues
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">1.</span> rendu ← liste vide
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="k">2.</span> Pour chaque pièce p dans le système (de la plus grande à la plus petite) :
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="k">3.</span>     Tant que somme &gt;= p :
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">4.</span>         Ajouter p à rendu
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="k">5.</span>         somme ← somme - p
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="k">6.</span> Retourner rendu
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">EUROS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">500</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">rendre_monnaie</span><span class="p">(</span><span class="n">somme</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">systeme</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="n">rendu</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="k">for</span> <span class="n">piece</span> <span class="ow">in</span> <span class="n">systeme</span><span class="p">:</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>        <span class="k">while</span> <span class="n">somme</span> <span class="o">&gt;=</span> <span class="n">piece</span><span class="p">:</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>            <span class="n">rendu</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">piece</span><span class="p">)</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>            <span class="n">somme</span> <span class="o">-=</span> <span class="n">piece</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="k">return</span> <span class="n">rendu</span>
+</code></pre></div>
+<hr />
+<h2 id="quand-lalgorithme-glouton-echoue">Quand l'algorithme glouton échoue</h2>
+<p>Pour le système euro, la stratégie gloutonne donne toujours la solution optimale. Mais ce n'est pas toujours le cas !</p>
+<p>Prenons un système fictif avec les pièces <code>[1, 3, 4]</code> et une somme de 6 :</p>
+<ul>
+<li><strong>Glouton</strong> : 4 + 1 + 1 = 3 pièces</li>
+<li><strong>Optimal</strong> : 3 + 3 = 2 pièces</li>
+</ul>
+<p>Le glouton s'est trompé ! En choisissant 4 en premier (meilleur choix local), il a raté la meilleure solution globale.</p>
+<div class="admonition abstract">
+<p class="admonition-title">Conclusion</p>
+<p>Un algorithme glouton est <strong>correct</strong> quand la propriété "le meilleur choix local mène au meilleur résultat global" est vérifiée. C'est le cas pour le système euro, mais pas pour tous les systèmes de pièces.</p>
+<p>Vérifier formellement qu'un algorithme glouton est correct nécessite une preuve mathématique. Pour l'instant, retenez l'idée : <strong>glouton = rapide, mais pas toujours optimal</strong>.</p>
+</div>
+<hr />
+<div class="admonition question">
+<p class="admonition-title">Exercice 2 - Rendre 48 centimes</p>
+<p>Appliquer l'algorithme glouton pour rendre 48 centimes avec le système euro.
+Lister les pièces utilisées.</p>
+</div>
+<details class="success">
+<summary>Correction</summary>
+<table>
+<thead>
+<tr>
+<th>Reste</th>
+<th>Pièce</th>
+<th>Reste après</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>48</td>
+<td>20</td>
+<td>28</td>
+</tr>
+<tr>
+<td>28</td>
+<td>20</td>
+<td>8</td>
+</tr>
+<tr>
+<td>8</td>
+<td>5</td>
+<td>3</td>
+</tr>
+<tr>
+<td>3</td>
+<td>2</td>
+<td>1</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p>Résultat : <strong>5 pièces</strong> [20, 20, 5, 2, 1].</p>
+</details>
+<div class="admonition question">
+<p class="admonition-title">Exercice 3 - Glouton en échec</p>
+<p>Avec le système <code>[1, 6, 10]</code>, rendre 12 centimes.</p>
+<ol>
+<li>Que donne l'algorithme glouton ?</li>
+<li>Quelle est la solution optimale ?</li>
+<li>Conclure.</li>
+</ol>
+</div>
+<details class="success">
+<summary>Correction</summary>
+<ol>
+<li><strong>Glouton</strong> : 10 + 1 + 1 = <strong>3 pièces</strong>.</li>
+<li><strong>Optimal</strong> : 6 + 6 = <strong>2 pièces</strong>.</li>
+<li>Le glouton a choisi 10 en premier (meilleur choix local), mais cela l'a empêché d'utiliser deux pièces de 6. Le choix localement optimal n'est pas toujours globalement optimal : le glouton échoue ici.</li>
+</ol>
+</details>
+<div class="admonition question">
+<p class="admonition-title">Exercice 4 - Identifier la stratégie gloutonne</p>
+<p>Dans chaque situation, identifier si une stratégie gloutonne est utilisée :</p>
+<ol>
+<li>Pour remplir un sac à dos de capacité limitée, on prend toujours l'objet le plus léger disponible.</li>
+<li>Pour traverser un labyrinthe, on tourne toujours à droite quand c'est possible.</li>
+<li>Pour trier des cartes, on cherche le minimum et on le place en premier.</li>
+</ol>
+</div>
+<details class="success">
+<summary>Correction</summary>
+<ol>
+<li><strong>Oui</strong> : on fait à chaque étape le meilleur choix local (l'objet le plus léger). Attention, ce n'est pas forcément optimal pour maximiser la valeur totale.</li>
+<li><strong>Oui</strong> : règle locale simple, jamais remise en question. Ne garantit pas de trouver la sortie.</li>
+<li><strong>Oui</strong> : c'est exactement le tri par sélection, qui est un algorithme glouton (et il est correct pour le tri).</li>
+</ol>
+</details>
 
 
 
@@ -4861,7 +4933,7 @@ Réaliser une somme dans un système monétaire, c'est trouver des pièces et de
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2025 11:43:39 UTC">September 7, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 25, 2026 16:24:35 UTC">April 25, 2026</span>
   </span>
 
     

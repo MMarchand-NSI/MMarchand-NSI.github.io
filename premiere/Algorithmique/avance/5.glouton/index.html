@@ -8,33 +8,33 @@
       
       
       
-        <link rel="canonical" href="https://mmarchand-nsi.github.io/premiere/Algorithmique/8.knn/">
+        <link rel="canonical" href="https://mmarchand-nsi.github.io/premiere/Algorithmique/avance/5.glouton/">
       
       
-        <link rel="prev" href="../7.distance/">
+        <link rel="prev" href="../4.dichotomie/">
       
       
-        <link rel="next" href="../../IHM/flet/">
+        <link rel="next" href="../6.intro_recurrence/">
       
       
         
       
       
-      <link rel="icon" href="../../../assets/images/favicon.png">
+      <link rel="icon" href="../../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.1">
     
     
       
-        <title>Algorithme des k plus proches voisins (KNN) - Science Informatique</title>
+        <title>Algorithmes gloutons - Science Informatique</title>
 <script src="/javascripts/bundle.js"></script>
 
       
     
     
-      <link rel="stylesheet" href="../../../assets/stylesheets/main.484c7ddc.min.css">
+      <link rel="stylesheet" href="../../../../assets/stylesheets/main.484c7ddc.min.css">
       
         
-        <link rel="stylesheet" href="../../../assets/stylesheets/palette.ab4e12ef.min.css">
+        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.ab4e12ef.min.css">
       
       
 
@@ -53,11 +53,11 @@
       
     
     
-      <link rel="stylesheet" href="../../../stylesheets/extra.css">
+      <link rel="stylesheet" href="../../../../stylesheets/extra.css">
     
       <link rel="stylesheet" href="https://unpkg.com/katex@0/dist/katex.min.css">
     
-    <script>__md_scope=new URL("../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
   
@@ -92,7 +92,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#algorithme-des-k-plus-proches-voisins-knn" class="md-skip">
+        <a href="#algorithmes-gloutons" class="md-skip">
           Skip to content
         </a>
       
@@ -106,9 +106,9 @@
 
 <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../../.." title="Science Informatique" class="md-header__button md-logo" aria-label="Science Informatique" data-md-component="logo">
+    <a href="../../../.." title="Science Informatique" class="md-header__button md-logo" aria-label="Science Informatique" data-md-component="logo">
       
-  <img src="../../../assets/logo-tr.png" alt="logo">
+  <img src="../../../../assets/logo-tr.png" alt="logo">
 
     </a>
     <label class="md-header__button md-icon" for="__drawer">
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Algorithme des k plus proches voisins (KNN)
+              Algorithmes gloutons
             
           </span>
         </div>
@@ -224,7 +224,7 @@
   
   
     <li class="md-tabs__item">
-      <a href="../../.." class="md-tabs__link">
+      <a href="../../../.." class="md-tabs__link">
         
   
   
@@ -245,7 +245,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../annales/annales/" class="md-tabs__link">
+        <a href="../../../../annales/annales/" class="md-tabs__link">
           
   
   
@@ -265,7 +265,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../les-outils/0.1cleusb/" class="md-tabs__link">
+        <a href="../../../../les-outils/0.1cleusb/" class="md-tabs__link">
           
   
   
@@ -287,7 +287,7 @@
     
     
       <li class="md-tabs__item md-tabs__item--active">
-        <a href="../../" class="md-tabs__link">
+        <a href="../../../" class="md-tabs__link">
           
   
   
@@ -307,7 +307,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../projets/imdb-flask/" class="md-tabs__link">
+        <a href="../../../../projets/imdb-flask/" class="md-tabs__link">
           
   
   
@@ -327,7 +327,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../terminale/" class="md-tabs__link">
+        <a href="../../../../terminale/" class="md-tabs__link">
           
   
   
@@ -361,9 +361,9 @@
 
 <nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../../.." title="Science Informatique" class="md-nav__button md-logo" aria-label="Science Informatique" data-md-component="logo">
+    <a href="../../../.." title="Science Informatique" class="md-nav__button md-logo" aria-label="Science Informatique" data-md-component="logo">
       
-  <img src="../../../assets/logo-tr.png" alt="logo">
+  <img src="../../../../assets/logo-tr.png" alt="logo">
 
     </a>
     Science Informatique
@@ -378,7 +378,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../.." class="md-nav__link">
+      <a href="../../../.." class="md-nav__link">
         
   
   
@@ -455,7 +455,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../annales/annales/" class="md-nav__link">
+      <a href="../../../../annales/annales/" class="md-nav__link">
         
   
   
@@ -540,7 +540,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/0.1cleusb/" class="md-nav__link">
+      <a href="../../../../les-outils/0.1cleusb/" class="md-nav__link">
         
   
   
@@ -568,7 +568,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/0.votreordi/" class="md-nav__link">
+      <a href="../../../../les-outils/0.votreordi/" class="md-nav__link">
         
   
   
@@ -596,7 +596,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/1.setup-vscode/" class="md-nav__link">
+      <a href="../../../../les-outils/1.setup-vscode/" class="md-nav__link">
         
   
   
@@ -624,7 +624,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/2.elm/" class="md-nav__link">
+      <a href="../../../../les-outils/2.elm/" class="md-nav__link">
         
   
   
@@ -652,7 +652,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/3.vscode_profiles_daemons/" class="md-nav__link">
+      <a href="../../../../les-outils/3.vscode_profiles_daemons/" class="md-nav__link">
         
   
   
@@ -680,7 +680,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/migration-terms/" class="md-nav__link">
+      <a href="../../../../les-outils/migration-terms/" class="md-nav__link">
         
   
   
@@ -708,7 +708,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/setup-nsi/" class="md-nav__link">
+      <a href="../../../../les-outils/setup-nsi/" class="md-nav__link">
         
   
   
@@ -798,7 +798,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../../../" class="md-nav__link">
         
   
   
@@ -849,7 +849,7 @@
   <span class="md-ellipsis">
     
   
-    Algorithmique
+    Algorithmique (simplifié)
   
 
     
@@ -865,7 +865,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    Algorithmique
+    Algorithmique (simplifié)
   
 
           </label>
@@ -878,7 +878,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../1.algo/" class="md-nav__link">
+      <a href="../../1.algo/" class="md-nav__link">
         
   
   
@@ -906,14 +906,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../2.tri_selection/" class="md-nav__link">
+      <a href="../../2.tri_selection/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Tri par Sélection
+    Tri par sélection
   
 
     
@@ -934,7 +934,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../3.tri_insertion/" class="md-nav__link">
+      <a href="../../3.tri_insertion/" class="md-nav__link">
         
   
   
@@ -962,7 +962,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../4.dichotomie/" class="md-nav__link">
+      <a href="../../4.dichotomie/" class="md-nav__link">
         
   
   
@@ -990,7 +990,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../5.glouton/" class="md-nav__link">
+      <a href="../../5.glouton/" class="md-nav__link">
         
   
   
@@ -1006,253 +1006,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../6.intro_recurrence/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Introduction à la récurrence
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../7.distance/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Dimensions supérieures et distances
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-    
-  
-  
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Algorithme des k plus proches voisins (KNN)
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Algorithme des k plus proches voisins (KNN)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#objectif" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Objectif
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#probleme-de-classification" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Problème de classification
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#les-k-plus-proches-voisins" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Les k plus proches voisins
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#realisation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Réalisation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Réalisation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#lecture-du-fichier-csv" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lecture du fichier csv:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fonction-de-distance" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fonction de distance:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#etape-1-tri-et-selection-des-k-plus-proches-voisins" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Etape 1 - Tri et sélection des k plus proches voisins
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#etape-2-collecte-des-classes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Etape 2 - Collecte des classes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#etape-3-prediction" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Etape 3 - Prédiction
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#le-choixpeau-magique" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Le choixpeau magique
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1323,7 +1076,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../IHM/flet/" class="md-nav__link">
+      <a href="../../../IHM/flet/" class="md-nav__link">
         
   
   
@@ -1409,7 +1162,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Num%C3%A9ration/1-entiers/" class="md-nav__link">
+      <a href="../../../Num%C3%A9ration/1-entiers/" class="md-nav__link">
         
   
   
@@ -1437,7 +1190,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Num%C3%A9ration/2-vers10/" class="md-nav__link">
+      <a href="../../../Num%C3%A9ration/2-vers10/" class="md-nav__link">
         
   
   
@@ -1465,7 +1218,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Num%C3%A9ration/3-depuis10/" class="md-nav__link">
+      <a href="../../../Num%C3%A9ration/3-depuis10/" class="md-nav__link">
         
   
   
@@ -1493,7 +1246,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Num%C3%A9ration/4-relatifs/" class="md-nav__link">
+      <a href="../../../Num%C3%A9ration/4-relatifs/" class="md-nav__link">
         
   
   
@@ -1629,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/OS/commandes-linux/" class="md-nav__link">
+      <a href="../../../architecture/OS/commandes-linux/" class="md-nav__link">
         
   
   
@@ -1657,7 +1410,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/OS/systemes-exploitation/" class="md-nav__link">
+      <a href="../../../architecture/OS/systemes-exploitation/" class="md-nav__link">
         
   
   
@@ -1685,7 +1438,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/OS/tp-installation/" class="md-nav__link">
+      <a href="../../../architecture/OS/tp-installation/" class="md-nav__link">
         
   
   
@@ -1771,7 +1524,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/logique/circuits_logiques/" class="md-nav__link">
+      <a href="../../../architecture/logique/circuits_logiques/" class="md-nav__link">
         
   
   
@@ -1799,7 +1552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/logique/logique/" class="md-nav__link">
+      <a href="../../../architecture/logique/logique/" class="md-nav__link">
         
   
   
@@ -1885,7 +1638,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/von_neumann/assembleur/" class="md-nav__link">
+      <a href="../../../architecture/von_neumann/assembleur/" class="md-nav__link">
         
   
   
@@ -1913,7 +1666,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/von_neumann/langage-machine/" class="md-nav__link">
+      <a href="../../../architecture/von_neumann/langage-machine/" class="md-nav__link">
         
   
   
@@ -1941,7 +1694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/von_neumann/vonneuman/" class="md-nav__link">
+      <a href="../../../architecture/von_neumann/vonneuman/" class="md-nav__link">
         
   
   
@@ -2035,7 +1788,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prog/2.sequences/" class="md-nav__link">
+      <a href="../../../prog/2.sequences/" class="md-nav__link">
         
   
   
@@ -2063,7 +1816,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prog/bouclefor/" class="md-nav__link">
+      <a href="../../../prog/bouclefor/" class="md-nav__link">
         
   
   
@@ -2091,7 +1844,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prog/comprehension/" class="md-nav__link">
+      <a href="../../../prog/comprehension/" class="md-nav__link">
         
   
   
@@ -2119,7 +1872,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prog/dictionnaires/" class="md-nav__link">
+      <a href="../../../prog/dictionnaires/" class="md-nav__link">
         
   
   
@@ -2147,7 +1900,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prog/exercices/" class="md-nav__link">
+      <a href="../../../prog/exercices/" class="md-nav__link">
         
   
   
@@ -2175,7 +1928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prog/modules/" class="md-nav__link">
+      <a href="../../../prog/modules/" class="md-nav__link">
         
   
   
@@ -2203,7 +1956,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prog/scope/" class="md-nav__link">
+      <a href="../../../prog/scope/" class="md-nav__link">
         
   
   
@@ -2231,7 +1984,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prog/tuples/" class="md-nav__link">
+      <a href="../../../prog/tuples/" class="md-nav__link">
         
   
   
@@ -2309,7 +2062,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prog/1.variables/" class="md-nav__link">
+      <a href="../../../prog/1.variables/" class="md-nav__link">
         
   
   
@@ -2337,7 +2090,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prog/1.variables/caracteres/" class="md-nav__link">
+      <a href="../../../prog/1.variables/caracteres/" class="md-nav__link">
         
   
   
@@ -2365,7 +2118,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prog/1.variables/entiers/" class="md-nav__link">
+      <a href="../../../prog/1.variables/entiers/" class="md-nav__link">
         
   
   
@@ -2393,7 +2146,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../prog/1.variables/strings/" class="md-nav__link">
+      <a href="../../../prog/1.variables/strings/" class="md-nav__link">
         
   
   
@@ -2487,7 +2240,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reseau/bases/" class="md-nav__link">
+      <a href="../../../reseau/bases/" class="md-nav__link">
         
   
   
@@ -2515,7 +2268,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reseau/bit-alterne/" class="md-nav__link">
+      <a href="../../../reseau/bit-alterne/" class="md-nav__link">
         
   
   
@@ -2543,7 +2296,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reseau/couches/" class="md-nav__link">
+      <a href="../../../reseau/couches/" class="md-nav__link">
         
   
   
@@ -2636,7 +2389,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../projets/imdb-flask/" class="md-nav__link">
+      <a href="../../../../projets/imdb-flask/" class="md-nav__link">
         
   
   
@@ -2664,7 +2417,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../projets/intro-pyxel-nopoo/" class="md-nav__link">
+      <a href="../../../../projets/intro-pyxel-nopoo/" class="md-nav__link">
         
   
   
@@ -2692,7 +2445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../projets/intro-pyxel/" class="md-nav__link">
+      <a href="../../../../projets/intro-pyxel/" class="md-nav__link">
         
   
   
@@ -2720,7 +2473,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../projets/jeudelavie/" class="md-nav__link">
+      <a href="../../../../projets/jeudelavie/" class="md-nav__link">
         
   
   
@@ -2748,7 +2501,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../projets/mastermind/" class="md-nav__link">
+      <a href="../../../../projets/mastermind/" class="md-nav__link">
         
   
   
@@ -2776,7 +2529,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../projets/musique/" class="md-nav__link">
+      <a href="../../../../projets/musique/" class="md-nav__link">
         
   
   
@@ -2804,7 +2557,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../projets/othello/" class="md-nav__link">
+      <a href="../../../../projets/othello/" class="md-nav__link">
         
   
   
@@ -2832,7 +2585,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../projets/pendu/" class="md-nav__link">
+      <a href="../../../../projets/pendu/" class="md-nav__link">
         
   
   
@@ -2860,7 +2613,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../projets/snake/" class="md-nav__link">
+      <a href="../../../../projets/snake/" class="md-nav__link">
         
   
   
@@ -2888,7 +2641,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../projets/space_invader/" class="md-nav__link">
+      <a href="../../../../projets/space_invader/" class="md-nav__link">
         
   
   
@@ -2973,7 +2726,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/" class="md-nav__link">
+      <a href="../../../../terminale/" class="md-nav__link">
         
   
   
@@ -3051,7 +2804,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/algorithmes/trifusion/" class="md-nav__link">
+      <a href="../../../../terminale/algorithmes/trifusion/" class="md-nav__link">
         
   
   
@@ -3137,7 +2890,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/architecture_reseau/adressage/" class="md-nav__link">
+      <a href="../../../../terminale/architecture_reseau/adressage/" class="md-nav__link">
         
   
   
@@ -3165,7 +2918,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/architecture_reseau/routage/" class="md-nav__link">
+      <a href="../../../../terminale/architecture_reseau/routage/" class="md-nav__link">
         
   
   
@@ -3193,7 +2946,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/architecture_reseau/modelisation/" class="md-nav__link">
+      <a href="../../../../terminale/architecture_reseau/modelisation/" class="md-nav__link">
         
   
   
@@ -3221,7 +2974,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/architecture_reseau/bitwise/" class="md-nav__link">
+      <a href="../../../../terminale/architecture_reseau/bitwise/" class="md-nav__link">
         
   
   
@@ -3249,7 +3002,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/architecture_reseau/chiffrement/" class="md-nav__link">
+      <a href="../../../../terminale/architecture_reseau/chiffrement/" class="md-nav__link">
         
   
   
@@ -3277,7 +3030,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/architecture_reseau/reciproque/" class="md-nav__link">
+      <a href="../../../../terminale/architecture_reseau/reciproque/" class="md-nav__link">
         
   
   
@@ -3305,7 +3058,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/architecture_reseau/chiffrement2/" class="md-nav__link">
+      <a href="../../../../terminale/architecture_reseau/chiffrement2/" class="md-nav__link">
         
   
   
@@ -3391,7 +3144,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/bdd/" class="md-nav__link">
+      <a href="../../../../terminale/bdd/" class="md-nav__link">
         
   
   
@@ -3419,7 +3172,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/bdd/jointure/" class="md-nav__link">
+      <a href="../../../../terminale/bdd/jointure/" class="md-nav__link">
         
   
   
@@ -3447,7 +3200,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/bdd/manipulation-integrite/" class="md-nav__link">
+      <a href="../../../../terminale/bdd/manipulation-integrite/" class="md-nav__link">
         
   
   
@@ -3475,7 +3228,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/bdd/projet/" class="md-nav__link">
+      <a href="../../../../terminale/bdd/projet/" class="md-nav__link">
         
   
   
@@ -3503,7 +3256,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/bdd/sql-murder-mystery/" class="md-nav__link">
+      <a href="../../../../terminale/bdd/sql-murder-mystery/" class="md-nav__link">
         
   
   
@@ -3531,7 +3284,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/bdd/tp-sgbd/" class="md-nav__link">
+      <a href="../../../../terminale/bdd/tp-sgbd/" class="md-nav__link">
         
   
   
@@ -3617,7 +3370,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/langages/" class="md-nav__link">
+      <a href="../../../../terminale/langages/" class="md-nav__link">
         
   
   
@@ -3645,7 +3398,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/langages/calculabilite/" class="md-nav__link">
+      <a href="../../../../terminale/langages/calculabilite/" class="md-nav__link">
         
   
   
@@ -3673,7 +3426,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/langages/complements_python/" class="md-nav__link">
+      <a href="../../../../terminale/langages/complements_python/" class="md-nav__link">
         
   
   
@@ -3701,7 +3454,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/langages/recursivite/" class="md-nav__link">
+      <a href="../../../../terminale/langages/recursivite/" class="md-nav__link">
         
   
   
@@ -3779,7 +3532,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/langages/fonctionnels/1.gleam-intro/" class="md-nav__link">
+      <a href="../../../../terminale/langages/fonctionnels/1.gleam-intro/" class="md-nav__link">
         
   
   
@@ -3807,7 +3560,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/langages/fonctionnels/2.gleam-option/" class="md-nav__link">
+      <a href="../../../../terminale/langages/fonctionnels/2.gleam-option/" class="md-nav__link">
         
   
   
@@ -3835,7 +3588,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/langages/fonctionnels/3.gleam-pipe/" class="md-nav__link">
+      <a href="../../../../terminale/langages/fonctionnels/3.gleam-pipe/" class="md-nav__link">
         
   
   
@@ -3863,7 +3616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/langages/fonctionnels/4.gleam-hof/" class="md-nav__link">
+      <a href="../../../../terminale/langages/fonctionnels/4.gleam-hof/" class="md-nav__link">
         
   
   
@@ -3949,7 +3702,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/langages/oriente_objet/heritage/" class="md-nav__link">
+      <a href="../../../../terminale/langages/oriente_objet/heritage/" class="md-nav__link">
         
   
   
@@ -3977,7 +3730,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/langages/oriente_objet/poo/" class="md-nav__link">
+      <a href="../../../../terminale/langages/oriente_objet/poo/" class="md-nav__link">
         
   
   
@@ -4071,7 +3824,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/processus/" class="md-nav__link">
+      <a href="../../../../terminale/processus/" class="md-nav__link">
         
   
   
@@ -4099,7 +3852,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/processus/interblocage/" class="md-nav__link">
+      <a href="../../../../terminale/processus/interblocage/" class="md-nav__link">
         
   
   
@@ -4235,7 +3988,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/structures-de-donnees/arbres/abr/" class="md-nav__link">
+      <a href="../../../../terminale/structures-de-donnees/arbres/abr/" class="md-nav__link">
         
   
   
@@ -4263,7 +4016,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/structures-de-donnees/arbres/arbre/" class="md-nav__link">
+      <a href="../../../../terminale/structures-de-donnees/arbres/arbre/" class="md-nav__link">
         
   
   
@@ -4291,7 +4044,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/structures-de-donnees/arbres/arbrebinaire/" class="md-nav__link">
+      <a href="../../../../terminale/structures-de-donnees/arbres/arbrebinaire/" class="md-nav__link">
         
   
   
@@ -4377,7 +4130,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/structures-de-donnees/graphes/dijkstra/" class="md-nav__link">
+      <a href="../../../../terminale/structures-de-donnees/graphes/dijkstra/" class="md-nav__link">
         
   
   
@@ -4405,7 +4158,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/structures-de-donnees/graphes/graphes/" class="md-nav__link">
+      <a href="../../../../terminale/structures-de-donnees/graphes/graphes/" class="md-nav__link">
         
   
   
@@ -4433,7 +4186,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/structures-de-donnees/graphes/parcours/" class="md-nav__link">
+      <a href="../../../../terminale/structures-de-donnees/graphes/parcours/" class="md-nav__link">
         
   
   
@@ -4519,7 +4272,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/structures-de-donnees/listes/listes/" class="md-nav__link">
+      <a href="../../../../terminale/structures-de-donnees/listes/listes/" class="md-nav__link">
         
   
   
@@ -4547,7 +4300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/structures-de-donnees/listes/listeschainees/" class="md-nav__link">
+      <a href="../../../../terminale/structures-de-donnees/listes/listeschainees/" class="md-nav__link">
         
   
   
@@ -4633,7 +4386,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/structures-de-donnees/piles-files/" class="md-nav__link">
+      <a href="../../../../terminale/structures-de-donnees/piles-files/" class="md-nav__link">
         
   
   
@@ -4661,7 +4414,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../terminale/structures-de-donnees/piles-files/file/" class="md-nav__link">
+      <a href="../../../../terminale/structures-de-donnees/piles-files/file/" class="md-nav__link">
         
   
   
@@ -4732,10 +4485,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#objectif" class="md-nav__link">
+  <a href="#systeme-monetaire" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Objectif
+        Système monétaire
       
     </span>
   </a>
@@ -4743,10 +4496,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#probleme-de-classification" class="md-nav__link">
+  <a href="#le-probleme-du-rendu-de-monnaie-cmp" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Problème de classification
+        Le problème du rendu de monnaie - CMP
       
     </span>
   </a>
@@ -4754,93 +4507,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#les-k-plus-proches-voisins" class="md-nav__link">
+  <a href="#algorithme-glouton" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Les k plus proches voisins
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#realisation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Réalisation
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Réalisation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#lecture-du-fichier-csv" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Lecture du fichier csv:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#fonction-de-distance" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fonction de distance:
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#etape-1-tri-et-selection-des-k-plus-proches-voisins" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Etape 1 - Tri et sélection des k plus proches voisins
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#etape-2-collecte-des-classes" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Etape 2 - Collecte des classes
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#etape-3-prediction" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Etape 3 - Prédiction
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#le-choixpeau-magique" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Le choixpeau magique
+        Algorithme glouton
       
     </span>
   </a>
@@ -4872,7 +4542,7 @@
   
   
     <li class="md-path__item">
-      <a href="../../.." class="md-path__link">
+      <a href="../../../.." class="md-path__link">
         
   <span class="md-ellipsis">
     Accueil
@@ -4890,7 +4560,7 @@
     
     
       <li class="md-path__item">
-        <a href="../../" class="md-path__link">
+        <a href="../../../" class="md-path__link">
           
   <span class="md-ellipsis">
     Première
@@ -4908,10 +4578,28 @@
     
     
       <li class="md-path__item">
+        <a href="../../1.algo/" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Algorithmique (simplifié)
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
         <a href="../1.algo/" class="md-path__link">
           
   <span class="md-ellipsis">
-    Algorithmique
+    Avance
   </span>
 
         </a>
@@ -4930,142 +4618,83 @@
 
 
 
-<h1 id="algorithme-des-k-plus-proches-voisins-knn">Algorithme des k plus proches voisins (KNN)</h1>
-<p>Il s'agit ici de découvrir un algorithme de classification du domaine de l'apprentissage supervisé.</p>
-<p>Du point de vue de la programmation, il s'agit de s'approprier l'utilisation des fonctions d'ordre supérieur afin de rester au plus près du problème posé.</p>
-<h2 id="objectif">Objectif</h2>
-<p>D'après des données connues, deviner une propriété inconnue d'une nouvelle donnée.</p>
-<h2 id="probleme-de-classification">Problème de classification</h2>
-<p>Un problème de classification s'exprime dans le contexte suivant:</p>
+<h1 id="algorithmes-gloutons">Algorithmes gloutons</h1>
+<h2 id="systeme-monetaire">Système monétaire</h2>
+<div class="admonition abstract">
+<p class="admonition-title">Définition</p>
+<p>Un système monétaire est un tableau trié dans l'ordre croissant dont le premier élément est 1.
+L'unité 1 correspond à la plus petite division du système (pour le système monétaire euro, c'est le centime).
+Réaliser une somme dans un système monétaire, c'est trouver des pièces et des billets pour faire cette somme.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Réalisation d'une somme</p>
+<p>Expliquer pourquoi une somme d'argent peut toujours être réalisée dans un système monétaire.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Le système Euro</p>
+<p>Nous travaillerons avec ces systèmes:</p>
 <ul>
-<li>On a un ensemble <span class="arithmatex">\(C\)</span> de classes (ex: <span class="arithmatex">\(\{Setosa, Versicolor, Virginica\}\)</span>)</li>
-<li>On a un ensemble <span class="arithmatex">\(E\)</span> d'éléments (ex: points <span class="arithmatex">\((x,y)\)</span> du plan, ensemble de fleurs)</li>
-<li>Chaque élément <span class="arithmatex">\(e\)</span> de <span class="arithmatex">\(E\)</span> est associé à exactement une classe <span class="arithmatex">\(c(e)\)</span> de <span class="arithmatex">\(C\)</span> (ex: pour chaque fleur, on sait à quelle classe elle appartient)</li>
+<li>Les Euros actuels (en centimes)</li>
+<li>L'ancien système monétaire du royaume uni (en pence) définitivement abandonné le lundi 15 février 1971, jour baptisé Decimal Day.<ul>
+<li>12 pence correspondaient à une pièce de 1 shilling.</li>
+<li>24 pence correspondaient à une pièce de 2 shilling.</li>
+<li>30 pence correspondait à une pièce de 1 half-crown.</li>
 </ul>
-<p>L'objectif est alors de produire un algorithme qui, pour chaque élément de <span class="arithmatex">\(E\)</span> détermine sa classe <span class="arithmatex">\(c(e)\)</span></p>
-<p>L'algorithme s'applique quand:</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">EUROS</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">1_00</span><span class="p">,</span> <span class="mi">2_00</span><span class="p">,</span> <span class="mi">5_00</span><span class="p">,</span> <span class="mi">10_00</span><span class="p">,</span> <span class="mi">20_00</span><span class="p">,</span> <span class="mi">50_00</span><span class="p">]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">RU_VIEUX</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">24</span><span class="p">,</span> <span class="mi">30</span><span class="p">]</span>
+</code></pre></div>
+</div>
+<h2 id="le-probleme-du-rendu-de-monnaie-cmp">Le problème du rendu de monnaie - CMP</h2>
+<div class="admonition abstract">
+<p class="admonition-title">Définition</p>
+<p><strong>Le problème CMP (Change-Making Problem) est celui de la réalisation d'une somme monétaire avec le nombre minimum de pièces (ou de billets).</strong> </p>
+<p>Avant que cet algorithme soit intégré aux caisses enregistreuses, les caissières exécutaient tous les jours l'algorithme glouton permettant de rendre optimalement une somme d'argent avec le moins de pièces possibles.</p>
+</div>
+<h2 id="algorithme-glouton">Algorithme glouton</h2>
+<div class="admonition abstract">
+<p class="admonition-title">Définition</p>
+<p><strong>Un algorithme glouton est un procédé qui, à chaque étape, choisit la décision localement optimale et ne la remet jamais en question.</strong></p>
+<p>L'usage veut que le terme 'glouton' ne s'applique qu'aux problèmes d'optimisation.</p>
+<p>Il est important de noter que, bien que les algorithmes gloutons soient simples et rapides, <strong>ils ne garantissent pas toujours la meilleure solution globale pour un problème d'optimisation donné</strong>. Cependant, dans de nombreux cas, ils fournissent une solution approchée suffisamment bonne dans un temps raisonnable.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Résolution gloutonne du CMP</p>
+<p>Voici le choix optimal local par la méthode gloutonne:</p>
+<p>Tant qu'on peut encore rendre, <strong>on rend toujours la plus grosse pièce qu'on peut rendre.</strong></p>
+<p>Complétez la fonction suivante en conséquence</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">SYSTEME</span> <span class="o">=</span> <span class="n">EUROS</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">realiser_somme_glouton</span><span class="p">(</span><span class="n">somme</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">sys</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="sd">    &gt;&gt;&gt; realiser_somme_glouton(237, EUROS)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="sd">    [200, 20, 10, 5, 2]</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>    <span class="k">assert</span> <span class="mi">1</span> <span class="ow">in</span> <span class="n">sys</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="k">while</span> <span class="o">...</span><span class="p">:</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>        <span class="o">...</span><span class="n">instructions</span><span class="o">...</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="k">return</span> <span class="n">res</span>
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Optimal?</p>
+<p>Essayez de rendre 48 avec l'approche gloutonne dans le vieux système du royaume-uni.</p>
 <ul>
-<li>On n'a pas de manière efficace (raisonnable en temps et en espace humain) de calculer exactement <span class="arithmatex">\(c(e)\)</span></li>
-<li>On dispose d'une table <span class="arithmatex">\(T\)</span> d'associations correcte entre des éléments <span class="arithmatex">\(e\)</span> et leur classe <span class="arithmatex">\(c(e)\)</span></li>
-<li>On dispose d'une notion de distance sur l'ensemble <span class="arithmatex">\(E\)</span>, c'est à dire d'une fonction qui à une paire d'éléments de <span class="arithmatex">\(E\)</span> associe un nombre réel positif ou nul mesurant la dissimilarité entre les deux éléments (La fonction doit donner des valeurs proches de 0 si les deux éléments sont peu dissimilaires, et de grandes valeurs s'ils sont très dissimilaires)</li>
+<li>La solution renvoyée est-elle la solution optimale?</li>
+<li>Quelle est la solution optimale dans ce système?</li>
 </ul>
-<h2 id="les-k-plus-proches-voisins">Les k plus proches voisins</h2>
-<p>Ce que nous voulons, c'est que, si on donne les coordonnées d'un nouvel Iris, la machine soit capable de dire de quelle variété il s'agit, sur le principe de ce gif animé:</p>
-<p><img alt="alt text" src="../KNN-Classification.gif" /></p>
-<p>Voici donc l'algorithme permettant cette sorcellerie:</p>
-<ol>
-<li>Chercher parmi les éléments présents dans la table <span class="arithmatex">\(T\)</span> les <span class="arithmatex">\(k\)</span> éléments ayant la plus faible distance à e</li>
-<li>Collecter les classes associées à ces <span class="arithmatex">\(k\)</span> éléments</li>
-<li>Déterminer la classe la plus souvent présente parmi les classes retenues.</li>
-</ol>
-<p>L'algorithme est dit <strong>supervisé</strong> car il nécessite l'intervention d'un humain qui doit <strong>choisir k à l'avance</strong>. Nous ne nous intéresserons pas au choix de <span class="arithmatex">\(k\)</span>. Il sera donné.</p>
-<h2 id="realisation">Réalisation</h2>
-<h3 id="lecture-du-fichier-csv">Lecture du fichier csv:</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Nous assimilons une fleur à un dictionnaire.</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">type</span> <span class="n">Fleur</span> <span class="o">=</span> <span class="nb">dict</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">liste_fleurs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Fleur</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;iris.csv&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">lecteur</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">lecteur</span><span class="p">:</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="n">donnees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
-</code></pre></div>
-<p>Nous cherchons à savoir de quelle espèce est la fleur que nous avons ramassée et mesurée:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">fleur_mystere</span><span class="p">:</span> <span class="n">fleur</span> <span class="o">=</span> <span class="p">{</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="s1">&#39;SepalLength&#39;</span><span class="p">:</span> <span class="mf">5.7</span><span class="p">,</span>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="s1">&#39;SepalWidth&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="s1">&#39;PetalLength&#39;</span><span class="p">:</span> <span class="mf">4.2</span><span class="p">,</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>    <span class="s1">&#39;PetalWidth&#39;</span><span class="p">:</span> <span class="mf">1.2</span>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">}</span>
-</code></pre></div>
-<h3 id="fonction-de-distance">Fonction de distance:</h3>
-<p>Nous utiliserons la distance euclidienne à travers la distance de Minkowski:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">dist_minkowski</span><span class="p">(</span><span class="n">keys</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">dict</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="sd">    Distance de Minkowski d&#39;ordre p entre deux objets modélisés </span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="sd">    par des dictionnaires à clés indiquées en paramètre.</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="o">**</span><span class="n">p</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">p</span><span class="p">)</span>
-</code></pre></div>
-<h3 id="etape-1-tri-et-selection-des-k-plus-proches-voisins">Etape 1 - Tri et sélection des k plus proches voisins</h3>
-<p><strong>TODO  Virer partial et faire une fonction comme ils ont déjà vu</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># intéressons nous aux 5 plus proches voisins</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">k</span><span class="o">=</span><span class="mi">5</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">knn</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">fleurs</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">liste_fleurs</span><span class="p">,</span> 
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>             <span class="nb">reversed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>             <span class="n">key</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">dist_minkowski</span><span class="p">,</span> <span class="n">fleurs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">fleur_mystere</span><span class="p">)</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>      <span class="p">)[:</span><span class="n">k</span><span class="p">]</span>
-</code></pre></div>
-<h3 id="etape-2-collecte-des-classes">Etape 2 - Collecte des classes</h3>
-<p>Calcul des fréquences absolues par espèce. Vous avez déjà vu cet algorithme de comptage.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">frequences</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">for</span> <span class="n">fleur</span> <span class="ow">in</span> <span class="n">knn</span><span class="p">:</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">espece</span> <span class="o">=</span> <span class="n">fleur</span><span class="p">[</span><span class="s1">&#39;Species&#39;</span><span class="p">]</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="k">if</span> <span class="n">espece</span> <span class="ow">in</span> <span class="n">frequences</span><span class="p">:</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        <span class="n">frequences</span><span class="p">[</span><span class="n">espece</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="n">frequences</span><span class="p">[</span><span class="n">espece</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
-</code></pre></div>
-<h3 id="etape-3-prediction">Etape 3 - Prédiction</h3>
-<p>Il suffit de renvoyer la clé qui correspond à la plus grande fréquence.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">pred</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">frequences</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">frequences</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="le-choixpeau-magique">Le choixpeau magique</h2>
-<p><img alt="alt text" src="../image-8.png" /></p>
-<p>Il s'agit d'une application directe pour la distance de Manhattan.</p>
-<p>Vous disposez du fichier poudlard.csv contenant une liste d'élèves de Poudlard et leur maison associées. Le choixpeau magique utilise les 7 plus proches voisins pour distribuer les élèves dans les différentes maisons, en utilisant la distance de Manhattan sur 4 dimensions (Courage, Loyauté, Sagesse et Malice).</p>
-<ol>
-<li>Quelle maison va-t-il assigner aux élèves suivants? </li>
-<li>Le choixpeau hésite plus ou moins à l'affectation des élèves dans leur maison. Proposez une manière de rendre compte du degré d'hésitation du choixpeau magique pour chaque prédiction.</li>
-</ol>
-<table>
-<thead>
-<tr>
-<th>Nom</th>
-<th>Courage</th>
-<th>Loyauté</th>
-<th>Sagesse</th>
-<th>Malice</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Hermione</td>
-<td>8</td>
-<td>6</td>
-<td>6</td>
-<td>6</td>
-</tr>
-<tr>
-<td>Drago</td>
-<td>6</td>
-<td>6</td>
-<td>5</td>
-<td>8</td>
-</tr>
-<tr>
-<td>Cho</td>
-<td>7</td>
-<td>6</td>
-<td>9</td>
-<td>6</td>
-</tr>
-<tr>
-<td>Cédric</td>
-<td>7</td>
-<td>10</td>
-<td>5</td>
-<td>6</td>
-</tr>
-</tbody>
-</table>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Système monétaire canonique</p>
+<p>On appelle <strong>canonique</strong> un système monétaire si et seulement si l'approche gloutonne renvoie la décomposition minimum de toute somme. Le système Euros est canonique. L'autre système ne l'est pas (il suffisait d'un contre-exemple pour le prouver).</p>
+</div>
+<p>Il existe des façons de résoudre CMP, que le système soit canonique ou non, que nous verrons l'année prochaine.</p>
+<hr />
+<p>TODO: Ajouter Fractional Knapsack (FKP)</p>
 
 
 
@@ -5086,7 +4715,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 9, 2025 12:27:34 UTC">November 9, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 25, 2026 16:24:35 UTC">April 25, 2026</span>
   </span>
 
     
@@ -5144,12 +4773,12 @@
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.top", "navigation.path"], "search": "../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "../../../..", "features": ["content.code.copy", "navigation.tabs", "navigation.top", "navigation.path"], "search": "../../../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
-      <script src="../../../assets/javascripts/bundle.79ae519e.min.js"></script>
+      <script src="../../../../assets/javascripts/bundle.79ae519e.min.js"></script>
       
-        <script src="../../../javascripts/katex.js"></script>
+        <script src="../../../../javascripts/katex.js"></script>
       
         <script src="https://unpkg.com/katex@0/dist/katex.min.js"></script>
       
@@ -5171,7 +4800,7 @@
       
         <script src="https://cdn.jsdelivr.net/pyodide/v0.26.2/full/pyodide.js"></script>
       
-        <script src="../../../javascripts/floating-console.js"></script>
+        <script src="../../../../javascripts/floating-console.js"></script>
       
     
   </body>
