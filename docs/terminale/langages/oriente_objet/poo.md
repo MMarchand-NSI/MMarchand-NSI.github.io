@@ -120,7 +120,3 @@ Ici, on a choisi que l'humain porte la liste de ses animaux. On aurait pu à la 
 
     - Ecrivez une classe Humain et une classe Voiture compatibles avec cette description.
     - Instanciez ensuite Humain et Voiture afin de tester des scenarios d'utilisation.
-
-
-
-
