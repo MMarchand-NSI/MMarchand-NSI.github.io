@@ -5069,8 +5069,8 @@
 </tbody>
 </table>
 </div>
-<div class="admonition hint">
-<p class="admonition-title">Réponse</p>
+<details class="hint">
+<summary>Réponse</summary>
 <table>
 <thead>
 <tr>
@@ -5102,7 +5102,7 @@
 </tbody>
 </table>
 <p><code>di</code> et <code>dj</code> valent chacun -1, 0 ou +1. Le seul couple à exclure est <code>(0, 0)</code> : c'est la cellule elle-même, pas un voisin.</p>
-</div>
+</details>
 <h2 id="etape-2-la-double-boucle">Étape 2 - La double boucle</h2>
 <div class="admonition question">
 <p class="admonition-title">Parcourir les déplacements</p>
@@ -5125,23 +5125,23 @@
 </li>
 </ol>
 </div>
-<div class="admonition hint">
-<p class="admonition-title">Condition pour exclure (0, 0)</p>
+<details class="hint">
+<summary>Réponse</summary>
 <p><code>di != 0 or dj != 0</code></p>
 <p>Si <code>di</code> et <code>dj</code> sont tous les deux nuls en même temps, on est sur la cellule elle-même. Cette condition est vraie dans tous les autres cas.</p>
-</div>
+</details>
 <h2 id="etape-3-compter-les-voisins-de-la-cellule-centrale">Étape 3 - Compter les voisins de la cellule centrale</h2>
 <div class="admonition question">
 <p class="admonition-title">Première version de la fonction</p>
 <p>On s'intéresse uniquement à la cellule centrale <code>(1, 1)</code> de <code>grille_exemple</code> (valeur 5). Toutes ses voisines existent bien dans la grille, donc pas besoin de vérifier les bords pour l'instant.</p>
 <p>Complétez la fonction en utilisant la double boucle :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">nombre_voisins</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="o">...</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="k">for</span> <span class="n">di</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="k">for</span> <span class="n">dj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>            <span class="k">if</span> <span class="o">...</span><span class="p">:</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="k">return</span> <span class="n">n</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>                <span class="n">n</span> <span class="o">=</span> <span class="o">...</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="k">return</span> <span class="o">...</span>
 </code></pre></div>
 <p>Vérifiez : <code>nombre_voisins(grille_exemple, 1, 1)</code> doit valoir <code>8</code>.</p>
 </div>
@@ -5161,11 +5161,11 @@
 </li>
 </ol>
 </div>
-<div class="admonition hint">
-<p class="admonition-title">Explication</p>
+<details class="hint">
+<summary>Explication</summary>
 <p>En Python, les indices négatifs sont valides : <code>g[-1][-1]</code> renvoie <code>9</code>, la case en bas à droite. Cette case n'est pas voisine de <code>(0, 0)</code>, donc la fonction renvoie une valeur incorrecte.</p>
 <p>Il faut vérifier que <code>i + di</code> et <code>j + dj</code> restent dans les bornes de la grille avant de compter la cellule comme voisine.</p>
-</div>
+</details>
 <div class="admonition question">
 <p class="admonition-title">Ajouter la condition de bord</p>
 <p>La grille <code>g</code> a <code>len(g)</code> lignes et <code>len(g[0])</code> colonnes. Les indices de ligne valides sont de <code>0</code> à <code>len(g) - 1</code>, et les indices de colonne de <code>0</code> à <code>len(g[0]) - 1</code>.</p>
@@ -5175,21 +5175,14 @@
 </code></pre></div>
 <p>Traduisez en Python : "l'indice de ligne <code>i + di</code> est compris entre <code>0</code> et <code>len(g) - 1</code>, ET l'indice de colonne <code>j + dj</code> est compris entre <code>0</code> et <code>len(g[0]) - 1</code>".</p>
 </div>
-<div class="admonition hint">
-<p class="admonition-title">Condition complète</p>
+<details class="hint">
+<summary>Réponse</summary>
+<p>Voici la condition complète</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">if</span> <span class="p">(</span><span class="n">di</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">dj</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">i</span> <span class="o">+</span> <span class="n">di</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">j</span> <span class="o">+</span> <span class="n">dj</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span>
 </code></pre></div>
 <p>Python autorise l'écriture <code>0 &lt;= x &lt; n</code> directement, ce qui est plus lisible qu'une double comparaison.</p>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Vérification</p>
-<ol>
-<li>Vérifiez à la main que le doctest est correct pour les quatre coins (valeur 3) et les quatre milieux de bord (valeur 5).</li>
-<li>Pourquoi les coins ont-ils exactement 3 voisins ? Pourquoi les milieux de bord en ont-ils 5 ?</li>
-<li>Quelle valeur aurait <code>nombre_voisins</code> pour toutes les cellules d'une grille sans bords (grille torique, comme dans le jeu de la vie) ?</li>
-</ol>
-</div>
+</details>
 
 
 
