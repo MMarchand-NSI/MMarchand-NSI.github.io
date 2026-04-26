@@ -31,7 +31,7 @@ Une cellule est repérée par ses coordonnées `(i, j)` : `i` est l'indice de li
     | **i**     | `(di=?, dj=?)` | **(i, j)** | `(di=?, dj=?)` |
     | **i + 1** | `(di=?, dj=?)` | `(di=?, dj=?)` | `(di=?, dj=?)` |
 
-!!! hint "Réponse"
+??? hint "Réponse"
     |        | j - 1       | j        | j + 1       |
     |--------|-------------|----------|-------------|
     | **i - 1** | `(-1, -1)` | `(-1, 0)` | `(-1, +1)` |
@@ -62,7 +62,7 @@ Une cellule est repérée par ses coordonnées `(i, j)` : `i` est l'indice de li
                     print(di, dj)
         ```
 
-!!! hint "Condition pour exclure (0, 0)"
+??? hint "Réponse"
     `di != 0 or dj != 0`
 
     Si `di` et `dj` sont tous les deux nuls en même temps, on est sur la cellule elle-même. Cette condition est vraie dans tous les autres cas.
@@ -76,12 +76,12 @@ Une cellule est repérée par ses coordonnées `(i, j)` : `i` est l'indice de li
 
     ```python
     def nombre_voisins(g: grille, i: int, j: int) -> int:
-        n = 0
+        n = ...
         for di in range(-1, 2):
             for dj in range(-1, 2):
                 if ...:
-                    n += 1
-        return n
+                    n = ...
+        return ...
     ```
 
     Vérifiez : `nombre_voisins(grille_exemple, 1, 1)` doit valoir `8`.
@@ -97,7 +97,7 @@ Une cellule est repérée par ses coordonnées `(i, j)` : `i` est l'indice de li
 
     3. Avec `i=0, j=0`, `di=-1` et `dj=-1`, on accède à `g[-1][-1]`. Quelle valeur cela renvoie-t-il dans `grille_exemple` ? Est-ce un voisin de `(0, 0)` ?
 
-!!! hint "Explication"
+??? hint "Explication"
     En Python, les indices négatifs sont valides : `g[-1][-1]` renvoie `9`, la case en bas à droite. Cette case n'est pas voisine de `(0, 0)`, donc la fonction renvoie une valeur incorrecte.
 
     Il faut vérifier que `i + di` et `j + dj` restent dans les bornes de la grille avant de compter la cellule comme voisine.
@@ -114,7 +114,9 @@ Une cellule est repérée par ses coordonnées `(i, j)` : `i` est l'indice de li
 
     Traduisez en Python : "l'indice de ligne `i + di` est compris entre `0` et `len(g) - 1`, ET l'indice de colonne `j + dj` est compris entre `0` et `len(g[0]) - 1`".
 
-!!! hint "Condition complète"
+??? hint "Réponse"
+    Voici la condition complète
+
     ```python
     if (di != 0 or dj != 0) and 0 <= i + di < len(g) and 0 <= j + dj < len(g[0]):
         n += 1
@@ -122,8 +124,3 @@ Une cellule est repérée par ses coordonnées `(i, j)` : `i` est l'indice de li
 
     Python autorise l'écriture `0 <= x < n` directement, ce qui est plus lisible qu'une double comparaison.
 
-!!! question "Vérification"
-
-    1. Vérifiez à la main que le doctest est correct pour les quatre coins (valeur 3) et les quatre milieux de bord (valeur 5).
-    2. Pourquoi les coins ont-ils exactement 3 voisins ? Pourquoi les milieux de bord en ont-ils 5 ?
-    3. Quelle valeur aurait `nombre_voisins` pour toutes les cellules d'une grille sans bords (grille torique, comme dans le jeu de la vie) ?

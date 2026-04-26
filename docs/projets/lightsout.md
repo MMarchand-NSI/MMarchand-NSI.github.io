@@ -4,7 +4,7 @@ Lights Out est un jeu de puzzle électronique inventé par Tiger Electronics en 
 
 La grille est composée de cellules pouvant être allumées ou éteintes. Cliquer sur une cellule **inverse son état et celui de ses 4 voisines directes** (haut, bas, gauche, droite). Le but est d'éteindre toutes les lumières.
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/MfbVFpkbdpA" title="Lights Out puzzle" frameborder="0" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pj0lVmhkx7M" title="Lights Out puzzle" frameborder="0" allowfullscreen></iframe>
 
 !!! tip "Pré-requis"
     Cette activité fait suite à l'activité sur le voisinage. On réutilise ici les mêmes notions : grille `(i, j)`, déplacements `(di, dj)`, et vérification des bords.
