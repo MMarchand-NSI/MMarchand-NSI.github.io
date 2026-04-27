@@ -5294,17 +5294,42 @@
 <li>le client envoie une <strong>requête</strong></li>
 <li>le serveur renvoie une <strong>réponse</strong></li>
 </ol>
+<div class="admonition tip">
+<p class="admonition-title">Fichier exemples.http</p>
+<p>Dans VSCode, crée un fichier <code>exemples.http</code> dans ton dossier de travail. L'extension <strong>REST Client</strong> te permet d'envoyer des requêtes HTTP directement depuis VSCode en cliquant sur <code>Send Request</code> au-dessus de chaque requête. Tu y ajouteras des exemples au fil du cours.</p>
+<p>Installe l'extension si ce n'est pas déjà fait : cherche <code>REST Client</code> (Huachao Mao) dans les extensions VSCode.</p>
+</div>
 <h3 id="anatomie-dune-url">Anatomie d'une URL</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>http://localhost:5000/deviner?proposition=42
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a> ^        ^           ^        ^
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a> |        |           |        |
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>protocole  serveur    route   paramètre(s)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>http://truc.com/deviner?proposition=42
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a> ^         ^         ^        ^
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a> |         |         |        |
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>protocole  serveur   route   paramètre(s)
 </code></pre></div>
 <p>La partie qui commence par <code>?</code> s'appelle la <strong>chaîne de requête</strong> (<em>query string</em>). Elle contient des paramètres sous la forme <code>nom=valeur</code>, séparés par <code>&amp;</code> si plusieurs.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>?proposition=42&amp;mode=facile
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>   ^^^^^^^^^      ^^^^^^^^^^
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>   paramètre 1   paramètre 2
 </code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">À tester</p>
+<p>Ajoute ces requêtes à ton fichier <code>exemples.http</code>. La première te montre le HTML brut qu'un navigateur reçoit avant tout rendu. La deuxième utilise un paramètre dans la query string pour choisir le format de la réponse.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="err">### GET - Page web HTML brute (Wikipédia)</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="err">GET https://fr.wikipedia.org/wiki/Python_(langage)</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="err">###</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="err">### GET - Mon adresse IP publique</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="err">GET https://api.ipify.org?format=json</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="err">###</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="err">### GET - Météo en temps réel à Paris</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="err">GET https://api.open-meteo.com/v1/forecast?latitude=48.85&amp;longitude=2.35&amp;current_weather=true</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="err">###</span>
+</code></pre></div>
+<p>Observe : pour la météo, combien de paramètres la query string contient-elle ? Quels sont leurs noms ?</p>
+</div>
 <h3 id="les-methodes-http">Les méthodes HTTP</h3>
 <p>Une requête HTTP précise toujours quelle <strong>méthode</strong> elle utilise. Les deux principales sont :</p>
 <table>
@@ -5339,16 +5364,59 @@
 <h3 id="la-reponse-du-serveur">La réponse du serveur</h3>
 <p>Le serveur répond avec :</p>
 <ul>
-<li>un <strong>code de statut</strong> (200 = OK, 404 = page introuvable, 500 = erreur serveur)</li>
+<li>un <strong>code de statut</strong> (200 = OK, 201 = créé, 404 = page introuvable, 500 = erreur serveur)</li>
 <li>des <strong>en-têtes</strong> (type du contenu, date...)</li>
 <li>un <strong>corps</strong> contenant les données (HTML, JSON, image...)</li>
 </ul>
+<div class="admonition tip">
+<p class="admonition-title">À tester</p>
+<p>Voici des requêtes POST à ajouter à <code>exemples.http</code>. La requête vers <code>httpbin.org</code> est particulièrement utile : le serveur te renvoie exactement ce qu'il a reçu, ce qui te permet de vérifier ce que tu envoies réellement.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="err">### POST - Créer une ressource (JSONPlaceholder)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="err">POST https://jsonplaceholder.typicode.com/posts</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="err">Content-Type: application/json</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="err">{</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="err">  &quot;title&quot;: &quot;Mon titre de test&quot;,</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="err">  &quot;body&quot;: &quot;Contenu de mon article&quot;,</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="err">  &quot;userId&quot;: 1</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="err">}</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="err">###</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="err">### POST - Inspecter sa propre requête (httpbin miroir)</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="err">POST https://httpbin.org/post</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="err">Content-Type: application/json</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="err">{</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="err">  &quot;nom&quot;: &quot;Matt&quot;,</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="err">  &quot;message&quot;: &quot;Test REST Client VS Code&quot;</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="err">}</span>
+<a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="err">###</span>
+</code></pre></div>
+<p>Observe : quel code de statut JSONPlaceholder renvoie-t-il ? Est-ce 200 ou 201 ?</p>
+</div>
 <hr />
 <h2 id="le-format-json">Le format JSON</h2>
 <p>Quand un serveur doit renvoyer des données structurées (pas une page HTML entière), il utilise souvent le format <strong>JSON</strong> (<em>JavaScript Object Notation</em>).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">{</span><span class="nt">&quot;resultat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Trop petit !&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;tentatives&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">{</span><span class="nt">&quot;resultat&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Trop petit !&quot;</span><span class="p">,</span><span class="w"> </span><span class="nt">&quot;tentatives&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">}</span>
 </code></pre></div>
 <p>JSON ressemble beaucoup à un dictionnaire Python. Le JavaScript peut le lire directement, ce qui en fait le format d'échange idéal entre un serveur et du code JS côté client.</p>
+<div class="admonition tip">
+<p class="admonition-title">À tester</p>
+<p>Ces deux APIs renvoient du JSON. Ajoute-les à <code>exemples.http</code> et observe la structure de la réponse.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="err">### GET - Blague aléatoire</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="err">GET https://official-joke-api.appspot.com/random_joke</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="err">###</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="err">### GET - Fait aléatoire sur les chats</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="err">GET https://catfact.ninja/fact</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="err">###</span>
+</code></pre></div>
+<p>Repère dans la réponse : quelles sont les clés ? Quelles sont les valeurs ? Comment traduirais-tu cette réponse en dictionnaire Python ?</p>
+</div>
 <hr />
 <h2 id="ce-qui-est-memorise-ou">Ce qui est mémorisé où</h2>
 <p>Une page web peut avoir besoin de retenir des informations. Mais côté client et côté serveur, les mécanismes sont très différents :</p>
@@ -5390,11 +5458,11 @@
 <hr />
 <h2 id="les-formulaires-html">Les formulaires HTML</h2>
 <p>Un formulaire HTML permet d'envoyer des données saisies par l'utilisateur vers le serveur.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;/inscription&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;pseudo&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Pseudo&quot;</span><span class="p">&gt;</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;mot_de_passe&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Mot de passe&quot;</span><span class="p">&gt;</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span>S&#39;inscrire<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="p">&lt;</span><span class="nt">form</span> <span class="na">action</span><span class="o">=</span><span class="s">&quot;/inscription&quot;</span> <span class="na">method</span><span class="o">=</span><span class="s">&quot;POST&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;pseudo&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Pseudo&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>  <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;mot_de_passe&quot;</span> <span class="na">placeholder</span><span class="o">=</span><span class="s">&quot;Mot de passe&quot;</span><span class="p">&gt;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  <span class="p">&lt;</span><span class="nt">button</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span><span class="p">&gt;</span>S&#39;inscrire<span class="p">&lt;/</span><span class="nt">button</span><span class="p">&gt;</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="p">&lt;/</span><span class="nt">form</span><span class="p">&gt;</span>
 </code></pre></div>
 <p>Les attributs importants :</p>
 <ul>
@@ -5403,9 +5471,22 @@
 <li><code>name</code> : le nom du paramètre tel qu'il sera reçu côté serveur</li>
 </ul>
 <p>Avec <code>method="GET"</code>, les valeurs apparaissent dans l'URL :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>/inscription?pseudo=alice&amp;mot_de_passe=1234
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>/inscription?pseudo=alice&amp;mot_de_passe=1234
 </code></pre></div></p>
-<p>Avec <code>method="POST"</code>, les valeurs sont dans le corps de la requête et n'apparaissent pas dans l'URL.</p>
+<p>Avec <code>method="POST"</code>, les valeurs sont dans le corps de la requête et n'apparaissent pas dans l'URL. Le format utilisé par les formulaires HTML est <code>application/x-www-form-urlencoded</code> : les données sont encodées comme une query string, mais placées dans le corps de la requête.</p>
+<div class="admonition tip">
+<p class="admonition-title">À tester</p>
+<p>Ajoute cette requête à <code>exemples.http</code>. Elle simule exactement ce qu'un formulaire HTML envoie avec <code>method="POST"</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="err">### POST - Envoi façon formulaire HTML (form-urlencoded)</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="err">POST https://httpbin.org/post</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="err">Content-Type: application/x-www-form-urlencoded</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="err">nom=Matt&amp;ville=Auray</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="err">###</span>
+</code></pre></div>
+<p>Compare la réponse avec celle de la requête POST en JSON : dans quel champ de la réponse httpbin trouve-t-on les données ? Est-ce le même champ ?</p>
+</div>
 <hr />
 <h2 id="https-pourquoi-chiffrer">HTTPS : pourquoi chiffrer ?</h2>
 <p>HTTP transmet tout en clair sur le réseau. N'importe quel équipement intermédiaire (routeur, fournisseur d'accès, Wi-Fi public) peut lire les données échangées.</p>
