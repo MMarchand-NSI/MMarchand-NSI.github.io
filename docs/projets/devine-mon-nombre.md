@@ -114,10 +114,13 @@ app.run(debug=True)
 
 ### Lancer le serveur
 
+Dans le terminal de VSCode, installe Flask :
+
 ```bash
-pip install flask
-python serveur.py
+uv add flask
 ```
+
+Puis exécute `serveur.py` directement depuis VSCode (bouton ▶ en haut à droite).
 
 Ouvre ensuite `http://localhost:5000` dans ton navigateur, puis ouvre les outils de développement (F12) et place-toi sur l'onglet **Réseau**.
 

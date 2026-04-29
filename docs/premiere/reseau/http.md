@@ -31,13 +31,18 @@ HTTP (*HyperText Transfer Protocol*) est le langage que le client et le serveur 
 1. le client envoie une **requête**
 2. le serveur renvoie une **réponse**
 
+!!! tip "Fichier exemples.http"
+    Dans VSCode, crée un fichier `exemples.http` dans ton dossier de travail. L'extension **REST Client** te permet d'envoyer des requêtes HTTP directement depuis VSCode en cliquant sur `Send Request` au-dessus de chaque requête. Tu y ajouteras des exemples au fil du cours.
+
+    Installe l'extension si ce n'est pas déjà fait : cherche `REST Client` (Huachao Mao) dans les extensions VSCode.
+
 ### Anatomie d'une URL
 
 ```
-http://localhost:5000/deviner?proposition=42
- ^        ^           ^        ^
- |        |           |        |
-protocole  serveur    route   paramètre(s)
+http://truc.com/deviner?proposition=42
+ ^         ^         ^        ^
+ |         |         |        |
+protocole  serveur   route   paramètre(s)
 ```
 
 La partie qui commence par `?` s'appelle la **chaîne de requête** (*query string*). Elle contient des paramètres sous la forme `nom=valeur`, séparés par `&` si plusieurs.
@@ -47,6 +52,28 @@ La partie qui commence par `?` s'appelle la **chaîne de requête** (*query stri
    ^^^^^^^^^      ^^^^^^^^^^
    paramètre 1   paramètre 2
 ```
+
+!!! tip "À tester"
+    Ajoute ces requêtes à ton fichier `exemples.http`. La première te montre le HTML brut qu'un navigateur reçoit avant tout rendu. La deuxième utilise un paramètre dans la query string pour choisir le format de la réponse.
+
+    ```http
+    ### GET - Page web HTML brute (Wikipédia)
+    GET https://fr.wikipedia.org/wiki/Python_(langage)
+
+    ###
+
+    ### GET - Mon adresse IP publique
+    GET https://api.ipify.org?format=json
+
+    ###
+
+    ### GET - Météo en temps réel à Paris
+    GET https://api.open-meteo.com/v1/forecast?latitude=48.85&longitude=2.35&current_weather=true
+
+    ###
+    ```
+
+    Observe : pour la météo, combien de paramètres la query string contient-elle ? Quels sont leurs noms ?
 
 ### Les méthodes HTTP
 
@@ -67,9 +94,39 @@ Une requête HTTP précise toujours quelle **méthode** elle utilise. Les deux p
 
 Le serveur répond avec :
 
-- un **code de statut** (200 = OK, 404 = page introuvable, 500 = erreur serveur)
+- un **code de statut** (200 = OK, 201 = créé, 404 = page introuvable, 500 = erreur serveur)
 - des **en-têtes** (type du contenu, date...)
 - un **corps** contenant les données (HTML, JSON, image...)
+
+!!! tip "À tester"
+    Voici des requêtes POST à ajouter à `exemples.http`. La requête vers `httpbin.org` est particulièrement utile : le serveur te renvoie exactement ce qu'il a reçu, ce qui te permet de vérifier ce que tu envoies réellement.
+
+    ```http
+    ### POST - Créer une ressource (JSONPlaceholder)
+    POST https://jsonplaceholder.typicode.com/posts
+    Content-Type: application/json
+
+    {
+      "title": "Mon titre de test",
+      "body": "Contenu de mon article",
+      "userId": 1
+    }
+
+    ###
+
+    ### POST - Inspecter sa propre requête (httpbin miroir)
+    POST https://httpbin.org/post
+    Content-Type: application/json
+
+    {
+      "nom": "Matt",
+      "message": "Test REST Client VS Code"
+    }
+
+    ###
+    ```
+
+    Observe : quel code de statut JSONPlaceholder renvoie-t-il ? Est-ce 200 ou 201 ?
 
 ---
 
@@ -82,6 +139,23 @@ Quand un serveur doit renvoyer des données structurées (pas une page HTML enti
 ```
 
 JSON ressemble beaucoup à un dictionnaire Python. Le JavaScript peut le lire directement, ce qui en fait le format d'échange idéal entre un serveur et du code JS côté client.
+
+!!! tip "À tester"
+    Ces deux APIs renvoient du JSON. Ajoute-les à `exemples.http` et observe la structure de la réponse.
+
+    ```http
+    ### GET - Blague aléatoire
+    GET https://official-joke-api.appspot.com/random_joke
+
+    ###
+
+    ### GET - Fait aléatoire sur les chats
+    GET https://catfact.ninja/fact
+
+    ###
+    ```
+
+    Repère dans la réponse : quelles sont les clés ? Quelles sont les valeurs ? Comment traduirais-tu cette réponse en dictionnaire Python ?
 
 ---
 
@@ -124,7 +198,22 @@ Avec `method="GET"`, les valeurs apparaissent dans l'URL :
 /inscription?pseudo=alice&mot_de_passe=1234
 ```
 
-Avec `method="POST"`, les valeurs sont dans le corps de la requête et n'apparaissent pas dans l'URL.
+Avec `method="POST"`, les valeurs sont dans le corps de la requête et n'apparaissent pas dans l'URL. Le format utilisé par les formulaires HTML est `application/x-www-form-urlencoded` : les données sont encodées comme une query string, mais placées dans le corps de la requête.
+
+!!! tip "À tester"
+    Ajoute cette requête à `exemples.http`. Elle simule exactement ce qu'un formulaire HTML envoie avec `method="POST"`.
+
+    ```http
+    ### POST - Envoi façon formulaire HTML (form-urlencoded)
+    POST https://httpbin.org/post
+    Content-Type: application/x-www-form-urlencoded
+
+    nom=Matt&ville=Auray
+
+    ###
+    ```
+
+    Compare la réponse avec celle de la requête POST en JSON : dans quel champ de la réponse httpbin trouve-t-on les données ? Est-ce le même champ ?
 
 ---
 
