@@ -73,11 +73,10 @@ def draw():
 
 if __name__ == "__main__":
     jeu = metagrid.create(NB_LIGNES, NB_COLONNES, TAILLE_CASE, 4)
-    jeu.init(init)
-    jeu.callback_click(cliquer)
-    jeu.callback_key(touche)
-    jeu.update(update)
-    jeu.draw(draw)
+    jeu.on_init(init)
+    jeu.on_click(cliquer)
+    jeu.on_key(touche)
+    jeu.on_draw(draw)
     jeu.start()
 ```
 
@@ -106,16 +105,16 @@ Avant d'ajouter toute interaction, on veut juste voir quelque chose à l'écran.
     ```python
     def init():
         global grille, flag_game_over
-        grille = [[False] * NB_COLONNES for _ in range(NB_LIGNES)]
-        flag_game_over = False
+        grille = ...
+        flag_game_over = ...
 
     def draw():
         for i in range(NB_LIGNES):
             for j in range(NB_COLONNES):
-                if grille[i][j]:
+                if ... :
                     couleur = COULEUR_ALLUMEE
                 else:
-                    couleur = COULEUR_ETEINTE
+                    ...
                 jeu.set_cell_color(i, j, couleur)
 
     def cliquer(i: int, j: int):
@@ -134,7 +133,7 @@ Avant d'ajouter toute interaction, on veut juste voir quelque chose à l'écran.
         jeu.start()
     ```
 
-    Lancez le programme. Vous devez voir une grille noire. Rien ne se passe encore au clic, c'est normal.
+    Lancez le programme. Vous devez voir une grille vide. Rien ne se passe encore au clic, c'est normal.
 
 ## Étape 3 - Toggle simple (sans voisinage)
 
@@ -188,7 +187,7 @@ La vraie règle de Lights Out : cliquer sur `(i, j)` inverse cette cellule **et 
                 if ...:  # garder la croix
                     ni, nj = i + di, j + dj
                     if ...:  # vérification des bords
-                        grille[ni][nj] = not grille[ni][nj]
+                        grille[ni][nj] = ...
 
     def cliquer(i: int, j: int):
         toggle(i, j)
