@@ -82,13 +82,15 @@ Un langage de programmation est dit Turing-complet s'il peut exprimer au moins c
 
 ### Les algorithmes sont dénombrables
 
-Un programme est un texte fini sur un alphabet fini (les caractères du clavier). On peut donc les trier : d'abord par longueur, puis alphabétiquement à longueur égale. Cela revient à les **numéroter** : programme n°1, n°2, n°3...
+Un programme est un texte fini sur un alphabet fini (les caractères du clavier). Chaque programme pris individuellement a une longueur finie, mais il n'existe aucune borne sur cette longueur : il y a des programmes de longueur 1, 2, 3, 1000... L'ensemble des programmes est donc **infini**. On peut néanmoins les trier : d'abord par longueur, puis alphabétiquement à longueur égale. Cela revient à les **numéroter** : programme n°1, n°2, n°3...
 
 Il y a donc "autant" de programmes que d'entiers naturels. On dit que l'ensemble des programmes est **dénombrable**.
 
 ### Les problèmes de décision sont indénombrables
 
 Un problème de décision, c'est l'ensemble des entrées pour lesquelles la réponse est **oui**. Il est entièrement caractérisé par ses solutions.
+
+Les exemples ci-dessous utilisent des entiers naturels comme entrées, mais ce n'est pas une restriction : toute donnée finie (texte, image, programme, graphe...) peut être encodée en un entier naturel. C'est exactement ce que fait un ordinateur en représentant tout en binaire. On peut donc toujours supposer sans perte de généralité que les entrées sont des entiers naturels.
 
 Par exemple :
 

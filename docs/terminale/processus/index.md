@@ -30,16 +30,16 @@ Les systèmes d'exploitation attribuent ainsi des "états" aux processus afin de
 
 
     ```mermaid
----
-title: Diagramme d'état d'un processus à connaître
----
-stateDiagram-v2
-    [*] --> Prêt : Réveil
-    Prêt --> Elu : Election
-    Elu --> Bloqué : Blocage
-    Elu --> [*] : Fin
-    Bloqué-->Prêt : Déblocage
-```
+    ---
+    title: Diagramme d'état d'un processus à connaître
+    ---
+    stateDiagram-v2
+        [*] --> Prêt : Réveil
+        Prêt --> Elu : Election
+        Elu --> Bloqué : Blocage
+        Elu --> [*] : Fin
+        Bloqué-->Prêt : Déblocage
+    ```
     
     Il est fondamental de bien comprendre que le "chef d'orchestre" qui attribue aux processus leur état "élu", "bloqué" ou "prêt" est le système d'exploitation (OS - Operating System). On dit que le système d'exploitation gère l'ordonnancement des processus (un processus sera prioritaire sur un autre...).
     Lorsqu'il est créé, le processus passe à l'état prêt. Il intègre une "file d'attente", ça n'est pas forcément son tour directement.
