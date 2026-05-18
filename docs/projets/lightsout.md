@@ -9,25 +9,20 @@ La grille est composée de cellules pouvant être allumées ou éteintes. Clique
 !!! tip "Pré-requis"
     Cette activité fait suite à l'activité sur le voisinage. On réutilise ici les mêmes notions : grille `(i, j)`, déplacements `(di, dj)`, et vérification des bords.
 
-Le code est organisé autour de la bibliothèque `metagrid`, qui prend en charge l'affichage et les interactions. Elle s'utilise ainsi :
+Le code est organisé autour de la bibliothèque `metagrid`, qui prend en charge l'affichage et les interactions. Dans `draw`, on colorie chaque cellule avec `jeu.set_cell_color(i, j, "#RRGGBB")`.
+
+Crée un fichier `lightsout.py` avec ce squelette complet :
 
 ```python
-jeu = metagrid.create(NB_LIGNES, NB_COLONNES, TAILLE_CASE, 4)
-jeu.init(init)              # appelé au démarrage
-jeu.callback_click(cliquer) # appelé avec (i, j) quand on clique
-jeu.callback_key(touche)    # appelé avec la touche pressée
-jeu.update(update)          # appelé à chaque frame
-jeu.draw(draw)              # appelé à chaque frame pour afficher
-jeu.start()
-```
+"""
+Lights Out
+Chaque cellule de la grille est soit allumée, soit éteinte.
+Cliquer une cellule inverse son état et celui de ses 4 voisines directes.
+But : éteindre toutes les lumières.
+Touche r : recommencer.
+"""
 
-Dans `draw`, on colorie chaque cellule avec `jeu.set_cell_color(i, j, "#RRGGBB")`.
-
-Les constantes et variables globales sont déjà définies :
-
-```python
 import metagrid
-from metagrid import AbstractEngine
 from random import randint
 
 NB_LIGNES   = 5
@@ -41,7 +36,49 @@ COULEUR_VICTOIRE = "#44FF88"
 grille: list[list[bool]]  # True = allumée, False = éteinte
 flag_game_over: bool
 
-jeu: AbstractEngine
+jeu: metagrid.AbstractEngine
+
+
+def toggle(i: int, j: int):
+    """Inverse la cellule (i, j) et ses 4 voisines directes."""
+    pass
+
+
+def gagne() -> bool:
+    """Renvoie True si toutes les cellules sont éteintes."""
+    pass
+
+
+def init():
+    """Callback - appelé au démarrage. Génère un nouveau puzzle garanti soluble."""
+    global grille, flag_game_over
+    pass
+
+
+def cliquer(i: int, j: int):
+    """Callback - appelé avec (i, j) quand le joueur clique une cellule."""
+    global flag_game_over
+    pass
+
+
+def touche(key: str):
+    """Callback - appelé avec la touche pressée. r pour recommencer."""
+    pass
+
+
+def draw():
+    """Callback - appelé à chaque frame. Colorie chaque cellule selon son état."""
+    pass
+
+
+if __name__ == "__main__":
+    jeu = metagrid.create(NB_LIGNES, NB_COLONNES, TAILLE_CASE, 4)
+    jeu.init(init)
+    jeu.callback_click(cliquer)
+    jeu.callback_key(touche)
+    jeu.update(update)
+    jeu.draw(draw)
+    jeu.start()
 ```
 
 ## Étape 1 - La grille booléenne
@@ -57,16 +94,70 @@ jeu: AbstractEngine
 
     2. Que vaut `[False] * 3` ? Vérifiez dans l'interpréteur.
 
-    3. On veut inverser l'état d'une cellule. Que vaut `not True` ? `not False` ? Comment inverser `grille[i][j]` sur place ?
+    3. On veut inverser l'état d'une cellule. Que vaut `not True` ? `not False` ? Comment inverser `grille[i][j]` en une instruction ?
 
-## Étape 2 - La fonction `toggle`
+## Étape 2 - Afficher la grille
 
-La règle du jeu : cliquer sur `(i, j)` inverse cette cellule **et ses 4 voisines directes** (haut, bas, gauche, droite). Ce voisinage à 4 est différent du voisinage à 8 de l'activité précédente.
+Avant d'ajouter toute interaction, on veut juste voir quelque chose à l'écran.
+
+!!! question "Fonctions `init` et `draw`"
+    Complétez `init` pour créer une grille entièrement éteinte, et `draw` pour colorier chaque cellule selon son état.
+
+    ```python
+    def init():
+        global grille, flag_game_over
+        grille = [[False] * NB_COLONNES for _ in range(NB_LIGNES)]
+        flag_game_over = False
+
+    def draw():
+        for i in range(NB_LIGNES):
+            for j in range(NB_COLONNES):
+                if grille[i][j]:
+                    couleur = COULEUR_ALLUMEE
+                else:
+                    couleur = COULEUR_ETEINTE
+                jeu.set_cell_color(i, j, couleur)
+
+    def cliquer(i: int, j: int):
+        pass
+
+    def touche(key: str):
+        pass
+
+    if __name__ == "__main__":
+        jeu = metagrid.create(NB_LIGNES, NB_COLONNES, TAILLE_CASE, 4)
+        jeu.init(init)
+        jeu.callback_click(cliquer)
+        jeu.callback_key(touche)
+        jeu.update(update)
+        jeu.draw(draw)
+        jeu.start()
+    ```
+
+    Lancez le programme. Vous devez voir une grille noire. Rien ne se passe encore au clic, c'est normal.
+
+## Étape 3 - Toggle simple (sans voisinage)
+
+On va maintenant réagir aux clics : cliquer sur une cellule inverse uniquement **cette cellule**, sans toucher aux voisines.
+
+!!! question "Fonction `cliquer` simple"
+    Complétez `cliquer` pour inverser l'état de la cellule `(i, j)` :
+
+    ```python
+    def cliquer(i: int, j: int):
+        grille[i][j] = ...
+    ```
+
+    Testez : cliquer sur une cellule doit l'allumer, recliquer doit l'éteindre.
+
+    Vous pouvez dessiner des motifs librement sur la grille.
+
+## Étape 4 - Toggle Lights Out (avec voisinage en croix)
+
+La vraie règle de Lights Out : cliquer sur `(i, j)` inverse cette cellule **et ses 4 voisines directes** (haut, bas, gauche, droite).
 
 !!! question "Croix ou diagonales ?"
-    Dans l'activité voisinage, on utilisait `range(-1, 2)` pour `di` et `dj`, ce qui donnait 9 couples. On excluait le centre avec `di != 0 or dj != 0`.
-
-    Voici les 9 couples classés :
+    Dans l'activité voisinage, on utilisait `range(-1, 2)` pour `di` et `dj`, ce qui donnait 9 couples. Voici les 9 couples classés :
 
     |        | dj = -1 | dj = 0 | dj = +1 |
     |--------|---------|--------|---------|
@@ -74,9 +165,9 @@ La règle du jeu : cliquer sur `(i, j)` inverse cette cellule **et ses 4 voisine
     | di = 0  | **gauche** | **centre** | **droite** |
     | di = +1 | diag | **bas** | diag |
 
-    1. Quels couples correspondent à la croix (centre + 4 voisins directs) ? Quels couples correspondent aux diagonales ?
+    1. Quels couples correspondent à la croix (centre + 4 voisins directs) ?
 
-    2. Quelle propriété distingue les couples de la croix ? Regardez les valeurs de `di` et `dj` pour chaque case en gras.
+    2. Quelle propriété distingue les couples de la croix ? Observez les valeurs de `di` et `dj` pour chaque case en gras.
 
     3. Complétez la condition pour ne garder que la croix :
 
@@ -87,8 +178,8 @@ La règle du jeu : cliquer sur `(i, j)` inverse cette cellule **et ses 4 voisine
                     print(di, dj)
         ```
 
-!!! question "Écrire `toggle`"
-    Complétez la fonction en utilisant la double boucle et la condition trouvée :
+!!! question "Écrire `toggle` et mettre à jour `cliquer`"
+    Complétez la fonction `toggle` avec la double boucle et la condition trouvée, puis faites appeler `toggle` depuis `cliquer` :
 
     ```python
     def toggle(i: int, j: int):
@@ -97,12 +188,15 @@ La règle du jeu : cliquer sur `(i, j)` inverse cette cellule **et ses 4 voisine
                 if ...:  # garder la croix
                     ni, nj = i + di, j + dj
                     if ...:  # vérification des bords
-                        grille[ni][nj] = ...  # inverser
+                        grille[ni][nj] = not grille[ni][nj]
+
+    def cliquer(i: int, j: int):
+        toggle(i, j)
     ```
 
     Testez mentalement : `toggle(0, 0)` sur une grille toute éteinte doit allumer `(0,0)`, `(1,0)` et `(0,1)` uniquement.
 
-## Étape 3 - La fonction `gagne`
+## Étape 5 - La fonction `gagne`
 
 !!! question "Vérifier la victoire"
     On gagne quand toutes les cellules sont éteintes (`False`).
@@ -118,38 +212,33 @@ La règle du jeu : cliquer sur `(i, j)` inverse cette cellule **et ses 4 voisine
         return True
     ```
 
-## Étape 4 - La fonction `init`
+## Étape 6 - Générer un puzzle soluble
 
-!!! question "Générer un puzzle soluble"
+!!! question "Initialisation aléatoire"
     Une idée naïve serait de remplir la grille aléatoirement. Mais certaines configurations de Lights Out sont insolubles.
 
     Voici une astuce : on part d'une grille entièrement éteinte (état gagnant), puis on applique un certain nombre de `toggle` aléatoires. Comme `toggle` est sa propre inverse (deux toggles au même endroit s'annulent), on est certain que le puzzle obtenu est soluble.
 
     1. Pourquoi cette approche garantit-elle que le puzzle est soluble ?
 
-    2. Complétez `init`. Elle doit :
-        - créer une grille entièrement éteinte (voir étape 1),
-        - appliquer 20 `toggle` à des positions aléatoires avec `randint(0, NB_LIGNES - 1)`,
-        - mettre `flag_game_over` à `False`.
+    2. Mettez à jour `init` :
 
-    ```python
-    def init():
-        global grille, flag_game_over
-        grille = ...
-        for _ in range(20):
-            toggle(randint(...), randint(...))
-        flag_game_over = False
-    ```
+        ```python
+        def init():
+            global grille, flag_game_over
+            grille = [[False] * NB_COLONNES for _ in range(NB_LIGNES)]
+            for _ in range(20):
+                toggle(randint(...), randint(...))
+            flag_game_over = False
+        ```
 
-## Étape 5 - Les fonctions `cliquer` et `touche`
+## Étape 7 - Finaliser le jeu
 
-!!! question "`cliquer`"
+!!! question "Gérer la victoire dans `cliquer`"
     Quand le joueur clique sur `(i, j)` :
     - si la partie est terminée (`flag_game_over` est `True`), on ne fait rien,
     - sinon, on applique `toggle(i, j)`,
     - puis on vérifie si la partie est gagnée avec `gagne()`.
-
-    Écrivez la fonction. Elle doit modifier `flag_game_over` si le joueur a gagné.
 
     ```python
     def cliquer(i: int, j: int):
@@ -161,24 +250,15 @@ La règle du jeu : cliquer sur `(i, j)` inverse cette cellule **et ses 4 voisine
             flag_game_over = True
     ```
 
-!!! question "`touche`"
-    La seule touche gérée est `'r'` pour recommencer. Écrivez la fonction.
-
+!!! question "Touche `r` pour recommencer"
     ```python
     def touche(key: str):
         if key == ...:
             init()
     ```
 
-## Étape 6 - La fonction `draw`
-
-!!! question "Afficher la grille"
-    Pour chaque cellule `(i, j)`, on choisit sa couleur selon l'état du jeu :
-    - si `flag_game_over` est `True` : `COULEUR_VICTOIRE`,
-    - sinon, si la cellule est allumée : `COULEUR_ALLUMEE`,
-    - sinon : `COULEUR_ETEINTE`.
-
-    Complétez `draw` avec deux boucles imbriquées et `jeu.set_cell_color(i, j, couleur)`.
+!!! question "Afficher la victoire dans `draw`"
+    Ajoutez le cas victoire : si `flag_game_over` est `True`, toutes les cellules prennent `COULEUR_VICTOIRE`.
 
     ```python
     def draw():
@@ -191,22 +271,6 @@ La règle du jeu : cliquer sur `(i, j)` inverse cette cellule **et ses 4 voisine
                 else:
                     couleur = COULEUR_ETEINTE
                 jeu.set_cell_color(i, j, couleur)
-    ```
-
-## Étape 7 - Lancement
-
-!!! question "Assembler le tout"
-    Il ne reste plus qu'à créer la fenêtre et brancher les callbacks. Complétez le bloc principal :
-
-    ```python
-    if __name__ == "__main__":
-        jeu = metagrid.create(NB_LIGNES, NB_COLONNES, TAILLE_CASE, 4)
-        jeu.init(init)
-        jeu.callback_click(cliquer)
-        jeu.callback_key(touche)
-        jeu.update(update)
-        jeu.draw(draw)
-        jeu.start()
     ```
 
     Lancez le programme et jouez quelques parties. Appuyez sur `r` pour générer un nouveau puzzle.
