@@ -34,7 +34,7 @@ Les systèmes d'exploitation attribuent ainsi des "états" aux processus afin de
     title: Diagramme d'état d'un processus à connaître
     ---
     stateDiagram-v2
-        [*] --> Prêt : Réveil
+        [*] --> Prêt : Création
         Prêt --> Elu : Election
         Elu --> Bloqué : Blocage
         Elu --> [*] : Fin
@@ -58,25 +58,7 @@ Dans un système multi-utilisateurs à temps partagé, plusieurs processus peuve
 
 Le système d'exploitation d'un ordinateur peut être vu comme un ensemble de processus dont l'exécution est gérée par un processus particulier : l'ordonnanceur (scheduler en anglais).
 
-Un ordonnanceur fait face à deux problèmes principaux :
-
-- le choix du processus à exécuter
-- le temps d'allocation du processeur au processus choisi.
-
-Un système d'exploitation multitâche est __préemptif__ lorsque celui-ci peut arrêter (réquisition) à tout moment n'importe quelle application pour passer la main à la suivante. Dans les systèmes d'exploitation préemptifs on peut lancer plusieurs applications à la fois et passer de l'une à l'autre, voire lancer une application pendant qu'une autre effectue un travail. Il y a aussi des systèmes d'exploitation dits multitâches, qui sont en fait des « multi-tâches coopératifs ». Quelle est la différence ? Un multitâche coopératif permet à plusieurs applications de fonctionner et d'occuper des plages mémoire, laissant le soin à ces applications de gérer cette occupation, au risque de bloquer tout le système. Par contre, avec un « multi-tâche préemptif », le noyau garde toujours le contrôle (qui fait quoi, quand et comment), et se réserve le droit de fermer les applications qui monopolisent les ressources du système. Ainsi les blocages du système sont inexistants.
-
-
-!!! abstract "Objectifs de l'ordonnanceur"
-    Les objectifs d'un ordonnanceur d'un système multi-utilisateurs sont, entre autres :
-
-    - s'assurer que chaque processus en attente d'exécution reçoive sa part de temps processeur
-    - minimiser le temps de réponse 
-    - utiliser le processeur à 100% 
-    - utiliser d'une manière équilibrée les ressources 
-    - prendre en compte les priorités 
-    - être prédictible
-
-    Ces objectifs sont parfois complémentaires, parfois contradictoires : augmenter la performance par rapport à l'un d'entre eux peut se faire au détriment d'un autre. **Il est impossible de créer un algorithme qui optimise tous les critères de façon simultanée.**
+L'ordonnanceur doit décider quel processus exécuter et pendant combien de temps. Ces deux choix sont souvent contradictoires : aucun algorithme ne peut optimiser simultanément le temps de réponse, l'équité entre processus et l'utilisation du processeur.
 
 ### Ordonnancement non préemptif
 
@@ -199,25 +181,11 @@ Je vous laisse créer le tableau comportant les temps d'attente et de terminaiso
 !!! abstract "Ordonnancement préemptif"
 
     Dans un schéma d'ordonnanceur préemptif, ou avec réquisition, pour s'assurer qu'aucun processus ne s'exécute pendant trop de temps, les ordinateurs ont une horloge électronique qui génère périodiquement une interruption. A chaque interruption d'horloge, le système d'exploitation reprend la main et décide si le processus courant doit poursuivre son exécution ou s'il doit être suspendu pour laisser place à un autre. S'il décide de suspendre son exécution au profit d'un autre, il doit d'abord sauvegarder l'état des registres du processeur avant de charger dans les registres les données du processus à lancer. C'est qu'on appelle la commutation de contexte ou le changement de contexte. Cette sauvegarde est nécessaire pour pouvoir poursuivre ultérieurement l'exécution du processus suspendu.
-    Le processeur passe donc d'un processus à un autre en exécutant chaque processus pendant quelques dizaines ou centaines de millisecondes. Le temps d'allocation du processeur au processus est appelé quantum. Cette commutation entre processus doit être rapide, c'est-à-dire, exiger un temps nettement inférieur au quantum.
-
-    Le processeur, à un instant donné, n'exécute réellement qu'un seul processus, mais pendant une seconde, le processeur peut exécuter plusieurs
-    processus et donne ainsi l'impression de parallélisme (pseudo-parallélisme).
-
-    **Problèmes :**
-
-    - Choix de la valeur du quantum.
-
-    - Choix du prochain processus à exécuter dans chacune des situations suivantes :
-
-    1. Le processus en cours se bloque (passe à l'état Attente).
-    2. Le processus en cours passe à l'état Prêt (fin du quantum...).
-    3. Un processus passe de l'état Attente à l'état Prêt (fin d'une E/S).
-    4. Le processus en cours se termine.
+    Le temps d'allocation du processeur à un processus est appelé **quantum**. Le processeur passe d'un processus à l'autre à chaque expiration du quantum, donnant l'impression de parallélisme (pseudo-parallélisme).
 
 
-!!! abstract "Ordonnancement du plus petit temps de séjour"
-    L'ordonnancement du plus petit temps de séjour ou Shortest Remaining Time est la version préemptive de l'algorithme SJF. Un processus arrive dans la file de processus, l'ordonnanceur compare la valeur espérée pour ce processus contre la valeur du processus actuellement en exécution. Si le temps du nouveau processus est plus petit, il rentre en exécution immédiatement.
+!!! tip "Pour aller plus loin : Shortest Remaining Time (SRT)"
+    Version préemptive de SJF : quand un processus arrive, s'il a un temps d'exécution restant inférieur à celui du processus en cours, il prend immédiatement la main.
 
 !!! abstract "Ordonnancement circulaire" 
     L'algorithme du tourniquet, circulaire ou round robin est un algorithme ancien, simple, fiable et très utilisé. Il mémorise    dans une file du type FIFO (First In First Out) la liste des processus prêts, c'est-à-dire en attente d'exécution.
@@ -231,7 +199,7 @@ Je vous laisse créer le tableau comportant les temps d'attente et de terminaiso
     
     __Choix de la valeur du quantum:__
 
-    Un quantum trop petit provoque trop de commutations de processus et abaisse l'efficacité du processeur. Un quantum trop élevé augmente le temps de réponse des courtes commandes en mode interactif. Un quantum entre 20 et 50 ms est souvent un compromis raisonnable
+    Un quantum trop petit provoque trop de commutations et abaisse l'efficacité du processeur. Un quantum trop grand augmente le temps de réponse des processus courts.
 
 ## Exemple
 
@@ -467,6 +435,6 @@ Donner le schéma d'exécution des algorithmes d'ordonnancement suivants (il n'e
 Quelle politique d'ordonnancement donne le meilleur résultat c'est-à-dire celui correspondant à la durée minimale d'attente moyenne par processus ?
 
 - Q10. Quelle commande permet de lister les processus en cours sur la machine?
-- Q11. Quelle Combinaison de touche permet de killer un processus dans un terminal?
-- Q12. Quelle Combinaison de touche permet de killer le processus en avant plan dans un terminal?
+- Q11. Quelle commande permet de terminer un processus à partir de son PID ?
+- Q12. Quelle combinaison de touches permet de terminer le processus en avant plan dans un terminal ?
 - Q13. Réalisez le diagramme d'état d'un processus.

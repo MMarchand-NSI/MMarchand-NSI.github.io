@@ -6,7 +6,6 @@ L'exécution d'un processus nécessite un ensemble de ressources (mémoire princ
 - __Utilisation de la ressource__ : Le processus peut utiliser la ressource.
 - __Libération de la ressource__ : Le processus libère la ressource demandée et allouée. 
 
-Lorsqu'un processus demande un accès exclusif à une ressource déjà allouée à un autre processus, le système d'exploitation décide de le mettre en attente jusqu'à ce que la ressource demandée devienne disponible ou lui retourner un message indiquant que la ressource n'est pas disponible: réessayer plus tard.
 
 !!! danger "Interblocage (deadlock)"
     Des problèmes peuvent survenir, lorsque les processus obtiennent des accès exclusifs aux ressources. Par exemple, un processus A détient une ressource P et attend une autre ressource Q qui est utilisée par un autre processus B; le processus B détient la ressource Q et attend la ressource P. On a une situation d'interblocage (deadlock en anglais) car Les deux processus attendent mutuellement des ressources qui ne seront jamais libérées. Les deux processus vont attendre indéfiniment.
@@ -35,20 +34,6 @@ Lorsqu'un processus demande un accès exclusif à une ressource déjà allouée 
     ![alt text](image-1.png)
 
 
-!!! example "accès périphériques"
-
-    Supposons que deux processus A et B veulent imprimer, en utilisant la même imprimante, un fichier stocké sur une bande magnétique. La taille de ce fichier est supérieure à la capacité du disque. Chaque processus a besoin d'un accès exclusif au dérouleur et à l'imprimante simultanément. On a une situation d'interblocage si :
-
-    - Le processus A utilise l'imprimante et demande l'accès au dérouleur.
-    - Le processus B détient le dérouleur de bande et demande l'imprimante.
-
-    !!! question Python
-        Le programme imprimante.py donné permet de rendre compte de cet interblocage. (Il utilise de ce fait une mauvaise façon de programmer)
-        Les instructions sleep permettent de simuler des actions supplémentaires (et de passer la main aux autres processus entre temps).
-        L'instruction with verrou signifie "attend que la ressource soit disponible et exécute le bloc ensuite en la verrouillant, puis dévérouille la ressource. C'est pour ça qu'on utilise with pour lire et écrire dans des fichiers.
-
-        Proposez une résolution de cette situation d'interblocage en modifiant sensiblement le programme python.
-    
 
 !!! abstract "Détection d'interblocage"
     __Le graphe d'allocation des ressources__ est un graphe biparti composé de deux types de nœuds et d'un ensemble d'arcs :
