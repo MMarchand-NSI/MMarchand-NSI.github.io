@@ -5093,7 +5093,6 @@
 <li><strong>Utilisation de la ressource</strong> : Le processus peut utiliser la ressource.</li>
 <li><strong>Libération de la ressource</strong> : Le processus libère la ressource demandée et allouée. </li>
 </ul>
-<p>Lorsqu'un processus demande un accès exclusif à une ressource déjà allouée à un autre processus, le système d'exploitation décide de le mettre en attente jusqu'à ce que la ressource demandée devienne disponible ou lui retourner un message indiquant que la ressource n'est pas disponible: réessayer plus tard.</p>
 <div class="admonition danger">
 <p class="admonition-title">Interblocage (deadlock)</p>
 <p>Des problèmes peuvent survenir, lorsque les processus obtiennent des accès exclusifs aux ressources. Par exemple, un processus A détient une ressource P et attend une autre ressource Q qui est utilisée par un autre processus B; le processus B détient la ressource Q et attend la ressource P. On a une situation d'interblocage (deadlock en anglais) car Les deux processus attendent mutuellement des ressources qui ne seront jamais libérées. Les deux processus vont attendre indéfiniment.</p>
@@ -5121,21 +5120,6 @@
 <p class="admonition-title">circulation routière</p>
 <p>Considérons deux routes à double sens qui se croisent comme dans la figure suivante, où la circulation est impossible. Un problème d'interblocage y est présent. A chaque intersection, une voiture (processus) attend que la route (ressource) se libère.</p>
 <p><img alt="alt text" src="../image-1.png" /></p>
-</div>
-<div class="admonition example">
-<p class="admonition-title">accès périphériques</p>
-<p>Supposons que deux processus A et B veulent imprimer, en utilisant la même imprimante, un fichier stocké sur une bande magnétique. La taille de ce fichier est supérieure à la capacité du disque. Chaque processus a besoin d'un accès exclusif au dérouleur et à l'imprimante simultanément. On a une situation d'interblocage si :</p>
-<ul>
-<li>Le processus A utilise l'imprimante et demande l'accès au dérouleur.</li>
-<li>Le processus B détient le dérouleur de bande et demande l'imprimante.</li>
-</ul>
-<div class="admonition question python">
-<p class="admonition-title">Question</p>
-<p>Le programme imprimante.py donné permet de rendre compte de cet interblocage. (Il utilise de ce fait une mauvaise façon de programmer)
-Les instructions sleep permettent de simuler des actions supplémentaires (et de passer la main aux autres processus entre temps).
-L'instruction with verrou signifie "attend que la ressource soit disponible et exécute le bloc ensuite en la verrouillant, puis dévérouille la ressource. C'est pour ça qu'on utilise with pour lire et écrire dans des fichiers.</p>
-<p>Proposez une résolution de cette situation d'interblocage en modifiant sensiblement le programme python.</p>
-</div>
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">Détection d'interblocage</p>
