@@ -11,6 +11,8 @@ La grille est composée de cellules pouvant être allumées ou éteintes. Clique
 
 Le code est organisé autour de la bibliothèque `metagrid`, qui prend en charge l'affichage et les interactions. Dans `draw`, on colorie chaque cellule avec `jeu.set_cell_color(i, j, "#RRGGBB")`.
 
+Installer metagrid dans le terminal: `uv add metagrid`
+
 Crée un fichier `lightsout.py` avec ce squelette complet :
 
 ```python
@@ -55,7 +57,7 @@ def init():
     pass
 
 
-def cliquer(i: int, j: int):
+def cliquer(i: int, j: int, _modif: str):
     """Callback - appelé avec (i, j) quand le joueur clique une cellule."""
     global flag_game_over
     pass
@@ -117,20 +119,7 @@ Avant d'ajouter toute interaction, on veut juste voir quelque chose à l'écran.
                     ...
                 jeu.set_cell_color(i, j, couleur)
 
-    def cliquer(i: int, j: int):
-        pass
 
-    def touche(key: str):
-        pass
-
-    if __name__ == "__main__":
-        jeu = metagrid.create(NB_LIGNES, NB_COLONNES, TAILLE_CASE, 4)
-        jeu.init(init)
-        jeu.callback_click(cliquer)
-        jeu.callback_key(touche)
-        jeu.update(update)
-        jeu.draw(draw)
-        jeu.start()
     ```
 
     Lancez le programme. Vous devez voir une grille vide. Rien ne se passe encore au clic, c'est normal.
@@ -189,8 +178,8 @@ La vraie règle de Lights Out : cliquer sur `(i, j)` inverse cette cellule **et 
                     if ...:  # vérification des bords
                         grille[ni][nj] = ...
 
-    def cliquer(i: int, j: int):
-        toggle(i, j)
+    def cliquer(i: int, j: int, _modif: str):
+        ...
     ```
 
     Testez mentalement : `toggle(0, 0)` sur une grille toute éteinte doit allumer `(0,0)`, `(1,0)` et `(0,1)` uniquement.
@@ -204,8 +193,8 @@ La vraie règle de Lights Out : cliquer sur `(i, j)` inverse cette cellule **et 
 
     ```python
     def gagne() -> bool:
-        for i in range(NB_LIGNES):
-            for j in range(NB_COLONNES):
+        for i in ...:
+            for j in ...:
                 if ...:
                     return False
         return True
@@ -240,11 +229,11 @@ La vraie règle de Lights Out : cliquer sur `(i, j)` inverse cette cellule **et 
     - puis on vérifie si la partie est gagnée avec `gagne()`.
 
     ```python
-    def cliquer(i: int, j: int):
+    def cliquer(i: int, j: int, _modif: str):
         global flag_game_over
         if ...:
             return
-        toggle(i, j)
+        ...
         if ...:
             flag_game_over = True
     ```
