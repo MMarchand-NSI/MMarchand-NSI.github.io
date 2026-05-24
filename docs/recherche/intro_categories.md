@@ -42,19 +42,19 @@ Prenons quelques concepts simples :
 
 On peut relier ces concepts avec une flèche : → signifie "est plus particulier que", ou si on préfère, "est inclus dans".
 
-```
-labrador → chien → mammifère → animal → être vivant
+```mermaid
+graph LR
+    A[labrador] --> B[chien] --> C[mammifère] --> D[animal] --> E[être vivant]
 ```
 
 Chaque flèche dit quelque chose de concret, car tout labrador est un chien, tout chien est un mammifère, et ainsi de suite.
 
 Cette organisation a une propriété qu'on voit tout de suite : **les flèches se composent**. Si tout labrador est un chien, et tout chien est un mammifère, alors tout labrador est un mammifère. On peut enchaîner les flèches.
 
-```
-labrador → chien → mammifère
-       \________________/
-          donne aussi :
-        labrador → mammifère
+```mermaid
+graph LR
+    A[labrador] --> B[chien] --> C[mammifère]
+    A --> C
 ```
 
 Il y a aussi une autre propriété, plus discrète : chaque concept est relié à lui-même. Un labrador est un labrador. Ça paraît tellement évident que ça semble inutile, mais on verra pourquoi ce détail a son importance.
@@ -151,7 +151,22 @@ Un foncteur est une traduction d'une catégorie vers une autre qui **préserve l
 
 Pourquoi est-ce intéressant ? Parce que la question de savoir si une traduction préserve la structure est précisément la bonne question à poser quand on veut savoir si deux théories parlent du même phénomène avec des mots différents, ou si elles disent vraiment des choses différentes.
 
-Un exemple simple avec les deux catégories qu'on a déjà construites. On peut définir un foncteur F qui traduit la catégorie des concepts vers la catégorie des propositions logiques. La règle de traduction est la suivante : F transforme chaque concept C en la proposition "x est un C", et chaque flèche d'inclusion entre deux concepts en une flèche d'implication entre les propositions correspondantes. Concrètement : F(labrador) = "x est un labrador", F(chien) = "x est un chien", et la flèche labrador → chien devient l'implication "x est un labrador" → "x est un chien". La composition est préservée, l'identité aussi. C'est un foncteur.
+Un exemple simple avec les deux catégories qu'on a déjà construites. On peut définir un foncteur F qui traduit la catégorie des concepts vers la catégorie des propositions logiques. La règle de traduction est la suivante : F transforme chaque concept C en la proposition "x est un C", et chaque flèche d'inclusion entre deux concepts en une flèche d'implication entre les propositions correspondantes.
+
+```mermaid
+graph LR
+    subgraph Concepts
+        A[labrador] --> B[chien] --> C[mammifère]
+    end
+    subgraph Propositions
+        D["x est un labrador"] --> E["x est un chien"] --> F["x est un mammifère"]
+    end
+    A -.->|F| D
+    B -.->|F| E
+    C -.->|F| F
+```
+
+La composition est préservée, l'identité aussi. C'est un foncteur.
 
 Ce que ça montre : la hiérarchie des genres et la logique d'implication ne sont pas deux choses différentes qu'on comparerait par analogie. Ce sont la même structure, traduite d'un langage dans un autre. Le foncteur rend cette équivalence précise et vérifiable.
 
