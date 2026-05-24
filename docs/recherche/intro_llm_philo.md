@@ -32,7 +32,7 @@ Tout ce qui suit parle des LLM. Uniquement des LLM.
 
 ## 2. Un texte, ça ressemble à quoi pour un programme ?
 
-Avant d'expliquer ce que fait un LLM, il faut résoudre un problème préalable qui n'est pas évident : un programme informatique travaille avec des nombres. Des mots, des phrases, des paragraphes, ça n'est pas des nombres. Ou plutôt : si. Un des principes fondamentaux de l'informatique est que tout objet formel est représentable sous la forme d'un entier naturel. Un texte n'échappe pas à la règle : ce qu'on voit affiché à l'écran ou imprimé sur une page est le résultat d'une conversion, ces nombres ont été traduits en signaux appropriés pour l'écran ou l'imprimante. Mais ces nombres qui encodent les caractères un par un ne disent rien sur ce que les mots signifient, ni sur leurs relations. Alors comment passer de cette représentation brute à quelque chose d'utile pour prédire un token ?
+Avant d'expliquer ce que fait un LLM, il faut résoudre un problème préalable qui n'est pas évident : un programme informatique travaille avec des nombres. Des mots, des phrases, des paragraphes, ça n'est pas des nombres. Ou plutôt : si. Un des principes fondamentaux de l'informatique est que tout objet formel est représentable sous la forme d'un entier naturel. Un texte n'échappe pas à la règle : ce qu'on voit affiché à l'écran ou imprimé sur une page est le résultat d'une conversion, ces nombres ont été traduits en signaux appropriés pour l'écran ou l'imprimante. Mais ces nombres qui encodent les caractères un par un ne disent rien sur ce que les mots signifient, ni sur leurs relations. Alors comment passer de cette représentation brute à quelque chose d'utile pour prédire ?
 
 La réponse se fait en deux étapes, dans cet ordre.
 
@@ -130,7 +130,7 @@ Il y a plusieurs idées reçues sur les LLM qui valent la peine d'être corrigé
 
 **Un LLM ne raisonne pas au sens où on entend habituellement ce mot, et n'utilise pas de procédé déductif.** C'est peut-être le malentendu le plus lourd de conséquences, parce qu'il touche directement à ce qu'un philosophe est formé à analyser : l'argumentation, la logique, l'inférence.
 
-Quand un LLM écrit "donc", "par conséquent", "il s'ensuit que", "si... alors...", il ne procède à aucune déduction. Il produit le token qui suit statistiquement ce type de formulation dans les textes qu'il a vus — et oui, "qu'il a vus" est encore un glissement : le modèle n'a rien vu, mais on ne s'en privera pas, le lecteur est maintenant averti. La forme du raisonnement est là. Le raisonnement, non.
+Quand un LLM écrit "donc", "par conséquent", "il s'ensuit que", "si... alors...", il ne procède à aucune déduction. Il produit le token qui suit statistiquement ce type de formulation dans les textes qu'il a vus, et oui, "qu'il a vus" est encore un glissement : le modèle n'a rien vu, mais on ne s'en privera pas, le lecteur est maintenant averti. La forme du raisonnement est là. Le raisonnement, non.
 
 Un exemple simple : si on demande à un LLM de résoudre un problème de logique, il peut produire la bonne réponse. Mais pas parce qu'il a appliqué une règle d'inférence. Parce que des problèmes similaires, avec des solutions similaires, étaient dans ses données d'entraînement. Si on reformule le même problème d'une façon légèrement inhabituelle, le modèle peut échouer là où un raisonnement véritable réussirait, précisément parce que la forme nouvelle ne ressemble plus aux exemples mémorisés.
 
