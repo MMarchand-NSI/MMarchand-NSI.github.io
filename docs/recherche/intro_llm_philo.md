@@ -14,7 +14,7 @@ Cette année 2026, le sujet de composition française commun à l'ENS Paris-PSL 
 
 Mais en lisant ce sujet, j'ai eu un malaise que je n'arrive pas à mettre de côté. Non pas que la question soit mal posée, mais parce qu'elle pointe vers ce qui me semble un cloisonnement tenace : les sciences humaines et les sciences formelles vivent dans des bâtiments différents, mangent dans des cantines différentes, et lisent des revues différentes. Le débat sur l'IA en porte les traces : soit on sait comment ça marche et on ne pense pas à ce que ça veut dire, soit on pense à ce que ça veut dire sans savoir comment ça marche. Ce texte est une tentative, depuis le côté technique, de contribuer au pont. Son objectif est simple : donner à un lecteur curieux, sans formation en informatique, suffisamment de compréhension du fonctionnement réel de ces systèmes pour que les questions qu'ils soulèvent puissent être posées depuis un point de vue plus large.
 
-Je ne suis pas philosophe. Je suis professeur de sciences informatiques, pas ingénieur en apprentissage automatique. Je suis quelqu'un qui a passé du temps à essayer de comprendre comment ces systèmes fonctionnent, et qui a trouvé que c'était à la fois plus simple à saisir dans ses principes, et plus étrange à mesure qu'on creuse, que je ne l'anticipais.
+Je suis professeur de sciences informatiques, pas philosophe, pas spécialiste de l'apprentissage automatique. Mais j'ai passé du temps à essayer de comprendre comment ces systèmes fonctionnent, et j'ai trouvé que c'était à la fois plus simple à saisir dans ses principes, et plus étrange à mesure qu'on creuse, que je ne l'anticipais.
 
 ---
 
