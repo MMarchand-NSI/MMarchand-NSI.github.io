@@ -166,6 +166,8 @@ La citation de Mouawad dit que l'IA ne saura jamais saisir le tremblement. C'est
 
 Ce texte ne tranche pas sur la question du critère du jugement. Il propose seulement que savoir comment ça fonctionne déplace la question, même si ça ne la résout pas.
 
+Ce déplacement est concret. Avant de connaître ce mécanisme, la question de Mouawwad porte sur "l'IA", une entité floue à qui on peut prêter, selon son humeur ou ses craintes, des intentions, une conscience, un désir. Après l'avoir lu, la question se repose différemment : est-ce qu'un système qui prédit des tokens par calcul statistique, sans ancrage dans le monde, sans procédé déductif au sens habituel, sans mémoire entre les échanges, dont le fonctionnement interne reste opaque même à ceux qui le construisent, peut saisir quelque chose ? Et surtout : que voudrait dire "saisir" pour un tel système ? Ce n'est plus tout à fait la même question. Elle est plus précise. Mouawwad avait peut-être raison. Mais maintenant on peut demander : raison sur quoi, exactement ?
+
 Le cloisonnement entre ceux qui savent comment ça marche et ceux qui pensent à ce qu'on en fait n'est pas une fatalité. Il est juste inconfortable à traverser. J'espère que ce texte a rendu la traversée un peu moins rude.
 
 ---
