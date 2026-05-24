@@ -5331,15 +5331,13 @@
 <li><em>labrador</em></li>
 </ul>
 <p>On peut relier ces concepts avec une flèche : → signifie "est plus particulier que", ou si on préfère, "est inclus dans".</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>labrador → chien → mammifère → animal → être vivant
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    A[labrador] --&gt; B[chien] --&gt; C[mammifère] --&gt; D[animal] --&gt; E[être vivant]</code></pre>
 <p>Chaque flèche dit quelque chose de concret, car tout labrador est un chien, tout chien est un mammifère, et ainsi de suite.</p>
 <p>Cette organisation a une propriété qu'on voit tout de suite : <strong>les flèches se composent</strong>. Si tout labrador est un chien, et tout chien est un mammifère, alors tout labrador est un mammifère. On peut enchaîner les flèches.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>labrador → chien → mammifère
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>       \________________/
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>          donne aussi :
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        labrador → mammifère
-</code></pre></div>
+<pre class="mermaid"><code>graph LR
+    A[labrador] --&gt; B[chien] --&gt; C[mammifère]
+    A --&gt; C</code></pre>
 <p>Il y a aussi une autre propriété, plus discrète : chaque concept est relié à lui-même. Un labrador est un labrador. Ça paraît tellement évident que ça semble inutile, mais on verra pourquoi ce détail a son importance.</p>
 <p>Ce que vous venez de voir satisfait exactement les conditions d'une catégorie. Voyons lesquelles.</p>
 <hr />
@@ -5393,7 +5391,18 @@
 <p>C'est ce que capture la notion de <strong>foncteur</strong>.</p>
 <p>Un foncteur est une traduction d'une catégorie vers une autre qui <strong>préserve la structure</strong> : les objets sont traduits en objets, les flèches en flèches, et les compositions restent des compositions. On ne peut pas traduire n'importe comment : la traduction doit respecter la façon dont les relations sont organisées.</p>
 <p>Pourquoi est-ce intéressant ? Parce que la question de savoir si une traduction préserve la structure est précisément la bonne question à poser quand on veut savoir si deux théories parlent du même phénomène avec des mots différents, ou si elles disent vraiment des choses différentes.</p>
-<p>Un exemple simple avec les deux catégories qu'on a déjà construites. On peut définir un foncteur F qui traduit la catégorie des concepts vers la catégorie des propositions logiques. La règle de traduction est la suivante : F transforme chaque concept C en la proposition "x est un C", et chaque flèche d'inclusion entre deux concepts en une flèche d'implication entre les propositions correspondantes. Concrètement : F(labrador) = "x est un labrador", F(chien) = "x est un chien", et la flèche labrador → chien devient l'implication "x est un labrador" → "x est un chien". La composition est préservée, l'identité aussi. C'est un foncteur.</p>
+<p>Un exemple simple avec les deux catégories qu'on a déjà construites. On peut définir un foncteur F qui traduit la catégorie des concepts vers la catégorie des propositions logiques. La règle de traduction est la suivante : F transforme chaque concept C en la proposition "x est un C", et chaque flèche d'inclusion entre deux concepts en une flèche d'implication entre les propositions correspondantes.</p>
+<pre class="mermaid"><code>graph LR
+    subgraph Concepts
+        A[labrador] --&gt; B[chien] --&gt; C[mammifère]
+    end
+    subgraph Propositions
+        D["x est un labrador"] --&gt; E["x est un chien"] --&gt; F["x est un mammifère"]
+    end
+    A -.-&gt;|F| D
+    B -.-&gt;|F| E
+    C -.-&gt;|F| F</code></pre>
+<p>La composition est préservée, l'identité aussi. C'est un foncteur.</p>
 <p>Ce que ça montre : la hiérarchie des genres et la logique d'implication ne sont pas deux choses différentes qu'on comparerait par analogie. Ce sont la même structure, traduite d'un langage dans un autre. Le foncteur rend cette équivalence précise et vérifiable.</p>
 <p>D'après ce que j'en comprends, ce serait particulièrement utile pour des questions comme : est-ce que deux théories disent la même chose avec des mots différents ? Qu'est-ce qu'on perd ou qu'on préserve quand on passe d'un cadre conceptuel à un autre ? Ce sont en tout cas des questions qui me semblent familières en philosophie, et le foncteur semble y apporter un langage plus précis que l'intuition seule.</p>
 <p>En discutant, mon collègue m'a aussi demandé si les monades de Leibniz avaient un rapport avec la théorie des catégories. La question est naturelle : le mot "monade" existe dans les deux univers. En théorie des catégories, une monade est un foncteur particulier qui va d'une catégorie vers elle-même, avec des propriétés supplémentaires. C'est un concept qui devient de plus en plus courant en informatique : explicitement nommé dans les langages fonctionnels comme Haskell, mais présent aussi de façon plus discrète dans d'autres langages, comme Python avec ses décorateurs et wrappers.</p>
@@ -5436,7 +5445,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 24, 2026 12:05:10 UTC">May 24, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="May 24, 2026 12:14:34 UTC">May 24, 2026</span>
   </span>
 
     
