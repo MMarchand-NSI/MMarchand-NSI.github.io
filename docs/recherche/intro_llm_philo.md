@@ -175,3 +175,5 @@ Le cloisonnement entre ceux qui savent comment ça marche et ceux qui pensent à
 ---
 
 *Ce texte a été rédigé avec l'aide d'un LLM qui a proposé une structure initiale et aidé à la formulation et à la vérification de certains points factuels. La structure a été modifiée en cours de route. Les choix de contenu, l'orientation du discours, les exemples et le point de vue sont les miens.*
+
+*En fin de rédaction, j'ai posé au LLM une question directe : quelle est ma part de créativité dans ce texte ? Il m'a répondu, en substance, que la structure initiale et beaucoup de formulations venaient de lui, mais que toutes les corrections de posture épistémique, le refus de prétendre savoir ce que je ne sais pas, la vigilance sur ce qu'on peut affirmer et ce qu'on ne peut pas, avaient profondément changé le texte. Et qu'il m'appartenait de décider si la valeur d'un texte dépend de son origine ou de ce qu'il fait. C'est exactement la question de la section 6.*
