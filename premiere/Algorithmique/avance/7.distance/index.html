@@ -5506,9 +5506,9 @@
 
 
 <h1 id="dimensions-superieures-et-distances">Dimensions supérieures et distances</h1>
-<p>Il y a beaucoup de contextes en informatique, notamment en intelligence artificielle, où on voudrait pouvoir dire que deux objets sont semblables, en ayant une vision précise de ce que "semblable" veut dire. C'est ce qui permet par exemple à un algorithme de déterminer d'après une photo si elle représente un chat ou un chien. Pour y enir nous alons nous intéresser à la notion de distance en partant de ce qui vous a déjà été présenté.</p>
+<p>Il y a beaucoup de contextes en informatique, notamment en intelligence artificielle, où on voudrait pouvoir dire que deux objets sont semblables, en ayant une vision précise de ce que "semblable" veut dire. C'est ce qui permet par exemple à un algorithme de déterminer d'après une photo si elle représente un chat ou un chien. Pour y venir nous allons nous intéresser à la notion de distance en partant de ce qui vous a déjà été présenté.</p>
 <h2 id="distance-entre-des-points">Distance entre des points</h2>
-<p>Soient 2 points du plan <span class="arithmatex">\(A(a_0,a_1)\)</span> et <span class="arithmatex">\(B(b_0, b_1)\)</span> du plan</p>
+<p>Soient 2 points <span class="arithmatex">\(A(a_0,a_1)\)</span> et <span class="arithmatex">\(B(b_0, b_1)\)</span> du plan</p>
 <p><img alt="alt text" src="../../image-3.png" /></p>
 <p>Pythagore nous dit que:</p>
 <div class="arithmatex">\[AB^2 = AH^2 + BH^2\]</div>
@@ -5644,12 +5644,15 @@ window.addEventListener('load', async () => {
 </script>
 
 <p>Nous voyons maintenant distinctement 3 groupes se former sous nos yeux, car notre cerveau est capable d'estimer la distance entre ces groupes. On voit que le groupe 2 est "loin" des 2 autres, qui sont "collés". On se dit que les fleurs qui sont éloignées sont dissimilaires. Il ne s'agit pas de distance par rapport à la localisation, mais de distance par rapport à des caractéristiques choisies des fleurs.
-MAIS, il y a toujours une information qui nous manque visuellement pour avoir une idée de nos données, il s'agit ici de la longueur des pétales. Or nous avons épuisé les 3 dimensions physiques et la coloration, et nous savons que l'ajout d'une dimension peut bouleverser la donne.
+Mais il y a toujours une information qui nous manque visuellement pour avoir une idée de nos données, il s'agit ici de la longueur des pétales. Or nous avons épuisé les 3 dimensions physiques et la coloration, et nous savons que l'ajout d'une dimension peut bouleverser la donne.
 Ne vous fatiguez pas, il n'existe pas de magie pour "voir" les 4 dimensions numériques et ainsi pouvoir renouveler l'expérience de la distance visuelle en "voyant" des groupes se distinguer. Toute représentation graphique n'est qu'une projection de la réalité avec perte d'information.
 En réalité, rien ne nous empêche de caractériser les fleurs avec l'ensemble de leurs coordonnées dans un espace de dimension supérieure, même si on ne peut pas le voir avec nos yeux.
 Très basiquement, la dimension d'un ensemble d'éléments est le nombre de coordonnées dont vous avez besoin pour identifier un de ses éléments.
 Dans nos données, une fleur est identifiée par 5 coordonnées. La dimension de notre ensemble de fleurs est donc 5.</p>
-<p>Note: Dans le dernier graphique, nous voyons une projection en dimension 2 (l'écran ou la feuille) d'une projection en dimension 4 (Spatialement 3 dimensions, plus une dimension de couleur) de la totalité des données en dimension 5.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Dans le dernier graphique, nous voyons une projection en dimension 2 (l'écran ou la feuille) d'une projection en dimension 4 (spatialement 3 dimensions, plus une dimension de couleur) de la totalité des données en dimension 5.</p>
+</div>
 <h2 id="distances-en-dimension-n">Distances en dimension <span class="arithmatex">\(n\)</span></h2>
 <p>Oublions la dimension de la variété, concentrons nous sur les 4 coordonnées numériques et revenons à notre notion de distance. Comment établir une distance dans un espace à 4 dimensions?</p>
 <p>En dimension 2, pour deux points <span class="arithmatex">\(A(a_0, a_1)\)</span> et <span class="arithmatex">\(B(b_0, b_1)\)</span>
@@ -5688,7 +5691,7 @@ P_4: d(A, B) + d(B, C) \ge d(A,C)
 \end{cases}
 \]</div>
 <p>Dans un ensemble quelconque, n'importe quelle fonction qui satisfait à ces propriétés est, par définition, une distance.
-<span class="arithmatex">\(P_1\)</span> et <span class="arithmatex">\(P_2\)</span> signifient que la distance entre deux points est toujours positive (elle est définie positive), sauf quand les deux points sont égaux, ce qui équivaut à une distance de 0.
+<span class="arithmatex">\(P_1\)</span> et <span class="arithmatex">\(P_2\)</span> signifient que la distance entre deux points est toujours positive ou nulle (elle est définie positive), et elle vaut 0 uniquement quand les deux points sont égaux.
 <span class="arithmatex">\(P_3\)</span> dit que la distance est une notion symétrique, c'est à dire que la distance entre A et B est la même qu'entre B et A.
 <span class="arithmatex">\(P_4\)</span> s'appelle l'inégalité triangulaire. Si vous imaginez A, B et C comme les sommets d'un triangle, ça dit que si vous prenez la somme des longueurs de deux côtés, elle sera toujours supérieure ou égale à la longueur du côté restant.</p>
 <p>La notion physique de distance entre deux objets n'est qu'un cas très particulier de distance.</p>
@@ -5701,7 +5704,7 @@ d(A,B)=\sqrt{\sum_{i=0}^{n-1} (b_i-a_i)^2}
 <h3 id="la-distance-de-manhattan">La distance de Manhattan</h3>
 <p>Là où la distance Euclidienne calcule la longueur du "vol d'oiseau" (le segment bleu), la distance de Manhattan calcule la longueur en rouge. Elle s'appelle ainsi car, les rues de Manhattan étant perpendiculaires, ça correspond à la longueur du trajet réel pour y marcher d'un point <span class="arithmatex">\(A\)</span> à un point <span class="arithmatex">\(B\)</span>.</p>
 <p><img alt="alt text" src="../../image-6.png" /></p>
-<p>Sur le dessin, la distance de manhattan entre A et B est 14.</p>
+<p>Sur le dessin, la distance de Manhattan entre A et B est 14.</p>
 <div class="arithmatex">\[
 d(A,B)=\sum_{i=0}^{n-1} |b_i-a_i|
 \]</div>
@@ -5736,11 +5739,11 @@ d(A,B)=\sum_{i=0}^{n-1} |b_i-a_i|
 <p>C'est une leçon générale de l'informatique : la définition formelle d'une distance (P1 à P4) est un objet mathématique cohérent, mais en pratique on extrait de cette notion uniquement ce qui est utile au problème posé. Ici, seul l'ordre compte, pas les propriétés algébriques. Le produit scalaire normalisé fournit cet ordre au moindre coût de calcul.</p>
 </div>
 <h3 id="distance-entre-des-chaines-de-caracteres">Distance entre des chaînes de caractères</h3>
-<p>L'information est transmise aujourd'hui sous forme de 0 et de 1, comme "00111010010". La distance de Hamming entre deux de ces chaîne de caractères, de même taille, est définie comme le nombre de caractères qu'il faut modifier dans une chaîne pour obtenir l'autre. Par exemple, la distance entre les chaînes "00111010010" et "00100101" est 2, car il faut modifier les caractères aux indices 3 et 7 seulement. Il existe une autre distance plus poussée entre les chaînes de caractères utilisées dans les correcteurs orthographiques qui s'appelle la distance de Levenshtein. Elle prend en compte le nombre minimum d'ajouts, de suppressions et de remplacement de caractères pour obtenir l'autre chaîne. Lorsque votre correcteur orthographique souligne un mot en rouge, c'est qu'il ne le trouve pas dans le dictionnaire. Il vous propose alors les mots les plus similaires, ceux pour lesquels la distance de levenshtein est la plus petite.</p>
+<p>Lorsqu'on transmet des données numériques sur un réseau, des erreurs peuvent survenir et modifier des bits. On veut quantifier combien de bits ont été altérés entre le message envoyé et le message reçu, pour détecter ou corriger ces erreurs. L'information est transmise aujourd'hui sous forme de 0 et de 1, comme "00111010010". La distance de Hamming entre deux de ces chaînes de caractères, de même taille, est définie comme le nombre de caractères qu'il faut modifier dans une chaîne pour obtenir l'autre. Par exemple, la distance entre les chaînes "00111010010" et "00100010010" est 2, car il faut modifier les caractères aux indices 3 et 4 seulement. Il existe une autre distance plus poussée entre les chaînes de caractères utilisées dans les correcteurs orthographiques qui s'appelle la distance de Levenshtein. Elle prend en compte le nombre minimum d'ajouts, de suppressions et de remplacement de caractères pour obtenir l'autre chaîne. Lorsque votre correcteur orthographique souligne un mot en rouge, c'est qu'il ne le trouve pas dans le dictionnaire. Il vous propose alors les mots les plus similaires, ceux pour lesquels la distance de levenshtein est la plus petite.</p>
 <h3 id="la-distance-tau-de-kendall">La distance <span class="arithmatex">\(\tau\)</span> de Kendall</h3>
-<p>Elle est utilisée en bio-informatique dans la comparaison de séquences génétiques, ainsi que plus généralement dans les problémes de classement. C'est une distance entre des listes. Elle est équivalente au nombre d'échanges nécessaires à l'algorithme de tri à bulle pour passer d'une liste à l'autre.</p>
+<p>Parfois les données ne sont pas des nombres mais des classements : deux utilisateurs ordonnent leurs films préférés différemment, deux médecins classent des symptômes par ordre d'importance, deux séquences génétiques diffèrent par l'ordre de leurs éléments. Il faut une distance qui mesure à quel point deux ordres se ressemblent. C'est une distance entre des listes. Elle est équivalente au nombre d'échanges nécessaires à l'algorithme de tri à bulle pour passer d'une liste à l'autre.</p>
 <h3 id="la-distance-de-minkowski">La distance de Minkowski</h3>
-<p>C'est une généralisation de la distance Euclidienne et de la distance de Manhattan.</p>
+<p>En pratique, on ne sait pas toujours a priori quelle distance est la plus adaptée à un jeu de données. La distance de Minkowski offre une famille de distances paramétrée par un réel <span class="arithmatex">\(p\)</span>, ce qui permet de tester différentes sensibilités sans changer de formule. C'est une généralisation de la distance euclidienne et de la distance de Manhattan.</p>
 <p>La distance Euclidienne en dimension n peut se réécrire ainsi:</p>
 <div class="arithmatex">\[
 d(A,B)=\left(\sum_{i=0}^{n-1} (b_i-a_i)^2 \right)^{1/2}
@@ -5750,15 +5753,15 @@ d(A,B)=\left(\sum_{i=0}^{n-1} (b_i-a_i)^2 \right)^{1/2}
 d(A,B)=\left(\sum_{i=0}^{n-1} |b_i-a_i|^p \right)^{1/p}
 \]</div>
 <p>Sa seule existence permet d'affirmer qu'il existe une infinité de fonctions de distances possibles, attendu que le domaine de valeurs de <span class="arithmatex">\(p\)</span> est infini.</p>
-<p>On l'appelle la distance de Minkowski d'ordre <span class="arithmatex">\(p \in \mathbb{R}, p \ge 1\)</span>. Quand <span class="arithmatex">\(p&lt;1\)</span>, la fonction viole l'inégalité triangulaire et ça n'est donc pas une distance, c'est alors une pseudo-distance.</p>
+<p>On l'appelle la distance de Minkowski d'ordre <span class="arithmatex">\(p \in \mathbb{R}, p \ge 1\)</span>. Quand <span class="arithmatex">\(p&lt;1\)</span>, la fonction viole l'inégalité triangulaire et ça n'est donc pas une distance.</p>
 <ul>
 <li>La distance de Minkowski d'ordre 1 est la distance de Manhattan.</li>
 <li>La distance de Minkowski d'ordre 2 est la distance Euclidienne.</li>
-<li>Sa limite quand <span class="arithmatex">\(p\)</span> tend vers <span class="arithmatex">\(+\infin\)</span> est appelée distance de Tchebychev.</li>
+<li>Sa limite quand <span class="arithmatex">\(p\)</span> tend vers <span class="arithmatex">\(+\infty\)</span> est appelée distance de Tchebychev.</li>
 </ul>
 <p>Plus <span class="arithmatex">\(p\)</span> est grand, plus on donne de l'importance aux grandes différences entre coordonnées. Faire varier <span class="arithmatex">\(p\)</span> permet d'ajuster la sensibilité des modèles qu'on cherche à construire.</p>
 <h3 id="distance-de-tchebychev">Distance de Tchebychev</h3>
-<p>La distance de Tchebychev est équivalente au plus grand écart entre chaques coordonnées de deux points. On l'appelle aussi distance de l'échiquier car c'est le nombre de tours minimal qu'il faut à un roi pour atteindre une case d'un échiquier à partir de sa position courante.
+<p>Certains problèmes ne s'intéressent pas à la distance globale entre deux objets, mais à leur pire écart sur une seule dimension. Une pièce mécanique est dans les tolérances si chacune de ses cotes est acceptable indépendamment des autres : c'est la dimension la plus déviante qui détermine si la pièce est bonne ou non. La distance de Tchebychev est équivalente au plus grand écart entre chaque coordonnée de deux points. On l'appelle aussi distance de l'échiquier car c'est le nombre de tours minimal qu'il faut à un roi pour atteindre une case d'un échiquier à partir de sa position courante.
 Elle s'écrit aussi sous une forme plus simple que la limite de la distance de Minkowski:</p>
 <div class="arithmatex">\[
 d(A, B) = \max_{0\le i &lt;n}\, |b_i-a_i|
