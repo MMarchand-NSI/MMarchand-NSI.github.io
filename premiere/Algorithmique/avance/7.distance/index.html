@@ -1387,10 +1387,9 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="La distance de Manhattan">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#la-similarite-cosinus" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1410,11 +1409,6 @@
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -5336,10 +5330,9 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="La distance de Manhattan">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#la-similarite-cosinus" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -5359,11 +5352,6 @@
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
         
@@ -5717,7 +5705,7 @@ d(A,B)=\sqrt{\sum_{i=0}^{n-1} (b_i-a_i)^2}
 <div class="arithmatex">\[
 d(A,B)=\sum_{i=0}^{n-1} |b_i-a_i|
 \]</div>
-<h3 id="la-similarite-cosinus">La similarité cosinus</h3>
+<h2 id="la-similarite-cosinus">La similarité cosinus</h2>
 <p>La distance euclidienne mesure l'écart entre deux points, mais dans certains contextes c'est la direction des vecteurs qui importe davantage que leur longueur. C'est le cas dans les grands modèles de langage (LLMs), présentés dans <a href="../../../../recherche/intro_llm_philo/">cet article</a> : chaque mot y est représenté par un vecteur dans un espace de plusieurs centaines de dimensions. Deux mots qui apparaissent souvent dans des contextes similaires pointent dans des directions voisines, indépendamment de la longueur de leurs vecteurs. Un mot très fréquent peut avoir un vecteur d'embedding plus long qu'un mot rare, sans que cela reflète une différence de comportement dans les textes.</p>
 <p>Pour comparer des vecteurs, on part du <strong>produit scalaire</strong>. Pour deux points <span class="arithmatex">\(A(a_0, ..., a_{n-1})\)</span> et <span class="arithmatex">\(B(b_0, ..., b_{n-1})\)</span>, il est défini par :</p>
 <div class="arithmatex">\[\vec{OA} \cdot \vec{OB} = \sum_{i=0}^{n-1} a_i \cdot b_i\]</div>
@@ -5735,12 +5723,12 @@ d(A,B)=\sum_{i=0}^{n-1} |b_i-a_i|
 <li><strong>P4</strong> : prenons trois vecteurs unitaires à 0°, 60° et 120°. On obtient <span class="arithmatex">\(d_{cos}(A,B) = \frac{1}{2}\)</span>, <span class="arithmatex">\(d_{cos}(B,C) = \frac{1}{2}\)</span>, <span class="arithmatex">\(d_{cos}(A,C) = \frac{3}{2}\)</span>. L'inégalité triangulaire exigerait <span class="arithmatex">\(\frac{3}{2} \leq \frac{1}{2} + \frac{1}{2} = 1\)</span>, ce qui est faux.</li>
 </ul>
 <p>C'est une <strong>mesure de dissimilarité</strong>, utilisée en pratique parce qu'elle est efficace, pas parce qu'elle satisfait les propriétés d'une distance.</p>
-<h4 id="le-produit-scalaire-normalise">Le produit scalaire normalisé</h4>
+<h3 id="le-produit-scalaire-normalise">Le produit scalaire normalisé</h3>
 <p>Une façon équivalente de calculer la similarité cosinus consiste à <strong>normaliser</strong> d'abord chaque vecteur, c'est-à-dire le diviser par sa norme pour obtenir un vecteur de longueur 1 :</p>
 <div class="arithmatex">\[\hat{A} = \frac{\vec{OA}}{\|\vec{OA}\|}, \qquad \hat{B} = \frac{\vec{OB}}{\|\vec{OB}\|}\]</div>
 <p>Le produit scalaire de ces deux vecteurs normalisés donne directement la similarité cosinus :</p>
 <div class="arithmatex">\[\hat{A} \cdot \hat{B} = \cos(\theta) = \text{sim}(A, B)\]</div>
-<p>C'est pourquoi on parle indifféremment de similarité cosinus ou de <strong>produit scalaire normalisé</strong>. Ramener les vecteurs à une longueur unitaire avant de les comparer permet de ne juger que de leur orientation, pas de leur magnitude.</p>
+<p>C'est pourquoi on parle indifféremment de similarité cosinus ou de <strong>produit scalaire normalisé</strong>. Ramener les vecteurs à une longueur unitaire avant de les comparer permet de ne juger que de leur orientation, pas de leur norme.</p>
 <div class="admonition info">
 <p class="admonition-title">Lien avec les LLMs</p>
 <p>L'article mentionne que "roi" et "reine" se retrouvent proches dans l'espace des embeddings, avec une différence de coordonnées proche de celle entre "homme" et "femme". La mesure utilisée est la similarité cosinus : ce qui compte n'est pas la longueur des vecteurs, mais la direction dans laquelle ils pointent. La distance euclidienne serait ici trompeuse, car un mot plus fréquent dans les textes d'entraînement aura tendance à produire un vecteur d'embedding de norme plus grande, et la distance euclidienne le signalerait comme "éloigné" de mots pourtant très souvent présents dans les mêmes contextes. La similarité cosinus corrige ce biais en ne regardant que l'angle.</p>
