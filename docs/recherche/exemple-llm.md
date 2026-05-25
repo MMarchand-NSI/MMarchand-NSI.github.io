@@ -2,7 +2,7 @@
 
 *Complément technique à l'article [Ce que fait vraiment un grand modèle de langage](intro_llm_philo.md)*
 
-Ce document est organisé en trois parties progressives. La première contient le code d'un LLM entraîné depuis zéro, concept par concept, en suivant l'ordre de l'article. La deuxième utilise un modèle pré-entraîné sur des milliards de tokens. La troisième aboutit à quelque chose qui ressemble au mécanisme question-réponse de ChatGPT. Chaque partie est un programme Python indépendant, fourni tel quel et prêt à être exécuté sans modification.
+Ce document est organisé en trois parties progressives. La première contient le code d'un LLM entraîné depuis zéro, concept par concept, en suivant l'ordre de l'article. La deuxième utilise un modèle pré-entraîné sur des milliards de tokens. La troisième aboutit à quelque chose qui ressemble au mécanisme question-réponse de ChatGPT. Chaque partie est un programme Python indépendant, fourni tel quel et prêt à être exécuté sans modification. Les parties 2 et 3 téléchargent un modèle au premier lancement, puis le mettent en cache localement : les exécutions suivantes ne nécessitent aucune connexion, et aucune donnée n'est envoyée à l'extérieur. Tout se passe sur la machine.
 
 La technologie est entièrement ouverte : n'importe qui peut construire un LLM. Ce que ce code démontre n'est pas un secret industriel. Le seul obstacle réel au passage à l'échelle est matériel : les capacités émergentes décrites dans l'article (raisonnement apparent, traduction, génération cohérente sur de longs textes) n'apparaissent qu'à partir d'un certain volume de paramètres et de données d'entraînement, ce qui nécessite des infrastructures inaccessibles à la plupart.
 
