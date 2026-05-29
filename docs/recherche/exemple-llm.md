@@ -46,13 +46,11 @@ BPE trouve un équilibre pragmatique : les fragments courants deviennent des tok
 
 ## Le mécanisme d'attention
 
-Pour prédire le token suivant "tapis" dans "le chat dort sur le tapis", le modèle doit décider à quels tokens précédents faire attention. "dort" et "sur" sont probablement plus utiles que "le". C'est ce que l'attention apprend à faire.
+Pour prédire le token suivant de "le chat dort sur le tapis", le modèle doit décider à quels tokens passés accorder de l'importance. "dort" et "sur" sont probablement plus utiles que "le" pour prédire "tapis". C'est ce que l'attention apprend à faire.
 
-Chaque token produit trois vecteurs : **Q** ("que cherche-t-on ?"), **K** ("qu'offre cette position ?"), **V** ("quelle information elle transmet"). On calcule un score de similarité $Q_i \cdot K_j$ entre chaque paire de positions, on met $-\infty$ pour les tokens futurs (le modèle ne peut pas regarder en avant), puis une fonction (le softmax) convertit ces scores bruts en poids qui somment à 1 : un score élevé devient un poids proche de 1, un score faible devient proche de 0, le tout de façon lisse et différentiable pour que l'entraînement puisse ajuster les paramètres. La sortie est la moyenne pondérée des vecteurs V :
+Pour chaque position, le modèle calcule un score de pertinence avec chacune des positions précédentes. Ces scores sont ensuite convertis en poids : un score élevé donne un poids proche de 1, un score faible donne un poids proche de 0, et l'ensemble somme à 1. La sortie est alors une combinaison de toutes les positions passées, avec plus de poids aux tokens jugés pertinents.
 
-$$\text{sortie}[i] = \sum_j \text{poids}(i,j) \cdot V_j$$
-
-La représentation de chaque token est ainsi enrichie par les tokens passés auxquels il a accordé de l'attention.
+Deux points importants. D'abord, le modèle ne peut regarder qu'en arrière : pour prédire "tapis", il voit "le chat dort sur le" mais pas ce qui suit. C'est imposé par un masque qui neutralise les scores futurs. Ensuite, les scores de pertinence ne sont pas fixés à la main : ils sont appris pendant l'entraînement, par essais et erreurs sur des millions d'exemples.
 
 ---
 
@@ -582,15 +580,13 @@ Aucune nouvelle bibliothèque Python. Seul le modèle change.
 
 ```python
 """
-Modèle d'instruction (fine-tuné via SFT + RLHF).
+Utilisation d'un modèle d'instruction (RLHF) via HuggingFace Transformers.
 
-Ce programme montre les deux comportements du même modèle :
-  - sans format de conversation : continuation narrative (comme un modèle de base)
-  - avec format de conversation  : réponse directe
+Contraste avec partie2.py :
+  - partie2.py  : modèle de base, continue le texte comme un livre
+  - ce fichier  : modèle d'instruction, répond aux questions
 
-L'architecture est identique à la partie 2. Seul l'entraînement diffère.
-Les tokens spéciaux (<|user|>, <|assistant|>) ne font l'objet d'aucun
-traitement particulier dans le code : leur rôle est appris statistiquement.
+L'architecture est identique. Seul l'entraînement diffère.
 """
 
 from transformers import AutoTokenizer, AutoModelForCausalLM
@@ -598,10 +594,14 @@ import torch
 
 # ---------------------------------------------------------------------------
 # CONSTANTES
+#   MODELE      : modèle instruction-tuned (fine-tuné sur des paires Q/R)
+#   NB_TOKENS   : longueur maximale de la réponse générée
+#   TEMPERATURE : créativité (0 = déterministe, >1 = plus aléatoire)
+#   TOP_P       : nucleus sampling
 # ---------------------------------------------------------------------------
 
 MODELE:      str   = "TinyLlama/TinyLlama-1.1B-Chat-v1.0"
-NB_TOKENS:   int   = 80
+NB_TOKENS:   int   = 200
 TEMPERATURE: float = 0.7
 TOP_P:       float = 0.9
 
@@ -616,32 +616,15 @@ modele.eval()
 print(f"Prêt — {sum(p.numel() for p in modele.parameters()):,} paramètres\n")
 
 # ---------------------------------------------------------------------------
-# GÉNÉRATION SANS FORMAT (comme un modèle de base)
-# ---------------------------------------------------------------------------
-
-def continuer(amorce: str, nb_tokens: int = NB_TOKENS) -> str:
-    """Continue le texte brut, sans format de conversation."""
-    entree = tokeniseur(amorce, return_tensors="pt")
-    with torch.no_grad():
-        sortie = modele.generate(
-            **entree,
-            max_new_tokens=nb_tokens,
-            do_sample=True,
-            temperature=TEMPERATURE,
-            top_p=TOP_P,
-            pad_token_id=tokeniseur.eos_token_id,
-        )
-    return tokeniseur.decode(sortie[0], skip_special_tokens=True)
-
-# ---------------------------------------------------------------------------
-# GÉNÉRATION AVEC FORMAT DE CONVERSATION
-#   apply_chat_template reproduit exactement le format vu pendant le fine-tuning.
-#   Le modèle n'a pas de code spécial pour "reconnaître une question" :
-#   il a appris que dans ce format, la continuation est une réponse directe.
+# GÉNÉRATION
+#   apply_chat_template formate la question dans le schéma de conversation
+#   sur lequel le modèle a été entraîné : [INST] question [/INST] réponse.
+#   Le modèle a appris que la continuation attendue après [/INST] est une
+#   réponse directe. C'est tout ce que fait le RLHF du point de vue du code.
 # ---------------------------------------------------------------------------
 
 def repondre(question: str, nb_tokens: int = NB_TOKENS) -> str:
-    """Pose une question dans le format de fine-tuning et retourne la réponse."""
+    """Pose une question au modèle d'instruction et retourne sa réponse."""
     messages = [
         {"role": "system", "content": "Tu es un assistant qui répond en français."},
         {"role": "user",   "content": question},
@@ -649,16 +632,20 @@ def repondre(question: str, nb_tokens: int = NB_TOKENS) -> str:
     entree = tokeniseur.apply_chat_template(
         messages, return_tensors="pt", add_generation_prompt=True
     )
+    input_ids      = entree if isinstance(entree, torch.Tensor) else entree["input_ids"]
+    attention_mask = torch.ones_like(input_ids)
     with torch.no_grad():
         sortie = modele.generate(
-            entree,
+            input_ids=input_ids,
+            attention_mask=attention_mask,
             max_new_tokens=nb_tokens,
+            max_length=None,
             do_sample=True,
             temperature=TEMPERATURE,
             top_p=TOP_P,
             pad_token_id=tokeniseur.eos_token_id,
         )
-    nouveaux_tokens = sortie[0][entree.shape[1]:]
+    nouveaux_tokens = sortie[0][input_ids.shape[1]:]
     return tokeniseur.decode(nouveaux_tokens, skip_special_tokens=True)
 
 # ---------------------------------------------------------------------------
@@ -666,16 +653,18 @@ def repondre(question: str, nb_tokens: int = NB_TOKENS) -> str:
 # ---------------------------------------------------------------------------
 
 if __name__ == "__main__":
-    question_test = "quelle est la capitale de la france?"
+    questions = [
+        "quelle est la capitale de la france?",
+        "explique ce qu'est un token en quelques phrases",
+        "écris un court poème sur l'automne",
+    ]
 
     print("=" * 60)
-    print("MÊME MODÈLE, MÊME QUESTION, FORMAT DIFFÉRENT")
+    print("QUESTIONS / RÉPONSES")
     print("=" * 60)
-    print(f"\nQuestion : {question_test}")
-    print(f"\nSans format de conversation :")
-    print(f"  {continuer(question_test)}")
-    print(f"\nAvec format de conversation :")
-    print(f"  {repondre(question_test)}")
+    for q in questions:
+        print(f"\nQuestion : {q}")
+        print(f"Réponse  : {repondre(q)}")
 
     print()
     print("=" * 60)

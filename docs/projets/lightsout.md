@@ -182,7 +182,6 @@ La vraie règle de Lights Out : cliquer sur `(i, j)` inverse cette cellule **et 
         ...
     ```
 
-    Testez mentalement : `toggle(0, 0)` sur une grille toute éteinte doit allumer `(0,0)`, `(1,0)` et `(0,1)` uniquement.
 
 ## Étape 5 - La fonction `gagne`
 
@@ -200,7 +199,26 @@ La vraie règle de Lights Out : cliquer sur `(i, j)` inverse cette cellule **et 
         return True
     ```
 
-## Étape 6 - Générer un puzzle soluble
+
+## Étape 6 - Vérifier la victoire
+
+!!! question "Gérer la victoire dans `cliquer`"
+    Quand le joueur clique sur `(i, j)` :
+    - si la partie est terminée (`flag_game_over` est `True`), on ne fait rien,
+    - sinon, on applique `toggle(i, j)`,
+    - puis on vérifie si la partie est gagnée avec `gagne()`.
+
+    ```python
+    def cliquer(i: int, j: int, _modif: str):
+        global flag_game_over
+        if ...:
+            return
+        ...
+        if ...:
+            flag_game_over = True
+    ```
+
+## Étape 7 - Générer un puzzle soluble
 
 !!! question "Initialisation aléatoire"
     Une idée naïve serait de remplir la grille aléatoirement. Mais certaines configurations de Lights Out sont insolubles.
@@ -220,29 +238,15 @@ La vraie règle de Lights Out : cliquer sur `(i, j)` inverse cette cellule **et 
             flag_game_over = False
         ```
 
-## Étape 7 - Finaliser le jeu
-
-!!! question "Gérer la victoire dans `cliquer`"
-    Quand le joueur clique sur `(i, j)` :
-    - si la partie est terminée (`flag_game_over` est `True`), on ne fait rien,
-    - sinon, on applique `toggle(i, j)`,
-    - puis on vérifie si la partie est gagnée avec `gagne()`.
-
-    ```python
-    def cliquer(i: int, j: int, _modif: str):
-        global flag_game_over
-        if ...:
-            return
-        ...
-        if ...:
-            flag_game_over = True
-    ```
+## Étape 8 - Touche finale
 
 !!! question "Touche `r` pour recommencer"
+
+    Si la touche appuyée est "r", alors on initialise le jeu.
+
     ```python
     def touche(key: str):
-        if key == ...:
-            init()
+        ...
     ```
 
 !!! question "Afficher la victoire dans `draw`"
@@ -253,11 +257,11 @@ La vraie règle de Lights Out : cliquer sur `(i, j)` inverse cette cellule **et 
         for i in range(NB_LIGNES):
             for j in range(NB_COLONNES):
                 if ...:
-                    couleur = COULEUR_VICTOIRE
+                    couleur = ...
                 elif ...:
-                    couleur = COULEUR_ALLUMEE
+                    couleur = ...
                 else:
-                    couleur = COULEUR_ETEINTE
+                    ...
                 jeu.set_cell_color(i, j, couleur)
     ```
 
