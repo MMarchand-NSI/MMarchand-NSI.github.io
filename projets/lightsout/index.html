@@ -3028,10 +3028,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#etape-6-generer-un-puzzle-soluble" class="md-nav__link">
+  <a href="#etape-6-verifier-la-victoire" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Étape 6 - Générer un puzzle soluble
+        Étape 6 - Vérifier la victoire
       
     </span>
   </a>
@@ -3039,10 +3039,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#etape-7-finaliser-le-jeu" class="md-nav__link">
+  <a href="#etape-7-generer-un-puzzle-soluble" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Étape 7 - Finaliser le jeu
+        Étape 7 - Générer un puzzle soluble
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etape-8-touche-finale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 8 - Touche finale
       
     </span>
   </a>
@@ -5273,10 +5284,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#etape-6-generer-un-puzzle-soluble" class="md-nav__link">
+  <a href="#etape-6-verifier-la-victoire" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Étape 6 - Générer un puzzle soluble
+        Étape 6 - Vérifier la victoire
       
     </span>
   </a>
@@ -5284,10 +5295,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#etape-7-finaliser-le-jeu" class="md-nav__link">
+  <a href="#etape-7-generer-un-puzzle-soluble" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Étape 7 - Finaliser le jeu
+        Étape 7 - Générer un puzzle soluble
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#etape-8-touche-finale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 8 - Touche finale
       
     </span>
   </a>
@@ -5552,7 +5574,6 @@
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">cliquer</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_modif</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="o">...</span>
 </code></pre></div>
-<p>Testez mentalement : <code>toggle(0, 0)</code> sur une grille toute éteinte doit allumer <code>(0,0)</code>, <code>(1,0)</code> et <code>(0,1)</code> uniquement.</p>
 </div>
 <h2 id="etape-5-la-fonction-gagne">Étape 5 - La fonction <code>gagne</code></h2>
 <div class="admonition question">
@@ -5567,7 +5588,23 @@
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="k">return</span> <span class="kc">True</span>
 </code></pre></div>
 </div>
-<h2 id="etape-6-generer-un-puzzle-soluble">Étape 6 - Générer un puzzle soluble</h2>
+<h2 id="etape-6-verifier-la-victoire">Étape 6 - Vérifier la victoire</h2>
+<div class="admonition question">
+<p class="admonition-title">Gérer la victoire dans <code>cliquer</code></p>
+<p>Quand le joueur clique sur <code>(i, j)</code> :
+- si la partie est terminée (<code>flag_game_over</code> est <code>True</code>), on ne fait rien,
+- sinon, on applique <code>toggle(i, j)</code>,
+- puis on vérifie si la partie est gagnée avec <code>gagne()</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">cliquer</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_modif</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">global</span> <span class="n">flag_game_over</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="k">if</span> <span class="o">...</span><span class="p">:</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>        <span class="k">return</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="o">...</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="k">if</span> <span class="o">...</span><span class="p">:</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        <span class="n">flag_game_over</span> <span class="o">=</span> <span class="kc">True</span>
+</code></pre></div>
+</div>
+<h2 id="etape-7-generer-un-puzzle-soluble">Étape 7 - Générer un puzzle soluble</h2>
 <div class="admonition question">
 <p class="admonition-title">Initialisation aléatoire</p>
 <p>Une idée naïve serait de remplir la grille aléatoirement. Mais certaines configurations de Lights Out sont insolubles.</p>
@@ -5578,37 +5615,22 @@
 </li>
 <li>
 <p>Mettez à jour <code>init</code> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">init</span><span class="p">():</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">global</span> <span class="n">grille</span><span class="p">,</span> <span class="n">flag_game_over</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="n">grille</span> <span class="o">=</span> <span class="p">[[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">NB_COLONNES</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NB_LIGNES</span><span class="p">)]</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        <span class="n">toggle</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> <span class="n">randint</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="n">flag_game_over</span> <span class="o">=</span> <span class="kc">False</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">init</span><span class="p">():</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="k">global</span> <span class="n">grille</span><span class="p">,</span> <span class="n">flag_game_over</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="n">grille</span> <span class="o">=</span> <span class="p">[[</span><span class="kc">False</span><span class="p">]</span> <span class="o">*</span> <span class="n">NB_COLONNES</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NB_LIGNES</span><span class="p">)]</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        <span class="n">toggle</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="o">...</span><span class="p">),</span> <span class="n">randint</span><span class="p">(</span><span class="o">...</span><span class="p">))</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">flag_game_over</span> <span class="o">=</span> <span class="kc">False</span>
 </code></pre></div>
 </li>
 </ol>
 </div>
-<h2 id="etape-7-finaliser-le-jeu">Étape 7 - Finaliser le jeu</h2>
-<div class="admonition question">
-<p class="admonition-title">Gérer la victoire dans <code>cliquer</code></p>
-<p>Quand le joueur clique sur <code>(i, j)</code> :
-- si la partie est terminée (<code>flag_game_over</code> est <code>True</code>), on ne fait rien,
-- sinon, on applique <code>toggle(i, j)</code>,
-- puis on vérifie si la partie est gagnée avec <code>gagne()</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">cliquer</span><span class="p">(</span><span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">_modif</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="k">global</span> <span class="n">flag_game_over</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="k">if</span> <span class="o">...</span><span class="p">:</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        <span class="k">return</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="o">...</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="k">if</span> <span class="o">...</span><span class="p">:</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        <span class="n">flag_game_over</span> <span class="o">=</span> <span class="kc">True</span>
-</code></pre></div>
-</div>
+<h2 id="etape-8-touche-finale">Étape 8 - Touche finale</h2>
 <div class="admonition question">
 <p class="admonition-title">Touche <code>r</code> pour recommencer</p>
+<p>Si la touche appuyée est "r", alors on initialise le jeu.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">touche</span><span class="p">(</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="k">if</span> <span class="n">key</span> <span class="o">==</span> <span class="o">...</span><span class="p">:</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>        <span class="n">init</span><span class="p">()</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="o">...</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
@@ -5618,11 +5640,11 @@
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NB_LIGNES</span><span class="p">):</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">NB_COLONNES</span><span class="p">):</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>            <span class="k">if</span> <span class="o">...</span><span class="p">:</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>                <span class="n">couleur</span> <span class="o">=</span> <span class="n">COULEUR_VICTOIRE</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>                <span class="n">couleur</span> <span class="o">=</span> <span class="o">...</span>
 <a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>            <span class="k">elif</span> <span class="o">...</span><span class="p">:</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>                <span class="n">couleur</span> <span class="o">=</span> <span class="n">COULEUR_ALLUMEE</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>                <span class="n">couleur</span> <span class="o">=</span> <span class="o">...</span>
 <a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>            <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>                <span class="n">couleur</span> <span class="o">=</span> <span class="n">COULEUR_ETEINTE</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>                <span class="o">...</span>
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>            <span class="n">jeu</span><span class="o">.</span><span class="n">set_cell_color</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">couleur</span><span class="p">)</span>
 </code></pre></div>
 <p>Lancez le programme et jouez quelques parties. Appuyez sur <code>r</code> pour générer un nouveau puzzle.</p>
