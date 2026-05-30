@@ -3,6 +3,12 @@
 On cherche à résoudre le problème suivant : étant donné un **motif** (pattern) et un **texte**,
 trouver la première position du texte à laquelle le motif apparaît, ou `None` s'il n'y apparaît pas.
 
+La démarche sera progressive. On part de l'algorithme naïf, puis on le décompose soigneusement
+en deux boucles imbriquées dont la structure devient le **socle commun** de tous les algorithmes suivants.
+Ce socle contient un seul paramètre libre : le déplacement appliqué après chaque échec.
+En y branchant des règles de saut de plus en plus informées, on obtient Horspool puis Boyer-Moore,
+sans jamais changer la structure elle-même.
+
 ```
 texte  :  a b r a c a d a b r a
 motif  :  a b r a
@@ -40,8 +46,10 @@ La boucle `for` parcourt toutes les positions de départ valides.
 
 ## 2. Décomposer avec des intervalles semi-ouverts
 
-Pour aller vers Horspool, il faut décomposer la comparaison caractère par caractère.
-Le raisonnement par **intervalles semi-ouverts** (de la forme $[a, b)$) rend les conditions de boucle très naturelles et évite tout débordement.
+On va décomposer la comparaison caractère par caractère et établir une structure de boucles
+qui servira de socle pour toute la suite. On modifiera ensuite cette structure pour vérifier
+le motif **en partant de la fin** : pourquoi ce sens-là prendra tout son sens plus loin.
+Le raisonnement par **intervalles semi-ouverts** (de la forme $[a, b)$) rend les conditions de boucle très naturelles, évite tout débordement, et donne une forme suffisamment régulière pour y brancher différentes stratégies de saut.
 
 ### La boucle externe : fenêtre glissante
 
@@ -79,7 +87,7 @@ def recherche_naive_full(motif: str, texte: str) -> int | None:
 
 ## 3. Variante : tester de droite à gauche
 
-On peut aussi comparer les caractères **en partant de la fin** du motif.
+Comme énoncé précédemment, on peut aussi comparer les caractères **en partant de la fin** du motif.
 `j` commence à `p` et descend jusqu'à `1` ; on accède à `motif[j-1]` et `texte[i+j-1]`.
 `j` parcourt l'intervalle $(0, p]$, d'où la condition `j > 0`.
 Si la boucle s'arrête parce que `j == 0`, le motif est entièrement reconnu.
@@ -118,7 +126,7 @@ d'un bout à l'autre.
 !!! note "Pas de débordement"
     Dans la variante droite-gauche, l'indice d'accès au texte est `i+j-1` avec `j ∈ (0, p]`,
     donc `j-1 ∈ [0, p)` et `i+j-1 ∈ [i, i+p)`.
-    La condition `i + p <= n` garantit `i+p-1 <= n-1` : aucun accès hors tableau.
+    La condition `i + p <= n` garantit `i+p-1 <= n-1` : aucun débordement d'indice.
 
 ---
 
@@ -128,7 +136,21 @@ L'algorithme naïf avance toujours de 1 après un échec. On peut faire beaucoup
 
 ### Idée : sauter plus loin
 
-Quand la comparaison de droite à gauche échoue, on regarde le caractère du texte **aligné avec la dernière position du motif** : `texte[i+p-1]`.
+Considérons la situation suivante. On cherche `"abra"` et la fenêtre courante contient :
+
+```
+texte :  . . . d . . . . . .
+motif : [a b r a]
+```
+
+Même sans comparer un seul caractère, on peut affirmer que le motif ne peut pas commencer
+aux trois positions suivantes non plus : si `'d'` n'apparaît pas dans `"abra"`,
+il ne peut s'aligner avec aucune case du motif. Les fenêtres `i+1`, `i+2`, `i+3` échouent
+nécessairement. On peut sauter directement à `i+4`.
+
+Cette observation s'applique à chaque position : en lisant le caractère du texte
+**aligné avec la dernière case du motif**, `texte[i+p-1]`, on connaît le saut minimal garanti
+sans risquer de manquer une occurrence.
 
 Ce caractère va forcément être comparé à `motif[p-1]` lors d'une prochaine fenêtre, à moins qu'on ne le dépasse.
 En cherchant où ce caractère apparaît dans le motif, on peut calculer de combien décaler la fenêtre pour
