@@ -63,6 +63,40 @@ Pour qu'elle tienne entièrement dans le texte `[0, n)`, il faut :
 
 $$i + p \leq n$$
 
+<div>
+<svg viewBox="0 0 620 88" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px;display:block;margin:1em 0;font-family:var(--md-code-font-family,monospace);font-size:13px">
+  <!-- axe -->
+  <line x1="30" y1="36" x2="578" y2="36" stroke="currentColor" stroke-width="1.5"/>
+  <polygon points="578,32 586,36 578,40" fill="currentColor"/>
+  <!-- ticks -->
+  <line x1="30"  y1="30" x2="30"  y2="42" stroke="currentColor" stroke-width="2"/>
+  <line x1="230" y1="30" x2="230" y2="42" stroke="currentColor" stroke-width="2"/>
+  <line x1="390" y1="30" x2="390" y2="42" stroke="currentColor" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="560" y1="30" x2="560" y2="42" stroke="currentColor" stroke-width="2" stroke-dasharray="5,3"/>
+  <!-- labels -->
+  <text x="30"  y="20" text-anchor="middle" fill="currentColor">0</text>
+  <text x="230" y="20" text-anchor="middle" fill="currentColor">i</text>
+  <text x="390" y="20" text-anchor="middle" fill="currentColor">i+p</text>
+  <text x="560" y="20" text-anchor="middle" fill="currentColor">n</text>
+  <!-- [0, n) -->
+  <line x1="30" y1="52" x2="560" y2="52" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="30"  y1="47" x2="30"  y2="57" stroke="currentColor" stroke-width="2"/>
+  <line x1="560" y1="47" x2="560" y2="57" stroke="currentColor" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="578" y="56" fill="currentColor">[0, n)</text>
+  <!-- [i, i+p) — fenêtre colorée -->
+  <rect x="230" y="29" width="160" height="14" fill="currentColor" opacity="0.12"/>
+  <line x1="230" y1="67" x2="390" y2="67" stroke="#2196f3" stroke-width="2"/>
+  <line x1="230" y1="62" x2="230" y2="72" stroke="#2196f3" stroke-width="2"/>
+  <line x1="390" y1="62" x2="390" y2="72" stroke="#2196f3" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="408" y="71" fill="#2196f3">[i, i+p)</text>
+  <!-- flèche p -->
+  <line x1="230" y1="82" x2="390" y2="82" stroke="#2196f3" stroke-width="1"/>
+  <polygon points="230,79 222,82 230,85" fill="#2196f3"/>
+  <polygon points="390,79 398,82 390,85" fill="#2196f3"/>
+  <text x="310" y="80" text-anchor="middle" fill="#2196f3" font-size="11">p</text>
+</svg>
+</div>
+
 ce qui donne la condition de boucle `while i + p <= n`.
 `i` parcourt donc l'intervalle $[0, n-p]$, soit $[0, n-p+1)$ en semi-ouvert.
 
@@ -421,7 +455,7 @@ motif :          a b c d a b
 
 **Cas 3 : aucun des deux.** Saut de `p`.
 
-!!! note "Exercice 1 : règle du bon suffixe (cas 1 seulement)"
+!!! question "Exercice 1 : règle du bon suffixe (cas 1 seulement)"
     Implémenter `bm_good_suffix(motif, texte)` en gérant uniquement le cas 1.
 
     - Précalcul : pour chaque longueur $l \in [1, p)$, trouver la position `k` la plus à droite
@@ -441,7 +475,7 @@ l'occurrence la plus à droite de `c` dans `motif[0..j-2]` avec cette position.
 Le saut dépend à la fois de `c` et de `j` : il faut, pour chaque caractère,
 connaître ses positions dans le motif afin de trouver la plus grande strictement inférieure à `j`.
 
-!!! note "Exercice 2 : règle du mauvais caractère"
+!!! question "Exercice 2 : règle du mauvais caractère"
     Implémenter `bm_bad_char(motif, texte)`.
 
     - Précalcul : dictionnaire `positions[c]` = liste triée des indices de `c` dans le motif.
@@ -454,7 +488,7 @@ connaître ses positions dans le motif afin de trouver la plus grande strictemen
 
 ### Boyer-Moore complet
 
-!!! note "Exercice 3 : Boyer-Moore"
+!!! question "Exercice 3 : Boyer-Moore"
     Combiner les deux règles dans `boyer_moore(motif, texte)` :
     à chaque échec, calculer les deux sauts et prendre le maximum.
     S'assurer que le résultat est toujours $\geq 1$.
@@ -462,10 +496,6 @@ connaître ses positions dans le motif afin de trouver la plus grande strictemen
 ---
 
 ## Annexe : le cas du motif vide
-
-$$\forall k \in [0,p) ,; \Bigl(, \text{motif}[k] = c ;\wedge; \forall k' \in (k,,p-1),; \text{motif}[k'] \neq c ,\Bigr) ;\Longrightarrow; \text{texte}[i+k] = c$$
-
-
 
 !!! note "Motif vide : un cas ordinaire des intervalles semi-ouverts"
     Avec `p = 0`, aucune branche de code ne traite ce cas explicitement.
@@ -478,7 +508,21 @@ $$\forall k \in [0,p) ,; \Bigl(, \text{motif}[k] = c ;\wedge; \forall k' \in (k,
     La condition de boucle est fausse dès le départ ; on sort immédiatement avec la valeur de succès (`j == 0` ou `j == p`).
     C'est la **vérité vacue** : aucun caractère n'a été comparé, donc aucun n'a pu être différent.
 
-    **Table des sauts** : `range(0, p-1) = range(0, -1)` est vide, aucun calcul effectué.
+    **Table des sauts (Horspool)** : `range(0, p-1) = range(0, -1)` est vide, aucun calcul effectué.
+    La boucle interne sort aussitôt avec `j == 0`, retourne 0. Horspool gère donc `p = 0` sans précondition.
 
     Avec des intervalles **fermés**, `[0, p-1]` pour `p = 0` donnerait `[0, -1]`, un intervalle sans sens
     qui nécessiterait un `if p == 0` explicite. Les semi-ouverts font disparaître ce cas particulier.
+
+!!! warning "Précondition `p > 0` pour les règles de saut de Boyer-Moore"
+    La règle du bon suffixe et la règle du mauvais caractère requièrent **`p > 0`**.
+
+    **Bon suffixe** : le précalcul itère sur `l ∈ [1, p)` = `[1, 0)`, vide, donc `gs` est vide.
+    Au moment du saut, `gs[p-j] = gs[0]` est indéfini : la règle n'a pas de sens pour un motif vide.
+
+    **Mauvais caractère** : si `p = 0`, la boucle interne sort avec `j = 0`, et on lirait
+    `texte[i + j - 1] = texte[i - 1]`, un accès hors de la fenêtre courante.
+
+    Ces deux règles exploitent la structure **interne** du motif : elles présupposent qu'il y a
+    des caractères à positionner. La précondition `p > 0` n'est pas un artifice technique,
+    elle reflète le fait que ces règles n'ont de sens que lorsqu'il y a un motif à aligner.
