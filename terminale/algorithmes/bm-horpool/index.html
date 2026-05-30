@@ -5898,30 +5898,55 @@ Le raisonnement par <strong>intervalles semi-ouverts</strong> (de la forme <span
 La fenêtre en position <code>i</code> occupe les indices <code>[i, i+p)</code>.
 Pour qu'elle tienne entièrement dans le texte <code>[0, n)</code>, il faut :</p>
 <div class="arithmatex">\[i + p \leq n\]</div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a> 0             i        i+p                           n
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a> ·──────────────·──────────·────────────────────────────·
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a> [                                                     )   [0, n)    &lt;- TEXTE
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>               [          )                                [i, i+p)   &lt;- MOTIF
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>                ←── p ─────→
-</code></pre></div>
+<p><svg viewBox="0 0 620 88" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:620px;display:block;margin:1em 0;font-family:var(--md-code-font-family,monospace);font-size:13px">
+  <!-- axe --></p>
+<p><line x1="30" y1="36" x2="578" y2="36" stroke="currentColor" stroke-width="1.5"/>
+  <polygon points="578,32 586,36 578,40" fill="currentColor"/>
+  <!-- ticks --></p>
+<p><line x1="30"  y1="30" x2="30"  y2="42" stroke="currentColor" stroke-width="2"/>
+  <line x1="230" y1="30" x2="230" y2="42" stroke="currentColor" stroke-width="2"/>
+  <line x1="390" y1="30" x2="390" y2="42" stroke="currentColor" stroke-width="2" stroke-dasharray="5,3"/>
+  <line x1="560" y1="30" x2="560" y2="42" stroke="currentColor" stroke-width="2" stroke-dasharray="5,3"/>
+  <!-- labels --></p>
+<p><text x="30"  y="20" text-anchor="middle" fill="currentColor">0</text>
+  <text x="230" y="20" text-anchor="middle" fill="currentColor">i</text>
+  <text x="390" y="20" text-anchor="middle" fill="currentColor">i+p</text>
+  <text x="560" y="20" text-anchor="middle" fill="currentColor">n</text>
+  <!-- [0, n) --></p>
+<p><line x1="30" y1="52" x2="560" y2="52" stroke="currentColor" stroke-width="1.5"/>
+  <line x1="30"  y1="47" x2="30"  y2="57" stroke="currentColor" stroke-width="2"/>
+  <line x1="560" y1="47" x2="560" y2="57" stroke="currentColor" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="578" y="56" fill="currentColor">[0, n)</text>
+  <!-- [i, i+p) — fenêtre colorée --></p>
+<p><rect x="230" y="29" width="160" height="14" fill="currentColor" opacity="0.12"/>
+  <line x1="230" y1="67" x2="390" y2="67" stroke="#2196f3" stroke-width="2"/>
+  <line x1="230" y1="62" x2="230" y2="72" stroke="#2196f3" stroke-width="2"/>
+  <line x1="390" y1="62" x2="390" y2="72" stroke="#2196f3" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="408" y="71" fill="#2196f3">[i, i+p)</text>
+  <!-- flèche p --></p>
+<p><line x1="230" y1="82" x2="390" y2="82" stroke="#2196f3" stroke-width="1"/>
+  <polygon points="230,79 222,82 230,85" fill="#2196f3"/>
+  <polygon points="390,79 398,82 390,85" fill="#2196f3"/>
+  <text x="310" y="80" text-anchor="middle" fill="#2196f3" font-size="11">p</text>
+</svg></p>
 <p>ce qui donne la condition de boucle <code>while i + p &lt;= n</code>.
 <code>i</code> parcourt donc l'intervalle <span class="arithmatex">\([0, n-p]\)</span>, soit <span class="arithmatex">\([0, n-p+1)\)</span> en semi-ouvert.</p>
 <h3 id="la-boucle-interne-de-gauche-a-droite">La boucle interne de gauche à droite</h3>
 <p>On compare <code>motif[j]</code> avec <code>texte[i+j]</code> pour <code>j</code> allant de <code>0</code> jusqu'à <code>p-1</code>.
 <code>j</code> parcourt l'intervalle <span class="arithmatex">\([0, p)\)</span>, d'où la condition <code>j &lt; p</code>.
 Si la boucle s'arrête parce que <code>j == p</code>, le motif est entièrement reconnu.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">recherche_naive_full</span><span class="p">(</span><span class="n">motif</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">texte</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">motif</span><span class="p">)</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">+</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>        <span class="c1"># fenêtre [i, i+p) dans [0, n)</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">p</span> <span class="ow">and</span> <span class="n">texte</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">motif</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>   <span class="c1"># j parcourt [0, p)</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">p</span><span class="p">:</span>           <span class="c1"># sorti par le bord droit → motif trouvé</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            <span class="k">return</span> <span class="n">i</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="k">return</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">recherche_naive_full</span><span class="p">(</span><span class="n">motif</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">texte</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">motif</span><span class="p">)</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">+</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>        <span class="c1"># fenêtre [i, i+p) dans [0, n)</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="k">while</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">p</span> <span class="ow">and</span> <span class="n">texte</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="p">]</span> <span class="o">==</span> <span class="n">motif</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>   <span class="c1"># j parcourt [0, p)</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>            <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="n">p</span><span class="p">:</span>           <span class="c1"># sorti par le bord droit → motif trouvé</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>            <span class="k">return</span> <span class="n">i</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>    <span class="k">return</span> <span class="kc">None</span>
 </code></pre></div>
 <hr />
 <h2 id="3-variante-tester-de-droite-a-gauche">3. Variante : tester de droite à gauche</h2>
@@ -5929,18 +5954,18 @@ Si la boucle s'arrête parce que <code>j == p</code>, le motif est entièrement 
 <code>j</code> commence à <code>p</code> et descend jusqu'à <code>1</code> ; on accède à <code>motif[j-1]</code> et <code>texte[i+j-1]</code>.
 <code>j</code> parcourt l'intervalle <span class="arithmatex">\((0, p]\)</span>, d'où la condition <code>j &gt; 0</code>.
 Si la boucle s'arrête parce que <code>j == 0</code>, le motif est entièrement reconnu.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">recherche_naive_modif</span><span class="p">(</span><span class="n">motif</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">texte</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">motif</span><span class="p">)</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">+</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>        <span class="c1"># fenêtre [i, i+p) dans [0, n)</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="n">j</span> <span class="o">=</span> <span class="n">p</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="k">while</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">texte</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">motif</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>   <span class="c1"># j parcourt (0, p]</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>           <span class="c1"># sorti par le bord gauche → motif trouvé</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>            <span class="k">return</span> <span class="n">i</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="k">return</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">recherche_naive_modif</span><span class="p">(</span><span class="n">motif</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">texte</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">motif</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">+</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>        <span class="c1"># fenêtre [i, i+p) dans [0, n)</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">j</span> <span class="o">=</span> <span class="n">p</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="k">while</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">texte</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">motif</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>   <span class="c1"># j parcourt (0, p]</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>           <span class="c1"># sorti par le bord gauche → motif trouvé</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>            <span class="k">return</span> <span class="n">i</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="k">return</span> <span class="kc">None</span>
 </code></pre></div>
 <h3 id="symetrie-des-deux-boucles-internes">Symétrie des deux boucles internes</h3>
 <p>Les deux variantes sont parfaitement symétriques :</p>
@@ -5994,8 +6019,8 @@ La condition <code>i + p &lt;= n</code> garantit <code>i+p-1 &lt;= n-1</code> : 
 <p>L'algorithme naïf avance toujours de 1 après un échec. On peut faire beaucoup mieux.</p>
 <h3 id="idee-sauter-plus-loin">Idée : sauter plus loin</h3>
 <p>Considérons la situation suivante. On cherche <code>"abra"</code> et la fenêtre courante contient :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>texte :  . . . d . . . . . .
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>motif : [a b r a]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>texte :  . . . d . . . . . .
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>motif : [a b r a]
 </code></pre></div>
 <p>Même sans comparer un seul caractère, on peut affirmer que le motif ne peut pas commencer
 aux trois positions suivantes non plus : si <code>'d'</code> n'apparaît pas dans <code>"abra"</code>,
@@ -6011,38 +6036,38 @@ sans risquer de "sauter par-dessus" une occurrence valide.</p>
 <p>Prenons <code>motif = "abra"</code> (<code>p = 4</code>). La table des sauts sera <code>{a: 3, b: 2, r: 1}</code> (construite section suivante).
 Après un échec, on lit <code>c = texte[i+3]</code> et on choisit le saut :</p>
 <p><strong>Cas 1 : <code>c = 'd'</code>, absent du motif. Saut = <code>p = 4</code>.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>texte :  . . . d . . . . . .
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>motif : [a b r a]
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>                ↑ &#39;d&#39; absent → décalage 4
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>motif :         [a b r a]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>texte :  . . . d . . . . . .
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>motif : [a b r a]
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>                ↑ &#39;d&#39; absent → décalage 4
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>motif :         [a b r a]
 </code></pre></div>
 <p>Aucune case du motif ne peut s'aligner sur ce <code>'d'</code> : on saute par-dessus.</p>
 <p><strong>Cas 2 : <code>c = 'r'</code>, présent en position 2. Saut = <code>p-1-2 = 1</code>.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>texte :  . . . r . . . . . .
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>motif : [a b r a]
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>                ↑ &#39;r&#39; en j=2 → décalage 1
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>motif :   [a b r a]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>texte :  . . . r . . . . . .
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>motif : [a b r a]
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>                ↑ &#39;r&#39; en j=2 → décalage 1
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>motif :   [a b r a]
 </code></pre></div>
 <p>On avance de 1 pour aligner le <code>'r'</code> du motif avec le <code>'r'</code> du texte.</p>
 <p><strong>Cas 3 : <code>c = 'b'</code>, présent en position 1. Saut = <code>p-1-1 = 2</code>.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>texte :  . . . b . . . . . .
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>motif : [a b r a]
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>                ↑ &#39;b&#39; en j=1 → décalage 2
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>motif :     [a b r a]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>texte :  . . . b . . . . . .
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>motif : [a b r a]
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>                ↑ &#39;b&#39; en j=1 → décalage 2
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>motif :     [a b r a]
 </code></pre></div>
 <p><strong>Cas 4 : <code>c = 'a'</code>, présent en position 0 (et en position 3, exclue). Saut = <code>p-1-0 = 3</code>.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>texte :  . . . a . . . . . .
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>motif : [a b r a]
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>                ↑ &#39;a&#39; en j=0 (dernier avant p-1) → décalage 3
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>motif :       [a b r a]
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>texte :  . . . a . . . . . .
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>motif : [a b r a]
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>                ↑ &#39;a&#39; en j=0 (dernier avant p-1) → décalage 3
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>motif :       [a b r a]
 </code></pre></div>
 <p>Le <code>'a'</code> de position 3 est exclu du calcul (c'est le dernier caractère) pour éviter un saut nul.
 On utilise donc l'occurrence la plus à droite <strong>dans <code>motif[0..p-2]</code></strong>, ici en position 0.</p>
 <h3 id="table-des-sauts">Table des sauts</h3>
 <p>On précalcule, pour chaque caractère <code>c</code> du motif (sauf le dernier), la distance qui le sépare de la fin :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">saut</span> <span class="o">=</span> <span class="p">{}</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>        <span class="c1"># on exclut le dernier caractère</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">saut</span><span class="p">[</span><span class="n">motif</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span>   <span class="c1"># distance de j à la position p-1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">saut</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>        <span class="c1"># on exclut le dernier caractère</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="n">saut</span><span class="p">[</span><span class="n">motif</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span>   <span class="c1"># distance de j à la position p-1</span>
 </code></pre></div>
 <p>Comme on itère de gauche à droite, une occurrence plus à droite <strong>écrase</strong> la précédente.
 <code>saut[c]</code> contient donc la distance depuis l'<strong>occurrence la plus à droite</strong> de <code>c</code> dans <code>motif[0..p-2]</code> jusqu'à la position <code>p-1</code>.</p>
@@ -6056,30 +6081,30 @@ En l'excluant, un caractère présent <strong>uniquement</strong> en dernière p
 donne bien un saut de <code>p</code> via <code>saut.get(c, p)</code>.</p>
 </div>
 <h3 id="algorithme-complet">Algorithme complet</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">horspool</span><span class="p">(</span><span class="n">motif</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">texte</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">motif</span><span class="p">)</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="c1"># Précalcul de la table des sauts</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="n">saut</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>        <span class="n">saut</span><span class="p">[</span><span class="n">motif</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">+</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>             <span class="c1"># fenêtre [i, i+p) dans [0, n)</span>
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>        <span class="n">j</span> <span class="o">=</span> <span class="n">p</span>
-<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>        <span class="k">while</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">texte</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">motif</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>   <span class="c1"># j parcourt (0, p]</span>
-<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
-<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>            <span class="k">return</span> <span class="n">i</span>
-<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>        <span class="n">i</span> <span class="o">+=</span> <span class="n">saut</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">texte</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>   <span class="c1"># saut basé sur texte[i+p-1]</span>
-<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>    <span class="k">return</span> <span class="kc">None</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">horspool</span><span class="p">(</span><span class="n">motif</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">texte</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">p</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">motif</span><span class="p">)</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="c1"># Précalcul de la table des sauts</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="n">saut</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>        <span class="n">saut</span><span class="p">[</span><span class="n">motif</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">+</span> <span class="n">p</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">:</span>             <span class="c1"># fenêtre [i, i+p) dans [0, n)</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>        <span class="n">j</span> <span class="o">=</span> <span class="n">p</span>
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>        <span class="k">while</span> <span class="n">j</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">texte</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">motif</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>   <span class="c1"># j parcourt (0, p]</span>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>            <span class="n">j</span> <span class="o">-=</span> <span class="mi">1</span>
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>        <span class="k">if</span> <span class="n">j</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>            <span class="k">return</span> <span class="n">i</span>
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>        <span class="n">i</span> <span class="o">+=</span> <span class="n">saut</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">texte</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="n">p</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">)</span>   <span class="c1"># saut basé sur texte[i+p-1]</span>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>    <span class="k">return</span> <span class="kc">None</span>
 </code></pre></div>
 <p>La seule différence avec <code>recherche_naive_modif</code> est la dernière ligne :
 <code>i += 1</code> devient <code>i += saut.get(texte[i+p-1], p)</code>.</p>
 <h3 id="exemple-de-sauts">Exemple de sauts</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>motif : a b r a        (p = 4)
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>saut  : a→3, b→2, r→1  (dernier &#39;a&#39; à distance 1, mais &#39;a&#39; en j=0 donne 3, en j=3 exclu)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>motif : a b r a        (p = 4)
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>saut  : a→3, b→2, r→1  (dernier &#39;a&#39; à distance 1, mais &#39;a&#39; en j=0 donne 3, en j=3 exclu)
 </code></pre></div>
 <p>Construisons la table pas à pas avec <code>range(0, 3)</code> :</p>
 <table>
@@ -6114,9 +6139,9 @@ donne bien un saut de <code>p</code> via <code>saut.get(c, p)</code>.</p>
 </table>
 <p><code>motif[3] = a</code> est ignoré. <code>a</code> garde donc la distance <code>3</code> (depuis <code>j=0</code>) et non <code>0</code> (depuis <code>j=3</code>).</p>
 <p>Lors de la recherche dans <code>abracadabra</code> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>i=0 : a b r a c a d a b r a
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>      a b r a
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>      ← ← ← ✓  motif trouvé
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>i=0 : a b r a c a d a b r a
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>      a b r a
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>      ← ← ← ✓  motif trouvé
 </code></pre></div>
 <p>Si aucune correspondance n'est trouvée et que <code>texte[i+p-1] = 'c'</code>, absent de la table,
 on saute de <code>p = 4</code> positions d'un coup.</p>
@@ -6131,8 +6156,8 @@ La complexité est donc une fonction de deux variables <span class="arithmatex">
 La complexité dans le pire cas est donc :</p>
 <div class="arithmatex">\[O((n - p + 1) \times p) = O(n \times p)\]</div>
 <p>Ce pire cas est atteint, par exemple, avec :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>texte  :  a a a a a a a a a a   (n fois &#39;a&#39;)
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>motif  :  a a a a b              (p-1 fois &#39;a&#39;, puis &#39;b&#39;)
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>texte  :  a a a a a a a a a a   (n fois &#39;a&#39;)
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>motif  :  a a a a b              (p-1 fois &#39;a&#39;, puis &#39;b&#39;)
 </code></pre></div>
 <p>À chaque position, on compare <span class="arithmatex">\(p - 1\)</span> caractères <code>'a'</code> identiques avant de trouver la différence sur le dernier.</p>
 <h3 id="algorithme-de-horspool">Algorithme de Horspool</h3>
@@ -6186,14 +6211,14 @@ Le coût total <span class="arithmatex">\(O(p + n/p)\)</span> reste dominé par 
 <h3 id="pretraiter-une-fois-interroger-souvent">Prétraiter une fois, interroger souvent</h3>
 <p>L'intérêt du prétraitement est encore plus net quand on cherche le <strong>même motif dans plusieurs textes</strong>.
 La table est calculée une seule fois et réutilisée pour chaque texte :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Prétraitement unique</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">saut</span> <span class="o">=</span> <span class="p">{}</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="n">saut</span><span class="p">[</span><span class="n">motif</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="c1"># Recherches multiples, sans recalcul</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="k">for</span> <span class="n">texte</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
-<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>    <span class="n">horspool_avec_table</span><span class="p">(</span><span class="n">motif</span><span class="p">,</span> <span class="n">texte</span><span class="p">,</span> <span class="n">saut</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># Prétraitement unique</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">saut</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span><span class="p">):</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">saut</span><span class="p">[</span><span class="n">motif</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">j</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="c1"># Recherches multiples, sans recalcul</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="k">for</span> <span class="n">texte</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>    <span class="n">horspool_avec_table</span><span class="p">(</span><span class="n">motif</span><span class="p">,</span> <span class="n">texte</span><span class="p">,</span> <span class="n">saut</span><span class="p">)</span>
 </code></pre></div>
 <p>C'est le principe général du prétraitement : <strong>déplacer un coût fixe hors de la boucle critique</strong>.</p>
 <h3 id="principe-general">Principe général</h3>
@@ -6245,16 +6270,16 @@ on a déjà <strong>validé</strong> le suffixe <code>motif[j..p-1]</code> : on 
 On cherche la position <code>k &lt; j</code> telle que <code>motif[k..k+(p-j)-1] == motif[j..p-1]</code>
 et <code>motif[k-1] != motif[j-1]</code> (sinon on retomberait sur le même échec).
 On décale de <code>j - k</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>motif :  a b c a b c        j=3, suffixe validé = &quot;abc&quot;
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>                             réapparaît en k=0 → saut 3
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>motif :        a b c a b c
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>motif :  a b c a b c        j=3, suffixe validé = &quot;abc&quot;
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>                             réapparaît en k=0 → saut 3
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>motif :        a b c a b c
 </code></pre></div>
 <p><strong>Cas 2 : aucune réapparition, mais un préfixe du motif est suffixe du bon suffixe.</strong>
 On cherche le plus long préfixe <code>motif[0..l-1]</code> qui soit aussi un suffixe de <code>motif[j..p-1]</code>.
 On décale de <code>p - l</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a>motif :  a b c d a b        j=4, suffixe validé = &quot;ab&quot;
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>                             préfixe &quot;ab&quot; = suffixe de &quot;ab&quot; → saut p-2 = 4
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>motif :          a b c d a b
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>motif :  a b c d a b        j=4, suffixe validé = &quot;ab&quot;
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>                             préfixe &quot;ab&quot; = suffixe de &quot;ab&quot; → saut p-2 = 4
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>motif :          a b c d a b
 </code></pre></div>
 <p><strong>Cas 3 : aucun des deux.</strong> Saut de <code>p</code>.</p>
 <div class="admonition question">
