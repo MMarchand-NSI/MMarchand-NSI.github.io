@@ -6291,7 +6291,6 @@ S'assurer que le résultat est toujours <span class="arithmatex">\(\geq 1\)</spa
 </div>
 <hr />
 <h2 id="annexe-le-cas-du-motif-vide">Annexe : le cas du motif vide</h2>
-<div class="arithmatex">\[\forall k \in [0,p) ,; \Bigl(, \text{motif}[k] = c ;\wedge; \forall k' \in (k,,p-1),; \text{motif}[k'] \neq c ,\Bigr) ;\Longrightarrow; \text{texte}[i+k] = c\]</div>
 <div class="admonition note">
 <p class="admonition-title">Motif vide : un cas ordinaire des intervalles semi-ouverts</p>
 <p>Avec <code>p = 0</code>, aucune branche de code ne traite ce cas explicitement.
@@ -6301,9 +6300,21 @@ La condition <code>i + p &lt;= n</code> exprime qu'il est contenu dans <code>[0,
 <p><strong>Boucle interne</strong> : <code>j</code> doit parcourir <code>(0, 0]</code> ou <code>[0, 0)</code>, deux intervalles vides.
 La condition de boucle est fausse dès le départ ; on sort immédiatement avec la valeur de succès (<code>j == 0</code> ou <code>j == p</code>).
 C'est la <strong>vérité vacue</strong> : aucun caractère n'a été comparé, donc aucun n'a pu être différent.</p>
-<p><strong>Table des sauts</strong> : <code>range(0, p-1) = range(0, -1)</code> est vide, aucun calcul effectué.</p>
+<p><strong>Table des sauts (Horspool)</strong> : <code>range(0, p-1) = range(0, -1)</code> est vide, aucun calcul effectué.
+La boucle interne sort aussitôt avec <code>j == 0</code>, retourne 0. Horspool gère donc <code>p = 0</code> sans précondition.</p>
 <p>Avec des intervalles <strong>fermés</strong>, <code>[0, p-1]</code> pour <code>p = 0</code> donnerait <code>[0, -1]</code>, un intervalle sans sens
 qui nécessiterait un <code>if p == 0</code> explicite. Les semi-ouverts font disparaître ce cas particulier.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Précondition <code>p &gt; 0</code> pour les règles de saut de Boyer-Moore</p>
+<p>La règle du bon suffixe et la règle du mauvais caractère requièrent <strong><code>p &gt; 0</code></strong>.</p>
+<p><strong>Bon suffixe</strong> : le précalcul itère sur <code>l ∈ [1, p)</code> = <code>[1, 0)</code>, vide, donc <code>gs</code> est vide.
+Au moment du saut, <code>gs[p-j] = gs[0]</code> est indéfini : la règle n'a pas de sens pour un motif vide.</p>
+<p><strong>Mauvais caractère</strong> : si <code>p = 0</code>, la boucle interne sort avec <code>j = 0</code>, et on lirait
+<code>texte[i + j - 1] = texte[i - 1]</code>, un accès hors de la fenêtre courante.</p>
+<p>Ces deux règles exploitent la structure <strong>interne</strong> du motif : elles présupposent qu'il y a
+des caractères à positionner. La précondition <code>p &gt; 0</code> n'est pas un artifice technique,
+elle reflète le fait que ces règles n'ont de sens que lorsqu'il y a un motif à aligner.</p>
 </div>
 
 
