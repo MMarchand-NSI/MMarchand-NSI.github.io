@@ -3,12 +3,6 @@
 On cherche à résoudre le problème suivant : étant donné un **motif** (pattern) et un **texte**,
 trouver la première position du texte à laquelle le motif apparaît, ou `None` s'il n'y apparaît pas.
 
-La démarche sera progressive. On part de l'algorithme naïf, puis on le décompose soigneusement
-en deux boucles imbriquées dont la structure devient le **socle commun** de tous les algorithmes suivants.
-Ce socle contient un seul paramètre libre : le déplacement appliqué après chaque échec.
-En y branchant des règles de saut de plus en plus informées, on obtient Horspool puis Boyer-Moore,
-sans jamais changer la structure elle-même.
-
 ```
 texte  :  a b r a c a d a b r a
 motif  :  a b r a
@@ -22,6 +16,16 @@ motif  :        f a i t
                 ^
           position 3 → correspondance trouvée
 ```
+
+Voici une vidéo expliquant ce qu'on cherche à construire.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/oCqVDwoiXGo?si=4N1LLCF4ilokT3O2" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+La démarche sera progressive. On part de l'algorithme naïf, puis on le décompose soigneusement
+en deux boucles imbriquées dont la structure devient le **socle commun** de tous les algorithmes suivants.
+Ce socle contient un seul paramètre libre : le déplacement appliqué après chaque échec.
+En y branchant des règles de saut de plus en plus informées, on obtient Horspool puis Boyer-Moore,
+sans jamais changer la structure elle-même.
 
 ---
 
@@ -458,6 +462,10 @@ connaître ses positions dans le motif afin de trouver la plus grande strictemen
 ---
 
 ## Annexe : le cas du motif vide
+
+$$\forall k \in [0,p) ,; \Bigl(, \text{motif}[k] = c ;\wedge; \forall k' \in (k,,p-1),; \text{motif}[k'] \neq c ,\Bigr) ;\Longrightarrow; \text{texte}[i+k] = c$$
+
+
 
 !!! note "Motif vide : un cas ordinaire des intervalles semi-ouverts"
     Avec `p = 0`, aucune branche de code ne traite ce cas explicitement.
