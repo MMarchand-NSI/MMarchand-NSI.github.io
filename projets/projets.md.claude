@@ -1,0 +1,105 @@
+---
+title: "Le pétard mouillé : pourquoi le constructivisme mal compris échoue avec les novices"
+author: "Matthieu Marchand"
+lang: fr
+documentclass: article
+geometry: margin=2cm
+fontsize: 12pt
+numbersections: true
+toc: true
+toc-depth: 1
+abstract: |
+  Cet article examine l'échec récurrent du format "projet libre" dans l'enseignement de l'informatique au lycée, à partir d'une séquence de travaux pratiques en NSI. L'argument central est que la littératie informatique, entendue comme la capacité à programmer selon les conventions qui rendent le code lisible, maintenable et communicable, ne s'acquiert pas par exploration libre. L'intuition constructiviste, mal comprise, aboutit à laisser le novice face à un problème ouvert sans les schémas cognitifs nécessaires pour en tirer profit. À partir des travaux de Vygotski sur la Zone Proximale de Développement et des principes d'enseignement explicite dégagés par Rosenshine, une séquence guidée est analysée : activité guidée sur le voisinage, puis Lights Out en transfert proche, puis jeu de la vie en transfert lointain. L'analyse montre que seuls les élèves ayant construit un véritable modèle mental du pattern peuvent transférer. Des pistes concrètes sont proposées : évaluation individuelle préalable aux projets libres, cahier des charges précis, et progression par transfert proche avant toute autonomie.
+---
+
+\newpage
+
+La question qui m'occupe est celle de la littératie informatique : pas seulement "est-ce que le programme tourne ?", mais "est-ce que l'élève programme selon les structures, les découpages et les conventions qui rendent le code lisible, maintenable et communicable ?" Cette distinction, entre faire fonctionner et programmer, n'est pas cosmétique. Elle est au cœur de ce qui différencie un débutant qui bricole d'un praticien qui construit. Ce texte explore pourquoi le format "projet libre" échoue souvent à faire franchir cette frontière, et ce qu'on peut faire à la place.
+
+# L'intuition constructiviste et sa dérive
+
+L'idée est séduisante : plutôt que de transmettre un savoir tout fait, on laisse l'élève le construire par l'exploration. En pratique, dans beaucoup de classes, ça donne ceci : on pose un problème ouvert, on dit "cherche", et on attend. L'élève cherche, tourne en rond, produit quelque chose qui ressemble à une solution, et repart avec ses représentations initiales intactes ou légèrement renforcées. Le pétard mouillé.
+
+Ce n'est pas le constructivisme. C'est le constructivisme amputé de sa moitié essentielle : l'étayage.
+
+Et c'est le premier obstacle à la littératie informatique : un élève qui survit à un problème sans avoir construit le modèle mental correspondant ne programme pas mieux : il bricole avec un peu plus d'assurance.
+
+# Ce que Piaget et Vygotski disaient vraiment
+
+Piaget ne préconisait pas l'abandon de l'élève face au problème. Il décrivait un mécanisme d'équilibration individuelle : les néo-piagétiens en feront un outil pédagogique sous le nom de *conflit cognitif* : une perturbation calculée, pas un vide. Vygotski introduit la Zone Proximale de Développement, l'écart entre ce que l'élève peut faire seul et ce qu'il peut atteindre avec aide. C'est dans cet écart que l'apprentissage se produit, pas en dehors. Bruner formalisera cette aide sous le nom d'étayage (*scaffolding*).
+
+Le malentendu est ancien et documenté : on a retenu "l'élève construit son savoir" en oubliant "avec un guidage précis et progressif".
+
+# Le novice face au problème ouvert
+
+Un expert peut explorer librement parce qu'il dispose déjà des schémas cognitifs pour donner du sens à ce qu'il trouve. Il sait reconnaître les structures, trier l'information pertinente, anticiper les impasses. C'est le versant haut de la ZPD de Vygotski : l'expert n'a plus besoin d'étayage parce qu'il a intériorisé les outils.
+
+Le novice ne dispose pas de ces schémas. Face à un problème ouvert, il ne sait pas quoi chercher, ne reconnaît pas ce qu'il trouve, et surcharge sa mémoire de travail sans rien construire en mémoire à long terme. Le conflit cognitif ne peut pas opérer : il faut déjà avoir des structures pour qu'une perturbation les ébranle. Kirschner, Sweller et Clark (2006) ont formulé l'argument de façon tranchée, trop tranchée selon leurs critiques, mais leur diagnostic sur le novice face à un problème non guidé reste empiriquement fondé, et c'est ce que j'observe en classe depuis que je fais des projets.
+
+Laisser un novice "découvrir" ne l'entraîne pas à penser comme un expert. Ça l'entraîne à survivre au problème avec les outils qu'il avait déjà. Il ne construit pas de littératie : il perfectionne ses contournements.
+
+# Un exemple concret : du voisinage à Lights Out
+
+Voici comment cette logique s'articule dans la pratique.
+
+L'activité [Le voisinage](https://mmarchand-nsi.github.io/projets/console/voisins/) installe un pattern fondamental : représenter une grille comme liste de listes, repérer une cellule par `(i, j)`, parcourir les déplacements `(di, dj)` avec une double boucle sur `range(-1, 2)`, gérer les bords. C'est une activité entièrement guidée, en groupe, avec des questions intermédiaires qui construisent le raisonnement pas à pas. L'étayage est là : les questions intermédiaires jouent exactement le rôle que Vygotski assignait à l'aide extérieure dans la ZPD.
+
+L'activité [Lights Out](https://mmarchand-nsi.github.io/projets/metagrid/lightsout/) réutilise exactement ce pattern. La grille est maintenant booléenne, le voisinage est restreint à la croix, mais la structure est identique. La nouveauté conceptuelle est délibérément limitée : on transfère ce qui a été construit, on ne repart pas de zéro. C'est le conflit cognitif au sens néo-piagétien : une perturbation calculée sur une structure déjà en place, pas un saut dans le vide.
+
+Ce n'est pas de la répétition. C'est du transfert proche (*near transfer*). Le transfert lointain, vers des problèmes structurellement différents, suppose une maîtrise que les élèves n'ont pas encore à ce point de la séquence.
+
+Le [jeu de la vie](https://mmarchand-nsi.github.io/projets/pyxel/jeudelavie/), proposé en alternative libre, confirme le diagnostic par l'absurde. La surface est similaire : même grille, même voisinage. Mais la grille est torique, la logique d'évolution impose de calculer la prochaine génération sans modifier l'actuelle, et les règles de transition sont plus complexes. Les élèves qui n'ont pas construit de modèle mental du pattern "voisinage" lors du TP guidé ne reconnaissent pas que le même outil s'applique. Ils repartent de zéro, bricolent, et aboutissent au pétard mouillé. Seuls ceux qui ont vraiment compris le voisinage, et pas seulement produit une solution qui tournait, peuvent transférer. Ce n'est plus du transfert proche : c'est du transfert lointain, et il révèle qui avait compris.
+
+Reconnaître un pattern d'une situation à l'autre, c'est précisément ce que font les praticiens. C'est la littératie en acte, pas seulement la reproduction d'une solution dans le même contexte.
+
+# Ce qui fonctionne mieux
+
+Rosenshine (2012) synthétise plusieurs décennies de recherche en classe sur l'enseignement explicite. Ses principes convergent avec l'idée d'étayage : présenter les nouvelles notions en petites unités avec démonstration explicite, vérifier la compréhension fréquemment, fournir suffisamment de pratique guidée avant de laisser l'élève travailler seul, s'appuyer sur ce qui a déjà été maîtrisé pour introduire ce qui est nouveau.
+
+Ce modèle est souvent résumé sous la forme *I Do / We Do / You Do* : démonstration, pratique accompagnée, autonomie. L'autonomie arrive en dernier, conditionnée à la maîtrise, pas donnée d'emblée. C'est la ZPD parcourue dans le bon sens : on commence dans l'écart avec aide, on retire progressivement l'aide à mesure que l'élève intériorise.
+
+La littératie informatique s'acquiert dans le *We Do* prolongé, pas dans le *You Do* précipité.
+
+# Ce que j'ai modifié
+
+Le diagnostic suggère une modification structurelle de la séquence : faire du voisinage un cours/TP à part entière, évalué individuellement, avant tout projet libre.
+
+L'évaluation en groupe masque les non-compréhensions. Un élève peut avoir été porté par ses camarades sans avoir construit son propre modèle mental. L'évaluation individuelle est le seul moyen de savoir, avant de lancer les projets, qui dispose réellement du pattern.
+
+L'évaluation ne devrait pas porter sur la restitution du TP. Elle devrait proposer une variante légère jamais vue, qui ne peut se résoudre qu'en ayant compris la structure : compter uniquement les voisins en croix plutôt qu'en carré, ou traiter une grille avec des règles de bord différentes. Celui qui a mémorisé une solution sans construire de schéma échoue. Celui qui a le modèle mental réussit.
+
+L'accès aux projets libres (jeu de la vie, démineur, Lights Out en autonomie) pourrait être conditionné à cette évaluation. Pas comme sanction : comme prérequis logique. Un élève qui n'a pas le pattern en tête va bricoler, bloquer, et ne rien apprendre de plus que ce qu'il savait déjà.
+
+Il reste une limite que je n'ai pas résolue : ce dispositif donne un meilleur diagnostic, il ne résout pas le cas des élèves qui n'ont pas compris. Il faut prévoir pour eux soit un guidage renforcé, soit un projet alternatif plus structuré qui reste dans le transfert proche.
+
+---
+
+# Conclusion : qu'est-ce qu'un projet pour des novices ?
+
+Pour des élèves novices, un projet n'est pas une page blanche. C'est un problème délimité, sur un territoire déjà balisé, avec un objectif atteignable par transfert de ce qui a été appris.
+
+Le projet doit mobiliser exactement les patterns maîtrisés, pas plus. Une nouveauté à la fois est acceptable si elle est petite et clairement isolée. Plusieurs nouveautés simultanées, c'est de la découverte déguisée.
+
+Le cahier des charges doit être précis : ce qu'on attend, les fonctions à écrire, les comportements attendus. Pas un énoncé vague ("fais un jeu"). Un squelette de code peut être fourni, comme pour Lights Out : l'élève remplit, il ne part pas de zéro.
+
+Le projet se déroule en étapes vérifiables, pas en un seul rendu final. Chaque étape est une fonction testable, un comportement observable. L'élève sait à chaque moment s'il avance ou s'il est bloqué.
+
+L'enseignant intervient sur la méthode, pas sur la solution. "Qu'est-ce que tu as essayé ?" avant toute réponse.
+
+Ce n'est pas un projet libre au sens plein. Ce n'est pas "choisis ton jeu et implémente-le". Ce n'est pas non plus un exercice déguisé en projet pour faire semblant d'autonomie. C'est un transfert guidé vers un problème légèrement plus complexe que ce qui a été fait, sur la même structure de fond. C'est le chemin le plus direct vers la littératie informatique : non pas apprendre les conventions en les récitant, mais les intérioriser en les mobilisant dans des contextes variés.
+
+Les élèves dotés de curiosité épistémique constituent un cas particulier qui mérite qu'on s'y arrête. Ils arrivent parfois à produire un jeu fonctionnel à partir de peu d'instructions, par exploration autonome. Mais le code obtenu est rarement pérenne : monolithique, sans séparation claire des responsabilités, difficile à faire évoluer ou à relire. Ils ont contourné la novice-expert gap par la motivation, pas par la maîtrise des conventions.
+
+Pour eux, l'enjeu n'est pas de débloquer mais de recadrer. Il faut les amener à comprendre que produire du code qui tourne n'est pas produire du bon code, et que les conventions (nommage, découpage en fonctions, séparation logique/affichage) ne sont pas des contraintes arbitraires mais des outils qui rendent le code communicable. Le squelette guidé n'est pas pour eux une béquille : c'est un modèle de ce à quoi doit ressembler du code bien structuré. C'est là que la littératie informatique devient exigeante même pour les meilleurs : pas "est-ce que ça tourne ?", mais "est-ce que quelqu'un d'autre peut le lire, le modifier, le faire évoluer ?"
+
+---
+
+# Pour aller plus loin
+
+Bruner, J. S. (1983). *Le développement de l'enfant : savoir faire, savoir dire*. PUF. (Concept d'étayage, *scaffolding*, développé à partir de Vygotski.)
+
+Kirschner, P. A., Sweller, J., & Clark, R. E. (2006). Why Minimal Guidance During Instruction Does Not Work. *Educational Psychologist*, 41(2), 75-86. (Article influent sur la charge cognitive et l'instruction guidée ; à lire avec les réponses publiées dans le même numéro.)
+
+Rosenshine, B. (2012). Principles of Instruction: Research-Based Strategies That All Teachers Should Know. *American Educator*, 36(1), 12-19. https://www.aft.org/sites/default/files/periodicals/Rosenshine.pdf
+
+Vygotski, L. S. (1934/1997). *Pensée et langage*. La Dispute. (Concept de Zone Proximale de Développement.)
