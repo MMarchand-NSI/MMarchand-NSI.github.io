@@ -185,8 +185,15 @@ Le complément à 1 de $110010$ est $001101$
 ![alt text](image-2.png)
 
 !!! abstract "A savoir"
-    - Sur $n$ bits signés, on peut écrire les nombres de $-2^n$ à $2^n-1$ inclus
-    - On remarque que $-2^n$ n'a pas d'opposé sur $n$ bits, puisqu'on ne peut pas écrire $2^n$ sur $n$ bits.
+    - Sur $n$ bits signés, on peut écrire les nombres de $-2^{n-1}$ à $2^{n-1}-1$ inclus
+    - On remarque que $-2^{n-1}$ n'a pas d'opposé sur $n$ bits, puisqu'on ne peut pas écrire $2^{n-1}$ sur $n$ bits signés.
+
+    Vérification sur l'image ci-dessus : sur 4 bits, on va de $-2^{3} = -8$ jusqu'à $2^{3}-1 = 7$.
+
+!!! abstract "Tailles courantes"
+    En pratique, les ordinateurs travaillent sur des tailles fixes standard : **8, 16, 32 ou 64 bits**. Un entier signé sur 8 bits couvre $-128$ à $127$, sur 16 bits $-32768$ à $32767$.
+
+    Python, lui, n'impose aucune limite : ses entiers s'agrandissent automatiquement autant que nécessaire (entiers de taille arbitraire). On peut donc y calculer $2^{1000}$ sans débordement.
 
 
 !!! question "Exercices"

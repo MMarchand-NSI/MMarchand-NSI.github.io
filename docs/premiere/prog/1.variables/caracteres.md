@@ -27,78 +27,8 @@ Lorsque les programmes deviennent longs, on peut se perdre dans les types, alors
     ```
     Cette instruction affecte le contenu de la variable `Bonjour` à la variable a.
 
-## Représentation en mémoire
-
-**Comme toute information, les str sont stockés dans la mémoire sous forme d'une suite de bits organisés en octets.** Il faut que tout le monde le fasse de la même manière pour que les informations puissent être communiquées. A ce titre, il existe des standards internationaux.
-
-### Le standard Ascii
-
-Le code ASCII (utilisé au départ par les ordinateurs) associe un nombre entre 0 et 127 à chaque caractère courant.
-
-
-| Caractère | Code ASCII | Stockage Binaire (8 bits) |
-| --------- | ---------- | ---------------- |
-| `'A'`     | 65         | `01000001`       |
-| `'a'`     | 97         | `01100001`       |
-| `'B'`     | 66         | `01000010`       |
-| `'0'`     | 48         | `00110000`       |
-
-Vous noterez que pour un ordinateur, les majuscules et les minuscules ne sont pas du tout les mêmes informations. Il les considère comme différentes.
-
-```python
-s: str = 'B'
-print(ord(s))    ## Affiche 66
-print(chr(48))   ## Affiche '0'
-```
-
-Le code précédent affiche le nombre de bits utilisés par python pour stocker l'information 157.
-
-
-### Le standard Unicode
-
-Le code ASCII ne suffit pas pour représenter toutes les lettres (comme 'é', 'ç') ou d’autres symboles d'autres langues. Pour encoder plus de caractères, on utilise maintenant Unicode, qui peut représenter plus de 1 million de caractères du monde entier (accents, symboles scientifiques, emojis...).
-
-Unicode est un standard universel. Il définit chaque caractère avec un code unique (point de code). Le 10 septembre 2024, 5185 nouveaux caractères ont été ajoutés, portant le total à 154998 caractères représentables.
-
-
-| Caractère | Point de code Unicode |
-| --------- | --------------------- |
-| `'A'`     | `U+0041`              |
-| `'é'`     | `U+00E9`              |
-| `'😊'`    | `U+1F60A`             |
-
-Mais ce sont juste des nombres abstraits : on ne dit pas comment les stocker ou transmettre.
-
-Pour ceci, on utilise des encodages qui transforment les points de code en octets (bytes) pour les stocker.
-
-
-| Caractère | Description              | Encodage UTF-8 (en hexadécimal) | Octets (en binaire)                   |
-| --------- | ------------------------ | ------------------------------- | ------------------------------------- |
-| `'A'`     | Lettre ASCII             | `41`                            | `01000001`                            |
-| `'é'`     | Lettre accentuée (latin) | `C3 A9`                         | `11000011 10101001`                   |
-| `'€'`     | Symbole euro             | `E2 82 AC`                      | `11100010 10000010 10101100`          |
-| `'😊'`    | Emoji « visage joyeux »  | `F0 9F 98 8A`                   | `11110000 10011111 10011000 10001010` |
-| `'語'`     | Kanji « langue / mot »   | `E8 AA 9E`                      | `11101000 10101010 10011110`          |
-
-On utilise souvent la représentation des octets en hexadécimal lorsqu'on a besoin de les lire.
-
-```python
-caractere = bytes.fromhex("F09F988A").decode("utf-8")
-print(caractere)  # Affiche 😊
-```
-
-Dans le code précédent, on créé une suite de 4 octets (bytes en anglais) d'après leur forme hexadécimale, puis on demande à python leur représentation en caractère d'après l'encodage UTF-8.
-
-```python
-caractere = chr(0x1F60A)
-print(caractere)  # Affiche 😊
-```
-
-Ici, la fonction `chr` nous permet directement d'utiliser le point unicode pour en déduire un caractère.
-
-
-Le site suivant est celui de la norme unicode https://home.unicode.org/
-
+!!! info "Comment un texte est-il stocké en mémoire ?"
+    La représentation d'un texte en machine (codes ASCII, Unicode, encodage UTF-8) est traitée dans le chapitre [Représentation de l'information > Texte](../../Numération/texte.md). Cette page-ci se concentre sur la **manipulation** des chaînes en Python.
 
 ## Opérations possibles
 
@@ -152,58 +82,8 @@ En Python, une chaîne de caractères est une suite ordonnée de lettres, comme 
     `IndexError: string index out of range`
 
 
-!!! question "Algorithme"
+!!! note "Et pour parcourir tous les caractères ?"
+    Accéder à un caractère par son indice est une chose. Parcourir automatiquement **tous** les caractères d'une chaîne en est une autre : c'est le rôle de la boucle `for`.
 
-    ```python
-    texte = "truc"
-    res = ""
-
-    POUR CHAQUE Caractère car de la variable texte, FAIRE:
-        res = car + res
-    FIN POUR
-
-    AFFICHER res
-    ```
-    
-    - Qu'affiche l'algorithme précédent?
-
-    `POUR CHAQUE Caractère car de la variable texte, FAIRE:` s'écrit en python ainsi:
-
-    ```python
-    for car in texte:
-    ```
-
-    - Ecrire le programme python correspondant
-
-
-!!! question "Algorithme"
-
-
-    ```python
-    texte = "truc"
-    res = ""
-
-    POUR CHAQUE entier i de 0 à 2, FAIRE:
-        SI texte[i] > texte[i+1] VAUT VRAI, ALORS FAIRE
-            res = texte[i] + res
-        FIN SI
-    FIN POUR
-    
-    AFFICHER res
-    ```
-
-    - Qu'affiche l'algorithme précédent?
-
-
-    `POUR CHAQUE entier i de 0 à 2, FAIRE:` s'écrit en python:
-    ```python
-    for i in range(0, 3):
-    ```
-
-    `SI texte[i] > texte[i+1] VAUT VRAI, ALORS FAIRE` s'écrit en python:
-    ```python
-    if texte[i] > texte[i+1]:
-    ```
-
-    Pourquoi 3? c'est le signal STOP pour python, il ne le fera pas. Il n'ira donc que jusqu'à 2.
+    Ce mécanisme de parcours sera étudié à part entière dans le cours [Parcourir des itérables](../bouclefor.md), car ce qui se passe à chaque tour de boucle mérite d'être déroulé pas à pas. On y reprendra justement le parcours de chaînes de caractères.
 

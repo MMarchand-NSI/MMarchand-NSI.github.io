@@ -1,5 +1,11 @@
 # Conversions vers la base 10
 
+Convertir un nombre, ce n'est pas le transformer, c'est le **traduire**. Le nombre (le signifié) reste le même, on change seulement de signifiant, c'est-à-dire la suite de chiffres qui le note. `1011` en base 2 et `11` en base 10 sont deux écritures du même nombre.
+
+La méthode a déjà été établie avec les roues : la valeur est la **somme de chaque chiffre multiplié par le poids de sa colonne** ($b^k$). On ne fait ici que l'appliquer, base par base.
+
+!!! tip "Pourquoi le faire à la main ?"
+    Une calculatrice ou une IA convertit en une fraction de seconde. L'intérêt n'est pas le résultat, mais de **comprendre le mécanisme** : c'est en traçant soi-même qu'on saisit ce que représente une base. C'est cette compréhension qui est évaluée, pas la capacité à recopier un résultat tout fait.
 
 !!! warning "Répétition"
     Les paragraphes suivants sont en réalité répétitifs, et ne servent qu'à vous faire vous rendre compte de la similarité du procédé.

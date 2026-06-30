@@ -32,6 +32,11 @@ TODO mettre image de boite
 
     Si la variable n'existe pas déjà, elle est crée, sinon, son contenu est remplacé.
 
+!!! tip "Ce que fait vraiment la machine"
+    Cette « opération mécanique » correspond très exactement à une instruction du processeur. Dans le modèle [Little Man Computer](../../architecture/von_neumann/langage-machine.md), affecter une valeur à une variable, c'est l'instruction `STA` (*store*) : « écris cette valeur à telle adresse mémoire ».
+
+    Autrement dit, `a = 4` revient à ranger `4` dans la case mémoire étiquetée `a`. Garder cette image en tête évite la confusion classique entre `=` (affectation) et `==` (égalité).
+
 
 !!! question "Exercice"
     ```python

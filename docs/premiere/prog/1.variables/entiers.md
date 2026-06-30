@@ -32,7 +32,7 @@ Le code précédent affiche le nombre de bits utilisés par python pour stocker 
 
     - Donnez l'affichage que produira la ligne `print(bin(a))`
 
-    `hex(a)` renvoie la représentation binaire de l'entier a.
+    `hex(a)` renvoie la représentation hexadécimale de l'entier a.
 
     - Donnez l'affichage que produira la ligne `print(hex(a))`
 
