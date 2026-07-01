@@ -79,6 +79,34 @@ Une boucle `while` se termine si une quantité **évolue à coup sûr vers la so
 
 En pratique : si vous pouvez dire « pour chaque élément » ou « n fois », utilisez `for`. Si vous devez dire « tant que... », utilisez `while`.
 
+## Lire et prédire avant d'écrire
+
+!!! question "Prédire"
+    Combien de fois « Bravo » s'affiche-t-il, et que vaut `n` à la fin ? Déroulez tour par tour, puis vérifiez.
+
+    ```python
+    n = 10
+    while n > 0:
+        print("Bravo")
+        n = n - 3
+    print(n)
+    ```
+
+    ??? warning "Réponse"
+        « Bravo » s'affiche **4 fois** (`n` vaut 10, 7, 4, 1 au moment du test), puis `n` passe à `-2` et la condition devient fausse. À la fin, `n` vaut `-2`.
+
+!!! question "Corriger une boucle infinie"
+    Ce code tourne indéfiniment. Trouvez pourquoi, puis corrigez-le.
+
+    ```python
+    i = 1
+    while i <= 5:
+        print(i)
+    ```
+
+    ??? warning "Réponse"
+        Il manque la **mise à jour** : `i` ne change jamais, donc `i <= 5` reste vrai pour toujours. Il faut ajouter `i = i + 1` **dans** la boucle.
+
 ## Exercices
 
 !!! question "1 - Saisie contrôlée"
@@ -110,6 +138,12 @@ En pratique : si vous pouvez dire « pour chaque élément » ou « n fois », u
 
 !!! question "4 - PGCD (algorithme d'Euclide)"
     Le plus grand commun diviseur de `a` et `b` s'obtient en remplaçant `(a, b)` par `(b, a % b)` **tant que** `b` n'est pas nul.
+
+    ??? tip "Indice léger"
+        La condition d'arrêt est « `b` est nul ». Que faut-il écrire après `while` ? Et que renvoyer une fois sorti de la boucle ?
+
+    ??? tip "Indice précis"
+        `while b != 0:` puis, dans la boucle, la déstructuration `a, b = b, a % b`. Quand `b` atteint 0, c'est `a` qui contient le PGCD.
 
     ??? warning "Corrigé"
         ```python

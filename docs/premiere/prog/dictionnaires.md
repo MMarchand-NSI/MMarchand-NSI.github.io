@@ -124,6 +124,22 @@ print("prix" in mon_dictionnaire)
 
 Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
 
+## Lire et prédire avant d'écrire
+
+!!! question "Prédire"
+    Qu'affiche ce code ? Déroulez le parcours, puis vérifiez.
+
+    ```python
+    stock = {"pomme": 3, "poire": 5, "kiwi": 2}
+    total = 0
+    for fruit in stock:
+        total = total + stock[fruit]
+    print(total)
+    ```
+
+    ??? warning "Réponse"
+        `10`. On parcourt les **clés** (`pomme`, `poire`, `kiwi`) et on accumule les **valeurs** associées : 3 + 5 + 2.
+
 ## Exercices
 
 !!! hint "Entraînement"

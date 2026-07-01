@@ -94,7 +94,19 @@ Résultat : `[0, 1, 4, 9, 16]`
 
     La compréhension est plus concise, mais ne sacrifiez jamais la lisibilité !
 
-## 3. Exercices
+## 3. Lire et prédire
+
+!!! question "Prédire"
+    Que contient `res` ? Traduisez d'abord la compréhension en phrase, puis vérifiez.
+
+    ```python
+    res = [x * 2 for x in range(5) if x % 2 == 1]
+    ```
+
+    ??? warning "Réponse"
+        `[2, 6]`. On parcourt `0, 1, 2, 3, 4`, on ne garde que les impairs (`1` et `3`), puis on les double.
+
+## 4. Exercices
 
 ### Listes de types primitifs
 
@@ -276,7 +288,7 @@ Les compréhensions de liste sont très utiles pour **filtrer ou transformer** d
     descriptifs = [f["titre"] + " (" + str(f["annee"]) + ")" for f in films]
     ```
 
-## 4. Résumé
+## 5. Résumé
 
 - Les **compréhensions de liste** sont une syntaxe concise pour créer des listes
 - Syntaxe : `[expression for element in liste if condition]`
