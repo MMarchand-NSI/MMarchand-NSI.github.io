@@ -1,4 +1,4 @@
-# Exercices Algorithmique
+# Exercices : algorithmique et traitement de données
 
 
 ## Accumulation - types primitifs
@@ -23,36 +23,10 @@
     Toute fonction devra être testée.
 
 
-!!! question "Somme des entiers" 
-    Écrire et tester une fonction qui renvoie la somme des nombres entiers de 1 jusque n.
+!!! tip "Les exercices de base sont ailleurs"
+    Les exercices fondamentaux d'accumulation (somme, produit, factorielle, nombre de voyelles, inverser, contient, take, drop...) se trouvent sur les pages [La boucle for](boucle-for.md) et [Exercices sur les séquences](exercices-sequences.md). Assurez-vous de les maîtriser avant d'attaquer les problèmes ci-dessous.
 
-!!! question "Produit des entiers > 0" 
-    Écrire et tester une fonction qui renvoie le produit des nombres entiers de 1 jusque n.
-
-    On appelle ce nombre $n!$ qui se lit "n factorielle", avec $0! = 1$
-
-!!! question "Nombre de voyelles"
-    Écrire une fonction qui lit une chaîne de caractères et affiche le nombre de voyelles présentes dans cette chaîne.
-
-!!! question "Inverser"
-    Ecrire une fonction qui renvoie les caractères d'une chaîne de caractères dans l'autre sens. inverser("banane") renvoie "enanab".
-
-!!! question "1 sur 2"
-    Ecrire une fonction qui prend une chaîne de caractère en paramètre. Elle renvoie une chaîne de caractères où seulement 1 caractère sur 2 est présent.
-
-!!! question "contient"
-    Ecrire une fonction qui renvoie True si une chaîne contient un caractère, False sinon. On n'utilisera pas l'opérateur `in`.
-
-!!! question "Nombre d'occurences"
-    Écrire une fonction qui prend en paramètres une chaîne de caractère et un caractère et renvoie le nombre de fois où le caractère apparaît dans la chaîne de caractère.
-
-!!! question "Take"
-    Ecrire une fonction qui renvoie les n premiers caractères d'une chaîne de caractères. Si n est supérieur au nombre de caractères, renvoyer la chaîne de caractères entière.
-
-!!! question "Drop"
-    Ecrire une fonction qui renvoie une chaîne amputée de ses n premiers caractères. Si n est supérieur au nombre de caractère, renvoyer la chaîne vide.
-
-## Listes
+## Algorithmique sur les listes
 
 !!! question "Somme"
     Ecrire et tester une fonction `somme` qui prend en paramètres une liste de floats et qui renvoie leur somme.
@@ -184,9 +158,7 @@
     ```
 
 
-## Dictionnaires
-
-# Traitement des données en table
+## Traitement de données en table
 
 !!! hint "Exercices"
 

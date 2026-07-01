@@ -111,7 +111,7 @@ for cle, valeur in mon_dictionnaire.items():
 On peut aussi parcourir le dictionnaire en récupérant seulement les valeurs :
 ```python
 for valeur in mon_dictionnaire.values():
-    print(cle, "->", valeur)
+    print(valeur)
 ```
 
 ## Vérifier si une clé est dans un dictionnaire
