@@ -89,6 +89,9 @@ En tant qu'égalité mathématique, ce serait absurde. En tant qu'affectation, c
 
     L'affichage est donc `0 12`. Remarquez que `y` **garde 12** : sa valeur a été calculée au moment du `y = x + 2`, et changer `x` ensuite n'y touche pas.
 
+!!! tip "Tracez vous-même avec Python Tutor"
+    Ne vous contentez pas de lire les traces : **produisez-les**. Copiez un programme dans [Python Tutor](https://pythontutor.com/), avancez pas à pas et observez, à chaque instruction, ce que contiennent les cases mémoire. C'est le meilleur moyen de construire une image juste de ce que fait la machine, et c'est un réflexe à garder pour tout le cours.
+
 ## Échanger le contenu de deux variables
 
 On veut échanger les contenus de `a` et `b`. La tentative naïve **échoue** :

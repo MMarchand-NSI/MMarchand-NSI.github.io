@@ -105,6 +105,48 @@ Exemple : la somme des entiers de 1 à `n`.
     2. Qu'est-ce que je dois **parcourir** ? J'écris correctement mon parcours.
     3. Dans le parcours, j'applique à chaque élément le **comportement d'accumulation** voulu par le problème.
 
+## Compter et filtrer : une condition dans la boucle
+
+Souvent, on n'accumule que les éléments qui **remplissent une condition** : on place alors un `if` (voir [Les conditionnelles](conditionnelles.md)) **à l'intérieur** de la boucle. Le point délicat n'est pas le `if` en lui-même, mais **où** placer chaque ligne.
+
+Exemple : compter combien de fois le 6 sort sur 1000 lancers de dé.
+
+```python
+from random import randint
+
+compteur = 0                 # AVANT la boucle (une seule fois)
+for _ in range(1000):        # 1000 tours
+    de = randint(1, 6)
+    if de == 6:              # test à CHAQUE tour
+        compteur = compteur + 1
+print(compteur)              # APRÈS la boucle (une seule fois)
+```
+
+!!! danger "Le piège de l'emplacement"
+    Trois choses vivent à trois endroits différents :
+
+    - l'**initialisation** de l'accumulateur : **avant** la boucle ;
+    - le **test et la mise à jour** : **dans** la boucle (indentés) ;
+    - l'**affichage** (ou le `return`) du résultat : **après** la boucle.
+
+    Mettre l'initialisation dans la boucle la remettrait à zéro à chaque tour ; mettre l'affichage dans la boucle l'afficherait 1000 fois.
+
+!!! question "Somme des pairs"
+    Écrivez `somme_pairs(lst)` qui renvoie la somme des entiers **pairs** d'une liste.
+
+    ??? tip "Indice"
+        Un accumulateur `res = 0`, un parcours, et **dans** la boucle un `if x % 2 == 0` avant d'ajouter.
+
+    ??? success "Solution"
+        ```python
+        def somme_pairs(lst: list[int]) -> int:
+            res = 0
+            for x in lst:
+                if x % 2 == 0:
+                    res = res + x
+            return res
+        ```
+
 ## Le même `for` sur les autres séquences
 
 Puisque `for` parcourt **n'importe quelle séquence**, il fonctionne à l'identique sur une chaîne, une liste, un tuple (les listes sont détaillées plus loin dans le cours). C'est **le même mécanisme**, on change seulement la séquence parcourue.

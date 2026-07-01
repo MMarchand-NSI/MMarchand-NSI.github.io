@@ -61,12 +61,17 @@ Nous reviendrons en temps et en heure sur les autres.
 | **Affectations combinées** | Addition et affectation     | `+=`               | `a += 2` ↔ `a = a+2` |
 |                            | Soustraction et affectation | `-=`               | `a -= 2`             |
 |                            | etc.                        | `*=`, `//=`, etc.  |                      |
-| **Opérations binaires**    | ET bit-à-bit                | `&`                | `5 & 3 → 1`          |
-|                            | OU bit-à-bit                | `\|`               | `5 \| 3 → 7`         |
-|                            | OU exclusif (XOR)           | `^`                | `5 ^ 3 → 6`          |
-|                            | Complément à 1            | `~`                | `~5 → -6`            |
-|                            | Décalage à gauche           | `<<`               | `3 << 2 → 12`        |
-|                            | Décalage à droite           | `>>`               | `12 >> 2 → 3`        |
+
+??? note "Opérations bit-à-bit (hors programme de première)"
+    Il existe aussi des opérateurs qui agissent directement sur les bits d'un entier. Ils ne sont **pas au programme de première** ; on les cite seulement pour information.
+
+    | Opération | Symbole | Exemple |
+    | --- | --- | --- |
+    | ET bit-à-bit | `&` | `5 & 3 → 1` |
+    | OU bit-à-bit | `\|` | `5 \| 3 → 7` |
+    | OU exclusif (XOR) | `^` | `5 ^ 3 → 6` |
+    | Décalage à gauche | `<<` | `3 << 2 → 12` |
+    | Décalage à droite | `>>` | `12 >> 2 → 3` |
 
 
 ## Division Euclidienne

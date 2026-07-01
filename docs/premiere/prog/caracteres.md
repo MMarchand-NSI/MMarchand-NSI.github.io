@@ -87,3 +87,50 @@ En Python, une chaîne de caractères est une suite ordonnée de lettres, comme 
 
     Ce mécanisme de parcours est étudié à part entière dans le cours [La boucle for](boucle-for.md), car ce qui se passe à chaque tour de boucle mérite d'être déroulé pas à pas. On y reprend justement le parcours de chaînes de caractères.
 
+## Immutabilité
+
+Une chaîne est **immuable** : une fois créée, on ne peut pas en changer un caractère. Toute opération qui « modifie » une chaîne renvoie en réalité une **nouvelle** chaîne.
+
+```python
+s = "python"
+s[0] = "P"        # TypeError : on ne peut pas modifier un caractère
+s = "P" + s[1:]   # on fabrique une nouvelle chaîne : "Python"
+```
+
+## Chaînes sur plusieurs lignes
+
+Avec des triples guillemets :
+
+```python
+texte = """Ligne 1
+Ligne 2"""
+```
+
+## Les f-strings : insérer des valeurs
+
+Pour construire une chaîne à partir de variables, on préfixe la chaîne par `f` et on met les expressions entre accolades :
+
+```python
+nom = "Alice"
+age = 25
+print(f"Je m'appelle {nom} et j'ai {age} ans.")
+```
+
+## Quelques méthodes utiles
+
+À ne pas apprendre par cœur : on les retrouve au besoin.
+
+```python
+s = "  Python  "
+s.lower()               # '  python  '
+s.upper()               # '  PYTHON  '
+s.strip()               # 'Python' (enlève les espaces autour)
+s.replace("Py", "My")   # '  Mython  '
+
+"123".isdigit()         # True
+"abc".isalpha()         # True
+```
+
+!!! danger "Une méthode ne modifie pas la chaîne"
+    Comme les chaînes sont immuables, `s.upper()` **renvoie** une nouvelle chaîne sans changer `s`. Pour garder le résultat, il faut le récupérer : `s = s.upper()`.
+
