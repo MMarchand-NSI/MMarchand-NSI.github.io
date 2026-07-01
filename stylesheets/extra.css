@@ -853,3 +853,30 @@ h1#accueil {
     right: 20px;
   }
 }
+/* --- Exercices : indices déverrouillés au fil du temps --- */
+.gated-start {
+  font: inherit;
+  cursor: pointer;
+  padding: 0.3em 0.9em;
+  margin: 0.6em 0;
+  border: none;
+  border-radius: 4px;
+  background: var(--md-primary-fg-color);
+  color: #fff;
+}
+.gated-start[disabled] {
+  cursor: default;
+  opacity: 0.7;
+  background: var(--md-default-fg-color--lighter);
+  color: var(--md-default-fg-color);
+}
+details.gated-locked {
+  opacity: 0.55;
+}
+details.gated-locked > summary {
+  pointer-events: none;
+  cursor: not-allowed;
+}
+details.gated-locked > summary::after {
+  content: " 🔒";
+}
