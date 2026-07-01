@@ -50,6 +50,73 @@ dernier = courses.pop()     # dernier vaut "oeufs", courses vaut ["pain"]
 
     Pour trier, attention de même : `lst.sort()` trie **sur place** (et renvoie `None`), tandis que `sorted(lst)` **renvoie une nouvelle liste** triée sans toucher à l'originale.
 
+## Deux noms, une seule liste
+
+Une variable ne **contient** pas la liste : elle **pointe vers** elle (elle garde son adresse en mémoire). C'est une image à avoir en tête dès qu'on écrit `b = a`.
+
+```python
+a = [1, 2, 3]
+b = a          # b pointe vers LA MÊME liste que a
+a.append(4)
+print(b)       # [1, 2, 3, 4]  <- b a changé aussi !
+```
+
+!!! danger "`b = a` ne copie pas la liste"
+    `b = a` copie seulement la **flèche** (la référence), pas la liste. Les deux noms `a` et `b` désignent alors **un seul et même objet** en mémoire :
+
+    ```
+    a ──▶ [1, 2, 3, 4] ◀── b
+    ```
+
+    Modifier la liste par l'un la modifie donc pour l'autre.
+
+Comparez avec un entier, qui est **immuable** :
+
+```python
+a = 5
+b = a
+a = a + 1
+print(b)       # 5 : inchangé
+```
+
+Ici `a = a + 1` ne modifie pas l'objet `5` : il fabrique un **nouvel** entier et fait pointer `a` dessus, tandis que `b` continue de pointer vers l'ancien. Une liste, elle, est modifiée **sur place** : tous ceux qui pointent dessus voient le changement.
+
+### Faire une vraie copie
+
+Pour obtenir une liste **indépendante**, on la copie explicitement :
+
+```python
+b = a.copy()      # ou list(a), ou a[:]
+a.append(4)
+print(b)          # inchangée : b est une autre liste
+```
+
+### Conséquence sur les fonctions
+
+Si on passe une liste à une fonction qui la modifie, la liste de l'appelant **change aussi** (c'est la même) :
+
+```python
+def ajoute_zero(lst: list[int]):
+    lst.append(0)
+
+mes_notes = [12, 15]
+ajoute_zero(mes_notes)
+print(mes_notes)   # [12, 15, 0] : la liste d'origine a été modifiée
+```
+
+!!! question "Prédire avant d'exécuter"
+    Sans lancer le code, prédisez l'affichage, puis vérifiez :
+
+    ```python
+    a = [1, 2, 3]
+    b = a
+    b.append(99)
+    print(a)
+    ```
+
+    ??? warning "Réponse"
+        `[1, 2, 3, 99]`. Comme `b` et `a` désignent la même liste, l'ajout via `b` se voit aussi par `a`.
+
 ## Construire une liste par accumulation
 
 C'est l'usage le plus important : partir d'une **liste vide** et la remplir, tour après tour, avec `append`. C'est le motif d'[accumulation](boucle-for.md) appliqué aux listes.

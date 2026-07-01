@@ -132,6 +132,39 @@ Là encore, c'est un `for each` : « pour chaque indice `i` dans `range(len(s))`
     - **Ce que je parcours** (quelle séquence ?) ;
     - **comment je le parcours** (par élément ou par indice ?).
 
+## Lire et prédire avant d'écrire
+
+Avant d'écrire une boucle, entraînez-vous à **lire** celles des autres et à **prédire** leur résultat. C'est la meilleure préparation à en écrire soi-même.
+
+!!! question "Prédire (1)"
+    Que vaut `res` à la fin ? Suivez-le tour par tour, puis exécutez pour vérifier.
+
+    ```python
+    res = 0
+    for i in range(1, 5):
+        res = res + i
+    print(res)
+    ```
+
+    ??? warning "Réponse"
+        `10`. `res` prend successivement 0, 1, 3, 6, puis 10 (on ajoute 1, 2, 3, 4).
+
+!!! question "Prédire, puis modifier"
+    ```python
+    mot = "python"
+    res = ""
+    for lettre in mot:
+        res = lettre + res
+    print(res)
+    ```
+
+    1. Prédisez l'affichage.
+    2. **Modifiez une seule ligne** pour que le mot s'affiche à l'endroit.
+
+    ??? warning "Réponse"
+        1. `nohtyp` : chaque lettre est placée **devant** les précédentes, donc la chaîne est renversée.
+        2. Remplacer `res = lettre + res` par `res = res + lettre`.
+
 ## Exercices
 
 !!! question "1 - Parcours simple"
@@ -205,6 +238,28 @@ Là encore, c'est un `for each` : « pour chaque indice `i` dans `range(len(s))`
     1. `somme(lst)` : la somme des entiers d'une liste.
     2. `produit(lst)` : leur produit (attention à l'initialisation de l'accumulateur !).
     3. `factorielle(n)` : $1 \times 2 \times \dots \times n$. Que vaut `factorielle(0)` avec votre code ?
+
+    ??? tip "Indice léger"
+        Reprenez la méthodologie de l'accumulation : de quel **type** est le résultat ? Quelle **valeur initiale** ne change rien à une addition ? à une multiplication ?
+
+    ??? tip "Indice plus précis"
+        Pour la somme, l'accumulateur part de `0` et on fait `res = res + x`. Pour le produit, il part de **`1`** (car multiplier par 1 ne change rien) et on fait `res = res * x`.
+
+    ??? success "Solution"
+        ```python
+        def somme(lst: list[int]) -> int:
+            res = 0
+            for x in lst:
+                res = res + x
+            return res
+
+        def produit(lst: list[int]) -> int:
+            res = 1
+            for x in lst:
+                res = res * x
+            return res
+        ```
+        `factorielle(0)` vaut `1` : la boucle `for i in range(1, 1)` ne fait aucun tour, l'accumulateur garde sa valeur initiale `1`.
 
 !!! question "7 - Minimum (sans la fonction `min`)"
     ```python
