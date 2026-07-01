@@ -3,7 +3,7 @@
 !!! abstract "Rôle de cette page"
     Ceci est une **fiche de référence** sur les opérations Python autour des `str` (création, slicing, méthodes, f-strings). La leçon principale sur les chaînes est [Les chaînes de caractère](caracteres.md). La **représentation en mémoire** d'un texte (ASCII, Unicode) est traitée à part, dans [Représentation de l'information > Texte](../../Numération/texte.md). Cette fiche sert d'aide-mémoire à consulter au fil des besoins.
 
-Les **chaînes de caractères** (strings, ou `str`) en Python sont des séquences immuables de caractères utilisées pour manipuler du texte.
+Les **chaînes de caractères** (strings, ou `str`) en Python sont des **séquences** immuables de caractères. À ce titre, l'indexation, les tranches (*slicing*), `len`, `in`, la concaténation et le parcours par `for` fonctionnent comme pour toute séquence : ces opérations communes sont présentées une fois pour toutes dans [Les séquences](../2.sequences.md).
 
 ---
 

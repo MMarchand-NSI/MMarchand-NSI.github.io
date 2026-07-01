@@ -1,179 +1,89 @@
-# Le type tuple
+# Le type tuple (p-uplet)
 
+Un **tuple** (ou p-uplet) est une [séquence](2.sequences.md) **immuable** : une fois créé, on ne peut plus le modifier. On le crée avec des **parenthèses**.
 
-!!! abstract "Qu'est-ce qu'un tuple?"
-    C'est un type de donnée qui permet de stocker plusieurs informations.
+```python
+point = (3, 7)
+personne = ("Alice", 25, "Paris")
+```
 
-    En Python, on peut créer un tuple en utilisant des parenthèses.
+Comme toute séquence, on y accède par indice, on le parcourt avec `for`, on connaît sa taille avec `len` : tout cela fonctionne exactement comme décrit dans [Les séquences](2.sequences.md). Cette page se concentre sur ce qui est **propre au tuple**.
 
-    Par exemple, le tuple `(1, 2, 3)` contient trois éléments, `1`, `2` et `3`.
-
-    Un tuple est immuable, ce qui veut dire qu'on ne peut pas modifier son contenu une fois qu'il est créé.
-
-
-!!! example "Création d'un tuple"
-    ```python
-    mon_tuple = (1, 2, 3)
-    ```
-    Ici, le tuple `mon_tuple` contient trois éléments, `1`, `2` et `3`.
-
-    !!! danger "Attention"
-        Un tuple à un seul élément se termine avec une virgule, par exemple `(1,)`. Sinon, python croît que c'est juste une expression arithmétique.
-
-        exemple:
-        ```python
-        print( (1) + (2)) # Affiche 3
-
-        print( (1,) + (2,) ) # Affiche (1, 2)
-        ```
-
-
-!!! example "Accès aux éléments d'un tuple"
-    ```python
-    mon_tuple = (1, 2, 3)
-    print(mon_tuple[0])  # Affiche 1
-    print(mon_tuple[1])  # Affiche 2
-    print(mon_tuple[2])  # Affiche 3
-    ```
-    Ici, nous accedons aux éléments du tuple `mon_tuple` en utilisant des indices.
-
-    `t[i]` est l'element numéro `i` du tuple `t`.
-
-!!! abstract "Séquence"
-    Un tuple est une séquence, ce qui veut dire qu'on peut accéder à ses éléments par leurs indices.
-
-    Le premier indice d'un tuple de taille $n$ est 0, le deuxieme est 1, ... , et le dernier est $n-1$.
-
-    Ca n'est pas la première séquence que vous rencontrez, en effet, les str sont aussi des séquences immuables.
-    Ce qui veut dire que tout ce que nous allons dire sur les tuples est aussi valable pour les str.
-
-!!! abstract "Concaténer des tuples"
-    ```python
-    tuple1 = (1, 2, 3)
-    tuple2 = (4, 5, 6)
-    tuple3 = tuple1 + tuple2
-    ```
-    Ici, nous concaternons les tuples `tuple1` et `tuple2` en un seul tuple `tuple3`
-
-    On aurait aussi pu avoir ce code:
+!!! danger "Le piège du tuple à un seul élément"
+    Un tuple à un seul élément **se termine par une virgule** : `(1,)`. Sans elle, les parenthèses ne sont qu'un groupement de calcul.
 
     ```python
-    tuple1 = (1, 2, 3)
-    tuple2 = (4, 5, 6)
-    tuple1 = tuple1 + tuple2
+    print((1) + (2))     # 3   : ce sont deux nombres
+    print((1,) + (2,))   # (1, 2) : ce sont deux tuples
     ```
 
-    Cette syntaxe ne veut pas dire qu'on modifie le tuple contenu dans la variable `tuple1`, ni qu'on lui ajoute des éléments.
-    Ce qu'il se passe réellement, c'est que `tuple1 + tuple2` est calculé, puis la variable `tuple1` est modifiée pour indiquer le nouveau tuple.
+## Quand utiliser un tuple plutôt qu'une liste ?
 
+Les deux stockent plusieurs valeurs, mais l'intention diffère :
 
-!!! abstract "Fonctions sur les tuples"
-    Avec les tuples, on peut utiliser toutes les fonctionns disponibles pour les séquences, comme `len()`, `min()`, `max()`, `sum()`, etc.
+- une **liste** est une collection qu'on fait **évoluer** (on ajoute, on retire, on trie) ;
+- un **tuple** est un **enregistrement figé** : un groupe de valeurs qui vont ensemble et ne doivent pas changer.
 
-    ```python
-    tuple1 = (1, 2, 3)  # tuple de taille 3
-    print(len(tuple1))  # Affiche 3
-    print(min(tuple1))  # Affiche 1
-    print(max(tuple1))  # Affiche 3
-    print(sum(tuple1))  # Affiche 6
-    ```
+On l'utilise typiquement pour un point `(x, y)`, une date `(jour, mois, annee)`, une fiche `("Alice", 25, "Paris")`, une couleur `(r, g, b)`. L'immuabilité est ici une **garantie** : personne ne modifiera la valeur par accident.
 
-!!!  example "Itérer sur un tuple"
-    Une séquence est itérable.
+## La déstructuration
 
-    ```python
-    tuple1 = (1, 2, 3)
-    for element in tuple1:
-        print(element)
-    ```
-    Ici, nous itérons sur tous les **éléments** du tuple `tuple1` et affichons chacun d'entre eux successivement.
+On peut affecter d'un coup plusieurs variables à partir d'un tuple : c'est la **déstructuration** (ou déconstruction). La forme de gauche est comparée à celle de droite.
 
-    ```python
-    tuple1 = (1, 2, 3)
-    for i in range(len(tuple1)):
-        print(tuple1[i])
-    ```
-    Ici, nous itérons sur tous les **indices** du tuple `tuple1` et affichons chacun d'entre eux successivement.
+```python
+a, b, c = 3, 7, 9        # a=3, b=7, c=9
 
+personne = ("Alice", 25, "Paris")
+nom, age, ville = personne
+print(nom)    # Alice
+print(ville)  # Paris
+```
 
-!!! tip "Algo - Accumulation"
-    **Le principe d'accumulation est très important à comprendre.**
-    
-    Voici un exemple:
+On peut même capturer « le reste » avec `*` :
 
-    ```python
-    tuple1 = (1, 2, 3)
-    total = 0
-    for element in tuple1:
-        total += element
-    print(total)  # Affiche 6
-    ```
-    Dans ce cas, on accumule tous les éléments du tuple `tuple1` dans la variable `total` en les additionnant. Enfin, on affiche la valeur de `total` qui est la somme des éléments du tuple `tuple1`.
+```python
+premier, *milieu, dernier = [1, 2, 3, 4, 5]
+print(premier)  # 1
+print(milieu)   # [2, 3, 4]
+print(dernier)  # 5
+```
 
-    Voici un autre exemple avec des str:
+## Retour multiple d'une fonction
 
-    ```python
-    tuple1 = ("a", "b", "c")
-    total = ""
-    for element in tuple1:
-        total += element
-    print(total)  # Affiche "abc"
-    ```
+La déstructuration rend un service très courant : une [fonction](fonctions.md) peut **renvoyer plusieurs valeurs** en les regroupant dans un tuple, qu'on déstructure à l'appel.
 
-    Transformer un tuple.
+```python
+def min_max(lst: list[int]) -> tuple[int, int]:
+    """Renvoie le plus petit et le plus grand élément."""
+    return min(lst), max(lst)
 
-    on dispose d'un tuple et on veut créer un autre tuple où toutes les valeurs sont multipliées par 2.
+petit, grand = min_max([3, 7, 2, 9])
+print(petit, grand)   # 2 9
+```
+
+## Exemple : les couleurs RGB
+
+Une couleur se représente par un tuple `(r, g, b)` (rouge, vert, bleu), chaque canal de 0 à 255. C'est ce qu'utilise la bibliothèque Pillow.
+
+```python
+from PIL import Image
+image = Image.new("RGB", (100, 100), (255, 0, 0))   # une image rouge
+image.show()
+```
+
+!!! question "Image en niveau de gris"
+    La version en niveau de gris d'un pixel `(r, g, b)` est `(m, m, m)`, où `m` est la moyenne de `r`, `g` et `b`.
+
+    Écrivez une fonction `to_noir_blanc(fichier)` qui ouvre une image, remplace chaque pixel par sa version en niveau de gris, et l'affiche.
 
     ```python
-    t = (1, 2, 3)
-    resultat = ()
-    for element in t:
-        resultat += (element * 2,)
-    print(resultat)  # Affiche (2, 4, 6)
-    ``` 
-
-    Modifier un str en décalant toutes les lettres de 1
-
-    ```python
-    t = "Hello"
-    resultat = ""
-    for element in t:
-        resultat += chr(ord(element) + 1)
-    print(resultat)  # Affiche "IFMMP"
+    from PIL import Image
+    image = Image.open("image.png")
+    for x in range(image.size[0]):
+        for y in range(image.size[1]):
+            r, g, b = image.getpixel((x, y))
+            ...
     ```
 
 !!! question "Moyenne"
-    Vos notes sont dans un tuple `notes`. Calculer la moyenne de ces notes.
-
-
-!!! question "tuple RGB"
-    Afin de représenter un pixel en RGB, nous pouvons utiliser un tuple.
-    Par exemple pour le pixel rouge, nous aurions un tuple `(255, 0, 0)`.
-
-    C'est le cas pour le module pillow.
-
-    Le code suivant affiche une image rouge.
-
-    ```python
-    from PIL import Image
-    image = Image.new("RGB", (100, 100), (255, 0, 0))
-    image.show()
-    ```
-
-    On peut aussi itérer sur tous les pixels d'une image, les modifier et les sauvegarder.
-
-    Par exemple, ce code assombrit tous les pixels de l'image en divisant tous les canaux par 2.
-
-    ```python
-    from PIL import Image
-    image = Image.load("image.png")
-    for x in range(image.size[0]):
-        for y in range(image.size[1]):
-            pixel = image.getpixel((x, y))
-            image.putpixel((x, y), (pixel[0] // 2, pixel[1] // 2, pixel[2] // 2))
-    image.show()
-    ```
-
-    Si on dispose d'un tuple `(r, g, b)`, la version en noir et blanc de ce tuple serait `(m, m, m)` où m est la moyenne de r, g et b.
-    créer une fonction to_noir_blanc qui prend un nom de fichier en paramètre, et qui affiche l'image en noir et blanc.
-
+    Vos notes sont dans un tuple `notes`. Calculez leur moyenne.
