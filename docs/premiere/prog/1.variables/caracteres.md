@@ -85,5 +85,5 @@ En Python, une chaîne de caractères est une suite ordonnée de lettres, comme 
 !!! note "Et pour parcourir tous les caractères ?"
     Accéder à un caractère par son indice est une chose. Parcourir automatiquement **tous** les caractères d'une chaîne en est une autre : c'est le rôle de la boucle `for`.
 
-    Ce mécanisme de parcours sera étudié à part entière dans le cours [Parcourir des itérables](../bouclefor.md), car ce qui se passe à chaque tour de boucle mérite d'être déroulé pas à pas. On y reprendra justement le parcours de chaînes de caractères.
+    Ce mécanisme de parcours est étudié à part entière dans le cours [La boucle for](../boucle-for.md), car ce qui se passe à chaque tour de boucle mérite d'être déroulé pas à pas. On y reprend justement le parcours de chaînes de caractères.
 

@@ -195,7 +195,7 @@ else:
     Résultat : `"passable"` ! Car `15 >= 10` est vrai en premier, et Python s'arrête là. Il faut tester **du cas le plus exigeant au moins exigeant**.
 
 !!! question "Exercices (`elif`)"
-    1. **Mention au bac.** À partir d'une moyenne sur 20 : `[0;8[` Recalé, `[8;10[` Rattrapage, `[10;12[` Sans mention, `[12;14[` Assez bien, `[14;16[` Bien, `[16;18[` Très bien, `[18;20]` Félicitations.
+    1. **Mention au bac.** À partir d'une moyenne sur 20 : `[0;8)` Recalé, `[8;10)` Rattrapage, `[10;12)` Sans mention, `[12;14)` Assez bien, `[14;16)` Bien, `[16;18)` Très bien, `[18;20]` Félicitations.
     2. **Année bissextile.** Une année est bissextile si elle est multiple de 4 mais pas de 100, **ou** multiple de 400. Testez 2021, 2020, 1900, 2000.
 
     ??? warning "Corrigé (mention)"
