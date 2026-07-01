@@ -9,11 +9,11 @@
     - Toute nouvelle information stockée dans une variable **efface** la précédente.
     - Les variables sont stockées sous forme binaire dans la mémoire de l'ordinateur : la **RAM**.
 
-![Barrette de RAM de 128 Go](image-1.png)
+![Barrette de RAM de 128 Go](variables-ram.png)
 
 ## Une variable est une case mémoire nommée
 
-Souvenez-vous du modèle de von Neumann et du [Little Man Computer](../../architecture/von_neumann/langage-machine.md) : la mémoire est une suite de **cases**, chacune repérée par une **adresse**, et le processeur y **range** ou y **lit** des valeurs.
+Souvenez-vous du modèle de von Neumann et du [Little Man Computer](../architecture/von_neumann/langage-machine.md) : la mémoire est une suite de **cases**, chacune repérée par une **adresse**, et le processeur y **range** ou y **lit** des valeurs.
 
 Une **variable**, c'est exactement cela : une **case mémoire à laquelle on a donné un nom**. Plutôt que de retenir « la case d'adresse 17 », on écrit `age`, et l'ordinateur sait de quelle case on parle.
 
@@ -34,7 +34,7 @@ a = 4
     Si la variable n'existe pas encore, elle est créée ; sinon, son contenu est remplacé.
 
 !!! abstract "Ce que fait vraiment la machine"
-    Cette opération correspond très exactement à une instruction du processeur. Dans le [Little Man Computer](../../architecture/von_neumann/langage-machine.md), affecter une valeur, c'est l'instruction **`STA`** (*store*) : « écris cette valeur à telle adresse mémoire ». Ainsi `a = 4` revient à **ranger `4` dans la case étiquetée `a`**.
+    Cette opération correspond très exactement à une instruction du processeur. Dans le [Little Man Computer](../architecture/von_neumann/langage-machine.md), affecter une valeur, c'est l'instruction **`STA`** (*store*) : « écris cette valeur à telle adresse mémoire ». Ainsi `a = 4` revient à **ranger `4` dans la case étiquetée `a`**.
 
 !!! question "Exercice"
     ```python
@@ -110,7 +110,7 @@ b = temp    # b récupère "gauche"
 ```
 
 !!! tip "Le raccourci de Python"
-    Python permet d'échanger en une ligne grâce à la [déstructuration](../tuples.md) : `a, b = b, a`. La droite est entièrement calculée d'abord, puis rangée dans la gauche.
+    Python permet d'échanger en une ligne grâce à la [déstructuration](tuples.md) : `a, b = b, a`. La droite est entièrement calculée d'abord, puis rangée dans la gauche.
 
 ## Le type d'une variable
 

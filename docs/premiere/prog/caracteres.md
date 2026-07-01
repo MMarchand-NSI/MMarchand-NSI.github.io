@@ -28,7 +28,7 @@ Lorsque les programmes deviennent longs, on peut se perdre dans les types, alors
     Cette instruction affecte le contenu de la variable `Bonjour` à la variable a.
 
 !!! info "Comment un texte est-il stocké en mémoire ?"
-    La représentation d'un texte en machine (codes ASCII, Unicode, encodage UTF-8) est traitée dans le chapitre [Représentation de l'information > Texte](../../Numération/texte.md). Cette page-ci se concentre sur la **manipulation** des chaînes en Python.
+    La représentation d'un texte en machine (codes ASCII, Unicode, encodage UTF-8) est traitée dans le chapitre [Représentation de l'information > Texte](../Numération/texte.md). Cette page-ci se concentre sur la **manipulation** des chaînes en Python.
 
 ## Opérations possibles
 
@@ -85,5 +85,5 @@ En Python, une chaîne de caractères est une suite ordonnée de lettres, comme 
 !!! note "Et pour parcourir tous les caractères ?"
     Accéder à un caractère par son indice est une chose. Parcourir automatiquement **tous** les caractères d'une chaîne en est une autre : c'est le rôle de la boucle `for`.
 
-    Ce mécanisme de parcours est étudié à part entière dans le cours [La boucle for](../boucle-for.md), car ce qui se passe à chaque tour de boucle mérite d'être déroulé pas à pas. On y reprend justement le parcours de chaînes de caractères.
+    Ce mécanisme de parcours est étudié à part entière dans le cours [La boucle for](boucle-for.md), car ce qui se passe à chaque tour de boucle mérite d'être déroulé pas à pas. On y reprend justement le parcours de chaînes de caractères.
 

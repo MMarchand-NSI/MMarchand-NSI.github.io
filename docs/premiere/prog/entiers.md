@@ -75,13 +75,13 @@ La division euclidienne est celle que vous avez appris en primaire. On n'en fait
 
 <center>
 
-![](image-2.png)
+![](entiers-euclide-1.png)
 
 </center>
 
 <center>
 
-![alt text](image.png)
+![alt text](entiers-euclide-2.png)
 
 </center>
 

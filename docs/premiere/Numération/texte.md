@@ -116,4 +116,4 @@ with open("en_utf8.txt", "r", encoding="latin-1") as f:
         Python va probablement lever une erreur (`UnicodeDecodeError`) : l'octet unique utilisé par ISO-8859-1 pour le `é` ne correspond à aucune séquence UTF-8 valide. Là où UTF-8 attend 2 octets pour un caractère accentué, il n'en trouve qu'un. Il faut **connaître l'encodage d'origine** pour relire correctement.
 
 !!! note "Et la manipulation des textes en Python ?"
-    Créer, découper, parcourir des chaînes de caractères (`str`) en Python est traité dans le chapitre Programmation, à la page [Les chaînes de caractère](../prog/1.variables/caracteres.md).
+    Créer, découper, parcourir des chaînes de caractères (`str`) en Python est traité dans le chapitre Programmation, à la page [Les chaînes de caractère](../prog/caracteres.md).
