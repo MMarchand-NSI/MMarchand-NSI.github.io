@@ -4,10 +4,12 @@
     {
         "label": "Deploy MkDocs to GitHub",
         "type": "shell",
-        "command": "uv run mkdocs build && uv run mkdocs gh-deploy",
+        "command": "uv run mkdocs gh-deploy",
         "options": {
             "cwd": "${workspaceFolder}"
         },
+        "dependsOrder": "sequence",
+        "dependsOn": ["build"],
         "group": {
             "kind": "build",
             "isDefault": true
