@@ -9,6 +9,109 @@
 }
 
 /* =========================
+   ONGLETS DE NAVIGATION
+   ========================= */
+
+/* Séparateurs entre groupes d'onglets : Accueil | Première Terminale SNT | Les outils Projets | Ponts Annales */
+.md-tabs__list > .md-tabs__item:nth-child(2),
+.md-tabs__list > .md-tabs__item:nth-child(5),
+.md-tabs__list > .md-tabs__item:nth-child(7) {
+  position: relative;
+  margin-left: 0.6rem;
+}
+
+.md-tabs__list > .md-tabs__item:nth-child(2)::before,
+.md-tabs__list > .md-tabs__item:nth-child(5)::before,
+.md-tabs__list > .md-tabs__item:nth-child(7)::before {
+  content: "";
+  position: absolute;
+  left: -0.6rem;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 1.1rem;
+  width: 1px;
+  background: currentColor;
+  opacity: 0.35;
+}
+
+/* =========================
+   WIDGET DICTIONNAIRE (TOC)
+   ========================= */
+
+.dico-widget {
+  margin-top: 1.2rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--md-default-fg-color--lightest);
+  font-size: 0.7rem;
+}
+
+.dico-widget__label {
+  display: block;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--md-default-fg-color--light);
+  margin-bottom: 0.4rem;
+  letter-spacing: 0.03em;
+}
+
+.dico-widget__form {
+  display: flex;
+  gap: 0.3rem;
+}
+
+.dico-widget__input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.3rem 0.5rem;
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+  background: var(--md-default-bg-color);
+  color: var(--md-default-fg-color);
+  font-size: 0.7rem;
+}
+
+.dico-widget__input:focus {
+  outline: none;
+  border-color: var(--md-primary-fg-color);
+}
+
+.dico-widget__button {
+  border: 1px solid var(--md-default-fg-color--lightest);
+  border-radius: 0.2rem;
+  background: var(--md-default-bg-color);
+  cursor: pointer;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.dico-widget__button:hover {
+  border-color: var(--md-primary-fg-color);
+}
+
+.dico-widget__result {
+  margin-top: 0.5rem;
+  color: var(--md-default-fg-color);
+  line-height: 1.4;
+}
+
+.dico-widget__pos {
+  margin: 0.4rem 0 0.1rem;
+  font-style: italic;
+  color: var(--md-primary-fg-color);
+  font-weight: 700;
+}
+
+.dico-widget__defs {
+  margin: 0 0 0 1rem;
+  padding: 0;
+}
+
+.dico-widget__defs li {
+  margin: 0.15rem 0;
+}
+
+/* =========================
    TYPOGRAPHIE ET CODE
    ========================= */
 
