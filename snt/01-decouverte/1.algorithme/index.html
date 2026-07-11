@@ -4833,10 +4833,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#un-langage-sans-ambiguite" class="md-nav__link">
+  <a href="#inventer-un-langage-pour-dessiner" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Un langage sans ambiguïté
+        Inventer un langage pour dessiner
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#un-mot-une-definition-precise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Un mot, une définition précise
       
     </span>
   </a>
@@ -5021,7 +5032,7 @@
   <span class="md-ellipsis">
     
   
-    2. La tortue
+    2. Programmer en Python
   
 
     
@@ -5037,7 +5048,7 @@
             <span class="md-nav__icon md-icon"></span>
             
   
-    2. La tortue
+    2. Programmer en Python
   
 
           </label>
@@ -6962,10 +6973,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#un-langage-sans-ambiguite" class="md-nav__link">
+  <a href="#inventer-un-langage-pour-dessiner" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Un langage sans ambiguïté
+        Inventer un langage pour dessiner
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#un-mot-une-definition-precise" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Un mot, une définition précise
       
     </span>
   </a>
@@ -7144,16 +7166,38 @@
 <p>Notre langage de tous les jours est <strong>plein d'implicites</strong>. Entre humains, ça passe : on se comprend à demi-mot. Mais une machine ne « comprend » pas, elle <strong>exécute</strong>. Elle ne devine jamais : si une consigne peut se comprendre de deux façons, elle prendra la mauvaise.</p>
 </div>
 <p>Conclusion : pour parler à une machine, notre langage naturel ne convient pas, il est trop ambigu. Il faut <strong>inventer des langages sans implicite</strong>, où chaque instruction ne veut dire qu'une seule chose. C'est tout l'enjeu de la programmation, et on va commencer par en fabriquer un nous-mêmes.</p>
-<h2 id="un-langage-sans-ambiguite">Un langage sans ambiguïté</h2>
-<p>On veut expliquer à quelqu'un comment tracer un dessin sur une grille, sans lui montrer le dessin. On va inventer un <strong>langage</strong> : une petite liste de mots-instructions.</p>
-<p>Mais attention : même un mot comme <code>droite</code> ne dit pas tout. Est-ce <strong>tourner</strong> à droite, ou <strong>se déplacer</strong> vers la droite ? Et de combien : d'une case, de deux ? Tant qu'on ne l'a pas <strong>défini</strong> précisément, il reste un implicite. Chaque mot-instruction doit donc recevoir une définition qui ne laisse aucun doute.</p>
-<p>Fixons deux mots et définissons-les exactement (une case, c'est une cellule de la grille) :</p>
+<h2 id="inventer-un-langage-pour-dessiner">Inventer un langage pour dessiner</h2>
+<p>On veut expliquer à quelqu'un comment tracer un dessin sur un quadrillage, <strong>sans lui montrer</strong> le dessin et <strong>sans le moindre implicite</strong> (souviens-toi du sandwich). Il faut donc <strong>inventer un langage</strong> : une petite liste de mots-instructions, chacun défini sans aucun doute possible.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercice 1 - Invente ton langage</p>
+<p>Un crayon part d'une case du quadrillage et doit pouvoir tracer <strong>n'importe quel</strong> trait le long des lignes. Quels <strong>mots-instructions</strong> proposes-tu ? Donne-les, et <strong>définis précisément</strong> ce que fait chacun. Mets-toi d'accord dans ton groupe, puis on compare en classe.</p>
+<details class="success">
+<summary>Correction : deux familles de réponses</summary>
+<p>En comparant les propositions de la classe, elles se rangent presque toujours en <strong>deux familles</strong>, deux façons de voir le déplacement.</p>
+<p><strong>Vu de la feuille (langage absolu).</strong> On nomme les quatre directions du quadrillage :</p>
+<ul>
+<li><code>droite</code>, <code>gauche</code>, <code>haut</code>, <code>bas</code> : trace un trait d'une case dans cette direction.</li>
+</ul>
+<p>Chaque mot désigne une direction <strong>fixe de la feuille</strong>. C'est immédiat sur un quadrillage, parce qu'une case a un haut, un bas, une gauche et une droite bien définis.</p>
+<p><strong>Vu du crayon (langage relatif).</strong> On se met <strong>à la place du crayon</strong>, qui regarde toujours quelque part :</p>
+<ul>
+<li><code>avance</code> : trace un trait d'une case, <strong>droit devant soi</strong>.</li>
+<li><code>tourne</code> : pivote d'un <strong>quart de tour</strong>, sans tracer.</li>
+</ul>
+<p>Ici, plus de droite ni de bas : il y a <strong>devant soi</strong> et <strong>pivoter</strong>. Le tracé ne dépend plus de la feuille, mais de la <strong>direction du crayon</strong>.</p>
+<p>Aucune des deux n'est « la bonne » : ce sont deux points de vue, chacun avec ses forces. On <strong>commence par l'absolu</strong>, qui colle au quadrillage. On <strong>met le relatif de côté</strong> pour le retrouver plus tard, quand on pilotera un crayon qui se déplace : il rendra certains dessins bien plus simples.</p>
+</details>
+</div>
+<h2 id="un-mot-une-definition-precise">Un mot, une définition précise</h2>
+<p>On développe donc le <strong>langage absolu</strong>. Encore faut-il que chaque mot soit défini sans ambiguïté : même <code>droite</code> ne dit pas tout. Est-ce <strong>tourner</strong> à droite, ou <strong>se déplacer</strong> vers la droite ? Et de combien, une case, deux ? On fixe une bonne fois (une case, c'est une cellule de la grille) :</p>
 <ul>
 <li><code>droite</code> : trace un trait d'une case <strong>vers la droite</strong></li>
+<li><code>gauche</code> : trace un trait d'une case <strong>vers la gauche</strong></li>
+<li><code>haut</code> : trace un trait d'une case <strong>vers le haut</strong></li>
 <li><code>bas</code> : trace un trait d'une case <strong>vers le bas</strong></li>
 </ul>
 <div class="admonition question">
-<p class="admonition-title">Exercice 1 - Décoder un tracé</p>
+<p class="admonition-title">Exercice 2 - Décoder un tracé</p>
 <p>On part du coin en haut à gauche. On exécute :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>droite
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>droite
@@ -7164,15 +7208,6 @@
 <details class="success">
 <summary>Correction</summary>
 <p>Un trait qui va deux cases à droite, puis une case en bas, puis encore une case à droite. Une sorte de marche d'escalier.</p>
-</details>
-</div>
-<p>Le problème, c'est que ces deux mots ne suffisent pas à tout dessiner : impossible de remonter ou d'aller à gauche.</p>
-<div class="admonition question">
-<p class="admonition-title">Exercice 2 - Compléter le langage</p>
-<p>Propose deux nouveaux mots-instructions pour pouvoir dessiner <strong>n'importe quel</strong> trait sur la grille. Explique précisément ce que fait chacun.</p>
-<details class="success">
-<summary>Correction</summary>
-<p>Par exemple <code>gauche</code> (un trait d'une case vers la gauche) et <code>haut</code> (un trait d'une case vers le haut). Avec <code>droite</code>, <code>gauche</code>, <code>haut</code>, <code>bas</code>, on peut tracer tous les chemins de la grille.</p>
 </details>
 </div>
 <h2 id="quand-ca-se-repete">Quand ça se répète</h2>
@@ -7385,6 +7420,7 @@ On trace le premier trait, on <strong>lève</strong> le crayon pour remonter et 
 <ul>
 <li>Un algorithme est une suite d'instructions <strong>précises</strong> et <strong>sans ambiguïté</strong>.</li>
 <li>Un <strong>langage</strong> est un ensemble de mots-instructions que la machine sait exécuter.</li>
+<li>Un même dessin se décrit de <strong>deux points de vue</strong> : <strong>absolu</strong> (vu de la feuille : <code>droite</code>, <code>bas</code>…) ou <strong>relatif</strong> (vu du crayon : <code>avance</code>, <code>tourne</code>). On a construit l'absolu ; on retrouvera le relatif avec un crayon qui se déplace.</li>
 <li>Chaque instruction doit avoir une <strong>définition précise</strong> : un mot comme <code>droite</code> ne dit rien tant qu'on n'a pas fixé ce qu'il fait (tourner ? se déplacer ? de combien ?).</li>
 <li>On écrit <strong>une instruction par ligne</strong>, et on <strong>indente</strong> (décale vers la droite) le bloc d'instructions à répéter.</li>
 <li>On apprend d'abord à <strong>lire</strong> un programme (dire ce qu'il dessine), avant de savoir en <strong>écrire</strong> un.</li>
@@ -7412,7 +7448,7 @@ On trace le premier trait, on <strong>lève</strong> le crayon pour remonter et 
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 8, 2026 18:34:16 UTC">July 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 11, 2026 21:15:53 UTC">July 11, 2026</span>
   </span>
 
     
