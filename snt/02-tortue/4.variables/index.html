@@ -4837,34 +4837,6 @@
 
               
             
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../01-decouverte/4.premier-programme/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Ton premier programme Python
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
           </ul>
         </nav>
       
@@ -5091,6 +5063,17 @@
     <span class="md-ellipsis">
       
         Dans notre langage inventé : le mot mémoire
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dabord-voir-une-valeur-print" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D'abord, voir une valeur : print
       
     </span>
   </a>
@@ -6968,6 +6951,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#dabord-voir-une-valeur-print" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        D'abord, voir une valeur : print
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#le-meme-mot-en-python-la-variable" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -7180,52 +7174,72 @@
 La mémoire part de <code>2</code> et grandit de <code>2</code> à chaque tour : <code>2</code>, puis <code>4</code>, puis <code>6</code>.</p>
 </details>
 </div>
+<h2 id="dabord-voir-une-valeur-print">D'abord, voir une valeur : <code>print</code></h2>
+<p>Avant de passer en Python, un problème pratique. La tortue <strong>montre</strong> son travail : le dessin s'affiche. Mais une valeur rangée en mémoire est <strong>invisible</strong> : rien à l'écran. Pour suivre ce que Python retient, il faut savoir <strong>afficher une valeur</strong>. C'est l'instruction <code>print</code> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bonjour&quot;</span><span class="p">)</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">print</span><span class="p">(</span><span class="mi">3</span> <span class="o">+</span> <span class="mi">4</span><span class="p">)</span>
+</code></pre></div>
+<p>Ce programme affiche :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Bonjour
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>7
+</code></pre></div>
+<p>Regarde bien la différence entre les deux lignes : les <strong>guillemets</strong> changent tout.</p>
+<ul>
+<li><strong>Entre guillemets</strong>, c'est du <strong>texte</strong>, recopié tel quel : <code>print("3 + 4")</code> afficherait <code>3 + 4</code>.</li>
+<li><strong>Sans guillemets</strong>, Python lit un <strong>calcul</strong> et affiche le résultat : <code>print(3 + 4)</code> affiche <code>7</code>. Python connaît <code>+</code>, <code>-</code>, <code>*</code> (multiplier) et <code>/</code> (diviser).</li>
+</ul>
+<p>C'est ce que Silent Teacher t'a fait deviner dans ses premières questions.</p>
+<div class="admonition note">
+<p class="admonition-title">Pourquoi « print » ?</p>
+<p><code>print</code> veut dire <strong>imprimer</strong> en anglais. Aux débuts de l'informatique, il n'y avait pas d'écran : les résultats sortaient sur du <strong>papier</strong>. Les écrans sont arrivés ensuite, mais le mot est resté.</p>
+</div>
 <h2 id="le-meme-mot-en-python-la-variable">Le même mot, en Python : la variable</h2>
 <p>Rien de magique là non plus : Python a le même geste, mais le mot n'est pas <code>mémoire</code>, c'est le signe <strong><code>=</code></strong>. On dit qu'on <strong>affecte</strong> une valeur à une <strong>variable</strong>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">largeur</span> <span class="o">=</span> <span class="mi">3</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">hortense</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">largeur</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">largeur</span> <span class="o">=</span> <span class="mi">3</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">hortense</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">largeur</span><span class="p">)</span>
 </code></pre></div>
 <ul>
 <li><code>largeur = 3</code> <strong>écrit</strong> dans la mémoire : crée la variable <code>largeur</code> avec la valeur <code>3</code>. Rien ne se dessine.</li>
 <li><code>hortense.forward(largeur)</code> <strong>lit</strong> la variable : Python remplace <code>largeur</code> par <code>3</code>.</li>
 </ul>
 <p>Comme avec <code>mémoire</code>, réécrire <strong>remplace</strong> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">6</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>   <span class="c1"># affiche 6</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">6</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>   <span class="c1"># affiche 6</span>
 </code></pre></div>
 <p>Le <code>4</code> est écrasé. Le <code>=</code> ne veut pas dire « égal » comme en maths ; il veut dire <strong>« range la valeur de droite dans la variable de gauche »</strong>. D'où le geste pour <strong>faire grandir</strong> une variable :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">score</span> <span class="o">=</span> <span class="mi">10</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">score</span> <span class="o">=</span> <span class="n">score</span> <span class="o">+</span> <span class="mi">5</span>   <span class="c1"># score vaut maintenant 15</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">score</span> <span class="o">=</span> <span class="mi">10</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">score</span> <span class="o">=</span> <span class="n">score</span> <span class="o">+</span> <span class="mi">5</span>   <span class="c1"># score vaut maintenant 15</span>
 </code></pre></div>
 <p>Et voici enfin la spirale qu'on ne savait pas dessiner : une variable <code>longueur</code> qu'on agrandit à chaque tour de boucle.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">turtle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Turtle</span><span class="p">,</span> <span class="n">done</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">hortense</span> <span class="o">=</span> <span class="n">Turtle</span><span class="p">()</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="n">longueur</span> <span class="o">=</span> <span class="mi">10</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="n">hortense</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">longueur</span><span class="p">)</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="n">hortense</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    <span class="n">longueur</span> <span class="o">=</span> <span class="n">longueur</span> <span class="o">+</span> <span class="mi">10</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="n">done</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">turtle</span><span class="w"> </span><span class="kn">import</span> <span class="n">Turtle</span><span class="p">,</span> <span class="n">done</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">hortense</span> <span class="o">=</span> <span class="n">Turtle</span><span class="p">()</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">longueur</span> <span class="o">=</span> <span class="mi">10</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">):</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="n">hortense</span><span class="o">.</span><span class="n">forward</span><span class="p">(</span><span class="n">longueur</span><span class="p">)</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="n">hortense</span><span class="o">.</span><span class="n">left</span><span class="p">(</span><span class="mi">90</span><span class="p">)</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    <span class="n">longueur</span> <span class="o">=</span> <span class="n">longueur</span> <span class="o">+</span> <span class="mi">10</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="n">done</span><span class="p">()</span>
 </code></pre></div>
 <p>À chaque tour : la tortue avance de <code>longueur</code>, tourne d'un quart de tour, puis <code>longueur</code> grandit de 10. Le tour suivant trace un côté plus long : c'est ce qui creuse la spirale. Sans variable, impossible.</p>
 <h2 id="le-nom-cest-toi-qui-choisis">Le nom, c'est toi qui choisis</h2>
 <p>Le nom d'une variable, c'est <strong>le programmeur qui le choisit</strong> : Python s'en moque. Ces deux programmes font exactement la même chose :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">longueur</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">longueur</span> <span class="o">=</span> <span class="mi">10</span>
 </code></pre></div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
 </code></pre></div>
 <p>Mais <code>longueur</code> se relit tout seul ; <code>x</code>, non : dans six mois, tu ne sauras plus ce que <code>x</code> contenait. <strong>Tu es libre du nom, mais choisis un nom parlant</strong> : il dit ce qu'il y a dans la boîte.</p>
 <h2 id="des-variables-tu-en-avais-deja-croise">Des variables, tu en avais déjà croisé</h2>
 <p>Souviens-toi : à la page des fonctions, on disait qu'un paramètre (<code>t</code>, <code>longueur</code>…) se comporte comme une <strong>valeur nommée</strong>. C'était déjà une variable, mais un cas particulier : celle que Python remplit <strong>automatiquement</strong>, avec la valeur donnée à l'appel.</p>
 <p>Et il y en a une autre, que tu écris depuis ton tout premier dessin :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">hortense</span> <span class="o">=</span> <span class="n">Turtle</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">hortense</span> <span class="o">=</span> <span class="n">Turtle</span><span class="p">()</span>
 </code></pre></div>
 <p>Ce <code>=</code> est exactement le même que celui de <code>largeur = 3</code> : il <strong>range dans la variable</strong> <code>hortense</code> la tortue qu'on vient de créer. « Donner un nom à la tortue », c'était déjà une affectation. Et tu remarques au passage qu'une variable ne contient pas forcément un nombre : ici, la boîte contient une <strong>tortue</strong>.</p>
 <p>La nouveauté d'aujourd'hui, c'est que tu peux créer des variables toi-même, et <strong>écrire dedans quand tu veux</strong>, autant de fois que tu veux.</p>
 <h2 id="ce-quon-retient">Ce qu'on retient</h2>
 <ul>
+<li><code>print(...)</code> <strong>affiche</strong> une valeur : entre <strong>guillemets</strong>, du texte recopié tel quel ; <strong>sans guillemets</strong>, un calcul est effectué (<code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>). C'est le seul moyen de <strong>voir</strong> ce que Python retient.</li>
 <li>Une <strong>variable</strong> est une <strong>boîte en mémoire</strong>, étiquetée par un nom, où l'on <strong>retient</strong> une valeur pour la réutiliser ou la faire changer. C'est l'équivalent Python du <code>mémoire</code> de notre langage inventé.</li>
 <li><strong>Écrire</strong> (<code>largeur = 3</code>) ne dessine rien : ça range une valeur sous un nom. <strong>Lire</strong> (<code>largeur</code>), c'est utiliser ce nom à la place de sa valeur.</li>
 <li>Le <code>=</code> <strong>range</strong>, il ne signifie pas « égal » : une nouvelle valeur <strong>écrase</strong> l'ancienne. D'où <code>score = score + 5</code> pour faire grandir une variable.</li>
@@ -7254,7 +7268,7 @@ La mémoire part de <code>2</code> et grandit de <code>2</code> à chaque tour :
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 11, 2026 19:26:37 UTC">July 11, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 11, 2026 20:34:52 UTC">July 11, 2026</span>
   </span>
 
     
