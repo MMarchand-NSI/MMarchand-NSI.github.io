@@ -5007,6 +5007,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../02-tortue/5.parcourir/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Parcourir les nombres
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -5081,7 +5109,7 @@
   <span class="md-ellipsis">
     
   
-    L'image numérique : du photosite au pixel
+    L'image numérique : pixels, couleurs, coordonnées
   
 
     
@@ -5184,10 +5212,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#colorier-un-pixel" class="md-nav__link">
+  <a href="#colorier-un-pixel-colorie-devient-putpixel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Colorier un pixel
+        Colorier un pixel : colorie devient putpixel
       
     </span>
   </a>
@@ -5328,7 +5356,7 @@
   <span class="md-ellipsis">
     
   
-    Ce qu'une photo dit de toi : les métadonnées
+    L'appareil photo, et ce qu'une photo dit de toi
   
 
     
@@ -6962,10 +6990,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#colorier-un-pixel" class="md-nav__link">
+  <a href="#colorier-un-pixel-colorie-devient-putpixel" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Colorier un pixel
+        Colorier un pixel : colorie devient putpixel
       
     </span>
   </a>
@@ -7111,7 +7139,7 @@
 
 
 <h1 id="creer-une-image-pixel-par-pixel">Créer une image pixel par pixel</h1>
-<p>Une image est une grille de triplets (R, V, B) : un programme peut donc la fabriquer, pixel par pixel. C'est ce qu'on fait ici, et au passage on apprend un geste nouveau : parcourir <strong>toute une grille</strong> avec une boucle <strong>dans</strong> une boucle.</p>
+<p>Une image est une grille de pixels, chacun avec ses <strong>coordonnées</strong> et sa <strong>couleur</strong> : un programme peut donc la fabriquer, pixel par pixel. Notre mot <code>colorie</code> existe en Python, presque tel quel. Et au passage, on apprend un geste nouveau : parcourir <strong>toute une grille</strong> avec une boucle <strong>dans</strong> une boucle.</p>
 <div class="admonition note">
 <p class="admonition-title">Cours ici, exercices sur Capytale</p>
 <p>Cette page est le <strong>cours</strong>. Les <strong>exercices</strong> sont sur <strong>Capytale</strong>.</p>
@@ -7128,39 +7156,51 @@
 <li>Sur Capytale, écrire <code>img</code> seul en fin de cellule <strong>affiche</strong> l'image.</li>
 </ul>
 <h2 id="les-coordonnees-dun-pixel">Les coordonnées d'un pixel</h2>
-<p>Chaque pixel a une adresse <code>(x, y)</code> : <code>x</code> compte les colonnes vers la <strong>droite</strong>, <code>y</code> compte les lignes vers le <strong>bas</strong>. Le pixel <code>(0, 0)</code> est <strong>en haut à gauche</strong>, comme le point de départ de nos tracés sur la grille de la première séance.</p>
+<p>Rien de neuf ici : c'est notre <strong>troisième façon de se repérer</strong>, celle de la dernière séance. Chaque pixel a une adresse <code>(x, y)</code> : <code>x</code> compte les colonnes vers la <strong>droite</strong>, <code>y</code> compte les lignes vers le <strong>bas</strong>, et le pixel <code>(0, 0)</code> est <strong>en haut à gauche</strong>.</p>
 <p><svg viewBox="0 0 240 170" width="240" role="img" aria-label="repere des coordonnees d'une image, origine en haut a gauche, x vers la droite, y vers le bas" style="max-width:100%;height:auto"><rect x="30" y="30" width="180" height="120" fill="none" stroke="#00897b" stroke-width="2"/><circle cx="30" cy="30" r="4" fill="#e53935"/><text x="14" y="20" font-size="12" fill="#e53935">(0,0)</text><line x1="30" y1="14" x2="150" y2="14" stroke="#555" stroke-width="1.5" marker-end="none"/><polygon points="150,14 142,10 142,18" fill="#555"/><text x="158" y="18" font-size="12" fill="#555">x</text><line x1="14" y1="30" x2="14" y2="110" stroke="#555" stroke-width="1.5"/><polygon points="14,110 10,102 18,102" fill="#555"/><text x="8" y="126" font-size="12" fill="#555">y</text><rect x="120" y="78" width="12" height="12" fill="#e53935"/><text x="138" y="88" font-size="12" fill="#555">(90, 48)</text></svg></p>
 <p>Attention au sens de <code>y</code> : il descend. Et les coordonnées vont de <code>0</code> à <code>largeur - 1</code> (ou <code>hauteur - 1</code>) : dans notre image de 300 sur 200, le pixel en bas à droite est <code>(299, 199)</code>.</p>
-<h2 id="colorier-un-pixel">Colorier un pixel</h2>
-<p>Pour changer la couleur d'un pixel, on <strong>parle à l'image</strong> avec la notation pointée, comme on parlait à la tortue :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">img</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-</code></pre></div>
-<p>Ça se lit : « img, mets le pixel <code>(150, 100)</code> en rouge ». <code>putpixel</code> reçoit deux choses : les <strong>coordonnées</strong> du pixel, puis son nouveau <strong>triplet</strong> de couleur.</p>
+<h2 id="colorier-un-pixel-colorie-devient-putpixel">Colorier un pixel : <code>colorie</code> devient <code>putpixel</code></h2>
+<p>Pour changer la couleur d'un pixel, on <strong>parle à l'image</strong> avec la notation pointée, comme on parlait à la tortue. Et le message, c'est la traduction directe de notre mot :</p>
+<table>
+<thead>
+<tr>
+<th>Notre langage</th>
+<th>Python</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>colorie (150, 100) en (255, 0, 0)</code></td>
+<td><code>img.putpixel((150, 100), (255, 0, 0))</code></td>
+</tr>
+</tbody>
+</table>
+<p>Ça se lit : « img, mets le pixel <code>(150, 100)</code> en rouge ». <code>putpixel</code> reçoit deux choses : les <strong>coordonnées</strong> du pixel, puis son nouveau <strong>triplet</strong> de couleur. Comme avec <code>colorie</code>, chaque instruction désigne sa case directement : pas de trajet, pas d'ordre imposé.</p>
 <p>Un pixel seul, c'est un point minuscule. Pour dessiner quelque chose de visible, il faut en colorier beaucoup : autrement dit, <strong>boucler</strong>.</p>
 <h2 id="une-ligne-de-pixels">Une ligne de pixels</h2>
-<p>Pour tracer une ligne horizontale rouge, on fait varier <code>x</code> sur toutes les colonnes, à <code>y</code> fixé. C'est la boucle qu'on connaît, avec ses <strong>deux bornes</strong> :</p>
+<p>Pour tracer une ligne horizontale rouge, on fait varier <code>x</code> sur toutes les colonnes, à <code>y</code> fixé. C'est la boucle <strong>parcourir un intervalle</strong> de la dernière séance : deux bornes, et une variable de boucle <strong>nommée</strong>, parce qu'on s'en sert.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">):</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="n">img</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">img</span>
+</code></pre></div>
+<p><code>for x in range(0, 300):</code> donne à <code>x</code> les valeurs 0, puis 1, puis 2… jusqu'à 299 (la borne 300 n'est <strong>pas comprise</strong> : c'est bien la dernière colonne de l'image). À chaque tour, on colorie le pixel <code>(x, 100)</code> : la ligne 100 devient rouge d'un bord à l'autre.</p>
+<h2 id="toute-limage-une-boucle-dans-la-boucle">Toute l'image : une boucle dans la boucle</h2>
+<p>Et pour colorier <strong>tous</strong> les pixels ? Pense à la façon dont tu lis un texte : tu lis la première ligne mot par mot, <strong>puis</strong> tu passes à la ligne suivante et tu recommences. Pour une image c'est pareil : <strong>pour chaque ligne, parcourir toutes les colonnes</strong>.</p>
+<p>En Python, ça s'écrit avec une boucle <strong>à l'intérieur</strong> d'une autre. On dit que les boucles sont <strong>imbriquées</strong> :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">):</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">img</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="n">img</span>
-</code></pre></div>
-<p><code>for x in range(0, 300):</code> parcourt l'intervalle des colonnes : <code>x</code> vaut 0, puis 1, puis 2… jusqu'à 299. À chaque tour, on colorie le pixel <code>(x, 100)</code> : la ligne 100 devient rouge d'un bord à l'autre.</p>
-<h2 id="toute-limage-une-boucle-dans-la-boucle">Toute l'image : une boucle dans la boucle</h2>
-<p>Et pour colorier <strong>tous</strong> les pixels ? Pense à la façon dont tu lis un texte : tu lis la première ligne mot par mot, <strong>puis</strong> tu passes à la ligne suivante et tu recommences. Pour une image c'est pareil : <strong>pour chaque ligne, parcourir toutes les colonnes</strong>.</p>
-<p>En Python, ça s'écrit avec une boucle <strong>à l'intérieur</strong> d'une autre. On dit que les boucles sont <strong>imbriquées</strong> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">):</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">):</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">img</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">img</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">):</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">300</span><span class="p">):</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="n">img</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">))</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="n">img</span>
 </code></pre></div>
 <p>Lis-le comme du texte : pour chaque ligne <code>y</code> (de 0 à 199), on parcourt toutes les colonnes <code>x</code> (de 0 à 299) et on colorie le pixel <code>(x, y)</code>. Ici, tout en bleu : 200 × 300 = 60 000 pixels coloriés par 5 lignes de programme.</p>
 <div class="admonition tip">
@@ -7169,21 +7209,21 @@
 </div>
 <h2 id="la-couleur-peut-dependre-de-la-position">La couleur peut dépendre de la position</h2>
 <p>Tout l'intérêt d'avoir <code>x</code> et <code>y</code> sous la main, c'est que la couleur peut <strong>se calculer</strong> à partir d'eux. Regarde :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">):</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="n">img</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">img</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">,</span> <span class="p">(</span><span class="mi">256</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">):</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">):</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>        <span class="n">img</span><span class="o">.</span><span class="n">putpixel</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">img</span>
 </code></pre></div>
 <p>Le rouge du pixel vaut <code>x</code> : 0 tout à gauche (noir), 255 tout à droite (rouge vif). Résultat : un <strong>dégradé</strong> du noir au rouge, sans écrire un seul triplet à la main. C'est la même idée que la spirale : une valeur qui change au fil de la boucle.</p>
 <h2 id="ce-quon-retient">Ce qu'on retient</h2>
 <ul>
-<li><code>Image.new("RGB", (largeur, hauteur))</code> crée une image ; <code>img.putpixel((x, y), (r, v, b))</code> colorie un pixel (notation pointée : on parle à l'image).</li>
-<li>Un pixel a des coordonnées <code>(x, y)</code> : origine <strong>en haut à gauche</strong>, <code>x</code> vers la droite, <code>y</code> vers le <strong>bas</strong>, de <code>0</code> à <code>largeur - 1</code> et <code>hauteur - 1</code>.</li>
+<li><code>Image.new("RGB", (largeur, hauteur))</code> crée une image ; <code>img.putpixel((x, y), (r, v, b))</code> est la traduction de notre <code>colorie</code> (notation pointée : on parle à l'image).</li>
+<li>Les coordonnées sont celles qu'on connaît : origine <strong>en haut à gauche</strong>, <code>x</code> vers la droite, <code>y</code> vers le <strong>bas</strong>, de <code>0</code> à <code>largeur - 1</code> et <code>hauteur - 1</code>.</li>
 <li>Pour traiter toute l'image, on <strong>imbrique</strong> deux boucles : pour chaque ligne <code>y</code>, parcourir toutes les colonnes <code>x</code>, comme on lit un texte.</li>
 <li>La couleur peut <strong>se calculer</strong> à partir de <code>x</code> et <code>y</code> : c'est ce qui permet dégradés et motifs.</li>
 <li>Le cours est ici ; on s'entraîne sur <strong>Capytale</strong>.</li>
@@ -7210,7 +7250,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 11, 2026 20:00:56 UTC">July 11, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 12, 2026 09:00:36 UTC">July 12, 2026</span>
   </span>
 
     
