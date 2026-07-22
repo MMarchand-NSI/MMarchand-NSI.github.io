@@ -19,6 +19,9 @@ Ce type de structure de données est par exemple utilisé dans:
 - La lecture d'expressions mathématiques
 - En général le parcours de structures de données comme les graphes, arbres... que nous verrons plus tard.
 
+!!! info "Pourquoi ces structures comptent"
+    Bien implémentées, les piles et les files garantissent leurs opérations d'ajout et de retrait en **temps constant**, `O(1)` : quelle que soit la quantité de données, empiler, dépiler, enfiler et défiler prennent le même temps. C'est ce qui les rend **omniprésentes** en informatique : la pile d'appels de la **récursivité**, annuler/refaire, le **parcours des graphes** (en profondeur avec une pile, en largeur avec une file), l'ordonnancement des tâches. Tu les **reverras toute l'année**. Ce ne sera alors pas le moment de les réapprendre : il faut les avoir acquises dès maintenant.
+
 ## Interface
 
 !!! abstract "Définition - Interface"
@@ -54,24 +57,22 @@ Le type list en Python présente deux méthodes rapides qui lui permettent d’i
 
 ### Implémentation minimaliste
 
-Voici une pile de "n'importe quoi" (str, int, float, ...) implémentée avec une liste de "n'importe quoi"
+On introduit d'abord un **nouveau type** `Pile[T]`, construit à partir de `list` (une pile de `T` est une liste de `T`), puis les quatre primitives.
 
 ```python
-from typing import Any # N'importe quoi
+type Pile[T] = list[T]
 
-type Pile = list[Any]
-
-def creer() -> Pile:
+def creer[T]() -> Pile[T]:
     return []
 
-def est_vide(p: Pile) -> bool:
+def est_vide[T](p: Pile[T]) -> bool:
     return len(p) == 0
 
-def empiler(e: Any, p: Pile):
+def empiler[T](e: T, p: Pile[T]) -> None:
     p.append(e)
 
-def depiler(p: Pile) -> Any:
-    assert not pile_vide(p), "La pile est vide"
+def depiler[T](p: Pile[T]) -> T:
+    assert not est_vide(p), "La pile est vide"
     return p.pop()
 
 ```
@@ -160,6 +161,15 @@ if __name__ == "__main__":
     doctest.testmod()
 ```
 
+!!! warning "Piège : `empiler` et `depiler` **modifient** la pile"
+    Ces deux primitives ont un **effet de bord** : elles changent l'état de la pile passée en argument. Après `depiler(p)`, l'élément a disparu de `p`. Conséquence directe : calculer la taille d'une pile **en la dépilant** la **vide**. Une fonction censée laisser la pile intacte doit remettre les éléments en place (voir les exercices « destructif / non destructif »).
+
+!!! note "L'état d'une pile est caché : seul le sommet est visible"
+    On n'accède jamais au milieu d'une pile, seulement à son sommet. Le reste de l'état n'apparaît nulle part dans le code. Pour comprendre ce que font vraiment `empiler` et `depiler`, le bon réflexe est de **tracer l'état à la main**, comme dans l'exercice « Sans exécuter le code » plus bas.
+
+!!! tip "Ce que l'IA ne fait pas à ta place"
+    Une IA écrit `empiler` et `depiler` en une seconde : ta valeur n'est pas là. Elle est dans la **spécification** de l'interface (que doit faire chaque primitive ? que se passe-t-il si on dépile une pile vide ?) et dans les **tests** qui vérifient que l'implémentation respecte ce contrat. D'où la règle : **signature typée et tests d'abord, corps ensuite.**
+
 ## Exercices
 
 !!! question "Préparation"
@@ -201,10 +211,10 @@ if __name__ == "__main__":
     Dessinez la pile p à chacune de ses modifications.
 
     ```python
-    p: Pile[int] = creer_pile()
+    p: Pile[int] = creer()
     for v in [2, 4, 3, 6, 8, 5, 77, 10, 1]:
-        if v%2 == 0:
-            empiler(p, v)
+        if v % 2 == 0:
+            empiler(v, p)
         else:
             depiler(p)
     ```
@@ -291,16 +301,16 @@ if __name__ == "__main__":
         Renvoie True si la chaîne ch est bien parenthésée
         et False sinon
         """
-        p = Pile()
+        p = creer()
         for c in ch:
             if c == ...:
-                empiler(p, c)
+                empiler(c, p)
             elif c == ...:
-                if pile_vide(p):
+                if est_vide(p):
                     return ...
                 else:
                     ...
-        return pile_vide(p)
+        return est_vide(p)
 
     ```
 

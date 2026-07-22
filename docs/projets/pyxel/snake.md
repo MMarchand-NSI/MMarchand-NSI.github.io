@@ -1,12 +1,14 @@
 # Snake
 
-L'objectif est de créer un jeu de snake minimaliste en exploitant la structure de file.
+L'objectif est de créer un jeu de snake minimaliste en exploitant la **file construite avec deux piles** dans le cours sur les files.
 
 Les bases de la modélisation et de l'implémentation d'un jeu sont aussi abordées.
 
 ## Modélisation
 
 Un snake est une File de Coordonnées entières.
+
+Cette file, c'est **exactement** celle que tu viens de construire avec deux piles : le snake en est la mise à l'épreuve. Faire avancer le serpent, c'est `enfiler` une nouvelle tête puis `defiler` la queue. Pour le dessiner ou détecter une collision, on parcourt la file avec `elements`, sans la détruire.
 
 ![alt text](image-11.png)
 
