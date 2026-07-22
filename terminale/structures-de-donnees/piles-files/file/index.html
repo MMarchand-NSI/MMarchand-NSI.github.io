@@ -4306,7 +4306,7 @@
   <span class="md-ellipsis">
     
   
-    Algorithme de Dijkstra
+    Dijkstra
   
 
     
@@ -4334,7 +4334,7 @@
   <span class="md-ellipsis">
     
   
-    Graphes - Généralités et Implémentation
+    Graphes
   
 
     
@@ -4362,7 +4362,7 @@
   <span class="md-ellipsis">
     
   
-    Parcours de graphes
+    Parcours
   
 
     
@@ -4448,7 +4448,7 @@
   <span class="md-ellipsis">
     
   
-    Listes - Paradigme fonctionnel
+    Listes et récursivité, en Gleam
   
 
     
@@ -4656,10 +4656,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
+  <a href="#une-premiere-implementation-avec-un-tableau" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Implémentation
+        Une première implémentation : avec un tableau
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objectif-du-cours-une-file-avec-deux-piles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objectif du cours : une file avec deux piles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lire-une-file-sans-la-detruire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lire une file sans la détruire
       
     </span>
   </a>
@@ -7802,10 +7824,32 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#implementation" class="md-nav__link">
+  <a href="#une-premiere-implementation-avec-un-tableau" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Implémentation
+        Une première implémentation : avec un tableau
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#objectif-du-cours-une-file-avec-deux-piles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objectif du cours : une file avec deux piles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lire-une-file-sans-la-detruire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lire une file sans la détruire
       
     </span>
   </a>
@@ -7944,6 +7988,7 @@
 <li>Un processeur pour planifier l’ordre des opérations.</li>
 <li>Un serveur web pour ordonner les réponses en fonction de l’ordre des demandes.</li>
 </ul>
+<p>Comme les piles, les files sont <strong>partout</strong> (parcours en largeur d'un graphe, files d'attente, ordonnancement), et tu les reverras toute l'année. Tout l'enjeu de ce cours est d'en obtenir une dont les opérations restent en <code>O(1)</code>, à partir de deux piles.</p>
 <h2 id="interface">Interface</h2>
 <p>Une file est définie par l’interface comprenant les primitives suivantes:
 Ici, f est une File contenant des éléments e de type T quelconque.</p>
@@ -7973,30 +8018,89 @@ Ici, f est une File contenant des éléments e de type T quelconque.</p>
 </tr>
 </tbody>
 </table>
-<h2 id="implementation">Implémentation</h2>
-<p>L’objet list en Python présente deux méthodes qui lui permettent d’implémenter la file:</p>
+<h2 id="une-premiere-implementation-avec-un-tableau">Une première implémentation : avec un tableau</h2>
+<p>Une liste Python sait déjà se comporter comme une file :</p>
 <ul>
-<li>list.append(e): ajoute l’élément e en fin de liste.</li>
-<li>list.pop(0): supprime le premier élément de la liste et le renvoie.</li>
+<li><code>list.append(e)</code> ajoute en fin de liste (l'entrée) ;</li>
+<li><code>list.pop(0)</code> retire et renvoie le premier élément (la sortie).</li>
 </ul>
-<p>Toutefois, pop(0) est en O(n), on veut mieux que ça en termes de complexité.</p>
-<p>Pour une première implémentation, on peut utiliser un nouveau type, <code>collections.deque</code>. Les deques offrent les méthodes append et pop, comme <code>list</code>, mais offrent aussi les méthodes appendleft et popleft en O(1).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">deque</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">File</span><span class="p">:</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">return</span> <span class="n">deque</span><span class="p">()</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">enfiler</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="n">f</span><span class="o">.</span><span class="n">appendleft</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">defiler</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Any</span><span class="p">:</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span><span class="o">!=</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;File Vide&quot;</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">type</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">[</span><span class="n">T</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="k">return</span> <span class="p">[]</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">enfiler</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">e</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>          <span class="c1"># on entre en fin de liste</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">defiler</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="s2">&quot;File vide&quot;</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="k">return</span> <span class="n">f</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>      <span class="c1"># on sort en tête</span>
 </code></pre></div>
+<p>Cette implémentation fonctionne, mais <code>pop(0)</code> est <strong>coûteux</strong> : retirer le premier élément oblige à <strong>décaler tous les autres d'un cran</strong>, soit <code>O(n)</code> à chaque défilement.</p>
+<div class="admonition note">
+<p class="admonition-title">Une solution toute faite : <code>collections.deque</code></p>
+<p>La bibliothèque standard fournit <code>collections.deque</code>, une file à deux bouts dont <code>appendleft</code> et <code>pop</code> sont en <code>O(1)</code>. En pratique, c'est ce qu'on utiliserait. Mais l'objectif de ce cours est ailleurs : <strong>obtenir une file efficace uniquement à partir d'une structure qu'on maîtrise déjà, la pile.</strong></p>
+</div>
+<h2 id="objectif-du-cours-une-file-avec-deux-piles">Objectif du cours : une file avec deux piles</h2>
+<p>On veut construire une file <strong>sans jamais toucher à une liste directement</strong>, à partir de la seule <strong>interface de la pile</strong> (<code>creer</code>, <code>est_vide</code>, <code>empiler</code>, <code>depiler</code>). C'est l'idée forte de l'abstraction : une structure peut s'appuyer sur l'<em>interface</em> d'une autre, sans rien connaître de son implémentation.</p>
+<p><strong>L'idée.</strong> On utilise deux piles, <code>entree</code> et <code>sortie</code>.</p>
+<ul>
+<li><strong>Enfiler</strong> : on empile sur <code>entree</code>.</li>
+<li><strong>Défiler</strong> : si <code>sortie</code> est vide, on <strong>bascule</strong> tout <code>entree</code> dans <code>sortie</code> (ce qui inverse l'ordre), puis on dépile <code>sortie</code>.</li>
+</ul>
+<p>Empiler sur <code>entree</code> place le dernier arrivé au sommet ; le basculement l'envoie au fond de <code>sortie</code>. Le premier arrivé se retrouve donc au sommet de <code>sortie</code> : c'est bien du FIFO.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires</span><span class="w"> </span><span class="kn">import</span> <span class="n">pile</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">type</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]]</span>   <span class="c1"># (entree, sortie)</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">[</span><span class="n">T</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">(),</span> <span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">())</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>    <span class="n">entree</span><span class="p">,</span> <span class="n">sortie</span> <span class="o">=</span> <span class="n">f</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="k">return</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">entree</span><span class="p">)</span> <span class="ow">and</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">sortie</span><span class="p">)</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">enfiler</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">e</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="n">entree</span><span class="p">,</span> <span class="n">sortie</span> <span class="o">=</span> <span class="n">f</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">entree</span><span class="p">)</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">defiler</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="s2">&quot;File vide&quot;</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="n">entree</span><span class="p">,</span> <span class="n">sortie</span> <span class="o">=</span> <span class="n">f</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>    <span class="k">if</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">sortie</span><span class="p">):</span>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>        <span class="k">while</span> <span class="ow">not</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">entree</span><span class="p">):</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a>            <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">depiler</span><span class="p">(</span><span class="n">entree</span><span class="p">),</span> <span class="n">sortie</span><span class="p">)</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>    <span class="k">return</span> <span class="n">pile</span><span class="o">.</span><span class="n">depiler</span><span class="p">(</span><span class="n">sortie</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Et la complexité ?</p>
+<p>Un défilement peut coûter cher quand il faut tout basculer. Mais chaque élément n'est basculé <strong>qu'une seule fois</strong> de <code>entree</code> vers <code>sortie</code> sur toute sa vie dans la file. Réparti sur l'ensemble des opérations, le coût est en <code>O(1)</code> <strong>amorti</strong>, bien meilleur que le <code>pop(0)</code> du tableau.</p>
+</div>
+<h2 id="lire-une-file-sans-la-detruire">Lire une file sans la détruire</h2>
+<p>Les primitives ne donnent accès qu'à la sortie. Pour <strong>parcourir</strong> toute la file (par exemple pour l'afficher) sans la modifier, on la vide dans une file temporaire, puis on la reconstruit. Cette fonction n'utilise que l'interface : elle marchera quelle que soit l'implémentation.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">elements</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Liste des éléments de f, de la sortie vers l&#39;entrée, sans modifier f.&quot;&quot;&quot;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="n">resultat</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="n">temp</span><span class="p">:</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="n">e</span> <span class="o">=</span> <span class="n">defiler</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>        <span class="n">resultat</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>        <span class="n">enfiler</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">temp</span><span class="p">)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">temp</span><span class="p">):</span>        <span class="c1"># on remet f dans son état initial</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="n">enfiler</span><span class="p">(</span><span class="n">defiler</span><span class="p">(</span><span class="n">temp</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">return</span> <span class="n">resultat</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Piège : <code>defiler</code> <strong>vide</strong> la file</p>
+<p>Comme <code>depiler</code> pour la pile, <code>defiler</code> retire l'élément (effet de bord). Compter les éléments d'une file ou en chercher un <strong>en défilant</strong> la détruit. Toute fonction censée « ne pas modifier la file » doit la reconstruire à l'identique : c'est exactement ce que fait <code>elements</code>, et ce que demandent les exercices « taille non destructive » et « occurrences ».</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Ce que l'IA ne fait pas à ta place</p>
+<p>Le vrai travail n'est pas d'écrire <code>enfiler</code> et <code>defiler</code> (une IA le fait), mais de <strong>spécifier</strong> (que se passe-t-il si on défile une file vide ?) et de <strong>tester</strong>. La file avec deux piles en est le meilleur exemple : le code est court, mais toute la valeur est de se convaincre, tests à l'appui, qu'il respecte bien le contrat FIFO.</p>
+</div>
 <h2 id="exercices">Exercices</h2>
 <div class="admonition question">
 <p class="admonition-title">Préparation</p>
@@ -8004,21 +8108,21 @@ Ici, f est une File contenant des éléments e de type T quelconque.</p>
 <li>Créer le fichier <code>structures/lineaires/file.py</code></li>
 <li>Créer le fichier <code>exos/exos_files.py</code></li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires</span><span class="w"> </span><span class="kn">import</span> <span class="n">file</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires</span><span class="w"> </span><span class="kn">import</span> <span class="n">file</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Réécriture</p>
-<p>Réécrire l'impémentation de file dans file.py</p>
-<p>On reprendra la même rigueur de typage que présentée pour les piles.</p>
+<p class="admonition-title">Écrire le fichier <code>file.py</code></p>
+<p>Reporter dans <code>structures/lineaires/file.py</code> l'implémentation <strong>avec deux piles</strong> (c'est celle qu'on garde, et sur laquelle tournera le snake), ainsi que la fonction <code>elements</code>.</p>
+<p>On reprendra la même rigueur de typage que pour les piles.</p>
 </div>
 <p>Les exercices suivants se font dans le fichier exos_files.py.</p>
 <div class="admonition question">
 <p class="admonition-title">File exemple</p>
-<p>Créer une fonction <code>file_exemple</code> qui renvoie la pile suivante:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>  --------------------------------------
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>&gt; &#39;rouge&#39; &#39;vert&#39; &#39;jaune&#39; &#39;rouge&#39; &#39;jaune&#39; &gt;
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>  --------------------------------------
+<p>Créer une fonction <code>file_exemple</code> qui renvoie la file suivante:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>  --------------------------------------
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>&gt; &#39;rouge&#39; &#39;vert&#39; &#39;jaune&#39; &#39;rouge&#39; &#39;jaune&#39; &gt;
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>  --------------------------------------
 </code></pre></div>
 </div>
 <div class="admonition question">
@@ -8029,11 +8133,11 @@ Ici, f est une File contenant des éléments e de type T quelconque.</p>
 <p class="admonition-title">Sans exécuter le code</p>
 <p>On considère la file exemple.
 Dessiner P et F après l’exécution du programme Python suivant.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">F</span> <span class="o">=</span> <span class="n">file_exemple</span><span class="p">()</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">P</span> <span class="o">=</span> <span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">()</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">while</span> <span class="ow">not</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">F</span><span class="p">)):</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">defiler</span><span class="p">(</span><span class="n">F</span><span class="p">),</span> <span class="n">P</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">F</span> <span class="o">=</span> <span class="n">file_exemple</span><span class="p">()</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">P</span> <span class="o">=</span> <span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">while</span> <span class="ow">not</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">F</span><span class="p">)):</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">defiler</span><span class="p">(</span><span class="n">F</span><span class="p">),</span> <span class="n">P</span><span class="p">)</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
@@ -8053,25 +8157,17 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
 <div class="admonition question">
 <p class="admonition-title">Occurences</p>
 <p>Écrire une fonction nb_elements qui prend en paramètres une file et un élément de n'importe quel type, et qui renvoie le nombre de fois où l'élément est présent dans la file. Après appel de cette fonction la file doit avoir retrouvé son état d’origine. Vous commencerez bien sûr par prendre le temps d'écrire la signature de la fonction proprement.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="sd">&gt;&gt;&gt; F = file_exemple()</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="sd">&gt;&gt;&gt; nb_elements(F, &quot;rouge&quot;)</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="sd">2</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="sd">&gt;&gt;&gt; F == creer_F() #? La file est toujours égale à la file exemple</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="sd">True</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="sd">&gt;&gt;&gt; nb_elements(F, &quot;vert&quot;)</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="sd">1</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="sd">&gt;&gt;&gt; nb_elements(F, &quot;violet&quot;)</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="sd">0</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="sd">&quot;&quot;&quot;</span>
-</code></pre></div>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Créer une file avec 2 piles</p>
-<p>Implémenter la structure de file avec 2 files.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires</span><span class="w"> </span><span class="kn">import</span> <span class="n">pile</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nb">type</span> <span class="n">File</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">,</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="sd">&gt;&gt;&gt; F = file_exemple()</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="sd">&gt;&gt;&gt; nb_elements(F, &quot;rouge&quot;)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="sd">2</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="sd">&gt;&gt;&gt; F == file_exemple() #? La file est toujours égale à la file exemple</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="sd">True</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="sd">&gt;&gt;&gt; nb_elements(F, &quot;vert&quot;)</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="sd">1</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="sd">&gt;&gt;&gt; nb_elements(F, &quot;violet&quot;)</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="sd">0</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="sd">&quot;&quot;&quot;</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
@@ -8104,7 +8200,7 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 24, 2025 15:54:31 UTC">September 24, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 22, 2026 16:46:20 UTC">July 22, 2026</span>
   </span>
 
     

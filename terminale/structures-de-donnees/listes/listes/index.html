@@ -25,7 +25,7 @@
     
     
       
-        <title>Listes - Paradigme fonctionnel - Science Informatique</title>
+        <title>Listes et récursivité, en Gleam - Science Informatique</title>
 <script src="/javascripts/bundle.js"></script>
 
       
@@ -92,7 +92,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#listes-paradigme-fonctionnel" class="md-skip">
+        <a href="#listes-et-recursivite-en-gleam" class="md-skip">
           Skip to content
         </a>
       
@@ -125,7 +125,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Listes - Paradigme fonctionnel
+              Listes et récursivité, en Gleam
             
           </span>
         </div>
@@ -4306,7 +4306,7 @@
   <span class="md-ellipsis">
     
   
-    Algorithme de Dijkstra
+    Dijkstra
   
 
     
@@ -4334,7 +4334,7 @@
   <span class="md-ellipsis">
     
   
-    Graphes - Généralités et Implémentation
+    Graphes
   
 
     
@@ -4362,7 +4362,7 @@
   <span class="md-ellipsis">
     
   
-    Parcours de graphes
+    Parcours
   
 
     
@@ -4459,7 +4459,7 @@
   <span class="md-ellipsis">
     
   
-    Listes - Paradigme fonctionnel
+    Listes et récursivité, en Gleam
   
 
     
@@ -4477,7 +4477,7 @@
   <span class="md-ellipsis">
     
   
-    Listes - Paradigme fonctionnel
+    Listes et récursivité, en Gleam
   
 
     
@@ -4503,10 +4503,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#definition" class="md-nav__link">
+  <a href="#pourquoi-gleam" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Définition
+        Pourquoi Gleam
       
     </span>
   </a>
@@ -4514,22 +4514,132 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#implementation-en-python" class="md-nav__link">
+  <a href="#la-structure-deux-possibilites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Implémentation en python
+        La structure : deux possibilités
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Implémentation en python">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construire-une-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Construire une liste
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lire-une-liste-la-disjonction-de-cas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lire une liste : la disjonction de cas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#premiere-fonction-la-taille" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Première fonction : la taille
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-toi-decrire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        À toi d'écrire
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deux-listes-a-la-fois-les-quatre-cas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deux listes à la fois : les quatre cas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#les-fonctions-qui-construisent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Les fonctions qui construisent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faire-pousser-une-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Faire pousser une liste
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#le-cout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le coût
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ce-que-lia-ne-fait-pas-a-ta-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ce que l'IA ne fait pas à ta place
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lequivalent-en-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'équivalent en Python
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="L&#39;équivalent en Python">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#traduction-de-notre-definition-en-python" class="md-nav__link">
+  <a href="#la-version-la-plus-proche-de-gleam-dataclass-match" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Traduction de notre définition en python:
+        La version la plus proche de Gleam : dataclass + match
       
     </span>
   </a>
@@ -4542,22 +4652,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#primitives-et-implementations" class="md-nav__link">
+  <a href="#exercices" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Primitives et implémentations
+        Exercices
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Primitives et implémentations">
+    <nav class="md-nav" aria-label="Exercices">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#creation-dune-liste" class="md-nav__link">
+  <a href="#lecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Création d'une Liste
+        Lecture
       
     </span>
   </a>
@@ -4565,66 +4675,54 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#acces-aux-elements" class="md-nav__link">
+  <a href="#creation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accès aux Éléments
+        Création
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fonctions-en-lecture" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fonctions en lecture
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Fonctions en lecture">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#calculer-la-taille-dune-liste" class="md-nav__link">
+  <a href="#construire-par-filtrage-vers-filtrer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Calculer la Taille d'une Liste
+        Construire par filtrage : vers filtrer
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fonctions-en-creation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fonctions en création
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Fonctions en création">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ajouter-un-element-a-la-fin" class="md-nav__link">
+  <a href="#construire-par-transformation-vers-mapper" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ajouter un Élément à la fin
+        Construire par transformation : vers mapper
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vers-le-tri-fusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vers le tri fusion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-python-seulement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        En Python seulement
       
     </span>
   </a>
@@ -7892,10 +7990,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#definition" class="md-nav__link">
+  <a href="#pourquoi-gleam" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Définition
+        Pourquoi Gleam
       
     </span>
   </a>
@@ -7903,22 +8001,132 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#implementation-en-python" class="md-nav__link">
+  <a href="#la-structure-deux-possibilites" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Implémentation en python
+        La structure : deux possibilités
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Implémentation en python">
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#construire-une-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Construire une liste
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lire-une-liste-la-disjonction-de-cas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Lire une liste : la disjonction de cas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#premiere-fonction-la-taille" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Première fonction : la taille
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a-toi-decrire" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        À toi d'écrire
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#deux-listes-a-la-fois-les-quatre-cas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deux listes à la fois : les quatre cas
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#les-fonctions-qui-construisent" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Les fonctions qui construisent
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#faire-pousser-une-liste" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Faire pousser une liste
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#le-cout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Le coût
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ce-que-lia-ne-fait-pas-a-ta-place" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ce que l'IA ne fait pas à ta place
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lequivalent-en-python" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        L'équivalent en Python
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="L&#39;équivalent en Python">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#traduction-de-notre-definition-en-python" class="md-nav__link">
+  <a href="#la-version-la-plus-proche-de-gleam-dataclass-match" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Traduction de notre définition en python:
+        La version la plus proche de Gleam : dataclass + match
       
     </span>
   </a>
@@ -7931,22 +8139,22 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#primitives-et-implementations" class="md-nav__link">
+  <a href="#exercices" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Primitives et implémentations
+        Exercices
       
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Primitives et implémentations">
+    <nav class="md-nav" aria-label="Exercices">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#creation-dune-liste" class="md-nav__link">
+  <a href="#lecture" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Création d'une Liste
+        Lecture
       
     </span>
   </a>
@@ -7954,66 +8162,54 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#acces-aux-elements" class="md-nav__link">
+  <a href="#creation" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Accès aux Éléments
+        Création
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fonctions-en-lecture" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fonctions en lecture
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Fonctions en lecture">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#calculer-la-taille-dune-liste" class="md-nav__link">
+  <a href="#construire-par-filtrage-vers-filtrer" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Calculer la Taille d'une Liste
+        Construire par filtrage : vers filtrer
       
     </span>
   </a>
   
 </li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#fonctions-en-creation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Fonctions en création
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Fonctions en création">
-      <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#ajouter-un-element-a-la-fin" class="md-nav__link">
+  <a href="#construire-par-transformation-vers-mapper" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Ajouter un Élément à la fin
+        Construire par transformation : vers mapper
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#vers-le-tri-fusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Vers le tri fusion
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#en-python-seulement" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        En Python seulement
       
     </span>
   </a>
@@ -8134,117 +8330,659 @@
 
 
 
-<h1 id="listes-paradigme-fonctionnel">Listes - Paradigme fonctionnel</h1>
+<h1 id="listes-et-recursivite-en-gleam">Listes et récursivité, en Gleam</h1>
 <div class="admonition danger">
-<p class="admonition-title">Attention</p>
-<p>Ici, nous ne parlons pas du tout des listes python. Nous n'en utiliserons d'ailleurs pas. Les listes python ne sont pas des listes à proprement parler. Ce sont en réalité ce qu'on appelle des tableaux dynamiques.</p>
+<p class="admonition-title">Ce ne sont pas les listes Python</p>
+<p>Ici, on ne parle <strong>pas</strong> des listes Python (qui sont en réalité des <em>tableaux dynamiques</em>). On étudie la <strong>vraie</strong> structure de liste, définie récursivement. Et on le fait dans un petit langage fonctionnel : <strong>Gleam</strong>.</p>
 </div>
-<h2 id="definition">Définition</h2>
-<p>Les <strong>listes</strong> sont une structure de données linéaire qui permet de stocker une séquence d'éléments. Il existe une multitude de manière de les implémenter. Nous en verrons 2. </p>
-<p>Les listes sont un outil formidable pour <strong>faire ses premiers pas en récursivité</strong>. C'est aussi l'occasion de découvrir le paradigme fonctionnel, et aussi d'aller juste un peu plus loin dans le paradigme orienté objet.</p>
-<p><strong>Ici, nous allons créer des listes IMMUABLES</strong>, ce qui signifie qu'elles ne peuvent pas être modifiées une fois créées. <strong>Toute opération qui dit "modifier" une liste renvoie une nouvelle liste</strong></p>
+<p>Les listes sont l'outil idéal pour <strong>faire ses premiers pas en récursivité</strong>, et l'occasion de découvrir le <strong>paradigme fonctionnel</strong>.</p>
+<h2 id="pourquoi-gleam">Pourquoi Gleam</h2>
+<ul>
+<li>Gleam n'a <strong>aucune boucle</strong> : ni <code>for</code>, ni <code>while</code>. La seule façon de parcourir une structure, c'est la <strong>récursivité</strong>. C'est exactement ce qu'on vient apprendre.</li>
+<li>
+<p>Sa signature de fonction ressemble à votre Python typé :</p>
+<table>
+<thead>
+<tr>
+<th>Python</th>
+<th>Gleam</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>def taille(lst) -&gt; int:</code></td>
+<td><code>fn taille(lst: Liste(a)) -&gt; Int {</code></td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>Le compilateur est un allié : messages d'erreur clairs, et il vous <strong>empêche d'oublier un cas</strong>.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Mise en place</p>
+<p>Créez un projet : <code>gleam new listes</code>, puis travaillez dans <code>src/listes.gleam</code>. Pour exécuter votre code : <code>gleam run</code>. Pour afficher une valeur et l'observer, utilisez <code>io.debug(...)</code> (après un <code>import gleam/io</code> en haut du fichier).</p>
+</div>
+<h2 id="la-structure-deux-possibilites">La structure : deux possibilités</h2>
+<p>Imaginez un <strong>lutin</strong> à qui on tend une liste. Il n'a que <strong>deux possibilités</strong> devant lui :</p>
+<ul>
+<li>soit la liste est <strong>vide</strong> ;</li>
+<li>soit c'est un élément, la <strong>tête</strong>, suivi d'une autre liste, la <strong>queue</strong>.</li>
+</ul>
 <div class="admonition abstract">
-<p class="admonition-title">Définition récursive</p>
-<p>Nous travaillerons avec des listes où chaque élément est un entier. </p>
-<p>Chaque liste peut être toit:</p>
+<p class="admonition-title">Définition récursive d'une liste</p>
+<p>Une liste est :</p>
 <ol>
-<li><strong>vide</strong></li>
-<li>Contenir un élément appelé la <strong>tête</strong>, suivi de la <strong>queue</strong>, qui est une autre liste.</li>
+<li>soit <strong>vide</strong> ;</li>
+<li>soit une <strong>tête</strong> (un élément) suivie d'une <strong>queue</strong> (qui est elle-même une liste).</li>
 </ol>
 </div>
-<p>Nous définissons une liste à l'aide de sa propre définition. Nous travaillons sur une structure définie récursivement.</p>
-<h2 id="implementation-en-python">Implémentation en python</h2>
-<p>Nous utiliserons des tuples pour contenir une liste car les tuples sont immuables, ils collent bien au cadre de la programmation fonctionnelle.</p>
-<p>Nous matérialiserons la liste vide par un tuple vide.</p>
-<p>Une liste non vide sera un tuple contienant 2 éléments, la tête, ainsi que la queue.</p>
-<p>Le tuple suivant représente une liste où la tête est <code>2</code>, et la queue est une liste dont la tête est <code>3</code>, suivie d'une liste ou la tete est 4, suivie elle-même de la liste vide.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="p">())))</span>
+<p>On <strong>définit la liste avec sa propre définition</strong> : c'est une structure <strong>récursive</strong>. En Gleam, ce type s'écrit :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="n">Vide</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="n">Cons</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
 </code></pre></div>
-<h3 id="traduction-de-notre-definition-en-python">Traduction de notre définition en python:</h3>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">type</span> <span class="n">Vide</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[()]</span>
+<ul>
+<li><code>a</code> désigne <strong>un type quelconque</strong> (comme le <code>T</code> de Python) : une liste d'entiers, de chaînes, peu importe.</li>
+<li>Il y a <strong>deux constructeurs</strong>, <code>Vide</code> et <code>Cons</code> : une liste <strong>est</strong> l'un <strong>ou</strong> l'autre. Ce sont les deux possibilités du lutin.</li>
+<li>La définition est <strong>récursive</strong> : <code>Cons</code> contient une <code>Liste(a)</code> (la queue).</li>
+</ul>
+<h2 id="construire-une-liste">Construire une liste</h2>
+<p>La liste dont la tête est <code>2</code>, suivie de <code>3</code>, puis <code>4</code>, puis la fin :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="k">import</span><span class="w"> </span><span class="n">gleam</span><span class="o">/</span><span class="n">io</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">type</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vide</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]]</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">exemple</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="n">Vide</span><span class="p">)))</span>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="w">  </span><span class="k">io</span><span class="p">.</span><span class="n">debug</span><span class="p">(</span><span class="n">exemple</span><span class="p">)</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="p">}</span>
 </code></pre></div>
-Nous créons ici deux types :</p>
-<ul>
-<li><code>Vide</code> représente le vide modélisé par un tuple vide.</li>
-<li><code>Liste</code> est une structure définie récursivement qui peut être soit vide, soit un tuple: tête (T) et queue(Liste[T]).</li>
-</ul>
-<h2 id="primitives-et-implementations">Primitives et implémentations</h2>
-<h3 id="creation-dune-liste">Création d'une Liste</h3>
-<p>Il y a deux opérations de création élémentaires qui correspondent aux deux cas de la définition:
-- <strong>Créer Vide</strong> : Créer une liste vide
-- <strong>Créer</strong> : Créer une nouvelle liste à partir d'un élément et d'une autre liste, ce qui revient à <strong>ajouter un élément au début de la liste</strong></p>
-<p>Une fonction pour creer une liste vide</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_vide</span><span class="p">[</span><span class="n">T</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">return</span> <span class="p">()</span>
+<p><code>gleam run</code> affiche <code>Cons(2, Cons(3, Cons(4, Vide)))</code>.</p>
+<div class="admonition question">
+<p class="admonition-title">Construire</p>
+<p>Écris, dans <code>main</code>, la liste des trois chaînes <code>"rouge"</code>, <code>"vert"</code>, <code>"bleu"</code>, puis affiche-la.</p>
+<details class="success">
+<summary>Corrigé</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">let</span><span class="w"> </span><span class="n">couleurs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="s">&quot;rouge&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="s">&quot;vert&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="s">&quot;bleu&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Vide</span><span class="p">)))</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">io</span><span class="p">.</span><span class="n">debug</span><span class="p">(</span><span class="n">couleurs</span><span class="p">)</span>
 </code></pre></div>
-<p>Une fonction pour  en paramètre :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">t</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
-</code></pre></div>
-Elle prend deux arguments :</p>
-<ul>
-<li><code>t</code> : la tête (l'élément à ajouter).</li>
-<li><code>q</code> : la queue (la liste suivante).</li>
-</ul>
-<h3 id="acces-aux-elements">Accès aux Éléments</h3>
-<p>Les opérations d'accès principales sont :
-- <strong>Tête</strong> : obtenir le premier élément de la liste.
-- <strong>Queue</strong> : obtenir la sous-liste à partir du deuxième élément.
-- <strong>Est Vide</strong> : Savoir si une liste est vide.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">tete</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Liste vide&quot;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">queue</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span><span class="p">,</span> <span class="s2">&quot;Liste vide&quot;</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>    <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">return</span> <span class="n">lst</span> <span class="o">==</span> <span class="p">()</span>
-</code></pre></div>
-<div class="admonition danger">
-<p class="admonition-title">Attention</p>
-<p>A partir de maintenant, nous n'utiliserons plus les tuples.
-Nous n'utiliserons que les fonctions que nous avons définies ainsi que la constante LISTE_VIDE.</p>
+</details>
 </div>
-<h2 id="fonctions-en-lecture">Fonctions en lecture</h2>
-<h3 id="calculer-la-taille-dune-liste">Calculer la Taille d'une Liste</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">taille</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="k">return</span> <span class="mi">0</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">taille</span><span class="p">(</span><span class="n">queue</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>
+<h2 id="lire-une-liste-la-disjonction-de-cas">Lire une liste : la disjonction de cas</h2>
+<p>Pour <strong>faire quelque chose</strong> d'une liste, le lutin regarde <strong>laquelle des deux possibilités</strong> il a en main. C'est la <strong>disjonction de cas</strong>, écrite avec <code>case</code> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">  </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">...</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">  </span><span class="n">Cons</span><span class="p">(</span><span class="n">tete</span><span class="p">,</span><span class="w"> </span><span class="n">queue</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="p">...</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>un cas par constructeur</strong> : le cas <code>Vide</code>, et le cas <code>Cons</code> ;</li>
+<li><code>Cons(tete, queue)</code> <strong>déconstruit</strong> la liste : ça donne un nom à la tête (<code>tete</code>) et à la queue (<code>queue</code>).</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Piège, et garde-fou : les deux cas, toujours</p>
+<p>Gleam <strong>refuse de compiler</strong> si vous oubliez un cas. Impossible d'oublier le <code>Vide</code>. Le compilateur vous <strong>force</strong> à penser « cas de base / cas récursif », les deux fondations de toute récursivité.</p>
+</div>
+<h2 id="premiere-fonction-la-taille">Première fonction : la taille</h2>
+<p>On la lit ensemble <strong>avant</strong> d'en écrire soi-même.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">taille</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Int</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">queue</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">taille</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Le raisonnement du lutin : <em>« Je ne sais pas compter toute la liste d'un coup. Mais je sais deux choses : une liste vide a pour taille 0 ; sinon, c'est 1 (pour ma tête) plus ce que comptera un autre lutin sur la queue. »</em></p>
+<ul>
+<li><code>_</code> remplace <code>tete</code> : ici on <strong>ignore</strong> la valeur de la tête (on n'en a pas besoin pour compter).</li>
+</ul>
+<p><strong>Traçons</strong> <code>taille(Cons(2, Cons(3, Cons(4, Vide))))</code> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>                     = 1 + 1 + taille(Cons(4, Vide))
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>                     = 1 + 1 + 1 + taille(Vide)
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>                     = 1 + 1 + 1 + 0
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>                     = 3
 </code></pre></div>
 <div class="admonition question">
-<p class="admonition-title">A vous</p>
-<p>Ecrivez toutes les autres fonctions demandées.
-On réalisera une disjonction de cas au papier avant de coder. </p>
+<p class="admonition-title">Prédire</p>
+<p>Sans exécuter : que renvoie <code>taille(Cons(7, Cons(8, Vide)))</code> ?</p>
+<details class="success">
+<summary>Réponse</summary>
+<p><code>2</code>. Deux têtes avant d'atteindre <code>Vide</code>.</p>
+</details>
 </div>
-<h2 id="fonctions-en-creation">Fonctions en création</h2>
-<div class="admonition danger">
-<p class="admonition-title">Attention</p>
-<p>Bien comprendre que ces listes sont immuables. On ne peut pas les modifier. Par "Insérer", on entendra "Renvoyer une liste dans laquelle on a inséré".</p>
+<h2 id="a-toi-decrire">À toi d'écrire</h2>
+<div class="admonition tip">
+<p class="admonition-title">Méthode</p>
+<p>Avant de coder, écris la <strong>disjonction de cas au papier</strong> : que renvoie la fonction si la liste est <code>Vide</code> ? et si c'est <code>Cons(tete, queue)</code> ?</p>
 </div>
-<h3 id="ajouter-un-element-a-la-fin">Ajouter un Élément à la fin</h3>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">ajouter_debut</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="n">liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">liste</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>        <span class="k">return</span> <span class="n">creer</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="p">())</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="k">return</span> <span class="n">creer</span><span class="p">(</span><span class="n">tete</span><span class="p">(</span><span class="n">lst</span><span class="p">),</span> <span class="n">ajouter_fin</span><span class="p">(</span><span class="n">queue</span><span class="p">(</span><span class="n">lst</span><span class="p">)))</span>
+<div class="admonition question">
+<p class="admonition-title">La somme</p>
+<p>Écris <code>somme(lst: Liste(Int)) -&gt; Int</code> qui renvoie la somme des éléments d'une liste d'entiers.</p>
+<details class="success">
+<summary>Corrigé</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">somme</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Int</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">tete</span><span class="p">,</span><span class="w"> </span><span class="n">queue</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">tete</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">somme</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">}</span>
 </code></pre></div>
-<p>Si on reprend la métaphore des lutins.</p>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Contient</p>
+<p>Écris <code>contient(x: a, lst: Liste(a)) -&gt; Bool</code> qui indique si <code>x</code> est présent dans la liste.</p>
+<details class="success">
+<summary>Corrigé</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">contient</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Bool</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">False</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">tete</span><span class="p">,</span><span class="w"> </span><span class="n">queue</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">tete</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">||</span><span class="w"> </span><span class="n">contient</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">queue</span><span class="p">)</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Le <code>||</code> est <strong>paresseux</strong> : si <code>tete == x</code> est vrai, Gleam ne va pas chercher plus loin dans la queue.</p>
+</details>
+</div>
+<h2 id="deux-listes-a-la-fois-les-quatre-cas">Deux listes à la fois : les quatre cas</h2>
+<p>Comparons <strong>deux</strong> listes. Le lutin en tient maintenant deux en même temps : chacune peut être <code>Vide</code> ou <code>Cons</code>, ce qui fait <strong>quatre</strong> possibilités (2 × 2). On les écrit <strong>toutes les quatre</strong>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">sont_egales</span><span class="p">(</span><span class="n">l1</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">l2</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Bool</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">l1</span><span class="p">,</span><span class="w"> </span><span class="n">l2</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="w">    </span><span class="n">Vide</span><span class="p">,</span><span class="w"> </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">True</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="w">    </span><span class="n">Vide</span><span class="p">,</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">False</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">),</span><span class="w"> </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">False</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">q1</span><span class="p">),</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="w"> </span><span class="n">q2</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="p">&amp;&amp;</span><span class="w"> </span><span class="n">sont_egales</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span><span class="w"> </span><span class="n">q2</span><span class="p">)</span>
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="p">}</span>
+</code></pre></div>
+<ul>
+<li>deux listes vides : <strong>égales</strong> ;</li>
+<li>une vide, l'autre non : <strong>différentes</strong> (pas la même longueur) ;</li>
+<li>deux non vides : même tête <strong>et</strong> mêmes queues (on redemande à un autre lutin).</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Quatre cas, même si on pourrait en écrire moins</p>
+<p>On pourrait fusionner les deux cas « une seule est vide » en un seul. Ce n'est qu'une <strong>optimisation d'écriture</strong>, et ce n'est pas le sujet : on écrit les <strong>quatre</strong> cas pour voir toute la disjonction. Là encore, Gleam <strong>exige</strong> que les quatre soient traités.</p>
+</div>
+<h2 id="les-fonctions-qui-construisent">Les fonctions qui construisent</h2>
+<div class="admonition danger">
+<p class="admonition-title">Les listes sont immuables</p>
+<p>On ne <strong>modifie jamais</strong> une liste. Une opération qui semble « modifier » une liste en <strong>construit une nouvelle</strong>. Le lutin ne rature rien : il <strong>reconstruit en retour</strong>.</p>
+</div>
+<p>Exemple à lire, ajouter un élément <strong>à la fin</strong> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">ajouter_fin</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">Vide</span><span class="p">)</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">tete</span><span class="p">,</span><span class="w"> </span><span class="n">queue</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">tete</span><span class="p">,</span><span class="w"> </span><span class="n">ajouter_fin</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">queue</span><span class="p">))</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Le <strong>lutin ajouteur</strong> : <em>« Si on me tend une liste vide, je renvoie une liste qui ne contient que <code>x</code>. Sinon, je garde la même tête, et pour la queue je demande à un autre lutin d'y ajouter <code>x</code>, puis je recolle. »</em></p>
 <p><img alt="alt text" src="../image.png" /></p>
-<p>Je suis un lutin-ajouteur. J'ai 2 possibilités:</p>
-<ul>
-<li>Si on me donne une <strong>liste vide</strong> et qu'on me dit d'y ajouter l'élément e, je renvoie une liste ne comportant que l'élément e</li>
-<li>Sinon, c'est qu'on me donne une <strong>liste avec une tete et une queue</strong>. Alors je créé une liste avec la même tête, et pour la queue, je demande à un autre lutin d'y insérer e et de me la renvoyer.</li>
-</ul>
 <div class="admonition question">
-<p class="admonition-title">A vous</p>
-<p>Ecrivez toutes les autres fonctions demandées.
-On réalisera une disjonction de cas au papier avant de coder. </p>
+<p class="admonition-title">Renverser</p>
+<p>Écris <code>renverser(lst: Liste(a)) -&gt; Liste(a)</code> qui renvoie la liste à l'envers. (Indice : <code>ajouter_fin</code> peut aider.)</p>
+<details class="success">
+<summary>Corrigé</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">renverser</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">tete</span><span class="p">,</span><span class="w"> </span><span class="n">queue</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">ajouter_fin</span><span class="p">(</span><span class="n">tete</span><span class="p">,</span><span class="w"> </span><span class="n">renverser</span><span class="p">(</span><span class="n">queue</span><span class="p">))</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">}</span>
+</code></pre></div>
+</details>
 </div>
+<div class="admonition question">
+<p class="admonition-title">Concaténer</p>
+<p>Écris <code>concat(l1: Liste(a), l2: Liste(a)) -&gt; Liste(a)</code> qui met <code>l2</code> à la suite de <code>l1</code>. (Sur quelle liste faut-il faire la disjonction de cas ?)</p>
+<details class="success">
+<summary>Corrigé</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">concat</span><span class="p">(</span><span class="n">l1</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">l2</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">l1</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">l2</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">tete</span><span class="p">,</span><span class="w"> </span><span class="n">queue</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">tete</span><span class="p">,</span><span class="w"> </span><span class="n">concat</span><span class="p">(</span><span class="n">queue</span><span class="p">,</span><span class="w"> </span><span class="n">l2</span><span class="p">))</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<h2 id="faire-pousser-une-liste">Faire pousser une liste</h2>
+<p>Jusqu'ici, le lutin <strong>déconstruisait</strong> une liste. Il peut aussi en <strong>construire une à partir d'une graine</strong> (ici, un entier).</p>
+<div class="admonition question">
+<p class="admonition-title">Répéter</p>
+<p>Écris <code>repete(x: a, n: Int) -&gt; Liste(a)</code> qui renvoie une liste contenant <code>n</code> fois l'élément <code>x</code>.</p>
+<details class="success">
+<summary>Corrigé</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">repete</span><span class="p">(</span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">    </span><span class="mi">0</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="n">_</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">repete</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="p">}</span>
+</code></pre></div>
+<p>Le cas de base n'est plus <code>Vide</code> mais <code>n == 0</code> : la graine <code>n</code> <strong>décroît</strong> à chaque appel jusqu'à 0.</p>
+</details>
+</div>
+<h2 id="le-cout">Le coût</h2>
+<ul>
+<li><code>taille</code> parcourt la liste <strong>une fois</strong> : son coût est <strong>linéaire</strong>, <code>O(n)</code>.</li>
+<li><code>renverser</code> est plus coûteuse : à chaque étape, <code>ajouter_fin</code> reparcourt toute la queue. Le coût est en <code>O(n²)</code>. Bien écrire une fonction récursive, ce n'est pas seulement qu'elle soit juste, c'est aussi ce qu'elle coûte.</li>
+</ul>
+<h2 id="ce-que-lia-ne-fait-pas-a-ta-place">Ce que l'IA ne fait pas à ta place</h2>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Une IA écrit <code>taille</code>, <code>somme</code> ou <code>renverser</code> en une seconde. Ta valeur n'est pas là. Elle est dans le fait de <strong>savoir énoncer les deux cas</strong> (que se passe-t-il si la liste est vide ? et sinon ?) et de <strong>tester</strong> le résultat. Gleam t'y aide : les <strong>types</strong> et l'<strong>exhaustivité des cas</strong> attrapent une grande partie des erreurs avant même l'exécution.</p>
+</div>
+<h2 id="lequivalent-en-python">L'équivalent en Python</h2>
+<p>Toute cette construction existe aussi en Python, le langage de l'épreuve. La même liste, définie récursivement, avec des <strong>tuples immuables</strong> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">type</span> <span class="n">Vide</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[()]</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">type</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vide</span> <span class="o">|</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]]</span>
+</code></pre></div>
+<p>Le <code>|</code> (OU) réapparaît, cette fois <strong>dans le type</strong> : une <code>Liste</code> est <code>Vide</code> <strong>ou</strong> un couple (tête, queue). C'est le même <code>|</code> que dans <code>int | None</code>. En Gleam, ce OU était porté par les deux constructeurs <code>Vide</code> et <code>Cons</code>.</p>
+<p>Pour ne pas manipuler les tuples à la main, on se donne un <strong>constructeur</strong> et des <strong>accesseurs</strong>, qui jouent le rôle de <code>Cons</code> et <code>Vide</code> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer_vide</span><span class="p">[</span><span class="n">T</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>               <span class="c1"># comme Vide</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="k">return</span> <span class="p">()</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">construire</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">t</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">q</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>   <span class="c1"># comme Cons(t, q)</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>    <span class="k">return</span> <span class="n">lst</span> <span class="o">==</span> <span class="p">()</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">tete</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>               <span class="c1"># la tête</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">),</span> <span class="s2">&quot;Liste vide&quot;</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>    <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">queue</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>       <span class="c1"># la queue</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">),</span> <span class="s2">&quot;Liste vide&quot;</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>    <span class="k">return</span> <span class="n">lst</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<p>On construit alors une liste <strong>exactement</strong> comme en Gleam, et on ne touche plus jamais aux tuples ensuite :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">exemple</span> <span class="o">=</span> <span class="n">construire</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">construire</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">construire</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">creer_vide</span><span class="p">())))</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="c1">#   en Gleam :  Cons(2, Cons(3, Cons(4, Vide)))</span>
+</code></pre></div>
+<p>On lit une liste avec des <strong><code>if</code></strong> et les accesseurs (<code>est_vide</code>, <code>tete</code>, <code>queue</code>), le style attendu <strong>au programme</strong> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">taille</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>        <span class="k">return</span> <span class="mi">0</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">taille</span><span class="p">(</span><span class="n">queue</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">somme</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">lst</span><span class="p">):</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>        <span class="k">return</span> <span class="mi">0</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>    <span class="k">return</span> <span class="n">tete</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">+</span> <span class="n">somme</span><span class="p">(</span><span class="n">queue</span><span class="p">(</span><span class="n">lst</span><span class="p">))</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Ce que les <code>if</code> cachent</p>
+<p>Avec <code>if</code> / <code>else</code>, rien ne signale <strong>combien</strong> de cas il y a, ni qu'on les a <strong>tous</strong> couverts. La disjonction <strong>exhaustive</strong>, un cas par possibilité, que <code>match</code> (et le <code>case</code> de Gleam) rendaient évidente, n'apparaît plus. En Gleam, le compilateur <strong>vérifiait</strong> cette exhaustivité ; avec des <code>if</code>, c'est à toi d'y veiller à chaque fois.</p>
+</div>
+<p>L'écart se voit encore mieux sur <strong>deux</strong> listes, où il y a <strong>quatre</strong> cas (chaque liste vide ou non). En <code>if</code>, ils <strong>fondent</strong> en conditions imbriquées, et on ne les distingue plus :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">sont_egales</span><span class="p">(</span><span class="n">l1</span><span class="p">:</span> <span class="n">Liste</span><span class="p">,</span> <span class="n">l2</span><span class="p">:</span> <span class="n">Liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">l2</span><span class="p">):</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>        <span class="k">return</span> <span class="kc">True</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="k">if</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span> <span class="ow">or</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">l2</span><span class="p">):</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>        <span class="k">return</span> <span class="kc">False</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>    <span class="k">return</span> <span class="n">tete</span><span class="p">(</span><span class="n">l1</span><span class="p">)</span> <span class="o">==</span> <span class="n">tete</span><span class="p">(</span><span class="n">l2</span><span class="p">)</span> <span class="ow">and</span> <span class="n">sont_egales</span><span class="p">(</span><span class="n">queue</span><span class="p">(</span><span class="n">l1</span><span class="p">),</span> <span class="n">queue</span><span class="p">(</span><span class="n">l2</span><span class="p">))</span>
+</code></pre></div>
+<h3 id="la-version-la-plus-proche-de-gleam-dataclass-match">La version la plus proche de Gleam : <code>dataclass</code> + <code>match</code></h3>
+<p>Python possède aussi le <strong>pattern matching</strong> (<code>match</code> / <code>case</code>), mais il est vraiment fait pour des <strong>classes</strong>, en particulier des <strong>dataclasses</strong>. Avec elles, on définit <code>Vide</code> et <code>Cons</code> <strong>exactement</strong> comme les deux constructeurs de Gleam. C'est une <strong>autre représentation</strong> de la liste, à la place des tuples :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nd">@dataclass</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">Vide</span><span class="p">:</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>    <span class="k">pass</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="nd">@dataclass</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="k">class</span><span class="w"> </span><span class="nc">Cons</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a>    <span class="n">tete</span><span class="p">:</span> <span class="n">T</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>    <span class="n">queue</span><span class="p">:</span> <span class="s2">&quot;Liste[T]&quot;</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>
+<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a><span class="nb">type</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">Vide</span> <span class="o">|</span> <span class="n">Cons</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
+</code></pre></div>
+<p>On construit alors une liste <strong>à l'identique de Gleam</strong> (en Python, <code>Vide()</code> prend des parenthèses car on crée une instance) :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">exemple</span> <span class="o">=</span> <span class="n">Cons</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">Cons</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">Cons</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">Vide</span><span class="p">())))</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="c1">#   en Gleam :  Cons(2, Cons(3, Cons(4, Vide)))</span>
+</code></pre></div>
+<p>Et le <code>match</code> retrouve tout son sens, <strong>un cas par constructeur</strong>, comme le <code>case</code> de Gleam :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">taille</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    <span class="k">match</span> <span class="n">lst</span><span class="p">:</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>        <span class="k">case</span> <span class="n">Vide</span><span class="p">():</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>            <span class="k">return</span> <span class="mi">0</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>        <span class="k">case</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="k">_</span><span class="p">,</span> <span class="n">queue</span><span class="p">):</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>            <span class="k">return</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">taille</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
+</code></pre></div>
+<p>Sur deux listes, les <strong>quatre</strong> cas redeviennent nets (à comparer avec la version <code>if</code> juste au-dessus) :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">sont_egales</span><span class="p">(</span><span class="n">l1</span><span class="p">:</span> <span class="n">Liste</span><span class="p">,</span> <span class="n">l2</span><span class="p">:</span> <span class="n">Liste</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    <span class="k">match</span> <span class="n">l1</span><span class="p">,</span> <span class="n">l2</span><span class="p">:</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>        <span class="k">case</span> <span class="n">Vide</span><span class="p">(),</span> <span class="n">Vide</span><span class="p">():</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>            <span class="k">return</span> <span class="kc">True</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>        <span class="k">case</span><span class="w"> </span><span class="n">Vide</span><span class="p">(),</span> <span class="n">Cons</span><span class="p">(</span><span class="k">_</span><span class="p">,</span> <span class="n">_</span><span class="p">):</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>            <span class="k">return</span> <span class="kc">False</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a>        <span class="k">case</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="k">_</span><span class="p">,</span> <span class="n">_</span><span class="p">),</span> <span class="n">Vide</span><span class="p">():</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>            <span class="k">return</span> <span class="kc">False</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>        <span class="k">case</span> <span class="n">Cons</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span> <span class="n">q1</span><span class="p">),</span> <span class="n">Cons</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span> <span class="n">q2</span><span class="p">):</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>            <span class="k">return</span> <span class="n">t1</span> <span class="o">==</span> <span class="n">t2</span> <span class="ow">and</span> <span class="n">sont_egales</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span> <span class="n">q2</span><span class="p">)</span>
+</code></pre></div>
+<p>Cette écriture est <strong>hors programme</strong> (les dataclasses ne sont pas exigées), mais c'est le calque le plus exact de Gleam, et la façon dont <code>match</code> est vraiment prévu pour être utilisé. Une différence subtile demeure : Python, contrairement à Gleam, <strong>ne vérifie pas</strong> que tu as traité tous les cas.</p>
+<p>La grande différence reste que <strong>Gleam n'a pas de boucle</strong> : la récursivité y était le seul chemin, alors qu'en Python on la <strong>choisit</strong>, parce que c'est la <strong>structure</strong> qui l'appelle. Toutes les autres fonctions (<code>contient</code>, <code>renverser</code>, <code>concat</code>, <code>repete</code>) se transposent de la même manière.</p>
+<div class="admonition note">
+<p class="admonition-title">Une troisième fois, plus tard</p>
+<p>Après la programmation objet, on réimplémentera cette même structure une <strong>troisième</strong> fois : une liste chaînée en <strong>objet impératif</strong> (avec des <code>while</code>). Même structure, trois paradigmes (fonctionnel, impératif, objet), de quoi mesurer ce que la récursivité apporte ici.</p>
+</div>
+<h2 id="exercices">Exercices</h2>
+<div class="admonition tip">
+<p class="admonition-title">Comment t'entraîner</p>
+<p>Écris chaque fonction <strong>d'abord en Gleam</strong> (avec <code>case</code>), puis <strong>en Python</strong> (avec des <code>if</code> et les accesseurs <code>tete</code> / <code>queue</code>). Fais la <strong>disjonction de cas au papier</strong> avant de coder. Le corrigé <strong>Gleam</strong> est replié sous chaque exercice ; le corrigé <strong>Python</strong>, avec ses tests, est dans le fichier <code>liste_immuable.py</code>. (Pour <code>to_str</code>, ajoute <code>import gleam/int</code> en tête du fichier Gleam.)</p>
+</div>
+<h3 id="lecture">Lecture</h3>
+<div class="admonition question">
+<p class="admonition-title">to_str</p>
+<p>Renvoie une chaîne façon <code>"2 -&gt; 3 -&gt; 4 -&gt; _|_"</code> (la liste vide donne <code>"_|_"</code>).</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">to_str</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="s">&quot;_|_&quot;</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="k">int</span><span class="p">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="s">&quot; -&gt; &quot;</span><span class="w"> </span><span class="o">&lt;&gt;</span><span class="w"> </span><span class="n">to_str</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">tous_vrais</p>
+<p>Renvoie <code>True</code> si <strong>tous</strong> les booléens de la liste sont vrais. La liste vide donne <code>True</code> (rien ne le contredit).</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">tous_vrais</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Bool</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Bool</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">True</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">&amp;&amp;</span><span class="w"> </span><span class="n">tous_vrais</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">au_moins_un_vrai</p>
+<p>Renvoie <code>True</code> si <strong>au moins un</strong> booléen est vrai. La liste vide donne <code>False</code>.</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">au_moins_un_vrai</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Bool</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Bool</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">False</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">||</span><span class="w"> </span><span class="n">au_moins_un_vrai</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">compte</p>
+<p>Compte le nombre d'occurrences d'un élément. <code>compte(3, 2 -&gt; 3 -&gt; 4)</code> vaut <code>1</code>.</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">compte</span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Int</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">        </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">compte</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">        </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">compte</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-25-9" name="__codelineno-25-9" href="#__codelineno-25-9"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-25-10" name="__codelineno-25-10" href="#__codelineno-25-10"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<h3 id="creation">Création</h3>
+<div class="admonition question">
+<p class="admonition-title">take</p>
+<p>Renvoie les <code>n</code> premiers éléments. <code>take(2, 2 -&gt; 3 -&gt; 4)</code> donne <code>2 -&gt; 3</code>. Si <code>n</code> dépasse la taille, on prend tout.</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">take</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a><span class="w">        </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a><span class="w">        </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">take</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">))</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">drop</p>
+<p>Renvoie la liste <strong>sans</strong> ses <code>n</code> premiers éléments. <code>drop(1, 2 -&gt; 3 -&gt; 4)</code> donne <code>3 -&gt; 4</code>.</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">drop</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="w">        </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">lst</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="w">        </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">drop</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">supprimer</p>
+<p>Renvoie une liste privée de la <strong>première</strong> occurrence d'un élément. <code>supprimer(3, 2 -&gt; 3 -&gt; 4)</code> donne <code>2 -&gt; 4</code>.</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">supprimer</span><span class="p">(</span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="n">e</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="w">        </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">q</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a><span class="w">        </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">supprimer</span><span class="p">(</span><span class="n">e</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">))</span>
+<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<h3 id="construire-par-filtrage-vers-filtrer">Construire par filtrage : vers <code>filtrer</code></h3>
+<p>On <strong>garde</strong> certains éléments selon une <strong>condition</strong>. Écris ces quatre fonctions, puis regarde ce qu'elles ont en commun. (En Python, ce sont des variantes de <code>pairs</code> : on change la condition.)</p>
+<div class="admonition question">
+<p class="admonition-title">pairs</p>
+<p>Garde les éléments <strong>pairs</strong>. <code>2 -&gt; 3 -&gt; 4</code> donne <code>2 -&gt; 4</code>.</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">pairs</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="w">        </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">pairs</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="w">        </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">pairs</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">impairs</p>
+<p>Garde les éléments <strong>impairs</strong>. <code>2 -&gt; 3 -&gt; 4</code> donne <code>3</code>.</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">impairs</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a><span class="w">        </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">impairs</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a><span class="w">        </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">impairs</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-30-8" name="__codelineno-30-8" href="#__codelineno-30-8"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-30-9" name="__codelineno-30-9" href="#__codelineno-30-9"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-30-10" name="__codelineno-30-10" href="#__codelineno-30-10"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">positifs</p>
+<p>Garde les éléments <strong>strictement positifs</strong>. <code>2 -&gt; -3 -&gt; 4</code> donne <code>2 -&gt; 4</code>.</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">positifs</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="w">        </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">positifs</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a><span class="w">        </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">positifs</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">negatifs</p>
+<p>Garde les éléments <strong>strictement négatifs</strong>. <code>2 -&gt; -3 -&gt; 4</code> donne <code>-3</code>.</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">negatifs</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a><span class="w">        </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">negatifs</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a><span class="w">        </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">negatifs</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<p><strong>Ce qu'elles ont en commun.</strong> Compare les quatre corrigés : ils sont <strong>identiques</strong>, seule la <strong>condition</strong> change (<code>t % 2 == 0</code>, <code>t % 2 != 0</code>, <code>t &gt; 0</code>, <code>t &lt; 0</code>). Écrire une fonction par condition, c'est se répéter. L'idée : <strong>passer la condition en paramètre</strong>. On obtient une seule fonction, <code>filtrer</code> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">filtrer</span><span class="p">(</span><span class="n">predicat</span><span class="p">:</span><span class="w"> </span><span class="k">fn</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Bool</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">predicat</span><span class="p">(</span><span class="n">t</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="w">        </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">filtrer</span><span class="p">(</span><span class="n">predicat</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">))</span>
+<a id="__codelineno-33-7" name="__codelineno-33-7" href="#__codelineno-33-7"></a><span class="w">        </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">filtrer</span><span class="p">(</span><span class="n">predicat</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-33-8" name="__codelineno-33-8" href="#__codelineno-33-8"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-33-9" name="__codelineno-33-9" href="#__codelineno-33-9"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-33-10" name="__codelineno-33-10" href="#__codelineno-33-10"></a><span class="p">}</span>
+</code></pre></div>
+<p><code>predicat</code> est <strong>une fonction</strong> (elle prend un élément et renvoie un booléen). Les quatre fonctions deviennent alors un seul appel, avec la bonne condition écrite <strong>sur place</strong> (une fonction anonyme <code>fn(x) { ... }</code>) :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="n">filtrer</span><span class="p">(</span><span class="k">fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">lst</span><span class="p">)</span><span class="w">   </span><span class="c1">// les pairs</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="n">filtrer</span><span class="p">(</span><span class="k">fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="p">!=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">lst</span><span class="p">)</span><span class="w">   </span><span class="c1">// les impairs</span>
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="n">filtrer</span><span class="p">(</span><span class="k">fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">lst</span><span class="p">)</span><span class="w">        </span><span class="c1">// les positifs</span>
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="n">filtrer</span><span class="p">(</span><span class="k">fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">lst</span><span class="p">)</span><span class="w">        </span><span class="c1">// les négatifs</span>
+</code></pre></div>
+<h3 id="construire-par-transformation-vers-mapper">Construire par transformation : vers <code>mapper</code></h3>
+<p>Cette fois, on ne <strong>garde</strong> pas : on <strong>transforme</strong> chaque élément. Écris ces trois fonctions.</p>
+<div class="admonition question">
+<p class="admonition-title">carres</p>
+<p>Renvoie les <strong>carrés</strong>. <code>2 -&gt; 3 -&gt; 4</code> donne <code>4 -&gt; 9 -&gt; 16</code>.</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">carres</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">carres</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">doubles</p>
+<p>Renvoie les <strong>doubles</strong>. <code>2 -&gt; 3 -&gt; 4</code> donne <code>4 -&gt; 6 -&gt; 8</code>.</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">doubles</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">doubles</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+<a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">triples</p>
+<p>Renvoie les <strong>triples</strong>. <code>2 -&gt; 3 -&gt; 4</code> donne <code>6 -&gt; 9 -&gt; 12</code>.</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">triples</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-37-4" name="__codelineno-37-4" href="#__codelineno-37-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">triples</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+<a id="__codelineno-37-5" name="__codelineno-37-5" href="#__codelineno-37-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-37-6" name="__codelineno-37-6" href="#__codelineno-37-6"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<p><strong>Même constat.</strong> Les trois corrigés sont identiques, seule la <strong>transformation</strong> change (<code>t * t</code>, <code>2 * t</code>, <code>3 * t</code>). On la passe en paramètre : c'est <code>mapper</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">mapper</span><span class="p">(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="k">fn</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">f</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="w"> </span><span class="n">mapper</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">))</span>
+<a id="__codelineno-38-5" name="__codelineno-38-5" href="#__codelineno-38-5"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-38-6" name="__codelineno-38-6" href="#__codelineno-38-6"></a><span class="p">}</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="n">mapper</span><span class="p">(</span><span class="k">fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">lst</span><span class="p">)</span><span class="w">   </span><span class="c1">// les carrés</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="n">mapper</span><span class="p">(</span><span class="k">fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">2</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">lst</span><span class="p">)</span><span class="w">   </span><span class="c1">// les doubles</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="n">mapper</span><span class="p">(</span><span class="k">fn</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="mi">3</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">lst</span><span class="p">)</span><span class="w">   </span><span class="c1">// les triples</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">filtrer choisit, mapper transforme</p>
+<p><code>filtrer</code> <strong>garde</strong> ou <strong>jette</strong> des éléments (la liste peut rétrécir) ; <code>mapper</code> <strong>transforme</strong> chaque élément (la liste garde sa taille). Ce sont deux outils très courants, et tu viens de les redécouvrir en remarquant que plusieurs fonctions n'en faisaient qu'une.</p>
+</div>
+<h3 id="vers-le-tri-fusion">Vers le tri fusion</h3>
+<div class="admonition question">
+<p class="admonition-title">fusionner</p>
+<p>À partir de <strong>deux listes déjà triées</strong>, renvoie une seule liste triée. <code>fusionner(2 -&gt; 4 -&gt; 6, 3 -&gt; 5 -&gt; 7)</code> donne <code>2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; 7</code>. C'est la brique du <strong>tri fusion</strong>, qu'on verra bientôt. Il y a ici <strong>quatre</strong> cas (chaque liste vide ou non).</p>
+<details class="success">
+<summary>Corrigé Gleam</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">fusionner</span><span class="p">(</span><span class="n">l1</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">),</span><span class="w"> </span><span class="n">l2</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">l1</span><span class="p">,</span><span class="w"> </span><span class="n">l2</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-40-3" name="__codelineno-40-3" href="#__codelineno-40-3"></a><span class="w">    </span><span class="n">Vide</span><span class="p">,</span><span class="w"> </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-40-4" name="__codelineno-40-4" href="#__codelineno-40-4"></a><span class="w">    </span><span class="n">Vide</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">l2</span>
+<a id="__codelineno-40-5" name="__codelineno-40-5" href="#__codelineno-40-5"></a><span class="w">    </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">l1</span>
+<a id="__codelineno-40-6" name="__codelineno-40-6" href="#__codelineno-40-6"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">q1</span><span class="p">),</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="w"> </span><span class="n">q2</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-40-7" name="__codelineno-40-7" href="#__codelineno-40-7"></a><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-40-8" name="__codelineno-40-8" href="#__codelineno-40-8"></a><span class="w">        </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">fusionner</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span><span class="w"> </span><span class="n">l2</span><span class="p">))</span>
+<a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a><span class="w">        </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="w"> </span><span class="n">fusionner</span><span class="p">(</span><span class="n">l1</span><span class="p">,</span><span class="w"> </span><span class="n">q2</span><span class="p">))</span>
+<a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-40-11" name="__codelineno-40-11" href="#__codelineno-40-11"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-40-12" name="__codelineno-40-12" href="#__codelineno-40-12"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
+<h3 id="en-python-seulement">En Python seulement</h3>
+<div class="admonition warning">
+<p class="admonition-title">Pourquoi pas en Gleam</p>
+<p>Les fonctions qui suivent peuvent <strong>échouer</strong> sur certaines entrées : une liste vide n'a pas de dernier élément, un indice peut sortir des bornes. En Python, on le signale par une <strong>assertion</strong> qui lève une erreur. En Gleam, il n'y a pas d'exception : il faudrait renvoyer un <code>Result</code> ou un <code>Option</code> pour dire « ça a échoué », une notion qu'on verra plus tard. On les fait donc <strong>uniquement en Python</strong>. Les corrigés (avec leurs tests) sont dans <code>liste_immuable.py</code>.</p>
+</div>
+<p>À écrire en Python (avec <code>assert</code> pour les préconditions) :</p>
+<ul>
+<li><strong><code>dernier_element(lst)</code></strong> : le dernier élément (erreur si la liste est vide).</li>
+<li><strong><code>avant_dernier_element(lst)</code></strong> : l'avant-dernier (erreur si moins de deux éléments).</li>
+<li><strong><code>minimum(lst)</code></strong> : le plus petit élément (erreur si la liste est vide).</li>
+<li><strong><code>get_n(n, lst)</code></strong> : l'élément d'indice <code>n</code> (erreur si hors bornes).</li>
+<li><strong><code>insert(e, n, lst)</code></strong> : insère <code>e</code> à l'indice <code>n</code> (erreur si hors bornes).</li>
+<li><strong><code>supprimer_n(n, lst)</code></strong> : supprime l'élément d'indice <code>n</code> (erreur si hors bornes).</li>
+<li><strong><code>supprimer_fin(lst)</code></strong> : supprime le dernier élément (erreur si la liste est vide).</li>
+<li><strong><code>trier(lst)</code></strong> : tri par sélection (il s'appuie sur <code>minimum</code>, donc entraîné lui aussi côté Python).</li>
+</ul>
 
 
 
@@ -8265,7 +9003,7 @@ On réalisera une disjonction de cas au papier avant de coder. </p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 21, 2025 13:21:20 UTC">September 21, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 22, 2026 16:46:20 UTC">July 22, 2026</span>
   </span>
 
     
