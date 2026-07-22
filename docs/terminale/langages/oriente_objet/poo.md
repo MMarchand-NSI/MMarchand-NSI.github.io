@@ -8,6 +8,9 @@
 
     Une **classe** permet de définir une famille d'objets. A partir d'une classe, on peut créer autant d'objets que l'on veut. Ce sont des exemplaires, des **instances** de la classe.
 
+!!! tip "Le facile et le difficile"
+    Écrire une classe (ses attributs, ses méthodes) est la partie **visible et statique**. Le vrai enjeu, plus difficile, est la **dynamique** : ce qui se passe **à l'exécution**, quand on crée des objets, qu'on les relie par des **références**, et qu'ils s'envoient des messages (les appels de méthodes). C'est cette dynamique qu'on va **tracer**, pas seulement la syntaxe.
+
 
 ## Classe `Animal`
 
@@ -71,6 +74,39 @@ Dans cet exemple :
     ```
 
     On considèrera malgré tout que `__init__` est le constructeur, car si on vous pose la question, c'est la réponse attendue.
+
+## Une variable désigne un objet : les références
+
+Le point le plus délicat de l'objet n'est pas la syntaxe des classes, c'est de suivre ce qui se passe **à l'exécution**. En particulier : que contient une variable comme `x` après `x = Animal("Bidule")` ?
+
+`x` ne **contient** pas l'animal. `x` **désigne** l'objet : elle en garde une **référence** (une flèche vers lui, quelque part en mémoire). C'est le même mécanisme que le partage de référence rencontré avec les listes.
+
+Conséquence directe : deux variables peuvent désigner le **même** objet.
+
+```python
+a = Animal("Rocket")
+b = a               # b et a désignent le MÊME objet
+b.nom = "Groot"
+print(a.nom)        # Groot : modifier via b a changé a
+```
+
+!!! warning "Piège : une référence n'est pas une copie"
+    `b = a` ne crée **pas** un second animal : `a` et `b` sont deux noms pour le même objet. Modifier l'un modifie l'autre. Pour savoir si deux variables désignent le **même** objet (et non deux objets seulement égaux), on utilise `is` :
+
+    ```python
+    c = Animal("Rocket")
+    d = Animal("Rocket")
+    print(c is d)          # False : deux objets distincts...
+    print(c.nom == d.nom)  # ...mais qui portent le même nom
+    ```
+
+    « Qui est l'objet ? » est une vraie question : un même objet peut apparaître sous plusieurs noms.
+
+!!! abstract "`self`, c'est l'objet courant"
+    Dans une méthode, `self` désigne l'instance **sur laquelle** la méthode est appelée. Quand on écrit `a.parler()`, la méthode `parler` s'exécute avec `self` valant `a`. Chaque objet a ses **propres** attributs : `self.nom` est le nom de **cet** objet-là, pas d'un autre.
+
+!!! tip "Trace la dynamique"
+    Copie ces exemples dans [Python Tutor](https://pythontutor.com/) et avance pas à pas : tu verras les objets créés en mémoire et les **flèches** (les références) qui pointent vers eux. C'est la meilleure façon de voir ce que la simple lecture du code ne montre pas.
 
   
 

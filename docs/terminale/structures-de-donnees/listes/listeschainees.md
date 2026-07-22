@@ -1,326 +1,131 @@
-# Listes chaînées - Approche Orientée Objet
-
+# Listes chaînées, en objet
 
 !!! danger "Requis"
     Vous devez savoir refaire les exercices sur la création et l'utilisation de classes en POO sans regarder le corrigé.
 
 ## Introduction
 
-Une liste chaînée est aussi une structure permettant d'implémenter une liste.
+On implémente une liste une **troisième** fois. En Gleam puis en Python fonctionnel, une liste était `Vide` **ou** `Cons(tête, queue)`. Ici, en **objet** et de façon **mutable** : une chaîne de **maillons**, chaque maillon portant une donnée et une **référence** vers le suivant. Le dernier ne pointe vers rien : `None`.
 
-La chaîne que représente la liste est composée de plusieurs maillons.
+C'est la **même structure**, vue sous le troisième paradigme :
 
-Chaque Maillon est composé d'un élément et d'une référence vers le maillon suivant.
-
-
-Il existe plusieurs façons d'organiser ces maillons:
+| Gleam / fonctionnel | Objet (ici) |
+|---|---|
+| `Vide` | `None` |
+| `Cons(tête, queue)` | un `Maillon` (donnée + référence au suivant) |
 
 ![alt text](image-1.png)
 
+## La classe `Maillon`
 
-Il reste un bon exercice d'essayer de temps en temps d'implémenter une autre version de liste chaînée.
-
-
-## Définition de la classe `Maillon`
-
-Un `Maillon` de la chaîne possède une donnée ainsi qu'une référence à son maillon suivant. 
-
-Un maillon a donc deux attributs :
-
-1. **`data`** : La donnée contenue dans le maillon (ici un entier).
-2. **`next`** : Une référence vers le maillon suivant.
+Un maillon a une **donnée** (`data`) et une référence `next` vers le maillon **suivant**, ou `None` s'il est le dernier.
 
 ```python
 class Maillon[T]:
-    def __init__(self, data: T, next: 'Maillon[T]'):
-        self.data = data
-        self.next = next
+    def __init__(self, data: T, next: "Maillon[T] | None"):
+        self.data = data      # la donnée
+        self.next = next      # référence vers le suivant, ou None
 ```
 
-### Problème initial
-
-Cette définition présente un problème. Lorsqu’on crée un maillon, on doit spécifier le maillon suivant (`next`), mais ce maillon suivant n’existe pas encore à ce stade de la création. Nous devons résoudre ce problème pour pouvoir créer une chaîne. 
+On peut fabriquer une chaîne à la main. La liste `2 -> 3 -> 4` :
 
 ```python
-premier_maillon = Maillon(3, ...euh, j'ai pas de maillon...)
+m3 = Maillon(4, None)     # le dernier pointe vers None
+m2 = Maillon(3, m3)
+m1 = Maillon(2, m2)
 ```
 
-### Sentinelle
-!!! abstract "Définition"
-    En informatique, une **sentinelle** est une valeur spéciale qui indique une ou plusieurs bornes d'une structure de données. 
+À comparer avec le Gleam `Cons(2, Cons(3, Cons(4, Vide)))` : le même emboîtement, mais avec des **références** entre objets.
 
+```mermaid
+graph LR
+  m1["2"] --> m2["3"] --> m3["4"] --> N["None"]
+```
 
-Appliqué à notre cas, en considérant que la sentinelle et dans notre chaîne, et qu'il n'y a que des maillons dans la chaîne:
+## La classe `Liste`
 
-- La sentinelle est dans la chaîne, donc la **Sentinelle EST UN Maillon**.
-- Mais tout maillon a un prochain maillon.    
-- Vu que la sentinelle est un Maillon, elle doit donc avoir un prochain maillon. 
-
-Il semble que nous soyons de retour à notre problème initial, mais en réalité, pas du tout.
-Pour résoudre ce casse tête, On va lui dire que son prochain maillon, c'est ___initialement___ elle-même.
-
-#### Classe `Sentinelle`
+Manipuler les maillons à la main est pénible. On enveloppe la chaîne dans une classe `Liste`, qui garde une **référence vers son premier maillon** (`tete`), ou `None` si elle est vide.
 
 ```python
-class Sentinelle(Maillon):    # Une Sentinelle EST UN Maillon
-    def __init__(self):
-        super().__init__(0, self)   # Son prochain Maillon est initialement elle-même
+class Liste[T]:
+    def __init__(self) -> None:
+        self.tete: "Maillon[T] | None" = None    # une liste neuve est vide
 ```
 
-
-Cette classe hérite de la classe `Maillon`. 
-Grâce à l’appel de **`super()`**, nous invoquons le constructeur de `Maillon` tout en assignant la sentinelle comme le maillon suivant d'elle-même.
-Sa donnée est arbitrairement mise à 0.
-
-
-Voici comment évoluera progressivement notre sentinelle (0) lorsqu'on ajoutera en tête les éléments 5, 3, puis 12:
-
-<table><tr><td>
-
-```mermaid
----
-title: Maillon sentinelle
----
-graph LR
-0((0)) --> 0
-```
-</td><td>
-
-```mermaid
----
-title: Ajout de la donnée 5
----
-graph LR
-0((0)) --> 5((5))
-5 --> 0
-```
-</td><td>
-
-```mermaid
----
-title: Ajout de la donnée 3
----
-graph LR
-0((0)) --> 3((3))
-3 --> 5((5))
-5 --> 0
-```
-</td></tr></table>
-
-```mermaid
----
-title: Ajout de la donnée 12
----
-graph LR
-0((0)) --> 12((12))
-12((12)) --> 3((3))
-3 --> 5((5))
-5 --> 0
-```
-
-Sauf lorsque la liste est vide, le premier élément de la liste est juste après la sentinelle. Le dernier est juste avant.
-
-!!! note 
-    Il est important de réaliser que l'attribut next est une référence à un noeud. ___"next, c'est la flèche qui va vers"___
-
-
-
-## Définition de la classe `Liste`
-
-Nous allons gérer une liste à partir de sa sentinelle. **Nous assimilerons alors une liste à sa sentinelle, en renommant tout simplement la classe sentinelle en Liste. On OUBLIE donc la classe sentinelle qui n'était là que pour la démarche de réflexion. La sentinelle d'une liste, c'est elle-même en tant que Maillon.**
-
-La classe `Liste` hérite de `Maillon` et représente notre liste chaînée complète.
-
-Lorsqu'elle est créée (donc vide), c'est un maillon pointant sur lui-même et qui représentera toujours sa propre sentinelle.
-
-#### Attributs de `Liste`
-- **`__taille`** : Stocke la taille de la liste.
-- Ceux hérités de Maillon (`data` et `next`)
-
-#### méthode initiale:
-
-**`ajouter_tete`** : Ajoute un nouvel élément en tête de la liste.
+**Disjonction de cas, comme en fonctionnel.** Toute méthode distingue deux cas : la liste est **vide** (`tete is None`), ou elle a une tête et une suite.
 
 ```python
-class Liste[T](Maillon[T]): 
-    """
-    Une liste est un maillon, son propre maillon sentinelle.
-    self est donc toujours le maillon sentinelle.
-    self.next est le premier maillon de la liste.
-    
-    Design clé : Liste hérite de Maillon pour garantir que None n'est JAMAIS 
-    utilisé dans la structure chaînée. La liste circulaire élimine tous les 
-    cas spéciaux.
-    """
+    def est_vide(self) -> bool:
+        return self.tete is None
 
-    def __init__(self):
-        """
-        On instancie un Maillon dont le maillon suivant est lui-même.
-        
-        Explication du mécanisme d'instanciation :
-        1. super().__init__() appelle Maillon.__init__()
-        2. On passe T.__default__ (la valeur par défaut du type T) comme data 
-           La sentinelle n'a pas de donnée utile et on ne peut et veut pas mettre None.
-        3. On passe self comme next, mais self n'est pas encore complètement 
-           initialisé à ce moment
-        4. Python permet cette référence circulaire car l'objet existe déjà 
-           en mémoire.
-        5. Résultat : self.next == self, une liste circulaire vide
-        
-        >>> lst = Liste()
-        >>> lst.next is lst
-        True
-        """
-        
-        super().__init__(T.__default__, self)  # pyright: ignore[reportAny]
-        self.__taille: int = 0
-
-
-    def __len__(self) -> int:
-        """
-        Renvoie la longueur de la chaine démarrant par le Maillon.
-        grâce au dunder, on peut maintenant appeler la fonction len.
-        >>> len(exemple())
-        3
-        """
-        return self.__taille
+    def ajouter_debut(self, e: T) -> None:
+        # un nouveau maillon dont le suivant est l'ancienne tête
+        self.tete = Maillon(e, self.tete)
 ```
 
-Dans une méthode, self.next représente toujours le premier Maillon, à moins que la liste ne soit vide, auquel cas elle pointe sur elle même.
+`ajouter_debut` est le **`Cons` mutable** : au lieu de *renvoyer* une nouvelle liste, on **modifie** `self.tete`.
 
-Ici, on choisit de plus de maintenir la taille du maillon en permanence.
-On marque cet attribut comme privé grâce au double underscore, afin de signifier qu'il ne doit pas être modifié par les programmeurs qui utilisent cette classe.
+!!! warning "Piège : `is None`, pas `== None`"
+    Pour tester si une référence vaut `None`, on écrit `is None` (comparaison d'identité), pas `== None`.
 
-Vu que la récupération de la taille est une opérationn courante, sa récupération sera donc en $\mathcal{O}(1)$, au lieu de $\mathcal{O}(n)$ s'il faut parcourir tous les maillons d'une liste de taille $n$. Ceci se fait au prix de l'augmentation de la taille de stockage de la liste, mais on ne peut pas tout avoir.
+## Parcourir : la longueur
 
-**Tout ce qui suit est du légo avec les maillons, il faut juste penser à bien faire les opérations dans l'ordre à chaque fois. On procèdera de manière impérative, avec des while.**
-
-#### Ajouter un élément
-
-On veut ajouter un nouveau maillon portant la donnée 12 en tête de liste:
-
-```mermaid
----
-title: Liste initiale
----
-graph LR
-0((0)) --> 3((3))
-3 --> 5((5))
-5 --> 0
-```
-
-1. On créé un Maillon portant la donnée 12 et pointant vers le Maillon suivant la sentinelle (donc suivant la liste elle meme, puisqu'elle est sa sentinelle)
-```mermaid
----
-title: 
----
-graph LR
-0((0)) ====> 3((3))
-12((12)) --> 3
-3 --> 5((5))
-5 --> 0
-```
-2. La flèche 0->3 représente la référence self.next
-il faut la remplacer par une référence au maillon 12
-```mermaid
----
-title: 
----
-graph LR
-0((0)) ==> 12((12))
-12 --> 3((3))
-3 --> 5((5))
-5 --> 0
-```
-3. Vu qu'on a choisi de maintenir la taille, il ne faut pas oublier de lui ajouter 1
-
-La méthode `ajouter_tete` écrite en conséquence insère un nouveau maillon juste après la sentinelle.
+En fonctionnel, on parcourait par **récursivité**. En objet impératif, on parcourt avec une **boucle `while`** : on avance de maillon en maillon jusqu'à `None`.
 
 ```python
-    def ajouter_debut(self, e: T):
-        """
-        il faut ajouter un maillon entre la sentinelle (self) et son maillon suivant (self.next).
-        >>> lst = Liste()
-        >>> lst.ajouter_debut(1)
-        >>> lst.ajouter_debut(2)
-        >>> lst.ajouter_debut(3)
-        >>> str(lst)
-        '3 -> 2 -> 1 -> _|_'
-        """
-        m: Maillon[T] = Maillon[T](e, self.next)  #1
-        self.next = m                             #2
-        self.__taille +=1                         #3
+    def longueur(self) -> int:
+        n = 0
+        courant = self.tete
+        while courant is not None:
+            n += 1
+            courant = courant.next
+        return n
 ```
 
-L'approche proposée permet de simplifier le code des méthodes.
-En effet, ça marche indépendamment du fait que la liste soit vide ou pas.
+C'est le **contraste de paradigmes** : même structure, mais ici on **itère** (`while`) et on met à jour un compteur, là où Gleam **récursait**.
 
+## À toi
 
-```mermaid
----
-title: Liste initiale
----
-graph RL
-0((0)) --> 0
-```
-1. On créé un Maillon portant la donnée 12 et pointant vers le Maillon suivant la sentinelle 
-```mermaid
----
-title: 
----
-graph RL
-0((0)) ==> 0
-12((12)) --> 0
-```
+!!! question "Les méthodes de la liste"
+    Écris, comme **méthodes** de la classe `Liste`, sans récursivité (avec des boucles `while`) :
 
-2. La flèche en gras représente la référence self.next
-il faut la remplacer par une référence au maillon 12
+    - `ajouter_fin(e)` : ajoute `e` à la fin.
+    - `contient(e)` : renvoie `True` si `e` est dans la liste.
+    - `__str__` : renvoie une chaîne du style `"3 -> 2 -> 1 -> _|_"`.
 
-```mermaid
----
-title: 
----
-graph LR
-0((0)) ==> 12((12))
-12 --> 0
-```
+    Fais la **disjonction de cas au papier** d'abord (liste vide ? sinon ?).
 
-#### Méthodes de départ
+    ??? success "Corrigé"
+        ```python
+        def ajouter_fin(self, e: T) -> None:
+            if self.tete is None:
+                self.tete = Maillon(e, None)
+            else:
+                courant = self.tete
+                while courant.next is not None:
+                    courant = courant.next
+                courant.next = Maillon(e, None)
 
-Afin de vous lancer sur le parcours de cette structure, je vous donne votre deuxième méthode, la méthode `est_vide`.
+        def contient(self, e: T) -> bool:
+            courant = self.tete
+            while courant is not None:
+                if courant.data == e:
+                    return True
+                courant = courant.next
+            return False
 
-```python
-def est_vide(self) -> bool:
-    """
-    Renvoie True si la liste est vide, False sinon.
-    """
-    return self.next is self
-```
+        def __str__(self) -> str:
+            s = ""
+            courant = self.tete
+            while courant is not None:
+                s += str(courant.data) + " -> "
+                courant = courant.next
+            return s + "_|_"
+        ```
 
-ainsi que la méthode longueur, qui renvoie la taille calculée de la liste.
+## Pour aller plus loin : la sentinelle
 
-A l'origine, le maillon courant est le premier maillon de la liste, ou elle même si la liste est vide.
-Tant que courant n'est pas self (sinon ça veut dire qu'on est revenu à la sentinelle), on incremente l'accumulateur et on passe au maillon suivant.
+??? note "Supprimer tous les cas particuliers"
+    Les méthodes ci-dessus traitent à part le cas vide et le premier maillon. On peut **éliminer ces cas spéciaux** avec une astuce : donner à la liste un **maillon sentinelle** placé avant le premier, toujours présent (même quand la liste est « vide »). Poussée à l'extrême, la liste **est** sa propre sentinelle, un maillon circulaire qui, au départ, pointe sur lui-même, et `None` n'apparaît alors jamais dans la structure.
 
-```python
-def longueur(self) -> int:
-    """
-    Renvoie la taille calculée de la liste.
-    """
-    acc = 0
-    courant: Maillon[T] = self.next
-    while courant is not self: # tant qu'on est pas "revenus" à la sentinelle
-        acc += 1
-        courant = courant.next
-    return acc
-```
-
-
-!!! tip Opérateur is
-    l'opérateur is sert à comparer les objets, non pas en termes de valeur, mais en termes d'adresse mémoire.
-
-
-!!! question Défi 
-    A vous maintenant de recréer les fonctions que vous avez vues en programmation fonctionnelles en tant que méthodes de la classe liste en commençant par la méthode ajouter_fin. Vous n'utiliserez pas la récursivité.
-
-
+    C'est **plus élégant** (les méthodes n'ont plus aucun cas particulier) mais **plus subtil** (un objet qui se référence lui-même, de l'héritage). À explorer une fois la version simple ci-dessus bien acquise. La version complète avec sentinelle circulaire figure dans l'historique de cette page.
