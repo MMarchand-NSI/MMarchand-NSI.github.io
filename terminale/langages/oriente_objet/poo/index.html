@@ -3972,6 +3972,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#une-variable-designe-un-objet-les-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Une variable désigne un objet : les références
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#interactions-entre-objets" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -4547,7 +4558,7 @@
   <span class="md-ellipsis">
     
   
-    Listes chaînées - Approche Orientée Objet
+    Listes chaînées, en objet
   
 
     
@@ -7791,6 +7802,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#une-variable-designe-un-objet-les-references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Une variable désigne un objet : les références
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#interactions-entre-objets" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -7910,6 +7932,10 @@
 Les comportements d'un objet sont représentés par l'ensemble de ses <strong>méthodes</strong></p>
 <p>Une <strong>classe</strong> permet de définir une famille d'objets. A partir d'une classe, on peut créer autant d'objets que l'on veut. Ce sont des exemplaires, des <strong>instances</strong> de la classe.</p>
 </div>
+<div class="admonition tip">
+<p class="admonition-title">Le facile et le difficile</p>
+<p>Écrire une classe (ses attributs, ses méthodes) est la partie <strong>visible et statique</strong>. Le vrai enjeu, plus difficile, est la <strong>dynamique</strong> : ce qui se passe <strong>à l'exécution</strong>, quand on crée des objets, qu'on les relie par des <strong>références</strong>, et qu'ils s'envoient des messages (les appels de méthodes). C'est cette dynamique qu'on va <strong>tracer</strong>, pas seulement la syntaxe.</p>
+</div>
 <h2 id="classe-animal">Classe <code>Animal</code></h2>
 <p>Voici un exemple basique d'une classe en Python qui modélise la phrase "Un animal porte un nom, et il sait parler."</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="p">:</span>
@@ -7962,26 +7988,53 @@ Les comportements d'un objet sont représentés par l'ensemble de ses <strong>m�
 </code></pre></div>
 <p>On considèrera malgré tout que <code>__init__</code> est le constructeur, car si on vous pose la question, c'est la réponse attendue.</p>
 </div>
+<h2 id="une-variable-designe-un-objet-les-references">Une variable désigne un objet : les références</h2>
+<p>Le point le plus délicat de l'objet n'est pas la syntaxe des classes, c'est de suivre ce qui se passe <strong>à l'exécution</strong>. En particulier : que contient une variable comme <code>x</code> après <code>x = Animal("Bidule")</code> ?</p>
+<p><code>x</code> ne <strong>contient</strong> pas l'animal. <code>x</code> <strong>désigne</strong> l'objet : elle en garde une <strong>référence</strong> (une flèche vers lui, quelque part en mémoire). C'est le même mécanisme que le partage de référence rencontré avec les listes.</p>
+<p>Conséquence directe : deux variables peuvent désigner le <strong>même</strong> objet.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">a</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Rocket&quot;</span><span class="p">)</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>               <span class="c1"># b et a désignent le MÊME objet</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">b</span><span class="o">.</span><span class="n">nom</span> <span class="o">=</span> <span class="s2">&quot;Groot&quot;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">nom</span><span class="p">)</span>        <span class="c1"># Groot : modifier via b a changé a</span>
+</code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Piège : une référence n'est pas une copie</p>
+<p><code>b = a</code> ne crée <strong>pas</strong> un second animal : <code>a</code> et <code>b</code> sont deux noms pour le même objet. Modifier l'un modifie l'autre. Pour savoir si deux variables désignent le <strong>même</strong> objet (et non deux objets seulement égaux), on utilise <code>is</code> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">c</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Rocket&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">d</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Rocket&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">c</span> <span class="ow">is</span> <span class="n">d</span><span class="p">)</span>          <span class="c1"># False : deux objets distincts...</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">nom</span> <span class="o">==</span> <span class="n">d</span><span class="o">.</span><span class="n">nom</span><span class="p">)</span>  <span class="c1"># ...mais qui portent le même nom</span>
+</code></pre></div>
+<p>« Qui est l'objet ? » est une vraie question : un même objet peut apparaître sous plusieurs noms.</p>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title"><code>self</code>, c'est l'objet courant</p>
+<p>Dans une méthode, <code>self</code> désigne l'instance <strong>sur laquelle</strong> la méthode est appelée. Quand on écrit <code>a.parler()</code>, la méthode <code>parler</code> s'exécute avec <code>self</code> valant <code>a</code>. Chaque objet a ses <strong>propres</strong> attributs : <code>self.nom</code> est le nom de <strong>cet</strong> objet-là, pas d'un autre.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Trace la dynamique</p>
+<p>Copie ces exemples dans <a href="https://pythontutor.com/">Python Tutor</a> et avance pas à pas : tu verras les objets créés en mémoire et les <strong>flèches</strong> (les références) qui pointent vers eux. C'est la meilleure façon de voir ce que la simple lecture du code ne montre pas.</p>
+</div>
 <h2 id="interactions-entre-objets">Interactions entre objets</h2>
 <p>Rajoutons la phrase "Un Humain porte un nom, un prenom et peut adopter des animaux domestiques. On peut afficher la liste des animaux d'un Humain".</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Humain</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prenom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">nom</span> <span class="o">=</span> <span class="n">nom</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">prenom</span> <span class="o">=</span> <span class="n">prenom</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">animaux</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Animal</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">adopte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">Animal</span><span class="p">):</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">animaux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">afficher_animaux</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">animaux</span><span class="p">:</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>            <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">nom</span><span class="p">)</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="n">x</span> <span class="o">=</span> <span class="n">Humain</span><span class="p">(</span><span class="s2">&quot;Peter&quot;</span><span class="p">,</span> <span class="s2">&quot;Quill&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="n">y</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Rocket&quot;</span><span class="p">)</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="n">x</span><span class="o">.</span><span class="n">adopte</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="n">x</span><span class="o">.</span><span class="n">afficher_animaux</span><span class="p">()</span>   <span class="c1"># Affiche Rocket</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Humain</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prenom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">nom</span> <span class="o">=</span> <span class="n">nom</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">prenom</span> <span class="o">=</span> <span class="n">prenom</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">animaux</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Animal</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">adopte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">Animal</span><span class="p">):</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">animaux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">afficher_animaux</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">animaux</span><span class="p">:</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>            <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">nom</span><span class="p">)</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="n">x</span> <span class="o">=</span> <span class="n">Humain</span><span class="p">(</span><span class="s2">&quot;Peter&quot;</span><span class="p">,</span> <span class="s2">&quot;Quill&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="n">y</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Rocket&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="n">x</span><span class="o">.</span><span class="n">adopte</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a><span class="n">x</span><span class="o">.</span><span class="n">afficher_animaux</span><span class="p">()</span>   <span class="c1"># Affiche Rocket</span>
 </code></pre></div>
 <p>Ici, on a choisi que l'humain porte la liste de ses animaux. On aurait pu à la place ajouter un attribut propriétaire à la classe Animal pour dire qu'un animal est la propriété d'un humain particulier. Mais on aurait perdu la possibilité d'afficher les animaux d'un humain sans disposer de la liste de tous les animaux. Il faut souvent choisir quelle classe est le "chef d'orchestre" en fonction du problème qu'on a à traiter.</p>
 <div class="admonition question">
@@ -8020,7 +8073,7 @@ Lorsqu'un humain fait le plein de sa voiture, son compte en banque diminue. </p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="April 25, 2026 12:38:32 UTC">April 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 22, 2026 17:55:18 UTC">July 22, 2026</span>
   </span>
 
     
