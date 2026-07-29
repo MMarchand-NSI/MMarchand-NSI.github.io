@@ -13,12 +13,12 @@
 
 ## Une variable est une case mémoire nommée
 
-Souvenez-vous du modèle de von Neumann et du [Little Man Computer](../architecture/von_neumann/langage-machine.md) : la mémoire est une suite de **cases**, chacune repérée par une **adresse**, et le processeur y **range** ou y **lit** des valeurs.
+Souviens-toi du modèle de von Neumann et du [Little Man Computer](../architecture/von_neumann/langage-machine.md) : la mémoire est une suite de **cases**, chacune repérée par une **adresse**, et le processeur y **range** ou y **lit** des valeurs.
 
 Une **variable**, c'est exactement cela : une **case mémoire à laquelle on a donné un nom**. Plutôt que de retenir « la case d'adresse 17 », on écrit `age`, et l'ordinateur sait de quelle case on parle.
 
 !!! tip "L'image de la boîte"
-    Voyez une variable comme une **boîte avec une étiquette** : l'étiquette est le nom (`age`), le contenu est la valeur (`16`). On peut regarder dans la boîte, ou en remplacer le contenu.
+    Vois une variable comme une **boîte avec une étiquette** : l'étiquette est le nom (`age`), le contenu est la valeur (`16`). On peut regarder dans la boîte, ou en remplacer le contenu.
 
 ## Écrire dans une variable : l'affectation
 
@@ -87,10 +87,10 @@ En tant qu'égalité mathématique, ce serait absurde. En tant qu'affectation, c
     | `y = x + 2` | 10 | 12 |
     | `x = 0` | 0 | 12 |
 
-    L'affichage est donc `0 12`. Remarquez que `y` **garde 12** : sa valeur a été calculée au moment du `y = x + 2`, et changer `x` ensuite n'y touche pas.
+    L'affichage est donc `0 12`. Remarque que `y` **garde 12** : sa valeur a été calculée au moment du `y = x + 2`, et changer `x` ensuite n'y touche pas.
 
-!!! tip "Tracez vous-même avec Python Tutor"
-    Ne vous contentez pas de lire les traces : **produisez-les**. Copiez un programme dans [Python Tutor](https://pythontutor.com/), avancez pas à pas et observez, à chaque instruction, ce que contiennent les cases mémoire. C'est le meilleur moyen de construire une image juste de ce que fait la machine, et c'est un réflexe à garder pour tout le cours.
+!!! tip "Trace toi-même avec Python Tutor"
+    Ne te contente pas de lire les traces : **produis-les**. Copie un programme dans [Python Tutor](https://pythontutor.com/), avance pas à pas et observe, à chaque instruction, ce que contiennent les cases mémoire. C'est le meilleur moyen de construire une image juste de ce que fait la machine, et c'est un réflexe à garder pour tout le cours.
 
 ## Échanger le contenu de deux variables
 
