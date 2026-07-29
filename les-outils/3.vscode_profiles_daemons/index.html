@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://mmarchand-nsi.github.io/les-outils/3.vscode_profiles_daemons/">
       
       
-        <link rel="prev" href="../2.elm/">
+        <link rel="prev" href="../1.setup-vscode/">
       
       
         <link rel="next" href="../migration-terms/">
@@ -6262,34 +6262,6 @@
                 
   
   
-  
-  
-    <li class="md-nav__item">
-      <a href="../2.elm/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Elm
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
     
   
   
@@ -8776,7 +8748,7 @@
 
 <h1 id="vscode-profils-daemons-et-gestion-de-la-ram">VSCode : Profils, Daemons et Gestion de la RAM</h1>
 <h2 id="le-probleme">🎯 Le Problème</h2>
-<p><strong>Situation :</strong> Tu installes 20 extensions dans VSCode (Python, Rust, Elm, C++, etc.)<br />
+<p><strong>Situation :</strong> Tu installes 20 extensions dans VSCode (Python, Rust, Gleam, C++, etc.)<br />
 <strong>Résultat :</strong> VSCode bouffe 4 GB de RAM et rame 🐌</p>
 <p><strong>Pourquoi ?</strong> Les <strong>daemons</strong> lancés par chaque extension tournent en permanence !</p>
 <hr />
@@ -8868,8 +8840,8 @@
 <td>~150 MB</td>
 </tr>
 <tr>
-<td><strong>Elm</strong></td>
-<td>Elm Language Server</td>
+<td><strong>Gleam</strong></td>
+<td>Gleam Language Server</td>
 <td>~100 MB</td>
 </tr>
 <tr>
@@ -8894,7 +8866,7 @@
 </ol>
 <p><strong>En ligne de commande :</strong>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># Linux/Mac</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;python|rust-analyzer|clangd|elm&quot;</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>ps<span class="w"> </span>aux<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-E<span class="w"> </span><span class="s2">&quot;python|rust-analyzer|clangd|gleam&quot;</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Windows</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>tasklist<span class="w"> </span><span class="p">|</span><span class="w"> </span>findstr<span class="w"> </span><span class="s2">&quot;python rust clangd&quot;</span>
@@ -8905,13 +8877,13 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>VSCode avec TOUTES les extensions
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>├── Python extension → lance python daemon (200 MB)
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>├── Rust extension → lance rust-analyzer (300 MB)
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── Elm extension → lance elm daemon (100 MB)
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>├── Gleam extension → lance gleam daemon (100 MB)
 <a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>├── C++ extension → lance clangd (150 MB)
 <a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>└── ... 15 autres extensions
 <a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
 <a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>Total RAM : 2-4 GB
 </code></pre></div>
-<p><strong>Même si tu codes en Python, les daemons Rust/Elm/C++ tournent quand même !</strong></p>
+<p><strong>Même si tu codes en Python, les daemons Rust/Gleam/C++ tournent quand même !</strong></p>
 <h3 id="la-solution-profils">La Solution : Profils</h3>
 <p><strong>Un profil = un VSCode avec seulement les extensions nécessaires</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>Profil Python
@@ -8949,7 +8921,7 @@
 <a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>✅ Git (général)
 <a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>✅ GitLens (général)
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>❌ Rust-analyzer (pas besoin)
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>❌ Elm (pas besoin)
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>❌ Gleam (pas besoin)
 </code></pre></div></p>
 <h3 id="methode-ligne-de-commande">Méthode Ligne de Commande</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># Lancer VSCode avec un profil spécifique</span>
@@ -8964,7 +8936,7 @@
 <a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>├── Python Development
 <a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>├── Rust Development
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>├── Web Development (HTML/CSS/JS)
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>├── Elm Development
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>├── Gleam Development
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>├── C/C++ Development
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>└── Écriture (Markdown, pas de code)
 </code></pre></div>
@@ -8997,7 +8969,7 @@
 | Rust | rust-analyzer |
 | C/C++ | clangd, ccls |
 | JavaScript/TypeScript | tsserver |
-| Elm | elm-language-server |
+| Gleam | gleam lsp |
 | Go | gopls |
 | Java | Eclipse JDT LS |</p>
 <hr />
@@ -9017,12 +8989,12 @@
 <a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>
 <a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="k">class</span><span class="w"> </span><span class="nc">MonDaemon</span><span class="p">(</span><span class="n">FileSystemEventHandler</span><span class="p">):</span>
 <a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">on_modified</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.elm&#39;</span><span class="p">):</span>
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>        <span class="k">if</span> <span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.gleam&#39;</span><span class="p">):</span>
 <a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Fichier modifié : </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;elm make </span><span class="si">{</span><span class="n">event</span><span class="o">.</span><span class="n">src_path</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s2">&quot;gleam build&quot;</span><span class="p">)</span>
 <a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
 <a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔄 Daemon Elm lancé...&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;🔄 Daemon Gleam lancé...&quot;</span><span class="p">)</span>
 <a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>
 <a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>    <span class="n">observer</span> <span class="o">=</span> <span class="n">Observer</span><span class="p">()</span>
 <a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>    <span class="n">observer</span><span class="o">.</span><span class="n">schedule</span><span class="p">(</span><span class="n">MonDaemon</span><span class="p">(),</span> <span class="n">path</span><span class="o">=</span><span class="s2">&quot;./src&quot;</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -9045,7 +9017,7 @@
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.0.0&quot;</span><span class="p">,</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="w">  </span><span class="nt">&quot;tasks&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="w">    </span><span class="p">{</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">      </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Start Elm Daemon&quot;</span><span class="p">,</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a><span class="w">      </span><span class="nt">&quot;label&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Start Gleam Daemon&quot;</span><span class="p">,</span>
 <a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="w">      </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
 <a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="w">      </span><span class="nt">&quot;command&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;python&quot;</span><span class="p">,</span>
 <a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">      </span><span class="nt">&quot;args&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;${workspaceFolder}/mon_daemon.py&quot;</span><span class="p">],</span>
@@ -9055,7 +9027,7 @@
 <a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">  </span><span class="p">]</span>
 <a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a><span class="p">}</span>
 </code></pre></div></p>
-<p><strong>Lancer avec :</strong> <code>Ctrl+Shift+P</code> → "Tasks: Run Task" → "Start Elm Daemon"</p>
+<p><strong>Lancer avec :</strong> <code>Ctrl+Shift+P</code> → "Tasks: Run Task" → "Start Gleam Daemon"</p>
 <hr />
 <h2 id="7-gerer-les-daemons-qui-consomment-trop">7. Gérer les Daemons qui Consomment Trop</h2>
 <h3 id="diagnostiquer">Diagnostiquer</h3>
@@ -9073,7 +9045,7 @@
 <ol>
 <li><strong>Un profil par langage principal</strong></li>
 <li>
-<p>Python, Elm, Rust, Web, etc.</p>
+<p>Python, Gleam, Rust, Web, etc.</p>
 </li>
 <li>
 <p><strong>Profil minimal pour l'écriture</strong></p>
@@ -9231,7 +9203,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 3, 2025 19:34:40 UTC">November 3, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 29, 2026 18:44:27 UTC">July 29, 2026</span>
   </span>
 
     

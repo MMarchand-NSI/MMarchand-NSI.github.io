@@ -3033,6 +3033,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#rappels-gleam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rappels Gleam
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fusion" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -6503,34 +6514,6 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/2.elm/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Elm
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
       <a href="../../../les-outils/3.vscode_profiles_daemons/" class="md-nav__link">
         
   
@@ -7945,6 +7928,17 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#rappels-gleam" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Rappels Gleam
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#fusion" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8217,65 +8211,112 @@
 
 
 <h1 id="tri-fusion">Tri Fusion</h1>
+<h2 id="rappels-gleam">Rappels Gleam</h2>
+<p>Cette page réutilise la liste récursive <code>Liste(a)</code> (<code>Vide</code> / <code>Cons</code>) et les fonctions <code>taille</code>, <code>take</code>, <code>drop</code> construites sur la page <a href="../../structures-de-donnees/listes/listes/">Listes et récursivité</a>. On les suppose connues.</p>
+<div class="admonition note">
+<p class="admonition-title">Deux particularités de Gleam</p>
+<ul>
+<li><strong>Pas de type <code>comparable</code>.</strong> On <strong>spécialise</strong> <code>fusion</code> et <code>tri_fusion</code> au type <code>Liste(Int)</code> (comparaison <code>&lt;=</code> sur les entiers). Pour trier autre chose, on passerait une fonction de comparaison en paramètre.</li>
+<li><strong>Pas de <code>if</code>.</strong> Gleam n'a pas de <code>if ... then ... else</code> : on filtre un booléen avec <code>case</code>, dans l'esprit « tout passe par le filtrage » : <code>case t1 &lt;= t2 { True -&gt; ... False -&gt; ... }</code>.</li>
+</ul>
+<details class="note">
+<summary>Le code des rappels (déjà vu sur la page Listes)</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">type</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">  </span><span class="n">Vide</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="w">  </span><span class="n">Cons</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="p">}</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">taille</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Int</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="mi">0</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">queue</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">taille</span><span class="p">(</span><span class="n">queue</span><span class="p">)</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="p">}</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">take</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="w">        </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">        </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">take</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">))</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="p">}</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">drop</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">0</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a><span class="w">        </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">lst</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">        </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">drop</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="p">}</span>
+</code></pre></div>
+</details>
+</div>
 <h2 id="fusion">Fusion</h2>
 <p>L'objectif est, à partir de <strong>2 listes triées</strong> <code>lst1</code> et <code>lst2</code>, d'obtenir leur fusion en <strong>une liste triée</strong>.</p>
 <h3 id="algorithme">Algorithme</h3>
-<p>On procède par disjonction de cas, en bon lutin:</p>
+<p>On procède par disjonction de cas, en bon lutin. En Gleam, on filtre <strong>les deux listes à la fois</strong> avec <code>case lst1, lst2 { ... }</code>.</p>
 <h4 id="on-recoit-2-listes-vides">On reçoit 2 listes vides</h4>
 <p>La fusion de deux listes vides est une liste vide.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="p">(</span><span class="kt">Vide</span><span class="p">,</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Vide</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">Vide</span><span class="p">,</span><span class="w"> </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
 </code></pre></div>
 <h4 id="on-recoit-lst1-vide-et-lst2-non-vide">On reçoit <code>lst1</code> vide et <code>lst2</code> non vide</h4>
 <p>On n'a rien à faire qu'à renvoyer lst2 qui est déjà triée </p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="p">(</span><span class="kt">Vide</span><span class="p">,</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="nv">q</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">lst2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">Vide</span><span class="p">,</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">lst2</span>
 </code></pre></div>
 <h4 id="on-recoit-lst1-non-vide-et-lst2-vide">On reçoit <code>lst1</code> non vide et <code>lst2</code> vide</h4>
-<p>Pareil, il n'y a qu'à renvoyer <code>lst2</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="nv">q</span><span class="p">,</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">lst1</span>
+<p>Pareil, il n'y a qu'à renvoyer <code>lst1</code></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">Cons</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">q</span><span class="p">),</span><span class="w"> </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">lst1</span>
 </code></pre></div>
 <h4 id="on-recoit-deux-listes-non-vides">On reçoit deux listes non vides</h4>
 <p>Alors ici, on sait qu'on va devoir <strong>construire</strong> la liste résultat.</p>
 <p>La liste résultat commencera forcément par la plus petite des têtes.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nv">q1</span><span class="p">,</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="nv">q2</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">        </span><span class="kr">if</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nf">&lt;=</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="kr">then</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">            </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nf">........</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">        </span><span class="kr">else</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">            </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="nf">........</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">Cons</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">q1</span><span class="p">),</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="w"> </span><span class="n">q2</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">    </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="p">........)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">    </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="w"> </span><span class="p">........)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">  </span><span class="p">}</span>
 </code></pre></div>
 <p>Dans le premier cas, quelle est la queue de la liste résultat?</p>
-<p>Une fois qu'on a mis t1 dans la liste résultat, il nous reste à y mettre fla fusion de q1 et de lst2. On a qu'à demander à un autre lutin de le faire!</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nv">q1</span><span class="p">,</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="nv">q2</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">        </span><span class="kr">if</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nf">&lt;=</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="kr">then</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="w">            </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="p">(</span><span class="nv">fusion</span><span class="w"> </span><span class="nv">q1</span><span class="w"> </span><span class="nv">lst2</span><span class="p">)</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="w">        </span><span class="kr">else</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="w">            </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="nf">........</span>
+<p>Une fois qu'on a mis t1 dans la liste résultat, il nous reste à y mettre la fusion de q1 et de lst2. On a qu'à demander à un autre lutin de le faire!</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">Cons</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">q1</span><span class="p">),</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="w"> </span><span class="n">q2</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">fusion</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span><span class="w"> </span><span class="n">lst2</span><span class="p">))</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">    </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="w"> </span><span class="p">........)</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">  </span><span class="p">}</span>
 </code></pre></div>
 <p>De la même manière, dans le deuxième cas, il nous reste à fusionner lst1 et q2 pour la queue.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nv">q1</span><span class="p">,</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="nv">q2</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">        </span><span class="kr">if</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nf">&lt;=</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="kr">then</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">            </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="p">(</span><span class="nv">fusion</span><span class="w"> </span><span class="nv">q1</span><span class="w"> </span><span class="nv">lst2</span><span class="p">)</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="w">        </span><span class="kr">else</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="w">            </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="p">(</span><span class="nv">fusion</span><span class="w"> </span><span class="nv">lst1</span><span class="w"> </span><span class="nv">q2</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">Cons</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">q1</span><span class="p">),</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="w"> </span><span class="n">q2</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">fusion</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span><span class="w"> </span><span class="n">lst2</span><span class="p">))</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">    </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="w"> </span><span class="n">fusion</span><span class="p">(</span><span class="n">lst1</span><span class="p">,</span><span class="w"> </span><span class="n">q2</span><span class="p">))</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="p">}</span>
 </code></pre></div>
 <p>ce qui nous donne au final:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">fusion</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nv">fusion</span><span class="w">   </span><span class="nv">lst1</span><span class="w">                </span><span class="nv">lst2</span><span class="w"> </span><span class="nf">=</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="p">(</span><span class="nv">lst1</span><span class="p">,</span><span class="w"> </span><span class="nv">lst2</span><span class="p">)</span><span class="w"> </span><span class="kr">of</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="w">        </span><span class="p">(</span><span class="kt">Vide</span><span class="p">,</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Vide</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">        </span><span class="p">(</span><span class="kt">Vide</span><span class="p">,</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="nv">q</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">lst2</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="w">        </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t</span><span class="w"> </span><span class="nv">q</span><span class="p">,</span><span class="w"> </span><span class="kt">Vide</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">lst1</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="w">        </span><span class="p">(</span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nv">q1</span><span class="p">,</span><span class="w"> </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="nv">q2</span><span class="p">)</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="w">                </span><span class="kr">if</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="nf">&lt;=</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="kr">then</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="w">                    </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t1</span><span class="w"> </span><span class="p">(</span><span class="nv">fusion</span><span class="w"> </span><span class="nv">q1</span><span class="w"> </span><span class="nv">lst2</span><span class="p">)</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="w">                </span><span class="kr">else</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="w">                    </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">t2</span><span class="w"> </span><span class="p">(</span><span class="nv">fusion</span><span class="w"> </span><span class="nv">lst1</span><span class="w"> </span><span class="nv">q2</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">fusion</span><span class="p">(</span><span class="n">lst1</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">),</span><span class="w"> </span><span class="n">lst2</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst1</span><span class="p">,</span><span class="w"> </span><span class="n">lst2</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="w">    </span><span class="n">Vide</span><span class="p">,</span><span class="w"> </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="w">    </span><span class="n">Vide</span><span class="p">,</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">lst2</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">_</span><span class="p">),</span><span class="w"> </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">lst1</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">q1</span><span class="p">),</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="w"> </span><span class="n">q2</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="w">      </span><span class="k">case</span><span class="w"> </span><span class="n">t1</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="n">t2</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="w">        </span><span class="n">True</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="w"> </span><span class="n">fusion</span><span class="p">(</span><span class="n">q1</span><span class="p">,</span><span class="w"> </span><span class="n">lst2</span><span class="p">))</span>
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="w">        </span><span class="n">False</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="n">t2</span><span class="p">,</span><span class="w"> </span><span class="n">fusion</span><span class="p">(</span><span class="n">lst1</span><span class="p">,</span><span class="w"> </span><span class="n">q2</span><span class="p">))</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="w">      </span><span class="p">}</span>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="p">}</span>
 </code></pre></div>
 <p>La terminaison est assurée par la diminution stricte de la taille du problème.
 Si on note <span class="arithmatex">\(n = |lst1| + |lst2|\)</span>, alors n décroît strictement à chaque appel puisqu'on appelle toujours fusion sur un élément de moins. On finira donc par tomber sur un des cas de base.</p>
 <h3 id="complexite-de-la-fusion">Complexité de la fusion</h3>
-<p>Le pire des cas est celui où on doit tout le temps appeler le cas récursif, donc quand les listes ont la même taille, et gardent la même taille (à 1 près). Pour garder la même taille, il faut que les deux listes soient entrelacées pour garantir une alterannce entre gauche et droite:
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">lst1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">lst2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<p>Le pire des cas est celui où on doit tout le temps appeler le cas récursif, donc quand les listes ont la même taille, et gardent la même taille (à 1 près). Pour garder la même taille, il faut que les deux listes soient entrelacées pour garantir une alternance entre gauche et droite:
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">lst1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">]</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">lst2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 </code></pre></div></p>
 <p>Soit <span class="arithmatex">\(n = n_1 + n_2\)</span> la taille totale du problème (somme des tailles des deux listes).</p>
 <p>Soit <span class="arithmatex">\(T_n\)</span> le temps qu'il faut pour effectuer cette fusion.</p>
@@ -8284,7 +8325,7 @@ Si on note <span class="arithmatex">\(n = |lst1| + |lst2|\)</span>, alors n déc
 <li>On traite 1 élément (on le place dans le résultat)</li>
 <li>Le problème restant a taille <span class="arithmatex">\(n - 1\)</span></li>
 </ul>
-<p>Le temps qu'in faut pour fusionner, c'est une unité de temps (simplement construire le résultat avec une tete qu'on a déjà), plus le temps qu'il faut pour construire sa queue de taille $ n - 1 $ par fusion. Donc pour un temps <span class="arithmatex">\(T_{n-1}\)</span> </p>
+<p>Le temps qu'il faut pour fusionner, c'est une unité de temps (simplement construire le résultat avec une tete qu'on a déjà), plus le temps qu'il faut pour construire sa queue de taille $ n - 1 $ par fusion. Donc pour un temps <span class="arithmatex">\(T_{n-1}\)</span> </p>
 <p>On obtient la <strong>suite récurrente</strong> :</p>
 <div class="arithmatex">\[\begin{cases}
 T_n = 1 + T_{n-1} \\
@@ -8328,18 +8369,19 @@ T_0 = 1
 </li>
 </ol>
 <p>donc je FUSIONne le TRI de lst1 et le TRI de lst2.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">fusion</span><span class="w"> </span><span class="p">(</span><span class="nv">tri_fusion</span><span class="w"> </span><span class="nv">lst1</span><span class="p">)</span><span class="w"> </span><span class="p">(</span><span class="nv">trifusion</span><span class="w"> </span><span class="nv">lst2</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">fusion</span><span class="p">(</span><span class="n">tri_fusion</span><span class="p">(</span><span class="n">lst1</span><span class="p">),</span><span class="w"> </span><span class="n">tri_fusion</span><span class="p">(</span><span class="n">lst2</span><span class="p">))</span>
 </code></pre></div>
 <p>La fonction complète:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">triFusion</span><span class="w"> </span><span class="nf">:</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Liste</span><span class="w"> </span><span class="nv">comparable</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nv">triFusion</span><span class="w">   </span><span class="nv">lst</span><span class="w"> </span><span class="nf">=</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="w">    </span><span class="kr">let</span><span class="w"> </span><span class="nv">n</span><span class="w"> </span><span class="nf">=</span><span class="w"> </span><span class="nv">taille</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">in</span><span class="w"> </span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="kr">case</span><span class="w"> </span><span class="nv">lst</span><span class="w"> </span><span class="kr">of</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">        </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="kt">Vide</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="w">        </span><span class="kt">Cons</span><span class="w"> </span><span class="nv">_</span><span class="w"> </span><span class="kt">Vide</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">lst</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="w">        </span><span class="nv">_</span><span class="w"> </span><span class="nf">-&gt;</span><span class="w"> </span><span class="nv">fusion</span><span class="w"> </span><span class="p">(</span><span class="nv">triFusion</span><span class="w"> </span><span class="p">(</span><span class="nv">take</span><span class="w"> </span><span class="p">(</span><span class="nv">n</span><span class="nf">//</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="nv">lst</span><span class="p">))</span><span class="w"> </span><span class="p">(</span><span class="nv">triFusion</span><span class="w"> </span><span class="p">(</span><span class="nv">drop</span><span class="w"> </span><span class="p">(</span><span class="nv">n</span><span class="nf">//</span><span class="mi">2</span><span class="p">)</span><span class="w"> </span><span class="nv">lst</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">tri_fusion</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">  </span><span class="k">let</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">taille</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="n">Vide</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Vide</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="w">    </span><span class="n">Cons</span><span class="p">(</span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="n">Vide</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">lst</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="w">    </span><span class="n">_</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">fusion</span><span class="p">(</span><span class="n">tri_fusion</span><span class="p">(</span><span class="n">take</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">)),</span><span class="w"> </span><span class="n">tri_fusion</span><span class="p">(</span><span class="n">drop</span><span class="p">(</span><span class="n">n</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">)))</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="w">  </span><span class="p">}</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="p">}</span>
 </code></pre></div>
-<p>En gros, le seul calcul que j'ai fait, c'est n//2, et j'ai délégué tout le reste à d'autres lutins.</p>
+<p>En gros, le seul calcul que j'ai fait, c'est n / 2, et j'ai délégué tout le reste à d'autres lutins.</p>
 <h3 id="terminaison">Terminaison</h3>
 <p>On rappelle à chaque fois <code>tri_fusion</code> sur des listes de taille strictement inférieure, sauf dans le cas de la liste à un élément qui divise la liste en 1 liste à 0 éléments et une liste à un élément. Mais ce cas est capturé par un cas de base. La fonction se termine donc.</p>
 <h3 id="complexite">Complexité</h3>
@@ -8352,7 +8394,7 @@ T_0 = 1
 <p>Donc : <span class="arithmatex">\(\log n\)</span> niveaux fois <span class="arithmatex">\(O(n)\)</span> travail par niveau =</p>
 <div class="arithmatex">\[\huge \mathcal{O}(n \log n)\]</div>
 <p><strong>On peut aussi voir ça comme on l'a fait pour la fusion:</strong></p>
-<p>Ici, on est dans le cas où  pour calculer <span class="arithmatex">\(T_n\)</span>, on fait déjà 2 fois triFusion sur <span class="arithmatex">\(n \over 2\)</span> éléments (donc ça dure <span class="arithmatex">\(2 \times T_{n \over 2}\)</span>) puis on fusionne, ce qui nous rajoute un <span class="arithmatex">\(O(n)\)</span>.</p>
+<p>Ici, on est dans le cas où  pour calculer <span class="arithmatex">\(T_n\)</span>, on fait déjà 2 fois tri_fusion sur <span class="arithmatex">\(n \over 2\)</span> éléments (donc ça dure <span class="arithmatex">\(2 \times T_{n \over 2}\)</span>) puis on fusionne, ce qui nous rajoute un <span class="arithmatex">\(O(n)\)</span>.</p>
 <p>On a donc <span class="arithmatex">\(T_n = 2 \times T_{n \over 2} + O(n)\)</span>, avec <span class="arithmatex">\(T_0=1\)</span></p>
 <p>Alors là c'est un peu plus complexe qu'une suite arithmétique.</p>
 <p>Il existe un théorème, le <a href="https://fr.wikipedia.org/wiki/Master_theorem"><code>Master Theorem</code></a>, qui nous permet souvent de conclure sur la complexité de ce genre de suites.</p>
@@ -8363,70 +8405,70 @@ T_0 = 1
 <h2 id="python-avec-le-type-list">Python avec le type <code>list</code></h2>
 <h3 id="fusion_1">Fusion</h3>
 <p>En impératif, on va s'appuyer sur notre définition récursive pour construire la fonction suivante:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">fusion</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">lst1</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">lst2</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">fusion</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">lst1</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">lst2</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
 </code></pre></div>
 <p>On va simuler la consommation progressive des listes avec des indices <span class="arithmatex">\(i_1\)</span> et <span class="arithmatex">\(i_2\)</span>. i1, c'est la position de la tete courante de lst1, et i2 c'est la position de la tete courante de lst2.</p>
 <p><img alt="fusion_indices" src="../fusion_indices.webp" /></p>
 <p>Donc nos têtes sont <code>lst1[i1]</code> et <code>lst2[i2]</code></p>
 <p>On va procéder par accumulation dans un résultat, comme d'habitude.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">i1</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1"># On met les tetes au début des listes</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">i2</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">res</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># On créé notre accumulateur</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">i1</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>   <span class="c1"># On met les tetes au début des listes</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">i2</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">res</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># On crée notre accumulateur</span>
 </code></pre></div>
 <p>dans la boucle while, on ne va traiter <strong>que le cas récursif</strong>, donc quand le reste à traiter est non vide des deux côtés. Donc quand <code>i1 &lt; len(lst1)</code> et <code>i2 &lt; len(lst2)</code></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">while</span> <span class="n">i1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">i2</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst2</span><span class="p">):</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="k">if</span> <span class="n">lst1</span><span class="p">[</span><span class="n">i1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">lst2</span><span class="p">[</span><span class="n">i2</span><span class="p">]:</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst1</span><span class="p">[</span><span class="n">i1</span><span class="p">])</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>        <span class="n">i1</span> <span class="o">+=</span> <span class="mi">1</span>     <span class="c1"># on fait avancer la tete vu qu&#39;on l&#39;a consommée dans le résultat</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst2</span><span class="p">[</span><span class="n">i2</span><span class="p">])</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>        <span class="n">i2</span> <span class="o">+=</span> <span class="mi">1</span>     <span class="c1"># Pareil du côté lst2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">while</span> <span class="n">i1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">i2</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst2</span><span class="p">):</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="k">if</span> <span class="n">lst1</span><span class="p">[</span><span class="n">i1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">lst2</span><span class="p">[</span><span class="n">i2</span><span class="p">]:</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst1</span><span class="p">[</span><span class="n">i1</span><span class="p">])</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>        <span class="n">i1</span> <span class="o">+=</span> <span class="mi">1</span>     <span class="c1"># on fait avancer la tete vu qu&#39;on l&#39;a consommée dans le résultat</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst2</span><span class="p">[</span><span class="n">i2</span><span class="p">])</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>        <span class="n">i2</span> <span class="o">+=</span> <span class="mi">1</span>     <span class="c1"># Pareil du côté lst2</span>
 </code></pre></div>
 <p>Maintenant, on est sûrs d'être dans un des cas de base.
 Il faut rajouter au résultat ce qu'il reste de lst1 ou ce qu'il reste de lst2 s'il en reste. C'est là que les slices sont super pratiques. Elles ne râlent pas en cas de débordement et renvoient juste la liste vide (tiens tiens... comme take et drop...).</p>
 <p>Ce qu'il reste de lst1 à traiter, c'est <code>lst1[i1:]</code>, pareil pour lst2.</p>
 <p>On n'a plus qu'à concaténer le résultat avec tout ça, vu qu'on est sûrs que soit l'une, soit l'autre, soit les 2 sont vides à cause de la garde du while.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">res</span> <span class="o">+=</span> <span class="n">lst1</span><span class="p">[</span><span class="n">i1</span><span class="p">:]</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">res</span> <span class="o">+=</span> <span class="n">lst2</span><span class="p">[</span><span class="n">i2</span><span class="p">:]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">res</span> <span class="o">+=</span> <span class="n">lst1</span><span class="p">[</span><span class="n">i1</span><span class="p">:]</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">res</span> <span class="o">+=</span> <span class="n">lst2</span><span class="p">[</span><span class="n">i2</span><span class="p">:]</span>
 </code></pre></div>
 <p>Voici donc la fonction finalisée:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">fusion</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">lst1</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">lst2</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="n">i1</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># indice de la tête dans lst1</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="n">i2</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Indice de la tete dans lst2</span>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>    <span class="n">res</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>    <span class="k">while</span> <span class="n">i1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">i2</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst2</span><span class="p">):</span>
-<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>        <span class="k">if</span> <span class="n">lst1</span><span class="p">[</span><span class="n">i1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">lst2</span><span class="p">[</span><span class="n">i2</span><span class="p">]:</span>
-<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst1</span><span class="p">[</span><span class="n">i1</span><span class="p">])</span> <span class="c1"># On ajoute la tete au résultat</span>
-<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>            <span class="n">i1</span> <span class="o">+=</span> <span class="mi">1</span>              <span class="c1"># On avance la tete de lst1</span>
-<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>        <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst2</span><span class="p">[</span><span class="n">i2</span><span class="p">])</span>
-<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>            <span class="n">i2</span> <span class="o">+=</span> <span class="mi">1</span>
-<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>
-<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>    <span class="n">res</span> <span class="o">+=</span> <span class="n">lst1</span><span class="p">[</span><span class="n">i1</span><span class="p">:]</span>
-<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>    <span class="n">res</span> <span class="o">+=</span> <span class="n">lst2</span><span class="p">[</span><span class="n">i2</span><span class="p">:]</span>
-<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>
-<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>    <span class="k">return</span> <span class="n">res</span>   <span class="c1"># On n&#39;oublie pas le bon vieux return</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">fusion</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">lst1</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">lst2</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="n">i1</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># indice de la tête dans lst1</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">i2</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Indice de la tete dans lst2</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>    <span class="n">res</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>    <span class="k">while</span> <span class="n">i1</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">i2</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst2</span><span class="p">):</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>        <span class="k">if</span> <span class="n">lst1</span><span class="p">[</span><span class="n">i1</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">lst2</span><span class="p">[</span><span class="n">i2</span><span class="p">]:</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst1</span><span class="p">[</span><span class="n">i1</span><span class="p">])</span> <span class="c1"># On ajoute la tete au résultat</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>            <span class="n">i1</span> <span class="o">+=</span> <span class="mi">1</span>              <span class="c1"># On avance la tete de lst1</span>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">lst2</span><span class="p">[</span><span class="n">i2</span><span class="p">])</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>            <span class="n">i2</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>    <span class="n">res</span> <span class="o">+=</span> <span class="n">lst1</span><span class="p">[</span><span class="n">i1</span><span class="p">:]</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>    <span class="n">res</span> <span class="o">+=</span> <span class="n">lst2</span><span class="p">[</span><span class="n">i2</span><span class="p">:]</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>    <span class="k">return</span> <span class="n">res</span>   <span class="c1"># On n&#39;oublie pas le bon vieux return</span>
 </code></pre></div>
 <h3 id="tri-fusion_2">Tri Fusion</h3>
 <p>En python, on le fera aussi récursivement, de la même manière.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">tri_fusion</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>    <span class="k">match</span> <span class="n">lst</span><span class="p">:</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>        <span class="k">case</span> <span class="p">[]:</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>            <span class="k">return</span> <span class="p">[]</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>        <span class="k">case</span><span class="w"> </span><span class="p">[</span><span class="k">_</span><span class="p">]:</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>            <span class="k">return</span> <span class="n">lst</span>
-<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>        <span class="k">case</span> <span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span><span class="p">]:</span>
-<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>            <span class="k">return</span> <span class="n">fusion</span><span class="p">(</span><span class="n">tri_fusion</span><span class="p">(</span><span class="n">lst</span><span class="p">[:</span><span class="n">n</span><span class="p">]),</span> <span class="n">tri_fusion</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">n</span><span class="p">:]))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">tri_fusion</span><span class="p">[</span><span class="n">T</span><span class="p">:</span> <span class="n">Comparable</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="n">n</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>    <span class="k">match</span> <span class="n">lst</span><span class="p">:</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>        <span class="k">case</span> <span class="p">[]:</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>            <span class="k">return</span> <span class="p">[]</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>        <span class="k">case</span><span class="w"> </span><span class="p">[</span><span class="k">_</span><span class="p">]:</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>            <span class="k">return</span> <span class="n">lst</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>        <span class="k">case</span> <span class="p">[</span><span class="n">t</span><span class="p">,</span> <span class="o">*</span><span class="n">q</span><span class="p">]:</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>            <span class="k">return</span> <span class="n">fusion</span><span class="p">(</span><span class="n">tri_fusion</span><span class="p">(</span><span class="n">lst</span><span class="p">[:</span><span class="n">n</span><span class="p">]),</span> <span class="n">tri_fusion</span><span class="p">(</span><span class="n">lst</span><span class="p">[</span><span class="n">n</span><span class="p">:]))</span>
 </code></pre></div>
 <p>je vous laisse réécrire ça avec des if en vous basant sur la taille de la liste.</p>
 <div class="admonition tip">
 <p class="admonition-title">Variantes</p>
-<p>Il existe plusieurs variantes à l'implémentation impérative du tri fusion, mais qui respectents toutes la spécification fonctionnelle.
+<p>Il existe plusieurs variantes à l'implémentation impérative du tri fusion, mais qui respectent toutes la spécification fonctionnelle.
 Ce que je vous présente ici, c'est la base.</p>
 </div>
 
@@ -8449,7 +8491,7 @@ Ce que je vous présente ici, c'est la base.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 15, 2025 02:40:40 UTC">November 15, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 29, 2026 18:44:27 UTC">July 29, 2026</span>
   </span>
 
     
