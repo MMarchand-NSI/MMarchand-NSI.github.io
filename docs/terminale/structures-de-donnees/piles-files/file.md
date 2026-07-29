@@ -182,7 +182,7 @@ Les exercices suivants se font dans le fichier exos_files.py.
 
 !!! question "Occurences"
 
-    Écrire une fonction nb_elements qui prend en paramètres une file et un élément de n'importe quel type, et qui renvoie le nombre de fois où l'élément est présent dans la file. Après appel de cette fonction la file doit avoir retrouvé son état d’origine. Vous commencerez bien sûr par prendre le temps d'écrire la signature de la fonction proprement.
+    Écrire une fonction nb_elements qui prend en paramètres une file et un élément de n'importe quel type, et qui renvoie le nombre de fois où l'élément est présent dans la file. Après appel de cette fonction la file doit avoir retrouvé son état d’origine. Tu commenceras bien sûr par prendre le temps d'écrire la signature de la fonction proprement.
 
     ```python
     """
@@ -199,7 +199,6 @@ Les exercices suivants se font dans le fichier exos_files.py.
     ```
 
 !!! question "Look-and-say"
-    A reprendre.
 
     La suite "Look-and-say", de Conway, consiste à lire à haute voix une série de chiffres en les groupant: ainsi la suite 11121223 est lue "trois 1, un 2, un 1,deux 2, un trois", qu'on écrit 3112112213.
 

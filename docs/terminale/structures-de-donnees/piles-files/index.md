@@ -27,7 +27,7 @@ Ce type de structure de données est par exemple utilisé dans:
 !!! abstract "Définition - Interface"
     L'interface d'une structure de données abstraite est composée des fonctionalités **théoriques** que doit savoir remplir la structure de données. On appelle ces fonctionalités des **primitives**.
 
-    Vous devez penser à la structure et au fonctionnement de l'interface (comme des légos) lorsque vous résolvez des problèmes. Pas à Python en particulier.
+    Tu dois penser à la structure et au fonctionnement de l'interface (comme des légos) lorsque tu résous des problèmes. Pas à Python en particulier.
 
 Une pile est définie par l’interface comprenant les primitives suivantes:
 
@@ -40,7 +40,7 @@ Une pile est définie par l’interface comprenant les primitives suivantes:
 
 ## Implémentation en Python
 
-!!! abstract Définition - Implémentation
+!!! abstract "Définition - Implémentation"
 
     L'implémentation d'une structure de donnée est la traduction pratique de son interface dans un langage de programmation spécifique.
     Les primitives doivent trouver une implémentation la plus rapide possible. Il peut exister plusieurs façon d'implémenter une structure de données dans un langage.
@@ -173,24 +173,24 @@ if __name__ == "__main__":
 ## Exercices
 
 !!! question "Préparation"
-    Les chemins sont donnés relativement à votre répertoire `prog_term`
+    Les chemins sont donnés relativement à ton répertoire `prog_term`
 
     Les commandes sont lancées dans ce même répertoire.
 
     Préparation des fichiers:
 
-    - Créez le répertoire `structures`. Ajoutez-y un fichier vide `__init__.py`
-    - Créez le répertoire `structures/lineaires`. Ajoutez-y un fichier vide `__init__.py`
+    - Crée le répertoire `structures`. Ajoutes-y un fichier vide `__init__.py`
+    - Crée le répertoire `structures/lineaires`. Ajoutes-y un fichier vide `__init__.py`
     - Reporter le code de création de la structure de Pile dans le fichier `structures/lineaires/pile.py`
-    - Créez le fichier `exos\exospiles.py` et ajoutez y ce code:
+    - Crée le fichier `exos\exospiles.py` et ajoute ce code:
 
     ```python
     from structures.lineaires import pile
     ```
 
-    **Vous travaillerez dans le fichier exospiles.py**
+    **Tu travailleras dans le fichier exospiles.py**
 
-    - Vous lancerez votre programme à l'aide de la commande `uv run -m exos.exospiles`
+    - Tu lanceras ton programme à l'aide de la commande `uv run -m exos.exospiles`
 
 
 
@@ -258,7 +258,7 @@ if __name__ == "__main__":
 
 
 !!! question "Sujet épreuve pratique (30 minutes grand maximum)"
-    Ne vous grillez pas immédiatement cet exercice. Il faut le faire une fois que vous êtes à l'aise avec les autres, et pas le même jour.
+    Ne te grille pas immédiatement cet exercice. Il faut le faire une fois que tu es à l'aise avec les autres, et pas le même jour.
 
     On dispose de chaînes de caractères contenant uniquement des parenthèses ouvrantes et fermantes.
     Un parenthésage est correct si :
