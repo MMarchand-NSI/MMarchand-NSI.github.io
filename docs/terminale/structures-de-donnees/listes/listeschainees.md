@@ -1,7 +1,7 @@
 # Listes chaînées, en objet
 
 !!! danger "Requis"
-    Vous devez savoir refaire les exercices sur la création et l'utilisation de classes en POO sans regarder le corrigé.
+    Tu dois savoir refaire les exercices sur la création et l'utilisation de classes en POO sans regarder le corrigé.
 
 ## Introduction
 
@@ -22,7 +22,7 @@ Un maillon a une **donnée** (`data`) et une référence `next` vers le maillon 
 
 ```python
 class Maillon[T]:
-    def __init__(self, data: T, next: "Maillon[T] | None"):
+    def __init__(self, data: T, next: "Maillon[T] | None") -> None:
         self.data = data      # la donnée
         self.next = next      # référence vers le suivant, ou None
 ```
@@ -84,6 +84,9 @@ En fonctionnel, on parcourait par **récursivité**. En objet impératif, on par
 
 C'est le **contraste de paradigmes** : même structure, mais ici on **itère** (`while`) et on met à jour un compteur, là où Gleam **récursait**.
 
+!!! tip "Trace les flèches"
+    Copie les classes `Maillon` et `Liste` et ces méthodes dans [Python Tutor](https://pythontutor.com/) et avance pas à pas. Tu **verras** les maillons en mémoire et les flèches `next` se rebrancher : `ajouter_debut` fait pointer un nouveau maillon vers l'ancienne tête, et `longueur` suit les flèches jusqu'à `None`. C'est ce que la simple lecture du code ne montre pas.
+
 ## À toi
 
 !!! question "Les méthodes de la liste"
@@ -93,7 +96,7 @@ C'est le **contraste de paradigmes** : même structure, mais ici on **itère** (
     - `contient(e)` : renvoie `True` si `e` est dans la liste.
     - `__str__` : renvoie une chaîne du style `"3 -> 2 -> 1 -> _|_"`.
 
-    Fais la **disjonction de cas au papier** d'abord (liste vide ? sinon ?).
+    Fais la **disjonction de cas au papier** d'abord (liste vide ? sinon ?). Écris aussi, pour chaque méthode, sa **signature typée et deux ou trois `assert`** avant le corps (que renvoie `contient` sur une liste vide ? que vaut `__str__` d'une liste vide ?).
 
     ??? success "Corrigé"
         ```python
@@ -122,6 +125,9 @@ C'est le **contraste de paradigmes** : même structure, mais ici on **itère** (
                 courant = courant.next
             return s + "_|_"
         ```
+
+!!! tip "Ce que l'IA ne fait pas à ta place"
+    Une IA écrit `ajouter_fin`, `contient` et `__str__` en une seconde. Ta valeur est ailleurs : **spécifier** (que doit renvoyer `contient` sur une liste vide ? que vaut `__str__` d'une liste vide ?) et **tester** que le code respecte ce contrat, cas limites compris. Signature typée et `assert` **avant** le corps.
 
 ## Pour aller plus loin : la sentinelle
 
