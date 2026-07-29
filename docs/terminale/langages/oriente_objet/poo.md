@@ -18,10 +18,10 @@ Voici un exemple basique d'une classe en Python qui modélise la phrase "Un anim
 
 ```python
 class Animal:
-    def __init__(self, nom: str):
+    def __init__(self, nom: str) -> None:
         self.nom = nom  # Attribut d'instance
     
-    def parler(self):   # Méthode d'instance
+    def parler(self) -> None:   # Méthode d'instance
         print(f"{self.nom} fait du bruit.")
 
 x = Animal("Bidule")   # création d'une instance d'Animal portant le nom bidule
@@ -31,11 +31,14 @@ x.parler()  # On accède aussi aux méthodes d'instance par le point. Affiche: T
 
 ```
 
-Ce programme affichera
-```
-Bidule
-Truc fait du bruit
-```
+!!! question "Prédis la sortie"
+    Avant d'exécuter, écris ce que ce programme affiche, puis déplie pour vérifier.
+
+    ??? success "Réponse"
+        ```
+        Bidule
+        Truc fait du bruit.
+        ```
 
 Dans cet exemple :
 
@@ -47,25 +50,25 @@ Dans cet exemple :
     Un constructeur est une fonction particulière appelée lors de l'instanciation. Elle permet d'allouer la mémoire nécessaire à l'objet et d'initialiser ses attributs.
 
 
-!!! info "Abus de langage"
+??? info "Abus de langage"
     Il est très (trop) courant de considérer `__init__` comme le constructeur en Python, car il initialise l'objet après sa création. Cependant, il ne fait que la moitié du travail. la méthode chargée de créer l'instance est le dunder `__new__`. La preuve en est que `__init__` prend self en paramètre, c'est donc bien que self existe déjà avant l'invocation d'`__init__`. Le constructeur est en réalité le couple formé par les méthodes `__new__` et `__init__`.
 
     Voici une portion de code pour se rendre compte de ce qu'il se passe réellement:
 
     ```python
     class MaClasse:
-        def __new__(cls, *args, **kwargs):
+        def __new__(cls, *args, **kwargs) -> "MaClasse":
             '''Appel de __new__ pour créer une nouvelle instance de la classe'''
             print("Appel de __new__ : Création de l'instance")
             instance = super(MaClasse, cls).__new__(cls)
             return instance
         
-        def __init__(self, valeur):
+        def __init__(self, valeur) -> None:
             '''Appel de __init__ pour initialiser l'instance avec les attributs'''
             print("Appel de __init__ : Initialisation de l'instance")
             self.valeur = valeur
     
-        def afficher_valeur(self):
+        def afficher_valeur(self) -> None:
             print(f"Valeur : {self.valeur}")
     
     # Instanciation d'un objet
@@ -73,7 +76,7 @@ Dans cet exemple :
     c.afficher_valeur()
     ```
 
-    On considèrera malgré tout que `__init__` est le constructeur, car si on vous pose la question, c'est la réponse attendue.
+    On considèrera malgré tout que `__init__` est le constructeur, car si on te pose la question, c'est la réponse attendue.
 
 ## Une variable désigne un objet : les références
 
@@ -117,15 +120,15 @@ Rajoutons la phrase "Un Humain porte un nom, un prenom et peut adopter des anima
 
 ```python
 class Humain:
-    def __init__(self, prenom: str, nom: str):
+    def __init__(self, prenom: str, nom: str) -> None:
         self.nom = nom
         self.prenom = prenom
         self.animaux: list[Animal] = []
 
-    def adopte(self, a: Animal):
+    def adopte(self, a: Animal) -> None:
         self.animaux.append(a)
     
-    def afficher_animaux(self):
+    def afficher_animaux(self) -> None:
         for a in self.animaux:
             print(a.nom)
 
@@ -154,5 +157,37 @@ Ici, on a choisi que l'humain porte la liste de ses animaux. On aurait pu à la 
     Avant de commencer un trajet, l'humain vérifie s'il a assez d'essence, sinon, il va à la station service faire le plein.
     Lorsqu'un humain fait le plein de sa voiture, son compte en banque diminue. 
 
-    - Ecrivez une classe Humain et une classe Voiture compatibles avec cette description.
-    - Instanciez ensuite Humain et Voiture afin de tester des scenarios d'utilisation.
+    - Écris une classe `Voiture` et une classe `Humain` compatibles avec cette description, puis instancie-les pour jouer un scénario.
+
+    **Méthode (une nouveauté à la fois).**
+
+    1. **Spécifie avant de coder.** Pour chaque classe, écris d'abord les **signatures typées** de ses méthodes et **2-3 scénarios de test** attendus (par exemple : après `v.roule(100)`, de combien baisse le carburant ?). C'est le travail que l'IA ne fait pas à ta place.
+    2. Écris et teste **`Voiture` d'abord** (rouler, faire le plein, afficher), puis **`Humain`** (acheter une voiture, faire un trajet en vérifiant le carburant).
+    3. **Instancie** un `Humain` et une `Voiture`, et joue un scénario complet (achat, trajet, passage à la station).
+
+    ??? tip "Indice : squelette de `Voiture`"
+        ```python
+        class Voiture:
+            def __init__(self, marque: str, modele: str, prix: float,
+                         conso: float, capacite: float) -> None:
+                self.marque = marque
+                self.modele = modele
+                self.prix = prix
+                self.conso = conso            # litres au 100 km
+                self.capacite = capacite      # capacité du réservoir
+                self.km = 0.0
+                self.carburant = 0.0
+
+            def roule(self, distance: float) -> None:
+                ...   # augmente self.km, diminue self.carburant selon la conso
+
+            def plein(self) -> float:
+                ...   # remplit le réservoir, renvoie le nombre de litres ajoutés
+
+            def affiche(self) -> None:
+                ...
+        ```
+
+    ??? warning "Ce que l'IA ne fait pas à ta place"
+        Une IA écrit ces deux classes en une seconde : ta valeur est **avant**. Décider quels attributs portent l'état (le carburant dans `Voiture`, l'argent dans `Humain`), choisir quelle classe est le **chef d'orchestre**, et écrire les **tests** qui disent ce que « faire un trajet » doit produire. Signatures typées et tests d'abord, corps ensuite.
+
