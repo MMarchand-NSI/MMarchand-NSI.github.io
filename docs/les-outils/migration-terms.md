@@ -16,7 +16,7 @@ VSCode s'ouvre dans le nouvel environnement et un script d'ouverture se lance.
 
 **Etape finale**
 
-Copier coller vos répertoire de fichiers de code dans PROG-NSI (python, elm, ou d'autres si vous en avez créé)
+Copier coller vos répertoire de fichiers de code dans PROG-NSI (python, gleam, ou d'autres si vous en avez créé)
 
 ## 2 - Installation des composants
 

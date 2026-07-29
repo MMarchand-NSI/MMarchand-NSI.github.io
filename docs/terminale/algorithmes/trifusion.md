@@ -1,5 +1,50 @@
 # Tri Fusion
 
+## Rappels Gleam
+
+Cette page réutilise la liste récursive `Liste(a)` (`Vide` / `Cons`) et les fonctions `taille`, `take`, `drop` construites sur la page [Listes et récursivité](../structures-de-donnees/listes/listes.md). On les suppose connues.
+
+!!! note "Deux particularités de Gleam"
+    - **Pas de type `comparable`.** On **spécialise** `fusion` et `tri_fusion` au type `Liste(Int)` (comparaison `<=` sur les entiers). Pour trier autre chose, on passerait une fonction de comparaison en paramètre.
+    - **Pas de `if`.** Gleam n'a pas de `if ... then ... else` : on filtre un booléen avec `case`, dans l'esprit « tout passe par le filtrage » : `case t1 <= t2 { True -> ... False -> ... }`.
+
+    ??? note "Le code des rappels (déjà vu sur la page Listes)"
+        ```gleam
+        pub type Liste(a) {
+          Vide
+          Cons(a, Liste(a))
+        }
+
+        pub fn taille(lst: Liste(a)) -> Int {
+          case lst {
+            Vide -> 0
+            Cons(_, queue) -> 1 + taille(queue)
+          }
+        }
+
+        pub fn take(n: Int, lst: Liste(a)) -> Liste(a) {
+          case lst {
+            Vide -> Vide
+            Cons(t, q) ->
+              case n <= 0 {
+                True -> Vide
+                False -> Cons(t, take(n - 1, q))
+              }
+          }
+        }
+
+        pub fn drop(n: Int, lst: Liste(a)) -> Liste(a) {
+          case lst {
+            Vide -> Vide
+            Cons(_, q) ->
+              case n <= 0 {
+                True -> lst
+                False -> drop(n - 1, q)
+              }
+          }
+        }
+        ```
+
 ## Fusion
 
 L'objectif est, à partir de **2 listes triées** `lst1` et `lst2`, d'obtenir leur fusion en **une liste triée**.
@@ -7,30 +52,30 @@ L'objectif est, à partir de **2 listes triées** `lst1` et `lst2`, d'obtenir le
 ### Algorithme
 
 
-On procède par disjonction de cas, en bon lutin:
+On procède par disjonction de cas, en bon lutin. En Gleam, on filtre **les deux listes à la fois** avec `case lst1, lst2 { ... }`.
 
 #### On reçoit 2 listes vides
 
 La fusion de deux listes vides est une liste vide.
 
-```elm
-(Vide, Vide) -> Vide
+```gleam
+Vide, Vide -> Vide
 ```
 
 #### On reçoit `lst1` vide et `lst2` non vide
 
 On n'a rien à faire qu'à renvoyer lst2 qui est déjà triée 
 
-```elm
-(Vide, Cons t q) -> lst2
+```gleam
+Vide, Cons(t, q) -> lst2
 ```
 
 #### On reçoit `lst1` non vide et `lst2` vide
 
-Pareil, il n'y a qu'à renvoyer `lst2`
+Pareil, il n'y a qu'à renvoyer `lst1`
 
-```elm
-(Cons t q, Vide) -> lst1
+```gleam
+Cons(t, q), Vide -> lst1
 ```
 
 #### On reçoit deux listes non vides
@@ -39,50 +84,51 @@ Alors ici, on sait qu'on va devoir **construire** la liste résultat.
 
 La liste résultat commencera forcément par la plus petite des têtes.
 
-```elm
-(Cons t1 q1, Cons t2 q2) -> 
-        if t1 <= t2 then
-            Cons t1 ........
-        else
-            Cons t2 ........
+```gleam
+Cons(t1, q1), Cons(t2, q2) ->
+  case t1 <= t2 {
+    True -> Cons(t1, ........)
+    False -> Cons(t2, ........)
+  }
 ```
 
 Dans le premier cas, quelle est la queue de la liste résultat?
 
-Une fois qu'on a mis t1 dans la liste résultat, il nous reste à y mettre fla fusion de q1 et de lst2. On a qu'à demander à un autre lutin de le faire!
+Une fois qu'on a mis t1 dans la liste résultat, il nous reste à y mettre la fusion de q1 et de lst2. On a qu'à demander à un autre lutin de le faire!
 
-```elm
-(Cons t1 q1, Cons t2 q2) -> 
-        if t1 <= t2 then
-            Cons t1 (fusion q1 lst2)
-        else
-            Cons t2 ........
+```gleam
+Cons(t1, q1), Cons(t2, q2) ->
+  case t1 <= t2 {
+    True -> Cons(t1, fusion(q1, lst2))
+    False -> Cons(t2, ........)
+  }
 ```
 
 De la même manière, dans le deuxième cas, il nous reste à fusionner lst1 et q2 pour la queue.
 
-```elm
-(Cons t1 q1, Cons t2 q2) -> 
-        if t1 <= t2 then
-            Cons t1 (fusion q1 lst2)
-        else
-            Cons t2 (fusion lst1 q2)
+```gleam
+Cons(t1, q1), Cons(t2, q2) ->
+  case t1 <= t2 {
+    True -> Cons(t1, fusion(q1, lst2))
+    False -> Cons(t2, fusion(lst1, q2))
+  }
 ```
 
 ce qui nous donne au final:
 
-```elm
-fusion : Liste comparable -> Liste comparable -> Liste comparable
-fusion   lst1                lst2 =
-    case (lst1, lst2) of
-        (Vide, Vide) -> Vide
-        (Vide, Cons t q) -> lst2
-        (Cons t q, Vide) -> lst1
-        (Cons t1 q1, Cons t2 q2) -> 
-                if t1 <= t2 then
-                    Cons t1 (fusion q1 lst2)
-                else
-                    Cons t2 (fusion lst1 q2)
+```gleam
+pub fn fusion(lst1: Liste(Int), lst2: Liste(Int)) -> Liste(Int) {
+  case lst1, lst2 {
+    Vide, Vide -> Vide
+    Vide, Cons(_, _) -> lst2
+    Cons(_, _), Vide -> lst1
+    Cons(t1, q1), Cons(t2, q2) ->
+      case t1 <= t2 {
+        True -> Cons(t1, fusion(q1, lst2))
+        False -> Cons(t2, fusion(lst1, q2))
+      }
+  }
+}
 ```
 
 La terminaison est assurée par la diminution stricte de la taille du problème.
@@ -90,7 +136,7 @@ Si on note $n = |lst1| + |lst2|$, alors n décroît strictement à chaque appel 
 
 ### Complexité de la fusion
 
-Le pire des cas est celui où on doit tout le temps appeler le cas récursif, donc quand les listes ont la même taille, et gardent la même taille (à 1 près). Pour garder la même taille, il faut que les deux listes soient entrelacées pour garantir une alterannce entre gauche et droite:
+Le pire des cas est celui où on doit tout le temps appeler le cas récursif, donc quand les listes ont la même taille, et gardent la même taille (à 1 près). Pour garder la même taille, il faut que les deux listes soient entrelacées pour garantir une alternance entre gauche et droite:
 ```python
 lst1 = [1, 3, 5, 7, 9]
 lst2 = [2, 4, 6, 8, 10]
@@ -105,7 +151,7 @@ Soit $T_n$ le temps qu'il faut pour effectuer cette fusion.
 - On traite 1 élément (on le place dans le résultat)
 - Le problème restant a taille $n - 1$
 
-Le temps qu'in faut pour fusionner, c'est une unité de temps (simplement construire le résultat avec une tete qu'on a déjà), plus le temps qu'il faut pour construire sa queue de taille $ n - 1 $ par fusion. Donc pour un temps $T_{n-1}$ 
+Le temps qu'il faut pour fusionner, c'est une unité de temps (simplement construire le résultat avec une tete qu'on a déjà), plus le temps qu'il faut pour construire sa queue de taille $ n - 1 $ par fusion. Donc pour un temps $T_{n-1}$ 
 
 On obtient la **suite récurrente** :
 
@@ -148,23 +194,24 @@ Je suis un lutin trieur et mon job s'appelle `tri_fusion`
 
 donc je FUSIONne le TRI de lst1 et le TRI de lst2.
 
-```elm
-fusion (tri_fusion lst1) (trifusion lst2)
+```gleam
+fusion(tri_fusion(lst1), tri_fusion(lst2))
 ```
 
 La fonction complète:
 
-```elm
-triFusion : Liste comparable -> Liste comparable
-triFusion   lst =
-    let n = taille lst in 
-    case lst of
-        Vide -> Vide
-        Cons _ Vide -> lst
-        _ -> fusion (triFusion (take (n//2) lst)) (triFusion (drop (n//2) lst))
+```gleam
+pub fn tri_fusion(lst: Liste(Int)) -> Liste(Int) {
+  let n = taille(lst)
+  case lst {
+    Vide -> Vide
+    Cons(_, Vide) -> lst
+    _ -> fusion(tri_fusion(take(n / 2, lst)), tri_fusion(drop(n / 2, lst)))
+  }
+}
 ```
 
-En gros, le seul calcul que j'ai fait, c'est n//2, et j'ai délégué tout le reste à d'autres lutins.
+En gros, le seul calcul que j'ai fait, c'est n / 2, et j'ai délégué tout le reste à d'autres lutins.
 
 ### Terminaison 
 
@@ -186,7 +233,7 @@ $$\huge \mathcal{O}(n \log n)$$
 **On peut aussi voir ça comme on l'a fait pour la fusion:**
 
 
-Ici, on est dans le cas où  pour calculer $T_n$, on fait déjà 2 fois triFusion sur $n \over 2$ éléments (donc ça dure $2 \times T_{n \over 2}$) puis on fusionne, ce qui nous rajoute un $O(n)$.
+Ici, on est dans le cas où  pour calculer $T_n$, on fait déjà 2 fois tri_fusion sur $n \over 2$ éléments (donc ça dure $2 \times T_{n \over 2}$) puis on fusionne, ce qui nous rajoute un $O(n)$.
 
 On a donc $T_n = 2 \times T_{n \over 2} + O(n)$, avec $T_0=1$
 
@@ -223,7 +270,7 @@ On va procéder par accumulation dans un résultat, comme d'habitude.
 ```python
 i1: int = 0   # On met les tetes au début des listes
 i2: int = 0
-res: list[T] = []  # On créé notre accumulateur
+res: list[T] = []  # On crée notre accumulateur
 ```
 
 dans la boucle while, on ne va traiter **que le cas récursif**, donc quand le reste à traiter est non vide des deux côtés. Donc quand `i1 < len(lst1)` et `i2 < len(lst2)`
@@ -294,6 +341,5 @@ def tri_fusion[T: Comparable](lst: list[T]) -> list[T]:
 je vous laisse réécrire ça avec des if en vous basant sur la taille de la liste.
 
 !!! tip "Variantes"
-    Il existe plusieurs variantes à l'implémentation impérative du tri fusion, mais qui respectents toutes la spécification fonctionnelle.
+    Il existe plusieurs variantes à l'implémentation impérative du tri fusion, mais qui respectent toutes la spécification fonctionnelle.
     Ce que je vous présente ici, c'est la base.
-

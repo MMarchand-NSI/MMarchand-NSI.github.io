@@ -8,16 +8,16 @@ Les listes sont l'outil idéal pour **faire ses premiers pas en récursivité**,
 ## Pourquoi Gleam
 
 - Gleam n'a **aucune boucle** : ni `for`, ni `while`. La seule façon de parcourir une structure, c'est la **récursivité**. C'est exactement ce qu'on vient apprendre.
-- Sa signature de fonction ressemble à votre Python typé :
+- Sa signature de fonction ressemble à ton Python typé :
 
     | Python | Gleam |
     |---|---|
     | `def taille(lst) -> int:` | `fn taille(lst: Liste(a)) -> Int {` |
 
-- Le compilateur est un allié : messages d'erreur clairs, et il vous **empêche d'oublier un cas**.
+- Le compilateur est un allié : messages d'erreur clairs, et il t'**empêche d'oublier un cas**.
 
 !!! note "Mise en place"
-    Créez un projet : `gleam new listes`, puis travaillez dans `src/listes.gleam`. Pour exécuter votre code : `gleam run`. Pour afficher une valeur et l'observer, utilisez `io.debug(...)` (après un `import gleam/io` en haut du fichier).
+    Crée un projet : `gleam new listes`, puis travaille dans `src/listes.gleam`. Pour exécuter ton code : `gleam run`. Pour afficher une valeur et l'observer, utilise `io.debug(...)` (après un `import gleam/io` en haut du fichier).
 
 ## La structure : deux possibilités
 
@@ -84,7 +84,7 @@ case lst {
 - `Cons(tete, queue)` **déconstruit** la liste : ça donne un nom à la tête (`tete`) et à la queue (`queue`).
 
 !!! warning "Piège, et garde-fou : les deux cas, toujours"
-    Gleam **refuse de compiler** si vous oubliez un cas. Impossible d'oublier le `Vide`. Le compilateur vous **force** à penser « cas de base / cas récursif », les deux fondations de toute récursivité.
+    Gleam **refuse de compiler** si tu oublies un cas. Impossible d'oublier le `Vide`. Le compilateur te **force** à penser « cas de base / cas récursif », les deux fondations de toute récursivité.
 
 ## Première fonction : la taille
 
@@ -112,6 +112,9 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
                      = 1 + 1 + 1 + 0
                      = 3
 ```
+
+!!! info "C'est la pile d'appels"
+    Chaque ligne où un lutin **attend** le résultat d'un autre est un appel **empilé** : la pile grandit à la descente (jusqu'à `Vide`), puis se vide à la remontée, quand chaque `1 + ...` se calcule enfin. Cette cascade **est** la **pile d'appels**, le mécanisme caché de toute récursion (on la retrouvera partout : arbres, tri fusion).
 
 !!! question "Prédire"
     Sans exécuter : que renvoie `taille(Cons(7, Cons(8, Vide)))` ?
@@ -194,15 +197,18 @@ Le **lutin ajouteur** : *« Si on me tend une liste vide, je renvoie une liste q
 
 ![alt text](image.png)
 
-!!! question "Renverser"
-    Écris `renverser(lst: Liste(a)) -> Liste(a)` qui renvoie la liste à l'envers. (Indice : `ajouter_fin` peut aider.)
+!!! question "Inverser"
+    Écris `inverser(lst: Liste(a)) -> Liste(a)` qui renvoie la liste à l'envers.
+
+    ??? tip "Indice"
+        Cas `Vide` : la liste renversée est `Vide`. Cas `Cons(tete, queue)` : renverse d'abord la **queue**, puis ajoute `tete` **à la fin** avec `ajouter_fin`.
 
     ??? success "Corrigé"
         ```gleam
-        pub fn renverser(lst: Liste(a)) -> Liste(a) {
+        pub fn inverser(lst: Liste(a)) -> Liste(a) {
           case lst {
             Vide -> Vide
-            Cons(tete, queue) -> ajouter_fin(tete, renverser(queue))
+            Cons(tete, queue) -> ajouter_fin(tete, inverser(queue))
           }
         }
         ```
@@ -242,12 +248,18 @@ Jusqu'ici, le lutin **déconstruisait** une liste. Il peut aussi en **construire
 ## Le coût
 
 - `taille` parcourt la liste **une fois** : son coût est **linéaire**, `O(n)`.
-- `renverser` est plus coûteuse : à chaque étape, `ajouter_fin` reparcourt toute la queue. Le coût est en `O(n²)`. Bien écrire une fonction récursive, ce n'est pas seulement qu'elle soit juste, c'est aussi ce qu'elle coûte.
+- `inverser` est plus coûteuse : à chaque étape, `ajouter_fin` reparcourt toute la queue. Le coût est en `O(n²)`. Bien écrire une fonction récursive, ce n'est pas seulement qu'elle soit juste, c'est aussi ce qu'elle coûte.
+
+!!! question "Trace le coût toi-même"
+    Déplie `inverser(2 -> 3 -> 4)` en écrivant chaque appel à `ajouter_fin`. Combien de fois chaque élément est-il reparcouru ? Tu dois **voir** le `O(n²)` apparaître, pas seulement le lire.
+
+    ??? success "Ce qu'on observe"
+        `inverser` fait un appel par élément (`n` appels), et **chaque** appel relance `ajouter_fin`, qui reparcourt toute la queue (jusqu'à `n`). Environ `n` parcours de longueur jusqu'à `n` : le coût total est en `O(n²)`.
 
 ## Ce que l'IA ne fait pas à ta place
 
 !!! tip
-    Une IA écrit `taille`, `somme` ou `renverser` en une seconde. Ta valeur n'est pas là. Elle est dans le fait de **savoir énoncer les deux cas** (que se passe-t-il si la liste est vide ? et sinon ?) et de **tester** le résultat. Gleam t'y aide : les **types** et l'**exhaustivité des cas** attrapent une grande partie des erreurs avant même l'exécution.
+    Une IA écrit `taille`, `somme` ou `inverser` en une seconde. Ta valeur n'est pas là. Elle est dans le fait de **savoir énoncer les deux cas** (que se passe-t-il si la liste est vide ? et sinon ?) et de **tester** le résultat. Gleam t'y aide : les **types** et l'**exhaustivité des cas** attrapent une grande partie des erreurs avant même l'exécution.
 
 ## L'équivalent en Python
 
@@ -371,7 +383,7 @@ def sont_egales(l1: Liste, l2: Liste) -> bool:
 
 Cette écriture est **hors programme** (les dataclasses ne sont pas exigées), mais c'est le calque le plus exact de Gleam, et la façon dont `match` est vraiment prévu pour être utilisé. Une différence subtile demeure : Python, contrairement à Gleam, **ne vérifie pas** que tu as traité tous les cas.
 
-La grande différence reste que **Gleam n'a pas de boucle** : la récursivité y était le seul chemin, alors qu'en Python on la **choisit**, parce que c'est la **structure** qui l'appelle. Toutes les autres fonctions (`contient`, `renverser`, `concat`, `repete`) se transposent de la même manière.
+La grande différence reste que **Gleam n'a pas de boucle** : la récursivité y était le seul chemin, alors qu'en Python on la **choisit**, parce que c'est la **structure** qui l'appelle. Toutes les autres fonctions (`contient`, `inverser`, `concat`, `repete`) se transposent de la même manière.
 
 !!! note "Une troisième fois, plus tard"
     Après la programmation objet, on réimplémentera cette même structure une **troisième** fois : une liste chaînée en **objet impératif** (avec des `while`). Même structure, trois paradigmes (fonctionnel, impératif, objet), de quoi mesurer ce que la récursivité apporte ici.
@@ -655,6 +667,9 @@ mapper(fn(x) { 3 * x }, lst)   // les triples
 
 !!! question "fusionner"
     À partir de **deux listes déjà triées**, renvoie une seule liste triée. `fusionner(2 -> 4 -> 6, 3 -> 5 -> 7)` donne `2 -> 3 -> 4 -> 5 -> 6 -> 7`. C'est la brique du **tri fusion**, qu'on verra bientôt. Il y a ici **quatre** cas (chaque liste vide ou non).
+
+    ??? tip "Indice"
+        Les trois cas avec un `Vide` sont directs (si une liste est vide, le résultat est l'autre). Pour deux `Cons` : la tête du résultat est la **plus petite des deux têtes** ; pour la queue, refais une `fusionner` en n'avançant **que** du côté de cette plus petite tête.
 
     ??? success "Corrigé Gleam"
         ```gleam
