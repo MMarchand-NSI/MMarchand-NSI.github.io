@@ -4,7 +4,7 @@
 a = 2
 ```
 
-Ici, on créé la variable a et on lui donne une valeur, la valeur 2. Python sait tout seul qu'il s'agit d'un entier sans qu'on lui dise. On dit qu'il pratique "l'inférence de type". (Il devine le type)
+Ici, on crée la variable a et on lui donne une valeur, la valeur 2. Python sait tout seul qu'il s'agit d'un entier sans qu'on lui dise. On dit qu'il pratique "l'inférence de type". (Il devine le type)
 
 Afin d'être plus précis, on peut indiquer explicitement le type qu'on souhaite pour la variable en utilisant cette syntaxe:
 
@@ -14,7 +14,7 @@ a: int = 157
 
 `int` est le type correspondant à un entier relatif. `int` vaut pour `integer` en anglais qui signifie un nombre entier.
 
-Lorsque les programmes deviennent longs, on peut se perdre dans les types, alors il faut prendre l'habitude de les indiquer lorsqu'on créé des variables.
+Lorsque les programmes deviennent longs, on peut se perdre dans les types, alors il faut prendre l'habitude de les indiquer lorsqu'on crée des variables.
 
 ## Représentation en mémoire
 
@@ -30,11 +30,11 @@ Le code précédent affiche le nombre de bits utilisés par python pour stocker 
 !!! question "Représentation des entiers"
     `bin(a)` renvoie la représentation binaire de l'entier a.
 
-    - Donnez l'affichage que produira la ligne `print(bin(a))`
+    - Donne l'affichage que produira la ligne `print(bin(a))`
 
     `hex(a)` renvoie la représentation hexadécimale de l'entier a.
 
-    - Donnez l'affichage que produira la ligne `print(hex(a))`
+    - Donne l'affichage que produira la ligne `print(hex(a))`
 
 
 ### Opérations possibles
@@ -76,7 +76,7 @@ Nous reviendrons en temps et en heure sur les autres.
 
 ## Division Euclidienne
 
-La division euclidienne est celle que vous avez appris en primaire. On n'en fait plus trop après, mais c'est une opération fondamentale.
+La division euclidienne est celle que tu as apprise en primaire. On n'en fait plus trop après, mais c'est une opération fondamentale.
 
 <center>
 
