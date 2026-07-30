@@ -23,7 +23,7 @@ flowchart TD
     O --> Z
 ```
 
-*(Combien auriez-vous payé dans ce cinéma ? Vous coderez ce diagramme en exercice.)*
+*(Combien aurais-tu payé dans ce cinéma ? Tu coderas ce diagramme en exercice.)*
 
 ## SI ... ALORS : une seule branche
 
@@ -103,10 +103,10 @@ Une condition se construit avec des comparaisons :
     Dans une condition, on **teste**, donc on écrit `==`. C'est une source de bugs très fréquente chez les débutants.
 
 !!! question "Exercices (deux branches)"
-    1. **Parc.** Il faut mesurer au moins 1m30 pour entrer. Demandez la taille en cm et indiquez si l'accès est autorisé.
-    2. **Plus grand.** Demandez deux nombres et affichez le plus grand.
-    3. **Valeur absolue.** Demandez un nombre et affichez sa valeur absolue (sans `abs`).
-    4. **Mot de passe.** Le mot de passe est `"azerty"`. Demandez-le et indiquez si l'accès est autorisé.
+    1. **Parc.** Il faut mesurer au moins 1m30 pour entrer. Demande la taille en cm et indique si l'accès est autorisé.
+    2. **Plus grand.** Demande deux nombres et affiche le plus grand.
+    3. **Valeur absolue.** Demande un nombre et affiche sa valeur absolue (sans `abs`).
+    4. **Mot de passe.** Le mot de passe est `"azerty"`. Demande-le et indique si l'accès est autorisé.
 
     ??? warning "Corrigés (3 et 4)"
         ```python
@@ -136,7 +136,7 @@ print(type(a))   # <class 'bool'>
 ```
 
 !!! hint "Une condition est un calcul"
-    Une condition est en réalité **un calcul qui renvoie un booléen**. Quand vous vous demandez s'il fait beau, votre cerveau *calcule* vrai ou faux à partir de ce que voient vos yeux.
+    Une condition est en réalité **un calcul qui renvoie un booléen**. Quand tu te demandes s'il fait beau, ton cerveau *calcule* vrai ou faux à partir de ce que voient tes yeux.
 
 On peut donc stocker une condition dans une variable, puis l'utiliser :
 
@@ -153,7 +153,7 @@ if majeur:
     ```
 
 !!! question "Exercice : type et valeur"
-    On exécute ces lignes dans l'ordre. Donnez le **type** et la **valeur** de chaque variable.
+    On exécute ces lignes dans l'ordre. Donne le **type** et la **valeur** de chaque variable.
     ```python
     a = 18
     b = (a > 7)
@@ -196,7 +196,7 @@ else:
 
 !!! question "Exercices (`elif`)"
     1. **Mention au bac.** À partir d'une moyenne sur 20 : `[0;8)` Recalé, `[8;10)` Rattrapage, `[10;12)` Sans mention, `[12;14)` Assez bien, `[14;16)` Bien, `[16;18)` Très bien, `[18;20]` Félicitations.
-    2. **Année bissextile.** Une année est bissextile si elle est multiple de 4 mais pas de 100, **ou** multiple de 400. Testez 2021, 2020, 1900, 2000.
+    2. **Année bissextile.** Une année est bissextile si elle est multiple de 4 mais pas de 100, **ou** multiple de 400. Teste 2021, 2020, 1900, 2000.
 
     ??? warning "Corrigé (mention)"
         ```python
@@ -263,9 +263,9 @@ Cela permet souvent de **remplacer des conditions imbriquées** par une seule, p
     ```
 
 !!! question "Exercices (booléens)"
-    1. **Triangle.** Demandez trois longueurs entières `a`, `b`, `c`. Si elles ne peuvent pas former un triangle (un côté doit être inférieur à la somme des deux autres), affichez `pas un triangle`. Sinon, affichez `equilateral`, `isocele` ou `scalene`.
-    2. **Cinéma.** Implémentez en Python le calcul de tarif du diagramme d'activité du début de la page.
-    3. **Bissextile, version booléenne.** Reprenez l'année bissextile avec **un seul calcul booléen**.
+    1. **Triangle.** Demande trois longueurs entières `a`, `b`, `c`. Si elles ne peuvent pas former un triangle (un côté doit être inférieur à la somme des deux autres), affichez `pas un triangle`. Sinon, affichez `equilateral`, `isocele` ou `scalene`.
+    2. **Cinéma.** Implémente en Python le calcul de tarif du diagramme d'activité du début de la page.
+    3. **Bissextile, version booléenne.** Reprends l'année bissextile avec **un seul calcul booléen**.
 
     ??? warning "Corrigé (bissextile booléenne)"
         ```python
@@ -275,7 +275,7 @@ Cela permet souvent de **remplacer des conditions imbriquées** par une seule, p
         ```
 
 !!! question "Projet : livre dont vous êtes le héros"
-    Implémentez l'histoire suivante avec des conditionnelles et des saisies utilisateur.
+    Implémente l'histoire suivante avec des conditionnelles et des saisies utilisateur.
 
     ```mermaid
     flowchart TD
