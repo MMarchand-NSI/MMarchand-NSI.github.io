@@ -74,7 +74,7 @@ image.show()
 !!! question "Image en niveau de gris"
     La version en niveau de gris d'un pixel `(r, g, b)` est `(m, m, m)`, où `m` est la moyenne de `r`, `g` et `b`.
 
-    Écrivez une fonction `to_noir_blanc(fichier)` qui ouvre une image, remplace chaque pixel par sa version en niveau de gris, et l'affiche.
+    Écris une fonction `to_noir_blanc(fichier)` qui ouvre une image, remplace chaque pixel par sa version en niveau de gris, et l'affiche.
 
     ```python
     from PIL import Image
@@ -86,4 +86,4 @@ image.show()
     ```
 
 !!! question "Moyenne"
-    Vos notes sont dans un tuple `notes`. Calculez leur moyenne.
+    Tes notes sont dans un tuple `notes`. Calcule leur moyenne.
