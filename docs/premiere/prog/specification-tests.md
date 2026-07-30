@@ -32,7 +32,7 @@ assert carre(3) == 9, "carre(3) aurait dû valoir 9"
 - Si elle est **fausse**, Python **lève une erreur** (`AssertionError`) avec le message, et arrête le programme.
 
 !!! question "Corriger grâce à un test"
-    Voici une fonction `carre` **volontairement fausse**. Le test le détecte. Corrigez le code, puis relancez : plus aucune erreur ne doit apparaître.
+    Voici une fonction `carre` **volontairement fausse**. Le test le détecte. Corrige le code, puis relance : plus aucune erreur ne doit apparaître.
 
     ```python
     def carre(x: float) -> float:
@@ -54,7 +54,7 @@ assert carre(3) == 9, "carre(3) aurait dû valoir 9"
         ```
 
 !!! tip "Un bon test couvre plusieurs cas"
-    Un seul `assert` ne suffit pas. Pensez aux cas particuliers : `0`, un nombre négatif, une liste vide, le plus petit ou le plus grand cas possible. Un bug se cache souvent dans un cas qu'on n'a pas testé.
+    Un seul `assert` ne suffit pas. Pense aux cas particuliers : `0`, un nombre négatif, une liste vide, le plus petit ou le plus grand cas possible. Un bug se cache souvent dans un cas qu'on n'a pas testé.
 
 ## 3. Des exemples qui deviennent des tests : les doctests
 
@@ -103,14 +103,14 @@ Ici, la précondition « la liste n'est pas vide » est nécessaire : le minimum
 !!! abstract "Spécifier et tester à l'ère de l'IA"
     Une IA générative écrit une fonction `carre` en une seconde. Écrire le code n'est donc plus la partie difficile.
 
-    En revanche, **dire précisément ce que le code doit faire (la spécification) et vérifier qu'il le fait (les tests)** restent le travail de l'humain. C'est aussi ce qui vous permet de **juger** si le code produit par une IA est correct : sans spécification ni test, vous ne pouvez que lui faire aveuglément confiance.
+    En revanche, **dire précisément ce que le code doit faire (la spécification) et vérifier qu'il le fait (les tests)** restent le travail de l'humain. C'est aussi ce qui te permet de **juger** si le code produit par une IA est correct : sans spécification ni test, tu ne peux que lui faire aveuglément confiance.
 
-    Savoir spécifier et tester est donc l'exact contraire de la dépendance : c'est ce qui vous garde aux commandes.
+    Savoir spécifier et tester est donc l'exact contraire de la dépendance : c'est ce qui te garde aux commandes.
 
 ## 6. Exercices
 
 !!! question "Spécifier, tester, puis coder"
-    Pour chaque fonction, écrivez **d'abord** la signature et la docstring, **puis** au moins deux `assert`, et **seulement ensuite** le code.
+    Pour chaque fonction, écris **d'abord** la signature et la docstring, **puis** au moins deux `assert`, et **seulement ensuite** le code.
 
     1. `aire_rectangle(largeur, hauteur)` : l'aire d'un rectangle.
     2. `cube(n)` : le cube d'un entier.
