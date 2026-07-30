@@ -4,7 +4,7 @@
 ## Accumulation - types primitifs
 
 !!! example "Mode opératoire"
-    - Créez un fichier exos_accumulation.py
+    - Crée un fichier exos_accumulation.py
 
     !!! danger "Attention"
         En informatique, on ne met **jamais** d'espace ni de caractère spécial (accents, etc) dans un nom de fichier ou de répertoire.
@@ -15,16 +15,16 @@
     - de le remplir à l'aide d'un parcours d'itérable
     - de renvoyer le résultat
 
-    Cette manière de faire est extrêmement fréquente et constitue la base de ce que vous devez savoir faire en algorithmique. On dit qu'on accumule progressivement dans le résultat afin de pouvoir le renvoyer.
+    Cette manière de faire est extrêmement fréquente et constitue la base de ce que tu dois savoir faire en algorithmique. On dit qu'on accumule progressivement dans le résultat afin de pouvoir le renvoyer.
     La première étape est toujours de bien modéliser le problème en écrivant une signature de fonction appropriée, avec des noms de fonction et de paramètres choisis judicieusement pour qu'ils soient à la fois évocateurs de ce qu'ils représentent, ni trop courts, ni trop longs.
 
-    La première chose à considérer lorsqu'on travaille sur une variable est toujours: "de quelle type est-elle?" La réponse nous informe sur ce qu'on peut faire ou pas avec cette variable d'après le cours. Ca devient naturel et instantané avec de la pratique, mais pour l'instant, vous devez faire l'effort d'y penser.
+    La première chose à considérer lorsqu'on travaille sur une variable est toujours: "de quelle type est-elle?" La réponse nous informe sur ce qu'on peut faire ou pas avec cette variable d'après le cours. Ca devient naturel et instantané avec de la pratique, mais pour l'instant, tu dois faire l'effort d'y penser.
 
     Toute fonction devra être testée.
 
 
 !!! tip "Les exercices de base sont ailleurs"
-    Les exercices fondamentaux d'accumulation (somme, produit, factorielle, nombre de voyelles, inverser, contient, take, drop...) se trouvent sur les pages [La boucle for](boucle-for.md) et [Exercices sur les séquences](exercices-sequences.md). Assurez-vous de les maîtriser avant d'attaquer les problèmes ci-dessous.
+    Les exercices fondamentaux d'accumulation (somme, produit, factorielle, nombre de voyelles, inverser, contient, take, drop...) se trouvent sur les pages [La boucle for](boucle-for.md) et [Exercices sur les séquences](exercices-sequences.md). Assure-toi de les maîtriser avant d'attaquer les problèmes ci-dessous.
 
 ## Algorithmique sur les listes
 
@@ -33,7 +33,7 @@
 
 
 !!! question "Moyenne"
-    Ecrire et tester une fonction `moyenne` qui prend en paramètres ue liste de floats et qui renvoie leur moyenne.
+    Ecrire et tester une fonction `moyenne` qui prend en paramètres une liste de floats et qui renvoie leur moyenne.
 
 
 !!! question "Minimum"
@@ -43,7 +43,7 @@
 
 
 !!! question "Maximum"
-    Ecrire et tester une fonction `maximum` qui prend en paramètres une liste d'entiers et qui renvoie le minimum, sur le même principe.
+    Ecrire et tester une fonction `maximum` qui prend en paramètres une liste d'entiers et qui renvoie le maximum, sur le même principe.
 
 !!! question "Indice Minimum"
     Ecrire et tester une fonction `i_minimum` qui prend en paramètres une liste d'entiers et qui renvoie l'index du minimum.
@@ -59,7 +59,7 @@
 
     Si on ne précise pas l'ordre du tri, on parle de tri par ordre croissant.
 
-    Une liste est triée si chaque élément est plus grand que le precedent.
+    Une liste est triée si chaque élément est supérieur ou égal au précédent.
 
     Ecrire et tester une fonction `est_triee(lst: list[int]) -> bool` qui prend en paramètres une liste et qui renvoie True si la liste est triée, False sinon.
 
@@ -82,7 +82,7 @@
 
     - Modifier la fonction pour qu'elle renvoie la liste des n premiers nombres de la suite.
 
-    - Modifier la fonction en `syracuse(a: int)-> list[int]` pour qu'elle s'arrête d'alimenter la liste résultat dès que la nouvelle valeur est 1. Testez pour a=15 et a=7. Les questions suivantes portent sur cette suite générée se terminant par 1.
+    - Modifier la fonction en `syracuse(a: int)-> list[int]` pour qu'elle s'arrête d'alimenter la liste résultat dès que la nouvelle valeur est 1. Teste pour a=15 et a=7. Les questions suivantes portent sur cette suite générée se terminant par 1.
 
     Pour un nombre de départ a, on appelle "temps de vol" de la suite l'indice du dernier élément de la liste.
     
@@ -104,7 +104,7 @@
     A l'aide des fonctions `i_miniminium_partiel` et `echanger`, imaginer une fonction `tri_selection(lst: list[int])` qui trie en place une liste dans l'ordre croissant.
     
     ```python
-    def tri_selection(lst: list[int]):
+    def tri_selection(lst: list[int]) -> None:
         for i in range(0, len(lst)-1):
             ...
             ...
@@ -129,7 +129,7 @@
     ```
 
 !!! question "Décompression"
-    Ecrivez une fonction `decompresse` qui décompresse un tableau de données compressée par la méthode précédente
+    Écris une fonction `decompresse` qui décompresse un tableau de données compressée par la méthode précédente
 
     Exemples :
 
@@ -143,7 +143,7 @@
 
 !!! question "ADN"
     On donne la séquence de nuléotide d'un brin de l'ADN sous la forme d'une chaîne de caractères.
-    Ecrivez une fonction `complementaire` qui renvoie la sequence du brin complementaire sachant que:
+    Écris une fonction `complementaire` qui renvoie la sequence du brin complementaire sachant que:
 
     - le complementaire de A est T
     - le complementaire de G est C
