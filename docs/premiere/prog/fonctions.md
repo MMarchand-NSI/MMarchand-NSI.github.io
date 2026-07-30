@@ -4,9 +4,9 @@
 
 En programmation, on a souvent besoin de réutiliser du code, à quelque chose près.
 
-Imaginez qu'on doive dessiner un carré et que cela prenne 10 lignes de code. Pour dessiner 50 carrés, faut-il écrire 500 lignes ? Non. On range le code qui dessine un carré dans une **fonction**, et il suffit ensuite d'une ligne pour l'appeler.
+Imagine qu'on doive dessiner un carré et que cela prenne 10 lignes de code. Pour dessiner 50 carrés, faut-il écrire 500 lignes ? Non. On range le code qui dessine un carré dans une **fonction**, et il suffit ensuite d'une ligne pour l'appeler.
 
-Vous utilisez déjà des fonctions écrites par d'autres. `print` appelle elle-même tout un tas de fonctions, jusque dans les tréfonds de l'ordinateur, pour allumer les bons pixels à l'écran.
+Tu utilises déjà des fonctions écrites par d'autres. `print` appelle elle-même tout un tas de fonctions, jusque dans les tréfonds de l'ordinateur, pour allumer les bons pixels à l'écran.
 
 !!! abstract "Définition : fonction"
     Une fonction est un **bloc de code nommé et réutilisable qui réalise une tâche précise**.
@@ -27,6 +27,9 @@ Vous utilisez déjà des fonctions écrites par d'autres. `print` appelle elle-m
     2. sa **docstring** (ce qu'elle fait) ;
     3. puis seulement son **code** ;
     4. et son **`return`** si elle renvoie quelque chose.
+
+!!! tip "Ce que l'IA ne fait pas à ta place"
+    Une IA écrit le **corps** d'une fonction en une seconde. Ta valeur est de définir le **contrat** : la signature typée et la docstring (que prend la fonction ? que renvoie-t-elle ?), puis, page suivante, de la **tester**. Le contrat, c'est toi qui le poses ; c'est ce qui te permet de juger si le code (le tien ou celui d'une IA) est correct.
 
 Commençons par **lire** une fonction qui existe déjà, `randint`, avant d'en écrire une nous-mêmes.
 
@@ -97,7 +100,7 @@ def randint(a: int, b: int) -> int:
     Partout, on retrouve un nom, des paramètres et (souvent) un type de retour.
 
 !!! question "Exercice papier : écrire des signatures et des docstrings"
-    Pour chaque fonction, trouvez un nom et des noms de paramètres adéquats, et renseignez bien les **types** des paramètres et du retour. **N'écrivez pas encore le code**, seulement la signature et la docstring.
+    Pour chaque fonction, trouve un nom et des noms de paramètres adéquats, et renseigne bien les **types** des paramètres et du retour. **N'écris pas encore le code**, seulement la signature et la docstring.
 
     1. Calcule le cube d'un nombre entier.
     2. Vérifie si un nombre entier est pair.
@@ -173,7 +176,7 @@ print(var)     # affiche 49
 Le résultat d'un appel est une valeur comme une autre : on peut l'utiliser dans des calculs.
 
 !!! question "Prédire avant d'exécuter"
-    Sans lancer le code, prédisez ce qui s'affiche, puis vérifiez :
+    Sans lancer le code, prédis ce qui s'affiche, puis vérifie :
 
     ```python
     a = 5.3
@@ -186,8 +189,8 @@ Le résultat d'un appel est une valeur comme une autre : on peut l'utiliser dans
     (Attention aux parenthèses : un appel de fonction est une valeur, on peut donc l'imbriquer.)
 
 !!! question "Périmètre"
-    1. Écrivez une fonction qui calcule le périmètre d'un rectangle.
-    2. Calculez le périmètre d'un rectangle de dimensions $14 \times 50$.
+    1. Écris une fonction qui calcule le périmètre d'un rectangle.
+    2. Calcule le périmètre d'un rectangle de dimensions $14 \times 50$.
 
     ??? warning "Corrigé"
         ```python
@@ -208,7 +211,7 @@ Le résultat d'un appel est une valeur comme une autre : on peut l'utiliser dans
     | Faux | Vrai | Vrai |
     | Faux | Faux | Faux |
 
-    Écrivez une fonction `xor` qui prend deux booléens et renvoie `True` ou `False` selon les cas. Testez-la dans les quatre cas.
+    Écris une fonction `xor` qui prend deux booléens et renvoie `True` ou `False` selon les cas. Teste-la dans les quatre cas.
 
     ??? warning "Corrigé"
         ```python
@@ -222,7 +225,7 @@ Le résultat d'un appel est une valeur comme une autre : on peut l'utiliser dans
 Une fonction peut ne renvoyer aucune valeur : son rôle est alors d'effectuer un travail (afficher, dessiner...) sans rendre d'information. C'est le cas de `print`.
 
 ```python
-def dis_coucou(n: int):
+def dis_coucou(n: int) -> None:
     """Affiche coucou n fois"""
     for _ in range(n):
         print("Coucou!")
@@ -254,11 +257,11 @@ Une fonction peut avoir autant de paramètres qu'on veut. À l'appel, il faut re
     AAAAA
     AAAAA
     ```
-    Écrivez et testez `affiche_rectangle`. Rappels : `print()` passe à la ligne ; `print('A', end='')` affiche sans passer à la ligne.
+    Écris et teste `affiche_rectangle`. Rappels : `print()` passe à la ligne ; `print('A', end='')` affiche sans passer à la ligne.
 
     ??? warning "Corrigé"
         ```python
-        def affiche_rectangle(hauteur: int, largeur: int, car: str):
+        def affiche_rectangle(hauteur: int, largeur: int, car: str) -> None:
             """Affiche un rectangle de hauteur x largeur fait du caractère car"""
             for _ in range(hauteur):
                 for _ in range(largeur):
@@ -267,10 +270,10 @@ Une fonction peut avoir autant de paramètres qu'on veut. À l'appel, il faut re
         ```
 
 !!! question "Automatismes"
-    Écrivez la signature, la docstring **puis** le code de :
+    Écris la signature, la docstring **puis** le code de :
 
     1. `nb_secondes(heures, minutes, secondes)` : renvoie le nombre total de secondes.
-    2. `conversion_euro_dollar(euros)` : convertit des euros en dollars (taux $1€ = 1{,}17\$$). Convertissez 12 €.
+    2. `conversion_euro_dollar(euros)` : convertit des euros en dollars (taux $1€ = 1{,}17\$$). Convertis 12 €.
     3. `pair_ou_impair(n)` : renvoie `"pair"` ou `"impair"`.
     4. `plus_petit(a, b)` : renvoie le plus petit des deux entiers.
 
@@ -298,13 +301,13 @@ Une fonction peut avoir autant de paramètres qu'on veut. À l'appel, il faut re
         ```
 
 !!! question "IMC"
-    1. Écrivez `imc(poids, taille)` qui renvoie l'indice de masse corporelle (formule sur [Wikipédia](https://fr.wikipedia.org/wiki/Indice_de_masse_corporelle)).
-    2. Écrivez un programme qui demande poids et taille, puis affiche l'IMC et un message d'interprétation.
-    3. Affichez une réserve claire : cette information ne doit pas servir à un autodiagnostic, il faut préférer l'avis d'un médecin.
+    1. Écris `imc(poids, taille)` qui renvoie l'indice de masse corporelle (formule sur [Wikipédia](https://fr.wikipedia.org/wiki/Indice_de_masse_corporelle)).
+    2. Écris un programme qui demande poids et taille, puis affiche l'IMC et un message d'interprétation.
+    3. Affiche une réserve claire : cette information ne doit pas servir à un autodiagnostic, il faut préférer l'avis d'un médecin.
 
 ## 6. Une fonction peut en appeler une autre
 
-La définition d'une fonction peut utiliser une autre fonction, déjà existante ou écrite par vous. C'est ainsi qu'on construit, à partir de briques simples, des fonctions plus puissantes.
+La définition d'une fonction peut utiliser une autre fonction, déjà existante ou écrite par toi. C'est ainsi qu'on construit, à partir de briques simples, des fonctions plus puissantes.
 
 ```python
 def carre(x: float) -> float:
@@ -326,7 +329,7 @@ print(somme_carres(3, 4))   # 25
     ```python
     import turtle
 
-    def triangle(tortue: turtle.Turtle, x: int, y: int, cote: int, couleur: str):
+    def triangle(tortue: turtle.Turtle, x: int, y: int, cote: int, couleur: str) -> None:
         """Dessine un triangle isocèle de base horizontale, de sommet (x, y)"""
         tortue.penup()
         tortue.goto(x, y)
@@ -343,9 +346,9 @@ print(somme_carres(3, 4))   # 25
         tortue.end_fill()
     ```
 
-    1. En **utilisant** `triangle`, écrivez une fonction `sapin(tortue, x, y)` qui empile quelques triangles pour dessiner un sapin.
-    2. Écrivez une fonction `foret(tortue, n)` qui dessine `n` sapins à des positions choisies aléatoirement.
+    1. En **utilisant** `triangle`, écris une fonction `sapin(tortue, x, y)` qui empile quelques triangles pour dessiner un sapin.
+    2. Écris une fonction `foret(tortue, n)` qui dessine `n` sapins à des positions choisies aléatoirement.
 
 ---
 
-Vous savez maintenant **écrire** une fonction. Reste à s'assurer qu'elle est **correcte** : c'est l'objet de la page [Spécification et tests](specification-tests.md), qui reprend la docstring et introduit les tests automatiques.
+Tu sais maintenant **écrire** une fonction. Reste à s'assurer qu'elle est **correcte** : c'est l'objet de la page [Spécification et tests](specification-tests.md), qui reprend la docstring et introduit les tests automatiques.
