@@ -127,7 +127,7 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
 ## Lire et prédire avant d'écrire
 
 !!! question "Prédire"
-    Qu'affiche ce code ? Déroulez le parcours, puis vérifiez.
+    Qu'affiche ce code ? Déroule le parcours, puis vérifie.
 
     ```python
     stock = {"pomme": 3, "poire": 5, "kiwi": 2}
@@ -145,67 +145,67 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
 !!! hint "Entraînement"
     Les 20 premières questions servent à s'entraîner à utiliser les fonctionnalités de base d'un dictionnaire.
 
-    Une fois les exercices réussis, vous pouvez les effacer et les refaire plus tard afin de vous assurer de maîtriser la base.
+    Une fois les exercices réussis, tu peux les effacer et les refaire plus tard afin de t'assurer de maîtriser la base.
 
     L'ensemble des questions correspond à des situations communes et récurrentes.
 
 
 !!! question "Exercice 1"
-    Créez un dictionnaire vide représentant les attributs d'un employé appelé `employe1`.
+    Crée un dictionnaire vide représentant les attributs d'un employé appelé `employe1`.
 
 
 !!! question "Exercice 2"
-    Ajoutez des clés telles que "nom", "age", "poste" à votre dictionnaire `employe1` et assignez-leur des valeurs appropriées.
+    Ajoute des clés telles que "nom", "age", "poste" à ton dictionnaire `employe1` et assignez-leur des valeurs appropriées.
 
 
 !!! question "Exercice 3"
-    Affichez l'âge de l'employé dans le dictionnaire `employe1`.
+    Affiche l'âge de l'employé dans le dictionnaire `employe1`.
 
 
 !!! question "Exercice 4"
-    Modifiez le poste de l'employé dans le dictionnaire `employe1`.
+    Modifie le poste de l'employé dans le dictionnaire `employe1`.
 
 
 !!! question "Exercice 5"
-    Supprimez l'âge de l'employé du dictionnaire `employe1`.
+    Supprime l'âge de l'employé du dictionnaire `employe1`.
 
 
 !!! question "Exercice 6"
-    Parcourez toutes les clés du dictionnaire `employe1` et affichez-les.
+    Parcours toutes les clés du dictionnaire `employe1` et affichez-les.
 
 
 !!! question "Exercice 7"
-    Parcourez toutes les valeurs du dictionnaire `employe1` et affichez-les.
+    Parcours toutes les valeurs du dictionnaire `employe1` et affichez-les.
 
 
 !!! question "Exercice 8"
-    Créez un dictionnaire représentant les attributs d'un fruit appelé `fruit1`, avec les clés "nom", "couleur", "quantite" et assignez-leur des valeurs appropriées.
+    Crée un dictionnaire représentant les attributs d'un fruit appelé `fruit1`, avec les clés "nom", "couleur", "quantite" et assignez-leur des valeurs appropriées.
 
 
 !!! question "Exercice 9"
-    Modifiez la couleur du fruit dans le dictionnaire `fruit1`.
+    Modifie la couleur du fruit dans le dictionnaire `fruit1`.
 
 
 !!! question "Exercice 10"
-    Supprimez la quantité de fruits du dictionnaire `fruit1`.
+    Supprime la quantité de fruits du dictionnaire `fruit1`.
 
 
 !!! question "Exercice 11"
-    Parcourez toutes les paires clé-valeur du dictionnaire `fruit1` et affichez-les.
+    Parcours toutes les paires clé-valeur du dictionnaire `fruit1` et affichez-les.
 
 
 !!! question "Exercice 12"
-    Créez un dictionnaire vide représentant les notes d'un élève appelé `notes`.
+    Crée un dictionnaire vide représentant les notes d'un élève appelé `notes`.
 
 
 !!! question "Exercice 13"
-    Ajoutez des clés représentant les matières de l'étudiant avec leurs notes associées dans le dictionnaire `notes`.
+    Ajoute des clés représentant les matières de l'étudiant avec leurs notes associées dans le dictionnaire `notes`.
 
 
 !!! question "Exercice 14"
-    Créez une fonction `moyenne(dico: dict[str, float]) -> float` qui prend en paramètre un dictionnaire de notes et renvoie la moyenne des notes dans le dictionnaire.
+    Crée une fonction `moyenne(dico: dict[str, float]) -> float` qui prend en paramètre un dictionnaire de notes et renvoie la moyenne des notes dans le dictionnaire.
     
-    Testez la fonction avec le dictionnaire `notes`.
+    Teste la fonction avec le dictionnaire `notes`.
     
     **Exemple** :
 
@@ -215,15 +215,15 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
     ```
 
 !!! question "Exercice 15"
-    Trouvez la matière avec la note la plus élevée dans le dictionnaire `notes`.
+    Trouve la matière avec la note la plus élevée dans le dictionnaire `notes`.
 
 
 !!! question "Exercice 16"
-    Vérifiez si la matière "NSI" est présente dans le dictionnaire `notes`.
+    Vérifie si la matière "NSI" est présente dans le dictionnaire `notes`.
 
 
 !!! question "Exercice 17"
-    Supprimez une matière dans le dictionnaire `notes`.
+    Supprime une matière dans le dictionnaire `notes`.
 
 !!! question "Exercice 18"
     On considère la ville suivante :
@@ -263,7 +263,7 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
     3. Modifier le numéro d'Ewen, il se termine par un 9 et non un 8.
     4. Ajouter "Raoul" dont le numéro est "0789898989".
     5. Supprimer "Hanae" du répertoire.
-    6. On souhaite obtenir l'annuaire inversé. C'est à dire un dictionnaire où on a échangé les clés et les valeurs. En parcourant le répertoire, créez l'annuaire inversé.
+    6. On souhaite obtenir l'annuaire inversé. C'est à dire un dictionnaire où on a échangé les clés et les valeurs. En parcourant le répertoire, crée l'annuaire inversé.
 
 !!! question "Exercice 20"
     Convertir les deux listes suivantes en un dictionnaire **en utilisant une seule boucle for**.
@@ -281,7 +281,7 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
 
 
 !!! question "Exercice 21"
-    Considérez la liste suivante :
+    Considère la liste suivante :
     ```python
         employees = [
         {'name': 'John', 'salary': 7500},
@@ -290,7 +290,7 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
         ]
     ```
 
-    1. Changez le salaire de Brad en 8500.
+    1. Change le salaire de Brad en 8500.
     
        Sortie attendue :
     ```python
@@ -299,9 +299,9 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
             {'name': 'Brad', 'salary': 8500}]
     ```
 
-    2. À l'aide d'une boucle, calculez le cumul des salaires.
+    2. À l'aide d'une boucle, calcule le cumul des salaires.
 
-    3. À l'aide d'une boucle, créez la liste des noms des employés.
+    3. À l'aide d'une boucle, crée la liste des noms des employés.
 
 !!! question "Exercice 22"
     Nous allons apprendre à compter les lettres d'une chaîne de caractères.
@@ -322,9 +322,9 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
         'c': 3, 'p': 2, 'u': 2, 'd': 2, 'a': 2, 'n': 2, 'g': 1}
     ```
 
-    Créez une fonction `compteur(chaine: str) -> dict[str, int]` que vous testerez avec plusieurs chaînes.
+    Crée une fonction `compteur(chaine: str) -> dict[str, int]` que tu testeras avec plusieurs chaînes.
     
-    Essayez de trouver un moyen sans dévoiler l'indice dans un premier temps.
+    Essaie de trouver un moyen sans dévoiler l'indice dans un premier temps.
 
     ??? tip "Indice"
         Il faut procéder par accumulation dans un dictionnaire.
