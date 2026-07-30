@@ -132,7 +132,7 @@ print(compteur)              # APRÈS la boucle (une seule fois)
     Mettre l'initialisation dans la boucle la remettrait à zéro à chaque tour ; mettre l'affichage dans la boucle l'afficherait 1000 fois.
 
 !!! question "Somme des pairs"
-    Écrivez `somme_pairs(lst)` qui renvoie la somme des entiers **pairs** d'une liste.
+    Écris `somme_pairs(lst)` qui renvoie la somme des entiers **pairs** d'une liste.
 
     ??? tip "Indice"
         Un accumulateur `res = 0`, un parcours, et **dans** la boucle un `if x % 2 == 0` avant d'ajouter.
@@ -145,6 +145,44 @@ print(compteur)              # APRÈS la boucle (une seule fois)
                 if x % 2 == 0:
                     res = res + x
             return res
+        ```
+
+## Deux traitements en un seul parcours : la fusion
+
+Parfois, on veut **deux résultats à la fois**, calculés pendant le **même** parcours. On mène alors **deux accumulateurs en parallèle** dans une seule boucle. C'est la **fusion**, et c'est le point où l'on se trompe le plus souvent : on oublie d'en initialiser un, ou on met une mise à jour au mauvais endroit.
+
+Exemple : la **moyenne** d'une liste a besoin de la **somme** *et* du **compte**. Un seul parcours suffit pour les deux :
+
+```python
+def moyenne(lst: list[float]) -> float:
+    somme = 0        # premier accumulateur
+    compte = 0       # second accumulateur
+    for x in lst:
+        somme = somme + x     # on met à jour les DEUX
+        compte = compte + 1   # dans la même boucle
+    return somme / compte
+```
+
+!!! danger "La fusion, à traiter pour elle-même"
+    Additionner d'un côté, puis compter de l'autre, c'est facile. Les **fusionner** dans une seule boucle est une compétence à part : chaque accumulateur a sa propre initialisation (**avant**), sa propre mise à jour (**dans**), et le résultat combine les deux (**après**). Deux accumulateurs, une boucle.
+
+!!! question "Fusion : min et max en un seul parcours"
+    Écris `min_et_max(lst)` qui renvoie le couple `(plus petit, plus grand)` d'une liste non vide, en **un seul parcours**.
+
+    ??? tip "Indice"
+        Deux accumulateurs, `mini` et `maxi`, tous deux initialisés à `lst[0]`. Dans la boucle, mets à jour chacun si l'élément courant est plus petit / plus grand.
+
+    ??? success "Solution"
+        ```python
+        def min_et_max(lst: list[int]) -> tuple[int, int]:
+            mini = lst[0]
+            maxi = lst[0]
+            for x in lst:
+                if x < mini:
+                    mini = x
+                if x > maxi:
+                    maxi = x
+            return (mini, maxi)
         ```
 
 ## Le même `for` sur les autres séquences
@@ -176,10 +214,10 @@ Là encore, c'est un `for each` : « pour chaque indice `i` dans `range(len(s))`
 
 ## Lire et prédire avant d'écrire
 
-Avant d'écrire une boucle, entraînez-vous à **lire** celles des autres et à **prédire** leur résultat. C'est la meilleure préparation à en écrire soi-même.
+Avant d'écrire une boucle, entraîne-toi à **lire** celles des autres et à **prédire** leur résultat. C'est la meilleure préparation à en écrire soi-même.
 
 !!! question "Prédire (1)"
-    Que vaut `res` à la fin ? Suivez-le tour par tour, puis exécutez pour vérifier.
+    Que vaut `res` à la fin ? Suis-le tour par tour, puis exécute pour vérifier.
 
     ```python
     res = 0
@@ -200,8 +238,8 @@ Avant d'écrire une boucle, entraînez-vous à **lire** celles des autres et à 
     print(res)
     ```
 
-    1. Prédisez l'affichage.
-    2. **Modifiez une seule ligne** pour que le mot s'affiche à l'endroit.
+    1. Prédis l'affichage.
+    2. **Modifie une seule ligne** pour que le mot s'affiche à l'endroit.
 
     ??? warning "Réponse"
         1. `nohtyp` : chaque lettre est placée **devant** les précédentes, donc la chaîne est renversée.
@@ -213,7 +251,7 @@ Avant d'écrire une boucle, entraînez-vous à **lire** celles des autres et à 
     ```python
     mot = "Dracofeu"
     ```
-    Affichez une par une les lettres de `mot`, par élément, puis par indice.
+    Affiche une par une les lettres de `mot`, par élément, puis par indice.
 
 !!! question "2 - Un caractère sur deux"
     ```python
@@ -231,7 +269,7 @@ Avant d'écrire une boucle, entraînez-vous à **lire** celles des autres et à 
     ```
 
 !!! question "3 - Nombre de voyelles"
-    On veut **compter** : que vaut le résultat au départ ? Complétez aussi le type de retour.
+    On veut **compter** : que vaut le résultat au départ ? Complète aussi le type de retour.
 
     ```python
     def nb_voyelles(txt: str) -> int:
@@ -279,10 +317,10 @@ Avant d'écrire une boucle, entraînez-vous à **lire** celles des autres et à 
 !!! question "6 - Somme, produit, factorielle"
     1. `somme(lst)` : la somme des entiers d'une liste.
     2. `produit(lst)` : leur produit (attention à l'initialisation de l'accumulateur !).
-    3. `factorielle(n)` : $1 \times 2 \times \dots \times n$. Que vaut `factorielle(0)` avec votre code ?
+    3. `factorielle(n)` : $1 \times 2 \times \dots \times n$. Que vaut `factorielle(0)` avec ton code ?
 
     ??? tip "Indice léger"
-        Reprenez la méthodologie de l'accumulation : de quel **type** est le résultat ? Quelle **valeur initiale** ne change rien à une addition ? à une multiplication ?
+        Reprends la méthodologie de l'accumulation : de quel **type** est le résultat ? Quelle **valeur initiale** ne change rien à une addition ? à une multiplication ?
 
     ??? tip "Indice plus précis"
         Pour la somme, l'accumulateur part de `0` et on fait `res = res + x`. Pour le produit, il part de **`1`** (car multiplier par 1 ne change rien) et on fait `res = res * x`.
@@ -316,7 +354,7 @@ Avant d'écrire une boucle, entraînez-vous à **lire** celles des autres et à 
     ```
 
 !!! question "8 - Problème : bin2dec"
-    Écrivez `bin2dec(txt)` qui convertit une écriture binaire (une chaîne de `0` et de `1`) en entier décimal.
+    Écris `bin2dec(txt)` qui convertit une écriture binaire (une chaîne de `0` et de `1`) en entier décimal.
 
     ```python
     >>> bin2dec("1101")
