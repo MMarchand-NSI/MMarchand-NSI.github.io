@@ -73,7 +73,7 @@
 
 !!! hint "Utiliser les doctests (tests unitaires automatiques)"
 
-    Mettez le code suivant à la fin de votre fichier:
+    Mets le code suivant à la fin de ton fichier:
 
     ```python
     if __name__ == "__main__":
@@ -81,7 +81,7 @@
         doctest.testmod()  # Exécute tous les doctests
     ```
 
-    Il permet d'exécuter automatiquement les doctests lorsque vous exécutez le programme python.
+    Il permet d'exécuter automatiquement les doctests lorsque tu exécutes le programme python.
 
     Les doctests sont les instructions précédées de `>>> ` dans la docstring.
 
@@ -94,9 +94,9 @@
 
     Si le test est passant (il marche), alors python ne dira rien du tout. Sinon il râle.
 
-    Dans le code que je vous fournis, j'annule l'exécution des doctests en indiquant `# doctest: +SKIP`
+    Dans le code que je te fournis, j'annule l'exécution des doctests en indiquant `# doctest: +SKIP`
 
-    Ca vous permet de copier coller tout le texte d'un exercice, et d'activer les doctests de la fonction sur laquelle vous travaillez en supprimant  `# doctest: +SKIP`
+    Ça te permet de copier coller tout le texte d'un exercice, et d'activer les doctests de la fonction sur laquelle tu travailles en supprimant  `# doctest: +SKIP`
 
 
 
