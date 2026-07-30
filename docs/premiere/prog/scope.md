@@ -9,7 +9,7 @@ Une variable **locale** est créée à l'intérieur d'une fonction. Elle n'exist
 ### Exemple de base
 
 ```python
-def ma_fonction():
+def ma_fonction() -> None:
     x = 10  # Variable locale
     print("Dans la fonction, x =", x)
 
@@ -26,7 +26,7 @@ print(x)            # ❌ ERREUR : x n'existe pas ici
 ### Les paramètres sont aussi des variables locales
 
 ```python
-def calculer(a, b):
+def calculer(a: int, b: int) -> int:
     # a et b sont des variables locales
     resultat = a + b  # resultat est aussi locale
     return resultat
@@ -40,11 +40,11 @@ print(a)            # ❌ ERREUR : a n'existe que dans calculer()
     Les variables locales permettent d'**isoler** le code de chaque fonction. Deux fonctions peuvent avoir des variables du même nom sans conflit :
 
     ```python
-    def fonction_a():
+    def fonction_a() -> None:
         x = 10
         print("Fonction A, x =", x)
 
-    def fonction_b():
+    def fonction_b() -> None:
         x = 20
         print("Fonction B, x =", x)
 
@@ -61,7 +61,7 @@ Une variable **globale** est définie en dehors de toute fonction, au niveau pri
 ```python
 a = 5  # Variable globale
 
-def afficher_a():
+def afficher_a() -> None:
     print("Dans la fonction, a =", a)  # On peut lire a
 
 afficher_a()                            # 5
@@ -75,7 +75,7 @@ Ici, pas de problème : on **lit** simplement la valeur de `a`.
 ```python
 x = 10  # Variable globale
 
-def incrementer_x():
+def incrementer_x() -> None:
     x = x + 1  # ❌ ERREUR : UnboundLocalError
     print(x)
 
@@ -96,7 +96,7 @@ Pour modifier une variable globale depuis une fonction, il faut déclarer explic
 ```python
 x = 10  # Variable globale
 
-def incrementer_x():
+def incrementer_x() -> None:
     global x      # Déclare qu'on veut utiliser la variable globale
     x = x + 1     # Maintenant ça marche
 
@@ -110,7 +110,7 @@ print("Après :", x)   # 11
 ```python
 compteur = 0  # Variable globale
 
-def incrementer_compteur():
+def incrementer_compteur() -> None:
     compteur = 5  # Crée une variable LOCALE "compteur"
     print("Dans la fonction, compteur =", compteur)
 
@@ -138,12 +138,12 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     # ❌ Mauvais : variable globale modifiable
     stock = 10
 
-    def acheter():
+    def acheter() -> None:
         global stock
         stock -= 1
 
     # ✅ Bon : paramètres et return
-    def acheter(stock):
+    def acheter(stock: int) -> int:
         return stock - 1
 
     stock = 10
@@ -158,7 +158,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     TVA = 0.20
     MAX_TENTATIVES = 3
 
-    def calculer_prix_ttc(prix_ht):
+    def calculer_prix_ttc(prix_ht: float) -> float:
         return prix_ht * (1 + TVA)  # Lecture de TVA : OK
     ```
 
@@ -174,7 +174,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
 
     compteur = 0  # Variable globale nécessaire
 
-    def clic():
+    def clic() -> None:
         global compteur
         compteur += 1
         label.config(text=f"Clics : {compteur}")
@@ -189,7 +189,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
 
     **Pourquoi c'est acceptable ici ?**
 
-    - La fonction `clic()` est appelée par le framework (pas par vous)
+    - La fonction `clic()` est appelée par le framework (pas par toi)
     - On ne peut pas passer de paramètres à `clic()` directement
     - Les variables globales modélisent **l'état de l'application**
 
@@ -198,12 +198,12 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
 ## 4. Exercices
 
 !!! question "Exercice 1 : Prédire le résultat"
-    Sans exécuter le code, prédisez ce qui sera affiché :
+    Sans exécuter le code, prédis ce qui sera affiché :
 
     ```python
     y = 100
 
-    def tester():
+    def tester() -> None:
         y = 50
         print("Dans tester, y =", y)
 
@@ -211,7 +211,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     print("En dehors, y =", y)
     ```
 
-    Puis exécutez pour vérifier.
+    Puis exécute pour vérifier.
 
 ??? success "Solution"
     ```
@@ -227,7 +227,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     ```python
     total = 0
 
-    def ajouter(valeur):
+    def ajouter(valeur: int) -> None:
         total = total + valeur
 
     ajouter(5)
@@ -244,7 +244,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     ```python
     total = 0
 
-    def ajouter(valeur):
+    def ajouter(valeur: int) -> None:
         global total
         total = total + valeur
 
@@ -255,7 +255,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     **Correction 2 (meilleure : sans global) :**
 
     ```python
-    def ajouter(total, valeur):
+    def ajouter(total: int, valeur: int) -> int:
         return total + valeur
 
     total = 0
@@ -264,20 +264,20 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     ```
 
 !!! question "Exercice 3 : Gestion de stock"
-    Créez un fichier `stock.py` avec :
+    Crée un fichier `stock.py` avec :
 
     - Une fonction `acheter(stock)` qui diminue le stock de 1 et le retourne
     - Une fonction `livraison(stock, quantite)` qui augmente le stock et le retourne
 
-    Testez avec un stock initial de 10, 2 achats, puis une livraison de 5.
+    Teste avec un stock initial de 10, 2 achats, puis une livraison de 5.
 
 ??? success "Solution"
     ```python
-    def acheter(stock):
+    def acheter(stock: int) -> int:
         """Diminue le stock de 1."""
         return stock - 1
 
-    def livraison(stock, quantite):
+    def livraison(stock: int, quantite: int) -> int:
         """Augmente le stock de la quantité livrée."""
         return stock + quantite
 
@@ -297,7 +297,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     Que va afficher ce code ?
 
     ```python
-    def mystere():
+    def mystere() -> None:
         for i in range(3):
             x = i * 2
         print("x =", x)
@@ -306,7 +306,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     mystere()
     ```
 
-    Puis exécutez pour vérifier. Que se passe-t-il avec `x` et `i` ?
+    Puis exécute pour vérifier. Que se passe-t-il avec `x` et `i` ?
 
 ??? success "Solution"
     ```
@@ -319,13 +319,13 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     C'est différent de langages comme C, Java ou Rust où les variables de boucle sont détruites après la boucle.
 
 !!! question "Exercice 5 : Accumulateur"
-    Sans utiliser de variable globale, écrivez une fonction `somme_liste(liste)` qui calcule la somme des éléments d'une liste.
+    Sans utiliser de variable globale, écris une fonction `somme_liste(liste)` qui calcule la somme des éléments d'une liste.
 
-    Testez avec `[1, 2, 3, 4, 5]`.
+    Teste avec `[1, 2, 3, 4, 5]`.
 
 ??? success "Solution"
     ```python
-    def somme_liste(liste):
+    def somme_liste(liste: list[int]) -> int:
         """Calcule la somme des éléments d'une liste."""
         total = 0  # Variable locale
         for nombre in liste:
