@@ -7911,10 +7911,10 @@ Les comportements d'un objet sont représentés par l'ensemble de ses <strong>m�
 <h2 id="classe-animal">Classe <code>Animal</code></h2>
 <p>Voici un exemple basique d'une classe en Python qui modélise la phrase "Un animal porte un nom, et il sait parler."</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="p">:</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">nom</span> <span class="o">=</span> <span class="n">nom</span>  <span class="c1"># Attribut d&#39;instance</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">parler</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>   <span class="c1"># Méthode d&#39;instance</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">parler</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>   <span class="c1"># Méthode d&#39;instance</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nom</span><span class="si">}</span><span class="s2"> fait du bruit.&quot;</span><span class="p">)</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">x</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Bidule&quot;</span><span class="p">)</span>   <span class="c1"># création d&#39;une instance d&#39;Animal portant le nom bidule</span>
@@ -7922,10 +7922,16 @@ Les comportements d'un objet sont représentés par l'ensemble de ses <strong>m�
 <a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="n">x</span><span class="o">.</span><span class="n">nom</span> <span class="o">=</span> <span class="s2">&quot;Truc&quot;</span>         <span class="c1"># Mutabilité -&gt; On peut modifier les attributs de l&#39;instance de la même manière </span>
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="n">x</span><span class="o">.</span><span class="n">parler</span><span class="p">()</span>  <span class="c1"># On accède aussi aux méthodes d&#39;instance par le point. Affiche: Truc fait du bruit.</span>
 </code></pre></div>
-<p>Ce programme affichera
+<div class="admonition question">
+<p class="admonition-title">Prédis la sortie</p>
+<p>Avant d'exécuter, écris ce que ce programme affiche, puis déplie pour vérifier.</p>
+<details class="success">
+<summary>Réponse</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Bidule
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Truc fait du bruit
-</code></pre></div></p>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Truc fait du bruit.
+</code></pre></div>
+</details>
+</div>
 <p>Dans cet exemple :</p>
 <ul>
 <li><strong><code>__init__</code></strong> : Cette méthode sera automatiquement chargée d'initialiser les attributs de l'objet en cours d'instanciation. On le considère comme le <strong>constructeur</strong> de la classe.</li>
@@ -7935,31 +7941,31 @@ Les comportements d'un objet sont représentés par l'ensemble de ses <strong>m�
 <p class="admonition-title">Constructeur</p>
 <p>Un constructeur est une fonction particulière appelée lors de l'instanciation. Elle permet d'allouer la mémoire nécessaire à l'objet et d'initialiser ses attributs.</p>
 </div>
-<div class="admonition info">
-<p class="admonition-title">Abus de langage</p>
+<details class="info">
+<summary>Abus de langage</summary>
 <p>Il est très (trop) courant de considérer <code>__init__</code> comme le constructeur en Python, car il initialise l'objet après sa création. Cependant, il ne fait que la moitié du travail. la méthode chargée de créer l'instance est le dunder <code>__new__</code>. La preuve en est que <code>__init__</code> prend self en paramètre, c'est donc bien que self existe déjà avant l'invocation d'<code>__init__</code>. Le constructeur est en réalité le couple formé par les méthodes <code>__new__</code> et <code>__init__</code>.</p>
 <p>Voici une portion de code pour se rendre compte de ce qu'il se passe réellement:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">MaClasse</span><span class="p">:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;MaClasse&quot;</span><span class="p">:</span>
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Appel de __new__ pour créer une nouvelle instance de la classe&#39;&#39;&#39;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Appel de __new__ : Création de l&#39;instance&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>        <span class="n">instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">MaClasse</span><span class="p">,</span> <span class="bp">cls</span><span class="p">)</span><span class="o">.</span><span class="fm">__new__</span><span class="p">(</span><span class="bp">cls</span><span class="p">)</span>
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        <span class="k">return</span> <span class="n">instance</span>
 <a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valeur</span><span class="p">):</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">valeur</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="w">        </span><span class="sd">&#39;&#39;&#39;Appel de __init__ pour initialiser l&#39;instance avec les attributs&#39;&#39;&#39;</span>
 <a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Appel de __init__ : Initialisation de l&#39;instance&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">valeur</span> <span class="o">=</span> <span class="n">valeur</span>
 <a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">afficher_valeur</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">afficher_valeur</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Valeur : </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">valeur</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
 <a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="c1"># Instanciation d&#39;un objet</span>
 <a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="n">c</span> <span class="o">=</span> <span class="n">MaClasse</span><span class="p">(</span><span class="s2">&quot;truc&quot;</span><span class="p">)</span>
 <a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="n">c</span><span class="o">.</span><span class="n">afficher_valeur</span><span class="p">()</span>
 </code></pre></div>
-<p>On considèrera malgré tout que <code>__init__</code> est le constructeur, car si on vous pose la question, c'est la réponse attendue.</p>
-</div>
+<p>On considèrera malgré tout que <code>__init__</code> est le constructeur, car si on te pose la question, c'est la réponse attendue.</p>
+</details>
 <h2 id="une-variable-designe-un-objet-les-references">Une variable désigne un objet : les références</h2>
 <p>Le point le plus délicat de l'objet n'est pas la syntaxe des classes, c'est de suivre ce qui se passe <strong>à l'exécution</strong>. En particulier : que contient une variable comme <code>x</code> après <code>x = Animal("Bidule")</code> ?</p>
 <p><code>x</code> ne <strong>contient</strong> pas l'animal. <code>x</code> <strong>désigne</strong> l'objet : elle en garde une <strong>référence</strong> (une flèche vers lui, quelque part en mémoire). C'est le même mécanisme que le partage de référence rencontré avec les listes.</p>
@@ -7990,15 +7996,15 @@ Les comportements d'un objet sont représentés par l'ensemble de ses <strong>m�
 <h2 id="interactions-entre-objets">Interactions entre objets</h2>
 <p>Rajoutons la phrase "Un Humain porte un nom, un prenom et peut adopter des animaux domestiques. On peut afficher la liste des animaux d'un Humain".</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Humain</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prenom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prenom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">nom</span> <span class="o">=</span> <span class="n">nom</span>
 <a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">prenom</span> <span class="o">=</span> <span class="n">prenom</span>
 <a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">animaux</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Animal</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 <a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">adopte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">Animal</span><span class="p">):</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">adopte</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="n">Animal</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">animaux</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">afficher_animaux</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">afficher_animaux</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">animaux</span><span class="p">:</span>
 <a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>            <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">nom</span><span class="p">)</span>
 <a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>
@@ -8021,9 +8027,41 @@ Un Humain peut faire des trajets avec une voiture pour un certain nombre de kilo
 Avant de commencer un trajet, l'humain vérifie s'il a assez d'essence, sinon, il va à la station service faire le plein.
 Lorsqu'un humain fait le plein de sa voiture, son compte en banque diminue. </p>
 <ul>
-<li>Ecrivez une classe Humain et une classe Voiture compatibles avec cette description.</li>
-<li>Instanciez ensuite Humain et Voiture afin de tester des scenarios d'utilisation.</li>
+<li>Écris une classe <code>Voiture</code> et une classe <code>Humain</code> compatibles avec cette description, puis instancie-les pour jouer un scénario.</li>
 </ul>
+<p><strong>Méthode (une nouveauté à la fois).</strong></p>
+<ol>
+<li><strong>Spécifie avant de coder.</strong> Pour chaque classe, écris d'abord les <strong>signatures typées</strong> de ses méthodes et <strong>2-3 scénarios de test</strong> attendus (par exemple : après <code>v.roule(100)</code>, de combien baisse le carburant ?). C'est le travail que l'IA ne fait pas à ta place.</li>
+<li>Écris et teste <strong><code>Voiture</code> d'abord</strong> (rouler, faire le plein, afficher), puis <strong><code>Humain</code></strong> (acheter une voiture, faire un trajet en vérifiant le carburant).</li>
+<li><strong>Instancie</strong> un <code>Humain</code> et une <code>Voiture</code>, et joue un scénario complet (achat, trajet, passage à la station).</li>
+</ol>
+<details class="tip">
+<summary>Indice : squelette de <code>Voiture</code></summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Voiture</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">marque</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">modele</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">prix</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>                 <span class="n">conso</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">capacite</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">marque</span> <span class="o">=</span> <span class="n">marque</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">modele</span> <span class="o">=</span> <span class="n">modele</span>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">prix</span> <span class="o">=</span> <span class="n">prix</span>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">conso</span> <span class="o">=</span> <span class="n">conso</span>            <span class="c1"># litres au 100 km</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">capacite</span> <span class="o">=</span> <span class="n">capacite</span>      <span class="c1"># capacité du réservoir</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">km</span> <span class="o">=</span> <span class="mf">0.0</span>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">carburant</span> <span class="o">=</span> <span class="mf">0.0</span>
+<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a>
+<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">roule</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">distance</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>        <span class="o">...</span>   <span class="c1"># augmente self.km, diminue self.carburant selon la conso</span>
+<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>
+<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">plein</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>        <span class="o">...</span>   <span class="c1"># remplit le réservoir, renvoie le nombre de litres ajoutés</span>
+<a id="__codelineno-6-17" name="__codelineno-6-17" href="#__codelineno-6-17"></a>
+<a id="__codelineno-6-18" name="__codelineno-6-18" href="#__codelineno-6-18"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">affiche</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-6-19" name="__codelineno-6-19" href="#__codelineno-6-19"></a>        <span class="o">...</span>
+</code></pre></div>
+</details>
+<details class="warning">
+<summary>Ce que l'IA ne fait pas à ta place</summary>
+<p>Une IA écrit ces deux classes en une seconde : ta valeur est <strong>avant</strong>. Décider quels attributs portent l'état (le carburant dans <code>Voiture</code>, l'argent dans <code>Humain</code>), choisir quelle classe est le <strong>chef d'orchestre</strong>, et écrire les <strong>tests</strong> qui disent ce que « faire un trajet » doit produire. Signatures typées et tests d'abord, corps ensuite.</p>
+</details>
 </div>
 
 
@@ -8045,7 +8083,7 @@ Lorsqu'un humain fait le plein de sa voiture, son compte en banque diminue. </p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 22, 2026 17:55:18 UTC">July 22, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 29, 2026 23:26:43 UTC">July 29, 2026</span>
   </span>
 
     

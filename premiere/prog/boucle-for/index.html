@@ -2403,6 +2403,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#deux-traitements-en-un-seul-parcours-la-fusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deux traitements en un seul parcours : la fusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#le-meme-for-sur-les-autres-sequences" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -7873,6 +7884,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#deux-traitements-en-un-seul-parcours-la-fusion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Deux traitements en un seul parcours : la fusion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#le-meme-for-sur-les-autres-sequences" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8145,7 +8167,7 @@ affiche <code>c</code>, puis <code>h</code>, puis <code>a</code>, puis <code>t</
 </div>
 <div class="admonition question">
 <p class="admonition-title">Somme des pairs</p>
-<p>Écrivez <code>somme_pairs(lst)</code> qui renvoie la somme des entiers <strong>pairs</strong> d'une liste.</p>
+<p>Écris <code>somme_pairs(lst)</code> qui renvoie la somme des entiers <strong>pairs</strong> d'une liste.</p>
 <details class="tip">
 <summary>Indice</summary>
 <p>Un accumulateur <code>res = 0</code>, un parcours, et <strong>dans</strong> la boucle un <code>if x % 2 == 0</code> avant d'ajouter.</p>
@@ -8161,17 +8183,53 @@ affiche <code>c</code>, puis <code>h</code>, puis <code>a</code>, puis <code>t</
 </code></pre></div>
 </details>
 </div>
+<h2 id="deux-traitements-en-un-seul-parcours-la-fusion">Deux traitements en un seul parcours : la fusion</h2>
+<p>Parfois, on veut <strong>deux résultats à la fois</strong>, calculés pendant le <strong>même</strong> parcours. On mène alors <strong>deux accumulateurs en parallèle</strong> dans une seule boucle. C'est la <strong>fusion</strong>, et c'est le point où l'on se trompe le plus souvent : on oublie d'en initialiser un, ou on met une mise à jour au mauvais endroit.</p>
+<p>Exemple : la <strong>moyenne</strong> d'une liste a besoin de la <strong>somme</strong> <em>et</em> du <strong>compte</strong>. Un seul parcours suffit pour les deux :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">moyenne</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">somme</span> <span class="o">=</span> <span class="mi">0</span>        <span class="c1"># premier accumulateur</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">compte</span> <span class="o">=</span> <span class="mi">0</span>       <span class="c1"># second accumulateur</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        <span class="n">somme</span> <span class="o">=</span> <span class="n">somme</span> <span class="o">+</span> <span class="n">x</span>     <span class="c1"># on met à jour les DEUX</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>        <span class="n">compte</span> <span class="o">=</span> <span class="n">compte</span> <span class="o">+</span> <span class="mi">1</span>   <span class="c1"># dans la même boucle</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="k">return</span> <span class="n">somme</span> <span class="o">/</span> <span class="n">compte</span>
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">La fusion, à traiter pour elle-même</p>
+<p>Additionner d'un côté, puis compter de l'autre, c'est facile. Les <strong>fusionner</strong> dans une seule boucle est une compétence à part : chaque accumulateur a sa propre initialisation (<strong>avant</strong>), sa propre mise à jour (<strong>dans</strong>), et le résultat combine les deux (<strong>après</strong>). Deux accumulateurs, une boucle.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Fusion : min et max en un seul parcours</p>
+<p>Écris <code>min_et_max(lst)</code> qui renvoie le couple <code>(plus petit, plus grand)</code> d'une liste non vide, en <strong>un seul parcours</strong>.</p>
+<details class="tip">
+<summary>Indice</summary>
+<p>Deux accumulateurs, <code>mini</code> et <code>maxi</code>, tous deux initialisés à <code>lst[0]</code>. Dans la boucle, mets à jour chacun si l'élément courant est plus petit / plus grand.</p>
+</details>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">min_et_max</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="n">mini</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="n">maxi</span> <span class="o">=</span> <span class="n">lst</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">mini</span><span class="p">:</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>            <span class="n">mini</span> <span class="o">=</span> <span class="n">x</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">maxi</span><span class="p">:</span>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>            <span class="n">maxi</span> <span class="o">=</span> <span class="n">x</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">mini</span><span class="p">,</span> <span class="n">maxi</span><span class="p">)</span>
+</code></pre></div>
+</details>
+</div>
 <h2 id="le-meme-for-sur-les-autres-sequences">Le même <code>for</code> sur les autres séquences</h2>
 <p>Puisque <code>for</code> parcourt <strong>n'importe quelle séquence</strong>, il fonctionne à l'identique sur une chaîne, une liste, un tuple (les listes sont détaillées plus loin dans le cours). C'est <strong>le même mécanisme</strong>, on change seulement la séquence parcourue.</p>
 <p>Il y a alors <strong>deux façons</strong> de parcourir une séquence <code>s</code>.</p>
 <p><strong>Par élément</strong> (à privilégier, plus lisible) :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;coucou&quot;</span><span class="p">,</span> <span class="s2">&quot;les&quot;</span><span class="p">,</span> <span class="s2">&quot;gens&quot;</span><span class="p">]:</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;coucou&quot;</span><span class="p">,</span> <span class="s2">&quot;les&quot;</span><span class="p">,</span> <span class="s2">&quot;gens&quot;</span><span class="p">]:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Par indice</strong>, quand on a besoin de la position. Les indices de <code>s</code> vont de <code>0</code> à <code>len(s) - 1</code>, donc on parcourt <code>range(len(s))</code> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;coucou&quot;</span><span class="p">,</span> <span class="s2">&quot;les&quot;</span><span class="p">,</span> <span class="s2">&quot;gens&quot;</span><span class="p">]</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>     <span class="c1"># i parcourt 0, 1, 2</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">s</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;coucou&quot;</span><span class="p">,</span> <span class="s2">&quot;les&quot;</span><span class="p">,</span> <span class="s2">&quot;gens&quot;</span><span class="p">]</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>     <span class="c1"># i parcourt 0, 1, 2</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
 </code></pre></div>
 <p>Là encore, c'est un <code>for each</code> : « pour chaque indice <code>i</code> dans <code>range(len(s))</code> ».</p>
 <div class="admonition danger">
@@ -8182,14 +8240,14 @@ affiche <code>c</code>, puis <code>h</code>, puis <code>a</code>, puis <code>t</
 </ul>
 </div>
 <h2 id="lire-et-predire-avant-decrire">Lire et prédire avant d'écrire</h2>
-<p>Avant d'écrire une boucle, entraînez-vous à <strong>lire</strong> celles des autres et à <strong>prédire</strong> leur résultat. C'est la meilleure préparation à en écrire soi-même.</p>
+<p>Avant d'écrire une boucle, entraîne-toi à <strong>lire</strong> celles des autres et à <strong>prédire</strong> leur résultat. C'est la meilleure préparation à en écrire soi-même.</p>
 <div class="admonition question">
 <p class="admonition-title">Prédire (1)</p>
-<p>Que vaut <code>res</code> à la fin ? Suivez-le tour par tour, puis exécutez pour vérifier.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="n">i</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<p>Que vaut <code>res</code> à la fin ? Suis-le tour par tour, puis exécute pour vérifier.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">):</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="n">i</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 </code></pre></div>
 <details class="warning">
 <summary>Réponse</summary>
@@ -8198,15 +8256,15 @@ affiche <code>c</code>, puis <code>h</code>, puis <code>a</code>, puis <code>t</
 </div>
 <div class="admonition question">
 <p class="admonition-title">Prédire, puis modifier</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;python&quot;</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">for</span> <span class="n">lettre</span> <span class="ow">in</span> <span class="n">mot</span><span class="p">:</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">lettre</span> <span class="o">+</span> <span class="n">res</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;python&quot;</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">for</span> <span class="n">lettre</span> <span class="ow">in</span> <span class="n">mot</span><span class="p">:</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">lettre</span> <span class="o">+</span> <span class="n">res</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 </code></pre></div>
 <ol>
-<li>Prédisez l'affichage.</li>
-<li><strong>Modifiez une seule ligne</strong> pour que le mot s'affiche à l'endroit.</li>
+<li>Prédis l'affichage.</li>
+<li><strong>Modifie une seule ligne</strong> pour que le mot s'affiche à l'endroit.</li>
 </ol>
 <details class="warning">
 <summary>Réponse</summary>
@@ -8219,68 +8277,68 @@ affiche <code>c</code>, puis <code>h</code>, puis <code>a</code>, puis <code>t</
 <h2 id="exercices">Exercices</h2>
 <div class="admonition question">
 <p class="admonition-title">1 - Parcours simple</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;Dracofeu&quot;</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;Dracofeu&quot;</span>
 </code></pre></div>
-Affichez une par une les lettres de <code>mot</code>, par élément, puis par indice.</p>
+Affiche une par une les lettres de <code>mot</code>, par élément, puis par indice.</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">2 - Un caractère sur deux</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">un_sur_2</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la chaîne formée d&#39;un caractère sur deux.</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="sd">    &gt;&gt;&gt; un_sur_2(&quot;abcdef&quot;)</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="sd">    &#39;ace&#39;</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="sd">    &gt;&gt;&gt; un_sur_2(&quot;AZE&quot;)</span>
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="sd">    &#39;AE&#39;</span>
-<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a><span class="sd">    &gt;&gt;&gt; un_sur_2(&quot;&quot;)</span>
-<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="sd">    &#39;&#39;</span>
-<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>    <span class="o">...</span>
-</code></pre></div>
-</div>
-<div class="admonition question">
-<p class="admonition-title">3 - Nombre de voyelles</p>
-<p>On veut <strong>compter</strong> : que vaut le résultat au départ ? Complétez aussi le type de retour.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">nb_voyelles</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le nombre de voyelles de txt.</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="sd">    &gt;&gt;&gt; nb_voyelles(&quot;bonjour&quot;)</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="sd">    3</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="sd">    &gt;&gt;&gt; nb_voyelles(&quot;&quot;)</span>
-<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="sd">    0</span>
-<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a><span class="sd">    &gt;&gt;&gt; nb_voyelles(&quot;aeiouy&quot;)</span>
-<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="sd">    6</span>
-<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>    <span class="n">voyelles</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">)</span>
-<a id="__codelineno-18-12" name="__codelineno-18-12" href="#__codelineno-18-12"></a>    <span class="o">...</span>
-</code></pre></div>
-</div>
-<div class="admonition question">
-<p class="admonition-title">4 - Renverser</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">renverser</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la chaîne dans l&#39;autre sens.</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">un_sur_2</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la chaîne formée d&#39;un caractère sur deux.</span>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="sd">    &gt;&gt;&gt; renverser(&quot;banane&quot;)</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="sd">    &#39;enanab&#39;</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="sd">    &gt;&gt;&gt; renverser(&quot;&quot;)</span>
-<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="sd">    &#39;&#39;</span>
-<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="sd">    &gt;&gt;&gt; renverser(&quot;a&quot;)</span>
-<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="sd">    &#39;a&#39;</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="sd">    &gt;&gt;&gt; un_sur_2(&quot;abcdef&quot;)</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="sd">    &#39;ace&#39;</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="sd">    &gt;&gt;&gt; un_sur_2(&quot;AZE&quot;)</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="sd">    &#39;AE&#39;</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="sd">    &gt;&gt;&gt; un_sur_2(&quot;&quot;)</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="sd">    &#39;&#39;</span>
 <a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-19-11" name="__codelineno-19-11" href="#__codelineno-19-11"></a>    <span class="o">...</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
-<p class="admonition-title">5 - Contient (sans l'opérateur <code>in</code>)</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">contient</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si e est dans lst.</span>
+<p class="admonition-title">3 - Nombre de voyelles</p>
+<p>On veut <strong>compter</strong> : que vaut le résultat au départ ? Complète aussi le type de retour.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">nb_voyelles</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le nombre de voyelles de txt.</span>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="sd">    &gt;&gt;&gt; contient(5, [2, 5, 8, 9])</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="sd">    True</span>
-<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="sd">    &gt;&gt;&gt; contient(6, [2, 5, 8, 9])</span>
-<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="sd">    False</span>
-<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a>    <span class="o">...</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="sd">    &gt;&gt;&gt; nb_voyelles(&quot;bonjour&quot;)</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a><span class="sd">    3</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="sd">    &gt;&gt;&gt; nb_voyelles(&quot;&quot;)</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a><span class="sd">    0</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a><span class="sd">    &gt;&gt;&gt; nb_voyelles(&quot;aeiouy&quot;)</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="sd">    6</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>    <span class="n">voyelles</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a&#39;</span><span class="p">,</span> <span class="s1">&#39;e&#39;</span><span class="p">,</span> <span class="s1">&#39;i&#39;</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="s1">&#39;u&#39;</span><span class="p">)</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a>    <span class="o">...</span>
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">4 - Renverser</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">renverser</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la chaîne dans l&#39;autre sens.</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="sd">    &gt;&gt;&gt; renverser(&quot;banane&quot;)</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="sd">    &#39;enanab&#39;</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="sd">    &gt;&gt;&gt; renverser(&quot;&quot;)</span>
+<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="sd">    &#39;&#39;</span>
+<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a><span class="sd">    &gt;&gt;&gt; renverser(&quot;a&quot;)</span>
+<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a><span class="sd">    &#39;a&#39;</span>
+<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>    <span class="o">...</span>
+</code></pre></div>
+</div>
+<div class="admonition question">
+<p class="admonition-title">5 - Contient (sans l'opérateur <code>in</code>)</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">contient</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si e est dans lst.</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="sd">    &gt;&gt;&gt; contient(5, [2, 5, 8, 9])</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="sd">    True</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="sd">    &gt;&gt;&gt; contient(6, [2, 5, 8, 9])</span>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="sd">    False</span>
+<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>    <span class="o">...</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
@@ -8288,11 +8346,11 @@ Affichez une par une les lettres de <code>mot</code>, par élément, puis par in
 <ol>
 <li><code>somme(lst)</code> : la somme des entiers d'une liste.</li>
 <li><code>produit(lst)</code> : leur produit (attention à l'initialisation de l'accumulateur !).</li>
-<li><code>factorielle(n)</code> : <span class="arithmatex">\(1 \times 2 \times \dots \times n\)</span>. Que vaut <code>factorielle(0)</code> avec votre code ?</li>
+<li><code>factorielle(n)</code> : <span class="arithmatex">\(1 \times 2 \times \dots \times n\)</span>. Que vaut <code>factorielle(0)</code> avec ton code ?</li>
 </ol>
 <details class="tip">
 <summary>Indice léger</summary>
-<p>Reprenez la méthodologie de l'accumulation : de quel <strong>type</strong> est le résultat ? Quelle <strong>valeur initiale</strong> ne change rien à une addition ? à une multiplication ?</p>
+<p>Reprends la méthodologie de l'accumulation : de quel <strong>type</strong> est le résultat ? Quelle <strong>valeur initiale</strong> ne change rien à une addition ? à une multiplication ?</p>
 </details>
 <details class="tip">
 <summary>Indice plus précis</summary>
@@ -8300,40 +8358,40 @@ Affichez une par une les lettres de <code>mot</code>, par élément, puis par in
 </details>
 <details class="success">
 <summary>Solution</summary>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">somme</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a>        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="n">x</span>
-<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>    <span class="k">return</span> <span class="n">res</span>
-<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>
-<a id="__codelineno-21-7" name="__codelineno-21-7" href="#__codelineno-21-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">produit</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-21-8" name="__codelineno-21-8" href="#__codelineno-21-8"></a>    <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span>
-<a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
-<a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">*</span> <span class="n">x</span>
-<a id="__codelineno-21-11" name="__codelineno-21-11" href="#__codelineno-21-11"></a>    <span class="k">return</span> <span class="n">res</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">somme</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="n">x</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>    <span class="k">return</span> <span class="n">res</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">produit</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a>    <span class="n">res</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lst</span><span class="p">:</span>
+<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a>        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">*</span> <span class="n">x</span>
+<a id="__codelineno-23-11" name="__codelineno-23-11" href="#__codelineno-23-11"></a>    <span class="k">return</span> <span class="n">res</span>
 </code></pre></div>
 <code>factorielle(0)</code> vaut <code>1</code> : la boucle <code>for i in range(1, 1)</code> ne fait aucun tour, l'accumulateur garde sa valeur initiale <code>1</code>.</p>
 </details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">7 - Minimum (sans la fonction <code>min</code>)</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">minimum</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le plus petit élément d&#39;une liste non vide.</span>
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>
-<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="sd">    &gt;&gt;&gt; minimum([7, 9, 2, 8, 2, 5])</span>
-<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="sd">    2</span>
-<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;la liste ne doit pas être vide&quot;</span>
-<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>    <span class="o">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">minimum</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le plus petit élément d&#39;une liste non vide.</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="sd">    &gt;&gt;&gt; minimum([7, 9, 2, 8, 2, 5])</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="sd">    2</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;la liste ne doit pas être vide&quot;</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a>    <span class="o">...</span>
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">8 - Problème : bin2dec</p>
-<p>Écrivez <code>bin2dec(txt)</code> qui convertit une écriture binaire (une chaîne de <code>0</code> et de <code>1</code>) en entier décimal.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">bin2dec</span><span class="p">(</span><span class="s2">&quot;1101&quot;</span><span class="p">)</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="mi">13</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">bin2dec</span><span class="p">(</span><span class="s2">&quot;10001000101111&quot;</span><span class="p">)</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="mi">8751</span>
+<p>Écris <code>bin2dec(txt)</code> qui convertit une écriture binaire (une chaîne de <code>0</code> et de <code>1</code>) en entier décimal.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">bin2dec</span><span class="p">(</span><span class="s2">&quot;1101&quot;</span><span class="p">)</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="mi">13</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="o">&gt;&gt;&gt;</span> <span class="n">bin2dec</span><span class="p">(</span><span class="s2">&quot;10001000101111&quot;</span><span class="p">)</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="mi">8751</span>
 </code></pre></div>
 <p>Indications : on peut renverser la chaîne pour que l'indice de chaque chiffre corresponde à sa puissance de 2, puis calculer la somme des puissances de 2 par accumulation (parcours par indice).</p>
 </div>
@@ -8359,7 +8417,7 @@ Affichez une par une les lettres de <code>mot</code>, par élément, puis par in
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 1, 2026 14:54:18 UTC">July 1, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 30, 2026 07:25:29 UTC">July 30, 2026</span>
   </span>
 
     

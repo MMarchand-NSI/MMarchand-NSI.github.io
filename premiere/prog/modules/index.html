@@ -8320,7 +8320,7 @@
 
 <h1 id="modules-python">Modules Python</h1>
 <p>Un <strong>module</strong> est un fichier Python (<code>.py</code>) qui contient du code réutilisable : des fonctions, des classes, des variables. Les modules permettent d'<strong>organiser</strong> le code et d'<strong>éviter la répétition</strong>.</p>
-<p>Python propose des centaines de modules intégrés (comme <code>random</code>, <code>math</code>, <code>os</code>...), permet d'en télécharger des milliers d'autres, et vous pouvez aussi créer vos propres modules.</p>
+<p>Python propose des centaines de modules intégrés (comme <code>random</code>, <code>math</code>, <code>os</code>...), permet d'en télécharger des milliers d'autres, et tu peux aussi créer tes propres modules.</p>
 <h2 id="1-quest-ce-qui-se-cache-derriere-import">1. Qu'est-ce qui se cache derrière <code>import</code></h2>
 <h3 id="exemple-de-depart">Exemple de départ</h3>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
@@ -8329,13 +8329,13 @@
 </code></pre></div>
 <p>Ce programme affiche un nombre aléatoire entre 1 et 6 (comme un dé).</p>
 <h3 id="explication-de-limport">Explication de l'import</h3>
-<p>Quand vous écrivez <code>import random</code>, Python :</p>
+<p>Quand tu écris <code>import random</code>, Python :</p>
 <ol>
 <li><strong>Cherche</strong> un fichier nommé <code>random.py</code> dans ses bibliothèques standard</li>
 <li><strong>Exécute</strong> tout le code de ce fichier (définitions de fonctions, de variables, etc.)</li>
 <li><strong>Crée</strong> un objet <code>random</code> qui contient tout ce qui a été défini dans le fichier</li>
 </ol>
-<p>Ensuite, vous pouvez accéder aux fonctions du module avec la <strong>notation pointée</strong> : <code>random.randint()</code>, <code>random.choice()</code>, etc.</p>
+<p>Ensuite, tu peux accéder aux fonctions du module avec la <strong>notation pointée</strong> : <code>random.randint()</code>, <code>random.choice()</code>, etc.</p>
 <div class="admonition example">
 <p class="admonition-title">Autres modules courants</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
@@ -8363,10 +8363,10 @@
 </code></pre></div>
 <div class="admonition warning">
 <p class="admonition-title">Attention</p>
-<p>Avec <code>from random import randint</code>, vous ne pouvez utiliser que <code>randint</code>. Pour utiliser d'autres fonctions du module, il faudrait les importer aussi.</p>
+<p>Avec <code>from random import randint</code>, tu ne peux utiliser que <code>randint</code>. Pour utiliser d'autres fonctions du module, il faudrait les importer aussi.</p>
 </div>
 <h4 id="import-de-tout-mauvaise-pratique-ne-pas-faire">Import de tout (MAUVAISE PRATIQUE - NE PAS FAIRE)</h4>
-<p>J'ajoute uniquement ce paragraphe pour que vous ne fassiez pas ça.</p>
+<p>J'ajoute uniquement ce paragraphe pour que tu ne fasses pas ça.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
@@ -8394,19 +8394,19 @@
 <p><strong>Le même code produit des résultats différents selon l'ordre des imports !</strong> C'est pourquoi il faut éviter <code>import *</code>.</p>
 </div>
 <h2 id="2-importer-un-fichier-dans-le-meme-repertoire">2. Importer un fichier dans le même répertoire</h2>
-<p>Vous pouvez créer vos propres modules en écrivant un fichier Python, puis l'importer dans un autre fichier.</p>
+<p>Tu peux créer tes propres modules en écrivant un fichier Python, puis l'importer dans un autre fichier.</p>
 <h3 id="exemple-module-de-calculs-geometriques">Exemple : Module de calculs géométriques</h3>
 <p><strong>Fichier <code>geometrie.py</code> (le module) :</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">aire_rectangle</span><span class="p">(</span><span class="n">longueur</span><span class="p">,</span> <span class="n">largeur</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">aire_rectangle</span><span class="p">(</span><span class="n">longueur</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">largeur</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule l&#39;aire d&#39;un rectangle.&quot;&quot;&quot;</span>
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="k">return</span> <span class="n">longueur</span> <span class="o">*</span> <span class="n">largeur</span>
 <a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">aire_cercle</span><span class="p">(</span><span class="n">rayon</span><span class="p">):</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">aire_cercle</span><span class="p">(</span><span class="n">rayon</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule l&#39;aire d&#39;un cercle.&quot;&quot;&quot;</span>
 <a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">rayon</span> <span class="o">**</span> <span class="mi">2</span>
 <a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">perimetre_rectangle</span><span class="p">(</span><span class="n">longueur</span><span class="p">,</span> <span class="n">largeur</span><span class="p">):</span>
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">perimetre_rectangle</span><span class="p">(</span><span class="n">longueur</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">largeur</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule le périmètre d&#39;un rectangle.&quot;&quot;&quot;</span>
 <a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="k">return</span> <span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">longueur</span> <span class="o">+</span> <span class="n">largeur</span><span class="p">)</span>
 </code></pre></div>
@@ -8420,21 +8420,21 @@
 </code></pre></div>
 <div class="admonition info">
 <p class="admonition-title">Comment ça marche ?</p>
-<p>Quand Python voit <code>import geometrie</code>, il cherche un fichier <code>geometrie.py</code> dans le <strong>même répertoire</strong> que <code>programme.py</code>, l'exécute, et vous donne accès à tout ce qui y est défini.</p>
+<p>Quand Python voit <code>import geometrie</code>, il cherche un fichier <code>geometrie.py</code> dans le <strong>même répertoire</strong> que <code>programme.py</code>, l'exécute, et te donne accès à tout ce qui y est défini.</p>
 </div>
 <h3 id="exemple-module-de-jeux">Exemple : Module de jeux</h3>
 <p><strong>Fichier <code>jeux.py</code> :</strong></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">lancer_de</span><span class="p">(</span><span class="n">nombre_faces</span><span class="o">=</span><span class="mi">6</span><span class="p">):</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">lancer_de</span><span class="p">(</span><span class="n">nombre_faces</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">6</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Simule le lancer d&#39;un dé.&quot;&quot;&quot;</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">nombre_faces</span><span class="p">)</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">pile_ou_face</span><span class="p">():</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">pile_ou_face</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Simule un pile ou face.&quot;&quot;&quot;</span>
 <a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">([</span><span class="s2">&quot;Pile&quot;</span><span class="p">,</span> <span class="s2">&quot;Face&quot;</span><span class="p">])</span>
 <a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>
-<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">tirage_loto</span><span class="p">(</span><span class="n">nb_numeros</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">maximum</span><span class="o">=</span><span class="mi">49</span><span class="p">):</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">tirage_loto</span><span class="p">(</span><span class="n">nb_numeros</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span> <span class="n">maximum</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">49</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
 <a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Tire des numéros aléatoires sans répétition.&quot;&quot;&quot;</span>
 <a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    <span class="k">return</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">maximum</span> <span class="o">+</span> <span class="mi">1</span><span class="p">),</span> <span class="n">nb_numeros</span><span class="p">)</span>
 </code></pre></div>
@@ -8456,8 +8456,8 @@
 <p class="admonition-title">Bonnes pratiques</p>
 <ul>
 <li>Un module = un fichier avec des <strong>fonctions liées</strong> (géométrie, jeux, calculs...)</li>
-<li>Donnez des <strong>noms clairs</strong> aux modules (évitez <code>module1.py</code>, <code>truc.py</code>)</li>
-<li><strong>Documentez</strong> vos fonctions avec des docstrings (<code>"""..."""</code>)</li>
+<li>Donne des <strong>noms clairs</strong> aux modules (évitez <code>module1.py</code>, <code>truc.py</code>)</li>
+<li><strong>Documente</strong> tes fonctions avec des docstrings (<code>"""..."""</code>)</li>
 </ul>
 </div>
 <h2 id="3-installer-de-nouveaux-modules">3. Installer de nouveaux modules</h2>
@@ -8480,20 +8480,20 @@
 <ol>
 <li><strong><code>uv</code> cherche</strong> le module <code>requests</code> sur PyPI</li>
 <li><strong>Télécharge</strong> le module et toutes ses dépendances (autres modules dont il a besoin)</li>
-<li><strong>Installe</strong> le module dans votre projet</li>
-<li><strong>Met à jour</strong> le fichier <code>pyproject.toml</code> (qui liste tous les modules de votre projet)</li>
+<li><strong>Installe</strong> le module dans ton projet</li>
+<li><strong>Met à jour</strong> le fichier <code>pyproject.toml</code> (qui liste tous les modules de ton projet)</li>
 <li><strong>Met à jour</strong> le fichier <code>uv.lock</code> (qui verrouille les versions exactes)</li>
 </ol>
 <div class="admonition info">
 <p class="admonition-title">Fichiers créés</p>
 <ul>
-<li><strong><code>pyproject.toml</code></strong> : liste les modules dont votre projet a besoin</li>
+<li><strong><code>pyproject.toml</code></strong> : liste les modules dont ton projet a besoin</li>
 <li><strong><code>uv.lock</code></strong> : verrouille les versions exactes pour garantir la reproductibilité</li>
 <li><strong><code>.venv/</code></strong> : dossier contenant tous les modules installés (environnement virtuel)</li>
 </ul>
 </div>
 <h4 id="utiliser-le-module-installe">Utiliser le module installé</h4>
-<p>Après <code>uv add requests</code>, vous pouvez l'importer normalement :</p>
+<p>Après <code>uv add requests</code>, tu peux l'importer normalement :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">response</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;https://api.github.com&quot;</span><span class="p">)</span>
@@ -8503,36 +8503,36 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>uv<span class="w"> </span>remove<span class="w"> </span>requests
 </code></pre></div>
 <h4 id="installer-les-dependances-dun-projet-existant">Installer les dépendances d'un projet existant</h4>
-<p>Si vous récupérez un projet Python qui a un fichier <code>pyproject.toml</code>, installez toutes les dépendances avec :</p>
+<p>Si tu récupères un projet Python qui a un fichier <code>pyproject.toml</code>, installez toutes les dépendances avec :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>uv<span class="w"> </span>sync
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Recommandation</p>
-<p>Utilisez <code>uv</code> pour tous vos nouveaux projets. C'est l'avenir de la gestion de dépendances en Python.</p>
+<p>Utilise <code>uv</code> pour tous tes nouveaux projets. C'est l'avenir de la gestion de dépendances en Python.</p>
 </div>
 <h2 id="4-exercices">4. Exercices</h2>
 <div class="admonition question">
 <p class="admonition-title">Exercice 1 : Module de conversions</p>
-<p>Créez un fichier <code>conversions.py</code> avec les fonctions suivantes :</p>
+<p>Crée un fichier <code>conversions.py</code> avec les fonctions suivantes :</p>
 <ul>
 <li><code>celsius_vers_fahrenheit(c)</code> : convertit des degrés Celsius en Fahrenheit</li>
 <li><code>fahrenheit_vers_celsius(f)</code> : convertit des degrés Fahrenheit en Celsius</li>
 <li><code>km_vers_miles(km)</code> : convertit des kilomètres en miles (1 km = 0.621371 miles)</li>
 </ul>
-<p>Créez ensuite un fichier <code>test_conversions.py</code> qui importe ce module et teste les trois fonctions.</p>
+<p>Crée ensuite un fichier <code>test_conversions.py</code> qui importe ce module et teste les trois fonctions.</p>
 </div>
 <details class="success">
 <summary>Solution</summary>
 <p><strong>Fichier <code>conversions.py</code> :</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">celsius_vers_fahrenheit</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">celsius_vers_fahrenheit</span><span class="p">(</span><span class="n">c</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convertit des degrés Celsius en Fahrenheit.&quot;&quot;&quot;</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="k">return</span> <span class="n">c</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span>
 <a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">fahrenheit_vers_celsius</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">fahrenheit_vers_celsius</span><span class="p">(</span><span class="n">f</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convertit des degrés Fahrenheit en Celsius.&quot;&quot;&quot;</span>
 <a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">f</span> <span class="o">-</span> <span class="mi">32</span><span class="p">)</span> <span class="o">*</span> <span class="mi">5</span><span class="o">/</span><span class="mi">9</span>
 <a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>
-<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">km_vers_miles</span><span class="p">(</span><span class="n">km</span><span class="p">):</span>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">km_vers_miles</span><span class="p">(</span><span class="n">km</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convertit des kilomètres en miles.&quot;&quot;&quot;</span>
 <a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>    <span class="k">return</span> <span class="n">km</span> <span class="o">*</span> <span class="mf">0.621371</span>
 </code></pre></div>
@@ -8546,7 +8546,7 @@
 </details>
 <div class="admonition question">
 <p class="admonition-title">Exercice 2 : Utiliser le module <code>math</code></p>
-<p>Sans regarder la documentation, essayez de deviner ce que font ces fonctions du module <code>math</code> :</p>
+<p>Sans regarder la documentation, essaie de deviner ce que font ces fonctions du module <code>math</code> :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">floor</span><span class="p">(</span><span class="mf">3.7</span><span class="p">))</span>
@@ -8554,7 +8554,7 @@
 <a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">25</span><span class="p">))</span>
 <a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">pow</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
 </code></pre></div>
-<p>Exécutez le code pour vérifier vos hypothèses.</p>
+<p>Exécute le code pour vérifier tes hypothèses.</p>
 </div>
 <details class="success">
 <summary>Solution</summary>
@@ -8568,7 +8568,7 @@
 </details>
 <div class="admonition question">
 <p class="admonition-title">Exercice 3 : Import sélectif</p>
-<p>Réécrivez ce code en important <strong>seulement</strong> les fonctions nécessaires (avec <code>from ... import ...</code>) :</p>
+<p>Réécris ce code en important <strong>seulement</strong> les fonctions nécessaires (avec <code>from ... import ...</code>) :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">rayon</span> <span class="o">=</span> <span class="mi">5</span>
@@ -8587,26 +8587,26 @@
 </details>
 <div class="admonition question">
 <p class="admonition-title">Exercice 4 : Module de statistiques</p>
-<p>Créez un fichier <code>stats.py</code> avec les fonctions :</p>
+<p>Crée un fichier <code>stats.py</code> avec les fonctions :</p>
 <ul>
 <li><code>moyenne(liste)</code> : calcule la moyenne d'une liste de nombres</li>
 <li><code>minimum(liste)</code> : renvoie le plus petit élément</li>
 <li><code>maximum(liste)</code> : renvoie le plus grand élément</li>
 </ul>
-<p>Testez votre module avec <code>[10, 15, 8, 22, 19]</code>.</p>
+<p>Teste ton module avec <code>[10, 15, 8, 22, 19]</code>.</p>
 </div>
 <details class="success">
 <summary>Solution</summary>
 <p><strong>Fichier <code>stats.py</code> :</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">moyenne</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">moyenne</span><span class="p">(</span><span class="n">liste</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calcule la moyenne d&#39;une liste de nombres.&quot;&quot;&quot;</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span>
 <a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>
-<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">minimum</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">minimum</span><span class="p">(</span><span class="n">liste</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le plus petit élément.&quot;&quot;&quot;</span>
 <a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>    <span class="k">return</span> <span class="nb">min</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span>
 <a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>
-<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">maximum</span><span class="p">(</span><span class="n">liste</span><span class="p">):</span>
+<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">maximum</span><span class="p">(</span><span class="n">liste</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le plus grand élément.&quot;&quot;&quot;</span>
 <a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">liste</span><span class="p">)</span>
 </code></pre></div>
@@ -8624,7 +8624,7 @@
 <li>Un <strong>module</strong> est un fichier Python (<code>.py</code>) contenant du code réutilisable</li>
 <li><strong><code>import module</code></strong> charge un module (standard ou local)</li>
 <li><strong>Modules standard</strong> : <code>random</code>, <code>math</code>, <code>time</code>, etc. (fournis avec Python)</li>
-<li><strong>Modules locaux</strong> : vos propres fichiers <code>.py</code> dans le même répertoire</li>
+<li><strong>Modules locaux</strong> : tes propres fichiers <code>.py</code> dans le même répertoire</li>
 <li><strong>PyPI</strong> : bibliothèque en ligne avec 500 000+ modules</li>
 <li><strong><code>uv add</code></strong> : installe un module depuis PyPI (rapide et moderne)</li>
 <li><strong><code>uv sync</code></strong> : installe toutes les dépendances d'un projet existant</li>
@@ -8649,7 +8649,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="February 9, 2026 17:21:15 UTC">February 9, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 30, 2026 07:40:01 UTC">July 30, 2026</span>
   </span>
 
     

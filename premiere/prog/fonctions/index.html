@@ -8029,8 +8029,8 @@
 <h1 id="les-fonctions">Les fonctions</h1>
 <h2 id="pourquoi-des-fonctions">Pourquoi des fonctions ?</h2>
 <p>En programmation, on a souvent besoin de réutiliser du code, à quelque chose près.</p>
-<p>Imaginez qu'on doive dessiner un carré et que cela prenne 10 lignes de code. Pour dessiner 50 carrés, faut-il écrire 500 lignes ? Non. On range le code qui dessine un carré dans une <strong>fonction</strong>, et il suffit ensuite d'une ligne pour l'appeler.</p>
-<p>Vous utilisez déjà des fonctions écrites par d'autres. <code>print</code> appelle elle-même tout un tas de fonctions, jusque dans les tréfonds de l'ordinateur, pour allumer les bons pixels à l'écran.</p>
+<p>Imagine qu'on doive dessiner un carré et que cela prenne 10 lignes de code. Pour dessiner 50 carrés, faut-il écrire 500 lignes ? Non. On range le code qui dessine un carré dans une <strong>fonction</strong>, et il suffit ensuite d'une ligne pour l'appeler.</p>
+<p>Tu utilises déjà des fonctions écrites par d'autres. <code>print</code> appelle elle-même tout un tas de fonctions, jusque dans les tréfonds de l'ordinateur, pour allumer les bons pixels à l'écran.</p>
 <div class="admonition abstract">
 <p class="admonition-title">Définition : fonction</p>
 <p>Une fonction est un <strong>bloc de code nommé et réutilisable qui réalise une tâche précise</strong>.</p>
@@ -8052,6 +8052,10 @@
 <li>puis seulement son <strong>code</strong> ;</li>
 <li>et son <strong><code>return</code></strong> si elle renvoie quelque chose.</li>
 </ol>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Ce que l'IA ne fait pas à ta place</p>
+<p>Une IA écrit le <strong>corps</strong> d'une fonction en une seconde. Ta valeur est de définir le <strong>contrat</strong> : la signature typée et la docstring (que prend la fonction ? que renvoie-t-elle ?), puis, page suivante, de la <strong>tester</strong>. Le contrat, c'est toi qui le poses ; c'est ce qui te permet de juger si le code (le tien ou celui d'une IA) est correct.</p>
 </div>
 <p>Commençons par <strong>lire</strong> une fonction qui existe déjà, <code>randint</code>, avant d'en écrire une nous-mêmes.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">randint</span>
@@ -8112,7 +8116,7 @@
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice papier : écrire des signatures et des docstrings</p>
-<p>Pour chaque fonction, trouvez un nom et des noms de paramètres adéquats, et renseignez bien les <strong>types</strong> des paramètres et du retour. <strong>N'écrivez pas encore le code</strong>, seulement la signature et la docstring.</p>
+<p>Pour chaque fonction, trouve un nom et des noms de paramètres adéquats, et renseigne bien les <strong>types</strong> des paramètres et du retour. <strong>N'écris pas encore le code</strong>, seulement la signature et la docstring.</p>
 <ol>
 <li>Calcule le cube d'un nombre entier.</li>
 <li>Vérifie si un nombre entier est pair.</li>
@@ -8183,7 +8187,7 @@
 <p>Le résultat d'un appel est une valeur comme une autre : on peut l'utiliser dans des calculs.</p>
 <div class="admonition question">
 <p class="admonition-title">Prédire avant d'exécuter</p>
-<p>Sans lancer le code, prédisez ce qui s'affiche, puis vérifiez :</p>
+<p>Sans lancer le code, prédis ce qui s'affiche, puis vérifie :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mf">5.3</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">b</span> <span class="o">=</span> <span class="n">carre</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
@@ -8195,8 +8199,8 @@
 <div class="admonition question">
 <p class="admonition-title">Périmètre</p>
 <ol>
-<li>Écrivez une fonction qui calcule le périmètre d'un rectangle.</li>
-<li>Calculez le périmètre d'un rectangle de dimensions <span class="arithmatex">\(14 \times 50\)</span>.</li>
+<li>Écris une fonction qui calcule le périmètre d'un rectangle.</li>
+<li>Calcule le périmètre d'un rectangle de dimensions <span class="arithmatex">\(14 \times 50\)</span>.</li>
 </ol>
 <details class="warning">
 <summary>Corrigé</summary>
@@ -8242,7 +8246,7 @@
 </tr>
 </tbody>
 </table>
-<p>Écrivez une fonction <code>xor</code> qui prend deux booléens et renvoie <code>True</code> ou <code>False</code> selon les cas. Testez-la dans les quatre cas.</p>
+<p>Écris une fonction <code>xor</code> qui prend deux booléens et renvoie <code>True</code> ou <code>False</code> selon les cas. Teste-la dans les quatre cas.</p>
 <details class="warning">
 <summary>Corrigé</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">xor</span><span class="p">(</span><span class="n">c1</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">c2</span><span class="p">:</span> <span class="nb">bool</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -8253,7 +8257,7 @@
 </div>
 <h2 id="3-fonctions-sans-valeur-de-retour">3. Fonctions sans valeur de retour</h2>
 <p>Une fonction peut ne renvoyer aucune valeur : son rôle est alors d'effectuer un travail (afficher, dessiner...) sans rendre d'information. C'est le cas de <code>print</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">dis_coucou</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">dis_coucou</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Affiche coucou n fois&quot;&quot;&quot;</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Coucou!&quot;</span><span class="p">)</span>
@@ -8277,10 +8281,10 @@
 <div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>AAAAA
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>AAAAA
 </code></pre></div>
-Écrivez et testez <code>affiche_rectangle</code>. Rappels : <code>print()</code> passe à la ligne ; <code>print('A', end='')</code> affiche sans passer à la ligne.</p>
+Écris et teste <code>affiche_rectangle</code>. Rappels : <code>print()</code> passe à la ligne ; <code>print('A', end='')</code> affiche sans passer à la ligne.</p>
 <details class="warning">
 <summary>Corrigé</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">affiche_rectangle</span><span class="p">(</span><span class="n">hauteur</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">largeur</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">car</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">affiche_rectangle</span><span class="p">(</span><span class="n">hauteur</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">largeur</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">car</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Affiche un rectangle de hauteur x largeur fait du caractère car&quot;&quot;&quot;</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">hauteur</span><span class="p">):</span>
 <a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">largeur</span><span class="p">):</span>
@@ -8291,10 +8295,10 @@
 </div>
 <div class="admonition question">
 <p class="admonition-title">Automatismes</p>
-<p>Écrivez la signature, la docstring <strong>puis</strong> le code de :</p>
+<p>Écris la signature, la docstring <strong>puis</strong> le code de :</p>
 <ol>
 <li><code>nb_secondes(heures, minutes, secondes)</code> : renvoie le nombre total de secondes.</li>
-<li><code>conversion_euro_dollar(euros)</code> : convertit des euros en dollars (taux <span class="arithmatex">\(1€ = 1{,}17\$\)</span>). Convertissez 12 €.</li>
+<li><code>conversion_euro_dollar(euros)</code> : convertit des euros en dollars (taux <span class="arithmatex">\(1€ = 1{,}17\$\)</span>). Convertis 12 €.</li>
 <li><code>pair_ou_impair(n)</code> : renvoie <code>"pair"</code> ou <code>"impair"</code>.</li>
 <li><code>plus_petit(a, b)</code> : renvoie le plus petit des deux entiers.</li>
 </ol>
@@ -8325,13 +8329,13 @@
 <div class="admonition question">
 <p class="admonition-title">IMC</p>
 <ol>
-<li>Écrivez <code>imc(poids, taille)</code> qui renvoie l'indice de masse corporelle (formule sur <a href="https://fr.wikipedia.org/wiki/Indice_de_masse_corporelle">Wikipédia</a>).</li>
-<li>Écrivez un programme qui demande poids et taille, puis affiche l'IMC et un message d'interprétation.</li>
-<li>Affichez une réserve claire : cette information ne doit pas servir à un autodiagnostic, il faut préférer l'avis d'un médecin.</li>
+<li>Écris <code>imc(poids, taille)</code> qui renvoie l'indice de masse corporelle (formule sur <a href="https://fr.wikipedia.org/wiki/Indice_de_masse_corporelle">Wikipédia</a>).</li>
+<li>Écris un programme qui demande poids et taille, puis affiche l'IMC et un message d'interprétation.</li>
+<li>Affiche une réserve claire : cette information ne doit pas servir à un autodiagnostic, il faut préférer l'avis d'un médecin.</li>
 </ol>
 </div>
 <h2 id="6-une-fonction-peut-en-appeler-une-autre">6. Une fonction peut en appeler une autre</h2>
-<p>La définition d'une fonction peut utiliser une autre fonction, déjà existante ou écrite par vous. C'est ainsi qu'on construit, à partir de briques simples, des fonctions plus puissantes.</p>
+<p>La définition d'une fonction peut utiliser une autre fonction, déjà existante ou écrite par toi. C'est ainsi qu'on construit, à partir de briques simples, des fonctions plus puissantes.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">carre</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le carré de x&quot;&quot;&quot;</span>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">x</span>
@@ -8348,7 +8352,7 @@
 <p>La fonction <code>triangle</code> ci-dessous dessine un triangle isocèle de base horizontale, de sommet <span class="arithmatex">\((x, y)\)</span>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">turtle</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a>
-<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">triangle</span><span class="p">(</span><span class="n">tortue</span><span class="p">:</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">cote</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">couleur</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">triangle</span><span class="p">(</span><span class="n">tortue</span><span class="p">:</span> <span class="n">turtle</span><span class="o">.</span><span class="n">Turtle</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">cote</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">couleur</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Dessine un triangle isocèle de base horizontale, de sommet (x, y)&quot;&quot;&quot;</span>
 <a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>    <span class="n">tortue</span><span class="o">.</span><span class="n">penup</span><span class="p">()</span>
 <a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a>    <span class="n">tortue</span><span class="o">.</span><span class="n">goto</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
@@ -8365,12 +8369,12 @@
 <a id="__codelineno-21-17" name="__codelineno-21-17" href="#__codelineno-21-17"></a>    <span class="n">tortue</span><span class="o">.</span><span class="n">end_fill</span><span class="p">()</span>
 </code></pre></div>
 <ol>
-<li>En <strong>utilisant</strong> <code>triangle</code>, écrivez une fonction <code>sapin(tortue, x, y)</code> qui empile quelques triangles pour dessiner un sapin.</li>
-<li>Écrivez une fonction <code>foret(tortue, n)</code> qui dessine <code>n</code> sapins à des positions choisies aléatoirement.</li>
+<li>En <strong>utilisant</strong> <code>triangle</code>, écris une fonction <code>sapin(tortue, x, y)</code> qui empile quelques triangles pour dessiner un sapin.</li>
+<li>Écris une fonction <code>foret(tortue, n)</code> qui dessine <code>n</code> sapins à des positions choisies aléatoirement.</li>
 </ol>
 </div>
 <hr />
-<p>Vous savez maintenant <strong>écrire</strong> une fonction. Reste à s'assurer qu'elle est <strong>correcte</strong> : c'est l'objet de la page <a href="../specification-tests/">Spécification et tests</a>, qui reprend la docstring et introduit les tests automatiques.</p>
+<p>Tu sais maintenant <strong>écrire</strong> une fonction. Reste à s'assurer qu'elle est <strong>correcte</strong> : c'est l'objet de la page <a href="../specification-tests/">Spécification et tests</a>, qui reprend la docstring et introduit les tests automatiques.</p>
 
 
 
@@ -8391,7 +8395,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 1, 2026 10:13:01 UTC">July 1, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 30, 2026 07:30:39 UTC">July 30, 2026</span>
   </span>
 
     
