@@ -2,7 +2,7 @@
 
 Un **module** est un fichier Python (`.py`) qui contient du code réutilisable : des fonctions, des classes, des variables. Les modules permettent d'**organiser** le code et d'**éviter la répétition**.
 
-Python propose des centaines de modules intégrés (comme `random`, `math`, `os`...), permet d'en télécharger des milliers d'autres, et vous pouvez aussi créer vos propres modules.
+Python propose des centaines de modules intégrés (comme `random`, `math`, `os`...), permet d'en télécharger des milliers d'autres, et tu peux aussi créer tes propres modules.
 
 ## 1. Qu'est-ce qui se cache derrière `import`
 
@@ -18,13 +18,13 @@ Ce programme affiche un nombre aléatoire entre 1 et 6 (comme un dé).
 
 ### Explication de l'import
 
-Quand vous écrivez `import random`, Python :
+Quand tu écris `import random`, Python :
 
 1. **Cherche** un fichier nommé `random.py` dans ses bibliothèques standard
 2. **Exécute** tout le code de ce fichier (définitions de fonctions, de variables, etc.)
 3. **Crée** un objet `random` qui contient tout ce qui a été défini dans le fichier
 
-Ensuite, vous pouvez accéder aux fonctions du module avec la **notation pointée** : `random.randint()`, `random.choice()`, etc.
+Ensuite, tu peux accéder aux fonctions du module avec la **notation pointée** : `random.randint()`, `random.choice()`, etc.
 
 !!! example "Autres modules courants"
     ```python
@@ -61,11 +61,11 @@ print(randint(1, 6))  # Pas besoin de préfixer par "random."
 ```
 
 !!! warning "Attention"
-    Avec `from random import randint`, vous ne pouvez utiliser que `randint`. Pour utiliser d'autres fonctions du module, il faudrait les importer aussi.
+    Avec `from random import randint`, tu ne peux utiliser que `randint`. Pour utiliser d'autres fonctions du module, il faudrait les importer aussi.
 
 #### Import de tout (MAUVAISE PRATIQUE - NE PAS FAIRE)
 
-J'ajoute uniquement ce paragraphe pour que vous ne fassiez pas ça.
+J'ajoute uniquement ce paragraphe pour que tu ne fasses pas ça.
 
 ```python
 from random import *
@@ -103,23 +103,23 @@ print(choice([1, 2, 3]))
 
 ## 2. Importer un fichier dans le même répertoire
 
-Vous pouvez créer vos propres modules en écrivant un fichier Python, puis l'importer dans un autre fichier.
+Tu peux créer tes propres modules en écrivant un fichier Python, puis l'importer dans un autre fichier.
 
 ### Exemple : Module de calculs géométriques
 
 **Fichier `geometrie.py` (le module) :**
 
 ```python
-def aire_rectangle(longueur, largeur):
+def aire_rectangle(longueur: float, largeur: float) -> float:
     """Calcule l'aire d'un rectangle."""
     return longueur * largeur
 
-def aire_cercle(rayon):
+def aire_cercle(rayon: float) -> float:
     """Calcule l'aire d'un cercle."""
     import math
     return math.pi * rayon ** 2
 
-def perimetre_rectangle(longueur, largeur):
+def perimetre_rectangle(longueur: float, largeur: float) -> float:
     """Calcule le périmètre d'un rectangle."""
     return 2 * (longueur + largeur)
 ```
@@ -136,7 +136,7 @@ print(geometrie.perimetre_rectangle(5, 3))  # 16
 ```
 
 !!! info "Comment ça marche ?"
-    Quand Python voit `import geometrie`, il cherche un fichier `geometrie.py` dans le **même répertoire** que `programme.py`, l'exécute, et vous donne accès à tout ce qui y est défini.
+    Quand Python voit `import geometrie`, il cherche un fichier `geometrie.py` dans le **même répertoire** que `programme.py`, l'exécute, et te donne accès à tout ce qui y est défini.
 
 ### Exemple : Module de jeux
 
@@ -145,15 +145,15 @@ print(geometrie.perimetre_rectangle(5, 3))  # 16
 ```python
 import random
 
-def lancer_de(nombre_faces=6):
+def lancer_de(nombre_faces: int = 6) -> int:
     """Simule le lancer d'un dé."""
     return random.randint(1, nombre_faces)
 
-def pile_ou_face():
+def pile_ou_face() -> str:
     """Simule un pile ou face."""
     return random.choice(["Pile", "Face"])
 
-def tirage_loto(nb_numeros=5, maximum=49):
+def tirage_loto(nb_numeros: int = 5, maximum: int = 49) -> list[int]:
     """Tire des numéros aléatoires sans répétition."""
     return random.sample(range(1, maximum + 1), nb_numeros)
 ```
@@ -180,8 +180,8 @@ mon_projet/
 
 !!! tip "Bonnes pratiques"
     - Un module = un fichier avec des **fonctions liées** (géométrie, jeux, calculs...)
-    - Donnez des **noms clairs** aux modules (évitez `module1.py`, `truc.py`)
-    - **Documentez** vos fonctions avec des docstrings (`"""..."""`)
+    - Donne des **noms clairs** aux modules (évitez `module1.py`, `truc.py`)
+    - **Documente** tes fonctions avec des docstrings (`"""..."""`)
 
 ## 3. Installer de nouveaux modules
 
@@ -212,18 +212,18 @@ uv add requests
 
 1. **`uv` cherche** le module `requests` sur PyPI
 2. **Télécharge** le module et toutes ses dépendances (autres modules dont il a besoin)
-3. **Installe** le module dans votre projet
-4. **Met à jour** le fichier `pyproject.toml` (qui liste tous les modules de votre projet)
+3. **Installe** le module dans ton projet
+4. **Met à jour** le fichier `pyproject.toml` (qui liste tous les modules de ton projet)
 5. **Met à jour** le fichier `uv.lock` (qui verrouille les versions exactes)
 
 !!! info "Fichiers créés"
-    - **`pyproject.toml`** : liste les modules dont votre projet a besoin
+    - **`pyproject.toml`** : liste les modules dont ton projet a besoin
     - **`uv.lock`** : verrouille les versions exactes pour garantir la reproductibilité
     - **`.venv/`** : dossier contenant tous les modules installés (environnement virtuel)
 
 #### Utiliser le module installé
 
-Après `uv add requests`, vous pouvez l'importer normalement :
+Après `uv add requests`, tu peux l'importer normalement :
 
 ```python
 import requests
@@ -240,39 +240,39 @@ uv remove requests
 
 #### Installer les dépendances d'un projet existant
 
-Si vous récupérez un projet Python qui a un fichier `pyproject.toml`, installez toutes les dépendances avec :
+Si tu récupères un projet Python qui a un fichier `pyproject.toml`, installez toutes les dépendances avec :
 
 ```bash
 uv sync
 ```
 
 !!! tip "Recommandation"
-    Utilisez `uv` pour tous vos nouveaux projets. C'est l'avenir de la gestion de dépendances en Python.
+    Utilise `uv` pour tous tes nouveaux projets. C'est l'avenir de la gestion de dépendances en Python.
 
 ## 4. Exercices
 
 !!! question "Exercice 1 : Module de conversions"
-    Créez un fichier `conversions.py` avec les fonctions suivantes :
+    Crée un fichier `conversions.py` avec les fonctions suivantes :
 
     - `celsius_vers_fahrenheit(c)` : convertit des degrés Celsius en Fahrenheit
     - `fahrenheit_vers_celsius(f)` : convertit des degrés Fahrenheit en Celsius
     - `km_vers_miles(km)` : convertit des kilomètres en miles (1 km = 0.621371 miles)
 
-    Créez ensuite un fichier `test_conversions.py` qui importe ce module et teste les trois fonctions.
+    Crée ensuite un fichier `test_conversions.py` qui importe ce module et teste les trois fonctions.
 
 ??? success "Solution"
     **Fichier `conversions.py` :**
 
     ```python
-    def celsius_vers_fahrenheit(c):
+    def celsius_vers_fahrenheit(c: float) -> float:
         """Convertit des degrés Celsius en Fahrenheit."""
         return c * 9/5 + 32
 
-    def fahrenheit_vers_celsius(f):
+    def fahrenheit_vers_celsius(f: float) -> float:
         """Convertit des degrés Fahrenheit en Celsius."""
         return (f - 32) * 5/9
 
-    def km_vers_miles(km):
+    def km_vers_miles(km: float) -> float:
         """Convertit des kilomètres en miles."""
         return km * 0.621371
     ```
@@ -288,7 +288,7 @@ uv sync
     ```
 
 !!! question "Exercice 2 : Utiliser le module `math`"
-    Sans regarder la documentation, essayez de deviner ce que font ces fonctions du module `math` :
+    Sans regarder la documentation, essaie de deviner ce que font ces fonctions du module `math` :
 
     ```python
     import math
@@ -299,7 +299,7 @@ uv sync
     print(math.pow(2, 3))
     ```
 
-    Exécutez le code pour vérifier vos hypothèses.
+    Exécute le code pour vérifier tes hypothèses.
 
 ??? success "Solution"
     ```python
@@ -312,7 +312,7 @@ uv sync
     ```
 
 !!! question "Exercice 3 : Import sélectif"
-    Réécrivez ce code en important **seulement** les fonctions nécessaires (avec `from ... import ...`) :
+    Réécris ce code en important **seulement** les fonctions nécessaires (avec `from ... import ...`) :
 
     ```python
     import math
@@ -332,27 +332,27 @@ uv sync
     ```
 
 !!! question "Exercice 4 : Module de statistiques"
-    Créez un fichier `stats.py` avec les fonctions :
+    Crée un fichier `stats.py` avec les fonctions :
 
     - `moyenne(liste)` : calcule la moyenne d'une liste de nombres
     - `minimum(liste)` : renvoie le plus petit élément
     - `maximum(liste)` : renvoie le plus grand élément
 
-    Testez votre module avec `[10, 15, 8, 22, 19]`.
+    Teste ton module avec `[10, 15, 8, 22, 19]`.
 
 ??? success "Solution"
     **Fichier `stats.py` :**
 
     ```python
-    def moyenne(liste):
+    def moyenne(liste: list[float]) -> float:
         """Calcule la moyenne d'une liste de nombres."""
         return sum(liste) / len(liste)
 
-    def minimum(liste):
+    def minimum(liste: list[float]) -> float:
         """Renvoie le plus petit élément."""
         return min(liste)
 
-    def maximum(liste):
+    def maximum(liste: list[float]) -> float:
         """Renvoie le plus grand élément."""
         return max(liste)
     ```
@@ -373,7 +373,7 @@ uv sync
 - Un **module** est un fichier Python (`.py`) contenant du code réutilisable
 - **`import module`** charge un module (standard ou local)
 - **Modules standard** : `random`, `math`, `time`, etc. (fournis avec Python)
-- **Modules locaux** : vos propres fichiers `.py` dans le même répertoire
+- **Modules locaux** : tes propres fichiers `.py` dans le même répertoire
 - **PyPI** : bibliothèque en ligne avec 500 000+ modules
 - **`uv add`** : installe un module depuis PyPI (rapide et moderne)
 - **`uv sync`** : installe toutes les dépendances d'un projet existant
