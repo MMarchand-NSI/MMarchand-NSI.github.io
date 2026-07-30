@@ -70,7 +70,7 @@ print(b)       # [1, 2, 3, 4]  <- b a changé aussi !
 
     Modifier la liste par l'un la modifie donc pour l'autre.
 
-Comparez avec un entier, qui est **immuable** :
+Compare avec un entier, qui est **immuable** :
 
 ```python
 a = 5
@@ -96,7 +96,7 @@ print(b)          # inchangée : b est une autre liste
 Si on passe une liste à une fonction qui la modifie, la liste de l'appelant **change aussi** (c'est la même) :
 
 ```python
-def ajoute_zero(lst: list[int]):
+def ajoute_zero(lst: list[int]) -> None:
     lst.append(0)
 
 mes_notes = [12, 15]
@@ -105,7 +105,7 @@ print(mes_notes)   # [12, 15, 0] : la liste d'origine a été modifiée
 ```
 
 !!! question "Prédire avant d'exécuter"
-    Sans lancer le code, prédisez l'affichage, puis vérifiez :
+    Sans lancer le code, prédis l'affichage, puis vérifie :
 
     ```python
     a = [1, 2, 3]
@@ -144,7 +144,7 @@ print(grille[1][2])     # 6 : ligne 1, colonne 2
 ## Exercices
 
 !!! question "1 - Remplir une liste"
-    Construisez, par accumulation, la liste des multiples de 3 de 0 à 30 inclus.
+    Construis, par accumulation, la liste des multiples de 3 de 0 à 30 inclus.
 
     ??? warning "Corrigé"
         ```python
@@ -155,7 +155,7 @@ print(grille[1][2])     # 6 : ligne 1, colonne 2
         ```
 
 !!! question "2 - Filtrer"
-    À partir de `notes = [8, 15, 3, 12, 17, 9]`, construisez la liste des notes supérieures ou égales à 10.
+    À partir de `notes = [8, 15, 3, 12, 17, 9]`, construis la liste des notes supérieures ou égales à 10.
 
     ??? warning "Corrigé"
         ```python
@@ -168,7 +168,7 @@ print(grille[1][2])     # 6 : ligne 1, colonne 2
         ```
 
 !!! question "3 - Doctests"
-    Écrivez et testez une fonction qui construit une liste :
+    Écris et teste une fonction qui construit une liste :
 
     ```python
     def repete(x: int, n: int) -> list[int]:
