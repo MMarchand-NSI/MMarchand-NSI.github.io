@@ -92,12 +92,12 @@ Résultat : `[0, 1, 4, 9, 16]`
     - **Compréhension** : pour des transformations simples et lisibles
     - **Boucle for** : quand la logique est complexe ou nécessite plusieurs lignes
 
-    La compréhension est plus concise, mais ne sacrifiez jamais la lisibilité !
+    La compréhension est plus concise, mais ne sacrifie jamais la lisibilité !
 
 ## 3. Lire et prédire
 
 !!! question "Prédire"
-    Que contient `res` ? Traduisez d'abord la compréhension en phrase, puis vérifiez.
+    Que contient `res` ? Traduis d'abord la compréhension en phrase, puis vérifie.
 
     ```python
     res = [x * 2 for x in range(5) if x % 2 == 1]
