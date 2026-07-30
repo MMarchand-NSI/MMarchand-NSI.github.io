@@ -39,7 +39,7 @@ print("fini")
 
 ## Les trois rouages : initialisation, condition, mise à jour
 
-Là où le `for` **cache** la gestion du compteur (Python s'en occupe), le `while` vous oblige à écrire vous-même les **trois rouages** d'une boucle :
+Là où le `for` **cache** la gestion du compteur (Python s'en occupe), le `while` t'oblige à écrire toi-même les **trois rouages** d'une boucle :
 
 ```python
 i = 1            # 1. INITIALISATION (avant la boucle)
@@ -62,8 +62,8 @@ while i <= 3:
 
 Ici `i` reste à 1, la condition reste vraie, et le programme affiche `1` indéfiniment. Il faut alors l'interrompre à la main (`Ctrl+C`).
 
-!!! danger "Avant d'écrire un `while`, posez-vous la question"
-    « Qu'est-ce qui, dans le corps de la boucle, va **finir par rendre la condition fausse** ? » Si vous ne savez pas répondre, votre boucle risque de tourner à l'infini.
+!!! danger "Avant d'écrire un `while`, pose-toi la question"
+    « Qu'est-ce qui, dans le corps de la boucle, va **finir par rendre la condition fausse** ? » Si tu ne sais pas répondre, ta boucle risque de tourner à l'infini.
 
 ## Le variant : ce qui garantit l'arrêt
 
@@ -77,12 +77,12 @@ Une boucle `while` se termine si une quantité **évolue à coup sûr vers la so
 | Mise à jour | gérée par Python | à écrire soi-même |
 | Risque | se termine toujours | **boucle infinie** possible |
 
-En pratique : si vous pouvez dire « pour chaque élément » ou « n fois », utilisez `for`. Si vous devez dire « tant que... », utilisez `while`.
+En pratique : si tu peux dire « pour chaque élément » ou « n fois », utilise `for`. Si tu dois dire « tant que... », utilise `while`.
 
 ## Lire et prédire avant d'écrire
 
 !!! question "Prédire"
-    Combien de fois « Bravo » s'affiche-t-il, et que vaut `n` à la fin ? Déroulez tour par tour, puis vérifiez.
+    Combien de fois « Bravo » s'affiche-t-il, et que vaut `n` à la fin ? Déroule tour par tour, puis vérifie.
 
     ```python
     n = 10
@@ -96,7 +96,7 @@ En pratique : si vous pouvez dire « pour chaque élément » ou « n fois », u
         « Bravo » s'affiche **4 fois** (`n` vaut 10, 7, 4, 1 au moment du test), puis `n` passe à `-2` et la condition devient fausse. À la fin, `n` vaut `-2`.
 
 !!! question "Corriger une boucle infinie"
-    Ce code tourne indéfiniment. Trouvez pourquoi, puis corrigez-le.
+    Ce code tourne indéfiniment. Trouve pourquoi, puis corrige-le.
 
     ```python
     i = 1
@@ -110,7 +110,7 @@ En pratique : si vous pouvez dire « pour chaque élément » ou « n fois », u
 ## Exercices
 
 !!! question "1 - Saisie contrôlée"
-    Demandez un nombre **entre 1 et 10** à l'utilisateur, en redemandant tant que la valeur saisie est hors de cet intervalle.
+    Demande un nombre **entre 1 et 10** à l'utilisateur, en redemandant tant que la valeur saisie est hors de cet intervalle.
 
     ??? warning "Corrigé"
         ```python
@@ -121,7 +121,7 @@ En pratique : si vous pouvez dire « pour chaque élément » ou « n fois », u
         ```
 
 !!! question "2 - Somme jusqu'à un seuil"
-    En partant de 1, additionnez les entiers successifs (1, 2, 3, ...) et affichez combien il en faut pour que la somme **dépasse 100**.
+    En partant de 1, additionne les entiers successifs (1, 2, 3, ...) et affiche combien il en faut pour que la somme **dépasse 100**.
 
     ??? warning "Corrigé"
         ```python
@@ -134,7 +134,7 @@ En pratique : si vous pouvez dire « pour chaque élément » ou « n fois », u
         ```
 
 !!! question "3 - Deviner un nombre"
-    L'ordinateur choisit un nombre au hasard entre 1 et 100. L'utilisateur propose des valeurs **tant qu'**il n'a pas trouvé ; à chaque essai, indiquez « plus grand » ou « plus petit ».
+    L'ordinateur choisit un nombre au hasard entre 1 et 100. L'utilisateur propose des valeurs **tant qu'**il n'a pas trouvé ; à chaque essai, indique « plus grand » ou « plus petit ».
 
 !!! question "4 - PGCD (algorithme d'Euclide)"
     Le plus grand commun diviseur de `a` et `b` s'obtient en remplaçant `(a, b)` par `(b, a % b)` **tant que** `b` n'est pas nul.
