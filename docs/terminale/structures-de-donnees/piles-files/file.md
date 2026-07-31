@@ -120,8 +120,10 @@ def elements[T](f: File[T]) -> list[T]:
 !!! warning "Piège : `defiler` **vide** la file"
     Comme `depiler` pour la pile, `defiler` retire l'élément (effet de bord). Compter les éléments d'une file ou en chercher un **en défilant** la détruit. Toute fonction censée « ne pas modifier la file » doit la reconstruire à l'identique : c'est exactement ce que fait `elements`, et ce que demandent les exercices « taille non destructive » et « occurrences ».
 
-!!! tip "Ce que l'IA ne fait pas à ta place"
-    Le vrai travail n'est pas d'écrire `enfiler` et `defiler` (une IA le fait), mais de **spécifier** (que se passe-t-il si on défile une file vide ?) et de **tester**. La file avec deux piles en est le meilleur exemple : le code est court, mais toute la valeur est de se convaincre, tests à l'appui, qu'il respecte bien le contrat FIFO.
+!!! tip "Ce que l'IA ne change pas"
+    Une IA écrit `enfiler` et `defiler`, et elle sait aussi les spécifier et les tester. Le point n'est pas là.
+
+    La file avec deux piles est le meilleur exemple de ce qui reste à ta charge : le code est court, mais l'essentiel est de **se convaincre**, tests à l'appui, qu'il respecte bien le contrat FIFO. Cette conviction ne se délègue pas : ou bien tu sais dire ce que doit produire la structure (y compris quand on défile une file vide) et tu peux valider ce que tu lis, ou bien tu fais confiance sans pouvoir vérifier.
 
 ## Exercices
 

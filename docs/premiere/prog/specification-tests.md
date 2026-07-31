@@ -98,14 +98,19 @@ def minimum(lst: list[int]) -> int:
 
 Ici, la précondition « la liste n'est pas vide » est nécessaire : le minimum d'une liste vide n'a pas de sens. L'`assert` protège la fonction contre un usage incorrect.
 
-## 5. Pourquoi c'est *le* travail de l'humain
+## 5. Pourquoi tu dois savoir le faire toi-même
 
 !!! abstract "Spécifier et tester à l'ère de l'IA"
-    Une IA générative écrit une fonction `carre` en une seconde. Écrire le code n'est donc plus la partie difficile.
+    Soyons exacts, parce que tu peux le vérifier en trente secondes : une IA générative écrit une fonction `carre` en une seconde, **et** elle sait aussi écrire sa spécification, ses préconditions et ses tests. Prétendre qu'elle en est incapable serait faux.
 
-    En revanche, **dire précisément ce que le code doit faire (la spécification) et vérifier qu'il le fait (les tests)** restent le travail de l'humain. C'est aussi ce qui te permet de **juger** si le code produit par une IA est correct : sans spécification ni test, tu ne peux que lui faire aveuglément confiance.
+    La question n'est donc pas ce que la machine sait faire, mais ce que **tu** sais faire.
 
-    Savoir spécifier et tester est donc l'exact contraire de la dépendance : c'est ce qui te garde aux commandes.
+    - **Juger.** Face à une réponse toute faite, tu n'as que deux positions possibles : la croire, ou la vérifier. Vérifier suppose de savoir dire ce que le code devait faire, cas limites compris. Ce n'est pas la machine qui te donne cette capacité, c'est l'entraînement que tu fais ici.
+    - **Décider.** Une spécification comporte des **choix** (que faire d'une liste vide ? d'un nombre négatif ?). Une machine en propose un, plausible. Savoir lequel te convient suppose de savoir à quoi servira ta fonction.
+    - **Répondre de ce que tu rends.** Un devoir, un projet, plus tard un programme utilisé par d'autres : la responsabilité reste celle de la personne qui signe, pas de l'outil.
+    - **Être évalué sans elle.** Les évaluations de NSI, en première comme à l'épreuve pratique de terminale, se passent sans IA.
+
+    Une étude récente sur des débutants qui programment avec une IA (Prather et al., 2024) observe précisément cela : l'outil aide beaucoup ceux qui savent déjà juger ce qu'ils lisent, et **creuse l'écart** pour les autres. Savoir spécifier et tester, c'est ce qui te met du bon côté de cet écart.
 
 ## 6. Exercices
 

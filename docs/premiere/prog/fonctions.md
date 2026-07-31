@@ -28,8 +28,10 @@ Tu utilises déjà des fonctions écrites par d'autres. `print` appelle elle-mê
     3. puis seulement son **code** ;
     4. et son **`return`** si elle renvoie quelque chose.
 
-!!! tip "Ce que l'IA ne fait pas à ta place"
-    Une IA écrit le **corps** d'une fonction en une seconde. Ta valeur est de définir le **contrat** : la signature typée et la docstring (que prend la fonction ? que renvoie-t-elle ?), puis, page suivante, de la **tester**. Le contrat, c'est toi qui le poses ; c'est ce qui te permet de juger si le code (le tien ou celui d'une IA) est correct.
+!!! tip "Ce que l'IA ne change pas"
+    Une IA écrit le **corps** d'une fonction en une seconde. Elle sait aussi écrire la signature, la docstring et les tests : ne compte pas sur une incapacité de sa part, il n'y en a pas ici.
+
+    Ce qui change, c'est ta position. Pour **accepter ou refuser** ce qu'elle te propose, il faut que tu saches énoncer le **contrat** toi-même : que prend la fonction, que renvoie-t-elle, dans quels cas. Sans ce contrat en tête, tu ne peux pas juger le code produit, tu ne peux que le croire. Et tu es évalué sans elle.
 
 Commençons par **lire** une fonction qui existe déjà, `randint`, avant d'en écrire une nous-mêmes.
 

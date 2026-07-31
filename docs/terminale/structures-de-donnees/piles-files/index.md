@@ -167,8 +167,10 @@ if __name__ == "__main__":
 !!! note "L'état d'une pile est caché : seul le sommet est visible"
     On n'accède jamais au milieu d'une pile, seulement à son sommet. Le reste de l'état n'apparaît nulle part dans le code. Pour comprendre ce que font vraiment `empiler` et `depiler`, le bon réflexe est de **tracer l'état à la main**, comme dans l'exercice « Sans exécuter le code » plus bas.
 
-!!! tip "Ce que l'IA ne fait pas à ta place"
-    Une IA écrit `empiler` et `depiler` en une seconde : ta valeur n'est pas là. Elle est dans la **spécification** de l'interface (que doit faire chaque primitive ? que se passe-t-il si on dépile une pile vide ?) et dans les **tests** qui vérifient que l'implémentation respecte ce contrat. D'où la règle : **signature typée et tests d'abord, corps ensuite.**
+!!! tip "Ce que l'IA ne change pas"
+    Une IA écrit `empiler` et `depiler` en une seconde, et elle sait aussi rédiger la spécification et les tests. Ce n'est pas une question de capacité de la machine.
+
+    C'est une question de **dépendance**. Décider ce que doit faire chaque primitive (que se passe-t-il si on dépile une pile vide ? renvoie-t-on une erreur, `None`, autre chose ?) est un **choix de conception** que tu assumes, et dont tu réponds. Si tu ne sais pas énoncer ce contrat, tu ne peux pas juger si l'implémentation qu'on te propose le respecte. D'où la règle, qui vaut que tu écrives le code ou non : **signature typée et tests d'abord, corps ensuite.** L'épreuve pratique, elle, se passe sans IA.
 
 ## Exercices
 

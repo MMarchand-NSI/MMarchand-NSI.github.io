@@ -126,8 +126,10 @@ C'est le **contraste de paradigmes** : même structure, mais ici on **itère** (
             return s + "_|_"
         ```
 
-!!! tip "Ce que l'IA ne fait pas à ta place"
-    Une IA écrit `ajouter_fin`, `contient` et `__str__` en une seconde. Ta valeur est ailleurs : **spécifier** (que doit renvoyer `contient` sur une liste vide ? que vaut `__str__` d'une liste vide ?) et **tester** que le code respecte ce contrat, cas limites compris. Signature typée et `assert` **avant** le corps.
+!!! tip "Ce que l'IA ne change pas"
+    Une IA écrit `ajouter_fin`, `contient` et `__str__` en une seconde, spécification et tests compris si tu les lui demandes.
+
+    Ce qu'elle ne fait pas, c'est te rendre capable de **trancher les cas limites** : que doit renvoyer `contient` sur une liste vide ? que vaut `__str__` d'une liste vide ? Ce sont des décisions, pas des vérités à retrouver, et c'est toi qui en réponds. Tant que tu ne sais pas les énoncer, tu ne peux pas juger le code qu'on te propose. Signature typée et `assert` **avant** le corps.
 
 ## Pour aller plus loin : la sentinelle
 

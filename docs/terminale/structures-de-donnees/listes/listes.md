@@ -256,10 +256,12 @@ Jusqu'ici, le lutin **déconstruisait** une liste. Il peut aussi en **construire
     ??? success "Ce qu'on observe"
         `inverser` fait un appel par élément (`n` appels), et **chaque** appel relance `ajouter_fin`, qui reparcourt toute la queue (jusqu'à `n`). Environ `n` parcours de longueur jusqu'à `n` : le coût total est en `O(n²)`.
 
-## Ce que l'IA ne fait pas à ta place
+## Ce que l'IA ne change pas
 
 !!! tip
-    Une IA écrit `taille`, `somme` ou `inverser` en une seconde. Ta valeur n'est pas là. Elle est dans le fait de **savoir énoncer les deux cas** (que se passe-t-il si la liste est vide ? et sinon ?) et de **tester** le résultat. Gleam t'y aide : les **types** et l'**exhaustivité des cas** attrapent une grande partie des erreurs avant même l'exécution.
+    Une IA écrit `taille`, `somme` ou `inverser` en une seconde, en Gleam comme en Python.
+
+    Ce qui est en jeu n'est pas ce qu'elle sait faire, c'est ce que **tu** sais faire sans elle : **énoncer les deux cas** (que se passe-t-il si la liste est vide ? et sinon ?), et reconnaître un raisonnement récursif correct quand tu en lis un. C'est exactement ce que l'épreuve pratique évalue, et c'est ce qui te permet de refuser une réponse fausse au lieu de la recopier. Gleam t'y aide : les **types** et l'**exhaustivité des cas** attrapent une grande partie des erreurs avant même l'exécution.
 
 ## L'équivalent en Python
 

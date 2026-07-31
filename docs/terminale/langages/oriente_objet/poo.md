@@ -161,7 +161,7 @@ Ici, on a choisi que l'humain porte la liste de ses animaux. On aurait pu à la 
 
     **Méthode (une nouveauté à la fois).**
 
-    1. **Spécifie avant de coder.** Pour chaque classe, écris d'abord les **signatures typées** de ses méthodes et **2-3 scénarios de test** attendus (par exemple : après `v.roule(100)`, de combien baisse le carburant ?). C'est le travail que l'IA ne fait pas à ta place.
+    1. **Spécifie avant de coder.** Pour chaque classe, écris d'abord les **signatures typées** de ses méthodes et **2-3 scénarios de test** attendus (par exemple : après `v.roule(100)`, de combien baisse le carburant ?). C'est ce qui te permettra de dire si le code obtenu, le tien ou un autre, fait bien ce qui était prévu.
     2. Écris et teste **`Voiture` d'abord** (rouler, faire le plein, afficher), puis **`Humain`** (acheter une voiture, faire un trajet en vérifiant le carburant).
     3. **Instancie** un `Humain` et une `Voiture`, et joue un scénario complet (achat, trajet, passage à la station).
 
@@ -188,6 +188,8 @@ Ici, on a choisi que l'humain porte la liste de ses animaux. On aurait pu à la 
                 ...
         ```
 
-    ??? warning "Ce que l'IA ne fait pas à ta place"
-        Une IA écrit ces deux classes en une seconde : ta valeur est **avant**. Décider quels attributs portent l'état (le carburant dans `Voiture`, l'argent dans `Humain`), choisir quelle classe est le **chef d'orchestre**, et écrire les **tests** qui disent ce que « faire un trajet » doit produire. Signatures typées et tests d'abord, corps ensuite.
+    ??? warning "Ce que l'IA ne change pas"
+        Une IA écrit ces deux classes en une seconde, et elle proposera aussi une répartition des attributs et des tests. Elle n'est incapable de rien de tout cela.
+
+        Mais décider quels attributs portent l'état (le carburant dans `Voiture`, l'argent dans `Humain`) et quelle classe est le **chef d'orchestre**, ce sont des **choix de modélisation** : il y a plusieurs réponses défendables, et celle qui te va dépend de ce que ton programme doit faire. Personne ne peut faire ce choix à ta place sans savoir où tu vas, et tu dois pouvoir le justifier. Signatures typées et tests d'abord, corps ensuite.
 
