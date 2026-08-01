@@ -5,6 +5,18 @@ python-console: true
 
 # Les dictionnaires
 
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** les pages sur les listes et les tuples.
+
+    1. On écrit `a = [1, 2, 3]`, puis `b = a`, puis `b.append(4)`. Que vaut `a` ensuite ?
+    2. Que valent `x` et `y` après `x, y = (3, 5)` ? Comment s'appelle cette écriture ?
+    3. Que vaut `len([[1, 2], [3, 4], [5, 6]])` ?
+
+    ??? success "Corrigé"
+        1. `a` vaut `[1, 2, 3, 4]`. `b = a` ne copie rien : ce sont **deux noms pour une seule liste**, et modifier l'une modifie l'autre.
+        2. `x` vaut `3` et `y` vaut `5` : c'est la **déstructuration**. C'est aussi ce qui permet à une fonction de « renvoyer deux valeurs », en renvoyant en réalité un tuple.
+        3. `3`. C'est une liste de **trois** éléments, chacun étant lui-même une liste de deux éléments.
+
 ## Qu'est-ce qu'un dictionnaire ?
 
 On peut voir les séquences comme permettant de stocker des paires indice-valeur.

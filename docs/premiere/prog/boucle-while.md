@@ -1,5 +1,22 @@
 # La boucle non bornée : `while`
 
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** la page sur la boucle `for`.
+
+    1. Combien de tours fait `for i in range(3, 8)` , et quelle est la **dernière** valeur prise par `i` ?
+    2. Écris la boucle qui calcule la somme des éléments de la liste `notes`.
+    3. Que faut-il mettre en place pour **compter et sommer en un seul parcours** ?
+
+    ??? success "Corrigé"
+        1. Cinq tours, et la dernière valeur de `i` est `7`. L'intervalle est **semi-ouvert** : `3` est inclus, `8` est exclu.
+        2. Deux temps, et le premier est celui qu'on oublie :
+           ```python
+           total = 0                 # initialisation AVANT la boucle
+           for note in notes:
+               total = total + note  # mise à jour à chaque tour
+           ```
+        3. **Deux accumulateurs**, tous deux initialisés avant la boucle et tous deux mis à jour dans le même tour (par exemple `total` et `combien`). C'est le point qui coûte le plus cher : ce n'est pas une boucle plus difficile, c'est **deux traitements menés ensemble**.
+
 ## Pourquoi ? Quand on ne sait pas combien de tours
 
 La boucle [`for`](boucle-for.md) parcourt une séquence **finie** : on connaît d'avance le nombre de tours. Mais parfois, on ne le connaît **pas** :

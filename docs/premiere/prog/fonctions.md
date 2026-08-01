@@ -1,5 +1,17 @@
 # Les fonctions
 
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** la page sur les conditionnelles, en écrivant tes réponses.
+
+    1. Écris la condition qui teste que `x` est strictement compris entre `0` et `10`.
+    2. `a` vaut `True` et `b` vaut `False`. Que vaut `not (a and b)` ?
+    3. Quelle différence entre écrire `elif` et écrire un second `if` juste après le premier ?
+
+    ??? success "Corrigé"
+        1. `0 < x < 10`, ou `x > 0 and x < 10`. Les deux sont corrects en Python.
+        2. `a and b` vaut `False`, donc `not (a and b)` vaut `True`.
+        3. Un `elif` n'est **testé que si** la condition précédente est fausse : les branches s'excluent. Deux `if` successifs sont testés **tous les deux**, et leurs blocs peuvent s'exécuter l'un après l'autre.
+
 ## Pourquoi des fonctions ?
 
 En programmation, on a souvent besoin de réutiliser du code, à quelque chose près.

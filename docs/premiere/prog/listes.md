@@ -1,5 +1,23 @@
 # Les listes
 
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** les pages sur les séquences et les boucles.
+
+    1. Avec `s = "chat"` : que valent `s[-1]` et `len(s)` ?
+    2. Parmi `str`, `list` et `tuple`, laquelle de ces séquences peut être **modifiée** après sa création ?
+    3. Écris la boucle qui calcule la somme des éléments de `valeurs`.
+
+    ??? success "Corrigé"
+        1. `s[-1]` vaut `"t"` (dernier caractère) et `len(s)` vaut `4`. Attention, le dernier indice est `3`, pas `4`.
+        2. Seule la **liste** est mutable. Une chaîne et un tuple sont immuables : toute « modification » construit un nouvel objet.
+        3. L'accumulateur est initialisé **avant** la boucle :
+
+           ```python
+           total = 0
+           for v in valeurs:
+               total = total + v
+           ```
+
 Une **liste** est une [séquence](2.sequences.md) que l'on peut **modifier** (elle est *mutable*). C'est le type de collection le plus utilisé : on y range des éléments, on en ajoute, on en retire.
 
 ```python

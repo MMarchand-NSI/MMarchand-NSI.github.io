@@ -1,5 +1,17 @@
 # La boucle `for`
 
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** les pages sur les fonctions, la spécification et la portée.
+
+    1. Écris la **signature typée** d'une fonction `est_majeur` qui prend un âge entier et renvoie un booléen.
+    2. Que renvoie une fonction qui n'a pas d'instruction `return` ?
+    3. Une variable créée à l'intérieur d'une fonction est-elle utilisable après l'appel, en dehors de la fonction ?
+
+    ??? success "Corrigé"
+        1. `def est_majeur(age: int) -> bool:`
+        2. Elle renvoie `None`. Une fonction renvoie toujours quelque chose ; sans `return`, c'est `None`.
+        3. Non. Elle est **locale** : elle est créée à l'appel et disparaît quand la fonction se termine. Pour récupérer une valeur, il faut la `return`.
+
 ## L'idée : pour chaque élément d'une séquence
 
 Faire l'appel en classe, c'est **parcourir** la liste des élèves : pour chaque élève, on applique la même procédure.

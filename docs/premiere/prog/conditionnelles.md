@@ -1,5 +1,17 @@
 # Les conditionnelles
 
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses. Se tester est ce qui fixe les acquis ; relire ne le fait pas.
+
+    1. Après `a = 3` puis `a = a + 2`, que vaut `a` ? Dans quel ordre la machine fait-elle le calcul et le rangement ?
+    2. Que valent `17 // 5` et `17 % 5` ?
+    3. Avec `s = "informatique"` : que vaut `s[0]` ? Que se passe-t-il si on écrit `s[0] = "I"` ?
+
+    ??? success "Corrigé"
+        1. `a` vaut `5`. Le membre de droite est **calculé d'abord** (`3 + 2`), et le résultat est **ensuite** rangé dans la case `a`. Le `=` n'est pas une égalité mathématique.
+        2. `17 // 5` vaut `3` (quotient entier) et `17 % 5` vaut `2` (reste). On a bien `5 * 3 + 2 = 17`.
+        3. `s[0]` vaut `"i"`. L'affectation `s[0] = "I"` provoque une `TypeError` : une chaîne est **immuable**, on ne peut pas en changer un caractère, seulement construire une nouvelle chaîne.
+
 ## Pourquoi ? Décider.
 
 Jusqu'ici, nos programmes exécutent les instructions **les unes après les autres**, toujours dans le même ordre. Mais un programme doit souvent **choisir** ce qu'il fait selon la situation : afficher « majeur » ou « mineur » selon l'âge, accepter ou refuser un mot de passe, calculer un tarif selon le client.
