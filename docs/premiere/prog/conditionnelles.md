@@ -275,6 +275,84 @@ Cela permet souvent de **remplacer des conditions imbriquées** par une seule, p
         ...
     ```
 
+### Nier une condition : les lois de De Morgan
+
+Tu as calculé sur les expressions booléennes dans le chapitre [Logique booléenne](../architecture/logique/logique.md), sans savoir encore à quoi cela servirait. C'est ici. Le cas le plus fréquent est la **négation d'une condition composée**, et c'est aussi celui où l'on se trompe le plus.
+
+Reprends l'encadrement ci-dessus. Comment écrire « `n` n'est **pas** entre 4 et 8 » ?
+
+```python
+# Correct, mais lourd
+if not (n >= 4 and n <= 8):
+    print("hors de l'intervalle")
+
+# Le même test, écrit directement
+if n < 4 or n > 8:
+    print("hors de l'intervalle")
+```
+
+Le passage de l'un à l'autre suit une règle, et une seule :
+
+!!! abstract "Les lois de De Morgan"
+    **Pour nier une condition composée, on inverse l'opérateur et on nie chaque partie.**
+
+    | En Python | En notation booléenne |
+    | --- | --- |
+    | `not (a and b)` équivaut à `not a or not b` | $\overline{a.b} = \bar{a} + \bar{b}$ |
+    | `not (a or b)` équivaut à `not a and not b` | $\overline{a+b} = \bar{a}.\bar{b}$ |
+
+    Le `and` devient `or`, le `or` devient `and`, et chaque morceau est nié. Si tu as un doute, dresse la table de vérité des deux expressions : elles ont la même colonne de résultat. C'est exactement ce que tu faisais en logique.
+
+!!! danger "Piège : le `or` qui est toujours vrai"
+    Tu veux tester que `n` n'est ni 4 ni 8. Beaucoup écrivent :
+
+    ```python
+    if n != 4 or n != 8:   # TOUJOURS VRAI
+    ```
+
+    Prends `n = 4` : `n != 4` est faux, mais `n != 8` est **vrai**, donc le `or` est vrai. Prends `n = 8` : c'est l'inverse, et le `or` est encore vrai. Prends n'importe quel autre nombre : les deux sont vrais. **Cette condition ne peut jamais être fausse.**
+
+    L'erreur vient de la négation. La phrase de départ est « `n` est 4 **ou** 8 », soit `n == 4 or n == 8`. En la niant, De Morgan transforme le `or` en `and` :
+
+    ```python
+    if n != 4 and n != 8:   # correct
+    ```
+
+    Retiens la forme : **quand tu nies une liste de possibilités, les `or` deviennent des `and`**.
+
+!!! question "Prédis avant d'exécuter"
+    Pour chacune de ces conditions, dis si elle est vraie ou fausse quand `age = 20` et `permis = False`, **avant** de l'essayer.
+
+    ```python
+    c1 = not (age >= 18 and permis)
+    c2 = not age >= 18 or not permis
+    c3 = not (age < 18 or permis)
+    c4 = age >= 18 and not permis
+    ```
+
+    Que remarques-tu en comparant `c1` et `c2` ? Et `c3` et `c4` ?
+
+    ??? success "Réponse"
+        `age >= 18` est **vrai**, `permis` est **faux**.
+
+        - `c1` : `not (vrai and faux)` = `not faux` = **True**
+        - `c2` : `not vrai or not faux` = `faux or vrai` = **True**
+        - `c3` : `not (faux or faux)` = `not faux` = **True**
+        - `c4` : `vrai and not faux` = `vrai and vrai` = **True**
+
+        `c1` et `c2` sont les deux formes de la même chose, par De Morgan. `c3` et `c4` aussi. Ce ne sont pas quatre conditions, mais **deux conditions écrites chacune de deux façons**. Vérifie-le en changeant les valeurs de `age` et `permis` : les couples resteront toujours d'accord.
+
+!!! tip "Simplifier au lieu d'empiler"
+    L'autre usage de l'algèbre booléenne est la **simplification**. Si tu obtiens une condition comme celle-ci :
+
+    ```python
+    if vaccine or (vaccine and test_negatif):
+    ```
+
+    elle se réduit à `if vaccine:`. En effet, si `vaccine` est vrai, le premier morceau suffit ; s'il est faux, le second l'est aussi puisqu'il commence par `vaccine`. C'est la règle $x + x.y = x$, que tu as démontrée par le calcul en logique.
+
+    Une condition simplifiée n'est pas seulement plus courte : elle est plus facile à relire, donc plus facile à corriger.
+
 !!! question "Exercices (booléens)"
     1. **Triangle.** Demande trois longueurs entières `a`, `b`, `c`. Si elles ne peuvent pas former un triangle (chaque côté doit être inférieur à la somme des deux autres), affiche `pas un triangle`. Sinon, affiche `equilateral`, `isocele` ou `scalene`.
     2. **Cinéma.** Implémente en Python le calcul de tarif du diagramme d'activité du début de la page.
