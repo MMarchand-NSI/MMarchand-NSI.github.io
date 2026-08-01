@@ -12,14 +12,14 @@
         2. `[1, 2, 3]`. `b = a` n'a pas copié la liste : les deux noms désignent **le même objet**, qui est mutable.
         3. Elle le peut, et c'est précisément l'objet de cette page. Sans le tuple, on s'en tirerait en renvoyant une liste de deux éléments.
 
-Un **tuple** (ou p-uplet) est une [séquence](2.sequences.md) **immuable** : une fois créé, on ne peut plus le modifier. On le crée avec des **parenthèses**.
+Un **tuple** (ou p-uplet) est une [séquence](caracteres.md) **immuable** : une fois créé, on ne peut plus le modifier, exactement comme une chaîne de caractères. On le crée avec des **parenthèses**.
 
 ```python
 point = (3, 7)
 personne = ("Alice", 25, "Paris")
 ```
 
-Comme toute séquence, on y accède par indice, on le parcourt avec `for`, on connaît sa taille avec `len` : tout cela fonctionne exactement comme décrit dans [Les séquences](2.sequences.md). Cette page se concentre sur ce qui est **propre au tuple**.
+On y accède par indice, on le parcourt avec `for`, on connaît sa taille avec `len` : **rien de neuf**, c'est ce que tu fais déjà sur les chaînes et les listes. Cette page ne traite donc que ce qui est **propre au tuple**. Ce que les trois types ont en commun sera mis à plat dans [Les séquences](2.sequences.md), juste après.
 
 !!! danger "Le piège du tuple à un seul élément"
     Un tuple à un seul élément **se termine par une virgule** : `(1,)`. Sans elle, les parenthèses ne sont qu'un groupement de calcul.

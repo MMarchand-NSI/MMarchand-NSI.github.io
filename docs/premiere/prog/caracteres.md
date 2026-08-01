@@ -94,6 +94,21 @@ En Python, une chaîne de caractères est une suite ordonnée de lettres, comme 
     `IndexError: string index out of range`
 
 
+!!! abstract "Ce que tu viens de rencontrer s'appelle une séquence"
+    Une **séquence** est une suite d'éléments **ordonnés**, numérotés de `0` à `len(...) - 1`, auxquels on accède par leur **indice** entre crochets.
+
+    La chaîne de caractères est la première que tu rencontres, elle ne sera pas la dernière : les **listes** et les **tuples**, plus loin dans le cours, sont aussi des séquences. Retiens dès maintenant ce qui ne changera pas d'un type à l'autre :
+
+    | Ce qu'on veut | Comment on l'écrit |
+    | --- | --- |
+    | l'élément numéro `i` | `seq[i]` |
+    | le nombre d'éléments | `len(seq)` |
+    | le dernier élément | `seq[len(seq) - 1]`, ou `seq[-1]` |
+    | savoir si `x` s'y trouve | `x in seq` |
+    | les parcourir tous | `for element in seq:` |
+
+    C'est l'un des rares endroits du cours où l'on apprend une chose **une fois pour toutes**. Quand tu croiseras les listes, tu n'auras ni nouvel accès, ni nouvelle boucle à apprendre.
+
 !!! note "Et pour parcourir tous les caractères ?"
     Accéder à un caractère par son indice est une chose. Parcourir automatiquement **tous** les caractères d'une chaîne en est une autre : c'est le rôle de la boucle `for`.
 

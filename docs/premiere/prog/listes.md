@@ -3,16 +3,16 @@
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 
-    1. Avec `s = "chat"` : que valent `s[-1]` et `len(s)` ?
-    2. Parmi `str`, `list` et `tuple`, laquelle de ces séquences peut être **modifiée** après sa création ?
-    3. Une variable créée dans une fonction est-elle utilisable après l'appel ? Et pourquoi est-ce une bonne chose pour un accumulateur ?
+    1. Avec `s = "chat"` : que valent `s[-1]` et `len(s)` ? Quel est le plus grand indice valide ?
+    2. Toujours avec `s = "chat"`, que se passe-t-il si on écrit `s[0] = "p"` ?
+    3. Écris la boucle qui construit dans `res` la chaîne `mot` à l'envers.
 
     ??? success "Corrigé"
-        1. `s[-1]` vaut `"t"` (dernier caractère) et `len(s)` vaut `4`. Attention, le dernier indice est `3`, pas `4`.
-        2. Seule la **liste** est mutable. Une chaîne et un tuple sont immuables : toute « modification » construit un nouvel objet.
-        3. Non, elle est **locale** : créée à l'appel, détruite à la fin. C'est exactement ce qu'il faut à un accumulateur, qui doit repartir de sa valeur initiale à chaque appel. S'il était global, deux appels successifs se contamineraient.
+        1. `s[-1]` vaut `"t"` et `len(s)` vaut `4`. Le plus grand indice valide est `3`, pas `4`.
+        2. Une `TypeError` : une chaîne est **immuable**, on ne peut pas en changer un caractère. Retiens bien cette réponse, la page d'aujourd'hui introduit précisément le type qui, lui, le permet.
+        3. `res = ""` avant la boucle, puis `res = c + res` à chaque tour.
 
-Une **liste** est une [séquence](2.sequences.md) que l'on peut **modifier** (elle est *mutable*). C'est le type de collection le plus utilisé : on y range des éléments, on en ajoute, on en retire.
+Une **liste** est une [séquence](caracteres.md), au même titre qu'une chaîne : des éléments ordonnés, numérotés de `0` à `len(...) - 1`. Ce qui est **nouveau**, et qui fait tout l'intérêt de cette page, c'est qu'on peut la **modifier** : elle est *mutable*. C'est le type de collection le plus utilisé.
 
 ```python
 notes = [16, 12, 18]      # une liste de 3 entiers
@@ -20,7 +20,7 @@ vide = []                 # une liste vide
 melange = [1, "deux", 3.0]  # les éléments peuvent être de types différents
 ```
 
-Comme toute séquence, on accède à ses éléments par leur indice, on la parcourt avec `for`, on connaît sa taille avec `len`. Ce qui est **nouveau**, c'est qu'on peut la **changer sur place**.
+Tu sais donc déjà t'en servir pour l'essentiel : `notes[0]`, `len(notes)`, `18 in notes`, `for note in notes:` s'écrivent exactement comme sur une chaîne. **Rien de tout cela n'est à réapprendre.** Ce qui est nouveau, et c'est le seul point vraiment neuf de cette page, c'est qu'une liste se **change sur place**.
 
 ## Modifier un élément
 
@@ -209,7 +209,7 @@ Ces deux exercices sont ceux de la [boucle `for`](boucle-for.md), portés sur le
 
 ## Listes de listes
 
-Un élément d'une liste peut lui-même être une liste : c'est une [imbrication](2.sequences.md). On accède alors avec deux indices, `a[i][j]`.
+Un élément d'une liste peut lui-même être une liste. On accède alors avec deux indices, `a[i][j]`. Cette **imbrication** est reprise et généralisée dans [Les séquences](2.sequences.md).
 
 ```python
 grille = [[1, 2, 3],
