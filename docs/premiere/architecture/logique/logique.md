@@ -1,5 +1,15 @@
 # Logique booléenne
 
+!!! question "Rappel d'ouverture (5 minutes, cours fermé)"
+    1. Quel composant de la machine effectue les additions ?
+    2. Le LMC écrit ses instructions avec trois chiffres décimaux. Un processeur réel dispose de combien de symboles différents, et pourquoi ?
+    3. Une case mémoire contient un nombre et ne peut en contenir qu'un. Qu'est-ce qui limite la valeur qu'on peut y ranger ?
+
+??? success "Corrigé"
+    1. L'**unité arithmétique et logique** (UAL), à l'intérieur de l'unité centrale.
+    2. **Deux**, parce que ses circuits ne savent distinguer que deux états, par exemple le passage ou non du courant. C'est le point de départ de cette page.
+    3. Sa **taille**, c'est-à-dire le nombre de symboles qu'elle peut contenir. Une case de trois chiffres décimaux s'arrête à 999 ; au-delà, la valeur ne rentre plus.
+
 ## Introduction
 
 Dans le cours sur l'architecture de Von Neumann, nous avons vu de quoi est composé un ordinateur : une unité centrale (CPU), de la mémoire, et des bus de communication. Nous avons aussi vu comment parler directement au CPU grâce au langage machine (LCM).

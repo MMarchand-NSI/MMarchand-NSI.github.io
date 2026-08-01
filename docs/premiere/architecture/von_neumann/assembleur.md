@@ -1,5 +1,15 @@
 # Activité : Little Man Computer (LMC)
 
+!!! question "Rappel d'ouverture (5 minutes, cours fermé)"
+    1. Une instruction machine se décompose en deux parties. Lesquelles, et à quoi sert chacune ?
+    2. Dans une machine où une instruction s'écrit sur trois chiffres, combien de chiffres reste-t-il pour désigner une adresse ?
+    3. Pourquoi le processeur n'a-t-il pas besoin de savoir que `007` était une donnée ?
+
+??? success "Corrigé"
+    1. Le **code opération** (quelle opération effectuer) et l'**opérande** (sur quelle donnée ou quelle adresse travailler).
+    2. **Deux**, le premier chiffre étant pris par le code opération. On peut donc adresser 100 cases, de 00 à 99.
+    3. Parce qu'il n'en a aucun moyen, et que cela ne l'empêche pas de fonctionner : il exécute ce que le compteur ordinal désigne, sans se demander ce que le programmeur avait en tête.
+
 ## Introduction
 
 Le **Little Man Computer (LMC)** est un simulateur pédagogique qui modélise une architecture simplifiée de processeur. Il permet de comprendre concrètement comment fonctionne un ordinateur en visualisant :
@@ -94,6 +104,60 @@ nb1     DAT       # Variable pour stocker le premier nombre
 3. Le **PC s'incrémente** automatiquement
 4. L'instruction est **décodée** puis **exécutée**
 5. Les données circulent sur les **bus** entre les registres
+
+---
+
+## Avant les défis : assembler à la main
+
+Vous allez écrire vos programmes en **mnémoniques** (`INP`, `STA nb1`, `ADD nb1`), parce que c'est lisible. La machine, elle, ne connaît que des **nombres**. Quelqu'un doit donc traduire, et cette activité consiste à faire ce travail une fois vous-même, pour savoir ce que le simulateur fait à votre place ensuite.
+
+!!! question "Traduire un programme en code machine"
+    Voici un programme en mnémoniques, déjà placé en mémoire. Chaque ligne occupe une case, à partir de l'adresse 00.
+
+    | Adresse | Mnémonique |
+    |:---:|:---|
+    | 00 | `INP` |
+    | 01 | `STA 06` |
+    | 02 | `INP` |
+    | 03 | `ADD 06` |
+    | 04 | `OUT` |
+    | 05 | `HLT` |
+    | 06 | `DAT` |
+
+    **1.** À l'aide du jeu d'instructions ci-dessus, écrivez le **code machine** de chaque ligne, c'est-à-dire les trois chiffres que contiendra réellement la case.
+
+    **2.** Recopiez la suite obtenue et vérifiez que le programme fonctionne : dans le simulateur, saisissez ces nombres directement dans les cases mémoire, **sans passer par les mnémoniques**, puis exécutez.
+
+    **3.** Combien de tables de correspondance avez-vous utilisées pour faire cette traduction ?
+
+    ??? success "Correction"
+        **1.**
+
+        | Adresse | Mnémonique | Code machine |
+        |:---:|:---|:---:|
+        | 00 | `INP` | `901` |
+        | 01 | `STA 06` | `306` |
+        | 02 | `INP` | `901` |
+        | 03 | `ADD 06` | `106` |
+        | 04 | `OUT` | `902` |
+        | 05 | `HLT` | `000` |
+        | 06 | `DAT` | `000` |
+
+        La suite est donc : `901 306 901 106 902 000 000`
+
+        **2.** Le programme fonctionne exactement de la même façon. C'est normal : **c'est le même programme**. Les mnémoniques n'existent que pour vous, elles ne sont jamais chargées dans la machine.
+
+        **3.** Une seule, celle du jeu d'instructions du LMC. Et c'est le point : vous venez de faire, à la main, ce qu'un programme appelé **assembleur** fait automatiquement. Traduire des mnémoniques en code machine, ce n'est pas comprendre un programme, c'est appliquer une table.
+
+!!! abstract "Ce que vous venez de faire, et pourquoi cela referme la boucle"
+    Souvenez-vous de l'activité de rentrée : votre groupe avait fabriqué une table associant un nombre à chaque mot, et le programme codé était illisible pour qui n'avait pas la table.
+
+    La table du LMC est **exactement de même nature**. Elle n'est ni plus vraie ni plus logique que la vôtre : elle a simplement été décidée par les concepteurs de cette machine, et gravée dans son circuit. C'est pourquoi `901` veut dire « lire une valeur » ici, et voudrait dire tout autre chose sur un processeur différent.
+
+    Un **assembleur** est donc un traducteur qui connaît une table. Un **compilateur**, que vous rencontrerez plus tard, fait un travail beaucoup plus difficile : il traduit un langage où une seule ligne peut valoir des dizaines d'instructions machine.
+
+!!! tip "Pourquoi le faire une seule fois"
+    Une fois cette traduction faite à la main, elle n'a plus d'intérêt : le simulateur la fait sans erreur et sans fatigue. Ce que vous devez en garder n'est pas la capacité de traduire vite, mais la certitude qu'**il n'y a rien de magique entre ce que vous écrivez et ce que la machine exécute**. Pour les 12 défis, écrivez donc en mnémoniques.
 
 ---
 

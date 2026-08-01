@@ -1,5 +1,15 @@
 # Circuits logiques
 
+!!! question "Rappel d'ouverture (5 minutes, cours fermé)"
+    1. Donnez la table de vérité du OU EXCLUSIF.
+    2. Quelle est la seule ligne où le OU et le OU EXCLUSIF donnent des résultats différents ?
+    3. $a$ vaut 1 et $b$ vaut 0. Que valent $a.b$, $a+b$ et $\bar{a}$ ?
+
+??? success "Corrigé"
+    1. $0 \oplus 0 = 0$, $0 \oplus 1 = 1$, $1 \oplus 0 = 1$, $1 \oplus 1 = 0$.
+    2. Celle où **les deux entrées valent 1** : le OU vaut 1, le OU EXCLUSIF vaut 0. Retenez cette ligne, c'est elle qui fera toute la différence dans le circuit que vous allez construire.
+    3. $a.b = 0$ (le ET exige les deux), $a+b = 1$ (le OU se contente d'un seul), $\bar{a} = 0$.
+
 ## Un peu d'électronique
 
 ### Le transistor

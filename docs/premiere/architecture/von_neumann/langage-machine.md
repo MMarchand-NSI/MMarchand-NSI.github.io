@@ -1,5 +1,15 @@
 # Le langage machine
 
+!!! question "Rappel d'ouverture (5 minutes, cours fermé)"
+    1. Citez les trois éléments que le modèle de von Neumann distingue dans une machine.
+    2. Le compteur ordinal vaut 12. Que désigne ce nombre ?
+    3. Qu'est-ce qui, dans la mémoire, distingue une instruction d'une donnée ?
+
+??? success "Corrigé"
+    1. L'**unité centrale** (avec son unité de calcul et son unité de contrôle), la **mémoire**, et les **entrées-sorties**, reliées par des bus.
+    2. L'**adresse de la prochaine instruction** à exécuter, pas sa valeur.
+    3. **Rien.** Ce qui décide qu'un nombre est exécuté comme une instruction, c'est uniquement le fait que le compteur ordinal pointe dessus.
+
 Le **langage machine** est le seul langage que le processeur comprend directement. C'est un ensemble d'instructions que le CPU peut exécuter, et chacune de ces instructions est **un nombre**.
 
 ## Qu'est-ce qu'une instruction machine ?

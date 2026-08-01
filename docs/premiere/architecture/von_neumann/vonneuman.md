@@ -1,5 +1,15 @@
 # Architecture de von Neumann
 
+!!! question "Rappel d'ouverture (5 minutes, cours fermé)"
+    1. Votre groupe avait codé `avance` par un certain nombre. Un autre groupe avait choisi un nombre différent. Lequel des deux avait raison ?
+    2. Vous recevez la suite `9 3 100 7 90`. Que vous manque-t-il pour la lire ?
+    3. Citez une raison pour laquelle un programme installé sur un ordinateur ne fonctionne pas sur un téléphone.
+
+??? success "Corrigé"
+    1. **Les deux.** Le nombre associé à un mot est une convention arbitraire : elle n'est ni vraie ni fausse, elle est partagée ou elle ne l'est pas.
+    2. **La table de correspondance.** Un code ne contient jamais son propre mode d'emploi.
+    3. Les deux machines n'ont pas le même **jeu d'instructions**, c'est-à-dire pas la même table. Le même nombre y désigne des ordres différents.
+
 !!! tip "D'où l'on vient"
     Dans l'activité [Inventer un langage pour une machine](langage-invente.md), vous avez fabriqué une table de correspondance entre des mots et des nombres, et constaté qu'un programme codé ne veut rien dire sans elle. Il restait une question ouverte : comment distinguer, dans une suite de nombres, les ordres des quantités ? Cette page et les suivantes y répondent.
 
