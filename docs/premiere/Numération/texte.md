@@ -1,5 +1,15 @@
 # Représentation d'un texte
 
+!!! question "Rappel d'ouverture (5 minutes, cours fermé)"
+    1. `a` est vrai et `b` est faux. Que valent `a and b`, `a or b` et `not a` ?
+    2. Un octet vaut 8 bits. Combien de valeurs différentes peut-il contenir ?
+    3. On veut associer un nombre à chaque lettre de l'alphabet latin. Un octet suffit-il ?
+
+??? success "Corrigé"
+    1. `a and b` est **faux** (le ET exige les deux), `a or b` est **vrai** (le OU se contente d'un seul), `not a` est **faux**.
+    2. **256**, de 0 à 255.
+    3. **Largement** : 26 lettres minuscules, 26 majuscules, les chiffres et la ponctuation tiennent sans peine dans 256 valeurs. La difficulté commence quand on veut écrire **toutes les langues du monde**, et c'est l'objet de cette page.
+
 Un texte est une suite de **caractères** (lettres, chiffres, symboles, espaces, emojis...). Comme toute information, un caractère doit être **codé sous forme de nombre** pour être stocké et manipulé par la machine.
 
 Il faut que tout le monde le fasse de la même manière pour que les informations puissent être communiquées. À ce titre, il existe des standards internationaux.

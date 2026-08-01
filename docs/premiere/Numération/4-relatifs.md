@@ -1,5 +1,15 @@
 # Entiers relatifs en binaire (Entiers signés)
 
+!!! question "Rappel d'ouverture (5 minutes, cours fermé)"
+    1. Convertissez $13$ en base 2, puis vérifiez votre résultat en le reconvertissant.
+    2. Sur $k$ bits, combien d'entiers naturels différents peut-on écrire ?
+    3. Sur 4 bits, on veut écrire à la fois des nombres positifs et négatifs. Combien de valeurs seront disponibles au total ?
+
+??? success "Corrigé"
+    1. $13 = 1101_2$. Vérification : $8 + 4 + 0 + 1 = 13$.
+    2. **$2^k$**, de $0$ à $2^k - 1$. Le nombre de valeurs ne change pas quand on change ce qu'elles représentent.
+    3. **Toujours 16**, comme pour les naturels. Ajouter les négatifs n'ajoute aucune combinaison : cela redistribue les 16 existantes. C'est tout le problème de cette page.
+
 
 ## Additionner des entiers naturels
 

@@ -1,5 +1,15 @@
 # Représentation des entiers naturels
 
+!!! question "Rappel d'ouverture (5 minutes, cours fermé)"
+    1. Une case du LMC contient trois chiffres. Quel est le plus grand nombre qu'on peut y ranger, et que se passe-t-il si l'on veut y mettre 1500 ?
+    2. Pourquoi un processeur ne dispose-t-il que de deux symboles pour écrire ses nombres ?
+    3. Le nombre `306` désignait l'instruction « ranger l'accumulateur en case 06 ». Ce choix aurait-il pu être différent ?
+
+??? success "Corrigé"
+    1. **999**. Au-delà, la valeur ne rentre plus : il faudrait davantage de chiffres, ou bien la case déborde.
+    2. Parce que ses circuits ne savent distinguer que **deux états**, par exemple le passage ou non du courant. Toute l'écriture des nombres doit tenir avec deux symboles.
+    3. **Oui**, entièrement. C'est une convention décidée par les concepteurs de la machine : elle n'est ni vraie ni fausse, elle est seulement partagée. C'est le codage. Cette page traite d'autre chose : comment **écrire les nombres eux-mêmes**.
+
 
 !!! question "Préambule"
     - Quel est le premier chiffre?

@@ -1,5 +1,15 @@
 # Les nombres flottants
 
+!!! question "Rappel d'ouverture (5 minutes, cours fermé)"
+    1. Sur 8 bits en complément à deux, quel est le plus petit entier représentable, et le plus grand ?
+    2. Comment reconnaît-on, en complément à deux, qu'un nombre est négatif ?
+    3. Combien de valeurs différentes une case de 8 bits peut-elle contenir, quelle que soit la manière dont on les interprète ?
+
+??? success "Corrigé"
+    1. De $-128$ à $+127$. L'intervalle n'est pas symétrique : il y a une valeur négative de plus, car zéro occupe une place du côté positif.
+    2. Son **bit de poids fort vaut 1**. C'est une convention de lecture, pas un signe écrit à part.
+    3. **256**, dans tous les cas. Une case ne contient jamais que des combinaisons de bits ; c'est nous qui décidons de ce qu'elles signifient.
+
 !!! question "Préambule : une bizarrerie"
     Ouvrez une console Python et tapez :
 

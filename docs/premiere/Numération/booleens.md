@@ -1,5 +1,15 @@
 # Les booléens
 
+!!! question "Rappel d'ouverture (5 minutes, cours fermé)"
+    1. Pourquoi $0{,}1 + 0{,}2$ ne vaut-il pas exactement $0{,}3$ en Python ?
+    2. Quelle règle en découle pour écrire une condition portant sur des flottants ?
+    3. Combien de valeurs différentes un seul bit peut-il prendre ?
+
+??? success "Corrigé"
+    1. Parce que $0{,}1$ **n'a pas d'écriture finie en base 2** : la machine en range une valeur approchée, et les erreurs s'additionnent.
+    2. Ne **jamais tester l'égalité** de deux flottants. On compare un écart à une tolérance.
+    3. **Deux**, 0 ou 1. C'est le plus petit contenant d'information qui existe, et l'objet de cette page.
+
 Le **booléen** est le plus petit type de donnée : il ne peut prendre que **deux valeurs**. On les note au choix :
 
 - $0$ ou $1$ ;
