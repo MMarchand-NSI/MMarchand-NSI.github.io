@@ -198,7 +198,30 @@ On peut donc conclure que :
 $$\bar{a} + a.b = \bar{a} + b$$
 
 Ce n'est pas évident à première vue, mais la table de vérité le prouve !
-## Exercices
+## Ce qu'il faut retenir pour la suite
+
+Pour construire un additionneur, la page suivante n'a besoin que de **quatre opérateurs et de leurs tables de vérité** : **ET**, **OU**, **NON** et **OU EXCLUSIF**. Si vous savez remplir ces quatre tables sans hésiter, vous pouvez passer aux circuits.
+
+!!! abstract "Le strict nécessaire"
+    | $a$ | $b$ | $a.b$ (ET) | $a+b$ (OU) | $a \oplus b$ (XOR) |
+    | :-: | :-: | :-: | :-: | :-: |
+    | 0 | 0 | 0 | 0 | 0 |
+    | 0 | 1 | 0 | 1 | 1 |
+    | 1 | 0 | 0 | 1 | 1 |
+    | 1 | 1 | 1 | 1 | 0 |
+
+    Et $\bar{a}$ (NON) vaut 1 quand $a$ vaut 0, et 0 quand $a$ vaut 1.
+
+    Retenez surtout la ligne qui distingue le OU du OU EXCLUSIF : quand les deux entrées valent 1, le OU vaut **1** et le XOR vaut **0**. C'est exactement ce qui fera la différence entre un bit de somme et une retenue.
+
+## Exercices d'algèbre de Boole
+
+!!! info "Ces exercices ne sont pas nécessaires aux circuits"
+    Ce qui suit fait **calculer sur les expressions booléennes** au lieu de simplement les évaluer : propriétés, égalités remarquables, distributivité, preuve par le calcul. C'est de l'**algèbre**, et rien de tout cela n'est requis pour construire l'additionneur de la page suivante.
+
+    Ces outils servent en revanche pleinement quand vous écrirez des **conditions en Python** : savoir que `not (a and b)` équivaut à `not a or not b` évite des tests faux et des `if` inutilement compliqués. Ils seront donc **repris à ce moment-là**, dans le chapitre de programmation, sur des exemples de code.
+
+    Traitez-les ici si le temps le permet, ou gardez-les pour la reprise. Dans les deux cas, ils ne bloquent pas la suite.
 
 !!! question "Propriétés de base"
 

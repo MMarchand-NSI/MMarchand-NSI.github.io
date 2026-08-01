@@ -48,6 +48,12 @@ Par exemple, le circuit suivant réalise l'expression $\overline{a.b}$ (c'est un
 
 ### Exercices
 
+!!! warning "Prédire avant de brancher"
+    Ces exercices se font dans un éditeur de circuits, et l'éditeur répond instantanément. C'est un piège : on peut brancher au hasard jusqu'à ce que la lampe s'allume, et repartir sans avoir rien compris.
+
+    La règle est donc la même que pour le compteur du chapitre précédent : **avant de relier quoi que ce soit, écrivez la table de vérité que vous voulez obtenir**, puis construisez le circuit, puis vérifiez qu'il produit bien cette table, ligne par ligne. Si le circuit fonctionne mais que vous ne savez pas dire *pourquoi*, l'exercice n'est pas fait.
+
+
 !!! question "Interrupteurs et lampe"
     On donne le circuit logique suivant avec les interrupteurs a (en haut) et b (en bas). L'interrupteur est à 1 s'il est fermé.
 

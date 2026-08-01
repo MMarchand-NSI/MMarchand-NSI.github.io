@@ -342,6 +342,30 @@ Le fait que les instructions et les données partagent la même mémoire et le m
 
     **Instruction 3 : HALT** - Le programme s'arrête.
 
+!!! question "Exécuter une donnée (le cœur du modèle de von Neumann)"
+    Reprenez le programme précédent. La case 10 contient la **donnée** `5`, la case 11 la donnée `3`.
+
+    Supposons maintenant qu'à cause d'une erreur, le programme se termine **sans** `HALT` : après l'instruction rangée en 2, le compteur ordinal passe à 3, puis à 4, puis continue. Il finit par arriver sur la case 10.
+
+    1. Que va faire le processeur en arrivant sur la case 10 ?
+    2. Qu'est-ce qui, dans la mémoire, distingue une instruction d'une donnée ?
+    3. Que se passerait-il si l'on plaçait volontairement le compteur ordinal sur la case 10 ?
+
+??? success "Réponse"
+    1. Il va **exécuter la case 10**. Le processeur n'a aucun moyen de savoir que `5` était censé être une donnée : il lit le nombre, il le décode comme une instruction, et il exécute ce que ce code désigne. Le résultat sera absurde, mais il sera exécuté.
+
+    2. **Rien.** C'est le point le plus important de cette page, et il est contre-intuitif. Dans la mémoire, une instruction et une donnée sont **le même genre de chose** : un nombre dans une case. Aucune marque, aucune couleur, aucun bit spécial ne les sépare.
+
+    3. Exactement la même chose. **Ce qui décide qu'un nombre est une instruction, c'est uniquement le fait que le compteur ordinal pointe dessus.** Une case est une instruction quand on l'exécute, une donnée quand on la lit. Rien d'autre.
+
+    C'est précisément cela, le **programme enregistré** de von Neumann : le programme est rangé dans la même mémoire que les données, parce qu'il est fait de la même matière. C'est ce qui permet de changer de programme sans recâbler la machine, et c'est aussi ce qui rend possible qu'un programme en modifie un autre, ou soi-même.
+
+!!! tip "À faire sur le simulateur, pas seulement sur le papier"
+    Cette réponse ne coûte que deux minutes à vérifier. Écrivez un programme LMC très court, retirez le `HLT`, lancez-le, et observez la machine partir dans les données et les exécuter. **Prédisez d'abord** ce qu'elle affichera, puis comparez.
+
+!!! warning "Piège : la machine ne fait pas ce que vous vouliez dire"
+    Beaucoup d'erreurs viennent de la même croyance : il y aurait, quelque part dans la machine, quelqu'un qui comprend l'intention. Il n'y a personne. La machine décode **ce qui est écrit**, et si c'est absurde, elle l'exécute absurdement. Retenez-le maintenant : cela vous servira toute l'année, en Python comme ici.
+
 !!! question "Les bus pendant le fetch"
     Lors de la phase fetch de l'instruction 1 (ADD ACC, 11) de l'exercice précédent :
 

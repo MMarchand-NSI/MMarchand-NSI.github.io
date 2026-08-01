@@ -1,25 +1,22 @@
 # Le langage machine
 
-Le **langage machine** est le seul langage que le processeur comprend directement. C'est un ensemble d'**instructions binaires** (des suites de 0 et de 1) que le CPU peut exécuter.
+Le **langage machine** est le seul langage que le processeur comprend directement. C'est un ensemble d'instructions que le CPU peut exécuter, et chacune de ces instructions est **un nombre**.
 
 ## Qu'est-ce qu'une instruction machine ?
 
-Une instruction machine est **un nombre** stocké en mémoire qui indique au CPU **quelle opération effectuer**. Chaque instruction comporte généralement :
+Une instruction machine est **un nombre** stocké en mémoire, qui indique au CPU **quelle opération effectuer**. Chaque instruction comporte généralement :
 
 1. Un **code opération** (*opcode*) : quel type d'opération (addition, chargement, saut...)
 2. Des **opérandes** : sur quelles données ou adresses travailler
 
-!!! example "Exemple simplifié"
-    En binaire, une instruction pourrait ressembler à : `0010 0000 0101`
+!!! abstract "Le code est une convention, exactement comme la vôtre"
+    Vous avez déjà fait ce travail : quand vous avez inventé votre langage, vous avez attribué **un numéro à chaque mot**, et vous avez constaté que le programme du voisin était indéchiffrable sans sa table.
 
-    - `0010` : code pour "charger en mémoire" (opcode)
-    - `0000 0101` : adresse 5 (opérande)
-
-    → Cette instruction signifie "charger la valeur à l'adresse 5"
+    Un processeur ne fait rien d'autre. Son **jeu d'instructions** est une table de correspondance décidée une fois pour toutes par ses concepteurs, et gravée dans le circuit. La table ci-dessous est celle du LMC : ce n'est pas *la* bonne, c'est *celle-là*. Une autre machine en utilise une autre, et c'est pourquoi un programme compilé pour un processeur ne tourne pas sur un autre.
 
 ## Les instructions du Little Man Computer (LMC)
 
-Pour comprendre concrètement, utilisons le **Little Man Computer**, un modèle pédagogique d'ordinateur avec un jeu d'instructions simple.
+Pour comprendre concrètement, utilisons le **Little Man Computer**, un modèle pédagogique d'ordinateur avec un jeu d'instructions simple. Ses instructions s'écrivent avec **trois chiffres décimaux** : le premier est l'opcode, les deux suivants l'opérande.
 
 **Instructions de manipulation de données :**
 
@@ -80,9 +77,9 @@ Pour comprendre concrètement, utilisons le **Little Man Computer**, un modèle 
 | 10 | `DAT 0` | 000 |
 
 !!! note "Du code à la machine"
-    1. **Langage machine** (binaire pur) : `1110000101` - incompréhensible pour l'humain
-    2. **Assembleur** (mnémoniques) : `ADD 5` - lisible mais proche de la machine
-    3. **Langages de haut niveau** (Python, C) : `resultat = a + b` - abstrait et lisible
+    1. **Langage machine** : `310`, un nombre, seule chose que le processeur décode
+    2. **Assembleur** (mnémoniques) : `STA 10`, lisible mais proche de la machine
+    3. **Langages de haut niveau** (Python, C) : `resultat = a + b`, abstrait et lisible
 
     Le CPU ne comprend QUE le langage machine. L'assembleur et les langages de haut niveau sont **traduits** en langage machine avant l'exécution.
 
@@ -112,3 +109,17 @@ cinq     DAT 5     // Constante 5
 4. Incrémente (1 → 2)
 5. Continue jusqu'à atteindre 5
 6. S'arrête
+
+## Et une vraie machine ?
+
+Le LMC écrit ses instructions avec trois chiffres **décimaux**, parce que c'est commode pour nous. Un processeur réel, lui, ne dispose que de **deux** symboles, puisque ses circuits ne savent distinguer que deux états. Ses instructions sont donc les mêmes nombres, écrits autrement :
+
+!!! example "La même idée, avec deux symboles"
+    Une instruction pourrait s'écrire `0010 0000 0101` :
+
+    - `0010` : l'opcode, par exemple « charger »
+    - `0000 0101` : l'opérande, ici l'adresse 5
+
+    L'instruction signifie « charge la valeur rangée à l'adresse 5 ». C'est **exactement** la structure du LMC, opcode plus opérande, avec un alphabet de deux chiffres au lieu de dix.
+
+Écrire les nombres avec deux symboles seulement, c'est tout l'objet du chapitre **Représentation de l'information**. Vous y répondrez notamment à la question que cette page laisse ouverte : une case ne contenant qu'un nombre de taille fixe, **jusqu'où peut-on compter avant qu'elle ne déborde** ?
