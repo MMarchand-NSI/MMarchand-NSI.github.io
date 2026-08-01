@@ -63,7 +63,7 @@ Pour `a and (not b)`, il y a $2 \times 2 = 4$ combinaisons :
         L'expression n'est vraie que lorsque `b` est vrai et `a` est faux.
 
 !!! abstract "Méthode systématique et notation mathématique"
-    La méthode complète pour construire une table de vérité, la notation mathématique ($\bar{a}$, $a.b$, $a+b$) et les lois de la logique sont traitées dans le cours [Logique booléenne](../architecture/logique/logique.md).
+    La méthode complète pour construire une table de vérité, la notation mathématique ($\bar{a}$, $a.b$, $a+b$) et les lois de la logique sont traitées dans le cours [Logique booléenne](../logique/logique.md).
 
 ## Le ou exclusif (xor)
 
@@ -102,4 +102,4 @@ Les opérateurs booléens ne sont pas que théoriques : ils **réalisent le calc
 C'est exactement le mécanisme de l'addition posée que vous avez vue avec les [entiers relatifs](4-relatifs.md). En enchaînant ces opérations sur des circuits, la machine additionne réellement des nombres.
 
 !!! info "Pour aller plus loin : des booléens au matériel"
-    Comment ces opérations deviennent des composants physiques (portes logiques, additionneur) est expliqué dans [Logique booléenne](../architecture/logique/logique.md) et [Circuits logiques](../architecture/logique/circuits_logiques.md).
+    Comment ces opérations deviennent des composants physiques (portes logiques, additionneur) est expliqué dans [Logique booléenne](../logique/logique.md) et [Circuits logiques](../logique/circuits_logiques.md).

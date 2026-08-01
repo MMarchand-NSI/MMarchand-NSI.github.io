@@ -229,7 +229,7 @@ Pour construire un additionneur, la page suivante n'a besoin que de **quatre op�
 !!! info "Ces exercices ne sont pas nécessaires aux circuits"
     Ce qui suit fait **calculer sur les expressions booléennes** au lieu de simplement les évaluer : propriétés, égalités remarquables, distributivité, preuve par le calcul. C'est de l'**algèbre**, et rien de tout cela n'est requis pour construire l'additionneur de la page suivante.
 
-    Ces outils servent en revanche pleinement quand vous écrirez des **conditions en Python** : savoir que `not (a and b)` équivaut à `not a or not b` évite des tests faux et des `if` inutilement compliqués. Ils sont donc **repris à ce moment-là**, sur des exemples de code, dans [Les conditionnelles](../../prog/conditionnelles.md#nier-une-condition-les-lois-de-de-morgan).
+    Ces outils servent en revanche pleinement quand vous écrirez des **conditions en Python** : savoir que `not (a and b)` équivaut à `not a or not b` évite des tests faux et des `if` inutilement compliqués. Ils sont donc **repris à ce moment-là**, sur des exemples de code, dans [Les conditionnelles](../prog/conditionnelles.md#nier-une-condition-les-lois-de-de-morgan).
 
     Traitez-les ici si le temps le permet, ou gardez-les pour la reprise. Dans les deux cas, ils ne bloquent pas la suite.
 

@@ -277,7 +277,7 @@ Cela permet souvent de **remplacer des conditions imbriquées** par une seule, p
 
 ### Nier une condition : les lois de De Morgan
 
-Tu as calculé sur les expressions booléennes dans le chapitre [Logique booléenne](../architecture/logique/logique.md), sans savoir encore à quoi cela servirait. C'est ici. Le cas le plus fréquent est la **négation d'une condition composée**, et c'est aussi celui où l'on se trompe le plus.
+Tu as calculé sur les expressions booléennes dans le chapitre [Logique booléenne](../logique/logique.md), sans savoir encore à quoi cela servirait. C'est ici. Le cas le plus fréquent est la **négation d'une condition composée**, et c'est aussi celui où l'on se trompe le plus.
 
 Reprends l'encadrement ci-dessus. Comment écrire « `n` n'est **pas** entre 4 et 8 » ?
 
