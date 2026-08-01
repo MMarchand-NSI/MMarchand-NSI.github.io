@@ -10,7 +10,7 @@ Une instruction machine est **un nombre** stocké en mémoire, qui indique au CP
 2. Des **opérandes** : sur quelles données ou adresses travailler
 
 !!! abstract "Le code est une convention, exactement comme la vôtre"
-    Vous avez déjà fait ce travail : quand vous avez inventé votre langage, vous avez attribué **un numéro à chaque mot**, et vous avez constaté que le programme du voisin était indéchiffrable sans sa table.
+    Vous avez déjà fait ce travail dans l'activité [Inventer un langage pour une machine](langage-invente.md) : vous avez attribué **un numéro à chaque mot**, et vous avez constaté que le programme du voisin était indéchiffrable sans sa table.
 
     Un processeur ne fait rien d'autre. Son **jeu d'instructions** est une table de correspondance décidée une fois pour toutes par ses concepteurs, et gravée dans le circuit. La table ci-dessous est celle du LMC : ce n'est pas *la* bonne, c'est *celle-là*. Une autre machine en utilise une autre, et c'est pourquoi un programme compilé pour un processeur ne tourne pas sur un autre.
 

@@ -1,5 +1,8 @@
 # Architecture de von Neumann
 
+!!! tip "D'où l'on vient"
+    Dans l'activité [Inventer un langage pour une machine](langage-invente.md), vous avez fabriqué une table de correspondance entre des mots et des nombres, et constaté qu'un programme codé ne veut rien dire sans elle. Il restait une question ouverte : comment distinguer, dans une suite de nombres, les ordres des quantités ? Cette page et les suivantes y répondent.
+
 ## Le problème de départ
 
 Les premiers ordinateurs, comme l'**ENIAC** (1945), étaient capables de faire des calculs extraordinairement rapides. Mais ils avaient un défaut majeur : pour changer de programme, il fallait **physiquement recâbler la machine**. Des opératrices devaient rebrancher des centaines de câbles et repositionner des interrupteurs, ce qui prenait **plusieurs jours**, alors que le calcul lui-même ne durait que quelques secondes.
