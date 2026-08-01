@@ -191,6 +191,12 @@ Ainsi, on peut directement construire la table de vérité du circuit résultant
 !!! question "Réalisation du demi-additionneur"
     Réalisez le circuit demi-additionneur dans l'interface et téléchargez le résultat.
 
+    ??? tip "Indice léger"
+        Vous cherchez **deux sorties** à partir des mêmes deux entrées, donc **deux circuits séparés** qui partagent leurs entrées. Traitez-les l'un après l'autre, et commencez par celui dont la table de vérité vous paraît la plus familière.
+
+    ??? tip "Indice précis"
+        Comparez la colonne de la retenue avec la table du **ET** : elles sont identiques. Comparez ensuite la colonne de la somme avec celle du **OU**, puis avec celle du **OU EXCLUSIF** : une seule des deux convient, et c'est la ligne où $a$ et $b$ valent tous les deux 1 qui tranche.
+
 ??? success "Correction — Demi-additionneur"
 
     [Télécharger la correction (half-adder.json)](half-adder.json)
@@ -219,6 +225,14 @@ Il émet 2 informations en sortie, la somme obtenue $S$, ainsi que la retenue $C
     - Montrer que $S = a \oplus b \oplus C_{in}$
     - Montrer que $C_{out} = (a \oplus b) . C_{in} + a . b$
     - Réalisez alors le circuit de l'additionneur complet et sauvegardez-le.
+
+    ??? tip "Indice léger"
+        Un additionneur complet additionne **trois** bits : $a$, $b$ et la retenue entrante. Or vous savez déjà en additionner **deux**. Comment obtenir la somme de trois nombres quand on ne dispose que d'un outil qui en additionne deux ?
+
+    ??? tip "Indice précis"
+        Additionnez d'abord $a$ et $b$ avec un demi-additionneur : vous obtenez une somme partielle et une retenue. Additionnez ensuite cette somme partielle avec $C_{in}$, avec un **second** demi-additionneur : vous obtenez la somme finale et une seconde retenue.
+
+        Reste à décider la retenue sortante. Regardez votre table : elle vaut 1 dès que **l'une des deux** retenues intermédiaires vaut 1. Il ne peut jamais y en avoir deux à la fois, vérifiez-le sur les huit lignes.
 
 ??? success "Correction — Full-Adder"
 
@@ -303,6 +317,14 @@ Il émet 2 informations en sortie, la somme obtenue $S$, ainsi que la retenue $C
   }
 }
 ```
+
+    ??? tip "Indice léger"
+        N'essayez pas de concevoir un circuit qui additionne quatre bits d'un coup. Vous avez déjà l'outil qui traite **une colonne** ; il vous en faut simplement plusieurs, et il faut décider ce que l'on branche entre eux.
+
+    ??? tip "Indice précis"
+        Posez l'addition à la main sur deux nombres de 4 bits, et regardez ce qui circule d'une colonne à la suivante : **la retenue**, toujours de droite à gauche. Chaînez donc quatre additionneurs complets, la sortie $C_{out}$ de l'un devenant le $C_{in}$ du suivant.
+
+        Deux questions restent, et elles se répondent en regardant votre addition posée : que branche-t-on sur le $C_{in}$ du tout premier ? Et que faire du $C_{out}$ du dernier ?
 
 ??? success "Correction — Additionneur 4 bits"
 

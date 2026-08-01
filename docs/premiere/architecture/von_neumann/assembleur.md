@@ -382,6 +382,14 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Afficher le résultat final
 
 
+    ??? tip "Indice léger"
+        Vous savez déjà comparer **deux** nombres, c'est le défi 6. N'essayez pas de comparer les trois d'un coup : servez-vous deux fois de ce que vous savez faire.
+
+    ??? tip "Indice précis"
+        Traitez le problème en deux temps. Premier temps, comparez A et B et **rangez le plus grand des deux** dans une case, disons `max`. Second temps, comparez le contenu de `max` avec C, exactement comme au défi 6, et rangez à nouveau le vainqueur dans `max`. Il ne reste plus qu'à l'afficher.
+
+        Le piège est de vouloir afficher dans chaque branche. Ne le faites qu'**une seule fois, à la fin** : la comparaison décide, elle n'affiche pas.
+
 ??? success "Correction — Défi 8"
     ```assembly
             INP
@@ -425,6 +433,14 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Répéter tant que le compteur n'est pas à 0
 
     **Concept clé :** Utilisation d'une **boucle** avec un test de fin (`BRZ`).
+
+    ??? tip "Indice léger"
+        Une boucle en langage machine, c'est un **saut en arrière**. Il vous faut donc repérer l'adresse à laquelle revenir, et décider à quel moment ne plus y revenir.
+
+    ??? tip "Indice précis"
+        Le corps de la boucle tient en trois gestes : charger le compteur, l'afficher, lui soustraire 1. Ensuite seulement viennent les deux décisions.
+
+        D'abord, **rangez le compteur** avant de tester, sinon vous testerez autre chose que ce que vous croyez. Ensuite, `BRZ` saute vers la sortie si l'accumulateur vaut zéro, et un `BRA` inconditionnel ramène au début du corps sinon. Attention à l'ordre de ces deux instructions : le `BRZ` doit venir **avant** le `BRA`, sans quoi on ne sort jamais.
 
 ??? success "Correction — Défi 9"
     ```assembly
@@ -534,6 +550,14 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Afficher la somme
 
     **Concept clé :** Utilisation d'un **accumulateur** et d'une **boucle décrémentale**.
+
+    ??? tip "Indice léger"
+        C'est le défi 9 avec une opération en plus : au lieu de simplement afficher le compteur, vous l'accumulez dans une seconde case avant de le décrémenter.
+
+    ??? tip "Indice précis"
+        Vous manipulez maintenant **deux** variables, `somme` et `compteur`, et un seul accumulateur pour les deux. Chaque fois que vous voulez travailler sur l'une, il faut la charger, et **la ranger avant de toucher à l'autre**. C'est la principale source d'erreur de ce défi.
+
+        L'ordre qui fonctionne : charger `somme`, y ajouter `compteur`, ranger `somme` ; puis charger `compteur`, lui soustraire 1, ranger `compteur` ; puis tester s'il vaut zéro. N'affichez qu'à la sortie de la boucle.
 
 ??? success "Correction — Défi 12"
     ```assembly
