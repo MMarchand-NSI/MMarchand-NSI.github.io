@@ -28,11 +28,11 @@ On peut écrire 魚, ou さかな et dire "sakana" en japonais.
 
 ![alt text](image.png)
 
-**Ce qu’on dit ou écrit (le signifiant) peut varier d'une personne à l'autre sur terre. L'idée qu’on désigne (le signifié), par contre, reste inchangé.**
+**Ce qu'on dit ou écrit (le signifiant) peut varier d'une personne à l'autre sur terre. L'idée qu'on désigne (le signifié), par contre, reste inchangé.**
 
 Ce qui réveille l'idée d'un poisson est différent, mais l'idée d'un poisson est globalement la même pour tous.
 
-La relation entre le signifiant et le signifié est arbitraire. Il n'y a aucune raison qu'on choisisse un signifiant particulier pour décrire un signifié. Autrement dit, les deux n’ont pas de relation logique et doivent être apprises. Il s’agit d’une convention humaine.
+La relation entre le signifiant et le signifié est arbitraire. Il n'y a aucune raison qu'on choisisse un signifiant particulier pour décrire un signifié. Autrement dit, les deux n'ont pas de relation logique et doivent être apprises. Il s'agit d'une convention humaine.
 
 ## Les chiffres et les nombres
 
@@ -41,7 +41,7 @@ Dans la vie courante, on pense d'abord aux nombres pour signifier une **quantit�
 - Il y a 53 pommes dans le panier $\rarr$ cardinal
 - Je suis arrivé en 3ème position $\rarr$ ordinal
 
-Pour l’instant vous n'avez été habitués qu’à dire, lire et écrire les nombres sur base de cet ensemble de dessins $<0, 1, 2, 3, 4, 5, 6, 7, 8, 9>$. On appelle chacun de ces dessins un chiffre (indo-arabe).
+Pour l'instant vous n'avez été habitués qu'à dire, lire et écrire les nombres sur base de cet ensemble de dessins $<0, 1, 2, 3, 4, 5, 6, 7, 8, 9>$. On appelle chacun de ces dessins un chiffre (indo-arabe).
 
 Au japon, leur équivalent est <零, 一, 二, 三, 四, 五, 六, 七, 八, 九> mais les nombres ne sont pas construits de la même façon que chez nous. Le Japon a totalement adopté le système de numération occidental au cours du XXème siècle. (vous remarquerez au passage qu'en France, nous utilisons toujours les chiffres romains pour écrire les siècles)
 
@@ -360,8 +360,17 @@ La petite application ci-dessous permet d'incrémenter ou décrémenter un compt
     btns.appendChild(plus);
     btns.appendChild(minus);
 
+    // La valeur reste masquee par defaut : l'eleve annonce sa reponse avant de
+    // la verifier, et toute manipulation du compteur la remasque aussitot.
+    const verif = document.createElement('button');
+    verif.textContent = 'Vérifier';
+    verif.style.cssText =
+      'font-size:1em;padding:0.2em 0.9em;cursor:pointer;' +
+      'font-family:monospace;border-radius:4px;margin-left:1em;';
+    btns.appendChild(verif);
+
     const valEl = document.createElement('div');
-    valEl.style.cssText = 'margin-top:0.8em;font-size:1.15em;font-family:monospace;';
+    valEl.style.cssText = 'margin-top:0.8em;font-size:1.15em;font-family:monospace;min-height:1.6em;';
 
     main.appendChild(row);
     main.appendChild(btns);
@@ -369,6 +378,14 @@ La petite application ci-dessous permet d'incrémenter ou décrémenter un compt
     root.appendChild(main);
 
     const maxVal = Math.pow(N, numDigits);
+    let currentValue = 0;
+    let revealed = false;
+
+    function renderValue() {
+      valEl.textContent = revealed
+        ? 'Valeur (écrite en base 10) : ' + currentValue
+        : 'Valeur masquée. Annoncez la vôtre, puis « Vérifier ».';
+    }
 
     function getValue() {
       return wheels.reduce((acc, w) => acc * N + w.get(), 0);
@@ -387,9 +404,12 @@ La petite application ci-dessous permet d'incrémenter ou décrémenter un compt
           wheels[i].show(digits[i], dir);
         }
       }
-      valEl.textContent = 'Valeur décimale : ' + wrapped;
+      currentValue = wrapped;
+      revealed = false;
+      renderValue();
     }
 
+    verif.onclick = () => { revealed = true; renderValue(); };
     plus.onclick = () => setValue(getValue() + 1, 1);
     minus.onclick = () => setValue(getValue() - 1, -1);
 
@@ -466,7 +486,7 @@ La petite application ci-dessous permet d'incrémenter ou décrémenter un compt
 
 
 
-**La colonne/roue 0 est la colonne de droite. la colonne 1 est la colonne juste à sa gauche, etc...**
+**La colonne (ou roue) 0 est celle de droite. La colonne 1 est celle juste à sa gauche, et ainsi de suite.**
 
 - Combien de fois faut-il incrémenter le compteur pour faire bouger :
     - la roue 0 d'un seul cran ?
@@ -520,6 +540,20 @@ Jusqu'ici, nos roues disposent de 10 chiffres : c'est la base 10. Que se passe-t
 <details class="success"><summary>Réponse</summary><p>C'est <b><span id="ans-max"></span></b> en base <span class="baseref"></span>, soit <b><span id="ans-maxdec"></span></b> en base 10 (c'est-à-dire <span class="baseref"></span><sup>4</sup> - 1).</p></details>
 </li>
 </ol>
+
+<p><b>Réglez maintenant le compteur en base 2</b> (alphabet <code>01</code>, 4 roues) pour les questions 6 et 7 : c'est la seule base où l'on atteint les situations intéressantes en quelques clics. La question 8, elle, vous fera changer d'alphabet.</p>
+
+<ol start="6">
+<li>Repartez de <code>0000</code> et cliquez <b>7 fois</b> : le compteur affiche <code>0111</code>. <b>Sans cliquer</b>, prédisez ce qu'il affichera au clic suivant. Écrivez votre réponse, <b>puis</b> vérifiez.
+<details class="success"><summary>Réponse</summary><p><code>0111</code> devient <code><b>1000</b></code>. Les trois roues pleines repassent à 0 <b>d'un coup</b> et chacune fait avancer sa voisine de gauche : c'est une <b>cascade</b>. Un seul clic, quatre roues qui bougent. C'est le moment vraiment difficile de la numération, et c'est précisément celui qu'on ne voit pas quand on se contente de regarder défiler le compteur. En base 2, il revient sans arrêt ; en base 10, une fois sur dix seulement, ce qui explique qu'on puisse traverser toute sa scolarité sans jamais l'avoir compris.</p></details>
+</li>
+<li>Continuez jusqu'à <code>1111</code> (15 clics depuis zéro). Que se passe-t-il au clic <b>suivant</b> ? Prédisez, puis essayez.
+<details class="success"><summary>Réponse</summary><p>Le compteur repasse à <code><b>0000</b></code>, sans le moindre avertissement. Avec 4 roues en base 2, on ne compte que de 0 à <b>15</b> : au-delà, la valeur ne « rentre » plus et le compteur recommence à zéro. C'est un <b>débordement</b>. Une machine fait exactement la même chose, et c'est pour cela qu'on doit toujours savoir <i>combien de roues (de bits) on s'est donné</i> avant d'écrire un nombre.</p></details>
+</li>
+<li>Dans le champ « Alphabet de chiffres », remplacez <code>0123456789</code> par trois symboles de votre choix, par exemple <code>@#$</code> (le premier jouera le rôle du zéro). Comptez. Le système fonctionne-t-il encore ? Pourquoi ?
+<details class="success"><summary>Réponse</summary><p>Oui, il fonctionne exactement pareil : c'est une base 3, avec d'autres dessins. Le <b>choix des symboles</b> est une pure convention, une correspondance arbitraire, comme le mot « poisson » pour l'animal. En revanche, la <b>règle de position</b> (une roue pleine fait avancer sa voisine, dont le poids vaut 3 fois plus) n'a, elle, rien d'arbitraire : c'est elle qui fabrique les quantités. Ne confondez jamais les deux, c'est le cœur de tout ce chapitre.</p></details>
+</li>
+</ol>
 </div>
 
 <script>
@@ -533,7 +567,7 @@ Jusqu'ici, nos roues disposent de 10 chiffres : c'est la base 10. Que se passe-t
     while (n > 0) { s = DIGITS[n % b] + s; n = Math.floor(n / b); }
     return s;
   }
-  function setText(id, v) { const e = document.getElementById(id); if (e) e.textContent = v; }
+  function setText(id, v) { document.querySelectorAll('#' + id).forEach(function (e) { e.textContent = v; }); }
   function update() {
     const b = parseInt(sel.value, 10);
     setText('base-alpha', DIGITS.slice(0, b));
@@ -555,7 +589,7 @@ Jusqu'ici, nos roues disposent de 10 chiffres : c'est la base 10. Que se passe-t
 !!! tip "Comment travailler"
     Commencez par la **base 3** avec votre professeur. Refaites ensuite seul(e) tout le travail en **base 2**. Pour aller plus loin, essayez aussi les bases 4, 8 et 16 : vous constaterez que la méthode est toujours la même.
 
-!!! danger "Le binaire"
+!!! info "Le binaire"
 
     **Le binaire, c'est tout simplement la base 2.**
 
@@ -567,7 +601,7 @@ Jusqu'ici, nos roues disposent de 10 chiffres : c'est la base 10. Que se passe-t
     - 1 : "allumé", "vrai", "oui", etc.
 
 
-!!! danger "L'hexadécimal"
+!!! info "L'hexadécimal"
 
     **L'hexadécimal, c'est la base 16**
 
@@ -590,7 +624,10 @@ Jusqu'ici, nos roues disposent de 10 chiffres : c'est la base 10. Que se passe-t
 
 ## Combien de bits pour un entier ?
 
-Sur $k$ bits, on écrit les entiers de $0$ à $2^k - 1$ (c'est le cas particulier en base 2 de la formule $n^k - 1$).
+!!! abstract "On range le compteur"
+    À partir d'ici, le compteur ne sert plus. Il vous a servi à comprendre **ce que fait une position** ; il ne sait pas répondre aux questions qui suivent, et de toute façon vous serez évalué sans lui. Tout le reste du chapitre se fait avec l'écriture seule, papier et crayon. Si un raisonnement vous échappe, revenez y jeter un coup d'œil, puis refermez-le.
+
+Sur $k$ bits, on écrit les entiers de $0$ à $2^k - 1$ (c'est le cas particulier en base 2 de la formule $n^k - 1$). C'est exactement le **débordement** que vous avez provoqué à la question 7 : avec 4 roues, on s'arrête à 15.
 
 Inversement, pour savoir **combien de bits** sont nécessaires pour écrire un entier donné, on cherche la plus petite puissance de 2 qui le dépasse. Par exemple, $13 = 1101_2$ tient sur 4 bits, car $2^3 <= 13 < 2^4$.
 
@@ -599,9 +636,27 @@ Quand on calcule, le résultat peut demander **plus de bits** que les nombres de
 - **Somme** : additionner deux nombres de $k$ bits peut créer une retenue finale, donc un résultat sur **$k+1$ bits** au plus. Exemple : $1111_2 + 1111_2 = 11110_2$ (4 bits + 4 bits donne 5 bits).
 - **Produit** : multiplier un nombre de $k$ bits par un nombre de $m$ bits donne un résultat sur **$k+m$ bits** au plus.
 
+### Les tailles que les machines utilisent vraiment
+
+Une machine ne choisit pas le nombre de bits au cas par cas : elle travaille sur des tailles fixes, presque toujours **8, 16, 32 ou 64 bits**. Cela borne, une fois pour toutes, ce qu'un entier peut valoir :
+
+| Taille | Nombre d'entiers naturels représentables | Plus grand |
+| :---: | :---: | :---: |
+| 8 bits (un **octet**) | $2^8 = 256$ | $255$ |
+| 16 bits | $2^{16} = 65\,536$ | $65\,535$ |
+| 32 bits | $2^{32}$, soit environ 4,3 milliards | $4\,294\,967\,295$ |
+| 64 bits | $2^{64}$, soit environ $1,8 \times 10^{19}$ | $2^{64}-1$ |
+
+Choisir une taille, c'est donc accepter un débordement au-delà. C'est un vrai problème d'ingénierie, pas une curiosité : un compteur de 32 bits qui déborde, et un logiciel se met à compter à l'envers.
+
+??? info "Pour aller plus loin : et Python, alors ?"
+    Vous n'avez jamais vu un entier déborder en Python, et pour cause : Python n'impose **aucune taille fixe** à ses entiers. Il en agrandit la représentation autant que nécessaire, tant qu'il reste de la mémoire. Écrivez `2 ** 1000` dans une console, vous obtiendrez les 302 chiffres du résultat.
+
+    C'est confortable, et ce n'est pas gratuit : ces entiers coûtent plus de mémoire et de temps de calcul que les entiers de taille fixe d'un processeur. La plupart des langages (C, Java, Rust) font le choix inverse. Retenez surtout que **le débordement existe partout ailleurs**, et que ne l'avoir jamais rencontré est une particularité de votre langage, pas une loi de l'informatique.
+
 ## Systèmes alternatifs
 
-En réalité vous utilisez sans le savoir d’autres modes.
+En réalité vous utilisez sans le savoir d'autres modes.
 
 Vous comptez par exemple les minutes et les secondes dans le système sexagésimal hérité des babyloniens (-3000).
 

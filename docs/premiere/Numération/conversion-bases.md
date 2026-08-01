@@ -1,5 +1,15 @@
 # Conversion de bases
 
+!!! question "Rappel d'ouverture (5 minutes, cours fermé)"
+    1. Un compteur a 4 roues et l'alphabet `01`. Quel est le plus grand nombre qu'il peut afficher, et que vaut ce nombre ?
+    2. Combien de crans faut-il pour faire avancer la roue 2 d'un seul cran, en base 5 ?
+    3. Le mot « poisson » et le dessin `12` ont un point commun. Lequel ?
+
+??? success "Corrigé"
+    1. `1111`, qui vaut $15$. Au clic suivant, il repasse à `0000` : c'est le débordement.
+    2. $5^2 = 25$ crans. Le poids de la roue $k$ vaut $b^k$.
+    3. Ce sont deux **signifiants** : des dessins choisis par convention pour désigner une idée. L'idée (le poisson, la quantité douze) ne change pas quand on change de dessin.
+
 Convertir un nombre, ce n'est pas le transformer : c'est le **traduire**. Le nombre (le signifié) reste le même, on change seulement de signifiant, c'est-à-dire la suite de chiffres qui le note. `1011` en base 2 et `11` en base 10 sont deux écritures du même nombre.
 
 Il y a deux sens à maîtriser : **lire** un nombre écrit dans une base pour en donner la valeur en base 10, et l'**inverse**, écrire un nombre de la base 10 dans une autre base.
@@ -34,8 +44,8 @@ Cette valeur est justement son écriture en **base 10**. Appliquons cette formul
 !!! tip "Pourquoi le faire à la main ?"
     Une calculatrice ou une IA convertit en une fraction de seconde. L'intérêt n'est pas le résultat, mais de **comprendre le mécanisme** : c'est en traçant soi-même qu'on saisit ce que représente une base. C'est cette compréhension qui est évaluée, pas la capacité à recopier un résultat tout fait.
 
-!!! warning "Répétition"
-    Les paragraphes suivants sont en réalité répétitifs, et ne servent qu'à vous faire vous rendre compte de la similarité du procédé.
+!!! warning "Répétition volontaire"
+    Les paragraphes suivants sont volontairement répétitifs : leur seul but est de vous faire constater que **le procédé ne change jamais**, quelle que soit la base. Les bases 2 et 3 sont travaillées à fond ; les bases 4 et 16 ne reçoivent que deux exercices chacune, parce qu'à ce stade il n'y a plus rien de neuf à comprendre. Vous les retrouverez en revanche dans les rappels d'ouverture des pages suivantes : mieux vaut quelques conversions **étalées sur plusieurs semaines** que vingt d'affilée oubliées aussitôt.
 
 ### De la base 2 à la base 10
 
@@ -50,25 +60,27 @@ En résumé, pour convertir un nombre binaire en décimal, il suffit de calculer
 
 $$\displaystyle \sum_{i=0}^{n-1} b_i \times 2^i$$
 
-où $b_i$ est le chiffre en position $i$ en partant de la droite (avec $b_i \in \{0, 1\}$), et $n$ est le nombre total de chiffres dans l’écriture binaire.
+où $b_i$ est le chiffre en position $i$ en partant de la droite (avec $b_i \in \{0, 1\}$), et $n$ est le nombre total de chiffres dans l'écriture binaire.
 
 !!! question "Exercices : convertir des nombres binaires en base décimale"
-    1. Convertis le nombre binaire $1101$ en base 10.  
+    1. Convertissez le nombre binaire $1101$ en base 10.  
     2. Que vaut le nombre binaire $10010$ en base 10 ?  
-    3. Convertis $111111$ en base 10.  
+    3. Convertissez $111111$ en base 10.  
     4. Que donne le binaire $1010101$ en base 10 ?  
-    5. Que vaut $1$ en binaire dans le système décimal ?
+    5. Sans convertir entièrement : lequel de $1000_2$ et $111_2$ est le plus grand ? Justifiez.
 
 ??? warning "Corrigé"
     1. $1101 = 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0 = 8 + 4 + 0 + 1 = \boxed{13}$  
     2. $10010 = 1 \times 2^4 + 0 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 0 \times 2^0 = 16 + 0 + 0 + 2 + 0 = \boxed{18}$  
     3. $111111 = 1 \times 2^5 + 1 \times 2^4 + 1 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0 = 32 + 16 + 8 + 4 + 2 + 1 = \boxed{63}$  
     4. $1010101 = 1 \times 2^6 + 0 \times 2^5 + 1 \times 2^4 + 0 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0 = 64 + 0 + 16 + 0 + 4 + 0 + 1 = \boxed{85}$  
-    5. $1 = 1 \times 2^0 = \boxed{1}$
+    5. $1000_2$ est le plus grand. Il occupe **4 chiffres** contre 3, donc il atteint le poids $2^3 = 8$,
+    que $111_2$ ne peut pas atteindre : avec 3 chiffres, on ne dépasse jamais $2^3 - 1 = 7$.
+    En base $b$, **un nombre écrit avec plus de chiffres est toujours plus grand** (à condition qu'il n'y ait pas de zéro inutile devant).
 
 ### De la base 3 à la base 10
 
-Un nombre écrit en base 3 est composé uniquement de chiffres $0$, $1$ et $2$. Comme pour la base 2, chaque chiffre représente une puissance de la base — ici, une puissance de $3$ — en partant de la droite vers la gauche. Le principe est exactement le même : on multiplie chaque chiffre par la puissance de $3$ correspondant à sa position, puis on additionne le tout.
+Un nombre écrit en base 3 est composé uniquement de chiffres $0$, $1$ et $2$. Comme pour la base 2, chaque chiffre représente une puissance de la base (ici, une puissance de $3$) en partant de la droite vers la gauche. Le principe est exactement le même : on multiplie chaque chiffre par la puissance de $3$ correspondant à sa position, puis on additionne le tout.
 
 Par exemple, le nombre ternaire $102$ correspond à :
 $1 \times 3^2 + 0 \times 3^1 + 2 \times 3^0$
@@ -76,63 +88,53 @@ $1 \times 3^2 + 0 \times 3^1 + 2 \times 3^0$
 Soit : $9 + 0 + 2 = 11$ en base 10.
 
 !!! question "Exercices : convertir des nombres en base 3 en base décimale"
-    1. Convertis le nombre ternaire $102$ en base 10.
+    1. Convertissez le nombre ternaire $102$ en base 10.
     2. Que vaut le nombre $210$ en base 10 ?
-    3. Convertis $222$ en base 10.
+    3. Convertissez $222$ en base 10.
     4. Que donne le ternaire $1001$ en base 10 ?
-    5. Que vaut $1$ en base 3 dans le système décimal ?
+    5. Que valent $1000_3$, $0001_3$ et $101_3$ ? Quel est le rôle d'un zéro selon sa place ?
 
 ??? warning "Corrigé"
     1. $102 = 1 \times 3^2 + 0 \times 3^1 + 2 \times 3^0 = 9 + 0 + 2 = \boxed{11}$
     2. $210 = 2 \times 3^2 + 1 \times 3^1 + 0 \times 3^0 = 18 + 3 + 0 = \boxed{21}$
     3. $222 = 2 \times 3^2 + 2 \times 3^1 + 2 \times 3^0 = 18 + 6 + 2 = \boxed{26}$
     4. $1001 = 1 \times 3^3 + 0 \times 3^2 + 0 \times 3^1 + 1 \times 3^0 = 27 + 0 + 0 + 1 = \boxed{28}$
-    5. $1 = 1 \times 3^0 = \boxed{1}$
+    5. $1000_3 = 27$, $0001_3 = 1$, $101_3 = 9 + 0 + 1 = \boxed{10}$.
+    Un zéro **à l'intérieur** du nombre est indispensable : il dit que ce poids-là ne compte pas, et il maintient les autres chiffres à leur place.
+    Un zéro **à gauche** ne sert à rien : il ajoute $0 \times b^k$. On ne l'écrit que pour remplir un nombre de chiffres imposé, par exemple les 8 bits d'un octet.
 
 ### De la base 4 à la base 10
 
 Le procédé est exactement le même que pour la base 2 ou la base 3 : chaque chiffre représente une puissance de la base, ici la base $4$, en partant de la droite vers la gauche. Les chiffres autorisés en base 4 sont $0$, $1$, $2$ et $3$.
 
 !!! question "Exercices : convertir des nombres en base 4 en base décimale"
-    1. Convertis le nombre $123$ (base 4) en base 10.
-    2. Que vaut $321$ (base 4) en base 10 ?
-    3. Convertis $33$ (base 4) en base 10.
-    4. Que donne $1002$ (base 4) en base 10 ?
-    5. Que vaut $1$ en base 4 dans le système décimal ?
+    1. Que vaut $321$ (base 4) en base 10 ?
+    2. Que donne $1002$ (base 4) en base 10 ?
 
 ??? warning "Corrigé"
-    1. $123 = 1 \times 4^2 + 2 \times 4^1 + 3 \times 4^0 = 16 + 8 + 3 = \boxed{27}$
-    2. $321 = 3 \times 4^2 + 2 \times 4^1 + 1 \times 4^0 = 48 + 8 + 1 = \boxed{57}$
-    3. $33 = 3 \times 4^1 + 3 \times 4^0 = 12 + 3 = \boxed{15}$
-    4. $1002 = 1 \times 4^3 + 0 \times 4^2 + 0 \times 4^1 + 2 \times 4^0 = 64 + 0 + 0 + 2 = \boxed{66}$
-    5. $1 = 1 \times 4^0 = \boxed{1}$
+    1. $321 = 3 \times 4^2 + 2 \times 4^1 + 1 \times 4^0 = 48 + 8 + 1 = \boxed{57}$
+    2. $1002 = 1 \times 4^3 + 0 \times 4^2 + 0 \times 4^1 + 2 \times 4^0 = 64 + 0 + 0 + 2 = \boxed{66}$
 
 ### De la base 16 à la base 10
 
 Le procédé est exactement le même que pour les autres bases : chaque chiffre représente une puissance de la base, ici la base $16$, en partant de la droite vers la gauche. Comme on a besoin de $16$ chiffres différents, on utilise les chiffres $0$ à $9$ pour les dix premières valeurs, puis les lettres $A$, $B$, $C$, $D$, $E$ et $F$ pour représenter respectivement les valeurs décimales $10$, $11$, $12$, $13$, $14$ et $15$.
 
 !!! question "Exercices : convertir des nombres hexadécimaux en base décimale"
-    1. Convertis le nombre $1A$ (base 16) en base 10.
-    2. Que vaut $2F$ (base 16) en base 10 ?
-    3. Convertis $B4$ (base 16) en base 10.
-    4. Que donne $3E8$ (base 16) en base 10 ?
-    5. Que vaut $F$ en base 16 dans le système décimal ?
+    1. Convertissez $B4$ (base 16) en base 10.
+    2. Que donne $3E8$ (base 16) en base 10 ?
 
 ??? warning "Corrigé"
-    1. $1A = 1 \times 16^1 + A \times 16^0 = 1 \times 16 + 10 = \boxed{26}$
-    2. $2F = 2 \times 16^1 + F \times 16^0 = 2 \times 16 + 15 = \boxed{47}$
-    3. $B4 = B \times 16^1 + 4 \times 16^0 = 11 \times 16 + 4 = \boxed{180}$
-    4. $3E8 = 3 \times 16^2 + E \times 16^1 + 8 \times 16^0 = 3 \times 256 + 14 \times 16 + 8 = 768 + 224 + 8 = \boxed{1000}$
-    5. $F = 15 \times 16^0 = \boxed{15}$
+    1. $B4 = B \times 16^1 + 4 \times 16^0 = 11 \times 16 + 4 = \boxed{180}$
+    2. $3E8 = 3 \times 16^2 + E \times 16^1 + 8 \times 16^0 = 3 \times 256 + 14 \times 16 + 8 = 768 + 224 + 8 = \boxed{1000}$
 
 ### Le plus grand entier sur $k$ chiffres
 
 !!! question "Exercices : plus grand entier représentable avec $k$ chiffres"
-    1. Quel est le plus grand entier que l’on peut écrire avec $4$ chiffres en base $2$ ?
-    2. Quel est le plus grand entier que l’on peut écrire avec $3$ chiffres en base $8$ ?
-    3. Quel est le plus grand entier que l’on peut écrire avec $2$ chiffres en base $16$ ?
-    4. Quel est le plus grand entier que l’on peut écrire avec $5$ chiffres en base $10$ ?
-    5. Donne la formule générale pour le plus grand entier représentable avec $k$ chiffres en base $n$. (à savoir)
+    1. Quel est le plus grand entier que l'on peut écrire avec $4$ chiffres en base $2$ ?
+    2. Quel est le plus grand entier que l'on peut écrire avec $3$ chiffres en base $8$ ?
+    3. Quel est le plus grand entier que l'on peut écrire avec $2$ chiffres en base $16$ ?
+    4. Quel est le plus grand entier que l'on peut écrire avec $5$ chiffres en base $10$ ?
+    5. Donnez la formule générale pour le plus grand entier représentable avec $k$ chiffres en base $n$. (à savoir)
 
 ??? warning "Corrigé"
     1. En base $2$, les chiffres vont de $0$ à $1$, donc le plus grand nombre à $4$ chiffres est $1111_2$ :  
@@ -247,7 +249,7 @@ Reprenons **douze**. En comptant sur les roues (page précédente), vous l'avez 
 
 ### Un exemple complet : 13 en base 2
 
-On divise le nombre par $2$, on note le **reste**, puis on recommence avec le quotient jusqu’à ce qu’il soit nul. L’écriture binaire est obtenue en lisant les **restes de bas en haut**.
+On divise le nombre par $2$, on note le **reste**, puis on recommence avec le quotient jusqu'à ce qu'il soit nul. L'écriture binaire est obtenue en lisant les **restes de bas en haut**.
 
 $$
 \begin{aligned}
@@ -264,14 +266,14 @@ $$13_{10} = 1101_2$$
 
 ### Convertir vers une base $b$ quelconque
 
-Ce procédé fonctionne exactement de la même manière pour convertir un entier de la base 10 vers n’importe quelle base entière $b > 1$ : on procède par divisions successives par $b$ jusqu'à obtenir un quotient nul.
+Ce procédé fonctionne exactement de la même manière pour convertir un entier de la base 10 vers n'importe quelle base entière $b > 1$ : on procède par divisions successives par $b$ jusqu'à obtenir un quotient nul.
 
 !!! question "Exercices : convertir des entiers de la base 10 vers d'autres bases"
-    1. Convertis $19_{10}$ en base $2$  
-    2. Convertis $45_{10}$ en base $3$  
-    3. Convertis $31_{10}$ en base $4$  
-    4. Convertis $73_{10}$ en base $8$  
-    5. Convertis $255_{10}$ en base $16$
+    1. Convertissez $19_{10}$ en base $2$  
+    2. Convertissez $45_{10}$ en base $3$  
+    3. Convertissez $31_{10}$ en base $4$  
+    4. Convertissez $73_{10}$ en base $8$  
+    5. Convertissez $255_{10}$ en base $16$
 
 ??? warning "Corrigé"
     1. Divisions successives par $2$ :  
@@ -307,9 +309,33 @@ Ce procédé fonctionne exactement de la même manière pour convertir un entier
     En base $16$, $15 = F$  
     Lecture de bas en haut : $\boxed{FF_{16}}$
 
+!!! question "Exercices : les cas qui font trébucher"
+    Ce sens est le plus difficile des deux : il demande de dérouler un **procédé**, alors que l'autre ne demandait qu'une somme. Ces cinq-là sont choisis pour les pièges qu'ils contiennent.
+
+    1. Convertissez $8_{10}$ en base $2$. Combien de chiffres obtenez-vous ?
+    2. Convertissez $9_{10}$ en base $3$. Attention au reste nul.
+    3. Convertissez $1_{10}$ en base $2$, puis $0_{10}$ en base $2$.
+    4. Convertissez $100_{10}$ en base $16$, puis vérifiez votre résultat en le reconvertissant vers la base 10.
+    5. Un élève convertit $13_{10}$ en base 2 et écrit $1011$. Sans refaire tout le calcul, montrez qu'il s'est trompé.
+
+??? warning "Corrigé"
+    1. $8 \div 2 = 4$ r $0$ ; $4 \div 2 = 2$ r $0$ ; $2 \div 2 = 1$ r $0$ ; $1 \div 2 = 0$ r $1$.
+    Lecture de bas en haut : $\boxed{1000_2}$, soit **4 chiffres**. C'est logique : $8 = 2^3$, il faut donc atteindre le poids $2^3$, c'est-à-dire une quatrième roue.
+
+    2. $9 \div 3 = 3$ r $0$ ; $3 \div 3 = 1$ r $0$ ; $1 \div 3 = 0$ r $1$.
+    Lecture de bas en haut : $\boxed{100_3}$. Les restes nuls **s'écrivent** : les oublier donnerait $1_3$, c'est-à-dire un tout autre nombre.
+
+    3. $1 \div 2 = 0$ r $1$, donc $\boxed{1_2}$. Pour zéro, la division s'arrête immédiatement (le quotient est déjà nul) et on convient d'écrire $\boxed{0_2}$.
+
+    4. $100 \div 16 = 6$ r $4$ ; $6 \div 16 = 0$ r $6$. Lecture de bas en haut : $\boxed{64_{16}}$.
+    Vérification : $6 \times 16 + 4 = 96 + 4 = 100$. **Reconvertir dans l'autre sens est le seul moyen de contrôler son résultat sans aide extérieure** : prenez-en l'habitude.
+
+    5. $1011_2 = 8 + 0 + 2 + 1 = 11$, et non $13$. L'erreur se voit **sans refaire les divisions**, simplement en relisant le résultat dans l'autre sens.
+    (La bonne réponse est $1101_2$ : l'élève a interverti deux chiffres, ce qui arrive quand on lit les restes de haut en bas au lieu de bas en haut.)
+
 ## Astuce : passer vite de l'hexadécimal au binaire
 
-Il existe une astuce simple pour passer rapidement d’un nombre en base 16 (hexadécimal) à la base 2 (binaire), et inversement : chaque chiffre hexadécimal correspond exactement à un groupe de **4 bits**.
+Il existe une astuce simple pour passer rapidement d'un nombre en base 16 (hexadécimal) à la base 2 (binaire), et inversement : chaque chiffre hexadécimal correspond exactement à un groupe de **4 bits**.
 
 Autrement dit, on convertit chaque chiffre hexadécimal en son équivalent binaire sur **4 chiffres**, en ajoutant des zéros à gauche si nécessaire.
 
