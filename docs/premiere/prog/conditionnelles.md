@@ -60,14 +60,15 @@ if age >= 18:
 print("Fin du programme.")
 ```
 
-!!! abstract "Ce que fait la machine, pas à pas"
-    Avec `age` valant 20 :
+!!! question "Prédis avant d'exécuter"
+    Sans lancer le code, écris ce qui s'affiche **dans les deux cas** : avec `age = 20`, puis avec `age = 15`. Combien de lignes chaque fois ?
 
-    1. Python évalue la condition `age >= 18`, soit `20 >= 18` : cela vaut `True`.
-    2. La condition est vraie : Python **entre dans le bloc indenté** et exécute ses deux lignes.
-    3. Puis il continue avec la ligne non indentée « Fin du programme. »
+    ??? success "Réponse"
+        Avec `age = 20`, trois lignes : « Vous êtes majeur. », « Bienvenue. », « Fin du programme. » Python évalue `20 >= 18`, qui vaut `True`, **entre dans le bloc indenté** et exécute ses deux lignes, puis continue avec la ligne non indentée.
 
-    Si `age` valait 15, la condition `15 >= 18` vaudrait `False` : Python **sauterait tout le bloc indenté**.
+        Avec `age = 15`, une seule ligne : « Fin du programme. » La condition `15 >= 18` vaut `False`, Python **saute tout le bloc indenté** et reprend juste après.
+
+        Ce qui décide de tout, ce n'est pas le `if` mais l'**indentation** : elle seule dit ce qui est sauté et ce qui ne l'est pas.
 
 !!! danger "L'indentation définit le bloc"
     Ce sont les **espaces en début de ligne** qui disent ce qui est « à l'intérieur » du `if`. Une ligne réalignée à gauche n'en fait plus partie.
@@ -275,9 +276,21 @@ Cela permet souvent de **remplacer des conditions imbriquées** par une seule, p
     ```
 
 !!! question "Exercices (booléens)"
-    1. **Triangle.** Demande trois longueurs entières `a`, `b`, `c`. Si elles ne peuvent pas former un triangle (un côté doit être inférieur à la somme des deux autres), affichez `pas un triangle`. Sinon, affichez `equilateral`, `isocele` ou `scalene`.
+    1. **Triangle.** Demande trois longueurs entières `a`, `b`, `c`. Si elles ne peuvent pas former un triangle (chaque côté doit être inférieur à la somme des deux autres), affiche `pas un triangle`. Sinon, affiche `equilateral`, `isocele` ou `scalene`.
     2. **Cinéma.** Implémente en Python le calcul de tarif du diagramme d'activité du début de la page.
     3. **Bissextile, version booléenne.** Reprends l'année bissextile avec **un seul calcul booléen**.
+
+    ??? tip "Indice léger (triangle)"
+        Il y a **deux décisions successives**, pas une seule : d'abord « est-ce un triangle ? », et seulement ensuite « lequel ? ». N'essaie pas de tout écrire dans un seul enchaînement de `elif`.
+
+    ??? tip "Indice plus précis (triangle)"
+        La première décision est un `if / else` dont la condition combine **trois** comparaisons avec `and`. La seconde décision, dans le `else`, est un `elif` à trois branches : combien de côtés sont égaux ? Attention à l'ordre, l'équilatéral est le cas **le plus exigeant**.
+
+    ??? tip "Indice léger (cinéma)"
+        Suis le diagramme dans l'ordre où il est dessiné : il te donne déjà la structure du programme. Chaque losange est un test, chaque rectangle une affectation.
+
+    ??? tip "Indice plus précis (cinéma)"
+        Le diagramme se lit en deux temps. Un premier bloc `if / elif / else` fixe le tarif selon l'âge, du plus exigeant au moins exigeant. Puis, **après** ce bloc et une seule fois, un second `if` applique la promotion. Ne recopie pas la promotion dans chaque branche.
 
     ??? warning "Corrigé (bissextile booléenne)"
         ```python
@@ -311,3 +324,61 @@ Cela permet souvent de **remplacer des conditions imbriquées** par une seule, p
 ---
 
 Une conditionnelle combinée à une **boucle** permet de filtrer ou de compter (par exemple : compter les 6 sur 1000 lancers de dé). On y viendra juste après, avec [Les boucles](boucle-for.md).
+
+## Point d'étape : où en es-tu vraiment ?
+
+Ce bloc (variables, entiers, chaînes, conditionnelles) est le socle de tout le reste de l'année. Il vaut donc la peine de savoir **maintenant**, et pas en février, ce qui est acquis et ce qui ne l'est pas.
+
+!!! warning "Vérification individuelle (15 minutes, seul, cours fermé)"
+    À faire seul, sans aide et sans IA. Ce n'est pas noté : c'est un instrument de mesure, et il ne sert que si tu ne triches pas avec toi-même.
+
+    **1. Lire.** Que s'affiche-t-il ?
+    ```python
+    x = 7
+    y = x
+    x = x + 3
+    if y > 5 and x > 5:
+        print("les deux")
+    elif y > 5:
+        print("y seul")
+    else:
+        print("aucun")
+    print(x, y)
+    ```
+
+    **2. Compléter.** Remplis les trous pour que le programme affiche `"cher"` si le prix dépasse 100, `"correct"` entre 50 et 100 inclus, et `"bon marché"` en dessous.
+    ```python
+    prix = int(input("Prix ? "))
+    if ...:
+        print("cher")
+    elif ...:
+        print("correct")
+    else:
+        print("bon marché")
+    ```
+
+    **3. Écrire.** Depuis zéro : demande une année et affiche si elle est bissextile (multiple de 4 mais pas de 100, **ou** multiple de 400).
+
+    ??? success "Réponses"
+        **1.** `les deux` puis `10 7`. Le point délicat est `y = x` : il a copié la valeur `7` à cet instant, et `x = x + 3` ne l'a pas suivi.
+
+        **2.** `if prix > 100:` puis `elif prix >= 50:`. L'ordre compte : le `elif` n'est atteint que si le premier test est faux, donc il est inutile d'y réécrire `prix <= 100`.
+
+        **3.**
+        ```python
+        annee = int(input("Année ? "))
+        if (annee % 4 == 0 and annee % 100 != 0) or annee % 400 == 0:
+            print("bissextile")
+        else:
+            print("non bissextile")
+        ```
+
+!!! abstract "Comment lire ton résultat"
+    Les trois questions ne mesurent pas la même chose, et **rater la troisième en réussissant la première n'est pas un signe de faiblesse**. Lire du code, le compléter et l'écrire de zéro sont trois compétences distinctes, qui se travaillent séparément.
+
+    - Tu réussis les trois : passe à la suite.
+    - Tu réussis 1 et 2 mais pas 3 : tu comprends le mécanisme, il te manque la **mise en route**. Refais des exercices d'écriture courts, pas de la relecture.
+    - Tu rates la 1 : reprends le traçage avant tout le reste. Écrire du code qu'on ne sait pas lire ne mène nulle part.
+
+!!! tip "Ce que ce point d'étape dit, et ce qu'il ne dit pas"
+    En programmation, réussir un concept rend le suivant plus facile, et le rater le rend plus difficile : l'écart entre deux élèves se creuse par **enchaînement**, pas parce que l'un aurait un don et l'autre non. C'est justement pour cela qu'on mesure **tôt**, quand un rattrapage coûte encore une heure et pas un trimestre. Un résultat faible aujourd'hui est une information sur ce qu'il faut retravailler, rien d'autre.

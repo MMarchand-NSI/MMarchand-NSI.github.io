@@ -1,16 +1,22 @@
 # Les fonctions
 
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
-    Réponds **sans rouvrir** la page sur les conditionnelles, en écrivant tes réponses.
+    Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 
-    1. Écris la condition qui teste que `x` est strictement compris entre `0` et `10`.
-    2. `a` vaut `True` et `b` vaut `False`. Que vaut `not (a and b)` ?
-    3. Quelle différence entre écrire `elif` et écrire un second `if` juste après le premier ?
+    1. Quelle différence entre écrire `elif` et écrire un second `if` juste après le premier ?
+    2. Écris la boucle qui compte les `"a"` de la chaîne `mot`. Où se place l'initialisation du compteur ?
+    3. Que vaut `len("bonjour")` et que vaut `"bonjour"[3]` ?
 
     ??? success "Corrigé"
-        1. `0 < x < 10`, ou `x > 0 and x < 10`. Les deux sont corrects en Python.
-        2. `a and b` vaut `False`, donc `not (a and b)` vaut `True`.
-        3. Un `elif` n'est **testé que si** la condition précédente est fausse : les branches s'excluent. Deux `if` successifs sont testés **tous les deux**, et leurs blocs peuvent s'exécuter l'un après l'autre.
+        1. Un `elif` n'est **testé que si** la condition précédente est fausse : les branches s'excluent. Deux `if` successifs sont testés **tous les deux**, et leurs blocs peuvent s'exécuter l'un après l'autre.
+        2. L'initialisation est **avant** la boucle, la mise à jour **dedans** :
+           ```python
+           compteur = 0
+           for c in mot:
+               if c == "a":
+                   compteur = compteur + 1
+           ```
+        3. `7` et `"j"`.
 
 ## Pourquoi des fonctions ?
 
@@ -126,8 +132,10 @@ def randint(a: int, b: int) -> int:
     8. Calcule la moyenne des notes d'une liste de notes.
     9. Vérifie si un texte est un palindrome.
 
-    !!! hint "Aide sur les types"
-        Une liste de quelque chose est de type `list`. Une liste d'entiers se note `list[int]`, une liste de chaînes `list[str]`, une liste de listes d'entiers `list[list[int]]`. Pas besoin de savoir comment cela marche pour écrire la signature.
+    !!! hint "Aide sur les types, dont un que tu n'as pas encore vu"
+        Une liste de quelque chose est de type `list`. Une liste d'entiers se note `list[int]`, une liste de chaînes `list[str]`, une liste de listes d'entiers `list[list[int]]`.
+
+        Les listes sont étudiées plus loin, dans [Les listes](listes.md) : ici, tu n'as **pas** à savoir les manipuler, seulement à écrire le type dans la signature. C'est justement l'intérêt de l'exercice : on peut énoncer un contrat sur une donnée dont on ne sait pas encore programmer le traitement.
 
 ## 2. Le corps de la fonction et `return`
 
@@ -273,6 +281,12 @@ Une fonction peut avoir autant de paramètres qu'on veut. À l'appel, il faut re
     ```
     Écris et teste `affiche_rectangle`. Rappels : `print()` passe à la ligne ; `print('A', end='')` affiche sans passer à la ligne.
 
+    ??? tip "Indice léger"
+        Un rectangle, ce sont des **lignes** ; une ligne, ce sont des **caractères**. Deux choses à répéter, donc deux boucles, et l'une est à l'intérieur de l'autre. Laquelle dedans ?
+
+    ??? tip "Indice plus précis"
+        La boucle **extérieure** compte les lignes (`hauteur` tours). La boucle **intérieure** affiche les caractères d'une ligne (`largeur` tours), avec `end=''` pour rester sur la même ligne. Le retour à la ligne se fait avec un `print()` vide, placé **dans** la boucle extérieure mais **après** la boucle intérieure.
+
     ??? warning "Corrigé"
         ```python
         def affiche_rectangle(hauteur: int, largeur: int, car: str) -> None:
@@ -318,6 +332,12 @@ Une fonction peut avoir autant de paramètres qu'on veut. À l'appel, il faut re
     1. Écris `imc(poids, taille)` qui renvoie l'indice de masse corporelle (formule sur [Wikipédia](https://fr.wikipedia.org/wiki/Indice_de_masse_corporelle)).
     2. Écris un programme qui demande poids et taille, puis affiche l'IMC et un message d'interprétation.
     3. Affiche une réserve claire : cette information ne doit pas servir à un autodiagnostic, il faut préférer l'avis d'un médecin.
+
+    ??? tip "Indice léger"
+        La question 1 et la question 2 ne demandent pas la même chose. La fonction **calcule et renvoie**, elle n'affiche rien et ne demande rien à l'utilisateur. Tout ce qui est saisie et affichage se passe **en dehors** d'elle.
+
+    ??? tip "Indice plus précis"
+        `def imc(poids: float, taille: float) -> float:` renvoie `poids / (taille * taille)`, avec la taille en mètres. Le programme de la question 2 appelle cette fonction, range le résultat dans une variable, puis enchaîne des `elif` sur cette variable. Si tu as mis un `print` dans `imc`, relis le piège `return` contre `print`.
 
 ## 6. Une fonction peut en appeler une autre
 

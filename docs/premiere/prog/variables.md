@@ -1,5 +1,19 @@
 # Les variables
 
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** les chapitres sur la représentation de l'information et l'architecture, en écrivant tes réponses. Se tester est ce qui fixe les acquis ; relire ne le fait pas.
+
+    1. Combien de valeurs différentes peut-on coder sur un octet ? Quelle est la plus grande, en écriture binaire ?
+    2. Dans le Little Man Computer, à quoi servent les instructions `STA` et `LDA` ?
+    3. Convertis `1011` (binaire) en décimal.
+
+    ??? success "Corrigé"
+        1. **256** valeurs, de `0` à `255`. La plus grande s'écrit `11111111` : huit bits, donc $2^8$ combinaisons.
+        2. `STA` (*store*) **range** une valeur à une adresse mémoire ; `LDA` (*load*) **lit** la valeur qui s'y trouve. Ce sont les deux seules opérations de la mémoire : écrire et lire.
+        3. `1011` vaut $8 + 0 + 2 + 1 = 11$.
+
+    Ces trois questions ne sont pas là par hasard : cette page montre que ce que Python appelle une **variable** est exactement la case mémoire du Little Man Computer, avec un nom à la place d'une adresse.
+
 ## Se souvenir d'une information
 
 !!! abstract "Le plus important"
@@ -17,8 +31,15 @@ Souviens-toi du modèle de von Neumann et du [Little Man Computer](../architectu
 
 Une **variable**, c'est exactement cela : une **case mémoire à laquelle on a donné un nom**. Plutôt que de retenir « la case d'adresse 17 », on écrit `age`, et l'ordinateur sait de quelle case on parle.
 
-!!! tip "L'image de la boîte"
+!!! tip "L'image de la boîte, et ses deux limites"
     Vois une variable comme une **boîte avec une étiquette** : l'étiquette est le nom (`age`), le contenu est la valeur (`16`). On peut regarder dans la boîte, ou en remplacer le contenu.
+
+    Cette image est utile, mais elle induit en erreur sur deux points, et ce sont deux des erreurs les plus tenaces chez les débutants :
+
+    - une boîte pourrait contenir **plusieurs objets** ; une variable contient **une seule valeur à la fois**. Ranger une nouvelle valeur **efface** l'ancienne, définitivement ;
+    - on peut **vider** une boîte en la regardant ; **lire** une variable ne la vide pas. On peut la relire autant qu'on veut.
+
+    Retiens plutôt la case mémoire du Little Man Computer : une adresse, une valeur, qu'on écrase en écrivant et qu'on recopie en lisant.
 
 ## Écrire dans une variable : l'affectation
 

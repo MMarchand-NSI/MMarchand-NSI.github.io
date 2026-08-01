@@ -1,5 +1,20 @@
 # Modules Python
 
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
+
+    1. Écris la signature typée et la docstring d'une fonction qui renvoie l'aire d'un disque à partir de son rayon.
+    2. À quoi sert un `assert` placé au début d'une fonction ?
+    3. Que vaut `d.get("absente", 0)` si la clé `"absente"` n'est pas dans le dictionnaire `d` ?
+
+    ??? success "Corrigé"
+        1. ```python
+           def aire_disque(rayon: float) -> float:
+               """Renvoie l'aire d'un disque de rayon donné."""
+           ```
+        2. À vérifier une **précondition** : ce qui doit être vrai des arguments pour que la fonction ait un sens. Il protège la fonction contre un usage incorrect, et documente le contrat.
+        3. `0`. C'est tout l'intérêt de `get` : il ne lève pas d'erreur sur une clé absente, il renvoie la valeur par défaut qu'on lui donne.
+
 Un **module** est un fichier Python (`.py`) qui contient du code réutilisable : des fonctions, des classes, des variables. Les modules permettent d'**organiser** le code et d'**éviter la répétition**.
 
 Python propose des centaines de modules intégrés (comme `random`, `math`, `os`...), permet d'en télécharger des milliers d'autres, et tu peux aussi créer tes propres modules.

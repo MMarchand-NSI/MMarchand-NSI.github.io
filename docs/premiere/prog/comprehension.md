@@ -1,5 +1,23 @@
 # Compréhensions de liste
 
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
+
+    1. Écris, avec une boucle `for`, la construction de la liste des multiples de `5` de `0` à `50`.
+    2. Où place-t-on le `if` quand on ne veut accumuler que certains éléments : avant, dans, ou après la boucle ?
+    3. Comment parcourt-on à la fois les clés et les valeurs d'un dictionnaire ?
+
+    ??? success "Corrigé"
+        1. ```python
+           multiples = []
+           for i in range(0, 51, 5):
+               multiples.append(i)
+           ```
+        2. **Dans** la boucle, avant la mise à jour de l'accumulateur. L'initialisation reste avant, le résultat s'utilise après.
+        3. Avec `for cle, valeur in d.items():`.
+
+    Toute cette page ne fait que **réécrire plus court** ce que tu viens d'écrire dans la question 1. Aucune nouvelle capacité n'y est introduite : si tu sais accumuler avec un `for`, tu sais déjà tout ce qu'une compréhension exprime.
+
 Les **compréhensions de liste** (*list comprehensions*) sont une façon **concise et élégante** d'écrire des boucles qui construisent des listes. C'est une syntaxe très utilisée en Python.
 
 ## 1. Approche sémantique
@@ -296,4 +314,53 @@ Les compréhensions de liste sont très utiles pour **filtrer ou transformer** d
 - Très pratique pour **filtrer** et **transformer** des listes
 - Particulièrement utile avec des listes de dictionnaires
 
+## Vérification individuelle : les types construits
 
+!!! warning "À faire seul, cours fermé (15 minutes)"
+    Sans aide et sans IA. Cette vérification conditionne le passage aux [exercices en autonomie](exercices.md).
+
+    **1. Lire.** Que s'affiche-t-il ?
+    ```python
+    a = [1, 2, 3]
+    b = a
+    c = a.copy()
+    b.append(4)
+    c.append(5)
+    print(a, b, c)
+
+    stock = {"pain": 2, "lait": 0}
+    print(stock.get("beurre", 0))
+    ```
+
+    **2. Compléter.** Réécris cette boucle en une **compréhension de liste**.
+    ```python
+    res = []
+    for mot in ["chat", "hippopotame", "rat", "girafe"]:
+        if len(mot) > 4:
+            res.append(mot.upper())
+    ```
+
+    **3. Écrire.** Depuis zéro : `occurrences(txt)` qui renvoie un **dictionnaire** associant à chaque caractère de `txt` son nombre d'apparitions.
+
+    ??? success "Réponses"
+        **1.** `[1, 2, 3, 4] [1, 2, 3, 4] [1, 2, 3, 5]` puis `0`. `b = a` **ne copie pas** : `a` et `b` sont un seul objet. `c = a.copy()` en fabrique un second, indépendant, et il a été copié **avant** l'`append` sur `b`.
+
+        **2.** `res = [mot.upper() for mot in ["chat", "hippopotame", "rat", "girafe"] if len(mot) > 4]`
+
+        **3.**
+        ```python
+        def occurrences(txt: str) -> dict[str, int]:
+            """Renvoie le nombre d'apparitions de chaque caractère de txt."""
+            compte = {}
+            for c in txt:
+                compte[c] = compte.get(c, 0) + 1
+            return compte
+        ```
+        C'est encore une accumulation : l'accumulateur est simplement un **dictionnaire vide** au lieu de `0`, `""` ou `[]`.
+
+!!! abstract "Comment lire ton résultat"
+    Les trois questions ne mesurent pas la même chose, et **rater la troisième en réussissant la première n'est pas un signe de faiblesse**. Lire du code, le compléter et l'écrire de zéro sont trois compétences distinctes, qui se travaillent séparément.
+
+    - Tu réussis les trois : passe à la suite.
+    - Tu réussis 1 et 2 mais pas 3 : tu comprends le mécanisme, il te manque la **mise en route**. Refais des exercices d'écriture courts, pas de la relecture.
+    - Tu rates la 1 : reprends le traçage avant tout le reste. Écrire du code qu'on ne sait pas lire ne mène nulle part.

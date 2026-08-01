@@ -1,16 +1,16 @@
 # La boucle `for`
 
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
-    Réponds **sans rouvrir** les pages sur les fonctions, la spécification et la portée.
+    Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 
-    1. Écris la **signature typée** d'une fonction `est_majeur` qui prend un âge entier et renvoie un booléen.
-    2. Que renvoie une fonction qui n'a pas d'instruction `return` ?
-    3. Une variable créée à l'intérieur d'une fonction est-elle utilisable après l'appel, en dehors de la fonction ?
+    1. Si `res` vaut `10`, que vaut `res` après `res = res + 3` ? Et dans quel ordre la machine procède-t-elle ?
+    2. Avec `mot = "python"` : que valent `mot[0]`, `mot[-1]` et `len(mot)` ? Quel est le plus grand indice valide ?
+    3. Écris la condition qui teste que le caractère `c` est une voyelle.
 
     ??? success "Corrigé"
-        1. `def est_majeur(age: int) -> bool:`
-        2. Elle renvoie `None`. Une fonction renvoie toujours quelque chose ; sans `return`, c'est `None`.
-        3. Non. Elle est **locale** : elle est créée à l'appel et disparaît quand la fonction se termine. Pour récupérer une valeur, il faut la `return`.
+        1. `13`. Le membre de droite est **calculé d'abord** (`10 + 3`), puis rangé dans `res`. C'est ce mécanisme, répété, qui va faire toute la page d'aujourd'hui.
+        2. `"p"`, `"n"` et `6`. Le plus grand indice valide est `5`, soit `len(mot) - 1` : écrire `mot[6]` lève une `IndexError`.
+        3. `c in "aeiouy"`, ou une longue suite de `or`. La première écriture est préférable.
 
 ## L'idée : pour chaque élément d'une séquence
 
@@ -143,19 +143,34 @@ print(compteur)              # APRÈS la boucle (une seule fois)
 
     Mettre l'initialisation dans la boucle la remettrait à zéro à chaque tour ; mettre l'affichage dans la boucle l'afficherait 1000 fois.
 
-!!! question "Somme des pairs"
-    Écris `somme_pairs(lst)` qui renvoie la somme des entiers **pairs** d'une liste.
+!!! abstract "Trois sortes d'erreurs, et elles ne se cherchent pas de la même façon"
+    Le piège ci-dessus appartient à la troisième catégorie, la plus coûteuse. Apprends à les distinguer dès maintenant : c'est ce qui sépare une méthode d'un tâtonnement.
 
-    ??? tip "Indice"
-        Un accumulateur `res = 0`, un parcours, et **dans** la boucle un `if x % 2 == 0` avant d'ajouter.
+    | Type | Ce que tu observes | Ce que la machine te donne |
+    | --- | --- | --- |
+    | **Syntaxe** | Le programme **ne démarre pas** | Un message et un **numéro de ligne** |
+    | **Exécution** | Il s'arrête **en route** (`IndexError`, `TypeError`...) | Un message et l'endroit où il a cassé |
+    | **Logique** | Il tourne jusqu'au bout et donne un résultat **faux** | **Rien du tout** |
+
+    Les deux premières te disent où regarder. La troisième ne te dit rien : c'est celle qui exige une méthode, et c'est celle que produit une initialisation mal placée. Un accumulateur remis à zéro à chaque tour ne provoque aucune erreur, il donne juste un résultat faux, sans prévenir.
+
+!!! question "Somme des pairs"
+    Écris `somme_pairs(n)` qui renvoie la somme des entiers **pairs** de `1` à `n` inclus.
+
+    ??? tip "Indice léger"
+        Reprends les trois temps de la méthodologie. Le filtre ne change ni l'initialisation ni le parcours : il ne change que ce qui se passe **dans** la boucle.
+
+    ??? tip "Indice plus précis"
+        Un accumulateur `res = 0` avant, un parcours `for i in range(1, n + 1)`, et **dans** la boucle un `if i % 2 == 0` avant d'ajouter.
 
     ??? success "Solution"
         ```python
-        def somme_pairs(lst: list[int]) -> int:
+        def somme_pairs(n: int) -> int:
+            """Renvoie la somme des entiers pairs de 1 à n inclus."""
             res = 0
-            for x in lst:
-                if x % 2 == 0:
-                    res = res + x
+            for i in range(1, n + 1):
+                if i % 2 == 0:
+                    res = res + i
             return res
         ```
 
@@ -163,60 +178,72 @@ print(compteur)              # APRÈS la boucle (une seule fois)
 
 Parfois, on veut **deux résultats à la fois**, calculés pendant le **même** parcours. On mène alors **deux accumulateurs en parallèle** dans une seule boucle. C'est la **fusion**, et c'est le point où l'on se trompe le plus souvent : on oublie d'en initialiser un, ou on met une mise à jour au mauvais endroit.
 
-Exemple : la **moyenne** d'une liste a besoin de la **somme** *et* du **compte**. Un seul parcours suffit pour les deux :
+Exemple : compter les **voyelles** *et* les **consonnes** d'un texte. Deux comptages, un seul parcours :
 
 ```python
-def moyenne(lst: list[float]) -> float:
-    somme = 0        # premier accumulateur
-    compte = 0       # second accumulateur
-    for x in lst:
-        somme = somme + x     # on met à jour les DEUX
-        compte = compte + 1   # dans la même boucle
-    return somme / compte
+def voyelles_et_consonnes(txt: str) -> tuple[int, int]:
+    """Renvoie le nombre de voyelles et le nombre de consonnes de txt."""
+    voyelles = 0      # premier accumulateur
+    consonnes = 0     # second accumulateur
+    for c in txt:
+        if c in "aeiouy":
+            voyelles = voyelles + 1     # on met à jour l'UN
+        else:
+            consonnes = consonnes + 1   # ou l'AUTRE, dans la même boucle
+    return (voyelles, consonnes)
 ```
 
 !!! danger "La fusion, à traiter pour elle-même"
     Additionner d'un côté, puis compter de l'autre, c'est facile. Les **fusionner** dans une seule boucle est une compétence à part : chaque accumulateur a sa propre initialisation (**avant**), sa propre mise à jour (**dans**), et le résultat combine les deux (**après**). Deux accumulateurs, une boucle.
 
-!!! question "Fusion : min et max en un seul parcours"
-    Écris `min_et_max(lst)` qui renvoie le couple `(plus petit, plus grand)` d'une liste non vide, en **un seul parcours**.
+!!! question "Fusion : compter et construire en un seul parcours"
+    Écris `majuscules_et_compte(txt)` qui renvoie le couple formé du texte **en majuscules** et du **nombre de lettres** converties, en **un seul parcours**.
 
-    ??? tip "Indice"
-        Deux accumulateurs, `mini` et `maxi`, tous deux initialisés à `lst[0]`. Dans la boucle, mets à jour chacun si l'élément courant est plus petit / plus grand.
+    Rappel : `c.upper()` renvoie la majuscule du caractère `c`, et `c.islower()` dit si `c` est une minuscule.
+
+    ??? tip "Indice léger"
+        Deux accumulateurs de **types différents** : l'un est une chaîne, l'autre un entier. Quelle est la valeur initiale de chacun ?
+
+    ??? tip "Indice plus précis"
+        `res = ""` et `compte = 0` avant la boucle. Dans la boucle, on ajoute `c.upper()` à `res` **à chaque tour**, mais on n'incrémente `compte` que **si** `c.islower()`.
 
     ??? success "Solution"
         ```python
-        def min_et_max(lst: list[int]) -> tuple[int, int]:
-            mini = lst[0]
-            maxi = lst[0]
-            for x in lst:
-                if x < mini:
-                    mini = x
-                if x > maxi:
-                    maxi = x
-            return (mini, maxi)
+        def majuscules_et_compte(txt: str) -> tuple[str, int]:
+            """Renvoie txt en majuscules et le nombre de lettres converties."""
+            res = ""
+            compte = 0
+            for c in txt:
+                if c.islower():
+                    compte = compte + 1
+                res = res + c.upper()
+            return (res, compte)
         ```
+        Piège à repérer : les deux mises à jour ne sont **pas au même endroit**. L'une est inconditionnelle, l'autre est sous le `if`. C'est exactement ce qui rend la fusion difficile.
 
 ## Le même `for` sur les autres séquences
 
-Puisque `for` parcourt **n'importe quelle séquence**, il fonctionne à l'identique sur une chaîne, une liste, un tuple (les listes sont détaillées plus loin dans le cours). C'est **le même mécanisme**, on change seulement la séquence parcourue.
+Pour l'instant, tu as parcouru deux choses : un `range` d'entiers et une **chaîne de caractères**. C'est déjà **le même mécanisme**, on change seulement ce qu'on parcourt.
 
 Il y a alors **deux façons** de parcourir une séquence `s`.
 
 **Par élément** (à privilégier, plus lisible) :
 
 ```python
-for element in ["coucou", "les", "gens"]:
-    print(element)
+for lettre in "coucou":
+    print(lettre)
 ```
 
 **Par indice**, quand on a besoin de la position. Les indices de `s` vont de `0` à `len(s) - 1`, donc on parcourt `range(len(s))` :
 
 ```python
-s = ["coucou", "les", "gens"]
-for i in range(len(s)):     # i parcourt 0, 1, 2
+s = "coucou"
+for i in range(len(s)):     # i parcourt 0, 1, 2, 3, 4, 5
     print(s[i])
 ```
+
+!!! note "Ce mécanisme resservira tel quel"
+    Le `for` ne change pas selon ce qu'il parcourt. Quand tu rencontreras les [listes](listes.md), les tuples et les dictionnaires, tu n'auras **aucune nouvelle boucle à apprendre** : ce sera exactement ce `for`, sur une autre séquence. C'est l'un des rares endroits du cours où l'on apprend une chose une fois pour toutes.
 
 Là encore, c'est un `for each` : « pour chaque indice `i` dans `range(len(s))` ».
 
@@ -294,7 +321,7 @@ Avant d'écrire une boucle, entraîne-toi à **lire** celles des autres et à **
         >>> nb_voyelles("aeiouy")
         6
         """
-        voyelles = ('a', 'e', 'i', 'o', 'u')
+        voyelles = "aeiouy"
         ...
     ```
 
@@ -315,20 +342,22 @@ Avant d'écrire une boucle, entraîne-toi à **lire** celles des autres et à **
 
 !!! question "5 - Contient (sans l'opérateur `in`)"
     ```python
-    def contient(e: int, lst: list[int]) -> bool:
-        """Renvoie True si e est dans lst.
+    def contient(c: str, txt: str) -> bool:
+        """Renvoie True si le caractère c apparaît dans txt.
 
-        >>> contient(5, [2, 5, 8, 9])
+        >>> contient("a", "banane")
         True
-        >>> contient(6, [2, 5, 8, 9])
+        >>> contient("z", "banane")
+        False
+        >>> contient("a", "")
         False
         """
         ...
     ```
 
 !!! question "6 - Somme, produit, factorielle"
-    1. `somme(lst)` : la somme des entiers d'une liste.
-    2. `produit(lst)` : leur produit (attention à l'initialisation de l'accumulateur !).
+    1. `somme(n)` : la somme des entiers de `1` à `n`.
+    2. `produit_impairs(n)` : le produit des entiers **impairs** de `1` à `n` (attention à l'initialisation de l'accumulateur !).
     3. `factorielle(n)` : $1 \times 2 \times \dots \times n$. Que vaut `factorielle(0)` avec ton code ?
 
     ??? tip "Indice léger"
@@ -339,31 +368,57 @@ Avant d'écrire une boucle, entraîne-toi à **lire** celles des autres et à **
 
     ??? success "Solution"
         ```python
-        def somme(lst: list[int]) -> int:
+        def somme(n: int) -> int:
+            """Renvoie la somme des entiers de 1 à n."""
             res = 0
-            for x in lst:
-                res = res + x
+            for i in range(1, n + 1):
+                res = res + i
             return res
 
-        def produit(lst: list[int]) -> int:
+        def produit_impairs(n: int) -> int:
+            """Renvoie le produit des entiers impairs de 1 à n."""
             res = 1
-            for x in lst:
-                res = res * x
+            for i in range(1, n + 1):
+                if i % 2 == 1:
+                    res = res * i
             return res
         ```
         `factorielle(0)` vaut `1` : la boucle `for i in range(1, 1)` ne fait aucun tour, l'accumulateur garde sa valeur initiale `1`.
 
-!!! question "7 - Minimum (sans la fonction `min`)"
-    ```python
-    def minimum(lst: list[int]) -> int:
-        """Renvoie le plus petit élément d'une liste non vide.
+!!! question "7 - Première lettre la plus petite (sans la fonction `min`)"
+    Les caractères se comparent avec `<` selon l'ordre alphabétique : `"a" < "b"` vaut `True`.
 
-        >>> minimum([7, 9, 2, 8, 2, 5])
-        2
+    ```python
+    def plus_petite_lettre(txt: str) -> str:
+        """Renvoie la plus petite lettre de txt, qui n'est pas vide.
+
+        >>> plus_petite_lettre("python")
+        'h'
+        >>> plus_petite_lettre("a")
+        'a'
         """
-        assert len(lst) > 0, "la liste ne doit pas être vide"
+        assert len(txt) > 0, "le texte ne doit pas être vide"
         ...
     ```
+
+    ??? tip "Indice léger"
+        L'accumulateur n'est pas un compteur ici : c'est **la meilleure valeur rencontrée jusqu'ici**. Par quoi l'initialiser ? Surtout pas par `""`, qui serait plus petit que tout.
+
+    ??? tip "Indice plus précis"
+        On l'initialise avec `txt[0]`, le seul candidat dont on soit sûr qu'il appartient au texte. C'est d'ailleurs à cela que sert l'`assert` : sans lui, `txt[0]` planterait sur une chaîne vide.
+
+    ??? success "Solution"
+        ```python
+        def plus_petite_lettre(txt: str) -> str:
+            """Renvoie la plus petite lettre de txt, qui n'est pas vide."""
+            assert len(txt) > 0, "le texte ne doit pas être vide"
+            mini = txt[0]
+            for c in txt:
+                if c < mini:
+                    mini = c
+            return mini
+        ```
+        Tu retrouveras exactement cet algorithme sur les listes, puis sur les dictionnaires. Ce n'est pas trois algorithmes, c'est le même.
 
 !!! question "8 - Problème : bin2dec"
     Écris `bin2dec(txt)` qui convertit une écriture binaire (une chaîne de `0` et de `1`) en entier décimal.

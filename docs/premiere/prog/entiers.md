@@ -1,5 +1,17 @@
 # Le type entier
 
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
+
+    1. Après `a = 4` puis `b = a` puis `a = 7`, que valent `a` et `b` ? Pourquoi `b` n'a-t-il pas suivi ?
+    2. Écris `13` en binaire sur un octet.
+    3. Que fait exactement l'instruction `a = a + 1` ? Décris l'ordre des opérations.
+
+    ??? success "Corrigé"
+        1. `a` vaut `7` et `b` vaut `4`. `b = a` a **copié** la valeur au moment de l'affectation, il n'a pas créé de lien durable entre les deux cases. Changer `a` ensuite ne touche pas `b`.
+        2. `00001101`.
+        3. On **calcule d'abord** le membre de droite avec la valeur actuelle de `a`, **puis** on range le résultat dans `a`. Le `=` n'est pas une égalité mathématique.
+
 ```python
 a = 2
 ```

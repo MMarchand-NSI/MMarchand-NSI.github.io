@@ -1,5 +1,17 @@
 # Portée des variables (scope)
 
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
+
+    1. Quelle est la différence entre `return x` et `print(x)` dans une fonction ?
+    2. On écrit `b = carre(5)`. Explique en une phrase ce qui remplace l'appel `carre(5)` dans cette ligne.
+    3. Où doit se trouver l'initialisation d'un accumulateur par rapport à la boucle, et pourquoi ?
+
+    ??? success "Corrigé"
+        1. `return` **rend une valeur** au reste du programme, qui peut la ranger et la réutiliser. `print` ne fait que l'**afficher** : la valeur est perdue pour le programme.
+        2. La **valeur renvoyée** remplace l'appel. La ligne devient `b = 25` : un appel de fonction se comporte comme la valeur qu'il renvoie.
+        3. **Avant** la boucle. Placée dedans, elle serait remise à sa valeur de départ à chaque tour, et le résultat final ne compterait que le dernier élément.
+
 La **portée** (*scope*) d'une variable détermine les parties du code où cette variable est accessible. Comprendre la portée permet d'éviter des bugs subtils et d'écrire du code plus clair.
 
 ## 1. Variables locales
@@ -319,24 +331,27 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     C'est différent de langages comme C, Java ou Rust où les variables de boucle sont détruites après la boucle.
 
 !!! question "Exercice 5 : Accumulateur"
-    Sans utiliser de variable globale, écris une fonction `somme_liste(liste)` qui calcule la somme des éléments d'une liste.
+    Sans utiliser de variable globale, écris une fonction `somme_chiffres(texte)` qui renvoie la somme des chiffres présents dans une chaîne.
 
-    Teste avec `[1, 2, 3, 4, 5]`.
+    Teste avec `"a1b2c3"`, qui doit donner `6`.
+
+    Rappel : `c.isdigit()` dit si le caractère `c` est un chiffre, et `int(c)` le convertit en entier.
 
 ??? success "Solution"
     ```python
-    def somme_liste(liste: list[int]) -> int:
-        """Calcule la somme des éléments d'une liste."""
-        total = 0  # Variable locale
-        for nombre in liste:
-            total += nombre
+    def somme_chiffres(texte: str) -> int:
+        """Renvoie la somme des chiffres présents dans texte."""
+        total = 0  # variable LOCALE : elle disparaît à la fin de l'appel
+        for c in texte:
+            if c.isdigit():
+                total += int(c)
         return total
 
     # Test
-    valeurs = [1, 2, 3, 4, 5]
-    resultat = somme_liste(valeurs)
-    print("Somme :", resultat)  # 15
+    print(somme_chiffres("a1b2c3"))   # 6
     ```
+
+    L'accumulateur `total` est **local** : c'est ce qui permet d'appeler la fonction autant de fois qu'on veut sans que les appels se contaminent. Une variable globale, ici, serait un bug en attente.
 
 ## 5. Résumé
 
@@ -378,3 +393,65 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     ```
 
     En Rust, les variables globales modifiables nécessitent un bloc `unsafe` car elles sont considérées dangereuses. Python est plus permissif, mais cela ne signifie pas qu'il faut en abuser !
+
+## Vérification individuelle : les fonctions
+
+!!! warning "À faire seul, cours fermé (15 minutes)"
+    Sans aide et sans IA. Cette vérification conditionne le passage aux pages d'exercices en autonomie.
+
+    **1. Lire.** Que s'affiche-t-il ?
+    ```python
+    def double(n: int) -> int:
+        n = n * 2
+        return n
+
+    x = 5
+    y = double(x)
+    print(x, y)
+    print(double(double(2)))
+    ```
+
+    **2. Compléter.** Cette fonction ne marche pas. Dis **pourquoi** avant de la corriger.
+    ```python
+    def moyenne_trois(a: float, b: float, c: float) -> float:
+        """Renvoie la moyenne de trois nombres."""
+        print((a + b + c) / 3)
+
+    m = moyenne_trois(10, 12, 14)
+    print(m * 2)
+    ```
+
+    **3. Écrire.** Depuis zéro : la signature typée, la docstring, **deux `assert`**, puis le code de `nb_mots(phrase)`, qui renvoie le nombre de mots d'une phrase (les mots sont séparés par des espaces).
+
+    ??? success "Réponses"
+        **1.** `5 5` puis `8`. Le paramètre `n` est **local** : le modifier dans la fonction ne touche pas `x`. Et un appel vaut la valeur qu'il renvoie, donc `double(double(2))` vaut `double(4)`, soit `8`.
+
+        **2.** La fonction **affiche** au lieu de **renvoyer**. Elle rend donc `None`, et `m * 2` lève une `TypeError`. C'est le piège `return` contre `print`. Il faut remplacer `print(...)` par `return (a + b + c) / 3`.
+
+        **3.**
+        ```python
+        def nb_mots(phrase: str) -> int:
+            """Renvoie le nombre de mots de la phrase, séparés par des espaces."""
+            assert isinstance(phrase, str), "phrase doit être une chaîne"
+            mots = 0
+            en_mot = False
+            for c in phrase:
+                if c != " ":
+                    if not en_mot:
+                        mots = mots + 1
+                    en_mot = True
+                else:
+                    en_mot = False
+            return mots
+
+        assert nb_mots("bonjour le monde") == 3
+        assert nb_mots("") == 0
+        ```
+        Toute solution correcte convient. Ce qui est vérifié ici, c'est que la signature soit **typée**, que la docstring dise ce que fait la fonction, et que les `assert` portent sur des cas **différents**, dont un cas limite.
+
+!!! abstract "Comment lire ton résultat"
+    Les trois questions ne mesurent pas la même chose, et **rater la troisième en réussissant la première n'est pas un signe de faiblesse**. Lire du code, le compléter et l'écrire de zéro sont trois compétences distinctes, qui se travaillent séparément.
+
+    - Tu réussis les trois : passe à la suite.
+    - Tu réussis 1 et 2 mais pas 3 : tu comprends le mécanisme, il te manque la **mise en route**. Refais des exercices d'écriture courts, pas de la relecture.
+    - Tu rates la 1 : reprends le traçage avant tout le reste. Écrire du code qu'on ne sait pas lire ne mène nulle part.

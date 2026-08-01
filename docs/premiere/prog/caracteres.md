@@ -1,5 +1,17 @@
 # Les chaînes de caractère
 
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
+
+    1. On veut échanger les contenus de `a` et `b`. Pourquoi `a = b` puis `b = a` ne marche-t-il pas ?
+    2. Que valent `17 // 5` et `17 % 5` ? Quelle égalité relie ces deux résultats à `17` et `5` ?
+    3. Que vaut `type(3.0)` ? Et `type(3)` ?
+
+    ??? success "Corrigé"
+        1. La première ligne **écrase** l'ancienne valeur de `a`, qui est perdue. Il faut la mettre de côté : `temp = a`, puis `a = b`, puis `b = temp`.
+        2. `17 // 5` vaut `3` (quotient entier) et `17 % 5` vaut `2` (reste). On a $5 \\times 3 + 2 = 17$.
+        3. `float` et `int`. `3.0` et `3` désignent le même nombre mais ne sont pas du même type.
+
 ```python
 s = "Bonjour"
 ```

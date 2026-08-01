@@ -1,22 +1,16 @@
 # Les listes
 
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
-    Réponds **sans rouvrir** les pages sur les séquences et les boucles.
+    Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 
     1. Avec `s = "chat"` : que valent `s[-1]` et `len(s)` ?
     2. Parmi `str`, `list` et `tuple`, laquelle de ces séquences peut être **modifiée** après sa création ?
-    3. Écris la boucle qui calcule la somme des éléments de `valeurs`.
+    3. Une variable créée dans une fonction est-elle utilisable après l'appel ? Et pourquoi est-ce une bonne chose pour un accumulateur ?
 
     ??? success "Corrigé"
         1. `s[-1]` vaut `"t"` (dernier caractère) et `len(s)` vaut `4`. Attention, le dernier indice est `3`, pas `4`.
         2. Seule la **liste** est mutable. Une chaîne et un tuple sont immuables : toute « modification » construit un nouvel objet.
-        3. L'accumulateur est initialisé **avant** la boucle :
-
-           ```python
-           total = 0
-           for v in valeurs:
-               total = total + v
-           ```
+        3. Non, elle est **locale** : créée à l'appel, détruite à la fin. C'est exactement ce qu'il faut à un accumulateur, qui doit repartir de sa valeur initiale à chaque appel. S'il était global, deux appels successifs se contamineraient.
 
 Une **liste** est une [séquence](2.sequences.md) que l'on peut **modifier** (elle est *mutable*). C'est le type de collection le plus utilisé : on y range des éléments, on en ajoute, on en retire.
 
@@ -148,6 +142,70 @@ print(carres)                   # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 ```
 
 On retrouve la méthodologie de l'accumulation : on **initialise** (ici `[]`), on **parcourt**, et à chaque tour on **ajoute** au résultat.
+
+!!! success "C'est le même mécanisme, et il n'y en aura pas d'autre"
+    Tu as accumulé un **entier** (une somme, un compte), puis une **chaîne** (un mot renversé), et maintenant une **liste**. Le `for` est le même, les trois temps sont les mêmes, seul le **type de l'accumulateur** change et donc sa valeur initiale : `0`, `""`, `[]`. Quand tu croiseras les dictionnaires, ce sera encore ce mécanisme.
+
+## Retrouver l'accumulation et la fusion sur une liste
+
+Ces deux exercices sont ceux de la [boucle `for`](boucle-for.md), portés sur les listes. Rien de nouveau n'y est demandé : c'est le même `for`, la même méthodologie. Si tu bloques, le problème n'est pas la liste.
+
+!!! question "Minimum (sans la fonction `min`)"
+    ```python
+    def minimum(lst: list[int]) -> int:
+        """Renvoie le plus petit élément d'une liste non vide.
+
+        >>> minimum([7, 9, 2, 8, 2, 5])
+        2
+        >>> minimum([4])
+        4
+        """
+        assert len(lst) > 0, "la liste ne doit pas être vide"
+        ...
+    ```
+
+    ??? tip "Indice léger"
+        L'accumulateur n'est pas un compteur : c'est **le plus petit élément vu jusqu'ici**. Par quoi l'initialiser ? Attention, `0` serait faux sur une liste de nombres positifs.
+
+    ??? tip "Indice plus précis"
+        On l'initialise avec `lst[0]`, le seul candidat dont on soit sûr qu'il appartient à la liste. Puis, dans la boucle, on le remplace chaque fois qu'on rencontre plus petit.
+
+    ??? success "Solution"
+        ```python
+        def minimum(lst: list[int]) -> int:
+            """Renvoie le plus petit élément d'une liste non vide."""
+            assert len(lst) > 0, "la liste ne doit pas être vide"
+            mini = lst[0]
+            for x in lst:
+                if x < mini:
+                    mini = x
+            return mini
+        ```
+
+!!! question "Fusion : minimum et maximum en un seul parcours"
+    Écris `min_et_max(lst)` qui renvoie le couple `(plus petit, plus grand)` d'une liste non vide, en **un seul parcours**.
+
+    ??? tip "Indice léger"
+        Deux accumulateurs menés en parallèle. Chacun a sa propre initialisation **avant** la boucle et sa propre mise à jour **dans** la boucle. Le piège est d'en oublier une des deux.
+
+    ??? tip "Indice plus précis"
+        `mini` et `maxi` sont tous deux initialisés à `lst[0]`. Dans la boucle, deux `if` **indépendants** : l'un compare à `mini`, l'autre à `maxi`. Ce n'est pas un `if / else`, car un même élément peut mettre les deux à jour au premier tour.
+
+    ??? success "Solution"
+        ```python
+        def min_et_max(lst: list[int]) -> tuple[int, int]:
+            """Renvoie le couple (minimum, maximum) d'une liste non vide."""
+            assert len(lst) > 0, "la liste ne doit pas être vide"
+            mini = lst[0]
+            maxi = lst[0]
+            for x in lst:
+                if x < mini:
+                    mini = x
+                if x > maxi:
+                    maxi = x
+            return (mini, maxi)
+        ```
+        Écrire deux boucles successives donnerait le bon résultat, mais ce n'est pas ce qui est demandé : l'exercice porte sur la **fusion**, c'est-à-dire sur la capacité à mener deux traitements de front. C'est le point où l'on se trompe le plus.
 
 ## Listes de listes
 

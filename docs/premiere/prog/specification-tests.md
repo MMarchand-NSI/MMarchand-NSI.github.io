@@ -1,5 +1,17 @@
 # Spécification et tests
 
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
+
+    1. Écris la **signature typée** d'une fonction `est_majeur` qui prend un âge entier et renvoie un booléen.
+    2. Que renvoie une fonction qui n'a aucune instruction `return` ?
+    3. Combien de tours fait `for i in range(0, 10, 3)` ?
+
+    ??? success "Corrigé"
+        1. `def est_majeur(age: int) -> bool:`
+        2. Elle renvoie `None`. Une fonction renvoie **toujours** quelque chose ; sans `return`, c'est `None`. D'où le piège `return` contre `print`.
+        3. Quatre tours : `i` prend `0`, `3`, `6`, `9`. La borne `10` est exclue.
+
 Écrire une fonction, c'est une chose. S'assurer qu'elle fait **vraiment** ce qu'on attend en est une autre. C'est le sujet de cette page, et c'est sans doute la partie la plus importante du travail d'un programmeur.
 
 ## 1. Spécifier : dire *ce que* fait la fonction
@@ -53,6 +65,11 @@ assert carre(3) == 9, "carre(3) aurait dû valoir 9"
         assert carre(-4) == 16      # ne pas oublier les cas « limites »
         ```
 
+!!! abstract "Ce qu'un test change dans la façon de chercher un bug"
+    Sans test, une erreur **logique** ne se signale pas : le programme tourne et donne un résultat faux. Un `assert` transforme cette erreur silencieuse en erreur **bruyante**, qui s'arrête et nomme la ligne. Autrement dit, il fait passer le bug le plus coûteux dans la catégorie la moins coûteuse.
+
+    D'où la discipline, la même que sur la boucle infinie : **une hypothèse précise avant chaque modification**. Devant un `assert` qui casse, on n'édite pas le code au hasard. On dit d'abord « je pense que le résultat est trop grand de 1 parce que la boucle va jusqu'à `n` inclus », puis on vérifie cette phrase-là. Si elle est fausse, on en formule une autre.
+
 !!! tip "Un bon test couvre plusieurs cas"
     Un seul `assert` ne suffit pas. Pense aux cas particuliers : `0`, un nombre négatif, une liste vide, le plus petit ou le plus grand cas possible. Un bug se cache souvent dans un cas qu'on n'a pas testé.
 
@@ -97,6 +114,9 @@ def minimum(lst: list[int]) -> int:
 ```
 
 Ici, la précondition « la liste n'est pas vide » est nécessaire : le minimum d'une liste vide n'a pas de sens. L'`assert` protège la fonction contre un usage incorrect.
+
+!!! note "Une liste, déjà ?"
+    Les listes ne sont étudiées que plus loin, dans [Les listes](listes.md). Elles servent ici uniquement d'exemple de donnée sur laquelle une **précondition** a un sens évident. Retiens le contrat, pas la manipulation : `len(lst) > 0` se lit « la liste contient au moins un élément ».
 
 ## 5. Pourquoi tu dois savoir le faire toi-même
 
