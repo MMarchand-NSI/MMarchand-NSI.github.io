@@ -2115,7 +2115,7 @@
   <span class="md-ellipsis">
     
   
-    Les fonctions
+    Les boucles
   
 
     
@@ -2128,6 +2128,120 @@
         
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Les boucles
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../boucle-for/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    La boucle for
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../boucle-while/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    La boucle non bornée : while
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6_4" id="__nav_2_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Les fonctions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2208,120 +2322,6 @@
     
   
     Portée des variables (scope)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_6_4" id="__nav_2_6_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Les boucles
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_6_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Les boucles
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../boucle-for/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    La boucle for
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../boucle-while/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    La boucle non bornée : while
   
 
     
@@ -7927,6 +7927,23 @@
 
 
 <h1 id="le-type-tuple-p-uplet">Le type tuple (p-uplet)</h1>
+<div class="admonition note">
+<p class="admonition-title">Rappel d'ouverture (5 minutes, cours fermé)</p>
+<p>Réponds <strong>sans rouvrir</strong> les pages précédentes, en écrivant tes réponses.</p>
+<ol>
+<li>Comment échange-t-on les contenus de <code>a</code> et <code>b</code> sans écraser l'un des deux ?</li>
+<li>On écrit <code>a = [1, 2]</code> puis <code>b = a</code> puis <code>b.append(3)</code>. Que vaut <code>a</code> ?</li>
+<li>Une fonction peut-elle renvoyer deux valeurs ? Comment ferais-tu, avec ce que tu sais déjà ?</li>
+</ol>
+<details class="success">
+<summary>Corrigé</summary>
+<ol>
+<li>Avec une variable temporaire : <code>temp = a</code>, <code>a = b</code>, <code>b = temp</code>.</li>
+<li><code>[1, 2, 3]</code>. <code>b = a</code> n'a pas copié la liste : les deux noms désignent <strong>le même objet</strong>, qui est mutable.</li>
+<li>Elle le peut, et c'est précisément l'objet de cette page. Sans le tuple, on s'en tirerait en renvoyant une liste de deux éléments.</li>
+</ol>
+</details>
+</div>
 <p>Un <strong>tuple</strong> (ou p-uplet) est une <a href="../2.sequences/">séquence</a> <strong>immuable</strong> : une fois créé, on ne peut plus le modifier. On le crée avec des <strong>parenthèses</strong>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">point</span> <span class="o">=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">7</span><span class="p">)</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">personne</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;Alice&quot;</span><span class="p">,</span> <span class="mi">25</span><span class="p">,</span> <span class="s2">&quot;Paris&quot;</span><span class="p">)</span>
@@ -8012,7 +8029,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 30, 2026 07:32:54 UTC">July 30, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 1, 2026 18:39:32 UTC">August 1, 2026</span>
   </span>
 
     

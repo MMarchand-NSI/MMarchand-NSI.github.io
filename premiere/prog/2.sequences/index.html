@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://mmarchand-nsi.github.io/premiere/prog/2.sequences/">
       
       
-        <link rel="prev" href="../boucle-while/">
+        <link rel="prev" href="../scope/">
       
       
         <link rel="next" href="../listes/">
@@ -2115,7 +2115,7 @@
   <span class="md-ellipsis">
     
   
-    Les fonctions
+    Les boucles
   
 
     
@@ -2128,6 +2128,120 @@
         
         <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_2_6_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Les boucles
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../boucle-for/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    La boucle for
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../boucle-while/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    La boucle non bornée : while
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_4" >
+        
+          
+          <label class="md-nav__link" for="__nav_2_6_4" id="__nav_2_6_4_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Les fonctions
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_6_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -2208,120 +2322,6 @@
     
   
     Portée des variables (scope)
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    
-    
-    
-    
-      
-      
-    
-    
-    <li class="md-nav__item md-nav__item--nested">
-      
-        
-        
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_6_4" >
-        
-          
-          <label class="md-nav__link" for="__nav_2_6_4" id="__nav_2_6_4_label" tabindex="0">
-            
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Les boucles
-  
-
-    
-  </span>
-  
-  
-
-            <span class="md-nav__icon md-icon"></span>
-          </label>
-        
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_6_4_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_6_4">
-            <span class="md-nav__icon md-icon"></span>
-            
-  
-    Les boucles
-  
-
-          </label>
-          <ul class="md-nav__list" data-md-scrollfix>
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../boucle-for/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    La boucle for
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../boucle-while/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    La boucle non bornée : while
   
 
     
@@ -8459,6 +8459,24 @@
 
 
 <h1 id="les-sequences">Les séquences</h1>
+<div class="admonition note">
+<p class="admonition-title">Rappel d'ouverture (5 minutes, cours fermé)</p>
+<p>Réponds <strong>sans rouvrir</strong> les pages précédentes, en écrivant tes réponses.</p>
+<ol>
+<li>Après <code>a = 4</code> puis <code>b = a</code> puis <code>a = 7</code>, que valent <code>a</code> et <code>b</code> ?</li>
+<li>Avec <code>s = "chat"</code>, que se passe-t-il si on écrit <code>s[0] = "p"</code> ?</li>
+<li>Écris la boucle qui construit la chaîne <code>mot</code> à l'envers dans une variable <code>res</code>.</li>
+</ol>
+<details class="success">
+<summary>Corrigé</summary>
+<ol>
+<li><code>a</code> vaut <code>7</code> et <code>b</code> vaut <code>4</code>. <code>b = a</code> a <strong>copié la valeur</strong> au moment de l'affectation ; il n'a pas créé de lien durable entre les deux.</li>
+<li>Une <code>TypeError</code> : une chaîne est <strong>immuable</strong>, on ne peut pas en changer un caractère.</li>
+<li><code>res = ""</code> avant la boucle, puis <code>res = c + res</code> à chaque tour.</li>
+</ol>
+</details>
+<p>La première question est celle qui compte aujourd'hui. Tu vas voir que sur une <strong>liste</strong>, la même écriture <code>b = a</code> ne se comporte pas du tout de la même façon, et c'est le point le plus délicat de cette page.</p>
+</div>
 <p>Ici, nous allons parler de types qui permettent de stocker une suite d'éléments dans une seule variable.</p>
 <p>Il s'agit surtout de définitions à accepter et à savoir. Ce sont des éléments de langage à connaître.</p>
 <div class="admonition abstract">
@@ -8866,7 +8884,7 @@ On ne peut pas remplacer "p" par "P". On est obligé de remplacer tout le mot:</
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 29, 2026 23:55:00 UTC">July 29, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 1, 2026 18:39:32 UTC">August 1, 2026</span>
   </span>
 
     
