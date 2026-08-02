@@ -172,7 +172,11 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
 ## Lire et prédire avant d'écrire
 
 !!! question "Prédire"
-    Qu'affiche ce code ? Déroule le parcours, puis vérifie.
+    Sans exécuter, réponds **dans l'ordre**. Les deux premières questions se répondent en déroulant, pas en calculant le résultat.
+
+    1. Que vaut `fruit` au **deuxième tour** ? Et que vaut `stock[fruit]` à ce moment-là ?
+    2. Que vaut `total` **juste après** le deuxième tour ?
+    3. Que vaut `total` à la fin ?
 
     ```python
     stock = {"pomme": 3, "poire": 5, "kiwi": 2}
@@ -183,7 +187,11 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
     ```
 
     ??? warning "Réponse"
-        `10`. On parcourt les **clés** (`pomme`, `poire`, `kiwi`) et on accumule les **valeurs** associées : 3 + 5 + 2.
+        1. `fruit` vaut `"poire"`, et `stock[fruit]` vaut `5`. La variable de boucle prend les **clés**, dans leur ordre d'insertion.
+        2. `8`, soit `3 + 5`.
+        3. `10`, soit `3 + 5 + 2`.
+
+        Le point à retenir est celui de la question 1 : `for fruit in stock` parcourt les **clés**, pas les valeurs. C'est `stock[fruit]` qui donne la valeur associée. Si tu as répondu `3` à la première question, tu confondais les deux.
 
 ## Exercices
 
