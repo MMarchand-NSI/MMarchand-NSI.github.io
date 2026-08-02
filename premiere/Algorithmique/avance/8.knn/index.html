@@ -8034,7 +8034,7 @@
 
 <h1 id="algorithme-des-k-plus-proches-voisins-knn">Algorithme des k plus proches voisins (KNN)</h1>
 <p>Il s'agit ici de découvrir un algorithme de classification du domaine de l'apprentissage supervisé.</p>
-<p>Du point de vue de la programmation, il s'agit de s'approprier l'utilisation des fonctions d'ordre supérieur afin de rester au plus près du problème posé.</p>
+<p>Du point de vue de la programmation, il s'agit de constater qu'un algorithme réputé savant se construit entièrement avec des schémas que vous connaissez déjà : un parcours, une accumulation, un tri et un comptage. Rien de neuf n'est nécessaire.</p>
 <h2 id="objectif">Objectif</h2>
 <p>D'après des données connues, deviner une propriété inconnue d'une nouvelle donnée.</p>
 <h2 id="probleme-de-classification">Problème de classification</h2>
@@ -8063,21 +8063,34 @@
 <p>L'algorithme est dit <strong>supervisé</strong> car il nécessite l'intervention d'un humain qui doit <strong>choisir k à l'avance</strong>. Nous ne nous intéresserons pas au choix de <span class="arithmatex">\(k\)</span>. Il sera donné.</p>
 <h2 id="realisation">Réalisation</h2>
 <h3 id="lecture-du-fichier-csv">Lecture du fichier csv:</h3>
+<p>Le fichier <code>Iris.csv</code> contient 150 fleurs, une par ligne, avec un identifiant, les quatre mesures et l'espèce. Placez-le à côté de votre programme.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="c1"># Nous assimilons une fleur à un dictionnaire.</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="nb">type</span> <span class="n">Fleur</span> <span class="o">=</span> <span class="nb">dict</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">liste_fleurs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Fleur</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># Nous assimilons une fleur à un dictionnaire.</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="nb">type</span> <span class="n">Fleur</span> <span class="o">=</span> <span class="nb">dict</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="c1"># Les quatre colonnes numériques, les seules sur lesquelles une distance a un sens.</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="n">ATTRIBUTS</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SepalLength&#39;</span><span class="p">,</span> <span class="s1">&#39;SepalWidth&#39;</span><span class="p">,</span> <span class="s1">&#39;PetalLength&#39;</span><span class="p">,</span> <span class="s1">&#39;PetalWidth&#39;</span><span class="p">]</span>
 <a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;iris.csv&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">csvfile</span><span class="p">:</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>    <span class="n">lecteur</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">csvfile</span><span class="p">)</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>    <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">lecteur</span><span class="p">:</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="n">donnees</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="n">liste_fleurs</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Fleur</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;Iris.csv&#39;</span><span class="p">,</span> <span class="n">newline</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fichier</span><span class="p">:</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>    <span class="n">lecteur</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">DictReader</span><span class="p">(</span><span class="n">fichier</span><span class="p">)</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="k">for</span> <span class="n">ligne</span> <span class="ow">in</span> <span class="n">lecteur</span><span class="p">:</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="n">fleur</span><span class="p">:</span> <span class="n">Fleur</span> <span class="o">=</span> <span class="p">{}</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="k">for</span> <span class="n">cle</span> <span class="ow">in</span> <span class="n">ligne</span><span class="p">:</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>            <span class="k">if</span> <span class="n">cle</span> <span class="ow">in</span> <span class="n">ATTRIBUTS</span><span class="p">:</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>                <span class="n">fleur</span><span class="p">[</span><span class="n">cle</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">ligne</span><span class="p">[</span><span class="n">cle</span><span class="p">])</span>   <span class="c1"># conversion indispensable, voir ci-dessous</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>            <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>                <span class="n">fleur</span><span class="p">[</span><span class="n">cle</span><span class="p">]</span> <span class="o">=</span> <span class="n">ligne</span><span class="p">[</span><span class="n">cle</span><span class="p">]</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>        <span class="n">liste_fleurs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fleur</span><span class="p">)</span>
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Un fichier ne contient que du texte</p>
+<p><code>csv.DictReader</code> rend <strong>toutes</strong> les valeurs sous forme de chaînes de caractères, y compris <code>'5.1'</code>. Sans la conversion en <code>float</code>, deux choses arrivent, et la seconde est la pire. Une soustraction lève une <code>TypeError</code>, ce qui se voit tout de suite. Mais une <strong>comparaison</strong>, elle, ne lève rien : les chaînes se comparent dans l'ordre alphabétique, si bien que <code>'49' &gt; '100'</code> vaut <code>True</code>. Le programme tourne et se trompe en silence.</p>
+</div>
 <p>Nous cherchons à savoir de quelle espèce est la fleur que nous avons ramassée et mesurée:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">fleur_mystere</span><span class="p">:</span> <span class="n">fleur</span> <span class="o">=</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">fleur_mystere</span><span class="p">:</span> <span class="n">Fleur</span> <span class="o">=</span> <span class="p">{</span>
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>    <span class="s1">&#39;SepalLength&#39;</span><span class="p">:</span> <span class="mf">5.7</span><span class="p">,</span>
 <a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>    <span class="s1">&#39;SepalWidth&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
 <a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="s1">&#39;PetalLength&#39;</span><span class="p">:</span> <span class="mf">4.2</span><span class="p">,</span>
@@ -8094,15 +8107,27 @@
 <a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="nb">abs</span><span class="p">(</span><span class="n">b</span><span class="p">[</span><span class="n">key</span><span class="p">]</span><span class="o">-</span><span class="n">a</span><span class="p">[</span><span class="n">key</span><span class="p">])</span><span class="o">**</span><span class="n">p</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys</span><span class="p">])</span><span class="o">**</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">p</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="etape-1-tri-et-selection-des-k-plus-proches-voisins">Etape 1 - Tri et sélection des k plus proches voisins</h3>
-<p><strong>TODO  Virer partial et faire une fonction comme ils ont déjà vu</strong></p>
+<p>Nous calculons la distance de chaque fleur à la fleur mystère, et nous rangeons les couples <code>(distance, indice)</code>. Trier des couples, c'est trier sur le premier élément, donc sur la distance.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># intéressons nous aux 5 plus proches voisins</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">k</span><span class="o">=</span><span class="mi">5</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">k</span> <span class="o">=</span> <span class="mi">5</span>
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">knn</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">fleurs</span><span class="p">]</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">liste_fleurs</span><span class="p">,</span> 
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>             <span class="nb">reversed</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>             <span class="n">key</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">dist_minkowski</span><span class="p">,</span> <span class="n">fleurs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="mi">2</span><span class="p">,</span> <span class="n">fleur_mystere</span><span class="p">)</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>      <span class="p">)[:</span><span class="n">k</span><span class="p">]</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">couples</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">liste_fleurs</span><span class="p">)):</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">d</span> <span class="o">=</span> <span class="n">dist_minkowski</span><span class="p">(</span><span class="n">ATTRIBUTS</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">fleur_mystere</span><span class="p">,</span> <span class="n">liste_fleurs</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">couples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">d</span><span class="p">,</span> <span class="n">i</span><span class="p">))</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="n">couples</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>          <span class="c1"># tri croissant : les plus proches en premier</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="n">knn</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Fleur</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="n">indice</span> <span class="o">=</span> <span class="n">couples</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="n">knn</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">liste_fleurs</span><span class="p">[</span><span class="n">indice</span><span class="p">])</span>
 </code></pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Deux erreurs faciles à cet endroit</p>
+<p>La première est de trier <strong>dans le mauvais sens</strong> : ce sont les distances les plus <strong>petites</strong> qui désignent les voisins les plus proches. Un tri décroissant donnerait les cinq fleurs les plus dissemblables, sans que rien ne plante.
+La seconde est de calculer la distance sur <strong>toutes</strong> les colonnes. <code>Id</code> et <code>Species</code> ne sont pas des mesures : la première fausserait le résultat, la seconde ferait échouer la soustraction. C'est la raison d'être de <code>ATTRIBUTS</code>.</p>
+</div>
 <h3 id="etape-2-collecte-des-classes">Etape 2 - Collecte des classes</h3>
 <p>Calcul des fréquences absolues par espèce. Vous avez déjà vu cet algorithme de comptage.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">frequences</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
@@ -8114,19 +8139,43 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="n">frequences</span><span class="p">[</span><span class="n">espece</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
 </code></pre></div>
 <h3 id="etape-3-prediction">Etape 3 - Prédiction</h3>
-<p>Il suffit de renvoyer la clé qui correspond à la plus grande fréquence.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">pred</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">frequences</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="n">frequences</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">pred</span><span class="p">)</span>
+<p>Il suffit de renvoyer la clé qui correspond à la plus grande fréquence. C'est la recherche d'un maximum, sur les valeurs d'un dictionnaire cette fois.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">espece_predite</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">meilleure_frequence</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="k">for</span> <span class="n">espece</span> <span class="ow">in</span> <span class="n">frequences</span><span class="p">:</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="k">if</span> <span class="n">frequences</span><span class="p">[</span><span class="n">espece</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">meilleure_frequence</span><span class="p">:</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        <span class="n">meilleure_frequence</span> <span class="o">=</span> <span class="n">frequences</span><span class="p">[</span><span class="n">espece</span><span class="p">]</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="n">espece_predite</span> <span class="o">=</span> <span class="n">espece</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">espece_predite</span><span class="p">)</span>
 </code></pre></div>
+<p>Sur la fleur mystère ci-dessus, les cinq voisins sont <strong>tous</strong> des <code>Iris-versicolor</code> : la prédiction est unanime. Ce ne sera pas toujours le cas, et c'est l'objet de la seconde question du choixpeau.</p>
+<details class="note">
+<summary>Pour aller plus loin : la même chose avec des fonctions d'ordre supérieur</summary>
+<p>Python permet d'écrire les étapes 1 et 3 en une ligne chacune, en passant une <strong>fonction en argument</strong> d'une autre fonction. C'est plus court, ce n'est pas plus clair tant que le schéma explicite n'est pas solide, et cela n'est pas exigible.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">partial</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">distance_a_la_mystere</span> <span class="o">=</span> <span class="n">partial</span><span class="p">(</span><span class="n">dist_minkowski</span><span class="p">,</span> <span class="n">ATTRIBUTS</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">fleur_mystere</span><span class="p">)</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">knn</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">liste_fleurs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">distance_a_la_mystere</span><span class="p">)[:</span><span class="n">k</span><span class="p">]</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="n">espece_predite</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">frequences</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">frequences</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+</code></pre></div>
+<p>Notez que <code>sorted</code> trie par ordre <strong>croissant</strong> par défaut, ce qui est exactement ce que nous voulons ici : ajouter <code>reverse=True</code> donnerait les voisins les plus lointains.</p>
+</details>
 <h2 id="le-choixpeau-magique">Le choixpeau magique</h2>
 <p><img alt="alt text" src="../../image-8.png" /></p>
 <p>Il s'agit d'une application directe pour la distance de Manhattan.</p>
-<p>Vous disposez du fichier poudlard.csv contenant une liste d'élèves de Poudlard et leur maison associées. Le choixpeau magique utilise les 7 plus proches voisins pour distribuer les élèves dans les différentes maisons, en utilisant la distance de Manhattan sur 4 dimensions (Courage, Loyauté, Sagesse et Malice).</p>
+<p>Vous disposez du fichier <code>Poudlard.csv</code>, qui contient 48 élèves déjà répartis. Ses colonnes sont <code>Id</code>, <code>Courage</code>, <code>Loyaute</code>, <code>Sagesse</code>, <code>Malice</code> et <code>Maison</code>. Le choixpeau magique utilise les 7 plus proches voisins pour distribuer les élèves dans les différentes maisons, en utilisant la distance de Manhattan sur 4 dimensions.</p>
+<p>Rien n'est à réécrire : c'est le <strong>même</strong> algorithme, avec un autre jeu de données et une autre distance. Il suffit de rappeler <code>dist_minkowski</code> avec <code>p = 1</code> et la bonne liste d'attributs.</p>
 <ol>
 <li>Quelle maison va-t-il assigner aux élèves suivants? </li>
 <li>Le choixpeau hésite plus ou moins à l'affectation des élèves dans leur maison. Proposez une manière de rendre compte du degré d'hésitation du choixpeau magique pour chaque prédiction.</li>
 </ol>
+<div class="admonition tip">
+<p class="admonition-title">Indice pour la question 2</p>
+<p>Regardez le dictionnaire <code>frequences</code>, et non la seule espèce prédite. Un vote de 7 voix contre 0 et un vote de 3 voix contre 2 et 2 donnent la même réponse, et pourtant l'un est sûr et l'autre non. Toute l'information est déjà là, elle n'est simplement pas affichée.</p>
+</div>
 <table>
 <thead>
 <tr>
@@ -8188,7 +8237,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 9, 2025 12:27:34 UTC">November 9, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 2, 2026 16:28:01 UTC">August 2, 2026</span>
   </span>
 
     
