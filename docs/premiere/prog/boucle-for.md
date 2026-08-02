@@ -154,6 +154,11 @@ print(compteur)              # APRÈS la boucle (une seule fois)
 
     Les deux premières te disent où regarder. La troisième ne te dit rien : c'est celle qui exige une méthode, et c'est celle que produit une initialisation mal placée. Un accumulateur remis à zéro à chaque tour ne provoque aucune erreur, il donne juste un résultat faux, sans prévenir.
 
+!!! note "Les indices sont faits pour être ouverts"
+    Ouvrir un indice n'est pas tricher, et ce n'est pas non plus un aveu. Ce qui coûte, ce n'est pas de demander de l'aide, c'est de rester bloqué vingt minutes sans rien produire, ou d'ouvrir la solution sans avoir compris ce qui bloquait.
+
+    La seule règle : quand un indice te débloque, **écris en une phrase ce qu'il t'a appris sur ton erreur** avant de continuer. C'est cette phrase qui reste, pas la solution recopiée.
+
 !!! question "Somme des pairs"
     Écris `somme_pairs(n)` qui renvoie la somme des entiers **pairs** de `1` à `n` inclus.
 
@@ -162,6 +167,11 @@ print(compteur)              # APRÈS la boucle (une seule fois)
 
     ??? tip "Indice plus précis"
         Un accumulateur `res = 0` avant, un parcours `for i in range(1, n + 1)`, et **dans** la boucle un `if i % 2 == 0` avant d'ajouter.
+
+    ??? question "Avant d'ouvrir la solution"
+        Écris une phrase sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui bloquait dans **ton** code ?
+
+        Une phrase suffit, et elle doit parler de ton code, pas du cours. C'est ce geste qui fait la différence entre finir l'exercice et savoir le refaire seul la prochaine fois.
 
     ??? success "Solution"
         ```python
@@ -206,6 +216,11 @@ def voyelles_et_consonnes(txt: str) -> tuple[int, int]:
 
     ??? tip "Indice plus précis"
         `res = ""` et `compte = 0` avant la boucle. Dans la boucle, on ajoute `c.upper()` à `res` **à chaque tour**, mais on n'incrémente `compte` que **si** `c.islower()`.
+
+    ??? question "Avant d'ouvrir la solution"
+        Écris une phrase sur ton cahier : **lequel de tes deux accumulateurs** était mal placé, et pourquoi ?
+
+        Si tu ne peux pas répondre, c'est que tu n'as pas encore identifié ton erreur, et la solution ne te l'apprendra pas.
 
     ??? success "Solution"
         ```python
