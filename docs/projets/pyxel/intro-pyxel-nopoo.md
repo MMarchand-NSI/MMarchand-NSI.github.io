@@ -75,6 +75,31 @@ px.run(update, draw)
 # qui appelle update, puis draw, de manière régulière, à chaque Frame (ici 10 fois par seconde)
 ```
 
+!!! question "Avant tout : qui appelle `update` ?"
+    Tu écris `update` et `draw`, et **tu ne les appelles jamais**. Tu donnes leurs noms à `px.run`, et c'est le moteur qui les rappelle, indéfiniment, plusieurs fois par seconde. Jusqu'ici, tout ce que tu écrivais s'exécutait dans l'ordre où tu l'avais écrit. Ici, le contrôle appartient à pyxel.
+
+    Déroule **trois frames à la main**, en supposant qu'on appuie sur la flèche droite pendant la deuxième et qu'on la relâche ensuite.
+
+    | frame | ce que fait `update` | état après `update` | ce que dessine `draw` |
+    |---|---|---|---|
+    | 1 | | | |
+    | 2 | | | |
+    | 3 | | | |
+
+    ??? note "À ouvrir une fois les trois lignes remplies"
+        | frame | ce que fait `update` | état après `update` | ce que dessine `draw` |
+        |---|---|---|---|
+        | 1 | aucune touche | `x=15 y=15 dx=0 dy=0` | un pixel en (15, 15) |
+        | 2 | flèche droite pressée : `dx` devient 1 | `x=15 y=15 dx=1 dy=0` | un pixel en (15, 15) |
+        | 3 | aucune touche : `x` avance de `dx` | `x=16 y=15 dx=1 dy=0` | un pixel en (16, 15) |
+
+        Deux questions, et elles ne sont pas rhétoriques.
+
+        1. Combien de fois `update` a-t-elle été appelée, et **par qui** ?
+        2. Pourquoi le pixel n'a-t-il **pas bougé** à la frame 2, alors qu'on appuyait sur la touche ?
+
+        La seconde est la source d'erreur numéro un de cette activité : **changer le vecteur** et **changer la position** sont deux choses différentes, et elles ne se produisent pas à la même frame.
+
 !!! question "Exercices de base"
 
     1. Complétez la fonction update. Testez

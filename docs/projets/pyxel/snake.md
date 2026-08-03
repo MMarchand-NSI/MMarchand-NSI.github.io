@@ -74,10 +74,77 @@ def reinit() -> None:
 ```
 
 
+!!! question "Deux fonctions outils, testables sans lancer le jeu"
+    Ces deux fonctions ne dessinent rien et ne touchent à aucune variable globale : elles se testent donc **immédiatement**, avec `python -m doctest`, sans ouvrir de fenêtre. Écrivez-les en premier.
+
+    ```python
+    def prochaine_tete(tete: Coord, direction: Coord) -> Coord:
+        """
+        Coordonnée de la case suivante, sans toucher au serpent.
+
+        >>> prochaine_tete((4, 2), (1, 0))
+        (5, 2)
+        >>> prochaine_tete((4, 2), (0, -1))
+        (4, 1)
+        >>> prochaine_tete((0, 5), (-1, 0))
+        (-1, 5)
+        """
+
+    def case_libre(occupees: list[Coord]) -> Coord:
+        """
+        Une case de la grille au hasard, parmi celles qui ne sont pas occupées.
+
+        >>> toutes = [(x, y) for x in range(W) for y in range(H)]
+        >>> case_libre([c for c in toutes if c != (7, 3)])
+        (7, 3)
+        """
+    ```
+
+    Le second doctest mérite un mot : en n'offrant qu'**une seule** case libre, il rend déterministe une fonction qui tire au hasard. C'est une manière courante de tester l'aléatoire.
+
 !!! question "Initialisation"
-    - Compléter la fonction reinit.
-    - Créer la fonction `avancer()` qui permet d'avancer d'une case.
-    - Créer la fonction `spawn_pomme()` qui permet de modifier les coordonnées de la pomme.
+    - Compléter la fonction `reinit`.
+    - Créer la fonction `spawn_pomme()`, qui appelle `case_libre` et modifie les coordonnées de la pomme.
+
+!!! question "Avancer, le point dur du projet"
+    Cette fonction porte à elle seule la difficulté du snake. Prenez-la séparément, et **après** avoir répondu aux exercices d'appropriation ci-dessus.
+
+    ```python
+    def avancer() -> None:
+        """
+        Fait avancer le serpent d'une case dans la direction courante.
+
+        Enfile la nouvelle tête. Défile la queue, SAUF si le serpent vient de
+        manger la pomme, auquel cas il grandit d'une case.
+        """
+    ```
+
+    Les deux cas de la docstring correspondent exactement aux exercices 1 et 2 d'appropriation : vous avez déjà écrit sur papier ce que la fonction doit produire.
+
+    ??? tip "Indice léger"
+        Vos exercices sur papier disent quelles primitives utiliser, et dans quel ordre. Reste une question : qu'est-ce qui change entre le cas ordinaire et le cas de la pomme ?
+
+    ??? tip "Indice plus précis"
+        Une seule opération diffère entre les deux cas : le `defiler`. Avancer sans manger, c'est enfiler **et** défiler, donc une longueur constante. Manger, c'est enfiler **sans** défiler, donc une longueur qui augmente de un. `queue_supprimee` sert à mémoriser ce qui a été défilé, pour le dessin.
+
+    ??? question "Avant d'ouvrir la solution"
+        En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce qui n'allait pas dans **votre** code ?
+
+    ??? success "Solution"
+        ```python
+        def avancer() -> None:
+            global serpent, tete, pomme, score, queue_supprimee
+            tete = prochaine_tete(tete, direction)
+            file.enfiler(tete, serpent)
+            if tete == pomme:
+                score = score + 1
+                queue_supprimee = None
+                spawn_pomme()
+            else:
+                queue_supprimee = file.defiler(serpent)
+        ```
+
+        Remarquez que `avancer` ne dessine rien et ne teste aucune collision : elle ne fait qu'avancer. C'est ce qui la rend lisible, et c'est aussi ce qui rendrait `prochaine_tete` testable si on l'avait écrite ainsi dès le début.
 
 Comme beaucoup de moteurs de jeu, pyxel va appeler automatiquement à chaque frame 2 fonctions à la suite:
 
@@ -107,6 +174,7 @@ def draw() -> None:
     Dessine le snake à l'écran.
     La seule fonction pyxel nécessaire est pset
     """
+    ...
 
 
 # -- Lancement --
