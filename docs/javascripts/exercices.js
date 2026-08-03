@@ -1,6 +1,9 @@
 /*
  * Indices déverrouillés progressivement dans les exercices.
  *
+ * INACTIF depuis le 03/08/2026 (voir la constante ACTIF et sa justification
+ * plus bas). Le fichier reste chargé, il ne verrouille plus rien.
+ *
  * Dans une admonition `!!! question`, les blocs repliables `???` (indices puis
  * correction, dans l'ordre) sont verrouillés au départ. Un bouton "Démarrer"
  * lance un compteur invisible : toutes les DELAY_SECONDS, le bloc suivant
@@ -104,7 +107,22 @@
     }
   }
 
+  // Déverrouillage au chronomètre DÉSACTIVÉ le 03/08/2026, décision pédagogique.
+  //
+  // Un délai imposé ne se défend qu'accompagné d'un canal qui OFFRE l'aide à
+  // l'élève qui ne la demande pas (Aleven et al. ; Murray & VanLehn 2005). Une
+  // page statique ne détecte pas qu'un élève piétine : le délai n'y est donc
+  // que la moitié inefficace du dispositif, et il pénalise d'abord ceux qui
+  // évitent déjà de demander de l'aide. Le canal proactif, c'est l'enseignant.
+  //
+  // Les indices restent gradués (léger, précis, auto-explication, solution),
+  // mais librement ouvrables. Mécanisme et CSS conservés : si un support
+  // interactif capable de détecter le piétinement apparaît, remettre ACTIF
+  // à true suffit.
+  var ACTIF = false;
+
   function boot() {
+    if (!ACTIF) return;
     // Portée : première uniquement (retirer/adapter pour étendre).
     if (location.pathname.indexOf("/premiere/") === -1) return;
     var qs = document.querySelectorAll(".admonition.question");
