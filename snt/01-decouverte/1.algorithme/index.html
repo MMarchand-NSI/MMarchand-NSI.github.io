@@ -8154,6 +8154,12 @@
 </tbody>
 </table>
 <p>Un déplacement trace un trait <strong>si le crayon est baissé</strong>.</p>
+<div class="admonition danger">
+<p class="admonition-title">Piège : <code>droite</code> ne veut pas toujours dire la même chose</p>
+<p>Regarde bien la ligne <code>droite</code> toute seule : elle ne dit <strong>pas</strong> si un trait apparaît. Elle déplace le crayon d'une case, et c'est tout. Qu'un trait se dessine ou non dépend d'autre chose, qui n'est écrit nulle part sur cette ligne : <strong>l'état du crayon</strong>, levé ou baissé.</p>
+<p>Cet état ne se voit pas dans l'instruction, il vient de ce qui s'est passé <strong>avant</strong>. Un <code>lève</code> écrit dix lignes plus haut agit encore. Pour lire un programme, il ne suffit donc pas de lire la ligne : il faut se souvenir, à chaque instant, si le crayon est levé ou baissé.</p>
+<p>C'est le premier exemple d'une chose qui reviendra toute l'année : un programme a un <strong>état</strong> qui se transporte d'une instruction à la suivante, et qui change le sens de ce qui vient après.</p>
+</div>
 <h2 id="lire-du-code">Lire du code</h2>
 <p>On commence par le plus important : savoir <strong>lire</strong> un programme, c'est-à-dire dire ce qu'il dessine sans l'exécuter en vrai. Pour chaque exercice, on part du <strong>coin en haut à gauche</strong>.</p>
 <div class="admonition question">
@@ -8177,9 +8183,20 @@
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>droite
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>droite
 </code></pre></div>
+<p>Réponds <strong>dans l'ordre</strong>. Les deux premières questions se répondent en suivant le programme ligne par ligne, pas en devinant le dessin.</p>
+<ol>
+<li>Après la <strong>4e</strong> instruction, de combien de cases le crayon s'est-il déplacé depuis le départ, et est-il <strong>levé ou baissé</strong> ?</li>
+<li>Combien d'instructions de ce programme tracent réellement un trait ?</li>
+<li>Que dessine le programme en entier ?</li>
+</ol>
 <details class="success">
 <summary>Correction</summary>
-<p>Deux traits horizontaux de 2 cases chacun, séparés par un espace d'une case (le déplacement fait crayon levé ne trace rien).</p>
+<ol>
+<li>Le crayon s'est déplacé de <strong>3 cases</strong> vers la droite, et il est <strong>levé</strong> (la 3e instruction l'a levé, rien ne l'a rebaissé depuis).</li>
+<li><strong>Quatre</strong> : les deux premiers <code>droite</code> et les deux derniers. Le <code>droite</code> du milieu déplace le crayon sans rien tracer.</li>
+<li>Deux traits horizontaux de 2 cases chacun, séparés par un espace d'une case.</li>
+</ol>
+<p>Remarque : il y a <strong>cinq</strong> instructions <code>droite</code> dans ce programme et seulement <strong>quatre</strong> traits. C'est l'état du crayon qui fait la différence, pas l'instruction.</p>
 </details>
 </div>
 <div class="admonition question">
@@ -8202,6 +8219,15 @@
 <p class="admonition-title">Exercice 8 - Un trait horizontal</p>
 <p>Écris un programme qui trace ce trait.</p>
 <p><svg viewBox="0 0 164 52" width="164" role="img" aria-label="trait horizontal de 5 cases" style="max-width:100%;height:auto"><g stroke="#c9c9c9" stroke-width="1"><line x1="12" y1="12" x2="12" y2="40"/><line x1="40" y1="12" x2="40" y2="40"/><line x1="68" y1="12" x2="68" y2="40"/><line x1="96" y1="12" x2="96" y2="40"/><line x1="124" y1="12" x2="124" y2="40"/><line x1="152" y1="12" x2="152" y2="40"/><line x1="12" y1="12" x2="152" y2="12"/><line x1="12" y1="40" x2="152" y2="40"/></g><polyline points="12,12 152,12" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="4.5" fill="#e53935"/></svg></p>
+<details class="tip">
+<summary>Indice</summary>
+<p>Compte les cases que le trait traverse. Chaque instruction déplace le crayon d'<strong>une seule</strong> case : combien t'en faut-il ?</p>
+</details>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui bloquait dans <strong>ton</strong> programme ?</p>
+<p>Écris-la même si tu as trouvé sans l'indice. C'est cette phrase qui reste, pas le programme recopié.</p>
+</details>
 <details class="success">
 <summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>répète 5 fois :
@@ -8214,6 +8240,15 @@
 <p class="admonition-title">Exercice 9 - Un carré</p>
 <p>Écris un programme qui trace ce carré (3 cases de côté).</p>
 <p><svg viewBox="0 0 108 108" width="108" role="img" aria-label="carre de 3 cases de cote" style="max-width:100%;height:auto"><g stroke="#c9c9c9" stroke-width="1"><line x1="12" y1="12" x2="12" y2="96"/><line x1="40" y1="12" x2="40" y2="96"/><line x1="68" y1="12" x2="68" y2="96"/><line x1="96" y1="12" x2="96" y2="96"/><line x1="12" y1="12" x2="96" y2="12"/><line x1="12" y1="40" x2="96" y2="40"/><line x1="12" y1="68" x2="96" y2="68"/><line x1="12" y1="96" x2="96" y2="96"/></g><polyline points="12,12 96,12 96,96 12,96 12,12" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="4.5" fill="#e53935"/></svg></p>
+<details class="tip">
+<summary>Indice</summary>
+<p>Un carré a quatre côtés. Écris d'abord le programme d'<strong>un seul</strong> côté, celui du haut. Puis demande-toi quelle instruction change pour le côté suivant.</p>
+</details>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui bloquait dans <strong>ton</strong> programme ?</p>
+<p>Écris-la même si tu as trouvé sans l'indice. C'est cette phrase qui reste, pas le programme recopié.</p>
+</details>
 <details class="success">
 <summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>répète 3 fois :
@@ -8232,6 +8267,15 @@ Un côté après l'autre : la droite, puis le bas, puis la gauche, puis le haut,
 <p class="admonition-title">Exercice 10 - Un escalier</p>
 <p>Écris un programme qui trace cet escalier (4 marches).</p>
 <p><svg viewBox="0 0 136 136" width="136" role="img" aria-label="escalier de 4 marches" style="max-width:100%;height:auto"><g stroke="#c9c9c9" stroke-width="1"><line x1="12" y1="12" x2="12" y2="124"/><line x1="40" y1="12" x2="40" y2="124"/><line x1="68" y1="12" x2="68" y2="124"/><line x1="96" y1="12" x2="96" y2="124"/><line x1="124" y1="12" x2="124" y2="124"/><line x1="12" y1="12" x2="124" y2="12"/><line x1="12" y1="40" x2="124" y2="40"/><line x1="12" y1="68" x2="124" y2="68"/><line x1="12" y1="96" x2="124" y2="96"/><line x1="12" y1="124" x2="124" y2="124"/></g><polyline points="12,12 40,12 40,40 68,40 68,68 96,68 96,96 124,96 124,124" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="4.5" fill="#e53935"/></svg></p>
+<details class="tip">
+<summary>Indice</summary>
+<p>Ne regarde qu'<strong>une seule marche</strong>. Quelles deux instructions la tracent ? Ensuite, compte combien de fois cette marche se répète.</p>
+</details>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui bloquait dans <strong>ton</strong> programme ?</p>
+<p>Écris-la même si tu as trouvé sans l'indice. C'est cette phrase qui reste, pas le programme recopié.</p>
+</details>
 <details class="success">
 <summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>répète 4 fois :
@@ -8244,6 +8288,15 @@ Un côté après l'autre : la droite, puis le bas, puis la gauche, puis le haut,
 <p class="admonition-title">Exercice 11 - Deux traits séparés</p>
 <p>Écris un programme qui trace ces deux traits verticaux (3 cases chacun, séparés par un espace d'une case).</p>
 <p><svg viewBox="0 0 80 108" width="80" role="img" aria-label="deux traits verticaux de 3 cases separes" style="max-width:100%;height:auto"><g stroke="#c9c9c9" stroke-width="1"><line x1="12" y1="12" x2="12" y2="96"/><line x1="40" y1="12" x2="40" y2="96"/><line x1="68" y1="12" x2="68" y2="96"/><line x1="12" y1="12" x2="68" y2="12"/><line x1="12" y1="40" x2="68" y2="40"/><line x1="12" y1="68" x2="68" y2="68"/><line x1="12" y1="96" x2="68" y2="96"/></g><polyline points="12,12 12,96" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="68,12 68,96" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="4.5" fill="#e53935"/></svg></p>
+<details class="tip">
+<summary>Indice</summary>
+<p>Le crayon doit revenir en haut, puis se décaler, <strong>sans laisser de trace</strong> au passage. Quelles instructions du tableau permettent cela ?</p>
+</details>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui bloquait dans <strong>ton</strong> programme ?</p>
+<p>Écris-la même si tu as trouvé sans l'indice. C'est cette phrase qui reste, pas le programme recopié.</p>
+</details>
 <details class="success">
 <summary>Correction</summary>
 <p>Une solution possible :
@@ -8294,7 +8347,7 @@ On trace le premier trait, on <strong>lève</strong> le crayon pour remonter et 
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 11, 2026 21:15:53 UTC">July 11, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 3, 2026 02:33:05 UTC">August 3, 2026</span>
   </span>
 
     
