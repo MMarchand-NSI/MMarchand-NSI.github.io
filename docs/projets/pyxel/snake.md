@@ -8,7 +8,7 @@ Les bases de la modélisation et de l'implémentation d'un jeu sont aussi abord�
 
 Un snake est une File de Coordonnées entières.
 
-Cette file, c'est **exactement** celle que tu viens de construire avec deux piles : le snake en est la mise à l'épreuve. Faire avancer le serpent, c'est `enfiler` une nouvelle tête puis `defiler` la queue. Pour le dessiner ou détecter une collision, on parcourt la file avec `elements`, sans la détruire.
+Cette file, c'est **exactement** celle que vous venez de construire avec deux piles : le snake en est la mise à l'épreuve. Faire avancer le serpent, c'est `enfiler` une nouvelle tête puis `defiler` la queue. Pour le dessiner ou détecter une collision, on parcourt la file avec `elements`, sans la détruire.
 
 ![alt text](image-11.png)
 
@@ -22,12 +22,12 @@ Par exemple, dans cette grille, voici l'état du snake:
 La flèche rouge représente le vecteur directeur du snake. Ici, `direction = (1, 0)`. On avance de 1 en x et de 0 en y.
 
 !!! question "Exercices d'appropriation de la modélisation"
-    1. Ecrire l'état du snake lorsqu'il aura avancé d'une case
-        - Quelles primitives de file avez vous utilisé?
-    2. Ecrire l'état du snake lorsqu'il aura avancé d'une case avec une pomme en (5,2)
-        - Quelles primitives de file avez-vous utilisé?
+    1. Écrire l'état du snake lorsqu'il aura avancé d'une case
+        - Quelles primitives de file avez-vous utilisées ?
+    2. Écrire l'état du snake lorsqu'il aura avancé d'une case avec une pomme en (5,2)
+        - Quelles primitives de file avez-vous utilisées ?
     3. Lorsque le snake `avance`, donnez la ou les conditions pour que le jeu soit terminé (`gameover = True`)
-    3. Ecrire les différentes valeurs du vecteur directeur selon qu'on avance en haut, à gauche, en bas, ou à droite.
+    4. Écrire les différentes valeurs du vecteur directeur selon qu'on avance en haut, à gauche, en bas, ou à droite.
 
 Voici le code de départ du snake
 
@@ -56,7 +56,7 @@ game_over: bool                 # indicateur de game over
 frames: int                     # compteur de frames (augmente de 1 dès que update est appelé)
 
 # --- Initialisation ---
-def reinit():
+def reinit() -> None:
     """
     Initialisation de TOUTES les variables globales
     """
@@ -91,7 +91,7 @@ Voici comment se lancera notre jeu (**fin du fichier**):
 ```python
 
 # -- Mise à jour régulière de l'état --
-def update():
+def update() -> None:
     """
     Appelée automatiquement par pyxel.
     si on appuie sur <R>, on réinitialise
@@ -101,7 +101,7 @@ def update():
     ...
 
 # -- Dessin régulier après mise à jour --
-def draw():
+def draw() -> None:
     """
     Appelée automatiquement par pyxel.
     Dessine le snake à l'écran.
@@ -111,7 +111,7 @@ def draw():
 
 # -- Lancement --
 
-def lancer_jeu():
+def lancer_jeu() -> None:
     # Initialiser pyxel, le moteur graphique
     pyxel.init(W, H, title="Snake")
     # Initialisaer l'état du jeu
