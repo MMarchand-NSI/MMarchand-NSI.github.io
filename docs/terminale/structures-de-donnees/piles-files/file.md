@@ -230,6 +230,33 @@ Les exercices suivants se font dans le fichier exos_files.py.
     """
     ```
 
+    ??? tip "Indice léger"
+        Tu ne peux voir que la sortie de la file. Pour examiner tous les éléments, il faut donc les faire sortir. Reste à savoir où tu les mets en attendant, et comment tu les remets dans le **bon ordre**.
+
+    ??? tip "Indice plus précis"
+        Une pile temporaire inverserait l'ordre, une **file** temporaire le conserve : ce qui entre en premier en ressort en premier, deux fois de suite. Défile `f` en entier, compte au passage, enfile chaque élément dans la file temporaire, puis vide la temporaire dans `f`.
+
+    ??? question "Avant d'ouvrir la solution"
+        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
+
+    ??? success "Solution"
+        ```python
+        def nb_elements[T](f: File[T], e: T) -> int:
+            """Nombre d'occurrences de e dans f. La file f est laissée intacte."""
+            n: int = 0
+            temp: File[T] = creer()
+            while not est_vide(f):
+                x = defiler(f)
+                if x == e:
+                    n += 1
+                enfiler(x, temp)
+            while not est_vide(temp):
+                enfiler(defiler(temp), f)
+            return n
+        ```
+
+        C'est exactement la structure de `elements` vue plus haut : sortir, garder, remettre. Une fonction qui prétend ne pas modifier une file doit toujours la reconstruire.
+
 !!! question "Look-and-say"
 
     La suite "Look-and-say", de Conway, consiste à lire à haute voix une série de chiffres en les groupant: ainsi la suite 11121223 est lue "trois 1, un 2, un 1,deux 2, un trois", qu'on écrit 3112112213.

@@ -260,6 +260,30 @@ if __name__ == "__main__":
     Créer une fonction  ```renverse_inplace``` qui prend une pile en paramètre et la renverse **en place**.
     Cette fonction ne retourne rien.
 
+    ??? tip "Indice léger"
+        Transférer une pile dans une autre, élément par élément, **inverse** son ordre. Combien de transferts te faut-il, sachant que le résultat doit se retrouver dans `p` elle-même ?
+
+    ??? tip "Indice plus précis"
+        Un transfert inverse l'ordre, deux transferts le rétablissent. Il t'en faut donc un nombre **impair**, et le dernier doit arriver dans `p`. Trois transferts, donc deux piles temporaires. Aucune autre structure n'est nécessaire, et tu n'as le droit d'utiliser que les quatre primitives.
+
+    ??? question "Avant d'ouvrir la solution"
+        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
+
+    ??? success "Solution"
+        ```python
+        def renverse_inplace[T](p: Pile[T]) -> None:
+            t1: Pile[T] = creer()
+            t2: Pile[T] = creer()
+            while not est_vide(p):
+                empiler(depiler(p), t1)    # p vers t1 : ordre inverse
+            while not est_vide(t1):
+                empiler(depiler(t1), t2)   # t1 vers t2 : ordre rétabli
+            while not est_vide(t2):
+                empiler(depiler(t2), p)    # t2 vers p : ordre inverse de l'original
+        ```
+
+        La pile `p` n'est jamais remplacée, seulement vidée puis remplie : c'est ce que veut dire « en place ».
+
 
 !!! question "Sujet épreuve pratique (30 minutes grand maximum)"
     Ne te grille pas immédiatement cet exercice. Il faut le faire une fois que tu es à l'aise avec les autres, et pas le même jour.
