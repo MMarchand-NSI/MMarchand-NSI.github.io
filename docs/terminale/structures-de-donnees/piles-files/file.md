@@ -71,6 +71,36 @@ On veut construire une file **sans jamais toucher à une liste directement**, à
 
 Empiler sur `entree` place le dernier arrivé au sommet ; le basculement l'envoie au fond de `sortie`. Le premier arrivé se retrouve donc au sommet de `sortie` : c'est bien du FIFO.
 
+!!! question "Avant de lire le code : trace le basculement"
+    Remplis ce tableau **à la main**, ligne par ligne. La dernière colonne est celle qui compte : `enfiler` ne rend rien, `defiler` rend un élément **et** le retire.
+
+    | opération | `entree` (bas vers haut) | `sortie` (bas vers haut) | valeur rendue |
+    |---|---|---|---|
+    | `enfiler(1, f)` | | | |
+    | `enfiler(2, f)` | | | |
+    | `defiler(f)` | | | |
+    | `enfiler(3, f)` | | | |
+    | `defiler(f)` | | | |
+    | `defiler(f)` | | | |
+
+    ??? note "À ouvrir une fois que tu as rempli les six lignes"
+        | opération | `entree` | `sortie` | valeur rendue |
+        |---|---|---|---|
+        | `enfiler(1, f)` | `[1]` | `[]` | rien |
+        | `enfiler(2, f)` | `[1, 2]` | `[]` | rien |
+        | `defiler(f)` | `[]` | `[2]` | `1`, après basculement |
+        | `enfiler(3, f)` | `[3]` | `[2]` | rien |
+        | `defiler(f)` | `[3]` | `[]` | `2`, sans basculement |
+        | `defiler(f)` | `[]` | `[]` | `3`, après basculement |
+
+!!! question "Pourquoi la condition « si `sortie` est vide » ?"
+    Reprends la trace ci-dessus en **supprimant** cette condition, c'est-à-dire en basculant `entree` dans `sortie` à **chaque** `defiler`. Quelle valeur rend le cinquième appel ?
+
+    ??? note "Ce que tu dois trouver"
+        Au quatrième pas, `entree` vaut `[3]` et `sortie` vaut `[2]`. Un basculement inconditionnel empile donc `3` **par-dessus** `2`, et `sortie` vaut `[2, 3]`. Le `defiler` suivant rend `3` alors qu'il devrait rendre `2` : l'ordre FIFO est cassé.
+
+        La condition n'est pas une optimisation, c'est **ce qui rend la file correcte**. Retiens le raisonnement, pas la ligne de code : basculer une pile dans une autre inverse son ordre, donc mélanger deux vagues de basculement mélange deux ordres.
+
 ```python
 from structures.lineaires import pile
 
@@ -84,7 +114,7 @@ def est_vide[T](f: File[T]) -> bool:
     return pile.est_vide(entree) and pile.est_vide(sortie)
 
 def enfiler[T](e: T, f: File[T]) -> None:
-    entree, sortie = f
+    entree, _ = f
     pile.empiler(e, entree)
 
 def defiler[T](f: File[T]) -> T:
@@ -153,7 +183,7 @@ Les exercices suivants se font dans le fichier exos_files.py.
     ```
 
 !!! question "Sortie d'une file"
-    Ecrire une fonction qui renvoie l'élément à la sortie d'une file sans qu'elle soit modifiée à la sortie de la fonction.
+    Écrire une fonction qui renvoie l'élément à la sortie d'une file sans qu'elle soit modifiée à la sortie de la fonction.
 
 !!! question "Sans exécuter le code"
     On considère la file exemple.
@@ -164,7 +194,7 @@ Les exercices suivants se font dans le fichier exos_files.py.
 
     P = pile.creer()
     while not(file.est_vide(F)):
-        pile.empiler(defiler(F), P)
+        pile.empiler(file.defiler(F), P)
     ```
 
 
@@ -182,7 +212,7 @@ Les exercices suivants se font dans le fichier exos_files.py.
     - Non destructive
 
 
-!!! question "Occurences"
+!!! question "Occurrences"
 
     Écrire une fonction nb_elements qui prend en paramètres une file et un élément de n'importe quel type, et qui renvoie le nombre de fois où l'élément est présent dans la file. Après appel de cette fonction la file doit avoir retrouvé son état d’origine. Tu commenceras bien sûr par prendre le temps d'écrire la signature de la fonction proprement.
 
@@ -191,7 +221,7 @@ Les exercices suivants se font dans le fichier exos_files.py.
     >>> F = file_exemple()
     >>> nb_elements(F, "rouge")
     2
-    >>> F == file_exemple() #? La file est toujours égale à la file exemple
+    >>> elements(F) == elements(file_exemple()) #? La file a retrouvé son contenu
     True
     >>> nb_elements(F, "vert")
     1
@@ -204,6 +234,6 @@ Les exercices suivants se font dans le fichier exos_files.py.
 
     La suite "Look-and-say", de Conway, consiste à lire à haute voix une série de chiffres en les groupant: ainsi la suite 11121223 est lue "trois 1, un 2, un 1,deux 2, un trois", qu'on écrit 3112112213.
 
-    1. Ecrire une fonction `etape` qui prend 2 files, `entree` et `sortie`, en paramètre. Elle retire les `n` premiers chiffres `c` identiques de `entree` et ajoute les chiffres `n` et `c` à la sortie. Testez cette fonction.
-    2. Ecrire une fonction `lookandsay` qui prend une file et retourne la file transformée. Testez cette fonction avec l'exemple.
+    1. Écrire une fonction `etape` qui prend 2 files, `entree` et `sortie`, en paramètre. Elle retire les `n` premiers chiffres `c` identiques de `entree` et ajoute les chiffres `n` et `c` à la sortie. Testez cette fonction.
+    2. Écrire une fonction `lookandsay` qui prend une file et retourne la file transformée. Testez cette fonction avec l'exemple.
     3. Afficher les 10 premières valeurs de la suite à partir d'une file contenant seulement un 1.

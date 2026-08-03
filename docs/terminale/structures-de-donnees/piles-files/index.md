@@ -1,6 +1,6 @@
 # Les Piles
 
-Les piles(stacks en anglais) correspondent **exactement** à la notion de pile dans la vie courante. C'est une structure qui contient des éléments empilés.
+Les piles (*stacks* en anglais) correspondent **exactement** à la notion de pile dans la vie courante. C'est une structure qui contient des éléments empilés.
 
 - Une pile de cartes à jouer,
 - Une pile d’assiettes…
@@ -25,7 +25,7 @@ Ce type de structure de données est par exemple utilisé dans:
 ## Interface
 
 !!! abstract "Définition - Interface"
-    L'interface d'une structure de données abstraite est composée des fonctionalités **théoriques** que doit savoir remplir la structure de données. On appelle ces fonctionalités des **primitives**.
+    L'interface d'une structure de données abstraite est composée des fonctionnalités **théoriques** que doit savoir remplir la structure de données. On appelle ces fonctionnalités des **primitives**.
 
     Tu dois penser à la structure et au fonctionnement de l'interface (comme des légos) lorsque tu résous des problèmes. Pas à Python en particulier.
 
@@ -35,7 +35,7 @@ Une pile est définie par l’interface comprenant les primitives suivantes:
 |--|--|
 | CREER() → Pile | Renvoie une nouvelle Pile vide |
 | EST_VIDE(p: Pile) → Booléen |Savoir si la pile p est vide |
-| EMPILER(p: Pile, e: T) |Empiler un élément e pour le mettre au sommet de la pile p |
+| EMPILER(e: T, p: Pile) |Empiler un élément e pour le mettre au sommet de la pile p |
 | DEPILER(p: Pile) → T | Dépiler un élément: le retirer du sommet de la pile et le renvoyer |
 
 ## Implémentation en Python
@@ -45,7 +45,7 @@ Une pile est définie par l’interface comprenant les primitives suivantes:
     L'implémentation d'une structure de donnée est la traduction pratique de son interface dans un langage de programmation spécifique.
     Les primitives doivent trouver une implémentation la plus rapide possible. Il peut exister plusieurs façon d'implémenter une structure de données dans un langage.
 
-    (on trouvera aussi parfois les termes implanter/implantation à la place d'implémentater/implémentation)
+    (on trouvera aussi parfois les termes implanter/implantation à la place d'implémenter/implémentation)
 
 Le type list en Python présente deux méthodes rapides qui lui permettent d’implémenter la Pile:
 
@@ -116,7 +116,7 @@ def est_vide[T](p: Pile[T]) -> bool:
     """
     return len(p) == 0
 
-def empiler[T](e: T, p: Pile[T]):
+def empiler[T](e: T, p: Pile[T]) -> None:
     """
     Empile l'élément e au sommet de la pile p (modifie p sur place).
 
@@ -184,7 +184,7 @@ if __name__ == "__main__":
     - Crée le répertoire `structures`. Ajoutes-y un fichier vide `__init__.py`
     - Crée le répertoire `structures/lineaires`. Ajoutes-y un fichier vide `__init__.py`
     - Reporter le code de création de la structure de Pile dans le fichier `structures/lineaires/pile.py`
-    - Crée le fichier `exos\exospiles.py` et ajoute ce code:
+    - Crée le fichier `exos/exospiles.py` et ajoute ce code:
 
     ```python
     from structures.lineaires import pile
@@ -210,7 +210,9 @@ if __name__ == "__main__":
     ``` 
 
 !!! question "Sans exécuter le code - papier"
-    Dessinez la pile p à chacune de ses modifications.
+    Dessine la pile `p` à chacune de ses modifications, dans un tableau à trois colonnes : l'opération, l'état de la pile, et **la valeur rendue** par l'opération.
+
+    La troisième colonne est celle qui piège : `empiler` ne rend rien, `depiler` rend l'élément **et** le retire.
 
     ```python
     p: Pile[int] = creer()
@@ -303,7 +305,7 @@ if __name__ == "__main__":
         Renvoie True si la chaîne ch est bien parenthésée
         et False sinon
         """
-        p = creer()
+        p: Pile[str] = creer()
         for c in ch:
             if c == ...:
                 empiler(c, p)
