@@ -7333,6 +7333,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../projets/pyside/pokedex/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Projet de synthèse : le Pokédex
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -8475,6 +8503,83 @@ Tu retrouveras exactement cet algorithme sur les listes, puis sur les dictionnai
 </code></pre></div>
 <p>Indications : on peut renverser la chaîne pour que l'indice de chaque chiffre corresponde à sa puissance de 2, puis calculer la somme des puissances de 2 par accumulation (parcours par indice).</p>
 </div>
+<div class="admonition question">
+<p class="admonition-title">9 - <code>take</code> : garder les n premiers</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">take</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie les n premiers caractères de s.</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="sd">    Si s est plus courte que n caractères, renvoie s en entier.</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a><span class="sd">    &gt;&gt;&gt; take(3, &quot;python&quot;)</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a><span class="sd">    &#39;pyt&#39;</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a><span class="sd">    &gt;&gt;&gt; take(0, &quot;python&quot;)</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="sd">    &#39;&#39;</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="sd">    &gt;&gt;&gt; take(10, &quot;abc&quot;)</span>
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a><span class="sd">    &#39;abc&#39;</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>    <span class="o">...</span>
+</code></pre></div>
+<details class="tip">
+<summary>Indice léger</summary>
+<p>C'est une accumulation de caractères, donc un parcours qui construit une chaîne. Mais tu ne veux <strong>pas tous</strong> les caractères : il te faut un filtre, comme pour <em>Somme des pairs</em>. Sur quoi porte-t-il ici ?</p>
+</details>
+<details class="tip">
+<summary>Indice plus précis</summary>
+<p>Parcours <strong>par indice</strong> (<code>for i in range(len(s))</code>), et le filtre compare <code>i</code> à <code>n</code> : tu n'ajoutes <code>s[i]</code> à l'accumulateur que si <code>i &lt; n</code>. Le cas <code>n</code> plus grand que <code>s</code> se règle tout seul : la boucle s'arrête avant d'avoir jamais pu être fausse.</p>
+</details>
+<details class="question">
+<summary>Avant d'ouvrir la solution</summary>
+<p>Écris une phrase sur ton cahier : pourquoi ce filtre n'a-t-il <strong>rien de spécial</strong> à faire pour le cas <code>take(10, "abc")</code> ?</p>
+</details>
+<details class="success">
+<summary>Solution</summary>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">take</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie les n premiers caractères de s.&quot;&quot;&quot;</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>        <span class="k">if</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>            <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>    <span class="k">return</span> <span class="n">res</span>
+</code></pre></div>
+Aucun cas particulier : si <code>n</code> dépasse <code>len(s)</code>, la condition <code>i &lt; n</code> reste vraie jusqu'au dernier tour, donc tous les caractères sont pris. C'est le même bénéfice que <code>range</code> semi-ouvert (section plus haut) : les bornes se comportent bien <strong>sans qu'on ait à y penser</strong>.</p>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">10 - <code>drop</code> : jeter les n premiers</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">drop</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie s privée de ses n premiers caractères.</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="sd">    Si s est plus courte que n caractères, renvoie la chaîne vide.</span>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="sd">    &gt;&gt;&gt; drop(3, &quot;python&quot;)</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="sd">    &#39;hon&#39;</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="sd">    &gt;&gt;&gt; drop(0, &quot;python&quot;)</span>
+<a id="__codelineno-29-9" name="__codelineno-29-9" href="#__codelineno-29-9"></a><span class="sd">    &#39;python&#39;</span>
+<a id="__codelineno-29-10" name="__codelineno-29-10" href="#__codelineno-29-10"></a><span class="sd">    &gt;&gt;&gt; drop(10, &quot;abc&quot;)</span>
+<a id="__codelineno-29-11" name="__codelineno-29-11" href="#__codelineno-29-11"></a><span class="sd">    &#39;&#39;</span>
+<a id="__codelineno-29-12" name="__codelineno-29-12" href="#__codelineno-29-12"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-29-13" name="__codelineno-29-13" href="#__codelineno-29-13"></a>    <span class="o">...</span>
+</code></pre></div>
+<details class="tip">
+<summary>Indice léger</summary>
+<p>Transfert proche de l'exercice précédent : même squelette, un seul symbole change dans le filtre.</p>
+</details>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">drop</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie s privée de ses n premiers caractères.&quot;&quot;&quot;</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)):</span>
+<a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a>        <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+<a id="__codelineno-30-6" name="__codelineno-30-6" href="#__codelineno-30-6"></a>            <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+<a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>    <span class="k">return</span> <span class="n">res</span>
+</code></pre></div>
+</details>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Une propriété à vérifier, pas à admettre</p>
+<p>Choisis plusieurs valeurs de <code>n</code> et plusieurs chaînes, et vérifie que <code>take(n, s) + drop(n, s)</code> redonne toujours <code>s</code>. C'est une <strong>spécification</strong> que tes deux fonctions doivent respecter ensemble, au sens de <a href="../specification-tests/">Spécification et tests</a> : si l'égalité casse sur un exemple, l'une des deux fonctions a un bug, même si chacune passait ses propres doctests.</p>
+</div>
 <hr />
 <p>Le <code>for</code> s'arrête toujours : il fait un tour par élément d'une séquence finie. Quand on ne sait <strong>pas</strong> à l'avance combien de tours faire, on utilise l'autre boucle : <a href="../boucle-while/">La boucle non bornée <code>while</code></a>.</p>
 
@@ -8497,7 +8602,7 @@ Tu retrouveras exactement cet algorithme sur les listes, puis sur les dictionnai
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 2, 2026 16:57:50 UTC">August 2, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 4, 2026 19:16:26 UTC">August 4, 2026</span>
   </span>
 
     
