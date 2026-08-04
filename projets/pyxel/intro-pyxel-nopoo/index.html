@@ -7747,10 +7747,10 @@
 
 <h1 id="introduction-a-pyxel-sans-poo">Introduction à pyxel - Sans POO</h1>
 <p>Vous allez découvrir les bases de la création d'un jeu.</p>
-<p>L'objectif est de créer un carré capable de se dessiner et de se déplacer en fonction de son vecteur directionnel (dx, dy).</p>
+<p>L'objectif est de créer un pixel capable de se dessiner et de se déplacer en fonction de son vecteur directionnel (dx, dy).</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pyxel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># -- CONStANTES</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="c1"># -- CONSTANTES</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="n">W</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span>   <span class="c1"># Largeur</span>
 <a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="n">H</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">30</span>   <span class="c1"># Hauteur</span>
 <a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
@@ -7765,7 +7765,7 @@
 <a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>
 <a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="c1"># -- Initialisation de l&#39;état du jeu -- </span>
 <a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="k">def</span><span class="w"> </span><span class="nf">reinit</span><span class="p">():</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="k">def</span><span class="w"> </span><span class="nf">reinit</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="sd">    Initialise un pixel vert avec une position centrale et un vecteur directeur nul.</span>
 <a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="sd">    &quot;&quot;&quot;</span>
@@ -7779,7 +7779,7 @@
 <a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>
 <a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="c1"># -- Mise à jour régulière de l&#39;état du jeu ---</span>
 <a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">():</span>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="sd">    Gère les événements utilisateur pour déplacer le pixel.</span>
 <a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="sd">    Cette fonction est automatiquement appelée en boucle par pyxel.</span>
@@ -7797,17 +7797,17 @@
 <a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>
 <a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a><span class="c1"># -- Dessin régulier de l&#39;état du jeu à l&#39;écran ---</span>
 <a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>
-<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">():</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a><span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="sd">    Dessine le carré sur l&#39;écran.</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a><span class="sd">    Dessine le pixel sur l&#39;écran.</span>
 <a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>    <span class="k">global</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">dx</span><span class="p">,</span> <span class="n">dy</span><span class="p">,</span> <span class="n">color</span>
 <a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>    <span class="n">px</span><span class="o">.</span><span class="n">cls</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">COLOR_BLACK</span><span class="p">)</span>          <span class="c1"># Efface l&#39;écran</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>    <span class="n">px</span><span class="o">.</span><span class="n">pset</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">color</span><span class="p">)</span>  <span class="c1"># Dessine le carré</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>    <span class="n">px</span><span class="o">.</span><span class="n">pset</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">y</span><span class="p">),</span> <span class="n">color</span><span class="p">)</span>  <span class="c1"># Dessine le pixel</span>
 <a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>
 <a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>
 <a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a><span class="c1"># 1. Démarrer le moteur de jeu en 10 FPS</span>
-<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a><span class="n">px</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Carré en Mouvement&quot;</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a><span class="n">px</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">H</span><span class="p">,</span> <span class="n">W</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Pixel en Mouvement&quot;</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
 <a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a><span class="c1"># 2. Initialiser les variables du jeu</span>
 <a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a><span class="n">reinit</span><span class="p">()</span>
 <a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a><span class="c1"># 3. Lancer le jeu</span>
@@ -7817,16 +7817,90 @@
 <a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a><span class="c1"># qui appelle update, puis draw, de manière régulière, à chaque Frame (ici 10 fois par seconde)</span>
 </code></pre></div>
 <div class="admonition question">
+<p class="admonition-title">Avant tout : qui appelle <code>update</code> ?</p>
+<p>Tu écris <code>update</code> et <code>draw</code>, et <strong>tu ne les appelles jamais</strong>. Tu donnes leurs noms à <code>px.run</code>, et c'est le moteur qui les rappelle, indéfiniment, plusieurs fois par seconde. Jusqu'ici, tout ce que tu écrivais s'exécutait dans l'ordre où tu l'avais écrit. Ici, le contrôle appartient à pyxel.</p>
+<p>Déroule <strong>trois frames à la main</strong>, en supposant qu'on appuie sur la flèche droite pendant la deuxième et qu'on la relâche ensuite.</p>
+<table>
+<thead>
+<tr>
+<th>frame</th>
+<th>ce que fait <code>update</code></th>
+<th>état après <code>update</code></th>
+<th>ce que dessine <code>draw</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>2</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>3</td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<details class="note">
+<summary>À ouvrir une fois les trois lignes remplies</summary>
+<table>
+<thead>
+<tr>
+<th>frame</th>
+<th>ce que fait <code>update</code></th>
+<th>état après <code>update</code></th>
+<th>ce que dessine <code>draw</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>aucune touche</td>
+<td><code>x=15 y=15 dx=0 dy=0</code></td>
+<td>un pixel en (15, 15)</td>
+</tr>
+<tr>
+<td>2</td>
+<td>flèche droite pressée : <code>dx</code> devient 1</td>
+<td><code>x=15 y=15 dx=1 dy=0</code></td>
+<td>un pixel en (15, 15)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>aucune touche : <code>x</code> avance de <code>dx</code></td>
+<td><code>x=16 y=15 dx=1 dy=0</code></td>
+<td>un pixel en (16, 15)</td>
+</tr>
+</tbody>
+</table>
+<p>Deux questions, et elles ne sont pas rhétoriques.</p>
+<ol>
+<li>Combien de fois <code>update</code> a-t-elle été appelée, et <strong>par qui</strong> ?</li>
+<li>Pourquoi le pixel n'a-t-il <strong>pas bougé</strong> à la frame 2, alors qu'on appuyait sur la touche ?</li>
+</ol>
+<p>La seconde est la source d'erreur numéro un de cette activité : <strong>changer le vecteur</strong> et <strong>changer la position</strong> sont deux choses différentes, et elles ne se produisent pas à la même frame.</p>
+</details>
+</div>
+<div class="admonition question">
 <p class="admonition-title">Exercices de base</p>
 <ol>
-<li>Complétez la méthode update. Testez</li>
+<li>Complétez la fonction update. Testez</li>
 <li>Modifiez le framerate. Testez</li>
-<li>Si ça n'est pas déjà fait, modifier la méthode update pour que le carré s'arrête lorsqu'on lâche les touches.</li>
-<li>Le carré ne doit pas bouger s'il va dépasser de l'écran.<ul>
+<li>Si ça n'est pas déjà fait, modifier la fonction update pour que le pixel s'arrête lorsqu'on lâche les touches.</li>
+<li>Le pixel ne doit pas bouger s'il va dépasser de l'écran.<ul>
 <li>Modifiez la fonction update pour tenir compte de cette information. </li>
 </ul>
 </li>
-<li>Espace torique: Un carré peut maintenant dépasser un bord mais il réapparaît au bord opposé (ce qui fait de l'espace de jeu un espace sans bord)<ul>
+<li>Espace torique: Un pixel peut maintenant dépasser un bord mais il réapparaît au bord opposé (ce qui fait de l'espace de jeu un espace sans bord)<ul>
 <li>Modifiez la fonction update pour tenir compte de cette information. On s'intéressera à l'opérateur modulo. La modification doit être minime.</li>
 </ul>
 </li>
@@ -7839,13 +7913,13 @@
 <li>Il s'agit d'un fichier contenant des ressources visuelles et sonores.</li>
 <li>Placez le <strong>dans le même répertoire</strong> que votre fichier python.</li>
 <li>Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources du jeu, exécutez la commande suivante dans un terminal:
-    <code>pyxel edit &lt;répertoire&gt;\2.pyxres</code></li>
+    <code>pyxel edit &lt;répertoire&gt;/2.pyxres</code></li>
 <li>N'hésitez pas à bidouiller, vous ne pouvez rien casser, au pire vous pourrez retélécharger le fichier.</li>
 </ul>
 </li>
-<li>A la place d'un simple carré, on veut maintenant utiliser un sprite<ul>
+<li>A la place d'un simple pixel, on veut maintenant utiliser un sprite<ul>
 <li>Pour le faire, il faut d'abord charger ce fichier dans le code <strong>juste avant de démarrer le jeu</strong>:
-    <code>px.load("&lt;répertoire&gt;\2.pyxres")</code></li>
+    <code>px.load("&lt;répertoire&gt;/2.pyxres")</code></li>
 <li>Ensuite il faut dessiner le sprite que vous aurez choisi au lieu de simplement remplir un pixel. Il n'y a qu'une ligne de code à modifier. Je vous laisse la trouver en explorant la <a href="https://github.com/kitao/pyxel/blob/main/docs/README.fr.md">documentation de pyxel</a>.<ul>
 <li>remarque: Vous aurez nécessairement besoin d'augmenter la hauteur et la largeur de votre fenêtre (H et W), ce qui réduira la taille des "pixels".</li>
 </ul>
@@ -7874,7 +7948,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 4, 2025 22:47:24 UTC">October 4, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 3, 2026 17:00:15 UTC">August 3, 2026</span>
   </span>
 
     

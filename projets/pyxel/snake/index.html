@@ -7817,7 +7817,7 @@
 <p>Les bases de la modélisation et de l'implémentation d'un jeu sont aussi abordées.</p>
 <h2 id="modelisation">Modélisation</h2>
 <p>Un snake est une File de Coordonnées entières.</p>
-<p>Cette file, c'est <strong>exactement</strong> celle que tu viens de construire avec deux piles : le snake en est la mise à l'épreuve. Faire avancer le serpent, c'est <code>enfiler</code> une nouvelle tête puis <code>defiler</code> la queue. Pour le dessiner ou détecter une collision, on parcourt la file avec <code>elements</code>, sans la détruire.</p>
+<p>Cette file, c'est <strong>exactement</strong> celle que vous venez de construire avec deux piles : le snake en est la mise à l'épreuve. Faire avancer le serpent, c'est <code>enfiler</code> une nouvelle tête puis <code>defiler</code> la queue. Pour le dessiner ou détecter une collision, on parcourt la file avec <code>elements</code>, sans la détruire.</p>
 <p><img alt="alt text" src="../image-11.png" /></p>
 <p>Par exemple, dans cette grille, voici l'état du snake:</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>&gt; (4, 2), (3, 2), (3, 3), (3, 4), (2, 4), (1, 4) &gt;
@@ -7826,16 +7826,16 @@
 <div class="admonition question">
 <p class="admonition-title">Exercices d'appropriation de la modélisation</p>
 <ol>
-<li>Ecrire l'état du snake lorsqu'il aura avancé d'une case<ul>
-<li>Quelles primitives de file avez vous utilisé?</li>
+<li>Écrire l'état du snake lorsqu'il aura avancé d'une case<ul>
+<li>Quelles primitives de file avez-vous utilisées ?</li>
 </ul>
 </li>
-<li>Ecrire l'état du snake lorsqu'il aura avancé d'une case avec une pomme en (5,2)<ul>
-<li>Quelles primitives de file avez-vous utilisé?</li>
+<li>Écrire l'état du snake lorsqu'il aura avancé d'une case avec une pomme en (5,2)<ul>
+<li>Quelles primitives de file avez-vous utilisées ?</li>
 </ul>
 </li>
 <li>Lorsque le snake <code>avance</code>, donnez la ou les conditions pour que le jeu soit terminé (<code>gameover = True</code>)</li>
-<li>Ecrire les différentes valeurs du vecteur directeur selon qu'on avance en haut, à gauche, en bas, ou à droite.</li>
+<li>Écrire les différentes valeurs du vecteur directeur selon qu'on avance en haut, à gauche, en bas, ou à droite.</li>
 </ol>
 </div>
 <p>Voici le code de départ du snake</p>
@@ -7862,7 +7862,7 @@
 <a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="n">frames</span><span class="p">:</span> <span class="nb">int</span>                     <span class="c1"># compteur de frames (augmente de 1 dès que update est appelé)</span>
 <a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a>
 <a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="c1"># --- Initialisation ---</span>
-<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="k">def</span><span class="w"> </span><span class="nf">reinit</span><span class="p">():</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="k">def</span><span class="w"> </span><span class="nf">reinit</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a><span class="sd">    Initialisation de TOUTES les variables globales</span>
 <a id="__codelineno-1-27" name="__codelineno-1-27" href="#__codelineno-1-27"></a><span class="sd">    &quot;&quot;&quot;</span>
@@ -7879,12 +7879,77 @@
 <a id="__codelineno-1-38" name="__codelineno-1-38" href="#__codelineno-1-38"></a>    <span class="c1"># on le fera grâce à une fonction spécifique qu&#39;il faudra appeler ici</span>
 </code></pre></div>
 <div class="admonition question">
+<p class="admonition-title">Deux fonctions outils, testables sans lancer le jeu</p>
+<p>Ces deux fonctions ne dessinent rien et ne touchent à aucune variable globale : elles se testent donc <strong>immédiatement</strong>, avec <code>python -m doctest</code>, sans ouvrir de fenêtre. Écrivez-les en premier.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">prochaine_tete</span><span class="p">(</span><span class="n">tete</span><span class="p">:</span> <span class="n">Coord</span><span class="p">,</span> <span class="n">direction</span><span class="p">:</span> <span class="n">Coord</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coord</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="sd">    Coordonnée de la case suivante, sans toucher au serpent.</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="sd">    &gt;&gt;&gt; prochaine_tete((4, 2), (1, 0))</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="sd">    (5, 2)</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="sd">    &gt;&gt;&gt; prochaine_tete((4, 2), (0, -1))</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="sd">    (4, 1)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="sd">    &gt;&gt;&gt; prochaine_tete((0, 5), (-1, 0))</span>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="sd">    (-1, 5)</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">case_libre</span><span class="p">(</span><span class="n">occupees</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Coord</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Coord</span><span class="p">:</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="sd">    Une case de la grille au hasard, parmi celles qui ne sont pas occupées.</span>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="sd">    &gt;&gt;&gt; toutes = [(x, y) for x in range(W) for y in range(H)]</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a><span class="sd">    &gt;&gt;&gt; case_libre([c for c in toutes if c != (7, 3)])</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a><span class="sd">    (7, 3)</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div>
+<p>Le second doctest mérite un mot : en n'offrant qu'<strong>une seule</strong> case libre, il rend déterministe une fonction qui tire au hasard. C'est une manière courante de tester l'aléatoire.</p>
+</div>
+<div class="admonition question">
 <p class="admonition-title">Initialisation</p>
 <ul>
-<li>Compléter la fonction reinit.</li>
-<li>Créer la fonction <code>avancer()</code> qui permet d'avancer d'une case.</li>
-<li>Créer la fonction <code>spawn_pomme()</code> qui permet de modifier les coordonnées de la pomme.</li>
+<li>Compléter la fonction <code>reinit</code>.</li>
+<li>Créer la fonction <code>spawn_pomme()</code>, qui appelle <code>case_libre</code> et modifie les coordonnées de la pomme.</li>
 </ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Avancer, le point dur du projet</p>
+<p>Cette fonction porte à elle seule la difficulté du snake. Prenez-la séparément, et <strong>après</strong> avoir répondu aux exercices d'appropriation ci-dessus.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">avancer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="sd">    Fait avancer le serpent d&#39;une case dans la direction courante.</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="sd">    Enfile la nouvelle tête. Défile la queue, SAUF si le serpent vient de</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="sd">    manger la pomme, auquel cas il grandit d&#39;une case.</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div>
+<p>Les deux cas de la docstring correspondent exactement aux exercices 1 et 2 d'appropriation : vous avez déjà écrit sur papier ce que la fonction doit produire.</p>
+<details class="tip">
+<summary>Indice léger</summary>
+<p>Vos exercices sur papier disent quelles primitives utiliser, et dans quel ordre. Reste une question : qu'est-ce qui change entre le cas ordinaire et le cas de la pomme ?</p>
+</details>
+<details class="tip">
+<summary>Indice plus précis</summary>
+<p>Une seule opération diffère entre les deux cas : le <code>defiler</code>. Avancer sans manger, c'est enfiler <strong>et</strong> défiler, donc une longueur constante. Manger, c'est enfiler <strong>sans</strong> défiler, donc une longueur qui augmente de un. <code>queue_supprimee</code> sert à mémoriser ce qui a été défilé, pour le dessin.</p>
+</details>
+<details class="question">
+<summary>Avant d'ouvrir la solution</summary>
+<p>En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce qui n'allait pas dans <strong>votre</strong> code ?</p>
+</details>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">avancer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">global</span> <span class="n">serpent</span><span class="p">,</span> <span class="n">tete</span><span class="p">,</span> <span class="n">pomme</span><span class="p">,</span> <span class="n">score</span><span class="p">,</span> <span class="n">queue_supprimee</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">tete</span> <span class="o">=</span> <span class="n">prochaine_tete</span><span class="p">(</span><span class="n">tete</span><span class="p">,</span> <span class="n">direction</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">file</span><span class="o">.</span><span class="n">enfiler</span><span class="p">(</span><span class="n">tete</span><span class="p">,</span> <span class="n">serpent</span><span class="p">)</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">if</span> <span class="n">tete</span> <span class="o">==</span> <span class="n">pomme</span><span class="p">:</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="n">score</span> <span class="o">=</span> <span class="n">score</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        <span class="n">queue_supprimee</span> <span class="o">=</span> <span class="kc">None</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>        <span class="n">spawn_pomme</span><span class="p">()</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>        <span class="n">queue_supprimee</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">defiler</span><span class="p">(</span><span class="n">serpent</span><span class="p">)</span>
+</code></pre></div>
+<p>Remarquez que <code>avancer</code> ne dessine rien et ne teste aucune collision : elle ne fait qu'avancer. C'est ce qui la rend lisible, et c'est aussi ce qui rendrait <code>prochaine_tete</code> testable si on l'avait écrite ainsi dès le début.</p>
+</details>
 </div>
 <p>Comme beaucoup de moteurs de jeu, pyxel va appeler automatiquement à chaque frame 2 fonctions à la suite:</p>
 <ol>
@@ -7896,37 +7961,38 @@
 <li>PUIS une fonction <code>draw()</code>, chargée de dessiner l'état du jeu.</li>
 </ol>
 <p>Voici comment se lancera notre jeu (<strong>fin du fichier</strong>):</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># -- Mise à jour régulière de l&#39;état --</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">():</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="sd">    Appelée automatiquement par pyxel.</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="sd">    si on appuie sur &lt;R&gt;, on réinitialise</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="sd">    Si on appuie sur &lt;Q, Z, S, D&gt;, on met à jour la direction</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="sd">    On avance</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>    <span class="o">...</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a><span class="c1"># -- Dessin régulier après mise à jour --</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">():</span>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="sd">    Appelée automatiquement par pyxel.</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="sd">    Dessine le snake à l&#39;écran.</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="sd">    La seule fonction pyxel nécessaire est pset</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="c1"># -- Lancement --</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="k">def</span><span class="w"> </span><span class="nf">lancer_jeu</span><span class="p">():</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a>    <span class="c1"># Initialiser pyxel, le moteur graphique</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    <span class="n">pyxel</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Snake&quot;</span><span class="p">)</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    <span class="c1"># Initialisaer l&#39;état du jeu</span>
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>    <span class="n">reinit</span><span class="p">()</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>    <span class="c1"># lancer la boucle d&#39;appels permanents à update puis draw</span>
-<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>    <span class="n">pyxel</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">draw</span><span class="p">)</span>  
-<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>
-<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
-<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="n">lancer_jeu</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="c1"># -- Mise à jour régulière de l&#39;état --</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="sd">    Appelée automatiquement par pyxel.</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="sd">    si on appuie sur &lt;R&gt;, on réinitialise</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="sd">    Si on appuie sur &lt;Q, Z, S, D&gt;, on met à jour la direction</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="sd">    On avance</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="o">...</span>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="c1"># -- Dessin régulier après mise à jour --</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a><span class="sd">    Appelée automatiquement par pyxel.</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a><span class="sd">    Dessine le snake à l&#39;écran.</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a><span class="sd">    La seule fonction pyxel nécessaire est pset</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-5-18" name="__codelineno-5-18" href="#__codelineno-5-18"></a>    <span class="o">...</span>
+<a id="__codelineno-5-19" name="__codelineno-5-19" href="#__codelineno-5-19"></a>
+<a id="__codelineno-5-20" name="__codelineno-5-20" href="#__codelineno-5-20"></a>
+<a id="__codelineno-5-21" name="__codelineno-5-21" href="#__codelineno-5-21"></a><span class="c1"># -- Lancement --</span>
+<a id="__codelineno-5-22" name="__codelineno-5-22" href="#__codelineno-5-22"></a>
+<a id="__codelineno-5-23" name="__codelineno-5-23" href="#__codelineno-5-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">lancer_jeu</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-5-24" name="__codelineno-5-24" href="#__codelineno-5-24"></a>    <span class="c1"># Initialiser pyxel, le moteur graphique</span>
+<a id="__codelineno-5-25" name="__codelineno-5-25" href="#__codelineno-5-25"></a>    <span class="n">pyxel</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">H</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Snake&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-26" name="__codelineno-5-26" href="#__codelineno-5-26"></a>    <span class="c1"># Initialisaer l&#39;état du jeu</span>
+<a id="__codelineno-5-27" name="__codelineno-5-27" href="#__codelineno-5-27"></a>    <span class="n">reinit</span><span class="p">()</span>
+<a id="__codelineno-5-28" name="__codelineno-5-28" href="#__codelineno-5-28"></a>    <span class="c1"># lancer la boucle d&#39;appels permanents à update puis draw</span>
+<a id="__codelineno-5-29" name="__codelineno-5-29" href="#__codelineno-5-29"></a>    <span class="n">pyxel</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">draw</span><span class="p">)</span>  
+<a id="__codelineno-5-30" name="__codelineno-5-30" href="#__codelineno-5-30"></a>
+<a id="__codelineno-5-31" name="__codelineno-5-31" href="#__codelineno-5-31"></a>
+<a id="__codelineno-5-32" name="__codelineno-5-32" href="#__codelineno-5-32"></a><span class="n">lancer_jeu</span><span class="p">()</span>
 </code></pre></div>
 <div class="admonition question">
 <p class="admonition-title">Amélioration</p>
@@ -7960,7 +8026,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="July 22, 2026 16:46:20 UTC">July 22, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 3, 2026 17:00:15 UTC">August 3, 2026</span>
   </span>
 
     
