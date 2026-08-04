@@ -447,6 +447,78 @@ Avant d'écrire une boucle, entraîne-toi à **lire** celles des autres et à **
 
     Indications : on peut renverser la chaîne pour que l'indice de chaque chiffre corresponde à sa puissance de 2, puis calculer la somme des puissances de 2 par accumulation (parcours par indice).
 
+!!! question "9 - `take` : garder les n premiers"
+    ```python
+    def take(n: int, s: str) -> str:
+        """Renvoie les n premiers caractères de s.
+
+        Si s est plus courte que n caractères, renvoie s en entier.
+
+        >>> take(3, "python")
+        'pyt'
+        >>> take(0, "python")
+        ''
+        >>> take(10, "abc")
+        'abc'
+        """
+        ...
+    ```
+
+    ??? tip "Indice léger"
+        C'est une accumulation de caractères, donc un parcours qui construit une chaîne. Mais tu ne veux **pas tous** les caractères : il te faut un filtre, comme pour *Somme des pairs*. Sur quoi porte-t-il ici ?
+
+    ??? tip "Indice plus précis"
+        Parcours **par indice** (`for i in range(len(s))`), et le filtre compare `i` à `n` : tu n'ajoutes `s[i]` à l'accumulateur que si `i < n`. Le cas `n` plus grand que `s` se règle tout seul : la boucle s'arrête avant d'avoir jamais pu être fausse.
+
+    ??? question "Avant d'ouvrir la solution"
+        Écris une phrase sur ton cahier : pourquoi ce filtre n'a-t-il **rien de spécial** à faire pour le cas `take(10, "abc")` ?
+
+    ??? success "Solution"
+        ```python
+        def take(n: int, s: str) -> str:
+            """Renvoie les n premiers caractères de s."""
+            res = ""
+            for i in range(len(s)):
+                if i < n:
+                    res = res + s[i]
+            return res
+        ```
+        Aucun cas particulier : si `n` dépasse `len(s)`, la condition `i < n` reste vraie jusqu'au dernier tour, donc tous les caractères sont pris. C'est le même bénéfice que `range` semi-ouvert (section plus haut) : les bornes se comportent bien **sans qu'on ait à y penser**.
+
+!!! question "10 - `drop` : jeter les n premiers"
+    ```python
+    def drop(n: int, s: str) -> str:
+        """Renvoie s privée de ses n premiers caractères.
+
+        Si s est plus courte que n caractères, renvoie la chaîne vide.
+
+        >>> drop(3, "python")
+        'hon'
+        >>> drop(0, "python")
+        'python'
+        >>> drop(10, "abc")
+        ''
+        """
+        ...
+    ```
+
+    ??? tip "Indice léger"
+        Transfert proche de l'exercice précédent : même squelette, un seul symbole change dans le filtre.
+
+    ??? success "Solution"
+        ```python
+        def drop(n: int, s: str) -> str:
+            """Renvoie s privée de ses n premiers caractères."""
+            res = ""
+            for i in range(len(s)):
+                if i >= n:
+                    res = res + s[i]
+            return res
+        ```
+
+!!! tip "Une propriété à vérifier, pas à admettre"
+    Choisis plusieurs valeurs de `n` et plusieurs chaînes, et vérifie que `take(n, s) + drop(n, s)` redonne toujours `s`. C'est une **spécification** que tes deux fonctions doivent respecter ensemble, au sens de [Spécification et tests](specification-tests.md) : si l'égalité casse sur un exemple, l'une des deux fonctions a un bug, même si chacune passait ses propres doctests.
+
 ---
 
 Le `for` s'arrête toujours : il fait un tour par élément d'une séquence finie. Quand on ne sait **pas** à l'avance combien de tours faire, on utilise l'autre boucle : [La boucle non bornée `while`](boucle-while.md).

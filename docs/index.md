@@ -61,29 +61,30 @@ On y apprend par exemple à:
 
 Ces raisonnements (invisibles à l'écran, mais décisifs en coulisses) font de l'informatique une science à part entière.
 
-L'intelligence artificielle est aujourd'hui capable de produire du code rapidement et efficacement, comme une calculatrice produit des résultats numériques. Mais cette automatisation ne supprime pas le besoin de comprendre, de concevoir et de vérifier.
+??? question "Et l'IA dans tout ça ?"
+    L'intelligence artificielle est aujourd'hui capable de produire du code rapidement et efficacement, comme une calculatrice produit des résultats numériques. Mais cette automatisation ne supprime pas le besoin de comprendre, de concevoir et de vérifier.
 
-Sans culture dans un domaine, on ne sait pas quoi demander et on ne sait pas non plus si ce que répond l'IA est juste.
+    Sans culture dans un domaine, on ne sait pas quoi demander et on ne sait pas non plus si ce que répond l'IA est juste.
 
-On peut très bien demander à une IA de faire ça :
+    On peut très bien demander à une IA de faire ça :
 
-!!! prompt "Prompt"
-    Génère un fichier Terraform qui provisionne un VPC sur AWS avec deux subnets (un public et un privé), un internet gateway attaché au public, une NAT gateway dans le public pour le privé, et deux security groups distincts : l'un qui autorise le trafic entrant HTTP/HTTPS depuis 0.0.0.0/0, l'autre qui n'autorise que le trafic entrant depuis le premier security group sur le port 5432.
+    !!! prompt "Prompt"
+        Génère un fichier Terraform qui provisionne un VPC sur AWS avec deux subnets (un public et un privé), un internet gateway attaché au public, une NAT gateway dans le public pour le privé, et deux security groups distincts : l'un qui autorise le trafic entrant HTTP/HTTPS depuis 0.0.0.0/0, l'autre qui n'autorise que le trafic entrant depuis le premier security group sur le port 5432.
 
-Le code n'est que la traduction d'un besoin formulé à la machine. Encore faut-il savoir le formuler.
+    Le code n'est que la traduction d'un besoin formulé à la machine. Encore faut-il savoir le formuler.
 
-!!! prompt "Prompt"
-    Implémente une fonction qui trouve les k plus proches voisins dans une liste de n points 2D, sans calculer toutes les distances deux à deux. Utilise un k-d tree pour ramener la complexité de O(n²) à O(n log n) en construction et O(log n) par requête.
+    !!! prompt "Prompt"
+        Implémente une fonction qui trouve les k plus proches voisins dans une liste de n points 2D, sans calculer toutes les distances deux à deux. Utilise un k-d tree pour ramener la complexité de O(n²) à O(n log n) en construction et O(log n) par requête.
 
-Sans cette seconde requête, l'IA produit du code correct, qui passe en production et qui s'effondre sous la charge.
+    Sans cette seconde requête, l'IA produit du code correct, qui passe en production et qui s'effondre sous la charge.
 
-L'IA est un exécutant rapide et relativement fiable pour qui sait challenger ses réponses. Mais elle attend des ordres, et donner le bon ordre suppose de maîtriser le métier.
+    L'IA est un exécutant rapide et relativement fiable pour qui sait challenger ses réponses. Mais elle attend des ordres, et donner le bon ordre suppose de maîtriser le métier.
 
-Il est par ailleurs **fondamentalement démontré** qu'aucun système automatique (IA comprise) ne peut garantir de manière générale la correction, la sécurité ou l'optimalité de tous les programmes[^5]. Un système probabiliste peut proposer des solutions plausibles, mais ne fournit pas de garanties universelles.
+    Il est par ailleurs **fondamentalement démontré** qu'aucun système automatique (IA comprise) ne peut garantir de manière générale la correction, la sécurité ou l'optimalité de tous les programmes[^5]. Un système probabiliste peut proposer des solutions plausibles, mais ne fournit pas de garanties universelles.
 
-On ne lance pas une fusée dans l'espace sur la base d'une estimation probabiliste.
+    On ne lance pas une fusée dans l'espace sur la base d'une estimation probabiliste.
 
-En entreprise, cette part de risque devient rapidement inacceptable. **C'est pourquoi, malgré l'IA, apprendre à raisonner, à programmer et à analyser les algorithmes reste nécessaire.** L'IA transforme la manière de coder, elle ne remplace pas l'ingénierie informatique. Le code reste le **fondement opérationnel de la discipline** : l'outil par lequel les idées sont rendues précises, testables et vérifiables.
+    En entreprise, cette part de risque devient rapidement inacceptable. **C'est pourquoi, malgré l'IA, apprendre à raisonner, à programmer et à analyser les algorithmes reste nécessaire.** L'IA transforme la manière de coder, elle ne remplace pas l'ingénierie informatique. Le code reste le **fondement opérationnel de la discipline** : l'outil par lequel les idées sont rendues précises, testables et vérifiables.
 
 [^5]: Turing, A. M. (1936). On computable numbers, with an application to the Entscheidungsproblem. *Proceedings of the London Mathematical Society*, 2(42), 230–265. Ce travail démontre l'indécidabilité du problème de l'arrêt. Rice, H. G. (1953). Classes of recursively enumerable sets and their decision problems. *Transactions of the American Mathematical Society*, 74(2), 358–366. Le théorème de Rice en généralise le résultat : aucune propriété sémantique non triviale d'un programme n'est décidable.
 
