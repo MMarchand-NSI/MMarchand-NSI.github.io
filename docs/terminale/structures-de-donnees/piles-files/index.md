@@ -1,5 +1,17 @@
 # Les Piles
 
+!!! question "Rappel d'ouverture (5 minutes, de mémoire, cahier fermé)"
+    Avant de commencer les piles, reprends ce que tu dois déjà tenir. **Écris les réponses de mémoire**, sans rouvrir le cours : c'est le fait de produire qui installe, pas le fait de relire.
+
+    1. Écris la signature typée d'une fonction qui prend une liste d'entiers et renvoie leur somme.
+    2. Quelle est la différence entre `return` et `print` dans une fonction ?
+    3. Après `a = [1, 2]` puis `b = a` puis `b.append(3)`, que vaut `a` ? Pourquoi ?
+
+    ??? success "Correction"
+        1. `def somme(nombres: list[int]) -> int:`
+        2. `return` **rend une valeur à l'appelant**, qui peut s'en servir ; `print` **affiche** et ne rend rien (`None`). Une fonction qui affiche au lieu de renvoyer est inutilisable dans un calcul.
+        3. `a` vaut `[1, 2, 3]`. `b = a` ne copie pas la liste, il donne un **second nom au même objet** : c'est l'aliasing. Retiens-le, il revient sur les piles.
+
 Les piles (*stacks* en anglais) correspondent **exactement** à la notion de pile dans la vie courante. C'est une structure qui contient des éléments empilés.
 
 - Une pile de cartes à jouer,
@@ -94,75 +106,95 @@ Voici le fichier pile.py
 type Pile[T] = list[T]
 
 def creer[T]() -> Pile[T]:
-    """
-    Crée une pile vide.
-
-    >>> p: Pile[int] = creer()
-    >>> p
-    []
-    """
+    """Crée et renvoie une pile vide."""
     return []
 
 def est_vide[T](p: Pile[T]) -> bool:
-    """
-    Indique si la pile est vide.
-
-    >>> p: Pile[str] = creer()
-    >>> est_vide(p)  #? True pour une pile vide
-    True
-    >>> empiler("test", p)
-    >>> est_vide(p)  #? False sinon
-    False
-    """
+    """Indique si la pile p est vide."""
     return len(p) == 0
 
 def empiler[T](e: T, p: Pile[T]) -> None:
     """
-    Empile l'élément e au sommet de la pile p (modifie p sur place).
-
-    >>> p = creer()
-    >>> empiler(10, p)  #? pas de valeur de retour (None)
-    >>> p
-    [10]
-    >>> empiler(5, p)
-    >>> p
-    [10, 5]
+    Empile l'élément e au sommet de la pile p.
+    Modifie p sur place et ne renvoie rien.
     """
     p.append(e)
 
-
 def depiler[T](p: Pile[T]) -> T:
     """
-    Dépile et retourne l'élément au sommet de la pile p.
-
-    >>> p = creer()
-    >>> empiler(1, p)
-    >>> empiler(2, p)
-    >>> depiler(p)
-    2
-    >>> p
-    [1]
-
-    Dépile sur pile vide -> AssertionError :
-
-    >>> depiler(p)
-    1
-    >>> depiler(p)  # doctest: +ELLIPSIS
-    Traceback (most recent call last):
-    ...
-    AssertionError: La pile est vide
+    Retire l'élément au sommet de la pile p et le renvoie.
+    Précondition : p ne doit pas être vide.
     """
     assert not est_vide(p), "La pile est vide"
     return p.pop()
 
 
+# --- Tests ---------------------------------------------------------------
+# Une fonction de test par primitive, nommée test_<primitive>.
+# Elle ne prend rien, ne renvoie rien, et échoue bruyamment si le code est faux.
+
+def test_creer() -> None:
+    p: Pile[int] = creer()
+    assert est_vide(p)
+
+def test_est_vide() -> None:
+    p: Pile[str] = creer()
+    assert est_vide(p)
+    empiler("test", p)
+    assert not est_vide(p)
+
+def test_empiler() -> None:
+    p: Pile[int] = creer()
+    assert empiler(10, p) is None      # empiler ne RENVOIE rien, il MODIFIE p
+    assert not est_vide(p)
+    empiler(5, p)
+    assert depiler(p) == 5             # 5 est bien au sommet : dernier entré
+
+def test_depiler() -> None:
+    p: Pile[int] = creer()
+    empiler(1, p)
+    empiler(2, p)
+    assert depiler(p) == 2             # retire ET renvoie
+    assert depiler(p) == 1
+    assert est_vide(p)
+
+def test_depiler_pile_vide() -> None:
+    p: Pile[int] = creer()
+    try:
+        depiler(p)
+    except AssertionError:
+        return                          # comportement attendu
+    assert False, "depiler sur une pile vide aurait dû échouer"
+
+
 if __name__ == "__main__":
-    import doctest
-    doctest.testmod()
+    test_creer()
+    test_est_vide()
+    test_empiler()
+    test_depiler()
+    test_depiler_pile_vide()
+    print("pile.py : tous les tests passent")
 ```
+
+!!! note "La convention de test de l'année, à prendre tout de suite"
+    Tu ne verras **jamais** de test écrit dans une docstring sur ce site. La règle est unique et vaut partout :
+
+    - la **docstring** dit le **contrat** en français : ce que la fonction prend, ce qu'elle rend, ce qu'elle exige ;
+    - une **fonction séparée**, nommée `test_` suivi du nom de la fonction testée, porte les `assert`.
+
+    Deux raisons, et la première est celle qui compte : **c'est la forme qu'on te demandera à l'épreuve pratique**. Autant s'entraîner dans la forme où l'on sera évalué. La seconde est pratique : ton éditeur sait retrouver tout seul les fonctions qui commencent par `test_`.
+
+    Regarde `test_empiler` ci-dessus : il ne vérifie pas seulement que ça marche, il vérifie qu'`empiler` **ne renvoie rien**. Un test qui ne contrôle que la valeur rendue laisse passer la moitié des erreurs sur une structure de données.
 
 !!! warning "Piège : `empiler` et `depiler` **modifient** la pile"
     Ces deux primitives ont un **effet de bord** : elles changent l'état de la pile passée en argument. Après `depiler(p)`, l'élément a disparu de `p`. Conséquence directe : calculer la taille d'une pile **en la dépilant** la **vide**. Une fonction censée laisser la pile intacte doit remettre les éléments en place (voir les exercices « destructif / non destructif »).
+
+!!! warning "Piège : une pile faite avec une `list` n'est **pas** une `list`"
+    L'implémentation utilise une `list` Python, donc rien ne t'empêche techniquement d'écrire `p.insert(0, x)` ou `p[2]`. Python l'acceptera sans broncher.
+
+    Ce serait pourtant une **faute**, et pas une faute de style : tu aurais atteint la pile **par-dessous son interface**. Les quatre primitives sont tout ce qu'une pile sait faire ; le jour où on remplace l'implémentation par une autre, ton `p[2]` cesse de marcher alors que le reste du programme continue.
+
+    La règle tient en une phrase : **tu utilises une pile par `creer`, `est_vide`, `empiler` et `depiler`, jamais autrement.** Le fait que le langage te laisse tricher ne rend pas la triche correcte.
 
 !!! note "L'état d'une pile est caché : seul le sommet est visible"
     On n'accède jamais au milieu d'une pile, seulement à son sommet. Le reste de l'état n'apparaît nulle part dans le code. Pour comprendre ce que font vraiment `empiler` et `depiler`, le bon réflexe est de **tracer l'état à la main**, comme dans l'exercice « Sans exécuter le code » plus bas.
@@ -192,9 +224,34 @@ if __name__ == "__main__":
 
     **Tu travailleras dans le fichier exospiles.py**
 
+!!! warning "À savoir avant le premier exercice : deux endroits, deux façons d'écrire"
+    À partir d'ici tu vas écrire dans **deux fichiers différents**, et il faut savoir à tout moment dans lequel tu es.
+
+    | | `structures/lineaires/pile.py` | `exos/exospiles.py` |
+    |---|---|---|
+    | ce que tu y fais | tu **fabriques** la structure | tu **utilises** la structure |
+    | tu écris | `def empiler(...)`, `type Pile[T] = list[T]` | `pile.empiler(x, p)`, `p: pile.Pile[int]` |
+    | tu as le droit de | toucher à la `list` qui est dessous | **seulement** les quatre primitives |
+
+    **Le préfixe `pile.` n'est pas une décoration : c'est la frontière.** Quand tu écris `pile.empiler(...)`, tu dis « j'appelle la fonction `empiler` **du module** `pile` », donc tu es **dehors**, tu utilises. Quand tu écris `empiler(...)` tout court, tu es **dedans**, tu fabriques.
+
+    C'est le même partage que celui du cours : **implémentation** d'un côté, **interface** de l'autre. Le préfixe te dit de quel côté tu te trouves, et il te préviendra le jour où tu voudras tricher : dans `exospiles.py`, `p[0]` ou `p.insert(...)` fonctionneront, mais tu auras traversé la frontière sans le dire.
+
     - Tu lanceras ton programme à l'aide de la commande `uv run -m exos.exospiles`
 
 
+
+!!! question "Vérification individuelle - trois questions, cinq minutes, sans aide"
+    À faire seul, sans code, sans voisin et sans machine. Une seule notion par question : le but n'est pas de te noter, c'est de savoir **lesquelles des trois** tu dois reprendre avant d'aller plus loin.
+
+    1. Après `pile.empiler(7, p)`, qu'est-ce que l'opération a **rendu** ?
+    2. La pile `p` vaut `[3, 9]` (du bas vers le haut). Que vaut `p` après `pile.depiler(p)`, et que rend l'appel ?
+    3. `p` est vide. Que se passe-t-il si on appelle `pile.depiler(p)`, et pourquoi est-ce voulu ?
+
+    ??? success "Correction"
+        1. **Rien.** `empiler` modifie la pile sans rien renvoyer. Confondre « modifier » et « renvoyer » est l'erreur d'entrée la plus fréquente.
+        2. `p` vaut `[3]`, et l'appel rend `9`. `depiler` fait les **deux** : il retire **et** il renvoie.
+        3. L'assertion échoue et le programme s'arrête. Ce n'est pas un bug : c'est une **précondition**, c'est-à-dire une condition que l'appelant doit garantir. Dépiler une pile vide n'a aucun sens, donc l'opération n'est pas définie là. Tu retrouveras cette idée sur toutes les structures de l'année.
 
 !!! question "Exercice 1"
 
@@ -215,36 +272,41 @@ if __name__ == "__main__":
     La troisième colonne est celle qui piège : `empiler` ne rend rien, `depiler` rend l'élément **et** le retire.
 
     ```python
-    p: Pile[int] = creer()
+    p: pile.Pile[int] = pile.creer()
     for v in [2, 4, 3, 6, 8, 5, 77, 10, 1]:
         if v % 2 == 0:
-            empiler(v, p)
+            pile.empiler(v, p)
         else:
-            depiler(p)
+            pile.depiler(p)
     ```
 
 
 !!! question "Sommet d'une pile"
     Écrire une fonction `sommet` qui renvoie le sommet d'une pile sans qu'elle soit modifiée à la sortie de la fonction. (on peut donc la modifier, mais on remet tout bien en place avant de sortir de la fonction)
 
-    ```python 
-    def sommet[T](p: Pile[T]) -> T:
+    ```python
+    def sommet[T](p: pile.Pile[T]) -> T:
         """
-        Compléter la docstring
-        
-        >>> P = pile_exemple()
-        >>> sommet(P)
-        'jaune'
+        Compléter la docstring : que prend la fonction, que rend-elle,
+        et dans quel état laisse-t-elle p ?
         """
+
+
+    def test_sommet() -> None:
+        P = pile_exemple()
+        assert sommet(P) == "jaune"
+        ...   # et surtout : vérifie que P n'a pas bougé
     ```
 
+    La ligne à compléter dans `test_sommet` est **l'essentiel de l'exercice**. Une fonction qui renvoie le bon sommet en vidant la pile est fausse, et seul ce second `assert` le détecte.
+
 !!! question "Taille d'une pile - version destructive"
-    Créer une fonction  ```taille_pile[T](p: Pile[T]) -> int``` qui renvoie la taille de p de manière destructive.
+    Créer une fonction  ```taille_pile[T](p: pile.Pile[T]) -> int``` qui renvoie la taille de p de manière destructive.
     (la pile est vide si on l'affiche après un appel de fonction)
 
 
 !!! question "Taille d'une pile - version non destructive"
-    Créer une fonction  ```taille_pile[T](p: Pile[T]) -> int``` qui renvoie la taille de p de manière non destructive.
+    Créer une fonction  ```taille_pile[T](p: pile.Pile[T]) -> int``` qui renvoie la taille de p de manière non destructive.
     (la pile est intacte si on l'affiche après un appel de fonction)
 
     On pourra utiliser une pile temporaire.
@@ -271,15 +333,15 @@ if __name__ == "__main__":
 
     ??? success "Solution"
         ```python
-        def renverse_inplace[T](p: Pile[T]) -> None:
-            t1: Pile[T] = creer()
-            t2: Pile[T] = creer()
-            while not est_vide(p):
-                empiler(depiler(p), t1)    # p vers t1 : ordre inverse
-            while not est_vide(t1):
-                empiler(depiler(t1), t2)   # t1 vers t2 : ordre rétabli
-            while not est_vide(t2):
-                empiler(depiler(t2), p)    # t2 vers p : ordre inverse de l'original
+        def renverse_inplace[T](p: pile.Pile[T]) -> None:
+            t1: pile.Pile[T] = pile.creer()
+            t2: pile.Pile[T] = pile.creer()
+            while not pile.est_vide(p):
+                pile.empiler(pile.depiler(p), t1)    # p vers t1 : ordre inverse
+            while not pile.est_vide(t1):
+                pile.empiler(pile.depiler(t1), t2)   # t1 vers t2 : ordre rétabli
+            while not pile.est_vide(t2):
+                pile.empiler(pile.depiler(t2), p)    # t2 vers p : ordre inverse de l'original
         ```
 
         La pile `p` n'est jamais remplacée, seulement vidée puis remplie : c'est ce que veut dire « en place ».
@@ -308,17 +370,16 @@ if __name__ == "__main__":
     - ou si, à la fin du parcours, la pile n’est pas vide.
 
 
-    Compléter le code de `parenthesage` et le tester.
+    Compléter le code, puis écrire sa fonction de test à partir de ces trois cas :
 
-    Exemples :
-    ``` python
-    >>> parenthesage("((()())(()))")
-    True
-    >>> parenthesage("())(()")
-    False
-    >>> parenthesage("(())(()")
-    False
+    ```python
+    def test_parenthesage() -> None:
+        assert parenthesage("((()())(()))")
+        assert not parenthesage("())(()")
+        assert not parenthesage("(())(()")
     ```
+
+    Ajoute au moins **deux cas de ton choix**, dont la chaîne vide. Une fonction de test qui ne contient que les exemples de l'énoncé ne teste que ce que l'énoncé avait déjà prévu.
 
     Code:
 
@@ -329,16 +390,16 @@ if __name__ == "__main__":
         Renvoie True si la chaîne ch est bien parenthésée
         et False sinon
         """
-        p: Pile[str] = creer()
+        p: pile.Pile[str] = pile.creer()
         for c in ch:
             if c == ...:
-                empiler(c, p)
+                pile.empiler(c, p)
             elif c == ...:
-                if est_vide(p):
+                if pile.est_vide(p):
                     return ...
                 else:
                     ...
-        return est_vide(p)
+        return pile.est_vide(p)
 
     ```
 
