@@ -71,6 +71,25 @@ Une pile est définie par l’interface comprenant les primitives suivantes:
 
     ??? note "Sur la question 2, si tu ne vois pas"
         Regarde l'état de `p` juste avant chaque `DEPILER`. Le contrat dit que cette opération a une **précondition**.
+    ??? question "Avant de regarder la correction, écris une phrase"
+        Pourquoi la troisième colonne n'est-elle pas remplie de la même façon selon l'opération ? Si tu ne sais pas l'écrire, ta trace n'est pas finie, et la correction ne t'apprendra rien.
+
+    ??? success "Correction"
+        | opération | état de `p` (du bas vers le haut) | valeur rendue |
+        |---|---|---|
+        | `CREER()` | `[]` | la pile neuve |
+        | `EMPILER(2, p)` | `[2]` | rien |
+        | `EMPILER(4, p)` | `[2, 4]` | rien |
+        | `DEPILER(p)` | `[2]` | `4` |
+        | `EMPILER(6, p)` | `[2, 6]` | rien |
+        | `EMPILER(8, p)` | `[2, 6, 8]` | rien |
+        | `DEPILER(p)` | `[2, 6]` | `8` |
+        | `DEPILER(p)` | `[2]` | `6` |
+        | `DEPILER(p)` | `[]` | `2` |
+        | `DEPILER(p)` | **impossible** | **précondition violée** |
+
+        1. **`p` est vide.** Les quatre derniers `DEPILER` l'ont entièrement dépilée. Piège de la question : elle porte sur ce que **contient** `p`, pas sur ce que les opérations ont **rendu**. La dernière valeur rendue est `2`, et pourtant `p` ne contient plus rien.
+        2. **Le dernier `DEPILER(p)`, celui que déclenche la valeur `1`.** La pile était déjà vide. Le contrat ne définit pas `DEPILER` sur une pile vide : c'est une **précondition**, à la charge de celui qui appelle. Ce n'est pas une erreur qui apparaîtrait « au moment de l'exécution », c'est une opération qui n'a **aucun sens** dans le contrat. Tu n'as écrit aucune ligne de Python, et le défaut se voit quand même : c'est le contrat qui l'a dit.
 
 !!! question "Vérification individuelle : trois questions, cinq minutes, sans aide"
     À faire seul, sans code, sans voisin et sans machine. Une seule notion par question : le but n'est pas de te noter, c'est de savoir **lesquelles des trois** tu dois reprendre avant d'aller plus loin.
