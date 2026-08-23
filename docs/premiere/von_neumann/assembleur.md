@@ -163,7 +163,20 @@ Vous allez écrire vos programmes en **mnémoniques** (`INP`, `STA nb1`, `ADD nb
 
 ## Les 12 défis
 
-Voici une série de 12 exercices progressifs pour maîtriser la programmation en LMC. Commencez par les plus simples et avancez progressivement.
+Voici une série de 12 exercices progressifs. Ils se font dans l'ordre : chacun réutilise ce que le précédent a installé.
+
+!!! info "Comment l'aide fonctionne dans ces défis"
+    **Les indices sont faits pour être lus.** Les ouvrir n'est pas de la triche, et ils ne sont comptés dans aucune note. Ce qui compte est ce que vous savez faire à la fin, pas le nombre de volets que vous avez ouverts.
+
+    **En revanche, l'énoncé vous en dit de moins en moins, et c'est voulu.**
+
+    - **Niveau 1**, les étapes du programme sont écrites dans l'énoncé : vous n'avez à chercher que les instructions qui les réalisent.
+    - **Niveau 2**, les étapes y sont encore, mais plus aucune indication sur les instructions à employer.
+    - **Niveau 3**, l'énoncé ne donne que le **résultat attendu**. Les étapes existent toujours, elles ont simplement changé de place : elles sont dans le premier indice, à ouvrir si vous en avez besoin.
+
+    Découper un problème en étapes est précisément ce que vous devez savoir faire à la fin de cette activité. C'est pour cela qu'on cesse de le faire à votre place.
+
+    **Le palier « avant d'ouvrir la correction » n'est pas décoratif.** Un indice lu améliore ce que vous faites sur l'exercice en cours, et rien sur le suivant, sauf si vous vous êtes expliqué à vous-même ce qu'il vous a appris. Une phrase suffit, mais écrivez-la.
 
 ### Niveau 1 : Séquence simple (Instructions de base)
 
@@ -177,12 +190,18 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
 
     **Instructions à utiliser :** `INP`, `OUT`, `HLT`
 
-??? success "Correction — Défi 1"
-    ```assembly
-            INP       # Lire l'entrée → ACC
-            OUT       # Afficher ACC
-            HLT       # Fin
-    ```
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+        qui n'allait pas dans **votre** programme ? Si vous n'avez pas encore écrit de
+        programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+        pourquoi vous en êtes sûr.
+
+    ??? success "Correction du défi 1"
+        ```assembly
+                INP       # Lire l'entrée → ACC
+                OUT       # Afficher ACC
+                HLT       # Fin
+        ```
 
 !!! question "Défi 2 : Deux nombres"
     **Objectif :** Demander deux nombres à l'utilisateur et les afficher dans le même ordre.
@@ -196,20 +215,26 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
 
     **Instructions à utiliser :** `INP`, `OUT`, `STA`, `LDA`, `HLT`, `DAT`
 
-??? success "Correction — Défi 2"
-    ```assembly
-            INP       # Lire le premier nombre → ACC
-            STA nb1   # Stocker dans nb1
-            INP       # Lire le deuxième nombre → ACC
-            STA nb2   # Stocker dans nb2
-            LDA nb1   # Charger nb1
-            OUT       # Afficher nb1
-            LDA nb2   # Charger nb2
-            OUT       # Afficher nb2
-            HLT
-    nb1     DAT
-    nb2     DAT
-    ```
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+        qui n'allait pas dans **votre** programme ? Si vous n'avez pas encore écrit de
+        programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+        pourquoi vous en êtes sûr.
+
+    ??? success "Correction du défi 2"
+        ```assembly
+                INP       # Lire le premier nombre → ACC
+                STA nb1   # Stocker dans nb1
+                INP       # Lire le deuxième nombre → ACC
+                STA nb2   # Stocker dans nb2
+                LDA nb1   # Charger nb1
+                OUT       # Afficher nb1
+                LDA nb2   # Charger nb2
+                OUT       # Afficher nb2
+                HLT
+        nb1     DAT
+        nb2     DAT
+        ```
 
 !!! question "Défi 3 : Addition"
     **Objectif :** Demander deux nombres à l'utilisateur et afficher leur somme.
@@ -223,16 +248,22 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
 
     **Instructions à utiliser :** `INP`, `OUT`, `STA`, `ADD`, `HLT`, `DAT`
 
-??? success "Correction — Défi 3"
-    ```assembly
-            INP       # Lire le premier nombre → ACC
-            STA nb1   # Stocker dans nb1
-            INP       # Lire le deuxième nombre → ACC
-            ADD nb1   # ACC = ACC + nb1
-            OUT       # Afficher la somme
-            HLT
-    nb1     DAT
-    ```
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+        qui n'allait pas dans **votre** programme ? Si vous n'avez pas encore écrit de
+        programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+        pourquoi vous en êtes sûr.
+
+    ??? success "Correction du défi 3"
+        ```assembly
+                INP       # Lire le premier nombre → ACC
+                STA nb1   # Stocker dans nb1
+                INP       # Lire le deuxième nombre → ACC
+                ADD nb1   # ACC = ACC + nb1
+                OUT       # Afficher la somme
+                HLT
+        nb1     DAT
+        ```
 
 !!! question "Défi 4 : Soustraction"
     **Objectif :** Demander deux nombres à l'utilisateur et afficher leur différence (premier - deuxième).
@@ -246,19 +277,25 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
 
     **Instructions à utiliser :** `INP`, `OUT`, `STA`, `LDA`, `SUB`, `HLT`, `DAT`
 
-??? success "Correction — Défi 4"
-    ```assembly
-            INP       # Lire le premier nombre → ACC
-            STA nb1   # Stocker dans nb1
-            INP       # Lire le deuxième nombre → ACC
-            STA nb2   # Stocker dans nb2
-            LDA nb1   # Charger nb1 dans ACC
-            SUB nb2   # ACC = nb1 - nb2
-            OUT       # Afficher le résultat
-            HLT
-    nb1     DAT
-    nb2     DAT
-    ```
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+        qui n'allait pas dans **votre** programme ? Si vous n'avez pas encore écrit de
+        programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+        pourquoi vous en êtes sûr.
+
+    ??? success "Correction du défi 4"
+        ```assembly
+                INP       # Lire le premier nombre → ACC
+                STA nb1   # Stocker dans nb1
+                INP       # Lire le deuxième nombre → ACC
+                STA nb2   # Stocker dans nb2
+                LDA nb1   # Charger nb1 dans ACC
+                SUB nb2   # ACC = nb1 - nb2
+                OUT       # Afficher le résultat
+                HLT
+        nb1     DAT
+        nb2     DAT
+        ```
 
 !!! question "Défi 5 : Moyenne de trois nombres"
     **Objectif :** Demander trois nombres à l'utilisateur et afficher leur moyenne (somme divisée par 3).
@@ -270,48 +307,58 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Diviser par 3 (soustraire 3 plusieurs fois jusqu'à obtenir 0, compter les soustractions)
     - Afficher le résultat
 
-    **Indices :**
+    ??? tip "Indice léger"
+        - Stocker les trois nombres en mémoire
+        - Les additionner un par un
+        - Pour diviser par 3, utiliser une boucle qui soustrait 3 et compte le nombre de soustractions
 
-    - Stocker les trois nombres en mémoire
-    - Les additionner un par un
-    - Pour diviser par 3, utiliser une boucle qui soustrait 3 et compte le nombre de soustractions
+    ??? tip "Indice précis"
+        C'est le premier défi qui demande une **boucle**, et donc un saut en arrière. Construisez-la sur la division : tant que la somme reste positive, retirez 3 et ajoutez 1 au quotient.
 
-??? success "Correction — Défi 5"
-    La division par 3 est simulée par soustractions successives : on soustrait 3 à la somme en comptant chaque opération jusqu'à ce que le résultat devienne négatif.
+        Le piège est le même que partout : l'accumulateur ne tient qu'une valeur. Rangez la somme avant de toucher au quotient, et rechargez-la ensuite.
 
-    ```assembly
-            INP
-            STA nb1
-            INP
-            STA nb2
-            INP
-            STA nb3
-            LDA nb1       # Calculer la somme
-            ADD nb2
-            ADD nb3
-            STA somme
-            LDA zero
-            STA moy
-    boucle  LDA somme     # Tester si somme - 3 >= 0
-            SUB trois
-            BRP suite     # Si oui, continuer la division
-            LDA moy       # Sinon, afficher le quotient
-            OUT
-            HLT
-    suite   STA somme     # somme = somme - 3
-            LDA moy
-            ADD un        # moy = moy + 1
-            STA moy
-            BRA boucle
-    nb1     DAT
-    nb2     DAT
-    nb3     DAT
-    somme   DAT
-    moy     DAT
-    zero    DAT 0
-    un      DAT 1
-    trois   DAT 3
-    ```
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+        qui n'allait pas dans **votre** programme ? Si vous n'avez pas encore écrit de
+        programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+        pourquoi vous en êtes sûr.
+
+    ??? success "Correction du défi 5"
+        La division par 3 est simulée par soustractions successives : on soustrait 3 à la somme en comptant chaque opération jusqu'à ce que le résultat devienne négatif.
+
+        ```assembly
+                INP
+                STA nb1
+                INP
+                STA nb2
+                INP
+                STA nb3
+                LDA nb1       # Calculer la somme
+                ADD nb2
+                ADD nb3
+                STA somme
+                LDA zero
+                STA moy
+        boucle  LDA somme     # Tester si somme - 3 >= 0
+                SUB trois
+                BRP suite     # Si oui, continuer la division
+                LDA moy       # Sinon, afficher le quotient
+                OUT
+                HLT
+        suite   STA somme     # somme = somme - 3
+                LDA moy
+                ADD un        # moy = moy + 1
+                STA moy
+                BRA boucle
+        nb1     DAT
+        nb2     DAT
+        nb3     DAT
+        somme   DAT
+        moy     DAT
+        zero    DAT 0
+        un      DAT 1
+        trois   DAT 3
+        ```
 
 ### Niveau 2 : Sélection (Structures conditionnelles)
 
@@ -326,26 +373,36 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Sinon : afficher B
 
 
-    **Astuce :** Utiliser `SUB` puis `BRP` pour tester quel nombre est le plus grand.
+    ??? tip "Indice léger"
+        Vous ne disposez d'aucune instruction « comparer ». Il va donc falloir fabriquer la comparaison avec ce que la machine sait faire, et regarder le **signe** du résultat.
 
-??? success "Correction — Défi 6"
-    ```assembly
-            INP
-            STA a
-            INP
-            STA b
-            LDA a
-            SUB b
-            BRP affA    # Si A - B >= 0, afficher A
-            LDA b       # Sinon afficher B
-            OUT
-            HLT
-    affA    LDA a
-            OUT
-            HLT
-    a       DAT
-    b       DAT
-    ```
+    ??? tip "Indice précis"
+        Utiliser `SUB` puis `BRP` pour tester quel nombre est le plus grand.
+
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+        qui n'allait pas dans **votre** programme ? Si vous n'avez pas encore écrit de
+        programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+        pourquoi vous en êtes sûr.
+
+    ??? success "Correction du défi 6"
+        ```assembly
+                INP
+                STA a
+                INP
+                STA b
+                LDA a
+                SUB b
+                BRP affA    # Si A - B >= 0, afficher A
+                LDA b       # Sinon afficher B
+                OUT
+                HLT
+        affA    LDA a
+                OUT
+                HLT
+        a       DAT
+        b       DAT
+        ```
 
 !!! question "Défi 7 : Test de positivité"
     **Objectif :** Demander un nombre à l'utilisateur. Afficher 1 s'il est positif ou nul, afficher 0 s'il est négatif.
@@ -356,20 +413,31 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
     - Tester s'il est positif (≥ 0)
     - Afficher 1 ou 0 selon le cas
 
+    ??? tip "Indice léger"
+        C'est le mécanisme du défi 6, en plus court : un `BRP` sépare deux chemins, et chacun des deux se termine par son propre `OUT` puis `HLT`.
 
-??? success "Correction — Défi 7"
-    ```assembly
-            INP
-            BRP positif # Si ACC >= 0, sauter à "positif"
-            LDA zero    # Sinon charger 0
-            OUT
-            HLT
-    positif LDA un      # Charger 1
-            OUT
-            HLT
-    zero    DAT 0
-    un      DAT 1
-    ```
+    ??? tip "Indice précis"
+        Le nombre lu par `INP` est déjà dans l'accumulateur : vous pouvez tester directement, sans le ranger d'abord. Les valeurs 0 et 1 à afficher, en revanche, doivent exister quelque part en mémoire : réservez-leur deux cases avec `DAT`.
+
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+        qui n'allait pas dans **votre** programme ? Si vous n'avez pas encore écrit de
+        programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+        pourquoi vous en êtes sûr.
+
+    ??? success "Correction du défi 7"
+        ```assembly
+                INP
+                BRP positif # Si ACC >= 0, sauter à "positif"
+                LDA zero    # Sinon charger 0
+                OUT
+                HLT
+        positif LDA un      # Charger 1
+                OUT
+                HLT
+        zero    DAT 0
+        un      DAT 1
+        ```
 
 !!! question "Défi 8 : Maximum de trois nombres"
     **Objectif :** Demander trois nombres à l'utilisateur et afficher le plus grand des trois.
@@ -390,51 +458,57 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
 
         Le piège est de vouloir afficher dans chaque branche. Ne le faites qu'**une seule fois, à la fin** : la comparaison décide, elle n'affiche pas.
 
-??? success "Correction — Défi 8"
-    ```assembly
-            INP
-            STA a
-            INP
-            STA b
-            INP
-            STA c
-            LDA a
-            SUB b
-            BRP aGb     # Si A >= B, max = A
-            LDA b       # Sinon max = B
-            STA max
-            BRA cmpC
-    aGb     LDA a
-            STA max
-    cmpC    LDA max
-            SUB c
-            BRP fin     # Si max >= C, max est déjà bon
-            LDA c       # Sinon max = C
-            STA max
-    fin     LDA max
-            OUT
-            HLT
-    a       DAT
-    b       DAT
-    c       DAT
-    max     DAT
-    ```
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+        qui n'allait pas dans **votre** programme ? Si vous n'avez pas encore écrit de
+        programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+        pourquoi vous en êtes sûr.
+
+    ??? success "Correction du défi 8"
+        ```assembly
+                INP
+                STA a
+                INP
+                STA b
+                INP
+                STA c
+                LDA a
+                SUB b
+                BRP aGb     # Si A >= B, max = A
+                LDA b       # Sinon max = B
+                STA max
+                BRA cmpC
+        aGb     LDA a
+                STA max
+        cmpC    LDA max
+                SUB c
+                BRP fin     # Si max >= C, max est déjà bon
+                LDA c       # Sinon max = C
+                STA max
+        fin     LDA max
+                OUT
+                HLT
+        a       DAT
+        b       DAT
+        c       DAT
+        max     DAT
+        ```
 
 ### Niveau 3 : Itération (Boucles)
 
 !!! question "Défi 9 : Compte à rebours"
     **Objectif :** Afficher les nombres de 10 à 1 (compte à rebours).
 
-    **Programme attendu :**
-
-    - Initialiser un compteur à 10
-    - Afficher le compteur
-    - Décrémenter le compteur (soustraire 1)
-    - Répéter tant que le compteur n'est pas à 0
-
     **Concept clé :** Utilisation d'une **boucle** avec un test de fin (`BRZ`).
 
     ??? tip "Indice léger"
+        Les étapes, si vous ne les voyez pas encore :
+
+        - Initialiser un compteur à 10
+        - Afficher le compteur
+        - Décrémenter le compteur (soustraire 1)
+        - Répéter tant que le compteur n'est pas à 0
+
         Une boucle en langage machine, c'est un **saut en arrière**. Il vous faut donc repérer l'adresse à laquelle revenir, et décider à quel moment ne plus y revenir.
 
     ??? tip "Indice précis"
@@ -442,116 +516,146 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
 
         D'abord, **rangez le compteur** avant de tester, sinon vous testerez autre chose que ce que vous croyez. Ensuite, `BRZ` saute vers la sortie si l'accumulateur vaut zéro, et un `BRA` inconditionnel ramène au début du corps sinon. Attention à l'ordre de ces deux instructions : le `BRZ` doit venir **avant** le `BRA`, sans quoi on ne sort jamais.
 
-??? success "Correction — Défi 9"
-    ```assembly
-            LDA dix
-            STA cpt
-    boucle  LDA cpt
-            OUT         # Afficher le compteur
-            SUB un
-            STA cpt
-            BRZ fin     # Si cpt = 0, terminer
-            BRA boucle
-    fin     HLT
-    cpt     DAT
-    dix     DAT 10
-    un      DAT 1
-    ```
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+        qui n'allait pas dans **votre** programme ? Si vous n'avez pas encore écrit de
+        programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+        pourquoi vous en êtes sûr.
+
+    ??? success "Correction du défi 9"
+        ```assembly
+                LDA dix
+                STA cpt
+        boucle  LDA cpt
+                OUT         # Afficher le compteur
+                SUB un
+                STA cpt
+                BRZ fin     # Si cpt = 0, terminer
+                BRA boucle
+        fin     HLT
+        cpt     DAT
+        dix     DAT 10
+        un      DAT 1
+        ```
 
 !!! question "Défi 10 : Compteur croissant"
     **Objectif :** Afficher les nombres de 1 à 10.
 
-    **Programme attendu :**
+    ??? tip "Indice léger : les étapes"
 
-    - Initialiser un compteur à 1
-    - Afficher le compteur
-    - Incrémenter le compteur (ajouter 1)
-    - Répéter jusqu'à 10
+        Voici la décomposition, si vous ne la voyez pas encore. Cherchez d'abord sans, c'est le travail du niveau 3.
 
-??? success "Correction — Défi 10"
-    ```assembly
-            LDA un
-            STA cpt
-    boucle  LDA cpt
-            OUT         # Afficher le compteur
-            SUB dix
-            BRZ fin     # Si cpt = 10, terminer
-            LDA cpt
-            ADD un
-            STA cpt
-            BRA boucle
-    fin     HLT
-    cpt     DAT
-    un      DAT 1
-    dix     DAT 10
-    ```
+        - Initialiser un compteur à 1
+        - Afficher le compteur
+        - Incrémenter le compteur (ajouter 1)
+        - Répéter jusqu'à 10
+
+    ??? tip "Indice précis"
+        C'est le défi 9 retourné : on ajoute 1 au lieu d'en retirer 1, et la sortie ne peut plus se tester avec `BRZ` sur le compteur lui-même, puisqu'il ne passera jamais par zéro. Testez donc `compteur - 10`, et souvenez-vous de **recharger** le compteur après ce test, car la soustraction a écrasé l'accumulateur.
+
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+        qui n'allait pas dans **votre** programme ? Si vous n'avez pas encore écrit de
+        programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+        pourquoi vous en êtes sûr.
+
+    ??? success "Correction du défi 10"
+        ```assembly
+                LDA un
+                STA cpt
+        boucle  LDA cpt
+                OUT         # Afficher le compteur
+                SUB dix
+                BRZ fin     # Si cpt = 10, terminer
+                LDA cpt
+                ADD un
+                STA cpt
+                BRA boucle
+        fin     HLT
+        cpt     DAT
+        un      DAT 1
+        dix     DAT 10
+        ```
 
 !!! question "Défi 11 : Table de multiplication"
     **Objectif :** Demander un nombre N à l'utilisateur, puis afficher sa table de multiplication de 1 à 10.
 
     **Exemple :** Si l'utilisateur entre 7, afficher : 7, 14, 21, 28, 35, 42, 49, 56, 63, 70
 
-    **Programme attendu :**
-
-    - Lire N
-    - Initialiser un compteur à 1 et un résultat à 0
-    - Boucle :
-        - Ajouter N au résultat
-        - Afficher le résultat
-        - Incrémenter le compteur
-        - Répéter jusqu'à 10
-
     **Instructions à utiliser :** `INP`, `OUT`, `LDA`, `STA`, `ADD`, `SUB`, `BRZ`, `BRA`, `HLT`, `DAT`
 
     **Concept clé :** La multiplication est réalisée par **additions successives**.
 
-??? success "Correction — Défi 11"
-    ```assembly
-            INP
-            STA n
-            LDA zero
-            STA res
-            LDA un
-            STA cpt
-    boucle  LDA res
-            ADD n       # res = res + N
-            STA res
-            OUT         # Afficher res (= N × cpt)
-            LDA cpt
-            SUB dix
-            BRZ fin     # Si cpt = 10, terminer
-            LDA cpt
-            ADD un
-            STA cpt
-            BRA boucle
-    fin     HLT
-    n       DAT
-    res     DAT
-    cpt     DAT
-    zero    DAT 0
-    un      DAT 1
-    dix     DAT 10
-    ```
+    ??? tip "Indice léger : les étapes"
+
+        Voici la décomposition, si vous ne la voyez pas encore. Cherchez d'abord sans, c'est le travail du niveau 3.
+
+        - Lire N
+        - Initialiser un compteur à 1 et un résultat à 0
+        - Boucle :
+            - Ajouter N au résultat
+            - Afficher le résultat
+            - Incrémenter le compteur
+            - Répéter jusqu'à 10
+
+    ??? tip "Indice précis"
+        Deux cases à tenir à jour, `resultat` et `compteur`, et un seul accumulateur pour les deux : chaque fois que vous passez de l'une à l'autre, il faut **ranger avant de charger**. C'est la principale source d'erreur de ce défi.
+
+        La boucle est celle du défi 10, avec une ligne de plus : charger `resultat`, y ajouter `N`, ranger `resultat`, afficher. Le compteur ne sert qu'à savoir quand s'arrêter.
+
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+        qui n'allait pas dans **votre** programme ? Si vous n'avez pas encore écrit de
+        programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+        pourquoi vous en êtes sûr.
+
+    ??? success "Correction du défi 11"
+        ```assembly
+                INP
+                STA n
+                LDA zero
+                STA res
+                LDA un
+                STA cpt
+        boucle  LDA res
+                ADD n       # res = res + N
+                STA res
+                OUT         # Afficher res (= N × cpt)
+                LDA cpt
+                SUB dix
+                BRZ fin     # Si cpt = 10, terminer
+                LDA cpt
+                ADD un
+                STA cpt
+                BRA boucle
+        fin     HLT
+        n       DAT
+        res     DAT
+        cpt     DAT
+        zero    DAT 0
+        un      DAT 1
+        dix     DAT 10
+        ```
 
 !!! question "Défi 12 : Somme des N premiers entiers"
     **Objectif :** Demander un nombre N à l'utilisateur et afficher la somme 1 + 2 + 3 + ... + N.
 
     **Exemple :** Si l'utilisateur entre 5, afficher 15 (car 1+2+3+4+5 = 15)
 
-    **Programme attendu :**
-
-    - Lire N
-    - Initialiser une somme à 0
-    - Initialiser un compteur à N
-    - Boucle :
-        - Ajouter le compteur à la somme
-        - Décrémenter le compteur
-        - Répéter tant que le compteur n'est pas à 0
-    - Afficher la somme
-
     **Concept clé :** Utilisation d'un **accumulateur** et d'une **boucle décrémentale**.
 
     ??? tip "Indice léger"
+        Les étapes, si vous ne les voyez pas encore :
+
+        - Lire N
+        - Initialiser une somme à 0
+        - Initialiser un compteur à N
+        - Boucle :
+            - Ajouter le compteur à la somme
+            - Décrémenter le compteur
+            - Répéter tant que le compteur n'est pas à 0
+        - Afficher la somme
+
         C'est le défi 9 avec une opération en plus : au lieu de simplement afficher le compteur, vous l'accumulez dans une seconde case avant de le décrémenter.
 
     ??? tip "Indice précis"
@@ -559,28 +663,34 @@ Voici une série de 12 exercices progressifs pour maîtriser la programmation en
 
         L'ordre qui fonctionne : charger `somme`, y ajouter `compteur`, ranger `somme` ; puis charger `compteur`, lui soustraire 1, ranger `compteur` ; puis tester s'il vaut zéro. N'affichez qu'à la sortie de la boucle.
 
-??? success "Correction — Défi 12"
-    ```assembly
-            INP
-            STA cpt     # cpt = N (on décompte de N à 1)
-            LDA zero
-            STA somme
-    boucle  LDA somme
-            ADD cpt     # somme = somme + cpt
-            STA somme
-            LDA cpt
-            SUB un
-            STA cpt
-            BRZ fin     # Si cpt = 0, terminer
-            BRA boucle
-    fin     LDA somme
-            OUT
-            HLT
-    cpt     DAT
-    somme   DAT
-    zero    DAT 0
-    un      DAT 1
-    ```
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+        qui n'allait pas dans **votre** programme ? Si vous n'avez pas encore écrit de
+        programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+        pourquoi vous en êtes sûr.
+
+    ??? success "Correction du défi 12"
+        ```assembly
+                INP
+                STA cpt     # cpt = N (on décompte de N à 1)
+                LDA zero
+                STA somme
+        boucle  LDA somme
+                ADD cpt     # somme = somme + cpt
+                STA somme
+                LDA cpt
+                SUB un
+                STA cpt
+                BRZ fin     # Si cpt = 0, terminer
+                BRA boucle
+        fin     LDA somme
+                OUT
+                HLT
+        cpt     DAT
+        somme   DAT
+        zero    DAT 0
+        un      DAT 1
+        ```
 
 ---
 

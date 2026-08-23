@@ -51,7 +51,9 @@ L'**UAL** (*ALU* en anglais) effectue les opérations :
 - **Comparaisons** : égalité, supériorité, infériorité
 
 !!! example "Lien avec les circuits logiques"
-    L'UAL est construite à partir des circuits logiques que vous avez étudiés : portes ET, OU, NON, etc. Par exemple, un additionneur 8 bits utilise une cascade de portes logiques pour calculer une somme.
+    L'UAL est construite à partir de **circuits logiques**, faits de portes ET, OU, NON. Vous les étudierez dans le chapitre suivant, et vous construirez alors un additionneur : vous verrez à ce moment-là comment une addition se fait avec des portes, et non avec un mécanisme qui saurait compter.
+
+    Retenez pour l'instant ce qui suffit ici : l'UAL est le seul endroit de la machine où un calcul a lieu, et elle ne sait faire que des opérations élémentaires.
 
 #### b) L'Unité de Contrôle (UC)
 
@@ -60,6 +62,22 @@ L'**Unité de Contrôle** orchestre le fonctionnement de l'ordinateur :
 - Elle **lit** les instructions en mémoire
 - Elle les **décode** pour comprendre quelle opération effectuer
 - Elle **commande** les autres composants pour exécuter l'instruction
+
+#### c) Un processeur, ou plusieurs ?
+
+La machine décrite ici n'a **qu'une** unité de traitement : elle exécute une instruction à la fois, dans l'ordre où le compteur ordinal les désigne. C'est une architecture **monoprocesseur**, et c'est celle que vous manipulerez dans tout ce chapitre.
+
+Les machines actuelles sont **multiprocesseur** : elles contiennent plusieurs unités de traitement complètes, appelées **cœurs**, le plus souvent gravées sur la même puce. Chacune a son compteur ordinal et déroule son propre cycle, et elles partagent la mémoire.
+
+!!! info "Ce qu'il faut en retenir, et rien de plus"
+    Avec un seul cœur, un ordinateur qui semble faire plusieurs choses à la fois ne fait qu'**alterner très vite** entre elles. Avec plusieurs cœurs, plusieurs instructions sont exécutées **réellement au même instant**.
+
+    Deux réserves, qui évitent la conclusion trop rapide :
+
+    - **Deux cœurs ne divisent pas le temps par deux.** Il faut que le travail puisse être découpé en parties indépendantes, et beaucoup de tâches ne s'y prêtent pas. Si les parties doivent constamment s'attendre, on gagne peu.
+    - **Le modèle de von Neumann n'est pas remis en cause.** Chaque cœur fait exactement ce que décrit ce chapitre : fetch, decode, execute, sur une mémoire où instructions et données cohabitent. Il y en a simplement plusieurs.
+
+    Nous n'irons pas plus loin cette année : ce qui suit, écrire et dérouler des programmes, se fait sur **un seul** processeur.
 
 ### 2.2 La mémoire
 
@@ -238,16 +256,7 @@ Les **registres** sont de petites mémoires ultra-rapides **intégrées au proce
 - **Registres généraux** : stockent temporairement des données pour les calculs
 - **Accumulateur** : stocke les résultats intermédiaires de l'UAL
 
-## 5. Le goulot de von Neumann
-
-Le fait que les instructions et les données partagent la même mémoire et le même bus crée un **goulot d'étranglement** : le processeur doit attendre que les données arrivent de la mémoire.
-
-!!! info "Solutions modernes"
-    - **Mémoire cache** : mémoire très rapide entre le CPU et la RAM
-    - **Architecture Harvard** : mémoires séparées pour instructions et données
-    - **Pipeline** : exécution simultanée de plusieurs étapes du cycle
-
-## 6. Exercices
+## 5. Exercices
 
 ### Les bus
 
@@ -308,10 +317,10 @@ Le fait que les instructions et les données partagent la même mémoire et le m
     ```
     Adresse | Instruction
     --------|------------------
-    0       | LOAD ACC, 10
-    1       | ADD ACC, 11
-    2       | STORE ACC, 12
-    3       | HALT
+    0       | LDA 10
+    1       | ADD 11
+    2       | STA 12
+    3       | HLT
     ```
 
     ```
@@ -328,37 +337,39 @@ Le fait que les instructions et les données partagent la même mémoire et le m
     2. Ce que fait chaque phase (fetch, decode, execute)
     3. La valeur de l'accumulateur **après** l'execute
 
+    Ces instructions sont celles du LMC : une fois votre tableau rempli, vous pourrez saisir ce programme tel quel dans le simulateur et vérifier votre trace.
+
 ??? success "Réponse"
-    **Instruction 0 : LOAD ACC, 10**
+    **Instruction 0 : `LDA 10`**
 
     - PC = 0 avant le fetch
     - **Fetch** : charge l'instruction à l'adresse 0 dans le registre d'instruction. PC passe à 1.
-    - **Decode** : identifie LOAD, adresse source = 10
+    - **Decode** : identifie `LDA` (code 5xx), adresse source = 10
     - **Execute** : lit la valeur à l'adresse 10 (= 5), la place dans l'accumulateur
     - ACC = **5**
 
-    **Instruction 1 : ADD ACC, 11**
+    **Instruction 1 : `ADD 11`**
 
     - PC = 1 avant le fetch
     - **Fetch** : charge l'instruction à l'adresse 1. PC passe à 2.
-    - **Decode** : identifie ADD, adresse source = 11
+    - **Decode** : identifie `ADD` (code 1xx), adresse source = 11
     - **Execute** : lit la valeur à l'adresse 11 (= 3), l'additionne à l'accumulateur (5 + 3)
     - ACC = **8**
 
-    **Instruction 2 : STORE ACC, 12**
+    **Instruction 2 : `STA 12`**
 
     - PC = 2 avant le fetch
     - **Fetch** : charge l'instruction à l'adresse 2. PC passe à 3.
-    - **Decode** : identifie STORE, adresse destination = 12
+    - **Decode** : identifie `STA` (code 3xx), adresse destination = 12
     - **Execute** : écrit la valeur de l'accumulateur (8) à l'adresse 12
     - La case mémoire 12 contient maintenant **8**
 
-    **Instruction 3 : HALT** - Le programme s'arrête.
+    **Instruction 3 : `HLT`.** Le programme s'arrête.
 
 !!! question "Exécuter une donnée (le cœur du modèle de von Neumann)"
     Reprenez le programme précédent. La case 10 contient la **donnée** `5`, la case 11 la donnée `3`.
 
-    Supposons maintenant qu'à cause d'une erreur, le programme se termine **sans** `HALT` : après l'instruction rangée en 2, le compteur ordinal passe à 3, puis à 4, puis continue. Il finit par arriver sur la case 10.
+    Supposons maintenant qu'à cause d'une erreur, le programme se termine **sans** `HLT` : après l'instruction rangée en 2, le compteur ordinal passe à 3, puis à 4, puis continue. Il finit par arriver sur la case 10.
 
     1. Que va faire le processeur en arrivant sur la case 10 ?
     2. Qu'est-ce qui, dans la mémoire, distingue une instruction d'une donnée ?
@@ -380,7 +391,7 @@ Le fait que les instructions et les données partagent la même mémoire et le m
     Beaucoup d'erreurs viennent de la même croyance : il y aurait, quelque part dans la machine, quelqu'un qui comprend l'intention. Il n'y a personne. La machine décode **ce qui est écrit**, et si c'est absurde, elle l'exécute absurdement. Retenez-le maintenant : cela vous servira toute l'année, en Python comme ici.
 
 !!! question "Les bus pendant le fetch"
-    Lors de la phase fetch de l'instruction 1 (ADD ACC, 11) de l'exercice précédent :
+    Lors de la phase fetch de l'instruction 1 (`ADD 11`) de l'exercice précédent :
 
     1. Que transporte le bus d'adresses ? Dans quel sens ?
     2. Que transporte le bus de contrôle ?
@@ -389,16 +400,26 @@ Le fait que les instructions et les données partagent la même mémoire et le m
 ??? success "Réponse"
     1. Le bus d'adresses transporte **1** (l'adresse de l'instruction à charger, celle contenue dans le PC). Sens : CPU → Mémoire.
     2. Le bus de contrôle transporte **LIRE** (le CPU veut récupérer l'instruction). Sens : CPU → Mémoire.
-    3. Le bus de données transporte **l'instruction ADD ACC, 11** (son code machine). Sens : Mémoire → CPU.
+    3. Le bus de données transporte **l'instruction `ADD 11`**, c'est-à-dire le nombre `111`. Sens : Mémoire → CPU.
 
     Le fetch est toujours une **lecture** en mémoire : le CPU va chercher l'instruction.
 
-## 7. Pour aller plus loin
+## 6. Pour aller plus loin
 
-!!! tip "Concepts avancés"
-    - **Jeu d'instructions** : ensemble des opérations qu'un processeur peut exécuter (CISC vs RISC)
-    - **Assembleur** : langage de bas niveau qui correspond directement aux instructions machine
-    - **Architectures alternatives** : Harvard, von Neumann modifiée
+*Rien de ce qui suit n'est exigible. Le programme borne cette page aux concepts généraux du modèle ; ces notions sont là pour ceux que la suite intéresse.*
+
+??? tip "Le goulot de von Neumann, et ce qu'on fait contre"
+    Les instructions et les données partagent la même mémoire et les mêmes bus. Le processeur passe donc une partie de son temps à **attendre** la mémoire, et cette attente devient le facteur limitant : c'est le **goulot de von Neumann**.
+
+    Trois réponses courantes, qui ne suppriment pas le problème mais le réduisent :
+
+    - la **mémoire cache**, petite et très rapide, placée entre le processeur et la mémoire vive ;
+    - l'**architecture Harvard**, qui sépare la mémoire des instructions de celle des données ;
+    - le **pipeline**, qui commence le fetch de l'instruction suivante pendant qu'on exécute la courante.
+
+??? tip "Jeux d'instructions et architectures"
+    - **Jeu d'instructions** : l'ensemble des opérations qu'un processeur sait exécuter. Les familles **CISC** (beaucoup d'instructions, complexes) et **RISC** (peu d'instructions, simples et rapides) reposent sur deux paris opposés.
+    - **Architectures alternatives** : Harvard, et les variantes dites de von Neumann modifiée.
 
 ## Résumé
 
