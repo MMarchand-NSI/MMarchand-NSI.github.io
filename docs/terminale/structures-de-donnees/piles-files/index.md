@@ -59,7 +59,7 @@ Une pile est définie par l’interface comprenant les primitives suivantes:
 
     ```
     p ← CREER()
-    pour v dans [2, 4, 3, 6, 8, 5, 77, 10, 1] :
+    pour v dans [2, 4, 3, 6, 8, 5, 77, 9, 1] :
         si v est pair :  EMPILER(v, p)
         sinon :          DEPILER(p)
     ```
