@@ -50,6 +50,40 @@ Une pile est définie par l’interface comprenant les primitives suivantes:
 | EMPILER(e: T, p: Pile) |Empiler un élément e pour le mettre au sommet de la pile p |
 | DEPILER(p: Pile) → T | Dépiler un élément: le retirer du sommet de la pile et le renvoyer |
 
+!!! question "Avant toute ligne de Python : trace la pile à la main"
+    Tu as le contrat ci-dessus, et c'est **tout ce qu'il faut**. Pas besoin de savoir comment une pile est fabriquée pour savoir ce qu'elle fait.
+
+    Dessine la pile `p` à chacune de ses modifications, dans un tableau à trois colonnes : l'opération, l'état de la pile, et **la valeur rendue** par l'opération.
+
+    La troisième colonne est celle qui piège : `EMPILER` ne rend rien, `DEPILER` rend l'élément **et** le retire.
+
+    ```
+    p ← CREER()
+    pour v dans [2, 4, 3, 6, 8, 5, 77, 10, 1] :
+        si v est pair :  EMPILER(v, p)
+        sinon :          DEPILER(p)
+    ```
+
+    Deux questions en fin de trace, et la seconde compte plus que la première :
+
+    1. Que contient `p` à la fin ?
+    2. À un moment, l'une des opérations n'aurait **pas dû** être possible. Laquelle, et pourquoi ?
+
+    ??? note "Sur la question 2, si tu ne vois pas"
+        Regarde l'état de `p` juste avant chaque `DEPILER`. Le contrat dit que cette opération a une **précondition**.
+
+!!! question "Vérification individuelle : trois questions, cinq minutes, sans aide"
+    À faire seul, sans code, sans voisin et sans machine. Une seule notion par question : le but n'est pas de te noter, c'est de savoir **lesquelles des trois** tu dois reprendre avant d'aller plus loin.
+
+    1. Après `EMPILER(7, p)`, qu'est-ce que l'opération a **rendu** ?
+    2. La pile `p` vaut `[3, 9]` (du bas vers le haut). Que vaut `p` après `DEPILER(p)`, et que rend l'appel ?
+    3. `p` est vide. Que se passe-t-il si on appelle `DEPILER(p)`, et pourquoi est-ce voulu ?
+
+    ??? success "Correction"
+        1. **Rien.** `EMPILER` modifie la pile sans rien renvoyer. Confondre « modifier » et « renvoyer » est l'erreur d'entrée la plus fréquente.
+        2. `p` vaut `[3]`, et l'appel rend `9`. `DEPILER` fait les **deux** : il retire **et** il renvoie.
+        3. L'opération n'est **pas définie** : c'est une **précondition**, une condition que l'appelant doit garantir. En Python, tu verras plus bas que cela se traduit par une assertion qui arrête le programme. Tu retrouveras cette idée sur toutes les structures de l'année.
+
 ## Implémentation en Python
 
 !!! abstract "Définition - Implémentation"
@@ -241,18 +275,6 @@ if __name__ == "__main__":
 
 
 
-!!! question "Vérification individuelle - trois questions, cinq minutes, sans aide"
-    À faire seul, sans code, sans voisin et sans machine. Une seule notion par question : le but n'est pas de te noter, c'est de savoir **lesquelles des trois** tu dois reprendre avant d'aller plus loin.
-
-    1. Après `pile.empiler(7, p)`, qu'est-ce que l'opération a **rendu** ?
-    2. La pile `p` vaut `[3, 9]` (du bas vers le haut). Que vaut `p` après `pile.depiler(p)`, et que rend l'appel ?
-    3. `p` est vide. Que se passe-t-il si on appelle `pile.depiler(p)`, et pourquoi est-ce voulu ?
-
-    ??? success "Correction"
-        1. **Rien.** `empiler` modifie la pile sans rien renvoyer. Confondre « modifier » et « renvoyer » est l'erreur d'entrée la plus fréquente.
-        2. `p` vaut `[3]`, et l'appel rend `9`. `depiler` fait les **deux** : il retire **et** il renvoie.
-        3. L'assertion échoue et le programme s'arrête. Ce n'est pas un bug : c'est une **précondition**, c'est-à-dire une condition que l'appelant doit garantir. Dépiler une pile vide n'a aucun sens, donc l'opération n'est pas définie là. Tu retrouveras cette idée sur toutes les structures de l'année.
-
 !!! question "Exercice 1"
 
     Créer une fonction `pile_exemple` qui renvoie la pile suivante:
@@ -265,21 +287,6 @@ if __name__ == "__main__":
     | 'rouge' |
     -----------
     ``` 
-
-!!! question "Sans exécuter le code - papier"
-    Dessine la pile `p` à chacune de ses modifications, dans un tableau à trois colonnes : l'opération, l'état de la pile, et **la valeur rendue** par l'opération.
-
-    La troisième colonne est celle qui piège : `empiler` ne rend rien, `depiler` rend l'élément **et** le retire.
-
-    ```python
-    p: pile.Pile[int] = pile.creer()
-    for v in [2, 4, 3, 6, 8, 5, 77, 10, 1]:
-        if v % 2 == 0:
-            pile.empiler(v, p)
-        else:
-            pile.depiler(p)
-    ```
-
 
 !!! question "Sommet d'une pile"
     Écrire une fonction `sommet` qui renvoie le sommet d'une pile sans qu'elle soit modifiée à la sortie de la fonction. (on peut donc la modifier, mais on remet tout bien en place avant de sortir de la fonction)
@@ -311,6 +318,19 @@ if __name__ == "__main__":
 
     On pourra utiliser une pile temporaire.
 
+    **Puis compare les deux versions par leur coût**, et c'est la vraie question de cet exercice :
+
+    1. Pour une pile de `n` éléments, combien de `EMPILER` et de `DEPILER` fait chacune des deux ?
+    2. L'introduction de cette page affirme qu'`empiler` et `depiler` coûtent `O(1)`. Ta fonction non destructive coûte-t-elle `O(1)` elle aussi ? Sinon, combien ?
+    3. Le contrat de la pile ne propose **aucune** primitive qui donne la taille. Est-ce un oubli, à ton avis ?
+
+    ??? tip "Indice sur la question 3"
+        Une primitive `TAILLE()` en `O(1)` est possible : il suffirait de tenir un compteur à jour à chaque empilement. Demande-toi ce qu'on gagne à ne **pas** la mettre dans le contrat.
+
+    ??? success "Correction"
+        1. La destructive fait `n` dépilements. La non destructive fait `n` dépilements, `n` empilements sur la temporaire, puis `n` dépilements et `n` empilements pour tout remettre : **`4n` opérations** contre `n`.
+        2. **Non.** Chaque opération de base est en `O(1)`, mais ta fonction en enchaîne un nombre proportionnel à `n` : elle est en `O(n)`. **Un assemblage d'opérations en temps constant n'est pas en temps constant.** C'est l'erreur de raisonnement la plus fréquente sur les structures de données, et elle vaut pour toute l'année.
+        3. Ce n'est pas un oubli, c'est un **choix**. Un contrat minimal est plus facile à implémenter de plusieurs façons, et c'est tout l'intérêt de la notion d'interface. Le prix de ce choix, tu viens de le payer : ce que le contrat ne donne pas coûte `O(n)` à reconstruire.
 
 !!! question "Renverser une pile"
     Créer et tester une fonction ```renverse``` qui prend une pile $p$ en paramètre et renvoie une pile contenant les éléments de $p$ dans l'ordre inverse.
