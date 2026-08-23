@@ -6,10 +6,12 @@
  * et l'eleve en tire lui-meme l'implementation. Trois choix en decoulent :
  *   1. Le code de `defiler` n'est jamais affiche.
  *   2. Un defilement demande une PREDICTION avant de reveler quoi que ce soit.
- *   3. Un interrupteur permet de lancer la version FAUSSE (basculer a chaque
- *      defilement), pour que le contre-exemple se constate au lieu d'etre raconte.
- * Un compteur d'operations elementaires rend l'amortissement observable, qui est
- * le point que le papier montre mal.
+ *   3. Il ne fait QUE ce que le papier fait mal : le compteur d'operations
+ *      elementaires, qui rend l'amortissement observable.
+ * Un interrupteur « basculer a chaque defilement » avait ete ajoute le 23/08/2026
+ * puis RETIRE le meme jour, sur arbitrage de l'utilisateur : il chargeait
+ * inutilement l'interface, et surtout il MONTRAIT la defaillance que l'eleve doit
+ * PRODUIRE en refaisant sa trace a la main. Le contre-exemple reste sur papier.
  */
 (function () {
   const hote = document.getElementById('file_deux_piles');
@@ -34,10 +36,6 @@
         <button id="fdp-defiler">défiler</button>
         <button id="fdp-reset">recommencer</button>
       </div>
-      <label class="fdp-opt">
-        <input type="checkbox" id="fdp-faux"> basculer à chaque défilement
-        <span class="fdp-aide">(version sans la condition : à essayer)</span>
-      </label>
       <div id="fdp-question" class="fdp-question" hidden>
         Avant de révéler : que va rendre ce <code>defiler</code> ?
         <input type="text" id="fdp-reponse" size="6" autocomplete="off">
@@ -97,10 +95,9 @@
 
   /* Calcule le defilement SANS l'appliquer : sert a poser la question. */
   function prevoir() {
-    const basculeToujours = $('fdp-faux').checked;
     const e = entree.slice(), s = sortie.slice();
     let cout = 0;
-    if (basculeToujours || s.length === 0) {
+    if (s.length === 0) {
       while (e.length) { s.push(e.pop()); cout++; }
     }
     cout++;
@@ -150,11 +147,6 @@
   $('fdp-valider').onclick = valider;
   $('fdp-reponse').onkeydown = (ev) => { if (ev.key === 'Enter') valider(); };
   $('fdp-reset').onclick = recommencer;
-  $('fdp-faux').onchange = () => {
-    journal($('fdp-faux').checked
-      ? '--- version SANS la condition activée ---'
-      : '--- version correcte rétablie ---', 'fdp-note');
-  };
 
   recommencer();
 })();

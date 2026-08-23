@@ -288,22 +288,16 @@ Chaque `defiler` te demande d'abord **ce qu'il va rendre**. Réponds avant de va
 <div id="file_deux_piles"></div>
 <script src="/javascripts/file_deux_piles.js" defer></script>
 
-!!! question "Trois manipulations à faire, dans cet ordre"
-    1. **Enfile cinq éléments, puis défile-les un par un.** Regarde la colonne « coût du dernier appel ». Que remarques-tu sur le **premier** défilement comparé aux quatre suivants ? Et sur la **moyenne** ?
+!!! question "Deux manipulations, dans cet ordre"
+    1. **Enfile cinq éléments, puis défile-les un par un.** Regarde la colonne « coût du dernier appel ». Que remarques-tu sur le **premier** défilement comparé aux quatre suivants ? Et sur le coût moyen ?
     2. **Alterne** : enfile, défile, enfile, défile. Le coût moyen change-t-il ?
-    3. **Coche « basculer à chaque défilement »**, puis rejoue la séquence `enfiler 1`, `enfiler 2`, `defiler`, `enfiler 3`, `defiler`. Note ce que rend le dernier appel.
 
     ??? note "Ce que la manipulation 1 doit t'apprendre"
         Le premier `defiler` coûte cher : il bascule toute la pile `entree`. Les suivants coûtent **1**, parce que `sortie` n'est plus vide et qu'il n'y a rien à rebasculer.
 
         Chaque élément ne traverse **qu'une seule fois** de `entree` vers `sortie` au cours de sa vie dans la file. C'est pour cela qu'on dit que le coût est en `O(1)` **amorti** : pas « toujours 1 », mais « 1 en moyenne, sur la durée ».
 
-    ??? warning "Ce que la manipulation 3 doit t'apprendre, et c'est le cœur du cours"
-        Le dernier appel rend **3** au lieu de **2**. L'ordre FIFO est cassé.
-
-        Sans la condition, le basculement du quatrième pas empile `3` **par-dessus** `2` qui attendait déjà dans `sortie`. Deux vagues de basculement se mélangent, donc deux ordres se mélangent.
-
-        La condition « si `sortie` est vide » n'est donc **pas une optimisation** : c'est ce qui rend la file correcte. Retiens le raisonnement, pas la ligne de code.
+        C'est la seule chose que ce bac à sable sait montrer et qu'une feuille de papier montre mal. Pour tout le reste, ta trace à la main vaut mieux.
 
 !!! question "Maintenant, à la main : trace le basculement"
     Le bac à sable te l'a montré ; à toi de le **produire**. Remplis ce tableau **à la main**, ligne par ligne, sans le rouvrir. La dernière colonne est celle qui compte : `enfiler` ne rend rien, `defiler` rend un élément **et** le retire.
@@ -328,14 +322,14 @@ Chaque `defiler` te demande d'abord **ce qu'il va rendre**. Réponds avant de va
         | `defiler(f)` | `[]` | `[]` | `3`, après basculement |
 
 !!! question "Pourquoi la condition « si `sortie` est vide » ?"
-    Tu viens de le constater dans le bac à sable, manipulation 3 : sans cette condition, le cinquième appel rend `3` au lieu de `2`.
+    **Refais ta trace ci-dessus à la main**, en **supprimant** cette condition, c'est-à-dire en basculant `entree` dans `sortie` à **chaque** `defiler`. Quelle valeur rend le cinquième appel ?
 
-    Écris **en une phrase, sur ton cahier**, pourquoi. Pas « parce que la case était cochée » : ce qui se passe dans les deux piles.
+    Le bac à sable ne te le montrera pas : il n'implémente que la version correcte. C'est à toi de le trouver, et c'est le seul exercice de la page où tu fabriques toi-même une panne.
 
-    ??? note "Ce que tu dois avoir écrit"
-        Au quatrième pas, `entree` vaut `[3]` et `sortie` vaut `[2]`. Un basculement inconditionnel empile donc `3` **par-dessus** `2`, et `sortie` vaut `[2, 3]`. Le `defiler` suivant rend `3` alors qu'il devrait rendre `2`.
+    ??? note "Ce que tu dois trouver"
+        Au quatrième pas, `entree` vaut `[3]` et `sortie` vaut `[2]`. Un basculement inconditionnel empile donc `3` **par-dessus** `2`, et `sortie` vaut `[2, 3]`. Le `defiler` suivant rend `3` alors qu'il devrait rendre `2` : l'ordre FIFO est cassé.
 
-        Basculer une pile dans une autre **inverse** son ordre. Mélanger deux vagues de basculement mélange donc deux ordres. La condition n'est pas une optimisation, c'est ce qui rend la file correcte.
+        La condition n'est pas une optimisation, c'est **ce qui rend la file correcte**. Retiens le raisonnement, pas la ligne de code : basculer une pile dans une autre inverse son ordre, donc mélanger deux vagues de basculement mélange deux ordres.
 
 !!! question "Maintenant, écris l'implémentation"
     Tu as le texte, qui te donne les **règles**. Tu as le bac à sable, qui te montre les **états**. Tu as ta trace à la main. Cela suffit : **écris `file.py` toi-même**, sans regarder la correction.
