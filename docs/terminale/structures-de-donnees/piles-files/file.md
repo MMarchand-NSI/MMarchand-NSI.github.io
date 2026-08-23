@@ -40,7 +40,7 @@ Ici, f est une File contenant des éléments e de type T quelconque.
 |CREER() → File|Renvoie une nouvelle File vide | 
 |EST_VIDE(f) → Booléen|Savoir si la file f est vide|
 |ENFILER(e, f)|Ajouter un élément à l'entrée de la file|
-|DEFILER(f) → T|Supprimer et renvoyer l'élément à la sortie de la file|
+|DEFILER(f) → T|Supprimer et renvoyer l'élément à la sortie de la file. **Précondition : la file ne doit pas être vide.**|
 
 
 ## Une première implémentation : avec un tableau
@@ -66,6 +66,8 @@ def defiler[T](f: File[T]) -> T:
     assert not est_vide(f), "File vide"
     return f.pop(0)      # on sort en tête
 ```
+
+Remarque l'`assert` de `defiler` : comme pour la pile, **défiler une file vide n'a pas de sens**. Ce n'est pas un bug à corriger, c'est une **précondition**, une condition que l'appelant doit garantir. L'opération n'est tout simplement **pas définie** dans ce cas, et l'assertion le dit à voix haute au lieu de laisser passer une erreur silencieuse.
 
 Cette implémentation fonctionne, mais `pop(0)` est **coûteux** : retirer le premier élément oblige à **décaler tous les autres d'un cran**, soit `O(n)` à chaque défilement.
 
@@ -275,7 +277,9 @@ On veut construire une file **sans jamais toucher à une liste directement**, à
 **L'idée.** On utilise deux piles, `entree` et `sortie`.
 
 - **Enfiler** : on empile sur `entree`.
-- **Défiler** : si `sortie` est vide, on **bascule** tout `entree` dans `sortie` (ce qui inverse l'ordre), puis on dépile `sortie`.
+- **Défiler** : **la file ne doit pas être vide** ; si `sortie` est vide, on **bascule** tout `entree` dans `sortie` (ce qui inverse l'ordre), puis on dépile `sortie`.
+
+**Attention à ne pas confondre les deux « vides », c'est le piège de cette structure.** « `sortie` est vide » déclenche un **basculement** : la file, elle, contient peut-être encore des éléments, ils sont dans `entree`. « La file est vide » est tout autre chose : les **deux** piles le sont, et c'est là que la précondition est violée. Une seule des deux conditions interrompt le programme.
 
 Empiler sur `entree` place le dernier arrivé au sommet ; le basculement l'envoie au fond de `sortie`. Le premier arrivé se retrouve donc au sommet de `sortie` : c'est bien du FIFO.
 
@@ -284,6 +288,8 @@ Empiler sur `entree` place le dernier arrivé au sommet ; le basculement l'envoi
 Ci-dessous, une file à deux piles que tu peux actionner. **Elle ne te donne pas le code** : elle te donne le **comportement**. Le texte ci-dessus dit les **règles**, le bac à sable montre les **états**. Avec les deux, tu as tout ce qu'il faut pour écrire l'implémentation toi-même, et c'est ce qu'on te demande juste après.
 
 Chaque `defiler` te demande d'abord **ce qu'il va rendre**. Réponds avant de valider : c'est là que tu vérifies ton modèle, pas en regardant.
+
+Tu remarqueras que le bouton `défiler` est **grisé quand la file est vide**. Ce n'est pas une facilité d'interface : c'est la **précondition**. Dans ton code, il n'y aura pas de bouton grisé, il y aura un `assert` qui arrête le programme.
 
 <div id="file_deux_piles"></div>
 <script src="/javascripts/file_deux_piles.js" defer></script>
