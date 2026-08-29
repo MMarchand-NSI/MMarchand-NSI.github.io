@@ -4578,7 +4578,7 @@
   <span class="md-ellipsis">
     
   
-    Dijkstra
+    Algorithme de Dijkstra
   
 
     
@@ -4606,7 +4606,7 @@
   <span class="md-ellipsis">
     
   
-    Graphes
+    Graphes - Généralités et Implémentation
   
 
     
@@ -4634,7 +4634,7 @@
   <span class="md-ellipsis">
     
   
-    Parcours
+    Parcours de graphes
   
 
     
@@ -8654,7 +8654,19 @@
 </div>
 <hr />
 <h2 id="les-12-defis">Les 12 défis</h2>
-<p>Voici une série de 12 exercices progressifs pour maîtriser la programmation en LMC. Commencez par les plus simples et avancez progressivement.</p>
+<p>Voici une série de 12 exercices progressifs. Ils se font dans l'ordre : chacun réutilise ce que le précédent a installé.</p>
+<div class="admonition info">
+<p class="admonition-title">Comment l'aide fonctionne dans ces défis</p>
+<p><strong>Les indices sont faits pour être lus.</strong> Les ouvrir n'est pas de la triche, et ils ne sont comptés dans aucune note. Ce qui compte est ce que vous savez faire à la fin, pas le nombre de volets que vous avez ouverts.</p>
+<p><strong>En revanche, l'énoncé vous en dit de moins en moins, et c'est voulu.</strong></p>
+<ul>
+<li><strong>Niveau 1</strong>, les étapes du programme sont écrites dans l'énoncé : vous n'avez à chercher que les instructions qui les réalisent.</li>
+<li><strong>Niveau 2</strong>, les étapes y sont encore, mais plus aucune indication sur les instructions à employer.</li>
+<li><strong>Niveau 3</strong>, l'énoncé ne donne que le <strong>résultat attendu</strong>. Les étapes existent toujours, elles ont simplement changé de place : elles sont dans le premier indice, à ouvrir si vous en avez besoin.</li>
+</ul>
+<p>Découper un problème en étapes est précisément ce que vous devez savoir faire à la fin de cette activité. C'est pour cela qu'on cesse de le faire à votre place.</p>
+<p><strong>Le palier « avant d'ouvrir la correction » n'est pas décoratif.</strong> Un indice lu améliore ce que vous faites sur l'exercice en cours, et rien sur le suivant, sauf si vous vous êtes expliqué à vous-même ce qu'il vous a appris. Une phrase suffit, mais écrivez-la.</p>
+</div>
 <h3 id="niveau-1-sequence-simple-instructions-de-base">Niveau 1 : Séquence simple (Instructions de base)</h3>
 <div class="admonition question">
 <p class="admonition-title">Défi 1 : Écho simple</p>
@@ -8665,14 +8677,21 @@
 <li>Afficher cette entrée</li>
 </ul>
 <p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>HLT</code></p>
-</div>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+qui n'allait pas dans <strong>votre</strong> programme ? Si vous n'avez pas encore écrit de
+programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+pourquoi vous en êtes sûr.</p>
+</details>
 <details class="success">
-<summary>Correction — Défi 1</summary>
+<summary>Correction du défi 1</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>        INP       # Lire l&#39;entrée → ACC
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>        OUT       # Afficher ACC
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        HLT       # Fin
 </code></pre></div>
 </details>
+</div>
 <div class="admonition question">
 <p class="admonition-title">Défi 2 : Deux nombres</p>
 <p><strong>Objectif :</strong> Demander deux nombres à l'utilisateur et les afficher dans le même ordre.</p>
@@ -8684,9 +8703,15 @@
 <li>Afficher le deuxième nombre</li>
 </ul>
 <p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>STA</code>, <code>LDA</code>, <code>HLT</code>, <code>DAT</code></p>
-</div>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+qui n'allait pas dans <strong>votre</strong> programme ? Si vous n'avez pas encore écrit de
+programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+pourquoi vous en êtes sûr.</p>
+</details>
 <details class="success">
-<summary>Correction — Défi 2</summary>
+<summary>Correction du défi 2</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>        INP       # Lire le premier nombre → ACC
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>        STA nb1   # Stocker dans nb1
 <a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        INP       # Lire le deuxième nombre → ACC
@@ -8700,6 +8725,7 @@
 <a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>nb2     DAT
 </code></pre></div>
 </details>
+</div>
 <div class="admonition question">
 <p class="admonition-title">Défi 3 : Addition</p>
 <p><strong>Objectif :</strong> Demander deux nombres à l'utilisateur et afficher leur somme.</p>
@@ -8711,9 +8737,15 @@
 <li>Afficher le résultat</li>
 </ul>
 <p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>STA</code>, <code>ADD</code>, <code>HLT</code>, <code>DAT</code></p>
-</div>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+qui n'allait pas dans <strong>votre</strong> programme ? Si vous n'avez pas encore écrit de
+programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+pourquoi vous en êtes sûr.</p>
+</details>
 <details class="success">
-<summary>Correction — Défi 3</summary>
+<summary>Correction du défi 3</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>        INP       # Lire le premier nombre → ACC
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>        STA nb1   # Stocker dans nb1
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        INP       # Lire le deuxième nombre → ACC
@@ -8723,6 +8755,7 @@
 <a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>nb1     DAT
 </code></pre></div>
 </details>
+</div>
 <div class="admonition question">
 <p class="admonition-title">Défi 4 : Soustraction</p>
 <p><strong>Objectif :</strong> Demander deux nombres à l'utilisateur et afficher leur différence (premier - deuxième).</p>
@@ -8734,9 +8767,15 @@
 <li>Afficher le résultat</li>
 </ul>
 <p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>STA</code>, <code>LDA</code>, <code>SUB</code>, <code>HLT</code>, <code>DAT</code></p>
-</div>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+qui n'allait pas dans <strong>votre</strong> programme ? Si vous n'avez pas encore écrit de
+programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+pourquoi vous en êtes sûr.</p>
+</details>
 <details class="success">
-<summary>Correction — Défi 4</summary>
+<summary>Correction du défi 4</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>        INP       # Lire le premier nombre → ACC
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>        STA nb1   # Stocker dans nb1
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        INP       # Lire le deuxième nombre → ACC
@@ -8749,6 +8788,7 @@
 <a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>nb2     DAT
 </code></pre></div>
 </details>
+</div>
 <div class="admonition question">
 <p class="admonition-title">Défi 5 : Moyenne de trois nombres</p>
 <p><strong>Objectif :</strong> Demander trois nombres à l'utilisateur et afficher leur moyenne (somme divisée par 3).</p>
@@ -8759,15 +8799,28 @@
 <li>Diviser par 3 (soustraire 3 plusieurs fois jusqu'à obtenir 0, compter les soustractions)</li>
 <li>Afficher le résultat</li>
 </ul>
-<p><strong>Indices :</strong></p>
+<details class="tip">
+<summary>Indice léger</summary>
 <ul>
 <li>Stocker les trois nombres en mémoire</li>
 <li>Les additionner un par un</li>
 <li>Pour diviser par 3, utiliser une boucle qui soustrait 3 et compte le nombre de soustractions</li>
 </ul>
-</div>
+</details>
+<details class="tip">
+<summary>Indice précis</summary>
+<p>C'est le premier défi qui demande une <strong>boucle</strong>, et donc un saut en arrière. Construisez-la sur la division : tant que la somme reste positive, retirez 3 et ajoutez 1 au quotient.</p>
+<p>Le piège est le même que partout : l'accumulateur ne tient qu'une valeur. Rangez la somme avant de toucher au quotient, et rechargez-la ensuite.</p>
+</details>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+qui n'allait pas dans <strong>votre</strong> programme ? Si vous n'avez pas encore écrit de
+programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+pourquoi vous en êtes sûr.</p>
+</details>
 <details class="success">
-<summary>Correction — Défi 5</summary>
+<summary>Correction du défi 5</summary>
 <p>La division par 3 est simulée par soustractions successives : on soustrait 3 à la somme en comptant chaque opération jusqu'à ce que le résultat devienne négatif.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>        INP
 <a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>        STA nb1
@@ -8802,6 +8855,7 @@
 <a id="__codelineno-6-31" name="__codelineno-6-31" href="#__codelineno-6-31"></a>trois   DAT 3
 </code></pre></div>
 </details>
+</div>
 <h3 id="niveau-2-selection-structures-conditionnelles">Niveau 2 : Sélection (Structures conditionnelles)</h3>
 <div class="admonition question">
 <p class="admonition-title">Défi 6 : Maximum de deux nombres</p>
@@ -8813,10 +8867,23 @@
 <li>Si le résultat est positif ou nul : afficher A</li>
 <li>Sinon : afficher B</li>
 </ul>
-<p><strong>Astuce :</strong> Utiliser <code>SUB</code> puis <code>BRP</code> pour tester quel nombre est le plus grand.</p>
-</div>
+<details class="tip">
+<summary>Indice léger</summary>
+<p>Vous ne disposez d'aucune instruction « comparer ». Il va donc falloir fabriquer la comparaison avec ce que la machine sait faire, et regarder le <strong>signe</strong> du résultat.</p>
+</details>
+<details class="tip">
+<summary>Indice précis</summary>
+<p>Utiliser <code>SUB</code> puis <code>BRP</code> pour tester quel nombre est le plus grand.</p>
+</details>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+qui n'allait pas dans <strong>votre</strong> programme ? Si vous n'avez pas encore écrit de
+programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+pourquoi vous en êtes sûr.</p>
+</details>
 <details class="success">
-<summary>Correction — Défi 6</summary>
+<summary>Correction du défi 6</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>        INP
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>        STA a
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        INP
@@ -8834,6 +8901,7 @@
 <a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>b       DAT
 </code></pre></div>
 </details>
+</div>
 <div class="admonition question">
 <p class="admonition-title">Défi 7 : Test de positivité</p>
 <p><strong>Objectif :</strong> Demander un nombre à l'utilisateur. Afficher 1 s'il est positif ou nul, afficher 0 s'il est négatif.</p>
@@ -8843,9 +8911,23 @@
 <li>Tester s'il est positif (≥ 0)</li>
 <li>Afficher 1 ou 0 selon le cas</li>
 </ul>
-</div>
+<details class="tip">
+<summary>Indice léger</summary>
+<p>C'est le mécanisme du défi 6, en plus court : un <code>BRP</code> sépare deux chemins, et chacun des deux se termine par son propre <code>OUT</code> puis <code>HLT</code>.</p>
+</details>
+<details class="tip">
+<summary>Indice précis</summary>
+<p>Le nombre lu par <code>INP</code> est déjà dans l'accumulateur : vous pouvez tester directement, sans le ranger d'abord. Les valeurs 0 et 1 à afficher, en revanche, doivent exister quelque part en mémoire : réservez-leur deux cases avec <code>DAT</code>.</p>
+</details>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+qui n'allait pas dans <strong>votre</strong> programme ? Si vous n'avez pas encore écrit de
+programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+pourquoi vous en êtes sûr.</p>
+</details>
 <details class="success">
-<summary>Correction — Défi 7</summary>
+<summary>Correction du défi 7</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>        INP
 <a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>        BRP positif # Si ACC &gt;= 0, sauter à &quot;positif&quot;
 <a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>        LDA zero    # Sinon charger 0
@@ -8858,6 +8940,7 @@
 <a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>un      DAT 1
 </code></pre></div>
 </details>
+</div>
 <div class="admonition question">
 <p class="admonition-title">Défi 8 : Maximum de trois nombres</p>
 <p><strong>Objectif :</strong> Demander trois nombres à l'utilisateur et afficher le plus grand des trois.</p>
@@ -8877,9 +8960,15 @@
 <p>Traitez le problème en deux temps. Premier temps, comparez A et B et <strong>rangez le plus grand des deux</strong> dans une case, disons <code>max</code>. Second temps, comparez le contenu de <code>max</code> avec C, exactement comme au défi 6, et rangez à nouveau le vainqueur dans <code>max</code>. Il ne reste plus qu'à l'afficher.</p>
 <p>Le piège est de vouloir afficher dans chaque branche. Ne le faites qu'<strong>une seule fois, à la fin</strong> : la comparaison décide, elle n'affiche pas.</p>
 </details>
-</div>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+qui n'allait pas dans <strong>votre</strong> programme ? Si vous n'avez pas encore écrit de
+programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+pourquoi vous en êtes sûr.</p>
+</details>
 <details class="success">
-<summary>Correction — Défi 8</summary>
+<summary>Correction du défi 8</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>        INP
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>        STA a
 <a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>        INP
@@ -8908,20 +8997,21 @@
 <a id="__codelineno-9-26" name="__codelineno-9-26" href="#__codelineno-9-26"></a>max     DAT
 </code></pre></div>
 </details>
+</div>
 <h3 id="niveau-3-iteration-boucles">Niveau 3 : Itération (Boucles)</h3>
 <div class="admonition question">
 <p class="admonition-title">Défi 9 : Compte à rebours</p>
 <p><strong>Objectif :</strong> Afficher les nombres de 10 à 1 (compte à rebours).</p>
-<p><strong>Programme attendu :</strong></p>
+<p><strong>Concept clé :</strong> Utilisation d'une <strong>boucle</strong> avec un test de fin (<code>BRZ</code>).</p>
+<details class="tip">
+<summary>Indice léger</summary>
+<p>Les étapes, si vous ne les voyez pas encore :</p>
 <ul>
 <li>Initialiser un compteur à 10</li>
 <li>Afficher le compteur</li>
 <li>Décrémenter le compteur (soustraire 1)</li>
 <li>Répéter tant que le compteur n'est pas à 0</li>
 </ul>
-<p><strong>Concept clé :</strong> Utilisation d'une <strong>boucle</strong> avec un test de fin (<code>BRZ</code>).</p>
-<details class="tip">
-<summary>Indice léger</summary>
 <p>Une boucle en langage machine, c'est un <strong>saut en arrière</strong>. Il vous faut donc repérer l'adresse à laquelle revenir, et décider à quel moment ne plus y revenir.</p>
 </details>
 <details class="tip">
@@ -8929,9 +9019,15 @@
 <p>Le corps de la boucle tient en trois gestes : charger le compteur, l'afficher, lui soustraire 1. Ensuite seulement viennent les deux décisions.</p>
 <p>D'abord, <strong>rangez le compteur</strong> avant de tester, sinon vous testerez autre chose que ce que vous croyez. Ensuite, <code>BRZ</code> saute vers la sortie si l'accumulateur vaut zéro, et un <code>BRA</code> inconditionnel ramène au début du corps sinon. Attention à l'ordre de ces deux instructions : le <code>BRZ</code> doit venir <strong>avant</strong> le <code>BRA</code>, sans quoi on ne sort jamais.</p>
 </details>
-</div>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+qui n'allait pas dans <strong>votre</strong> programme ? Si vous n'avez pas encore écrit de
+programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+pourquoi vous en êtes sûr.</p>
+</details>
 <details class="success">
-<summary>Correction — Défi 9</summary>
+<summary>Correction du défi 9</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>        LDA dix
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>        STA cpt
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>boucle  LDA cpt
@@ -8946,19 +9042,33 @@
 <a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>un      DAT 1
 </code></pre></div>
 </details>
+</div>
 <div class="admonition question">
 <p class="admonition-title">Défi 10 : Compteur croissant</p>
 <p><strong>Objectif :</strong> Afficher les nombres de 1 à 10.</p>
-<p><strong>Programme attendu :</strong></p>
+<details class="tip">
+<summary>Indice léger : les étapes</summary>
+<p>Voici la décomposition, si vous ne la voyez pas encore. Cherchez d'abord sans, c'est le travail du niveau 3.</p>
 <ul>
 <li>Initialiser un compteur à 1</li>
 <li>Afficher le compteur</li>
 <li>Incrémenter le compteur (ajouter 1)</li>
 <li>Répéter jusqu'à 10</li>
 </ul>
-</div>
+</details>
+<details class="tip">
+<summary>Indice précis</summary>
+<p>C'est le défi 9 retourné : on ajoute 1 au lieu d'en retirer 1, et la sortie ne peut plus se tester avec <code>BRZ</code> sur le compteur lui-même, puisqu'il ne passera jamais par zéro. Testez donc <code>compteur - 10</code>, et souvenez-vous de <strong>recharger</strong> le compteur après ce test, car la soustraction a écrasé l'accumulateur.</p>
+</details>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+qui n'allait pas dans <strong>votre</strong> programme ? Si vous n'avez pas encore écrit de
+programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+pourquoi vous en êtes sûr.</p>
+</details>
 <details class="success">
-<summary>Correction — Défi 10</summary>
+<summary>Correction du défi 10</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>        LDA un
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>        STA cpt
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>boucle  LDA cpt
@@ -8975,11 +9085,16 @@
 <a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>dix     DAT 10
 </code></pre></div>
 </details>
+</div>
 <div class="admonition question">
 <p class="admonition-title">Défi 11 : Table de multiplication</p>
 <p><strong>Objectif :</strong> Demander un nombre N à l'utilisateur, puis afficher sa table de multiplication de 1 à 10.</p>
 <p><strong>Exemple :</strong> Si l'utilisateur entre 7, afficher : 7, 14, 21, 28, 35, 42, 49, 56, 63, 70</p>
-<p><strong>Programme attendu :</strong></p>
+<p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>LDA</code>, <code>STA</code>, <code>ADD</code>, <code>SUB</code>, <code>BRZ</code>, <code>BRA</code>, <code>HLT</code>, <code>DAT</code></p>
+<p><strong>Concept clé :</strong> La multiplication est réalisée par <strong>additions successives</strong>.</p>
+<details class="tip">
+<summary>Indice léger : les étapes</summary>
+<p>Voici la décomposition, si vous ne la voyez pas encore. Cherchez d'abord sans, c'est le travail du niveau 3.</p>
 <ul>
 <li>Lire N</li>
 <li>Initialiser un compteur à 1 et un résultat à 0</li>
@@ -8991,11 +9106,21 @@
 </ul>
 </li>
 </ul>
-<p><strong>Instructions à utiliser :</strong> <code>INP</code>, <code>OUT</code>, <code>LDA</code>, <code>STA</code>, <code>ADD</code>, <code>SUB</code>, <code>BRZ</code>, <code>BRA</code>, <code>HLT</code>, <code>DAT</code></p>
-<p><strong>Concept clé :</strong> La multiplication est réalisée par <strong>additions successives</strong>.</p>
-</div>
+</details>
+<details class="tip">
+<summary>Indice précis</summary>
+<p>Deux cases à tenir à jour, <code>resultat</code> et <code>compteur</code>, et un seul accumulateur pour les deux : chaque fois que vous passez de l'une à l'autre, il faut <strong>ranger avant de charger</strong>. C'est la principale source d'erreur de ce défi.</p>
+<p>La boucle est celle du défi 10, avec une ligne de plus : charger <code>resultat</code>, y ajouter <code>N</code>, ranger <code>resultat</code>, afficher. Le compteur ne sert qu'à savoir quand s'arrêter.</p>
+</details>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+qui n'allait pas dans <strong>votre</strong> programme ? Si vous n'avez pas encore écrit de
+programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+pourquoi vous en êtes sûr.</p>
+</details>
 <details class="success">
-<summary>Correction — Défi 11</summary>
+<summary>Correction du défi 11</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>        INP
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>        STA n
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>        LDA zero
@@ -9022,11 +9147,15 @@
 <a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>dix     DAT 10
 </code></pre></div>
 </details>
+</div>
 <div class="admonition question">
 <p class="admonition-title">Défi 12 : Somme des N premiers entiers</p>
 <p><strong>Objectif :</strong> Demander un nombre N à l'utilisateur et afficher la somme 1 + 2 + 3 + ... + N.</p>
 <p><strong>Exemple :</strong> Si l'utilisateur entre 5, afficher 15 (car 1+2+3+4+5 = 15)</p>
-<p><strong>Programme attendu :</strong></p>
+<p><strong>Concept clé :</strong> Utilisation d'un <strong>accumulateur</strong> et d'une <strong>boucle décrémentale</strong>.</p>
+<details class="tip">
+<summary>Indice léger</summary>
+<p>Les étapes, si vous ne les voyez pas encore :</p>
 <ul>
 <li>Lire N</li>
 <li>Initialiser une somme à 0</li>
@@ -9039,9 +9168,6 @@
 </li>
 <li>Afficher la somme</li>
 </ul>
-<p><strong>Concept clé :</strong> Utilisation d'un <strong>accumulateur</strong> et d'une <strong>boucle décrémentale</strong>.</p>
-<details class="tip">
-<summary>Indice léger</summary>
 <p>C'est le défi 9 avec une opération en plus : au lieu de simplement afficher le compteur, vous l'accumulez dans une seconde case avant de le décrémenter.</p>
 </details>
 <details class="tip">
@@ -9049,9 +9175,15 @@
 <p>Vous manipulez maintenant <strong>deux</strong> variables, <code>somme</code> et <code>compteur</code>, et un seul accumulateur pour les deux. Chaque fois que vous voulez travailler sur l'une, il faut la charger, et <strong>la ranger avant de toucher à l'autre</strong>. C'est la principale source d'erreur de ce défi.</p>
 <p>L'ordre qui fonctionne : charger <code>somme</code>, y ajouter <code>compteur</code>, ranger <code>somme</code> ; puis charger <code>compteur</code>, lui soustraire 1, ranger <code>compteur</code> ; puis tester s'il vaut zéro. N'affichez qu'à la sortie de la boucle.</p>
 </details>
-</div>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur votre cahier : qu'est-ce que l'indice vous a appris sur ce
+qui n'allait pas dans <strong>votre</strong> programme ? Si vous n'avez pas encore écrit de
+programme, écrivez plutôt la première instruction dont vous êtes sûr, et dites
+pourquoi vous en êtes sûr.</p>
+</details>
 <details class="success">
-<summary>Correction — Défi 12</summary>
+<summary>Correction du défi 12</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>        INP
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>        STA cpt     # cpt = N (on décompte de N à 1)
 <a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>        LDA zero
@@ -9073,6 +9205,7 @@
 <a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>un      DAT 1
 </code></pre></div>
 </details>
+</div>
 <hr />
 <h2 id="conseils-pour-reussir">Conseils pour réussir</h2>
 <h3 id="1-observer-avant-de-coder">1. Observer avant de coder</h3>
@@ -9143,7 +9276,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 1, 2026 23:36:26 UTC">August 1, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 23, 2026 14:40:43 UTC">August 23, 2026</span>
   </span>
 
     

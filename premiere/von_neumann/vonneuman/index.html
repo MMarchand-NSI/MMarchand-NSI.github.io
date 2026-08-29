@@ -756,6 +756,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#c-un-processeur-ou-plusieurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        c) Un processeur, ou plusieurs ?
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -889,26 +900,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-le-goulot-de-von-neumann" class="md-nav__link">
+  <a href="#5-exercices" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Le goulot de von Neumann
+        5. Exercices
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-exercices" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Exercices
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6. Exercices">
+    <nav class="md-nav" aria-label="5. Exercices">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -939,10 +939,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-pour-aller-plus-loin" class="md-nav__link">
+  <a href="#6-pour-aller-plus-loin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Pour aller plus loin
+        6. Pour aller plus loin
       
     </span>
   </a>
@@ -4606,7 +4606,7 @@
   <span class="md-ellipsis">
     
   
-    Dijkstra
+    Algorithme de Dijkstra
   
 
     
@@ -4634,7 +4634,7 @@
   <span class="md-ellipsis">
     
   
-    Graphes
+    Graphes - Généralités et Implémentation
   
 
     
@@ -4662,7 +4662,7 @@
   <span class="md-ellipsis">
     
   
-    Parcours
+    Parcours de graphes
   
 
     
@@ -8115,6 +8115,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#c-un-processeur-ou-plusieurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        c) Un processeur, ou plusieurs ?
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -8248,26 +8259,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-le-goulot-de-von-neumann" class="md-nav__link">
+  <a href="#5-exercices" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Le goulot de von Neumann
+        5. Exercices
       
     </span>
   </a>
   
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-exercices" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Exercices
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="6. Exercices">
+    <nav class="md-nav" aria-label="5. Exercices">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
@@ -8298,10 +8298,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-pour-aller-plus-loin" class="md-nav__link">
+  <a href="#6-pour-aller-plus-loin" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Pour aller plus loin
+        6. Pour aller plus loin
       
     </span>
   </a>
@@ -8449,7 +8449,8 @@
 </ul>
 <div class="admonition example">
 <p class="admonition-title">Lien avec les circuits logiques</p>
-<p>L'UAL est construite à partir des circuits logiques que vous avez étudiés : portes ET, OU, NON, etc. Par exemple, un additionneur 8 bits utilise une cascade de portes logiques pour calculer une somme.</p>
+<p>L'UAL est construite à partir de <strong>circuits logiques</strong>, faits de portes ET, OU, NON. Vous les étudierez dans le chapitre suivant, et vous construirez alors un additionneur : vous verrez à ce moment-là comment une addition se fait avec des portes, et non avec un mécanisme qui saurait compter.</p>
+<p>Retenez pour l'instant ce qui suffit ici : l'UAL est le seul endroit de la machine où un calcul a lieu, et elle ne sait faire que des opérations élémentaires.</p>
 </div>
 <h4 id="b-lunite-de-controle-uc">b) L'Unité de Contrôle (UC)</h4>
 <p>L'<strong>Unité de Contrôle</strong> orchestre le fonctionnement de l'ordinateur :</p>
@@ -8458,6 +8459,19 @@
 <li>Elle les <strong>décode</strong> pour comprendre quelle opération effectuer</li>
 <li>Elle <strong>commande</strong> les autres composants pour exécuter l'instruction</li>
 </ul>
+<h4 id="c-un-processeur-ou-plusieurs">c) Un processeur, ou plusieurs ?</h4>
+<p>La machine décrite ici n'a <strong>qu'une</strong> unité de traitement : elle exécute une instruction à la fois, dans l'ordre où le compteur ordinal les désigne. C'est une architecture <strong>monoprocesseur</strong>, et c'est celle que vous manipulerez dans tout ce chapitre.</p>
+<p>Les machines actuelles sont <strong>multiprocesseur</strong> : elles contiennent plusieurs unités de traitement complètes, appelées <strong>cœurs</strong>, le plus souvent gravées sur la même puce. Chacune a son compteur ordinal et déroule son propre cycle, et elles partagent la mémoire.</p>
+<div class="admonition info">
+<p class="admonition-title">Ce qu'il faut en retenir, et rien de plus</p>
+<p>Avec un seul cœur, un ordinateur qui semble faire plusieurs choses à la fois ne fait qu'<strong>alterner très vite</strong> entre elles. Avec plusieurs cœurs, plusieurs instructions sont exécutées <strong>réellement au même instant</strong>.</p>
+<p>Deux réserves, qui évitent la conclusion trop rapide :</p>
+<ul>
+<li><strong>Deux cœurs ne divisent pas le temps par deux.</strong> Il faut que le travail puisse être découpé en parties indépendantes, et beaucoup de tâches ne s'y prêtent pas. Si les parties doivent constamment s'attendre, on gagne peu.</li>
+<li><strong>Le modèle de von Neumann n'est pas remis en cause.</strong> Chaque cœur fait exactement ce que décrit ce chapitre : fetch, decode, execute, sur une mémoire où instructions et données cohabitent. Il y en a simplement plusieurs.</li>
+</ul>
+<p>Nous n'irons pas plus loin cette année : ce qui suit, écrire et dérouler des programmes, se fait sur <strong>un seul</strong> processeur.</p>
+</div>
 <h3 id="22-la-memoire">2.2 La mémoire</h3>
 <p><img alt="" src="../image-9.png" /></p>
 <p>La <strong>mémoire</strong> stocke à la fois :</p>
@@ -8617,17 +8631,7 @@
 <li><strong>Registres généraux</strong> : stockent temporairement des données pour les calculs</li>
 <li><strong>Accumulateur</strong> : stocke les résultats intermédiaires de l'UAL</li>
 </ul>
-<h2 id="5-le-goulot-de-von-neumann">5. Le goulot de von Neumann</h2>
-<p>Le fait que les instructions et les données partagent la même mémoire et le même bus crée un <strong>goulot d'étranglement</strong> : le processeur doit attendre que les données arrivent de la mémoire.</p>
-<div class="admonition info">
-<p class="admonition-title">Solutions modernes</p>
-<ul>
-<li><strong>Mémoire cache</strong> : mémoire très rapide entre le CPU et la RAM</li>
-<li><strong>Architecture Harvard</strong> : mémoires séparées pour instructions et données</li>
-<li><strong>Pipeline</strong> : exécution simultanée de plusieurs étapes du cycle</li>
-</ul>
-</div>
-<h2 id="6-exercices">6. Exercices</h2>
+<h2 id="5-exercices">5. Exercices</h2>
 <h3 id="les-bus">Les bus</h3>
 <div class="admonition question">
 <p class="admonition-title">Le CPU veut lire la valeur stockée à l'adresse 7</p>
@@ -8769,10 +8773,10 @@
 <p>Voici un programme en mémoire et l'état initial de la mémoire de données :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Adresse | Instruction
 <a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>--------|------------------
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>0       | LOAD ACC, 10
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>1       | ADD ACC, 11
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>2       | STORE ACC, 12
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>3       | HALT
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>0       | LDA 10
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>1       | ADD 11
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>2       | STA 12
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>3       | HLT
 </code></pre></div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Adresse | Valeur
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>--------|-------
@@ -8786,39 +8790,40 @@
 <li>Ce que fait chaque phase (fetch, decode, execute)</li>
 <li>La valeur de l'accumulateur <strong>après</strong> l'execute</li>
 </ol>
+<p>Ces instructions sont celles du LMC : une fois votre tableau rempli, vous pourrez saisir ce programme tel quel dans le simulateur et vérifier votre trace.</p>
 </div>
 <details class="success">
 <summary>Réponse</summary>
-<p><strong>Instruction 0 : LOAD ACC, 10</strong></p>
+<p><strong>Instruction 0 : <code>LDA 10</code></strong></p>
 <ul>
 <li>PC = 0 avant le fetch</li>
 <li><strong>Fetch</strong> : charge l'instruction à l'adresse 0 dans le registre d'instruction. PC passe à 1.</li>
-<li><strong>Decode</strong> : identifie LOAD, adresse source = 10</li>
+<li><strong>Decode</strong> : identifie <code>LDA</code> (code 5xx), adresse source = 10</li>
 <li><strong>Execute</strong> : lit la valeur à l'adresse 10 (= 5), la place dans l'accumulateur</li>
 <li>ACC = <strong>5</strong></li>
 </ul>
-<p><strong>Instruction 1 : ADD ACC, 11</strong></p>
+<p><strong>Instruction 1 : <code>ADD 11</code></strong></p>
 <ul>
 <li>PC = 1 avant le fetch</li>
 <li><strong>Fetch</strong> : charge l'instruction à l'adresse 1. PC passe à 2.</li>
-<li><strong>Decode</strong> : identifie ADD, adresse source = 11</li>
+<li><strong>Decode</strong> : identifie <code>ADD</code> (code 1xx), adresse source = 11</li>
 <li><strong>Execute</strong> : lit la valeur à l'adresse 11 (= 3), l'additionne à l'accumulateur (5 + 3)</li>
 <li>ACC = <strong>8</strong></li>
 </ul>
-<p><strong>Instruction 2 : STORE ACC, 12</strong></p>
+<p><strong>Instruction 2 : <code>STA 12</code></strong></p>
 <ul>
 <li>PC = 2 avant le fetch</li>
 <li><strong>Fetch</strong> : charge l'instruction à l'adresse 2. PC passe à 3.</li>
-<li><strong>Decode</strong> : identifie STORE, adresse destination = 12</li>
+<li><strong>Decode</strong> : identifie <code>STA</code> (code 3xx), adresse destination = 12</li>
 <li><strong>Execute</strong> : écrit la valeur de l'accumulateur (8) à l'adresse 12</li>
 <li>La case mémoire 12 contient maintenant <strong>8</strong></li>
 </ul>
-<p><strong>Instruction 3 : HALT</strong> - Le programme s'arrête.</p>
+<p><strong>Instruction 3 : <code>HLT</code>.</strong> Le programme s'arrête.</p>
 </details>
 <div class="admonition question">
 <p class="admonition-title">Exécuter une donnée (le cœur du modèle de von Neumann)</p>
 <p>Reprenez le programme précédent. La case 10 contient la <strong>donnée</strong> <code>5</code>, la case 11 la donnée <code>3</code>.</p>
-<p>Supposons maintenant qu'à cause d'une erreur, le programme se termine <strong>sans</strong> <code>HALT</code> : après l'instruction rangée en 2, le compteur ordinal passe à 3, puis à 4, puis continue. Il finit par arriver sur la case 10.</p>
+<p>Supposons maintenant qu'à cause d'une erreur, le programme se termine <strong>sans</strong> <code>HLT</code> : après l'instruction rangée en 2, le compteur ordinal passe à 3, puis à 4, puis continue. Il finit par arriver sur la case 10.</p>
 <ol>
 <li>Que va faire le processeur en arrivant sur la case 10 ?</li>
 <li>Qu'est-ce qui, dans la mémoire, distingue une instruction d'une donnée ?</li>
@@ -8850,7 +8855,7 @@
 </div>
 <div class="admonition question">
 <p class="admonition-title">Les bus pendant le fetch</p>
-<p>Lors de la phase fetch de l'instruction 1 (ADD ACC, 11) de l'exercice précédent :</p>
+<p>Lors de la phase fetch de l'instruction 1 (<code>ADD 11</code>) de l'exercice précédent :</p>
 <ol>
 <li>Que transporte le bus d'adresses ? Dans quel sens ?</li>
 <li>Que transporte le bus de contrôle ?</li>
@@ -8862,19 +8867,29 @@
 <ol>
 <li>Le bus d'adresses transporte <strong>1</strong> (l'adresse de l'instruction à charger, celle contenue dans le PC). Sens : CPU → Mémoire.</li>
 <li>Le bus de contrôle transporte <strong>LIRE</strong> (le CPU veut récupérer l'instruction). Sens : CPU → Mémoire.</li>
-<li>Le bus de données transporte <strong>l'instruction ADD ACC, 11</strong> (son code machine). Sens : Mémoire → CPU.</li>
+<li>Le bus de données transporte <strong>l'instruction <code>ADD 11</code></strong>, c'est-à-dire le nombre <code>111</code>. Sens : Mémoire → CPU.</li>
 </ol>
 <p>Le fetch est toujours une <strong>lecture</strong> en mémoire : le CPU va chercher l'instruction.</p>
 </details>
-<h2 id="7-pour-aller-plus-loin">7. Pour aller plus loin</h2>
-<div class="admonition tip">
-<p class="admonition-title">Concepts avancés</p>
+<h2 id="6-pour-aller-plus-loin">6. Pour aller plus loin</h2>
+<p><em>Rien de ce qui suit n'est exigible. Le programme borne cette page aux concepts généraux du modèle ; ces notions sont là pour ceux que la suite intéresse.</em></p>
+<details class="tip">
+<summary>Le goulot de von Neumann, et ce qu'on fait contre</summary>
+<p>Les instructions et les données partagent la même mémoire et les mêmes bus. Le processeur passe donc une partie de son temps à <strong>attendre</strong> la mémoire, et cette attente devient le facteur limitant : c'est le <strong>goulot de von Neumann</strong>.</p>
+<p>Trois réponses courantes, qui ne suppriment pas le problème mais le réduisent :</p>
 <ul>
-<li><strong>Jeu d'instructions</strong> : ensemble des opérations qu'un processeur peut exécuter (CISC vs RISC)</li>
-<li><strong>Assembleur</strong> : langage de bas niveau qui correspond directement aux instructions machine</li>
-<li><strong>Architectures alternatives</strong> : Harvard, von Neumann modifiée</li>
+<li>la <strong>mémoire cache</strong>, petite et très rapide, placée entre le processeur et la mémoire vive ;</li>
+<li>l'<strong>architecture Harvard</strong>, qui sépare la mémoire des instructions de celle des données ;</li>
+<li>le <strong>pipeline</strong>, qui commence le fetch de l'instruction suivante pendant qu'on exécute la courante.</li>
 </ul>
-</div>
+</details>
+<details class="tip">
+<summary>Jeux d'instructions et architectures</summary>
+<ul>
+<li><strong>Jeu d'instructions</strong> : l'ensemble des opérations qu'un processeur sait exécuter. Les familles <strong>CISC</strong> (beaucoup d'instructions, complexes) et <strong>RISC</strong> (peu d'instructions, simples et rapides) reposent sur deux paris opposés.</li>
+<li><strong>Architectures alternatives</strong> : Harvard, et les variantes dites de von Neumann modifiée.</li>
+</ul>
+</details>
 <h2 id="resume">Résumé</h2>
 <ul>
 <li>L'architecture de von Neumann repose sur le principe du <strong>programme enregistré</strong></li>
@@ -8909,7 +8924,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 1, 2026 23:32:28 UTC">August 1, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 23, 2026 14:40:43 UTC">August 23, 2026</span>
   </span>
 
     
