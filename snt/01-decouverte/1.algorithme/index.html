@@ -8072,22 +8072,53 @@
 <p>On veut expliquer à quelqu'un comment tracer un dessin sur un quadrillage, <strong>sans lui montrer</strong> le dessin et <strong>sans le moindre implicite</strong> (souviens-toi du sandwich). Il faut donc <strong>inventer un langage</strong> : une petite liste de mots-instructions, chacun défini sans aucun doute possible.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercice 1 - Invente ton langage</p>
-<p>Un crayon part d'une case du quadrillage et doit pouvoir tracer <strong>n'importe quel</strong> trait le long des lignes. Quels <strong>mots-instructions</strong> proposes-tu ? Donne-les, et <strong>définis précisément</strong> ce que fait chacun. Mets-toi d'accord dans ton groupe, puis on compare en classe.</p>
+<p>Voici le dessin à faire tracer : un <strong>5</strong>. Le crayon part du <strong>point rouge</strong>, et il ne se déplace que <strong>le long des lignes</strong> du quadrillage, une case à la fois.</p>
+<p><svg viewBox="0 0 192 304" width="192" role="img" aria-label="le chiffre 5 tracé sur un quadrillage" style="max-width:100%;height:auto"><g stroke="#c9c9c9" stroke-width="1"><line x1="12" y1="12" x2="12" y2="292"/><line x1="40" y1="12" x2="40" y2="292"/><line x1="68" y1="12" x2="68" y2="292"/><line x1="96" y1="12" x2="96" y2="292"/><line x1="124" y1="12" x2="124" y2="292"/><line x1="152" y1="12" x2="152" y2="292"/><line x1="180" y1="12" x2="180" y2="292"/><line x1="12" y1="12" x2="180" y2="12"/><line x1="12" y1="40" x2="180" y2="40"/><line x1="12" y1="68" x2="180" y2="68"/><line x1="12" y1="96" x2="180" y2="96"/><line x1="12" y1="124" x2="180" y2="124"/><line x1="12" y1="152" x2="180" y2="152"/><line x1="12" y1="180" x2="180" y2="180"/><line x1="12" y1="208" x2="180" y2="208"/><line x1="12" y1="236" x2="180" y2="236"/><line x1="12" y1="264" x2="180" y2="264"/><line x1="12" y1="292" x2="180" y2="292"/></g><polyline points="152,40 40,40 40,152 152,152 152,264 40,264" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="152" cy="40" r="4.5" fill="#e53935"/></svg></p>
+<p>Invente les <strong>mots-instructions</strong> qui permettront à quelqu'un de tracer <strong>exactement</strong> ce 5, sans jamais rien deviner, puis écris le programme qui le trace.</p>
+<p>Deux règles :</p>
+<ul>
+<li>chaque mot est <strong>défini précisément</strong>, une seule interprétation possible (souviens-toi du sandwich) ;</li>
+<li>le programme n'utilise <strong>que les mots de ton langage</strong>, rien d'autre, même pas des nombres.</li>
+</ul>
+<p>Mets-toi d'accord dans ton groupe. On comparera les langages en classe, et on exécutera vos programmes <strong>au pied de la lettre</strong>.</p>
 <details class="success">
-<summary>Correction : deux familles de réponses</summary>
+<summary>Correction</summary>
 <p>En comparant les propositions de la classe, elles se rangent presque toujours en <strong>deux familles</strong>, deux façons de voir le déplacement.</p>
 <p><strong>Vu de la feuille (langage absolu).</strong> On nomme les quatre directions du quadrillage :</p>
 <ul>
 <li><code>droite</code>, <code>gauche</code>, <code>haut</code>, <code>bas</code> : trace un trait d'une case dans cette direction.</li>
 </ul>
-<p>Chaque mot désigne une direction <strong>fixe de la feuille</strong>. C'est immédiat sur un quadrillage, parce qu'une case a un haut, un bas, une gauche et une droite bien définis.</p>
+<p>Chaque mot désigne une direction <strong>fixe de la feuille</strong>. C'est immédiat sur un quadrillage, parce qu'une case a un haut, un bas, une gauche et une droite bien définis. Le 5 s'écrit alors en <strong>20 instructions</strong> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>gauche
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>gauche
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>gauche
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>gauche
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>bas
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>bas
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>bas
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>bas
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>droite
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>droite
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>droite
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>droite
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>bas
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>bas
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>bas
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>bas
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>gauche
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>gauche
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>gauche
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>gauche
+</code></pre></div>
+<p>Vingt lignes pour un chiffre, et quatre fois le même mot d'affilée à chaque trait : c'est long, c'est pénible à écrire, et c'est exactement ce qui va rendre la <strong>répétition</strong> désirable dans quelques instants.</p>
 <p><strong>Vu du crayon (langage relatif).</strong> On se met <strong>à la place du crayon</strong>, qui regarde toujours quelque part :</p>
 <ul>
 <li><code>avance</code> : trace un trait d'une case, <strong>droit devant soi</strong>.</li>
 <li><code>tourne</code> : pivote d'un <strong>quart de tour</strong>, sans tracer.</li>
 </ul>
 <p>Ici, plus de droite ni de bas : il y a <strong>devant soi</strong> et <strong>pivoter</strong>. Le tracé ne dépend plus de la feuille, mais de la <strong>direction du crayon</strong>.</p>
-<p>Aucune des deux n'est « la bonne » : ce sont deux points de vue, chacun avec ses forces. On <strong>commence par l'absolu</strong>, qui colle au quadrillage. On <strong>met le relatif de côté</strong> pour le retrouver plus tard, quand on pilotera un crayon qui se déplace : il rendra certains dessins bien plus simples.</p>
+<p><strong>Et ce 5 fait apparaître deux implicites que ces définitions laissent passer.</strong> D'abord, il faut dire <strong>dans quelle direction le crayon regarde au départ</strong>, sinon le programme ne veut rien dire. Ensuite, <code>tourne</code> ne dit pas <strong>de quel côté</strong> on pivote. Or ce dessin tourne tantôt d'un côté, tantôt de l'autre : si <code>tourne</code> va toujours vers la gauche du crayon, il faut en écrire <strong>trois</strong> pour tourner à droite. Le 5 coûte alors <strong>28 instructions</strong> (20 <code>avance</code> et 8 <code>tourne</code>), contre 20 en absolu.</p>
+<p>Aucune des deux n'est « la bonne » : ce sont deux points de vue, chacun avec ses forces. On <strong>commence par l'absolu</strong>, qui colle au quadrillage et qui écrit ce 5-ci plus court. On <strong>met le relatif de côté</strong> pour le retrouver plus tard, quand on pilotera un crayon qui se déplace : il rendra certains dessins bien plus simples.</p>
 </details>
 </div>
 <h2 id="un-mot-une-definition-precise">Un mot, une définition précise</h2>
@@ -8101,10 +8132,10 @@
 <div class="admonition question">
 <p class="admonition-title">Exercice 2 - Décoder un tracé</p>
 <p>On part du coin en haut à gauche. On exécute :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>droite
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>droite
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>bas
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>droite
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>droite
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>droite
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>bas
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>droite
 </code></pre></div>
 <p>Dessine sur une feuille le trait obtenu.</p>
 <details class="success">
@@ -8114,22 +8145,22 @@
 </div>
 <h2 id="quand-ca-se-repete">Quand ça se répète</h2>
 <p>Regarde ce programme :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>droite
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>droite
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>droite
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>droite
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>droite
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>droite
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>droite
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>droite
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>droite
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>droite
 </code></pre></div>
 <p>Cinq fois la même instruction, c'est long et pénible à écrire. Les langages de programmation offrent un raccourci pour dire « répète ceci N fois ». On l'apprendra bientôt en Python. Retiens l'idée : <strong>repérer une répétition, c'est un geste essentiel en informatique</strong>.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercice 3 - Repérer les répétitions</p>
 <p>Dans le programme ci-dessous, repère les groupes d'instructions identiques qui se suivent, et réécris-le en français avec des « répète ... fois ».</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>droite
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>droite
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>droite
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>bas
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>bas
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>droite
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>droite
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>droite
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>droite
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>bas
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>bas
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>droite
 </code></pre></div>
 <details class="success">
 <summary>Correction</summary>
@@ -8143,19 +8174,19 @@
 <li>pour répéter, on écrit <code>répète N fois :</code> puis, en dessous, les instructions à répéter <strong>décalées vers la droite</strong>. Ce décalage s'appelle l'<strong>indentation</strong>.</li>
 </ol>
 <p>Par exemple :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>répète 3 fois :
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    droite
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>bas
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>répète 3 fois :
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    droite
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>bas
 </code></pre></div>
 <p>Ce programme veut dire : <code>droite</code>, <code>droite</code>, <code>droite</code>, puis <code>bas</code>.</p>
 <p>Le décalage n'est pas décoratif : il indique <strong>exactement</strong> ce qui est à l'intérieur de la répétition et ce qui est à l'extérieur. Ici <code>droite</code> est indenté, donc répété 3 fois ; <code>bas</code> ne l'est pas, donc il est fait <strong>une seule fois</strong>, après la répétition. Cette écriture en blocs indentés est précisément celle qu'on retrouvera en <strong>Python</strong>.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercice 4 - Lire un programme indenté</p>
 <p>Quelle suite d'instructions simples ce programme représente-t-il ?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>répète 2 fois :
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    droite
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    bas
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>droite
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>répète 2 fois :
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    droite
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    bas
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>droite
 </code></pre></div>
 <details class="success">
 <summary>Correction</summary>
@@ -8165,6 +8196,18 @@
 </div>
 <h2 id="il-nous-manque-des-instructions">Il nous manque des instructions</h2>
 <p>Jusqu'ici, chaque déplacement <strong>trace</strong> un trait : autrement dit, le crayon est toujours posé sur la feuille. Du coup, on ne peut dessiner que des figures d'un seul tenant.</p>
+<div class="admonition question">
+<p class="admonition-title">Exercice 5 - Essaie de tracer ceci</p>
+<p>Écris le programme qui trace ces deux traits verticaux (3 cases chacun, séparés par un espace d'une case). Le crayon part du point rouge.</p>
+<p><svg viewBox="0 0 136 164" width="136" role="img" aria-label="deux traits verticaux de 3 cases separes par une case" style="max-width:100%;height:auto"><g stroke="#c9c9c9" stroke-width="1"><line x1="12" y1="12" x2="12" y2="152"/><line x1="40" y1="12" x2="40" y2="152"/><line x1="68" y1="12" x2="68" y2="152"/><line x1="96" y1="12" x2="96" y2="152"/><line x1="124" y1="12" x2="124" y2="152"/><line x1="12" y1="12" x2="124" y2="12"/><line x1="12" y1="40" x2="124" y2="40"/><line x1="12" y1="68" x2="124" y2="68"/><line x1="12" y1="96" x2="124" y2="96"/><line x1="12" y1="124" x2="124" y2="124"/><line x1="12" y1="152" x2="124" y2="152"/></g><polyline points="40,40 40,124" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="96,40 96,124" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="40" cy="40" r="4.5" fill="#e53935"/></svg></p>
+<p>Cherche vraiment avant d'ouvrir la correction : ici, c'est le fait de buter qui apprend quelque chose.</p>
+<details class="success">
+<summary>Correction</summary>
+<p>Quel que soit le chemin essayé, le crayon <strong>laisse une trace partout où il passe</strong>, puisque rien ne permet de le lever. Pour aller du premier trait au second, il doit traverser l'espace qui les sépare, et il le dessine.</p>
+<p>Autrement dit : tout ce que ce langage sait tracer se tient <strong>d'un seul tenant</strong>, et ce dessin est en <strong>deux morceaux</strong>. Aucun programme ne peut le tracer.</p>
+<p>Ce n'est pas toi qui as échoué, c'est le <strong>langage qui est incomplet</strong>. C'est un constat qu'on fera souvent : on ne change pas le langage pour le plaisir, on le change quand on a rencontré quelque chose qu'il ne sait pas dire.</p>
+</details>
+</div>
 <p>Comment dessiner <strong>deux traits séparés</strong> ? Il faudrait pouvoir se déplacer <strong>sans tracer</strong>. Notre langage en est incapable : il lui manque des instructions. Ajoutons-les :</p>
 <ul>
 <li><code>lève</code> : lève le crayon (les déplacements suivants ne tracent plus rien)</li>
@@ -8219,10 +8262,10 @@
 <h2 id="lire-du-code">Lire du code</h2>
 <p>On commence par le plus important : savoir <strong>lire</strong> un programme, c'est-à-dire dire ce qu'il dessine sans l'exécuter en vrai. Pour chaque exercice, on part du <strong>coin en haut à gauche</strong>.</p>
 <div class="admonition question">
-<p class="admonition-title">Exercice 5 - Que dessine ce programme ?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>répète 3 fois :
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    droite
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    bas
+<p class="admonition-title">Exercice 6 - Que dessine ce programme ?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>répète 3 fois :
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    droite
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    bas
 </code></pre></div>
 <details class="success">
 <summary>Correction</summary>
@@ -8230,14 +8273,14 @@
 </details>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Exercice 6 - Avec le crayon levé</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>droite
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>droite
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>lève
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>droite
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>baisse
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>droite
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>droite
+<p class="admonition-title">Exercice 7 - Avec le crayon levé</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>droite
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>droite
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>lève
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>droite
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>baisse
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>droite
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>droite
 </code></pre></div>
 <p>Réponds <strong>dans l'ordre</strong>. Les deux premières questions se répondent en suivant le programme ligne par ligne, pas en devinant le dessin.</p>
 <ol>
@@ -8256,13 +8299,13 @@
 </details>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Exercice 7 - Une figure fermée</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>droite
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>droite
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>bas
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>gauche
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>gauche
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>haut
+<p class="admonition-title">Exercice 8 - Une figure fermée</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>droite
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>droite
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>bas
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>gauche
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>gauche
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>haut
 </code></pre></div>
 <details class="success">
 <summary>Correction</summary>
@@ -8272,7 +8315,7 @@
 <h2 id="ecrire-du-code">Écrire du code</h2>
 <p>Maintenant, à toi d'<strong>écrire</strong> les programmes qui tracent les figures ci-dessous. Utilise <code>répète</code> dès que tu repères une répétition. On part toujours du <strong>point rouge</strong> (le coin en haut à gauche).</p>
 <div class="admonition question">
-<p class="admonition-title">Exercice 8 - Un trait horizontal</p>
+<p class="admonition-title">Exercice 9 - Un trait horizontal</p>
 <p>Écris un programme qui trace ce trait.</p>
 <p><svg viewBox="0 0 164 52" width="164" role="img" aria-label="trait horizontal de 5 cases" style="max-width:100%;height:auto"><g stroke="#c9c9c9" stroke-width="1"><line x1="12" y1="12" x2="12" y2="40"/><line x1="40" y1="12" x2="40" y2="40"/><line x1="68" y1="12" x2="68" y2="40"/><line x1="96" y1="12" x2="96" y2="40"/><line x1="124" y1="12" x2="124" y2="40"/><line x1="152" y1="12" x2="152" y2="40"/><line x1="12" y1="12" x2="152" y2="12"/><line x1="12" y1="40" x2="152" y2="40"/></g><polyline points="12,12 152,12" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="4.5" fill="#e53935"/></svg></p>
 <details class="tip">
@@ -8286,14 +8329,14 @@
 </details>
 <details class="success">
 <summary>Correction</summary>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>répète 5 fois :
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    droite
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>répète 5 fois :
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    droite
 </code></pre></div>
 (Écrire cinq fois <code>droite</code> à la suite est aussi correct, mais plus long.)</p>
 </details>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Exercice 9 - Un carré</p>
+<p class="admonition-title">Exercice 10 - Un carré</p>
 <p>Écris un programme qui trace ce carré (3 cases de côté).</p>
 <p><svg viewBox="0 0 108 108" width="108" role="img" aria-label="carre de 3 cases de cote" style="max-width:100%;height:auto"><g stroke="#c9c9c9" stroke-width="1"><line x1="12" y1="12" x2="12" y2="96"/><line x1="40" y1="12" x2="40" y2="96"/><line x1="68" y1="12" x2="68" y2="96"/><line x1="96" y1="12" x2="96" y2="96"/><line x1="12" y1="12" x2="96" y2="12"/><line x1="12" y1="40" x2="96" y2="40"/><line x1="12" y1="68" x2="96" y2="68"/><line x1="12" y1="96" x2="96" y2="96"/></g><polyline points="12,12 96,12 96,96 12,96 12,12" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="4.5" fill="#e53935"/></svg></p>
 <details class="tip">
@@ -8307,20 +8350,20 @@
 </details>
 <details class="success">
 <summary>Correction</summary>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>répète 3 fois :
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    droite
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>répète 3 fois :
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    bas
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>répète 3 fois :
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    gauche
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>répète 3 fois :
-<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    haut
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>répète 3 fois :
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    droite
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>répète 3 fois :
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    bas
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>répète 3 fois :
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    gauche
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>répète 3 fois :
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    haut
 </code></pre></div>
 Un côté après l'autre : la droite, puis le bas, puis la gauche, puis le haut, pour revenir au départ.</p>
 </details>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Exercice 10 - Un escalier</p>
+<p class="admonition-title">Exercice 11 - Un escalier</p>
 <p>Écris un programme qui trace cet escalier (4 marches).</p>
 <p><svg viewBox="0 0 136 136" width="136" role="img" aria-label="escalier de 4 marches" style="max-width:100%;height:auto"><g stroke="#c9c9c9" stroke-width="1"><line x1="12" y1="12" x2="12" y2="124"/><line x1="40" y1="12" x2="40" y2="124"/><line x1="68" y1="12" x2="68" y2="124"/><line x1="96" y1="12" x2="96" y2="124"/><line x1="124" y1="12" x2="124" y2="124"/><line x1="12" y1="12" x2="124" y2="12"/><line x1="12" y1="40" x2="124" y2="40"/><line x1="12" y1="68" x2="124" y2="68"/><line x1="12" y1="96" x2="124" y2="96"/><line x1="12" y1="124" x2="124" y2="124"/></g><polyline points="12,12 40,12 40,40 68,40 68,68 96,68 96,96 124,96 124,124" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="4.5" fill="#e53935"/></svg></p>
 <details class="tip">
@@ -8334,16 +8377,16 @@ Un côté après l'autre : la droite, puis le bas, puis la gauche, puis le haut,
 </details>
 <details class="success">
 <summary>Correction</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>répète 4 fois :
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    droite
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    bas
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>répète 4 fois :
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    droite
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    bas
 </code></pre></div>
 </details>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Exercice 11 - Deux traits séparés</p>
-<p>Écris un programme qui trace ces deux traits verticaux (3 cases chacun, séparés par un espace d'une case).</p>
-<p><svg viewBox="0 0 80 108" width="80" role="img" aria-label="deux traits verticaux de 3 cases separes" style="max-width:100%;height:auto"><g stroke="#c9c9c9" stroke-width="1"><line x1="12" y1="12" x2="12" y2="96"/><line x1="40" y1="12" x2="40" y2="96"/><line x1="68" y1="12" x2="68" y2="96"/><line x1="12" y1="12" x2="68" y2="12"/><line x1="12" y1="40" x2="68" y2="40"/><line x1="12" y1="68" x2="68" y2="68"/><line x1="12" y1="96" x2="68" y2="96"/></g><polyline points="12,12 12,96" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="68,12 68,96" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="12" r="4.5" fill="#e53935"/></svg></p>
+<p class="admonition-title">Exercice 12 - Deux traits séparés</p>
+<p>Reprends le dessin de l'exercice 5, celui qu'on ne savait pas tracer. Avec <code>lève</code> et <code>baisse</code>, écris maintenant le programme qui le trace.</p>
+<p><svg viewBox="0 0 136 164" width="136" role="img" aria-label="deux traits verticaux de 3 cases separes par une case" style="max-width:100%;height:auto"><g stroke="#c9c9c9" stroke-width="1"><line x1="12" y1="12" x2="12" y2="152"/><line x1="40" y1="12" x2="40" y2="152"/><line x1="68" y1="12" x2="68" y2="152"/><line x1="96" y1="12" x2="96" y2="152"/><line x1="124" y1="12" x2="124" y2="152"/><line x1="12" y1="12" x2="124" y2="12"/><line x1="12" y1="40" x2="124" y2="40"/><line x1="12" y1="68" x2="124" y2="68"/><line x1="12" y1="96" x2="124" y2="96"/><line x1="12" y1="124" x2="124" y2="124"/><line x1="12" y1="152" x2="124" y2="152"/></g><polyline points="40,40 40,124" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="96,40 96,124" fill="none" stroke="#00897b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="40" cy="40" r="4.5" fill="#e53935"/></svg></p>
 <details class="tip">
 <summary>Indice</summary>
 <p>Le crayon doit revenir en haut, puis se décaler, <strong>sans laisser de trace</strong> au passage. Quelles instructions du tableau permettent cela ?</p>
@@ -8356,17 +8399,17 @@ Un côté après l'autre : la droite, puis le bas, puis la gauche, puis le haut,
 <details class="success">
 <summary>Correction</summary>
 <p>Une solution possible :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>répète 3 fois :
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    bas
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>lève
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>haut
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>haut
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>haut
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>droite
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>droite
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>baisse
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>répète 3 fois :
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    bas
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>répète 3 fois :
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    bas
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>lève
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>haut
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>haut
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>haut
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>droite
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>droite
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>baisse
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>répète 3 fois :
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    bas
 </code></pre></div>
 On trace le premier trait, on <strong>lève</strong> le crayon pour remonter et se décaler de deux cases (en laissant un espace d'une case), puis on <strong>baisse</strong> le crayon pour tracer le second.</p>
 </details>
@@ -8403,7 +8446,7 @@ On trace le premier trait, on <strong>lève</strong> le crayon pour remonter et 
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 3, 2026 02:33:05 UTC">August 3, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 1, 2026 20:47:38 UTC">September 1, 2026</span>
   </span>
 
     
