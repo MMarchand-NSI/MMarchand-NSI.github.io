@@ -1,32 +1,18 @@
 # Architecture de von Neumann
 
-!!! question "Rappel d'ouverture (5 minutes, cours fermé)"
-    1. Votre groupe avait codé `avance` par un certain nombre. Un autre groupe avait choisi un nombre différent. Lequel des deux avait raison ?
-    2. Vous recevez la suite `9 3 100 7 90`. Que vous manque-t-il pour la lire ?
-    3. Citez une raison pour laquelle un programme installé sur un ordinateur ne fonctionne pas sur un téléphone.
-
-??? success "Corrigé"
-    1. **Les deux.** Le nombre associé à un mot est une convention arbitraire : elle n'est ni vraie ni fausse, elle est partagée ou elle ne l'est pas.
-    2. **La table de correspondance.** Un code ne contient jamais son propre mode d'emploi.
-    3. Les deux machines n'ont pas le même **jeu d'instructions**, c'est-à-dire pas la même table. Le même nombre y désigne des ordres différents.
-
-!!! tip "D'où l'on vient"
-    Dans l'activité [Inventer un langage pour une machine](langage-invente.md), vous avez fabriqué une table de correspondance entre des mots et des nombres, et constaté qu'un programme codé ne veut rien dire sans elle. Il restait une question ouverte : comment distinguer, dans une suite de nombres, les ordres des quantités ? Cette page et les suivantes y répondent.
 
 ## Le problème de départ
 
-Les premiers ordinateurs, comme l'**ENIAC** (1945), étaient capables de faire des calculs extraordinairement rapides. Mais ils avaient un défaut majeur : pour changer de programme, il fallait **physiquement recâbler la machine**. Des opératrices devaient rebrancher des centaines de câbles et repositionner des interrupteurs, ce qui prenait **plusieurs jours**, alors que le calcul lui-même ne durait que quelques secondes.
+Les premiers ordinateurs, comme l'**ENIAC** (1945), étaient capables de faire des calculs extraordinairement rapides. Mais ils avaient un défaut majeur : pour changer de programme, il fallait **physiquement recâbler la machine**. Six mathématiciennes, les premières programmeuses de la machine, devaient établir la séquence des opérations puis la câbler : des centaines de fiches à rebrancher et d'interrupteurs à repositionner, ce qui prenait **plusieurs jours**, alors que le calcul lui-même ne durait que quelques secondes.
 
 Le programme n'existait pas en mémoire : il était inscrit dans le **câblage physique** de la machine. Changer de tâche revenait à reconstruire une partie de l'ordinateur.
 
 !!! example "Concrètement"
-    Imaginons qu'à chaque fois que vous voulez utiliser une nouvelle application sur votre téléphone, un technicien doive ouvrir l'appareil et ressouder des composants. C'était exactement la situation avant l'architecture de von Neumann.
+    Imaginons qu'à chaque fois que tu veux utiliser une nouvelle application sur ton téléphone, un technicien doive ouvrir l'appareil et ressouder des composants. C'était exactement la situation avant l'architecture de von Neumann.
 
 **La solution proposée par von Neumann en 1945** : stocker le programme **dans la mémoire**, au même endroit que les données. Ainsi, changer de programme revient simplement à charger de nouvelles instructions en mémoire, sans toucher au matériel. C'est le principe du **programme enregistré**, et c'est le fonctionnement de tous les ordinateurs actuels.
 
-## Introduction
-
-L'**architecture de von Neumann** est le modèle fondamental de la plupart des ordinateurs actuels. Elle tire son nom du mathématicien et physicien John von Neumann qui l'a formalisée en 1945 dans son rapport sur l'EDVAC (*Electronic Discrete Variable Automatic Computer*).
+L'**architecture de von Neumann** est ainsi devenue le modèle fondamental de la plupart des ordinateurs actuels. Elle tire son nom du mathématicien et physicien John von Neumann, qui l'a formalisée en 1945 dans son rapport sur l'EDVAC (*Electronic Discrete Variable Automatic Computer*).
 
 ## 1. Principe fondamental
 
@@ -47,25 +33,30 @@ Le **processeur** (CPU - *Central Processing Unit*) est le cerveau de l'ordinate
 L'**UAL** (*ALU* en anglais) effectue les opérations :
 
 - **Arithmétiques** : addition, soustraction, multiplication, division
-- **Logiques** : AND, OR, NOT, XOR (les opérations booléennes que vous connaissez)
+- **Logiques** : AND, OR, NOT, XOR (les opérations booléennes, que tu verras au chapitre suivant)
 - **Comparaisons** : égalité, supériorité, infériorité
 
-!!! example "Lien avec les circuits logiques"
-    L'UAL est construite à partir de **circuits logiques**, faits de portes ET, OU, NON. Vous les étudierez dans le chapitre suivant, et vous construirez alors un additionneur : vous verrez à ce moment-là comment une addition se fait avec des portes, et non avec un mécanisme qui saurait compter.
+Elle travaille sur un registre particulier, l'**accumulateur**, qui contient la valeur en cours de calcul et reçoit le résultat.
 
-    Retenez pour l'instant ce qui suffit ici : l'UAL est le seul endroit de la machine où un calcul a lieu, et elle ne sait faire que des opérations élémentaires.
+**l'UAL est le seul endroit de la machine où un calcul a lieu, et elle ne sait faire que des opérations élémentaires.**
 
 #### b) L'Unité de Contrôle (UC)
 
 L'**Unité de Contrôle** orchestre le fonctionnement de l'ordinateur :
 
-- Elle **lit** les instructions en mémoire
-- Elle les **décode** pour comprendre quelle opération effectuer
-- Elle **commande** les autres composants pour exécuter l'instruction
+Elle ne fait qu'une seule chose, indéfiniment : répéter un **cycle** en trois temps.
+
+1. Elle **lit** les instructions en mémoire (`fetch`)
+2. Elle les **décode** pour comprendre quelle opération effectuer (`decode`)
+3. Elle **commande** les autres composants pour exécuter l'instruction (`execute`)
+
+On appelle ça le **cycle decode-fetch-execute**
+
+L'UC **répète ce cycle en boucle et ne sait rien faire d'autre**. Sa force réside uniquement dans sa vitesse d'exécution, dictée par sa fréquence d'horloge : un processeur cadencé à 3 GHz effectue ainsi 3 milliards de cycles par seconde.
 
 #### c) Un processeur, ou plusieurs ?
 
-La machine décrite ici n'a **qu'une** unité de traitement : elle exécute une instruction à la fois, dans l'ordre où le compteur ordinal les désigne. C'est une architecture **monoprocesseur**, et c'est celle que vous manipulerez dans tout ce chapitre.
+La machine décrite ici n'a **qu'une** unité de traitement : elle exécute une instruction à la fois, dans l'ordre où le compteur ordinal les désigne. C'est une architecture **monoprocesseur**, et c'est celle que tu manipuleras dans tout ce chapitre.
 
 Les machines actuelles sont **multiprocesseur** : elles contiennent plusieurs unités de traitement complètes, appelées **cœurs**, le plus souvent gravées sur la même puce. Chacune a son compteur ordinal et déroule son propre cycle, et elles partagent la mémoire.
 
@@ -74,12 +65,14 @@ Les machines actuelles sont **multiprocesseur** : elles contiennent plusieurs un
 
     Deux réserves, qui évitent la conclusion trop rapide :
 
-    - **Deux cœurs ne divisent pas le temps par deux.** Il faut que le travail puisse être découpé en parties indépendantes, et beaucoup de tâches ne s'y prêtent pas. Si les parties doivent constamment s'attendre, on gagne peu.
+    - **Deux cœurs ne divisent pas le temps d'un programme par deux.** Il faut que le travail puisse être découpé en parties indépendantes, et beaucoup de tâches ne s'y prêtent pas. Si les parties doivent constamment s'attendre, on gagne peu. Par contre, 2 programmes lancés au même instant peuvent s'exécuter sur des coeurs différents automatiquement.
     - **Le modèle de von Neumann n'est pas remis en cause.** Chaque cœur fait exactement ce que décrit ce chapitre : fetch, decode, execute, sur une mémoire où instructions et données cohabitent. Il y en a simplement plusieurs.
 
     Nous n'irons pas plus loin cette année : ce qui suit, écrire et dérouler des programmes, se fait sur **un seul** processeur.
 
 ### 2.2 La mémoire
+
+Le processeur est un calculateur hors pair, mais il ne peut pas travailler à vide. Pour réaliser une opération aussi simple que 3 + 2, il a besoin qu'on lui fournisse ses opérandes : le nombre 3 et le nombre 2. C’est là qu'intervient la mémoire : elle sert de réservoir pour stocker les données nécessaires à un calcul.
 
 ![](image-9.png)
 
@@ -92,8 +85,7 @@ Chaque emplacement mémoire possède une **adresse** unique qui permet d'y accé
 
 !!! info "Types de mémoire"
     - **Mémoire vive (RAM)** : rapide, volatile (effacée à l'extinction)
-    - **Mémoire morte (ROM)** : contient le BIOS, non volatile
-    - **Mémoire de stockage** : disque dur, SSD (non volatile, plus lente)
+    - **Mémoire morte (ROM)** : contient l'UEFI (anciennement BIOS), non volatile,  le tout premier programme qui se lance à l'allumage pour réveiller les composants de l'ordinateur et lui apprendre à démarrer
 
 ### 2.3 Les dispositifs d'entrée/sortie (E/S) (I/O)
 
@@ -110,54 +102,26 @@ Le **disque dur** (HDD) et le **SSD** sont des **dispositifs d'entrée/sortie**,
 - Ils sont **externes au modèle de base** de von Neumann : ni le CPU ne peut les utiliser directement pour exécuter des instructions, ni ils ne font partie de la mémoire vive
 - Avant d'exécuter un programme stocké sur disque, il faut le **charger en RAM**
 
-!!! info "Distinction mémoire vs stockage"
+!!! danger "Distinction mémoire vs stockage"
     - **Mémoire (RAM)** : rapide, volatile, directement accessible par le CPU pour lire les instructions et les données
-    - **Stockage (disque dur, SSD)** : lent, persistant, accessible via les bus d'E/S. Le CPU ne peut pas exécuter directement du code sur le disque.
+    - **Stockage (disque dur, SSD)** : lent, persistant, accessible via les bus d'E/S. Le CPU ne peut pas exécuter directement du code sur le disque car tout serait extrêmement lent. Tout doit d'abord être transféré en RAM.
 
 ### 2.4 Les bus
 
-Les **bus** sont les canaux de communication qui relient les composants. Un bus n'est pas un tuyau dans lequel les informations circulent les unes après les autres : c'est un **groupe de fils parallèles** qui portent chacun un signal électrique (0 ou 1) **en permanence**.
+Tous les composants présentés communiquent par des liaisons matérielles. Ca n'est pas magique. Ils ont branchés ensemble avec des "fils" qu'on appele des `bus`.
 
-Chaque bus est un groupe de fils **physiquement séparé** des autres. A chaque instant, la mémoire "voit" l'état de tous les fils simultanément. Il n'y a pas de mélange possible : chaque information voyage sur son propre groupe de fils.
+Les **bus** sont les canaux de communication qui relient les composants. Il y en a trois, et chacun porte une information d'une nature différente :
 
-- **Bus d'adresses** : transmet l'adresse mémoire à accéder (indique **où**)
-- **Bus de données** : transmet le contenu (un nombre, une instruction...)
-- **Bus de contrôle** : transmet les signaux de commande (indique **quoi faire** : lire ou écrire)
+- **Bus d'adresses** : **où**, c'est-à-dire l'adresse de la case concernée
+- **Bus de données** : **quoi**, c'est-à-dire le contenu, un nombre
+- **Bus de contrôle** : **quoi faire**, c'est-à-dire lire ou écrire
 
-C'est le signal sur le bus de contrôle qui déclenche l'action. Sans lui, la mémoire ne fait rien, même si une adresse est présente sur le bus d'adresses.
+Les trois travaillent en même temps, et c'est leur combinaison qui donne un sens à l'opération. Sans le bus de contrôle, la mémoire verrait passer une adresse et une valeur sans savoir si on lui demande de lire ou d'écrire.
 
-!!! example "Exemple : ajouter 2 à la valeur stockée à l'adresse 42"
-    Supposons que la case mémoire 42 contient la valeur **10**. Le CPU doit calculer 10 + 2 et réécrire le résultat en mémoire.
+Imaginez que le processeur (CPU) veuille stocker le nombre 42 dans la case mémoire numéro 150. Pour ce faire, il envoie trois informations simultanément :📬 Le bus d'adresses (Où) : C'est l'étiquette sur la boîte. Le processeur y écrit : « Box n°150 ».🎁 Le bus de données (Quoi) : C'est l'objet que l'on transporte. Le processeur y dépose la valeur : « 42 ».📋 Le bus de contrôle (Quoi faire) : C'est l'ordre écrit sur la feuille. Le processeur coche la case : « ÉCRIRE » (enregistrer).
 
-    Les trois bus travaillent **simultanément** à chaque étape. C'est leur combinaison qui donne un sens à l'opération : le bus de contrôle dit quoi faire, le bus d'adresses dit où, et le bus de données transporte le contenu.
 
-    **Etape 1 : Lire la valeur en mémoire**
-
-    ```
-    CPU  ══[ LIRE ]══►  Mémoire      (bus de contrôle : le CPU demande une lecture)
-    CPU  ══[  42  ]══►  Mémoire      (bus d'adresses  : le CPU envoie l'adresse)
-    CPU  ◄═[  10  ]═══  Mémoire      (bus de données  : la mémoire répond avec la valeur)
-    ```
-
-    Le CPU envoie **en même temps** l'ordre LIRE et l'adresse 42. La mémoire répond en plaçant la valeur 10 sur le bus de données. Le CPU la récupère dans l'accumulateur.
-
-    **Etape 2 : Le calcul**
-
-    L'UAL effectue 10 + 2 = **12**. Cette étape est interne au CPU, les bus ne sont pas sollicités.
-
-    **Etape 3 : Ecrire le résultat en mémoire**
-
-    ```
-    CPU  ══[ ECRIRE ]══►  Mémoire    (bus de contrôle : le CPU demande une écriture)
-    CPU  ══[   42   ]══►  Mémoire    (bus d'adresses  : le CPU envoie l'adresse)
-    CPU  ══[   12   ]══►  Mémoire    (bus de données  : le CPU envoie la valeur)
-    ```
-
-    Le CPU envoie **en même temps** l'ordre ECRIRE, l'adresse 42 et la valeur 12. La mémoire reçoit les trois informations et écrit 12 à l'adresse 42.
-
-    **A retenir :** A l'étape 1, le bus de données va de la mémoire vers le CPU (la mémoire **répond**). A l'étape 3, il va du CPU vers la mémoire (le CPU **envoie**). Les bus d'adresses et de contrôle vont toujours du CPU vers la mémoire : c'est le CPU qui commande.
-
-    La case mémoire 42 contient maintenant **12**.
+## 3. Diagramme récapitulatif à connaître
 
 ```mermaid
 graph TB
@@ -186,248 +150,13 @@ graph TB
     style IO fill:#f0f0f0
 ```
 
-### 2.5 Le langage machine
-
-Voir [Le langage machine](langage-machine.md)
-
-## 3. Le cycle d'exécution (FETCH-DECODE-EXECUTE)
-
-Le processeur fonctionne selon un **cycle répétitif** en trois phases :
-
-### 3.1 Fetch (Recherche)
-
-1. L'UC lit l'adresse de la prochaine instruction dans le **compteur ordinal** (ou *Program Counter*)
-2. L'instruction est chargée depuis la mémoire vers le **registre d'instruction**
-3. Le compteur ordinal est incrémenté pour pointer vers l'instruction suivante
-
-### 3.2 Decode (Décodage)
-
-L'UC analyse l'instruction pour déterminer :
-
-- Quelle opération effectuer
-- Quelles données utiliser (adresses, registres)
-
-### 3.3 Execute (Exécution)
-
-L'UC commande l'UAL ou les autres composants pour réaliser l'opération.
-
-!!! example "Exemple concret avec le LMC"
-    **Programme :** Additionner 3 + 5
-
-    ```
-    00: LDA 10    // Charger la valeur à l'adresse 10
-    01: ADD 11    // Ajouter la valeur à l'adresse 11
-    02: STA 12    // Stocker le résultat à l'adresse 12
-    03: HLT       // Arrêter
-    ...
-    10: DAT 3     // Première valeur
-    11: DAT 5     // Deuxième valeur
-    12: DAT 0     // Résultat (initialement 0)
-    ```
-
-    **Déroulement du cycle pour l'instruction `ADD 11` (adresse 01) :**
-
-    - **Fetch** :
-        - Le PC contient 01
-        - L'UC lit l'instruction à l'adresse 01 : `ADD 11` (code machine : 111)
-        - L'instruction est chargée dans le registre d'instruction
-        - Le PC est incrémenté : PC = 02
-
-    - **Decode** :
-        - L'UC décode 111 : code 1xx = instruction ADD
-        - Opérande : adresse 11
-        - Opération à effectuer : ajouter le contenu de l'adresse 11 à l'accumulateur
-
-    - **Execute** :
-        - L'UC lit la valeur à l'adresse 11 : **5**
-        - L'UAL additionne : accumulateur (3) + 5 = **8**
-        - Le résultat 8 est stocké dans l'accumulateur
-
-    Puis le cycle recommence avec l'instruction suivante à l'adresse 02 (`STA 12`).
-
-Ce cycle se répète des milliards de fois par seconde (fréquence du processeur en GHz).
-
-## 4. Les registres
-
-Les **registres** sont de petites mémoires ultra-rapides **intégrées au processeur** :
-
-- **Compteur ordinal (PC)** : contient l'adresse de la prochaine instruction
-- **Registre d'instruction (RI)** : contient l'instruction en cours d'exécution
-- **Registres généraux** : stockent temporairement des données pour les calculs
-- **Accumulateur** : stocke les résultats intermédiaires de l'UAL
-
-## 5. Exercices
-
-### Les bus
-
-!!! question "Le CPU veut lire la valeur stockée à l'adresse 7"
-    Complétez le tableau :
-
-    | Bus | Valeur transportée | Sens |
-    |-----|--------------------|------|
-    | Bus d'adresses | ? | ? → ? |
-    | Bus de contrôle | ? | ? → ? |
-    | Bus de données | ? | ? → ? |
-
-??? success "Réponse"
-    | Bus | Valeur transportée | Sens |
-    |-----|--------------------|------|
-    | Bus d'adresses | **7** | CPU → Mémoire |
-    | Bus de contrôle | **LIRE** | CPU → Mémoire |
-    | Bus de données | **la valeur à l'adresse 7** | Mémoire → CPU |
-
-    Le bus de données va de la mémoire vers le CPU car c'est une lecture : la mémoire **répond**.
-
-!!! question "Le CPU veut écrire la valeur 25 à l'adresse 3"
-    Complétez le tableau :
-
-    | Bus | Valeur transportée | Sens |
-    |-----|--------------------|------|
-    | Bus d'adresses | ? | ? → ? |
-    | Bus de contrôle | ? | ? → ? |
-    | Bus de données | ? | ? → ? |
-
-??? success "Réponse"
-    | Bus | Valeur transportée | Sens |
-    |-----|--------------------|------|
-    | Bus d'adresses | **3** | CPU → Mémoire |
-    | Bus de contrôle | **ECRIRE** | CPU → Mémoire |
-    | Bus de données | **25** | CPU → Mémoire |
-
-    Cette fois, les trois bus vont dans le même sens : le CPU envoie tout. C'est la différence avec la lecture.
-
-!!! question "Qu'est-ce qui changerait si on supprimait le bus de contrôle ?"
-    On garde le bus d'adresses et le bus de données. Le CPU envoie l'adresse 3 et la valeur 25.
-
-    La mémoire doit-elle lire ou écrire ? Peut-elle le savoir ?
-
-??? success "Réponse"
-    Non, elle ne peut pas le savoir. Sans bus de contrôle, la mémoire voit une adresse (3) et une donnée (25) mais ne sait pas si elle doit :
-
-    - **lire** la valeur à l'adresse 3 et la mettre sur le bus de données, ou
-    - **écrire** 25 à l'adresse 3
-
-    Le bus de contrôle est indispensable pour lever cette ambiguïté.
-
-### Le cycle fetch-decode-execute
-
-!!! question "Dérouler un programme"
-    Voici un programme en mémoire et l'état initial de la mémoire de données :
-
-    ```
-    Adresse | Instruction
-    --------|------------------
-    0       | LDA 10
-    1       | ADD 11
-    2       | STA 12
-    3       | HLT
-    ```
-
-    ```
-    Adresse | Valeur
-    --------|-------
-    10      | 5
-    11      | 3
-    12      | ?
-    ```
-
-    Pour chaque instruction, donnez :
-
-    1. La valeur du PC **avant** le fetch
-    2. Ce que fait chaque phase (fetch, decode, execute)
-    3. La valeur de l'accumulateur **après** l'execute
-
-    Ces instructions sont celles du LMC : une fois votre tableau rempli, vous pourrez saisir ce programme tel quel dans le simulateur et vérifier votre trace.
-
-??? success "Réponse"
-    **Instruction 0 : `LDA 10`**
-
-    - PC = 0 avant le fetch
-    - **Fetch** : charge l'instruction à l'adresse 0 dans le registre d'instruction. PC passe à 1.
-    - **Decode** : identifie `LDA` (code 5xx), adresse source = 10
-    - **Execute** : lit la valeur à l'adresse 10 (= 5), la place dans l'accumulateur
-    - ACC = **5**
-
-    **Instruction 1 : `ADD 11`**
-
-    - PC = 1 avant le fetch
-    - **Fetch** : charge l'instruction à l'adresse 1. PC passe à 2.
-    - **Decode** : identifie `ADD` (code 1xx), adresse source = 11
-    - **Execute** : lit la valeur à l'adresse 11 (= 3), l'additionne à l'accumulateur (5 + 3)
-    - ACC = **8**
-
-    **Instruction 2 : `STA 12`**
-
-    - PC = 2 avant le fetch
-    - **Fetch** : charge l'instruction à l'adresse 2. PC passe à 3.
-    - **Decode** : identifie `STA` (code 3xx), adresse destination = 12
-    - **Execute** : écrit la valeur de l'accumulateur (8) à l'adresse 12
-    - La case mémoire 12 contient maintenant **8**
-
-    **Instruction 3 : `HLT`.** Le programme s'arrête.
-
-!!! question "Exécuter une donnée (le cœur du modèle de von Neumann)"
-    Reprenez le programme précédent. La case 10 contient la **donnée** `5`, la case 11 la donnée `3`.
-
-    Supposons maintenant qu'à cause d'une erreur, le programme se termine **sans** `HLT` : après l'instruction rangée en 2, le compteur ordinal passe à 3, puis à 4, puis continue. Il finit par arriver sur la case 10.
-
-    1. Que va faire le processeur en arrivant sur la case 10 ?
-    2. Qu'est-ce qui, dans la mémoire, distingue une instruction d'une donnée ?
-    3. Que se passerait-il si l'on plaçait volontairement le compteur ordinal sur la case 10 ?
-
-??? success "Réponse"
-    1. Il va **exécuter la case 10**. Le processeur n'a aucun moyen de savoir que `5` était censé être une donnée : il lit le nombre, il le décode comme une instruction, et il exécute ce que ce code désigne. Le résultat sera absurde, mais il sera exécuté.
-
-    2. **Rien.** C'est le point le plus important de cette page, et il est contre-intuitif. Dans la mémoire, une instruction et une donnée sont **le même genre de chose** : un nombre dans une case. Aucune marque, aucune couleur, aucun bit spécial ne les sépare.
-
-    3. Exactement la même chose. **Ce qui décide qu'un nombre est une instruction, c'est uniquement le fait que le compteur ordinal pointe dessus.** Une case est une instruction quand on l'exécute, une donnée quand on la lit. Rien d'autre.
-
-    C'est précisément cela, le **programme enregistré** de von Neumann : le programme est rangé dans la même mémoire que les données, parce qu'il est fait de la même matière. C'est ce qui permet de changer de programme sans recâbler la machine, et c'est aussi ce qui rend possible qu'un programme en modifie un autre, ou soi-même.
-
-!!! tip "À faire sur le simulateur, pas seulement sur le papier"
-    Cette réponse ne coûte que deux minutes à vérifier. Écrivez un programme LMC très court, retirez le `HLT`, lancez-le, et observez la machine partir dans les données et les exécuter. **Prédisez d'abord** ce qu'elle affichera, puis comparez.
-
-!!! warning "Piège : la machine ne fait pas ce que vous vouliez dire"
-    Beaucoup d'erreurs viennent de la même croyance : il y aurait, quelque part dans la machine, quelqu'un qui comprend l'intention. Il n'y a personne. La machine décode **ce qui est écrit**, et si c'est absurde, elle l'exécute absurdement. Retenez-le maintenant : cela vous servira toute l'année, en Python comme ici.
-
-!!! question "Les bus pendant le fetch"
-    Lors de la phase fetch de l'instruction 1 (`ADD 11`) de l'exercice précédent :
-
-    1. Que transporte le bus d'adresses ? Dans quel sens ?
-    2. Que transporte le bus de contrôle ?
-    3. Que transporte le bus de données ? Dans quel sens ?
-
-??? success "Réponse"
-    1. Le bus d'adresses transporte **1** (l'adresse de l'instruction à charger, celle contenue dans le PC). Sens : CPU → Mémoire.
-    2. Le bus de contrôle transporte **LIRE** (le CPU veut récupérer l'instruction). Sens : CPU → Mémoire.
-    3. Le bus de données transporte **l'instruction `ADD 11`**, c'est-à-dire le nombre `111`. Sens : Mémoire → CPU.
-
-    Le fetch est toujours une **lecture** en mémoire : le CPU va chercher l'instruction.
-
-## 6. Pour aller plus loin
-
-*Rien de ce qui suit n'est exigible. Le programme borne cette page aux concepts généraux du modèle ; ces notions sont là pour ceux que la suite intéresse.*
-
-??? tip "Le goulot de von Neumann, et ce qu'on fait contre"
-    Les instructions et les données partagent la même mémoire et les mêmes bus. Le processeur passe donc une partie de son temps à **attendre** la mémoire, et cette attente devient le facteur limitant : c'est le **goulot de von Neumann**.
-
-    Trois réponses courantes, qui ne suppriment pas le problème mais le réduisent :
-
-    - la **mémoire cache**, petite et très rapide, placée entre le processeur et la mémoire vive ;
-    - l'**architecture Harvard**, qui sépare la mémoire des instructions de celle des données ;
-    - le **pipeline**, qui commence le fetch de l'instruction suivante pendant qu'on exécute la courante.
-
-??? tip "Jeux d'instructions et architectures"
-    - **Jeu d'instructions** : l'ensemble des opérations qu'un processeur sait exécuter. Les familles **CISC** (beaucoup d'instructions, complexes) et **RISC** (peu d'instructions, simples et rapides) reposent sur deux paris opposés.
-    - **Architectures alternatives** : Harvard, et les variantes dites de von Neumann modifiée.
-
 ## Résumé
 
 - L'architecture de von Neumann repose sur le principe du **programme enregistré**
 - Quatre composants principaux : **CPU** (UC + UAL), **mémoire**, **E/S**, **bus**
-- Le CPU fonctionne en cycle : **fetch-decode-execute**
-- Les **registres** sont des mémoires ultra-rapides dans le CPU
-- Le **goulot de von Neumann** limite les performances (résolu partiellement par le cache)
+- Trois bus, qui disent **où**, **quoi** et **quoi faire**
+- Le CPU répète un cycle : **fetch-decode-execute**, et le **compteur ordinal** désigne la prochaine instruction
+- Rien, dans la mémoire, ne distingue une instruction d'une donnée : c'est le compteur ordinal qui décide
 
 ---
 

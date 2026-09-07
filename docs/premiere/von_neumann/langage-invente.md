@@ -126,7 +126,7 @@ Regardez à nouveau la suite `9 3 100 7 90 3 100 4`.
 
         Il manque donc une seconde convention : un **format**, qui dise où commence et où finit chaque instruction, et lesquels de ces nombres sont des ordres et lesquels sont des quantités.
 
-C'est exactement le problème que résout la machine que vous allez étudier dans les pages suivantes. Son format tient en une phrase : **chaque instruction s'écrit avec trois chiffres**, le premier désignant l'ordre, les deux suivants la donnée. La suite de nombres redevient alors lisible sans deviner.
+C'est exactement le problème que résout la machine que vous allez étudier dans les pages suivantes. Son format tient en une phrase : **chaque instruction s'écrit avec quatre chiffres**, le premier désignant l'ordre et les deux derniers la donnée. La suite de nombres redevient alors lisible sans deviner.
 
 !!! tip "Le lien avec la suite du chapitre"
     Le processeur que vous allez découvrir possède, lui aussi, une table de correspondance entre des ordres et des nombres. On l'appelle son **jeu d'instructions**. Elle a été décidée par ses concepteurs, exactement comme vous avez décidé la vôtre, et elle est gravée dans le circuit.
