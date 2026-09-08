@@ -763,10 +763,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#b-lunite-de-controle-uc" class="md-nav__link">
+  <a href="#b-les-registres" class="md-nav__link">
     <span class="md-ellipsis">
       
-        b) L'Unité de Contrôle (UC)
+        b) Les registres
       
     </span>
   </a>
@@ -774,10 +774,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#c-un-processeur-ou-plusieurs" class="md-nav__link">
+  <a href="#c-lunite-de-controle-uc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        c) Un processeur, ou plusieurs ?
+        c) L'Unité de Contrôle (UC)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-un-processeur-ou-plusieurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        d) Un processeur, ou plusieurs ?
       
     </span>
   </a>
@@ -8000,10 +8011,10 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#b-lunite-de-controle-uc" class="md-nav__link">
+  <a href="#b-les-registres" class="md-nav__link">
     <span class="md-ellipsis">
       
-        b) L'Unité de Contrôle (UC)
+        b) Les registres
       
     </span>
   </a>
@@ -8011,10 +8022,21 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#c-un-processeur-ou-plusieurs" class="md-nav__link">
+  <a href="#c-lunite-de-controle-uc" class="md-nav__link">
     <span class="md-ellipsis">
       
-        c) Un processeur, ou plusieurs ?
+        c) L'Unité de Contrôle (UC)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#d-un-processeur-ou-plusieurs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        d) Un processeur, ou plusieurs ?
       
     </span>
   </a>
@@ -8212,17 +8234,29 @@
 </ul>
 <p>Elle travaille sur un registre particulier, l'<strong>accumulateur</strong>, qui contient la valeur en cours de calcul et reçoit le résultat.</p>
 <p><strong>l'UAL est le seul endroit de la machine où un calcul a lieu, et elle ne sait faire que des opérations élémentaires.</strong></p>
-<h4 id="b-lunite-de-controle-uc">b) L'Unité de Contrôle (UC)</h4>
+<h4 id="b-les-registres">b) Les registres</h4>
+<p>L'UAL ne va pas chercher chaque valeur en mémoire au moment où elle en a besoin : la mémoire est bien trop lente pour cela. Le processeur possède ses propres cases, en très petit nombre, appelées <strong>registres</strong>.</p>
+<p>Un registre est une <strong>mini-mémoire intégrée au processeur</strong>, et c'est la mémoire la plus rapide de la machine. Un processeur n'en compte que quelques dizaines, là où la mémoire vive compte des milliards de cases : plus une mémoire est rapide, plus elle coûte cher à quantité d'information égale, et moins on peut en mettre.</p>
+<p>Deux registres suffisent pour tout ce chapitre :</p>
+<ul>
+<li>l'<strong>accumulateur</strong> (<code>ACC</code>) : la valeur sur laquelle l'UAL travaille, et où elle dépose son résultat ;</li>
+<li>le <strong>compteur ordinal</strong> (<code>PC</code>, <em>program counter</em>) : l'adresse de la prochaine instruction à exécuter.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">Un registre n'est pas une case mémoire</p>
+<p>Quand le processeur charge le contenu de la case 42 dans l'accumulateur, il le <strong>recopie</strong> : la case 42 ne bouge pas. Et l'accumulateur, lui, n'a <strong>pas d'adresse</strong> : il n'est pas dans la mémoire, il est dans le processeur. C'est pourquoi il n'apparaît jamais sur le bus d'adresses.</p>
+</div>
+<h4 id="c-lunite-de-controle-uc">c) L'Unité de Contrôle (UC)</h4>
 <p>L'<strong>Unité de Contrôle</strong> orchestre le fonctionnement de l'ordinateur :</p>
 <p>Elle ne fait qu'une seule chose, indéfiniment : répéter un <strong>cycle</strong> en trois temps.</p>
 <ol>
-<li>Elle <strong>lit</strong> les instructions en mémoire (<code>fetch</code>)</li>
+<li>Elle <strong>lit</strong> en mémoire l'instruction que désigne le compteur ordinal (<code>fetch</code>)</li>
 <li>Elle les <strong>décode</strong> pour comprendre quelle opération effectuer (<code>decode</code>)</li>
 <li>Elle <strong>commande</strong> les autres composants pour exécuter l'instruction (<code>execute</code>)</li>
 </ol>
 <p>On appelle ça le <strong>cycle decode-fetch-execute</strong></p>
 <p>L'UC <strong>répète ce cycle en boucle et ne sait rien faire d'autre</strong>. Sa force réside uniquement dans sa vitesse d'exécution, dictée par sa fréquence d'horloge : un processeur cadencé à 3 GHz effectue ainsi 3 milliards de cycles par seconde.</p>
-<h4 id="c-un-processeur-ou-plusieurs">c) Un processeur, ou plusieurs ?</h4>
+<h4 id="d-un-processeur-ou-plusieurs">d) Un processeur, ou plusieurs ?</h4>
 <p>La machine décrite ici n'a <strong>qu'une</strong> unité de traitement : elle exécute une instruction à la fois, dans l'ordre où le compteur ordinal les désigne. C'est une architecture <strong>monoprocesseur</strong>, et c'est celle que tu manipuleras dans tout ce chapitre.</p>
 <p>Les machines actuelles sont <strong>multiprocesseur</strong> : elles contiennent plusieurs unités de traitement complètes, appelées <strong>cœurs</strong>, le plus souvent gravées sur la même puce. Chacune a son compteur ordinal et déroule son propre cycle, et elles partagent la mémoire.</p>
 <div class="admonition info">
@@ -8286,7 +8320,10 @@
     subgraph CPU["Unité Centrale (CPU)"]
         UC["Unité de Contrôle&lt;br/&gt;(UC)"]
         UAL["Unité Arithmétique&lt;br/&gt;et Logique (UAL)"]
+        REG["Registres&lt;br/&gt;(ACC, PC)"]
         UC &lt;--&gt; UAL
+        UC &lt;--&gt; REG
+        UAL &lt;--&gt; REG
     end
 
     subgraph BUS["BUS"]
@@ -8310,6 +8347,7 @@
 <ul>
 <li>L'architecture de von Neumann repose sur le principe du <strong>programme enregistré</strong></li>
 <li>Quatre composants principaux : <strong>CPU</strong> (UC + UAL), <strong>mémoire</strong>, <strong>E/S</strong>, <strong>bus</strong></li>
+<li>Le CPU contient des <strong>registres</strong>, mini-mémoires internes et ultra-rapides : l'<strong>accumulateur</strong> (où l'on calcule) et le <strong>compteur ordinal</strong> (l'adresse de la prochaine instruction)</li>
 <li>Trois bus, qui disent <strong>où</strong>, <strong>quoi</strong> et <strong>quoi faire</strong></li>
 <li>Le CPU répète un cycle : <strong>fetch-decode-execute</strong>, et le <strong>compteur ordinal</strong> désigne la prochaine instruction</li>
 <li>Rien, dans la mémoire, ne distingue une instruction d'une donnée : c'est le compteur ordinal qui décide</li>
