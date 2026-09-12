@@ -468,3 +468,140 @@ def test_depiler_pile_vide() -> None:
 
     ```
 
+
+## Pour aller plus loin : une pile qu'on ne peut pas modifier
+
+!!! question "Une pile immuable, bâtie sur un tuple"
+    Depuis le début de cette page, une `Pile[T]` est une `list[T]`, et `empiler` comme `depiler` la **modifient sur place**. On va la refaire autrement : avec un **tuple**, qui ne se modifie jamais.
+
+    Crée `structures/lineaires/pile_immuable.py` et `structures/lineaires/pile_immuable_test.py`, et repars de cette déclaration :
+
+    ```python
+    # dans structures/lineaires/pile_immuable.py
+
+    type Pile[T] = tuple[T, ...]
+    ```
+
+    !!! info "Les trois points ne sont pas une coquille"
+        `tuple[int]` désigne un tuple d'**exactement un** entier, et rien d'autre. Pour un tuple contenant un nombre quelconque d'entiers, il faut écrire `tuple[int, ...]`, les trois points faisant partie de la notation. Ici, `tuple[T, ...]` : autant d'éléments qu'on veut, tous du même type.
+
+    **Deux des quatre primitives ne peuvent pas garder leur signature.** Ce n'est pas une question de goût : avec les anciennes, elles sont impossibles à écrire.
+
+    Avant d'écrire une seule ligne, réponds sur ton cahier :
+
+    1. Quelles sont, aujourd'hui, les signatures de `empiler` et de `depiler` ?
+    2. Pourquoi aucune des deux ne peut survivre au passage au tuple ?
+    3. `depiler` a maintenant **deux** choses à communiquer à celui qui l'appelle. Lesquelles, et comment une fonction en rend-elle deux ?
+
+    Écris ensuite les quatre primitives et leurs fonctions de test, puis `uv run pytest`.
+
+    ??? tip "Indice léger"
+        Un tuple ne peut pas changer. Or une fonction qui ne modifie rien **et** ne rend rien ne fait rien du tout.
+
+    ??? tip "Indice précis"
+        `empiler` doit **rendre la pile obtenue** : `-> Pile[T]` au lieu de `-> None`. Et `depiler` doit rendre l'élément retiré **et** la pile qui reste, donc un couple : `-> tuple[T, Pile[T]]`.
+
+    ??? question "Avant d'ouvrir la solution, une phrase sur ton cahier"
+        Qu'est-ce que l'ancienne version communiquait à l'appelant **sans rien lui rendre** ? Si tu sais l'écrire, tu as compris pourquoi les signatures changent.
+
+    ??? success "Solution"
+        ```python
+        # structures/lineaires/pile_immuable.py
+
+        type Pile[T] = tuple[T, ...]
+
+        def creer[T]() -> Pile[T]:
+            """Crée et renvoie une pile vide."""
+            return ()
+
+        def est_vide[T](p: Pile[T]) -> bool:
+            """Indique si la pile p est vide."""
+            return len(p) == 0
+
+        def empiler[T](e: T, p: Pile[T]) -> Pile[T]:
+            """
+            Renvoie la pile obtenue en ajoutant e au sommet de p.
+            La pile p n'est pas modifiée : elle ne peut pas l'être.
+            """
+            return p + (e,)
+
+        def depiler[T](p: Pile[T]) -> tuple[T, Pile[T]]:
+            """
+            Renvoie deux choses : l'élément au sommet de p, et la pile qui reste.
+            La pile p n'est pas modifiée.
+            Précondition : p ne doit pas être vide.
+            """
+            assert not est_vide(p), "La pile est vide"
+            return p[-1], p[0:-1]
+        ```
+
+        ```python
+        # structures/lineaires/pile_immuable_test.py
+
+        from structures.lineaires.pile_immuable import (
+            Pile,
+            creer,
+            depiler,
+            empiler,
+            est_vide,
+        )
+
+
+        def test_creer() -> None:
+            p: Pile[int] = creer()
+            assert est_vide(p)
+
+
+        def test_est_vide() -> None:
+            p: Pile[str] = creer()
+            assert est_vide(p)
+            q = empiler("test", p)
+            assert not est_vide(q)
+
+
+        def test_empiler() -> None:
+            p: Pile[int] = creer()
+            q = empiler(10, p)
+            assert not est_vide(q)
+            assert est_vide(p)          # p n'a pas bougé : c'est tout l'intérêt
+
+
+        def test_depiler() -> None:
+            p: Pile[int] = empiler(2, empiler(1, creer()))
+            sommet, reste = depiler(p)
+            assert sommet == 2          # dernier entré, premier sorti
+            sommet2, reste2 = depiler(reste)
+            assert sommet2 == 1
+            assert est_vide(reste2)
+            assert depiler(p)[0] == 2   # p est intacte, on peut la redépiler
+
+
+        def test_depiler_pile_vide() -> None:
+            p: Pile[int] = creer()
+            try:
+                depiler(p)
+            except AssertionError:
+                return                  # comportement attendu
+            assert False, "depiler sur une pile vide aurait dû échouer"
+        ```
+
+        Regarde `test_empiler` : il ne vérifie pas seulement que la nouvelle pile est bonne, il vérifie que **l'ancienne n'a pas bougé**. C'est la propriété entière de cette version, et c'est le seul `assert` qui la teste.
+
+!!! warning "Ce que cet exercice démontre, et c'est l'inverse de la leçon des files"
+    Sur la page des files, remplacer l'**intérieur** de la structure ne cassait aucun exercice : les fonctions clientes n'employaient que les quatre primitives, et les primitives n'avaient pas changé.
+
+    Ici, c'est l'**interface** qui change, donc tout le code qui utilise une pile est à réécrire :
+
+    ```python
+    empiler(3, p)        # avant : p est modifiée sur place
+    p = empiler(3, p)    # maintenant : on récupère la pile obtenue
+
+    x = depiler(p)       # avant
+    x, p = depiler(p)    # maintenant
+    ```
+
+    Retiens la distinction, elle vaut pour tout le métier : **changer l'implémentation ne coûte rien à personne, changer l'interface coûte à tout le monde.** C'est pourquoi on réfléchit longuement à un contrat avant de l'écrire, et qu'on le change le moins souvent possible.
+
+    Ce qu'on achète en échange : une pile immuable ne peut plus être vidée par accident au fond d'une fonction. Les exercices « destructif / non destructif » du début de cette page n'ont plus d'objet, faute de version destructive possible.
+
+    Ce qu'on paie, et il faut le mesurer plutôt que de l'oublier : `p + (e,)` ne modifie pas `p`, il **fabrique un tuple neuf** en recopiant tous les éléments. `empiler` et `depiler` passent donc de `O(1)` à `O(n)`, et la promesse du début de cette page tombe. Une structure immuable ne se paie pas en confort, elle se paie en copies.
