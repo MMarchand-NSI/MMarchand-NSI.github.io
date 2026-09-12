@@ -502,7 +502,9 @@ def test_depiler_pile_vide() -> None:
         `empiler` doit **rendre la pile obtenue** : `-> Pile[T]` au lieu de `-> None`. Et `depiler` doit rendre l'élément retiré **et** la pile qui reste, donc un couple : `-> tuple[T, Pile[T]]`.
 
     ??? question "Avant d'ouvrir la solution, une phrase sur ton cahier"
-        Qu'est-ce que l'ancienne version communiquait à l'appelant **sans rien lui rendre** ? Si tu sais l'écrire, tu as compris pourquoi les signatures changent.
+        L'ancien `empiler` ne renvoyait **rien**. Alors comment la pile changeait-elle ?
+
+        Ta réponse dit pourquoi les signatures doivent changer.
 
     ??? success "Solution"
         ```python
