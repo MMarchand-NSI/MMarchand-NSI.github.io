@@ -120,41 +120,18 @@ Le type list en Python présente deux méthodes rapides qui lui permettent d’i
 (voir la [Documentation de python](https://wiki.python.org/moin/TimeComplexity))
 
 
-### Implémentation minimaliste
-
-On introduit d'abord un **nouveau type** `Pile[T]`, construit à partir de `list` (une pile de `T` est une liste de `T`), puis les quatre primitives.
-
-```python
-type Pile[T] = list[T]
-
-def creer[T]() -> Pile[T]:
-    return []
-
-def est_vide[T](p: Pile[T]) -> bool:
-    return len(p) == 0
-
-def empiler[T](e: T, p: Pile[T]) -> None:
-    p.append(e)
-
-def depiler[T](p: Pile[T]) -> T:
-    assert not est_vide(p), "La pile est vide"
-    return p.pop()
-
-```
-
-
-### Implémentation avancée
+### Les deux fichiers : `pile.py` et `pile_test.py`
 
 Ici on considère que:
 
 **Une Pile d'éléments d'un type quelconque T est une liste d'éléments de type T**
 
-On ajoute aussi des docstrings qui intègrent les tests unitaires de chaque fonction.
+On introduit donc un **nouveau type** `Pile[T]`, construit à partir de `list`, puis les quatre primitives. Cela tient en **deux fichiers, côte à côte** dans `structures/lineaires/` : le module et ses tests.
 
-Voici le fichier pile.py
+Voici le fichier `structures/lineaires/pile.py`. Les docstrings y disent le **contrat** en français, et rien d'autre : ce que la primitive prend, ce qu'elle rend, ce qu'elle exige.
 
 ```python
-# Python 3.13
+# structures/lineaires/pile.py
 
 type Pile[T] = list[T]
 
@@ -180,11 +157,15 @@ def depiler[T](p: Pile[T]) -> T:
     """
     assert not est_vide(p), "La pile est vide"
     return p.pop()
+```
 
+Et voici le fichier `structures/lineaires/pile_test.py`, dans **le même répertoire**. Une fonction de test par primitive, nommée `test_` suivi du nom de la primitive. Elle ne prend rien, ne renvoie rien, et échoue bruyamment si le code est faux.
 
-# --- Tests ---------------------------------------------------------------
-# Une fonction de test par primitive, nommée test_<primitive>.
-# Elle ne prend rien, ne renvoie rien, et échoue bruyamment si le code est faux.
+```python
+# structures/lineaires/pile_test.py
+
+from structures.lineaires.pile import Pile, creer, depiler, empiler, est_vide
+
 
 def test_creer() -> None:
     p: Pile[int] = creer()
@@ -218,24 +199,29 @@ def test_depiler_pile_vide() -> None:
     except AssertionError:
         return                          # comportement attendu
     assert False, "depiler sur une pile vide aurait dû échouer"
-
-
-if __name__ == "__main__":
-    test_creer()
-    test_est_vide()
-    test_empiler()
-    test_depiler()
-    test_depiler_pile_vide()
-    print("pile.py : tous les tests passent")
 ```
+
+!!! note "Lancer les tests"
+    Depuis la racine de ton dépôt :
+
+    ```bash
+    uv run pytest
+    ```
+
+    ou le panneau **Tests** de VSCode, l'icône en forme de fiole.
+
+    `pytest` joue **toutes** les fonctions dont le nom commence par `test_`, dans **tous** les fichiers dont le nom finit par `_test.py`, partout sous `python/`. Rien d'autre : une fonction `test_` posée dans `pile.py` ne serait **jamais jouée**, et rien ne te le dirait.
 
 !!! note "La convention de test de l'année, à prendre tout de suite"
     Tu ne verras **jamais** de test écrit dans une docstring sur ce site. La règle est unique et vaut partout :
 
     - la **docstring** dit le **contrat** en français : ce que la fonction prend, ce qu'elle rend, ce qu'elle exige ;
-    - une **fonction séparée**, nommée `test_` suivi du nom de la fonction testée, porte les `assert`.
+    - une **fonction séparée**, nommée `test_` suivi du nom de la fonction testée, porte les `assert` ;
+    - elle vit dans un fichier **`<module>_test.py`**, à côté du module qu'elle vérifie.
 
-    Deux raisons, et la première est celle qui compte : **c'est la forme qu'on te demandera à l'épreuve pratique**. Autant s'entraîner dans la forme où l'on sera évalué. La seconde est pratique : ton éditeur sait retrouver tout seul les fonctions qui commencent par `test_`.
+    Deux raisons, et la première est celle qui compte : **c'est la forme qu'on te demandera à l'épreuve pratique**. Autant s'entraîner dans la forme où l'on sera évalué. La seconde est que c'est exactement ce que `pytest` sait trouver tout seul dans ton dépôt, sans que tu aies rien à lui dire.
+
+    Remarque aussi l'import de `pile_test.py` : il prend les primitives **par leur nom**, sans préfixe, parce qu'il accompagne le module et le vérifie de l'intérieur. Tu verras juste en dessous que dans un fichier d'exercice, ce n'est pas la même écriture.
 
     Regarde `test_empiler` ci-dessus : il ne vérifie pas seulement que ça marche, il vérifie qu'`empiler` **ne renvoie rien**. Un test qui ne contrôle que la valeur rendue laisse passer la moitié des erreurs sur une structure de données.
 
@@ -260,43 +246,74 @@ if __name__ == "__main__":
 ## Exercices
 
 !!! question "Préparation"
-    Les chemins sont donnés relativement à ton répertoire `prog_term`
+    Tout ton code vit dans le dossier **`python/`** de ton dépôt : les chemins ci-dessous sont donnés relativement à lui. Les commandes, elles, se lancent depuis la **racine du dépôt**.
 
-    Les commandes sont lancées dans ce même répertoire.
-
-    Préparation des fichiers:
+    Rappel de la règle du dépôt : **tout dossier que tu crées reçoit un fichier vide `__init__.py`**, et tous les imports sont **absolus**, c'est-à-dire écrits depuis `python/`.
 
     - Crée le répertoire `structures`. Ajoutes-y un fichier vide `__init__.py`
     - Crée le répertoire `structures/lineaires`. Ajoutes-y un fichier vide `__init__.py`
-    - Reporter le code de création de la structure de Pile dans le fichier `structures/lineaires/pile.py`
-    - Crée le fichier `exos/exospiles.py` et ajoute ce code:
+    - Reporte le code du cours dans `structures/lineaires/pile.py` et `structures/lineaires/pile_test.py`
+    - Crée le répertoire `exos`. Ajoutes-y un fichier vide `__init__.py`
+    - Crée le fichier `exos/exos_piles.py` et ajoute ce code:
 
     ```python
     from structures.lineaires import pile
     ```
 
-    **Tu travailleras dans le fichier exospiles.py**
+    - Crée le fichier `exos/exos_piles_test.py` et ajoute ce code:
+
+    ```python
+    from structures.lineaires import pile
+    ```
+
+    Dès que tu auras écrit ta première fonction, tu ajouteras dans ce fichier une seconde ligne d'import qui la nomme, par exemple
+
+    ```python
+    from exos.exos_piles import pile_exemple, sommet
+    ```
+
+    et tu l'allongeras à mesure : **une fonction que tu veux tester doit y être nommée**. N'y mets jamais un nom que tu n'as pas encore écrit : `pytest` s'arrête alors sur une `ImportError` **sans jouer aucun test**, même ceux qui marchaient.
+
+    **Tu écris tes fonctions dans `exos/exos_piles.py`, et toutes tes fonctions `test_` dans `exos/exos_piles_test.py`.** C'est la même séparation que pour `pile.py` et `pile_test.py`.
+
+    Vérifie tout de suite que la chaîne est en place, depuis la racine du dépôt :
+
+    ```bash
+    uv run pytest
+    ```
+
+    Les cinq tests de `pile_test.py` doivent passer.
+
+    ??? warning "Si Python te répond `ModuleNotFoundError: No module named 'structures'`"
+        Cela arrive quand tu lances **un fichier** (le bouton ▷) juste après avoir créé un nouveau dossier : le dépôt n'a pas encore enregistré ce dossier. Lance une fois, depuis la racine :
+
+        ```bash
+        uv sync
+        ```
+
+        puis réessaie. `uv run pytest`, lui, trouve tes modules sans cela, grâce aux `__init__.py`.
 
 !!! warning "À savoir avant le premier exercice : deux endroits, deux façons d'écrire"
     À partir d'ici tu vas écrire dans **deux fichiers différents**, et il faut savoir à tout moment dans lequel tu es.
 
-    | | `structures/lineaires/pile.py` | `exos/exospiles.py` |
+    | | `structures/lineaires/pile.py` | `exos/exos_piles.py` |
     |---|---|---|
     | ce que tu y fais | tu **fabriques** la structure | tu **utilises** la structure |
     | tu écris | `def empiler(...)`, `type Pile[T] = list[T]` | `pile.empiler(x, p)`, `p: pile.Pile[int]` |
     | tu as le droit de | toucher à la `list` qui est dessous | **seulement** les quatre primitives |
+    | ses tests vivent dans | `structures/lineaires/pile_test.py` | `exos/exos_piles_test.py` |
 
-    **Le préfixe `pile.` n'est pas une décoration : c'est la frontière.** Quand tu écris `pile.empiler(...)`, tu dis « j'appelle la fonction `empiler` **du module** `pile` », donc tu es **dehors**, tu utilises. Quand tu écris `empiler(...)` tout court, tu es **dedans**, tu fabriques.
+    **Le préfixe `pile.` n'est pas une décoration : c'est la frontière.** Quand tu écris `pile.empiler(...)`, tu dis « j'appelle la fonction `empiler` **du module** `pile` », donc tu es **dehors**, tu utilises. Quand tu écris `empiler(...)` tout court, tu es **dedans**, tu fabriques : c'est le cas dans `pile.py`, et dans `pile_test.py` qui l'accompagne.
 
-    C'est le même partage que celui du cours : **implémentation** d'un côté, **interface** de l'autre. Le préfixe te dit de quel côté tu te trouves, et il te préviendra le jour où tu voudras tricher : dans `exospiles.py`, `p[0]` ou `p.insert(...)` fonctionneront, mais tu auras traversé la frontière sans le dire.
+    C'est le même partage que celui du cours : **implémentation** d'un côté, **interface** de l'autre. Le préfixe te dit de quel côté tu te trouves, et il te préviendra le jour où tu voudras tricher : dans `exos/exos_piles.py`, `p[0]` ou `p.insert(...)` fonctionneront, mais tu auras traversé la frontière sans le dire.
 
-    - Tu lanceras ton programme à l'aide de la commande `uv run -m exos.exospiles`
+    - Tu vérifies ton travail par `uv run pytest`, depuis la racine du dépôt.
 
 
 
 !!! question "Exercice 1"
 
-    Créer une fonction `pile_exemple` qui renvoie la pile suivante:
+    Créer dans `exos/exos_piles.py` une fonction `pile_exemple` qui renvoie la pile suivante:
 
     ```
     | 'jaune' |
@@ -311,12 +328,17 @@ if __name__ == "__main__":
     Écrire une fonction `sommet` qui renvoie le sommet d'une pile sans qu'elle soit modifiée à la sortie de la fonction. (on peut donc la modifier, mais on remet tout bien en place avant de sortir de la fonction)
 
     ```python
+    # dans exos/exos_piles.py
+
     def sommet[T](p: pile.Pile[T]) -> T:
         """
         Compléter la docstring : que prend la fonction, que rend-elle,
         et dans quel état laisse-t-elle p ?
         """
+    ```
 
+    ```python
+    # dans exos/exos_piles_test.py
 
     def test_sommet() -> None:
         P = pile_exemple()
@@ -327,15 +349,17 @@ if __name__ == "__main__":
     La ligne à compléter dans `test_sommet` est **l'essentiel de l'exercice**. Une fonction qui renvoie le bon sommet en vidant la pile est fausse, et seul ce second `assert` le détecte.
 
 !!! question "Taille d'une pile - version destructive"
-    Créer une fonction  ```taille_pile[T](p: pile.Pile[T]) -> int``` qui renvoie la taille de p de manière destructive.
+    Créer une fonction  ```taille_pile_nuke[T](p: pile.Pile[T]) -> int``` qui renvoie la taille de p de manière destructive.
     (la pile est vide si on l'affiche après un appel de fonction)
+
+    Écris aussi son test, dans `exos/exos_piles_test.py` : il doit vérifier la taille renvoyée **et** que la pile est bien vide après l'appel.
 
 
 !!! question "Taille d'une pile - version non destructive"
     Créer une fonction  ```taille_pile[T](p: pile.Pile[T]) -> int``` qui renvoie la taille de p de manière non destructive.
     (la pile est intacte si on l'affiche après un appel de fonction)
 
-    On pourra utiliser une pile temporaire.
+    On pourra utiliser une pile temporaire. Les deux fonctions portent des noms différents parce qu'elles vivent dans le même fichier, et qu'elles ne font pas la même chose : `taille_pile_nuke` détruit, `taille_pile` non.
 
     **Puis compare les deux versions par leur coût**, et c'est la vraie question de cet exercice :
 
@@ -409,9 +433,11 @@ if __name__ == "__main__":
     - ou si, à la fin du parcours, la pile n’est pas vide.
 
 
-    Compléter le code, puis écrire sa fonction de test à partir de ces trois cas :
+    Compléter le code, puis écrire sa fonction de test dans `exos/exos_piles_test.py`, à partir de ces trois cas :
 
     ```python
+    # dans exos/exos_piles_test.py
+
     def test_parenthesage() -> None:
         assert parenthesage("((()())(()))")
         assert not parenthesage("())(()")

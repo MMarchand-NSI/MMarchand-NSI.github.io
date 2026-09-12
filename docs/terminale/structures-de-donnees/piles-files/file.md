@@ -84,8 +84,10 @@ Cette implémentation fonctionne, mais `pop(0)` est **coûteux** : retirer le pr
 ## Exercices d'appropriation
 
 !!! question "Préparation"
-    - Créer le fichier `structures/lineaires/file.py`
-    - Créer le fichier `exos/exos_files.py`
+    Mêmes conventions que pour les piles : tout vit sous `python/`, tout dossier créé reçoit son `__init__.py`, les imports sont absolus, et les tests vivent dans un fichier `*_test.py` **à côté** du code qu'ils vérifient.
+
+    - Créer les fichiers `structures/lineaires/file.py` et `structures/lineaires/file_test.py`
+    - Créer les fichiers `exos/exos_files.py` et `exos/exos_files_test.py`
 
     Tous les exercices qui suivent s'écrivent dans `exos/exos_files.py`, et plusieurs manipulent **aussi** une pile. Ce fichier commence donc par ces deux lignes, une fois pour toutes :
 
@@ -94,16 +96,32 @@ Cette implémentation fonctionne, mais `pop(0)` est **coûteux** : retirer le pr
     from structures.lineaires import pile
     ```
 
+    Et `exos/exos_files_test.py` commence par les mêmes, plus la liste des fonctions **déjà écrites** que tu veux tester :
+
+    ```python
+    from structures.lineaires import file
+    from structures.lineaires import pile
+    from exos.exos_files import file_exemple      # à allonger au fur et à mesure
+    ```
+
+    Comme pour les piles : jamais un nom que tu n'as pas encore écrit, sinon `pytest` s'arrête sur une `ImportError` **sans jouer aucun test**.
+
     C'est ce qui explique les préfixes que tu verras partout : `file.defiler(...)` appelle la fonction `defiler` **du module `file`**, et `pile.empiler(...)` celle du module `pile`. Le préfixe dit **de quelle structure** on parle, ce qui est utile précisément quand les deux sont en jeu dans la même ligne.
 
-    Et il dit surtout **où tu es**, comme sur la page des piles : préfixe, tu es dans un fichier d'exercice et tu **utilises** la structure ; pas de préfixe, tu es dans `file.py` et tu la **fabriques**. C'est la même frontière que celle du cours, interface d'un côté, implémentation de l'autre.
+    Et il dit surtout **où tu es**, comme sur la page des piles : préfixe, tu es dans un fichier d'exercice et tu **utilises** la structure ; pas de préfixe, tu es dans `file.py` (ou dans `file_test.py`, qui l'accompagne) et tu la **fabriques**. C'est la même frontière que celle du cours, interface d'un côté, implémentation de l'autre.
 
-!!! question "Écrire le fichier `file.py`"
+!!! question "Écrire le fichier `file.py`, et son fichier de tests"
     Reporter dans `structures/lineaires/file.py` l'implémentation **avec un tableau** ci-dessus, c'est-à-dire les quatre primitives.
 
     C'est une implémentation correcte, et elle suffit pour tous les exercices qui suivent. On la remplacera plus tard par une meilleure, et ce sera l'occasion de vérifier quelque chose d'important.
 
-    On reprendra la même rigueur de typage que pour les piles.
+    On reprendra la même rigueur de typage que pour les piles, et la même forme de tests : **une fonction `test_` par primitive**, dans `structures/lineaires/file_test.py`, qui commence par
+
+    ```python
+    from structures.lineaires.file import File, creer, defiler, enfiler, est_vide
+    ```
+
+    Prends modèle sur `pile_test.py`, primitive par primitive, sans oublier celui qui vérifie que `defiler` sur une file vide **échoue** bien. Puis `uv run pytest` depuis la racine du dépôt.
 
 Les exercices suivants se font dans le fichier exos_files.py.
 
@@ -170,6 +188,8 @@ Les exercices suivants se font dans le fichier exos_files.py.
     **Puis écris leurs deux fonctions de test**, `test_taille_file_nuke` et `test_taille_file`, avec des `assert`. Une fonction de test ne prend rien, ne renvoie rien, et **échoue bruyamment** si le code est faux.
 
     ```python
+    # dans exos/exos_files_test.py
+
     def test_taille_file_nuke() -> None:
         ...
 
@@ -189,6 +209,8 @@ Les exercices suivants se font dans le fichier exos_files.py.
     On te donne la fonction de test. **Lis-la avant d'écrire `nb_elements`** : elle dit exactement ce qui est attendu, y compris ce qu'on oublie toujours, à savoir que la file survive à l'appel.
 
     ```python
+    # dans exos/exos_files_test.py
+
     def test_nb_elements() -> None:
         F = file_exemple()
         assert nb_elements(F, "rouge") == 2
@@ -210,17 +232,19 @@ Les exercices suivants se font dans le fichier exos_files.py.
 
     ??? success "Solution"
         ```python
-        def nb_elements[T](f: File[T], e: T) -> int:
+        # dans exos/exos_files.py : on est du côté qui UTILISE, d'où le préfixe file.
+
+        def nb_elements[T](f: file.File[T], e: T) -> int:
             """Nombre d'occurrences de e dans f. La file f est laissée intacte."""
             n: int = 0
-            temp: File[T] = creer()
-            while not est_vide(f):
-                x = defiler(f)
+            temp: file.File[T] = file.creer()
+            while not file.est_vide(f):
+                x = file.defiler(f)
                 if x == e:
                     n += 1
-                enfiler(x, temp)
-            while not est_vide(temp):
-                enfiler(defiler(temp), f)
+                file.enfiler(x, temp)
+            while not file.est_vide(temp):
+                file.enfiler(file.defiler(temp), f)
             return n
         ```
 
@@ -235,7 +259,11 @@ Quand un même motif revient trois fois, on l'écrit une fois pour toutes.
 !!! question "Écris `elements`, puis ajoute-la à `file.py`"
     Écris une fonction `elements` qui renvoie la **liste** des éléments d'une file, de la sortie vers l'entrée, **sans modifier la file**.
 
+    Celle-ci a sa place **dans `structures/lineaires/file.py`**, et non dans un fichier d'exercice : elle rend un service à tous ceux qui utilisent une file. Elle s'écrit donc **sans préfixe**, comme les quatre primitives, et son test va dans `file_test.py`.
+
     ```python
+    # dans structures/lineaires/file.py
+
     def elements[T](f: File[T]) -> list[T]:
         """Liste des éléments de f, de la sortie vers l'entrée, sans modifier f."""
     ```
@@ -268,7 +296,9 @@ Quand un même motif revient trois fois, on l'écrit une fois pour toutes.
 
         Une **file** temporaire, parce qu'elle conserve l'ordre : ce qui y entre en premier en ressort en premier, et deux transferts de suite rendent donc `f` identique. Une pile l'aurait inversée, et il aurait fallu deux piles pour rattraper.
 
-    **Ajoute cette fonction à `structures/lineaires/file.py`.** Elle n'utilise que l'interface : elle marchera donc **quelle que soit l'implémentation**, et tu vérifieras ce point tout à l'heure.
+    **Ajoute cette fonction à `structures/lineaires/file.py`, et son `test_elements` à `file_test.py`.** Elle n'utilise que l'interface : elle marchera donc **quelle que soit l'implémentation**, et tu vérifieras ce point tout à l'heure.
+
+    Un test qui vaut la peine : appeler `elements` **deux fois de suite** et vérifier que la seconde rend la même liste. Si `elements` abîmait la file, seul ce second appel le dirait.
 
 ## Le vrai objectif du cours : la même file, mais efficace
 
@@ -348,7 +378,7 @@ Tu remarqueras que le bouton `défiler` est **grisé quand la file est vide**. C
     type File[T] = tuple[pile.Pile[T], pile.Pile[T]]   # (entree, sortie)
     ```
 
-    À écrire, avec signatures typées et docstrings testables comme pour les piles : `creer`, `est_vide`, `enfiler`, `defiler`.
+    À écrire, avec signatures typées et docstrings de contrat comme pour les piles : `creer`, `est_vide`, `enfiler`, `defiler`. Tu **ne touches pas** à `file_test.py` : ses tests portent sur le contrat, pas sur l'intérieur, et ils doivent passer sur cette version comme sur l'autre.
 
     Trois questions à te poser **avant** d'écrire `defiler`, dans cet ordre :
 
@@ -403,11 +433,11 @@ Tu viens de remplacer **entièrement** l'intérieur de la file. La première ver
 
 !!! question "Relance tes exercices, sans en changer une ligne"
     1. Dans `structures/lineaires/file.py`, remplace l'implémentation à tableau par celle **à deux piles** que tu viens d'écrire. Garde `elements`, qui n'a pas à changer.
-    2. Ne touche **à rien** dans `exos/exos_files.py`.
-    3. Relance tes tests.
+    2. Ne touche **à rien** dans `exos/exos_files.py`, ni dans `exos/exos_files_test.py`, ni dans `file_test.py`.
+    3. `uv run pytest`.
 
     ??? note "Ce que tu dois constater, et ce que ça veut dire"
-        **Tout passe.** `file_exemple`, `taille_file`, `nb_elements`, la fonction mystère : aucune n'a bougé, et aucune n'avait besoin de bouger.
+        **Tout passe**, et le compte de tests est le même qu'avant : `file_exemple`, `taille_file`, `nb_elements`, la fonction mystère, et jusqu'aux tests de `file_test.py` écrits pour l'implémentation à tableau. Aucun n'a bougé, et aucun n'avait besoin de bouger.
 
         C'est **la** démonstration du cours, et elle ne se raconte pas, elle se constate. Tes fonctions n'ont jamais utilisé que les quatre primitives. Elles ne savaient pas ce qu'il y avait sous le capot, donc elles ne pouvaient pas être cassées par un changement de capot.
 
