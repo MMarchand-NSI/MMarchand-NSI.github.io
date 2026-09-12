@@ -17,7 +17,7 @@ Le fichier à écrire est divisé en 2 parties:
 
 ## Préparation
 
-- Créez un répertoire "pendu" et ouvrez le dans VSCode  (Voir [Setup VSCode][setup-vscode]).
+- Créez un répertoire "pendu" dans le dossier `python/` de votre dépôt, avec son fichier vide `__init__.py` (voir [Au quotidien](../../les-outils/au-quotidien.md)).
 - Créez-y un fichier pendu.py
 - Créez-y un fichier tests.py
 

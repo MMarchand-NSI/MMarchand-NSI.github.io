@@ -1,85 +1,78 @@
-# Outils pour développer
+# Ton environnement de travail
 
-Cette sélection d'outils a été choisie pour être à la fois réaliste et abordable. 
+Tout ce que tu écris cette année vit dans **un dépôt GitHub qui t'appartient**. Tu le retrouves à l'identique sur n'importe quel ordinateur, au lycée comme chez toi, et il n'y a plus rien à transporter ni à perdre (voir [Le problème des clés USB](cle-usb.md)).
 
-L'installation proposée se fait dans l'invite de commandes windows grâce à l'outil winget qui est déjà présent.
+Trois pièces, et c'est tout.
 
-Il aussi est tout à fait possible d'installer la plupart de ces outils en les téléchargeant et en exécutant leur programme d'installation depuis leur site internet, mais c'est plus long. 
+## 1. Ce qui est installé sur la machine
 
+L'installation pose les outils dont tu auras besoin toute l'année :
 
-## VS Code
+| Outil | À quoi il sert |
+|---|---|
+| **VSCode** | l'éditeur dans lequel tu écris ton code |
+| **uv** | il gère Python, les bibliothèques et les tests |
+| **git** et **gh** | ils parlent à GitHub à ta place |
+| **graphviz** | il dessine les graphes et les arbres, en terminale |
 
-Le couteau suisse de la programmation.
+Sous Windows, il installe en plus une **machine Linux** (WSL2 et Debian) : ton code tourne dedans, et VSCode reste côté Windows. Tu n'as rien à faire de particulier, mais ne t'étonne pas de voir apparaître un terminal Debian.
 
-Sous Windows:
+## 2. Ton dépôt de cours, en ligne
 
-```shell
-winget install Microsoft.VisualStudioCode
-```
+Ton professeur a créé pour toi un dépôt **privé** dans l'organisation GitHub `nsi-bf`. Personne d'autre que toi et un professeur du cours ne le voit.
 
-Sous macos, Cliquer sur le lien suivant pour télécharger VSCode et pouvoir l'installer
-[Télécharger Pour MacOS](https://code.visualstudio.com/docs?dv=osx)
-
-
-## UV
-
-Le tout nouveau couteau suisse de python.
-
-Sous windows, exécutez cette ligne dans un terminal.
-
-```powershell
-powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"
-```
-Redémarrez votre ordinateur.
-
-
-Si vous êtes sous linux ou MacOS, dans un terminal:
+Il porte le nom de ta classe, de l'année scolaire et de ton pseudo GitHub, et il est recopié sur ta machine dans un dossier de ton dossier personnel. Pour savoir où :
 
 ```bash
-wget -qO- https://astral.sh/uv/install.sh | sh
+nsi dir
 ```
 
+## 3. La commande `nsi`
 
+Un seul outil commande tout le reste. Tu n'en utiliseras vraiment que deux formes :
 
-## MSYS2
-Cet outil simule l'environnement linux et vous permettra même de programmer dans d'autres langages de programmation, ainsi que d'nistaller simplement un système de gestion de bases de données.
-
-Cet outil n'est nécessaire que sous windows.
-
-```shell
-winget install MSYS2.MSYS2
+```bash
+nsi pull     # en arrivant : récupère ton travail
+nsi push     # en partant : sauvegarde et envoie ton travail
 ```
 
---- 
+Les autres servent une fois, ou en cas de pépin : elles sont toutes dans [Au quotidien](au-quotidien.md).
 
-## Graphviz
+!!! warning "Les trois gestes de chaque séance"
+    1. **En arrivant**, avant de toucher à quoi que ce soit : `nsi pull`
+    2. **Tu travailles** dans le dossier `python/` de ton dépôt
+    3. **En partant**, avant de fermer VSCode : `nsi push`
 
-Un utilitaire pour dessiner des graphes depuis python car `print` a ses limites pour visualiser certaines structures.
+    Sans le dernier, ton code reste sur cette machine, et une machine de salle informatique s'efface.
 
-Seulement en terminale.
+## Où va ton code
 
-```shell
-winget install Graphviz.Graphviz
+Tout dans le dossier **`python/`**, et tu peux y créer autant de sous-dossiers que tu veux.
+
+```
+python/
+├── hello_world.py
+├── hello_world_test.py
+└── structures/
+    ├── __init__.py
+    └── lineaires/
+        ├── __init__.py
+        ├── pile.py
+        └── pile_test.py
 ```
 
----
-## GIT
+Trois règles, qui valent pour toute l'année :
 
-Un outil de base pour gérer "le stockage" de ses fichiers.
+- **tout dossier que tu crées reçoit un fichier vide `__init__.py`** ;
+- tes imports sont **absolus**, écrits depuis `python/` : `from structures.lineaires import pile` ;
+- tes tests vivent dans un fichier **`*_test.py`**, à côté du code qu'ils vérifient, et chaque test est une fonction dont le nom commence par **`test_`**.
 
-```cmd
-winget install Git.Git
+Pour les jouer tous, depuis la racine de ton dépôt :
+
+```bash
+uv run pytest
 ```
 
-Puis dans une ligne de commande, en imaginant avoir créé un compte github bidule avec l'adresse email truc@gmail.com:
+## Et si ça casse
 
-```cmd
-git config --global user.name "bidule"
-
-git config --global user.email "truc@gmail.com"
-```
-
-Pour la facilité d'utilisation au quotidien (pour utiliser git comme une clé usb):
-
-Dans les settings de VSCode, recherchez `post commit command` et mettez le paramètre à `sync`
-
+Les pannes courantes, avec ce qu'il faut taper, sont dans [Dépannage](depannage.md). Aucune ne fait perdre le travail qui a été poussé sur GitHub : c'est tout l'intérêt de `nsi push`.
