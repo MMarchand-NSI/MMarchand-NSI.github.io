@@ -307,7 +307,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../les-outils/0.1cleusb/" class="md-tabs__link">
+        <a href="../../../les-outils/" class="md-tabs__link">
           
   
   
@@ -4638,21 +4638,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#implementation-minimaliste" class="md-nav__link">
+  <a href="#les-deux-fichiers-pilepy-et-pile_testpy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Implémentation minimaliste
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#implementation-avancee" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Implémentation avancée
+        Les deux fichiers : pile.py et pile_test.py
       
     </span>
   </a>
@@ -4669,6 +4658,17 @@
     <span class="md-ellipsis">
       
         Exercices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pour-aller-plus-loin-une-pile-quon-ne-peut-pas-modifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pour aller plus loin : une pile qu'on ne peut pas modifier
       
     </span>
   </a>
@@ -6291,14 +6291,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/0.1cleusb/" class="md-nav__link">
+      <a href="../../../les-outils/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    ⚠️ Le problème des clés USB
+    Ton environnement de travail
   
 
     
@@ -6319,14 +6319,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/0.votreordi/" class="md-nav__link">
+      <a href="../../../les-outils/installation/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Gérer son ordi: La base
+    Installation
   
 
     
@@ -6347,14 +6347,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/1.setup-vscode/" class="md-nav__link">
+      <a href="../../../les-outils/au-quotidien/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Environnement de travail
+    Au quotidien
   
 
     
@@ -6375,14 +6375,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/3.vscode_profiles_daemons/" class="md-nav__link">
+      <a href="../../../les-outils/depannage/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    VSCode : Profils, Daemons et Gestion de la RAM
+    Dépannage
   
 
     
@@ -6403,14 +6403,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/migration-terms/" class="md-nav__link">
+      <a href="../../../les-outils/cle-usb/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Migration
+    Le problème des clés USB
   
 
     
@@ -6431,14 +6431,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../les-outils/setup-nsi/" class="md-nav__link">
+      <a href="../../../les-outils/ordinateur/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Installation initiale de l'environnement de développement
+    Gérer son ordinateur
   
 
     
@@ -7868,21 +7868,10 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#implementation-minimaliste" class="md-nav__link">
+  <a href="#les-deux-fichiers-pilepy-et-pile_testpy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Implémentation minimaliste
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#implementation-avancee" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Implémentation avancée
+        Les deux fichiers : pile.py et pile_test.py
       
     </span>
   </a>
@@ -7899,6 +7888,17 @@
     <span class="md-ellipsis">
       
         Exercices
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#pour-aller-plus-loin-une-pile-quon-ne-peut-pas-modifier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pour aller plus loin : une pile qu'on ne peut pas modifier
       
     </span>
   </a>
@@ -8206,110 +8206,95 @@ Les primitives doivent trouver une implémentation la plus rapide possible. Il p
 <li>list.pop(): supprime le dernier élément de la liste et le renvoie en O(1).</li>
 </ul>
 <p>(voir la <a href="https://wiki.python.org/moin/TimeComplexity">Documentation de python</a>)</p>
-<h3 id="implementation-minimaliste">Implémentation minimaliste</h3>
-<p>On introduit d'abord un <strong>nouveau type</strong> <code>Pile[T]</code>, construit à partir de <code>list</code> (une pile de <code>T</code> est une liste de <code>T</code>), puis les quatre primitives.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">type</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
-<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">[</span><span class="n">T</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>    <span class="k">return</span> <span class="p">[]</span>
-<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
-<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
-<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">empiler</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">e</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>    <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>
-<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">depiler</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="s2">&quot;La pile est vide&quot;</span>
-<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="k">return</span> <span class="n">p</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-</code></pre></div>
-<h3 id="implementation-avancee">Implémentation avancée</h3>
+<h3 id="les-deux-fichiers-pilepy-et-pile_testpy">Les deux fichiers : <code>pile.py</code> et <code>pile_test.py</code></h3>
 <p>Ici on considère que:</p>
 <p><strong>Une Pile d'éléments d'un type quelconque T est une liste d'éléments de type T</strong></p>
-<p>On ajoute aussi des docstrings qui intègrent les tests unitaires de chaque fonction.</p>
-<p>Voici le fichier pile.py</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># Python 3.13</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">type</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">[</span><span class="n">T</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Crée et renvoie une pile vide.&quot;&quot;&quot;</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="k">return</span> <span class="p">[]</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Indique si la pile p est vide.&quot;&quot;&quot;</span>
-<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>
-<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">empiler</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">e</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a><span class="sd">    Empile l&#39;élément e au sommet de la pile p.</span>
-<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="sd">    Modifie p sur place et ne renvoie rien.</span>
-<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>
-<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a><span class="k">def</span><span class="w"> </span><span class="nf">depiler</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a><span class="sd">    Retire l&#39;élément au sommet de la pile p et le renvoie.</span>
-<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="sd">    Précondition : p ne doit pas être vide.</span>
-<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="s2">&quot;La pile est vide&quot;</span>
-<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>    <span class="k">return</span> <span class="n">p</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
-<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>
-<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>
-<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a><span class="c1"># --- Tests ---------------------------------------------------------------</span>
-<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a><span class="c1"># Une fonction de test par primitive, nommée test_&lt;primitive&gt;.</span>
-<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="c1"># Elle ne prend rien, ne renvoie rien, et échoue bruyamment si le code est faux.</span>
-<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>
-<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_creer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
-<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>    <span class="k">assert</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>
-<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_est_vide</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-38" name="__codelineno-2-38" href="#__codelineno-2-38"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
-<a id="__codelineno-2-39" name="__codelineno-2-39" href="#__codelineno-2-39"></a>    <span class="k">assert</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<a id="__codelineno-2-40" name="__codelineno-2-40" href="#__codelineno-2-40"></a>    <span class="n">empiler</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<a id="__codelineno-2-41" name="__codelineno-2-41" href="#__codelineno-2-41"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<a id="__codelineno-2-42" name="__codelineno-2-42" href="#__codelineno-2-42"></a>
-<a id="__codelineno-2-43" name="__codelineno-2-43" href="#__codelineno-2-43"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_empiler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-44" name="__codelineno-2-44" href="#__codelineno-2-44"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
-<a id="__codelineno-2-45" name="__codelineno-2-45" href="#__codelineno-2-45"></a>    <span class="k">assert</span> <span class="n">empiler</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>      <span class="c1"># empiler ne RENVOIE rien, il MODIFIE p</span>
-<a id="__codelineno-2-46" name="__codelineno-2-46" href="#__codelineno-2-46"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<a id="__codelineno-2-47" name="__codelineno-2-47" href="#__codelineno-2-47"></a>    <span class="n">empiler</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<a id="__codelineno-2-48" name="__codelineno-2-48" href="#__codelineno-2-48"></a>    <span class="k">assert</span> <span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>             <span class="c1"># 5 est bien au sommet : dernier entré</span>
-<a id="__codelineno-2-49" name="__codelineno-2-49" href="#__codelineno-2-49"></a>
-<a id="__codelineno-2-50" name="__codelineno-2-50" href="#__codelineno-2-50"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_depiler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-51" name="__codelineno-2-51" href="#__codelineno-2-51"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
-<a id="__codelineno-2-52" name="__codelineno-2-52" href="#__codelineno-2-52"></a>    <span class="n">empiler</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<a id="__codelineno-2-53" name="__codelineno-2-53" href="#__codelineno-2-53"></a>    <span class="n">empiler</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<a id="__codelineno-2-54" name="__codelineno-2-54" href="#__codelineno-2-54"></a>    <span class="k">assert</span> <span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>             <span class="c1"># retire ET renvoie</span>
-<a id="__codelineno-2-55" name="__codelineno-2-55" href="#__codelineno-2-55"></a>    <span class="k">assert</span> <span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-<a id="__codelineno-2-56" name="__codelineno-2-56" href="#__codelineno-2-56"></a>    <span class="k">assert</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<a id="__codelineno-2-57" name="__codelineno-2-57" href="#__codelineno-2-57"></a>
-<a id="__codelineno-2-58" name="__codelineno-2-58" href="#__codelineno-2-58"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_depiler_pile_vide</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-2-59" name="__codelineno-2-59" href="#__codelineno-2-59"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
-<a id="__codelineno-2-60" name="__codelineno-2-60" href="#__codelineno-2-60"></a>    <span class="k">try</span><span class="p">:</span>
-<a id="__codelineno-2-61" name="__codelineno-2-61" href="#__codelineno-2-61"></a>        <span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-<a id="__codelineno-2-62" name="__codelineno-2-62" href="#__codelineno-2-62"></a>    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
-<a id="__codelineno-2-63" name="__codelineno-2-63" href="#__codelineno-2-63"></a>        <span class="k">return</span>                          <span class="c1"># comportement attendu</span>
-<a id="__codelineno-2-64" name="__codelineno-2-64" href="#__codelineno-2-64"></a>    <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;depiler sur une pile vide aurait dû échouer&quot;</span>
-<a id="__codelineno-2-65" name="__codelineno-2-65" href="#__codelineno-2-65"></a>
-<a id="__codelineno-2-66" name="__codelineno-2-66" href="#__codelineno-2-66"></a>
-<a id="__codelineno-2-67" name="__codelineno-2-67" href="#__codelineno-2-67"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-<a id="__codelineno-2-68" name="__codelineno-2-68" href="#__codelineno-2-68"></a>    <span class="n">test_creer</span><span class="p">()</span>
-<a id="__codelineno-2-69" name="__codelineno-2-69" href="#__codelineno-2-69"></a>    <span class="n">test_est_vide</span><span class="p">()</span>
-<a id="__codelineno-2-70" name="__codelineno-2-70" href="#__codelineno-2-70"></a>    <span class="n">test_empiler</span><span class="p">()</span>
-<a id="__codelineno-2-71" name="__codelineno-2-71" href="#__codelineno-2-71"></a>    <span class="n">test_depiler</span><span class="p">()</span>
-<a id="__codelineno-2-72" name="__codelineno-2-72" href="#__codelineno-2-72"></a>    <span class="n">test_depiler_pile_vide</span><span class="p">()</span>
-<a id="__codelineno-2-73" name="__codelineno-2-73" href="#__codelineno-2-73"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;pile.py : tous les tests passent&quot;</span><span class="p">)</span>
+<p>On introduit donc un <strong>nouveau type</strong> <code>Pile[T]</code>, construit à partir de <code>list</code>, puis les quatre primitives. Cela tient en <strong>deux fichiers, côte à côte</strong> dans <code>structures/lineaires/</code> : le module et ses tests.</p>
+<p>Voici le fichier <code>structures/lineaires/pile.py</code>. Les docstrings y disent le <strong>contrat</strong> en français, et rien d'autre : ce que la primitive prend, ce qu'elle rend, ce qu'elle exige.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># structures/lineaires/pile.py</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="nb">type</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span>
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">[</span><span class="n">T</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Crée et renvoie une pile vide.&quot;&quot;&quot;</span>
+<a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>    <span class="k">return</span> <span class="p">[]</span>
+<a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+<a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Indique si la pile p est vide.&quot;&quot;&quot;</span>
+<a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a>
+<a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">empiler</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">e</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a><span class="sd">    Empile l&#39;élément e au sommet de la pile p.</span>
+<a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a><span class="sd">    Modifie p sur place et ne renvoie rien.</span>
+<a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a>    <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+<a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a>
+<a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a><span class="k">def</span><span class="w"> </span><span class="nf">depiler</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+<a id="__codelineno-1-21" name="__codelineno-1-21" href="#__codelineno-1-21"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-1-22" name="__codelineno-1-22" href="#__codelineno-1-22"></a><span class="sd">    Retire l&#39;élément au sommet de la pile p et le renvoie.</span>
+<a id="__codelineno-1-23" name="__codelineno-1-23" href="#__codelineno-1-23"></a><span class="sd">    Précondition : p ne doit pas être vide.</span>
+<a id="__codelineno-1-24" name="__codelineno-1-24" href="#__codelineno-1-24"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-1-25" name="__codelineno-1-25" href="#__codelineno-1-25"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="s2">&quot;La pile est vide&quot;</span>
+<a id="__codelineno-1-26" name="__codelineno-1-26" href="#__codelineno-1-26"></a>    <span class="k">return</span> <span class="n">p</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>
 </code></pre></div>
+<p>Et voici le fichier <code>structures/lineaires/pile_test.py</code>, dans <strong>le même répertoire</strong>. Une fonction de test par primitive, nommée <code>test_</code> suivi du nom de la primitive. Elle ne prend rien, ne renvoie rien, et échoue bruyamment si le code est faux.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="c1"># structures/lineaires/pile_test.py</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires.pile</span><span class="w"> </span><span class="kn">import</span> <span class="n">Pile</span><span class="p">,</span> <span class="n">creer</span><span class="p">,</span> <span class="n">depiler</span><span class="p">,</span> <span class="n">empiler</span><span class="p">,</span> <span class="n">est_vide</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_creer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="k">assert</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>
+<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_est_vide</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-2-11" name="__codelineno-2-11" href="#__codelineno-2-11"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-2-12" name="__codelineno-2-12" href="#__codelineno-2-12"></a>    <span class="k">assert</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-2-13" name="__codelineno-2-13" href="#__codelineno-2-13"></a>    <span class="n">empiler</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-2-14" name="__codelineno-2-14" href="#__codelineno-2-14"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-2-15" name="__codelineno-2-15" href="#__codelineno-2-15"></a>
+<a id="__codelineno-2-16" name="__codelineno-2-16" href="#__codelineno-2-16"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_empiler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-2-17" name="__codelineno-2-17" href="#__codelineno-2-17"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-2-18" name="__codelineno-2-18" href="#__codelineno-2-18"></a>    <span class="k">assert</span> <span class="n">empiler</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span>      <span class="c1"># empiler ne RENVOIE rien, il MODIFIE p</span>
+<a id="__codelineno-2-19" name="__codelineno-2-19" href="#__codelineno-2-19"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-2-20" name="__codelineno-2-20" href="#__codelineno-2-20"></a>    <span class="n">empiler</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-2-21" name="__codelineno-2-21" href="#__codelineno-2-21"></a>    <span class="k">assert</span> <span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>             <span class="c1"># 5 est bien au sommet : dernier entré</span>
+<a id="__codelineno-2-22" name="__codelineno-2-22" href="#__codelineno-2-22"></a>
+<a id="__codelineno-2-23" name="__codelineno-2-23" href="#__codelineno-2-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_depiler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-2-24" name="__codelineno-2-24" href="#__codelineno-2-24"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-2-25" name="__codelineno-2-25" href="#__codelineno-2-25"></a>    <span class="n">empiler</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-2-26" name="__codelineno-2-26" href="#__codelineno-2-26"></a>    <span class="n">empiler</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-2-27" name="__codelineno-2-27" href="#__codelineno-2-27"></a>    <span class="k">assert</span> <span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>             <span class="c1"># retire ET renvoie</span>
+<a id="__codelineno-2-28" name="__codelineno-2-28" href="#__codelineno-2-28"></a>    <span class="k">assert</span> <span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<a id="__codelineno-2-29" name="__codelineno-2-29" href="#__codelineno-2-29"></a>    <span class="k">assert</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-2-30" name="__codelineno-2-30" href="#__codelineno-2-30"></a>
+<a id="__codelineno-2-31" name="__codelineno-2-31" href="#__codelineno-2-31"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_depiler_pile_vide</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-2-32" name="__codelineno-2-32" href="#__codelineno-2-32"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-2-33" name="__codelineno-2-33" href="#__codelineno-2-33"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-2-34" name="__codelineno-2-34" href="#__codelineno-2-34"></a>        <span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-2-35" name="__codelineno-2-35" href="#__codelineno-2-35"></a>    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+<a id="__codelineno-2-36" name="__codelineno-2-36" href="#__codelineno-2-36"></a>        <span class="k">return</span>                          <span class="c1"># comportement attendu</span>
+<a id="__codelineno-2-37" name="__codelineno-2-37" href="#__codelineno-2-37"></a>    <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;depiler sur une pile vide aurait dû échouer&quot;</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Lancer les tests</p>
+<p>Depuis la racine de ton dépôt :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest
+</code></pre></div>
+<p>ou le panneau <strong>Tests</strong> de VSCode, l'icône en forme de fiole.</p>
+<p><code>pytest</code> joue <strong>toutes</strong> les fonctions dont le nom commence par <code>test_</code>, dans <strong>tous</strong> les fichiers dont le nom finit par <code>_test.py</code>, partout sous <code>python/</code>. Rien d'autre : une fonction <code>test_</code> posée dans <code>pile.py</code> ne serait <strong>jamais jouée</strong>, et rien ne te le dirait.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">La convention de test de l'année, à prendre tout de suite</p>
 <p>Tu ne verras <strong>jamais</strong> de test écrit dans une docstring sur ce site. La règle est unique et vaut partout :</p>
 <ul>
 <li>la <strong>docstring</strong> dit le <strong>contrat</strong> en français : ce que la fonction prend, ce qu'elle rend, ce qu'elle exige ;</li>
-<li>une <strong>fonction séparée</strong>, nommée <code>test_</code> suivi du nom de la fonction testée, porte les <code>assert</code>.</li>
+<li>une <strong>fonction séparée</strong>, nommée <code>test_</code> suivi du nom de la fonction testée, porte les <code>assert</code> ;</li>
+<li>elle vit dans un fichier <strong><code>&lt;module&gt;_test.py</code></strong>, à côté du module qu'elle vérifie.</li>
 </ul>
-<p>Deux raisons, et la première est celle qui compte : <strong>c'est la forme qu'on te demandera à l'épreuve pratique</strong>. Autant s'entraîner dans la forme où l'on sera évalué. La seconde est pratique : ton éditeur sait retrouver tout seul les fonctions qui commencent par <code>test_</code>.</p>
+<p>Deux raisons, et la première est celle qui compte : <strong>c'est la forme qu'on te demandera à l'épreuve pratique</strong>. Autant s'entraîner dans la forme où l'on sera évalué. La seconde est que c'est exactement ce que <code>pytest</code> sait trouver tout seul dans ton dépôt, sans que tu aies rien à lui dire.</p>
+<p>Remarque aussi l'import de <code>pile_test.py</code> : il prend les primitives <strong>par leur nom</strong>, sans préfixe, parce qu'il accompagne le module et le vérifie de l'intérieur. Tu verras juste en dessous que dans un fichier d'exercice, ce n'est pas la même écriture.</p>
 <p>Regarde <code>test_empiler</code> ci-dessus : il ne vérifie pas seulement que ça marche, il vérifie qu'<code>empiler</code> <strong>ne renvoie rien</strong>. Un test qui ne contrôle que la valeur rendue laisse passer la moitié des erreurs sur une structure de données.</p>
 </div>
 <div class="admonition warning">
@@ -8334,18 +8319,38 @@ Les primitives doivent trouver une implémentation la plus rapide possible. Il p
 <h2 id="exercices">Exercices</h2>
 <div class="admonition question">
 <p class="admonition-title">Préparation</p>
-<p>Les chemins sont donnés relativement à ton répertoire <code>prog_term</code></p>
-<p>Les commandes sont lancées dans ce même répertoire.</p>
-<p>Préparation des fichiers:</p>
+<p>Tout ton code vit dans le dossier <strong><code>python/</code></strong> de ton dépôt : les chemins ci-dessous sont donnés relativement à lui. Les commandes, elles, se lancent depuis la <strong>racine du dépôt</strong>.</p>
+<p>Rappel de la règle du dépôt : <strong>tout dossier que tu crées reçoit un fichier vide <code>__init__.py</code></strong>, et tous les imports sont <strong>absolus</strong>, c'est-à-dire écrits depuis <code>python/</code>.</p>
 <ul>
 <li>Crée le répertoire <code>structures</code>. Ajoutes-y un fichier vide <code>__init__.py</code></li>
 <li>Crée le répertoire <code>structures/lineaires</code>. Ajoutes-y un fichier vide <code>__init__.py</code></li>
-<li>Reporter le code de création de la structure de Pile dans le fichier <code>structures/lineaires/pile.py</code></li>
-<li>Crée le fichier <code>exos/exospiles.py</code> et ajoute ce code:</li>
+<li>Reporte le code du cours dans <code>structures/lineaires/pile.py</code> et <code>structures/lineaires/pile_test.py</code></li>
+<li>Crée le répertoire <code>exos</code>. Ajoutes-y un fichier vide <code>__init__.py</code></li>
+<li>Crée le fichier <code>exos/exos_piles.py</code> et ajoute ce code:</li>
 </ul>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires</span><span class="w"> </span><span class="kn">import</span> <span class="n">pile</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires</span><span class="w"> </span><span class="kn">import</span> <span class="n">pile</span>
 </code></pre></div>
-<p><strong>Tu travailleras dans le fichier exospiles.py</strong></p>
+<ul>
+<li>Crée le fichier <code>exos/exos_piles_test.py</code> et ajoute ce code:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires</span><span class="w"> </span><span class="kn">import</span> <span class="n">pile</span>
+</code></pre></div>
+<p>Dès que tu auras écrit ta première fonction, tu ajouteras dans ce fichier une seconde ligne d'import qui la nomme, par exemple</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">exos.exos_piles</span><span class="w"> </span><span class="kn">import</span> <span class="n">pile_exemple</span><span class="p">,</span> <span class="n">sommet</span>
+</code></pre></div>
+<p>et tu l'allongeras à mesure : <strong>une fonction que tu veux tester doit y être nommée</strong>. N'y mets jamais un nom que tu n'as pas encore écrit : <code>pytest</code> s'arrête alors sur une <code>ImportError</code> <strong>sans jouer aucun test</strong>, même ceux qui marchaient.</p>
+<p><strong>Tu écris tes fonctions dans <code>exos/exos_piles.py</code>, et toutes tes fonctions <code>test_</code> dans <code>exos/exos_piles_test.py</code>.</strong> C'est la même séparation que pour <code>pile.py</code> et <code>pile_test.py</code>.</p>
+<p>Vérifie tout de suite que la chaîne est en place, depuis la racine du dépôt :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>uv<span class="w"> </span>run<span class="w"> </span>pytest
+</code></pre></div>
+<p>Les cinq tests de <code>pile_test.py</code> doivent passer.</p>
+<details class="warning">
+<summary>Si Python te répond <code>ModuleNotFoundError: No module named 'structures'</code></summary>
+<p>Cela arrive quand tu lances <strong>un fichier</strong> (le bouton ▷) juste après avoir créé un nouveau dossier : le dépôt n'a pas encore enregistré ce dossier. Lance une fois, depuis la racine :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>uv<span class="w"> </span>sync
+</code></pre></div>
+<p>puis réessaie. <code>uv run pytest</code>, lui, trouve tes modules sans cela, grâce aux <code>__init__.py</code>.</p>
+</details>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">À savoir avant le premier exercice : deux endroits, deux façons d'écrire</p>
@@ -8355,7 +8360,7 @@ Les primitives doivent trouver une implémentation la plus rapide possible. Il p
 <tr>
 <th></th>
 <th><code>structures/lineaires/pile.py</code></th>
-<th><code>exos/exospiles.py</code></th>
+<th><code>exos/exos_piles.py</code></th>
 </tr>
 </thead>
 <tbody>
@@ -8374,52 +8379,61 @@ Les primitives doivent trouver une implémentation la plus rapide possible. Il p
 <td>toucher à la <code>list</code> qui est dessous</td>
 <td><strong>seulement</strong> les quatre primitives</td>
 </tr>
+<tr>
+<td>ses tests vivent dans</td>
+<td><code>structures/lineaires/pile_test.py</code></td>
+<td><code>exos/exos_piles_test.py</code></td>
+</tr>
 </tbody>
 </table>
-<p><strong>Le préfixe <code>pile.</code> n'est pas une décoration : c'est la frontière.</strong> Quand tu écris <code>pile.empiler(...)</code>, tu dis « j'appelle la fonction <code>empiler</code> <strong>du module</strong> <code>pile</code> », donc tu es <strong>dehors</strong>, tu utilises. Quand tu écris <code>empiler(...)</code> tout court, tu es <strong>dedans</strong>, tu fabriques.</p>
-<p>C'est le même partage que celui du cours : <strong>implémentation</strong> d'un côté, <strong>interface</strong> de l'autre. Le préfixe te dit de quel côté tu te trouves, et il te préviendra le jour où tu voudras tricher : dans <code>exospiles.py</code>, <code>p[0]</code> ou <code>p.insert(...)</code> fonctionneront, mais tu auras traversé la frontière sans le dire.</p>
+<p><strong>Le préfixe <code>pile.</code> n'est pas une décoration : c'est la frontière.</strong> Quand tu écris <code>pile.empiler(...)</code>, tu dis « j'appelle la fonction <code>empiler</code> <strong>du module</strong> <code>pile</code> », donc tu es <strong>dehors</strong>, tu utilises. Quand tu écris <code>empiler(...)</code> tout court, tu es <strong>dedans</strong>, tu fabriques : c'est le cas dans <code>pile.py</code>, et dans <code>pile_test.py</code> qui l'accompagne.</p>
+<p>C'est le même partage que celui du cours : <strong>implémentation</strong> d'un côté, <strong>interface</strong> de l'autre. Le préfixe te dit de quel côté tu te trouves, et il te préviendra le jour où tu voudras tricher : dans <code>exos/exos_piles.py</code>, <code>p[0]</code> ou <code>p.insert(...)</code> fonctionneront, mais tu auras traversé la frontière sans le dire.</p>
 <ul>
-<li>Tu lanceras ton programme à l'aide de la commande <code>uv run -m exos.exospiles</code></li>
+<li>Tu vérifies ton travail par <code>uv run pytest</code>, depuis la racine du dépôt.</li>
 </ul>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 1</p>
-<p>Créer une fonction <code>pile_exemple</code> qui renvoie la pile suivante:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>| &#39;jaune&#39; |
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>| &#39;rouge&#39; |
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>| &#39;jaune&#39; |
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>| &#39;vert&#39;  |
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>| &#39;rouge&#39; |
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>-----------
+<p>Créer dans <code>exos/exos_piles.py</code> une fonction <code>pile_exemple</code> qui renvoie la pile suivante:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>| &#39;jaune&#39; |
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>| &#39;rouge&#39; |
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>| &#39;jaune&#39; |
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>| &#39;vert&#39;  |
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>| &#39;rouge&#39; |
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>-----------
 </code></pre></div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Sommet d'une pile</p>
 <p>Écrire une fonction <code>sommet</code> qui renvoie le sommet d'une pile sans qu'elle soit modifiée à la sortie de la fonction. (on peut donc la modifier, mais on remet tout bien en place avant de sortir de la fonction)</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">sommet</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">p</span><span class="p">:</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="sd">    Compléter la docstring : que prend la fonction, que rend-elle,</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="sd">    et dans quel état laisse-t-elle p ?</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_sommet</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="n">P</span> <span class="o">=</span> <span class="n">pile_exemple</span><span class="p">()</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="k">assert</span> <span class="n">sommet</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;jaune&quot;</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="o">...</span>   <span class="c1"># et surtout : vérifie que P n&#39;a pas bougé</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># dans exos/exos_piles.py</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">sommet</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">p</span><span class="p">:</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="sd">    Compléter la docstring : que prend la fonction, que rend-elle,</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="sd">    et dans quel état laisse-t-elle p ?</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="sd">    &quot;&quot;&quot;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="c1"># dans exos/exos_piles_test.py</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_sommet</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="n">P</span> <span class="o">=</span> <span class="n">pile_exemple</span><span class="p">()</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="k">assert</span> <span class="n">sommet</span><span class="p">(</span><span class="n">P</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;jaune&quot;</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="o">...</span>   <span class="c1"># et surtout : vérifie que P n&#39;a pas bougé</span>
 </code></pre></div>
 <p>La ligne à compléter dans <code>test_sommet</code> est <strong>l'essentiel de l'exercice</strong>. Une fonction qui renvoie le bon sommet en vidant la pile est fausse, et seul ce second <code>assert</code> le détecte.</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Taille d'une pile - version destructive</p>
-<p>Créer une fonction  <code>taille_pile[T](p: pile.Pile[T]) -&gt; int</code> qui renvoie la taille de p de manière destructive.
+<p>Créer une fonction  <code>taille_pile_nuke[T](p: pile.Pile[T]) -&gt; int</code> qui renvoie la taille de p de manière destructive.
 (la pile est vide si on l'affiche après un appel de fonction)</p>
+<p>Écris aussi son test, dans <code>exos/exos_piles_test.py</code> : il doit vérifier la taille renvoyée <strong>et</strong> que la pile est bien vide après l'appel.</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Taille d'une pile - version non destructive</p>
 <p>Créer une fonction  <code>taille_pile[T](p: pile.Pile[T]) -&gt; int</code> qui renvoie la taille de p de manière non destructive.
 (la pile est intacte si on l'affiche après un appel de fonction)</p>
-<p>On pourra utiliser une pile temporaire.</p>
+<p>On pourra utiliser une pile temporaire. Les deux fonctions portent des noms différents parce qu'elles vivent dans le même fichier, et qu'elles ne font pas la même chose : <code>taille_pile_nuke</code> détruit, <code>taille_pile</code> non.</p>
 <p><strong>Puis compare les deux versions par leur coût</strong>, et c'est la vraie question de cet exercice :</p>
 <ol>
 <li>Pour une pile de <code>n</code> éléments, combien de <code>EMPILER</code> et de <code>DEPILER</code> fait chacune des deux ?</li>
@@ -8462,15 +8476,15 @@ Cette fonction ne retourne rien.</p>
 </details>
 <details class="success">
 <summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">renverse_inplace</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">p</span><span class="p">:</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">t1</span><span class="p">:</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">()</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">t2</span><span class="p">:</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">()</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">t1</span><span class="p">)</span>    <span class="c1"># p vers t1 : ordre inverse</span>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">t1</span><span class="p">):</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">depiler</span><span class="p">(</span><span class="n">t1</span><span class="p">),</span> <span class="n">t2</span><span class="p">)</span>   <span class="c1"># t1 vers t2 : ordre rétabli</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">t2</span><span class="p">):</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>        <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">depiler</span><span class="p">(</span><span class="n">t2</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span>    <span class="c1"># t2 vers p : ordre inverse de l&#39;original</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">renverse_inplace</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">p</span><span class="p">:</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">t1</span><span class="p">:</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">t2</span><span class="p">:</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">t1</span><span class="p">)</span>    <span class="c1"># p vers t1 : ordre inverse</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">t1</span><span class="p">):</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>        <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">depiler</span><span class="p">(</span><span class="n">t1</span><span class="p">),</span> <span class="n">t2</span><span class="p">)</span>   <span class="c1"># t1 vers t2 : ordre rétabli</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    <span class="k">while</span> <span class="ow">not</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">t2</span><span class="p">):</span>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>        <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">depiler</span><span class="p">(</span><span class="n">t2</span><span class="p">),</span> <span class="n">p</span><span class="p">)</span>    <span class="c1"># t2 vers p : ordre inverse de l&#39;original</span>
 </code></pre></div>
 <p>La pile <code>p</code> n'est jamais remplacée, seulement vidée puis remplie : c'est ce que veut dire « en place ».</p>
 </details>
@@ -8494,30 +8508,161 @@ Elle est, par contre, mal parenthésée :</p>
 <li>si dans le parcours, on trouve une parenthèse fermante, alors que la pile est vide ;</li>
 <li>ou si, à la fin du parcours, la pile n’est pas vide.</li>
 </ul>
-<p>Compléter le code, puis écrire sa fonction de test à partir de ces trois cas :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_parenthesage</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">assert</span> <span class="n">parenthesage</span><span class="p">(</span><span class="s2">&quot;((()())(()))&quot;</span><span class="p">)</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">parenthesage</span><span class="p">(</span><span class="s2">&quot;())(()&quot;</span><span class="p">)</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">parenthesage</span><span class="p">(</span><span class="s2">&quot;(())(()&quot;</span><span class="p">)</span>
+<p>Compléter le code, puis écrire sa fonction de test dans <code>exos/exos_piles_test.py</code>, à partir de ces trois cas :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="c1"># dans exos/exos_piles_test.py</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_parenthesage</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="k">assert</span> <span class="n">parenthesage</span><span class="p">(</span><span class="s2">&quot;((()())(()))&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">parenthesage</span><span class="p">(</span><span class="s2">&quot;())(()&quot;</span><span class="p">)</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">parenthesage</span><span class="p">(</span><span class="s2">&quot;(())(()&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Ajoute au moins <strong>deux cas de ton choix</strong>, dont la chaîne vide. Une fonction de test qui ne contient que les exemples de l'énoncé ne teste que ce que l'énoncé avait déjà prévu.</p>
 <p>Code:</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">parenthesage</span><span class="p">(</span><span class="n">ch</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="sd">    Renvoie True si la chaîne ch est bien parenthésée</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="sd">    et False sinon</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">()</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ch</span><span class="p">:</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="o">...</span><span class="p">:</span>
-<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>            <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
-<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="o">...</span><span class="p">:</span>
-<a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>            <span class="k">if</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
-<a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>                <span class="k">return</span> <span class="o">...</span>
-<a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>            <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>                <span class="o">...</span>
-<a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a>    <span class="k">return</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">parenthesage</span><span class="p">(</span><span class="n">ch</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="sd">    Renvoie True si la chaîne ch est bien parenthésée</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="sd">    et False sinon</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">pile</span><span class="o">.</span><span class="n">Pile</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">ch</span><span class="p">:</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>        <span class="k">if</span> <span class="n">c</span> <span class="o">==</span> <span class="o">...</span><span class="p">:</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>            <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>        <span class="k">elif</span> <span class="n">c</span> <span class="o">==</span> <span class="o">...</span><span class="p">:</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>            <span class="k">if</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">):</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>                <span class="k">return</span> <span class="o">...</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>            <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>                <span class="o">...</span>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>    <span class="k">return</span> <span class="n">pile</span><span class="o">.</span><span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
 </code></pre></div>
+</div>
+<h2 id="pour-aller-plus-loin-une-pile-quon-ne-peut-pas-modifier">Pour aller plus loin : une pile qu'on ne peut pas modifier</h2>
+<div class="admonition question">
+<p class="admonition-title">Une pile immuable, bâtie sur un tuple</p>
+<p>Depuis le début de cette page, une <code>Pile[T]</code> est une <code>list[T]</code>, et <code>empiler</code> comme <code>depiler</code> la <strong>modifient sur place</strong>. On va la refaire autrement : avec un <strong>tuple</strong>, qui ne se modifie jamais.</p>
+<p>Crée <code>structures/lineaires/pile_immuable.py</code> et <code>structures/lineaires/pile_immuable_test.py</code>, et repars de cette déclaration :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="c1"># dans structures/lineaires/pile_immuable.py</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="nb">type</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+</code></pre></div>
+<div class="admonition info">
+<p class="admonition-title">Les trois points ne sont pas une coquille</p>
+<p><code>tuple[int]</code> désigne un tuple d'<strong>exactement un</strong> entier, et rien d'autre. Pour un tuple contenant un nombre quelconque d'entiers, il faut écrire <code>tuple[int, ...]</code>, les trois points faisant partie de la notation. Ici, <code>tuple[T, ...]</code> : autant d'éléments qu'on veut, tous du même type.</p>
+</div>
+<p><strong>Deux des quatre primitives ne peuvent pas garder leur signature.</strong> Ce n'est pas une question de goût : avec les anciennes, elles sont impossibles à écrire.</p>
+<p>Avant d'écrire une seule ligne, réponds sur ton cahier :</p>
+<ol>
+<li>Quelles sont, aujourd'hui, les signatures de <code>empiler</code> et de <code>depiler</code> ?</li>
+<li>Pourquoi aucune des deux ne peut survivre au passage au tuple ?</li>
+<li><code>depiler</code> a maintenant <strong>deux</strong> choses à communiquer à celui qui l'appelle. Lesquelles, et comment une fonction en rend-elle deux ?</li>
+</ol>
+<p>Écris ensuite les quatre primitives et leurs fonctions de test, puis <code>uv run pytest</code>.</p>
+<details class="tip">
+<summary>Indice léger</summary>
+<p>Un tuple ne peut pas changer. Or une fonction qui ne modifie rien <strong>et</strong> ne rend rien ne fait rien du tout.</p>
+</details>
+<details class="tip">
+<summary>Indice précis</summary>
+<p><code>empiler</code> doit <strong>rendre la pile obtenue</strong> : <code>-&gt; Pile[T]</code> au lieu de <code>-&gt; None</code>. Et <code>depiler</code> doit rendre l'élément retiré <strong>et</strong> la pile qui reste, donc un couple : <code>-&gt; tuple[T, Pile[T]]</code>.</p>
+</details>
+<details class="question">
+<summary>Avant d'ouvrir la solution, une phrase sur ton cahier</summary>
+<p>L'ancien <code>empiler</code> ne renvoyait <strong>rien</strong>. Alors comment la pile changeait-elle ?</p>
+<p>Ta réponse dit pourquoi les signatures doivent changer.</p>
+</details>
+<details class="success">
+<summary>Solution</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># structures/lineaires/pile_immuable.py</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="nb">type</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="o">...</span><span class="p">]</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">[</span><span class="n">T</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Crée et renvoie une pile vide.&quot;&quot;&quot;</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>    <span class="k">return</span> <span class="p">()</span>
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Indique si la pile p est vide.&quot;&quot;&quot;</span>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">empiler</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">e</span><span class="p">:</span> <span class="n">T</span><span class="p">,</span> <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a><span class="sd">    Renvoie la pile obtenue en ajoutant e au sommet de p.</span>
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a><span class="sd">    La pile p n&#39;est pas modifiée : elle ne peut pas l&#39;être.</span>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>    <span class="k">return</span> <span class="n">p</span> <span class="o">+</span> <span class="p">(</span><span class="n">e</span><span class="p">,)</span>
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a><span class="k">def</span><span class="w"> </span><span class="nf">depiler</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">T</span><span class="p">,</span> <span class="n">Pile</span><span class="p">[</span><span class="n">T</span><span class="p">]]:</span>
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a><span class="sd">    Renvoie deux choses : l&#39;élément au sommet de p, et la pile qui reste.</span>
+<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a><span class="sd">    La pile p n&#39;est pas modifiée.</span>
+<a id="__codelineno-16-24" name="__codelineno-16-24" href="#__codelineno-16-24"></a><span class="sd">    Précondition : p ne doit pas être vide.</span>
+<a id="__codelineno-16-25" name="__codelineno-16-25" href="#__codelineno-16-25"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-16-26" name="__codelineno-16-26" href="#__codelineno-16-26"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="s2">&quot;La pile est vide&quot;</span>
+<a id="__codelineno-16-27" name="__codelineno-16-27" href="#__codelineno-16-27"></a>    <span class="k">return</span> <span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">p</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="c1"># structures/lineaires/pile_immuable_test.py</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires.pile_immuable</span><span class="w"> </span><span class="kn">import</span> <span class="p">(</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="n">Pile</span><span class="p">,</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>    <span class="n">creer</span><span class="p">,</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>    <span class="n">depiler</span><span class="p">,</span>
+<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>    <span class="n">empiler</span><span class="p">,</span>
+<a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>    <span class="n">est_vide</span><span class="p">,</span>
+<a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a><span class="p">)</span>
+<a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>
+<a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>
+<a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_creer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>    <span class="k">assert</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>
+<a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>
+<a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_est_vide</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>    <span class="k">assert</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>    <span class="n">q</span> <span class="o">=</span> <span class="n">empiler</span><span class="p">(</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>
+<a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>
+<a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_empiler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a>    <span class="n">q</span> <span class="o">=</span> <span class="n">empiler</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>    <span class="k">assert</span> <span class="ow">not</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+<a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>    <span class="k">assert</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>          <span class="c1"># p n&#39;a pas bougé : c&#39;est tout l&#39;intérêt</span>
+<a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a>
+<a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a>
+<a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_depiler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">empiler</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">empiler</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">creer</span><span class="p">()))</span>
+<a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a>    <span class="n">sommet</span><span class="p">,</span> <span class="n">reste</span> <span class="o">=</span> <span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a>    <span class="k">assert</span> <span class="n">sommet</span> <span class="o">==</span> <span class="mi">2</span>          <span class="c1"># dernier entré, premier sorti</span>
+<a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a>    <span class="n">sommet2</span><span class="p">,</span> <span class="n">reste2</span> <span class="o">=</span> <span class="n">depiler</span><span class="p">(</span><span class="n">reste</span><span class="p">)</span>
+<a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a>    <span class="k">assert</span> <span class="n">sommet2</span> <span class="o">==</span> <span class="mi">1</span>
+<a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a>    <span class="k">assert</span> <span class="n">est_vide</span><span class="p">(</span><span class="n">reste2</span><span class="p">)</span>
+<a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a>    <span class="k">assert</span> <span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="mi">2</span>   <span class="c1"># p est intacte, on peut la redépiler</span>
+<a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a>
+<a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a>
+<a id="__codelineno-17-41" name="__codelineno-17-41" href="#__codelineno-17-41"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_depiler_pile_vide</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-17-42" name="__codelineno-17-42" href="#__codelineno-17-42"></a>    <span class="n">p</span><span class="p">:</span> <span class="n">Pile</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
+<a id="__codelineno-17-43" name="__codelineno-17-43" href="#__codelineno-17-43"></a>    <span class="k">try</span><span class="p">:</span>
+<a id="__codelineno-17-44" name="__codelineno-17-44" href="#__codelineno-17-44"></a>        <span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+<a id="__codelineno-17-45" name="__codelineno-17-45" href="#__codelineno-17-45"></a>    <span class="k">except</span> <span class="ne">AssertionError</span><span class="p">:</span>
+<a id="__codelineno-17-46" name="__codelineno-17-46" href="#__codelineno-17-46"></a>        <span class="k">return</span>                  <span class="c1"># comportement attendu</span>
+<a id="__codelineno-17-47" name="__codelineno-17-47" href="#__codelineno-17-47"></a>    <span class="k">assert</span> <span class="kc">False</span><span class="p">,</span> <span class="s2">&quot;depiler sur une pile vide aurait dû échouer&quot;</span>
+</code></pre></div>
+<p>Regarde <code>test_empiler</code> : il ne vérifie pas seulement que la nouvelle pile est bonne, il vérifie que <strong>l'ancienne n'a pas bougé</strong>. C'est la propriété entière de cette version, et c'est le seul <code>assert</code> qui la teste.</p>
+</details>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Ce que cet exercice démontre, et c'est l'inverse de la leçon des files</p>
+<p>Sur la page des files, remplacer l'<strong>intérieur</strong> de la structure ne cassait aucun exercice : les fonctions clientes n'employaient que les quatre primitives, et les primitives n'avaient pas changé.</p>
+<p>Ici, c'est l'<strong>interface</strong> qui change, donc tout le code qui utilise une pile est à réécrire :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">empiler</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>        <span class="c1"># avant : p est modifiée sur place</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="n">p</span> <span class="o">=</span> <span class="n">empiler</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>    <span class="c1"># maintenant : on récupère la pile obtenue</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">x</span> <span class="o">=</span> <span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>       <span class="c1"># avant</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="n">x</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="n">depiler</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>    <span class="c1"># maintenant</span>
+</code></pre></div>
+<p>Retiens la distinction, elle vaut pour tout le métier : <strong>changer l'implémentation ne coûte rien à personne, changer l'interface coûte à tout le monde.</strong> C'est pourquoi on réfléchit longuement à un contrat avant de l'écrire, et qu'on le change le moins souvent possible.</p>
+<p>Ce qu'on achète en échange : une pile immuable ne peut plus être vidée par accident au fond d'une fonction. Les exercices « destructif / non destructif » du début de cette page n'ont plus d'objet, faute de version destructive possible.</p>
+<p>Ce qu'on paie, et il faut le mesurer plutôt que de l'oublier : <code>p + (e,)</code> ne modifie pas <code>p</code>, il <strong>fabrique un tuple neuf</strong> en recopiant tous les éléments. <code>empiler</code> et <code>depiler</code> passent donc de <code>O(1)</code> à <code>O(n)</code>, et la promesse du début de cette page tombe. Une structure immuable ne se paie pas en confort, elle se paie en copies.</p>
 </div>
 
 
@@ -8539,7 +8684,7 @@ Elle est, par contre, mal parenthésée :</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 23, 2026 17:10:38 UTC">August 23, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 12, 2026 16:22:41 UTC">September 12, 2026</span>
   </span>
 
     
