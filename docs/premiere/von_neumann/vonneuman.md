@@ -1,5 +1,17 @@
 # Architecture de von Neumann
 
+![Raspberry Pi 4 Model B, avec ses composants annotés](raspberry-pi.webp)
+
+Voici un **ordinateur complet**, de la taille d'une carte bancaire : un Raspberry Pi 4. Tout ce dont parle ce cours tient sur cette carte, et on y voit les quatre composants **d'un seul coup d'œil**, alors que dans un ordinateur de bureau ils sont dispersés dans le boîtier et le processeur caché sous son ventilateur.
+
+Il y a beaucoup d'étiquettes. **Quatre** comptent ici :
+
+- **Broadcom BCM2711 CPU** : le **processeur** ;
+- **8GB RAM** : la **mémoire** ;
+- tout ce qui dépasse sur les bords, USB, Ethernet, HDMI, prise jack : les **entrées/sorties** ;
+- les **bus** sont les pistes qui relient les puces entre elles. Quelques-unes se voient à la surface, mais la plupart passent **à l'intérieur** de la carte.
+
+Retiens aussi le **Micro SD Card Slot** : c'est le **stockage**, et ce n'est pas de la mémoire. La différence est expliquée plus bas, et elle compte.
 
 ## Le problème de départ
 
@@ -40,13 +52,27 @@ Elle travaille sur un registre particulier, l'**accumulateur**, qui contient la 
 
 **l'UAL est le seul endroit de la machine où un calcul a lieu, et elle ne sait faire que des opérations élémentaires.**
 
-#### b) L'Unité de Contrôle (UC)
+#### b) Les registres
+
+L'UAL ne va pas chercher chaque valeur en mémoire au moment où elle en a besoin : la mémoire est bien trop lente pour cela. Le processeur possède ses propres cases, en très petit nombre, appelées **registres**.
+
+Un registre est une **mini-mémoire intégrée au processeur**, et c'est la mémoire la plus rapide de la machine. Un processeur n'en compte que quelques dizaines, là où la mémoire vive compte des milliards de cases : plus une mémoire est rapide, plus elle coûte cher à quantité d'information égale, et moins on peut en mettre.
+
+Deux registres suffisent pour tout ce chapitre :
+
+- l'**accumulateur** (`ACC`) : la valeur sur laquelle l'UAL travaille, et où elle dépose son résultat ;
+- le **compteur ordinal** (`PC`, *program counter*) : l'adresse de la prochaine instruction à exécuter.
+
+!!! warning "Un registre n'est pas une case mémoire"
+    Quand le processeur charge le contenu de la case 42 dans l'accumulateur, il le **recopie** : la case 42 ne bouge pas. Et l'accumulateur, lui, n'a **pas d'adresse** : il n'est pas dans la mémoire, il est dans le processeur. C'est pourquoi il n'apparaît jamais sur le bus d'adresses.
+
+#### c) L'Unité de Contrôle (UC)
 
 L'**Unité de Contrôle** orchestre le fonctionnement de l'ordinateur :
 
 Elle ne fait qu'une seule chose, indéfiniment : répéter un **cycle** en trois temps.
 
-1. Elle **lit** les instructions en mémoire (`fetch`)
+1. Elle **lit** en mémoire l'instruction que désigne le compteur ordinal (`fetch`)
 2. Elle les **décode** pour comprendre quelle opération effectuer (`decode`)
 3. Elle **commande** les autres composants pour exécuter l'instruction (`execute`)
 
@@ -54,7 +80,7 @@ On appelle ça le **cycle decode-fetch-execute**
 
 L'UC **répète ce cycle en boucle et ne sait rien faire d'autre**. Sa force réside uniquement dans sa vitesse d'exécution, dictée par sa fréquence d'horloge : un processeur cadencé à 3 GHz effectue ainsi 3 milliards de cycles par seconde.
 
-#### c) Un processeur, ou plusieurs ?
+#### d) Un processeur, ou plusieurs ?
 
 La machine décrite ici n'a **qu'une** unité de traitement : elle exécute une instruction à la fois, dans l'ordre où le compteur ordinal les désigne. C'est une architecture **monoprocesseur**, et c'est celle que tu manipuleras dans tout ce chapitre.
 
@@ -128,7 +154,10 @@ graph TB
     subgraph CPU["Unité Centrale (CPU)"]
         UC["Unité de Contrôle<br/>(UC)"]
         UAL["Unité Arithmétique<br/>et Logique (UAL)"]
+        REG["Registres<br/>(ACC, PC)"]
         UC <--> UAL
+        UC <--> REG
+        UAL <--> REG
     end
 
     subgraph BUS["BUS"]
@@ -154,6 +183,7 @@ graph TB
 
 - L'architecture de von Neumann repose sur le principe du **programme enregistré**
 - Quatre composants principaux : **CPU** (UC + UAL), **mémoire**, **E/S**, **bus**
+- Le CPU contient des **registres**, mini-mémoires internes et ultra-rapides : l'**accumulateur** (où l'on calcule) et le **compteur ordinal** (l'adresse de la prochaine instruction)
 - Trois bus, qui disent **où**, **quoi** et **quoi faire**
 - Le CPU répète un cycle : **fetch-decode-execute**, et le **compteur ordinal** désigne la prochaine instruction
 - Rien, dans la mémoire, ne distingue une instruction d'une donnée : c'est le compteur ordinal qui décide
