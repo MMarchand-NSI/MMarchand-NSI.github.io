@@ -1026,6 +1026,12 @@ Voici l'histoire. Un éditeur vend un logiciel. Pour empêcher qu'on l'utilise s
 
 ### Le logiciel, tel que son auteur l'a écrit
 
+Comme **tout** logiciel, celui-ci contient des défauts. Ils ne sont pas là pour les besoins de l'exercice : un programme est écrit par des humains, souvent vite, souvent à plusieurs, et personne ne relit jamais chaque ligne. Ce que tu vas lire est un programme ordinaire, écrit par quelqu'un de sérieux qui a fait deux maladresses.
+
+Et si elles ont survécu, c'est justement parce qu'elles **ne se voient pas** : un défaut qui plante la machine est corrigé le jour même, un défaut qui laisse le programme marcher reste des années. Les failles de sécurité sont presque toujours de cette sorte, des erreurs mal détectées, pas des portes laissées exprès.
+
+Lis le programme en sachant cela, et cherche.
+
 | Adresse | Programme | Ce que ça fait |
 |:---:|:---|:---|
 | 00 | `INP` | lire la clé tapée, et la mettre dans `ACC` |
