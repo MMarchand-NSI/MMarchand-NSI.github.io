@@ -1028,7 +1028,9 @@ Voici l'histoire. Un éditeur vend un logiciel. Pour empêcher qu'on l'utilise s
 
 Comme **tout** logiciel, celui-ci contient des défauts. Ils ne sont pas là pour les besoins de l'exercice : un programme est écrit par des humains, souvent vite, souvent à plusieurs, et personne ne relit jamais chaque ligne. Ce que tu vas lire est un programme ordinaire, écrit par quelqu'un de sérieux qui a fait deux maladresses.
 
-Et si elles ont survécu, c'est justement parce qu'elles **ne se voient pas** : un défaut qui plante la machine est corrigé le jour même, un défaut qui laisse le programme marcher reste des années. Les failles de sécurité sont presque toujours de cette sorte, des erreurs mal détectées, pas des portes laissées exprès.
+Le plus souvent, ce n'est même pas une erreur de raisonnement : c'est un **copier-coller**. On duplique quelques lignes qui marchaient ailleurs, on oublie d'en adapter une, et le défaut est né. Regarde les deux branches de ce programme, celle qui refuse et celle qui démarre : elles se ressemblent beaucoup, et l'une a visiblement été recopiée de l'autre.
+
+Et si ces maladresses ont survécu, c'est justement parce qu'elles **ne se voient pas** : un défaut qui plante la machine est corrigé le jour même, un défaut qui laisse le programme marcher reste des années. Les failles de sécurité sont presque toujours de cette sorte, des erreurs mal détectées, pas des portes laissées exprès.
 
 Lis le programme en sachant cela, et cherche.
 
