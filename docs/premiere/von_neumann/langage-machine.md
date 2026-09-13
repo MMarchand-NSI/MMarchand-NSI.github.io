@@ -53,7 +53,18 @@ Une case contient un nombre, et **une instruction est un nombre comme un autre**
 
 ### 1.2 Le jeu d'instructions
 
-Onze mots à connaître, pas un de plus.
+Onze instructions, et **la machine ne sait rien faire d'autre**. Ce n'est pas une simplification pour débutants : un processeur réel a la même sorte de table, plus longue, et lui non plus ne sait rien faire qui n'y figure pas.
+
+!!! warning "Cette table ne s'apprend pas par cœur"
+    Tu l'auras sous les yeux à chaque exercice, et tu ne seras jamais interrogé dessus. Tu finiras par en retenir une partie à force de t'en servir, ou non, et cela n'a aucune importance.
+
+    Ce qu'on te demande de comprendre est ailleurs, et tient en trois points.
+
+    - **La machine est bête.** Elle fait exactement ce que cette table permet de demander, rien de plus, et jamais ce que tu *voulais* dire. Quand un programme ne fait pas ce que tu attendais, c'est qu'il fait ce que tu as écrit.
+    - Avec ces onze instructions seulement, tu dois savoir **choisir entre deux chemins** selon une valeur.
+    - Et savoir **répéter un morceau** de programme autant de fois qu'il le faut.
+
+    Les deux dernières n'ont l'air de rien, et pourtant **aucune ligne de cette table ne dit « si », ni « répète »**. Il faudra les fabriquer toi-même avec les trois branchements, qui savent seulement désigner la case suivante. C'est tout l'objet de la section 5, et c'est le vrai contenu de ce chapitre.
 
 **Entrée et sortie**
 
@@ -1011,7 +1022,7 @@ Une case du LMC tient quatre chiffres décimaux, donc de 0000 à 9999. Que se pa
 
 - Un **fichier source** est du texte. L'**assembleur** le traduit en nombres, le **fichier objet** ; c'est ce fichier qui est chargé en **RAM** et exécuté.
 - Le fichier objet ne contient ni mnémonique, ni nom de variable, ni commentaire : tout cela n'existait que pour toi.
-- Le **jeu d'instructions** d'un processeur est une table de correspondance décidée par ses concepteurs, de même nature que celle de ton groupe à la première séance.
+- Le **jeu d'instructions** d'un processeur est une table de correspondance décidée par ses concepteurs, de même nature que celle de ton groupe à la première séance. Elle se **consulte**, elle ne s'apprend pas ; ce qui s'apprend, c'est ce qu'on arrive à en faire.
 - Sur le LMC, une instruction est un nombre de **quatre chiffres** : le premier est le code opération, les deux derniers l'adresse.
 - L'**accumulateur** est unique : il faut ranger avant de charger autre chose.
 - Les **branchements** sont les seules instructions qui écrivent dans le compteur ordinal. Un saut en avant fait choisir entre deux chemins, c'est une **condition** ; un saut en arrière fait repasser sur les mêmes instructions, c'est une **boucle**. Il n'y a rien d'autre.
