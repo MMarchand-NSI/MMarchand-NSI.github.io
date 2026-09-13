@@ -2,6 +2,19 @@
 
 ![Raspberry Pi 4 Model B, avec ses composants annotés](raspberry-pi.webp)
 
+<script type="module" src="https://unpkg.com/@google/model-viewer@4.3.1/dist/model-viewer.min.js"></script>
+
+<model-viewer
+  src="../RaspberryPi4ModelB-web.glb"
+  alt="Modèle 3D d'un Raspberry Pi 4 Model B"
+  camera-controls
+  orientation="180deg 0deg 0deg"
+  camera-orbit="180deg 70deg auto"
+  style="width: 100%; height: 500px;">
+</model-viewer>
+
+*La même carte en trois dimensions : fais-la tourner avec la souris, et zoome pour retrouver les puces de la photo.*
+
 Voici un **ordinateur complet**, de la taille d'une carte bancaire : un Raspberry Pi 4. Tout ce dont parle ce cours tient sur cette carte, et on y voit les quatre composants **d'un seul coup d'œil**, alors que dans un ordinateur de bureau ils sont dispersés dans le boîtier et le processeur caché sous son ventilateur.
 
 Il y a beaucoup d'étiquettes. **Quatre** comptent ici :
