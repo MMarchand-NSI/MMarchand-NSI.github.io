@@ -1018,7 +1018,76 @@ Le LMC écrit ses instructions avec quatre chiffres **décimaux**, parce que c'e
 
 Une case du LMC tient quatre chiffres décimaux, donc de 0000 à 9999. Que se passe-t-il si un calcul donne 10 000 ?
 
-## 10. Ce qu'il faut retenir
+## 10. Cybersécurité : quand une donnée devient du code
+
+Tu sais maintenant la chose la plus importante de ce chapitre : **rien, dans la mémoire, ne distingue une instruction d'une donnée**. C'est ce qui rend un ordinateur programmable. C'est aussi, littéralement, la faille par laquelle passe une famille entière d'attaques informatiques.
+
+Voici un programme qui garde un secret. Il affiche une valeur publique, `42`, et contient une valeur secrète, `1234`, qu'il n'affiche **jamais** : aucune ligne ne demande de l'afficher.
+
+| Adresse | Programme | Ce que ça fait |
+|:---:|:---|:---|
+| 00 | `INP` | lire le nombre de l'utilisateur et le mettre dans `ACC` |
+| 01 | `STA suite` | ranger `ACC` dans la case `suite` |
+| 02 | `LDA public` | charger la valeur publique |
+| 03 | `OUT` | l'afficher |
+| 04 | `suite: DAT 0` | la case où atterrit la saisie |
+| 05 | `OUT` | afficher l'accumulateur |
+| 06 | `HLT` | arrêter |
+| 07 | `public: DAT 42` | la valeur publique |
+| 08 | `secret: DAT 1234` | la valeur secrète |
+
+!!! danger "Le défaut, et tu l'as déjà rencontré"
+    La case de saisie, à l'adresse 04, est posée **au milieu du chemin d'exécution**, avant le `HLT`. C'est exactement le défaut nommé à la section 8 : le compteur ordinal finit par tomber dans les données.
+
+    En usage normal, personne ne le remarque. L'utilisateur tape `0`, la case 04 contient alors `0000`, qui est le code de `HLT` : la machine s'arrête, et le programme a l'air de marcher.
+
+!!! question "À toi : fais afficher le secret"
+    Tu es maintenant la personne qui tape le nombre. Tu ne peux rien changer au programme : **tu ne contrôles qu'une chose, la valeur saisie**.
+
+    Quel nombre faut-il taper pour que la machine affiche `1234` ?
+
+    Écris ta réponse, puis vérifie dans le simulateur.
+
+    ??? tip "Indice léger"
+        Ce que tu tapes n'est pas rangé n'importe où : il est rangé à l'adresse 04, et le compteur ordinal passera dessus juste après avoir affiché `42`. Que se passe-t-il si ce que tu tapes **est** une instruction ?
+
+    ??? tip "Indice précis"
+        Il faut que la case 04 contienne l'instruction « charge le contenu de la case 08 ». Retourne voir la colonne « Code » de la table, section 1.2 : `LDA adr` s'écrit `50adr`.
+
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur ton cahier : à quel moment précis la valeur que tu tapes cesse-t-elle d'être un nombre pour devenir un ordre ?
+
+    ??? success "Correction"
+        Il faut taper **5008**, qui est le code machine de `LDA secret`.
+
+        Déroulé de l'exécution :
+
+        | `PC` | Case exécutée | Effet |
+        |:---:|:---|:---|
+        | 00 | `INP` | `ACC` reçoit 5008 |
+        | 01 | `STA suite` | la case 04 contient maintenant **5008** |
+        | 02 | `LDA public` | `ACC` reçoit 42 |
+        | 03 | `OUT` | affiche **42** |
+        | 04 | `5008`, c'est-à-dire `LDA 08` | `ACC` reçoit **1234** |
+        | 05 | `OUT` | affiche **1234** |
+        | 06 | `HLT` | fin |
+
+        Le programme affiche `42` **puis 1234**. Le secret est sorti, et pourtant aucune ligne du programme ne demandait de l'afficher.
+
+        Ce que tu viens de faire porte un nom : une **injection de code**. Tu n'as pas modifié le programme, tu lui as fourni une **donnée** qu'il a fini par exécuter comme une **instruction**. La machine n'a commis aucune erreur : elle a fait exactement ce qu'on lui a demandé, et c'est bien le problème.
+
+!!! abstract "Ce que cet exemple dit des vraies machines"
+    Le mécanisme est le même sur un ordinateur réel, à l'échelle près. Une saisie trop longue qui déborde de la place prévue et vient recouvrir du code, un champ de formulaire dont le contenu finit exécuté : dans tous les cas, **une donnée fournie de l'extérieur a franchi la frontière et s'est retrouvée exécutée**.
+
+    Trois protections, qu'on retrouve partout aujourd'hui :
+
+    - **ne jamais faire confiance à une saisie**, et vérifier sa forme et sa taille avant de la ranger quelque part ;
+    - **séparer le code des données** : les processeurs récents savent marquer une zone de mémoire comme **non exécutable**, et le compteur ordinal refuse alors d'y aller ;
+    - **vérifier les bornes** : la plupart des langages modernes refusent d'écrire en dehors de la place réservée, là où les plus anciens laissaient faire.
+
+    Aucune de ces protections n'annule le principe de von Neumann : elles ajoutent des garde-fous **par-dessus**. Le fait qu'une instruction soit un nombre comme un autre reste vrai, et c'est ce qui rend un ordinateur capable d'exécuter des programmes qu'il ne connaissait pas d'avance.
+
+## 11. Ce qu'il faut retenir
 
 - Un **fichier source** est du texte. L'**assembleur** le traduit en nombres, le **fichier objet** ; c'est ce fichier qui est chargé en **RAM** et exécuté.
 - Le fichier objet ne contient ni mnémonique, ni nom de variable, ni commentaire : tout cela n'existait que pour toi.
@@ -1027,6 +1096,7 @@ Une case du LMC tient quatre chiffres décimaux, donc de 0000 à 9999. Que se pa
 - L'**accumulateur** est unique : il faut ranger avant de charger autre chose.
 - Les **branchements** sont les seules instructions qui écrivent dans le compteur ordinal. Un saut en avant fait choisir entre deux chemins, c'est une **condition** ; un saut en arrière fait repasser sur les mêmes instructions, c'est une **boucle**. Il n'y a rien d'autre.
 - **Rien ne distingue une instruction d'une donnée en mémoire** : c'est le compteur ordinal qui décide.
+- Ce principe est ce qui rend une machine programmable, et c'est aussi la porte d'entrée de l'**injection de code** : une donnée venue de l'extérieur qui finit exécutée.
 
 Ce que tout cela devient sur une vraie machine, avec un vrai assembleur, est à la dernière page du chapitre : [Pour aller plus loin](pour-aller-plus-loin.md).
 
