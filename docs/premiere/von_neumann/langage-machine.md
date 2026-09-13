@@ -43,6 +43,42 @@ graph LR
 
     Un assembleur n'est donc pas un programme intelligent. C'est un programme qui **applique une table**, exactement celle que ton groupe a fabriquée à la première séance. Un **compilateur**, que tu rencontreras plus tard, fait un travail beaucoup plus difficile : il traduit un langage où une seule ligne peut valoir des dizaines d'instructions machine.
 
+    ??? example "Exemple : ce qu'un simple `print` demande à un vrai processeur"
+        Voici ce qu'il faut écrire, pour un processeur de ton ordinateur, afin d'obtenir ce que Python écrit en **une seule ligne**, `print("truc")`. Rien ici n'est au programme, et tu n'as pas à le comprendre : regarde seulement la **longueur**.
+
+        ```nasm
+        ; truc.asm
+        ; Assemblage        : nasm -f elf64 truc.asm -o truc.o
+        ; Édition de liens  : ld truc.o -o truc
+        ; Exécution         : ./truc
+
+        section .data
+            msg     db "truc", 10      ; le message, avec un saut de ligne (10 = '\n')
+            msg_len equ $ - msg        ; longueur calculée automatiquement
+
+        section .text
+            global _start
+
+        _start:
+            ; appel système write(1, msg, msg_len)
+            mov     rax, 1             ; numéro de syscall pour write
+            mov     rdi, 1             ; descripteur de fichier 1 = stdout
+            mov     rsi, msg           ; adresse du message
+            mov     rdx, msg_len       ; nombre d'octets à écrire
+            syscall
+
+            ; appel système exit(0)
+            mov     rax, 60            ; numéro de syscall pour exit
+            xor     rdi, rdi           ; code de retour 0
+            syscall
+        ```
+
+        Une fois assemblé, cela fait **huit instructions machine** pour afficher quatre lettres. Et c'est le **minimum** : ce programme se contente de demander au système d'exploitation d'écrire cinq octets, là où le `print` de Python fait beaucoup plus de choses avant d'en arriver là.
+
+        Tu y reconnais des mots de ce cours : une **adresse** (`msg`), des **registres** (`rax`, `rdi`, `rsi`, `rdx`), un fichier **source** en texte, et un assembleur qui le traduit en nombres. Le reste, les numéros d'appel système et le rôle de chaque registre, s'apprend ailleurs.
+
+        Si tu veux l'essayer : `nsi install nasm`, puis les trois commandes écrites en tête du fichier.
+
 ## 2. La machine : le Little Man Computer
 
 Le **Little Man Computer** (LMC) est un ordinateur d'étude. Il est minuscule, et c'est tout son intérêt : il tient en une page, et il a pourtant tout ce qu'a une vraie machine de von Neumann.
