@@ -873,10 +873,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-jeux-dinstructions-et-architectures" class="md-nav__link">
+  <a href="#5-de-ton-fichier-a-lexecution-sur-une-vraie-machine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Jeux d'instructions et architectures
+        5. De ton fichier à l'exécution, sur une vraie machine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-jeux-dinstructions-et-architectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Jeux d'instructions et architectures
       
     </span>
   </a>
@@ -8015,10 +8026,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-jeux-dinstructions-et-architectures" class="md-nav__link">
+  <a href="#5-de-ton-fichier-a-lexecution-sur-une-vraie-machine" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Jeux d'instructions et architectures
+        5. De ton fichier à l'exécution, sur une vraie machine
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-jeux-dinstructions-et-architectures" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Jeux d'instructions et architectures
       
     </span>
   </a>
@@ -8113,7 +8135,7 @@
 <p class="admonition-title">Quand lire cette page, et pourquoi elle est à part</p>
 <p>Le cours <a href="../vonneuman/">Architecture de von Neumann</a> <strong>nomme</strong> les trois bus et les trois temps du cycle. Cette page les <strong>détaille</strong>, et ajoute les exercices qui vont avec.</p>
 <p>Viens-y <strong>après les défis LMC</strong>, pas avant : le cycle se comprend beaucoup mieux quand on a déjà écrit et fait tourner ses propres programmes. Rien ici n'est nécessaire pour les défis.</p>
-<p>Le programme de première borne le cours aux <strong>concepts généraux</strong> du modèle. Ce qui est exigible tient donc dans la page de cours ; ce qui suit est du détail utile, et les deux dernières sections sont franchement hors programme.</p>
+<p>Le programme de première borne le cours aux <strong>concepts généraux</strong> du modèle. Ce qui est exigible tient donc dans la page de cours ; ce qui suit est du détail utile, et les trois dernières sections sont franchement hors programme.</p>
 </div>
 <h2 id="1-les-trois-bus-en-detail">1. Les trois bus en détail</h2>
 <p>Un bus n'est pas un tuyau dans lequel les informations circulent les unes après les autres : c'est un <strong>groupe de fils parallèles</strong> qui portent chacun, <strong>en permanence</strong>, un signal électrique dans l'un de ses deux états possibles.</p>
@@ -8461,7 +8483,64 @@
 <li>l'<strong>architecture Harvard</strong>, qui sépare la mémoire des instructions de celle des données ;</li>
 <li>le <strong>pipeline</strong>, qui commence le fetch de l'instruction suivante pendant qu'on exécute la courante.</li>
 </ul>
-<h2 id="5-jeux-dinstructions-et-architectures">5. Jeux d'instructions et architectures</h2>
+<h2 id="5-de-ton-fichier-a-lexecution-sur-une-vraie-machine">5. De ton fichier à l'exécution, sur une vraie machine</h2>
+<p><em>Hors programme.</em></p>
+<p>Sur le LMC, tu as écrit un fichier, cliqué sur « Assembler », puis sur « Charger ». Ces deux boutons ne sont pas une commodité du simulateur : ils sont la chaîne que suit <strong>tout</strong> programme, sur n'importe quelle machine.</p>
+<p>Tu n'écris jamais des nombres. Tu écris du <strong>texte</strong>, dans un fichier, sur le <strong>disque</strong>. Ce texte n'est pas exécutable : le processeur ne lit pas des lettres.</p>
+<p>Il se passe donc trois choses, dans cet ordre, et ce sont les mêmes pour Python, pour un jeu vidéo ou pour le système d'exploitation.</p>
+<pre class="mermaid"><code>graph LR
+    S["Fichier source&lt;br/&gt;du texte, sur le disque"] --&gt;|assemblage| O["Fichier objet&lt;br/&gt;des nombres, sur le disque"]
+    O --&gt;|chargement| R["Mémoire vive&lt;br/&gt;les mêmes nombres, en RAM"]
+    R --&gt;|cycle fetch-decode-execute| P["Processeur"]</code></pre>
+<ol>
+<li><strong>Tu écris le source.</strong> Du texte lisible par toi : des mots, des noms que tu choisis, des commentaires. Il est rangé sur le disque, comme n'importe quel fichier.</li>
+<li><strong>Un programme le traduit : l'assembleur.</strong> Il remplace chaque mot par le nombre que le <strong>jeu d'instructions</strong> de la machine lui associe, et il produit un second fichier, le <strong>fichier objet</strong>, qui ne contient plus que des nombres.</li>
+<li><strong>Le fichier objet est chargé en mémoire vive.</strong> Le disque est un périphérique d'entrée-sortie : le processeur ne peut pas y exécuter quoi que ce soit. Il faut d'abord recopier les nombres en RAM. C'est seulement là que le compteur ordinal peut s'y promener.</li>
+</ol>
+<div class="admonition abstract">
+<p class="admonition-title">Ce que l'assembleur enlève, et c'est le point important</p>
+<p>Le fichier objet ne contient <strong>ni mnémonique, ni nom de variable, ni commentaire</strong>. Tout cela a disparu à la traduction : c'était pour toi, pas pour la machine.</p>
+<p>Un assembleur n'est donc pas un programme intelligent. C'est un programme qui <strong>applique une table</strong>, exactement celle que ton groupe a fabriquée à la première séance. Un <strong>compilateur</strong>, que tu rencontreras plus tard, fait un travail beaucoup plus difficile : il traduit un langage où une seule ligne peut valoir des dizaines d'instructions machine.</p>
+<details class="example">
+<summary>Exemple : ce qu'un simple <code>print</code> demande à un vrai processeur</summary>
+<p>Voici ce qu'il faut écrire, pour un processeur de ton ordinateur, afin d'obtenir ce que Python écrit en <strong>une seule ligne</strong>, <code>print("truc")</code>. Rien ici n'est au programme, et tu n'as pas à le comprendre : regarde seulement la <strong>longueur</strong>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1">; truc.asm</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="c1">; Assemblage        : nasm -f elf64 truc.asm -o truc.o</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="c1">; Édition de liens  : ld truc.o -o truc</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="c1">; Exécution         : ./truc</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="k">section</span><span class="w"> </span><span class="nv">.data</span>
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="w">    </span><span class="nf">msg</span><span class="w">     </span><span class="nv">db</span><span class="w"> </span><span class="s">&quot;truc&quot;</span><span class="p">,</span><span class="w"> </span><span class="mi">10</span><span class="w">      </span><span class="c1">; le message, avec un saut de ligne (10 = &#39;\n&#39;)</span>
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="w">    </span><span class="no">msg_len</span><span class="w"> </span><span class="kd">equ</span><span class="w"> </span><span class="kc">$</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nv">msg</span><span class="w">        </span><span class="c1">; longueur calculée automatiquement</span>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>
+<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="k">section</span><span class="w"> </span><span class="nv">.text</span>
+<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a><span class="w">    </span><span class="k">global</span><span class="w"> </span><span class="nv">_start</span>
+<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>
+<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a><span class="nl">_start:</span>
+<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a><span class="w">    </span><span class="c1">; appel système write(1, msg, msg_len)</span>
+<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a><span class="w">    </span><span class="nf">mov</span><span class="w">     </span><span class="nb">rax</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">             </span><span class="c1">; numéro de syscall pour write</span>
+<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a><span class="w">    </span><span class="nf">mov</span><span class="w">     </span><span class="nb">rdi</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="w">             </span><span class="c1">; descripteur de fichier 1 = stdout</span>
+<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a><span class="w">    </span><span class="nf">mov</span><span class="w">     </span><span class="nb">rsi</span><span class="p">,</span><span class="w"> </span><span class="nv">msg</span><span class="w">           </span><span class="c1">; adresse du message</span>
+<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a><span class="w">    </span><span class="nf">mov</span><span class="w">     </span><span class="nb">rdx</span><span class="p">,</span><span class="w"> </span><span class="nv">msg_len</span><span class="w">       </span><span class="c1">; nombre d&#39;octets à écrire</span>
+<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a><span class="w">    </span><span class="nf">syscall</span>
+<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>
+<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a><span class="w">    </span><span class="c1">; appel système exit(0)</span>
+<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a><span class="w">    </span><span class="nf">mov</span><span class="w">     </span><span class="nb">rax</span><span class="p">,</span><span class="w"> </span><span class="mi">60</span><span class="w">            </span><span class="c1">; numéro de syscall pour exit</span>
+<a id="__codelineno-4-23" name="__codelineno-4-23" href="#__codelineno-4-23"></a><span class="w">    </span><span class="nf">xor</span><span class="w">     </span><span class="nb">rdi</span><span class="p">,</span><span class="w"> </span><span class="nb">rdi</span><span class="w">           </span><span class="c1">; code de retour 0</span>
+<a id="__codelineno-4-24" name="__codelineno-4-24" href="#__codelineno-4-24"></a><span class="w">    </span><span class="nf">syscall</span>
+</code></pre></div>
+<p>Une fois assemblé, cela fait <strong>huit instructions machine</strong> pour afficher quatre lettres. Et c'est le <strong>minimum</strong> : ce programme se contente de demander au système d'exploitation d'écrire cinq octets, là où le <code>print</code> de Python fait beaucoup plus de choses avant d'en arriver là.</p>
+<p>Tu y reconnais des mots de ce cours : une <strong>adresse</strong> (<code>msg</code>), des <strong>registres</strong> (<code>rax</code>, <code>rdi</code>, <code>rsi</code>, <code>rdx</code>), un fichier <strong>source</strong> en texte, et un assembleur qui le traduit en nombres. Le reste, les numéros d'appel système et le rôle de chaque registre, s'apprend ailleurs.</p>
+<p><strong>Et ces huit instructions ne sont pas le bout du chemin.</strong> <code>syscall</code> ne fait qu'une chose : passer la main au <strong>système d'exploitation</strong>, qui ira écrire, lui, dans le terminal. Ce que la machine exécute ensuite est encore du code, écrit par d'autres, et il est de deux natures.</p>
+<ul>
+<li>La <strong>porte d'entrée</strong> du système, elle, est bien écrite <strong>en assembleur, à la main</strong> (dans Linux, le fichier <code>arch/x86/entry/entry_64.S</code>). Elle doit sauvegarder les registres, changer de pile et basculer le processeur en mode noyau : des gestes qu'aucun langage de haut niveau ne sait exprimer.</li>
+<li>Mais le <code>write</code> lui-même, celui qui écrit vraiment tes cinq octets, est écrit en <strong>C</strong> (<code>fs/read_write.c</code>), comme l'immense majorité du noyau. La porte est en assembleur, la pièce derrière ne l'est pas.</li>
+</ul>
+<p>Ce qui reste vrai des deux côtés : assembleur ou C, <strong>tout finit en instructions machine</strong>, parce que le processeur ne sait rien lire d'autre. Et cela se mesure : sur une machine Linux, afficher ces quatre lettres demande <strong>environ dix mille instructions exécutées dans le noyau</strong>, contre les huit que tu as écrites. Tu n'as écrit ici que celles qui frappent à la porte.</p>
+<p>Si tu veux l'essayer : <code>nsi install nasm</code>, puis les trois commandes écrites en tête du fichier.</p>
+</details>
+</div>
+<h2 id="6-jeux-dinstructions-et-architectures">6. Jeux d'instructions et architectures</h2>
 <p><em>Hors programme.</em></p>
 <ul>
 <li><strong>Jeu d'instructions</strong> : l'ensemble des opérations qu'un processeur sait exécuter. Les familles <strong>CISC</strong> (beaucoup d'instructions, complexes) et <strong>RISC</strong> (peu d'instructions, simples et rapides) reposent sur deux paris opposés.</li>
@@ -8493,7 +8572,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 7, 2026 10:53:23 UTC">September 7, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 13, 2026 10:22:02 UTC">September 13, 2026</span>
   </span>
 
     
