@@ -84,8 +84,6 @@ graph LR
 
         Ce qui reste vrai des deux côtés : assembleur ou C, **tout finit en instructions machine**, parce que le processeur ne sait rien lire d'autre. Et cela se mesure : sur une machine Linux, afficher ces quatre lettres demande **environ dix mille instructions exécutées dans le noyau**, contre les huit que tu as écrites. Tu n'as écrit ici que celles qui frappent à la porte.
 
-        *Mesure faite avec l'outil `perf`, en comparant ce programme à un programme identique dont on a retiré le seul `write` : la différence est ce que coûte l'écriture. Médiane de quinze exécutions, sortie redirigée et non affichée dans un terminal.*
-
         Si tu veux l'essayer : `nsi install nasm`, puis les trois commandes écrites en tête du fichier.
 
 ## 2. La machine : le Little Man Computer
