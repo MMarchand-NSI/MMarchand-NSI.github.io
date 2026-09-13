@@ -21,72 +21,9 @@
 
     Cette page y répond, et elle te fait écrire tes premiers programmes.
 
-## 1. Ce qui se passe entre ton fichier et l'exécution
+## 1. La machine et sa table
 
-Tu n'écris jamais des nombres. Tu écris du **texte**, dans un fichier, sur le **disque**. Ce texte n'est pas exécutable : le processeur ne lit pas des lettres.
-
-Il se passe donc trois choses, dans cet ordre, et ce sont les mêmes pour Python, pour un jeu vidéo ou pour le système d'exploitation.
-
-```mermaid
-graph LR
-    S["Fichier source<br/>du texte, sur le disque"] -->|assemblage| O["Fichier objet<br/>des nombres, sur le disque"]
-    O -->|chargement| R["Mémoire vive<br/>les mêmes nombres, en RAM"]
-    R -->|cycle fetch-decode-execute| P["Processeur"]
-```
-
-1. **Tu écris le source.** Du texte lisible par toi : des mots, des noms que tu choisis, des commentaires. Il est rangé sur le disque, comme n'importe quel fichier.
-2. **Un programme le traduit : l'assembleur.** Il remplace chaque mot par le nombre que le **jeu d'instructions** de la machine lui associe, et il produit un second fichier, le **fichier objet**, qui ne contient plus que des nombres.
-3. **Le fichier objet est chargé en mémoire vive.** Le disque est un périphérique d'entrée-sortie : le processeur ne peut pas y exécuter quoi que ce soit. Il faut d'abord recopier les nombres en RAM. C'est seulement là que le compteur ordinal peut s'y promener.
-
-!!! abstract "Ce que l'assembleur enlève, et c'est le point important"
-    Le fichier objet ne contient **ni mnémonique, ni nom de variable, ni commentaire**. Tout cela a disparu à la traduction : c'était pour toi, pas pour la machine.
-
-    Un assembleur n'est donc pas un programme intelligent. C'est un programme qui **applique une table**, exactement celle que ton groupe a fabriquée à la première séance. Un **compilateur**, que tu rencontreras plus tard, fait un travail beaucoup plus difficile : il traduit un langage où une seule ligne peut valoir des dizaines d'instructions machine.
-
-    ??? example "Exemple : ce qu'un simple `print` demande à un vrai processeur"
-        Voici ce qu'il faut écrire, pour un processeur de ton ordinateur, afin d'obtenir ce que Python écrit en **une seule ligne**, `print("truc")`. Rien ici n'est au programme, et tu n'as pas à le comprendre : regarde seulement la **longueur**.
-
-        ```nasm
-        ; truc.asm
-        ; Assemblage        : nasm -f elf64 truc.asm -o truc.o
-        ; Édition de liens  : ld truc.o -o truc
-        ; Exécution         : ./truc
-
-        section .data
-            msg     db "truc", 10      ; le message, avec un saut de ligne (10 = '\n')
-            msg_len equ $ - msg        ; longueur calculée automatiquement
-
-        section .text
-            global _start
-
-        _start:
-            ; appel système write(1, msg, msg_len)
-            mov     rax, 1             ; numéro de syscall pour write
-            mov     rdi, 1             ; descripteur de fichier 1 = stdout
-            mov     rsi, msg           ; adresse du message
-            mov     rdx, msg_len       ; nombre d'octets à écrire
-            syscall
-
-            ; appel système exit(0)
-            mov     rax, 60            ; numéro de syscall pour exit
-            xor     rdi, rdi           ; code de retour 0
-            syscall
-        ```
-
-        Une fois assemblé, cela fait **huit instructions machine** pour afficher quatre lettres. Et c'est le **minimum** : ce programme se contente de demander au système d'exploitation d'écrire cinq octets, là où le `print` de Python fait beaucoup plus de choses avant d'en arriver là.
-
-        Tu y reconnais des mots de ce cours : une **adresse** (`msg`), des **registres** (`rax`, `rdi`, `rsi`, `rdx`), un fichier **source** en texte, et un assembleur qui le traduit en nombres. Le reste, les numéros d'appel système et le rôle de chaque registre, s'apprend ailleurs.
-
-        **Et ces huit instructions ne sont pas le bout du chemin.** `syscall` ne fait qu'une chose : passer la main au **système d'exploitation**, qui ira écrire, lui, dans le terminal. Ce que la machine exécute ensuite est encore du code, écrit par d'autres, et il est de deux natures.
-
-        - La **porte d'entrée** du système, elle, est bien écrite **en assembleur, à la main** (dans Linux, le fichier `arch/x86/entry/entry_64.S`). Elle doit sauvegarder les registres, changer de pile et basculer le processeur en mode noyau : des gestes qu'aucun langage de haut niveau ne sait exprimer.
-        - Mais le `write` lui-même, celui qui écrit vraiment tes cinq octets, est écrit en **C** (`fs/read_write.c`), comme l'immense majorité du noyau. La porte est en assembleur, la pièce derrière ne l'est pas.
-
-        Ce qui reste vrai des deux côtés : assembleur ou C, **tout finit en instructions machine**, parce que le processeur ne sait rien lire d'autre. Et cela se mesure : sur une machine Linux, afficher ces quatre lettres demande **environ dix mille instructions exécutées dans le noyau**, contre les huit que tu as écrites. Tu n'as écrit ici que celles qui frappent à la porte.
-
-        Si tu veux l'essayer : `nsi install nasm`, puis les trois commandes écrites en tête du fichier.
-
-## 2. La machine : le Little Man Computer
+### 1.1 Le Little Man Computer
 
 Le **Little Man Computer** (LMC) est un ordinateur d'étude. Il est minuscule, et c'est tout son intérêt : il tient en une page, et il a pourtant tout ce qu'a une vraie machine de von Neumann.
 
@@ -114,7 +51,7 @@ Une case contient un nombre, et **une instruction est un nombre comme un autre**
 
     Le chiffre du milieu sert, sur cette machine, à désigner des registres et des modes d'accès dont tu n'auras pas besoin cette année. Il vaut `0` partout dans ce chapitre.
 
-## 3. Le jeu d'instructions
+### 1.2 Le jeu d'instructions
 
 Onze mots à connaître, pas un de plus.
 
@@ -170,7 +107,11 @@ Onze mots à connaître, pas un de plus.
 
     Le même chiffre, deux sens. Le processeur, lui, ne se trompe jamais : il lit d'abord le code opération, et c'est **lui** qui décide comment lire la suite.
 
-## 4. Écrire un programme
+## 2. Lire un programme
+
+Avant d'écrire quoi que ce soit, tu vas **lire** des programmes et **prédire** ce qu'ils font. Il faut pour cela connaître la forme d'une ligne, et c'est tout ce que demande la sous-section suivante.
+
+### 2.1 La forme d'une ligne
 
 Une ligne porte au plus une **étiquette**, une **instruction** et un **commentaire**.
 
@@ -194,37 +135,7 @@ total:  DAT             // réserve une case, initialisée à 0
 
     Ce n'est pas une bizarrerie du LMC : les tout premiers processeurs ne savaient pas multiplier non plus.
 
-## 5. Le simulateur
-
-Le simulateur est une extension de VSCode, et c'est aussi l'occasion de te familiariser avec l'outil qu'on utilisera toute l'année.
-
-!!! info "Installation"
-    1. Ouvre VSCode.
-    2. Clique sur l'icône des **extensions** dans la barre de gauche.
-    3. Cherche `mmarchand.lmc-vscode`.
-    4. Clique sur le bouton bleu **Installer**.
-
-    Crée ensuite un fichier dont le nom se termine par **`.lmc`**, par exemple `essai.lmc`. C'est l'extension du fichier qui déclenche la coloration et la détection d'erreurs.
-
-    Pour ouvrir l'émulateur : `Ctrl+Shift+P`, puis tape **LMC: Open Emulator**.
-
-Quatre boutons, et ils suivent exactement la chaîne de la section 1.
-
-| Bouton | Ce qu'il fait |
-|---|---|
-| **Assembler .lmc** | traduit ton source et écrit le fichier objet `.lmcobj` à côté de lui. N'exécute rien. |
-| **Charger .lmcobj en RAM** | relit ce fichier **sur le disque** et le dépose en mémoire. |
-| **Step** | exécute une seule instruction, et montre les trois phases du cycle. |
-| **Run** | exécute jusqu'au `HLT`. |
-
-!!! warning "Le piège du fichier objet périmé"
-    Si tu modifies ton source **sans réassembler**, le bouton « Charger » chargera l'**ancien** programme, celui qui est encore sur le disque. Ta correction ne servira à rien et tu chercheras longtemps.
-
-    Ce n'est pas un défaut du simulateur : une vraie chaîne d'outils se comporte exactement ainsi. Assemble d'abord, charge ensuite.
-
-## 6. Lire et tracer avant d'écrire
-
-### 6.1 Prédire l'état de la machine
+### 2.2 Prédire ce qu'affiche un programme
 
 !!! question "Que va afficher ce programme ?"
     Voici un programme complet. Chaque ligne occupe une case, à partir de l'adresse 00.
@@ -282,7 +193,7 @@ Quatre boutons, et ils suivent exactement la chaîne de la section 1.
 
         Vérifie maintenant dans le simulateur, en mode **Step**.
 
-### 6.2 Assembler à la main, une fois
+## 3. Assembler à la main, une fois
 
 Tu écriras tes programmes en **mnémoniques**, parce que c'est lisible. La machine, elle, ne connaît que des **nombres**. Tu vas faire ce travail de traduction une seule fois toi-même, pour savoir ce que l'assembleur fait à ta place ensuite.
 
@@ -301,7 +212,7 @@ Tu écriras tes programmes en **mnémoniques**, parce que c'est lisible. La mach
 
     **Sur ton cahier :**
 
-    1. Écris le **code machine** de chaque ligne, c'est-à-dire les **quatre chiffres** que contiendra réellement la case. Utilise la table de la section 3.
+    1. Écris le **code machine** de chaque ligne, c'est-à-dire les **quatre chiffres** que contiendra réellement la case. Utilise la table de la section 1.2.
     2. Dis en une phrase ce que fait ce programme.
     3. Combien de tables de correspondance t'a-t-il fallu pour faire cette traduction ?
 
@@ -340,7 +251,37 @@ Tu écriras tes programmes en **mnémoniques**, parce que c'est lisible. La mach
 !!! tip "Pourquoi ne le faire qu'une fois"
     Une fois cette traduction faite à la main, elle n'a plus d'intérêt : le simulateur la fait sans erreur et sans fatigue. Ce que tu dois en garder n'est pas la capacité de traduire vite, mais la certitude qu'**il n'y a rien de magique entre ce que tu écris et ce que la machine exécute**. Pour les douze défis, écris en mnémoniques.
 
-## 7. Le seul pouvoir que tu as : changer le compteur ordinal
+## 4. Le simulateur
+
+Le simulateur est une extension de VSCode, et c'est aussi l'occasion de te familiariser avec l'outil qu'on utilisera toute l'année.
+
+!!! info "Installation"
+    1. Ouvre VSCode.
+    2. Clique sur l'icône des **extensions** dans la barre de gauche.
+    3. Cherche `mmarchand.lmc-vscode`.
+    4. Clique sur le bouton bleu **Installer**.
+
+    Crée ensuite un fichier dont le nom se termine par **`.lmc`**, par exemple `essai.lmc`. C'est l'extension du fichier qui déclenche la coloration et la détection d'erreurs.
+
+    Pour ouvrir l'émulateur : `Ctrl+Shift+P`, puis tape **LMC: Open Emulator**.
+
+Avant d'exécuter quoi que ce soit, il faut **traduire** : ton fichier `.lmc` est du texte, et la machine ne lit que des nombres. C'est pourquoi il y a deux boutons et non un.
+
+Tu viens de faire cette traduction à la main. Le simulateur la refait sans erreur, range le résultat dans un second fichier, à côté du tien, puis charge ce fichier-là en mémoire.
+
+| Bouton | Ce qu'il fait |
+|---|---|
+| **Assembler .lmc** | traduit ton source et écrit le fichier objet `.lmcobj` à côté de lui. N'exécute rien. |
+| **Charger .lmcobj en RAM** | relit ce fichier **sur le disque** et le dépose en mémoire. |
+| **Step** | exécute une seule instruction, et montre les trois phases du cycle. |
+| **Run** | exécute jusqu'au `HLT`. |
+
+!!! warning "Le piège du fichier objet périmé"
+    Si tu modifies ton source **sans réassembler**, le bouton « Charger » chargera l'**ancien** programme, celui qui est encore sur le disque. Ta correction ne servira à rien et tu chercheras longtemps.
+
+    Ce n'est pas un défaut du simulateur : une vraie chaîne d'outils se comporte exactement ainsi. Assemble d'abord, charge ensuite.
+
+## 5. Le compteur ordinal, le seul pouvoir que tu as
 
 Tous les programmes que tu as lus jusqu'ici se déroulent de la même façon : la case 00, puis la 01, puis la 02, et ainsi de suite jusqu'au `HLT`. Le compteur ordinal avance de 1, toujours, et chaque instruction est exécutée **une fois**.
 
@@ -354,7 +295,7 @@ Les trois branchements changent cela, et ce sont les **seules** instructions de 
 
 C'est tout. Et de ces trois instructions naissent les deux seules formes que prend n'importe quel programme, dans n'importe quel langage.
 
-### 7.1 Sauter par-dessus un morceau
+### 5.1 Sauter par-dessus un morceau
 
 Si le saut mène **plus loin** dans le programme, les instructions enjambées ne sont jamais exécutées. La machine emprunte l'un des deux chemins, jamais les deux.
 
@@ -379,7 +320,7 @@ Avec l'entrée `5`, ce programme affiche **100**. Avec l'entrée `0`, il affiche
 
     Une case n'est pas une frontière. Rien n'arrête le compteur ordinal, sauf un `HLT` ou un saut. C'est l'erreur la plus fréquente sur les défis 6, 7 et 8.
 
-### 7.2 Sauter en arrière
+### 5.2 Sauter en arrière
 
 Si le saut mène **plus haut** dans le programme, la machine repasse sur des instructions qu'elle a déjà exécutées. Les mêmes cases sont donc exécutées plusieurs fois, alors qu'elles ne sont écrites qu'une fois.
 
@@ -417,7 +358,7 @@ Deux choses sont indispensables, et l'oubli de l'une ou de l'autre est le défau
 
     Le simulateur finit par s'interrompre avec une erreur, au bout de 100 000 instructions. Une vraie machine, elle, ne dirait rien : elle tournerait, c'est tout. C'est très exactement ce qui se passe quand un logiciel « se fige ».
 
-### 7.3 Les deux noms qu'on leur donnera
+### 5.3 Les deux noms qu'on leur donnera
 
 Tu viens de voir les deux seules choses qu'un processeur sait faire en plus d'enchaîner des instructions.
 
@@ -429,7 +370,7 @@ Tu viens de voir les deux seules choses qu'un processeur sait faire en plus d'en
 Retiens l'ordre dans lequel tu les rencontres : **le saut existe d'abord, le nom vient après**. En Python, tu écriras `if` et `while`, et ce sera plus court et plus lisible. Mais dessous, une fois traduit en langage machine, il n'y aura toujours que des sauts, exactement ceux-là.
 
 !!! question "Vérifie que tu as compris (5 minutes, sur ton cahier)"
-    Reprends le programme de la section 7.2, celui qui affiche un nombre trois fois.
+    Reprends le programme de la section 5.2, celui qui affiche un nombre trois fois.
 
     1. Combien de fois la case étiquetée `boucle` est-elle **exécutée** ? Et combien de fois est-elle **écrite** dans le programme ?
     2. Quelle valeur contient `cpt` juste avant le tout dernier `BRZ fin` ?
@@ -447,7 +388,7 @@ Retiens l'ordre dans lequel tu les rencontres : **le saut existe d'abord, le nom
         3. Remplacer `trois: DAT 3` par `trois: DAT 5`. **Rien d'autre** : aucune autre ligne ne sait combien de tours seront faits. L'étiquette s'appelle alors `trois` alors qu'elle vaut 5, ce qui est un mauvais nom mais un programme parfaitement correct : les étiquettes n'existent que pour toi, elles ont disparu du fichier objet.
         4. Il affiche **7 une seule fois**. `BRP` saute dès que l'accumulateur est positif **ou nul** : après le premier tour, `cpt` vaut 2, qui est positif, donc on sort immédiatement. Choisir le bon branchement n'est pas un détail.
 
-### 7.4 Et le saut peut tomber sur une donnée
+### 5.4 Et le saut peut tomber sur une donnée
 
 !!! question "Prédire l'impossible"
     Regarde bien ce programme. La case 04 a été remplie avec `DAT 9002`, c'est-à-dire avec le **nombre** 9002.
@@ -486,7 +427,32 @@ Retiens l'ordre dans lequel tu les rencontres : **le saut existe d'abord, le nom
 
         Rien, dans la mémoire, n'aurait pu empêcher cela. Il n'existe pas de marque « ceci est une donnée ». C'est le compteur ordinal qui décide, et rien d'autre. C'est exactement le principe du **programme enregistré** de von Neumann, vu du mauvais côté : la même liberté qui permet de charger un programme sans recâbler la machine permet aussi d'exécuter n'importe quoi.
 
-## 8. Les douze défis
+## 6. Modifier avant d'écrire
+
+Tu sais lire un programme, le traduire et le suivre pas à pas. Avant d'en écrire un de zéro, il reste un geste : **en changer un qui marche**, et prédire l'effet du changement **avant** de le lancer.
+
+Reprends le programme de la section 2.2, celui qui affiche `7` alors que la case `c` contient `11`.
+
+!!! question "Trois modifications, trois prédictions"
+    Pour chacune : écris d'abord ce que le programme affichera, **puis** vérifie dans le simulateur. Si ta prédiction était fausse, écris en une ligne ce que tu avais mal compris.
+
+    1. Ajoute `LDA c` juste avant `OUT`. Qu'affiche le programme ?
+    2. Remets le programme d'origine, puis **échange** les lignes 3 et 4, c'est-à-dire `STA c` et `SUB a`. Qu'affiche-t-il, et que contient `c` à la fin ?
+    3. Remets le programme d'origine, puis remplace `a: DAT 4` par `a: DAT 10`. Qu'affiche-t-il ?
+
+    ??? question "Avant d'ouvrir la correction"
+        La troisième est la plus intéressante des trois. En une phrase : est-ce que le nombre affiché dépend de `a` ?
+
+    ??? success "Correction"
+        1. **11.** `LDA c` recharge l'accumulateur depuis la case `c`, et `OUT` affiche toujours l'accumulateur. C'est ce que la correction de la section 2.2 annonçait déjà : pour afficher `c`, il faut `LDA c` puis `OUT`.
+        2. Il affiche **7**, comme avant, mais `c` contient maintenant **7** et non plus `11`. Ranger après avoir soustrait, ce n'est pas ranger avant : **l'ordre des instructions est le programme**.
+        3. Il affiche **7**, encore. Et avec `a: DAT 99`, il afficherait toujours **7**.
+
+            Le programme calcule `a + b` puis retire `a` : il affiche donc **toujours** `b`, quelle que soit la valeur de `a`. Seule la case `c` change, puisqu'elle garde la somme.
+
+            Retiens ce geste, il vaut pour toute l'année : quand un programme donne le même résultat malgré un changement, ce n'est pas une coïncidence. C'est qu'on vient de découvrir ce qu'il **fait vraiment**.
+
+## 7. Les douze défis
 
 Douze exercices progressifs, à faire **dans l'ordre** : chacun réutilise ce que le précédent a installé.
 
@@ -642,12 +608,12 @@ Douze exercices progressifs, à faire **dans l'ordre** : chacun réutilise ce qu
 
     **Instructions à utiliser :** `INP`, `OUT`, `LDA`, `STA`, `ADD`, `SUB`, `BRP`, `BRA`, `HLT`, `DAT`
 
-    C'est le plus long des cinq premiers, et le premier qui a besoin d'un saut en arrière. Relis la section 7.2 avant de commencer.
+    C'est le plus long des cinq premiers, et le premier qui a besoin d'un saut en arrière. Relis la section 5.2 avant de commencer.
 
     ??? tip "Indice léger"
         Le LMC ne sait pas diviser, mais il sait soustraire. Combien de fois peut-on retirer 3 de 12 ? Quatre fois. Diviser, c'est donc retirer 3 encore et encore, et **compter** les retraits.
 
-        « Encore et encore », c'est un saut en arrière, comme en section 7.2. Il te faut donc une étiquette où revenir, une case qui compte les retraits, et un branchement qui décide de ne plus y revenir.
+        « Encore et encore », c'est un saut en arrière, comme en section 5.2. Il te faut donc une étiquette où revenir, une case qui compte les retraits, et un branchement qui décide de ne plus y revenir.
 
     ??? tip "Indice précis"
         Construis-la sur la soustraction : charge la somme, retire 3, et regarde le **signe** du résultat avec `BRP`. S'il est encore positif ou nul, tu peux compter un retrait de plus ; sinon, c'est fini.
@@ -1011,11 +977,11 @@ Douze exercices progressifs, à faire **dans l'ordre** : chacun réutilise ce qu
 
         Entrée `5`, sortie `15`. Entrée `1`, sortie `1`.
 
-        **Un cas non traité, et c'est instructif.** Avec l'entrée `0`, ce programme ne s'arrête jamais : le compteur passe à moins 1, puis moins 2, et il n'est plus jamais égal à zéro. C'est le danger annoncé en section 7.2, rencontré pour de vrai.
+        **Un cas non traité, et c'est instructif.** Avec l'entrée `0`, ce programme ne s'arrête jamais : le compteur passe à moins 1, puis moins 2, et il n'est plus jamais égal à zéro. C'est le danger annoncé en section 5.2, rencontré pour de vrai.
 
         Le programme teste **après** avoir fait un tour, donc il en fait toujours au moins un. Pour qu'il puisse n'en faire aucun, il faudrait tester **avant** d'entrer. Ces deux façons de placer le test existent dans tous les langages, et tu les retrouveras nommément en Python.
 
-## 9. Quand ça ne marche pas
+## 8. Quand ça ne marche pas
 
 - **Le simulateur charge un vieux programme.** Tu as modifié le source sans réassembler. Assemble d'abord, charge ensuite.
 - **Le programme ne s'arrête pas.** Il manque un `HLT`, ou un `BRA` ramène en arrière sans qu'aucun test ne fasse sortir. Relis l'ordre de tes deux branchements.
@@ -1025,7 +991,7 @@ Douze exercices progressifs, à faire **dans l'ordre** : chacun réutilise ce qu
 
 Utilise **Step** plutôt que **Run** : c'est en regardant l'accumulateur et le compteur ordinal changer, une instruction à la fois, qu'on trouve l'erreur. Et écris ta prédiction avant de cliquer, sinon tu ne fais que regarder.
 
-## 10. Et une vraie machine ?
+## 9. Et une vraie machine ?
 
 Le LMC écrit ses instructions avec quatre chiffres **décimaux**, parce que c'est commode pour nous. Un processeur réel, lui, ne dispose que de **deux** symboles, puisque ses circuits ne savent distinguer que deux états. Ses instructions sont donc les mêmes nombres, écrits autrement.
 
@@ -1041,7 +1007,7 @@ Le LMC écrit ses instructions avec quatre chiffres **décimaux**, parce que c'e
 
 Une case du LMC tient quatre chiffres décimaux, donc de 0000 à 9999. Que se passe-t-il si un calcul donne 10 000 ?
 
-## 11. Ce qu'il faut retenir
+## 10. Ce qu'il faut retenir
 
 - Un **fichier source** est du texte. L'**assembleur** le traduit en nombres, le **fichier objet** ; c'est ce fichier qui est chargé en **RAM** et exécuté.
 - Le fichier objet ne contient ni mnémonique, ni nom de variable, ni commentaire : tout cela n'existait que pour toi.
@@ -1050,6 +1016,8 @@ Une case du LMC tient quatre chiffres décimaux, donc de 0000 à 9999. Que se pa
 - L'**accumulateur** est unique : il faut ranger avant de charger autre chose.
 - Les **branchements** sont les seules instructions qui écrivent dans le compteur ordinal. Un saut en avant fait choisir entre deux chemins, c'est une **condition** ; un saut en arrière fait repasser sur les mêmes instructions, c'est une **boucle**. Il n'y a rien d'autre.
 - **Rien ne distingue une instruction d'une donnée en mémoire** : c'est le compteur ordinal qui décide.
+
+Ce que tout cela devient sur une vraie machine, avec un vrai assembleur, est à la dernière page du chapitre : [Pour aller plus loin](pour-aller-plus-loin.md).
 
 ---
 

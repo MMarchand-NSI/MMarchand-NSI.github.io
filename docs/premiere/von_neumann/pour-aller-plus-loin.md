@@ -5,7 +5,7 @@
 
     Viens-y **après les défis LMC**, pas avant : le cycle se comprend beaucoup mieux quand on a déjà écrit et fait tourner ses propres programmes. Rien ici n'est nécessaire pour les défis.
 
-    Le programme de première borne le cours aux **concepts généraux** du modèle. Ce qui est exigible tient donc dans la page de cours ; ce qui suit est du détail utile, et les deux dernières sections sont franchement hors programme.
+    Le programme de première borne le cours aux **concepts généraux** du modèle. Ce qui est exigible tient donc dans la page de cours ; ce qui suit est du détail utile, et les trois dernières sections sont franchement hors programme.
 
 ## 1. Les trois bus en détail
 
@@ -246,7 +246,76 @@ Trois réponses courantes, qui ne suppriment pas le problème mais le réduisent
 - l'**architecture Harvard**, qui sépare la mémoire des instructions de celle des données ;
 - le **pipeline**, qui commence le fetch de l'instruction suivante pendant qu'on exécute la courante.
 
-## 5. Jeux d'instructions et architectures
+## 5. De ton fichier à l'exécution, sur une vraie machine
+
+*Hors programme.*
+
+Sur le LMC, tu as écrit un fichier, cliqué sur « Assembler », puis sur « Charger ». Ces deux boutons ne sont pas une commodité du simulateur : ils sont la chaîne que suit **tout** programme, sur n'importe quelle machine.
+
+Tu n'écris jamais des nombres. Tu écris du **texte**, dans un fichier, sur le **disque**. Ce texte n'est pas exécutable : le processeur ne lit pas des lettres.
+
+Il se passe donc trois choses, dans cet ordre, et ce sont les mêmes pour Python, pour un jeu vidéo ou pour le système d'exploitation.
+
+```mermaid
+graph LR
+    S["Fichier source<br/>du texte, sur le disque"] -->|assemblage| O["Fichier objet<br/>des nombres, sur le disque"]
+    O -->|chargement| R["Mémoire vive<br/>les mêmes nombres, en RAM"]
+    R -->|cycle fetch-decode-execute| P["Processeur"]
+```
+
+1. **Tu écris le source.** Du texte lisible par toi : des mots, des noms que tu choisis, des commentaires. Il est rangé sur le disque, comme n'importe quel fichier.
+2. **Un programme le traduit : l'assembleur.** Il remplace chaque mot par le nombre que le **jeu d'instructions** de la machine lui associe, et il produit un second fichier, le **fichier objet**, qui ne contient plus que des nombres.
+3. **Le fichier objet est chargé en mémoire vive.** Le disque est un périphérique d'entrée-sortie : le processeur ne peut pas y exécuter quoi que ce soit. Il faut d'abord recopier les nombres en RAM. C'est seulement là que le compteur ordinal peut s'y promener.
+
+!!! abstract "Ce que l'assembleur enlève, et c'est le point important"
+    Le fichier objet ne contient **ni mnémonique, ni nom de variable, ni commentaire**. Tout cela a disparu à la traduction : c'était pour toi, pas pour la machine.
+
+    Un assembleur n'est donc pas un programme intelligent. C'est un programme qui **applique une table**, exactement celle que ton groupe a fabriquée à la première séance. Un **compilateur**, que tu rencontreras plus tard, fait un travail beaucoup plus difficile : il traduit un langage où une seule ligne peut valoir des dizaines d'instructions machine.
+
+    ??? example "Exemple : ce qu'un simple `print` demande à un vrai processeur"
+        Voici ce qu'il faut écrire, pour un processeur de ton ordinateur, afin d'obtenir ce que Python écrit en **une seule ligne**, `print("truc")`. Rien ici n'est au programme, et tu n'as pas à le comprendre : regarde seulement la **longueur**.
+
+        ```nasm
+        ; truc.asm
+        ; Assemblage        : nasm -f elf64 truc.asm -o truc.o
+        ; Édition de liens  : ld truc.o -o truc
+        ; Exécution         : ./truc
+
+        section .data
+            msg     db "truc", 10      ; le message, avec un saut de ligne (10 = '\n')
+            msg_len equ $ - msg        ; longueur calculée automatiquement
+
+        section .text
+            global _start
+
+        _start:
+            ; appel système write(1, msg, msg_len)
+            mov     rax, 1             ; numéro de syscall pour write
+            mov     rdi, 1             ; descripteur de fichier 1 = stdout
+            mov     rsi, msg           ; adresse du message
+            mov     rdx, msg_len       ; nombre d'octets à écrire
+            syscall
+
+            ; appel système exit(0)
+            mov     rax, 60            ; numéro de syscall pour exit
+            xor     rdi, rdi           ; code de retour 0
+            syscall
+        ```
+
+        Une fois assemblé, cela fait **huit instructions machine** pour afficher quatre lettres. Et c'est le **minimum** : ce programme se contente de demander au système d'exploitation d'écrire cinq octets, là où le `print` de Python fait beaucoup plus de choses avant d'en arriver là.
+
+        Tu y reconnais des mots de ce cours : une **adresse** (`msg`), des **registres** (`rax`, `rdi`, `rsi`, `rdx`), un fichier **source** en texte, et un assembleur qui le traduit en nombres. Le reste, les numéros d'appel système et le rôle de chaque registre, s'apprend ailleurs.
+
+        **Et ces huit instructions ne sont pas le bout du chemin.** `syscall` ne fait qu'une chose : passer la main au **système d'exploitation**, qui ira écrire, lui, dans le terminal. Ce que la machine exécute ensuite est encore du code, écrit par d'autres, et il est de deux natures.
+
+        - La **porte d'entrée** du système, elle, est bien écrite **en assembleur, à la main** (dans Linux, le fichier `arch/x86/entry/entry_64.S`). Elle doit sauvegarder les registres, changer de pile et basculer le processeur en mode noyau : des gestes qu'aucun langage de haut niveau ne sait exprimer.
+        - Mais le `write` lui-même, celui qui écrit vraiment tes cinq octets, est écrit en **C** (`fs/read_write.c`), comme l'immense majorité du noyau. La porte est en assembleur, la pièce derrière ne l'est pas.
+
+        Ce qui reste vrai des deux côtés : assembleur ou C, **tout finit en instructions machine**, parce que le processeur ne sait rien lire d'autre. Et cela se mesure : sur une machine Linux, afficher ces quatre lettres demande **environ dix mille instructions exécutées dans le noyau**, contre les huit que tu as écrites. Tu n'as écrit ici que celles qui frappent à la porte.
+
+        Si tu veux l'essayer : `nsi install nasm`, puis les trois commandes écrites en tête du fichier.
+
+## 6. Jeux d'instructions et architectures
 
 *Hors programme.*
 
