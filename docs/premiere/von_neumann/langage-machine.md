@@ -77,6 +77,13 @@ graph LR
 
         Tu y reconnais des mots de ce cours : une **adresse** (`msg`), des **registres** (`rax`, `rdi`, `rsi`, `rdx`), un fichier **source** en texte, et un assembleur qui le traduit en nombres. Le reste, les numéros d'appel système et le rôle de chaque registre, s'apprend ailleurs.
 
+        **Et ces huit instructions ne sont pas le bout du chemin.** `syscall` ne fait qu'une chose : passer la main au **système d'exploitation**, qui ira écrire, lui, dans le terminal. Ce que la machine exécute ensuite est encore du code, écrit par d'autres, et il est de deux natures.
+
+        - La **porte d'entrée** du système, elle, est bien écrite **en assembleur, à la main** (dans Linux, le fichier `arch/x86/entry/entry_64.S`). Elle doit sauvegarder les registres, changer de pile et basculer le processeur en mode noyau : des gestes qu'aucun langage de haut niveau ne sait exprimer.
+        - Mais le `write` lui-même, celui qui écrit vraiment tes cinq octets, est écrit en **C** (`fs/read_write.c`), comme l'immense majorité du noyau. La porte est en assembleur, la pièce derrière ne l'est pas.
+
+        Ce qui reste vrai des deux côtés : assembleur ou C, **tout finit en instructions machine**, parce que le processeur ne sait rien lire d'autre. Écrire quatre lettres à l'écran mobilise donc bien plus que ces huit instructions : tu n'as écrit ici que celles qui frappent à la porte.
+
         Si tu veux l'essayer : `nsi install nasm`, puis les trois commandes écrites en tête du fichier.
 
 ## 2. La machine : le Little Man Computer
