@@ -118,8 +118,8 @@ Une ligne porte au plus une **étiquette**, une **instruction** et un **commenta
 ```
 // Un commentaire commence par // et va jusqu'à la fin de la ligne.
 
-        INP             // lire un nombre
-        STA total       // le ranger dans la case étiquetée "total"
+        INP             // lire un nombre et le mettre dans ACC
+        STA total       // ranger ACC dans la case mémoire "total"
         HLT
 
 total:  DAT             // réserve une case, initialisée à 0
