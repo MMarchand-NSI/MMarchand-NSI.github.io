@@ -1020,72 +1020,110 @@ Une case du LMC tient quatre chiffres décimaux, donc de 0000 à 9999. Que se pa
 
 ## 10. Cybersécurité : quand une donnée devient du code
 
-Tu sais maintenant la chose la plus importante de ce chapitre : **rien, dans la mémoire, ne distingue une instruction d'une donnée**. C'est ce qui rend un ordinateur programmable. C'est aussi, littéralement, la faille par laquelle passe une famille entière d'attaques informatiques.
+Tu sais maintenant la chose la plus importante de ce chapitre : **rien, dans la mémoire, ne distingue une instruction d'une donnée**. C'est ce qui rend un ordinateur programmable, et c'est aussi la porte par laquelle passe une famille entière d'attaques.
 
-Voici un programme qui garde un secret. Il affiche une valeur publique, `42`, et contient une valeur secrète, `1234`, qu'il n'affiche **jamais** : aucune ligne ne demande de l'afficher.
+Voici l'histoire. Un éditeur vend un logiciel. Pour empêcher qu'on l'utilise sans payer, il lui fait demander une **clé de licence** au démarrage : la bonne clé, le logiciel démarre ; une mauvaise, il refuse. Camille, elle, a récupéré une copie du logiciel sans l'acheter. Elle n'a donc pas de clé, et elle a le programme sous les yeux.
+
+### Le logiciel, tel que son auteur l'a écrit
 
 | Adresse | Programme | Ce que ça fait |
 |:---:|:---|:---|
-| 00 | `INP` | lire le nombre de l'utilisateur et le mettre dans `ACC` |
-| 01 | `STA suite` | ranger `ACC` dans la case `suite` |
-| 02 | `LDA public` | charger la valeur publique |
-| 03 | `OUT` | l'afficher |
-| 04 | `suite: DAT 0` | la case où atterrit la saisie |
-| 05 | `OUT` | afficher l'accumulateur |
-| 06 | `HLT` | arrêter |
-| 07 | `public: DAT 42` | la valeur publique |
-| 08 | `secret: DAT 1234` | la valeur secrète |
+| 00 | `INP` | lire la clé tapée, et la mettre dans `ACC` |
+| 01 | `STA cle` | ranger `ACC` dans la case `cle` |
+| 02 | `SUB licence` | comparer : clé tapée moins clé enregistrée |
+| 03 | `BRZ demarre` | si la différence vaut 0, la clé est bonne |
+| 04 | `LDA zero` | |
+| 05 | `OUT` | afficher `0` : clé refusée |
+| 06 | `cle: DAT 0` | la case où atterrit la clé tapée |
+| 07 | `OUT` | afficher la clé tapée, pour que l'utilisateur la relise |
+| 08 | `HLT` | |
+| 09 | `demarre: LDA un` | |
+| 10 | `OUT` | afficher `1` : le logiciel démarre |
+| 11 | `HLT` | |
+| 12 | `licence: DAT 4242` | **la clé enregistrée dans le logiciel** |
+| 13 | `zero: DAT 0` | |
+| 14 | `un: DAT 1` | |
 
-!!! danger "Le défaut, et tu l'as déjà rencontré"
-    La case de saisie, à l'adresse 04, est posée **au milieu du chemin d'exécution**, avant le `HLT`. C'est exactement le défaut nommé à la section 8 : le compteur ordinal finit par tomber dans les données.
+En usage normal, il a l'air de faire ce qu'on attend. Avec la bonne clé, `4242`, il affiche `1` et démarre. Avec une clé fausse, `1234` par exemple, il affiche `0`, puis `0` de nouveau : refusé.
 
-    En usage normal, personne ne le remarque. L'utilisateur tape `0`, la case 04 contient alors `0000`, qui est le code de `HLT` : la machine s'arrête, et le programme a l'air de marcher.
+!!! question "Avant de lire la suite, essaie plusieurs clés fausses"
+    Tape `1234`, puis `1000`, puis `6100`, puis `7000`. Le refus, `0`, s'affiche à chaque fois, mais **ce qui se passe juste après n'est pas toujours pareil** : `1234` fait afficher un second `0`, `1000` fait afficher `9001`, et `6100` comme `7000` font redemander une clé.
 
-!!! question "À toi : fais afficher le secret"
-    Tu es maintenant la personne qui tape le nombre. Tu ne peux rien changer au programme : **tu ne contrôles qu'une chose, la valeur saisie**.
+    Que le comportement d'un programme dépende à ce point de ce qu'on tape est déjà le signe que quelque chose ne va pas. La suite de cette section dit quoi.
 
-    Quel nombre faut-il taper pour que la machine affiche `1234` ?
+!!! danger "Deux défauts, et tu les as déjà rencontrés tous les deux"
+    **La case `cle` est posée au milieu du chemin d'exécution**, à l'adresse 06, alors que le `HLT` n'arrive qu'en 08. Le compteur ordinal va donc **passer dessus** et exécuter ce qu'elle contient. C'est le défaut nommé à la section 8.
 
-    Écris ta réponse, puis vérifie dans le simulateur.
+    **Et la ligne 07 ne fait pas ce que son auteur croit.** Il voulait afficher la clé tapée ; mais `OUT` affiche l'accumulateur, jamais une case, comme la correction de la section 2.2 le disait. Il aurait fallu `LDA cle` avant.
+
+    Pris séparément, ce sont deux maladresses. Ensemble, ils ouvrent la porte.
+
+### Attaque 1 : faire dire au logiciel sa propre clé
+
+!!! question "À toi de jouer le rôle de Camille"
+    Tu ne peux **rien** changer au programme : tu ne contrôles qu'une seule chose, le nombre que tu tapes au démarrage.
+
+    Quel nombre faut-il taper pour que le logiciel affiche `4242`, sa clé de licence ?
 
     ??? tip "Indice léger"
-        Ce que tu tapes n'est pas rangé n'importe où : il est rangé à l'adresse 04, et le compteur ordinal passera dessus juste après avoir affiché `42`. Que se passe-t-il si ce que tu tapes **est** une instruction ?
+        Ce que tu tapes est rangé à l'adresse 06, et le compteur ordinal passera dessus juste après avoir affiché `0`. Que se passe-t-il si ce que tu tapes **est** une instruction ?
 
     ??? tip "Indice précis"
-        Il faut que la case 04 contienne l'instruction « charge le contenu de la case 08 ». Retourne voir la colonne « Code » de la table, section 1.2 : `LDA adr` s'écrit `50adr`.
+        Il faut que la case 06 contienne « charge le contenu de la case 12 ». Va relire la colonne « Code » de la table, section 1.2 : `LDA adr` s'écrit `50adr`. Et regarde ce que fait la ligne 07 juste après.
 
     ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : à quel moment précis la valeur que tu tapes cesse-t-elle d'être un nombre pour devenir un ordre ?
+        En une phrase, sur ton cahier : à quel moment exact le nombre que tu as tapé cesse-t-il d'être une donnée pour devenir un ordre ?
 
     ??? success "Correction"
-        Il faut taper **5008**, qui est le code machine de `LDA secret`.
+        Camille tape **5012**, qui est le code machine de `LDA licence`.
 
-        Déroulé de l'exécution :
+        **La mémoire avant l'exécution, et après la ligne 01 :**
+
+        | Adresse | Avant | Après `STA cle` |
+        |:---:|:---|:---|
+        | 06 | `DAT 0`, une donnée qui vaut 0 | `5012`, c'est-à-dire **`LDA licence`** |
+
+        Le programme n'a pas été modifié sur le disque. C'est sa **mémoire** qui a changé, et la case 06 est passée du statut de donnée à celui d'instruction, sans que rien ne le signale.
 
         | `PC` | Case exécutée | Effet |
         |:---:|:---|:---|
-        | 00 | `INP` | `ACC` reçoit 5008 |
-        | 01 | `STA suite` | la case 04 contient maintenant **5008** |
-        | 02 | `LDA public` | `ACC` reçoit 42 |
-        | 03 | `OUT` | affiche **42** |
-        | 04 | `5008`, c'est-à-dire `LDA 08` | `ACC` reçoit **1234** |
-        | 05 | `OUT` | affiche **1234** |
-        | 06 | `HLT` | fin |
+        | 00 à 02 | `INP`, `STA cle`, `SUB licence` | `ACC` vaut 5012 - 4242 = 770 |
+        | 03 | `BRZ demarre` | 770 n'est pas 0 : pas de saut, la clé est refusée |
+        | 04, 05 | `LDA zero`, `OUT` | affiche **0** |
+        | 06 | `5012`, donc `LDA licence` | `ACC` reçoit **4242** |
+        | 07 | `OUT` | affiche **4242** |
+        | 08 | `HLT` | fin |
 
-        Le programme affiche `42` **puis 1234**. Le secret est sorti, et pourtant aucune ligne du programme ne demandait de l'afficher.
+        Le logiciel vient d'**afficher sa propre clé de licence**, alors qu'aucune ligne du programme ne demande de l'afficher. Camille peut maintenant la donner à qui elle veut : c'est ainsi que des clés circulent.
 
-        Ce que tu viens de faire porte un nom : une **injection de code**. Tu n'as pas modifié le programme, tu lui as fourni une **donnée** qu'il a fini par exécuter comme une **instruction**. La machine n'a commis aucune erreur : elle a fait exactement ce qu'on lui a demandé, et c'est bien le problème.
+### Attaque 2 : se passer complètement de la clé
 
-!!! abstract "Ce que cet exemple dit des vraies machines"
-    Le mécanisme est le même sur un ordinateur réel, à l'échelle près. Une saisie trop longue qui déborde de la place prévue et vient recouvrir du code, un champ de formulaire dont le contenu finit exécuté : dans tous les cas, **une donnée fournie de l'extérieur a franchi la frontière et s'est retrouvée exécutée**.
+!!! question "Et sans connaître la clé du tout ?"
+    Camille n'a même pas besoin de la clé. Quel nombre taper pour que le logiciel **démarre** sans qu'aucune clé valable n'ait été fournie ?
 
-    Trois protections, qu'on retrouve partout aujourd'hui :
+    ??? tip "Indice"
+        Le programme démarre quand le compteur ordinal arrive à l'adresse 09. Quelle instruction de la table sert à **y aller directement** ?
 
-    - **ne jamais faire confiance à une saisie**, et vérifier sa forme et sa taille avant de la ranger quelque part ;
-    - **séparer le code des données** : les processeurs récents savent marquer une zone de mémoire comme **non exécutable**, et le compteur ordinal refuse alors d'y aller ;
-    - **vérifier les bornes** : la plupart des langages modernes refusent d'écrire en dehors de la place réservée, là où les plus anciens laissaient faire.
+    ??? success "Correction"
+        Camille tape **6009**, qui est le code machine de `BRA demarre`.
 
-    Aucune de ces protections n'annule le principe de von Neumann : elles ajoutent des garde-fous **par-dessus**. Le fait qu'une instruction soit un nombre comme un autre reste vrai, et c'est ce qui rend un ordinateur capable d'exécuter des programmes qu'il ne connaissait pas d'avance.
+        La case 06 contient alors un **saut**. Après avoir affiché `0`, le compteur ordinal l'exécute et bondit à l'adresse 09, c'est-à-dire **derrière le contrôle**. Le logiciel affiche `1` et démarre.
+
+        La vérification de la ligne 03 n'a pas été trompée : elle a bien conclu que la clé était fausse. Elle a simplement été **contournée**, et c'est ce qu'on appelle un *crack*.
+
+!!! abstract "Ce qu'il faut en retenir, et ce n'est pas « comment pirater »"
+    Ces deux attaques disent la même chose, et c'est un principe de sécurité que tu retrouveras partout : **une vérification faite sur la machine de celui qu'elle doit arrêter ne protège rien**. Camille possède le programme, la mémoire et le processeur ; quel que soit le contrôle écrit à la ligne 03, elle est du côté du manche.
+
+    D'où ce que font les éditeurs aujourd'hui, et que tu observes sans le savoir :
+
+    - la clé n'est plus vérifiée sur ta machine mais **sur un serveur**, chez eux, où tu n'as pas la main : c'est l'activation en ligne ;
+    - un secret n'est **jamais** rangé en clair dans un programme, parce que tout ce que le programme peut lire, son utilisateur peut le lire aussi ;
+    - les processeurs récents savent marquer une zone de mémoire comme **non exécutable**, et le compteur ordinal refuse alors d'y aller ;
+    - et **aucune saisie n'est jamais rangée sans avoir été vérifiée**.
+
+    Le même mécanisme, à plus grande échelle, porte des noms que tu entendras : *injection de code*, *débordement de tampon*. Dans tous les cas, une donnée venue de l'extérieur a franchi la frontière et s'est retrouvée exécutée.
+
+    *Cela dit en passant : utiliser un logiciel payant sans licence est illégal. Ce qu'on étudie ici est le mécanisme, pas la pratique, et le savoir sert d'abord à écrire des programmes qu'on n'ouvre pas aussi facilement.*
 
 ## 11. Ce qu'il faut retenir
 
