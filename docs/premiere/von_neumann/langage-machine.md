@@ -37,19 +37,7 @@ Le **Little Man Computer** (LMC) est un ordinateur d'étude. Il est minuscule, e
 
 Une case contient un nombre, et **une instruction est un nombre comme un autre**. C'est déjà la réponse à la sixième question du rappel : rien ne distingue une case de code d'une case de données, c'est le compteur ordinal qui décide, en s'y arrêtant.
 
-!!! info "Le format d'une instruction, en quatre chiffres"
-    Voilà la seconde convention qui manquait à ton langage de la première séance : le **format**.
-
-    ```
-      5 0 4 2
-      │ │ └─┴── l'adresse de la case concernée, de 00 à 99
-      │ └────── toujours 0 dans tout ce chapitre
-      └──────── le code opération : quelle instruction
-    ```
-
-    `5042` se lit donc « charge dans l'accumulateur le contenu de la case 42 ». Le premier chiffre dit **quoi faire**, les deux derniers **sur quelle case**.
-
-    Le chiffre du milieu sert, sur cette machine, à désigner des registres et des modes d'accès dont tu n'auras pas besoin cette année. Il vaut `0` partout dans ce chapitre.
+Voilà du même coup la convention qui manquait à ton langage de la première séance : le **format**. Sur cette machine, une instruction s'écrit **toujours avec quatre chiffres**, le premier disant quoi faire et les deux derniers sur quelle case. Ainsi `5042` se lit « charge dans l'accumulateur le contenu de la case 42 ». Tu n'as rien de plus à savoir là-dessus.
 
 ### 1.2 Le jeu d'instructions
 
@@ -96,15 +84,6 @@ Onze instructions, et **la machine ne sait rien faire d'autre**. Ce n'est pas un
 |---|---|---|
 | `HLT` | `0000` | arrête le processeur |
 | `DAT` | | réserve une case, avec une valeur initiale facultative. Ce n'est pas une instruction : rien ne l'exécute, elle sert seulement à mettre un nombre en mémoire avant le départ |
-
-!!! info "Comment lire la colonne « Code »"
-    `50adr` veut dire : les deux chiffres `50`, puis l'**adresse écrite sur deux chiffres**.
-
-    - `LDA 42` s'écrit donc `5042`
-    - `LDA 7` s'écrit `5007`, et non `507` : l'adresse occupe toujours deux chiffres, le zéro compris
-    - `HLT` s'écrit `0000`, quatre zéros
-
-    Un mot machine fait **toujours quatre chiffres**, sans exception. C'est ce qui permet au processeur de savoir où finit une instruction et où commence la suivante, ce qui manquait justement à ton langage de la première séance.
 
 !!! abstract "Cette table est une convention, exactement comme la tienne"
     Tu as déjà fait ce travail dans l'activité [Inventer un langage pour une machine](langage-invente.md) : tu as attribué **un numéro à chaque mot**, et tu as constaté que le programme du voisin était indéchiffrable sans ta table.
