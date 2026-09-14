@@ -742,6 +742,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="1. La machine et ses instructions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-meme-table-dite-comme-dans-les-livres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La même table, dite comme dans les livres
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -8017,6 +8034,23 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="1. La machine et ses instructions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#la-meme-table-dite-comme-dans-les-livres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La même table, dite comme dans les livres
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -8404,6 +8438,78 @@
 </tbody>
 </table>
 <p>Cette table ne s'apprend pas par cœur : tu l'as sous les yeux pour tous les exercices. C'est une convention, comme la table que ton groupe a inventée : une autre machine en a une autre.</p>
+<h3 id="la-meme-table-dite-comme-dans-les-livres">La même table, dite comme dans les livres</h3>
+<p>C'est <strong>exactement la même chose</strong>, dite de façon plus courte et plus précise. Deux mots à connaître :</p>
+<ul>
+<li><code>&lt;adr&gt;</code> n'est <strong>pas à recopier</strong> : les chevrons <code>&lt; &gt;</code> veulent dire « mets un numéro de case ici ». <code>LDA &lt;adr&gt;</code> s'écrit par exemple <code>LDA 15</code> ;</li>
+<li><code>PC</code> est le <strong>compteur ordinal</strong>, le numéro de la case où se trouve la prochaine instruction.</li>
+</ul>
+<p>De gauche à droite, le langage devient de plus en plus <strong>formel</strong> : la première table en français de tous les jours, puis la description usuelle, puis la notation, où <code>←</code> se lit « reçoit ».</p>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Description usuelle</th>
+<th>Notation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LDA &lt;adr&gt;</code></td>
+<td>charge dans l'accumulateur le contenu de l'adresse <code>&lt;adr&gt;</code></td>
+<td><code>ACC ← mémoire[&lt;adr&gt;]</code></td>
+</tr>
+<tr>
+<td><code>STA &lt;adr&gt;</code></td>
+<td>range le contenu de l'accumulateur à l'adresse <code>&lt;adr&gt;</code></td>
+<td><code>mémoire[&lt;adr&gt;] ← ACC</code></td>
+</tr>
+<tr>
+<td><code>ADD &lt;adr&gt;</code></td>
+<td>ajoute à l'accumulateur le contenu de l'adresse <code>&lt;adr&gt;</code></td>
+<td><code>ACC ← ACC + mémoire[&lt;adr&gt;]</code></td>
+</tr>
+<tr>
+<td><code>SUB &lt;adr&gt;</code></td>
+<td>soustrait de l'accumulateur le contenu de l'adresse <code>&lt;adr&gt;</code></td>
+<td><code>ACC ← ACC − mémoire[&lt;adr&gt;]</code></td>
+</tr>
+<tr>
+<td><code>INP</code></td>
+<td>lit une entrée et la place dans l'accumulateur</td>
+<td><code>ACC ← entrée</code></td>
+</tr>
+<tr>
+<td><code>OUT</code></td>
+<td>envoie l'accumulateur sur la sortie</td>
+<td><code>sortie ← ACC</code></td>
+</tr>
+<tr>
+<td><code>HLT</code></td>
+<td>arrête le processeur</td>
+<td>arrêt</td>
+</tr>
+<tr>
+<td><code>BRA &lt;adr&gt;</code></td>
+<td>branchement inconditionnel à l'adresse <code>&lt;adr&gt;</code></td>
+<td><code>PC ← &lt;adr&gt;</code></td>
+</tr>
+<tr>
+<td><code>BRZ &lt;adr&gt;</code></td>
+<td>branchement à l'adresse <code>&lt;adr&gt;</code> si l'accumulateur est nul</td>
+<td>si <code>ACC = 0</code> : <code>PC ← &lt;adr&gt;</code></td>
+</tr>
+<tr>
+<td><code>BRP &lt;adr&gt;</code></td>
+<td>branchement à l'adresse <code>&lt;adr&gt;</code> si l'accumulateur est positif ou nul</td>
+<td>si <code>ACC ≥ 0</code> : <code>PC ← &lt;adr&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition warning">
+<p class="admonition-title">À l'évaluation, tu auras cette deuxième table, et seulement elle</p>
+<p>Pas besoin de l'apprendre par cœur, elle te sera donnée. Mais il faut savoir la <strong>lire</strong> : entraîne-toi avec elle, au plus tard pour les défis.</p>
+</div>
 <h2 id="2-predire-sur-ton-cahier">2. Prédire, sur ton cahier</h2>
 <p>Pas de simulateur dans cette partie : <strong>papier et crayon</strong>.</p>
 <h3 id="21-lda">2.1 <code>LDA</code></h3>
@@ -8454,14 +8560,6 @@
 </tr>
 </tbody>
 </table>
-<details class="success">
-<summary>Correction</summary>
-<ul>
-<li><code>LDA 11</code> : l'accumulateur contient <strong>3</strong>.</li>
-<li><code>LDA 13</code> : l'accumulateur contient <strong>25</strong>.</li>
-<li>Après la ligne 1 : <strong>7</strong>. Après la ligne 2 : <strong>3</strong>, le 7 est écrasé. La case n°10 contient toujours <strong>7</strong> : <code>LDA</code> prend sans vider.</li>
-</ul>
-</details>
 </div>
 <h3 id="22-sta">2.2 <code>STA</code></h3>
 <div class="admonition question">
@@ -8518,38 +8616,6 @@
 </tr>
 </tbody>
 </table>
-<details class="success">
-<summary>Correction</summary>
-<p><strong>A.</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Ligne</th>
-<th style="text-align: left;">Instruction</th>
-<th style="text-align: center;">Accumulateur</th>
-<th style="text-align: center;">Case n°10</th>
-<th style="text-align: center;">Case n°12</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">1</td>
-<td style="text-align: left;"><code>LDA 10</code></td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">0</td>
-</tr>
-<tr>
-<td style="text-align: center;">2</td>
-<td style="text-align: left;"><code>STA 12</code></td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">7</td>
-</tr>
-</tbody>
-</table>
-<p><strong>B.</strong> Cases 10, 11, 12, 13 : <strong>25, 25, 0, 25</strong>. <code>STA</code> ne vide pas l'accumulateur : le 25 y reste, et on peut le ranger deux fois.</p>
-</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 3 : échanger deux cases</p>
@@ -8581,11 +8647,6 @@
 </tbody>
 </table>
 <p>Sur ton cahier : que contiennent les cases n°10 et n°11 à la fin ? Le programme a-t-il réussi ?</p>
-<details class="success">
-<summary>Correction</summary>
-<p>Les deux cases contiennent <strong>7</strong>. Raté : dès la ligne 2, le 3 de la case n°11 est <strong>écrasé</strong>, et il n'existe plus nulle part.</p>
-<p>Pour échanger, il faut d'abord mettre l'une des deux valeurs <strong>à l'abri dans une troisième case</strong>.</p>
-</details>
 </div>
 <h3 id="23-add-et-sub">2.3 <code>ADD</code> et <code>SUB</code></h3>
 <div class="admonition question">
@@ -8655,47 +8716,6 @@
 </tr>
 </tbody>
 </table>
-<details class="success">
-<summary>Correction</summary>
-<p><strong>A.</strong></p>
-<table>
-<thead>
-<tr>
-<th style="text-align: center;">Ligne</th>
-<th style="text-align: left;">Instruction</th>
-<th style="text-align: center;">Accumulateur</th>
-<th style="text-align: center;">Case n°12</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align: center;">1</td>
-<td style="text-align: left;"><code>LDA 10</code></td>
-<td style="text-align: center;">7</td>
-<td style="text-align: center;">0</td>
-</tr>
-<tr>
-<td style="text-align: center;">2</td>
-<td style="text-align: left;"><code>ADD 11</code></td>
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">0</td>
-</tr>
-<tr>
-<td style="text-align: center;">3</td>
-<td style="text-align: left;"><code>STA 12</code></td>
-<td style="text-align: center;">10</td>
-<td style="text-align: center;">10</td>
-</tr>
-<tr>
-<td style="text-align: center;">4</td>
-<td style="text-align: left;"><code>SUB 10</code></td>
-<td style="text-align: center;">3</td>
-<td style="text-align: center;">10</td>
-</tr>
-</tbody>
-</table>
-<p><strong>B.</strong> 25 − 7 − 7 − 7 = <strong>4</strong>.</p>
-</details>
 </div>
 <h3 id="24-un-programme-entier">2.4 Un programme entier</h3>
 <p>Le programme aussi est rangé dans la mémoire : sa première instruction dans la case n°0, la suivante dans la case n°1, et ainsi de suite. La machine les fait <strong>l'une après l'autre</strong>, jusqu'à <code>HLT</code>.</p>
@@ -8776,11 +8796,6 @@
 </tr>
 </tbody>
 </table>
-<details class="success">
-<summary>Correction</summary>
-<p><strong>A.</strong> Affiche <strong>13</strong>. La case n°10 contient <strong>4</strong>.</p>
-<p><strong>B.</strong> Affiche <strong>6</strong>, et la case n°11 contient <strong>12</strong>. <code>OUT</code> affiche <strong>l'accumulateur</strong>, jamais une case : au moment du <code>OUT</code>, la ligne 4 y a remis 6.</p>
-</details>
 </div>
 <h2 id="3-donner-un-nom-aux-cases">3. Donner un nom aux cases</h2>
 <p>Compter les numéros de cases, c'est pénible, et on se trompe. Alors on donne un <strong>nom</strong> à une case.</p>
@@ -9198,7 +9213,7 @@
 <h2 id="6-ecrire-des-programmes">6. Écrire des programmes</h2>
 <p>Dans l'ordre. Chaque défi ajoute <strong>une seule</strong> difficulté.</p>
 <p>Pour chacun : écris ton programme <strong>sur ton cahier</strong>, puis tape-le et teste-le dans le simulateur.</p>
-<p><strong>Il n'y a pas de correction : c'est le simulateur qui te dit si ça marche.</strong> Si ça ne marche pas, reprends ton programme ligne par ligne avec la table de la section 1. Chaque instruction fait <strong>ce qui est écrit dans la table, et rien d'autre</strong>.</p>
+<p><strong>Il n'y a pas de correction : c'est le simulateur qui te dit si ça marche.</strong> Si ça ne marche pas, reprends ton programme ligne par ligne avec la <strong>deuxième table</strong>, celle que tu auras à l'évaluation. Chaque instruction fait <strong>ce qui est écrit dans la table, et rien d'autre</strong>.</p>
 <h3 id="sans-saut">Sans saut</h3>
 <div class="admonition question">
 <p class="admonition-title">Défi 1</p>
@@ -9320,18 +9335,6 @@
 <details class="tip">
 <summary>Indice précis</summary>
 <p>Charger <code>somme</code>, ajouter <code>cpt</code>, ranger <code>somme</code>. Puis charger <code>cpt</code>, enlever 1, ranger <code>cpt</code>, tester s'il vaut 0. Afficher <strong>une seule fois, à la sortie</strong>.</p>
-</details>
-</div>
-<div class="admonition question">
-<p class="admonition-title">Défi 15 (bonus)</p>
-<p>Demander trois nombres et afficher leur <strong>moyenne</strong> (division entière). La machine ne sait pas diviser.</p>
-<details class="tip">
-<summary>Indice léger</summary>
-<p>Diviser 12 par 3, c'est compter combien de fois on peut enlever 3 de 12.</p>
-</details>
-<details class="tip">
-<summary>Indice précis</summary>
-<p>Dans la boucle : <code>somme</code> moins 3. Si c'est 0 ou plus, on range le résultat dans <code>somme</code> et on ajoute 1 à <code>moy</code>. Sinon, on affiche <code>moy</code>.</p>
 </details>
 </div>
 <h2 id="7-quand-ca-ne-marche-pas">7. Quand ça ne marche pas</h2>
