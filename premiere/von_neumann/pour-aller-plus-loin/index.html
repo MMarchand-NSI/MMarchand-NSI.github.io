@@ -894,6 +894,56 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#7-ce-que-la-machine-voit-vraiment-des-nombres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Ce que la machine voit vraiment : des nombres
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Ce que la machine voit vraiment : des nombres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-chaque-instruction-est-un-nombre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Chaque instruction est un nombre
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-le-saut-peut-tomber-sur-une-donnee" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Le saut peut tomber sur une donnée
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-cybersecurite-quand-une-donnee-devient-du-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Cybersécurité : quand une donnée devient du code
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -8047,6 +8097,56 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#7-ce-que-la-machine-voit-vraiment-des-nombres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Ce que la machine voit vraiment : des nombres
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="7. Ce que la machine voit vraiment : des nombres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#71-chaque-instruction-est-un-nombre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.1 Chaque instruction est un nombre
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#72-le-saut-peut-tomber-sur-une-donnee" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.2 Le saut peut tomber sur une donnée
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#73-cybersecurite-quand-une-donnee-devient-du-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7.3 Cybersécurité : quand une donnée devient du code
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -8546,6 +8646,278 @@
 <li><strong>Jeu d'instructions</strong> : l'ensemble des opérations qu'un processeur sait exécuter. Les familles <strong>CISC</strong> (beaucoup d'instructions, complexes) et <strong>RISC</strong> (peu d'instructions, simples et rapides) reposent sur deux paris opposés.</li>
 <li><strong>Architectures alternatives</strong> : Harvard, et les variantes dites de von Neumann modifiée.</li>
 </ul>
+<h2 id="7-ce-que-la-machine-voit-vraiment-des-nombres">7. Ce que la machine voit vraiment : des nombres</h2>
+<p>À faire <strong>après</strong> les défis du <a href="../langage-machine/">langage machine</a>.</p>
+<h3 id="71-chaque-instruction-est-un-nombre">7.1 Chaque instruction est un nombre</h3>
+<p><code>LDA</code>, <code>STA</code>, les noms de cases : tout cela est pour toi. Dans la mémoire, il n'y a que des nombres de quatre chiffres. Les deux premiers disent <strong>quoi faire</strong>, les deux derniers <strong>sur quelle case</strong>. Ainsi <code>5042</code>, c'est <code>LDA 42</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th>Nombre</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>INP</code></td>
+<td><code>9001</code></td>
+</tr>
+<tr>
+<td><code>OUT</code></td>
+<td><code>9002</code></td>
+</tr>
+<tr>
+<td><code>HLT</code></td>
+<td><code>0000</code></td>
+</tr>
+<tr>
+<td><code>LDA 42</code></td>
+<td><code>5042</code></td>
+</tr>
+<tr>
+<td><code>STA 42</code></td>
+<td><code>3042</code></td>
+</tr>
+<tr>
+<td><code>ADD 42</code></td>
+<td><code>1042</code></td>
+</tr>
+<tr>
+<td><code>SUB 42</code></td>
+<td><code>2042</code></td>
+</tr>
+<tr>
+<td><code>BRA 42</code></td>
+<td><code>6042</code></td>
+</tr>
+<tr>
+<td><code>BRZ 42</code></td>
+<td><code>7042</code></td>
+</tr>
+<tr>
+<td><code>BRP 42</code></td>
+<td><code>8042</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition question">
+<p class="admonition-title">Traduire à la main, une fois</p>
+<p>Chaque ligne occupe une case, à partir de la case n°0.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Case n°</th>
+<th style="text-align: left;">Instruction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;"><code>INP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>STA 06</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>INP</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>ADD 06</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>OUT</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">5</td>
+<td style="text-align: left;"><code>HLT</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">6</td>
+<td style="text-align: left;"><code>DAT</code></td>
+</tr>
+</tbody>
+</table>
+<p>Sur ton cahier : écris le nombre que contient chaque case.</p>
+<p>Ensuite, dans le simulateur : assemble ce programme, ouvre le fichier <code>.lmcobj</code> qui apparaît et compare. Remplace <code>1006</code> par <code>2006</code>, enregistre, clique <strong>Charger</strong> <strong>sans réassembler</strong>, puis <strong>Run</strong> : le programme fait maintenant une soustraction. C'est bien le fichier de nombres qui tourne.</p>
+<details class="success">
+<summary>Correction</summary>
+<p><code>9001 3006 9001 1006 9002 0000 0000</code>. Il lit deux nombres et affiche leur somme.</p>
+</details>
+</div>
+<h3 id="72-le-saut-peut-tomber-sur-une-donnee">7.2 Le saut peut tomber sur une donnée</h3>
+<div class="admonition question">
+<p class="admonition-title">Prédire l'impossible</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Case n°</th>
+<th style="text-align: left;">Instruction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">0</td>
+<td style="text-align: left;"><code>LDA 04</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">1</td>
+<td style="text-align: left;"><code>OUT</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">2</td>
+<td style="text-align: left;"><code>BRA 04</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">3</td>
+<td style="text-align: left;"><code>HLT</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">4</td>
+<td style="text-align: left;"><code>DAT 9002</code></td>
+</tr>
+</tbody>
+</table>
+<p>Sur ton cahier : la liste des nombres affichés, et pourquoi le programme s'arrête alors qu'il ne passe jamais par la case n°3.</p>
+<p><strong>N'ouvre pas le simulateur tant que tu n'as pas écrit tes réponses.</strong></p>
+<details class="tip">
+<summary>Indice</summary>
+<p>Compare le nombre de la case n°1 et celui de la case n°4.</p>
+</details>
+<details class="success">
+<summary>Correction</summary>
+<p>Il affiche <strong>9002</strong>, puis <strong>9002</strong> encore.</p>
+<ul>
+<li>Case n°0 : l'accumulateur reçoit le <strong>nombre</strong> 9002. Case n°1 : premier affichage.</li>
+<li>Case n°2 : la machine va à la case n°4 et la lit comme une <strong>instruction</strong>. Or 9002, c'est <code>OUT</code> : second affichage.</li>
+<li>Case n°5 : jamais écrite, elle vaut <code>0000</code>, c'est-à-dire <code>HLT</code>.</li>
+</ul>
+<p><strong>Rien, dans la mémoire, ne distingue une instruction d'une donnée.</strong> C'est le compteur ordinal qui décide.</p>
+</details>
+</div>
+<h3 id="73-cybersecurite-quand-une-donnee-devient-du-code">7.3 Cybersécurité : quand une donnée devient du code</h3>
+<p>Un éditeur vend un logiciel qui demande une <strong>clé de licence</strong> au démarrage. Camille en a une copie, sans clé. Le programme a deux maladresses, comme en ont tous les logiciels, souvent nées d'un copier-coller.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: center;">Case n°</th>
+<th style="text-align: left;">Programme</th>
+<th style="text-align: left;">Ce que ça fait</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: center;">00</td>
+<td style="text-align: left;"><code>INP</code></td>
+<td style="text-align: left;">lire la clé tapée</td>
+</tr>
+<tr>
+<td style="text-align: center;">01</td>
+<td style="text-align: left;"><code>STA cle</code></td>
+<td style="text-align: left;">la ranger dans la case <code>cle</code></td>
+</tr>
+<tr>
+<td style="text-align: center;">02</td>
+<td style="text-align: left;"><code>SUB licence</code></td>
+<td style="text-align: left;">clé tapée moins clé enregistrée</td>
+</tr>
+<tr>
+<td style="text-align: center;">03</td>
+<td style="text-align: left;"><code>BRZ demarre</code></td>
+<td style="text-align: left;">si ça vaut 0, la clé est bonne</td>
+</tr>
+<tr>
+<td style="text-align: center;">04</td>
+<td style="text-align: left;"><code>LDA zero</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">05</td>
+<td style="text-align: left;"><code>OUT</code></td>
+<td style="text-align: left;">afficher <code>0</code> : refusé</td>
+</tr>
+<tr>
+<td style="text-align: center;">06</td>
+<td style="text-align: left;"><code>cle: DAT 0</code></td>
+<td style="text-align: left;">la case où atterrit la clé tapée</td>
+</tr>
+<tr>
+<td style="text-align: center;">07</td>
+<td style="text-align: left;"><code>OUT</code></td>
+<td style="text-align: left;">afficher la clé tapée, pour la relire</td>
+</tr>
+<tr>
+<td style="text-align: center;">08</td>
+<td style="text-align: left;"><code>HLT</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">09</td>
+<td style="text-align: left;"><code>demarre: LDA un</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">10</td>
+<td style="text-align: left;"><code>OUT</code></td>
+<td style="text-align: left;">afficher <code>1</code> : le logiciel démarre</td>
+</tr>
+<tr>
+<td style="text-align: center;">11</td>
+<td style="text-align: left;"><code>HLT</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">12</td>
+<td style="text-align: left;"><code>licence: DAT 4242</code></td>
+<td style="text-align: left;"><strong>la clé enregistrée</strong></td>
+</tr>
+<tr>
+<td style="text-align: center;">13</td>
+<td style="text-align: left;"><code>zero: DAT 0</code></td>
+<td style="text-align: left;"></td>
+</tr>
+<tr>
+<td style="text-align: center;">14</td>
+<td style="text-align: left;"><code>un: DAT 1</code></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition danger">
+<p class="admonition-title">Les deux maladresses</p>
+<ul>
+<li>La case <code>cle</code> est <strong>au milieu du chemin</strong> : la machine va passer dessus et exécuter ce qu'elle contient.</li>
+<li>La case n°07 ne fait pas ce que l'auteur croit : <code>OUT</code> affiche l'accumulateur, pas la case <code>cle</code>.</li>
+</ul>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Attaque 1 : faire afficher la clé</p>
+<p>Tu ne peux rien changer au programme, seulement le nombre que tu tapes. Quel nombre taper pour que le logiciel affiche <code>4242</code> ?</p>
+<details class="tip">
+<summary>Indice</summary>
+<p>Ce que tu tapes atterrit en case n°06, et la machine va l'exécuter. Il faudrait que ce soit <code>LDA licence</code>, c'est-à-dire <code>LDA 12</code>.</p>
+</details>
+<details class="success">
+<summary>Correction</summary>
+<p><strong>5012</strong>, le nombre de <code>LDA 12</code>. Le refus s'affiche (<code>0</code>), puis la case n°06 met 4242 dans l'accumulateur, et la case n°07 l'affiche. Le logiciel a donné sa propre clé.</p>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Attaque 2 : démarrer sans clé</p>
+<p>Quel nombre taper pour que le logiciel <strong>démarre</strong> ?</p>
+<details class="success">
+<summary>Correction</summary>
+<p><strong>6009</strong>, le nombre de <code>BRA 09</code>. Après le refus, la case n°06 fait sauter la machine en case n°09, <strong>derrière</strong> le contrôle. C'est un <em>crack</em>.</p>
+</details>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Ce qu'il faut en retenir</p>
+<p><strong>Une vérification faite sur la machine de celui qu'elle doit arrêter ne protège rien.</strong> D'où ce que font les éditeurs : vérifier la clé <strong>sur un serveur</strong>, ne jamais ranger un secret en clair dans un programme, marquer des zones de mémoire <strong>non exécutables</strong>, et ne jamais ranger une saisie sans la vérifier. Le même mécanisme porte des noms que tu entendras : <em>injection de code</em>, <em>débordement de tampon</em>.</p>
+<p><em>Utiliser un logiciel payant sans licence est illégal. On étudie le mécanisme, pas la pratique.</em></p>
+</div>
 <hr />
 <p><strong>Sources</strong> :</p>
 <ul>
