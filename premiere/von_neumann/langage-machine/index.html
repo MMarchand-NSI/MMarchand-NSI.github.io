@@ -956,6 +956,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#avec-un-peu-de-tout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Avec un peu de tout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#7-quand-ca-ne-marche-pas" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8248,6 +8259,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#avec-un-peu-de-tout" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Avec un peu de tout
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#7-quand-ca-ne-marche-pas" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -9337,6 +9359,59 @@
 <p>Charger <code>somme</code>, ajouter <code>cpt</code>, ranger <code>somme</code>. Puis charger <code>cpt</code>, enlever 1, ranger <code>cpt</code>, tester s'il vaut 0. Afficher <strong>une seule fois, à la sortie</strong>.</p>
 </details>
 </div>
+<h2 id="avec-un-peu-de-tout">Avec un peu de tout</h2>
+<div class="admonition question">
+<p class="admonition-title">Défi 15 : la multiplication</p>
+<p>Demander deux nombres et afficher leur <strong>produit</strong>. On tape 6 puis 7 : affiche 42.</p>
+<p>Les deux nombres tapés sont positifs, et leur produit ne dépasse pas 9999.</p>
+<details class="tip">
+<summary>Indice léger</summary>
+<p>C'est le défi 6, le triple. Mais cette fois, le nombre de fois qu'on ajoute est <strong>tapé au clavier</strong>, il n'est pas connu d'avance.</p>
+</details>
+<details class="tip">
+<summary>Indice précis</summary>
+<p>Une case <code>res</code> part de 0, une case <code>cpt</code> part du second nombre. À chaque tour : ajouter le premier nombre à <code>res</code>, puis enlever 1 à <code>cpt</code>. On sort quand <code>cpt</code> vaut 0, et on affiche <code>res</code> <strong>une seule fois, à la fin</strong>.</p>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Défi 16 : la division euclidienne</p>
+<p>Demander deux nombres, et afficher le <strong>quotient</strong>, puis le <strong>reste</strong> de la division euclidienne du premier par le second. On tape 17 puis 5 : affiche 3, puis 2.</p>
+<p>Les deux nombres tapés sont positifs, et le second n'est pas 0.</p>
+<details class="tip">
+<summary>Indice léger</summary>
+<p>La machine ne sait pas diviser, comme elle ne savait pas multiplier au défi 6. Combien de fois peut-on enlever 5 à 17 avant de passer en négatif ?</p>
+</details>
+<details class="tip">
+<summary>Indice précis</summary>
+<p>Une case <code>reste</code> part du premier nombre, une case <code>quotient</code> part de 0. Tant que <code>reste</code> moins le diviseur est <strong>positif ou nul</strong>, on range ce résultat dans <code>reste</code> et on ajoute 1 à <code>quotient</code>. On sort de la boucle quand il devient négatif, et on affiche les deux cases <strong>à la fin, une seule fois</strong>.</p>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Défi 17 : compter jusqu'au 0</p>
+<p>Demander des nombres, un par un, jusqu'à ce qu'on tape <strong>0</strong>. Afficher <strong>combien</strong> de nombres ont été tapés avant ce 0. On tape 12, 7, 9, puis 0 : affiche 3.</p>
+<details class="tip">
+<summary>Indice léger</summary>
+<p>Dans tous tes programmes jusqu'ici, la boucle savait <strong>d'avance</strong> combien de tours faire. Ici, c'est le nombre tapé qui décide d'arrêter.</p>
+</details>
+<details class="tip">
+<summary>Indice précis</summary>
+<p><code>INP</code> met le nombre tapé dans l'accumulateur : <code>BRZ</code> peut donc le tester <strong>tout de suite</strong>, sans le ranger nulle part. Si ce n'est pas 0, on ajoute 1 à une case <code>n</code>, et on revient au <code>INP</code>. On affiche <code>n</code> à la sortie.</p>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Défi 18 : la suite de Fibonacci</p>
+<p>Chaque terme est la <strong>somme des deux précédents</strong> : 1, 1, 2, 3, 5, 8, 13, 21, et ainsi de suite. Demander un nombre N, et afficher les N premiers termes. On tape 8 : affiche 1, 1, 2, 3, 5, 8, 13, 21.</p>
+<p>N est compris entre 1 et 20. Au-delà, les termes ne tiennent plus dans une case, et la machine affiche n'importe quoi sans prévenir.</p>
+<details class="tip">
+<summary>Indice léger</summary>
+<p>Il faut garder <strong>deux</strong> termes en même temps, et il n'y a qu'un accumulateur. Relis l'exercice 3 : pourquoi l'échange y échouait-il ?</p>
+</details>
+<details class="tip">
+<summary>Indice précis</summary>
+<p>Trois cases, <code>a</code>, <code>b</code>, et une case de passage <code>t</code>. À chaque tour : afficher <code>b</code>, calculer <code>a + b</code> et le ranger dans <code>t</code>, puis ranger <code>b</code> dans <code>a</code> et <code>t</code> dans <code>b</code>. Un compteur part de N et descend jusqu'à 0.</p>
+</details>
+</div>
+<p>En Python, tu écriras <code>6 * 7</code>, <code>17 // 5</code> et <code>17 % 5</code> en une ligne chacun. Ici, il n'y a que <code>ADD</code> et <code>SUB</code>.</p>
 <h2 id="7-quand-ca-ne-marche-pas">7. Quand ça ne marche pas</h2>
 <ul>
 <li><strong>Le simulateur fait l'ancien programme</strong> : assemble à nouveau.</li>
