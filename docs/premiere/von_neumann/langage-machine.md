@@ -1,692 +1,607 @@
 # Le langage machine
 
 !!! question "Rappel d'ouverture (5 minutes, cours fermé)"
-    1. Ton groupe avait codé `avance` par un certain nombre. Un autre groupe avait choisi un nombre différent. Lequel des deux avait raison ?
-    2. Tu reçois la suite `9 3 100 7 90`. Que te manque-t-il pour la lire ?
-    3. Cite une raison pour laquelle un programme installé sur un ordinateur ne fonctionne pas sur un téléphone.
-    4. Cite les trois éléments que le modèle de von Neumann distingue dans une machine.
-    5. Le compteur ordinal vaut 12. Que désigne ce nombre ?
-    6. Qu'est-ce qui, dans la mémoire, distingue une instruction d'une donnée ?
+    1. Dans le modèle de von Neumann, où est rangé le programme ?
+    2. Que désigne le compteur ordinal ?
+    3. Pourquoi un programme d'ordinateur ne marche-t-il pas sur un téléphone ?
 
     ??? success "Corrigé"
-        1. **Les deux.** Le nombre associé à un mot est une convention arbitraire : elle n'est ni vraie ni fausse, elle est partagée ou elle ne l'est pas.
-        2. **La table de correspondance.** Un code ne contient jamais son propre mode d'emploi.
-        3. Les deux machines n'ont pas le même **jeu d'instructions**, c'est-à-dire pas la même table. Le même nombre y désigne des ordres différents.
-        4. L'**unité centrale** (avec son unité de calcul et son unité de contrôle), la **mémoire**, et les **entrées-sorties**, reliées par des bus.
-        5. L'**adresse de la prochaine instruction** à exécuter, pas sa valeur.
-        6. **Rien.** Ce qui décide qu'un nombre est exécuté comme une instruction, c'est uniquement le fait que le compteur ordinal pointe dessus.
+        1. Dans la **mémoire**, avec les données.
+        2. Le **numéro de la case** où se trouve la prochaine instruction.
+        3. Les deux machines n'ont pas la même **table d'instructions**.
 
-!!! tip "D'où l'on vient"
-    Dans l'activité [Inventer un langage pour une machine](langage-invente.md), tu as fabriqué une table de correspondance entre des mots et des nombres, et constaté qu'un programme codé ne veut rien dire sans elle. Il restait une question ouverte : comment distinguer, dans une suite de nombres, les ordres des quantités ?
+## 1. La machine et ses instructions
 
-    Cette page y répond, et elle te fait écrire tes premiers programmes.
+On va parler dans le langage d'une machine : le **Little Man Computer** (LMC).
 
-## 1. La machine et sa table
+- Elle a **100 cases mémoire**, numérotées de 0 à 99. Chaque case contient un nombre.
+- Elle a **une seule case de calcul** : l'**accumulateur**. Tous les calculs se font dedans.
 
-### 1.1 Le Little Man Computer
+Et voici **tout** ce qu'elle sait faire. Rien d'autre.
 
-Le **Little Man Computer** (LMC) est un ordinateur d'étude. Il est minuscule, et c'est tout son intérêt : il tient en une page, et il a pourtant tout ce qu'a une vraie machine de von Neumann.
-
-| | |
-|---|---|
-| **Mémoire** | 100 cases, numérotées de 00 à 99 |
-| **Contenu d'une case** | un nombre de 0000 à 9999 |
-| **Accumulateur** (`ACC`) | le seul endroit où l'on calcule : tout passe par lui |
-| **Compteur ordinal** (`PC`) | l'adresse de la prochaine instruction à exécuter |
-| **Entrée / sortie** | des nombres qu'on fournit, des nombres qui s'affichent |
-
-Une case contient un nombre, et **une instruction est un nombre comme un autre**. C'est déjà la réponse à la sixième question du rappel : rien ne distingue une case de code d'une case de données, c'est le compteur ordinal qui décide, en s'y arrêtant.
-
-Voilà du même coup la convention qui manquait à ton langage de la première séance : le **format**. Sur cette machine, une instruction s'écrit **toujours avec quatre chiffres**, le premier disant quoi faire et les deux derniers sur quelle case. Ainsi `5042` se lit « charge dans l'accumulateur le contenu de la case 42 ». Tu n'as rien de plus à savoir là-dessus.
-
-### 1.2 Le jeu d'instructions
-
-Onze instructions, et **la machine ne sait rien faire d'autre**. Ce n'est pas une simplification pour débutants : un processeur réel a la même sorte de table, plus longue, et lui non plus ne sait rien faire qui n'y figure pas.
-
-!!! warning "Cette table ne s'apprend pas par cœur"
-    Tu l'auras sous les yeux à chaque exercice, et tu ne seras jamais interrogé dessus. Tu finiras par en retenir une partie à force de t'en servir, ou non, et cela n'a aucune importance.
-
-    Ce qu'on te demande de comprendre est ailleurs, et tient en trois points.
-
-    - **La machine est bête.** Elle fait exactement ce que cette table permet de demander, rien de plus, et jamais ce que tu *voulais* dire. Quand un programme ne fait pas ce que tu attendais, c'est qu'il fait ce que tu as écrit.
-    - Avec ces onze instructions seulement, tu dois savoir **choisir entre deux chemins** selon une valeur.
-    - Et savoir **répéter un morceau** de programme autant de fois qu'il le faut.
-
-    Les deux dernières n'ont l'air de rien, et pourtant **aucune ligne de cette table ne dit « si », ni « répète »**. Il faudra les fabriquer toi-même avec les trois branchements, qui savent seulement désigner la case suivante. C'est tout l'objet de la section 5, et c'est le vrai contenu de ce chapitre.
-
-**Entrée et sortie**
-
-| Mnémonique | Code | Effet |
+| Instruction | Exemple | Ce que fait la machine |
 |---|---|---|
-| `INP` | `9001` | lit une valeur et la place dans l'accumulateur |
-| `OUT` | `9002` | affiche la valeur de l'accumulateur |
+| `LDA` (*load*) | `LDA 15` | Elle **prend** ce qu'il y a dans la case n°15 et le **met dans l'accumulateur**. La case n°15 ne change pas. |
+| `STA` (*store*) | `STA 15` | Elle **met** ce qu'il y a dans l'accumulateur **dans la case n°15**. L'accumulateur ne change pas. |
+| `ADD` | `ADD 15` | Elle **ajoute** à l'accumulateur ce qu'il y a dans la case n°15. |
+| `SUB` | `SUB 15` | Elle **enlève** de l'accumulateur ce qu'il y a dans la case n°15. |
+| `INP` (*input*) | `INP` | Elle **demande un nombre** et le met dans l'accumulateur. |
+| `OUT` (*output*) | `OUT` | Elle **affiche** ce qu'il y a dans l'accumulateur. |
+| `HLT` (*halt*) | `HLT` | Elle **s'arrête**. |
+| `BRA` (*branch*) | `BRA 4` | Elle **va à la case n°4**, au lieu de passer à la suivante. |
+| `BRZ` (*branch if zero*) | `BRZ 4` | **Si l'accumulateur vaut 0**, elle va à la case n°4. Sinon, elle passe à la suivante. |
+| `BRP` (*branch if positive*) | `BRP 4` | **Si l'accumulateur vaut 0 ou plus**, elle va à la case n°4. Sinon, elle passe à la suivante. |
 
-**Mémoire et arithmétique**
+Cette table ne s'apprend pas par cœur : tu l'as sous les yeux pour tous les exercices. C'est une convention, comme la table que ton groupe a inventée : une autre machine en a une autre.
 
-| Mnémonique | Code | Effet |
+### La même table, dite comme dans les livres
+
+C'est **exactement la même chose**, dite de façon plus courte et plus précise. Deux mots à connaître :
+
+- `<adr>` n'est **pas à recopier** : les chevrons `< >` veulent dire « mets un numéro de case ici ». `LDA <adr>` s'écrit par exemple `LDA 15` ;
+- `PC` est le **compteur ordinal**, le numéro de la case où se trouve la prochaine instruction.
+
+De gauche à droite, le langage devient de plus en plus **formel** : la première table en français de tous les jours, puis la description usuelle, puis la notation, où `←` se lit « reçoit ».
+
+| Instruction | Description usuelle | Notation |
 |---|---|---|
-| `LDA adr` | `50adr` | `ACC` reçoit le contenu de la case `adr` |
-| `STA adr` | `30adr` | la case `adr` reçoit le contenu de `ACC` |
-| `ADD adr` | `10adr` | `ACC` reçoit `ACC` plus le contenu de la case `adr` |
-| `SUB adr` | `20adr` | `ACC` reçoit `ACC` moins le contenu de la case `adr` |
+| `LDA <adr>` | charge dans l'accumulateur le contenu de l'adresse `<adr>` | `ACC ← mémoire[<adr>]` |
+| `STA <adr>` | range le contenu de l'accumulateur à l'adresse `<adr>` | `mémoire[<adr>] ← ACC` |
+| `ADD <adr>` | ajoute à l'accumulateur le contenu de l'adresse `<adr>` | `ACC ← ACC + mémoire[<adr>]` |
+| `SUB <adr>` | soustrait de l'accumulateur le contenu de l'adresse `<adr>` | `ACC ← ACC − mémoire[<adr>]` |
+| `INP` | lit une entrée et la place dans l'accumulateur | `ACC ← entrée` |
+| `OUT` | envoie l'accumulateur sur la sortie | `sortie ← ACC` |
+| `HLT` | arrête le processeur | arrêt |
+| `BRA <adr>` | branchement inconditionnel à l'adresse `<adr>` | `PC ← <adr>` |
+| `BRZ <adr>` | branchement à l'adresse `<adr>` si l'accumulateur est nul | si `ACC = 0` : `PC ← <adr>` |
+| `BRP <adr>` | branchement à l'adresse `<adr>` si l'accumulateur est positif ou nul | si `ACC ≥ 0` : `PC ← <adr>` |
 
-**Branchements**
+!!! warning "À l'évaluation, tu auras cette deuxième table, et seulement elle"
+    Pas besoin de l'apprendre par cœur, elle te sera donnée. Mais il faut savoir la **lire** : entraîne-toi avec elle, au plus tard pour les défis.
 
-| Mnémonique | Code | Effet |
-|---|---|---|
-| `BRA adr` | `60adr` | saute toujours à l'adresse `adr` |
-| `BRZ adr` | `70adr` | saute à `adr` si `ACC` vaut 0 |
-| `BRP adr` | `80adr` | saute à `adr` si `ACC` est positif ou nul |
+## 2. Prédire, sur ton cahier
 
-**Arrêt et données**
+Pas de simulateur dans cette partie : **papier et crayon**.
 
-| Mnémonique | Code | Effet |
-|---|---|---|
-| `HLT` | `0000` | arrête le processeur |
-| `DAT` | | réserve une case, avec une valeur initiale facultative. Ce n'est pas une instruction : rien ne l'exécute, elle sert seulement à mettre un nombre en mémoire avant le départ |
+### 2.1 `LDA`
 
-!!! abstract "Cette table est une convention, exactement comme la tienne"
-    Tu as déjà fait ce travail dans l'activité [Inventer un langage pour une machine](langage-invente.md) : tu as attribué **un numéro à chaque mot**, et tu as constaté que le programme du voisin était indéchiffrable sans ta table.
+!!! question "Exercice 1"
+    Au départ, la mémoire contient :
 
-    Un processeur ne fait rien d'autre. La table ci-dessus n'est pas *la* bonne, c'est *celle-là*. Elle a été décidée par les concepteurs de cette machine et gravée dans son circuit, comme la tienne a été décidée par ton groupe. Une autre machine en utilise une autre, et c'est pourquoi un programme assemblé pour un processeur ne tourne pas sur un autre.
+    | Case n° | 10 | 11 | 12 | 13 |
+    |:---:|:---:|:---:|:---:|:---:|
+    | Contenu | 7 | 3 | 0 | 25 |
 
-!!! danger "`LDA 07` et `BRA 07` ne parlent pas de la même chose"
-    Dans `LDA 07`, le `07` désigne une case dont on veut **le contenu**.
+    Sur ton cahier, écris :
 
-    Dans `BRA 07`, le `07` désigne la case **où aller**, c'est-à-dire une adresse d'instruction.
+    - ce que contient l'accumulateur après `LDA 11` ;
+    - ce que contient l'accumulateur après `LDA 13` ;
+    - pour le programme ci-dessous, l'accumulateur après la ligne 1, puis après la ligne 2, et ce que contient la case n°10 à la fin.
 
-    Le même chiffre, deux sens. Le processeur, lui, ne se trompe jamais : il lit d'abord le code opération, et c'est **lui** qui décide comment lire la suite.
-
-## 2. Lire un programme
-
-Avant d'écrire quoi que ce soit, tu vas **lire** des programmes et **prédire** ce qu'ils font. Il faut pour cela connaître la forme d'une ligne, et c'est tout ce que demande la sous-section suivante.
-
-### 2.1 La forme d'une ligne
-
-Une ligne porte au plus une **étiquette**, une **instruction** et un **commentaire**.
-
-```
-// Un commentaire commence par // et va jusqu'à la fin de la ligne.
-
-        INP             // lire un nombre et le mettre dans ACC
-        STA total       // ranger ACC dans la case mémoire "total"
-        HLT
-
-total:  DAT             // réserve une case, initialisée à 0
-```
-
-- **Une étiquette se termine par deux points** : `total:`, `depart:`. Elle donne un nom à une case, pour ne pas avoir à compter les adresses soi-même.
-- **`DAT` réserve une case.** `DAT` seul la met à 0, `DAT 42` la met à 42.
-- **L'indentation est libre.** On aligne les instructions pour que les étiquettes ressortent, c'est tout.
-- **Le programme et ses données ne peuvent pas dépasser 100 cases**, puisque c'est la taille de la mémoire.
-
-!!! warning "Le LMC ne sait ni multiplier ni diviser"
-    Il n'y a que `ADD` et `SUB` dans la table. Multiplier par 3, c'est additionner trois fois ; diviser par 3, c'est retirer 3 autant de fois que possible en comptant les retraits. Tu le feras aux défis 5 et 11.
-
-    Ce n'est pas une bizarrerie du LMC : les tout premiers processeurs ne savaient pas multiplier non plus.
-
-### 2.2 Prédire ce qu'affiche un programme
-
-!!! question "Que va afficher ce programme ?"
-    Voici un programme complet. Chaque ligne occupe une case, à partir de l'adresse 00.
-
-    | Ligne | Adresse | Contenu |
-    |:---:|:---:|:---|
-    | 1 | 00 | `LDA a` |
-    | 2 | 01 | `ADD b` |
-    | 3 | 02 | `STA c` |
-    | 4 | 03 | `SUB a` |
-    | 5 | 04 | `OUT` |
-    | 6 | 05 | `HLT` |
-    | 7 | 06 | `a: DAT 4` |
-    | 8 | 07 | `b: DAT 7` |
-    | 9 | 08 | `c: DAT 0` |
-
-    **Sur ton cahier**, recopie et remplis ce tableau. Une ligne par instruction exécutée, et tu donnes l'état **après exécution de la ligne** indiquée.
-
-    | Après la ligne | `ACC` | contenu de `c` |
-    |:---:|:---:|:---:|
-    | 1 | | |
-    | 2 | | |
-    | 3 | | |
-    | 4 | | |
-
-    Puis réponds à ces deux questions, en une ligne chacune :
-
-    - quel nombre la ligne 5 affiche-t-elle ?
-    - la case `c` contient-elle ce nombre-là ?
-
-    **N'ouvre pas le simulateur tant que tu n'as pas écrit tes réponses.**
-
-    ??? tip "Indice"
-        Deux instructions seulement écrivent dans `ACC` sans le lire : `LDA` et `INP`. Toutes les autres partent de ce qu'il contient déjà.
-
-        Demande-toi ce que `STA` fait à l'accumulateur. Rien du tout ? Ou est-ce qu'il le vide ?
-
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : sur quelle ligne ta prédiction s'est-elle écartée de ce que tu croyais, et qu'est-ce que l'indice t'a appris ?
-
-    ??? success "Correction"
-        | Après la ligne | `ACC` | contenu de `c` |
-        |:---:|:---:|:---:|
-        | 1 | 4 | 0 |
-        | 2 | 11 | 0 |
-        | 3 | 11 | 11 |
-        | 4 | 7 | 11 |
-
-        La ligne 5 affiche **7**, et la case `c` contient **11**. Ce ne sont pas les mêmes.
-
-        Deux pièges dans quatre lignes, et ce sont les deux plus fréquents de tout le chapitre.
-
-        - **`STA` copie, il ne déplace pas.** Après la ligne 3, la valeur 11 est à deux endroits : dans la case `c` **et** toujours dans l'accumulateur. Beaucoup pensent que ranger une valeur vide l'accumulateur.
-        - **`OUT` affiche l'accumulateur, jamais une case.** Il n'a pas d'opérande : il ne peut pas afficher `c`. Pour afficher `c`, il faudrait `LDA c` puis `OUT`.
-
-        Vérifie maintenant dans le simulateur, en mode **Step**.
-
-## 3. Assembler à la main, une fois
-
-Tu écriras tes programmes en **mnémoniques**, parce que c'est lisible. La machine, elle, ne connaît que des **nombres**. Tu vas faire ce travail de traduction une seule fois toi-même, pour savoir ce que l'assembleur fait à ta place ensuite.
-
-!!! question "Traduire un programme en code machine"
-    Voici un programme, déjà placé en mémoire. Chaque ligne occupe une case, à partir de l'adresse 00.
-
-    | Adresse | Instruction |
+    | Ligne | Instruction |
     |:---:|:---|
-    | 00 | `INP` |
-    | 01 | `STA 06` |
-    | 02 | `INP` |
-    | 03 | `ADD 06` |
-    | 04 | `OUT` |
-    | 05 | `HLT` |
-    | 06 | `DAT` |
+    | 1 | `LDA 10` |
+    | 2 | `LDA 11` |
 
-    **Sur ton cahier :**
+### 2.2 `STA`
 
-    1. Écris le **code machine** de chaque ligne, c'est-à-dire les **quatre chiffres** que contiendra réellement la case. Utilise la table de la section 1.2.
-    2. Dis en une phrase ce que fait ce programme.
-    3. Combien de tables de correspondance t'a-t-il fallu pour faire cette traduction ?
+!!! question "Exercice 2"
+    Même mémoire au départ : case n°10 → 7, case n°11 → 3, case n°12 → 0, case n°13 → 25.
 
-    **Ensuite seulement**, vérifie :
+    **Programme A.** Recopie et remplis.
 
-    1. Saisis ce programme en mnémoniques dans un fichier `main.lmc`, et clique sur **Assembler .lmc**.
-    2. Ouvre le fichier `main.lmcobj` qui vient d'apparaître à côté. Compare-le, ligne à ligne, avec ce que tu as écrit sur ton cahier.
-    3. Modifie un des nombres de `main.lmcobj`, par exemple remplace le `1006` par `2006`, enregistre, puis clique sur **Charger .lmcobj en RAM** **sans réassembler**, et sur **Run**. Le programme fait maintenant une soustraction.
+    | Ligne | Instruction | Accumulateur | Case n°10 | Case n°12 |
+    |:---:|:---|:---:|:---:|:---:|
+    | 1 | `LDA 10` | | | |
+    | 2 | `STA 12` | | | |
 
-    C'est bien le fichier de nombres qui est chargé, et lui seul.
+    **Programme B.** Écris le contenu des cases 10 à 13 à la fin.
 
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : quelle case t'a demandé le plus de réflexion, et pourquoi ?
+    | Ligne | Instruction |
+    |:---:|:---|
+    | 1 | `LDA 13` |
+    | 2 | `STA 10` |
+    | 3 | `STA 11` |
+
+!!! question "Exercice 3 : échanger deux cases"
+    Même mémoire au départ. Ce programme veut **échanger** les cases n°10 et n°11, pour avoir 3 dans la case n°10 et 7 dans la case n°11.
+
+    | Ligne | Instruction |
+    |:---:|:---|
+    | 1 | `LDA 10` |
+    | 2 | `STA 11` |
+    | 3 | `LDA 11` |
+    | 4 | `STA 10` |
+
+    Sur ton cahier : que contiennent les cases n°10 et n°11 à la fin ? Le programme a-t-il réussi ?
+
+### 2.3 `ADD` et `SUB`
+
+!!! question "Exercice 4"
+    Même mémoire au départ : case n°10 → 7, case n°11 → 3, case n°12 → 0, case n°13 → 25.
+
+    **Programme A.** Recopie et remplis.
+
+    | Ligne | Instruction | Accumulateur | Case n°12 |
+    |:---:|:---|:---:|:---:|
+    | 1 | `LDA 10` | | |
+    | 2 | `ADD 11` | | |
+    | 3 | `STA 12` | | |
+    | 4 | `SUB 10` | | |
+
+    **Programme B.** Que contient l'accumulateur à la fin ?
+
+    | Ligne | Instruction |
+    |:---:|:---|
+    | 1 | `LDA 13` |
+    | 2 | `SUB 10` |
+    | 3 | `SUB 10` |
+    | 4 | `SUB 10` |
+
+### 2.4 Un programme entier
+
+Le programme aussi est rangé dans la mémoire : sa première instruction dans la case n°0, la suivante dans la case n°1, et ainsi de suite. La machine les fait **l'une après l'autre**, jusqu'à `HLT`.
+
+!!! question "Exercice 5"
+    Toutes les cases de données valent 0 au départ.
+
+    **Programme A.** On tape **4**, puis **9**. Qu'est-ce qui s'affiche ? Que contient la case n°10 à la fin ?
+
+    | Case n° | Instruction |
+    |:---:|:---|
+    | 0 | `INP` |
+    | 1 | `STA 10` |
+    | 2 | `INP` |
+    | 3 | `ADD 10` |
+    | 4 | `OUT` |
+    | 5 | `HLT` |
+
+    **Programme B.** On tape **6**. Qu'est-ce qui s'affiche ? Que contient la case n°11 à la fin ?
+
+    | Case n° | Instruction |
+    |:---:|:---|
+    | 0 | `INP` |
+    | 1 | `STA 10` |
+    | 2 | `ADD 10` |
+    | 3 | `STA 11` |
+    | 4 | `LDA 10` |
+    | 5 | `OUT` |
+    | 6 | `HLT` |
+
+## 3. Donner un nom aux cases
+
+Compter les numéros de cases, c'est pénible, et on se trompe. Alors on donne un **nom** à une case.
+
+```
+        INP
+        STA a
+        INP
+        ADD a
+        OUT
+        HLT
+a:      DAT
+```
+
+- `a: DAT` veut dire : **cette case s'appelle `a`**, et elle contient 0 au départ.
+- `b: DAT 5` veut dire : cette case s'appelle `b`, et elle contient **5** au départ.
+- `DAT` n'est pas une instruction. On le met **après** le `HLT`, pour que la machine ne passe jamais dessus.
+
+C'est le programme A de l'exercice 5, en plus lisible.
+
+!!! question "Exercice 6"
+    Chaque ligne occupe une case, à partir de la case n°0.
+
+    | Ligne | Instruction |
+    |:---:|:---|
+    | 1 | `LDA a` |
+    | 2 | `ADD b` |
+    | 3 | `STA c` |
+    | 4 | `SUB a` |
+    | 5 | `OUT` |
+    | 6 | `HLT` |
+    | 7 | `a: DAT 4` |
+    | 8 | `b: DAT 7` |
+    | 9 | `c: DAT 0` |
+
+    Sur ton cahier, écris :
+
+    - le numéro de la case qui s'appelle `c` ;
+    - le nombre affiché ;
+    - ce que contient `c` à la fin.
 
     ??? success "Correction"
-        **1.**
-
-        | Adresse | Instruction | Code machine |
-        |:---:|:---|:---:|
-        | 00 | `INP` | `9001` |
-        | 01 | `STA 06` | `3006` |
-        | 02 | `INP` | `9001` |
-        | 03 | `ADD 06` | `1006` |
-        | 04 | `OUT` | `9002` |
-        | 05 | `HLT` | `0000` |
-        | 06 | `DAT` | `0000` |
-
-        La suite est donc : `9001 3006 9001 1006 9002 0000 0000`
-
-        **2.** Il lit deux nombres et affiche leur somme. Le premier est rangé en case 06 le temps de lire le second.
-
-        **3.** Une seule, celle du jeu d'instructions du LMC. Et c'est tout le point : tu viens de faire **à la main** ce qu'un assembleur fait automatiquement. Traduire des mnémoniques en code machine, ce n'est pas comprendre un programme, c'est appliquer une table.
-
-        **Et la vérification est la vraie leçon** : le programme tourne, alors que tu n'as écrit aucun mnémonique nulle part. Ils n'existaient que pour toi.
-
-!!! tip "Pourquoi ne le faire qu'une fois"
-    Une fois cette traduction faite à la main, elle n'a plus d'intérêt : le simulateur la fait sans erreur et sans fatigue. Ce que tu dois en garder n'est pas la capacité de traduire vite, mais la certitude qu'**il n'y a rien de magique entre ce que tu écris et ce que la machine exécute**. Pour les douze défis, écris en mnémoniques.
+        - `c` est la **case n°8** : la ligne 1 est dans la case n°0, donc la ligne 9 dans la case n°8. Le nom, c'est juste un numéro que la machine calcule pour toi.
+        - Affiche **7**.
+        - `c` contient **11**. Ce n'est pas ce qui est affiché : `OUT` affiche l'accumulateur.
 
 ## 4. Le simulateur
 
-Le simulateur est une extension de VSCode, et c'est aussi l'occasion de te familiariser avec l'outil qu'on utilisera toute l'année.
+Maintenant, et seulement maintenant, la machine.
 
 !!! info "Installation"
-    1. Ouvre VSCode.
-    2. Clique sur l'icône des **extensions** dans la barre de gauche.
-    3. Cherche `mmarchand.lmc-vscode`.
-    4. Clique sur le bouton bleu **Installer**.
-
-    Crée ensuite un fichier dont le nom se termine par **`.lmc`**, par exemple `essai.lmc`. C'est l'extension du fichier qui déclenche la coloration et la détection d'erreurs.
-
-    Pour ouvrir l'émulateur : `Ctrl+Shift+P`, puis tape **LMC: Open Emulator**.
-
-Avant d'exécuter quoi que ce soit, il faut **traduire** : ton fichier `.lmc` est du texte, et la machine ne lit que des nombres. C'est pourquoi il y a deux boutons et non un.
-
-Tu viens de faire cette traduction à la main. Le simulateur la refait sans erreur, range le résultat dans un second fichier, à côté du tien, puis charge ce fichier-là en mémoire.
+    1. Dans VSCode, ouvre les **extensions** (barre de gauche), cherche `mmarchand.lmc-vscode`, clique **Installer**.
+    2. Crée un fichier qui finit par **`.lmc`**, par exemple `essai.lmc`.
+    3. Pour ouvrir le simulateur, clique sur la **flèche ▶** en haut du fichier.
 
 | Bouton | Ce qu'il fait |
 |---|---|
-| **Assembler .lmc** | traduit ton source et écrit le fichier objet `.lmcobj` à côté de lui. N'exécute rien. |
-| **Charger .lmcobj en RAM** | relit ce fichier **sur le disque** et le dépose en mémoire. |
-| **Step** | exécute une seule instruction, et montre les trois phases du cycle. |
-| **Run** | exécute jusqu'au `HLT`. |
+| **Assembler .lmc** | traduit ton fichier en nombres |
+| **Charger .lmcobj en RAM** | met ces nombres dans la mémoire |
+| **Step** | fait **une** instruction |
+| **Run** | fait tout, jusqu'au `HLT` |
 
-!!! warning "Le piège du fichier objet périmé"
-    Si tu modifies ton source **sans réassembler**, le bouton « Charger » chargera l'**ancien** programme, celui qui est encore sur le disque. Ta correction ne servira à rien et tu chercheras longtemps.
+!!! warning "Tu as modifié ton programme ? Assemble à nouveau"
+    Sinon, « Charger » remet l'**ancienne** version en mémoire.
 
-    Ce n'est pas un défaut du simulateur : une vraie chaîne d'outils se comporte exactement ainsi. Assemble d'abord, charge ensuite.
+!!! question "Exercice 7"
+    Tape le programme de l'exercice 6, et vérifie tes réponses en mode **Step**, une instruction à la fois.
 
-## 5. Le compteur ordinal, le seul pouvoir que tu as
+## 5. Sauter
 
-Tous les programmes que tu as lus jusqu'ici se déroulent de la même façon : la case 00, puis la 01, puis la 02, et ainsi de suite jusqu'au `HLT`. Le compteur ordinal avance de 1, toujours, et chaque instruction est exécutée **une fois**.
+Jusqu'ici, la machine fait les cases **dans l'ordre**. `BRA`, `BRZ` et `BRP` la font **sauter** à une autre case. Avec un nom de case, c'est plus simple : `BRA fin` veut dire « va à la case qui s'appelle `fin` ».
 
-Avec ces seules instructions, un programme ne peut faire qu'une liste de gestes, toujours la même, dans le même ordre. C'est peu.
+Dans toute cette partie : **écris ta réponse avant d'ouvrir le simulateur.**
 
-Les trois branchements changent cela, et ce sont les **seules** instructions de la table qui écrivent dans le compteur ordinal. Elles disent : « la prochaine instruction n'est pas celle d'à côté, c'est celle de la case `adr` ».
+### 5.1 `BRA`
 
-- `BRA adr` le fait **toujours**.
-- `BRZ adr` le fait **seulement si** l'accumulateur vaut 0.
-- `BRP adr` le fait **seulement si** l'accumulateur est positif ou nul.
+!!! question "Exercice 8"
+    **Programme A.** On tape **5**. Qu'est-ce qui s'affiche ?
 
-C'est tout. Et de ces trois instructions naissent les deux seules formes que prend n'importe quel programme, dans n'importe quel langage.
+    | Ligne | Instruction |
+    |:---:|:---|
+    | 1 | `INP` |
+    | 2 | `BRA fin` |
+    | 3 | `OUT` |
+    | 4 | `fin: HLT` |
 
-### 5.1 Sauter par-dessus un morceau
+    **Programme B.** Combien de nombres ce programme va-t-il demander ?
 
-Si le saut mène **plus loin** dans le programme, les instructions enjambées ne sont jamais exécutées. La machine emprunte l'un des deux chemins, jamais les deux.
-
-```
-        INP
-        BRZ nul         // si le nombre lu vaut 0, aller à la case étiquetée "nul"
-        LDA cent        // chemin emprunté quand on n'a PAS sauté
-        OUT
-        HLT
-nul:    LDA mille       // chemin emprunté quand on a sauté
-        OUT
-        HLT
-
-cent:   DAT 100
-mille:  DAT 1000
-```
-
-Avec l'entrée `5`, ce programme affiche **100**. Avec l'entrée `0`, il affiche **1000**. Les deux `LDA` sont dans la mémoire, mais un seul des deux est exécuté à chaque fois.
-
-!!! danger "Chaque chemin a besoin de son propre `HLT`"
-    Regarde la ligne `HLT` du milieu. Si on l'enlevait, le chemin « pas sauté » afficherait 100, **puis continuerait** sur la ligne `nul:` et afficherait 1000 aussi.
-
-    Une case n'est pas une frontière. Rien n'arrête le compteur ordinal, sauf un `HLT` ou un saut. C'est l'erreur la plus fréquente sur les défis 6, 7 et 8.
-
-### 5.2 Sauter en arrière
-
-Si le saut mène **plus haut** dans le programme, la machine repasse sur des instructions qu'elle a déjà exécutées. Les mêmes cases sont donc exécutées plusieurs fois, alors qu'elles ne sont écrites qu'une fois.
-
-Voici un programme qui lit un nombre et l'affiche **trois fois**, en n'écrivant `OUT` qu'une seule fois.
-
-```
-        INP
-        STA n
-        LDA trois
-        STA cpt         // cpt sert à compter les tours restants
-boucle: LDA n
-        OUT
-        LDA cpt
-        SUB un
-        STA cpt         // un tour de moins
-        BRZ fin         // s'il n'en reste plus, sortir
-        BRA boucle      // sinon, remonter à "boucle"
-fin:    HLT
-
-n:      DAT
-cpt:    DAT
-trois:  DAT 3
-un:     DAT 1
-```
-
-Avec l'entrée `7`, il affiche `7 7 7`.
-
-Deux choses sont indispensables, et l'oubli de l'une ou de l'autre est le défaut le plus courant du niveau 3.
-
-- **Une case qui compte**, ici `cpt`. Sans elle, rien ne change d'un tour à l'autre, donc rien ne peut décider d'arrêter.
-- **Un branchement conditionnel avant le saut en arrière**, ici le `BRZ`. C'est lui, et lui seul, qui permet de sortir.
-
-!!! danger "Un saut en arrière sans sortie ne s'arrête jamais"
-    Retire le `BRZ fin` du programme ci-dessus, et il affiche `7` indéfiniment.
-
-    Le simulateur finit par s'interrompre avec une erreur, au bout de 100 000 instructions. Une vraie machine, elle, ne dirait rien : elle tournerait, c'est tout. C'est très exactement ce qui se passe quand un logiciel « se fige ».
-
-### 5.3 Les deux noms qu'on leur donnera
-
-Tu viens de voir les deux seules choses qu'un processeur sait faire en plus d'enchaîner des instructions.
-
-| Ce que tu as fait | Le nom que ça portera |
-|---|---|
-| Sauter par-dessus un morceau, pour n'emprunter qu'un chemin sur deux | une **condition** |
-| Sauter en arrière, pour repasser sur les mêmes instructions | une **boucle** |
-
-Retiens l'ordre dans lequel tu les rencontres : **le saut existe d'abord, le nom vient après**. En Python, tu écriras `if` et `while`, et ce sera plus court et plus lisible. Mais dessous, une fois traduit en langage machine, il n'y aura toujours que des sauts, exactement ceux-là.
-
-!!! question "Vérifie que tu as compris (5 minutes, sur ton cahier)"
-    Reprends le programme de la section 5.2, celui qui affiche un nombre trois fois.
-
-    1. Combien de fois la case étiquetée `boucle` est-elle **exécutée** ? Et combien de fois est-elle **écrite** dans le programme ?
-    2. Quelle valeur contient `cpt` juste avant le tout dernier `BRZ fin` ?
-    3. Que faudrait-il changer, et seulement cela, pour qu'il affiche le nombre **cinq** fois ?
-    4. On remplace `BRZ fin` par `BRP fin`. Qu'est-ce que le programme affiche ?
+    | Ligne | Instruction |
+    |:---:|:---|
+    | 1 | `debut: INP` |
+    | 2 | `OUT` |
+    | 3 | `BRA debut` |
 
     **N'ouvre pas le simulateur tant que tu n'as pas écrit tes réponses.**
 
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : sur laquelle des quatre questions as-tu hésité, et pourquoi ?
-
     ??? success "Correction"
-        1. Elle est **écrite une fois** et **exécutée trois fois**. C'est tout l'intérêt du saut en arrière : le nombre de lignes écrites ne dit rien du nombre d'instructions exécutées.
-        2. **0.** Les valeurs prises par `cpt` sont 3, puis 2, puis 1, puis 0 ; c'est en atteignant 0 que le `BRZ` fait sortir.
-        3. Remplacer `trois: DAT 3` par `trois: DAT 5`. **Rien d'autre** : aucune autre ligne ne sait combien de tours seront faits. L'étiquette s'appelle alors `trois` alors qu'elle vaut 5, ce qui est un mauvais nom mais un programme parfaitement correct : les étiquettes n'existent que pour toi, elles ont disparu du fichier objet.
-        4. Il affiche **7 une seule fois**. `BRP` saute dès que l'accumulateur est positif **ou nul** : après le premier tour, `cpt` vaut 2, qui est positif, donc on sort immédiatement. Choisir le bon branchement n'est pas un détail.
+        **A.** **Rien.** La ligne 2 saute par-dessus le `OUT`.
 
-### 5.4 Et le saut peut tomber sur une donnée
+        **B.** **Sans fin.** Après la ligne 3, la machine revient à la ligne 1, toujours. Rien ne l'arrête.
 
-!!! question "Prédire l'impossible"
-    Regarde bien ce programme. La case 04 a été remplie avec `DAT 9002`, c'est-à-dire avec le **nombre** 9002.
+### 5.2 `BRZ`
 
-    | Ligne | Adresse | Instruction |
-    |:---:|:---:|:---|
-    | 1 | 00 | `LDA 04` |
-    | 2 | 01 | `OUT` |
-    | 3 | 02 | `BRA 04` |
-    | 4 | 03 | `HLT` |
-    | 5 | 04 | `DAT 9002` |
+!!! question "Exercice 9"
+    | Ligne | Instruction |
+    |:---:|:---|
+    | 1 | `INP` |
+    | 2 | `BRZ zero` |
+    | 3 | `LDA cent` |
+    | 4 | `OUT` |
+    | 5 | `HLT` |
+    | 6 | `zero: LDA mille` |
+    | 7 | `OUT` |
+    | 8 | `HLT` |
+    | 9 | `cent: DAT 100` |
+    | 10 | `mille: DAT 1000` |
 
-    **Sur ton cahier**, écris :
+    Sur ton cahier, écris ce qui s'affiche :
 
-    - la liste exacte des nombres affichés, dans l'ordre ;
-    - ce qui se passe quand le compteur ordinal arrive à la case 04 ;
-    - pourquoi le programme finit par s'arrêter, alors qu'il n'atteint jamais la ligne 4.
+    - quand on tape **5** ;
+    - quand on tape **0** ;
+    - quand on tape **5**, si on a **effacé la ligne 5**.
 
     **N'ouvre pas le simulateur tant que tu n'as pas écrit tes réponses.**
 
-    ??? tip "Indice"
-        Compare le contenu de la case 01 et celui de la case 04, en code machine. Que remarques-tu ?
+    ??? success "Correction"
+        - Avec 5 : **100**.
+        - Avec 0 : **1000**.
+        - Sans la ligne 5, avec 5 : **100 puis 1000**. Rien n'arrête la machine après le premier `OUT`, alors elle continue sur la ligne suivante. **Chaque chemin a besoin de son `HLT`.**
 
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce qui, dans la mémoire, aurait pu empêcher cela ?
+### 5.3 `BRP`
+
+!!! question "Exercice 10"
+    | Ligne | Instruction |
+    |:---:|:---|
+    | 1 | `INP` |
+    | 2 | `SUB dix` |
+    | 3 | `BRP grand` |
+    | 4 | `LDA zero` |
+    | 5 | `OUT` |
+    | 6 | `HLT` |
+    | 7 | `grand: LDA un` |
+    | 8 | `OUT` |
+    | 9 | `HLT` |
+    | 10 | `dix: DAT 10` |
+    | 11 | `zero: DAT 0` |
+    | 12 | `un: DAT 1` |
+
+    Sur ton cahier, écris :
+
+    - ce qui s'affiche quand on tape **15**, puis **10**, puis **3** ;
+    - en une phrase, ce que fait ce programme.
+
+    **N'ouvre pas le simulateur tant que tu n'as pas écrit tes réponses.**
 
     ??? success "Correction"
-        Le programme affiche **9002**, puis **9002** une seconde fois.
+        - 15 donne **1**, 10 donne **1**, 3 donne **0**.
+        - Il affiche 1 si le nombre vaut **10 ou plus**, et 0 sinon. La machine ne sait pas comparer : on **enlève** 10, et on regarde si le résultat est positif.
 
-        - La ligne 1 charge le **contenu** de la case 04 dans l'accumulateur : `ACC` vaut 9002, comme nombre.
-        - La ligne 2 l'affiche. Premier `9002`.
-        - La ligne 3 saute **à** la case 04. Le compteur ordinal y pointe, donc le processeur y lit une **instruction**. Il trouve 9002, et 9002 est le code de `OUT`. Il affiche donc l'accumulateur : second `9002`.
-        - Le compteur ordinal passe alors à la case 05, qui n'a jamais été écrite et vaut donc `0000`. Or `0000` est le code de `HLT` : le programme s'arrête là, sans jamais passer par la ligne 4.
+### 5.4 Revenir en arrière : la boucle
 
-        **Les cases 01 et 04 contiennent le même nombre.** L'une a été écrite `OUT`, l'autre `DAT 9002`, et il n'en reste aucune trace : le fichier objet ne porte que des nombres.
+!!! question "Exercice 11"
+    | Ligne | Instruction |
+    |:---:|:---|
+    | 1 | `INP` |
+    | 2 | `STA cpt` |
+    | 3 | `boucle: LDA cpt` |
+    | 4 | `BRZ fin` |
+    | 5 | `OUT` |
+    | 6 | `SUB un` |
+    | 7 | `STA cpt` |
+    | 8 | `BRA boucle` |
+    | 9 | `fin: HLT` |
+    | 10 | `cpt: DAT` |
+    | 11 | `un: DAT 1` |
 
-        Rien, dans la mémoire, n'aurait pu empêcher cela. Il n'existe pas de marque « ceci est une donnée ». C'est le compteur ordinal qui décide, et rien d'autre. C'est exactement le principe du **programme enregistré** de von Neumann, vu du mauvais côté : la même liberté qui permet de charger un programme sans recâbler la machine permet aussi d'exécuter n'importe quoi.
+    On tape **3**. Sur ton cahier, écris :
 
-## 6. Modifier avant d'écrire
+    - les nombres affichés, dans l'ordre ;
+    - combien de fois la ligne 5 est faite ;
+    - ce que contient `cpt` à la fin.
 
-Tu sais lire un programme, le traduire et le suivre pas à pas. Avant d'en écrire un de zéro, il reste un geste : **en changer un qui marche**, et prédire l'effet du changement **avant** de le lancer.
+    Puis : qu'est-ce qui se passe si on tape **0** ? Et si on efface la ligne 4 ?
 
-Reprends le programme de la section 2.2, celui qui affiche `7` alors que la case `c` contient `11`.
-
-!!! question "Trois modifications, trois prédictions"
-    Pour chacune : écris d'abord ce que le programme affichera, **puis** vérifie dans le simulateur. Si ta prédiction était fausse, écris en une ligne ce que tu avais mal compris.
-
-    1. Ajoute `LDA c` juste avant `OUT`. Qu'affiche le programme ?
-    2. Remets le programme d'origine, puis **échange** les lignes 3 et 4, c'est-à-dire `STA c` et `SUB a`. Qu'affiche-t-il, et que contient `c` à la fin ?
-    3. Remets le programme d'origine, puis remplace `a: DAT 4` par `a: DAT 10`. Qu'affiche-t-il ?
-
-    ??? question "Avant d'ouvrir la correction"
-        La troisième est la plus intéressante des trois. En une phrase : est-ce que le nombre affiché dépend de `a` ?
+    **N'ouvre pas le simulateur tant que tu n'as pas écrit tes réponses.**
 
     ??? success "Correction"
-        1. **11.** `LDA c` recharge l'accumulateur depuis la case `c`, et `OUT` affiche toujours l'accumulateur. C'est ce que la correction de la section 2.2 annonçait déjà : pour afficher `c`, il faut `LDA c` puis `OUT`.
-        2. Il affiche **7**, comme avant, mais `c` contient maintenant **7** et non plus `11`. Ranger après avoir soustrait, ce n'est pas ranger avant : **l'ordre des instructions est le programme**.
-        3. Il affiche **7**, encore. Et avec `a: DAT 99`, il afficherait toujours **7**.
+        - Affiche **3, 2, 1**.
+        - La ligne 5 est écrite **une** fois et faite **trois** fois.
+        - `cpt` contient **0** : c'est ce 0 qui fait sauter la ligne 4 vers `fin`.
 
-            Le programme calcule `a + b` puis retire `a` : il affiche donc **toujours** `b`, quelle que soit la valeur de `a`. Seule la case `c` change, puisqu'elle garde la somme.
+        Avec **0** : **rien ne s'affiche**, et la machine s'arrête tout de suite. Le test est en tête, donc il est fait **avant** le premier `OUT`.
 
-            Retiens ce geste, il vaut pour toute l'année : quand un programme donne le même résultat malgré un changement, ce n'est pas une coïncidence. C'est qu'on vient de découvrir ce qu'il **fait vraiment**.
+        Sans la ligne 4 : la machine affiche 3, 2, 1, 0, puis **−1, −2, −3**… et ne s'arrête jamais. Plus rien ne la fait sortir, et `cpt` ne repasse plus par 0.
 
-## 7. Les douze défis
+!!! abstract "Le squelette d'une boucle, toujours le même"
+    Toutes les boucles de cette page suivent ces trois temps, **dans cet ordre**. Reprends-le tel quel, même quand tu vois plus court.
 
-Douze exercices progressifs, à faire **dans l'ordre** : chacun réutilise ce que le précédent a installé.
+    1. **On vérifie la condition de sortie**, tout en haut.
+    2. **On fait le corps** de la boucle.
+    3. **On boucle**, avec `BRA`.
 
-!!! info "Comment l'aide fonctionne dans ces défis"
-    **Les indices sont faits pour être lus.** Les ouvrir n'est pas de la triche, et ils ne comptent dans aucune note. Ce qui compte est ce que tu sais faire à la fin, pas le nombre de volets que tu as ouverts.
+    ```
+    boucle: LDA cpt
+            BRZ fin
+            ... le corps ...
+            BRA boucle
+    fin:    HLT
+    ```
 
-    **En revanche, l'énoncé t'en dit de moins en moins, et c'est voulu.**
+    Quand la sortie ne se joue pas sur un 0 mais sur une **comparaison**, il n'existe pas de « saute si c'est négatif ». On saute alors **vers le corps** si on continue, et la ligne juste en dessous part vers `fin`.
 
-    - **Niveau 1**, les étapes du programme sont écrites dans l'énoncé : tu n'as à chercher que les instructions qui les réalisent.
-    - **Niveau 2**, les étapes y sont encore, mais plus aucune indication sur les instructions à employer.
-    - **Niveau 3**, l'énoncé ne donne que le **résultat attendu**. Les étapes existent toujours, elles ont simplement changé de place : elles sont dans le premier indice, à ouvrir si tu en as besoin.
+    ```
+    boucle: LDA dix
+            SUB cpt
+            BRP corps
+            BRA fin
+    corps:  ... le corps ...
+            BRA boucle
+    fin:    HLT
+    ```
 
-    Découper un problème en étapes est précisément ce que tu dois savoir faire à la fin de cette activité. C'est pour cela qu'on cesse de le faire à ta place.
+!!! abstract "Deux sortes de sauts"
+    - Sauter **en avant**, par-dessus des lignes : la machine choisit un chemin. En Python, ce sera `if`.
+    - Sauter **en arrière** : la machine refait les mêmes lignes. En Python, ce sera `while`.
 
-    **Le palier « avant d'ouvrir la correction » n'est pas décoratif.** Un indice lu améliore ce que tu fais sur l'exercice en cours, et rien sur le suivant, sauf si tu t'expliques à toi-même ce qu'il t'a appris. Une phrase suffit, mais écris-la.
+## 6. Écrire des programmes
 
-### Niveau 1 : on te donne les étapes et les instructions
+Dans l'ordre. Chaque défi ajoute **une seule** difficulté.
 
-!!! question "Défi 1 : écho"
-    **Objectif :** demander un nombre et l'afficher.
+Pour chacun : écris ton programme **sur ton cahier**, puis tape-le et teste-le dans le simulateur.
 
-    **Étapes :**
+**C'est le simulateur qui te dit si ça marche, pas la correction.** Si ça ne marche pas, reprends ton programme ligne par ligne avec la **deuxième table**, celle que tu auras à l'évaluation. Chaque instruction fait **ce qui est écrit dans la table, et rien d'autre**.
 
-    - lire une entrée
-    - afficher cette entrée
+!!! warning "La correction s'ouvre en dernier"
+    Avant de l'ouvrir, écris sur ton cahier, en une phrase, **ce que ton programme fait et qui n'est pas ce que tu voulais**.
 
-    **Instructions à utiliser :** `INP`, `OUT`, `HLT`
+    Et si ton programme marche mais ne ressemble pas à la correction, il est juste quand même : il y a plusieurs façons d'écrire chacun de ces défis.
 
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : ton programme marchait-il, et sinon, où bloquait-il ?
+### Sans saut
 
-    ??? success "Correction du défi 1"
+!!! question "Défi 1"
+    Demander un nombre et l'afficher.
+
+    ??? success "Correction"
         ```
-                INP             // lire l'entrée dans l'accumulateur
-                OUT             // afficher l'accumulateur
+                INP             // lire un nombre
+                OUT             // l'afficher
                 HLT
         ```
 
-        Entrée `7`, sortie `7`.
+!!! question "Défi 2"
+    Demander un nombre et l'afficher **deux fois**.
 
-!!! question "Défi 2 : deux nombres"
-    **Objectif :** demander deux nombres et les afficher dans le même ordre.
+    ??? success "Correction"
+        ```
+                INP             // lire un nombre
+                OUT             // l'afficher
+                OUT             // OUT ne vide pas l'accumulateur : on peut recommencer
+                HLT
+        ```
 
-    **Étapes :**
-
-    - lire un premier nombre et le ranger
-    - lire un deuxième nombre et le ranger
-    - afficher le premier
-    - afficher le second
-
-    **Instructions à utiliser :** `INP`, `OUT`, `STA`, `LDA`, `HLT`, `DAT`
+!!! question "Défi 3"
+    Demander deux nombres, et afficher **le second, puis le premier**.
 
     ??? tip "Indice"
-        Il n'y a qu'un seul accumulateur. Le second `INP` écrase le premier nombre : il faut donc l'avoir rangé **avant**.
+        Le deuxième `INP` écrase le premier nombre. Range-le avant.
 
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** programme ?
-
-    ??? success "Correction du défi 2"
+    ??? success "Correction"
         ```
-                INP
-                STA nb1
-                INP
-                STA nb2
-                LDA nb1
-                OUT
-                LDA nb2
-                OUT
-                HLT
-
-        nb1:    DAT
-        nb2:    DAT
-        ```
-
-        Entrées `4` puis `9`, sortie `4 9`.
-
-!!! question "Défi 3 : addition"
-    **Objectif :** demander deux nombres et afficher leur somme.
-
-    **Étapes :**
-
-    - lire le premier nombre et le ranger
-    - lire le deuxième nombre
-    - additionner les deux
-    - afficher le résultat
-
-    **Instructions à utiliser :** `INP`, `OUT`, `STA`, `ADD`, `HLT`, `DAT`
-
-    ??? tip "Indice"
-        Le second nombre est déjà dans l'accumulateur après le second `INP`. Il n'y a donc qu'une seule case à réserver, pas deux.
-
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** programme ?
-
-    ??? success "Correction du défi 3"
-        ```
-                INP
-                STA nb1
-                INP
-                ADD nb1         // ACC = second nombre + nb1
-                OUT
-                HLT
-
-        nb1:    DAT
-        ```
-
-        Entrées `3` puis `8`, sortie `11`.
-
-!!! question "Défi 4 : soustraction"
-    **Objectif :** demander deux nombres et afficher leur différence, premier moins second.
-
-    **Étapes :**
-
-    - lire le premier nombre et le ranger
-    - lire le deuxième nombre et le ranger
-    - calculer premier moins second
-    - afficher le résultat
-
-    **Instructions à utiliser :** `INP`, `OUT`, `STA`, `LDA`, `SUB`, `HLT`, `DAT`
-
-    ??? tip "Indice"
-        Ici on ne peut pas se contenter d'une case, contrairement au défi 3 : l'ordre compte. `SUB` retire de l'accumulateur, il faut donc que ce soit le **premier** nombre qui s'y trouve au moment du calcul.
-
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** programme ?
-
-    ??? success "Correction du défi 4"
-        ```
-                INP
-                STA nb1
-                INP
-                STA nb2
-                LDA nb1
-                SUB nb2         // ACC = nb1 - nb2
-                OUT
-                HLT
-
-        nb1:    DAT
-        nb2:    DAT
-        ```
-
-        Entrées `10` puis `4`, sortie `6`.
-
-!!! question "Défi 5 : moyenne de trois nombres"
-    **Objectif :** demander trois nombres et afficher leur moyenne, c'est-à-dire leur somme divisée par 3.
-
-    **Étapes :**
-
-    - lire trois nombres et les ranger
-    - calculer leur somme
-    - diviser par 3 : retirer 3 autant de fois que possible, en comptant les retraits
-    - afficher le compte
-
-    **Instructions à utiliser :** `INP`, `OUT`, `LDA`, `STA`, `ADD`, `SUB`, `BRP`, `BRA`, `HLT`, `DAT`
-
-    C'est le plus long des cinq premiers, et le premier qui a besoin d'un saut en arrière. Relis la section 5.2 avant de commencer.
-
-    ??? tip "Indice léger"
-        Le LMC ne sait pas diviser, mais il sait soustraire. Combien de fois peut-on retirer 3 de 12 ? Quatre fois. Diviser, c'est donc retirer 3 encore et encore, et **compter** les retraits.
-
-        « Encore et encore », c'est un saut en arrière, comme en section 5.2. Il te faut donc une étiquette où revenir, une case qui compte les retraits, et un branchement qui décide de ne plus y revenir.
-
-    ??? tip "Indice précis"
-        Construis-la sur la soustraction : charge la somme, retire 3, et regarde le **signe** du résultat avec `BRP`. S'il est encore positif ou nul, tu peux compter un retrait de plus ; sinon, c'est fini.
-
-        Le piège est le même que partout : l'accumulateur ne tient qu'une valeur. Range la somme avant de toucher au quotient, et recharge-la ensuite.
-
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** programme ?
-
-    ??? success "Correction du défi 5"
-        ```
-                INP
-                STA nb1
-                INP
-                STA nb2
-                INP
-                STA nb3
-                LDA nb1         // calculer la somme
-                ADD nb2
-                ADD nb3
-                STA somme
-                LDA zero
-                STA moy
-        boucle: LDA somme       // tester si somme - 3 reste positif
-                SUB trois
-                BRP suite
-                LDA moy         // sinon, afficher le quotient
-                OUT
-                HLT
-        suite:  STA somme       // somme = somme - 3
-                LDA moy
-                ADD un          // moy = moy + 1
-                STA moy
-                BRA boucle
-
-        nb1:    DAT
-        nb2:    DAT
-        nb3:    DAT
-        somme:  DAT
-        moy:    DAT
-        zero:   DAT 0
-        un:     DAT 1
-        trois:  DAT 3
-        ```
-
-        Entrées `4 5 6`, sortie `5`. Entrées `1 1 1`, sortie `1`. Entrées `10 10 10`, sortie `10`.
-
-        C'est une division **entière** : les entrées `1 2 3` donnent `2`, et non `2,5`. Le LMC ne connaît pas les nombres à virgule.
-
-### Niveau 2 : on te donne les étapes, pas les instructions
-
-!!! question "Défi 6 : le plus grand de deux nombres"
-    **Objectif :** demander deux nombres et afficher le plus grand des deux.
-
-    **Étapes :**
-
-    - lire deux nombres, A et B
-    - calculer A moins B
-    - si le résultat est positif ou nul, afficher A
-    - sinon, afficher B
-
-    ??? tip "Indice léger"
-        Tu ne disposes d'aucune instruction « comparer ». Il va donc falloir fabriquer la comparaison avec ce que la machine sait faire, et regarder le **signe** du résultat.
-
-    ??? tip "Indice précis"
-        `SUB` puis `BRP`. Le branchement mène à un morceau de programme qui affiche A ; le chemin qui ne branche pas affiche B. Chacun des deux se termine par son propre `HLT`, sinon le premier déborde sur le second.
-
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** programme ?
-
-    ??? success "Correction du défi 6"
-        ```
-                INP
+                INP             // les deux nombres, d'abord
                 STA a
                 INP
                 STA b
+
+                LDA b           // puis on affiche, le second en premier
+                OUT
                 LDA a
-                SUB b
-                BRP affA        // si a - b >= 0, afficher a
-                LDA b           // sinon afficher b
+                OUT
+
+                HLT
+
+        a:      DAT
+        b:      DAT
+        ```
+
+!!! question "Défi 4"
+    Demander deux nombres et afficher leur **somme**.
+
+    ??? success "Correction"
+        ```
+                INP             // les deux nombres, d'abord
+                STA a
+                INP
+                STA b
+
+                LDA a           // puis on calcule
+                ADD b
+                OUT
+
+                HLT
+
+        a:      DAT
+        b:      DAT
+        ```
+
+!!! question "Défi 5"
+    Demander deux nombres et afficher **le premier moins le second**.
+
+    ??? tip "Indice"
+        Au moment du `SUB`, c'est le **premier** nombre qui doit être dans l'accumulateur.
+
+    ??? success "Correction"
+        Le résultat peut être négatif : avec 4 puis 9, la machine affiche **−5**. Mais la case, elle, contient **9995**, c'est-à-dire 10000 − 5. Le signe n'est écrit nulle part : la machine a simplement décidé que tout mot à partir de 5000 se lit comme un négatif. Tu retrouveras exactement cette idée en binaire, au chapitre **Représentation de l'information**.
+
+        ```
+                INP             // le premier nombre
+                STA a
+
+                INP             // le second nombre
+                STA b
+
+                LDA a           // c'est le PREMIER qui doit être dans l'accumulateur
+                SUB b           // avant d'enlever le second
+                OUT
+
+                HLT
+
+        a:      DAT
+        b:      DAT
+        ```
+
+!!! question "Défi 6"
+    Demander un nombre et afficher son **triple**. La machine ne sait pas multiplier.
+
+    ??? tip "Indice"
+        Le triple de 7, c'est 7 + 7 + 7.
+
+    ??? success "Correction"
+        ```
+                INP             // le nombre, d'abord
+                STA n
+
+                LDA n           // puis on calcule : n + n + n
+                ADD n
+                ADD n
+                OUT
+
+                HLT
+
+        n:      DAT
+        ```
+
+### Avec un saut
+
+!!! question "Défi 7"
+    Demander un nombre. Afficher **1** s'il vaut 0 ou plus, **0** s'il est négatif.
+
+    ??? tip "Indice"
+        Regarde l'exercice 10. Les nombres 0 et 1 doivent exister dans des cases : `zero: DAT 0` et `un: DAT 1`.
+
+    ??? success "Correction"
+        ```
+                INP
+                BRP positif     // 0 ou plus : aller sur l'autre chemin
+
+                LDA zero        // chemin du nombre négatif
+                OUT
+                HLT             // chaque chemin a besoin de son HLT
+
+        positif: LDA un         // chemin du nombre positif ou nul
                 OUT
                 HLT
-        affA:   LDA a
+
+        zero:   DAT 0
+        un:     DAT 1
+        ```
+
+!!! question "Défi 8"
+    Demander deux nombres. Afficher **1** s'ils sont **égaux**, **0** sinon.
+
+    ??? tip "Indice"
+        Deux nombres sont égaux quand l'un moins l'autre vaut 0.
+
+    ??? success "Correction"
+        ```
+                INP             // les deux nombres, d'abord
+                STA a
+                INP
+                STA b
+
+                LDA b           // puis on compare : deux nombres égaux
+                SUB a           // donnent une différence nulle
+                BRZ egal
+
+                LDA zero        // chemin des nombres différents
+                OUT
+                HLT
+
+        egal:   LDA un          // chemin des nombres égaux
+                OUT
+                HLT
+
+        a:      DAT
+        b:      DAT
+        zero:   DAT 0
+        un:     DAT 1
+        ```
+
+!!! question "Défi 9"
+    Demander deux nombres et afficher **le plus grand**.
+
+    ??? tip "Indice léger"
+        Calcule le second moins le premier, et regarde le signe avec `BRP`.
+
+    ??? tip "Indice précis"
+        Range les deux nombres dans `a` et `b`. Si `b − a` vaut 0 ou plus, on saute vers un morceau qui affiche `b`. Sinon, on affiche `a`. Chaque morceau finit par son `HLT`.
+
+    ??? success "Correction"
+        ```
+                INP             // les deux nombres, d'abord
+                STA a
+                INP
+                STA b
+
+                LDA b           // puis on compare : la machine ne sait pas comparer,
+                SUB a           // elle enlève et regarde le signe
+                BRP affB
+
+                LDA a           // b - a est négatif : a est le plus grand
+                OUT
+                HLT
+
+        affB:   LDA b           // b - a est positif ou nul : b est le plus grand
                 OUT
                 HLT
 
@@ -694,86 +609,44 @@ Douze exercices progressifs, à faire **dans l'ordre** : chacun réutilise ce qu
         b:      DAT
         ```
 
-        Entrées `3 9`, sortie `9`. Entrées `9 3`, sortie `9`.
-
-!!! question "Défi 7 : positif ou négatif"
-    **Objectif :** demander un nombre. Afficher 1 s'il est positif ou nul, 0 s'il est négatif.
-
-    **Étapes :**
-
-    - lire un nombre
-    - tester s'il est positif ou nul
-    - afficher 1 ou 0 selon le cas
+!!! question "Défi 10"
+    Demander trois nombres et afficher **le plus grand**.
 
     ??? tip "Indice léger"
-        C'est le mécanisme du défi 6, en plus court : un `BRP` sépare deux chemins, et chacun se termine par son propre `OUT` puis `HLT`.
+        D'abord lire les **trois** nombres et les ranger. Ensuite seulement chercher le plus grand : une case `max` garde le plus grand **vu jusqu'ici**, et le premier nombre y va directement.
 
     ??? tip "Indice précis"
-        Le nombre lu par `INP` est déjà dans l'accumulateur : tu peux tester directement, sans le ranger d'abord. Les valeurs 0 et 1 à afficher, en revanche, doivent exister quelque part en mémoire : réserve-leur deux cases avec `DAT`.
+        Pour chaque nouveau nombre : nombre moins `max`. Si c'est 0 ou plus, le nombre va dans `max`. On n'affiche **qu'une fois, à la fin**.
 
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** programme ?
-
-    ??? success "Correction du défi 7"
+    ??? success "Correction"
         ```
-                 INP
-                 BRP positif    // si ACC >= 0, sauter à "positif"
-                 LDA zero       // sinon charger 0
-                 OUT
-                 HLT
-        positif: LDA un         // charger 1
-                 OUT
-                 HLT
-
-        zero:    DAT 0
-        un:      DAT 1
-        ```
-
-        Entrée `5`, sortie `1`. Entrée `0`, sortie `1`. Entrée `-3`, sortie `0`.
-
-!!! question "Défi 8 : le plus grand de trois nombres"
-    **Objectif :** demander trois nombres et afficher le plus grand des trois.
-
-    **Étapes :**
-
-    - lire trois nombres, A, B et C
-    - comparer A et B, garder le plus grand dans une case
-    - comparer cette case avec C
-    - afficher le résultat
-
-    ??? tip "Indice léger"
-        Tu sais déjà comparer **deux** nombres, c'est le défi 6. N'essaie pas de comparer les trois d'un coup : sers-toi deux fois de ce que tu sais faire.
-
-    ??? tip "Indice précis"
-        Deux temps. D'abord, compare A et B et **range le plus grand des deux** dans une case, disons `max`. Ensuite, compare le contenu de `max` avec C, exactement comme au défi 6, et range à nouveau le vainqueur dans `max`. Il ne reste plus qu'à l'afficher.
-
-        Le piège est de vouloir afficher dans chaque branche. Ne le fais qu'**une seule fois, à la fin** : la comparaison décide, elle n'affiche pas.
-
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** programme ?
-
-    ??? success "Correction du défi 8"
-        ```
-                INP
+                INP             // les trois nombres, d'abord
                 STA a
                 INP
                 STA b
                 INP
                 STA c
-                LDA a
-                SUB b
-                BRP aGb         // si a >= b, max = a
-                LDA b           // sinon max = b
+
+                LDA a           // puis on cherche le maximum :
+                STA max         // a est le plus grand vu jusqu'ici
+
+                LDA b           // b - max
+                SUB max
+                BRP bGagne      // positif ou nul : b prend la place
+                BRA testC
+
+        bGagne: LDA b
                 STA max
-                BRA cmpC
-        aGb:    LDA a
+
+        testC:  LDA c           // c - max, le même test avec le troisième
+                SUB max
+                BRP cGagne
+                BRA fin
+
+        cGagne: LDA c
                 STA max
-        cmpC:   LDA max
-                SUB c
-                BRP fin         // si max >= c, max est déjà bon
-                LDA c           // sinon max = c
-                STA max
-        fin:    LDA max
+
+        fin:    LDA max         // on n'affiche qu'une fois, à la fin
                 OUT
                 HLT
 
@@ -783,39 +656,28 @@ Douze exercices progressifs, à faire **dans l'ordre** : chacun réutilise ce qu
         max:    DAT
         ```
 
-        Entrées `3 9 5`, sortie `9`. Entrées `9 3 5`, sortie `9`. Entrées `3 5 9`, sortie `9`.
+### Avec une boucle
 
-### Niveau 3 : on ne te donne que le résultat attendu
+!!! question "Défi 11"
+    Afficher 10, 9, 8, … jusqu'à 1.
 
-!!! question "Défi 9 : compte à rebours"
-    **Objectif :** afficher les nombres de 10 à 1.
+    ??? tip "Indice"
+        C'est l'exercice 11, sans le `INP` : le compteur part de 10.
 
-    ??? tip "Indice léger : les étapes"
-        Cherche d'abord sans, c'est le travail du niveau 3.
-
-        - initialiser un compteur à 10
-        - afficher le compteur
-        - lui retirer 1
-        - recommencer tant qu'il n'est pas à 0
-
-    ??? tip "Indice précis"
-        Le corps de la boucle tient en trois gestes : charger le compteur, l'afficher, lui retirer 1. Ensuite seulement viennent les deux décisions.
-
-        D'abord, **range le compteur** avant de tester, sinon tu testeras autre chose que ce que tu crois. Ensuite, `BRZ` saute vers la sortie si l'accumulateur vaut zéro, et un `BRA` inconditionnel ramène au début du corps sinon. Attention à l'ordre : le `BRZ` doit venir **avant** le `BRA`, sans quoi on ne sort jamais.
-
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** programme ?
-
-    ??? success "Correction du défi 9"
+    ??? success "Correction"
         ```
-                LDA dix
+                LDA dix         // le compteur part de 10
                 STA cpt
-        boucle: LDA cpt
-                OUT             // afficher le compteur
+
+        boucle: LDA cpt         // 1. la condition de sortie
+                BRZ fin
+
+                OUT             // 2. le corps : afficher, puis descendre d'un
                 SUB un
                 STA cpt
-                BRZ fin         // si cpt = 0, terminer
-                BRA boucle
+
+                BRA boucle      // 3. on boucle
+
         fin:    HLT
 
         cpt:    DAT
@@ -823,39 +685,32 @@ Douze exercices progressifs, à faire **dans l'ordre** : chacun réutilise ce qu
         un:     DAT 1
         ```
 
-        Sortie : `10 9 8 7 6 5 4 3 2 1`.
+!!! question "Défi 12"
+    Afficher 1, 2, 3, … jusqu'à 10.
 
-!!! question "Défi 10 : compteur croissant"
-    **Objectif :** afficher les nombres de 1 à 10.
-
-    ??? tip "Indice léger : les étapes"
-        Cherche d'abord sans.
-
-        - initialiser un compteur à 1
-        - afficher le compteur
-        - lui ajouter 1
-        - recommencer jusqu'à 10
+    ??? tip "Indice léger"
+        Le compteur ne passe jamais par 0, donc `BRZ` ne peut pas décider seul. On continue tant que **10 moins le compteur** est positif ou nul.
 
     ??? tip "Indice précis"
-        C'est le défi 9 retourné : on ajoute 1 au lieu d'en retirer 1, et la sortie ne peut plus se tester avec `BRZ` sur le compteur lui-même, puisqu'il ne passera jamais par zéro.
+        Ce test écrase l'accumulateur : le compteur vit dans une case `cpt`, et il faut le **recharger** dans le corps. C'est le second squelette de la partie 5.4.
 
-        Teste donc `compteur - 10`, et souviens-toi de **recharger** le compteur après ce test : la soustraction a écrasé l'accumulateur.
-
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** programme ?
-
-    ??? success "Correction du défi 10"
+    ??? success "Correction"
         ```
-                LDA un
+                LDA un          // le compteur part de 1
                 STA cpt
-        boucle: LDA cpt
-                OUT             // afficher le compteur
-                SUB dix
-                BRZ fin         // si cpt = 10, terminer
-                LDA cpt
+
+        boucle: LDA dix         // 1. la condition de sortie : on continue tant que
+                SUB cpt         //    10 - compteur est positif ou nul
+                BRP corps
+                BRA fin
+
+        corps:  LDA cpt         // 2. le corps : afficher, puis monter d'un
+                OUT
                 ADD un
                 STA cpt
-                BRA boucle
+
+                BRA boucle      // 3. on boucle
+
         fin:    HLT
 
         cpt:    DAT
@@ -863,272 +718,148 @@ Douze exercices progressifs, à faire **dans l'ordre** : chacun réutilise ce qu
         dix:    DAT 10
         ```
 
-        Sortie : `1 2 3 4 5 6 7 8 9 10`.
+!!! question "Défi 13"
+    Demander un nombre, et afficher sa **table de multiplication** de 1 à 10. On tape 7 : affiche 7, 14, 21, … 70.
 
-!!! question "Défi 11 : table de multiplication"
-    **Objectif :** demander un nombre N, puis afficher sa table de multiplication de 1 à 10.
-
-    **Exemple :** pour l'entrée 7, afficher `7 14 21 28 35 42 49 56 63 70`.
-
-    ??? tip "Indice léger : les étapes"
-        Cherche d'abord sans.
-
-        - lire N
-        - initialiser un compteur à 1 et un résultat à 0
-        - dans la boucle : ajouter N au résultat, l'afficher, puis ajouter 1 au compteur
-        - recommencer jusqu'à 10
+    ??? tip "Indice léger"
+        C'est le défi 12, avec une case `res` en plus : à chaque tour, on lui ajoute le nombre tapé.
 
     ??? tip "Indice précis"
-        Le LMC ne sait pas multiplier, mais tu n'en as pas besoin : afficher la table, c'est **ajouter N dix fois de suite** en affichant à chaque tour.
+        Deux cases à tenir, `res` et `cpt`, et un seul accumulateur. Avant de charger l'une, **range** l'autre.
 
-        Deux cases à tenir à jour, `res` et `cpt`, et un seul accumulateur pour les deux : chaque fois que tu passes de l'une à l'autre, il faut **ranger avant de charger**. C'est la principale source d'erreur de ce défi.
-
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** programme ?
-
-    ??? success "Correction du défi 11"
+    ??? success "Correction"
         ```
-                INP
+                INP             // le nombre tapé
                 STA n
-                LDA zero
-                STA res
-                LDA un
+                STA res         // le premier multiple, c'est le nombre lui-même
+
+                LDA un          // le compteur part de 1
                 STA cpt
-        boucle: LDA res
-                ADD n           // res = res + n
+
+        boucle: LDA dix         // 1. la condition de sortie : dix multiples en tout
+                SUB cpt
+                BRP corps
+                BRA fin
+
+        corps:  LDA res         // 2. le corps : afficher le multiple courant,
+                OUT
+                ADD n           //    puis préparer le suivant
                 STA res
-                OUT             // afficher res, c'est-à-dire n x cpt
-                LDA cpt
-                SUB dix
-                BRZ fin         // si cpt = 10, terminer
-                LDA cpt
+
+                LDA cpt         //    et avancer le compteur
                 ADD un
                 STA cpt
-                BRA boucle
+
+                BRA boucle      // 3. on boucle
+
         fin:    HLT
 
         n:      DAT
         res:    DAT
         cpt:    DAT
-        zero:   DAT 0
         un:     DAT 1
         dix:    DAT 10
         ```
 
-        Entrée `7`, sortie `7 14 21 28 35 42 49 56 63 70`.
+!!! question "Défi 14"
+    Demander un nombre N, et afficher 1 + 2 + … + N. On tape 5 : affiche 15.
 
-!!! question "Défi 12 : somme des N premiers entiers"
-    **Objectif :** demander un nombre N et afficher la somme 1 + 2 + 3 + ... + N.
-
-    **Exemple :** pour l'entrée 5, afficher 15, car 1+2+3+4+5 = 15.
-
-    ??? tip "Indice léger : les étapes"
-        Cherche d'abord sans.
-
-        - lire N
-        - initialiser une somme à 0 et un compteur à N
-        - dans la boucle : ajouter le compteur à la somme, puis retirer 1 au compteur
-        - recommencer tant que le compteur n'est pas à 0
-        - afficher la somme, une seule fois, à la sortie
-
-        C'est le défi 9 avec une opération en plus : au lieu d'afficher le compteur, tu l'ajoutes à une seconde case avant de lui retirer 1.
+    ??? tip "Indice léger"
+        Un compteur part de N et descend jusqu'à 1. À chaque tour, on l'ajoute à une case `somme`.
 
     ??? tip "Indice précis"
-        Tu manipules **deux** cases, `somme` et `cpt`, et un seul accumulateur pour les deux. Chaque fois que tu veux travailler sur l'une, il faut la charger, et **la ranger avant de toucher à l'autre**.
+        Le test est en tête : charger `cpt`, sortir s'il vaut 0. Dans le corps : charger `somme`, ajouter `cpt`, ranger `somme`, puis enlever 1 à `cpt`. Afficher **une seule fois, à la sortie**.
 
-        L'ordre qui fonctionne : charger `somme`, y ajouter `cpt`, ranger `somme` ; puis charger `cpt`, lui retirer 1, ranger `cpt` ; puis tester s'il vaut zéro. N'affiche qu'à la sortie de la boucle.
-
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** programme ?
-
-    ??? success "Correction du défi 12"
+    ??? success "Correction"
         ```
-                INP
-                STA cpt         // cpt = N, on décompte de N à 1
-                LDA zero
+                INP             // le nombre N
+                STA cpt
+
+        boucle: LDA cpt         // 1. la condition de sortie
+                BRZ fin
+
+                LDA somme       // 2. le corps : ajouter le compteur à la somme
+                ADD cpt
                 STA somme
-        boucle: LDA somme
-                ADD cpt         // somme = somme + cpt
-                STA somme
-                LDA cpt
+
+                LDA cpt         //    puis descendre d'un
                 SUB un
                 STA cpt
-                BRZ fin         // si cpt = 0, terminer
-                BRA boucle
-        fin:    LDA somme
+
+                BRA boucle      // 3. on boucle
+
+        fin:    LDA somme       // on n'affiche qu'une fois, à la sortie
                 OUT
                 HLT
 
         cpt:    DAT
-        somme:  DAT
-        zero:   DAT 0
+        somme:  DAT 0
         un:     DAT 1
         ```
 
-        Entrée `5`, sortie `15`. Entrée `1`, sortie `1`.
+### Avec un peu de tout
 
-        **Un cas non traité, et c'est instructif.** Avec l'entrée `0`, ce programme ne s'arrête jamais : le compteur passe à moins 1, puis moins 2, et il n'est plus jamais égal à zéro. C'est le danger annoncé en section 5.2, rencontré pour de vrai.
+!!! question "Défi 15 : la multiplication"
+    Demander deux nombres et afficher leur **produit**. On tape 6 puis 7 : affiche 42.
 
-        Le programme teste **après** avoir fait un tour, donc il en fait toujours au moins un. Pour qu'il puisse n'en faire aucun, il faudrait tester **avant** d'entrer. Ces deux façons de placer le test existent dans tous les langages, et tu les retrouveras nommément en Python.
-
-## 8. Quand ça ne marche pas
-
-- **Le simulateur charge un vieux programme.** Tu as modifié le source sans réassembler. Assemble d'abord, charge ensuite.
-- **Le programme ne s'arrête pas.** Il manque un `HLT`, ou un `BRA` ramène en arrière sans qu'aucun test ne fasse sortir. Relis l'ordre de tes deux branchements.
-- **Le résultat est faux d'un tour.** Regarde le moment où tu testes : avant ou après avoir modifié le compteur, ce n'est pas la même boucle.
-- **Une valeur a disparu.** Tu as chargé autre chose dans l'accumulateur sans avoir rangé la précédente. Il n'y en a qu'un.
-- **Le programme fait n'importe quoi puis s'arrête.** Le compteur ordinal est probablement tombé dans tes `DAT`. Vérifie que le chemin d'exécution rencontre bien un `HLT` avant la zone des données.
-
-Utilise **Step** plutôt que **Run** : c'est en regardant l'accumulateur et le compteur ordinal changer, une instruction à la fois, qu'on trouve l'erreur. Et écris ta prédiction avant de cliquer, sinon tu ne fais que regarder.
-
-## 9. Et une vraie machine ?
-
-Le LMC écrit ses instructions avec quatre chiffres **décimaux**, parce que c'est commode pour nous. Un processeur réel, lui, ne dispose que de **deux** symboles, puisque ses circuits ne savent distinguer que deux états. Ses instructions sont donc les mêmes nombres, écrits autrement.
-
-!!! example "La même idée, avec deux symboles"
-    Une instruction pourrait s'écrire `0010 0000 0101` :
-
-    - `0010` : le code opération, par exemple « charger »
-    - `0000 0101` : l'opérande, ici l'adresse 5
-
-    L'instruction signifie « charge la valeur rangée à l'adresse 5 ». C'est **exactement** la structure du LMC, code opération plus opérande, avec un alphabet de deux chiffres au lieu de dix.
-
-Écrire les nombres avec deux symboles seulement, c'est tout l'objet du chapitre **Représentation de l'information**. Tu y répondras notamment à la question que cette page laisse ouverte : une case ne contenant qu'un nombre de taille fixe, **jusqu'où peut-on compter avant qu'elle ne déborde** ?
-
-Une case du LMC tient quatre chiffres décimaux, donc de 0000 à 9999. Que se passe-t-il si un calcul donne 10 000 ?
-
-## 10. Cybersécurité : quand une donnée devient du code
-
-Tu sais maintenant la chose la plus importante de ce chapitre : **rien, dans la mémoire, ne distingue une instruction d'une donnée**. C'est ce qui rend un ordinateur programmable, et c'est aussi la porte par laquelle passe une famille entière d'attaques.
-
-Voici l'histoire. Un éditeur vend un logiciel. Pour empêcher qu'on l'utilise sans payer, il lui fait demander une **clé de licence** au démarrage : la bonne clé, le logiciel démarre ; une mauvaise, il refuse. Camille, elle, a récupéré une copie du logiciel sans l'acheter. Elle n'a donc pas de clé, et elle a le programme sous les yeux.
-
-### Le logiciel, tel que son auteur l'a écrit
-
-Comme **tout** logiciel, celui-ci contient des défauts. Ils ne sont pas là pour les besoins de l'exercice : un programme est écrit par des humains, souvent vite, souvent à plusieurs, et personne ne relit jamais chaque ligne. Ce que tu vas lire est un programme ordinaire, écrit par quelqu'un de sérieux qui a fait deux maladresses.
-
-Le plus souvent, ce n'est même pas une erreur de raisonnement : c'est un **copier-coller**. On duplique quelques lignes qui marchaient ailleurs, on oublie d'en adapter une, et le défaut est né. Regarde les deux branches de ce programme, celle qui refuse et celle qui démarre : elles se ressemblent beaucoup, et l'une a visiblement été recopiée de l'autre.
-
-Et si ces maladresses ont survécu, c'est justement parce qu'elles **ne se voient pas** : un défaut qui plante la machine est corrigé le jour même, un défaut qui laisse le programme marcher reste des années. Les failles de sécurité sont presque toujours de cette sorte, des erreurs mal détectées, pas des portes laissées exprès.
-
-Lis le programme en sachant cela, et cherche.
-
-| Adresse | Programme | Ce que ça fait |
-|:---:|:---|:---|
-| 00 | `INP` | lire la clé tapée, et la mettre dans `ACC` |
-| 01 | `STA cle` | ranger `ACC` dans la case `cle` |
-| 02 | `SUB licence` | comparer : clé tapée moins clé enregistrée |
-| 03 | `BRZ demarre` | si la différence vaut 0, la clé est bonne |
-| 04 | `LDA zero` | |
-| 05 | `OUT` | afficher `0` : clé refusée |
-| 06 | `cle: DAT 0` | la case où atterrit la clé tapée |
-| 07 | `OUT` | afficher la clé tapée, pour que l'utilisateur la relise |
-| 08 | `HLT` | |
-| 09 | `demarre: LDA un` | |
-| 10 | `OUT` | afficher `1` : le logiciel démarre |
-| 11 | `HLT` | |
-| 12 | `licence: DAT 4242` | **la clé enregistrée dans le logiciel** |
-| 13 | `zero: DAT 0` | |
-| 14 | `un: DAT 1` | |
-
-En usage normal, il a l'air de faire ce qu'on attend. Avec la bonne clé, `4242`, il affiche `1` et démarre. Avec une clé fausse, `1234` par exemple, il affiche `0`, puis `0` de nouveau : refusé.
-
-!!! question "Avant de lire la suite, essaie plusieurs clés fausses"
-    Tape `1234`, puis `1000`, puis `6100`, puis `7000`. Le refus, `0`, s'affiche à chaque fois, mais **ce qui se passe juste après n'est pas toujours pareil** : `1234` fait afficher un second `0`, `1000` fait afficher `9001`, et `6100` comme `7000` font redemander une clé.
-
-    Que le comportement d'un programme dépende à ce point de ce qu'on tape est déjà le signe que quelque chose ne va pas. La suite de cette section dit quoi.
-
-!!! danger "Deux défauts, et tu les as déjà rencontrés tous les deux"
-    **La case `cle` est posée au milieu du chemin d'exécution**, à l'adresse 06, alors que le `HLT` n'arrive qu'en 08. Le compteur ordinal va donc **passer dessus** et exécuter ce qu'elle contient. C'est le défaut nommé à la section 8.
-
-    **Et la ligne 07 ne fait pas ce que son auteur croit.** Il voulait afficher la clé tapée ; mais `OUT` affiche l'accumulateur, jamais une case, comme la correction de la section 2.2 le disait. Il aurait fallu `LDA cle` avant.
-
-    Pris séparément, ce sont deux maladresses. Ensemble, ils ouvrent la porte.
-
-### Attaque 1 : faire dire au logiciel sa propre clé
-
-!!! question "À toi de jouer le rôle de Camille"
-    Tu ne peux **rien** changer au programme : tu ne contrôles qu'une seule chose, le nombre que tu tapes au démarrage.
-
-    Quel nombre faut-il taper pour que le logiciel affiche `4242`, sa clé de licence ?
+    Les deux nombres tapés sont positifs, et leur produit ne dépasse pas 4999.
 
     ??? tip "Indice léger"
-        Ce que tu tapes est rangé à l'adresse 06, et le compteur ordinal passera dessus juste après avoir affiché `0`. Que se passe-t-il si ce que tu tapes **est** une instruction ?
+        C'est le défi 6, le triple. Mais cette fois, le nombre de fois qu'on ajoute est **tapé au clavier**, il n'est pas connu d'avance.
 
     ??? tip "Indice précis"
-        Il faut que la case 06 contienne « charge le contenu de la case 12 ». Va relire la colonne « Code » de la table, section 1.2 : `LDA adr` s'écrit `50adr`. Et regarde ce que fait la ligne 07 juste après.
+        Une case `res` part de 0, une case `cpt` part du second nombre. À chaque tour : ajouter le premier nombre à `res`, puis enlever 1 à `cpt`. On sort quand `cpt` vaut 0, et on affiche `res` **une seule fois, à la fin**.
 
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : à quel moment exact le nombre que tu as tapé cesse-t-il d'être une donnée pour devenir un ordre ?
+!!! question "Défi 16 : la division euclidienne"
+    Demander deux nombres, et afficher le **quotient**, puis le **reste** de la division euclidienne du premier par le second. On tape 17 puis 5 : affiche 3, puis 2.
 
-    ??? success "Correction"
-        Camille tape **5012**, qui est le code machine de `LDA licence`.
+    Les deux nombres tapés sont positifs, et le second n'est pas 0.
 
-        **La mémoire avant l'exécution, et après la ligne 01 :**
+    ??? tip "Indice léger"
+        La machine ne sait pas diviser, comme elle ne savait pas multiplier au défi 6. Combien de fois peut-on enlever 5 à 17 avant de passer en négatif ?
 
-        | Adresse | Avant | Après `STA cle` |
-        |:---:|:---|:---|
-        | 06 | `DAT 0`, une donnée qui vaut 0 | `5012`, c'est-à-dire **`LDA licence`** |
+    ??? tip "Indice précis"
+        Une case `reste` part du premier nombre, une case `quotient` part de 0. Tant que `reste` moins le diviseur est **positif ou nul**, on range ce résultat dans `reste` et on ajoute 1 à `quotient`. On sort de la boucle quand il devient négatif, et on affiche les deux cases **à la fin, une seule fois**.
 
-        Le programme n'a pas été modifié sur le disque. C'est sa **mémoire** qui a changé, et la case 06 est passée du statut de donnée à celui d'instruction, sans que rien ne le signale.
+!!! question "Défi 17 : compter jusqu'au 0"
+    Demander des nombres, un par un, jusqu'à ce qu'on tape **0**. Afficher **combien** de nombres ont été tapés avant ce 0. On tape 12, 7, 9, puis 0 : affiche 3.
 
-        | `PC` | Case exécutée | Effet |
-        |:---:|:---|:---|
-        | 00 à 02 | `INP`, `STA cle`, `SUB licence` | `ACC` vaut 5012 - 4242 = 770 |
-        | 03 | `BRZ demarre` | 770 n'est pas 0 : pas de saut, la clé est refusée |
-        | 04, 05 | `LDA zero`, `OUT` | affiche **0** |
-        | 06 | `5012`, donc `LDA licence` | `ACC` reçoit **4242** |
-        | 07 | `OUT` | affiche **4242** |
-        | 08 | `HLT` | fin |
+    ??? tip "Indice léger"
+        Dans tous tes programmes jusqu'ici, la boucle savait **d'avance** combien de tours faire. Ici, c'est le nombre tapé qui décide d'arrêter.
 
-        Le logiciel vient d'**afficher sa propre clé de licence**, alors qu'aucune ligne du programme ne demande de l'afficher. Camille peut maintenant la donner à qui elle veut : c'est ainsi que des clés circulent.
+    ??? tip "Indice précis"
+        `INP` met le nombre tapé dans l'accumulateur : `BRZ` peut donc le tester **tout de suite**, sans le ranger nulle part. Si ce n'est pas 0, on ajoute 1 à une case `n`, et on revient au `INP`. On affiche `n` à la sortie.
 
-### Attaque 2 : se passer complètement de la clé
+!!! question "Défi 18 : la suite de Fibonacci"
+    Chaque terme est la **somme des deux précédents** : 1, 1, 2, 3, 5, 8, 13, 21, et ainsi de suite. Demander un nombre N, et afficher les N premiers termes. On tape 8 : affiche 1, 1, 2, 3, 5, 8, 13, 21.
 
-!!! question "Et sans connaître la clé du tout ?"
-    Camille n'a même pas besoin de la clé. Quel nombre taper pour que le logiciel **démarre** sans qu'aucune clé valable n'ait été fournie ?
+    N est compris entre 1 et 19. Au-delà, les termes sortent de ce que la machine sait afficher, et elle se met à annoncer des nombres négatifs sans prévenir.
 
-    ??? tip "Indice"
-        Le programme démarre quand le compteur ordinal arrive à l'adresse 09. Quelle instruction de la table sert à **y aller directement** ?
+    ??? tip "Indice léger"
+        Il faut garder **deux** termes en même temps, et il n'y a qu'un accumulateur. Relis l'exercice 3 : pourquoi l'échange y échouait-il ?
 
-    ??? success "Correction"
-        Camille tape **6009**, qui est le code machine de `BRA demarre`.
+    ??? tip "Indice précis"
+        Trois cases, `a`, `b`, et une case de passage `t`. À chaque tour : afficher `b`, calculer `a + b` et le ranger dans `t`, puis ranger `b` dans `a` et `t` dans `b`. Un compteur part de N et descend jusqu'à 0.
 
-        La case 06 contient alors un **saut**. Après avoir affiché `0`, le compteur ordinal l'exécute et bondit à l'adresse 09, c'est-à-dire **derrière le contrôle**. Le logiciel affiche `1` et démarre.
+En Python, tu écriras `6 * 7`, `17 // 5` et `17 % 5` en une ligne chacun. Ici, il n'y a que `ADD` et `SUB`.
 
-        La vérification de la ligne 03 n'a pas été trompée : elle a bien conclu que la clé était fausse. Elle a simplement été **contournée**, et c'est ce qu'on appelle un *crack*.
+## 7. Quand ça ne marche pas
 
-!!! abstract "Ce qu'il faut en retenir, et ce n'est pas « comment pirater »"
-    Ces deux attaques disent la même chose, et c'est un principe de sécurité que tu retrouveras partout : **une vérification faite sur la machine de celui qu'elle doit arrêter ne protège rien**. Camille possède le programme, la mémoire et le processeur ; quel que soit le contrôle écrit à la ligne 03, elle est du côté du manche.
+- **Le simulateur fait l'ancien programme** : assemble à nouveau.
+- **Ça ne s'arrête pas** : un saut en arrière sans sortie, ou un `HLT` qui manque.
+- **Une valeur a disparu** : tu as chargé autre chose dans l'accumulateur sans la ranger avant.
+- **N'importe quoi, puis ça s'arrête** : la machine est passée sur tes `DAT`. Il manque un `HLT` avant.
 
-    D'où ce que font les éditeurs aujourd'hui, et que tu observes sans le savoir :
+Utilise **Step**, et dis ce qui va se passer **avant** de cliquer.
 
-    - la clé n'est plus vérifiée sur ta machine mais **sur un serveur**, chez eux, où tu n'as pas la main : c'est l'activation en ligne ;
-    - un secret n'est **jamais** rangé en clair dans un programme, parce que tout ce que le programme peut lire, son utilisateur peut le lire aussi ;
-    - les processeurs récents savent marquer une zone de mémoire comme **non exécutable**, et le compteur ordinal refuse alors d'y aller ;
-    - et **aucune saisie n'est jamais rangée sans avoir été vérifiée**.
+## 8. À retenir
 
-    Le même mécanisme, à plus grande échelle, porte des noms que tu entendras : *injection de code*, *débordement de tampon*. Dans tous les cas, une donnée venue de l'extérieur a franchi la frontière et s'est retrouvée exécutée.
+- La machine ne connaît qu'une petite table d'instructions. Elle fait **exactement** ce qui est écrit.
+- Il n'y a **qu'un accumulateur** : on range avant de charger autre chose.
+- `LDA` et `STA` **copient** : la case, ou l'accumulateur, garde sa valeur.
+- Un nom de case, c'est juste un **numéro** que la machine calcule pour toi.
+- Sauter en avant, c'est **choisir** ; sauter en arrière, c'est **répéter**.
 
-    *Cela dit en passant : utiliser un logiciel payant sans licence est illégal. Ce qu'on étudie ici est le mécanisme, pas la pratique, et le savoir sert d'abord à écrire des programmes qu'on n'ouvre pas aussi facilement.*
+Une case contient quatre chiffres, de 0000 à 9999. Mais la machine lit tout mot à partir de 5000 comme un **négatif** : le plus grand nombre qu'elle sait afficher est 4999, et le plus petit −5000. Que se passe-t-il quand un calcul sort de là ? C'est la question du chapitre **Représentation de l'information**, où cette idée s'appelle le **complément à 2**.
 
-## 11. Ce qu'il faut retenir
-
-- Un **fichier source** est du texte. L'**assembleur** le traduit en nombres, le **fichier objet** ; c'est ce fichier qui est chargé en **RAM** et exécuté.
-- Le fichier objet ne contient ni mnémonique, ni nom de variable, ni commentaire : tout cela n'existait que pour toi.
-- Le **jeu d'instructions** d'un processeur est une table de correspondance décidée par ses concepteurs, de même nature que celle de ton groupe à la première séance. Elle se **consulte**, elle ne s'apprend pas ; ce qui s'apprend, c'est ce qu'on arrive à en faire.
-- Sur le LMC, une instruction est un nombre de **quatre chiffres** : le premier est le code opération, les deux derniers l'adresse.
-- L'**accumulateur** est unique : il faut ranger avant de charger autre chose.
-- Les **branchements** sont les seules instructions qui écrivent dans le compteur ordinal. Un saut en avant fait choisir entre deux chemins, c'est une **condition** ; un saut en arrière fait repasser sur les mêmes instructions, c'est une **boucle**. Il n'y a rien d'autre.
-- **Rien ne distingue une instruction d'une donnée en mémoire** : c'est le compteur ordinal qui décide.
-- Ce principe est ce qui rend une machine programmable, et c'est aussi la porte d'entrée de l'**injection de code** : une donnée venue de l'extérieur qui finit exécutée.
-
-Ce que tout cela devient sur une vraie machine, avec un vrai assembleur, est à la dernière page du chapitre : [Pour aller plus loin](pour-aller-plus-loin.md).
-
----
-
-**Sources :**
-
-- von Neumann, J. (1945). *First Draft of a Report on the EDVAC*. University of Pennsylvania.
-- Tanenbaum, A. S. (2013). *Structured Computer Organization* (6e éd.). Pearson.
-- Programme de NSI, Bulletin officiel spécial n°1 du 22 janvier 2019.
+Ce que la machine voit vraiment, des nombres et rien d'autre, est à la page [Pour aller plus loin](pour-aller-plus-loin.md#7-ce-que-la-machine-voit-vraiment-des-nombres).

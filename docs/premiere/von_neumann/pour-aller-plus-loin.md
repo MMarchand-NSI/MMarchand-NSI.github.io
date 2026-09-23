@@ -322,6 +322,122 @@ graph LR
 - **Jeu d'instructions** : l'ensemble des opérations qu'un processeur sait exécuter. Les familles **CISC** (beaucoup d'instructions, complexes) et **RISC** (peu d'instructions, simples et rapides) reposent sur deux paris opposés.
 - **Architectures alternatives** : Harvard, et les variantes dites de von Neumann modifiée.
 
+## 7. Ce que la machine voit vraiment : des nombres
+
+À faire **après** les défis du [langage machine](langage-machine.md).
+
+### 7.1 Chaque instruction est un nombre
+
+`LDA`, `STA`, les noms de cases : tout cela est pour toi. Dans la mémoire, il n'y a que des nombres de quatre chiffres. Les deux premiers disent **quoi faire**, les deux derniers **sur quelle case**. Ainsi `5042`, c'est `LDA 42`.
+
+| Instruction | Nombre |
+|---|---|
+| `INP` | `9001` |
+| `OUT` | `9002` |
+| `HLT` | `0000` |
+| `LDA 42` | `5042` |
+| `STA 42` | `3042` |
+| `ADD 42` | `1042` |
+| `SUB 42` | `2042` |
+| `BRA 42` | `6042` |
+| `BRZ 42` | `7042` |
+| `BRP 42` | `8042` |
+
+!!! question "Traduire à la main, une fois"
+    Chaque ligne occupe une case, à partir de la case n°0.
+
+    | Case n° | Instruction |
+    |:---:|:---|
+    | 0 | `INP` |
+    | 1 | `STA 06` |
+    | 2 | `INP` |
+    | 3 | `ADD 06` |
+    | 4 | `OUT` |
+    | 5 | `HLT` |
+    | 6 | `DAT` |
+
+    Sur ton cahier : écris le nombre que contient chaque case.
+
+    Ensuite, dans le simulateur : assemble ce programme, ouvre le fichier `.lmcobj` qui apparaît et compare. Remplace `1006` par `2006`, enregistre, clique **Charger** **sans réassembler**, puis **Run** : le programme fait maintenant une soustraction. C'est bien le fichier de nombres qui tourne.
+
+    ??? success "Correction"
+        `9001 3006 9001 1006 9002 0000 0000`. Il lit deux nombres et affiche leur somme.
+
+### 7.2 Le saut peut tomber sur une donnée
+
+!!! question "Prédire l'impossible"
+    | Case n° | Instruction |
+    |:---:|:---|
+    | 0 | `LDA 04` |
+    | 1 | `OUT` |
+    | 2 | `BRA 04` |
+    | 3 | `HLT` |
+    | 4 | `DAT 9002` |
+
+    Sur ton cahier : la liste des nombres affichés, et pourquoi le programme s'arrête alors qu'il ne passe jamais par la case n°3.
+
+    **N'ouvre pas le simulateur tant que tu n'as pas écrit tes réponses.**
+
+    ??? tip "Indice"
+        Compare le nombre de la case n°1 et celui de la case n°4.
+
+    ??? success "Correction"
+        Il affiche **−998**, puis **−998** encore.
+
+        - Case n°0 : l'accumulateur reçoit le **mot** 9002. Case n°1 : premier affichage. La machine l'écrit −998, parce qu'elle lit tout mot à partir de 5000 comme un négatif ; le mot rangé, lui, vaut bien 9002.
+        - Case n°2 : la machine va à la case n°4 et la lit comme une **instruction**. Or 9002, c'est `OUT` : second affichage.
+        - Case n°5 : jamais écrite, elle vaut `0000`, c'est-à-dire `HLT`.
+
+        **Rien, dans la mémoire, ne distingue une instruction d'une donnée.** C'est le compteur ordinal qui décide.
+
+        Le même mot a même été lu de **trois** façons ici : l'instruction `OUT`, le nombre −998, et les quatre chiffres `9002` que montre l'inspecteur mémoire. Une seule case, trois lectures.
+
+### 7.3 Cybersécurité : quand une donnée devient du code
+
+Un éditeur vend un logiciel qui demande une **clé de licence** au démarrage. Camille en a une copie, sans clé. Le programme a deux maladresses, comme en ont tous les logiciels, souvent nées d'un copier-coller.
+
+| Case n° | Programme | Ce que ça fait |
+|:---:|:---|:---|
+| 00 | `INP` | lire la clé tapée |
+| 01 | `STA cle` | la ranger dans la case `cle` |
+| 02 | `SUB licence` | clé tapée moins clé enregistrée |
+| 03 | `BRZ demarre` | si ça vaut 0, la clé est bonne |
+| 04 | `LDA zero` | |
+| 05 | `OUT` | afficher `0` : refusé |
+| 06 | `cle: DAT 0` | la case où atterrit la clé tapée |
+| 07 | `OUT` | afficher la clé tapée, pour la relire |
+| 08 | `HLT` | |
+| 09 | `demarre: LDA un` | |
+| 10 | `OUT` | afficher `1` : le logiciel démarre |
+| 11 | `HLT` | |
+| 12 | `licence: DAT 4242` | **la clé enregistrée** |
+| 13 | `zero: DAT 0` | |
+| 14 | `un: DAT 1` | |
+
+!!! danger "Les deux maladresses"
+    - La case `cle` est **au milieu du chemin** : la machine va passer dessus et exécuter ce qu'elle contient.
+    - La case n°07 ne fait pas ce que l'auteur croit : `OUT` affiche l'accumulateur, pas la case `cle`.
+
+!!! question "Attaque 1 : faire afficher la clé"
+    Tu ne peux rien changer au programme, seulement le nombre que tu tapes. Quel nombre taper pour que le logiciel affiche `4242` ?
+
+    ??? tip "Indice"
+        Ce que tu tapes atterrit en case n°06, et la machine va l'exécuter. Il faudrait que ce soit `LDA licence`, c'est-à-dire `LDA 12`.
+
+    ??? success "Correction"
+        **5012**, le nombre de `LDA 12`. Le refus s'affiche (`0`), puis la case n°06 met 4242 dans l'accumulateur, et la case n°07 l'affiche. Le logiciel a donné sa propre clé.
+
+!!! question "Attaque 2 : démarrer sans clé"
+    Quel nombre taper pour que le logiciel **démarre** ?
+
+    ??? success "Correction"
+        **6009**, le nombre de `BRA 09`. Après le refus, la case n°06 fait sauter la machine en case n°09, **derrière** le contrôle. C'est un *crack*.
+
+!!! abstract "Ce qu'il faut en retenir"
+    **Une vérification faite sur la machine de celui qu'elle doit arrêter ne protège rien.** D'où ce que font les éditeurs : vérifier la clé **sur un serveur**, ne jamais ranger un secret en clair dans un programme, marquer des zones de mémoire **non exécutables**, et ne jamais ranger une saisie sans la vérifier. Le même mécanisme porte des noms que tu entendras : *injection de code*, *débordement de tampon*.
+
+    *Utiliser un logiciel payant sans licence est illégal. On étudie le mécanisme, pas la pratique.*
+
 ---
 
 **Sources** :
