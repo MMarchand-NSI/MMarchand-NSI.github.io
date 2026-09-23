@@ -950,12 +950,7 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#avec-un-peu-de-tout" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -963,6 +958,11 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -8253,12 +8253,7 @@
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
+          <li class="md-nav__item">
   <a href="#avec-un-peu-de-tout" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8266,6 +8261,11 @@
       
     </span>
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -9175,19 +9175,19 @@
 </tr>
 <tr>
 <td style="text-align: center;">4</td>
-<td style="text-align: left;"><code>OUT</code></td>
+<td style="text-align: left;"><code>BRZ fin</code></td>
 </tr>
 <tr>
 <td style="text-align: center;">5</td>
-<td style="text-align: left;"><code>SUB un</code></td>
+<td style="text-align: left;"><code>OUT</code></td>
 </tr>
 <tr>
 <td style="text-align: center;">6</td>
-<td style="text-align: left;"><code>STA cpt</code></td>
+<td style="text-align: left;"><code>SUB un</code></td>
 </tr>
 <tr>
 <td style="text-align: center;">7</td>
-<td style="text-align: left;"><code>BRZ fin</code></td>
+<td style="text-align: left;"><code>STA cpt</code></td>
 </tr>
 <tr>
 <td style="text-align: center;">8</td>
@@ -9210,20 +9210,45 @@
 <p>On tape <strong>3</strong>. Sur ton cahier, écris :</p>
 <ul>
 <li>les nombres affichés, dans l'ordre ;</li>
-<li>combien de fois la ligne 4 est faite ;</li>
+<li>combien de fois la ligne 5 est faite ;</li>
 <li>ce que contient <code>cpt</code> à la fin.</li>
 </ul>
-<p>Puis : qu'est-ce qui se passe si on tape <strong>0</strong> ?</p>
+<p>Puis : qu'est-ce qui se passe si on tape <strong>0</strong> ? Et si on efface la ligne 4 ?</p>
 <p><strong>N'ouvre pas le simulateur tant que tu n'as pas écrit tes réponses.</strong></p>
 <details class="success">
 <summary>Correction</summary>
 <ul>
 <li>Affiche <strong>3, 2, 1</strong>.</li>
-<li>La ligne 4 est écrite <strong>une</strong> fois et faite <strong>trois</strong> fois.</li>
-<li><code>cpt</code> contient <strong>0</strong> : c'est ce 0 qui fait sauter la ligne 7 vers <code>fin</code>.</li>
+<li>La ligne 5 est écrite <strong>une</strong> fois et faite <strong>trois</strong> fois.</li>
+<li><code>cpt</code> contient <strong>0</strong> : c'est ce 0 qui fait sauter la ligne 4 vers <code>fin</code>.</li>
 </ul>
-<p>Avec <strong>0</strong> : la machine affiche 0, puis −1, −2, −3… et <strong>ne s'arrête jamais</strong>. <code>cpt</code> ne repasse jamais par 0, donc la ligne 7 ne saute jamais.</p>
+<p>Avec <strong>0</strong> : <strong>rien ne s'affiche</strong>, et la machine s'arrête tout de suite. Le test est en tête, donc il est fait <strong>avant</strong> le premier <code>OUT</code>.</p>
+<p>Sans la ligne 4 : la machine affiche 3, 2, 1, 0, puis <strong>9999, 9998, 9997</strong>… et ne s'arrête jamais. Plus rien ne la fait sortir, et 0 moins 1 ne s'écrit pas dans une case.</p>
 </details>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Le squelette d'une boucle, toujours le même</p>
+<p>Toutes les boucles de cette page suivent ces trois temps, <strong>dans cet ordre</strong>. Reprends-le tel quel, même quand tu vois plus court.</p>
+<ol>
+<li><strong>On vérifie la condition de sortie</strong>, tout en haut.</li>
+<li><strong>On fait le corps</strong> de la boucle.</li>
+<li><strong>On boucle</strong>, avec <code>BRA</code>.</li>
+</ol>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>boucle: LDA cpt
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>        BRZ fin
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>        ... le corps ...
+<a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>        BRA boucle
+<a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>fin:    HLT
+</code></pre></div>
+<p>Quand la sortie ne se joue pas sur un 0 mais sur une <strong>comparaison</strong>, il n'existe pas de « saute si c'est négatif ». On saute alors <strong>vers le corps</strong> si on continue, et la ligne juste en dessous part vers <code>fin</code>.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>boucle: LDA dix
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>        SUB cpt
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>        BRP corps
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>        BRA fin
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>corps:  ... le corps ...
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>        BRA boucle
+<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>fin:    HLT
+</code></pre></div>
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">Deux sortes de sauts</p>
@@ -9235,15 +9260,35 @@
 <h2 id="6-ecrire-des-programmes">6. Écrire des programmes</h2>
 <p>Dans l'ordre. Chaque défi ajoute <strong>une seule</strong> difficulté.</p>
 <p>Pour chacun : écris ton programme <strong>sur ton cahier</strong>, puis tape-le et teste-le dans le simulateur.</p>
-<p><strong>Il n'y a pas de correction : c'est le simulateur qui te dit si ça marche.</strong> Si ça ne marche pas, reprends ton programme ligne par ligne avec la <strong>deuxième table</strong>, celle que tu auras à l'évaluation. Chaque instruction fait <strong>ce qui est écrit dans la table, et rien d'autre</strong>.</p>
+<p><strong>C'est le simulateur qui te dit si ça marche, pas la correction.</strong> Si ça ne marche pas, reprends ton programme ligne par ligne avec la <strong>deuxième table</strong>, celle que tu auras à l'évaluation. Chaque instruction fait <strong>ce qui est écrit dans la table, et rien d'autre</strong>.</p>
+<div class="admonition warning">
+<p class="admonition-title">La correction s'ouvre en dernier</p>
+<p>Avant de l'ouvrir, écris sur ton cahier, en une phrase, <strong>ce que ton programme fait et qui n'est pas ce que tu voulais</strong>.</p>
+<p>Et si ton programme marche mais ne ressemble pas à la correction, il est juste quand même : il y a plusieurs façons d'écrire chacun de ces défis.</p>
+</div>
 <h3 id="sans-saut">Sans saut</h3>
 <div class="admonition question">
 <p class="admonition-title">Défi 1</p>
 <p>Demander un nombre et l'afficher.</p>
+<details class="success">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>        INP             // lire un nombre
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>        OUT             // l&#39;afficher
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>        HLT
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Défi 2</p>
 <p>Demander un nombre et l'afficher <strong>deux fois</strong>.</p>
+<details class="success">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>        INP             // lire un nombre
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>        OUT             // l&#39;afficher
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        OUT             // OUT ne vide pas l&#39;accumulateur : on peut recommencer
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        HLT
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Défi 3</p>
@@ -9252,10 +9297,40 @@
 <summary>Indice</summary>
 <p>Le deuxième <code>INP</code> écrase le premier nombre. Range-le avant.</p>
 </details>
+<details class="success">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>        INP             // le premier nombre
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>        STA a           // le ranger, sinon le prochain INP l&#39;écrase
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        INP             // le second nombre
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        OUT             // il est déjà dans l&#39;accumulateur : on l&#39;affiche
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        LDA a           // aller rechercher le premier
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>        OUT
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        HLT
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>a:      DAT
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Défi 4</p>
 <p>Demander deux nombres et afficher leur <strong>somme</strong>.</p>
+<details class="success">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>        INP             // le premier nombre
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>        STA a           // le ranger, sinon le prochain INP l&#39;écrase
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>        INP             // le second nombre
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>        ADD a           // lui ajouter le premier
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>        OUT
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>        HLT
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>
+<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a>a:      DAT
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Défi 5</p>
@@ -9264,6 +9339,25 @@
 <summary>Indice</summary>
 <p>Au moment du <code>SUB</code>, c'est le <strong>premier</strong> nombre qui doit être dans l'accumulateur.</p>
 </details>
+<details class="success">
+<summary>Correction</summary>
+<p>Si le résultat est négatif, la machine affiche <strong>9995</strong> pour −5 : une case ne sait pas écrire un signe. C'est la question posée à la fin de la partie 8.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>        INP             // le premier nombre
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>        STA a
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>        INP             // le second nombre
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>        STA b
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
+<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>        LDA a           // c&#39;est le PREMIER qui doit être dans l&#39;accumulateur
+<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>        SUB b           // avant d&#39;enlever le second
+<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        OUT
+<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>        HLT
+<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>
+<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>a:      DAT
+<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>b:      DAT
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Défi 6</p>
@@ -9271,6 +9365,20 @@
 <details class="tip">
 <summary>Indice</summary>
 <p>Le triple de 7, c'est 7 + 7 + 7.</p>
+</details>
+<details class="success">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>        INP             // le nombre est déjà dans l&#39;accumulateur
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>        STA n           // on le range pour pouvoir l&#39;ajouter à lui-même
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        ADD n           // n + n
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>        ADD n           // n + n + n
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>        OUT
+<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>
+<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        HLT
+<a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>
+<a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>n:      DAT
+</code></pre></div>
 </details>
 </div>
 <h3 id="avec-un-saut">Avec un saut</h3>
@@ -9281,6 +9389,23 @@
 <summary>Indice</summary>
 <p>Regarde l'exercice 10. Les nombres 0 et 1 doivent exister dans des cases : <code>zero: DAT 0</code> et <code>un: DAT 1</code>.</p>
 </details>
+<details class="success">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>        INP
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>        BRP positif     // 0 ou plus : aller sur l&#39;autre chemin
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>        LDA zero        // chemin du nombre négatif
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        OUT
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>        HLT             // chaque chemin a besoin de son HLT
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>positif: LDA un         // chemin du nombre positif ou nul
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>        OUT
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>        HLT
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>
+<a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a>zero:   DAT 0
+<a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>un:     DAT 1
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Défi 8</p>
@@ -9288,6 +9413,28 @@
 <details class="tip">
 <summary>Indice</summary>
 <p>Deux nombres sont égaux quand l'un moins l'autre vaut 0.</p>
+</details>
+<details class="success">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>        INP             // le premier nombre
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>        STA a
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>        INP             // le second nombre
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        SUB a           // deux nombres égaux donnent 0
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>        BRZ egal
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>        LDA zero        // chemin des nombres différents
+<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>        OUT
+<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>        HLT
+<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>
+<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>egal:   LDA un          // chemin des nombres égaux
+<a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>        OUT
+<a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>        HLT
+<a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a>
+<a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>a:      DAT
+<a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a>zero:   DAT 0
+<a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a>un:     DAT 1
+</code></pre></div>
 </details>
 </div>
 <div class="admonition question">
@@ -9301,6 +9448,29 @@
 <summary>Indice précis</summary>
 <p>Range les deux nombres dans <code>a</code> et <code>b</code>. Si <code>b − a</code> vaut 0 ou plus, on saute vers un morceau qui affiche <code>b</code>. Sinon, on affiche <code>a</code>. Chaque morceau finit par son <code>HLT</code>.</p>
 </details>
+<details class="success">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>        INP             // le premier nombre
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>        STA a
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>        INP             // le second nombre
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>        STA b
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>        SUB a           // b - a : la machine ne sait pas comparer,
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>        BRP affB        // elle enlève et regarde le signe
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>        LDA a           // b - a est négatif : a est le plus grand
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>        OUT
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>        HLT
+<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>
+<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>affB:   LDA b           // b - a est positif ou nul : b est le plus grand
+<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>        OUT
+<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>        HLT
+<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>
+<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>a:      DAT
+<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>b:      DAT
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Défi 10</p>
@@ -9313,6 +9483,38 @@
 <summary>Indice précis</summary>
 <p>Pour chaque nouveau nombre : nombre moins <code>max</code>. Si c'est 0 ou plus, le nombre va dans <code>max</code>. On n'affiche <strong>qu'une fois, à la fin</strong>.</p>
 </details>
+<details class="success">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>        INP             // le premier nombre
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>        STA max         // pour l&#39;instant, c&#39;est lui le plus grand
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>        INP             // le deuxième nombre
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        STA b
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>        SUB max         // b - max
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>        BRP bGagne      // positif ou nul : b prend la place
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>        BRA suite
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>bGagne: LDA b
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>        STA max
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>suite:  INP             // le troisième nombre
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>        STA c
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>        SUB max         // c - max
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>        BRP cGagne
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>        BRA fin
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>cGagne: LDA c
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>        STA max
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>fin:    LDA max         // on n&#39;affiche qu&#39;une fois, à la fin
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>        OUT
+<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>        HLT
+<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>
+<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>max:    DAT
+<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>b:      DAT
+<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>c:      DAT
+</code></pre></div>
+</details>
 </div>
 <h3 id="avec-une-boucle">Avec une boucle</h3>
 <div class="admonition question">
@@ -9322,17 +9524,62 @@
 <summary>Indice</summary>
 <p>C'est l'exercice 11, sans le <code>INP</code> : le compteur part de 10.</p>
 </details>
+<details class="success">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>        LDA dix         // le compteur part de 10
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>        STA cpt
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>boucle: LDA cpt         // 1. la condition de sortie
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>        BRZ fin
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>        OUT             // 2. le corps : afficher, puis descendre d&#39;un
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>        SUB un
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>        STA cpt
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>        BRA boucle      // 3. on boucle
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>fin:    HLT
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>cpt:    DAT
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>dix:    DAT 10
+<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>un:     DAT 1
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Défi 12</p>
 <p>Afficher 1, 2, 3, … jusqu'à 10.</p>
 <details class="tip">
 <summary>Indice léger</summary>
-<p>Le compteur ne passe jamais par 0. Pour savoir s'il vaut 10, calcule compteur moins 10.</p>
+<p>Le compteur ne passe jamais par 0, donc <code>BRZ</code> ne peut pas décider seul. On continue tant que <strong>10 moins le compteur</strong> est positif ou nul.</p>
 </details>
 <details class="tip">
 <summary>Indice précis</summary>
-<p>Ce calcul écrase l'accumulateur : le compteur doit être <strong>rangé</strong> dans une case <code>cpt</code>, et rechargé après le test.</p>
+<p>Ce test écrase l'accumulateur : le compteur vit dans une case <code>cpt</code>, et il faut le <strong>recharger</strong> dans le corps. C'est le second squelette de la partie 5.4.</p>
+</details>
+<details class="success">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>        LDA un          // le compteur part de 1
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>        STA cpt
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>boucle: LDA dix         // 1. la condition de sortie : on continue tant que
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>        SUB cpt         //    10 - compteur est positif ou nul
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>        BRP corps
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>        BRA fin
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>corps:  LDA cpt         // 2. le corps : afficher, puis monter d&#39;un
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>        OUT
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>        ADD un
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>        STA cpt
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>        BRA boucle      // 3. on boucle
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a>fin:    HLT
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>cpt:    DAT
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>un:     DAT 1
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a>dix:    DAT 10
+</code></pre></div>
 </details>
 </div>
 <div class="admonition question">
@@ -9346,6 +9593,40 @@
 <summary>Indice précis</summary>
 <p>Deux cases à tenir, <code>res</code> et <code>cpt</code>, et un seul accumulateur. Avant de charger l'une, <strong>range</strong> l'autre.</p>
 </details>
+<details class="success">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a>        INP             // le nombre tapé
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>        STA n
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>        STA res         // le premier multiple, c&#39;est le nombre lui-même
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>        LDA un          // le compteur part de 1
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>        STA cpt
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>boucle: LDA dix         // 1. la condition de sortie : dix multiples en tout
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>        SUB cpt
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>        BRP corps
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>        BRA fin
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>corps:  LDA res         // 2. le corps : afficher le multiple courant,
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>        OUT
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>        ADD n           //    puis préparer le suivant
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a>        STA res
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>        LDA cpt         //    et avancer le compteur
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>        ADD un
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>        STA cpt
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>        BRA boucle      // 3. on boucle
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>fin:    HLT
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>n:      DAT
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>res:    DAT
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a>cpt:    DAT
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a>un:     DAT 1
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a>dix:    DAT 10
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Défi 14</p>
@@ -9356,10 +9637,37 @@
 </details>
 <details class="tip">
 <summary>Indice précis</summary>
-<p>Charger <code>somme</code>, ajouter <code>cpt</code>, ranger <code>somme</code>. Puis charger <code>cpt</code>, enlever 1, ranger <code>cpt</code>, tester s'il vaut 0. Afficher <strong>une seule fois, à la sortie</strong>.</p>
+<p>Le test est en tête : charger <code>cpt</code>, sortir s'il vaut 0. Dans le corps : charger <code>somme</code>, ajouter <code>cpt</code>, ranger <code>somme</code>, puis enlever 1 à <code>cpt</code>. Afficher <strong>une seule fois, à la sortie</strong>.</p>
+</details>
+<details class="success">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a>        INP             // le nombre N
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>        STA cpt
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>boucle: LDA cpt         // 1. la condition de sortie
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>        BRZ fin
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>        LDA somme       // 2. le corps : ajouter le compteur à la somme
+<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a>        ADD cpt
+<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>        STA somme
+<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>
+<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>        LDA cpt         //    puis descendre d&#39;un
+<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>        SUB un
+<a id="__codelineno-16-13" name="__codelineno-16-13" href="#__codelineno-16-13"></a>        STA cpt
+<a id="__codelineno-16-14" name="__codelineno-16-14" href="#__codelineno-16-14"></a>
+<a id="__codelineno-16-15" name="__codelineno-16-15" href="#__codelineno-16-15"></a>        BRA boucle      // 3. on boucle
+<a id="__codelineno-16-16" name="__codelineno-16-16" href="#__codelineno-16-16"></a>
+<a id="__codelineno-16-17" name="__codelineno-16-17" href="#__codelineno-16-17"></a>fin:    LDA somme       // on n&#39;affiche qu&#39;une fois, à la sortie
+<a id="__codelineno-16-18" name="__codelineno-16-18" href="#__codelineno-16-18"></a>        OUT
+<a id="__codelineno-16-19" name="__codelineno-16-19" href="#__codelineno-16-19"></a>        HLT
+<a id="__codelineno-16-20" name="__codelineno-16-20" href="#__codelineno-16-20"></a>
+<a id="__codelineno-16-21" name="__codelineno-16-21" href="#__codelineno-16-21"></a>cpt:    DAT
+<a id="__codelineno-16-22" name="__codelineno-16-22" href="#__codelineno-16-22"></a>somme:  DAT 0
+<a id="__codelineno-16-23" name="__codelineno-16-23" href="#__codelineno-16-23"></a>un:     DAT 1
+</code></pre></div>
 </details>
 </div>
-<h2 id="avec-un-peu-de-tout">Avec un peu de tout</h2>
+<h3 id="avec-un-peu-de-tout">Avec un peu de tout</h3>
 <div class="admonition question">
 <p class="admonition-title">Défi 15 : la multiplication</p>
 <p>Demander deux nombres et afficher leur <strong>produit</strong>. On tape 6 puis 7 : affiche 42.</p>
