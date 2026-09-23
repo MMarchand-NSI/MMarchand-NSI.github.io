@@ -375,6 +375,17 @@ def test_depiler_pile_vide() -> None:
         2. **Non.** Chaque opération de base est en `O(1)`, mais ta fonction en enchaîne un nombre proportionnel à `n` : elle est en `O(n)`. **Un assemblage d'opérations en temps constant n'est pas en temps constant.** C'est l'erreur de raisonnement la plus fréquente sur les structures de données, et elle vaut pour toute l'année.
         3. Ce n'est pas un oubli, c'est un **choix**. Un contrat minimal est plus facile à implémenter de plusieurs façons, et c'est tout l'intérêt de la notion d'interface. Le prix de ce choix, tu viens de le payer : ce que le contrat ne donne pas coûte `O(n)` à reconstruire.
 
+!!! question "Transvaser"
+
+    - Créer une pile `pa` comportement de bas en haut les éléments 2 et 7
+    - Créer une pile `pb` comportement de bas en haut les éléments 5 et 12
+    
+    Soit une fonction `transvase[T](p1: Pile[T], p2: Pile[T]) -> None`
+
+    - Dessiner pa et pb arès l'appel `transvase(pa, pb)`
+    - Ecrire la fonction `test_transvase() -> None` en utilisant pa et pb
+    - Ecrire la fonction `transvase`
+
 !!! question "Renverser une pile"
     Créer et tester une fonction ```renverse``` qui prend une pile $p$ en paramètre et renvoie une pile contenant les éléments de $p$ dans l'ordre inverse.
         
