@@ -9223,7 +9223,7 @@
 <li><code>cpt</code> contient <strong>0</strong> : c'est ce 0 qui fait sauter la ligne 4 vers <code>fin</code>.</li>
 </ul>
 <p>Avec <strong>0</strong> : <strong>rien ne s'affiche</strong>, et la machine s'arrête tout de suite. Le test est en tête, donc il est fait <strong>avant</strong> le premier <code>OUT</code>.</p>
-<p>Sans la ligne 4 : la machine affiche 3, 2, 1, 0, puis <strong>9999, 9998, 9997</strong>… et ne s'arrête jamais. Plus rien ne la fait sortir, et 0 moins 1 ne s'écrit pas dans une case.</p>
+<p>Sans la ligne 4 : la machine affiche 3, 2, 1, 0, puis <strong>−1, −2, −3</strong>… et ne s'arrête jamais. Plus rien ne la fait sortir, et <code>cpt</code> ne repasse plus par 0.</p>
 </details>
 </div>
 <div class="admonition abstract">
@@ -9346,7 +9346,7 @@
 </details>
 <details class="success">
 <summary>Correction</summary>
-<p>Si le résultat est négatif, la machine affiche <strong>9995</strong> pour −5 : une case ne sait pas écrire un signe. C'est la question posée à la fin de la partie 8.</p>
+<p>Le résultat peut être négatif : avec 4 puis 9, la machine affiche <strong>−5</strong>. Mais la case, elle, contient <strong>9995</strong>, c'est-à-dire 10000 − 5. Le signe n'est écrit nulle part : la machine a simplement décidé que tout mot à partir de 5000 se lit comme un négatif. Tu retrouveras exactement cette idée en binaire, au chapitre <strong>Représentation de l'information</strong>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>        INP             // le premier nombre
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>        STA a
 <a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
@@ -9686,7 +9686,7 @@
 <div class="admonition question">
 <p class="admonition-title">Défi 15 : la multiplication</p>
 <p>Demander deux nombres et afficher leur <strong>produit</strong>. On tape 6 puis 7 : affiche 42.</p>
-<p>Les deux nombres tapés sont positifs, et leur produit ne dépasse pas 9999.</p>
+<p>Les deux nombres tapés sont positifs, et leur produit ne dépasse pas 4999.</p>
 <details class="tip">
 <summary>Indice léger</summary>
 <p>C'est le défi 6, le triple. Mais cette fois, le nombre de fois qu'on ajoute est <strong>tapé au clavier</strong>, il n'est pas connu d'avance.</p>
@@ -9724,7 +9724,7 @@
 <div class="admonition question">
 <p class="admonition-title">Défi 18 : la suite de Fibonacci</p>
 <p>Chaque terme est la <strong>somme des deux précédents</strong> : 1, 1, 2, 3, 5, 8, 13, 21, et ainsi de suite. Demander un nombre N, et afficher les N premiers termes. On tape 8 : affiche 1, 1, 2, 3, 5, 8, 13, 21.</p>
-<p>N est compris entre 1 et 20. Au-delà, les termes ne tiennent plus dans une case, et la machine affiche n'importe quoi sans prévenir.</p>
+<p>N est compris entre 1 et 19. Au-delà, les termes sortent de ce que la machine sait afficher, et elle se met à annoncer des nombres négatifs sans prévenir.</p>
 <details class="tip">
 <summary>Indice léger</summary>
 <p>Il faut garder <strong>deux</strong> termes en même temps, et il n'y a qu'un accumulateur. Relis l'exercice 3 : pourquoi l'échange y échouait-il ?</p>
@@ -9751,7 +9751,7 @@
 <li>Un nom de case, c'est juste un <strong>numéro</strong> que la machine calcule pour toi.</li>
 <li>Sauter en avant, c'est <strong>choisir</strong> ; sauter en arrière, c'est <strong>répéter</strong>.</li>
 </ul>
-<p>Une case contient au plus 9999. Que se passe-t-il si un calcul donne 10 000 ? C'est la question du chapitre <strong>Représentation de l'information</strong>.</p>
+<p>Une case contient quatre chiffres, de 0000 à 9999. Mais la machine lit tout mot à partir de 5000 comme un <strong>négatif</strong> : le plus grand nombre qu'elle sait afficher est 4999, et le plus petit −5000. Que se passe-t-il quand un calcul sort de là ? C'est la question du chapitre <strong>Représentation de l'information</strong>, où cette idée s'appelle le <strong>complément à 2</strong>.</p>
 <p>Ce que la machine voit vraiment, des nombres et rien d'autre, est à la page <a href="../pour-aller-plus-loin/#7-ce-que-la-machine-voit-vraiment-des-nombres">Pour aller plus loin</a>.</p>
 
 
@@ -9773,7 +9773,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 13, 2026 11:11:34 UTC">September 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 23, 2026 16:52:36 UTC">September 23, 2026</span>
   </span>
 
     

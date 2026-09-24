@@ -8789,13 +8789,14 @@
 </details>
 <details class="success">
 <summary>Correction</summary>
-<p>Il affiche <strong>9002</strong>, puis <strong>9002</strong> encore.</p>
+<p>Il affiche <strong>−998</strong>, puis <strong>−998</strong> encore.</p>
 <ul>
-<li>Case n°0 : l'accumulateur reçoit le <strong>nombre</strong> 9002. Case n°1 : premier affichage.</li>
+<li>Case n°0 : l'accumulateur reçoit le <strong>mot</strong> 9002. Case n°1 : premier affichage. La machine l'écrit −998, parce qu'elle lit tout mot à partir de 5000 comme un négatif ; le mot rangé, lui, vaut bien 9002.</li>
 <li>Case n°2 : la machine va à la case n°4 et la lit comme une <strong>instruction</strong>. Or 9002, c'est <code>OUT</code> : second affichage.</li>
 <li>Case n°5 : jamais écrite, elle vaut <code>0000</code>, c'est-à-dire <code>HLT</code>.</li>
 </ul>
 <p><strong>Rien, dans la mémoire, ne distingue une instruction d'une donnée.</strong> C'est le compteur ordinal qui décide.</p>
+<p>Le même mot a même été lu de <strong>trois</strong> façons ici : l'instruction <code>OUT</code>, le nombre −998, et les quatre chiffres <code>9002</code> que montre l'inspecteur mémoire. Une seule case, trois lectures.</p>
 </details>
 </div>
 <h3 id="73-cybersecurite-quand-une-donnee-devient-du-code">7.3 Cybersécurité : quand une donnée devient du code</h3>
@@ -8944,7 +8945,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 13, 2026 10:22:02 UTC">September 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="September 23, 2026 16:52:36 UTC">September 23, 2026</span>
   </span>
 
     

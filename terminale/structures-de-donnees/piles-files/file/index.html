@@ -8111,15 +8111,14 @@
 <li>La pile <code>p</code> vaut <code>[4, 7]</code> (du bas vers le haut). Qu'affiche <code>print(depiler(p))</code>, et que vaut <code>p</code> ensuite ?</li>
 <li>Si on empile <code>1</code> puis <code>2</code> puis <code>3</code> dans une pile vide et qu'on dépile trois fois, dans quel ordre sortent les éléments ?</li>
 </ol>
-<details class="success">
-<summary>Correction</summary>
-<ol>
-<li><code>creer</code>, <code>est_vide</code>, <code>empiler</code>, <code>depiler</code>.</li>
-<li>Affiche <code>7</code>, et <code>p</code> vaut <code>[4]</code>. <code>depiler</code> retire <strong>et</strong> renvoie.</li>
-<li><code>3</code>, <code>2</code>, <code>1</code> : c'est le LIFO. Retiens cet ordre <strong>inversé</strong>, c'est exactement ce qui va servir à fabriquer une file.</li>
-</ol>
-</details>
 </div>
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
+    ??? success "Correction"
+        1. `creer`, `est_vide`, `empiler`, `depiler`.
+        2. Affiche `7`, et `p` vaut `[4]`. `depiler` retire **et** renvoie.
+        3. `3`, `2`, `1` : c'est le LIFO. Retiens cet ordre **inversé**, c'est exactement ce qui va servir à fabriquer une file.
+-->
+
 <p>Les files (queues en anglais) correspondent exactement à la notion de file dans la vie courante:</p>
 <p>Une file d’attente à la caisse, à un feu rouge…</p>
 <p><img alt="alt text" src="../image-1.png" /></p>
@@ -8317,13 +8316,13 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
 <summary>Indice plus précis</summary>
 <p>Une pile temporaire inverserait l'ordre, une <strong>file</strong> temporaire le conserve : ce qui entre en premier en ressort en premier, deux fois de suite. Défile <code>f</code> en entier, compte au passage, enfile chaque élément dans la file temporaire, puis vide la temporaire dans <code>f</code>.</p>
 </details>
-<details class="question">
-<summary>Avant d'ouvrir la solution</summary>
-<p>En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans <strong>ton</strong> code ?</p>
-</details>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># dans exos/exos_files.py : on est du côté qui UTILISE, d&#39;où le préfixe file.</span>
+</div>
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
+    ??? question "Avant d'ouvrir la solution"
+        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
+
+    ??? success "Solution"
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="c1"># dans exos/exos_files.py : on est du côté qui UTILISE, d&#39;où le préfixe file.</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">def</span><span class="w"> </span><span class="nf">nb_elements</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">file</span><span class="o">.</span><span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">e</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Nombre d&#39;occurrences de e dans f. La file f est laissée intacte.&quot;&quot;&quot;</span>
@@ -8338,9 +8337,10 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
 <a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a>        <span class="n">file</span><span class="o">.</span><span class="n">enfiler</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">defiler</span><span class="p">(</span><span class="n">temp</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span>
 <a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a>    <span class="k">return</span> <span class="n">n</span>
 </code></pre></div>
-<p>Retiens la structure : <strong>sortir, garder au passage, remettre</strong>. Une fonction qui prétend ne pas modifier une file doit toujours la reconstruire. Tu viens de l'écrire pour la troisième fois, après « Sortie d'une file » et « Taille non destructive » : la section suivante en tire la conséquence.</p>
-</details>
-</div>
+
+        Retiens la structure : **sortir, garder au passage, remettre**. Une fonction qui prétend ne pas modifier une file doit toujours la reconstruire. Tu viens de l'écrire pour la troisième fois, après « Sortie d'une file » et « Taille non destructive » : la section suivante en tire la conséquence.
+-->
+
 <h2 id="generaliser-ce-que-tu-viens-de-faire-trois-fois-la-fonction-elements">Généraliser ce que tu viens de faire trois fois : la fonction <code>elements</code></h2>
 <p>Regarde en arrière. Dans « Sortie d'une file », dans « Taille non destructive » et dans « Occurrences », tu as écrit <strong>trois fois la même chose</strong> : vider la file dans une temporaire, faire quelque chose au passage, puis tout remettre. Seul le « quelque chose » changeait.</p>
 <p>Quand un même motif revient trois fois, on l'écrit une fois pour toutes.</p>
@@ -8358,17 +8358,19 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
 <li>elle n'utilise <strong>que</strong> les quatre primitives, jamais l'intérieur de la file ;</li>
 <li>à la fin, <code>f</code> doit être <strong>exactement</strong> dans l'état où elle était au début, contenu <strong>et</strong> ordre.</li>
 </ol>
+<p><strong>Ajoute cette fonction à <code>structures/lineaires/file.py</code>, et son <code>test_elements</code> à <code>file_test.py</code>.</strong> Elle n'utilise que l'interface : elle marchera donc <strong>quelle que soit l'implémentation</strong>, et tu vérifieras ce point tout à l'heure.</p>
+<p>Un test qui vaut la peine : appeler <code>elements</code> <strong>deux fois de suite</strong> et vérifier que la seconde rend la même liste. Si <code>elements</code> abîmait la file, seul ce second appel le dirait.</p>
 <details class="tip">
 <summary>Indice</summary>
 <p>Tu l'as déjà écrit dans « Occurrences ». Reprends ta solution et enlève le comptage : ce qui reste <strong>est</strong> <code>elements</code>.</p>
 </details>
-<details class="note">
-<summary>Avant d'ouvrir la solution</summary>
-<p>En une phrase, sur ton cahier : pourquoi une <strong>file</strong> temporaire, et pas une <strong>pile</strong> ?</p>
-</details>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">elements</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+</div>
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
+    ??? note "Avant d'ouvrir la solution"
+        En une phrase, sur ton cahier : pourquoi une **file** temporaire, et pas une **pile** ?
+
+    ??? success "Solution"
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">elements</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Liste des éléments de f, de la sortie vers l&#39;entrée, sans modifier f.&quot;&quot;&quot;</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">resultat</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
 <a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="n">temp</span><span class="p">:</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">creer</span><span class="p">()</span>
@@ -8380,11 +8382,10 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
 <a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>        <span class="n">enfiler</span><span class="p">(</span><span class="n">defiler</span><span class="p">(</span><span class="n">temp</span><span class="p">),</span> <span class="n">f</span><span class="p">)</span>
 <a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="k">return</span> <span class="n">resultat</span>
 </code></pre></div>
-<p>Une <strong>file</strong> temporaire, parce qu'elle conserve l'ordre : ce qui y entre en premier en ressort en premier, et deux transferts de suite rendent donc <code>f</code> identique. Une pile l'aurait inversée, et il aurait fallu deux piles pour rattraper.</p>
-</details>
-<p><strong>Ajoute cette fonction à <code>structures/lineaires/file.py</code>, et son <code>test_elements</code> à <code>file_test.py</code>.</strong> Elle n'utilise que l'interface : elle marchera donc <strong>quelle que soit l'implémentation</strong>, et tu vérifieras ce point tout à l'heure.</p>
-<p>Un test qui vaut la peine : appeler <code>elements</code> <strong>deux fois de suite</strong> et vérifier que la seconde rend la même liste. Si <code>elements</code> abîmait la file, seul ce second appel le dirait.</p>
-</div>
+
+        Une **file** temporaire, parce qu'elle conserve l'ordre : ce qui y entre en premier en ressort en premier, et deux transferts de suite rendent donc `f` identique. Une pile l'aurait inversée, et il aurait fallu deux piles pour rattraper.
+-->
+
 <h2 id="le-vrai-objectif-du-cours-la-meme-file-mais-efficace">Le vrai objectif du cours : la même file, mais efficace</h2>
 <p>On veut construire une file <strong>sans jamais toucher à une liste directement</strong>, à partir de la seule <strong>interface de la pile</strong> (<code>creer</code>, <code>est_vide</code>, <code>empiler</code>, <code>depiler</code>). C'est l'idée forte de l'abstraction : une structure peut s'appuyer sur l'<em>interface</em> d'une autre, sans rien connaître de son implémentation.</p>
 <p><strong>L'idée.</strong> On utilise deux piles, <code>entree</code> et <code>sortie</code>.</p>
@@ -8407,13 +8408,16 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
 <li><strong>Enfile cinq éléments, puis défile-les un par un.</strong> Regarde la colonne « coût du dernier appel ». Que remarques-tu sur le <strong>premier</strong> défilement comparé aux quatre suivants ? Et sur le coût moyen ?</li>
 <li><strong>Alterne</strong> : enfile, défile, enfile, défile. Le coût moyen change-t-il ?</li>
 </ol>
-<details class="note">
-<summary>Ce que la manipulation 1 doit t'apprendre</summary>
-<p>Le premier <code>defiler</code> coûte cher : il bascule toute la pile <code>entree</code>. Les suivants coûtent <strong>1</strong>, parce que <code>sortie</code> n'est plus vide et qu'il n'y a rien à rebasculer.</p>
-<p>Chaque élément ne traverse <strong>qu'une seule fois</strong> de <code>entree</code> vers <code>sortie</code> au cours de sa vie dans la file. C'est pour cela qu'on dit que le coût est en <code>O(1)</code> <strong>amorti</strong> : pas « toujours 1 », mais « 1 en moyenne, sur la durée ».</p>
-<p>C'est la seule chose que ce bac à sable sait montrer et qu'une feuille de papier montre mal. Pour tout le reste, ta trace à la main vaut mieux.</p>
-</details>
 </div>
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
+    ??? note "Ce que la manipulation 1 doit t'apprendre"
+        Le premier `defiler` coûte cher : il bascule toute la pile `entree`. Les suivants coûtent **1**, parce que `sortie` n'est plus vide et qu'il n'y a rien à rebasculer.
+
+        Chaque élément ne traverse **qu'une seule fois** de `entree` vers `sortie` au cours de sa vie dans la file. C'est pour cela qu'on dit que le coût est en `O(1)` **amorti** : pas « toujours 1 », mais « 1 en moyenne, sur la durée ».
+
+        C'est la seule chose que ce bac à sable sait montrer et qu'une feuille de papier montre mal. Pour tout le reste, ta trace à la main vaut mieux.
+-->
+
 <div class="admonition question">
 <p class="admonition-title">Maintenant, à la main : trace le basculement</p>
 <p>Le bac à sable te l'a montré ; à toi de le <strong>produire</strong>. Remplis ce tableau <strong>à la main</strong>, ligne par ligne, sans le rouvrir. La dernière colonne est celle qui compte : <code>enfiler</code> ne rend rien, <code>defiler</code> rend un élément <strong>et</strong> le retire.</p>
@@ -8465,68 +8469,31 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
 </tr>
 </tbody>
 </table>
-<details class="note">
-<summary>À ouvrir une fois que tu as rempli les six lignes</summary>
-<table>
-<thead>
-<tr>
-<th>opération</th>
-<th><code>entree</code></th>
-<th><code>sortie</code></th>
-<th>valeur rendue</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>enfiler(1, f)</code></td>
-<td><code>[1]</code></td>
-<td><code>[]</code></td>
-<td>rien</td>
-</tr>
-<tr>
-<td><code>enfiler(2, f)</code></td>
-<td><code>[1, 2]</code></td>
-<td><code>[]</code></td>
-<td>rien</td>
-</tr>
-<tr>
-<td><code>defiler(f)</code></td>
-<td><code>[]</code></td>
-<td><code>[2]</code></td>
-<td><code>1</code>, après basculement</td>
-</tr>
-<tr>
-<td><code>enfiler(3, f)</code></td>
-<td><code>[3]</code></td>
-<td><code>[2]</code></td>
-<td>rien</td>
-</tr>
-<tr>
-<td><code>defiler(f)</code></td>
-<td><code>[3]</code></td>
-<td><code>[]</code></td>
-<td><code>2</code>, sans basculement</td>
-</tr>
-<tr>
-<td><code>defiler(f)</code></td>
-<td><code>[]</code></td>
-<td><code>[]</code></td>
-<td><code>3</code>, après basculement</td>
-</tr>
-</tbody>
-</table>
-</details>
 </div>
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
+    ??? note "À ouvrir une fois que tu as rempli les six lignes"
+        | opération | `entree` | `sortie` | valeur rendue |
+        |---|---|---|---|
+        | `enfiler(1, f)` | `[1]` | `[]` | rien |
+        | `enfiler(2, f)` | `[1, 2]` | `[]` | rien |
+        | `defiler(f)` | `[]` | `[2]` | `1`, après basculement |
+        | `enfiler(3, f)` | `[3]` | `[2]` | rien |
+        | `defiler(f)` | `[3]` | `[]` | `2`, sans basculement |
+        | `defiler(f)` | `[]` | `[]` | `3`, après basculement |
+-->
+
 <div class="admonition question">
 <p class="admonition-title">Pourquoi la condition « si <code>sortie</code> est vide » ?</p>
 <p><strong>Refais ta trace ci-dessus à la main</strong>, en <strong>supprimant</strong> cette condition, c'est-à-dire en basculant <code>entree</code> dans <code>sortie</code> à <strong>chaque</strong> <code>defiler</code>. Quelle valeur rend le cinquième appel ?</p>
 <p>Le bac à sable ne te le montrera pas : il n'implémente que la version correcte. C'est à toi de le trouver, et c'est le seul exercice de la page où tu fabriques toi-même une panne.</p>
-<details class="note">
-<summary>Ce que tu dois trouver</summary>
-<p>Au quatrième pas, <code>entree</code> vaut <code>[3]</code> et <code>sortie</code> vaut <code>[2]</code>. Un basculement inconditionnel empile donc <code>3</code> <strong>par-dessus</strong> <code>2</code>, et <code>sortie</code> vaut <code>[2, 3]</code>. Le <code>defiler</code> suivant rend <code>3</code> alors qu'il devrait rendre <code>2</code> : l'ordre FIFO est cassé.</p>
-<p>La condition n'est pas une optimisation, c'est <strong>ce qui rend la file correcte</strong>. Retiens le raisonnement, pas la ligne de code : basculer une pile dans une autre inverse son ordre, donc mélanger deux vagues de basculement mélange deux ordres.</p>
-</details>
 </div>
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
+    ??? note "Ce que tu dois trouver"
+        Au quatrième pas, `entree` vaut `[3]` et `sortie` vaut `[2]`. Un basculement inconditionnel empile donc `3` **par-dessus** `2`, et `sortie` vaut `[2, 3]`. Le `defiler` suivant rend `3` alors qu'il devrait rendre `2` : l'ordre FIFO est cassé.
+
+        La condition n'est pas une optimisation, c'est **ce qui rend la file correcte**. Retiens le raisonnement, pas la ligne de code : basculer une pile dans une autre inverse son ordre, donc mélanger deux vagues de basculement mélange deux ordres.
+-->
+
 <div class="admonition question">
 <p class="admonition-title">Maintenant, écris l'implémentation</p>
 <p>Tu as le texte, qui te donne les <strong>règles</strong>. Tu as le bac à sable, qui te montre les <strong>états</strong>. Tu as ta trace à la main. Cela suffit : <strong>écris <code>file.py</code> toi-même</strong>, sans regarder la correction.</p>
@@ -8550,13 +8517,13 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
 <summary>Indice précis</summary>
 <p>Le basculement est une boucle : tant que <code>entree</code> n'est pas vide, dépiler <code>entree</code> et empiler le résultat sur <code>sortie</code>. Une seule ligne de corps.</p>
 </details>
-<details class="note">
-<summary>En une phrase, sur ton cahier, avant d'ouvrir la solution</summary>
-<p>Qu'est-ce que ton <code>defiler</code> fait quand <code>sortie</code> n'est pas vide ? Écris-le en français. Si tu ne sais pas le dire, tu ne sais pas encore l'écrire.</p>
-</details>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">[</span><span class="n">T</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+</div>
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
+    ??? note "En une phrase, sur ton cahier, avant d'ouvrir la solution"
+        Qu'est-ce que ton `defiler` fait quand `sortie` n'est pas vide ? Écris-le en français. Si tu ne sais pas le dire, tu ne sais pas encore l'écrire.
+
+    ??? success "Solution"
+        <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">creer</span><span class="p">[</span><span class="n">T</span><span class="p">]()</span> <span class="o">-&gt;</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="k">return</span> <span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">(),</span> <span class="n">pile</span><span class="o">.</span><span class="n">creer</span><span class="p">())</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_vide</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">f</span><span class="p">:</span> <span class="n">File</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
@@ -8575,9 +8542,10 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
 <a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>            <span class="n">pile</span><span class="o">.</span><span class="n">empiler</span><span class="p">(</span><span class="n">pile</span><span class="o">.</span><span class="n">depiler</span><span class="p">(</span><span class="n">entree</span><span class="p">),</span> <span class="n">sortie</span><span class="p">)</span>
 <a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>    <span class="k">return</span> <span class="n">pile</span><span class="o">.</span><span class="n">depiler</span><span class="p">(</span><span class="n">sortie</span><span class="p">)</span>
 </code></pre></div>
-<p>Remarque que <code>enfiler</code> ignore <code>sortie</code> et que <code>defiler</code> ne touche <code>entree</code> que pour la vider. Aucune des deux ne regarde <strong>dans</strong> une pile : elles n'utilisent que <code>creer</code>, <code>est_vide</code>, <code>empiler</code>, <code>depiler</code>. C'est ce qui fait qu'une file peut être bâtie sur une pile sans rien savoir de son intérieur.</p>
-</details>
-</div>
+
+        Remarque que `enfiler` ignore `sortie` et que `defiler` ne touche `entree` que pour la vider. Aucune des deux ne regarde **dans** une pile : elles n'utilisent que `creer`, `est_vide`, `empiler`, `depiler`. C'est ce qui fait qu'une file peut être bâtie sur une pile sans rien savoir de son intérieur.
+-->
+
 <div class="admonition note">
 <p class="admonition-title">Et la complexité ?</p>
 <p>Un défilement peut coûter cher quand il faut tout basculer. Mais chaque élément n'est basculé <strong>qu'une seule fois</strong> de <code>entree</code> vers <code>sortie</code> sur toute sa vie dans la file. Réparti sur l'ensemble des opérations, le coût est en <code>O(1)</code> <strong>amorti</strong>, bien meilleur que le <code>pop(0)</code> du tableau.</p>
@@ -8596,18 +8564,21 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
 <li>Ne touche <strong>à rien</strong> dans <code>exos/exos_files.py</code>, ni dans <code>exos/exos_files_test.py</code>, ni dans <code>file_test.py</code>.</li>
 <li><code>uv run pytest</code>.</li>
 </ol>
-<details class="note">
-<summary>Ce que tu dois constater, et ce que ça veut dire</summary>
-<p><strong>Tout passe</strong>, et le compte de tests est le même qu'avant : <code>file_exemple</code>, <code>taille_file</code>, <code>nb_elements</code>, la fonction mystère, et jusqu'aux tests de <code>file_test.py</code> écrits pour l'implémentation à tableau. Aucun n'a bougé, et aucun n'avait besoin de bouger.</p>
-<p>C'est <strong>la</strong> démonstration du cours, et elle ne se raconte pas, elle se constate. Tes fonctions n'ont jamais utilisé que les quatre primitives. Elles ne savaient pas ce qu'il y avait sous le capot, donc elles ne pouvaient pas être cassées par un changement de capot.</p>
-<p>Retiens la contrepartie, qui est la vraie discipline : <strong>si l'une de tes fonctions avait triché</strong>, en écrivant par exemple <code>f.pop(0)</code> ou <code>f[0]</code> au lieu de passer par <code>defiler</code>, elle serait cassée maintenant. C'est à ce moment précis qu'on paie la triche, pas avant.</p>
-</details>
-<details class="warning">
-<summary>Le seul exercice dont la réponse change, et c'est instructif</summary>
-<p>L'exercice « Sans exécuter le code » demandait de <strong>dessiner</strong> <code>F</code>. Le contenu de la file, lui, est identique dans les deux versions. Mais sa <strong>forme interne</strong> ne l'est plus du tout : avant, une liste ; maintenant, deux piles dont l'une est peut-être vide.</p>
-<p>Ce qui devrait donc être dessiné, c'est la file comme <strong>suite d'éléments de la sortie vers l'entrée</strong>, jamais sa représentation interne. Si ton dessin dépend de l'implémentation, c'est que tu regardais sous le capot.</p>
-</details>
 </div>
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
+    ??? note "Ce que tu dois constater, et ce que ça veut dire"
+        **Tout passe**, et le compte de tests est le même qu'avant : `file_exemple`, `taille_file`, `nb_elements`, la fonction mystère, et jusqu'aux tests de `file_test.py` écrits pour l'implémentation à tableau. Aucun n'a bougé, et aucun n'avait besoin de bouger.
+
+        C'est **la** démonstration du cours, et elle ne se raconte pas, elle se constate. Tes fonctions n'ont jamais utilisé que les quatre primitives. Elles ne savaient pas ce qu'il y avait sous le capot, donc elles ne pouvaient pas être cassées par un changement de capot.
+
+        Retiens la contrepartie, qui est la vraie discipline : **si l'une de tes fonctions avait triché**, en écrivant par exemple `f.pop(0)` ou `f[0]` au lieu de passer par `defiler`, elle serait cassée maintenant. C'est à ce moment précis qu'on paie la triche, pas avant.
+
+    ??? warning "Le seul exercice dont la réponse change, et c'est instructif"
+        L'exercice « Sans exécuter le code » demandait de **dessiner** `F`. Le contenu de la file, lui, est identique dans les deux versions. Mais sa **forme interne** ne l'est plus du tout : avant, une liste ; maintenant, deux piles dont l'une est peut-être vide.
+
+        Ce qui devrait donc être dessiné, c'est la file comme **suite d'éléments de la sortie vers l'entrée**, jamais sa représentation interne. Si ton dessin dépend de l'implémentation, c'est que tu regardais sous le capot.
+-->
+
 <div class="admonition abstract">
 <p class="admonition-title">Définition - Structure de données abstraite</p>
 <p>Une structure de données est dite <strong>abstraite</strong> quand on la définit par ce qu'elle <strong>sait faire</strong> (son interface) et non par la façon dont elle est <strong>faite</strong> (son implémentation). Un même comportement peut alors avoir plusieurs réalisations, qui se distinguent par leur <strong>coût</strong>.</p>
@@ -8652,19 +8623,17 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
 <summary>Indice</summary>
 <p>Ne commence pas par le nom de la structure. Demande-toi d'abord : <strong>quel élément dois-je atteindre</strong>, et <strong>combien d'éléments dois-je regarder</strong> pour l'atteindre.</p>
 </details>
-<details class="note">
-<summary>En une phrase, avant d'ouvrir la correction</summary>
-<p>Écris pour toi, sur ton cahier, ce que chaque situation coûte si tu choisis mal. C'est cette phrase-là qui te servira à l'épreuve pratique, pas le nom de la structure.</p>
-</details>
-<details class="success">
-<summary>Correction</summary>
-<ol>
-<li><strong>Une pile.</strong> L'élément dont on a besoin est le <strong>dernier entré</strong>, et une pile le rend sans parcourir quoi que ce soit : <code>O(1)</code>.</li>
-<li><strong>Une file.</strong> L'élément dont on a besoin est le <strong>premier entré</strong>. Attention au piège : une file mal implémentée, avec <code>pop(0)</code> sur un tableau, coûte <code>O(n)</code> à chaque document. C'est le sujet entier de ce cours.</li>
-<li><strong>Ni l'une ni l'autre : un dictionnaire</strong> (ou un ensemble). Ni pile ni file ne permettent de chercher un élément quelconque autrement qu'en les parcourant, donc en <code>O(n)</code>. Un dictionnaire répond en <code>O(1)</code>. Une structure ne se choisit pas parce qu'elle est au programme, mais parce que son coût correspond à ce qu'on lui demande.</li>
-</ol>
-</details>
 </div>
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
+    ??? note "En une phrase, avant d'ouvrir la correction"
+        Écris pour toi, sur ton cahier, ce que chaque situation coûte si tu choisis mal. C'est cette phrase-là qui te servira à l'épreuve pratique, pas le nom de la structure.
+
+    ??? success "Correction"
+        1. **Une pile.** L'élément dont on a besoin est le **dernier entré**, et une pile le rend sans parcourir quoi que ce soit : `O(1)`.
+        2. **Une file.** L'élément dont on a besoin est le **premier entré**. Attention au piège : une file mal implémentée, avec `pop(0)` sur un tableau, coûte `O(n)` à chaque document. C'est le sujet entier de ce cours.
+        3. **Ni l'une ni l'autre : un dictionnaire** (ou un ensemble). Ni pile ni file ne permettent de chercher un élément quelconque autrement qu'en les parcourant, donc en `O(n)`. Un dictionnaire répond en `O(1)`. Une structure ne se choisit pas parce qu'elle est au programme, mais parce que son coût correspond à ce qu'on lui demande.
+-->
+
 <h2 id="bonus-la-suite-de-conway">Bonus : la suite de Conway</h2>
 <div class="admonition question">
 <p class="admonition-title">Look-and-say</p>
@@ -8679,11 +8648,11 @@ Dessiner P et F après l’exécution du programme Python suivant.</p>
 <summary>Indice sur la question 1</summary>
 <p>Pour savoir combien de chiffres identiques se suivent, tu dois en défiler un, puis regarder le suivant <strong>sans le perdre</strong>. Or <code>defiler</code> retire. Relis « Lire une file sans la détruire » : le problème y est déjà résolu.</p>
 </details>
-<details class="note">
-<summary>Ce que tu peux remarquer, si tu as fait le bonus jusqu'au bout</summary>
-<p>Les termes de cette suite grandissent vite. Regarde le nombre de <code>defiler</code> que fait ton programme au dixième terme, et souviens-toi de ce que t'a montré le compteur du bac à sable : c'est exactement le genre de situation où le coût d'une file cesse d'être une question théorique.</p>
-</details>
 </div>
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
+    ??? note "Ce que tu peux remarquer, si tu as fait le bonus jusqu'au bout"
+        Les termes de cette suite grandissent vite. Regarde le nombre de `defiler` que fait ton programme au dixième terme, et souviens-toi de ce que t'a montré le compteur du bac à sable : c'est exactement le genre de situation où le coût d'une file cesse d'être une question théorique.
+-->
 
 
 
