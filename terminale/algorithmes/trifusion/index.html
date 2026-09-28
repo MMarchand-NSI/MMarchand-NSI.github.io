@@ -8313,6 +8313,15 @@
 </div>
 <h2 id="fusion">Fusion</h2>
 <p>L'objectif est, à partir de <strong>2 listes triées</strong> <code>lst1</code> et <code>lst2</code>, d'obtenir leur fusion en <strong>une liste triée</strong>.</p>
+<div class="admonition question">
+<p class="admonition-title">À toi d'abord : <code>fusion</code></p>
+<p>Écris <code>fusion(lst1: Liste(Int), lst2: Liste(Int)) -&gt; Liste(Int)</code> qui, à partir de <strong>deux listes déjà triées</strong>, renvoie une seule liste triée. <code>fusion(2 -&gt; 4 -&gt; 6, 3 -&gt; 5 -&gt; 7)</code> donne <code>2 -&gt; 3 -&gt; 4 -&gt; 5 -&gt; 6 -&gt; 7</code>. Il y a ici <strong>quatre</strong> cas (chaque liste vide ou non).</p>
+<details class="tip">
+<summary>Indice</summary>
+<p>Les trois cas avec un <code>Vide</code> sont directs (si une liste est vide, le résultat est l'autre). Pour deux <code>Cons</code> : la tête du résultat est la <strong>plus petite des deux têtes</strong> ; pour la queue, refais une <code>fusion</code> en n'avançant <strong>que</strong> du côté de cette plus petite tête.</p>
+</details>
+<p>La suite de cette section construit la solution pas à pas : ne la lis qu'après avoir cherché.</p>
+</div>
 <h3 id="algorithme">Algorithme</h3>
 <p>On procède par disjonction de cas, en bon lutin. En Gleam, on filtre <strong>les deux listes à la fois</strong> avec <code>case lst1, lst2 { ... }</code>.</p>
 <h4 id="on-recoit-2-listes-vides">On reçoit 2 listes vides</h4>
