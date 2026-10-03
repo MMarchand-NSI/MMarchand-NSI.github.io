@@ -4,12 +4,12 @@
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 
     1. Comment échange-t-on les contenus de `a` et `b` sans écraser l'un des deux ?
-    2. On écrit `a = [1, 2]` puis `b = a` puis `b.append(3)`. Que vaut `a` ?
+    2. Combien de tours fait `for i in range(3, 8)`, et quelle est la **dernière** valeur prise par `i` ?
     3. Une fonction peut-elle renvoyer deux valeurs ? Comment ferais-tu, avec ce que tu sais déjà ?
 
     ??? success "Corrigé"
         1. Avec une variable temporaire : `temp = a`, `a = b`, `b = temp`.
-        2. `[1, 2, 3]`. `b = a` n'a pas copié la liste : les deux noms désignent **le même objet**, qui est mutable.
+        2. Cinq tours, et la dernière valeur de `i` est `7`. L'intervalle est **semi-ouvert** : `3` est inclus, `8` est exclu.
         3. Elle le peut, et c'est précisément l'objet de cette page. Sans le tuple, on s'en tirerait en renvoyant une liste de deux éléments.
 
 Un **tuple** (ou p-uplet) est une [séquence](caracteres.md) **immuable** : une fois créé, on ne peut plus le modifier, exactement comme une chaîne de caractères. On le crée avec des **parenthèses**.

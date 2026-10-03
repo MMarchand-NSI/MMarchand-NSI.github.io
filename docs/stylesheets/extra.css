@@ -576,6 +576,51 @@ h1#accueil {
 }
 
 /* =========================
+   ADMONITION PERSONNALISÉE : FONDAMENTAL
+   Réservée aux quelques notions qui commandent tout le reste du cours :
+   elle doit rester rare pour garder son effet.
+   ========================= */
+
+:root {
+  --md-admonition-icon--fondamental: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z'/%3E%3C/svg%3E");
+  --fondamental-couleur: #8a0303;
+}
+
+[data-md-color-scheme="slate"] {
+  --fondamental-couleur: #e05252;
+}
+
+.md-typeset .admonition.fondamental,
+.md-typeset details.fondamental {
+  border: 3px solid var(--fondamental-couleur);
+  box-shadow: 0 4px 16px rgba(138, 3, 3, 0.25);
+  font-size: 17px;
+}
+
+.md-typeset .fondamental > .admonition-title,
+.md-typeset .fondamental > summary {
+  background-color: var(--fondamental-couleur);
+  color: #fff;
+  font-size: 1.1em;
+  font-weight: 700;
+}
+
+.md-typeset .fondamental > .admonition-title::before,
+.md-typeset .fondamental > summary::before {
+  background-color: #fff;
+  -webkit-mask-image: var(--md-admonition-icon--fondamental);
+          mask-image: var(--md-admonition-icon--fondamental);
+}
+
+/* Étapes d'une méthode, mises en valeur dans le texte : **On parcourt**{ .methode } */
+.md-typeset strong.methode {
+  color: var(--fondamental-couleur);
+  background-color: rgba(138, 3, 3, 0.1);
+  padding: 0 0.25em;
+  border-radius: 3px;
+}
+
+/* =========================
    VIDEO RESPONSIVE
    ========================= */
 

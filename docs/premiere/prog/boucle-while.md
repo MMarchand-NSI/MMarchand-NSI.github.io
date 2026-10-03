@@ -3,18 +3,18 @@
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 
-    1. Combien de tours fait `for i in range(3, 8)`, et quelle est la **dernière** valeur prise par `i` ?
+    1. Après `x = 100`, on exécute trois fois de suite `x = x // 3`. Que vaut `x` après chacune ?
     2. Avec `note = 15`, pourquoi cette suite de tests affiche-t-elle « passable » et non « bien » ?
        ```python
        if note >= 10: print("passable")
        elif note >= 14: print("bien")
        ```
-    3. Que faut-il mettre en place pour **compter et sommer en un seul parcours** ?
+    3. Une variable créée dans le corps d'une fonction existe-t-elle encore après l'appel ?
 
     ??? success "Corrigé"
-        1. Cinq tours, et la dernière valeur de `i` est `7`. L'intervalle est **semi-ouvert** : `3` est inclus, `8` est exclu.
+        1. `33`, puis `11`, puis `3`. Chaque division entière fait diminuer `x` : retiens-le, c'est ce genre de quantité qui garantit qu'une boucle s'arrête.
         2. Parce que Python **s'arrête au premier test vrai**. `15 >= 10` est vrai, donc le premier bloc s'exécute et tous les `elif` suivants sont ignorés. Il faut tester **du cas le plus exigeant au moins exigeant**.
-        3. **Deux accumulateurs**, tous deux initialisés avant la boucle et tous deux mis à jour dans le même tour (par exemple `total` et `combien`). C'est le point qui coûte le plus cher : ce n'est pas une boucle plus difficile, c'est **deux traitements menés ensemble**.
+        3. Non. Elle est **locale** : elle naît à l'appel et disparaît quand la fonction rend la main.
 
 ## Pourquoi ? Quand on ne sait pas combien de tours
 
@@ -222,7 +222,7 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
         print(compteur)
     ```
 
-    **3. Écrire.** Depuis zéro, avec un `for` : `compte_et_somme(txt)` qui renvoie le couple (nombre de chiffres, somme de ces chiffres) présents dans une chaîne, **en un seul parcours**.
+    **3. Écrire.** Depuis zéro, avec un `for` : `nb_chiffres(txt)`, qui renvoie le nombre de chiffres présents dans une chaîne. Rappel : `c.isdigit()` dit si le caractère `c` est un chiffre.
 
     ??? success "Réponses"
         **1.** `res` vaut `"024"` et la boucle fait **trois** tours (`i` vaut 0, 2, 4). Le `if` est toujours vrai ici, puisque `i` avance de 2 en 2 depuis 0 : c'est un test inutile, et le repérer fait partie de la lecture.
@@ -239,17 +239,18 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
 
         **3.**
         ```python
-        def compte_et_somme(txt: str) -> tuple[int, int]:
-            """Renvoie le nombre de chiffres de txt et leur somme."""
+        def nb_chiffres(txt: str) -> int:
+            """Renvoie le nombre de chiffres présents dans txt."""
             combien = 0
-            total = 0
             for c in txt:
                 if c.isdigit():
                     combien = combien + 1
-                    total = total + int(c)
-            return (combien, total)
+            return combien
+
+        def test_nb_chiffres():
+            assert nb_chiffres("a1b22c") == 3
+            assert nb_chiffres("") == 0
         ```
-        C'est une **fusion** : deux accumulateurs, une seule boucle. Si tu as écrit deux boucles, le résultat est juste mais l'exercice est raté.
 
 !!! abstract "Comment lire ton résultat"
     Les trois questions ne mesurent pas la même chose, et **rater la troisième en réussissant la première n'est pas un signe de faiblesse**. Lire du code, le compléter et l'écrire de zéro sont trois compétences distinctes, qui se travaillent séparément.

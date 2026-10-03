@@ -5,12 +5,12 @@
 
     1. Quelle est la différence entre `return x` et `print(x)` dans une fonction ?
     2. On écrit `b = carre(5)`. Explique en une phrase ce qui remplace l'appel `carre(5)` dans cette ligne.
-    3. Où doit se trouver l'initialisation d'un accumulateur par rapport à la boucle, et pourquoi ?
+    3. Que renvoie une fonction qui n'a aucune instruction `return` ?
 
     ??? success "Corrigé"
         1. `return` **rend une valeur** au reste du programme, qui peut la ranger et la réutiliser. `print` ne fait que l'**afficher** : la valeur est perdue pour le programme.
         2. La **valeur renvoyée** remplace l'appel. La ligne devient `b = 25` : un appel de fonction se comporte comme la valeur qu'il renvoie.
-        3. **Avant** la boucle. Placée dedans, elle serait remise à sa valeur de départ à chaque tour, et le résultat final ne compterait que le dernier élément.
+        3. Elle renvoie `None`. Une fonction renvoie **toujours** quelque chose ; sans `return`, c'est `None`. D'où le piège `return` contre `print`.
 
 La **portée** (*scope*) d'une variable détermine les parties du code où cette variable est accessible. Comprendre la portée permet d'éviter des bugs subtils et d'écrire du code plus clair.
 
@@ -141,7 +141,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     - Difficile de savoir qui a modifié quoi
     - Crée des **dépendances cachées** entre fonctions
 
-    **Préférez :**
+    **Préfère :**
 
     - Passer les valeurs en **paramètres**
     - Retourner les résultats avec **return**
@@ -305,54 +305,6 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     print("Après livraison de 5 :", stock)  # 13
     ```
 
-!!! question "Exercice 4 : Portée dans les boucles (piège)"
-    Que va afficher ce code ?
-
-    ```python
-    def mystere() -> None:
-        for i in range(3):
-            x = i * 2
-        print("x =", x)
-        print("i =", i)
-
-    mystere()
-    ```
-
-    Puis exécute pour vérifier. Que se passe-t-il avec `x` et `i` ?
-
-??? success "Solution"
-    ```
-    x = 4
-    i = 2
-    ```
-
-    **Attention :** En Python, les variables créées dans une boucle `for` **ne sont pas locales à la boucle**, elles sont locales à la **fonction**. Donc `x` et `i` existent encore après la boucle.
-
-    C'est différent de langages comme C, Java ou Rust où les variables de boucle sont détruites après la boucle.
-
-!!! question "Exercice 5 : Accumulateur"
-    Sans utiliser de variable globale, écris une fonction `somme_chiffres(texte)` qui renvoie la somme des chiffres présents dans une chaîne.
-
-    Teste avec `"a1b2c3"`, qui doit donner `6`.
-
-    Rappel : `c.isdigit()` dit si le caractère `c` est un chiffre, et `int(c)` le convertit en entier.
-
-??? success "Solution"
-    ```python
-    def somme_chiffres(texte: str) -> int:
-        """Renvoie la somme des chiffres présents dans texte."""
-        total = 0  # variable LOCALE : elle disparaît à la fin de l'appel
-        for c in texte:
-            if c.isdigit():
-                total += int(c)
-        return total
-
-    # Test
-    print(somme_chiffres("a1b2c3"))   # 6
-    ```
-
-    L'accumulateur `total` est **local** : c'est ce qui permet d'appeler la fonction autant de fois qu'on veut sans que les appels se contaminent. Une variable globale, ici, serait un bug en attente.
-
 ## 5. Résumé
 
 | Type | Où est-elle définie ? | Accessible où ? | Exemple |
@@ -365,34 +317,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
 
 1. Les **paramètres** d'une fonction sont des variables locales
 2. Une assignation `x = ...` dans une fonction crée une variable **locale** (sauf si `global x`)
-3. Préférez **paramètres + return** aux variables globales modifiables
-4. Les variables de boucle `for` en Python **ne sont pas détruites** après la boucle
-
----
-
-!!! note "Pour aller plus loin : Autres langages"
-    D'autres langages ont des règles de portée plus strictes. Par exemple, en **Rust**, même les variables dans une boucle ont leur propre portée :
-
-    ```rust
-    fn main() {
-        let x = 10;
-        for i in 0..3 {
-            let x = x + i;  // Nouvelle variable locale à la boucle
-            println!("Boucle : x = {}", x);
-        }
-        println!("Après : x = {}", x);  // x = 10 (inchangé)
-    }
-    ```
-
-    Sortie :
-    ```
-    Boucle : x = 10
-    Boucle : x = 11
-    Boucle : x = 12
-    Après : x = 10
-    ```
-
-    En Rust, les variables globales modifiables nécessitent un bloc `unsafe` car elles sont considérées dangereuses. Python est plus permissif, mais cela ne signifie pas qu'il faut en abuser !
+3. Préfère **paramètres + return** aux variables globales modifiables
 
 ## Vérification individuelle : les fonctions
 
@@ -421,7 +346,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     print(m * 2)
     ```
 
-    **3. Écrire.** Depuis zéro : la signature typée, la docstring, **deux `assert`**, puis le code de `nb_mots(phrase)`, qui renvoie le nombre de mots d'une phrase (les mots sont séparés par des espaces).
+    **3. Écrire.** Depuis zéro : la signature typée, la docstring, une fonction `test_initiales` avec **deux `assert`**, puis le code de `initiales(prenom, nom)`, qui renvoie les initiales suivies chacune d'un point : `initiales("Ada", "Lovelace")` vaut `"A.L."`. Le prénom et le nom ne sont jamais vides.
 
     ??? success "Réponses"
         **1.** `5 5` puis `8`. Le paramètre `n` est **local** : le modifier dans la fonction ne touche pas `x`. Et un appel vaut la valeur qu'il renvoie, donc `double(double(2))` vaut `double(4)`, soit `8`.
@@ -430,22 +355,16 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
 
         **3.**
         ```python
-        def nb_mots(phrase: str) -> int:
-            """Renvoie le nombre de mots de la phrase, séparés par des espaces."""
-            assert isinstance(phrase, str), "phrase doit être une chaîne"
-            mots = 0
-            en_mot = False
-            for c in phrase:
-                if c != " ":
-                    if not en_mot:
-                        mots = mots + 1
-                    en_mot = True
-                else:
-                    en_mot = False
-            return mots
+        def initiales(prenom: str, nom: str) -> str:
+            """Renvoie les initiales de prenom et nom, chacune suivie d'un point.
+            Précondition : prenom et nom ne sont pas vides."""
+            assert len(prenom) > 0, "le prénom ne doit pas être vide"
+            assert len(nom) > 0, "le nom ne doit pas être vide"
+            return prenom[0] + "." + nom[0] + "."
 
-        assert nb_mots("bonjour le monde") == 3
-        assert nb_mots("") == 0
+        def test_initiales():
+            assert initiales("Ada", "Lovelace") == "A.L."
+            assert initiales("A", "B") == "A.B."
         ```
         Toute solution correcte convient. Ce qui est vérifié ici, c'est que la signature soit **typée**, que la docstring dise ce que fait la fonction, et que les `assert` portent sur des cas **différents**, dont un cas limite.
 

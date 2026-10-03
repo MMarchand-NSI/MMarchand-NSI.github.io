@@ -3,20 +3,14 @@
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 
-    1. Quelle différence entre écrire `elif` et écrire un second `if` juste après le premier ?
-    2. Écris la boucle qui compte les `"a"` de la chaîne `mot`. Où se place l'initialisation du compteur ?
-    3. Que vaut `len("bonjour")` et que vaut `"bonjour"[3]` ?
+    1. Après `x = 5`, puis `x = x * 2 + 1`, puis `x = x - 4`, que vaut `x` ?
+    2. Que valent `23 // 4` et `23 % 4` ? Quelle égalité relie ces deux résultats à `23` et à `4` ?
+    3. Que vaut `n % 2 == 0` quand `n` vaut `14` ? Et quand `n` vaut `9` ?
 
     ??? success "Corrigé"
-        1. Un `elif` n'est **testé que si** la condition précédente est fausse : les branches s'excluent. Deux `if` successifs sont testés **tous les deux**, et leurs blocs peuvent s'exécuter l'un après l'autre.
-        2. L'initialisation est **avant** la boucle, la mise à jour **dedans** :
-           ```python
-           compteur = 0
-           for c in mot:
-               if c == "a":
-                   compteur = compteur + 1
-           ```
-        3. `7` et `"j"`.
+        1. `7`. La deuxième ligne calcule `5 * 2 + 1`, soit `11`, **puis** range le résultat dans `x` ; la troisième calcule `11 - 4`.
+        2. `5` et `3`, et on a bien `4 * 5 + 3 = 23`.
+        3. `True` pour `14`, `False` pour `9`. Le reste de la division par `2` dit si un nombre est pair, et la comparaison `==` rend un booléen.
 
 ## Pourquoi des fonctions ?
 
@@ -46,11 +40,6 @@ Tu utilises déjà des fonctions écrites par d'autres. `print` appelle elle-mê
     3. puis seulement son **code** ;
     4. et son **`return`** si elle renvoie quelque chose.
 
-!!! tip "Ce que l'IA ne change pas"
-    Une IA écrit le **corps** d'une fonction en une seconde. Elle sait aussi écrire la signature, la docstring et les tests : ne compte pas sur une incapacité de sa part, il n'y en a pas ici.
-
-    Ce qui change, c'est ta position. Pour **accepter ou refuser** ce qu'elle te propose, il faut que tu saches énoncer le **contrat** toi-même : que prend la fonction, que renvoie-t-elle, dans quels cas. Sans ce contrat en tête, tu ne peux pas juger le code produit, tu ne peux que le croire. Et tu es évalué sans elle.
-
 Commençons par **lire** une fonction qui existe déjà, `randint`, avant d'en écrire une nous-mêmes.
 
 ```python
@@ -76,7 +65,7 @@ def randint(a: int, b: int) -> int:
     ...  # le code
 ```
 
-!!! abstract "Définition : la signature"
+!!! fondamental "Définition : la signature"
     La **première ligne** d'une fonction est sa **signature**. Elle comprend :
 
     1. le **nom** de la fonction ;
@@ -247,13 +236,12 @@ Le résultat d'un appel est une valeur comme une autre : on peut l'utiliser dans
 Une fonction peut ne renvoyer aucune valeur : son rôle est alors d'effectuer un travail (afficher, dessiner...) sans rendre d'information. C'est le cas de `print`.
 
 ```python
-def dis_coucou(n: int) -> None:
-    """Affiche coucou n fois"""
-    for _ in range(n):
-        print("Coucou!")
+def saluer(prenom: str) -> None:
+    """Affiche une salutation pour prenom"""
+    print("Bonjour " + prenom + " !")
 
-dis_coucou(3)
-a = dis_coucou(2)
+saluer("Ada")
+a = saluer("Alan")
 print(a)      # affiche None
 ```
 
@@ -273,37 +261,11 @@ def demander_prenom() -> str:
 
 Une fonction peut avoir autant de paramètres qu'on veut. À l'appel, il faut respecter leur **nombre** et leur **ordre**.
 
-!!! question "Rectangle de caractères"
-    L'appel `affiche_rectangle(2, 5, 'A')` doit afficher :
-    ```
-    AAAAA
-    AAAAA
-    ```
-    Écris et teste `affiche_rectangle`. Rappels : `print()` passe à la ligne ; `print('A', end='')` affiche sans passer à la ligne.
-
-    ??? tip "Indice léger"
-        Un rectangle, ce sont des **lignes** ; une ligne, ce sont des **caractères**. Deux choses à répéter, donc deux boucles, et l'une est à l'intérieur de l'autre. Laquelle dedans ?
-
-    ??? tip "Indice plus précis"
-        La boucle **extérieure** compte les lignes (`hauteur` tours). La boucle **intérieure** affiche les caractères d'une ligne (`largeur` tours), avec `end=''` pour rester sur la même ligne. Le retour à la ligne se fait avec un `print()` vide, placé **dans** la boucle extérieure mais **après** la boucle intérieure.
-
-    ??? warning "Corrigé"
-        ```python
-        def affiche_rectangle(hauteur: int, largeur: int, car: str) -> None:
-            """Affiche un rectangle de hauteur x largeur fait du caractère car"""
-            for _ in range(hauteur):
-                for _ in range(largeur):
-                    print(car, end='')
-                print()
-        ```
-
 !!! question "Automatismes"
     Écris la signature, la docstring **puis** le code de :
 
     1. `nb_secondes(heures, minutes, secondes)` : renvoie le nombre total de secondes.
     2. `conversion_euro_dollar(euros)` : convertit des euros en dollars (taux $1€ = 1{,}17\$$). Convertis 12 €.
-    3. `pair_ou_impair(n)` : renvoie `"pair"` ou `"impair"`.
-    4. `plus_petit(a, b)` : renvoie le plus petit des deux entiers.
 
     ??? warning "Corrigé"
         ```python
@@ -314,30 +276,7 @@ Une fonction peut avoir autant de paramètres qu'on veut. À l'appel, il faut re
         def conversion_euro_dollar(euros: float) -> float:
             """Convertit un montant en euros vers des dollars"""
             return euros * 1.17
-
-        def pair_ou_impair(n: int) -> str:
-            """Renvoie 'pair' ou 'impair' selon la parité de n"""
-            if n % 2 == 0:
-                return "pair"
-            return "impair"
-
-        def plus_petit(a: int, b: int) -> int:
-            """Renvoie le plus petit des deux entiers"""
-            if a < b:
-                return a
-            return b
         ```
-
-!!! question "IMC"
-    1. Écris `imc(poids, taille)` qui renvoie l'indice de masse corporelle (formule sur [Wikipédia](https://fr.wikipedia.org/wiki/Indice_de_masse_corporelle)).
-    2. Écris un programme qui demande poids et taille, puis affiche l'IMC et un message d'interprétation.
-    3. Affiche une réserve claire : cette information ne doit pas servir à un autodiagnostic, il faut préférer l'avis d'un médecin.
-
-    ??? tip "Indice léger"
-        La question 1 et la question 2 ne demandent pas la même chose. La fonction **calcule et renvoie**, elle n'affiche rien et ne demande rien à l'utilisateur. Tout ce qui est saisie et affichage se passe **en dehors** d'elle.
-
-    ??? tip "Indice plus précis"
-        `def imc(poids: float, taille: float) -> float:` renvoie `poids / (taille * taille)`, avec la taille en mètres. Le programme de la question 2 appelle cette fonction, range le résultat dans une variable, puis enchaîne des `elif` sur cette variable. Si tu as mis un `print` dans `imc`, relis le piège `return` contre `print`.
 
 ## 6. Une fonction peut en appeler une autre
 

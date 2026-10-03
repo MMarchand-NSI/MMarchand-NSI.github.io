@@ -144,7 +144,85 @@ print(carres)                   # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 On retrouve la méthodologie de l'accumulation : on **initialise** (ici `[]`), on **parcourt**, et à chaque tour on **ajoute** au résultat.
 
 !!! success "C'est le même mécanisme, et il n'y en aura pas d'autre"
-    Tu as accumulé un **entier** (une somme, un compte), puis une **chaîne** (un mot renversé), et maintenant une **liste**. Le `for` est le même, les trois temps sont les mêmes, seul le **type de l'accumulateur** change et donc sa valeur initiale : `0`, `""`, `[]`. Quand tu croiseras les dictionnaires, ce sera encore ce mécanisme.
+    Tu as accumulé un **entier** (une somme, un compte), puis une **chaîne** (un mot renversé), et maintenant une **liste**. Le `for` est le même, les trois temps sont les mêmes. Ce qui change, c'est la **valeur de départ** de l'accumulateur, et elle ne se choisit pas au hasard.
+
+    La valeur de départ est celle qui **ne change rien** à l'opération qu'on répète à chaque tour. On l'appelle le **neutre** de cette opération :
+
+    | Opération répétée | Neutre | parce que |
+    | --- | :--: | --- |
+    | additionner des nombres | `0` | `0 + x` vaut `x` |
+    | multiplier des nombres | `1` | `1 * x` vaut `x` |
+    | coller des chaînes | `""` | `"" + s` vaut `s` |
+    | coller des listes | `[]` | `[] + l` vaut `l` |
+
+    `append(x)` construit le même résultat que coller `[x]` à la fin : c'est pour cela que la liste part de `[]`.
+
+    Le neutre dépend donc de l'**opération**, pas seulement du type : une somme et un produit d'entiers ne partent pas de la même valeur. C'est aussi pour cela que `factorielle(0)` vaut `1` : sans aucun tour de boucle, il ne reste que le neutre.
+
+    Certaines opérations n'ont **pas** de neutre, par exemple « garder le plus petit ». On démarre alors avec un élément de la séquence, comme dans `plus_petite_lettre`, et il faut d'abord s'assurer qu'elle n'est pas vide.
+
+    Quand tu croiseras les dictionnaires, ce sera encore ce mécanisme.
+
+## Deux traitements en un seul parcours : la fusion
+
+Parfois, on veut **deux résultats à la fois**, calculés pendant le **même** parcours. On mène alors **deux accumulateurs en parallèle** dans une seule boucle. C'est la **fusion**, et c'est le point où l'on se trompe le plus souvent : on oublie d'en initialiser un, ou on met une mise à jour au mauvais endroit.
+
+!!! question "Que fait ce programme ?"
+    Lis ce programme, puis écris sur ton cahier :
+
+    - ce qu'il affiche ;
+    - **une phrase en français** qui dit ce qu'il fait, sans parler de Python.
+
+    **N'exécute pas ce code tant que tu n'as pas écrit tes réponses.**
+
+    ```python
+    txt = "informatique"
+    a = 0
+    b = 0
+    for c in txt:
+        if c in "aeiouy":
+            a = a + 1
+        else:
+            b = b + 1
+    print(a, b)
+    ```
+
+    ??? success "Réponse"
+        Il affiche `6 6`. Il **compte, en un seul parcours, les voyelles et les consonnes** du texte : `a` compte les voyelles, `b` tout le reste, ce qui fait des consonnes quand le texte n'a que des lettres.
+
+        Deux accumulateurs, une seule boucle : à chaque tour, on met à jour **l'un ou l'autre**.
+
+!!! danger "La fusion, à traiter pour elle-même"
+    Additionner d'un côté, puis compter de l'autre, c'est facile. Les **fusionner** dans une seule boucle est une compétence à part : chaque accumulateur a sa propre initialisation (**avant**), sa propre mise à jour (**dans**), et on utilise les deux résultats **après**. Deux accumulateurs, une boucle.
+
+!!! question "Fusion : compter et construire en un seul parcours"
+    Avec `txt = "Bonjour le Monde"`, construis **en un seul parcours** le texte **en majuscules** dans `acc`, et le **nombre de lettres** converties dans `compte`, puis affiche les deux.
+
+    Rappel : `c.upper()` renvoie la majuscule du caractère `c`, et `c.islower()` dit si `c` est une minuscule.
+
+    ??? tip "Indice léger"
+        Deux accumulateurs de **types différents** : l'un est une chaîne, l'autre un entier. Quelle est la valeur initiale de chacun ?
+
+    ??? tip "Indice plus précis"
+        `acc = ""` et `compte = 0` avant la boucle. Dans la boucle, on ajoute `c.upper()` à `acc` **à chaque tour**, mais on n'incrémente `compte` que **si** `c.islower()`.
+
+    ??? question "Avant d'ouvrir la solution"
+        Écris une phrase sur ton cahier : **lequel de tes deux accumulateurs** était mal placé, et pourquoi ?
+
+        Si tu ne peux pas répondre, c'est que tu n'as pas encore identifié ton erreur, et la solution ne te l'apprendra pas.
+
+    ??? success "Solution"
+        ```python
+        txt = "Bonjour le Monde"
+        acc = ""
+        compte = 0
+        for c in txt:
+            if c.islower():
+                compte = compte + 1
+            acc = acc + c.upper()
+        print(acc, compte)      # BONJOUR LE MONDE 12
+        ```
+        Piège à repérer : les deux mises à jour ne sont **pas au même endroit**. L'une est inconditionnelle, l'autre est sous le `if`. C'est exactement ce qui rend la fusion difficile.
 
 ## Retrouver l'accumulation et la fusion sur une liste
 
@@ -231,17 +309,35 @@ print(grille[1][2])     # 6 : ligne 1, colonne 2
         ```
 
 !!! question "2 - Filtrer"
-    À partir de `notes = [8, 15, 3, 12, 17, 9]`, construis la liste des notes supérieures ou égales à 10.
+    Écris la fonction `reussies`, qui renvoie la liste des notes supérieures ou égales à 10, dans leur ordre d'origine. Complète d'abord `test_reussies` avec un troisième `assert` sur un cas que les deux premiers ne couvrent pas.
+
+    ```python
+    def reussies(notes: list[int]) -> list[int]:
+        """Renvoie les notes supérieures ou égales à 10, dans leur ordre d'origine."""
+        ...
+
+    def test_reussies():
+        assert reussies([8, 15, 3, 12, 17, 9]) == [15, 12, 17]
+        assert reussies([]) == []
+        ...
+    ```
 
     ??? warning "Corrigé"
         ```python
-        notes = [8, 15, 3, 12, 17, 9]
-        reussies = []
-        for note in notes:
-            if note >= 10:
-                reussies.append(note)
-        print(reussies)     # [15, 12, 17]
+        def reussies(notes: list[int]) -> list[int]:
+            """Renvoie les notes supérieures ou égales à 10, dans leur ordre d'origine."""
+            res = []
+            for note in notes:
+                if note >= 10:
+                    res.append(note)
+            return res
+
+        def test_reussies():
+            assert reussies([8, 15, 3, 12, 17, 9]) == [15, 12, 17]
+            assert reussies([]) == []
+            assert reussies([2, 5, 9]) == []
         ```
+        Le troisième test vérifie le cas où **aucune** note ne passe : la fonction doit renvoyer une liste vide, pas `None`. On peut aussi tester une note qui vaut exactement `10`.
 
 !!! question "3 - Doctests"
     Écris et teste une fonction qui construit une liste :

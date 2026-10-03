@@ -4,12 +4,12 @@
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses. Se tester est ce qui fixe les acquis ; relire ne le fait pas.
 
     1. Après `a = 3` puis `a = a + 2`, que vaut `a` ? Dans quel ordre la machine fait-elle le calcul et le rangement ?
-    2. Que valent `17 // 5` et `17 % 5` ?
+    2. Écris la **signature typée** d'une fonction `est_majeur` qui prend un âge entier et renvoie un booléen.
     3. Avec `s = "informatique"` : que vaut `s[0]` ? Que se passe-t-il si on écrit `s[0] = "I"` ?
 
     ??? success "Corrigé"
         1. `a` vaut `5`. Le membre de droite est **calculé d'abord** (`3 + 2`), et le résultat est **ensuite** rangé dans la case `a`. Le `=` n'est pas une égalité mathématique.
-        2. `17 // 5` vaut `3` (quotient entier) et `17 % 5` vaut `2` (reste). On a bien `5 * 3 + 2 = 17`.
+        2. `def est_majeur(age: int) -> bool:`
         3. `s[0]` vaut `"i"`. L'affectation `s[0] = "I"` provoque une `TypeError` : une chaîne est **immuable**, on ne peut pas en changer un caractère, seulement construire une nouvelle chaîne.
 
 ## Pourquoi ? Décider.
@@ -402,6 +402,42 @@ Le passage de l'un à l'autre suit une règle, et une seule :
 ---
 
 Une conditionnelle combinée à une **boucle** permet de filtrer ou de compter (par exemple : compter les 6 sur 1000 lancers de dé). On y viendra juste après, avec [Les boucles](boucle-for.md).
+
+## Avec ce qu'on sait déjà : des fonctions qui décident
+
+Tu sais écrire des fonctions : une conditionnelle se place maintenant **dans** leur corps, et chaque branche peut renvoyer sa propre valeur.
+
+!!! question "Automatismes"
+    Écris la signature, la docstring **puis** le code de :
+
+    1. `pair_ou_impair(n)` : renvoie `"pair"` ou `"impair"`.
+    2. `plus_petit(a, b)` : renvoie le plus petit des deux entiers.
+
+    ??? warning "Corrigé"
+        ```python
+        def pair_ou_impair(n: int) -> str:
+            """Renvoie 'pair' ou 'impair' selon la parité de n"""
+            if n % 2 == 0:
+                return "pair"
+            return "impair"
+
+        def plus_petit(a: int, b: int) -> int:
+            """Renvoie le plus petit des deux entiers"""
+            if a < b:
+                return a
+            return b
+        ```
+
+!!! question "IMC"
+    1. Écris `imc(poids, taille)` qui renvoie l'indice de masse corporelle (formule sur [Wikipédia](https://fr.wikipedia.org/wiki/Indice_de_masse_corporelle)).
+    2. Écris un programme qui demande poids et taille, puis affiche l'IMC et un message d'interprétation.
+    3. Affiche une réserve claire : cette information ne doit pas servir à un autodiagnostic, il faut préférer l'avis d'un médecin.
+
+    ??? tip "Indice léger"
+        La question 1 et la question 2 ne demandent pas la même chose. La fonction **calcule et renvoie**, elle n'affiche rien et ne demande rien à l'utilisateur. Tout ce qui est saisie et affichage se passe **en dehors** d'elle.
+
+    ??? tip "Indice plus précis"
+        `def imc(poids: float, taille: float) -> float:` renvoie `poids / (taille * taille)`, avec la taille en mètres. Le programme de la question 2 appelle cette fonction, range le résultat dans une variable, puis enchaîne des `elif` sur cette variable. Si tu as mis un `print` dans `imc`, relis le piège `return` contre `print`.
 
 ## Point d'étape : où en es-tu vraiment ?
 

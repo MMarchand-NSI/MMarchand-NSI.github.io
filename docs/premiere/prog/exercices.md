@@ -24,7 +24,7 @@
 
 
 !!! tip "Les exercices de base sont ailleurs"
-    Les exercices fondamentaux d'accumulation (somme, produit, factorielle, nombre de voyelles, inverser, contient, take, drop...) se trouvent sur les pages [La boucle for](boucle-for.md) et [Exercices sur les séquences](exercices-sequences.md). Assure-toi de les maîtriser avant d'attaquer les problèmes ci-dessous.
+    Les exercices fondamentaux d'accumulation (somme, produit, factorielle, nombre de voyelles, inverser, contient, take, drop...) se trouvent sur les pages [La boucle for](boucle-for.md), [La boucle for sur un intervalle d'entiers](boucle-range.md) et [Exercices sur les séquences](exercices-sequences.md). Assure-toi de les maîtriser avant d'attaquer les problèmes ci-dessous.
 
 ## Algorithmique sur les listes
 

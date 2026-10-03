@@ -3,14 +3,14 @@
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 
-    1. Écris la **signature typée** d'une fonction `est_majeur` qui prend un âge entier et renvoie un booléen.
-    2. Que renvoie une fonction qui n'a aucune instruction `return` ?
-    3. Combien de tours fait `for i in range(0, 10, 3)` ?
+    1. Avec `mot = "bonjour"` : que valent `len(mot)` et `mot[3]` ?
+    2. Que vaut `"ha" * 3 + "!"` ?
+    3. Que vaut `(17 // 5) * 5 + 17 % 5` ? Pourquoi ce résultat ne dépend-il pas des deux nombres choisis ?
 
     ??? success "Corrigé"
-        1. `def est_majeur(age: int) -> bool:`
-        2. Elle renvoie `None`. Une fonction renvoie **toujours** quelque chose ; sans `return`, c'est `None`. D'où le piège `return` contre `print`.
-        3. Quatre tours : `i` prend `0`, `3`, `6`, `9`. La borne `10` est exclue.
+        1. `7` et `"j"`. Le premier caractère a l'indice `0`.
+        2. `"hahaha!"` : la répétition est calculée d'abord, puis la concaténation.
+        3. `17`. Quotient fois diviseur plus reste redonne toujours le nombre de départ : c'est la définition même de la division euclidienne.
 
 Écrire une fonction, c'est une chose. S'assurer qu'elle fait **vraiment** ce qu'on attend en est une autre. C'est le sujet de cette page, et c'est sans doute la partie la plus importante du travail d'un programmeur.
 
@@ -118,21 +118,7 @@ Ici, la précondition « la liste n'est pas vide » est nécessaire : le minimum
 !!! note "Une liste, déjà ?"
     Les listes ne sont étudiées que plus loin, dans [Les listes](listes.md). Elles servent ici uniquement d'exemple de donnée sur laquelle une **précondition** a un sens évident. Retiens le contrat, pas la manipulation : `len(lst) > 0` se lit « la liste contient au moins un élément ».
 
-## 5. Pourquoi tu dois savoir le faire toi-même
-
-!!! abstract "Spécifier et tester à l'ère de l'IA"
-    Soyons exacts, parce que tu peux le vérifier en trente secondes : une IA générative écrit une fonction `carre` en une seconde, **et** elle sait aussi écrire sa spécification, ses préconditions et ses tests. Prétendre qu'elle en est incapable serait faux.
-
-    La question n'est donc pas ce que la machine sait faire, mais ce que **tu** sais faire.
-
-    - **Juger.** Face à une réponse toute faite, tu n'as que deux positions possibles : la croire, ou la vérifier. Vérifier suppose de savoir dire ce que le code devait faire, cas limites compris. Ce n'est pas la machine qui te donne cette capacité, c'est l'entraînement que tu fais ici.
-    - **Décider.** Une spécification comporte des **choix** (que faire d'une liste vide ? d'un nombre négatif ?). Une machine en propose un, plausible. Savoir lequel te convient suppose de savoir à quoi servira ta fonction.
-    - **Répondre de ce que tu rends.** Un devoir, un projet, plus tard un programme utilisé par d'autres : la responsabilité reste celle de la personne qui signe, pas de l'outil.
-    - **Être évalué sans elle.** Les évaluations de NSI, en première comme à l'épreuve pratique de terminale, se passent sans IA.
-
-    Une étude récente sur des débutants qui programment avec une IA (Prather et al., 2024) observe précisément cela : l'outil aide beaucoup ceux qui savent déjà juger ce qu'ils lisent, et **creuse l'écart** pour les autres. Savoir spécifier et tester, c'est ce qui te met du bon côté de cet écart.
-
-## 6. Exercices
+## 5. Exercices
 
 !!! question "Spécifier, tester, puis coder"
     Pour chaque fonction, écris **d'abord** la signature et la docstring, **puis** au moins deux `assert`, et **seulement ensuite** le code.

@@ -5,7 +5,7 @@
 
     1. Écris, avec une boucle `for`, la construction de la liste des multiples de `5` de `0` à `50`.
     2. Où place-t-on le `if` quand on ne veut accumuler que certains éléments : avant, dans, ou après la boucle ?
-    3. Comment parcourt-on à la fois les clés et les valeurs d'un dictionnaire ?
+    3. Que vaut `"informatique"[2:6]` ?
 
     ??? success "Corrigé"
         1. ```python
@@ -14,7 +14,7 @@
                multiples.append(i)
            ```
         2. **Dans** la boucle, avant la mise à jour de l'accumulateur. L'initialisation reste avant, le résultat s'utilise après.
-        3. Avec `for cle, valeur in d.items():`.
+        3. `"form"` : les indices `2`, `3`, `4` et `5`, la borne `6` étant exclue.
 
     Toute cette page ne fait que **réécrire plus court** ce que tu viens d'écrire dans la question 1. Aucune nouvelle capacité n'y est introduite : si tu sais accumuler avec un `for`, tu sais déjà tout ce qu'une compréhension exprime.
 
