@@ -49,6 +49,14 @@ Cette page réutilise la liste récursive `Liste(a)` (`Vide` / `Cons`) et les fo
 
 L'objectif est, à partir de **2 listes triées** `lst1` et `lst2`, d'obtenir leur fusion en **une liste triée**.
 
+!!! question "À toi d'abord : `fusion`"
+    Écris `fusion(lst1: Liste(Int), lst2: Liste(Int)) -> Liste(Int)` qui, à partir de **deux listes déjà triées**, renvoie une seule liste triée. `fusion(2 -> 4 -> 6, 3 -> 5 -> 7)` donne `2 -> 3 -> 4 -> 5 -> 6 -> 7`. Il y a ici **quatre** cas (chaque liste vide ou non).
+
+    ??? tip "Indice"
+        Les trois cas avec un `Vide` sont directs (si une liste est vide, le résultat est l'autre). Pour deux `Cons` : la tête du résultat est la **plus petite des deux têtes** ; pour la queue, refais une `fusion` en n'avançant **que** du côté de cette plus petite tête.
+
+    La suite de cette section construit la solution pas à pas : ne la lis qu'après avoir cherché.
+
 ### Algorithme
 
 

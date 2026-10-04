@@ -89,7 +89,7 @@ Elle ne fait qu'une seule chose, indéfiniment : répéter un **cycle** en trois
 2. Elle les **décode** pour comprendre quelle opération effectuer (`decode`)
 3. Elle **commande** les autres composants pour exécuter l'instruction (`execute`)
 
-On appelle ça le **cycle decode-fetch-execute**
+On appelle ça le **cycle fetch-decode-execute**
 
 L'UC **répète ce cycle en boucle et ne sait rien faire d'autre**. Sa force réside uniquement dans sa vitesse d'exécution, dictée par sa fréquence d'horloge : un processeur cadencé à 3 GHz effectue ainsi 3 milliards de cycles par seconde.
 

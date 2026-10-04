@@ -7,10 +7,12 @@
     2. La pile `p` vaut `[4, 7]` (du bas vers le haut). Qu'affiche `print(depiler(p))`, et que vaut `p` ensuite ?
     3. Si on empile `1` puis `2` puis `3` dans une pile vide et qu'on dépile trois fois, dans quel ordre sortent les éléments ?
 
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
     ??? success "Correction"
         1. `creer`, `est_vide`, `empiler`, `depiler`.
         2. Affiche `7`, et `p` vaut `[4]`. `depiler` retire **et** renvoie.
         3. `3`, `2`, `1` : c'est le LIFO. Retiens cet ordre **inversé**, c'est exactement ce qui va servir à fabriquer une file.
+-->
 
 Les files (queues en anglais) correspondent exactement à la notion de file dans la vie courante:
 
@@ -148,7 +150,7 @@ Les exercices suivants se font dans le fichier exos_files.py.
     def sortie[T](f: file.File[T]) -> T:
     ```
 
-    Teste-la sur la file exemple : `sortie(file_exemple())` doit rendre `'rouge'`. Vérifie **aussi** qu'après l'appel la file contient toujours ses cinq éléments, dans le même ordre. C'est cette seconde vérification qui compte, et c'est celle qu'on oublie.
+    Teste-la sur la file exemple : `sortie(file_exemple())` doit rendre `'jaune'`. Vérifie **aussi** qu'après l'appel la file contient toujours ses cinq éléments, dans le même ordre. C'est cette seconde vérification qui compte, et c'est celle qu'on oublie.
 
 !!! question "Sans exécuter le code"
     On considère la file exemple.
@@ -227,6 +229,7 @@ Les exercices suivants se font dans le fichier exos_files.py.
     ??? tip "Indice plus précis"
         Une pile temporaire inverserait l'ordre, une **file** temporaire le conserve : ce qui entre en premier en ressort en premier, deux fois de suite. Défile `f` en entier, compte au passage, enfile chaque élément dans la file temporaire, puis vide la temporaire dans `f`.
 
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
     ??? question "Avant d'ouvrir la solution"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
@@ -249,6 +252,7 @@ Les exercices suivants se font dans le fichier exos_files.py.
         ```
 
         Retiens la structure : **sortir, garder au passage, remettre**. Une fonction qui prétend ne pas modifier une file doit toujours la reconstruire. Tu viens de l'écrire pour la troisième fois, après « Sortie d'une file » et « Taille non destructive » : la section suivante en tire la conséquence.
+-->
 
 ## Généraliser ce que tu viens de faire trois fois : la fonction `elements`
 
@@ -273,9 +277,14 @@ Quand un même motif revient trois fois, on l'écrit une fois pour toutes.
     1. elle n'utilise **que** les quatre primitives, jamais l'intérieur de la file ;
     2. à la fin, `f` doit être **exactement** dans l'état où elle était au début, contenu **et** ordre.
 
+    **Ajoute cette fonction à `structures/lineaires/file.py`, et son `test_elements` à `file_test.py`.** Elle n'utilise que l'interface : elle marchera donc **quelle que soit l'implémentation**, et tu vérifieras ce point tout à l'heure.
+
+    Un test qui vaut la peine : appeler `elements` **deux fois de suite** et vérifier que la seconde rend la même liste. Si `elements` abîmait la file, seul ce second appel le dirait.
+
     ??? tip "Indice"
         Tu l'as déjà écrit dans « Occurrences ». Reprends ta solution et enlève le comptage : ce qui reste **est** `elements`.
 
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
     ??? note "Avant d'ouvrir la solution"
         En une phrase, sur ton cahier : pourquoi une **file** temporaire, et pas une **pile** ?
 
@@ -295,10 +304,8 @@ Quand un même motif revient trois fois, on l'écrit une fois pour toutes.
         ```
 
         Une **file** temporaire, parce qu'elle conserve l'ordre : ce qui y entre en premier en ressort en premier, et deux transferts de suite rendent donc `f` identique. Une pile l'aurait inversée, et il aurait fallu deux piles pour rattraper.
+-->
 
-    **Ajoute cette fonction à `structures/lineaires/file.py`, et son `test_elements` à `file_test.py`.** Elle n'utilise que l'interface : elle marchera donc **quelle que soit l'implémentation**, et tu vérifieras ce point tout à l'heure.
-
-    Un test qui vaut la peine : appeler `elements` **deux fois de suite** et vérifier que la seconde rend la même liste. Si `elements` abîmait la file, seul ce second appel le dirait.
 
 ## Le vrai objectif du cours : la même file, mais efficace
 
@@ -328,12 +335,14 @@ Tu remarqueras que le bouton `défiler` est **grisé quand la file est vide**. C
     1. **Enfile cinq éléments, puis défile-les un par un.** Regarde la colonne « coût du dernier appel ». Que remarques-tu sur le **premier** défilement comparé aux quatre suivants ? Et sur le coût moyen ?
     2. **Alterne** : enfile, défile, enfile, défile. Le coût moyen change-t-il ?
 
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
     ??? note "Ce que la manipulation 1 doit t'apprendre"
         Le premier `defiler` coûte cher : il bascule toute la pile `entree`. Les suivants coûtent **1**, parce que `sortie` n'est plus vide et qu'il n'y a rien à rebasculer.
 
         Chaque élément ne traverse **qu'une seule fois** de `entree` vers `sortie` au cours de sa vie dans la file. C'est pour cela qu'on dit que le coût est en `O(1)` **amorti** : pas « toujours 1 », mais « 1 en moyenne, sur la durée ».
 
         C'est la seule chose que ce bac à sable sait montrer et qu'une feuille de papier montre mal. Pour tout le reste, ta trace à la main vaut mieux.
+-->
 
 !!! question "Maintenant, à la main : trace le basculement"
     Le bac à sable te l'a montré ; à toi de le **produire**. Remplis ce tableau **à la main**, ligne par ligne, sans le rouvrir. La dernière colonne est celle qui compte : `enfiler` ne rend rien, `defiler` rend un élément **et** le retire.
@@ -347,6 +356,7 @@ Tu remarqueras que le bouton `défiler` est **grisé quand la file est vide**. C
     | `defiler(f)` | | | |
     | `defiler(f)` | | | |
 
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
     ??? note "À ouvrir une fois que tu as rempli les six lignes"
         | opération | `entree` | `sortie` | valeur rendue |
         |---|---|---|---|
@@ -356,16 +366,19 @@ Tu remarqueras que le bouton `défiler` est **grisé quand la file est vide**. C
         | `enfiler(3, f)` | `[3]` | `[2]` | rien |
         | `defiler(f)` | `[3]` | `[]` | `2`, sans basculement |
         | `defiler(f)` | `[]` | `[]` | `3`, après basculement |
+-->
 
 !!! question "Pourquoi la condition « si `sortie` est vide » ?"
     **Refais ta trace ci-dessus à la main**, en **supprimant** cette condition, c'est-à-dire en basculant `entree` dans `sortie` à **chaque** `defiler`. Quelle valeur rend le cinquième appel ?
 
     Le bac à sable ne te le montrera pas : il n'implémente que la version correcte. C'est à toi de le trouver, et c'est le seul exercice de la page où tu fabriques toi-même une panne.
 
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
     ??? note "Ce que tu dois trouver"
         Au quatrième pas, `entree` vaut `[3]` et `sortie` vaut `[2]`. Un basculement inconditionnel empile donc `3` **par-dessus** `2`, et `sortie` vaut `[2, 3]`. Le `defiler` suivant rend `3` alors qu'il devrait rendre `2` : l'ordre FIFO est cassé.
 
         La condition n'est pas une optimisation, c'est **ce qui rend la file correcte**. Retiens le raisonnement, pas la ligne de code : basculer une pile dans une autre inverse son ordre, donc mélanger deux vagues de basculement mélange deux ordres.
+-->
 
 !!! question "Maintenant, écris l'implémentation"
     Tu as le texte, qui te donne les **règles**. Tu as le bac à sable, qui te montre les **états**. Tu as ta trace à la main. Cela suffit : **écris `file.py` toi-même**, sans regarder la correction.
@@ -392,6 +405,7 @@ Tu remarqueras que le bouton `défiler` est **grisé quand la file est vide**. C
     ??? tip "Indice précis"
         Le basculement est une boucle : tant que `entree` n'est pas vide, dépiler `entree` et empiler le résultat sur `sortie`. Une seule ligne de corps.
 
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
     ??? note "En une phrase, sur ton cahier, avant d'ouvrir la solution"
         Qu'est-ce que ton `defiler` fait quand `sortie` n'est pas vide ? Écris-le en français. Si tu ne sais pas le dire, tu ne sais pas encore l'écrire.
 
@@ -418,6 +432,7 @@ Tu remarqueras que le bouton `défiler` est **grisé quand la file est vide**. C
         ```
 
         Remarque que `enfiler` ignore `sortie` et que `defiler` ne touche `entree` que pour la vider. Aucune des deux ne regarde **dans** une pile : elles n'utilisent que `creer`, `est_vide`, `empiler`, `depiler`. C'est ce qui fait qu'une file peut être bâtie sur une pile sans rien savoir de son intérieur.
+-->
 
 !!! note "Et la complexité ?"
     Un défilement peut coûter cher quand il faut tout basculer. Mais chaque élément n'est basculé **qu'une seule fois** de `entree` vers `sortie` sur toute sa vie dans la file. Réparti sur l'ensemble des opérations, le coût est en `O(1)` **amorti**, bien meilleur que le `pop(0)` du tableau.
@@ -436,6 +451,7 @@ Tu viens de remplacer **entièrement** l'intérieur de la file. La première ver
     2. Ne touche **à rien** dans `exos/exos_files.py`, ni dans `exos/exos_files_test.py`, ni dans `file_test.py`.
     3. `uv run pytest`.
 
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
     ??? note "Ce que tu dois constater, et ce que ça veut dire"
         **Tout passe**, et le compte de tests est le même qu'avant : `file_exemple`, `taille_file`, `nb_elements`, la fonction mystère, et jusqu'aux tests de `file_test.py` écrits pour l'implémentation à tableau. Aucun n'a bougé, et aucun n'avait besoin de bouger.
 
@@ -447,6 +463,7 @@ Tu viens de remplacer **entièrement** l'intérieur de la file. La première ver
         L'exercice « Sans exécuter le code » demandait de **dessiner** `F`. Le contenu de la file, lui, est identique dans les deux versions. Mais sa **forme interne** ne l'est plus du tout : avant, une liste ; maintenant, deux piles dont l'une est peut-être vide.
 
         Ce qui devrait donc être dessiné, c'est la file comme **suite d'éléments de la sortie vers l'entrée**, jamais sa représentation interne. Si ton dessin dépend de l'implémentation, c'est que tu regardais sous le capot.
+-->
 
 !!! abstract "Définition - Structure de données abstraite"
     Une structure de données est dite **abstraite** quand on la définit par ce qu'elle **sait faire** (son interface) et non par la façon dont elle est **faite** (son implémentation). Un même comportement peut alors avoir plusieurs réalisations, qui se distinguent par leur **coût**.
@@ -471,6 +488,7 @@ La première ligne est l'**interface**, et elle n'a pas changé. La deuxième es
     ??? tip "Indice"
         Ne commence pas par le nom de la structure. Demande-toi d'abord : **quel élément dois-je atteindre**, et **combien d'éléments dois-je regarder** pour l'atteindre.
 
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
     ??? note "En une phrase, avant d'ouvrir la correction"
         Écris pour toi, sur ton cahier, ce que chaque situation coûte si tu choisis mal. C'est cette phrase-là qui te servira à l'épreuve pratique, pas le nom de la structure.
 
@@ -478,6 +496,7 @@ La première ligne est l'**interface**, et elle n'a pas changé. La deuxième es
         1. **Une pile.** L'élément dont on a besoin est le **dernier entré**, et une pile le rend sans parcourir quoi que ce soit : `O(1)`.
         2. **Une file.** L'élément dont on a besoin est le **premier entré**. Attention au piège : une file mal implémentée, avec `pop(0)` sur un tableau, coûte `O(n)` à chaque document. C'est le sujet entier de ce cours.
         3. **Ni l'une ni l'autre : un dictionnaire** (ou un ensemble). Ni pile ni file ne permettent de chercher un élément quelconque autrement qu'en les parcourant, donc en `O(n)`. Un dictionnaire répond en `O(1)`. Une structure ne se choisit pas parce qu'elle est au programme, mais parce que son coût correspond à ce qu'on lui demande.
+-->
 
 ## Bonus : la suite de Conway
 
@@ -493,5 +512,7 @@ La première ligne est l'**interface**, et elle n'a pas changé. La deuxième es
     ??? tip "Indice sur la question 1"
         Pour savoir combien de chiffres identiques se suivent, tu dois en défiler un, puis regarder le suivant **sans le perdre**. Or `defiler` retire. Relis « Lire une file sans la détruire » : le problème y est déjà résolu.
 
+<!-- CORRIGÉ MASQUÉ. Pour le rétablir : supprimer cette ligne et la fermeture de commentaire plus bas.
     ??? note "Ce que tu peux remarquer, si tu as fait le bonus jusqu'au bout"
         Les termes de cette suite grandissent vite. Regarde le nombre de `defiler` que fait ton programme au dixième terme, et souviens-toi de ce que t'a montré le compteur du bac à sable : c'est exactement le genre de situation où le coût d'une file cesse d'être une question théorique.
+-->

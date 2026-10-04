@@ -35,9 +35,71 @@ while condition:
 
 Tant que la condition est vraie, le bloc indenté est réexécuté. Dès qu'elle devient fausse, la boucle s'arrête.
 
+### Un algorithme déjà vu, écrit avec `while`
+
+Tout ce que tu as fait avec un `for` peut s'écrire avec un `while`, **mais le `while` peut faire plus** : il sait aussi répéter quand on ne connaît pas d'avance le nombre de tours, ce qu'un `for` ne sait pas faire. Reprenons le renversement d'un mot, tel que tu l'as écrit avec un `for` :
+
 ```python
-i = 1
-while i <= 3:
+mot = "python"
+acc = ""
+for car in mot:
+    acc = car + acc
+print(acc)
+```
+
+!!! question "Le même, avec un `while`"
+    Voici le même algorithme écrit avec un `while`. Écris sur ton cahier :
+
+    - ce qu'il affiche ;
+    - à quoi sert `i` ;
+    - ce qui se passerait si on oubliait la ligne `i = i + 1` ;
+    - ce qui se passerait si on écrivait `while i <= len(mot):`.
+
+    **N'exécute pas ce code tant que tu n'as pas écrit tes réponses.**
+
+    ```python
+    mot = "python"
+    acc = ""
+    i = 0
+    while i < len(mot):
+        acc = mot[i] + acc
+        i = i + 1
+    print(acc)
+    ```
+
+    ??? success "Réponse"
+        Il affiche `nohtyp`, comme la version avec `for`. `i` est la **position** du caractère qu'on traite : il va de `0` à `len(mot) - 1`, et la boucle s'arrête quand il atteint `len(mot)`. Sans `i = i + 1`, `i` resterait à `0`, la condition resterait vraie, et la boucle ne s'arrêterait jamais.
+
+        Avec `while i <= len(mot):`, la boucle ferait un tour de trop : quand `i` vaut `6`, `mot[6]` n'existe pas, puisque les positions de `"python"` vont de `0` à `5`. Le programme s'arrête sur une `IndexError` avant d'avoir rien affiché. C'est pour cela qu'on écrit `<` : les positions valides forment l'intervalle semi-ouvert $[0 ; \text{len(mot)})$.
+
+        Avec le `for`, Python passait tout seul d'un caractère au suivant. Avec le `while`, **c'est toi qui le fais**.
+
+!!! question "À toi : sans les espaces, avec un `while`"
+    Réécris avec un `while` le programme qui construit dans `acc` la phrase `"le petit chat"` privée de ses espaces, puis l'affiche.
+
+    ??? tip "Indice léger"
+        Même squelette que ci-dessus : `i = 0`, `while i < len(phrase)`, et `i = i + 1` à la fin du corps. Le `if` porte sur `phrase[i]`.
+
+    ??? success "Solution"
+        ```python
+        phrase = "le petit chat"
+        acc = ""
+        i = 0
+        while i < len(phrase):
+            if phrase[i] != " ":
+                acc = acc + phrase[i]
+            i = i + 1
+        print(acc)      # lepetitchat
+        ```
+        Attention à l'indentation : `i = i + 1` est **dans** la boucle mais **hors** du `if`. Placé sous le `if`, il ne serait jamais exécuté sur un espace, et la boucle tournerait sans fin.
+
+### Compter avec un `while`
+
+Un `while` n'a pas besoin d'une chaîne : sa condition peut porter sur n'importe quelle variable. Ici, un entier qu'on fait avancer :
+
+```python
+i = 0
+while i < 3:
     print(i)
     i = i + 1
 print("fini")
@@ -46,47 +108,52 @@ print("fini")
 !!! question "Trace-le toi-même, puis vérifie"
     Tu sais déjà tracer une boucle : tu l'as fait sur le `for`. Ici, c'est à toi. **Recopie ce tableau et remplis-le** avant de regarder la réponse, puis exécute le code pour te contrôler.
 
-    | Avant le tour | `i <= 3` ? | on exécute | après |
+    | Avant le tour | `i < 3` ? | on exécute | après |
     | :--: | :--: | :--: | :--: |
-    | `i = 1` | ? | ? | ? |
+    | `i = 0` | ? | ? | ? |
     | ? | ? | ? | ? |
     | ? | ? | ? | ? |
     | ? | ? | ? | ? |
 
     ??? success "Réponse"
-        | Avant le tour | `i <= 3` ? | on exécute | après |
+        | Avant le tour | `i < 3` ? | on exécute | après |
         | :--: | :--: | :--: | :--: |
+        | `i = 0` | vrai | affiche 0, `i` devient 1 | `i = 1` |
         | `i = 1` | vrai | affiche 1, `i` devient 2 | `i = 2` |
         | `i = 2` | vrai | affiche 2, `i` devient 3 | `i = 3` |
-        | `i = 3` | vrai | affiche 3, `i` devient 4 | `i = 4` |
-        | `i = 4` | **faux** | on sort de la boucle | |
+        | `i = 3` | **faux** | on sort de la boucle | |
 
         Puis Python continue avec « fini ». Le point à retenir, et c'est celui qui produit les boucles infinies : **la condition est testée avant chaque tour**, jamais pendant.
 
 ## Les trois rouages : initialisation, condition, mise à jour
 
-Là où le `for` **cache** la gestion du compteur (Python s'en occupe), le `while` t'oblige à écrire toi-même les **trois rouages** d'une boucle :
+Là où le `for` **cache** la gestion du compteur (Python s'en occupe), le `while` t'oblige à écrire toi-même les **trois rouages** d'une boucle.
 
-```python
-i = 1            # 1. INITIALISATION (avant la boucle)
-while i <= 3:    # 2. CONDITION de continuation
-    print(i)
-    i = i + 1    # 3. MISE À JOUR (dans la boucle)
-```
+!!! fondamental "Les trois rouages d'une boucle"
+    ```python
+    i = 0            # 1. INITIALISATION (avant la boucle)
+    while i < 3:     # 2. CONDITION de continuation
+        print(i)
+        i = i + 1    # 3. MISE À JOUR (dans la boucle)
+    ```
 
-C'est plus de travail, mais c'est aussi ce qui rend le mécanisme **visible**. Si l'un des trois rouages manque ou est faux, la boucle ne fait pas ce qu'on croit.
+    1. L'**initialisation** : la valeur de départ, **avant** la boucle.
+    2. La **condition** : tant qu'elle est vraie, on refait un tour.
+    3. La **mise à jour** : **dans** la boucle, ce qui fait avancer vers la sortie.
+
+    Si l'un des trois manque ou est faux, la boucle ne fait pas ce qu'on croit.
 
 ## Le danger : la boucle infinie
 
 Si la mise à jour ne rapproche jamais la condition du « faux », la boucle ne s'arrête **jamais**.
 
 ```python
-i = 1
-while i <= 3:
+i = 0
+while i < 3:
     print(i)      # ERREUR : on a oublié i = i + 1
 ```
 
-Ici `i` reste à 1, la condition reste vraie, et le programme affiche `1` indéfiniment. Il faut alors l'interrompre à la main (`Ctrl+C`).
+Ici `i` reste à 0, la condition reste vraie, et le programme affiche `0` indéfiniment. Il faut alors l'interrompre à la main (`Ctrl+C`).
 
 !!! abstract "Le cycle du débogage, sur un cas où il se voit"
     Une boucle infinie est l'erreur idéale pour apprendre à déboguer : le symptôme est net, et la cause est toujours du même genre. La méthode vaut pour toutes les autres erreurs.
@@ -104,6 +171,39 @@ Ici `i` reste à 1, la condition reste vraie, et le programme affiche `1` indéf
 ## Le variant : ce qui garantit l'arrêt
 
 Une boucle `while` se termine si une quantité **évolue à coup sûr vers la sortie** : par exemple un nombre qui **diminue** strictement à chaque tour et ne peut pas descendre en dessous d'une limite. On appelle cela un **variant**. On y reviendra en algorithmique, mais l'idée est déjà là : pour être sûr qu'une boucle s'arrête, il faut exhiber ce qui la fait progresser vers sa fin.
+
+## Une condition peut être composée
+
+La condition d'un `while` n'est pas forcément une simple comparaison d'entiers : c'est **n'importe quel booléen**, et tu peux la construire avec `and`, `or` et `not`, comme dans un `if`.
+
+!!! question "Que fait ce programme ?"
+    Lis ce programme, puis écris sur ton cahier :
+
+    - ce qu'il affiche ;
+    - **une phrase en français** qui dit ce qu'il fait ;
+    - ce qu'il afficherait avec `phrase = "bonjour"`.
+
+    **N'exécute pas ce code tant que tu n'as pas écrit tes réponses.**
+
+    ```python
+    phrase = "bonjour le monde"
+    i = 0
+    while i < len(phrase) and phrase[i] != " ":
+        i = i + 1
+    print(i)
+    ```
+
+    ??? success "Réponse"
+        Il affiche `7`. Il **cherche la position du premier espace** : `i` avance tant qu'on n'est pas au bout **et** qu'on n'est pas sur un espace.
+
+        Avec `"bonjour"`, il n'y a pas d'espace : la boucle s'arrête quand `i` vaut `7`, c'est-à-dire `len(phrase)`, et le programme affiche `7`. Une position égale à la longueur veut dire « pas trouvé ».
+
+!!! abstract "Avec `and`, l'ordre compte"
+    Python évalue `a and b` **de gauche à droite**, et s'arrête dès qu'il connaît la réponse : si `a` est faux, `a and b` est faux, et **`b` n'est même pas calculé**.
+
+    C'est ce qui protège le programme ci-dessus. Quand `i` vaut `len(phrase)`, `i < len(phrase)` est faux, et `phrase[i]`, qui provoquerait une `IndexError`, n'est jamais lu. Écrit dans l'autre ordre, `phrase[i] != " " and i < len(phrase)` plante sur une phrase sans espace.
+
+    De même, `a or b` s'arrête dès que `a` est vrai.
 
 ## `for` ou `while` ?
 
@@ -135,13 +235,13 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
     Ce code tourne indéfiniment. Trouve pourquoi, puis corrige-le.
 
     ```python
-    i = 1
-    while i <= 5:
+    i = 0
+    while i < 5:
         print(i)
     ```
 
     ??? warning "Réponse"
-        Il manque la **mise à jour** : `i` ne change jamais, donc `i <= 5` reste vrai pour toujours. Il faut ajouter `i = i + 1` **dans** la boucle.
+        Il manque la **mise à jour** : `i` ne change jamais, donc `i < 5` reste vrai pour toujours. Il faut ajouter `i = i + 1` **dans** la boucle.
 
 ## Exercices
 
@@ -157,13 +257,13 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
         ```
 
 !!! question "2 - Somme jusqu'à un seuil"
-    En partant de 1, additionne les entiers successifs (1, 2, 3, ...) et affiche combien il en faut pour que la somme **dépasse 100**.
+    En partant de 1, additionne les entiers successifs (1, 2, 3, ...) et affiche combien il en faut pour que la somme **atteigne ou dépasse 100**.
 
     ??? warning "Corrigé"
         ```python
         somme = 0
         i = 0
-        while somme <= 100:
+        while somme < 100:
             i = i + 1
             somme = somme + i
         print(i, "entiers, somme =", somme)
@@ -172,29 +272,125 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
 !!! question "3 - Deviner un nombre"
     L'ordinateur choisit un nombre au hasard entre 1 et 100. L'utilisateur propose des valeurs **tant qu'**il n'a pas trouvé ; à chaque essai, indique « plus grand » ou « plus petit ».
 
+    **Variante.** Le joueur n'a plus droit qu'à `7` essais : la partie continue tant qu'il n'a pas trouvé **et** qu'il lui reste des essais. À la fin, affiche s'il a gagné ou perdu.
+
 !!! question "4 - PGCD (algorithme d'Euclide)"
-    Le plus grand commun diviseur de `a` et `b` s'obtient en remplaçant `(a, b)` par `(b, a % b)` **tant que** `b` n'est pas nul.
+    Le plus grand commun diviseur de `a` et `b` s'obtient en remplaçant `(a, b)` par `(b, a % b)` **tant que** `b` n'est pas nul. Quand `b` vaut `0`, le PGCD est dans `a`.
+
+    1. Sur ton cahier, déroule l'algorithme pour `a = 48` et `b = 36` : écris les valeurs de `a` et `b` avant chaque tour.
+    2. Écris la fonction `pgcd`, puis lance `test_pgcd` : tous les tests doivent passer.
+
+    ```python
+    def pgcd(a: int, b: int) -> int:
+        """Renvoie le PGCD de a et b, par l'algorithme d'Euclide.
+        Précondition : a et b sont positifs ou nuls, et pas tous les deux nuls."""
+        ...
+
+    def test_pgcd():
+        assert pgcd(48, 36) == 12
+        assert pgcd(36, 48) == 12
+        assert pgcd(17, 5) == 1
+        assert pgcd(7, 0) == 7
+        assert pgcd(10, 10) == 10
+    ```
 
     ??? tip "Indice léger"
         La condition d'arrêt est « `b` est nul ». Que faut-il écrire après `while` ? Et que renvoyer une fois sorti de la boucle ?
 
     ??? tip "Indice précis"
-        `while b != 0:` puis, dans la boucle, la déstructuration `a, b = b, a % b`. Quand `b` atteint 0, c'est `a` qui contient le PGCD.
+        `while b != 0:`. Dans la boucle, il faut que `a` prenne l'ancienne valeur de `b`, et `b` l'ancienne valeur de `a % b`. Attention : si tu écris `a = b` en premier, l'ancienne valeur de `a` est perdue. Range d'abord `a % b` dans une variable `r`.
 
     ??? warning "Corrigé"
-        ```python
-        def pgcd(a: int, b: int) -> int:
-            """Renvoie le PGCD de a et b (algorithme d'Euclide).
+        1. `(48, 36)`, puis `(36, 12)`, puis `(12, 0)` : `b` est nul, le PGCD est `12`.
+        2. ```python
+           def pgcd(a: int, b: int) -> int:
+               """Renvoie le PGCD de a et b, par l'algorithme d'Euclide.
+               Précondition : a et b sont positifs ou nuls, et pas tous les deux nuls."""
+               while b != 0:
+                   r = a % b
+                   a = b
+                   b = r
+               return a
+           ```
 
-            >>> pgcd(48, 36)
-            12
-            >>> pgcd(17, 5)
-            1
-            """
-            while b != 0:
-                a, b = b, a % b
-            return a
+        Le test `pgcd(36, 48)` est intéressant : au premier tour, `36 % 48` vaut `36`, et l'algorithme **échange** simplement `a` et `b`. Il n'y a pas besoin de savoir lequel est le plus grand.
+
+!!! question "5 - Oui ou non"
+    Demande à l'utilisateur s'il veut continuer, et redemande **tant que** sa réponse n'est ni `"oui"` ni `"non"`. Une fois sorti de la boucle, affiche `Terminé`.
+
+    ??? tip "Indice léger"
+        Écris d'abord, en français, quand la réponse est **acceptable**. La condition du `while` est le contraire : `not` de cette phrase.
+
+    ??? success "Corrigé"
+        ```python
+        rep = input("Continuer ? (oui/non) ")
+        while not (rep == "oui" or rep == "non"):
+            rep = input("Réponds par oui ou par non : ")
+        print("Terminé")
         ```
+        On peut aussi écrire `while rep != "oui" and rep != "non":`. Les deux conditions sont équivalentes : « ni l'un ni l'autre », c'est « pas l'un **et** pas l'autre ».
+
+!!! question "6 - Position du premier chiffre"
+    Écris `premier_chiffre(txt)`, qui renvoie la position du premier chiffre de `txt`, ou `len(txt)` s'il n'y en a pas. Rappel : `car.isdigit()` dit si `car` est un chiffre.
+
+    ```python
+    def premier_chiffre(txt: str) -> int:
+        """Renvoie la position du premier chiffre de txt, ou len(txt) s'il n'y en a pas."""
+        ...
+
+    def test_premier_chiffre():
+        assert premier_chiffre("abc4d5") == 3
+        ...
+    ```
+
+    ??? tip "Indice léger"
+        C'est la recherche du premier espace, avec une autre condition sur le caractère. Laquelle, avec `not` ?
+
+    ??? success "Corrigé"
+        ```python
+        def premier_chiffre(txt: str) -> int:
+            """Renvoie la position du premier chiffre de txt, ou len(txt) s'il n'y en a pas."""
+            i = 0
+            while i < len(txt) and not txt[i].isdigit():
+                i = i + 1
+            return i
+
+        def test_premier_chiffre():
+            assert premier_chiffre("abc4d5") == 3
+            assert premier_chiffre("7 nains") == 0
+            assert premier_chiffre("aucun") == 5
+            assert premier_chiffre("") == 0
+        ```
+        Le test `"aucun"` vérifie le cas « pas trouvé », et le test `""` qu'on ne lit jamais `txt[0]` sur une chaîne vide : c'est l'ordre des deux conditions du `and` qui le garantit.
+
+!!! question "7 - Tant que ce n'est pas fini"
+    Un coffre s'ouvre avec le code `"1234"`. L'utilisateur a droit à **3 essais**. La partie est **finie** quand il a trouvé le code, **ou** quand il a utilisé ses 3 essais.
+
+    1. On range le dernier code tapé dans `code`, et le nombre d'essais déjà faits dans `essais`. Écris en Python la condition « c'est fini ».
+    2. La boucle doit tourner **tant que ce n'est pas fini**. Écris la ligne `while` avec `not` et ta condition de la question 1.
+    3. Avec les [lois de De Morgan](conditionnelles.md), réécris cette condition **sans** `not`.
+    4. Complète le programme : à la fin, affiche « Coffre ouvert » ou « Coffre bloqué ».
+
+    ??? tip "Indice léger"
+        Pour la question 3 : la négation d'un `or` est un `and` de négations. Que devient `not (code == "1234")` ? Et `not (essais == 3)`, sachant que `essais` ne dépasse jamais `3` ?
+
+    ??? success "Corrigé"
+        1. `code == "1234" or essais == 3`
+        2. `while not (code == "1234" or essais == 3):`
+        3. `while code != "1234" and essais < 3:`. Comme `essais` ne dépasse jamais `3`, « différent de 3 » revient à « plus petit que 3 ».
+        4. ```python
+           code = input("Code : ")
+           essais = 1
+           while code != "1234" and essais < 3:
+               code = input("Faux. Code : ")
+               essais = essais + 1
+           if code == "1234":
+               print("Coffre ouvert")
+           else:
+               print("Coffre bloqué")
+           ```
+
+        Écrire d'abord **quand c'est fini**, puis le nier, est souvent plus simple que de chercher directement la condition pour continuer.
 
 ## Vérification individuelle : les boucles
 
@@ -251,10 +447,3 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
             assert nb_chiffres("a1b22c") == 3
             assert nb_chiffres("") == 0
         ```
-
-!!! abstract "Comment lire ton résultat"
-    Les trois questions ne mesurent pas la même chose, et **rater la troisième en réussissant la première n'est pas un signe de faiblesse**. Lire du code, le compléter et l'écrire de zéro sont trois compétences distinctes, qui se travaillent séparément.
-
-    - Tu réussis les trois : passe à la suite.
-    - Tu réussis 1 et 2 mais pas 3 : tu comprends le mécanisme, il te manque la **mise en route**. Refais des exercices d'écriture courts, pas de la relecture.
-    - Tu rates la 1 : reprends le traçage avant tout le reste. Écrire du code qu'on ne sait pas lire ne mène nulle part.

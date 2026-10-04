@@ -1,25 +1,13 @@
-# Listes et récursivité, en Gleam
+# Listes et récursivité
 
 !!! danger "Ce ne sont pas les listes Python"
-    Ici, on ne parle **pas** des listes Python (qui sont en réalité des *tableaux dynamiques*). On étudie la **vraie** structure de liste, définie récursivement. Et on le fait dans un petit langage fonctionnel : **Gleam**.
+    Ici, on ne parle **pas** des listes Python (qui sont en réalité des *tableaux dynamiques*). On étudie la **vraie** structure de liste, définie récursivement.
 
-Les listes sont l'outil idéal pour **faire ses premiers pas en récursivité**, et l'occasion de découvrir le **paradigme fonctionnel**.
+La **récursivité** est la **généralisation totale** du principe de **récurrence** que tu connais en mathématiques. Les listes sont l'outil idéal pour **faire ses premiers pas en récursivité**.
 
-## Pourquoi Gleam
+## 1 Les listes récursives
 
-- Gleam n'a **aucune boucle** : ni `for`, ni `while`. La seule façon de parcourir une structure, c'est la **récursivité**. C'est exactement ce qu'on vient apprendre.
-- Sa signature de fonction ressemble à ton Python typé :
-
-    | Python | Gleam |
-    |---|---|
-    | `def taille(lst) -> int:` | `fn taille(lst: Liste(a)) -> Int {` |
-
-- Le compilateur est un allié : messages d'erreur clairs, et il t'**empêche d'oublier un cas**.
-
-!!! note "Mise en place"
-    Crée un projet : `gleam new listes`, puis travaille dans `src/listes.gleam`. Pour exécuter ton code : `gleam run`. Pour afficher une valeur et l'observer, utilise `io.debug(...)` (après un `import gleam/io` en haut du fichier).
-
-## La structure : deux possibilités
+### 1.1 La structure : deux possibilités
 
 Imaginez un **lutin** à qui on tend une liste. Il n'a que **deux possibilités** devant lui :
 
@@ -32,7 +20,7 @@ Imaginez un **lutin** à qui on tend une liste. Il n'a que **deux possibilités*
     1. soit **vide** ;
     2. soit une **tête** (un élément) suivie d'une **queue** (qui est elle-même une liste).
 
-On **définit la liste avec sa propre définition** : c'est une structure **récursive**. En Gleam, ce type s'écrit :
+On **définit la liste avec sa propre définition** : c'est une structure **récursive**. On l'écrit ainsi :
 
 ```gleam
 pub type Liste(a) {
@@ -45,7 +33,23 @@ pub type Liste(a) {
 - Il y a **deux constructeurs**, `Vide` et `Cons` : une liste **est** l'un **ou** l'autre. Ce sont les deux possibilités du lutin.
 - La définition est **récursive** : `Cons` contient une `Liste(a)` (la queue).
 
-## Construire une liste
+### 1.2 Écrire une liste à la main
+
+!!! info "Cette notation est un vrai langage : Gleam"
+    La notation que tu utilises depuis le début pour ranger les cas n'est pas qu'une façon d'écrire au tableau : c'est un vrai langage de programmation, **Gleam**, un petit langage **fonctionnel**. Tu vas maintenant l'exécuter.
+
+    - Gleam n'a **aucune boucle** : ni `for`, ni `while`. La seule façon de parcourir une structure, c'est la **récursivité**. C'est exactement ce qu'on a appris au tableau pour commencer ce cours.
+    - Gleam n'a pas non plus de `if` : toute décision passe par une **disjonction de cas**, avec `case`.
+    - Sa signature de fonction ressemble à ton Python typé :
+
+        | Python | Gleam |
+        |---|---|
+        | `def taille(lst) -> int:` | `fn taille(lst: Liste(a)) -> Int {` |
+
+    - Le compilateur est un allié : messages d'erreur clairs, et il t'**empêche d'oublier un cas**.
+
+!!! note "Mise en place"
+    Dans un terminal, exécute la commande `nsi install gleam`, puis écris tes fichiers dans le répertoire `src`. Pour exécuter ton code : `gleam run`. Pour afficher une valeur et l'observer, utilise `io.debug(...)` (après un `import gleam/io` en haut du fichier).
 
 La liste dont la tête est `2`, suivie de `3`, puis `4`, puis la fin :
 
@@ -69,7 +73,7 @@ pub fn main() {
         io.debug(couleurs)
         ```
 
-## Lire une liste : la disjonction de cas
+### 1.3 La disjonction de cas
 
 Pour **faire quelque chose** d'une liste, le lutin regarde **laquelle des deux possibilités** il a en main. C'est la **disjonction de cas**, écrite avec `case` :
 
@@ -86,7 +90,19 @@ case lst {
 !!! warning "Piège, et garde-fou : les deux cas, toujours"
     Gleam **refuse de compiler** si tu oublies un cas. Impossible d'oublier le `Vide`. Le compilateur te **force** à penser « cas de base / cas récursif », les deux fondations de toute récursivité.
 
-## Première fonction : la taille
+### 1.4 Les trois grands types de problèmes
+
+Presque toutes les fonctions sur les listes relèvent de l'un de ces trois types :
+
+- **lire** une liste : de la liste à une **valeur** (`taille`, `somme`, `contient`) ;
+- **construire** une liste : de la liste à une **nouvelle liste** (`inverser`, `concat`) ;
+- **faire pousser** une liste : d'une **graine** à une liste (`repete`).
+
+#### 1.4.1 Lire une liste : de la liste à une valeur
+
+Les premières fonctions **lisent** une liste : elles la parcourent et rendent une valeur qui n'est **pas** une liste (un nombre, un booléen).
+
+##### 1.4.1.1 Première fonction : la taille
 
 On la lit ensemble **avant** d'en écrire soi-même.
 
@@ -122,7 +138,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
     ??? success "Réponse"
         `2`. Deux têtes avant d'atteindre `Vide`.
 
-## À toi d'écrire
+##### 1.4.1.2 À toi d'écrire
 
 !!! tip "Méthode"
     Avant de coder, écris la **disjonction de cas au papier** : que renvoie la fonction si la liste est `Vide` ? et si c'est `Cons(tete, queue)` ?
@@ -140,8 +156,44 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
         }
         ```
 
+!!! info "OU, ET, NON en Gleam"
+    Une fonction qui renvoie un `Bool` se construit souvent en **combinant** des conditions. Les trois opérateurs s'écrivent ainsi :
+
+    | | Gleam | Python |
+    |---|---|---|
+    | OU | `a || b` | `a or b` |
+    | ET | `a && b` | `a and b` |
+    | NON | `!a` | `not a` |
+
+    ```gleam
+    n > 0 && n < 10      // n est entre 1 et 9
+    n < 0 || n > 100     // n est hors de [0 ; 100]
+    !{ n == 5 }          // n ne vaut pas 5 (on peut aussi écrire n != 5)
+    ```
+
+    Pour grouper une expression, Gleam utilise des **accolades** `{ }`, pas des parenthèses : on écrit `!{ n == 5 }`.
+
+    Comme `or` et `and` en Python, `||` et `&&` sont **paresseux** : si la partie gauche suffit à décider (`True` pour `||`, `False` pour `&&`), la partie droite n'est **pas calculée**.
+
 !!! question "Contient"
-    Écris `contient(x: a, lst: Liste(a)) -> Bool` qui indique si `x` est présent dans la liste.
+    On veut écrire `contient(x: a, lst: Liste(a)) -> Bool`, qui indique si `x` est présent dans la liste. La réponse sera une **expression booléenne**, qu'on construit en trois temps.
+
+    1. Si la liste est `Vide`, que renvoie la fonction ?
+
+        ??? success "Réponse"
+            `False` : une liste vide ne contient rien.
+
+    2. Si la liste est `Cons(tete, queue)`, complète la phrase : « `x` est dans la liste si … **ou** … ».
+
+        ??? success "Réponse"
+            « `x` est dans la liste si **la tête vaut `x`**, **ou** si **`x` est dans la queue**. »
+
+    3. Traduis cette phrase en une expression booléenne Gleam. Quelle partie est un appel récursif ?
+
+        ??? success "Réponse"
+            `tete == x || contient(x, queue)`. La partie droite, `contient(x, queue)`, est l'appel récursif : on redemande à un autre lutin de chercher dans la queue.
+
+    Écris maintenant `contient` en entier.
 
     ??? success "Corrigé"
         ```gleam
@@ -155,29 +207,61 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
 
         Le `||` est **paresseux** : si `tete == x` est vrai, Gleam ne va pas chercher plus loin dans la queue.
 
-## Deux listes à la fois : les quatre cas
+##### 1.4.1.3 Deux listes à la fois : les quatre cas
 
-Comparons **deux** listes. Le lutin en tient maintenant deux en même temps : chacune peut être `Vide` ou `Cons`, ce qui fait **quatre** possibilités (2 × 2). On les écrit **toutes les quatre**.
+On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si deux listes contiennent les mêmes éléments dans le même ordre. Le lutin en tient maintenant **deux** en même temps. La méthode tient en trois questions, à se poser **dans l'ordre**, avant d'écrire la moindre ligne.
 
-```gleam
-pub fn sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool {
-  case l1, l2 {
-    Vide, Vide -> True
-    Vide, Cons(_, _) -> False
-    Cons(_, _), Vide -> False
-    Cons(t1, q1), Cons(t2, q2) -> t1 == t2 && sont_egales(q1, q2)
-  }
-}
-```
+!!! question "Égalité de deux listes"
+    1. Quels sont **tous** les cas possibles pour le couple d'entrée `(l1, l2)` ?
 
-- deux listes vides : **égales** ;
-- une vide, l'autre non : **différentes** (pas la même longueur) ;
-- deux non vides : même tête **et** mêmes queues (on redemande à un autre lutin).
+        ??? success "Réponse"
+            Chaque liste peut être `Vide` ou `Cons`, ce qui fait **quatre** cas (2 × 2) :
+
+            - `l1` vide et `l2` vide ;
+            - `l1` vide et `l2` non vide ;
+            - `l1` non vide et `l2` vide ;
+            - `l1` non vide et `l2` non vide.
+
+    2. Que doit renvoyer la fonction dans **chacun** de ces cas ?
+
+        ??? success "Réponse"
+            - deux listes vides : elles sont **égales**, on renvoie `True` ;
+            - `l1` vide, `l2` non vide : elles n'ont pas la même longueur, on renvoie `False` ;
+            - `l1` non vide, `l2` vide : même raison, `False` ;
+            - deux listes non vides : elles sont égales si leurs **têtes** sont égales **et** si leurs **queues** sont égales.
+
+    3. Parmi ces quatre cas, lesquels sont des **cas de base** (la réponse est immédiate) et lesquels sont **récursifs** (il faut redemander à un autre lutin) ?
+
+        ??? success "Réponse"
+            Les **trois** premiers sont des cas de base : la réponse se lit directement. Le **quatrième** est le seul cas récursif : pour savoir si les queues sont égales, on appelle `sont_egales` sur `q1` et `q2`.
+
+    Écris maintenant `sont_egales` en Gleam, avec **une branche par cas**. Pour faire la disjonction sur **deux** listes à la fois, on les met toutes les deux après `case`, séparées par une virgule, et chaque branche donne un motif pour chacune. Complète :
+
+    ```gleam
+    pub fn sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool {
+      case l1, l2 {
+        Vide, Vide -> ...
+        ...
+      }
+    }
+    ```
+
+    ??? success "Corrigé"
+        ```gleam
+        pub fn sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool {
+          case l1, l2 {
+            Vide, Vide -> True
+            Vide, Cons(_, _) -> False
+            Cons(_, _), Vide -> False
+            Cons(t1, q1), Cons(t2, q2) -> t1 == t2 && sont_egales(q1, q2)
+          }
+        }
+        ```
 
 !!! note "Quatre cas, même si on pourrait en écrire moins"
     On pourrait fusionner les deux cas « une seule est vide » en un seul. Ce n'est qu'une **optimisation d'écriture**, et ce n'est pas le sujet : on écrit les **quatre** cas pour voir toute la disjonction. Là encore, Gleam **exige** que les quatre soient traités.
 
-## Les fonctions qui construisent
+#### 1.4.2 Construire une liste : de la liste à une nouvelle liste
 
 !!! danger "Les listes sont immuables"
     On ne **modifie jamais** une liste. Une opération qui semble « modifier » une liste en **construit une nouvelle**. Le lutin ne rature rien : il **reconstruit en retour**.
@@ -214,24 +298,65 @@ Le **lutin ajouteur** : *« Si on me tend une liste vide, je renvoie une liste q
         ```
 
 !!! question "Concaténer"
-    Écris `concat(l1: Liste(a), l2: Liste(a)) -> Liste(a)` qui met `l2` à la suite de `l1`. (Sur quelle liste faut-il faire la disjonction de cas ?)
+    Écris `concat(l1: Liste(a), l2: Liste(a)) -> Liste(a)` qui met `l2` à la suite de `l1`. Il y a **deux** listes : fais la disjonction des **quatre** cas, comme pour `sont_egales`, et traite-les un par un.
 
     ??? success "Corrigé"
         ```gleam
         pub fn concat(l1: Liste(a), l2: Liste(a)) -> Liste(a) {
-          case l1 {
-            Vide -> l2
-            Cons(tete, queue) -> Cons(tete, concat(queue, l2))
+          case l1, l2 {
+            Vide, Vide -> Vide
+            Vide, Cons(_, _) -> l2
+            Cons(_, _), Vide -> l1
+            Cons(t1, q1), Cons(_, _) -> Cons(t1, concat(q1, l2))
           }
         }
         ```
 
-## Faire pousser une liste
+        - deux listes vides : le résultat est **vide** ;
+        - `l1` vide : le résultat est **`l2`** ;
+        - `l2` vide : le résultat est **`l1`** ;
+        - deux non vides : on garde la tête de `l1`, et pour la suite on demande à un autre lutin de concaténer la queue de `l1` avec `l2`, puis on recolle.
+
+#### 1.4.3 Faire pousser une liste : d'une graine à une liste
 
 Jusqu'ici, le lutin **déconstruisait** une liste. Il peut aussi en **construire une à partir d'une graine** (ici, un entier).
 
+La récursivité ne porte plus sur une liste mais sur un **entier**. Un entier n'a pas de constructeurs `Vide` et `Cons`, mais on peut quand même faire une disjonction de cas avec `case`, en donnant des **valeurs** comme motifs :
+
+```gleam
+case n {
+  0 -> ...
+  _ -> ...
+}
+```
+
+- `0 ->` : le cas où `n` vaut exactement `0`. C'est le **cas de base**.
+- `_ ->` : `_` attrape **toutes les autres valeurs**. C'est le **cas récursif**, où l'on rappelle la fonction avec `n - 1`.
+- Les cas sont essayés **dans l'ordre** : `_` doit venir en dernier, sinon il attraperait aussi `0` (Gleam t'avertit alors que le cas `0` est inatteignable).
+
 !!! question "Répéter"
-    Écris `repete(x: a, n: Int) -> Liste(a)` qui renvoie une liste contenant `n` fois l'élément `x`.
+    Écris `repete(x: a, n: Int) -> Liste(a)` qui renvoie une liste contenant `n` fois l'élément `x` (on suppose `n` positif ou nul).
+
+    1. Que renvoie `repete(x, 0)` ?
+
+        ??? success "Réponse"
+            `Vide` : zéro fois `x`, c'est la liste vide.
+
+    2. Si `n` n'est pas nul, comment obtenir `repete(x, n)` à partir de `repete(x, n - 1)` ?
+
+        ??? success "Réponse"
+            On met `x` en tête de `repete(x, n - 1)` : `Cons(x, repete(x, n - 1))`.
+
+    Complète :
+
+    ```gleam
+    pub fn repete(x: a, n: Int) -> Liste(a) {
+      case n {
+        0 -> ...
+        _ -> ...
+      }
+    }
+    ```
 
     ??? success "Corrigé"
         ```gleam
@@ -245,25 +370,14 @@ Jusqu'ici, le lutin **déconstruisait** une liste. Il peut aussi en **construire
 
         Le cas de base n'est plus `Vide` mais `n == 0` : la graine `n` **décroît** à chaque appel jusqu'à 0.
 
-## Le coût
-
-- `taille` parcourt la liste **une fois** : son coût est **linéaire**, `O(n)`.
-- `inverser` est plus coûteuse : à chaque étape, `ajouter_fin` reparcourt toute la queue. Le coût est en `O(n²)`. Bien écrire une fonction récursive, ce n'est pas seulement qu'elle soit juste, c'est aussi ce qu'elle coûte.
-
-!!! question "Trace le coût toi-même"
-    Déplie `inverser(2 -> 3 -> 4)` en écrivant chaque appel à `ajouter_fin`. Combien de fois chaque élément est-il reparcouru ? Tu dois **voir** le `O(n²)` apparaître, pas seulement le lire.
-
-    ??? success "Ce qu'on observe"
-        `inverser` fait un appel par élément (`n` appels), et **chaque** appel relance `ajouter_fin`, qui reparcourt toute la queue (jusqu'à `n`). Environ `n` parcours de longueur jusqu'à `n` : le coût total est en `O(n²)`.
-
-## Ce que l'IA ne change pas
+### 1.5 Ce que l'IA ne change pas
 
 !!! tip
     Une IA écrit `taille`, `somme` ou `inverser` en une seconde, en Gleam comme en Python.
 
     Ce qui est en jeu n'est pas ce qu'elle sait faire, c'est ce que **tu** sais faire sans elle : **énoncer les deux cas** (que se passe-t-il si la liste est vide ? et sinon ?), et reconnaître un raisonnement récursif correct quand tu en lis un. C'est exactement ce que l'épreuve pratique évalue, et c'est ce qui te permet de refuser une réponse fausse au lieu de la recopier. Gleam t'y aide : les **types** et l'**exhaustivité des cas** attrapent une grande partie des erreurs avant même l'exécution.
 
-## L'équivalent en Python
+## 2 L'équivalent en Python
 
 Toute cette construction existe aussi en Python, le langage de l'épreuve. La même liste, définie récursivement, avec des **tuples immuables** :
 
@@ -318,7 +432,7 @@ def somme(lst: Liste[int]) -> int:
 ```
 
 !!! warning "Ce que les `if` cachent"
-    Avec `if` / `else`, rien ne signale **combien** de cas il y a, ni qu'on les a **tous** couverts. La disjonction **exhaustive**, un cas par possibilité, que `match` (et le `case` de Gleam) rendaient évidente, n'apparaît plus. En Gleam, le compilateur **vérifiait** cette exhaustivité ; avec des `if`, c'est à toi d'y veiller à chaque fois.
+    Avec `if` / `else`, rien ne signale **combien** de cas il y a, ni qu'on les a **tous** couverts. La disjonction **exhaustive**, un cas par possibilité, que le `case` de Gleam rendait évidente, n'apparaît plus. En Gleam, le compilateur **vérifiait** cette exhaustivité ; avec des `if`, c'est à toi d'y veiller à chaque fois. (Python a aussi un `match`, voir la section 5.)
 
 L'écart se voit encore mieux sur **deux** listes, où il y a **quatre** cas (chaque liste vide ou non). En `if`, ils **fondent** en conditions imbriquées, et on ne les distingue plus :
 
@@ -331,71 +445,69 @@ def sont_egales(l1: Liste, l2: Liste) -> bool:
     return tete(l1) == tete(l2) and sont_egales(queue(l1), queue(l2))
 ```
 
-### La version la plus proche de Gleam : `dataclass` + `match`
-
-Python possède aussi le **pattern matching** (`match` / `case`), mais il est vraiment fait pour des **classes**, en particulier des **dataclasses**. Avec elles, on définit `Vide` et `Cons` **exactement** comme les deux constructeurs de Gleam. C'est une **autre représentation** de la liste, à la place des tuples :
-
-```python
-from dataclasses import dataclass
-
-@dataclass
-class Vide:
-    pass
-
-@dataclass
-class Cons[T]:
-    tete: T
-    queue: "Liste[T]"
-
-type Liste[T] = Vide | Cons[T]
-```
-
-On construit alors une liste **à l'identique de Gleam** (en Python, `Vide()` prend des parenthèses car on crée une instance) :
-
-```python
-exemple = Cons(2, Cons(3, Cons(4, Vide())))
-#   en Gleam :  Cons(2, Cons(3, Cons(4, Vide)))
-```
-
-Et le `match` retrouve tout son sens, **un cas par constructeur**, comme le `case` de Gleam :
-
-```python
-def taille(lst: Liste) -> int:
-    match lst:
-        case Vide():
-            return 0
-        case Cons(_, queue):
-            return 1 + taille(queue)
-```
-
-Sur deux listes, les **quatre** cas redeviennent nets (à comparer avec la version `if` juste au-dessus) :
-
-```python
-def sont_egales(l1: Liste, l2: Liste) -> bool:
-    match l1, l2:
-        case Vide(), Vide():
-            return True
-        case Vide(), Cons(_, _):
-            return False
-        case Cons(_, _), Vide():
-            return False
-        case Cons(t1, q1), Cons(t2, q2):
-            return t1 == t2 and sont_egales(q1, q2)
-```
-
-Cette écriture est **hors programme** (les dataclasses ne sont pas exigées), mais c'est le calque le plus exact de Gleam, et la façon dont `match` est vraiment prévu pour être utilisé. Une différence subtile demeure : Python, contrairement à Gleam, **ne vérifie pas** que tu as traité tous les cas.
-
 La grande différence reste que **Gleam n'a pas de boucle** : la récursivité y était le seul chemin, alors qu'en Python on la **choisit**, parce que c'est la **structure** qui l'appelle. Toutes les autres fonctions (`contient`, `inverser`, `concat`, `repete`) se transposent de la même manière.
 
 !!! note "Une troisième fois, plus tard"
     Après la programmation objet, on réimplémentera cette même structure une **troisième** fois : une liste chaînée en **objet impératif** (avec des `while`). Même structure, trois paradigmes (fonctionnel, impératif, objet), de quoi mesurer ce que la récursivité apporte ici.
 
-## Exercices
+## 3 Le coût
+
+On appelle $T(n)$ le **nombre d'opérations élémentaires** (comparaisons, additions, appels) effectuées par une fonction sur une liste de taille $n$. Une fonction récursive s'appelle elle-même sur une liste plus courte : son coût $T(n)$ s'exprime donc à partir de $T(n-1)$. C'est une **suite récurrente**, et calculer le coût, c'est trouver sa **forme générale**.
+
+### 3.1 Exemple : la taille
+
+```gleam
+pub fn taille(lst: Liste(a)) -> Int {
+  case lst {
+    Vide -> 0
+    Cons(_, queue) -> 1 + taille(queue)
+  }
+}
+```
+
+- Cas `Vide` : un nombre fixe d'opérations, qu'on note $a$. Donc $T(0) = a$.
+- Cas `Cons` : un nombre fixe d'opérations (le test, l'addition), qu'on note $b$, **plus** l'appel sur la queue, qui est de taille $n-1$. Donc $T(n) = T(n-1) + b$.
+
+$T$ est une **suite arithmétique** de premier terme $a$ et de raison $b$ :
+
+$$T(n) = a + b \times n$$
+
+Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs exactes de $a$ et de $b$ ne comptent pas, seule la **forme** de la suite décide.
+
+### 3.2 À toi : `ajouter_fin` et `inverser`
+
+!!! question "Le coût de `inverser`"
+    1. Écris la relation de récurrence du coût $A(n)$ de `ajouter_fin(x, lst)`, pour une liste `lst` de taille $n$. Quelle est sa forme générale ?
+
+        ??? success "Réponse"
+            $A(0) = a$ et $A(n) = A(n-1) + b$ : c'est la même récurrence que `taille`. $A(n) = a + b \times n$, coût **linéaire**.
+
+    2. `inverser` appelle `inverser` sur la queue (taille $n-1$), **puis** `ajouter_fin` sur le résultat (taille $n-1$ aussi). Écris la relation de récurrence de son coût $T(n)$.
+
+        ??? success "Réponse"
+            $T(0) = c$ et $T(n) = T(n-1) + A(n-1) + d$, où $d$ compte les opérations fixes de l'appel. En remplaçant $A(n-1)$ : $T(n) = T(n-1) + b \times (n-1) + (a + d)$.
+
+    3. Cette suite n'est ni arithmétique ni géométrique : ce qu'on ajoute à chaque étape **grandit** avec $n$. Trouve sa forme générale, en additionnant les écarts $T(k) - T(k-1)$ pour $k$ allant de $1$ à $n$.
+
+        ??? success "Réponse"
+            Les termes intermédiaires se simplifient :
+
+            $$T(n) = T(0) + b \times \big(0 + 1 + \dots + (n-1)\big) + (a + d) \times n = c + b \times \frac{n(n-1)}{2} + (a + d) \times n$$
+
+            Le terme en $n^2$ l'emporte : le coût est **quadratique**, en $O(n^2)$. C'est `ajouter_fin`, linéaire, appelée $n$ fois, qui coûte cher.
+
+!!! question "Vérifie en dépliant"
+    Déplie `inverser(2 -> 3 -> 4)` en écrivant chaque appel à `ajouter_fin`. Combien de fois chaque élément est-il reparcouru ? Tu dois **voir** le $O(n^2)$ apparaître, pas seulement le calculer.
+
+    ??? success "Ce qu'on observe"
+        `inverser` fait un appel par élément ($n$ appels), et **chaque** appel relance `ajouter_fin`, qui reparcourt toute la liste déjà renversée (de longueur $0$, puis $1$, puis $2$…). On retrouve la somme $0 + 1 + \dots + (n-1)$ du calcul.
+
+## 4 Exercices
 
 !!! tip "Comment t'entraîner"
     Écris chaque fonction **d'abord en Gleam** (avec `case`), puis **en Python** (avec des `if` et les accesseurs `tete` / `queue`). Fais la **disjonction de cas au papier** avant de coder. Le corrigé **Gleam** est replié sous chaque exercice ; le corrigé **Python**, avec ses tests, est dans le fichier `liste_immuable.py`. (Pour `to_str`, ajoute `import gleam/int` en tête du fichier Gleam.)
 
-### Lecture
+### 4.1 Lire une liste
 
 !!! question "to_str"
     Renvoie une chaîne façon `"2 -> 3 -> 4 -> _|_"` (la liste vide donne `"_|_"`).
@@ -453,7 +565,9 @@ La grande différence reste que **Gleam n'a pas de boucle** : la récursivité y
         }
         ```
 
-### Création
+### 4.2 Construire une liste
+
+#### 4.2.1 Prendre, sauter, supprimer
 
 !!! question "take"
     Renvoie les `n` premiers éléments. `take(2, 2 -> 3 -> 4)` donne `2 -> 3`. Si `n` dépasse la taille, on prend tout.
@@ -506,7 +620,7 @@ La grande différence reste que **Gleam n'a pas de boucle** : la récursivité y
         }
         ```
 
-### Construire par filtrage : vers `filtrer`
+#### 4.2.2 Par filtrage : vers `filtrer`
 
 On **garde** certains éléments selon une **condition**. Écris ces quatre fonctions, puis regarde ce qu'elles ont en commun. (En Python, ce sont des variantes de `pairs` : on change la condition.)
 
@@ -602,7 +716,7 @@ filtrer(fn(x) { x > 0 }, lst)        // les positifs
 filtrer(fn(x) { x < 0 }, lst)        // les négatifs
 ```
 
-### Construire par transformation : vers `mapper`
+#### 4.2.3 Par transformation : vers `mapper`
 
 Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces trois fonctions.
 
@@ -665,31 +779,7 @@ mapper(fn(x) { 3 * x }, lst)   // les triples
 !!! tip "filtrer choisit, mapper transforme"
     `filtrer` **garde** ou **jette** des éléments (la liste peut rétrécir) ; `mapper` **transforme** chaque élément (la liste garde sa taille). Ce sont deux outils très courants, et tu viens de les redécouvrir en remarquant que plusieurs fonctions n'en faisaient qu'une.
 
-### Vers le tri fusion
-
-!!! question "fusionner"
-    À partir de **deux listes déjà triées**, renvoie une seule liste triée. `fusionner(2 -> 4 -> 6, 3 -> 5 -> 7)` donne `2 -> 3 -> 4 -> 5 -> 6 -> 7`. C'est la brique du **tri fusion**, qu'on verra bientôt. Il y a ici **quatre** cas (chaque liste vide ou non).
-
-    ??? tip "Indice"
-        Les trois cas avec un `Vide` sont directs (si une liste est vide, le résultat est l'autre). Pour deux `Cons` : la tête du résultat est la **plus petite des deux têtes** ; pour la queue, refais une `fusionner` en n'avançant **que** du côté de cette plus petite tête.
-
-    ??? success "Corrigé Gleam"
-        ```gleam
-        pub fn fusionner(l1: Liste(Int), l2: Liste(Int)) -> Liste(Int) {
-          case l1, l2 {
-            Vide, Vide -> Vide
-            Vide, _ -> l2
-            _, Vide -> l1
-            Cons(t1, q1), Cons(t2, q2) ->
-              case t1 < t2 {
-                True -> Cons(t1, fusionner(q1, l2))
-                False -> Cons(t2, fusionner(l1, q2))
-              }
-          }
-        }
-        ```
-
-### En Python seulement
+### 4.3 En Python seulement
 
 !!! warning "Pourquoi pas en Gleam"
     Les fonctions qui suivent peuvent **échouer** sur certaines entrées : une liste vide n'a pas de dernier élément, un indice peut sortir des bornes. En Python, on le signale par une **assertion** qui lève une erreur. En Gleam, il n'y a pas d'exception : il faudrait renvoyer un `Result` ou un `Option` pour dire « ça a échoué », une notion qu'on verra plus tard. On les fait donc **uniquement en Python**. Les corrigés (avec leurs tests) sont dans `liste_immuable.py`.
@@ -704,3 +794,59 @@ mapper(fn(x) { 3 * x }, lst)   // les triples
 - **`supprimer_n(n, lst)`** : supprime l'élément d'indice `n` (erreur si hors bornes).
 - **`supprimer_fin(lst)`** : supprime le dernier élément (erreur si la liste est vide).
 - **`trier(lst)`** : tri par sélection (il s'appuie sur `minimum`, donc entraîné lui aussi côté Python).
+
+## 5 Pour aller plus loin
+
+### 5.1 La version la plus proche de Gleam : `dataclass` + `match`
+
+Python possède aussi le **pattern matching** (`match` / `case`), mais il est vraiment fait pour des **classes**, en particulier des **dataclasses**. Avec elles, on définit `Vide` et `Cons` **exactement** comme les deux constructeurs de Gleam. C'est une **autre représentation** de la liste, à la place des tuples :
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class Vide:
+    pass
+
+@dataclass
+class Cons[T]:
+    tete: T
+    queue: "Liste[T]"
+
+type Liste[T] = Vide | Cons[T]
+```
+
+On construit alors une liste **à l'identique de Gleam** (en Python, `Vide()` prend des parenthèses car on crée une instance) :
+
+```python
+exemple = Cons(2, Cons(3, Cons(4, Vide())))
+#   en Gleam :  Cons(2, Cons(3, Cons(4, Vide)))
+```
+
+Et le `match` retrouve tout son sens, **un cas par constructeur**, comme le `case` de Gleam :
+
+```python
+def taille(lst: Liste) -> int:
+    match lst:
+        case Vide():
+            return 0
+        case Cons(_, queue):
+            return 1 + taille(queue)
+```
+
+Sur deux listes, les **quatre** cas redeviennent nets (à comparer avec la version `if` de la section 2) :
+
+```python
+def sont_egales(l1: Liste, l2: Liste) -> bool:
+    match l1, l2:
+        case Vide(), Vide():
+            return True
+        case Vide(), Cons(_, _):
+            return False
+        case Cons(_, _), Vide():
+            return False
+        case Cons(t1, q1), Cons(t2, q2):
+            return t1 == t2 and sont_egales(q1, q2)
+```
+
+Cette écriture est **hors programme** (les dataclasses ne sont pas exigées), mais c'est le calque le plus exact de Gleam, et la façon dont `match` est vraiment prévu pour être utilisé. Une différence subtile demeure : Python, contrairement à Gleam, **ne vérifie pas** que tu as traité tous les cas.
