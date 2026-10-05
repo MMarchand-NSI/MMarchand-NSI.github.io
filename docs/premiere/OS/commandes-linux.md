@@ -1,257 +1,215 @@
-# Système de fichiers et commandes Linux
+# Se déplacer dans l'arborescence
 
-## 1. Système de fichiers Linux
+!!! note "Rappel d'ouverture (5 minutes, cours fermé)"
+    Réponds **sans rouvrir** la page précédente, en écrivant tes réponses.
 
-### 1.1 Chemins absolus et relatifs
+    1. Cite deux rôles d'un système d'exploitation.
+    2. Pour chacun, donne un exemple de ce qui se passerait sans lui.
 
-#### Chemin absolu
+    ??? success "Corrigé"
+        Deux parmi : gérer la **mémoire** (sans lui, un programme pourrait écraser la mémoire d'un autre), gérer les **processus** (sans lui, un seul programme tournerait à la fois), gérer le **système de fichiers** (sans lui, le disque serait une suite d'octets sans structure), gérer les **pilotes** (sans lui, chaque programme devrait savoir parler à chaque matériel).
 
-Un **chemin absolu** commence **toujours par `/`** (la racine) et indique l'emplacement exact d'un fichier depuis la racine.
+## 1. Le terminal est toujours quelque part
 
-**Exemple** : `/home/alice/Documents/notes.txt`
-
-Peu importe où vous êtes dans l'arborescence, ce chemin vous amène toujours au même fichier.
-
-#### Chemin relatif
-
-Un **chemin relatif** ne commence **pas par `/`** et dépend de votre **position actuelle** dans l'arborescence.
-
-**Exemple** : si vous êtes dans `/home/alice/`, alors :
-
-- `Documents/notes.txt` désigne `/home/alice/Documents/notes.txt`
-- `../bob/` désigne `/home/bob/` (on remonte d'un niveau avec `..`)
-
-**Raccourcis** :
-
-- `.` désigne le **répertoire courant**
-- `..` désigne le **répertoire parent** (celui au-dessus)
-- `~` désigne le **répertoire personnel** de l'utilisateur (`/home/alice` si vous êtes alice)
-
-!!! example "Navigation"
-    ```bash
-    pwd                    # Affiche : /home/alice
-    cd Documents           # Va dans /home/alice/Documents
-    pwd                    # Affiche : /home/alice/Documents
-    cd ..                  # Remonte à /home/alice
-    cd /etc                # Va dans /etc (chemin absolu)
-    cd ~/Documents         # Va dans /home/alice/Documents (~ = home)
-    ```
-
-## 2. Commandes Linux de base
-
-Voici un **tableau de référence** des commandes essentielles :
-
-### 2.1 Navigation et information
-
-| Commande | Description | Exemple |
-|----------|-------------|---------|
-| `pwd` | **P**rint **W**orking **D**irectory : affiche le répertoire courant | `pwd` → `/home/alice` |
-| `ls` | **L**i**s**t : liste les fichiers et dossiers | `ls` |
-| `ls -l` | Liste détaillée (permissions, taille, date) | `ls -l` |
-| `ls -a` | Liste **tous** les fichiers (y compris les cachés `.`) | `ls -a` |
-| `ls -lh` | Liste avec tailles **h**umainement lisibles (Ko, Mo, Go) | `ls -lh` |
-| `cd <dir>` | **C**hange **D**irectory : change de répertoire | `cd Documents` |
-| `cd ..` | Remonte au répertoire parent | `cd ..` |
-| `cd ~` | Va dans le répertoire personnel | `cd ~` |
-| `cd /` | Va à la racine | `cd /` |
-
-### 2.2 Manipulation de fichiers et répertoires
-
-| Commande | Description | Exemple |
-|----------|-------------|---------|
-| `mkdir <dir>` | **M**a**k**e **dir**ectory : crée un répertoire | `mkdir projet` |
-| `mkdir -p a/b/c` | Crée une arborescence complète | `mkdir -p dossier/sous-dossier` |
-| `touch <file>` | Crée un fichier vide (ou met à jour la date de modification) | `touch notes.txt` |
-| `cp <src> <dest>` | **C**o**p**y : copie un fichier | `cp test.txt backup.txt` |
-| `cp -r <dir1> <dir2>` | Copie un répertoire **r**écursivement | `cp -r projet/ backup/` |
-| `mv <src> <dest>` | **M**o**v**e : déplace ou renomme | `mv old.txt new.txt` |
-| `rm <file>` | **R**e**m**ove : supprime un fichier | `rm test.txt` |
-| `rm -r <dir>` | Supprime un répertoire et son contenu | `rm -r dossier/` |
-| `rm -rf <dir>` | Supprime **f**orcément (sans confirmation) | ⚠️ **Dangereux** : `rm -rf /` détruit tout ! |
-
-!!! danger "Attention avec rm"
-    `rm` supprime **définitivement** les fichiers (pas de corbeille). `rm -rf` est encore plus dangereux : il supprime tout sans demander de confirmation.
-
-### 2.3 Affichage et édition de fichiers
-
-| Commande | Description | Exemple |
-|----------|-------------|---------|
-| `cat <file>` | Con**cat**enate : affiche le contenu complet d'un fichier | `cat notes.txt` |
-| `head <file>` | Affiche les **10 premières lignes** | `head fichier.log` |
-| `head -n 5 <file>` | Affiche les 5 premières lignes | `head -n 5 fichier.log` |
-| `tail <file>` | Affiche les **10 dernières lignes** | `tail fichier.log` |
-| `tail -f <file>` | Affiche les dernières lignes et **suit** les ajouts en temps réel | `tail -f /var/log/syslog` |
-| `less <file>` | Affiche un fichier page par page (navigation avec ↑↓, quitter avec `q`) | `less long.txt` |
-| `nano <file>` | Éditeur de texte simple (Ctrl+O pour sauver, Ctrl+X pour quitter) | `nano config.txt` |
-
-### 2.4 Recherche
-
-| Commande | Description | Exemple |
-|----------|-------------|---------|
-| `grep <motif> <file>` | Cherche un motif dans un fichier | `grep "error" fichier.log` |
-| `grep -r <motif> <dir>` | Cherche **r**écursivement dans tous les fichiers d'un répertoire | `grep -r "TODO" projet/` |
-| `grep -i <motif>` | Recherche **i**nsensible à la casse | `grep -i "erreur" log.txt` |
-| `find <dir> -name <nom>` | Trouve des fichiers par nom | `find /home -name "*.txt"` |
-| `find <dir> -type f` | Trouve tous les **f**ichiers | `find . -type f` |
-| `find <dir> -type d` | Trouve tous les répertoires (**d**irectory) | `find . -type d` |
-
-### 2.5 Redirections et pipes
-
-Les **redirections** permettent de rediriger l'entrée/sortie des commandes. Les **pipes** permettent de chaîner des commandes.
-
-| Syntaxe | Description | Exemple |
-|---------|-------------|---------|
-| `cmd > file` | Redirige la **sortie** de `cmd` dans `file` (écrase) | `ls > liste.txt` |
-| `cmd >> file` | **Ajoute** la sortie à la fin de `file` | `echo "log" >> fichier.log` |
-| `cmd < file` | Utilise `file` comme **entrée** de `cmd` | `sort < noms.txt` |
-| `cmd1 \| cmd2` | **Pipe** : la sortie de `cmd1` devient l'entrée de `cmd2` | `ls \| grep ".txt"` |
-
-!!! example "Exemples de pipes"
-    ```bash
-    # Compter le nombre de fichiers dans le répertoire
-    ls | wc -l
-
-    # Afficher les 5 fichiers les plus gros
-    ls -lh | sort -k5 -h | tail -5
-
-    # Chercher "error" dans tous les logs et compter les occurrences
-    grep -r "error" /var/log/ | wc -l
-
-    # Afficher les processus Python en cours
-    ps aux | grep python
-    ```
-
-### 2.6 Permissions
-
-Sous Linux, chaque fichier a des **permissions** qui déterminent qui peut le lire, l'écrire, ou l'exécuter.
-
-#### Afficher les permissions
+Ouvre ton dépôt dans VS Code, puis le terminal (**Terminal > Nouveau terminal**). Tape :
 
 ```bash
-ls -l fichier.txt
--rw-r--r-- 1 alice users 1234 Jan 10 12:00 fichier.txt
+pwd
 ```
 
-Décomposition de `-rw-r--r--` :
+`pwd` (*print working directory*) affiche le **répertoire courant** : l'endroit de l'arborescence où se trouve le terminal. Chez toi, le résultat ressemble à `/home/eleve/nsi`, avec ton nom d'utilisateur et le nom de ton dépôt.
 
-- **1er caractère** : type (`-` = fichier, `d` = répertoire, `l` = lien symbolique)
-- **3 caractères suivants** : permissions du **propriétaire** (alice) → `rw-` = lecture + écriture
-- **3 suivants** : permissions du **groupe** (users) → `r--` = lecture seule
-- **3 derniers** : permissions des **autres** utilisateurs → `r--` = lecture seule
+!!! warning "Vérifie que ta réponse commence par `/home/`"
+    Si `pwd` affiche un chemin qui commence par `/mnt/c/`, ton dépôt est sur le disque Windows. Une partie de la séance suivante ne fonctionnera pas : **appelle ton professeur**.
 
-**Signification** :
+Le répertoire courant ne s'affiche **jamais tout seul**. Le terminal le connaît, toi tu dois le demander, ou le suivre de tête. C'est lui qui fait réussir ou échouer la plupart des commandes de cette page.
 
-- `r` = **r**ead (lecture) : peut lire le fichier
-- `w` = **w**rite (écriture) : peut modifier le fichier
-- `x` = e**x**ecute (exécution) : peut exécuter le fichier (s'il est un programme ou script)
+## 2. Chemins absolus et chemins relatifs
 
-#### Modifier les permissions avec `chmod`
+Un **chemin absolu** commence par `/`, la **racine**. Il désigne toujours le même endroit, quel que soit le répertoire courant : `/home/eleve/nsi/os/notes`.
 
-**Syntaxe symbolique** :
+Un **chemin relatif** ne commence pas par `/`. Il se lit **à partir du répertoire courant** : depuis `/home/eleve/nsi`, `os/notes` désigne `/home/eleve/nsi/os/notes`.
+
+Trois raccourcis :
+
+- `.` désigne le répertoire courant.
+- `..` désigne le répertoire **parent**, celui juste au-dessus.
+- `~` désigne ton répertoire personnel, `/home/eleve`.
+
+## 3. Les commandes de la séance
+
+| Commande | Ce qu'elle fait | Exemple |
+|---|---|---|
+| `pwd` | affiche le répertoire courant | `pwd` |
+| `ls` | liste le contenu d'un répertoire (le courant, si on n'en donne pas) | `ls os` |
+| `ls -a` | liste **aussi** les fichiers cachés, dont le nom commence par `.` | `ls -a` |
+| `cd <dir>` | change le répertoire courant | `cd os/notes` |
+| `cd ..` | remonte au parent | `cd ..` |
+| `mkdir <dir>` | crée un répertoire | `mkdir essais` |
+| `mkdir -p a/b` | crée un répertoire et ceux qui manquent sur le chemin | `mkdir -p os/scripts/essais` |
+| `touch <file>` | crée un fichier vide | `touch td.txt` |
+| `cp <src> <dest>` | copie un fichier | `cp td.txt td2.txt` |
+| `mv <src> <dest>` | déplace ou renomme | `mv td2.txt archive.txt` |
+| `rm <file>` | supprime un fichier | `rm archive.txt` |
+| `cat <file> ...` | con**cat**ène les fichiers donnés, dans l'ordre, et écrit le résultat sur la sortie standard (le terminal) | `cat cours.txt td.txt` |
+
+!!! danger "`rm` ne passe pas par la corbeille"
+    Un fichier supprimé avec `rm` est perdu. Relis toujours la commande avant de valider.
+
+## 4. Construire l'arborescence de travail
+
+Depuis la **racine de ton dépôt** (là où `pwd` t'a placé en ouvrant le terminal), tape ces deux lignes :
 
 ```bash
-chmod u+x script.sh     # Ajoute le droit d'exécution pour le user (propriétaire)
-chmod g+w fichier.txt   # Ajoute l'écriture pour le group
-chmod o-r fichier.txt   # Retire la lecture pour les others
-chmod a+x script.sh     # Ajoute l'exécution pour all (u+g+o)
+mkdir -p os/notes os/scripts/essais
+touch os/notes/cours.txt os/notes/td.txt os/scripts/calcul.py
 ```
 
-**Syntaxe octale** (plus compacte) :
+Tu obtiens :
 
-Chaque permission a une valeur : `r=4`, `w=2`, `x=1`. On additionne pour obtenir un chiffre :
-
-- `rwx` = 4+2+1 = **7**
-- `rw-` = 4+2 = **6**
-- `r-x` = 4+1 = **5**
-- `r--` = **4**
-
-```bash
-chmod 755 script.sh     # rwxr-xr-x (propriétaire: tout, groupe+autres: lecture+exec)
-chmod 644 fichier.txt   # rw-r--r-- (propriétaire: lire+écrire, autres: lire)
-chmod 600 secret.txt    # rw------- (seul le propriétaire peut lire/écrire)
+```
+nsi/                  ← la racine de ton dépôt
+└── os/
+    ├── notes/
+    │   ├── cours.txt
+    │   └── td.txt
+    └── scripts/
+        ├── calcul.py
+        └── essais/
 ```
 
-!!! example "Rendre un script exécutable"
-    Vous créez un script Python `test.py`. Par défaut, il n'est pas exécutable :
+Recopie ce schéma sur ton cahier : il sert pour tous les exercices.
 
-    ```bash
-    ls -l test.py
-    -rw-r--r-- 1 alice users 245 Jan 10 12:00 test.py
+## 5. Prédire avant de taper
 
-    ./test.py              # ❌ Erreur : Permission denied
+!!! question "Exercice 1 : où est le terminal ?"
+    Le terminal est à la racine du dépôt, `/home/eleve/nsi`. On tape, dans l'ordre :
 
-    chmod +x test.py       # Rend le fichier exécutable
-
-    ./test.py              # ✅ Le script s'exécute
+    ```bash linenums="1"
+    cd os/scripts
+    cd ..
+    cd notes
+    cd ../scripts/essais
+    cd ../../..
     ```
 
-### 2.7 Gestion des processus
+    Sur ton cahier, écris ce qu'afficherait `pwd` :
 
-Un **processus** est un programme en cours d'exécution. Chaque processus a un **PID** (*Process ID*), un numéro unique.
+    - après la ligne 1
+    - après la ligne 2
+    - après la ligne 3
+    - après la ligne 4
+    - après la ligne 5
 
-| Commande | Description | Exemple |
-|----------|-------------|---------|
-| `ps` | Affiche les processus du terminal actuel | `ps` |
-| `ps aux` | Affiche **tous** les processus de tous les utilisateurs | `ps aux` |
-| `top` | Affiche les processus en temps réel (CPU, RAM) - sortir avec `q` | `top` |
-| `htop` | Version améliorée de `top` (à installer : `sudo apt install htop`) | `htop` |
-| `kill <PID>` | Envoie un signal TERM (terminaison propre) au processus | `kill 1234` |
-| `kill -9 <PID>` | **Force** l'arrêt du processus (SIGKILL, brutal) | `kill -9 1234` |
-| `killall <nom>` | Tue tous les processus avec ce nom | `killall firefox` |
+    Pose ton doigt sur le schéma à chaque ligne. Une fois tes cinq réponses écrites, tape les commandes une à une, avec `pwd` après chacune, et compare.
 
-!!! example "Trouver et tuer un processus bloqué"
-    ```bash
-    # Trouver le PID d'un programme bloqué (ex: Firefox)
-    ps aux | grep firefox
-    # alice  1234  5.2  2.1  firefox
+    ??? tip "Indice"
+        `..` remonte d'**un** niveau. `../../..` en remonte trois, un par `..`.
 
-    # Tuer le processus
-    kill 1234
+    ??? success "Réponses"
+        1. `/home/eleve/nsi/os/scripts`
+        2. `/home/eleve/nsi/os`
+        3. `/home/eleve/nsi/os/notes`
+        4. `/home/eleve/nsi/os/scripts/essais`
+        5. `/home/eleve/nsi` : depuis `essais`, les trois remontées passent par `scripts`, puis `os`, puis la racine du dépôt.
 
-    # Si ça ne marche pas, forcer :
-    kill -9 1234
+!!! question "Exercice 2 : que va afficher `ls` ?"
+    Le terminal est revenu à la racine du dépôt. Sur ton cahier, écris ce qu'affiche chacune de ces commandes :
+
+    ```bash linenums="1"
+    ls os
+    ls os/scripts
+    ls -a os/notes
     ```
 
-**Lancer un processus en arrière-plan** :
+    Tape-les ensuite et compare.
 
-```bash
-python3 serveur.py &      # Le & lance en arrière-plan
-jobs                       # Liste les processus en arrière-plan
-fg %1                      # Ramène le job 1 au premier plan
-```
+    ??? success "Réponses"
+        1. `notes  scripts`
+        2. `calcul.py  essais` : `ls` liste les fichiers **et** les répertoires, et `essais` existe même s'il est vide.
+        3. `.  ..  cours.txt  td.txt` : avec `-a`, `ls` montre aussi `.` et `..`, qui existent dans tout répertoire.
 
-### 2.8 Gestion des paquets (Alpine Linux)
+!!! question "Exercice 3 : une commande qui échoue"
+    Le terminal est dans `/home/eleve/nsi/os/notes`. On tape `cd scripts`.
 
-Alpine utilise `apk` comme gestionnaire de paquets :
+    Sur ton cahier :
 
-| Commande | Description |
-|----------|-------------|
-| `doas apk update` | Met à jour la liste des paquets disponibles |
-| `doas apk upgrade` | Met à jour tous les paquets installés |
-| `doas apk add <paquet>` | Installe un paquet |
-| `doas apk del <paquet>` | Désinstalle un paquet |
-| `apk search <mot>` | Cherche un paquet |
+    - ce que répond le terminal
+    - où se trouve le terminal ensuite
+    - la commande qu'il fallait taper pour aller dans `scripts`
 
-!!! info "doas vs sudo"
-    - **`sudo`** : **S**uper**u**ser **do** (utilisé sur Ubuntu, Debian, etc.)
-    - **`doas`** : **Do as** (utilisé sur Alpine, OpenBSD) - plus simple et léger
+    ??? success "Réponses"
+        - `bash: cd: scripts: No such file or directory`. Le chemin `scripts` se lit depuis `notes`, et `notes` ne contient pas de répertoire `scripts`.
+        - Toujours dans `/home/eleve/nsi/os/notes` : une commande qui échoue ne déplace rien.
+        - `cd ../scripts`
 
-    Les deux permettent d'exécuter une commande avec les privilèges de `root` (superutilisateur).
+## 6. À toi
+
+!!! question "Exercice 4 : construire avec des chemins relatifs"
+    Place-toi dans `os/notes`. **Sans quitter ce répertoire**, et en n'utilisant que des chemins **relatifs** :
+
+    - crée un répertoire `projet` à côté de `notes`, dans `os`
+    - crée un répertoire `images` dans `projet`
+    - crée un fichier vide `index.html` dans `projet`
+
+    Vérifie avec `ls ../projet`. Puis écris sur ton cahier le **chemin absolu** de `index.html`.
+
+    ??? tip "Indice léger"
+        Où est `os` quand tu es dans `notes` ?
+
+    ??? tip "Indice plus précis"
+        `os` est le parent de `notes`, donc `..`. Tout ce qui est à créer dans `os` commence par `../`.
+
+    ??? question "Avant d'ouvrir la solution"
+        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **tes** commandes ?
+
+    ??? success "Solution"
+        ```bash
+        mkdir ../projet
+        mkdir ../projet/images
+        touch ../projet/index.html
+        ```
+
+        `ls ../projet` affiche `images  index.html`, et le chemin absolu est `/home/eleve/nsi/os/projet/index.html`.
+
+!!! question "Exercice 5 : les fichiers cachés"
+    Reviens à la racine de ton dépôt et compare `ls` et `ls -a`. Sur ton cahier, note les noms qui n'apparaissent qu'avec `-a`.
+
+    ??? success "Réponse"
+        Au moins `.`, `..` et `.git`, le répertoire où sont rangées les informations du dépôt. Selon ton dépôt, d'autres noms qui commencent par un point peuvent apparaître. On les voit, on n'y touche pas.
 
 ## Résumé
 
-- Le système de fichiers Linux est une **arborescence** partant de `/`
-- **Chemin absolu** : commence par `/` (ex: `/home/alice/fichier.txt`)
-- **Chemin relatif** : dépend du répertoire courant (ex: `../bob/`)
-- Les **permissions** (`rwx`) contrôlent qui peut lire/écrire/exécuter un fichier
-- **`chmod`** modifie les permissions (syntaxe symbolique ou octale)
-- Les **redirections** (`>`, `<`) et **pipes** (`|`) permettent de chaîner des commandes
-- Les **processus** sont gérés avec `ps`, `top`, `kill`
-
-**Commandes essentielles à retenir** : `pwd`, `ls`, `cd`, `mkdir`, `touch`, `cp`, `mv`, `rm`, `cat`, `grep`, `chmod`, `ps`, `top`, `kill`
+- Le terminal a toujours un **répertoire courant**, que `pwd` affiche.
+- Un chemin **absolu** commence par `/`, un chemin **relatif** se lit depuis le répertoire courant.
+- `..` est le parent, `.` le répertoire courant.
+- Une commande qui échoue ne change pas le répertoire courant. Devant `No such file or directory`, le premier réflexe est `pwd`.
 
 ---
 
-**Pour aller plus loin** :
+**Pour aller plus loin**
 
-- Tutoriel Linux complet (5h) : [https://www.youtube.com/watch?v=ZtqBQ68cfJc](https://www.youtube.com/watch?v=ZtqBQ68cfJc)
+??? info "Redirections et pipes"
+    | Syntaxe | Ce qu'elle fait | Exemple |
+    |---|---|---|
+    | `cmd > file` | écrit la sortie de `cmd` dans `file` (écrase) | `ls > liste.txt` |
+    | `cmd >> file` | ajoute la sortie à la fin de `file` | `echo "log" >> journal.txt` |
+    | `cmd1 \| cmd2` | la sortie de `cmd1` devient l'entrée de `cmd2` | `ls \| wc -l` |
+
+??? info "Chercher un fichier ou un mot"
+    | Commande | Ce qu'elle fait | Exemple |
+    |---|---|---|
+    | `grep <motif> <file>` | cherche un motif dans un fichier | `grep "def" calcul.py` |
+    | `grep -r <motif> <dir>` | cherche dans tout un répertoire | `grep -r "TODO" os` |
+    | `find <dir> -name <nom>` | trouve des fichiers par leur nom | `find . -name "*.py"` |
+
+??? info "Les processus"
+    Un **processus** est un programme en cours d'exécution, repéré par un numéro, son **PID**.
+
+    | Commande | Ce qu'elle fait |
+    |---|---|
+    | `ps` | affiche les processus du terminal |
+    | `top` | affiche les processus en temps réel (quitter avec `q`) |
+    | `kill <PID>` | demande au processus de s'arrêter |
+
+- Tutoriel Linux complet (5 h) : [https://www.youtube.com/watch?v=ZtqBQ68cfJc](https://www.youtube.com/watch?v=ZtqBQ68cfJc)
