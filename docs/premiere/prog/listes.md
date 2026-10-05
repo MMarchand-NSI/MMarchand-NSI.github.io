@@ -136,7 +136,7 @@ C'est l'usage le plus important : partir d'une **liste vide** et la remplir, tou
 ```python
 # Construire la liste des carrés de 0 à 9
 carres: list[int] = []          # 1. accumulateur : une liste vide
-for i in range(10):             # 2. parcours
+for i in range(0, 10):             # 2. parcours
     carres.append(i * i)        # 3. on accumule en ajoutant à la fin
 print(carres)                   # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 ```

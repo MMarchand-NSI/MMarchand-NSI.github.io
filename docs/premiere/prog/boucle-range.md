@@ -39,9 +39,8 @@ range(5, 9)    # la séquence 5, 6, 7, 8
 
 Pour un anglophone, la première ligne se lit presque comme une phrase : *for i in range 5, 9*, « pour `i` dans l'intervalle de 5 à 9 ». Lis-la ainsi à voix haute, en te souvenant que 9 est exclu.
 
-!!! tip "Deux conséquences de l'intervalle semi-ouvert"
-    - `range(n)` vaut `range(0, n)` : la séquence `0, 1, ..., n-1`, soit **`n` entiers** en partant de 0.
-    - Comme `b` est exclu, `b - a` est exactement le **nombre d'entiers** parcourus.
+!!! tip "Une conséquence de l'intervalle semi-ouvert"
+    Comme `b` est exclu, `b - a` est exactement le **nombre d'entiers** parcourus : `range(0, n)` parcourt `0, 1, ..., n-1`, soit **`n` entiers**.
 
 !!! note "Ce choix n'est pas anodin"
     Exclure la borne haute peut sembler arbitraire. Ce n'est pas le cas : c'est un choix réfléchi, dont les raisons les plus profondes vont bien au-delà de ce qu'on voit en première, et même au-delà de la licence.
@@ -84,7 +83,7 @@ Pour un anglophone, la première ligne se lit presque comme une phrase : *for i 
 
     **Ce que cela change dans un programme.** Les corrections de $\pm 1$ ne disparaissent pas toutes : elles se **concentrent à l'interface**, au moment où l'on traduit un énoncé posé sur des fermés, et chacune traduit un fermé présent dans l'énoncé.
 
-    - **Le cardinal est $b - a$.** Pour $a \leqslant b$, `for i in range(a, b)` fait exactement `b - a` tours, et les indices d'une séquence `s` sont exactement `range(len(s))`.
+    - **Le cardinal est $b - a$.** Pour $a \leqslant b$, `for i in range(a, b)` fait exactement `b - a` tours, et les indices d'une séquence `s` sont exactement `range(0, len(s))`.
     - **Le recollement est sans chevauchement.** Couper en `k` puis recoller redonne le tout : `s[0:k] + s[k:len(s)] == s` pour tout `k`, sans cas particulier. C'est la propriété `take(n, s) + drop(n, s) == s` des exercices de cette page. Deux boucles successives sur `range(a, b)` puis `range(b, c)` parcourent `range(a, c)`, sans oubli ni doublon.
     - **L'intervalle vide ne fait aucun tour.** `range(a, a)` est vide, et l'accumulateur garde sa valeur de départ. Le `+ 1` de `range(1, n + 1)`, dans `factorielle`, n'est pas une exception : il traduit l'énoncé, qui parle des entiers **de 1 à $n$**, c'est-à-dire d'un fermé. C'est le seul `+ 1` de `factorielle`.
     - **Diviser pour régner.** La recherche dichotomique et le tri fusion, au programme, coupent un intervalle en deux. En semi-ouvert, $[lo\,;\,hi)$ se coupe en $[lo\,;\,mid)$ et $[mid\,;\,hi)$, et la boucle s'arrête quand l'intervalle est vide, `lo == hi` :
@@ -109,26 +108,116 @@ Pour un anglophone, la première ligne se lit presque comme une phrase : *for i 
 
     C'est ce qui se passe en Rust : pour parcourir les 256 valeurs d'un octet, `0u8..256` est refusé à la compilation (« *range endpoint is out of range for `u8`* »), et il faut écrire `0u8..=255`. C'est précisément l'exemple que donne la RFC 1192, qui a introduit les intervalles inclusifs en Rust : « *iterating from `0_u8` up to and including some number `n` can be done via `for _ in 0..n + 1` at the moment, but this will fail if `n` is `255`* ». Les semi-ouverts sont la **convention par défaut** parce que, la plupart du temps, on travaille loin du bout du type, là où les entiers machine se comportent comme $\omega$. Au bout du type, c'est l'objet terminal qui décide, et la convention fermée devient nécessaire.
 
+## Quand la première borne dépasse la seconde
+
+!!! question "Prédire"
+    Écris sur ton cahier ce qu'affiche ce programme.
+
+    **N'exécute pas ce code tant que tu n'as pas écrit ta réponse.**
+
+    ```python
+    for i in range(6, 4):
+        print(i)
+    print("fini")
+    ```
+
+    ??? success "Réponse"
+        Il n'affiche que `fini`. Le `print(i)` ne s'exécute jamais, et aucune erreur ne se produit.
+
+`range(a, b)` représente les entiers $k$ tels que $a \leqslant k < b$. Quand $a$ est **supérieur ou égal** à $b$, aucun entier ne vérifie les deux conditions à la fois : avec `range(6, 4)`, il faudrait $6 \leqslant k$ et $k < 4$. L'intervalle est **vide**.
+
+!!! abstract "La boucle vide d'exécution"
+    Quand l'intervalle est vide, le corps de la boucle ne s'exécute pas une seule fois : on dit que la boucle est **vide d'exécution**. Python passe directement à la suite, sans erreur. C'est le cas de `range(6, 4)`, et aussi de `range(4, 4)`, qui ne contient aucun entier non plus.
+
+    Un accumulateur garde alors sa valeur de départ. Tu le retrouveras dans les exercices : `factorielle(0)` parcourt `range(1, 1)`, et vaut donc `1`.
+
+??? info "Pour le lecteur averti : l'intervalle vide quand a dépasse b"
+    *Suite de l'encart « Pour le lecteur averti » plus haut. Ne s'adresse pas aux élèves.*
+
+    Quand $a > b$, il n'y a **pas de flèche** $a \to b$ dans $\omega$, puisqu'une flèche n'existe que si $a \leqslant b$ (Riehl, exemple 1.1.4). `range(a, b)` n'est donc pas, dans ce cas, l'intervalle d'une flèche. Ce n'est pas non plus une identité, qui ajoute bien le vide, mais seulement de $a$ vers $a$.
+
+    Ce que `range(a, b)` implémente, c'est la **différence** $b \setminus a$, que le geste a fait apparaître : ce qui est dans $b$ mais pas dans $a$. Cette formule a un sens pour **tout couple** d'ordinaux, qu'une flèche existe ou non. Quand $a > b$, l'ordinal $b$ est inclus dans $a$, donc $b \setminus a = \varnothing$ : par exemple, $4 \setminus 6 = \{\beta \mid \beta < 4 \text{ et non } \beta < 6\} = \varnothing$. Le vide de `range(6, 4)` n'est pas un cas particulier ajouté à la règle, il sort de la même formule que tous les autres intervalles.
+
+    La longueur le confirme. Le foncteur $b - a$ n'est défini que sur les flèches, et vaudrait ici $-2$, ce qui n'a pas de sens. Le cardinal de la différence, lui, est défini partout : il vaut $b - a$ quand $a \leqslant b$, et $0$ quand $a > b$, puisque $b \setminus a$ est alors vide. C'est exactement `len(range(a, b))`.
+
 ## Répéter `n` fois
 
-« Répéter n fois » est simplement le cas où on parcourt `range(n)` **sans se soucier de l'élément**. Par convention, on nomme alors la variable `_` (souligné), pour dire « je n'utilise pas cette valeur ».
+« Répéter n fois » est simplement le cas où on parcourt `range(0, n)` **sans se soucier de l'élément**. Par convention, on nomme alors la variable `_` (souligné), pour dire « je n'utilise pas cette valeur ».
 
 ```python
-for _ in range(3):
+for _ in range(0, 3):
     print("Coucou !")     # affiché 3 fois
 ```
 
+!!! warning "Toujours les deux bornes"
+    Python accepte aussi `range(3)`, qui vaut `range(0, 3)`. Je ne veux plus que tu utilises `range` de cette façon : ce n'est qu'un raccourci propre à Python, qui ne fonctionnera pas ailleurs, et qui te fait oublier que tu travailles sur des **intervalles**. Donne toujours les deux bornes, même quand seul le nombre de tours compte.
+
 ## Parcourir une séquence par indice
 
-**Par indice**, quand on a besoin de la position. Les indices de `s` vont de `0` à `len(s) - 1`, donc on parcourt `range(len(s))` :
+**Par indice**, quand on a besoin de la position. Les indices de `s` vont de `0` à `len(s) - 1`, donc on parcourt `range(0, len(s))` :
 
 ```python
 s = "coucou"
-for i in range(len(s)):     # i parcourt 0, 1, 2, 3, 4, 5
+for i in range(0, len(s)):     # i parcourt 0, 1, 2, 3, 4, 5
     print(s[i])
 ```
 
-Là encore, c'est un `for each` : « pour chaque indice `i` dans `range(len(s))` ».
+Là encore, c'est un `for each` : « pour chaque indice `i` dans `range(0, len(s))` ».
+
+## Parcourir un intervalle à l'envers
+
+`range` accepte un troisième paramètre, le **pas**. Avec un pas de `-1`, il descend au lieu de monter.
+
+!!! question "Prédire"
+    Écris sur ton cahier les valeurs que prend `i`, puis dis laquelle des deux bornes, `5` ou `2`, est atteinte.
+
+    **N'exécute pas ce code tant que tu n'as pas écrit ta réponse.**
+
+    ```python
+    for i in range(5, 2, -1):
+        print(i)
+    ```
+
+    ??? success "Réponse"
+        `5`, `4`, `3`. La première borne, `5`, est atteinte, la seconde, `2`, ne l'est pas : c'est encore un intervalle semi-ouvert, lu de haut en bas. Compare avec `range(2, 5)`, qui donne `2`, `3`, `4` : chaque valeur est **décalée d'un cran vers le haut**.
+
+!!! danger "Parcourir un intervalle à l'envers"
+    On garde les bornes de l'intervalle, dans l'ordre inverse, et on utilise `i - 1` :
+
+    ```python
+    for i in range(b, a, -1):
+        ...           # on utilise i - 1, qui prend b - 1, b - 2, ..., a
+    ```
+
+    `range(b, a, -1)` donne `b`, `b - 1`, ..., `a + 1` : chaque valeur est **un cran trop haut**. C'est donc `i - 1` qu'on utilise : il prend exactement les valeurs de $[a\,;\,b)$, de la plus grande à la plus petite.
+
+    On pourrait arguer d'une autre manière de faire, mais nous nous en tiendrons à cette forme de parcours, et c'est ce qui est attendu de toi.
+
+??? info "Pour le lecteur averti : le parcours à l'envers"
+    *Suite de l'encart « Pour le lecteur averti » plus haut. Ne s'adresse pas aux élèves.*
+
+    Parcourir à l'envers, c'est se placer dans la catégorie opposée $\omega^{\text{op}}$, qui a une flèche $x \to y$ quand $y \leqslant x$ : « *its opposite category is the category that has a morphism 𝑥 → 𝑦 if and only if 𝑦 ≤ 𝑥* » (Riehl, exemple 1.2.2). Les pas y descendent, $k + 1 \to k$, mais ce sont **les mêmes pas** : celui qui relie $k$ et $k + 1$ ajoute toujours l'élément $\{k\} = [k\,;\,k + 1)$. Seule change l'extrémité qui lui sert de nom.
+
+    `range` nomme un pas par son **origine**, la borne qu'il inclut. En montant, le pas qui ajoute $k$ part de $k$. En descendant, il part de $k + 1$. `range(b, a, -1)` énumère donc les pas de $[a\,;\,b)$ nommés par leur extrémité haute, $b, \dots, a + 1$, et `i - 1` rend à chacun son nom d'élément de l'ordinal. Ce n'est pas un ajustement, c'est le passage d'une extrémité du pas à l'autre.
+
+    L'autre écriture, `range(b - 1, a - 1, -1)`, étiquette l'intervalle par la borne décalée $a - 1$ : c'est l'étiquette décalée des fermés. Pour $a = 0$, elle demande $-1$, qui n'est pas un objet de $\omega$. La « convention » n'en est donc pas une : `range(b, a, -1)` est la seule écriture dont les bornes restent des objets de $\omega$ pour tout intervalle.
+
+Par exemple, pour afficher les lettres d'un mot de la dernière à la première, on parcourt $[0\,;\,\text{len(mot)})$ à l'envers :
+
+```python
+mot = "python"
+for i in range(len(mot), 0, -1):
+    print(mot[i - 1])        # affiche n, o, h, t, y, p
+```
+
+!!! question "À toi"
+    Écris la boucle qui affiche les entiers de $[3\,;\,8)$, du plus grand au plus petit.
+
+    ??? success "Solution"
+        ```python
+        for i in range(8, 3, -1):
+            print(i - 1)         # affiche 7, 6, 5, 4, 3
+        ```
 
 ## Lire et prédire avant d'écrire
 
@@ -231,7 +320,7 @@ Là encore, c'est un `for each` : « pour chaque indice `i` dans `range(len(s))`
         C'est une accumulation de caractères, donc un parcours qui construit une chaîne. Mais tu ne veux **pas tous** les caractères : il te faut un filtre, comme pour *Sans les espaces* (page [La boucle `for`](boucle-for.md)). Sur quoi porte-t-il ici ?
 
     ??? tip "Indice plus précis"
-        Parcours **par indice** (`for i in range(len(s))`), et le filtre compare `i` à `n` : tu n'ajoutes `s[i]` à l'accumulateur que si `i < n`. Le cas `n` plus grand que `s` se règle tout seul : la boucle s'arrête avant d'avoir jamais pu être fausse.
+        Parcours **par indice** (`for i in range(0, len(s))`), et le filtre compare `i` à `n` : tu n'ajoutes `s[i]` à l'accumulateur que si `i < n`. Le cas `n` plus grand que `s` se règle tout seul : la boucle s'arrête avant d'avoir jamais pu être fausse.
 
     ??? question "Avant d'ouvrir la solution"
         Écris une phrase sur ton cahier : pourquoi ce filtre n'a-t-il **rien de spécial** à faire pour le cas `take(10, "abc")` ?
@@ -241,7 +330,7 @@ Là encore, c'est un `for each` : « pour chaque indice `i` dans `range(len(s))`
         def take(n: int, s: str) -> str:
             """Renvoie les n premiers caractères de s."""
             res = ""
-            for i in range(len(s)):
+            for i in range(0, len(s)):
                 if i < n:
                     res = res + s[i]
             return res
@@ -273,7 +362,7 @@ Là encore, c'est un `for each` : « pour chaque indice `i` dans `range(len(s))`
         def drop(n: int, s: str) -> str:
             """Renvoie s privée de ses n premiers caractères."""
             res = ""
-            for i in range(len(s)):
+            for i in range(0, len(s)):
                 if i >= n:
                     res = res + s[i]
             return res
@@ -287,35 +376,58 @@ Là encore, c'est un `for each` : « pour chaque indice `i` dans `range(len(s))`
 Une boucle se place, elle aussi, dans le corps d'une fonction. Les exercices qui suivent mêlent fonctions, conditions et boucles.
 
 !!! question "Rectangle de caractères"
-    L'appel `affiche_rectangle(2, 5, 'A')` doit afficher :
+    Écris `rectangle(hauteur, largeur, car)`, qui **renvoie** la chaîne qui dessine un rectangle de `hauteur` lignes et de `largeur` colonnes, fait du caractère `car`. La fonction n'affiche rien : c'est le programme qui affiche ce qu'elle renvoie.
+
+    Pour passer à la ligne à l'intérieur d'une chaîne, on utilise le caractère `"\n"`. Il s'écrit avec deux symboles, mais c'est **un seul caractère** : `len("\n")` vaut `1`.
+
+    ```python
+    def rectangle(hauteur: int, largeur: int, car: str) -> str:
+        """Renvoie la chaîne qui dessine un rectangle de hauteur lignes et de largeur
+        colonnes, fait du caractère car. Chaque ligne se termine par un retour à la ligne."""
+        ...
+
+    def test_rectangle():
+        assert rectangle(2, 5, "A") == "AAAAA\nAAAAA\n"
+        ...
+    ```
+
+    Une fois la fonction écrite, `print(rectangle(2, 5, "A"))` affiche :
     ```
     AAAAA
     AAAAA
     ```
-    Écris et teste `affiche_rectangle`. Rappels : `print()` passe à la ligne ; `print('A', end='')` affiche sans passer à la ligne.
 
     ??? tip "Indice léger"
-        Un rectangle, ce sont des **lignes** ; une ligne, ce sont des **caractères**. Deux choses à répéter, donc deux boucles, et l'une est à l'intérieur de l'autre. Laquelle dedans ?
+        Un rectangle, ce sont des **lignes**, et une ligne, ce sont des **caractères**. Deux choses à répéter, donc deux boucles, l'une à l'intérieur de l'autre. L'accumulateur est une chaîne : quelle est sa valeur de départ ?
 
     ??? tip "Indice plus précis"
-        La boucle **extérieure** compte les lignes (`hauteur` tours). La boucle **intérieure** affiche les caractères d'une ligne (`largeur` tours), avec `end=''` pour rester sur la même ligne. Le retour à la ligne se fait avec un `print()` vide, placé **dans** la boucle extérieure mais **après** la boucle intérieure.
+        `acc = ""` avant tout. La boucle **extérieure** fait `hauteur` tours. La boucle **intérieure** ajoute `car` à `acc`, `largeur` fois. Le `"\n"` s'ajoute **dans** la boucle extérieure, mais **après** la boucle intérieure.
 
     ??? warning "Corrigé"
         ```python
-        def affiche_rectangle(hauteur: int, largeur: int, car: str) -> None:
-            """Affiche un rectangle de hauteur x largeur fait du caractère car"""
-            for _ in range(hauteur):
-                for _ in range(largeur):
-                    print(car, end='')
-                print()
+        def rectangle(hauteur: int, largeur: int, car: str) -> str:
+            """Renvoie la chaîne qui dessine un rectangle de hauteur lignes et de largeur
+            colonnes, fait du caractère car. Chaque ligne se termine par un retour à la ligne."""
+            acc = ""
+            for _ in range(0, hauteur):
+                for _ in range(0, largeur):
+                    acc = acc + car
+                acc = acc + "\n"
+            return acc
+
+        def test_rectangle():
+            assert rectangle(2, 5, "A") == "AAAAA\nAAAAA\n"
+            assert rectangle(3, 1, "#") == "#\n#\n#\n"
+            assert rectangle(0, 5, "A") == ""
         ```
+        Le dernier test est le cas où la boucle extérieure est vide d'exécution : l'accumulateur garde sa valeur de départ, la chaîne vide.
 
 !!! question "Portée dans les boucles (piège)"
     Que va afficher ce code ?
 
     ```python
     def mystere() -> None:
-        for i in range(3):
+        for i in range(0, 3):
             x = i * 2
         print("x =", x)
         print("i =", i)

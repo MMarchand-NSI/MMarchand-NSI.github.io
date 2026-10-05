@@ -202,7 +202,7 @@ Les exercices suivants se font dans le fichier exos_files.py.
     Chacune doit vérifier **deux choses** : que la taille renvoyée est la bonne, et que la file est dans l'état attendu **après** l'appel. Ce n'est pas le même état dans les deux cas, et c'est tout l'intérêt de les tester séparément.
 
     ??? tip "Indice : que vérifier après l'appel"
-        Pour la version destructive, la file doit être **vide**. Pour l'autre, elle doit être **intacte** : même taille, et la sortie doit toujours être `'rouge'`.
+        Pour la version destructive, la file doit être **vide**. Pour l'autre, elle doit être **intacte** : même taille, et la sortie doit toujours être `'jaune'`.
 
 !!! question "Occurrences"
 
@@ -219,7 +219,7 @@ Les exercices suivants se font dans le fichier exos_files.py.
         assert nb_elements(F, "vert") == 1
         assert nb_elements(F, "violet") == 0
         # la file doit avoir survécu aux trois appels précédents :
-        assert file.defiler(F) == "rouge"
+        assert file.defiler(F) == "jaune"
         assert taille_file(F) == 4
     ```
 

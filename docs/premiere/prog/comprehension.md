@@ -47,19 +47,19 @@ Ici, `res` contiendra `[6]` car seul 5 est inférieur à 9, et 5 + 1 = 6.
 !!! example "Exemples simples"
     ```python
     # Tous les nombres de 0 à 9
-    nombres = [x for x in range(10)]
+    nombres = [x for x in range(0, 10)]
     # [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     # Les carrés de 0 à 9
-    carres = [x**2 for x in range(10)]
+    carres = [x**2 for x in range(0, 10)]
     # [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 
     # Les nombres pairs entre 0 et 9
-    pairs = [x for x in range(10) if x % 2 == 0]
+    pairs = [x for x in range(0, 10) if x % 2 == 0]
     # [0, 2, 4, 6, 8]
 
     # Les carrés des nombres impairs
-    carres_impairs = [x**2 for x in range(10) if x % 2 == 1]
+    carres_impairs = [x**2 for x in range(0, 10) if x % 2 == 1]
     # [1, 9, 25, 49, 81]
     ```
 
@@ -93,14 +93,14 @@ Les deux versions produisent exactement le même résultat : `[6]`.
 **Avec compréhension de liste :**
 
 ```python
-carres = [x**2 for x in range(5)]
+carres = [x**2 for x in range(0, 5)]
 ```
 
 **Avec boucle for classique :**
 
 ```python
 carres = []
-for x in range(5):
+for x in range(0, 5):
     carres.append(x**2)
 ```
 
@@ -118,7 +118,7 @@ Résultat : `[0, 1, 4, 9, 16]`
     Que contient `res` ? Traduis d'abord la compréhension en phrase, puis vérifie.
 
     ```python
-    res = [x * 2 for x in range(5) if x % 2 == 1]
+    res = [x * 2 for x in range(0, 5) if x % 2 == 1]
     ```
 
     ??? warning "Réponse"
@@ -135,7 +135,7 @@ Résultat : `[0, 1, 4, 9, 16]`
 
 ??? success "Solution"
     ```python
-    multiples_de_3 = [x for x in range(31) if x % 3 == 0]
+    multiples_de_3 = [x for x in range(0, 31) if x % 3 == 0]
     ```
 
     Ou en utilisant directement `range` :

@@ -379,12 +379,12 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
         Tu dois avancer dans **deux** listes en même temps. Que peux-tu parcourir qui te donne accès aux deux ?
 
     ??? tip "Indice plus précis"
-        Parcours les **indices**, avec `for i in range(len(cles))`. À chaque tour, `cles[i]` et `valeurs[i]` se correspondent.
+        Parcours les **indices**, avec `for i in range(0, len(cles))`. À chaque tour, `cles[i]` et `valeurs[i]` se correspondent.
 
     ??? success "Corrigé"
         ```python
         resultat = {}
-        for i in range(len(cles)):
+        for i in range(0, len(cles)):
             resultat[cles[i]] = valeurs[i]
         ```
         Remarque : n'importe quel type **immuable** peut servir de clé. Un entier convient, une liste non.

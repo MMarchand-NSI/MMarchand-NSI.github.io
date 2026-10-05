@@ -91,8 +91,8 @@ image.show()
     ```python
     from PIL import Image
     image = Image.open("image.png")
-    for x in range(image.size[0]):
-        for y in range(image.size[1]):
+    for x in range(0, image.size[0]):
+        for y in range(0, image.size[1]):
             r, g, b = image.getpixel((x, y))
             ...
     ```
