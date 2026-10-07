@@ -121,31 +121,6 @@ def reinit() -> None:
 
     Les deux cas de la docstring correspondent exactement aux exercices 1 et 2 d'appropriation : tu as déjà écrit sur papier ce que la fonction doit produire.
 
-    ??? tip "Indice léger"
-        Vos exercices sur papier disent quelles primitives utiliser, et dans quel ordre. Reste une question : qu'est-ce qui change entre le cas ordinaire et le cas de la pomme ?
-
-    ??? tip "Indice plus précis"
-        Une seule opération diffère entre les deux cas : le `defiler`. Avancer sans manger, c'est enfiler **et** défiler, donc une longueur constante. Manger, c'est enfiler **sans** défiler, donc une longueur qui augmente de un. `queue_supprimee` sert à mémoriser ce qui a été défilé, pour le dessin.
-
-    ??? question "Avant d'ouvrir la solution"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
-
-    ??? success "Solution"
-        ```python
-        def avancer() -> None:
-            global serpent, tete, pomme, score, queue_supprimee
-            tete = prochaine_tete(tete, direction)
-            file.enfiler(tete, serpent)
-            if tete == pomme:
-                score = score + 1
-                queue_supprimee = None
-                spawn_pomme()
-            else:
-                queue_supprimee = file.defiler(serpent)
-        ```
-
-        Remarque que `avancer` ne dessine rien et ne teste aucune collision : elle ne fait qu'avancer. C'est ce qui la rend lisible, et c'est aussi ce qui rendrait `prochaine_tete` testable si on l'avait écrite ainsi dès le début.
-
 Comme beaucoup de moteurs de jeu, pyxel va appeler automatiquement à chaque frame 2 fonctions à la suite:
 
 1. une fonction `update()`, chargée de:
@@ -210,29 +185,6 @@ lancer_jeu()
     - la nouvelle tête, en **couleur du serpent**.
 
     C'est très exactement pour cela que `queue_supprimee` existe dans le squelette : `avancer` y mémorise ce qu'elle a défilé, pour que `draw` sache quoi effacer.
-
-    ??? tip "Indice 1 : par où commencer"
-        Cherche l'appel qui efface l'écran à chaque image et supprime-le de `draw`. Il faudra alors effacer **une seule fois**, au moment de `reinit`, sinon la partie commence sur les restes de la précédente.
-
-    ??? tip "Indice 2 : le cas où rien n'est effacé"
-        Quand le serpent mange, `avancer` enfile **sans** défiler : il n'y a pas de queue retirée, et `queue_supprimee` vaut `None`. Ton `draw` doit traiter ce cas, sinon il effacera n'importe quoi.
-
-    ??? tip "Indice 3 : ce qu'on oublie presque toujours"
-        La pomme. Elle n'est plus redessinée à chaque image, donc il faut l'allumer **au moment où elle apparaît**, et pas ailleurs.
-
-    ??? note "En une phrase, sur ton cahier"
-        Avant d'ouvrir la correction : combien d'opérations fait ton nouveau `draw`, et de quoi ce nombre dépend-il ? C'est cette phrase qui compte, pas le code.
-
-    ??? success "Correction"
-        ```python
-        def draw() -> None:
-            """Ne redessine que ce qui a changé : la queue retirée, puis la nouvelle tête."""
-            if queue_supprimee is not None:
-                pyxel.pset(queue_supprimee[0], queue_supprimee[1], COULEUR_FOND)
-            pyxel.pset(tete[0], tete[1], COULEUR_SERPENT)
-        ```
-
-        Deux `pset`, quelle que soit la longueur du serpent : `draw` est en **`O(1)`**, alors qu'il était en `O(n)`.
 
     ??? warning "Ce que ce bonus t'apprend, et qui dépasse le dessin"
         Ta file est faite de deux piles, et son `defiler` est annoncé en `O(1)` **amorti** : chaque élément ne bascule qu'une fois de `entree` vers `sortie` au cours de sa vie.
