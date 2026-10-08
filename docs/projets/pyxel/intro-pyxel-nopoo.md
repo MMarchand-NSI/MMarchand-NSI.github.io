@@ -1,8 +1,38 @@
 # Introduction à pyxel - Sans POO
 
-Vous allez découvrir les bases de la création d'un jeu.
+!!! info "Setup"
+    Dans le terminal, télécharge le module pyxel :
 
-L'objectif est de créer un pixel capable de se dessiner et de se déplacer en fonction de son vecteur directionnel (dx, dy).
+    ```bash
+    uv add pyxel
+    ```
+
+Tu vas découvrir les bases de la création d'un jeu.
+
+L'objectif est de créer un pixel capable de se dessiner et de se déplacer en fonction de son vecteur directeur (dx, dy).
+
+!!! info "Rappel : se déplacer selon un vecteur"
+    L'écran est un repère. Le pixel est un **point** de coordonnées $(x, y)$, et son vecteur directeur $\vec{u}\,(dx, dy)$ dit de combien il se déplace **à chaque frame**.
+
+    Une frame, c'est une addition : le point $M(x, y)$ devient $M'(x + dx,\ y + dy)$.
+
+    **Attention, le repère de l'écran n'est pas celui du cours de maths.** L'origine $(0, 0)$ est **en haut à gauche**, et $y$ augmente **vers le bas**.
+
+    ![Repère de l'écran : origine en haut à gauche, x vers la droite, y vers le bas](repere-ecran.svg)
+
+!!! question "Calculer avant de coder"
+    Le pixel est en $(15, 15)$ et son vecteur est $(2, -1)$.
+
+    1. Où est-il après **3 frames** ? Écris le calcul, pas seulement le résultat.
+    2. À l'écran, il part vers la droite et vers le haut, ou vers la droite et vers le bas ?
+    3. Quel vecteur faut-il pour qu'il monte tout droit ?
+    4. Le jeu tourne à 10 frames par seconde avec le vecteur $(1, 0)$. De combien de pixels avance-t-il en une seconde ?
+
+    ??? success "Réponses"
+        1. $(15 + 3 \times 2,\ 15 + 3 \times (-1)) = (21, 12)$
+        2. Vers la droite et vers le **haut** : $y$ diminue.
+        3. $(0, -1)$
+        4. $10 \times 1 = 10$ pixels. La vitesse dépend du vecteur **et** du nombre de frames par seconde. C'est ce que montre l'exercice 2.
 
 
 ```python
@@ -44,6 +74,10 @@ def update() -> None:
     """
     global x, y, dx, dy, color
 
+    # Déplacement du pixel selon son vecteur directeur
+    x = ...
+    y = ...
+
     # Modification du vecteur directeur selon les touches fléchées
     if px.btn(px.KEY_RIGHT):
         dx = ...
@@ -78,6 +112,8 @@ px.run(update, draw)
 !!! question "Avant tout : qui appelle `update` ?"
     Tu écris `update` et `draw`, et **tu ne les appelles jamais**. Tu donnes leurs noms à `px.run`, et c'est le moteur qui les rappelle, indéfiniment, plusieurs fois par seconde. Jusqu'ici, tout ce que tu écrivais s'exécutait dans l'ordre où tu l'avais écrit. Ici, le contrôle appartient à pyxel.
 
+    Tu n'as pas besoin d'avoir complété `update` pour la suite. Il suffit de savoir ce qu'elle fait, **dans cet ordre** : elle déplace le pixel de son vecteur, puis elle change le vecteur si une flèche est pressée.
+
     Déroule **trois frames à la main**, en supposant qu'on appuie sur la flèche droite pendant la deuxième et qu'on la relâche ensuite.
 
     | frame | ce que fait `update` | état après `update` | ce que dessine `draw` |
@@ -102,25 +138,25 @@ px.run(update, draw)
 
 !!! question "Exercices de base"
 
-    1. Complétez la fonction update. Testez
-    2. Modifiez le framerate. Testez
-    3. Si ça n'est pas déjà fait, modifier la fonction update pour que le pixel s'arrête lorsqu'on lâche les touches.
+    1. Complète la fonction update. Teste.
+    2. Modifie le framerate. Teste.
+    3. Si ça n'est pas déjà fait, modifie la fonction update pour que le pixel s'arrête lorsqu'on lâche les touches.
     4. Le pixel ne doit pas bouger s'il va dépasser de l'écran.
-        - Modifiez la fonction update pour tenir compte de cette information. 
+        - Modifie la fonction update pour tenir compte de cette information. 
     5. Espace torique: Un pixel peut maintenant dépasser un bord mais il réapparaît au bord opposé (ce qui fait de l'espace de jeu un espace sans bord)
-        - Modifiez la fonction update pour tenir compte de cette information. On s'intéressera à l'opérateur modulo. La modification doit être minime.
+        - Modifie la fonction update pour tenir compte de cette information. On s'intéressera à l'opérateur modulo. La modification doit être minime.
 
 
 !!! question "Remplacer un pixel par un sprite"
-    1. Téléchargez le fichier 2.pyxres sur [le site de la nuit du code](https://depot.nuitducode.net)
+    1. Télécharge le fichier 2.pyxres sur [le site de la nuit du code](https://depot.nuitducode.net)
         - Il s'agit d'un fichier contenant des ressources visuelles et sonores.
-        - Placez le **dans le même répertoire** que votre fichier python.
-        - Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources du jeu, exécutez la commande suivante dans un terminal:
+        - Place-le **dans le même répertoire** que ton fichier python.
+        - Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources du jeu, exécute la commande suivante dans un terminal:
             `pyxel edit <répertoire>/2.pyxres`
-        - N'hésitez pas à bidouiller, vous ne pouvez rien casser, au pire vous pourrez retélécharger le fichier.
+        - N'hésite pas à bidouiller, tu ne peux rien casser, au pire tu pourras retélécharger le fichier.
     2. A la place d'un simple pixel, on veut maintenant utiliser un sprite
         - Pour le faire, il faut d'abord charger ce fichier dans le code **juste avant de démarrer le jeu**:
             `px.load("<répertoire>/2.pyxres")`
-        - Ensuite il faut dessiner le sprite que vous aurez choisi au lieu de simplement remplir un pixel. Il n'y a qu'une ligne de code à modifier. Je vous laisse la trouver en explorant la [documentation de pyxel](https://github.com/kitao/pyxel/blob/main/docs/README.fr.md).
-            - remarque: Vous aurez nécessairement besoin d'augmenter la hauteur et la largeur de votre fenêtre (H et W), ce qui réduira la taille des "pixels".
+        - Ensuite il faut dessiner le sprite que tu auras choisi au lieu de simplement remplir un pixel. Il n'y a qu'une ligne de code à modifier. Je te laisse la trouver en explorant la [documentation de pyxel](https://github.com/kitao/pyxel/blob/main/docs/README.fr.md).
+            - remarque: Tu auras nécessairement besoin d'augmenter la hauteur et la largeur de ta fenêtre (H et W), ce qui réduira la taille des "pixels".
 
