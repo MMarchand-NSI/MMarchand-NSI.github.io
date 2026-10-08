@@ -8,16 +8,24 @@ Les bases de la modélisation et de l'implémentation d'un jeu sont aussi abord�
 
 Un snake est une File de Coordonnées entières.
 
-Cette file, c'est **exactement** celle que tu viens de construire avec deux piles : le snake en est la mise à l'épreuve. Faire avancer le serpent, c'est `enfiler` une nouvelle tête puis `defiler` la queue. Pour le dessiner ou détecter une collision, on parcourt la file avec `elements`, sans la détruire.
+Cette file, c'est **exactement** celle que tu viens de construire avec deux piles : le snake en est la mise à l'épreuve. Pour le dessiner ou détecter une collision, on parcourt la file avec `elements`, sans la détruire.
 
 ![alt text](image-11.png)
 
 
-Par exemple, dans cette grille, voici l'état du snake:
+Avant toute ligne de code, une décision commande tout le reste : une file a une **entrée** et une **sortie**, le serpent a une **tête** et une **queue**. Quel bout du serpent mets-tu à l'entrée ?
 
-```
-> (4, 2), (3, 2), (3, 3), (3, 4), (2, 4), (1, 4) >
-```
+!!! question "Choisir l'entrée et la sortie de la file"
+    1. Quand le serpent avance d'une case, quel bout gagne une case ? Quel bout en perd une ?
+    2. Une file n'ajoute qu'à son entrée et ne retire qu'à sa sortie. Où places-tu la tête ? Où places-tu la queue ?
+    3. Écris l'état du snake de la grille ci-dessus, avec la notation du cours : `> ... >`, l'entrée à gauche, la sortie à droite.
+
+    ??? success "Correction"
+        La tête gagne une case, la queue en perd une. La tête est donc à l'**entrée**, la queue à la **sortie** : avancer, c'est `enfiler` la nouvelle tête puis `defiler` la queue.
+
+        ```
+        > (4, 2), (3, 2), (3, 3), (3, 4), (2, 4), (1, 4) >
+        ```
 
 La flèche rouge représente le vecteur directeur du snake. Ici, `direction = (1, 0)`. On avance de 1 en x et de 0 en y.
 
