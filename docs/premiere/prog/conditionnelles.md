@@ -5,12 +5,12 @@
 
     1. Après `a = 3` puis `a = a + 2`, que vaut `a` ? Dans quel ordre la machine fait-elle le calcul et le rangement ?
     2. Écris la **signature typée** d'une fonction `est_majeur` qui prend un âge entier et renvoie un booléen.
-    3. Avec `s = "informatique"` : que vaut `s[0]` ? Que se passe-t-il si on écrit `s[0] = "I"` ?
+    3. Avec $a = 1$ et $b = 0$, que vaut $\overline{a.b}$ ? Que vaut $\bar{a} + \bar{b}$ ?
 
     ??? success "Corrigé"
         1. `a` vaut `5`. Le membre de droite est **calculé d'abord** (`3 + 2`), et le résultat est **ensuite** rangé dans la case `a`. Le `=` n'est pas une égalité mathématique.
         2. `def est_majeur(age: int) -> bool:`
-        3. `s[0]` vaut `"i"`. L'affectation `s[0] = "I"` provoque une `TypeError` : une chaîne est **immuable**, on ne peut pas en changer un caractère, seulement construire une nouvelle chaîne.
+        3. $a.b = 0$, donc $\overline{a.b} = 1$. Et $\bar{a} = 0$, $\bar{b} = 1$, donc $\bar{a} + \bar{b} = 1$. Les deux valent $1$, et ce n'est pas un hasard : c'est la loi de De Morgan, que tu as utilisée pour câbler tes portes. Tu vas la retrouver dans les conditions de ce chapitre.
 
 ## Pourquoi ? Décider.
 
