@@ -12,22 +12,22 @@ Cette file, c'est **exactement** celle que tu viens de construire avec deux pile
 
 ![alt text](image-11.png)
 
+La flèche rouge représente le vecteur directeur du snake. Ici, `direction = (1, 0)`. On avance de 1 en x et de 0 en y.
 
 Avant toute ligne de code, une décision commande tout le reste : une file a une **entrée** et une **sortie**, le serpent a une **tête** et une **queue**. Quel bout du serpent mets-tu à l'entrée ?
 
 !!! question "Choisir l'entrée et la sortie de la file"
-    1. Quand le serpent avance d'une case, quel bout gagne une case ? Quel bout en perd une ?
-    2. Une file n'ajoute qu'à son entrée et ne retire qu'à sa sortie. Où places-tu la tête ? Où places-tu la queue ?
-    3. Écris l'état du snake de la grille ci-dessus, avec la notation du cours : `> ... >`, l'entrée à gauche, la sortie à droite.
+    1. Sur la grille, donne les coordonnées de la tête du serpent et celles de sa queue.
+    2. Le serpent avance d'une case. Quelle case de la grille devient noire ? Quelle case redevient blanche ? Quel bout du serpent a gagné une case, lequel en a perdu une ?
+    3. Une file n'ajoute qu'à son entrée et ne retire qu'à sa sortie. Où places-tu la tête ? Où places-tu la queue ?
+    4. Écris l'état du snake de la grille, avec la notation du cours : `> ... >`, l'entrée à gauche, la sortie à droite.
 
     ??? success "Correction"
-        La tête gagne une case, la queue en perd une. La tête est donc à l'**entrée**, la queue à la **sortie** : avancer, c'est `enfiler` la nouvelle tête puis `defiler` la queue.
+        La tête est en (4, 2), la queue en (1, 4). En avançant, la case (5, 2) devient noire et la case (1, 4) redevient blanche : la tête gagne une case, la queue en perd une. La tête est donc à l'**entrée**, la queue à la **sortie** : avancer, c'est `enfiler` la nouvelle tête puis `defiler` la queue.
 
         ```
         > (4, 2), (3, 2), (3, 3), (3, 4), (2, 4), (1, 4) >
         ```
-
-La flèche rouge représente le vecteur directeur du snake. Ici, `direction = (1, 0)`. On avance de 1 en x et de 0 en y.
 
 !!! question "Exercices d'appropriation de la modélisation"
     1. Écrire l'état du snake lorsqu'il aura avancé d'une case
@@ -114,8 +114,8 @@ def reinit() -> None:
     - Compléter la fonction `reinit`.
     - Créer la fonction `spawn_pomme()`, qui appelle `case_libre` et modifie les coordonnées de la pomme.
 
-!!! question "Avancer, le point dur du projet"
-    Cette fonction porte à elle seule la difficulté du snake. Prends-la séparément, et **après** avoir répondu aux exercices d'appropriation ci-dessus.
+!!! question "Avancer"
+    Écris cette fonction **après** avoir répondu aux exercices d'appropriation ci-dessus.
 
     ```python
     def avancer() -> None:
