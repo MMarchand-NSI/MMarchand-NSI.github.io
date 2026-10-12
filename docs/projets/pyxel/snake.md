@@ -83,32 +83,40 @@ def reinit() -> None:
 
 
 !!! question "Deux fonctions outils, testables sans lancer le jeu"
-    Ces deux fonctions ne dessinent rien et ne touchent à aucune variable globale : elles se testent donc **immédiatement**, avec `python -m doctest`, sans ouvrir de fenêtre. Écris-les en premier.
+    Ces deux fonctions ne dessinent rien et ne touchent à aucune variable globale : elles se testent donc **immédiatement**, sans ouvrir de fenêtre. Écris-les en premier, dans `snake.py`.
 
     ```python
     def prochaine_tete(tete: Coord, direction: Coord) -> Coord:
         """
         Coordonnée de la case suivante, sans toucher au serpent.
-
-        >>> prochaine_tete((4, 2), (1, 0))
-        (5, 2)
-        >>> prochaine_tete((4, 2), (0, -1))
-        (4, 1)
-        >>> prochaine_tete((0, 5), (-1, 0))
-        (-1, 5)
         """
 
     def case_libre(occupees: list[Coord]) -> Coord:
         """
         Une case de la grille au hasard, parmi celles qui ne sont pas occupées.
-
-        >>> toutes = [(x, y) for x in range(W) for y in range(H)]
-        >>> case_libre([c for c in toutes if c != (7, 3)])
-        (7, 3)
         """
     ```
 
-    Le second doctest mérite un mot : en n'offrant qu'**une seule** case libre, il rend déterministe une fonction qui tire au hasard. C'est une manière courante de tester l'aléatoire.
+    Leurs tests vont dans `snake_test.py`, dans le même répertoire :
+
+    ```python
+    # snake_test.py
+
+    from snake import H, W, case_libre, prochaine_tete
+
+
+    def test_prochaine_tete() -> None:
+        assert prochaine_tete((4, 2), (1, 0)) == (5, 2)
+        assert prochaine_tete((4, 2), (0, -1)) == (4, 1)
+        assert prochaine_tete((0, 5), (-1, 0)) == (-1, 5)
+
+
+    def test_case_libre() -> None:
+        toutes = [(x, y) for x in range(0, W) for y in range(0, H)]
+        assert case_libre([c for c in toutes if c != (7, 3)]) == (7, 3)
+    ```
+
+    Le second test mérite un mot : en n'offrant qu'**une seule** case libre, il rend déterministe une fonction qui tire au hasard. C'est une manière courante de tester l'aléatoire.
 
 !!! question "Initialisation"
     - Compléter la fonction `reinit`.
@@ -165,13 +173,14 @@ def draw() -> None:
 def lancer_jeu() -> None:
     # Initialiser pyxel, le moteur graphique
     pyxel.init(W, H, title="Snake")
-    # Initialisaer l'état du jeu
+    # Initialiser l'état du jeu
     reinit()
     # lancer la boucle d'appels permanents à update puis draw
     pyxel.run(update, draw)  
 
 
-lancer_jeu()
+if __name__ == "__main__":
+    lancer_jeu()
 ```
 
 !!! question "Amélioration"
