@@ -51,7 +51,7 @@ chmod u-x calcul.py     # la lui retire (-)
 
 ## 2. Écrire un programme, et le lancer de deux façons
 
-Dans VS Code, crée le fichier `os/scripts/bonjour.py` et écris-y ces deux lignes :
+Dans le terminal, toujours dans `os/scripts`, tape `code bonjour.py` : VS Code ouvre le fichier, et le crée quand tu l'enregistres s'il n'existe pas encore. Écris-y ces deux lignes :
 
 ```python
 #!/usr/bin/env python3

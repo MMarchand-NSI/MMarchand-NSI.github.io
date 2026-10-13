@@ -3,38 +3,40 @@
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** la page précédente, en écrivant tes réponses.
 
-    1. Cite deux rôles d'un système d'exploitation.
-    2. Pour chacun, donne un exemple de ce qui se passerait sans lui.
+    1. Deux programmes rangent chacun une valeur « à l'adresse 1 ». Pourquoi l'un n'écrase-t-il pas l'autre ?
+    2. Un programme attend une donnée du disque. Que fait le processeur pendant ce temps ?
+    3. Ton programme Python fait `print("bonjour")`. Qui allume les pixels de l'écran ?
 
     ??? success "Corrigé"
-        Deux parmi : gérer la **mémoire** (sans lui, un programme pourrait écraser la mémoire d'un autre), gérer les **processus** (sans lui, un seul programme tournerait à la fois), gérer le **système de fichiers** (sans lui, le disque serait une suite d'octets sans structure), gérer les **pilotes** (sans lui, chaque programme devrait savoir parler à chaque matériel).
+        1. Grâce à la **mémoire virtuelle** : le système d'exploitation range chaque « adresse 1 » à un endroit différent de la vraie mémoire, et retient la correspondance.
+        2. L'**ordonnanceur** met ce programme en pause et donne le processeur à un autre.
+        3. Pas ton programme : il fait un **appel système**, et c'est le système d'exploitation, par le **pilote** de l'écran, qui agit sur le matériel.
+
+Tu l'as vu sur la page précédente : un programme ne touche jamais le matériel, il **demande** au système d'exploitation. Le **terminal** est l'un des logiciels livrés autour du noyau, et c'est l'interface la plus directe entre toi et le système : tu y tapes des commandes, il les fait exécuter. Beaucoup de systèmes n'ont d'ailleurs pas de fenêtres ni de souris, comme la plupart des serveurs : le terminal est alors le seul moyen de leur parler. Il sert surtout à **lancer des programmes** : `ls` ou `mkdir` sont eux-mêmes de petits programmes, et bientôt tu y lanceras les tiens. Le système range les fichiers du disque dans une **arborescence de répertoires**, et cette page t'apprend à t'y déplacer.
 
 ## 1. Le terminal est toujours quelque part
 
-Ouvre ton dépôt dans VS Code, puis le terminal (**Terminal > Nouveau terminal**). Tape :
+Dans VS Code, ouvre un terminal (**Terminal > Nouveau terminal**). Il s'ouvre directement dans ton dépôt. Tape la commande suivante, puis valide-la avec la touche **Entrée** : une commande ne s'exécute que quand tu appuies sur Entrée.
 
 ```bash
 pwd
 ```
 
-`pwd` (*print working directory*) affiche le **répertoire courant** : l'endroit de l'arborescence où se trouve le terminal. Chez toi, le résultat ressemble à `/home/eleve/nsi`, avec ton nom d'utilisateur et le nom de ton dépôt.
+`pwd` (*print working directory*) affiche le **répertoire courant** : l'endroit de l'arborescence où se trouve le terminal. Chez toi, il affiche `/home/padawan/PNSINFGR_2_2026-2027` : `padawan` est ton nom d'utilisateur, et `PNSINFGR_2_2026-2027` le répertoire de ton dépôt.
 
-!!! warning "Vérifie que ta réponse commence par `/home/`"
-    Si `pwd` affiche un chemin qui commence par `/mnt/c/`, ton dépôt est sur le disque Windows. Une partie de la séance suivante ne fonctionnera pas : **appelle ton professeur**.
-
-Le répertoire courant ne s'affiche **jamais tout seul**. Le terminal le connaît, toi tu dois le demander, ou le suivre de tête. C'est lui qui fait réussir ou échouer la plupart des commandes de cette page.
+Le répertoire courant s'affiche aussi dans le **prompt**, la ligne où tu tapes tes commandes : tu y lis `~/PNSINFGR_2_2026-2027`, où `~` abrège `/home/padawan`.
 
 ## 2. Chemins absolus et chemins relatifs
 
-Un **chemin absolu** commence par `/`, la **racine**. Il désigne toujours le même endroit, quel que soit le répertoire courant : `/home/eleve/nsi/os/notes`.
+!!! fondamental "Chemin absolu, chemin relatif"
+    Un **chemin absolu** commence par `/`, la **racine**. Il désigne toujours le même endroit, quel que soit le répertoire courant : `/home/padawan/PNSINFGR_2_2026-2027/os/notes`.
 
-Un **chemin relatif** ne commence pas par `/`. Il se lit **à partir du répertoire courant** : depuis `/home/eleve/nsi`, `os/notes` désigne `/home/eleve/nsi/os/notes`.
+    Un **chemin relatif** ne commence pas par `/`. Il se lit **à partir du répertoire courant** : depuis `/home/padawan/PNSINFGR_2_2026-2027`, `os/notes` désigne `/home/padawan/PNSINFGR_2_2026-2027/os/notes`.
 
-Trois raccourcis :
-
-- `.` désigne le répertoire courant.
-- `..` désigne le répertoire **parent**, celui juste au-dessus.
-- `~` désigne ton répertoire personnel, `/home/eleve`.
+!!! hint "Trois raccourcis ultra courants"
+    - `.` désigne le répertoire courant.
+    - `..` désigne le répertoire **parent**, celui juste au-dessus.
+    - `~` désigne ton répertoire personnel, `/home/padawan`.
 
 ## 3. Les commandes de la séance
 
@@ -48,6 +50,7 @@ Trois raccourcis :
 | `mkdir <dir>` | crée un répertoire | `mkdir essais` |
 | `mkdir -p a/b` | crée un répertoire et ceux qui manquent sur le chemin | `mkdir -p os/scripts/essais` |
 | `touch <file>` | crée un fichier vide | `touch td.txt` |
+| `code <file>` | ouvre le fichier dans VS Code pour le modifier (le crée à l'enregistrement s'il n'existe pas) | `code td.txt` |
 | `cp <src> <dest>` | copie un fichier | `cp td.txt td2.txt` |
 | `mv <src> <dest>` | déplace ou renomme | `mv td2.txt archive.txt` |
 | `rm <file>` | supprime un fichier | `rm archive.txt` |
@@ -58,7 +61,7 @@ Trois raccourcis :
 
 ## 4. Construire l'arborescence de travail
 
-Depuis la **racine de ton dépôt** (là où `pwd` t'a placé en ouvrant le terminal), tape ces deux lignes :
+Depuis la **racine de ton dépôt** (là où le terminal s'ouvre), tape ces deux lignes :
 
 ```bash
 mkdir -p os/notes os/scripts/essais
@@ -68,7 +71,7 @@ touch os/notes/cours.txt os/notes/td.txt os/scripts/calcul.py
 Tu obtiens :
 
 ```
-nsi/                  ← la racine de ton dépôt
+PNSINFGR_2_2026-2027/  ← la racine de ton dépôt
 └── os/
     ├── notes/
     │   ├── cours.txt
@@ -83,7 +86,7 @@ Recopie ce schéma sur ton cahier : il sert pour tous les exercices.
 ## 5. Prédire avant de taper
 
 !!! question "Exercice 1 : où est le terminal ?"
-    Le terminal est à la racine du dépôt, `/home/eleve/nsi`. On tape, dans l'ordre :
+    Le terminal est à la racine du dépôt, `/home/padawan/PNSINFGR_2_2026-2027`. On tape, dans l'ordre :
 
     ```bash linenums="1"
     cd os/scripts
@@ -101,17 +104,17 @@ Recopie ce schéma sur ton cahier : il sert pour tous les exercices.
     - après la ligne 4
     - après la ligne 5
 
-    Pose ton doigt sur le schéma à chaque ligne. Une fois tes cinq réponses écrites, tape les commandes une à une, avec `pwd` après chacune, et compare.
+    Une fois tes cinq réponses écrites, tape les commandes une à une, avec `pwd` après chacune, et compare.
 
     ??? tip "Indice"
         `..` remonte d'**un** niveau. `../../..` en remonte trois, un par `..`.
 
     ??? success "Réponses"
-        1. `/home/eleve/nsi/os/scripts`
-        2. `/home/eleve/nsi/os`
-        3. `/home/eleve/nsi/os/notes`
-        4. `/home/eleve/nsi/os/scripts/essais`
-        5. `/home/eleve/nsi` : depuis `essais`, les trois remontées passent par `scripts`, puis `os`, puis la racine du dépôt.
+        1. `/home/padawan/PNSINFGR_2_2026-2027/os/scripts`
+        2. `/home/padawan/PNSINFGR_2_2026-2027/os`
+        3. `/home/padawan/PNSINFGR_2_2026-2027/os/notes`
+        4. `/home/padawan/PNSINFGR_2_2026-2027/os/scripts/essais`
+        5. `/home/padawan/PNSINFGR_2_2026-2027` : depuis `essais`, les trois remontées passent par `scripts`, puis `os`, puis la racine du dépôt.
 
 !!! question "Exercice 2 : que va afficher `ls` ?"
     Le terminal est revenu à la racine du dépôt. Sur ton cahier, écris ce qu'affiche chacune de ces commandes :
@@ -130,7 +133,7 @@ Recopie ce schéma sur ton cahier : il sert pour tous les exercices.
         3. `.  ..  cours.txt  td.txt` : avec `-a`, `ls` montre aussi `.` et `..`, qui existent dans tout répertoire.
 
 !!! question "Exercice 3 : une commande qui échoue"
-    Le terminal est dans `/home/eleve/nsi/os/notes`. On tape `cd scripts`.
+    Le terminal est dans `/home/padawan/PNSINFGR_2_2026-2027/os/notes`. On tape `cd scripts`.
 
     Sur ton cahier :
 
@@ -140,7 +143,7 @@ Recopie ce schéma sur ton cahier : il sert pour tous les exercices.
 
     ??? success "Réponses"
         - `bash: cd: scripts: No such file or directory`. Le chemin `scripts` se lit depuis `notes`, et `notes` ne contient pas de répertoire `scripts`.
-        - Toujours dans `/home/eleve/nsi/os/notes` : une commande qui échoue ne déplace rien.
+        - Toujours dans `/home/padawan/PNSINFGR_2_2026-2027/os/notes` : une commande qui échoue ne déplace rien.
         - `cd ../scripts`
 
 ## 6. À toi
@@ -170,7 +173,7 @@ Recopie ce schéma sur ton cahier : il sert pour tous les exercices.
         touch ../projet/index.html
         ```
 
-        `ls ../projet` affiche `images  index.html`, et le chemin absolu est `/home/eleve/nsi/os/projet/index.html`.
+        `ls ../projet` affiche `images  index.html`, et le chemin absolu est `/home/padawan/PNSINFGR_2_2026-2027/os/projet/index.html`.
 
 !!! question "Exercice 5 : les fichiers cachés"
     Reviens à la racine de ton dépôt et compare `ls` et `ls -a`. Sur ton cahier, note les noms qui n'apparaissent qu'avec `-a`.
