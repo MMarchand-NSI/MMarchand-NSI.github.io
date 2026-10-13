@@ -377,7 +377,7 @@
     
     
       <li class="md-tabs__item">
-        <a href="../../../annales/bac-ecrit/" class="md-tabs__link">
+        <a href="../../../annales/" class="md-tabs__link">
           
   
   
@@ -8060,6 +8060,34 @@
   
   
     <li class="md-nav__item">
+      <a href="../../../annales/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Annales
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../../annales/bac-ecrit/" class="md-nav__link">
         
   
@@ -8099,10 +8127,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_2" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_3" >
         
           
-          <label class="md-nav__link" for="__nav_8_2" id="__nav_8_2_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
             
   
   
@@ -8120,8 +8148,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_2_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8_2">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_3">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -8325,10 +8353,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8_4" >
         
           
-          <label class="md-nav__link" for="__nav_8_3" id="__nav_8_3_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_8_4" id="__nav_8_4_label" tabindex="0">
             
   
   
@@ -8346,8 +8374,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_3_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_8_3">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_8_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8_4">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -8759,33 +8787,40 @@
 <p class="admonition-title">Rappel d'ouverture (5 minutes, cours fermé)</p>
 <p>Réponds <strong>sans rouvrir</strong> la page précédente, en écrivant tes réponses.</p>
 <ol>
-<li>Cite deux rôles d'un système d'exploitation.</li>
-<li>Pour chacun, donne un exemple de ce qui se passerait sans lui.</li>
+<li>Deux programmes rangent chacun une valeur « à l'adresse 1 ». Pourquoi l'un n'écrase-t-il pas l'autre ?</li>
+<li>Un programme attend une donnée du disque. Que fait le processeur pendant ce temps ?</li>
+<li>Ton programme Python fait <code>print("bonjour")</code>. Qui allume les pixels de l'écran ?</li>
 </ol>
 <details class="success">
 <summary>Corrigé</summary>
-<p>Deux parmi : gérer la <strong>mémoire</strong> (sans lui, un programme pourrait écraser la mémoire d'un autre), gérer les <strong>processus</strong> (sans lui, un seul programme tournerait à la fois), gérer le <strong>système de fichiers</strong> (sans lui, le disque serait une suite d'octets sans structure), gérer les <strong>pilotes</strong> (sans lui, chaque programme devrait savoir parler à chaque matériel).</p>
+<ol>
+<li>Grâce à la <strong>mémoire virtuelle</strong> : le système d'exploitation range chaque « adresse 1 » à un endroit différent de la vraie mémoire, et retient la correspondance.</li>
+<li>L'<strong>ordonnanceur</strong> met ce programme en pause et donne le processeur à un autre.</li>
+<li>Pas ton programme : il fait un <strong>appel système</strong>, et c'est le système d'exploitation, par le <strong>pilote</strong> de l'écran, qui agit sur le matériel.</li>
+</ol>
 </details>
 </div>
+<p>Tu l'as vu sur la page précédente : un programme ne touche jamais le matériel, il <strong>demande</strong> au système d'exploitation. Le <strong>terminal</strong> est l'un des logiciels livrés autour du noyau, et c'est l'interface la plus directe entre toi et le système : tu y tapes des commandes, il les fait exécuter. Beaucoup de systèmes n'ont d'ailleurs pas de fenêtres ni de souris, comme la plupart des serveurs : le terminal est alors le seul moyen de leur parler. Il sert surtout à <strong>lancer des programmes</strong> : <code>ls</code> ou <code>mkdir</code> sont eux-mêmes de petits programmes, et bientôt tu y lanceras les tiens. Le système range les fichiers du disque dans une <strong>arborescence de répertoires</strong>, et cette page t'apprend à t'y déplacer.</p>
 <h2 id="1-le-terminal-est-toujours-quelque-part">1. Le terminal est toujours quelque part</h2>
-<p>Ouvre ton dépôt dans VS Code, puis le terminal (<strong>Terminal &gt; Nouveau terminal</strong>). Tape :</p>
+<p>Dans VS Code, ouvre un terminal (<strong>Terminal &gt; Nouveau terminal</strong>). Il s'ouvre directement dans ton dépôt. Tape la commande suivante, puis valide-la avec la touche <strong>Entrée</strong> : une commande ne s'exécute que quand tu appuies sur Entrée.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">pwd</span>
 </code></pre></div>
-<p><code>pwd</code> (<em>print working directory</em>) affiche le <strong>répertoire courant</strong> : l'endroit de l'arborescence où se trouve le terminal. Chez toi, le résultat ressemble à <code>/home/eleve/nsi</code>, avec ton nom d'utilisateur et le nom de ton dépôt.</p>
-<div class="admonition warning">
-<p class="admonition-title">Vérifie que ta réponse commence par <code>/home/</code></p>
-<p>Si <code>pwd</code> affiche un chemin qui commence par <code>/mnt/c/</code>, ton dépôt est sur le disque Windows. Une partie de la séance suivante ne fonctionnera pas : <strong>appelle ton professeur</strong>.</p>
-</div>
-<p>Le répertoire courant ne s'affiche <strong>jamais tout seul</strong>. Le terminal le connaît, toi tu dois le demander, ou le suivre de tête. C'est lui qui fait réussir ou échouer la plupart des commandes de cette page.</p>
+<p><code>pwd</code> (<em>print working directory</em>) affiche le <strong>répertoire courant</strong> : l'endroit de l'arborescence où se trouve le terminal. Chez toi, il affiche <code>/home/padawan/PNSINFGR_2_2026-2027</code> : <code>padawan</code> est ton nom d'utilisateur, et <code>PNSINFGR_2_2026-2027</code> le répertoire de ton dépôt.</p>
+<p>Le répertoire courant s'affiche aussi dans le <strong>prompt</strong>, la ligne où tu tapes tes commandes : tu y lis <code>~/PNSINFGR_2_2026-2027</code>, où <code>~</code> abrège <code>/home/padawan</code>.</p>
 <h2 id="2-chemins-absolus-et-chemins-relatifs">2. Chemins absolus et chemins relatifs</h2>
-<p>Un <strong>chemin absolu</strong> commence par <code>/</code>, la <strong>racine</strong>. Il désigne toujours le même endroit, quel que soit le répertoire courant : <code>/home/eleve/nsi/os/notes</code>.</p>
-<p>Un <strong>chemin relatif</strong> ne commence pas par <code>/</code>. Il se lit <strong>à partir du répertoire courant</strong> : depuis <code>/home/eleve/nsi</code>, <code>os/notes</code> désigne <code>/home/eleve/nsi/os/notes</code>.</p>
-<p>Trois raccourcis :</p>
+<div class="admonition fondamental">
+<p class="admonition-title">Chemin absolu, chemin relatif</p>
+<p>Un <strong>chemin absolu</strong> commence par <code>/</code>, la <strong>racine</strong>. Il désigne toujours le même endroit, quel que soit le répertoire courant : <code>/home/padawan/PNSINFGR_2_2026-2027/os/notes</code>.</p>
+<p>Un <strong>chemin relatif</strong> ne commence pas par <code>/</code>. Il se lit <strong>à partir du répertoire courant</strong> : depuis <code>/home/padawan/PNSINFGR_2_2026-2027</code>, <code>os/notes</code> désigne <code>/home/padawan/PNSINFGR_2_2026-2027/os/notes</code>.</p>
+</div>
+<div class="admonition hint">
+<p class="admonition-title">Trois raccourcis ultra courants</p>
 <ul>
 <li><code>.</code> désigne le répertoire courant.</li>
 <li><code>..</code> désigne le répertoire <strong>parent</strong>, celui juste au-dessus.</li>
-<li><code>~</code> désigne ton répertoire personnel, <code>/home/eleve</code>.</li>
+<li><code>~</code> désigne ton répertoire personnel, <code>/home/padawan</code>.</li>
 </ul>
+</div>
 <h2 id="3-les-commandes-de-la-seance">3. Les commandes de la séance</h2>
 <table>
 <thead>
@@ -8837,6 +8872,11 @@
 <td><code>touch td.txt</code></td>
 </tr>
 <tr>
+<td><code>code &lt;file&gt;</code></td>
+<td>ouvre le fichier dans VS Code pour le modifier (le crée à l'enregistrement s'il n'existe pas)</td>
+<td><code>code td.txt</code></td>
+</tr>
+<tr>
 <td><code>cp &lt;src&gt; &lt;dest&gt;</code></td>
 <td>copie un fichier</td>
 <td><code>cp td.txt td2.txt</code></td>
@@ -8863,12 +8903,12 @@
 <p>Un fichier supprimé avec <code>rm</code> est perdu. Relis toujours la commande avant de valider.</p>
 </div>
 <h2 id="4-construire-larborescence-de-travail">4. Construire l'arborescence de travail</h2>
-<p>Depuis la <strong>racine de ton dépôt</strong> (là où <code>pwd</code> t'a placé en ouvrant le terminal), tape ces deux lignes :</p>
+<p>Depuis la <strong>racine de ton dépôt</strong> (là où le terminal s'ouvre), tape ces deux lignes :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>mkdir<span class="w"> </span>-p<span class="w"> </span>os/notes<span class="w"> </span>os/scripts/essais
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>touch<span class="w"> </span>os/notes/cours.txt<span class="w"> </span>os/notes/td.txt<span class="w"> </span>os/scripts/calcul.py
 </code></pre></div>
 <p>Tu obtiens :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>nsi/                  ← la racine de ton dépôt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>PNSINFGR_2_2026-2027/  ← la racine de ton dépôt
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>└── os/
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    ├── notes/
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    │   ├── cours.txt
@@ -8881,7 +8921,7 @@
 <h2 id="5-predire-avant-de-taper">5. Prédire avant de taper</h2>
 <div class="admonition question">
 <p class="admonition-title">Exercice 1 : où est le terminal ?</p>
-<p>Le terminal est à la racine du dépôt, <code>/home/eleve/nsi</code>. On tape, dans l'ordre :</p>
+<p>Le terminal est à la racine du dépôt, <code>/home/padawan/PNSINFGR_2_2026-2027</code>. On tape, dans l'ordre :</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-3-1">1</a></span>
 <span class="normal"><a href="#__codelineno-3-2">2</a></span>
 <span class="normal"><a href="#__codelineno-3-3">3</a></span>
@@ -8900,7 +8940,7 @@
 <li>après la ligne 4</li>
 <li>après la ligne 5</li>
 </ul>
-<p>Pose ton doigt sur le schéma à chaque ligne. Une fois tes cinq réponses écrites, tape les commandes une à une, avec <code>pwd</code> après chacune, et compare.</p>
+<p>Une fois tes cinq réponses écrites, tape les commandes une à une, avec <code>pwd</code> après chacune, et compare.</p>
 <details class="tip">
 <summary>Indice</summary>
 <p><code>..</code> remonte d'<strong>un</strong> niveau. <code>../../..</code> en remonte trois, un par <code>..</code>.</p>
@@ -8908,11 +8948,11 @@
 <details class="success">
 <summary>Réponses</summary>
 <ol>
-<li><code>/home/eleve/nsi/os/scripts</code></li>
-<li><code>/home/eleve/nsi/os</code></li>
-<li><code>/home/eleve/nsi/os/notes</code></li>
-<li><code>/home/eleve/nsi/os/scripts/essais</code></li>
-<li><code>/home/eleve/nsi</code> : depuis <code>essais</code>, les trois remontées passent par <code>scripts</code>, puis <code>os</code>, puis la racine du dépôt.</li>
+<li><code>/home/padawan/PNSINFGR_2_2026-2027/os/scripts</code></li>
+<li><code>/home/padawan/PNSINFGR_2_2026-2027/os</code></li>
+<li><code>/home/padawan/PNSINFGR_2_2026-2027/os/notes</code></li>
+<li><code>/home/padawan/PNSINFGR_2_2026-2027/os/scripts/essais</code></li>
+<li><code>/home/padawan/PNSINFGR_2_2026-2027</code> : depuis <code>essais</code>, les trois remontées passent par <code>scripts</code>, puis <code>os</code>, puis la racine du dépôt.</li>
 </ol>
 </details>
 </div>
@@ -8937,7 +8977,7 @@
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 3 : une commande qui échoue</p>
-<p>Le terminal est dans <code>/home/eleve/nsi/os/notes</code>. On tape <code>cd scripts</code>.</p>
+<p>Le terminal est dans <code>/home/padawan/PNSINFGR_2_2026-2027/os/notes</code>. On tape <code>cd scripts</code>.</p>
 <p>Sur ton cahier :</p>
 <ul>
 <li>ce que répond le terminal</li>
@@ -8948,7 +8988,7 @@
 <summary>Réponses</summary>
 <ul>
 <li><code>bash: cd: scripts: No such file or directory</code>. Le chemin <code>scripts</code> se lit depuis <code>notes</code>, et <code>notes</code> ne contient pas de répertoire <code>scripts</code>.</li>
-<li>Toujours dans <code>/home/eleve/nsi/os/notes</code> : une commande qui échoue ne déplace rien.</li>
+<li>Toujours dans <code>/home/padawan/PNSINFGR_2_2026-2027/os/notes</code> : une commande qui échoue ne déplace rien.</li>
 <li><code>cd ../scripts</code></li>
 </ul>
 </details>
@@ -8981,7 +9021,7 @@
 <a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>mkdir<span class="w"> </span>../projet/images
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>touch<span class="w"> </span>../projet/index.html
 </code></pre></div>
-<p><code>ls ../projet</code> affiche <code>images  index.html</code>, et le chemin absolu est <code>/home/eleve/nsi/os/projet/index.html</code>.</p>
+<p><code>ls ../projet</code> affiche <code>images  index.html</code>, et le chemin absolu est <code>/home/padawan/PNSINFGR_2_2026-2027/os/projet/index.html</code>.</p>
 </details>
 </div>
 <div class="admonition question">
@@ -9108,7 +9148,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 5, 2026 22:05:22 UTC">October 5, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 13, 2026 18:58:58 UTC">October 13, 2026</span>
   </span>
 
     
