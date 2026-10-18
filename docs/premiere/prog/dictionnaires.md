@@ -5,6 +5,43 @@ python-console: true
 
 # Les dictionnaires
 
+!!! question "Prédire la dernière ligne"
+    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+
+<script type="text/x-silent-teacher" data-titre="Les dictionnaires">
+d = {'a': {{a:1..4}}, 'b': {{b:5..9}}}
+d['b']
+---
+d = {'a': {{a:1..4}}, 'b': {{b:5..9}}}
+d['c']
+---
+d = {'a': {{a:1..4}}}
+d[{{k:'a'|'b'}}] = {{b:5..9}}
+len(d)
+---
+d = {'a': {{a:1..4}}}
+d['a'] = d['a'] + {{k:5..9}}
+d
+---
+d = {'x': {{a:1..4}}, 'y': {{b:5..9}}}
+{{e:'x' in d|'z' in d|d['x'] in d}}
+---
+d = {'x': {{a:1..4}}, 'y': {{b:5..9}}}
+n = 0
+for k in d:
+    n = n + d[k]
+n
+---
+d = {}
+for c in {{m:'banane'|'ananas'|'papaye'}}:
+    if c in d:
+        d[c] = d[c] + 1
+    else:
+        d[c] = 1
+d['a']
+</script>
+<script src="/javascripts/silent_teacher.js" defer></script>
+
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 

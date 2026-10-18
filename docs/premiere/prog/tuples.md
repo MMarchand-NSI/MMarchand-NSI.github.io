@@ -1,5 +1,31 @@
 # Le type tuple (p-uplet)
 
+!!! question "Prédire la dernière ligne"
+    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+
+<script type="text/x-silent-teacher" data-titre="Les tuples">
+t = ({{a:1..4}}, {{b:5..9}})
+t[1]
+---
+({{a:1..9}})
+---
+({{a:1..9}},)
+---
+a, b = {{a:1..4}}, {{b:5..9}}
+a, b = b, a
+a - b
+---
+t = ({{a:1..4}}, {{b:5..9}})
+t[0] = 0
+---
+def f(x: int) -> tuple[int, int]:
+    return x, x * 2
+
+a, b = f({{a:1..5}})
+b
+</script>
+<script src="/javascripts/silent_teacher.js" defer></script>
+
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 

@@ -1,5 +1,43 @@
 # Les listes
 
+!!! question "Prédire la dernière ligne"
+    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+
+<script type="text/x-silent-teacher" data-titre="Les listes">
+t = [{{a:1..3}}, {{b:4..6}}, {{c:7..9}}]
+t[1] = 0
+t
+---
+t = [{{a:1..3}}, {{b:4..6}}, {{c:7..9}}]
+t.insert(0, {{d:1..9}})
+t
+---
+a = [{{a:1..3}}, {{b:4..6}}]
+b = a
+b.append({{d:7..9}})
+a
+---
+t = [{{a:1..3}}, {{b:4..6}}]
+t = t.append({{d:7..9}})
+t
+---
+a = [{{a:1..3}}, {{b:4..6}}]
+b = a.copy()
+b[0] = 0
+a
+---
+t = [{{a:1..3}}, {{b:4..6}}, {{c:7..9}}]
+x = t.pop()
+x + len(t)
+---
+t = [{{a:1..3}}, {{b:4..6}}, {{c:7..9}}]
+r = []
+for x in t:
+    r.append(x * 2)
+r
+</script>
+<script src="/javascripts/silent_teacher.js" defer></script>
+
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 
@@ -98,7 +136,7 @@ Ici `a = a + 1` ne modifie pas l'objet `5` : il fabrique un **nouvel** entier et
 Pour obtenir une liste **indépendante**, on la copie explicitement :
 
 ```python
-b = a.copy()      # ou list(a), ou a[:]
+b = a.copy()      # ou list(a)
 a.append(4)
 print(b)          # inchangée : b est une autre liste
 ```

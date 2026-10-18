@@ -1,5 +1,21 @@
 # Compréhensions de liste
 
+!!! question "Prédire la dernière ligne"
+    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+
+<script type="text/x-silent-teacher" data-titre="Les compréhensions">
+[x * 2 for x in range(0, {{n:3..5}})]
+---
+[x for x in [{{a:1..3}}, {{b:4..6}}, {{c:7..9}}] if x > {{k:4..6}}]
+---
+[c for c in {{m:'chat'|'tigre'|'girafe'}} if c != 'a']
+---
+len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
+---
+[len(m) for m in [{{m:'a'|'bb'}}, 'ccc', 'dddd']]
+</script>
+<script src="/javascripts/silent_teacher.js" defer></script>
+
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 

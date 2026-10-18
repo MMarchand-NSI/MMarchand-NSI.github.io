@@ -1,5 +1,45 @@
 # La boucle non bornée : `while`
 
+!!! question "Prédire la dernière ligne"
+    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+
+<script type="text/x-silent-teacher" data-titre="La boucle while">
+n = {{n:20..40}}
+k = 0
+while n > 10:
+    n = n - {{d:3..5}}
+    k = k + 1
+k
+---
+n = {{n:2..5}}
+while n < 100:
+    n = n * 2
+n
+---
+i = 0
+while i < {{n:3..7}}:
+    i = i + 2
+i
+---
+n = {{n:10..20}}
+while n < 5:
+    n = n + 1
+n
+---
+a = {{a:13..29}}
+b = {{b:3..6}}
+while a >= b:
+    a = a - b
+a
+---
+s = {{m:'chat'|'loup'|'bonjour'}}
+i = 0
+while i < len(s) and s[i] != 'o':
+    i = i + 1
+i
+</script>
+<script src="/javascripts/silent_teacher.js" defer></script>
+
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 

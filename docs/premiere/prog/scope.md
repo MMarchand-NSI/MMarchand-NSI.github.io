@@ -1,5 +1,55 @@
 # Portée des variables (scope)
 
+!!! question "Prédire la dernière ligne"
+    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+
+<script type="text/x-silent-teacher" data-titre="La portée des variables">
+def f(x: int) -> int:
+    x = x + {{k:1..3}}
+    return x
+
+x = {{x:4..8}}
+f(x)
+x
+---
+def f() -> int:
+    return n * 2
+
+n = {{n:2..5}}
+f()
+---
+def f() -> None:
+    n = {{a:6..9}}
+
+n = {{n:1..5}}
+f()
+n
+---
+def f() -> None:
+    n = n + 1
+
+n = {{n:1..5}}
+f()
+n
+---
+def f(y: int) -> int:
+    z = y * 2
+    return z
+
+f({{a:1..5}})
+z
+---
+def f() -> None:
+    global n
+    n = n + {{k:1..3}}
+
+n = {{n:4..8}}
+f()
+f()
+n
+</script>
+<script src="/javascripts/silent_teacher.js" defer></script>
+
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 

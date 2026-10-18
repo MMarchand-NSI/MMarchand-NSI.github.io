@@ -1,5 +1,40 @@
 # La boucle `for`
 
+!!! question "Prédire la dernière ligne"
+    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+
+<script type="text/x-silent-teacher" data-titre="La boucle for">
+n = 0
+for c in {{m:'chat'|'tigre'|'girafe'}}:
+    n = n + 1
+n
+---
+r = ''
+for c in {{m:'abc'|'nsi'|'rat'}}:
+    r = c + r
+r
+---
+r = ''
+for c in {{m:'abc'|'nsi'|'rat'}}:
+    r = r + c + c
+r
+---
+n = 0
+for c in {{m:'banane'|'ananas'|'papaye'}}:
+    if c == 'a':
+        n = n + 1
+n
+---
+for c in {{m:'chat'|'tigre'|'girafe'}}:
+    r = ''
+    r = r + c
+r
+---
+for c in {{m:'abc'|'nsi'|'rat'}}:
+    print(c)
+</script>
+<script src="/javascripts/silent_teacher.js" defer></script>
+
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 

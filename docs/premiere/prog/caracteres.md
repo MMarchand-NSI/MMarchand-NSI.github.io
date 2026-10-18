@@ -1,5 +1,42 @@
 # Les chaînes de caractère
 
+!!! question "Prédire la dernière ligne"
+    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+
+<script type="text/x-silent-teacher" data-titre="Les chaînes de caractères">
+s = {{m:'chat'|'loup'|'ours'}}
+s + s
+---
+x = {{x:'2'|'3'|'4'}}
+y = {{y:'5'|'6'|'7'}}
+x + y
+---
+'a' + {{k:1..3}}
+---
+{{m:'ha'|'bo'|'zu'}} * {{n:2..4}}
+---
+s = {{m:'chat'|'tigre'|'girafe'}}
+len(s)
+---
+s = {{m:'chat'|'tigre'|'girafe'}}
+s[{{i:1..3}}]
+---
+s = {{m:'chat'|'tigre'|'girafe'}}
+s[len(s)]
+---
+s = {{m:'girafe'|'python'|'bureau'}}
+s[{{i:0..2}}:{{j:3..5}}]
+---
+s = {{m:'nsi'|'chat'|'loup'}}
+s = s.upper()
+s
+---
+s = {{m:'nsi'|'chat'|'loup'}}
+s.upper()
+s
+</script>
+<script src="/javascripts/silent_teacher.js" defer></script>
+
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 
@@ -121,7 +158,7 @@ Une chaîne est **immuable** : une fois créée, on ne peut pas en changer un ca
 ```python
 s = "python"
 s[0] = "P"        # TypeError : on ne peut pas modifier un caractère
-s = "P" + s[1:]   # on fabrique une nouvelle chaîne : "Python"
+s = "P" + s[1:len(s)]   # on fabrique une nouvelle chaîne : "Python"
 ```
 
 ## Chaînes sur plusieurs lignes

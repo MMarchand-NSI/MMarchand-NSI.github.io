@@ -1,5 +1,40 @@
 # La boucle `for` sur un intervalle semi-ouvert d'entiers
 
+!!! question "Prédire la dernière ligne"
+    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+
+<script type="text/x-silent-teacher" data-titre="range">
+n = 0
+for i in range({{a:2..4}}, {{b:6..9}}):
+    n = n + 1
+n
+---
+s = 0
+for i in range(0, {{n:3..6}}):
+    s = s + i
+s
+---
+n = 0
+for i in range({{a:2..9}}, {{b:2..9}}):
+    n = n + 1
+n
+---
+for i in range(0, {{n:3..6}}):
+    x = i * 2
+x
+---
+for i in range({{b:4..6}}, {{a:1..2}}, -1):
+    print(i)
+---
+s = {{m:'sac'|'banane'|'pizza'}}
+r = 0
+for i in range(0, len(s)):
+    if s[i] == 'a':
+        r = i
+r
+</script>
+<script src="/javascripts/silent_teacher.js" defer></script>
+
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 

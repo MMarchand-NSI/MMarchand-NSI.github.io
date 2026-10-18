@@ -1,5 +1,31 @@
 # Le type entier
 
+!!! question "Prédire la dernière ligne"
+    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+
+<script type="text/x-silent-teacher" data-titre="Le type entier">
+{{a:13..29}} // {{b:3..6}}
+---
+{{a:13..29}} % {{b:3..6}}
+---
+n = {{a:13..29}}
+q = n // {{b:3..6}}
+r = n % {{b}}
+q * {{b}} + r
+---
+{{a:2..3}} ** {{b:2..4}}
+---
+{{a:2..4}} + {{b:2..4}} * {{c:2..4}}
+---
+{{a:11..19}} % 2 == 0
+---
+a = {{a:1..5}}
+a += {{b:2..4}}
+a *= 2
+a
+</script>
+<script src="/javascripts/silent_teacher.js" defer></script>
+
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 

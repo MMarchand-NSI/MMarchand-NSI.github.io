@@ -1,5 +1,41 @@
 # Les conditionnelles
 
+!!! question "Prédire la dernière ligne"
+    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+
+<script type="text/x-silent-teacher" data-titre="Les conditionnelles">
+a = {{a:1..9}}
+if a > 5:
+    a = a * 2
+a
+---
+x = {{x:1..9}}
+if x % 2 == 0:
+    r = 'pair'
+else:
+    r = 'impair'
+r
+---
+n = {{n:5..19}}
+if n > 10:
+    r = 'A'
+elif n > 15:
+    r = 'B'
+else:
+    r = 'C'
+r
+---
+a = {{a:1..9}}
+a > 3 and a < 7
+---
+a = {{a:1..9}}
+not (a < 5)
+---
+n = {{n:3..9}}
+n != 4 {{op:or|and}} n != 8
+</script>
+<script src="/javascripts/silent_teacher.js" defer></script>
+
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses. Se tester est ce qui fixe les acquis ; relire ne le fait pas.
 

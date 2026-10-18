@@ -1,5 +1,40 @@
 # Les fonctions
 
+!!! question "Prédire la dernière ligne"
+    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+
+<script type="text/x-silent-teacher" data-titre="Les fonctions">
+def f(x: int) -> int:
+    return x * {{k:2..4}}
+
+f({{a:1..5}})
+---
+def f(x: int) -> int:
+    return x + 1
+
+f(f({{a:1..5}}))
+---
+def f(a: int, b: int) -> int:
+    return a - b
+
+f({{b:1..4}}, {{a:5..9}})
+---
+def carre(x: int) -> int:
+    return x * x
+
+def g(x: int) -> int:
+    return carre(x) + {{k:1..3}}
+
+g({{a:2..5}})
+---
+def f(x: int) -> None:
+    print(x * 2)
+
+r = f({{a:1..5}})
+print(r)
+</script>
+<script src="/javascripts/silent_teacher.js" defer></script>
+
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les pages précédentes, en écrivant tes réponses.
 

@@ -1,5 +1,40 @@
 # Les variables
 
+!!! question "Prédire la dernière ligne"
+    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+
+<script type="text/x-silent-teacher" data-titre="Les variables">
+a = {{a:1..5}}
+a + {{b:1..5}}
+---
+a = {{a:1..5}}
+a = {{b:6..9}}
+a
+---
+a = {{a:2..5}}
+a = a + {{b:1..3}}
+a
+---
+x = {{x:2..5}}
+y = x + {{d:1..3}}
+x = {{z:6..9}}
+y
+---
+a = {{a:1..4}}
+b = {{b:5..9}}
+a = b
+b = a
+b
+---
+a = {{a:1..4}}
+b = {{b:5..9}}
+t = a
+a = b
+b = t
+a - b
+</script>
+<script src="/javascripts/silent_teacher.js" defer></script>
+
 !!! note "Rappel d'ouverture (5 minutes, cours fermé)"
     Réponds **sans rouvrir** les chapitres sur la représentation de l'information et l'architecture, en écrivant tes réponses. Se tester est ce qui fixe les acquis ; relire ne le fait pas.
 
