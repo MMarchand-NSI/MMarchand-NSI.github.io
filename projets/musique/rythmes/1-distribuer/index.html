@@ -9121,25 +9121,6 @@
 <summary>Indice plus précis</summary>
 <p><code>[""] * n</code> crée une liste de <code>n</code> chaînes vides. Parcours ensuite les indices de <code>texte</code> : le caractère d'indice <code>i</code> s'ajoute au bout de la main du joueur qui le reçoit. L'exercice « Qui reçoit quelle carte ? » te dit lequel.</p>
 </details>
-<details class="question">
-<summary>Avant d'ouvrir la solution</summary>
-<p>En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans <strong>ton</strong> code ?</p>
-</details>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">distribuer</span><span class="p">(</span><span class="n">texte</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Distribue les caractères de texte entre n paquets, à chacun son tour.</span>
-<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="sd">    Le premier caractère va dans le paquet 0, le suivant dans le paquet 1, et ainsi de suite.</span>
-<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="sd">    Précondition : n &gt; 0.</span>
-<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="k">assert</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;n doit être strictement positif&quot;</span>
-<a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a>    <span class="n">resultat</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">n</span>
-<a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">texte</span><span class="p">)):</span>
-<a id="__codelineno-2-9" name="__codelineno-2-9" href="#__codelineno-2-9"></a>        <span class="n">resultat</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">resultat</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">n</span><span class="p">]</span> <span class="o">+</span> <span class="n">texte</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-<a id="__codelineno-2-10" name="__codelineno-2-10" href="#__codelineno-2-10"></a>    <span class="k">return</span> <span class="n">resultat</span>
-</code></pre></div>
-<p>Les deux lignes à compléter du test : <code>["A", "B", "", ""]</code> et <code>["", "", ""]</code>. Il y a toujours <code>n</code> mains, même vides.</p>
-</details>
 </div>
 <h2 id="etape-3-rassembler">Étape 3 - Rassembler</h2>
 <p>La partie est finie, on ramasse. Pour reconstituer le paquet d'origine, on reprend la première carte de chaque main, du joueur 0 au dernier, puis la deuxième carte de chaque main, et ainsi de suite.</p>
@@ -9162,20 +9143,20 @@
 <div class="admonition question">
 <p class="admonition-title">La fonction <code>rassembler</code> (obligatoire)</p>
 <p>Écris le corps de cette fonction :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">rassembler</span><span class="p">(</span><span class="n">paquets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Réciproque de distribuer : reconstitue le texte que distribuer</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="sd">    a réparti dans paquets.</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="sd">    Précondition : paquets contient au moins un paquet, et provient de distribuer.</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="o">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">rassembler</span><span class="p">(</span><span class="n">paquets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Réciproque de distribuer : reconstitue le texte que distribuer</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="sd">    a réparti dans paquets.</span>
+<a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="sd">    Précondition : paquets contient au moins un paquet, et provient de distribuer.</span>
+<a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="o">...</span>
 </code></pre></div>
 <p>Recopie et complète ce test :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_rassembler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="k">assert</span> <span class="n">rassembler</span><span class="p">([</span><span class="s2">&quot;ADGJ&quot;</span><span class="p">,</span> <span class="s2">&quot;BEH&quot;</span><span class="p">,</span> <span class="s2">&quot;CFI&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;ABCDEFGHIJ&quot;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">assert</span> <span class="n">rassembler</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;AB&quot;</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="c1"># rassembler défait ce que distribuer a fait, quel que soit n :</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        <span class="k">assert</span> <span class="n">rassembler</span><span class="p">(</span><span class="n">distribuer</span><span class="p">(</span><span class="s2">&quot;ABCDEFGHIJ&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">==</span> <span class="o">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_rassembler</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="k">assert</span> <span class="n">rassembler</span><span class="p">([</span><span class="s2">&quot;ADGJ&quot;</span><span class="p">,</span> <span class="s2">&quot;BEH&quot;</span><span class="p">,</span> <span class="s2">&quot;CFI&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;ABCDEFGHIJ&quot;</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="k">assert</span> <span class="n">rassembler</span><span class="p">([</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">])</span> <span class="o">==</span> <span class="s2">&quot;AB&quot;</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="c1"># rassembler défait ce que distribuer a fait, quel que soit n :</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">12</span><span class="p">):</span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>        <span class="k">assert</span> <span class="n">rassembler</span><span class="p">(</span><span class="n">distribuer</span><span class="p">(</span><span class="s2">&quot;ABCDEFGHIJ&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">==</span> <span class="o">...</span>
 </code></pre></div>
 <details class="tip">
 <summary>Indice léger</summary>
@@ -9185,35 +9166,12 @@
 <summary>Indice plus précis</summary>
 <p>Calcule d'abord le nombre total de cartes. Puis, pour <code>i</code> dans <code>range(0, total)</code>, la carte <code>i</code> est <code>paquets[i % n][i // n]</code>, où <code>n</code> est le nombre de paquets.</p>
 </details>
-<details class="question">
-<summary>Avant d'ouvrir la solution</summary>
-<p>En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans <strong>ton</strong> code ?</p>
-</details>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">rassembler</span><span class="p">(</span><span class="n">paquets</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Réciproque de distribuer : reconstitue le texte que distribuer</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="sd">    a réparti dans paquets.</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="sd">    Précondition : paquets contient au moins un paquet, et provient de distribuer.</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">paquets</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;il faut au moins un paquet&quot;</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">paquets</span><span class="p">)</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="k">for</span> <span class="n">paquet</span> <span class="ow">in</span> <span class="n">paquets</span><span class="p">:</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>        <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">paquet</span><span class="p">)</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="n">resultat</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">total</span><span class="p">):</span>
-<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>        <span class="n">resultat</span> <span class="o">=</span> <span class="n">resultat</span> <span class="o">+</span> <span class="n">paquets</span><span class="p">[</span><span class="n">i</span> <span class="o">%</span> <span class="n">n</span><span class="p">][</span><span class="n">i</span> <span class="o">//</span> <span class="n">n</span><span class="p">]</span>
-<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    <span class="k">return</span> <span class="n">resultat</span>
-</code></pre></div>
-<p>Compare avec <code>distribuer</code> : la même boucle sur <code>i</code>, les mêmes <code>i % n</code>. L'une <strong>range</strong> la carte <code>i</code> dans la main <code>i % n</code>, l'autre l'y <strong>reprend</strong>.</p>
-</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Des mains qui ne viennent pas d'une distribution (entraînement)</p>
 <p>Lis ce code. Que se passe-t-il quand on l'exécute ? Écris ta réponse sur ton cahier, puis explique pourquoi aucune distribution ne peut produire ces deux mains.</p>
 <p><strong>Ne lance pas ce code tant que tu n'as pas écrit ta réponse.</strong></p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">rassembler</span><span class="p">([</span><span class="s2">&quot;AB&quot;</span><span class="p">,</span> <span class="s2">&quot;CDE&quot;</span><span class="p">]))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">rassembler</span><span class="p">([</span><span class="s2">&quot;AB&quot;</span><span class="p">,</span> <span class="s2">&quot;CDE&quot;</span><span class="p">]))</span>
 </code></pre></div>
 <details class="success">
 <summary>Réponse</summary>

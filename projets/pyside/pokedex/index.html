@@ -9493,33 +9493,6 @@
 <summary>Pour la couleur d'un type</summary>
 <p><code>COULEUR_TYPE.get(p["type1"], "#999999")</code> : si le type n'est pas dans le dictionnaire, un gris par défaut plutôt qu'une erreur.</p>
 </details>
-<details class="success">
-<summary>Solution</summary>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">afficher</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Affiche le pokémon d&#39;indice `index` sur la fiche.&quot;&quot;&quot;</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">p</span> <span class="o">=</span> <span class="n">pokedex</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">numero</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="s2">&quot;N°&quot;</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;numero&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">zfill</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">nom</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;nom&quot;</span><span class="p">])</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">sprite</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;source&quot;</span><span class="p">,</span> <span class="n">SPRITE</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;numero&quot;</span><span class="p">]))</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="n">badge1_txt</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;type1&quot;</span><span class="p">])</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>    <span class="n">badge1</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;color&quot;</span><span class="p">,</span> <span class="n">COULEUR_TYPE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;type1&quot;</span><span class="p">],</span> <span class="s2">&quot;#999999&quot;</span><span class="p">))</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a>    <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;type2&quot;</span><span class="p">]:</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>        <span class="n">badge2_txt</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">,</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;type2&quot;</span><span class="p">])</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>        <span class="n">badge2</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;color&quot;</span><span class="p">,</span> <span class="n">COULEUR_TYPE</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;type2&quot;</span><span class="p">],</span> <span class="s2">&quot;#999999&quot;</span><span class="p">))</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>        <span class="n">badge2</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;visible&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
-<a id="__codelineno-4-14" name="__codelineno-4-14" href="#__codelineno-4-14"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-4-15" name="__codelineno-4-15" href="#__codelineno-4-15"></a>        <span class="n">badge2</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;visible&quot;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
-<a id="__codelineno-4-16" name="__codelineno-4-16" href="#__codelineno-4-16"></a>
-<a id="__codelineno-4-17" name="__codelineno-4-17" href="#__codelineno-4-17"></a>    <span class="n">barres</span><span class="p">[</span><span class="s2">&quot;pv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;valeur&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;pv&quot;</span><span class="p">]))</span>
-<a id="__codelineno-4-18" name="__codelineno-4-18" href="#__codelineno-4-18"></a>    <span class="n">barres</span><span class="p">[</span><span class="s2">&quot;atk&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;valeur&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;attaque&quot;</span><span class="p">]))</span>
-<a id="__codelineno-4-19" name="__codelineno-4-19" href="#__codelineno-4-19"></a>    <span class="n">barres</span><span class="p">[</span><span class="s2">&quot;def&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;valeur&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;defense&quot;</span><span class="p">]))</span>
-<a id="__codelineno-4-20" name="__codelineno-4-20" href="#__codelineno-4-20"></a>    <span class="n">barres</span><span class="p">[</span><span class="s2">&quot;ats&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;valeur&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;attaque_spe&quot;</span><span class="p">]))</span>
-<a id="__codelineno-4-21" name="__codelineno-4-21" href="#__codelineno-4-21"></a>    <span class="n">barres</span><span class="p">[</span><span class="s2">&quot;dfs&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;valeur&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;defense_spe&quot;</span><span class="p">]))</span>
-<a id="__codelineno-4-22" name="__codelineno-4-22" href="#__codelineno-4-22"></a>    <span class="n">barres</span><span class="p">[</span><span class="s2">&quot;vit&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">setProperty</span><span class="p">(</span><span class="s2">&quot;valeur&quot;</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;vitesse&quot;</span><span class="p">]))</span>
-</code></pre></div>
-<code>zfill(3)</code> complète avec des zéros à gauche jusqu'à 3 caractères : <code>"1"</code> devient <code>"001"</code>. C'est une méthode de chaîne, pas une nouveauté conceptuelle.</p>
-</details>
 <p>Le squelette appelle déjà <code>afficher()</code> juste avant <code>sys.exit(app.exec())</code> : lance, et vérifie que la fiche de Bulbizarre s'affiche complètement dès l'ouverture.</p>
 </div>
 <h2 id="etape-2-role-a-pilote-suivant-et-precedent">Étape 2 (Rôle A pilote) - <code>suivant</code> et <code>precedent</code></h2>
@@ -9529,23 +9502,6 @@
 <details class="tip">
 <summary>L'opérateur qui boucle</summary>
 <p><code>(index + 1) % len(pokedex)</code> : le reste de la division par la longueur de la liste revient toujours à 0 juste après avoir atteint la fin. Tu as déjà rencontré <code>%</code> pour tester la parité ; ici, il sert à <strong>boucler</strong>.</p>
-</details>
-<details class="success">
-<summary>Solution</summary>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">suivant</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Passe au pokémon suivant (callback du bouton Suivant).&quot;&quot;&quot;</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="k">global</span> <span class="n">index</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">pokedex</span><span class="p">)</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="n">afficher</span><span class="p">()</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">precedent</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Passe au pokémon précédent (callback du bouton Précédent).&quot;&quot;&quot;</span>
-<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a>    <span class="k">global</span> <span class="n">index</span>
-<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="n">index</span> <span class="o">=</span> <span class="p">(</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">pokedex</span><span class="p">)</span>
-<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="n">afficher</span><span class="p">()</span>
-</code></pre></div>
-En Python, <code>%</code> sur un résultat négatif reste <strong>positif</strong> (contrairement à d'autres langages) : <code>(0 - 1) % 151</code> vaut <code>150</code>, pas <code>-1</code>. C'est ce qui fait boucler <code>precedent</code> vers le <strong>dernier</strong> pokémon sans code particulier.</p>
 </details>
 <p>Teste : lance l'application, clique sur <strong>Précédent</strong> dès le démarrage (encore sur Bulbizarre). Le pokédex doit boucler sur le <strong>dernier</strong> pokémon de la table, pas planter.</p>
 </div>
@@ -9560,26 +9516,6 @@ En Python, <code>%</code> sur un résultat négatif reste <strong>positif</stron
 <summary>Indice</summary>
 <p>Reprends le motif de <code>plus_petite_lettre</code> (<a href="../../../premiere/prog/boucle-for/">boucle-for.md</a>) : un parcours par indice avec <code>enumerate</code>, et un <code>return</code> <strong>dès qu'on trouve</strong>, plutôt qu'un accumulateur. Si la boucle se termine sans avoir renvoyé, il faut renvoyer <code>None</code>.</p>
 </details>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">trouver_index</span><span class="p">(</span><span class="n">requete</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Cherche un pokémon par numéro exact ou par début de nom (insensible à la casse).</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="sd">    Renvoie son indice dans `pokedex`, ou None si rien ne correspond.</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="sd">    &gt;&gt;&gt; trouver_index(&quot;4&quot;)</span>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="sd">    3</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a><span class="sd">    &gt;&gt;&gt; trouver_index(&quot;saLA&quot;)</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="sd">    3</span>
-<a id="__codelineno-6-10" name="__codelineno-6-10" href="#__codelineno-6-10"></a><span class="sd">    &gt;&gt;&gt; trouver_index(&quot;zzzzz&quot;)</span>
-<a id="__codelineno-6-11" name="__codelineno-6-11" href="#__codelineno-6-11"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-6-12" name="__codelineno-6-12" href="#__codelineno-6-12"></a>    <span class="n">q</span> <span class="o">=</span> <span class="n">requete</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-<a id="__codelineno-6-13" name="__codelineno-6-13" href="#__codelineno-6-13"></a>    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">p</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">pokedex</span><span class="p">):</span>
-<a id="__codelineno-6-14" name="__codelineno-6-14" href="#__codelineno-6-14"></a>        <span class="k">if</span> <span class="n">q</span> <span class="o">==</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;numero&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;nom&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
-<a id="__codelineno-6-15" name="__codelineno-6-15" href="#__codelineno-6-15"></a>            <span class="k">return</span> <span class="n">i</span>
-<a id="__codelineno-6-16" name="__codelineno-6-16" href="#__codelineno-6-16"></a>    <span class="k">return</span> <span class="kc">None</span>
-</code></pre></div>
-</details>
 <p>Lance le fichier <strong>sans cliquer sur rien</strong> et regarde la console : si les trois doctests passent, <code>trouver_index</code> est correcte, avant même d'avoir touché à l'interface.</p>
 </div>
 <h2 id="etape-4-role-b-pilote-rechercher-le-pont-vers-afficher">Étape 4 (Rôle B pilote) - <code>rechercher</code>, le pont vers <code>afficher</code></h2>
@@ -9590,21 +9526,6 @@ En Python, <code>%</code> sur un résultat négatif reste <strong>positif</stron
 <p class="admonition-title">La frontière avec le travail de Rôle A</p>
 <p><code>rechercher</code> <strong>appelle</strong> <code>afficher</code>, écrite par Rôle A. C'est le seul endroit du fichier où votre code se touche directement. Si <code>afficher</code> n'est pas encore terminée, teste <code>trouver_index</code> seule (étape 3) en attendant.</p>
 </div>
-<details class="success">
-<summary>Solution</summary>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">rechercher</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Callback du bouton Chercher : lit le champ recherche, saute au pokémon trouvé.&quot;&quot;&quot;</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="k">global</span> <span class="n">index</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="n">q</span> <span class="o">=</span> <span class="n">recherche</span><span class="o">.</span><span class="n">property</span><span class="p">(</span><span class="s2">&quot;text&quot;</span><span class="p">)</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="k">if</span> <span class="n">q</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span><span class="p">:</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>        <span class="k">return</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="n">i</span> <span class="o">=</span> <span class="n">trouver_index</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>    <span class="k">if</span> <span class="n">i</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a>        <span class="n">index</span> <span class="o">=</span> <span class="n">i</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>        <span class="n">afficher</span><span class="p">()</span>
-</code></pre></div>
-Remarque ce que <code>rechercher</code> fait et que <code>trouver_index</code> ne fait <strong>pas</strong> : décider quoi faire du résultat (rien si vide, rien si <code>None</code>, sinon changer <code>index</code> et rafraîchir). <code>trouver_index</code> se contente de répondre à la question qu'on lui pose ; c'est <code>rechercher</code> qui décide.</p>
-</details>
 </div>
 <h2 id="integration-tout-brancher-et-tester-a-deux">Intégration : tout brancher, et tester à deux</h2>
 <p>Les trois <code>.clicked.connect(...)</code> sont déjà dans le squelette fourni : il n'y a rien à ajouter ici, seulement à vérifier que les noms de fonctions correspondent à ce que vous avez écrit.</p>

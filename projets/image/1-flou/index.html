@@ -6981,6 +6981,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#etape-6-et-en-couleur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 6 - Et en couleur ?
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -8907,6 +8918,17 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#etape-6-et-en-couleur" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 6 - Et en couleur ?
+      
+    </span>
+  </a>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -9003,14 +9025,15 @@
 <p>Sur cette page, on écrit un <strong>flou</strong>. Sur la suivante, on généralise jusqu'à la <strong>détection de contours</strong>.</p>
 <h2 id="mise-en-place">Mise en place</h2>
 <p>Une image en niveaux de gris est une grille : chaque case contient un entier entre <code>0</code> (noir) et <code>255</code> (blanc). On la représente comme dans le voisinage, par une liste de listes.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">type</span> <span class="n">grille</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nb">type</span> <span class="n">grille</span> <span class="o">=</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span>
 </code></pre></div>
 <p>Pour lire et écrire un fichier image, on te donne le fichier <a href="../image_io.py">image_io.py</a>, à placer à côté de ton programme. Il ne contient <strong>que</strong> de la lecture et de l'écriture de fichiers :</p>
 <ul>
 <li><code>charger(chemin: str) -&gt; grille</code> lit une image et la rend en niveaux de gris, réduite à 400 pixels de côté au plus,</li>
 <li><code>sauver(g: grille, chemin: str) -&gt; None</code> enregistre une grille d'entiers entre 0 et 255 dans un fichier,</li>
-<li><code>charger_couleur</code>, qui ne servira qu'à la dernière page.</li>
+<li><code>charger_couleur(chemin: str) -&gt; image_couleur</code> lit une image en couleur. Elle ne servira qu'à la fin de cette page et à la dernière page.</li>
 </ul>
+<p><code>sauver</code> accepte aussi une image en couleur.</p>
 <p>Tout le reste, c'est toi qui l'écris. Installe la bibliothèque qu'utilise <code>image_io.py</code> : <code>uv add pillow</code>.</p>
 <p>Crée un fichier <code>filtres.py</code> qui commence ainsi, et choisis une de tes photos :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">image_io</span><span class="w"> </span><span class="kn">import</span> <span class="n">charger</span><span class="p">,</span> <span class="n">sauver</span><span class="p">,</span> <span class="n">grille</span>
@@ -9075,6 +9098,7 @@
 Somme : 210. Moyenne : <span class="arithmatex">\(210 / 9 \approx 23{,}3\)</span>.</p>
 </details>
 </div>
+<p>Une valeur de pixel est un <strong>entier</strong>. On arrondit donc toujours la moyenne à l'entier le plus proche : le pixel <code>(0, 0)</code> flouté vaut <code>23</code>.</p>
 <div class="admonition warning">
 <p class="admonition-title">Piège : les indices négatifs</p>
 <p>En Python, <code>G[-1][-1]</code> ne provoque <strong>aucune erreur</strong> : il renvoie <code>90</code>, le coin opposé. Tu l'as vu dans le voisinage. Un programme qui oublie le bord tourne donc sans rien signaler, et l'image obtenue a des bords faux. Les tests ci-dessous sont faits pour l'attraper.</p>
@@ -9096,31 +9120,19 @@ Somme : 210. Moyenne : <span class="arithmatex">\(210 / 9 \approx 23{,}3\)</span
 <a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a>    <span class="k">assert</span> <span class="n">borner</span><span class="p">(</span><span class="mi">9</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span>
 <a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="k">assert</span> <span class="n">borner</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">9</span>
 </code></pre></div>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">borner</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">debut</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">fin</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie x s&#39;il est dans l&#39;intervalle [debut ; fin), sinon l&#39;entier</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="sd">    de cet intervalle le plus proche de x. Précondition : debut &lt; fin.&quot;&quot;&quot;</span>
-<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">debut</span><span class="p">:</span>
-<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        <span class="k">return</span> <span class="n">debut</span>
-<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>    <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">fin</span><span class="p">:</span>
-<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="k">return</span> <span class="n">fin</span> <span class="o">-</span> <span class="mi">1</span>
-<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="k">return</span> <span class="n">x</span>
-</code></pre></div>
-</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Écrire <code>pixel</code> (obligatoire)</p>
 <p>En utilisant <code>borner</code>, écris la fonction qui lit un pixel avec la règle du bord répliqué. Complète les tests avec les quatre positions de l'étape 1.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">pixel</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la valeur du pixel (i, j). Si (i, j) sort de l&#39;image,</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="sd">    renvoie la valeur du pixel du bord le plus proche.&quot;&quot;&quot;</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">pass</span>
-<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
-<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
-<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_pixel</span><span class="p">():</span>
-<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="k">assert</span> <span class="n">pixel</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">50</span>
-<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="o">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">pixel</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la valeur du pixel (i, j). Si (i, j) sort de l&#39;image,</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="sd">    renvoie la valeur du pixel du bord le plus proche.&quot;&quot;&quot;</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">pass</span>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_pixel</span><span class="p">():</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="k">assert</span> <span class="n">pixel</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">50</span>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>    <span class="o">...</span>
 </code></pre></div>
 <details class="tip">
 <summary>Indice léger</summary>
@@ -9130,80 +9142,44 @@ Somme : 210. Moyenne : <span class="arithmatex">\(210 / 9 \approx 23{,}3\)</span
 <summary>Indice plus précis</summary>
 <p>Calcule d'abord deux nouveaux indices avec deux appels à <code>borner</code>, l'un pour la ligne, l'autre pour la colonne, puis lis la case de <code>g</code> à ces indices.</p>
 </details>
-<details class="question">
-<summary>Avant d'ouvrir la solution</summary>
-<p>En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans <strong>ton</strong> code ?</p>
-</details>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">pixel</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la valeur du pixel (i, j). Si (i, j) sort de l&#39;image,</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="sd">    renvoie la valeur du pixel du bord le plus proche.&quot;&quot;&quot;</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>    <span class="n">ii</span> <span class="o">=</span> <span class="n">borner</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">))</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a>    <span class="n">jj</span> <span class="o">=</span> <span class="n">borner</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="k">return</span> <span class="n">g</span><span class="p">[</span><span class="n">ii</span><span class="p">][</span><span class="n">jj</span><span class="p">]</span>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
-<a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_pixel</span><span class="p">():</span>
-<a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="k">assert</span> <span class="n">pixel</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">50</span>
-<a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    <span class="k">assert</span> <span class="n">pixel</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">20</span>
-<a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="k">assert</span> <span class="n">pixel</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">60</span>
-<a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    <span class="k">assert</span> <span class="n">pixel</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span>
-<a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>    <span class="k">assert</span> <span class="n">pixel</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">70</span>
-</code></pre></div>
-</details>
 </div>
 <p>À partir d'ici, on ne lit <strong>plus jamais</strong> <code>g[i][j]</code> directement dans un calcul de voisinage : on passe par <code>pixel</code>. C'est elle qui porte la règle du bord, une fois pour toutes.</p>
 <h2 id="etape-3-la-moyenne-dun-pixel">Étape 3 - La moyenne d'un pixel</h2>
 <div class="admonition question">
 <p class="admonition-title">Écrire <code>moyenne_voisinage</code> (obligatoire)</p>
 <p>C'est la double boucle du voisinage, sans exclure <code>(0, 0)</code> et sans test de bord, puisque <code>pixel</code> s'en charge.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">moyenne_voisinage</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la moyenne des 9 pixels du voisinage de (i, j), bord répliqué.&quot;&quot;&quot;</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="k">pass</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_moyenne_voisinage</span><span class="p">():</span>
-<a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>    <span class="k">assert</span> <span class="n">moyenne_voisinage</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">50</span>
-<a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="k">assert</span> <span class="n">moyenne_voisinage</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">210</span> <span class="o">/</span> <span class="mi">9</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">moyenne_voisinage</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la moyenne des 9 pixels du voisinage de (i, j), bord répliqué,</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="sd">    arrondie à l&#39;entier le plus proche.&quot;&quot;&quot;</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="k">pass</span>
+<a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>
+<a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>
+<a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_moyenne_voisinage</span><span class="p">():</span>
+<a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="k">assert</span> <span class="n">moyenne_voisinage</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">50</span>
+<a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="k">assert</span> <span class="n">moyenne_voisinage</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">23</span>
 </code></pre></div>
 <details class="tip">
 <summary>Indice léger</summary>
-<p>Accumule une somme dans la double boucle, et divise <strong>après</strong> la boucle.</p>
+<p>Accumule une somme dans la double boucle, et divise <strong>après</strong> la boucle. <code>round</code> arrondit à l'entier le plus proche.</p>
 </details>
 <details class="tip">
 <summary>Indice plus précis</summary>
 <p>Le pixel visité est <code>pixel(g, i + di, j + dj)</code>.</p>
 </details>
-<details class="question">
-<summary>Avant d'ouvrir la solution</summary>
-<p>En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans <strong>ton</strong> code ?</p>
-</details>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">moyenne_voisinage</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la moyenne des 9 pixels du voisinage de (i, j), bord répliqué.&quot;&quot;&quot;</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="k">for</span> <span class="n">di</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>        <span class="k">for</span> <span class="n">dj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>            <span class="n">s</span> <span class="o">=</span> <span class="n">s</span> <span class="o">+</span> <span class="n">pixel</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">i</span> <span class="o">+</span> <span class="n">di</span><span class="p">,</span> <span class="n">j</span> <span class="o">+</span> <span class="n">dj</span><span class="p">)</span>
-<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="k">return</span> <span class="n">s</span> <span class="o">/</span> <span class="mi">9</span>
-</code></pre></div>
-</details>
 </div>
 <h2 id="etape-4-flouter-toute-limage">Étape 4 - Flouter toute l'image</h2>
 <p>Il reste à appliquer <code>moyenne_voisinage</code> à <strong>chaque</strong> pixel. Une première idée vient naturellement : parcourir l'image et remplacer chaque valeur sur place.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">flou_en_place</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)):</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>            <span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">moyenne_voisinage</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">flou_en_place</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)):</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>            <span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">moyenne_voisinage</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">)</span>
 </code></pre></div>
 <p>On l'essaie sur une image noire avec un seul point gris au centre :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">P</span> <span class="o">=</span> <span class="p">[</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">P</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="p">[</span><span class="mi">0</span><span class="p">,</span>  <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">]</span>
 </code></pre></div>
 <div class="admonition question">
 <p class="admonition-title">Prédire</p>
@@ -9216,7 +9192,7 @@ Somme : 210. Moyenne : <span class="arithmatex">\(210 / 9 \approx 23{,}3\)</span
 <summary>Réponse</summary>
 <ol>
 <li><span class="arithmatex">\(90 / 9 = 10\)</span> pour chaque pixel.</li>
-<li>Le calcul de <code>(0, 1)</code> lit la <strong>nouvelle</strong> valeur de <code>(0, 0)</code>, qui vaut déjà <code>10</code>, et il la lit deux fois à cause du bord répliqué. On obtient <span class="arithmatex">\((10 + 10 + 90) / 9 \approx 12{,}2\)</span> au lieu de <code>10</code>. Chaque pixel est calculé à partir de pixels <strong>déjà floutés</strong> : l'erreur se propage dans tout le parcours.</li>
+<li>Le calcul de <code>(0, 1)</code> lit la <strong>nouvelle</strong> valeur de <code>(0, 0)</code>, qui vaut déjà <code>10</code>, et il la lit deux fois à cause du bord répliqué. On obtient <span class="arithmatex">\((10 + 10 + 90) / 9 \approx 12{,}2\)</span>, arrondi à <code>12</code>, au lieu de <code>10</code>. Chaque pixel est calculé à partir de pixels <strong>déjà floutés</strong> : l'erreur se propage dans tout le parcours.</li>
 </ol>
 </details>
 </div>
@@ -9227,17 +9203,17 @@ Somme : 210. Moyenne : <span class="arithmatex">\(210 / 9 \approx 23{,}3\)</span
 <div class="admonition question">
 <p class="admonition-title">Écrire <code>flou</code> (obligatoire)</p>
 <p>La fonction renvoie une <strong>nouvelle</strong> grille, de même taille que <code>g</code>. Le second test vérifie que l'image d'origine n'a pas été modifiée : complète-le.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">flou</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">grille</span><span class="p">:</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie une nouvelle grille, floutée. g n&#39;est pas modifiée.&quot;&quot;&quot;</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="k">pass</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_flou</span><span class="p">():</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="n">uni</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>    <span class="k">assert</span> <span class="n">flou</span><span class="p">(</span><span class="n">uni</span><span class="p">)</span> <span class="o">==</span> <span class="n">uni</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>    <span class="n">p</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    <span class="k">assert</span> <span class="n">flou</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]]</span>
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="k">assert</span> <span class="n">p</span> <span class="o">==</span> <span class="o">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">flou</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">grille</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie une nouvelle grille, floutée. g n&#39;est pas modifiée.&quot;&quot;&quot;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>    <span class="k">pass</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_flou</span><span class="p">():</span>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>    <span class="n">uni</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>    <span class="k">assert</span> <span class="n">flou</span><span class="p">(</span><span class="n">uni</span><span class="p">)</span> <span class="o">==</span> <span class="n">uni</span>
+<a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a>    <span class="n">p</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
+<a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a>    <span class="k">assert</span> <span class="n">flou</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]]</span>
+<a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a>    <span class="k">assert</span> <span class="n">p</span> <span class="o">==</span> <span class="o">...</span>
 </code></pre></div>
 <details class="tip">
 <summary>Indice léger</summary>
@@ -9247,63 +9223,25 @@ Somme : 210. Moyenne : <span class="arithmatex">\(210 / 9 \approx 23{,}3\)</span
 <summary>Indice plus précis</summary>
 <p>Dans la double boucle sur <code>i</code> et <code>j</code>, la valeur ajoutée à <code>ligne</code> est <code>moyenne_voisinage(g, i, j)</code>. On ne touche jamais à <code>g</code>.</p>
 </details>
-<details class="question">
-<summary>Avant d'ouvrir la solution</summary>
-<p>En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans <strong>ton</strong> code ?</p>
-</details>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">flou</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">grille</span><span class="p">:</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie une nouvelle grille, floutée. g n&#39;est pas modifiée.&quot;&quot;&quot;</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)):</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>        <span class="n">ligne</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>            <span class="n">ligne</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">moyenne_voisinage</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">))</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>    <span class="k">return</span> <span class="n">res</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
-<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>
-<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_flou</span><span class="p">():</span>
-<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>    <span class="n">uni</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">],</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">]]</span>
-<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>    <span class="k">assert</span> <span class="n">flou</span><span class="p">(</span><span class="n">uni</span><span class="p">)</span> <span class="o">==</span> <span class="n">uni</span>
-<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>    <span class="n">p</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>    <span class="k">assert</span> <span class="n">flou</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]]</span>
-<a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>    <span class="k">assert</span> <span class="n">p</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]]</span>
-</code></pre></div>
-</details>
 </div>
 <h2 id="etape-5-revenir-a-une-image">Étape 5 - Revenir à une image</h2>
-<p><code>flou</code> produit des nombres à virgule, comme <code>23.33</code>. Or <code>sauver</code> n'accepte que des entiers entre 0 et 255. Sur la page suivante, certains filtres produiront même des valeurs <strong>négatives</strong> ou <strong>supérieures à 255</strong>.</p>
+<p><code>flou</code> renvoie des entiers entre 0 et 255 : <code>sauver</code> les accepte tels quels. Ce ne sera plus le cas sur la page suivante, où certains filtres produiront des nombres à virgule, des valeurs <strong>négatives</strong> ou <strong>supérieures à 255</strong>. On écrit dès maintenant la fonction qui les ramène à une image.</p>
 <div class="admonition question">
 <p class="admonition-title">Écrire <code>vers_image</code> (obligatoire)</p>
 <p>La fonction arrondit chaque valeur à l'entier le plus proche avec <code>round</code>, puis la ramène dans l'intervalle <code>[0 ; 256)</code>, c'est-à-dire entre 0 et 255 inclus. Tu as déjà la fonction qu'il faut pour la seconde partie.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">vers_image</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">grille</span><span class="p">:</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie une nouvelle grille d&#39;entiers entre 0 et 255.&quot;&quot;&quot;</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="k">pass</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
-<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>
-<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_vers_image</span><span class="p">():</span>
-<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>    <span class="k">assert</span> <span class="n">vers_image</span><span class="p">([[</span><span class="mf">12.4</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">,</span> <span class="mf">254.6</span><span class="p">]])</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">]]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">vers_image</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">]])</span> <span class="o">-&gt;</span> <span class="n">grille</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie une nouvelle grille d&#39;entiers entre 0 et 255.&quot;&quot;&quot;</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="k">pass</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_vers_image</span><span class="p">():</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>    <span class="k">assert</span> <span class="n">vers_image</span><span class="p">([[</span><span class="mf">12.4</span><span class="p">,</span> <span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="mf">300.0</span><span class="p">,</span> <span class="mf">254.6</span><span class="p">]])</span> <span class="o">==</span> <span class="p">[[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">]]</span>
 </code></pre></div>
-<details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">vers_image</span><span class="p">(</span><span class="n">g</span><span class="p">:</span> <span class="n">grille</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">grille</span><span class="p">:</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie une nouvelle grille d&#39;entiers entre 0 et 255.&quot;&quot;&quot;</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">)):</span>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>        <span class="n">ligne</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="mi">0</span><span class="p">])):</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>            <span class="n">ligne</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">borner</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]),</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">256</span><span class="p">))</span>
-<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ligne</span><span class="p">)</span>
-<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>    <span class="k">return</span> <span class="n">res</span>
-</code></pre></div>
-</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Flouter ta photo</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">photo</span> <span class="o">=</span> <span class="n">charger</span><span class="p">(</span><span class="s2">&quot;ma_photo.jpg&quot;</span><span class="p">)</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="n">sauver</span><span class="p">(</span><span class="n">vers_image</span><span class="p">(</span><span class="n">flou</span><span class="p">(</span><span class="n">photo</span><span class="p">)),</span> <span class="s2">&quot;flou.png&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">photo</span> <span class="o">=</span> <span class="n">charger</span><span class="p">(</span><span class="s2">&quot;ma_photo.jpg&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">sauver</span><span class="p">(</span><span class="n">flou</span><span class="p">(</span><span class="n">photo</span><span class="p">),</span> <span class="s2">&quot;flou.png&quot;</span><span class="p">)</span>
 </code></pre></div>
 <ol>
 <li>Ouvre <code>flou.png</code> et compare avec <code>gris.png</code>. Le flou est léger : pourquoi ?</li>
@@ -9316,6 +9254,51 @@ Somme : 210. Moyenne : <span class="arithmatex">\(210 / 9 \approx 23{,}3\)</span
 <li>Le flou s'étend : à chaque passage, un pixel reçoit l'influence de pixels un cran plus loin.</li>
 </ol>
 </details>
+</div>
+<h2 id="etape-6-et-en-couleur">Étape 6 - Et en couleur ?</h2>
+<p><code>charger_couleur</code> rend une image en couleur : chaque pixel est un triplet <code>(rouge, vert, bleu)</code>, chaque composante étant un entier entre 0 et 255.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">image_io</span><span class="w"> </span><span class="kn">import</span> <span class="n">charger_couleur</span><span class="p">,</span> <span class="n">image_couleur</span>
+</code></pre></div>
+<div class="admonition question">
+<p class="admonition-title">Synthèse</p>
+<p>Pour flouter une image en couleur, il suffit de modifier <strong>une seule</strong> de tes fonctions. Laquelle, et pourquoi les autres peuvent-elles rester telles quelles ? Réponds sur ton cahier.</p>
+<details class="success">
+<summary>Réponse</summary>
+<p>C'est <code>moyenne_voisinage</code>, la seule fonction qui <strong>calcule</strong> avec la valeur d'un pixel.</p>
+<ul>
+<li><code>borner</code> travaille sur des indices, jamais sur des valeurs de pixel.</li>
+<li><code>pixel</code> renvoie la case lue sans regarder ce qu'elle contient : un entier ou un triplet, peu importe.</li>
+<li><code>flou</code> range dans la nouvelle grille ce que <code>moyenne_voisinage</code> lui renvoie, sans y toucher.</li>
+</ul>
+<p><code>moyenne_voisinage</code>, elle, additionne des valeurs de pixel. Avec des triplets, <code>0 + (10, 245, 100)</code> provoque une erreur, et la somme de deux triplets les mettrait bout à bout au lieu de les additionner.</p>
+<p>En couleur, on fait la moyenne de <strong>chaque canal</strong> séparément : la moyenne des 9 rouges, celle des 9 verts et celle des 9 bleus, chacune arrondie à l'entier le plus proche. Le pixel flouté est le triplet de ces trois moyennes.</p>
+<p>Dans les autres fonctions, seules les annotations de type changent : on y lit <code>image_couleur</code> au lieu de <code>grille</code>.</p>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Écrire <code>moyenne_voisinage</code> en couleur</p>
+<p>Copie <code>filtres.py</code> dans un nouveau fichier <code>filtres_couleur.py</code>. Réécris <code>moyenne_voisinage</code> pour une image en couleur, et ne touche à rien d'autre.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">C</span> <span class="o">=</span> <span class="p">[</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="p">[(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">245</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">235</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">225</span><span class="p">,</span> <span class="mi">100</span><span class="p">)],</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="p">[(</span><span class="mi">40</span><span class="p">,</span> <span class="mi">215</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">205</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">60</span><span class="p">,</span> <span class="mi">195</span><span class="p">,</span> <span class="mi">100</span><span class="p">)],</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="p">[(</span><span class="mi">70</span><span class="p">,</span> <span class="mi">185</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">80</span><span class="p">,</span> <span class="mi">175</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="p">(</span><span class="mi">90</span><span class="p">,</span> <span class="mi">165</span><span class="p">,</span> <span class="mi">100</span><span class="p">)],</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="p">]</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>
+<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">moyenne_voisinage</span><span class="p">(</span><span class="n">img</span><span class="p">:</span> <span class="n">image_couleur</span><span class="p">,</span> <span class="n">i</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">j</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
+<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le triplet des moyennes de chaque canal sur les 9 pixels du</span>
+<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="sd">    voisinage de (i, j), bord répliqué, chacune arrondie à l&#39;entier le plus proche.&quot;&quot;&quot;</span>
+<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>    <span class="k">pass</span>
+<a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>
+<a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>
+<a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_moyenne_voisinage</span><span class="p">():</span>
+<a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>    <span class="k">assert</span> <span class="n">moyenne_voisinage</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">205</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>    <span class="k">assert</span> <span class="n">moyenne_voisinage</span><span class="p">(</span><span class="n">C</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="mi">23</span><span class="p">,</span> <span class="mi">232</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</code></pre></div>
+<p>Puis floute ta photo en couleur :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">photo</span> <span class="o">=</span> <span class="n">charger_couleur</span><span class="p">(</span><span class="s2">&quot;ma_photo.jpg&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">sauver</span><span class="p">(</span><span class="n">flou</span><span class="p">(</span><span class="n">photo</span><span class="p">),</span> <span class="s2">&quot;flou_couleur.png&quot;</span><span class="p">)</span>
+</code></pre></div>
 </div>
 
 
@@ -9337,7 +9320,7 @@ Somme : 210. Moyenne : <span class="arithmatex">\(210 / 9 \approx 23{,}3\)</span
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 6, 2026 10:51:21 UTC">October 6, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2026 11:33:28 UTC">October 18, 2026</span>
   </span>
 
     
