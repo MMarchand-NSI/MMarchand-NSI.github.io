@@ -229,12 +229,13 @@ Quand les deux personnes frappent sur la même case, on n'entend qu'un coup, plu
     2. Chaque personne frappe 8 fois par tour, sur 12 cases. Explique sur ton cahier pourquoi une section où il n'y a que 4 frappes communes n'a **aucun** trou.
     3. Quelles sections n'ont aucun trou ? Réécoute `clapping.wav` en les guettant.
 
-    ??? success "Réponse"
+    ??? success "Solution de la question 1"
         ```python
         for s in range(0, 13):
             print(s, frappes_communes(MOTIF, decaler(MOTIF, s)))
         ```
 
+    ??? success "Réponse aux questions 2 et 3"
         | section | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
         |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
         | frappes communes | 8 | 4 | 5 | 6 | 5 | 6 | 4 | 6 | 5 | 6 | 5 | 4 | 8 |
@@ -295,7 +296,7 @@ CLOCHE: str = "x.xx.x.xx.x."
 
     Puis écris `partition(CLOCHE, 8)` dans un fichier `.wav`, et compare avec la pièce de Reich.
 
-    ??? success "Réponse"
+    ??? success "Solution"
         ```python
         for i in range(0, len(MOTIF)):
             if MOTIF[i] == "x":

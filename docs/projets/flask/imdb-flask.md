@@ -259,7 +259,7 @@ Le template Jinja :
     3. Quelle(s) fonction(s) du service sont appelees ?
     4. Quel template genere le HTML ?
 
-??? success "Solution"
+??? success "Réponse"
     1. `app.py` recoit la requete, reconnait le prefixe `/acteurs` et la transmet au blueprint
     2. `detail_acteur(nconst)` dans `acteurs_controler.py`
     3. `get_acteur()`, `get_films_acteur()`, `get_professions_acteur()` dans `acteurs_db.py`

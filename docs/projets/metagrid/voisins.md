@@ -114,7 +114,7 @@ Une cellule est repérée par ses coordonnées `(i, j)` : `i` est l'indice de li
 
     Traduisez en Python : "l'indice de ligne `i + di` est compris entre `0` et `len(g) - 1`, ET l'indice de colonne `j + dj` est compris entre `0` et `len(g[0]) - 1`".
 
-??? hint "Réponse"
+??? hint "Solution"
     Voici la condition complète
 
     ```python

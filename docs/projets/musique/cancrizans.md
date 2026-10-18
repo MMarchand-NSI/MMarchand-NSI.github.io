@@ -237,13 +237,15 @@ On numérote les croches de la pièce de 0 à 143. Pour savoir ce que les deux v
     1. À la croche 1, le violon 2 joue ce que le violon 1 joue à quelle croche ? Et à la croche `t` ?
     2. Écris un test qui vérifie ta réponse pour toutes les croches de la pièce, à l'aide d'une boucle.
 
-    ??? success "Réponse"
-        1. À la croche 1, le violon 2 joue la note de la croche 142 du violon 1. À la croche `t`, celle de la croche `143 - t`. C'est la formule de `retrograde`, `len(ligne) - 1 - i`, appliquée cette fois aux croches : la pièce dure 144 croches, et 144 - 1 - t = 143 - t.
-        2. ```python
-           def test_miroir() -> None:
-               for t in range(0, 144):
-                   assert note_a(retrograde(LIGNE), t) == note_a(LIGNE, 143 - t)
-           ```
+    ??? success "Réponse à la question 1"
+        À la croche 1, le violon 2 joue la note de la croche 142 du violon 1. À la croche `t`, celle de la croche `143 - t`. C'est la formule de `retrograde`, `len(ligne) - 1 - i`, appliquée cette fois aux croches : la pièce dure 144 croches, et 144 - 1 - t = 143 - t.
+
+    ??? success "Solution"
+        ```python
+        def test_miroir() -> None:
+            for t in range(0, 144):
+                assert note_a(retrograde(LIGNE), t) == note_a(LIGNE, 143 - t)
+        ```
 
 !!! question "Les unissons (obligatoire)"
     On dit que les deux violons jouent à l'**unisson** quand ils jouent la même note au même moment.
@@ -350,7 +352,7 @@ En musique, l'écart entre deux notes se mesure en **demi-tons**. Dans une octav
     2. Sur ton cahier, prédis : pour la ligne de Bach, l'écart à la croche `t` et l'écart à la croche `143 - t` sont-ils égaux ? Vérifie-le pour toutes les croches où aucun violon ne se tait.
     3. Ta réponse dépend-elle de la ligne écrite par Bach ? Essaie avec une autre ligne, par exemple `[("do4", 2), ("re4", 1), ("sol4", 3)]`, qui dure 6 croches : compare l'écart à la croche `t` et à la croche `5 - t`.
 
-    ??? success "Réponse"
+    ??? success "Solution"
         ```python
         def ecart(ligne: list[tuple[str, int]], t: int) -> int:
             """Écart en demi-tons entre ligne et son rétrograde, à la croche t.
@@ -368,6 +370,7 @@ En musique, l'écart entre deux notes se mesure en **demi-tons**. Dans une octav
                 assert ecart(autre, t) == ecart(autre, 5 - t)
         ```
 
+    ??? success "Réponse aux questions 2 et 3"
         Les écarts sont égaux, pour toutes les croches, et **pour n'importe quelle ligne**. Pour une ligne de `n` croches, à la croche `t`, on entend les notes des croches `t` et `n - 1 - t` de la ligne. À la croche `n - 1 - t`, on entend les notes des croches `n - 1 - t` et `t` : les deux mêmes notes, échangées entre les violons. La valeur absolue de leur écart ne change pas.
 
         Le miroir est donc automatique : n'importe quelle ligne, jouée contre son rétrograde, donne un palindrome. Ce qui ne l'est pas, c'est que le résultat sonne bien. Écoute ta ligne contre son rétrograde : le travail de Bach a été d'écrire une ligne qui, lue dans les deux sens à la fois, fait encore de la musique.

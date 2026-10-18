@@ -312,7 +312,7 @@ On dit que deux rythmes de même longueur sont des **rotations** l'un de l'autre
 !!! question "La samba (entraînement)"
     Toussaint donne aussi $E(7, 16)$ comme base de la samba brésilienne, que l'on joue `"x.x..x.x.x..x.x."`. Écris une boucle qui trouve la valeur de `d` telle que `rotation(euclidien(7, 16), d)` donne la samba.
 
-    ??? success "Réponse"
+    ??? success "Solution"
         ```python
         samba = "x.x..x.x.x..x.x."
         for d in range(0, 16):
