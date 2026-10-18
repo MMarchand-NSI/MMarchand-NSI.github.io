@@ -35,10 +35,20 @@ def _should_show_corrections(page_path: str) -> bool:
     # Vérifier si le fichier est dans la liste
     return page_path in show_list
 
-def _remove_corrections(markdown: str) -> str:
-    """Supprime les blocs ??? warning 'Correction' du markdown"""
-    # Pattern pour matcher les blocs de correction avec leur contenu indenté
-    # On cherche ??? warning "Correction" suivi de tout le contenu indenté
+# Blocs retirés sur toutes les pages
+_CORRECTION_RE = re.compile(r'^(\s*)\?\?\?\+?\s+warning\s+"Correction"')
+
+# Blocs retirés en plus dans les projets : les solutions de code (titre
+# « Solution »), et la question « Avant d'ouvrir la solution » qui n'a plus
+# d'objet sans elle. Les « Réponse » des exercices préparatoires sur le cahier
+# et les indices sont conservés.
+_SOLUTION_PROJET_RE = re.compile(
+    r'^(\s*)\?\?\?\+?\s+(\w+\s+"(Solution( de la question \d+)?|Vérifier sa solution|Avant d\'ouvrir la solution)"'
+    r'|warning\s+"Correction")'
+)
+
+def _remove_corrections(markdown: str, pattern: re.Pattern = _CORRECTION_RE) -> str:
+    """Supprime du markdown les blocs repliables dont l'en-tête correspond à pattern"""
     lines = markdown.split('\n')
     result = []
     skip_until_unindent = False
@@ -49,7 +59,7 @@ def _remove_corrections(markdown: str) -> str:
         line = lines[i]
 
         # Détecter le début d'un bloc correction
-        if re.match(r'^(\s*)\?\?\?\+?\s+warning\s+"Correction"', line):
+        if pattern.match(line):
             skip_until_unindent = True
             # Calculer l'indentation de base du bloc
             match = re.match(r'^(\s*)', line)
@@ -81,7 +91,11 @@ def on_page_markdown(markdown, page, config, files):
         markdown = '<div data-python-console="true"></div>\n\n' + markdown
 
     # Masquer les corrections si le fichier n'est pas dans la liste
-    if not _should_show_corrections(page.file.src_path):
-        markdown = _remove_corrections(markdown)
+    src_path = page.file.src_path.replace('\\', '/')
+    if not _should_show_corrections(src_path):
+        if src_path.startswith('projets/'):
+            markdown = _remove_corrections(markdown, _SOLUTION_PROJET_RE)
+        else:
+            markdown = _remove_corrections(markdown)
 
     return markdown
