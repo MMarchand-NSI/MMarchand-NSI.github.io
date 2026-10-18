@@ -1,10 +1,10 @@
-"""Lecture et écriture d'images en niveaux de gris.
+"""Lecture et écriture d'images, en niveaux de gris ou en couleur.
 
-Ces deux fonctions sont les seules données. Tout le reste, c'est toi qui l'écris.
+Ces fonctions sont les seules données. Tout le reste, c'est toi qui l'écris.
 """
 from PIL import Image
 
-type grille = list[list[float]]
+type grille = list[list[int]]
 type image_couleur = list[list[tuple[int, int, int]]]
 
 
@@ -40,12 +40,16 @@ def charger_couleur(chemin: str, cote_max: int = 400) -> image_couleur:
     return g
 
 
-def sauver(g: grille, chemin: str) -> None:
-    """Enregistre la grille `g` dans le fichier `chemin` (par exemple "flou.png").
-    Chaque valeur doit être un entier entre 0 et 255."""
+def sauver(g: grille | image_couleur, chemin: str) -> None:
+    """Enregistre `g` dans le fichier `chemin` (par exemple "flou.png").
+    Chaque valeur doit être un entier entre 0 et 255, ou un triplet
+    (rouge, vert, bleu) de tels entiers pour une image en couleur."""
     hauteur = len(g)
     largeur = len(g[0])
-    img = Image.new("L", (largeur, hauteur))
+    if isinstance(g[0][0], tuple):
+        img = Image.new("RGB", (largeur, hauteur))
+    else:
+        img = Image.new("L", (largeur, hauteur))
     for i in range(0, hauteur):
         for j in range(0, largeur):
             img.putpixel((j, i), g[i][j])

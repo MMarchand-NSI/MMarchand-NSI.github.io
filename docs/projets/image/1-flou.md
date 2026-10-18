@@ -9,14 +9,16 @@ Sur cette page, on écrit un **flou**. Sur la suivante, on généralise jusqu'à
 Une image en niveaux de gris est une grille : chaque case contient un entier entre `0` (noir) et `255` (blanc). On la représente comme dans le voisinage, par une liste de listes.
 
 ```python
-type grille = list[list[float]]
+type grille = list[list[int]]
 ```
 
 Pour lire et écrire un fichier image, on te donne le fichier [image_io.py](image_io.py), à placer à côté de ton programme. Il ne contient **que** de la lecture et de l'écriture de fichiers :
 
 - `charger(chemin: str) -> grille` lit une image et la rend en niveaux de gris, réduite à 400 pixels de côté au plus,
 - `sauver(g: grille, chemin: str) -> None` enregistre une grille d'entiers entre 0 et 255 dans un fichier,
-- `charger_couleur`, qui ne servira qu'à la dernière page.
+- `charger_couleur(chemin: str) -> image_couleur` lit une image en couleur. Elle ne servira qu'à la fin de cette page et à la dernière page.
+
+`sauver` accepte aussi une image en couleur.
 
 Tout le reste, c'est toi qui l'écris. Installe la bibliothèque qu'utilise `image_io.py` : `uv add pillow`.
 
@@ -82,6 +84,8 @@ On choisit donc la règle du **bord répliqué** : un pixel hors de l'image pren
         ```
         Somme : 210. Moyenne : $210 / 9 \approx 23{,}3$.
 
+Une valeur de pixel est un **entier**. On arrondit donc toujours la moyenne à l'entier le plus proche : le pixel `(0, 0)` flouté vaut `23`.
+
 !!! warning "Piège : les indices négatifs"
     En Python, `G[-1][-1]` ne provoque **aucune erreur** : il renvoie `90`, le coin opposé. Tu l'as vu dans le voisinage. Un programme qui oublie le bord tourne donc sans rien signaler, et l'image obtenue a des bords faux. Les tests ci-dessous sont faits pour l'attraper.
 
@@ -120,7 +124,7 @@ On choisit donc la règle du **bord répliqué** : un pixel hors de l'image pren
     En utilisant `borner`, écris la fonction qui lit un pixel avec la règle du bord répliqué. Complète les tests avec les quatre positions de l'étape 1.
 
     ```python
-    def pixel(g: grille, i: int, j: int) -> float:
+    def pixel(g: grille, i: int, j: int) -> int:
         """Renvoie la valeur du pixel (i, j). Si (i, j) sort de l'image,
         renvoie la valeur du pixel du bord le plus proche."""
         pass
@@ -142,7 +146,7 @@ On choisit donc la règle du **bord répliqué** : un pixel hors de l'image pren
 
     ??? success "Solution"
         ```python
-        def pixel(g: grille, i: int, j: int) -> float:
+        def pixel(g: grille, i: int, j: int) -> int:
             """Renvoie la valeur du pixel (i, j). Si (i, j) sort de l'image,
             renvoie la valeur du pixel du bord le plus proche."""
             ii = borner(i, 0, len(g))
@@ -166,18 +170,19 @@ On choisit donc la règle du **bord répliqué** : un pixel hors de l'image pren
     C'est la double boucle du voisinage, sans exclure `(0, 0)` et sans test de bord, puisque `pixel` s'en charge.
 
     ```python
-    def moyenne_voisinage(g: grille, i: int, j: int) -> float:
-        """Renvoie la moyenne des 9 pixels du voisinage de (i, j), bord répliqué."""
+    def moyenne_voisinage(g: grille, i: int, j: int) -> int:
+        """Renvoie la moyenne des 9 pixels du voisinage de (i, j), bord répliqué,
+        arrondie à l'entier le plus proche."""
         pass
 
 
     def test_moyenne_voisinage():
         assert moyenne_voisinage(G, 1, 1) == 50
-        assert moyenne_voisinage(G, 0, 0) == 210 / 9
+        assert moyenne_voisinage(G, 0, 0) == 23
     ```
 
     ??? tip "Indice léger"
-        Accumule une somme dans la double boucle, et divise **après** la boucle.
+        Accumule une somme dans la double boucle, et divise **après** la boucle. `round` arrondit à l'entier le plus proche.
 
     ??? tip "Indice plus précis"
         Le pixel visité est `pixel(g, i + di, j + dj)`.
@@ -187,13 +192,14 @@ On choisit donc la règle du **bord répliqué** : un pixel hors de l'image pren
 
     ??? success "Solution"
         ```python
-        def moyenne_voisinage(g: grille, i: int, j: int) -> float:
-            """Renvoie la moyenne des 9 pixels du voisinage de (i, j), bord répliqué."""
+        def moyenne_voisinage(g: grille, i: int, j: int) -> int:
+            """Renvoie la moyenne des 9 pixels du voisinage de (i, j), bord répliqué,
+            arrondie à l'entier le plus proche."""
             s = 0
             for di in range(-1, 2):
                 for dj in range(-1, 2):
                     s = s + pixel(g, i + di, j + dj)
-            return s / 9
+            return round(s / 9)
         ```
 
 ## Étape 4 - Flouter toute l'image
@@ -225,7 +231,7 @@ P = [
 
     ??? success "Réponse"
         1. $90 / 9 = 10$ pour chaque pixel.
-        2. Le calcul de `(0, 1)` lit la **nouvelle** valeur de `(0, 0)`, qui vaut déjà `10`, et il la lit deux fois à cause du bord répliqué. On obtient $(10 + 10 + 90) / 9 \approx 12{,}2$ au lieu de `10`. Chaque pixel est calculé à partir de pixels **déjà floutés** : l'erreur se propage dans tout le parcours.
+        2. Le calcul de `(0, 1)` lit la **nouvelle** valeur de `(0, 0)`, qui vaut déjà `10`, et il la lit deux fois à cause du bord répliqué. On obtient $(10 + 10 + 90) / 9 \approx 12{,}2$, arrondi à `12`, au lieu de `10`. Chaque pixel est calculé à partir de pixels **déjà floutés** : l'erreur se propage dans tout le parcours.
 
 !!! warning "Piège : écrire dans l'image qu'on est en train de lire"
     Tous les pixels doivent être calculés à partir de l'image **d'origine**. On construit donc une **nouvelle** grille, et on ne modifie jamais `g`. C'est le même piège que dans le jeu de la vie, où la génération suivante se calcule entièrement à partir de la génération courante.
@@ -279,13 +285,13 @@ P = [
 
 ## Étape 5 - Revenir à une image
 
-`flou` produit des nombres à virgule, comme `23.33`. Or `sauver` n'accepte que des entiers entre 0 et 255. Sur la page suivante, certains filtres produiront même des valeurs **négatives** ou **supérieures à 255**.
+`flou` renvoie des entiers entre 0 et 255 : `sauver` les accepte tels quels. Ce ne sera plus le cas sur la page suivante, où certains filtres produiront des nombres à virgule, des valeurs **négatives** ou **supérieures à 255**. On écrit dès maintenant la fonction qui les ramène à une image.
 
 !!! question "Écrire `vers_image` (obligatoire)"
     La fonction arrondit chaque valeur à l'entier le plus proche avec `round`, puis la ramène dans l'intervalle `[0 ; 256)`, c'est-à-dire entre 0 et 255 inclus. Tu as déjà la fonction qu'il faut pour la seconde partie.
 
     ```python
-    def vers_image(g: grille) -> grille:
+    def vers_image(g: list[list[float]]) -> grille:
         """Renvoie une nouvelle grille d'entiers entre 0 et 255."""
         pass
 
@@ -296,7 +302,7 @@ P = [
 
     ??? success "Solution"
         ```python
-        def vers_image(g: grille) -> grille:
+        def vers_image(g: list[list[float]]) -> grille:
             """Renvoie une nouvelle grille d'entiers entre 0 et 255."""
             res = []
             for i in range(0, len(g)):
@@ -310,7 +316,7 @@ P = [
 !!! question "Flouter ta photo"
     ```python
     photo = charger("ma_photo.jpg")
-    sauver(vers_image(flou(photo)), "flou.png")
+    sauver(flou(photo), "flou.png")
     ```
 
     1. Ouvre `flou.png` et compare avec `gris.png`. Le flou est léger : pourquoi ?
@@ -319,3 +325,73 @@ P = [
     ??? success "Réponse"
         1. Chaque pixel ne se mélange qu'avec ses voisins immédiats, sur une image de plusieurs centaines de pixels de côté.
         2. Le flou s'étend : à chaque passage, un pixel reçoit l'influence de pixels un cran plus loin.
+
+## Étape 6 - Et en couleur ?
+
+`charger_couleur` rend une image en couleur : chaque pixel est un triplet `(rouge, vert, bleu)`, chaque composante étant un entier entre 0 et 255.
+
+```python
+from image_io import charger_couleur, image_couleur
+```
+
+!!! question "Synthèse"
+    Pour flouter une image en couleur, il suffit de modifier **une seule** de tes fonctions. Laquelle, et pourquoi les autres peuvent-elles rester telles quelles ? Réponds sur ton cahier.
+
+    ??? success "Réponse"
+        C'est `moyenne_voisinage`, la seule fonction qui **calcule** avec la valeur d'un pixel.
+
+        - `borner` travaille sur des indices, jamais sur des valeurs de pixel.
+        - `pixel` renvoie la case lue sans regarder ce qu'elle contient : un entier ou un triplet, peu importe.
+        - `flou` range dans la nouvelle grille ce que `moyenne_voisinage` lui renvoie, sans y toucher.
+
+        `moyenne_voisinage`, elle, additionne des valeurs de pixel. Avec des triplets, `0 + (10, 245, 100)` provoque une erreur, et la somme de deux triplets les mettrait bout à bout au lieu de les additionner.
+
+        En couleur, on fait la moyenne de **chaque canal** séparément : la moyenne des 9 rouges, celle des 9 verts et celle des 9 bleus, chacune arrondie à l'entier le plus proche. Le pixel flouté est le triplet de ces trois moyennes.
+
+        Dans les autres fonctions, seules les annotations de type changent : on y lit `image_couleur` au lieu de `grille`.
+
+!!! question "Écrire `moyenne_voisinage` en couleur"
+    Copie `filtres.py` dans un nouveau fichier `filtres_couleur.py`. Réécris `moyenne_voisinage` pour une image en couleur, et ne touche à rien d'autre.
+
+    ```python
+    C = [
+        [(10, 245, 100), (20, 235, 100), (30, 225, 100)],
+        [(40, 215, 100), (50, 205, 100), (60, 195, 100)],
+        [(70, 185, 100), (80, 175, 100), (90, 165, 100)],
+    ]
+
+
+    def moyenne_voisinage(img: image_couleur, i: int, j: int) -> tuple[int, int, int]:
+        """Renvoie le triplet des moyennes de chaque canal sur les 9 pixels du
+        voisinage de (i, j), bord répliqué, chacune arrondie à l'entier le plus proche."""
+        pass
+
+
+    def test_moyenne_voisinage():
+        assert moyenne_voisinage(C, 1, 1) == (50, 205, 100)
+        assert moyenne_voisinage(C, 0, 0) == (23, 232, 100)
+    ```
+
+    Puis floute ta photo en couleur :
+
+    ```python
+    photo = charger_couleur("ma_photo.jpg")
+    sauver(flou(photo), "flou_couleur.png")
+    ```
+
+    ??? success "Solution"
+        ```python
+        def moyenne_voisinage(img: image_couleur, i: int, j: int) -> tuple[int, int, int]:
+            """Renvoie le triplet des moyennes de chaque canal sur les 9 pixels du
+            voisinage de (i, j), bord répliqué, chacune arrondie à l'entier le plus proche."""
+            r = 0
+            v = 0
+            b = 0
+            for di in range(-1, 2):
+                for dj in range(-1, 2):
+                    p = pixel(img, i + di, j + dj)
+                    r = r + p[0]
+                    v = v + p[1]
+                    b = b + p[2]
+            return (round(r / 9), round(v / 9), round(b / 9))
+        ```
