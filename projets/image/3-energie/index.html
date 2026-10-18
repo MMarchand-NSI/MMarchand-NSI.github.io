@@ -9109,8 +9109,9 @@
 <p>Comme pour Sobel, <code>vers_image</code> ne s'applique jamais à <code>gx</code> ou <code>gy</code> : leurs valeurs négatives deviendraient <code>0</code>, et les contours qui vont du clair au sombre disparaîtraient de l'énergie.</p>
 </div>
 <h2 id="etape-5-voir-lenergie-de-ta-photo">Étape 5 - Voir l'énergie de ta photo</h2>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">photo</span> <span class="o">=</span> <span class="n">charger_couleur</span><span class="p">(</span><span class="s2">&quot;ma_photo.jpg&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">sauver</span><span class="p">(</span><span class="n">vers_image</span><span class="p">(</span><span class="n">energie</span><span class="p">(</span><span class="n">photo</span><span class="p">)),</span> <span class="s2">&quot;energie.png&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">photo</span> <span class="o">=</span> <span class="n">charger_couleur</span><span class="p">(</span><span class="s2">&quot;ma_photo.jpg&quot;</span><span class="p">)</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">sauver</span><span class="p">(</span><span class="n">vers_image</span><span class="p">(</span><span class="n">energie</span><span class="p">(</span><span class="n">photo</span><span class="p">)),</span> <span class="s2">&quot;energie.png&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition question">
 <p class="admonition-title">Observer</p>
@@ -9155,8 +9156,9 @@
 </div>
 <div class="admonition question">
 <p class="admonition-title">Comparer</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">sauver</span><span class="p">(</span><span class="n">vers_image</span><span class="p">(</span><span class="n">normaliser</span><span class="p">(</span><span class="n">energie</span><span class="p">(</span><span class="n">photo</span><span class="p">))),</span> <span class="s2">&quot;energie.png&quot;</span><span class="p">)</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">sauver</span><span class="p">(</span><span class="n">vers_image</span><span class="p">(</span><span class="n">normaliser</span><span class="p">(</span><span class="n">sobel</span><span class="p">(</span><span class="n">charger</span><span class="p">(</span><span class="s2">&quot;ma_photo.jpg&quot;</span><span class="p">)))),</span> <span class="s2">&quot;sobel_gris.png&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">sauver</span><span class="p">(</span><span class="n">vers_image</span><span class="p">(</span><span class="n">normaliser</span><span class="p">(</span><span class="n">energie</span><span class="p">(</span><span class="n">photo</span><span class="p">))),</span> <span class="s2">&quot;energie.png&quot;</span><span class="p">)</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">sauver</span><span class="p">(</span><span class="n">vers_image</span><span class="p">(</span><span class="n">normaliser</span><span class="p">(</span><span class="n">sobel</span><span class="p">(</span><span class="n">charger</span><span class="p">(</span><span class="s2">&quot;ma_photo.jpg&quot;</span><span class="p">)))),</span> <span class="s2">&quot;sobel_gris.png&quot;</span><span class="p">)</span>
 </code></pre></div>
 <ol>
 <li>Où l'énergie est-elle la plus faible sur ta photo ? Qu'ont ces zones en commun ?</li>

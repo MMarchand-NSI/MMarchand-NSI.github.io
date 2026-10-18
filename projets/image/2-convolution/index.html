@@ -6999,6 +6999,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#etape-6-une-fenetre-pour-essayer-des-noyaux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 6 - Une fenêtre pour essayer des noyaux
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pour-aller-plus-loin" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8897,6 +8908,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#etape-6-une-fenetre-pour-essayer-des-noyaux" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Étape 6 - Une fenêtre pour essayer des noyaux
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#pour-aller-plus-loin" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -9211,13 +9233,41 @@
 </div>
 <div class="admonition question">
 <p class="admonition-title">Les contours de ta photo</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">photo</span> <span class="o">=</span> <span class="n">charger</span><span class="p">(</span><span class="s2">&quot;ma_photo.jpg&quot;</span><span class="p">)</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">sauver</span><span class="p">(</span><span class="n">vers_image</span><span class="p">(</span><span class="n">sobel</span><span class="p">(</span><span class="n">photo</span><span class="p">)),</span> <span class="s2">&quot;contours.png&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="n">photo</span> <span class="o">=</span> <span class="n">charger</span><span class="p">(</span><span class="s2">&quot;ma_photo.jpg&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="n">sauver</span><span class="p">(</span><span class="n">vers_image</span><span class="p">(</span><span class="n">sobel</span><span class="p">(</span><span class="n">photo</span><span class="p">)),</span> <span class="s2">&quot;contours.png&quot;</span><span class="p">)</span>
 </code></pre></div>
 <ol>
 <li>Ouvre <code>contours.png</code>. Qu'est-ce qui apparaît en blanc ? en noir ?</li>
 <li>Applique d'abord <code>GAUSS</code> à la photo, puis <code>sobel</code> au résultat. Qu'est-ce qui change ? Pourquoi est-ce utile sur une photo granuleuse ?</li>
 </ol>
+</div>
+<h2 id="etape-6-une-fenetre-pour-essayer-des-noyaux">Étape 6 - Une fenêtre pour essayer des noyaux</h2>
+<p>Le fichier <a href="../interface_convolution.py">interface_convolution.py</a> ouvre une fenêtre où tu écris un noyau dans 9 cases, puis l'appliques à une image avec <strong>ta</strong> fonction <code>convolution</code>. Une case accepte un entier, un décimal ou une fraction comme <code>1/9</code>. La liste déroulante remplit les cases avec les noyaux de cette page, et la fenêtre affiche la somme des poids.</p>
+<p>Après chaque noyau, la fenêtre applique <code>vers_image</code>, pour pouvoir afficher le résultat. On peut appliquer plusieurs noyaux à la suite, et revenir à l'image d'origine.</p>
+<p>Place le fichier à côté de <code>filtres.py</code> et de <code>image_io.py</code>, puis lance-le avec <code>uv run interface_convolution.py</code>. PySide6 s'installe avec <code>uv add pyside6</code>.</p>
+<p>La fenêtre importe <code>filtres.py</code>. Les instructions de ton bloc <code>if __name__ == "__main__":</code> ne s'exécutent alors pas : seules tes fonctions sont chargées.</p>
+<div class="admonition question">
+<p class="admonition-title"><code>SOBEL_X</code> seul</p>
+<ol>
+<li>Avant de l'appliquer, sur ton cahier : la fenêtre passe le résultat dans <code>vers_image</code>. Quels contours de ta photo vont apparaître en blanc, et lesquels vont disparaître ?</li>
+<li>Applique <code>SOBEL_X</code> et vérifie.</li>
+</ol>
+<details class="success">
+<summary>Réponse</summary>
+<p>Seuls apparaissent les contours où l'image devient <strong>plus claire</strong> de gauche à droite : <code>gx</code> y est positif. Là où elle devient plus sombre, <code>gx</code> est négatif, et <code>vers_image</code> le ramène à <code>0</code>, donc au noir. C'est le piège de l'étape 5 : c'est pour cela que <code>sobel</code> calcule la norme <strong>avant</strong> d'appliquer <code>vers_image</code>.</p>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Un noyau à toi</p>
+<ol>
+<li>Remplis les 9 cases avec <code>1/18</code>. Sur ton cahier, avant d'appliquer : que vaut la somme des poids, et à quoi ressemblera l'image ?</li>
+<li>Invente un noyau, prédis son effet, puis applique-le.</li>
+</ol>
+<details class="success">
+<summary>Réponse à la question 1</summary>
+<p>La somme vaut <span class="arithmatex">\(9 \times 1/18 = 0{,}5\)</span>. L'image est floutée comme avec <code>FLOU</code>, et deux fois plus sombre : chaque pixel vaut la moitié de la moyenne de son voisinage.</p>
+</details>
 </div>
 <h2 id="pour-aller-plus-loin">Pour aller plus loin</h2>
 <div class="admonition question">
