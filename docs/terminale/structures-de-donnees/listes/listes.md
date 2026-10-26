@@ -162,6 +162,7 @@ pub type Liste(a) {
 !!! question "Construire"
     Écris, dans `main`, la liste des trois chaînes `"rouge"`, `"vert"`, `"bleu"`, puis affiche-la.
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé"
         ```gleam
         let couleurs = Cons("rouge", Cons("vert", Cons("bleu", Vide)))
@@ -169,6 +170,7 @@ pub type Liste(a) {
         ```
 
         `echo` affiche `Cons("rouge", Cons("vert", Cons("bleu", Vide)))` : les chaînes gardent leurs guillemets.
+    </div>
 
 ### 1.3 La disjonction de cas
 
@@ -257,6 +259,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
     }
     ```
 
+    <div markdown="block" style="display: none">
     ??? success "Réponse"
         ```text
         f(Cons(2, ...)) = 2 - f(Cons(3, ...))
@@ -269,6 +272,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
         ```
 
         Si tu as trouvé `-5`, tu as calculé `2 - 3 - 4` de gauche à droite, comme une boucle. Les soustractions se font **à la remontée**, de la fin vers le début.
+    </div>
 
 #### 2.1.2 À toi d'écrire
 
@@ -318,6 +322,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé"
         ```gleam
         pub fn somme(lst: Liste(Int)) -> Int {
@@ -327,6 +332,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
           }
         }
         ```
+    </div>
 
 !!! question "La somme des pairs"
     Écris `somme_pairs(lst: Liste(Int)) -> Int` qui renvoie la somme des seuls éléments **pairs**. `2 -> 3 -> 4` donne `6`.
@@ -350,6 +356,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé"
         ```gleam
         pub fn somme_pairs(lst: Liste(Int)) -> Int {
@@ -365,6 +372,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
         ```
 
         Le `case` sur la condition est **imbriqué** dans le cas `Cons` : on ne regarde la parité de la tête que s'il y a une tête.
+    </div>
 
     ??? tip "Pour aller plus loin : comparer ne rend pas un booléen"
         Un `case` sur une condition n'a que deux issues, `True` et `False`. Mais **comparer** deux nombres en a trois, et Gleam a un type exprès pour cela, `Order`, avec ses trois valeurs `Lt` (plus petit), `Eq` (égal) et `Gt` (plus grand). C'est ce que renvoie `int.compare` :
@@ -411,18 +419,24 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
 
     1. Si la liste est `Vide`, que renvoie la fonction ?
 
+        <div markdown="block" style="display: none">
         ??? success "Réponse"
             `False` : une liste vide ne contient rien.
+        </div>
 
     2. Si la liste est `Cons(tete, queue)`, complète la phrase : « `x` est dans la liste si … **ou** … ».
 
+        <div markdown="block" style="display: none">
         ??? success "Réponse"
             « `x` est dans la liste si **la tête vaut `x`**, **ou** si **`x` est dans la queue**. »
+        </div>
 
     3. Traduis cette phrase en une expression booléenne Gleam. Quelle partie est un appel récursif ?
 
+        <div markdown="block" style="display: none">
         ??? success "Réponse"
             `tete == x || contient(queue, x)`. La partie droite, `contient(queue, x)`, est l'appel récursif : on redemande à un autre lutin de chercher dans la queue.
+        </div>
 
     Écris maintenant `contient` en entier.
 
@@ -436,6 +450,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé"
         ```gleam
         pub fn contient(lst: Liste(a), x: a) -> Bool {
@@ -447,6 +462,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
         ```
 
         Le `||` est **paresseux** : si `tete == x` est vrai, Gleam ne va pas chercher plus loin dans la queue.
+    </div>
 
 #### 2.1.3 Deux listes à la fois : les quatre cas
 
@@ -455,6 +471,7 @@ On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si de
 !!! question "Égalité de deux listes"
     1. Quels sont **tous** les cas possibles pour le couple d'entrée `(l1, l2)` ?
 
+        <div markdown="block" style="display: none">
         ??? success "Réponse"
             Chaque liste peut être `Vide` ou `Cons`, ce qui fait **quatre** cas (2 × 2) :
 
@@ -462,19 +479,24 @@ On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si de
             - `l1` vide et `l2` non vide
             - `l1` non vide et `l2` vide
             - `l1` non vide et `l2` non vide.
+        </div>
 
     2. Que doit renvoyer la fonction dans **chacun** de ces cas ?
 
+        <div markdown="block" style="display: none">
         ??? success "Réponse"
             - deux listes vides : elles sont **égales**, on renvoie `True`
             - `l1` vide, `l2` non vide : elles n'ont pas la même longueur, on renvoie `False`
             - `l1` non vide, `l2` vide : même raison, `False`
             - deux listes non vides : elles sont égales si leurs **têtes** sont égales **et** si leurs **queues** sont égales.
+        </div>
 
     3. Parmi ces quatre cas, lesquels sont des **cas de base** (la réponse est immédiate) et lesquels sont **récursifs** (il faut redemander à un autre lutin) ?
 
+        <div markdown="block" style="display: none">
         ??? success "Réponse"
             Les **trois** premiers sont des cas de base : la réponse se lit directement. Le **quatrième** est le seul cas récursif : pour savoir si les queues sont égales, on appelle `sont_egales` sur `q1` et `q2`.
+        </div>
 
     Écris maintenant `sont_egales` en Gleam, avec **une branche par cas**. Pour faire la disjonction sur **deux** listes à la fois, on les met toutes les deux après `case`, séparées par une virgule, et chaque branche donne un motif pour chacune. Complète :
 
@@ -498,6 +520,7 @@ On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si de
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé"
         ```gleam
         pub fn sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool {
@@ -509,6 +532,7 @@ On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si de
           }
         }
         ```
+    </div>
 
 !!! note "Quatre cas, même si on pourrait en écrire moins"
     On pourrait fusionner les deux cas « une seule est vide » en un seul. Ce n'est qu'une **optimisation d'écriture**, et ce n'est pas le sujet : on écrit les **quatre** cas pour voir toute la disjonction. Là encore, Gleam **exige** que les quatre soient traités.
@@ -549,6 +573,7 @@ Le **lutin ajouteur** : *« Si je reçois une liste vide, je renvoie la liste qu
     ??? question "Avant d'ouvrir le corrigé"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé"
         ```gleam
         pub fn inverser(lst: Liste(a)) -> Liste(a) {
@@ -558,6 +583,7 @@ Le **lutin ajouteur** : *« Si je reçois une liste vide, je renvoie la liste qu
           }
         }
         ```
+    </div>
 
 !!! question "Concaténer"
     Écris `concat(l1: Liste(a), l2: Liste(a)) -> Liste(a)` qui met `l2` à la suite de `l1`. Il y a **deux** listes : fais la disjonction des **quatre** cas, comme pour `sont_egales`, et traite-les un par un.
@@ -573,6 +599,7 @@ Le **lutin ajouteur** : *« Si je reçois une liste vide, je renvoie la liste qu
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé"
         ```gleam
         pub fn concat(l1: Liste(a), l2: Liste(a)) -> Liste(a) {
@@ -589,6 +616,7 @@ Le **lutin ajouteur** : *« Si je reçois une liste vide, je renvoie la liste qu
         - `l1` vide : le résultat est **`l2`**
         - `l2` vide : le résultat est **`l1`**
         - deux non vides : on garde la tête de `l1`, et pour la suite on demande à un autre lutin de concaténer la queue de `l1` avec `l2`, puis on recolle.
+    </div>
 
 ### 2.3 Faire pousser une liste : d'une graine à une liste
 
@@ -614,13 +642,17 @@ C'est exactement la **récurrence** de ton cours de maths : un cas pour 0, puis 
 
     1. Que renvoie `repete(0, x)` ?
 
+        <div markdown="block" style="display: none">
         ??? success "Réponse"
             `Vide` : zéro fois `x`, c'est la liste vide.
+        </div>
 
     2. Si `n` n'est pas nul, comment obtenir `repete(n, x)` à partir de `repete(n - 1, x)` ?
 
+        <div markdown="block" style="display: none">
         ??? success "Réponse"
             On met `x` en tête de `repete(n - 1, x)` : `Cons(x, repete(n - 1, x))`.
+        </div>
 
     Complète :
 
@@ -641,6 +673,7 @@ C'est exactement la **récurrence** de ton cours de maths : un cas pour 0, puis 
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé"
         ```gleam
         pub fn repete(n: Int, x: a) -> Liste(a) {
@@ -652,6 +685,7 @@ C'est exactement la **récurrence** de ton cours de maths : un cas pour 0, puis 
         ```
 
         Le cas de base n'est plus `Vide` mais `n == 0` : la graine `n` **décroît** à chaque appel jusqu'à 0.
+    </div>
 
 ## 3 Le coût
 
@@ -682,28 +716,36 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
 !!! question "Le coût de `inverser`"
     1. Écris la relation de récurrence du coût $A(n)$ de `ajouter_fin(lst, x)`, pour une liste `lst` de taille $n$. Quelle est sa forme générale ?
 
+        <div markdown="block" style="display: none">
         ??? success "Réponse"
             $A(0) = a$ et $A(n) = A(n-1) + b$ : c'est la même récurrence que `taille`. $A(n) = a + b \times n$, coût **linéaire**.
+        </div>
 
     2. `inverser` appelle `inverser` sur la queue (taille $n-1$), **puis** `ajouter_fin` sur le résultat (taille $n-1$ aussi). Écris la relation de récurrence de son coût $T(n)$.
 
+        <div markdown="block" style="display: none">
         ??? success "Réponse"
             $T(0) = c$ et $T(n) = T(n-1) + A(n-1) + d$, où $d$ compte les opérations fixes de l'appel. En remplaçant $A(n-1)$ : $T(n) = T(n-1) + b \times (n-1) + (a + d)$.
+        </div>
 
     3. Cette suite n'est ni arithmétique ni géométrique : ce qu'on ajoute à chaque étape **grandit** avec $n$. Trouve sa forme générale, en additionnant les écarts $T(k) - T(k-1)$ pour $k$ allant de $1$ à $n$.
 
+        <div markdown="block" style="display: none">
         ??? success "Réponse"
             Les termes intermédiaires se simplifient :
 
             $$T(n) = T(0) + b \times \big(0 + 1 + \dots + (n-1)\big) + (a + d) \times n = c + b \times \frac{n(n-1)}{2} + (a + d) \times n$$
 
             Le terme en $n^2$ l'emporte : le coût est **quadratique**, en $O(n^2)$. C'est `ajouter_fin`, linéaire, appelée $n$ fois, qui coûte cher.
+        </div>
 
 !!! question "Vérifie en dépliant"
     Déplie `inverser(2 -> 3 -> 4)` en écrivant chaque appel à `ajouter_fin`. Combien de fois chaque élément est-il reparcouru ? Tu dois **voir** le $O(n^2)$ apparaître, pas seulement le calculer.
 
+    <div markdown="block" style="display: none">
     ??? success "Ce qu'on observe"
         `inverser` fait un appel par élément ($n$ appels), et **chaque** appel relance `ajouter_fin`, qui reparcourt toute la liste déjà renversée (de longueur $0$, puis $1$, puis $2$…). On retrouve la somme $0 + 1 + \dots + (n-1)$ du calcul.
+    </div>
 
 ## 4 Exercices
 
@@ -726,6 +768,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn to_str(lst: Liste(Int)) -> String {
@@ -735,6 +778,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
           }
         }
         ```
+    </div>
 
 !!! question "tous_vrais"
     Écris `tous_vrais(lst: Liste(Bool)) -> Bool`, qui renvoie `True` si **tous** les booléens de la liste sont vrais. La liste vide donne `True` (rien ne le contredit).
@@ -748,6 +792,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn tous_vrais(lst: Liste(Bool)) -> Bool {
@@ -757,6 +802,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
           }
         }
         ```
+    </div>
 
 !!! question "au_moins_un_vrai"
     Écris `au_moins_un_vrai(lst: Liste(Bool)) -> Bool`, qui renvoie `True` si **au moins un** booléen est vrai. La liste vide donne `False`.
@@ -770,6 +816,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn au_moins_un_vrai(lst: Liste(Bool)) -> Bool {
@@ -779,6 +826,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
           }
         }
         ```
+    </div>
 
 !!! question "compte"
     Écris `compte(lst: Liste(a), e: a) -> Int`, qui compte le nombre d'occurrences d'un élément. `compte(2 -> 3 -> 4, 3)` vaut `1`.
@@ -793,6 +841,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn compte(lst: Liste(a), e: a) -> Int {
@@ -806,6 +855,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
           }
         }
         ```
+    </div>
 
 ### 4.2 Transformer une liste
 
@@ -844,6 +894,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
     ??? question "Avant d'ouvrir le corrigé"
         En une phrase, sur ton cahier : lequel des deux cas de base avais-tu oublié ?
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn take(lst: Liste(a), n: Int) -> Liste(a) {
@@ -857,6 +908,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
           }
         }
         ```
+    </div>
 
 !!! question "drop"
     Écris `drop(lst: Liste(a), n: Int) -> Liste(a)`, qui renvoie la liste **sans** ses `n` premiers éléments. `drop(2 -> 3 -> 4, 1)` donne `3 -> 4`.
@@ -874,6 +926,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn drop(lst: Liste(a), n: Int) -> Liste(a) {
@@ -889,6 +942,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
         Quand il n'y a plus rien à sauter, on renvoie `lst` **en entier**, pas `q` : la tête fait partie du résultat.
+    </div>
 
 !!! question "slice"
     Écris `slice(lst: Liste(a), debut: Int, fin: Int) -> Liste(a)`, qui renvoie les éléments d'indice `debut` à `fin` **exclu**, c'est-à-dire l'intervalle `[debut ; fin)`. `slice(2 -> 3 -> 4, 1, 3)` donne `3 -> 4`.
@@ -906,6 +960,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn slice(lst: Liste(a), debut: Int, fin: Int) -> Liste(a) {
@@ -914,6 +969,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
         On garde d'abord tout ce qui est avant `fin`, puis on jette ce qui est avant `debut`. Dans l'autre ordre il faudrait corriger `fin`, puisque la liste a raccourci.
+    </div>
 
     ??? question "Cherche : l'opérateur `|>`"
         Cette autre écriture du **même** corrigé est valable en Gleam :
@@ -931,10 +987,12 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
 
         **Tu n'es pas obligé d'écrire ta réponse avec `|>`**, mais tu dois savoir la lire.
 
+        <div markdown="block" style="display: none">
         ??? success "Réponse"
             `x |> f(y)` est une autre façon d'écrire `f(x, y)` : la valeur de gauche devient le **premier** argument de la fonction de droite. On lit alors le calcul dans l'ordre où il se fait, de gauche à droite, au lieu de le lire de l'intérieur vers l'extérieur.
 
             C'est pour cela que toutes les fonctions de ce chapitre prennent la **liste en premier** : sans cela, le *pipe* ne tomberait pas sur le bon paramètre. L'ordre des paramètres n'est donc pas un détail, c'est ce qui rend ces fonctions enchaînables.
+        </div>
 
 !!! question "supprimer"
     Écris `supprimer(lst: Liste(a), e: a) -> Liste(a)`, qui renvoie une liste privée de la **première** occurrence d'un élément. `supprimer(2 -> 3 -> 4, 3)` donne `2 -> 4`.
@@ -949,6 +1007,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn supprimer(lst: Liste(a), e: a) -> Liste(a) {
@@ -962,6 +1021,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
           }
         }
         ```
+    </div>
 
 #### 4.2.2 Par filtrage : vers `filter`
 
@@ -980,6 +1040,7 @@ On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn impairs(lst: Liste(Int)) -> Liste(Int) {
@@ -993,6 +1054,7 @@ On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'
           }
         }
         ```
+    </div>
 
 !!! question "positifs"
     Écris `positifs(lst: Liste(Int)) -> Liste(Int)`, qui garde les éléments **strictement positifs**. `2 -> -3 -> 4` donne `2 -> 4`.
@@ -1006,6 +1068,7 @@ On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn positifs(lst: Liste(Int)) -> Liste(Int) {
@@ -1019,6 +1082,7 @@ On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'
           }
         }
         ```
+    </div>
 
 !!! question "negatifs"
     Écris `negatifs(lst: Liste(Int)) -> Liste(Int)`, qui garde les éléments **strictement négatifs**. `2 -> -3 -> 4` donne `-3`.
@@ -1032,6 +1096,7 @@ On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn negatifs(lst: Liste(Int)) -> Liste(Int) {
@@ -1045,6 +1110,7 @@ On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'
           }
         }
         ```
+    </div>
 
 **Ce qu'elles ont en commun.** Compare les trois corrigés : ils sont **identiques**, seule la **condition** change (`t % 2 != 0`, `t > 0`, `t < 0`). Écrire une fonction par condition, c'est se répéter. L'idée : **passer la condition en paramètre**. On obtient une seule fonction, `filter` (c'est son nom partout, dans tous les langages) :
 
@@ -1098,6 +1164,7 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn carres(lst: Liste(Int)) -> Liste(Int) {
@@ -1107,6 +1174,7 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
           }
         }
         ```
+    </div>
 
 !!! question "doubles"
     Écris `doubles(lst: Liste(Int)) -> Liste(Int)`, qui renvoie les **doubles**. `2 -> 3 -> 4` donne `4 -> 6 -> 8`.
@@ -1120,6 +1188,7 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn doubles(lst: Liste(Int)) -> Liste(Int) {
@@ -1129,6 +1198,7 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
           }
         }
         ```
+    </div>
 
 !!! question "triples"
     Écris `triples(lst: Liste(Int)) -> Liste(Int)`, qui renvoie les **triples**. `2 -> 3 -> 4` donne `6 -> 9 -> 12`.
@@ -1142,6 +1212,7 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
         }
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn triples(lst: Liste(Int)) -> Liste(Int) {
@@ -1151,6 +1222,7 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
           }
         }
         ```
+    </div>
 
 **Même constat.** Les trois corrigés sont identiques, seule la **transformation** change (`t * t`, `2 * t`, `3 * t`). On la passe en paramètre : c'est `map`, et c'est là aussi son nom partout.
 
@@ -1238,6 +1310,7 @@ Lis `concat` deux fois : on part de `l2` au lieu de `Vide`, on recolle chaque t�
 
     Puis relance `gleam test`. **Les tests que tu as déjà collés doivent rester verts** : ce sont les mêmes fonctions, écrites autrement. Tu n'as donc aucun test à ajouter, et c'est la meilleure preuve que tu puisses avoir.
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn tous_vrais(lst: Liste(Bool)) -> Bool {
@@ -1261,6 +1334,7 @@ Lis `concat` deux fois : on part de `l2` au lieu de `Vide`, on recolle chaque t�
           )
         }
         ```
+    </div>
 
 ### 5.1 Ce que le pli ne sait pas faire
 

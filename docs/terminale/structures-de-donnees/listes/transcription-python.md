@@ -128,6 +128,7 @@ Comme pour les piles et les files, une fois la structure en place on ne touche *
             assert liste.queue(l) == liste.cons(3, liste.vide())
         ```
 
+    <div markdown="block" style="display: none">
     ??? success "Corrigé"
         ```python
         # structures/lineaires/liste.py
@@ -168,6 +169,7 @@ Comme pour les piles et les files, une fois la structure en place on ne touche *
             assert not est_vide(lst), "La liste est vide"
             return lst[1]
         ```
+    </div>
 
 !!! fondamental "Ce que tu fais ici, et ce que tu ne fais pas"
     Les primitives étaient le seul morceau à trouver. Toutes les fonctions qui suivent, tu les as déjà écrites en Gleam : **les algorithmes, tu les as.** À partir d'ici on réécrit les mêmes, en Python, et le seul travail est la **syntaxe**.
