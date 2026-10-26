@@ -1,6 +1,58 @@
 # Transcription en Python
 
-## 1 Les primitives
+## 1 Les deux lignes de type
+
+Tout part de deux lignes, qu'il faut savoir lire avant d'écrire quoi que ce soit.
+
+```python
+type Vide = tuple[()]
+type Liste[T] = Vide | tuple[T, Liste[T]]
+```
+
+### 1.1 `type` donne un nom, il ne crée rien
+
+`type X = ...` déclare un **alias** : un nom pour un type qui existe déjà. Rien n'est fabriqué, aucun objet ne change à l'exécution. C'est une annotation, que les outils savent vérifier et que tu sais lire.
+
+- `type Vide = tuple[()]` : le nom `Vide` désigne désormais le type du tuple vide.
+- `type Liste[T] = ...` : le `[T]` en fait un alias **paramétré**, exactement comme le `a` de `Liste(a)` en Gleam. Une `Liste[int]` et une `Liste[str]` sont le même alias, rempli deux fois.
+- La deuxième ligne **s'appelle elle-même** : `Liste[T]` apparaît dans sa propre définition. C'est permis, et c'est la définition récursive du cours, écrite cette fois dans le type.
+
+### 1.2 Le `|` est un OU, et il est dans le type
+
+`A | B` se lit « un `A` **ou** un `B` ». C'est le même `|` que dans `int | None`.
+
+```python
+type Liste[T] = Vide | tuple[T, Liste[T]]
+#               ^^^^   ^^^^^^^^^^^^^^^^^
+#               vide   un couple (tête, queue)
+```
+
+En Gleam, ce OU n'avait pas à être écrit : il était porté par les **deux constructeurs**, `Vide` et `Cons`. Même énoncé, autre notation.
+
+### 1.3 Pourquoi le tuple vide a un type à lui
+
+Ce n'est pas un hasard, et c'est la raison pour laquelle on représente la liste par des **tuples** plutôt que par des listes Python.
+
+Un **tuple** a une longueur fixe, et son type dit ce qu'il y a dans **chaque case** : `tuple[int, str]` est un couple dont la première case est un entier et la seconde une chaîne. Le type peut donc nommer le tuple à **zéro case**, et c'est `tuple[()]`. Ce type n'a **qu'une seule valeur possible**, `()`.
+
+Une **liste** se type autrement : `list[int]` dit le type des éléments, jamais combien il y en a. `[]` et `[1, 2, 3]` sont tous deux des `list[int]`, et **la liste vide n'a pas de type à elle** : `list[()]` n'existe pas.
+
+**La conséquence est tout l'intérêt du choix.** Avec des tuples, les deux cas de la définition se distinguent **dans le type** : `()` est un `Vide` et rien d'autre, `(2, ())` est un couple et ne peut pas être un `Vide`. C'est ce qui permet d'écrire « soit l'un, soit l'autre », comme les deux constructeurs de Gleam. Avec des listes, les deux cas porteraient le même type, et la définition ne pourrait pas s'écrire.
+
+```python
+exemple_vide: Liste[int] = ()            # accepté
+exemple_un: Liste[int] = (1, ())         # accepté
+exemple_deux: Liste[int] = (1, (2, ()))  # accepté
+
+refuse_1: Liste[int] = (1, 2)            # refusé : la seconde case doit être une liste
+refuse_2: Liste[int] = ("a", ())         # refusé : les éléments doivent être des entiers
+refuse_3: Vide = (1,)                    # refusé : Vide n'a qu'une valeur, ()
+```
+
+!!! note "Ce que « refusé » veut dire"
+    Ces trois dernières lignes **s'exécutent sans erreur** : Python ne vérifie pas les annotations en marchant. Elles sont refusées par un **vérificateur de types**, qui lit le programme sans le lancer, et c'est tout l'intérêt : l'erreur se voit avant que le programme ne tourne. En Gleam, le compilateur faisait ce travail d'office et refusait de produire un exécutable.
+
+## 2 Les primitives
 
 Comme pour les piles et les files, une fois la structure en place on ne touche **jamais** à sa représentation : tout passe par les **cinq primitives**. Encore faut-il les écrire une fois, et c'est le premier exercice de la page.
 
@@ -120,14 +172,12 @@ Comme pour les piles et les files, une fois la structure en place on ne touche *
             return lst[1]
         ```
 
-Regarde la deuxième ligne du fichier : le `|` (OU) réapparaît, cette fois **dans le type**. Une `Liste` est `Vide` **ou** un couple (tête, queue), et c'est le même `|` que dans `int | None`. En Gleam, ce OU était porté par les deux constructeurs `Vide` et `Cons`.
-
 !!! fondamental "Ce que tu fais ici, et ce que tu ne fais pas"
     Les primitives étaient le seul morceau à trouver. Toutes les fonctions qui suivent, tu les as déjà écrites en Gleam : **les algorithmes, tu les as.** À partir d'ici on réécrit les mêmes, en Python, et le seul travail est la **syntaxe**.
 
     Garde la page [Listes et récursivité](listes.md) ouverte à côté. Ta version Gleam est ton énoncé.
 
-## 2 La correspondance, terme à terme
+## 3 La correspondance, terme à terme
 
 C'est tout ce qu'il y a à savoir. Le reste est mécanique.
 
@@ -140,7 +190,7 @@ C'est tout ce qu'il y a à savoir. Le reste est mécanique.
 | `case condition { True -> A  False -> B }` | `if condition: A` sinon `B` |
 | `lst1 == lst2` | `lst1 == lst2`, les tuples se comparent de la même façon |
 
-### 2.1 Les trois formes, une fois chacune
+### 3.1 Les trois formes, une fois chacune
 
 **Lire une liste**, c'est-à-dire en tirer une valeur.
 
@@ -210,11 +260,11 @@ Cons(tete, queue) ->
         return tete(l1) == tete(l2) and sont_egales(queue(l1), queue(l2))
     ```
 
-## 3 À transcrire
+## 4 À transcrire
 
 Même ordre que la page Gleam, pour que tu retrouves chaque fonction en face. Le test est à coller dans `liste_test.py`, le corrigé est là pour te débloquer, pas pour commencer.
 
-### 3.1 Lire une liste
+### 4.1 Lire une liste
 
 !!! question "somme"
     ??? info "Le test"
@@ -358,7 +408,7 @@ Même ordre que la page Gleam, pour que tu retrouves chaque fonction en face. Le
             return compte(queue(lst), e)
         ```
 
-### 3.2 Construire une liste
+### 4.2 Construire une liste
 
 !!! question "inverser"
     `ajouter_fin` est donnée plus haut, tu n'as qu'à la recopier avant.
@@ -505,7 +555,7 @@ Même ordre que la page Gleam, pour que tu retrouves chaque fonction en face. Le
             return cons(tete(lst), supprimer(queue(lst), e))
         ```
 
-### 3.3 Filtrer et transformer
+### 4.3 Filtrer et transformer
 
 !!! question "impairs, positifs, negatifs"
     Trois fonctions, le même squelette, une condition qui change.
@@ -643,7 +693,7 @@ Même ordre que la page Gleam, pour que tu retrouves chaque fonction en face. Le
 !!! note "Une différence qui reste, et qui n'est pas de syntaxe"
     **Gleam n'a pas de boucle** : la récursivité y était le seul chemin. En Python, tu la **choisis**, et tu la choisis ici parce que c'est la **structure** qui l'appelle, pas parce que le langage t'y oblige.
 
-## 4 En Python seulement
+## 5 En Python seulement
 
 !!! warning "Pourquoi ces fonctions n'étaient pas en Gleam"
     Les fonctions qui suivent peuvent **échouer** sur certaines entrées : une liste vide n'a pas de dernier élément, un indice peut sortir des bornes. En Python, on le signale par une **assertion** qui lève une erreur, exactement comme le font `tete` et `queue`. En Gleam, il n'y a pas d'exception : une fonction qui peut échouer renvoie un `Result`, une valeur qui porte **soit** le résultat, **soit** l'échec, et que l'appelant est obligé d'ouvrir. On ne verra pas ce type en classe, faute de temps, et ces fonctions se font donc **uniquement en Python**. Rien ne t'empêche d'aller voir par toi-même.
@@ -661,7 +711,7 @@ Même ordre que la page Gleam, pour que tu retrouves chaque fonction en face. Le
 
 Celles-là n'ont pas de version Gleam à transcrire, donc **pas de test fourni** : pour chacune, écris aussi une fonction `test_<nom>` avec des `assert`, y compris un cas limite (liste vide, indice au bord).
 
-## 5 Pour aller plus loin : `dataclass` et `match`
+## 6 Pour aller plus loin : `dataclass` et `match`
 
 Python possède aussi le **pattern matching** (`match` / `case`), mais il est vraiment fait pour des **classes**, en particulier des **dataclasses**. Avec elles, on définit `Vide` et `Cons` **exactement** comme les deux constructeurs de Gleam. C'est une **autre représentation** de la liste, à la place des tuples :
 
@@ -701,7 +751,7 @@ def taille(lst: Liste) -> int:
             return 1 + taille(queue)
 ```
 
-Sur deux listes, les **quatre** cas redeviennent nets, à comparer avec la version en `if` de la section 2 :
+Sur deux listes, les **quatre** cas redeviennent nets, à comparer avec la version en `if` de la section 3 :
 
 ```python
 def sont_egales(l1: Liste, l2: Liste) -> bool:
