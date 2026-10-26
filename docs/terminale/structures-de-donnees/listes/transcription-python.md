@@ -618,33 +618,16 @@ Aucune version n'existe d'avance, ni en Gleam ni en Python, et la solution n'est
     Regarde le `1` de la fin, qui **reste** : ce n'est pas « enlever les doublons », c'est « enlever les répétitions qui se touchent ».
 
 !!! question "aplatir"
-    Une liste peut contenir des listes, qui peuvent elles-mêmes en contenir. `aplatir` rend la liste **plate** de tous les éléments, dans l'ordre, quelle que soit la profondeur.
+    Une liste peut contenir des **listes**, et rien d'autre. `aplatir[T](lst: Liste[Liste[T]]) -> Liste[T]` rend la liste **plate** de tous leurs éléments, dans l'ordre.
 
-    - `aplatir((1 -> 2) -> 3 -> ((4 -> 5) -> 6))` donne `1 -> 2 -> 3 -> 4 -> 5 -> 6`
+    - `aplatir((1 -> 2) -> (3) -> (4 -> 5))` donne `1 -> 2 -> 3 -> 4 -> 5`
+    - une liste intérieure **vide** n'apporte rien, elle disparaît du résultat
     - sur la liste vide, le résultat est la liste vide
 
-    Deux choses à régler avant de coder, et elles ne se devinent pas. Ce sont aussi les deux endroits où les deux langages ne font pas pareil.
+    Lis le type avant de coder, il dit tout le travail à faire : l'entrée n'est pas une `Liste[T]` mais une `Liste[Liste[T]]`, et la sortie est une `Liste[T]`. Une épaisseur disparaît.
 
-    **Dire qu'un élément est soit un entier, soit une liste du même genre.** En Python, par un alias qui s'appelle lui-même, exactement comme en section 1 :
-
-    ```python
-    type Imbriquee = Liste[int | Imbriquee]
-
-
-    def aplatir(lst: Imbriquee) -> Liste[int]:
-        ...
-    ```
-
-    En Gleam, par un type à **deux constructeurs**, qui est la façon habituelle d'y écrire « ou bien ceci, ou bien cela » :
-
-    ```gleam
-    pub type Imbriquee {
-      Element(Int)
-      Sous(Liste(Imbriquee))
-    }
-    ```
-
-    **Poser la question à chaque élément**, « es-tu une liste ? ». En Python, elle se pose à l'exécution : `isinstance(t, tuple)`, puisqu'une liste est représentée par un tuple. En Gleam, elle ne se pose pas du tout : `Element` et `Sous` sont deux motifs du `case`, et le compilateur vérifie que tu les as traités tous les deux.
+    ??? tip "Indice"
+        Tu as déjà écrit la fonction qui met deux listes bout à bout.
 
 !!! note "Une troisième fois, plus tard"
     Après la programmation objet, on réimplémentera cette même structure une **troisième** fois : une liste chaînée en **objet impératif**, avec des `while`. Même structure, trois paradigmes (fonctionnel, impératif, objet), de quoi mesurer ce que la récursivité apporte ici.
