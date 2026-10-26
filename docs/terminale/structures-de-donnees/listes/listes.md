@@ -212,7 +212,9 @@ pub fn taille(lst: Liste(a)) -> Int {
 }
 ```
 
-Le raisonnement du lutin : *« Je ne sais pas compter toute la liste d'un coup. Mais je regarde ce que je reçois. Ou bien c'est `Vide`, et je réponds 0. Ou bien c'est une tête et une queue : je donne la queue à un autre lutin, et je réponds 1, pour ma tête, plus sa réponse. »*
+**Les lutins sont de grosses faignasses.** Ils ont la flemme de compter toute la liste, alors chacun en fait le moins possible et refile le reste au suivant.
+
+Le raisonnement du lutin : *« Compter toute la liste ? Pas question. Je regarde ce que je reçois. Ou bien c'est `Vide`, et je réponds 0, ça ne me coûte rien. Ou bien c'est une tête et une queue : je donne la queue à un autre lutin, et je réponds 1, pour ma tête, plus sa réponse. »*
 
 - `_` remplace `tete` : ici on **ignore** la valeur de la tête (on n'en a pas besoin pour compter).
 
