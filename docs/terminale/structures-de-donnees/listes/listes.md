@@ -216,7 +216,7 @@ pub fn taille(lst: Liste(a)) -> Int {
 
 Le raisonnement du lutin : *« Compter toute la liste ? Pas question. Je regarde ce que je reçois. Ou bien c'est `Vide`, et je réponds 0, ça ne me coûte rien. Ou bien c'est une tête et une queue : je donne la queue à un autre lutin, et je réponds 1, pour ma tête, plus sa réponse. »*
 
-![Un lutin avachi sur une pile de cadres d'appel, sa réponse à la main](lutin-pile.png)
+![Un lutin avachi sur une pile de cadres d'appel, sa réponse à la main](lutin-pile.png){ style="width: 380px; display: block; margin: 0 auto" }
 
 - `_` remplace `tete` : ici on **ignore** la valeur de la tête (on n'en a pas besoin pour compter).
 
@@ -653,17 +653,11 @@ C'est exactement la **récurrence** de ton cours de maths : un cas pour 0, puis 
 
         Le cas de base n'est plus `Vide` mais `n == 0` : la graine `n` **décroît** à chaque appel jusqu'à 0.
 
-## 3 Ce que l'IA ne change pas
-
-!!! tip
-    Une IA écrit `taille`, `somme` ou `inverser` en une seconde, en Gleam comme en Python.
-
-    Ce qui est en jeu n'est pas ce qu'elle sait faire, c'est ce que **tu** sais faire sans elle : **énoncer les deux cas** (que se passe-t-il si la liste est vide ? et sinon ?), et reconnaître un raisonnement récursif correct quand tu en lis un. C'est exactement ce que l'épreuve pratique évalue, et c'est ce qui te permet de refuser une réponse fausse au lieu de la recopier. Gleam t'y aide : les **types** et l'**exhaustivité des cas** attrapent une grande partie des erreurs avant même l'exécution.
-## 4 Le coût
+## 3 Le coût
 
 On appelle $T(n)$ le **nombre d'opérations élémentaires** (comparaisons, additions, appels) effectuées par une fonction sur une liste de taille $n$. Une fonction récursive s'appelle elle-même sur une liste plus courte : son coût $T(n)$ s'exprime donc à partir de $T(n-1)$. C'est une **suite récurrente**, et calculer le coût, c'est trouver sa **forme générale**.
 
-### 4.1 Exemple : la taille
+### 3.1 Exemple : la taille
 
 ```gleam
 pub fn taille(lst: Liste(a)) -> Int {
@@ -683,7 +677,7 @@ $$T(n) = a + b \times n$$
 
 Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs exactes de $a$ et de $b$ ne comptent pas, seule la **forme** de la suite décide.
 
-### 4.2 À toi : `ajouter_fin` et `inverser`
+### 3.2 À toi : `ajouter_fin` et `inverser`
 
 !!! question "Le coût de `inverser`"
     1. Écris la relation de récurrence du coût $A(n)$ de `ajouter_fin(lst, x)`, pour une liste `lst` de taille $n$. Quelle est sa forme générale ?
@@ -711,14 +705,14 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
     ??? success "Ce qu'on observe"
         `inverser` fait un appel par élément ($n$ appels), et **chaque** appel relance `ajouter_fin`, qui reparcourt toute la liste déjà renversée (de longueur $0$, puis $1$, puis $2$…). On retrouve la somme $0 + 1 + \dots + (n-1)$ du calcul.
 
-## 5 Exercices
+## 4 Exercices
 
 !!! tip "Comment t'entraîner"
     Écris chaque fonction **en Gleam**, avec `case`. Fais la **disjonction de cas au papier** avant de coder. Sous chaque exercice, son **test** à coller dans `test/liste_test.gleam`, puis son corrigé. (Pour `to_str`, ajoute `import gleam/int` en tête de `src/liste.gleam`.)
 
     Quand tu les auras toutes, tu les réécriras **en Python** : c'est l'objet de la page [Transcription en Python](transcription-python.md), où les algorithmes seront déjà les tiens et où il ne restera que la syntaxe.
 
-### 5.1 Lire une liste
+### 4.1 Lire une liste
 
 !!! question "to_str"
     Écris `to_str(lst: Liste(Int)) -> String`, qui renvoie une chaîne façon `"2 -> 3 -> 4 -> _|_"` (la liste vide donne `"_|_"`).
@@ -813,9 +807,9 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
-### 5.2 Construire une liste
+### 4.2 Construire une liste
 
-#### 5.2.1 Prendre, sauter, supprimer
+#### 4.2.1 Prendre, sauter, supprimer
 
 !!! question "take"
     Écris `take(lst: Liste(a), n: Int) -> Liste(a)`, qui renvoie les `n` premiers éléments. `take(2 -> 3 -> 4, 2)` donne `2 -> 3`. Si `n` dépasse la taille, on prend tout.
@@ -969,7 +963,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
-#### 5.2.2 Par filtrage : vers `filter`
+#### 4.2.2 Par filtrage : vers `filter`
 
 On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'a fait pour additionner. Écris ces trois fonctions, puis regarde ce qu'elles ont en commun.
 
@@ -1088,7 +1082,7 @@ filter(fn(x) { x % 2 == 0 }, lst)   // les pairs, sans écrire une ligne de plus
         }
         ```
 
-#### 5.2.3 Par transformation : vers `map`
+#### 4.2.3 Par transformation : vers `map`
 
 Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces trois fonctions.
 
@@ -1190,6 +1184,6 @@ map(fn(x) { 3 * x }, lst)   // les triples
 !!! tip "`filter` choisit, `map` transforme"
     `filter` **garde** ou **jette** des éléments (la liste peut rétrécir), alors que `map` **transforme** chaque élément (la liste garde sa taille). Ce sont deux outils très courants, et tu viens de les redécouvrir en remarquant que plusieurs fonctions n'en faisaient qu'une.
 
-## 6 Et maintenant, en Python
+## 5 Et maintenant, en Python
 
 Tu as les algorithmes. Il reste à les écrire dans le langage de l'épreuve, et c'est l'objet de la page suivante : [Transcription en Python](transcription-python.md). La structure y est la même, portée par des primitives `vide`, `cons`, `tete`, `queue` et `est_vide`, et chaque fonction y retrouve la sienne.
