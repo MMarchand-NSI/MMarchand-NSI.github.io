@@ -192,7 +192,7 @@ case lst {
 Presque toutes les fonctions sur les listes relèvent de l'un de ces trois types :
 
 - **lire** une liste : de la liste à une **valeur** (`taille`, `somme`, `contient`)
-- **construire** une liste : de la liste à une **nouvelle liste** (`inverser`, `concat`)
+- **transformer** une liste : d'une liste à une **autre liste** (`inverser`, `concat`)
 - **faire pousser** une liste : d'une **graine** à une liste (`repete`).
 
 ### 2.1 Lire une liste : de la liste à une valeur
@@ -513,7 +513,7 @@ On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si de
 !!! note "Quatre cas, même si on pourrait en écrire moins"
     On pourrait fusionner les deux cas « une seule est vide » en un seul. Ce n'est qu'une **optimisation d'écriture**, et ce n'est pas le sujet : on écrit les **quatre** cas pour voir toute la disjonction. Là encore, Gleam **exige** que les quatre soient traités.
 
-### 2.2 Construire une liste : de la liste à une nouvelle liste
+### 2.2 Transformer une liste : d'une liste à une autre liste
 
 !!! danger "Les listes sont immuables"
     On ne **modifie jamais** une liste. Une opération qui semble « modifier » une liste en **construit une nouvelle**. Le lutin ne rature rien : il **reconstruit en retour**.
@@ -807,7 +807,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
-### 4.2 Construire une liste
+### 4.2 Transformer une liste
 
 #### 4.2.1 Prendre, sauter, supprimer
 

@@ -209,7 +209,7 @@ def taille(lst: Liste) -> int:
 
 Le cas `Vide` devient le `if`, et le cas `Cons` est **tout ce qui vient après** : si la fonction n'est pas déjà repartie avec `return`, c'est que la liste n'est pas vide.
 
-**Construire une liste**, c'est-à-dire en rendre une nouvelle. Le `Cons` du résultat devient `cons`.
+**Transformer une liste**, c'est-à-dire en rendre une autre. Le `Cons` du résultat devient `cons`.
 
 ```gleam
 pub fn ajouter_fin(lst: Liste(a), x: a) -> Liste(a) {
@@ -329,7 +329,7 @@ Cons(tete, queue) ->
             assert liste.compte(l, 9) == 0
         ```
 
-    **Construire une liste** : de la liste à une **nouvelle liste**.
+    **Transformer une liste** : d'une liste à une **autre liste**.
 
     - `inverser[T](lst: Liste[T]) -> Liste[T]`
     - `concat[T](l1: Liste[T], l2: Liste[T]) -> Liste[T]`
