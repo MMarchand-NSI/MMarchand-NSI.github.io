@@ -516,8 +516,6 @@ pub fn ajouter_fin(lst: Liste(a), x: a) -> Liste(a) {
 
 Le **lutin ajouteur** : *« Si on me tend une liste vide, je renvoie une liste qui ne contient que `x`. Sinon, je garde la même tête, et pour la queue je demande à un autre lutin d'y ajouter `x`, puis je recolle. »*
 
-![Deux lutins qui se passent le travail](image.png)
-
 !!! question "Inverser"
     Écris `inverser(lst: Liste(a)) -> Liste(a)` qui renvoie la liste à l'envers.
 
