@@ -36,7 +36,7 @@ La **récursivité** **généralise** le principe de **récurrence** que tu conn
 
 ### 1.1 La structure : deux possibilités
 
-Imagine un **lutin** à qui on tend une liste. Il n'a que **deux possibilités** devant lui :
+Imagine un **lutin** à qui on confie une liste. Il n'a que **deux possibilités** devant lui :
 
 - soit la liste est **vide**
 - soit c'est un élément, la **tête**, suivi d'une autre liste, la **queue**.
@@ -212,7 +212,7 @@ pub fn taille(lst: Liste(a)) -> Int {
 }
 ```
 
-Le raisonnement du lutin : *« Je ne sais pas compter toute la liste d'un coup. Mais je regarde ce qu'on me tend, et il n'y a que deux possibilités. Ou bien c'est `Vide`, et je réponds 0. Ou bien c'est une tête et une queue, et je réponds 1 pour ma tête, plus ce que me répondra un autre lutin à qui je tends la queue. »*
+Le raisonnement du lutin : *« Je ne sais pas compter toute la liste d'un coup. Mais je regarde ce qu'on m'a confié, et il n'y a que deux possibilités. Ou bien c'est `Vide`, et je réponds 0. Ou bien c'est une tête et une queue, et je réponds 1 pour ma tête, plus ce que me répondra un autre lutin, celui qui s'occupe de la queue. »*
 
 - `_` remplace `tete` : ici on **ignore** la valeur de la tête (on n'en a pas besoin pour compter).
 
@@ -525,7 +525,7 @@ pub fn ajouter_fin(lst: Liste(a), x: a) -> Liste(a) {
 }
 ```
 
-Le **lutin ajouteur** : *« Si on me tend une liste vide, je renvoie une liste qui ne contient que `x`. Sinon, je garde la même tête, et pour la queue je demande à un autre lutin d'y ajouter `x`, puis je recolle. »*
+Le **lutin ajouteur** : *« Si on me confie une liste vide, je renvoie une liste qui ne contient que `x`. Sinon, je garde la même tête, et pour la queue je demande à un autre lutin d'y ajouter `x`, puis je recolle. »*
 
 !!! question "Inverser"
     Écris `inverser(lst: Liste(a)) -> Liste(a)` qui renvoie la liste à l'envers.
