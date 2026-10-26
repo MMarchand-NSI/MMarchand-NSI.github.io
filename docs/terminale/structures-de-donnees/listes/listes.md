@@ -1,4 +1,4 @@
-# Listes et récursivité
+# Listes et récursivité ![](../../../assets/lucy.svg){ alt="" style="height: 1em; width: auto; vertical-align: -0.1em" }
 
 !!! danger "Ce ne sont pas les listes Python"
     Ici, on ne parle **pas** des listes Python (qui sont en réalité des *tableaux dynamiques*). On étudie la **vraie** structure de liste, définie récursivement.
