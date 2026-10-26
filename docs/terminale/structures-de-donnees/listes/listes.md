@@ -201,7 +201,7 @@ Les premières fonctions **lisent** une liste : elles la parcourent et rendent u
 
 ##### 1.4.1.1 Première fonction : la taille
 
-On la lit ensemble **avant** d'en écrire soi-même.
+C'est la fonction qu'on a écrite ensemble au tableau, au début du cours. La voici en Gleam.
 
 ```gleam
 pub fn taille(lst: Liste(a)) -> Int {
