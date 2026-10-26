@@ -212,7 +212,7 @@ pub fn taille(lst: Liste(a)) -> Int {
 }
 ```
 
-Le raisonnement du lutin : *« Je ne sais pas compter toute la liste d'un coup. Mais je regarde ce que j'ai reçu, et il n'y a que deux possibilités. Ou bien c'est `Vide`, et je réponds 0. Ou bien c'est une tête et une queue, et je réponds 1 pour ma tête, plus ce que me répondra un autre lutin, celui qui reçoit la queue. »*
+Le raisonnement du lutin : *« Je ne sais pas compter toute la liste d'un coup. Mais je regarde ce que je reçois. Ou bien c'est `Vide`, et je réponds 0. Ou bien c'est une tête et une queue : je donne la queue à un autre lutin, et je réponds 1, pour ma tête, plus sa réponse. »*
 
 - `_` remplace `tete` : ici on **ignore** la valeur de la tête (on n'en a pas besoin pour compter).
 
@@ -525,7 +525,7 @@ pub fn ajouter_fin(lst: Liste(a), x: a) -> Liste(a) {
 }
 ```
 
-Le **lutin ajouteur** : *« Si je reçois une liste vide, je renvoie une liste qui ne contient que `x`. Sinon, je garde la même tête, et je donne la queue à un autre lutin pour qu'il y ajoute `x`, puis je recolle. »*
+Le **lutin ajouteur** : *« Si je reçois une liste vide, je renvoie la liste qui contient juste `x`. Sinon, je garde ma tête, je donne la queue à un autre lutin pour qu'il y ajoute `x`, et je recolle. »*
 
 !!! question "Inverser"
     Écris `inverser(lst: Liste(a)) -> Liste(a)` qui renvoie la liste à l'envers.
