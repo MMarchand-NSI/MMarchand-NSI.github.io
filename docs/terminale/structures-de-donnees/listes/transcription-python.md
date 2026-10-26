@@ -594,5 +594,64 @@ def sont_egales(l1: Liste, l2: Liste) -> bool:
 
 Cette écriture est **hors programme** (les dataclasses ne sont pas exigées), mais c'est le calque le plus exact de Gleam, et la façon dont `match` est vraiment prévu pour être utilisé. Une différence subtile demeure : Python, contrairement à Gleam, **ne vérifie pas** que tu as traité tous les cas.
 
+## 7 Quatre problèmes pour finir
+
+Ceux-là ne sont plus des transcriptions : aucune version Gleam à côté, et la solution n'est écrite nulle part. On te donne ce que la fonction doit rendre et des exemples pour la vérifier. **Écris le test d'abord**, avec les exemples de l'énoncé, puis la fonction.
+
+!!! question "intercale"
+    `intercale[T](lst: Liste[T], x: T) -> Liste[T]` rend une nouvelle liste où `x` est glissé **entre** deux éléments voisins, et nulle part ailleurs.
+
+    - `intercale(2 -> 3 -> 4, 0)` donne `2 -> 0 -> 3 -> 0 -> 4`
+    - sur la liste `2`, à un seul élément, il ne se passe rien : pas de voisin, pas de séparateur
+    - sur la liste vide, le résultat est la liste vide
+
+!!! question "compress"
+    `compress[T](lst: Liste[T]) -> Liste[T]` supprime les répétitions **consécutives** : d'une suite d'éléments égaux qui se suivent, il ne reste que le premier.
+
+    - `compress(1 -> 1 -> 2 -> 2 -> 2 -> 3 -> 1)` donne `1 -> 2 -> 3 -> 1`
+    - sur la liste vide, le résultat est la liste vide
+
+    Regarde le `1` de la fin, qui **reste** : ce n'est pas « enlever les doublons », c'est « enlever les répétitions qui se touchent ».
+
+!!! question "aplatir"
+    Une liste peut contenir des listes, qui peuvent elles-mêmes en contenir. `aplatir` rend la liste **plate** de tous les éléments, dans l'ordre, quelle que soit la profondeur.
+
+    - `aplatir((1 -> 2) -> 3 -> ((4 -> 5) -> 6))` donne `1 -> 2 -> 3 -> 4 -> 5 -> 6`
+    - sur la liste vide, le résultat est la liste vide
+
+    Deux choses à régler avant de coder, et elles ne se devinent pas.
+
+    **Le type.** Un élément est soit un entier, soit une liste du même genre. Cela s'écrit avec un alias qui s'appelle lui-même, exactement comme en section 1 :
+
+    ```python
+    type Imbriquee = Liste[int | Imbriquee]
+
+
+    def aplatir(lst: Imbriquee) -> Liste[int]:
+        ...
+    ```
+
+    **La question à poser à chaque élément** : « es-tu une liste ? ». Une liste est représentée par un tuple, donc cela se teste avec `isinstance(t, tuple)`.
+
+!!! question "permutations"
+    `permutations[T](lst: Liste[T]) -> Liste[Liste[T]]` rend **toutes** les façons d'ordonner les éléments. Le résultat est une liste **de listes**.
+
+    - `permutations(1 -> 2)` rend deux listes, `1 -> 2` et `2 -> 1`, dans l'ordre que tu veux
+    - `permutations(1 -> 2 -> 3)` en rend **six**
+    - sur la liste vide, le résultat est **une** liste, qui est la liste vide : il y a exactement une façon de n'ordonner rien, et ce n'est pas zéro
+
+    ??? tip "Indice : commence par une autre fonction"
+        Suppose les permutations de la **queue** déjà obtenues. Il reste à y faire entrer la tête, et elle peut entrer à **toutes les positions** de chacune. Écris donc d'abord la fonction qui rend la liste de toutes les listes obtenues en insérant un élément à chaque position :
+
+        ```python
+        def insere_partout[T](lst: Liste[T], x: T) -> Liste[Liste[T]]:
+            ...
+        ```
+
+        `insere_partout(2 -> 3, 9)` rend trois listes : `9 -> 2 -> 3`, puis `2 -> 9 -> 3`, puis `2 -> 3 -> 9`.
+
+    ??? tip "Indice : combien de fonctions en tout"
+        Trois. `insere_partout`, une deuxième qui l'applique à **chaque** permutation déjà trouvée et recolle les résultats bout à bout, et `permutations` elle-même, qui tient alors en deux lignes.
+
 !!! note "Une troisième fois, plus tard"
     Après la programmation objet, on réimplémentera cette même structure une **troisième** fois : une liste chaînée en **objet impératif**, avec des `while`. Même structure, trois paradigmes (fonctionnel, impératif, objet), de quoi mesurer ce que la récursivité apporte ici.
