@@ -596,7 +596,11 @@ Cette écriture est **hors programme** (les dataclasses ne sont pas exigées), m
 
 ## 7 Quatre problèmes pour finir
 
-Ceux-là ne sont plus des transcriptions : aucune version Gleam à côté, et la solution n'est écrite nulle part. On te donne ce que la fonction doit rendre et des exemples pour la vérifier. **Écris le test d'abord**, avec les exemples de l'énoncé, puis la fonction.
+Aucune version n'existe d'avance, ni en Gleam ni en Python, et la solution n'est écrite nulle part. On te donne ce que la fonction doit rendre, et des exemples qui te serviront de test.
+
+**Écris chacune dans le langage que tu veux, puis transcris-la dans l'autre.** C'est le même passage qu'aux sections 3 et 4, mais dans le sens que tu choisis, et sur un code dont tu es l'auteur. Les signatures ci-dessous sont écrites en Python, celles de Gleam s'en déduisent par le tableau de la section 3.
+
+**Écris le test d'abord**, avec les exemples de l'énoncé, puis la fonction.
 
 !!! question "intercale"
     `intercale[T](lst: Liste[T], x: T) -> Liste[T]` rend une nouvelle liste où `x` est glissé **entre** deux éléments voisins, et nulle part ailleurs.
@@ -619,9 +623,9 @@ Ceux-là ne sont plus des transcriptions : aucune version Gleam à côté, et la
     - `aplatir((1 -> 2) -> 3 -> ((4 -> 5) -> 6))` donne `1 -> 2 -> 3 -> 4 -> 5 -> 6`
     - sur la liste vide, le résultat est la liste vide
 
-    Deux choses à régler avant de coder, et elles ne se devinent pas.
+    Deux choses à régler avant de coder, et elles ne se devinent pas. Ce sont aussi les deux endroits où les deux langages ne font pas pareil.
 
-    **Le type.** Un élément est soit un entier, soit une liste du même genre. Cela s'écrit avec un alias qui s'appelle lui-même, exactement comme en section 1 :
+    **Dire qu'un élément est soit un entier, soit une liste du même genre.** En Python, par un alias qui s'appelle lui-même, exactement comme en section 1 :
 
     ```python
     type Imbriquee = Liste[int | Imbriquee]
@@ -631,7 +635,16 @@ Ceux-là ne sont plus des transcriptions : aucune version Gleam à côté, et la
         ...
     ```
 
-    **La question à poser à chaque élément** : « es-tu une liste ? ». Une liste est représentée par un tuple, donc cela se teste avec `isinstance(t, tuple)`.
+    En Gleam, par un type à **deux constructeurs**, qui est la façon habituelle d'y écrire « ou bien ceci, ou bien cela » :
+
+    ```gleam
+    pub type Imbriquee {
+      Element(Int)
+      Sous(Liste(Imbriquee))
+    }
+    ```
+
+    **Poser la question à chaque élément**, « es-tu une liste ? ». En Python, elle se pose à l'exécution : `isinstance(t, tuple)`, puisqu'une liste est représentée par un tuple. En Gleam, elle ne se pose pas du tout : `Element` et `Sous` sont deux motifs du `case`, et le compilateur vérifie que tu les as traités tous les deux.
 
 !!! question "permutations"
     `permutations[T](lst: Liste[T]) -> Liste[Liste[T]]` rend **toutes** les façons d'ordonner les éléments. Le résultat est une liste **de listes**.
