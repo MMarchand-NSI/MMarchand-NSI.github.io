@@ -23,8 +23,6 @@ Un nom donné à un type qui existe déjà, paramétré par `T`, et qui ne fabri
 - le `|`, un OU écrit **dans le type**,
 - la définition qui **s'appelle elle-même**.
 
-S'y ajoute une curiosité d'écriture, `tuple[()]`, qui n'est pas un détail non plus.
-
 ### 1.2 Le `|` est un OU, et il est dans le type
 
 `A | B` se lit « un `A` **ou** un `B` ». C'est le même `|` que dans `int | None`.
@@ -50,43 +48,6 @@ type Liste[T] = Vide | tuple[T, Liste[T]]
 C'est mot pour mot le `Cons(a, Liste(a))` de Gleam, et c'est ce qui rend la structure **sans limite de taille** : une ligne décrit des listes de n'importe quelle longueur, parce que le second cas se redéploie autant de fois qu'il le faut.
 
 Lis bien ce que cette ligne ne dit pas. Elle ne décrit aucun objet infini : elle dit que pour connaître une liste, il faut connaître une liste **plus courte**, et que cela s'arrête sur `Vide`. C'est la définition récursive du cours, écrite dans le type au lieu de l'être dans une fonction.
-
-!!! note "Pourquoi cela ne marche qu'avec l'instruction `type`"
-    Une affectation ordinaire échouerait, parce que Python calcule la partie droite tout de suite et que le nom n'existe pas encore :
-
-    ```python
-    type Vide = tuple[()]
-    Liste = Vide | tuple[int, Liste]
-    ```
-
-    ```text
-    NameError: name 'Liste' is not defined. Did you mean: 'list'?
-    ```
-
-    L'instruction `type`, elle, **ne calcule sa définition qu'au moment où on la demande**. Le nom peut donc y figurer avant d'être connu, et c'est exactement ce qu'il faut pour une définition récursive.
-
-### 1.4 Pourquoi le tuple vide a un type à lui
-
-Ce n'est pas un hasard, et c'est la raison pour laquelle on représente la liste par des **tuples** plutôt que par des listes Python.
-
-Un **tuple** a une longueur fixe, et son type dit ce qu'il y a dans **chaque case** : `tuple[int, str]` est un couple dont la première case est un entier et la seconde une chaîne. Le type peut donc nommer le tuple à **zéro case**, et c'est `tuple[()]`. Ce type n'a **qu'une seule valeur possible**, `()`.
-
-Une **liste** se type autrement : `list[int]` dit le type des éléments, jamais combien il y en a. `[]` et `[1, 2, 3]` sont tous deux des `list[int]`, et **la liste vide n'a pas de type à elle** : `list[()]` n'existe pas.
-
-**La conséquence est tout l'intérêt du choix.** Avec des tuples, les deux cas de la définition se distinguent **dans le type** : `()` est un `Vide` et rien d'autre, `(2, ())` est un couple et ne peut pas être un `Vide`. C'est ce qui permet d'écrire « soit l'un, soit l'autre », comme les deux constructeurs de Gleam. Avec des listes, les deux cas porteraient le même type, et la définition ne pourrait pas s'écrire.
-
-```python
-exemple_vide: Liste[int] = ()            # accepté
-exemple_un: Liste[int] = (1, ())         # accepté
-exemple_deux: Liste[int] = (1, (2, ()))  # accepté
-
-refuse_1: Liste[int] = (1, 2)            # refusé : la seconde case doit être une liste
-refuse_2: Liste[int] = ("a", ())         # refusé : les éléments doivent être des entiers
-refuse_3: Vide = (1,)                    # refusé : Vide n'a qu'une valeur, ()
-```
-
-!!! note "Ce que « refusé » veut dire"
-    Ces trois dernières lignes **s'exécutent sans erreur** : Python ne vérifie pas les annotations en marchant. Elles sont refusées par un **vérificateur de types**, qui lit le programme sans le lancer, et c'est tout l'intérêt : l'erreur se voit avant que le programme ne tourne. En Gleam, le compilateur faisait ce travail d'office et refusait de produire un exécutable.
 
 ## 2 Les primitives
 
@@ -298,135 +259,69 @@ Cons(tete, queue) ->
 
 ## 4 À transcrire
 
-Même ordre que la page Gleam, pour que tu retrouves chaque fonction en face. Le test est à coller dans `liste_test.py`, le corrigé est là pour te débloquer, pas pour commencer.
+!!! question "Les vingt-trois fonctions"
+    Ta version Gleam est l'énoncé de chacune : tu ne cherches que la syntaxe. Écris-les à la suite dans `liste.py`, dans cet ordre, qui est celui de la page Gleam. `taille` et `ajouter_fin` sont déjà faites, elles servaient d'exemples.
 
-### 4.1 Lire une liste
+    Colle les tests d'un groupe au moment où tu l'attaques, pas tous d'un coup.
 
-!!! question "somme"
-    ??? info "Le test"
+    **Lire une liste** : de la liste à une **valeur**.
+
+    - `somme(lst: Liste[int]) -> int`
+    - `somme_pairs(lst: Liste[int]) -> int`
+    - `contient[T](lst: Liste[T], x: T) -> bool`
+    - `sont_egales(l1: Liste, l2: Liste) -> bool`
+    - `to_str(lst: Liste[int]) -> str`
+    - `tous_vrais(lst: Liste[bool]) -> bool`
+    - `au_moins_un_vrai(lst: Liste[bool]) -> bool`
+    - `compte[T](lst: Liste[T], e: T) -> int`
+
+    ??? info "Les tests de ce groupe, à coller dans `liste_test.py`"
         ```python
         def test_somme() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(4, liste.vide())))
             assert liste.somme(liste.vide()) == 0
             assert liste.somme(l) == 9
-        ```
 
-    ??? success "Corrigé"
-        ```python
-        def somme(lst: Liste[int]) -> int:
-            if est_vide(lst):
-                return 0
-            return tete(lst) + somme(queue(lst))
-        ```
 
-!!! question "somme_pairs"
-    ??? info "Le test"
-        ```python
         def test_somme_pairs() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(4, liste.vide())))
             assert liste.somme_pairs(liste.vide()) == 0
             assert liste.somme_pairs(l) == 6
-        ```
 
-    ??? success "Corrigé"
-        ```python
-        def somme_pairs(lst: Liste[int]) -> int:
-            if est_vide(lst):
-                return 0
-            if tete(lst) % 2 == 0:
-                return tete(lst) + somme_pairs(queue(lst))
-            return somme_pairs(queue(lst))
-        ```
 
-!!! question "contient"
-    ??? info "Le test"
-        ```python
         def test_contient() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(4, liste.vide())))
             assert liste.contient(liste.vide(), 2) == False
             assert liste.contient(l, 3) == True
             assert liste.contient(l, 9) == False
-        ```
 
-    ??? success "Corrigé"
-        ```python
-        def contient[T](lst: Liste[T], x: T) -> bool:
-            if est_vide(lst):
-                return False
-            return tete(lst) == x or contient(queue(lst), x)
-        ```
 
-        Le `or` de Python est **paresseux**, comme le `||` de Gleam : si la tête est la bonne, la queue n'est pas parcourue.
-
-!!! question "sont_egales"
-    Le corrigé est donné plus haut, dans l'avertissement sur les quatre cas. Colle le test, et vérifie que ta version passe.
-
-    ??? info "Le test"
-        ```python
         def test_sont_egales() -> None:
             l = liste.cons(2, liste.cons(3, liste.vide()))
             assert liste.sont_egales(liste.vide(), liste.vide()) == True
             assert liste.sont_egales(l, liste.cons(2, liste.cons(3, liste.vide()))) == True
             assert liste.sont_egales(l, liste.cons(2, liste.vide())) == False
             assert liste.sont_egales(l, liste.cons(2, liste.cons(9, liste.vide()))) == False
-        ```
 
-!!! question "to_str"
-    ??? info "Le test"
-        ```python
+
         def test_to_str() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(4, liste.vide())))
             assert liste.to_str(liste.vide()) == "_|_"
             assert liste.to_str(l) == "2 -> 3 -> 4 -> _|_"
-        ```
 
-    ??? success "Corrigé"
-        ```python
-        def to_str(lst: Liste[int]) -> str:
-            if est_vide(lst):
-                return "_|_"
-            return str(tete(lst)) + " -> " + to_str(queue(lst))
-        ```
 
-        `str(n)` remplace `int.to_string(n)`, et `+` entre deux chaînes remplace `<>`.
-
-!!! question "tous_vrais"
-    ??? info "Le test"
-        ```python
         def test_tous_vrais() -> None:
             assert liste.tous_vrais(liste.vide()) == True
             assert liste.tous_vrais(liste.cons(True, liste.cons(True, liste.vide()))) == True
             assert liste.tous_vrais(liste.cons(True, liste.cons(False, liste.vide()))) == False
-        ```
 
-    ??? success "Corrigé"
-        ```python
-        def tous_vrais(lst: Liste[bool]) -> bool:
-            if est_vide(lst):
-                return True
-            return tete(lst) and tous_vrais(queue(lst))
-        ```
 
-!!! question "au_moins_un_vrai"
-    ??? info "Le test"
-        ```python
         def test_au_moins_un_vrai() -> None:
             assert liste.au_moins_un_vrai(liste.vide()) == False
             assert liste.au_moins_un_vrai(liste.cons(False, liste.cons(True, liste.vide()))) == True
             assert liste.au_moins_un_vrai(liste.cons(False, liste.cons(False, liste.vide()))) == False
-        ```
 
-    ??? success "Corrigé"
-        ```python
-        def au_moins_un_vrai(lst: Liste[bool]) -> bool:
-            if est_vide(lst):
-                return False
-            return tete(lst) or au_moins_un_vrai(queue(lst))
-        ```
 
-!!! question "compte"
-    ??? info "Le test"
-        ```python
         def test_compte() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(2, liste.vide())))
             assert liste.compte(liste.vide(), 2) == 0
@@ -434,40 +329,24 @@ Même ordre que la page Gleam, pour que tu retrouves chaque fonction en face. Le
             assert liste.compte(l, 9) == 0
         ```
 
-    ??? success "Corrigé"
-        ```python
-        def compte[T](lst: Liste[T], e: T) -> int:
-            if est_vide(lst):
-                return 0
-            if tete(lst) == e:
-                return 1 + compte(queue(lst), e)
-            return compte(queue(lst), e)
-        ```
+    **Construire une liste** : de la liste à une **nouvelle liste**.
 
-### 4.2 Construire une liste
+    - `inverser[T](lst: Liste[T]) -> Liste[T]`
+    - `concat[T](l1: Liste[T], l2: Liste[T]) -> Liste[T]`
+    - `repete[T](n: int, x: T) -> Liste[T]`
+    - `take[T](lst: Liste[T], n: int) -> Liste[T]`
+    - `drop[T](lst: Liste[T], n: int) -> Liste[T]`
+    - `slice[T](lst: Liste[T], debut: int, fin: int) -> Liste[T]`
+    - `supprimer[T](lst: Liste[T], e: T) -> Liste[T]`
 
-!!! question "inverser"
-    `ajouter_fin` est donnée plus haut, tu n'as qu'à la recopier avant.
-
-    ??? info "Le test"
+    ??? info "Les tests de ce groupe, à coller dans `liste_test.py`"
         ```python
         def test_inverser() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(4, liste.vide())))
             assert liste.inverser(liste.vide()) == liste.vide()
             assert liste.inverser(l) == liste.cons(4, liste.cons(3, liste.cons(2, liste.vide())))
-        ```
 
-    ??? success "Corrigé"
-        ```python
-        def inverser[T](lst: Liste[T]) -> Liste[T]:
-            if est_vide(lst):
-                return vide()
-            return ajouter_fin(inverser(queue(lst)), tete(lst))
-        ```
 
-!!! question "concat"
-    ??? info "Le test"
-        ```python
         def test_concat() -> None:
             l = liste.cons(2, liste.cons(3, liste.vide()))
             assert liste.concat(liste.vide(), liste.vide()) == liste.vide()
@@ -476,104 +355,39 @@ Même ordre que la page Gleam, pour que tu retrouves chaque fonction en face. Le
             assert liste.concat(l, liste.cons(4, liste.vide())) == liste.cons(
                 2, liste.cons(3, liste.cons(4, liste.vide()))
             )
-        ```
 
-    ??? success "Corrigé"
-        ```python
-        def concat[T](l1: Liste[T], l2: Liste[T]) -> Liste[T]:
-            if est_vide(l1):
-                return l2
-            return cons(tete(l1), concat(queue(l1), l2))
-        ```
 
-        Deux cas suffisent ici, là où Gleam en demandait quatre : si `l1` est vide on rend `l2`, qu'elle soit vide ou non. C'est la seule fonction où le passage en Python **raccourcit** vraiment le code, et c'est aussi la seule où tu peux oublier un cas sans que rien ne te le dise.
-
-!!! question "repete"
-    ??? info "Le test"
-        ```python
         def test_repete() -> None:
             assert liste.repete(0, "a") == liste.vide()
             assert liste.repete(3, "a") == liste.cons(
                 "a", liste.cons("a", liste.cons("a", liste.vide()))
             )
-        ```
 
-    ??? success "Corrigé"
-        ```python
-        def repete[T](n: int, x: T) -> Liste[T]:
-            if n == 0:
-                return vide()
-            return cons(x, repete(n - 1, x))
-        ```
 
-        Le cas de base porte sur le compteur, pas sur une liste : il n'y a donc pas de `est_vide` ici.
-
-!!! question "take"
-    ??? info "Le test"
-        ```python
         def test_take() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(4, liste.vide())))
             assert liste.take(liste.vide(), 2) == liste.vide()
             assert liste.take(l, 0) == liste.vide()
             assert liste.take(l, 2) == liste.cons(2, liste.cons(3, liste.vide()))
             assert liste.take(l, 9) == l
-        ```
 
-    ??? success "Corrigé"
-        ```python
-        def take[T](lst: Liste[T], n: int) -> Liste[T]:
-            if est_vide(lst):
-                return vide()
-            if n == 0:
-                return vide()
-            return cons(tete(lst), take(queue(lst), n - 1))
-        ```
 
-        Les deux `case` emboîtés de Gleam deviennent deux `if` l'un après l'autre.
-
-!!! question "drop"
-    ??? info "Le test"
-        ```python
         def test_drop() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(4, liste.vide())))
             assert liste.drop(liste.vide(), 2) == liste.vide()
             assert liste.drop(l, 0) == l
             assert liste.drop(l, 2) == liste.cons(4, liste.vide())
             assert liste.drop(l, 9) == liste.vide()
-        ```
 
-    ??? success "Corrigé"
-        ```python
-        def drop[T](lst: Liste[T], n: int) -> Liste[T]:
-            if est_vide(lst):
-                return vide()
-            if n == 0:
-                return lst
-            return drop(queue(lst), n - 1)
-        ```
 
-!!! question "slice"
-    ??? info "Le test"
-        ```python
         def test_slice() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(4, liste.vide())))
             assert liste.slice(liste.vide(), 0, 2) == liste.vide()
             assert liste.slice(l, 1, 3) == liste.cons(3, liste.cons(4, liste.vide()))
             assert liste.slice(l, 0, 0) == liste.vide()
             assert liste.slice(l, 0, 9) == l
-        ```
 
-    ??? success "Corrigé"
-        ```python
-        def slice[T](lst: Liste[T], debut: int, fin: int) -> Liste[T]:
-            return drop(take(lst, fin), debut)
-        ```
 
-        Python n'a pas d'opérateur `|>`, il ne reste que l'écriture emboîtée.
-
-!!! question "supprimer"
-    ??? info "Le test"
-        ```python
         def test_supprimer() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(2, liste.vide())))
             assert liste.supprimer(liste.vide(), 2) == liste.vide()
@@ -581,22 +395,18 @@ Même ordre que la page Gleam, pour que tu retrouves chaque fonction en face. Le
             assert liste.supprimer(l, 9) == l
         ```
 
-    ??? success "Corrigé"
-        ```python
-        def supprimer[T](lst: Liste[T], e: T) -> Liste[T]:
-            if est_vide(lst):
-                return vide()
-            if tete(lst) == e:
-                return queue(lst)
-            return cons(tete(lst), supprimer(queue(lst), e))
-        ```
+    **Filtrer et transformer** : garder certains éléments, ou les changer tous.
 
-### 4.3 Filtrer et transformer
+    - `impairs(lst: Liste[int]) -> Liste[int]`
+    - `positifs(lst: Liste[int]) -> Liste[int]`
+    - `negatifs(lst: Liste[int]) -> Liste[int]`
+    - `filter[T](predicat, lst: Liste[T]) -> Liste[T]`
+    - `carres(lst: Liste[int]) -> Liste[int]`
+    - `doubles(lst: Liste[int]) -> Liste[int]`
+    - `triples(lst: Liste[int]) -> Liste[int]`
+    - `map[T, U](f, lst: Liste[T]) -> Liste[U]`
 
-!!! question "impairs, positifs, negatifs"
-    Trois fonctions, le même squelette, une condition qui change.
-
-    ??? info "Les tests"
+    ??? info "Les tests de ce groupe, à coller dans `liste_test.py`"
         ```python
         def test_impairs() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(4, liste.vide())))
@@ -614,58 +424,14 @@ Même ordre que la page Gleam, pour que tu retrouves chaque fonction en face. Le
             l = liste.cons(2, liste.cons(-3, liste.cons(0, liste.vide())))
             assert liste.negatifs(liste.vide()) == liste.vide()
             assert liste.negatifs(l) == liste.cons(-3, liste.vide())
-        ```
-
-    ??? success "Corrigé"
-        ```python
-        def impairs(lst: Liste[int]) -> Liste[int]:
-            if est_vide(lst):
-                return vide()
-            if tete(lst) % 2 != 0:
-                return cons(tete(lst), impairs(queue(lst)))
-            return impairs(queue(lst))
 
 
-        def positifs(lst: Liste[int]) -> Liste[int]:
-            if est_vide(lst):
-                return vide()
-            if tete(lst) > 0:
-                return cons(tete(lst), positifs(queue(lst)))
-            return positifs(queue(lst))
-
-
-        def negatifs(lst: Liste[int]) -> Liste[int]:
-            if est_vide(lst):
-                return vide()
-            if tete(lst) < 0:
-                return cons(tete(lst), negatifs(queue(lst)))
-            return negatifs(queue(lst))
-        ```
-
-!!! question "filter"
-    En Gleam, le prédicat était une fonction passée en paramètre. En Python aussi : une fonction est une valeur, et `fn(x) { x > 0 }` s'écrit `lambda x: x > 0`.
-
-    ??? info "Le test"
-        ```python
         def test_filter() -> None:
             l = liste.cons(2, liste.cons(-3, liste.cons(4, liste.vide())))
             assert liste.filter(lambda x: x > 0, liste.vide()) == liste.vide()
             assert liste.filter(lambda x: x > 0, l) == liste.cons(2, liste.cons(4, liste.vide()))
-        ```
 
-    ??? success "Corrigé"
-        ```python
-        def filter[T](predicat, lst: Liste[T]) -> Liste[T]:
-            if est_vide(lst):
-                return vide()
-            if predicat(tete(lst)):
-                return cons(tete(lst), filter(predicat, queue(lst)))
-            return filter(predicat, queue(lst))
-        ```
 
-!!! question "carres, doubles, triples"
-    ??? info "Les tests"
-        ```python
         def test_carres() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(4, liste.vide())))
             assert liste.carres(liste.vide()) == liste.vide()
@@ -682,31 +448,8 @@ Même ordre que la page Gleam, pour que tu retrouves chaque fonction en face. Le
             l = liste.cons(2, liste.cons(3, liste.cons(4, liste.vide())))
             assert liste.triples(liste.vide()) == liste.vide()
             assert liste.triples(l) == liste.cons(6, liste.cons(9, liste.cons(12, liste.vide())))
-        ```
-
-    ??? success "Corrigé"
-        ```python
-        def carres(lst: Liste[int]) -> Liste[int]:
-            if est_vide(lst):
-                return vide()
-            return cons(tete(lst) * tete(lst), carres(queue(lst)))
 
 
-        def doubles(lst: Liste[int]) -> Liste[int]:
-            if est_vide(lst):
-                return vide()
-            return cons(2 * tete(lst), doubles(queue(lst)))
-
-
-        def triples(lst: Liste[int]) -> Liste[int]:
-            if est_vide(lst):
-                return vide()
-            return cons(3 * tete(lst), triples(queue(lst)))
-        ```
-
-!!! question "map"
-    ??? info "Le test"
-        ```python
         def test_map() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(4, liste.vide())))
             assert liste.map(lambda x: x * x, liste.vide()) == liste.vide()
@@ -715,20 +458,11 @@ Même ordre que la page Gleam, pour que tu retrouves chaque fonction en face. Le
             )
         ```
 
-    ??? success "Corrigé"
-        ```python
-        def map[T, U](f, lst: Liste[T]) -> Liste[U]:
-            if est_vide(lst):
-                return vide()
-            return cons(f(tete(lst)), map(f, queue(lst)))
-        ```
+!!! note "`filter` et `map` prennent une fonction en paramètre"
+    En Gleam, le prédicat de `filter` et la transformation de `map` étaient des fonctions passées en argument. En Python aussi, une fonction est une valeur : le `fn(x) { x > 0 }` de Gleam s'écrit `lambda x: x > 0`.
 
 !!! note "`filter` et `map` existent déjà en Python"
     Ce sont deux fonctions de la bibliothèque standard, qui font la même chose sur les listes Python. Les tiennes ne les écrasent pas tant que tu passes par `liste.filter` et `liste.map`, c'est-à-dire tant que tu importes **le module** et non les fonctions une par une.
-
-!!! note "Une différence qui reste, et qui n'est pas de syntaxe"
-    **Gleam n'a pas de boucle** : la récursivité y était le seul chemin. En Python, tu la **choisis**, et tu la choisis ici parce que c'est la **structure** qui l'appelle, pas parce que le langage t'y oblige.
-
 ## 5 En Python seulement
 
 !!! warning "Pourquoi ces fonctions n'étaient pas en Gleam"
