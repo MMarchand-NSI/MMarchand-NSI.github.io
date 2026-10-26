@@ -291,6 +291,8 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
 !!! fondamental "Méthode"
     Avant de coder, écris la **disjonction de cas au papier** : que renvoie la fonction si la liste est `Vide` ? et si c'est `Cons(tete, queue)` ?
 
+    Garde ce papier sous la main, et montre-le quand tu appelles ton professeur. Il dit tout de suite si ce qui bloque est ton **raisonnement** ou la façon de l'**écrire en Gleam**. Sans lui, il faut chercher les deux à la fois.
+
 !!! question "La somme"
     Écris `somme(lst: Liste(Int)) -> Int` qui renvoie la somme des éléments d'une liste d'entiers.
 
