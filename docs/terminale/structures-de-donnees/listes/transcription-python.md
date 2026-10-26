@@ -60,6 +60,8 @@ def queue[T](lst: Liste[T]) -> Liste[T]:
     return lst[1]
 ```
 
+Regarde la deuxième ligne : le `|` (OU) réapparaît, cette fois **dans le type**. Une `Liste` est `Vide` **ou** un couple (tête, queue), et c'est le même `|` que dans `int | None`. En Gleam, ce OU était porté par les deux constructeurs `Vide` et `Cons`.
+
 !!! note "Mise en place"
     - Le fichier va dans `python/structures/lineaires/`. Si ce répertoire n'existe pas encore, crée-le, et **chaque répertoire créé reçoit un fichier vide `__init__.py`**.
     - Les tests vont **à côté**, dans `python/structures/lineaires/liste_test.py`. Chaque exercice te donne le sien, à coller à la fin du fichier, en tête duquel tu écris une seule fois :
@@ -151,7 +153,9 @@ Cons(tete, queue) ->
 ```
 
 !!! warning "Le piège : les quatre cas disparaissent"
-    Sur **deux** listes, Gleam t'obligeait à écrire les quatre cas, et le compilateur vérifiait qu'aucun ne manquait. En Python, ils fondent dans des conditions, et **rien ne te dit si tu en as oublié un**. Écris-les au papier avant de coder, comme en Gleam, puis regroupe-les seulement après.
+    Avec des `if`, rien ne signale **combien** de cas il y a, ni qu'on les a **tous** couverts. La disjonction exhaustive, un cas par possibilité, que le `case` de Gleam rendait évidente, n'apparaît plus, et le compilateur ne la vérifie plus.
+
+    Cela ne coûte rien sur une liste, où il n'y a que deux cas. Sur **deux** listes il y en a quatre, ils fondent dans des conditions, et **rien ne te dit si tu en as oublié un**. Écris-les au papier avant de coder, comme en Gleam, puis regroupe-les seulement après.
 
     ```python
     def sont_egales(l1: Liste, l2: Liste) -> bool:
@@ -592,6 +596,83 @@ Même ordre que la page Gleam, pour que tu retrouves chaque fonction en face. Le
 !!! note "`filter` et `map` existent déjà en Python"
     Ce sont deux fonctions de la bibliothèque standard, qui font la même chose sur les listes Python. Les tiennes ne les écrasent pas tant que tu passes par `liste.filter` et `liste.map`, c'est-à-dire tant que tu importes **le module** et non les fonctions une par une.
 
-## 4 Et ensuite
+!!! note "Une différence qui reste, et qui n'est pas de syntaxe"
+    **Gleam n'a pas de boucle** : la récursivité y était le seul chemin. En Python, tu la **choisis**, et tu la choisis ici parce que c'est la **structure** qui l'appelle, pas parce que le langage t'y oblige.
 
-Quand tout passe, va écrire les fonctions de la section [En Python seulement](listes.md#43-en-python-seulement) de la page précédente : celles qui peuvent échouer, et qu'on ne pouvait pas faire en Gleam.
+## 4 En Python seulement
+
+!!! warning "Pourquoi ces fonctions n'étaient pas en Gleam"
+    Les fonctions qui suivent peuvent **échouer** sur certaines entrées : une liste vide n'a pas de dernier élément, un indice peut sortir des bornes. En Python, on le signale par une **assertion** qui lève une erreur, exactement comme le font `tete` et `queue`. En Gleam, il n'y a pas d'exception : une fonction qui peut échouer renvoie un `Result`, une valeur qui porte **soit** le résultat, **soit** l'échec, et que l'appelant est obligé d'ouvrir. On ne verra pas ce type en classe, faute de temps, et ces fonctions se font donc **uniquement en Python**. Rien ne t'empêche d'aller voir par toi-même.
+
+À écrire avec `assert` pour les préconditions :
+
+- **`dernier_element[T](lst: Liste[T]) -> T`** : le dernier élément (erreur si la liste est vide).
+- **`avant_dernier_element[T](lst: Liste[T]) -> T`** : l'avant-dernier (erreur si moins de deux éléments).
+- **`minimum(lst: Liste[int]) -> int`** : le plus petit élément (erreur si la liste est vide).
+- **`get_n[T](lst: Liste[T], n: int) -> T`** : l'élément d'indice `n` (erreur si hors bornes).
+- **`insert[T](lst: Liste[T], e: T, n: int) -> Liste[T]`** : insère `e` à l'indice `n` (erreur si hors bornes).
+- **`supprimer_n[T](lst: Liste[T], n: int) -> Liste[T]`** : supprime l'élément d'indice `n` (erreur si hors bornes).
+- **`supprimer_fin[T](lst: Liste[T]) -> Liste[T]`** : supprime le dernier élément (erreur si la liste est vide).
+- **`trier(lst: Liste[int]) -> Liste[int]`** : tri par sélection (il s'appuie sur `minimum`).
+
+Celles-là n'ont pas de version Gleam à transcrire, donc **pas de test fourni** : pour chacune, écris aussi une fonction `test_<nom>` avec des `assert`, y compris un cas limite (liste vide, indice au bord).
+
+## 5 Pour aller plus loin : `dataclass` et `match`
+
+Python possède aussi le **pattern matching** (`match` / `case`), mais il est vraiment fait pour des **classes**, en particulier des **dataclasses**. Avec elles, on définit `Vide` et `Cons` **exactement** comme les deux constructeurs de Gleam. C'est une **autre représentation** de la liste, à la place des tuples :
+
+```python
+from dataclasses import dataclass
+
+
+@dataclass
+class Vide:
+    pass
+
+
+@dataclass
+class Cons[T]:
+    tete: T
+    queue: "Liste[T]"
+
+
+type Liste[T] = Vide | Cons[T]
+```
+
+On construit alors une liste **à l'identique de Gleam** (en Python, `Vide()` prend des parenthèses car on crée une instance) :
+
+```python
+exemple = Cons(2, Cons(3, Cons(4, Vide())))
+#   en Gleam :  Cons(2, Cons(3, Cons(4, Vide)))
+```
+
+Et le `match` retrouve tout son sens, **un cas par constructeur**, comme le `case` de Gleam :
+
+```python
+def taille(lst: Liste) -> int:
+    match lst:
+        case Vide():
+            return 0
+        case Cons(_, queue):
+            return 1 + taille(queue)
+```
+
+Sur deux listes, les **quatre** cas redeviennent nets, à comparer avec la version en `if` de la section 2 :
+
+```python
+def sont_egales(l1: Liste, l2: Liste) -> bool:
+    match l1, l2:
+        case Vide(), Vide():
+            return True
+        case Vide(), Cons(_, _):
+            return False
+        case Cons(_, _), Vide():
+            return False
+        case Cons(t1, q1), Cons(t2, q2):
+            return t1 == t2 and sont_egales(q1, q2)
+```
+
+Cette écriture est **hors programme** (les dataclasses ne sont pas exigées), mais c'est le calque le plus exact de Gleam, et la façon dont `match` est vraiment prévu pour être utilisé. Une différence subtile demeure : Python, contrairement à Gleam, **ne vérifie pas** que tu as traité tous les cas.
+
+!!! note "Une troisième fois, plus tard"
+    Après la programmation objet, on réimplémentera cette même structure une **troisième** fois : une liste chaînée en **objet impératif**, avec des `while`. Même structure, trois paradigmes (fonctionnel, impératif, objet), de quoi mesurer ce que la récursivité apporte ici.

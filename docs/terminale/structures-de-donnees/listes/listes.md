@@ -646,85 +646,11 @@ C'est exactement la **récurrence** de ton cours de maths : un cas pour 0, puis 
     Une IA écrit `taille`, `somme` ou `inverser` en une seconde, en Gleam comme en Python.
 
     Ce qui est en jeu n'est pas ce qu'elle sait faire, c'est ce que **tu** sais faire sans elle : **énoncer les deux cas** (que se passe-t-il si la liste est vide ? et sinon ?), et reconnaître un raisonnement récursif correct quand tu en lis un. C'est exactement ce que l'épreuve pratique évalue, et c'est ce qui te permet de refuser une réponse fausse au lieu de la recopier. Gleam t'y aide : les **types** et l'**exhaustivité des cas** attrapent une grande partie des erreurs avant même l'exécution.
-
-## 2 L'équivalent en Python
-
-Toute cette construction existe aussi en Python, le langage de l'épreuve. La même liste, définie récursivement, avec des **tuples immuables** :
-
-```python
-type Vide = tuple[()]
-type Liste[T] = Vide | tuple[T, Liste[T]]
-```
-
-Le `|` (OU) réapparaît, cette fois **dans le type** : une `Liste` est `Vide` **ou** un couple (tête, queue). C'est le même `|` que dans `int | None`. En Gleam, ce OU était porté par les deux constructeurs `Vide` et `Cons`.
-
-Pour ne pas manipuler les tuples à la main, on se donne un **constructeur** et des **accesseurs**, qui jouent le rôle de `Cons` et `Vide` :
-
-```python
-def creer_vide[T]() -> Liste[T]:               # comme Vide
-    return ()
-
-def construire[T](t: T, q: Liste[T]) -> Liste[T]:   # comme Cons(t, q)
-    return (t, q)
-
-def est_vide(lst: Liste) -> bool:
-    return lst == ()
-
-def tete[T](lst: Liste[T]) -> T:               # la tête
-    assert not est_vide(lst), "Liste vide"
-    return lst[0]
-
-def queue[T](lst: Liste[T]) -> Liste[T]:       # la queue
-    assert not est_vide(lst), "Liste vide"
-    return lst[1]
-```
-
-On construit alors une liste **exactement** comme en Gleam, et on ne touche plus jamais aux tuples ensuite :
-
-```python
-exemple = construire(2, construire(3, construire(4, creer_vide())))
-#   en Gleam :  Cons(2, Cons(3, Cons(4, Vide)))
-```
-
-On lit une liste avec des **`if`** et les accesseurs (`est_vide`, `tete`, `queue`), le style attendu **au programme** :
-
-```python
-def taille(lst: Liste) -> int:
-    if est_vide(lst):
-        return 0
-    return 1 + taille(queue(lst))
-
-
-def somme(lst: Liste[int]) -> int:
-    if est_vide(lst):
-        return 0
-    return tete(lst) + somme(queue(lst))
-```
-
-!!! warning "Ce que les `if` cachent"
-    Avec `if` / `else`, rien ne signale **combien** de cas il y a, ni qu'on les a **tous** couverts. La disjonction **exhaustive**, un cas par possibilité, que le `case` de Gleam rendait évidente, n'apparaît plus. En Gleam, le compilateur **vérifiait** cette exhaustivité. Avec des `if`, c'est à toi d'y veiller à chaque fois. (Python a aussi un `match`, voir la section 5.)
-
-L'écart se voit encore mieux sur **deux** listes, où il y a **quatre** cas (chaque liste vide ou non). En `if`, ils **fondent** en conditions imbriquées, et on ne les distingue plus :
-
-```python
-def sont_egales(l1: Liste, l2: Liste) -> bool:
-    if est_vide(l1) and est_vide(l2):
-        return True
-    if est_vide(l1) or est_vide(l2):
-        return False
-    return tete(l1) == tete(l2) and sont_egales(queue(l1), queue(l2))
-```
-
-La grande différence reste que **Gleam n'a pas de boucle** : la récursivité y était le seul chemin, alors qu'en Python on la **choisit**, parce que c'est la **structure** qui l'appelle. Toutes les autres fonctions (`contient`, `inverser`, `concat`, `repete`) se transposent de la même manière, et c'est ce que tu feras sur la page [Transcription en Python](transcription-python.md), une fois les versions Gleam écrites.
-
-!!! note "Une troisième fois, plus tard"
-    Après la programmation objet, on réimplémentera cette même structure une **troisième** fois : une liste chaînée en **objet impératif** (avec des `while`). Même structure, trois paradigmes (fonctionnel, impératif, objet), de quoi mesurer ce que la récursivité apporte ici.
-
-## 3 Le coût
+## 2 Le coût
 
 On appelle $T(n)$ le **nombre d'opérations élémentaires** (comparaisons, additions, appels) effectuées par une fonction sur une liste de taille $n$. Une fonction récursive s'appelle elle-même sur une liste plus courte : son coût $T(n)$ s'exprime donc à partir de $T(n-1)$. C'est une **suite récurrente**, et calculer le coût, c'est trouver sa **forme générale**.
 
-### 3.1 Exemple : la taille
+### 2.1 Exemple : la taille
 
 ```gleam
 pub fn taille(lst: Liste(a)) -> Int {
@@ -744,7 +670,7 @@ $$T(n) = a + b \times n$$
 
 Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs exactes de $a$ et de $b$ ne comptent pas, seule la **forme** de la suite décide.
 
-### 3.2 À toi : `ajouter_fin` et `inverser`
+### 2.2 À toi : `ajouter_fin` et `inverser`
 
 !!! question "Le coût de `inverser`"
     1. Écris la relation de récurrence du coût $A(n)$ de `ajouter_fin(lst, x)`, pour une liste `lst` de taille $n$. Quelle est sa forme générale ?
@@ -772,14 +698,14 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
     ??? success "Ce qu'on observe"
         `inverser` fait un appel par élément ($n$ appels), et **chaque** appel relance `ajouter_fin`, qui reparcourt toute la liste déjà renversée (de longueur $0$, puis $1$, puis $2$…). On retrouve la somme $0 + 1 + \dots + (n-1)$ du calcul.
 
-## 4 Exercices
+## 3 Exercices
 
 !!! tip "Comment t'entraîner"
     Écris chaque fonction **en Gleam**, avec `case`. Fais la **disjonction de cas au papier** avant de coder. Sous chaque exercice, son **test** à coller dans `test/liste_test.gleam`, puis son corrigé. (Pour `to_str`, ajoute `import gleam/int` en tête de `src/liste.gleam`.)
 
     Quand tu les auras toutes, tu les réécriras **en Python** : c'est l'objet de la page [Transcription en Python](transcription-python.md), où les algorithmes seront déjà les tiens et où il ne restera que la syntaxe.
 
-### 4.1 Lire une liste
+### 3.1 Lire une liste
 
 !!! question "to_str"
     Écris `to_str(lst: Liste(Int)) -> String`, qui renvoie une chaîne façon `"2 -> 3 -> 4 -> _|_"` (la liste vide donne `"_|_"`).
@@ -874,9 +800,9 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
-### 4.2 Construire une liste
+### 3.2 Construire une liste
 
-#### 4.2.1 Prendre, sauter, supprimer
+#### 3.2.1 Prendre, sauter, supprimer
 
 !!! question "take"
     Écris `take(lst: Liste(a), n: Int) -> Liste(a)`, qui renvoie les `n` premiers éléments. `take(2 -> 3 -> 4, 2)` donne `2 -> 3`. Si `n` dépasse la taille, on prend tout.
@@ -1030,7 +956,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
-#### 4.2.2 Par filtrage : vers `filter`
+#### 3.2.2 Par filtrage : vers `filter`
 
 On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'a fait pour additionner. Écris ces trois fonctions, puis regarde ce qu'elles ont en commun.
 
@@ -1149,7 +1075,7 @@ filter(fn(x) { x % 2 == 0 }, lst)   // les pairs, sans écrire une ligne de plus
         }
         ```
 
-#### 4.2.3 Par transformation : vers `map`
+#### 3.2.3 Par transformation : vers `map`
 
 Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces trois fonctions.
 
@@ -1251,76 +1177,6 @@ map(fn(x) { 3 * x }, lst)   // les triples
 !!! tip "`filter` choisit, `map` transforme"
     `filter` **garde** ou **jette** des éléments (la liste peut rétrécir), alors que `map` **transforme** chaque élément (la liste garde sa taille). Ce sont deux outils très courants, et tu viens de les redécouvrir en remarquant que plusieurs fonctions n'en faisaient qu'une.
 
-### 4.3 En Python seulement
+## 4 Et maintenant, en Python
 
-!!! warning "Pourquoi pas en Gleam"
-    Les fonctions qui suivent peuvent **échouer** sur certaines entrées : une liste vide n'a pas de dernier élément, un indice peut sortir des bornes. En Python, on le signale par une **assertion** qui lève une erreur. En Gleam, il n'y a pas d'exception : une fonction qui peut échouer renvoie un `Result`, une valeur qui porte **soit** le résultat, **soit** l'échec, et que l'appelant est obligé d'ouvrir. On ne verra pas ce type en classe, faute de temps, et ces fonctions se font donc **uniquement en Python**. Rien ne t'empêche d'aller voir par toi-même.
-
-À écrire en Python (avec `assert` pour les préconditions) :
-
-- **`dernier_element[T](lst: Liste[T]) -> T`** : le dernier élément (erreur si la liste est vide).
-- **`avant_dernier_element[T](lst: Liste[T]) -> T`** : l'avant-dernier (erreur si moins de deux éléments).
-- **`minimum(lst: Liste[int]) -> int`** : le plus petit élément (erreur si la liste est vide).
-- **`get_n[T](lst: Liste[T], n: int) -> T`** : l'élément d'indice `n` (erreur si hors bornes).
-- **`insert[T](lst: Liste[T], e: T, n: int) -> Liste[T]`** : insère `e` à l'indice `n` (erreur si hors bornes).
-- **`supprimer_n[T](lst: Liste[T], n: int) -> Liste[T]`** : supprime l'élément d'indice `n` (erreur si hors bornes).
-- **`supprimer_fin[T](lst: Liste[T]) -> Liste[T]`** : supprime le dernier élément (erreur si la liste est vide).
-- **`trier(lst: Liste[int]) -> Liste[int]`** : tri par sélection (il s'appuie sur `minimum`, donc entraîné lui aussi côté Python).
-
-Pour chaque fonction, écris aussi une fonction `test_<nom>` qui contient des `assert`, y compris un cas limite (liste vide, indice au bord).
-
-## 5 Pour aller plus loin
-
-### 5.1 La version la plus proche de Gleam : `dataclass` + `match`
-
-Python possède aussi le **pattern matching** (`match` / `case`), mais il est vraiment fait pour des **classes**, en particulier des **dataclasses**. Avec elles, on définit `Vide` et `Cons` **exactement** comme les deux constructeurs de Gleam. C'est une **autre représentation** de la liste, à la place des tuples :
-
-```python
-from dataclasses import dataclass
-
-@dataclass
-class Vide:
-    pass
-
-@dataclass
-class Cons[T]:
-    tete: T
-    queue: "Liste[T]"
-
-type Liste[T] = Vide | Cons[T]
-```
-
-On construit alors une liste **à l'identique de Gleam** (en Python, `Vide()` prend des parenthèses car on crée une instance) :
-
-```python
-exemple = Cons(2, Cons(3, Cons(4, Vide())))
-#   en Gleam :  Cons(2, Cons(3, Cons(4, Vide)))
-```
-
-Et le `match` retrouve tout son sens, **un cas par constructeur**, comme le `case` de Gleam :
-
-```python
-def taille(lst: Liste) -> int:
-    match lst:
-        case Vide():
-            return 0
-        case Cons(_, queue):
-            return 1 + taille(queue)
-```
-
-Sur deux listes, les **quatre** cas redeviennent nets (à comparer avec la version `if` de la section 2) :
-
-```python
-def sont_egales(l1: Liste, l2: Liste) -> bool:
-    match l1, l2:
-        case Vide(), Vide():
-            return True
-        case Vide(), Cons(_, _):
-            return False
-        case Cons(_, _), Vide():
-            return False
-        case Cons(t1, q1), Cons(t2, q2):
-            return t1 == t2 and sont_egales(q1, q2)
-```
-
-Cette écriture est **hors programme** (les dataclasses ne sont pas exigées), mais c'est le calque le plus exact de Gleam, et la façon dont `match` est vraiment prévu pour être utilisé. Une différence subtile demeure : Python, contrairement à Gleam, **ne vérifie pas** que tu as traité tous les cas.
+Tu as les algorithmes. Il reste à les écrire dans le langage de l'épreuve, et c'est l'objet de la page suivante : [Transcription en Python](transcription-python.md). La structure y est la même, portée par des primitives `vide`, `cons`, `tete`, `queue` et `est_vide`, et chaque fonction y retrouve la sienne.
