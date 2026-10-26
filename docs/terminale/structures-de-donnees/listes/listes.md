@@ -232,7 +232,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
 !!! fondamental "Cas de base"
     Je ne te ferai pas l'affront de t'écrire ce qu'est un cas de base, ni même un cas récursif, tellement c'est martelé en cours
 
-!!! warning "Pour écrire, ne déroule pas"
+!!! fondamental "Pour écrire, ne déroule pas"
     La trace sert à **comprendre** ce que fait la machine. Pour **écrire** une fonction récursive, on ne déroule rien : on fait confiance à l'appel sur la queue, comme le lutin fait confiance à l'autre lutin, et on se demande seulement quoi faire de sa réponse.
 
 !!! question "Prédire"
