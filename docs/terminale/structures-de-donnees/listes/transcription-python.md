@@ -7,7 +7,7 @@
 
 ## 1 Les primitives
 
-Comme pour les piles et les files, on ne touche **jamais** à la représentation. Une liste est un couple `(tête, queue)` ou le tuple vide, mais cela ne te regarde pas : tu passes par les **cinq primitives**.
+Comme pour les piles et les files, une fois la structure en place on ne touche **jamais** à sa représentation : tout passe par les **cinq primitives**. Encore faut-il les écrire une fois, et c'est le premier exercice de la page.
 
 !!! fondamental "L'interface"
     | Primitive | Ce qu'elle fait |
@@ -18,52 +18,8 @@ Comme pour les piles et les files, on ne touche **jamais** à la représentation
     | `tete(lst)` | rend la tête, **interdit** sur une liste vide |
     | `queue(lst)` | rend la queue, **interdit** sur une liste vide |
 
-Crée le fichier `python/structures/lineaires/liste.py` et recopie ceci. Tes fonctions viendront **à la suite**, dans le même fichier.
-
-```python
-# structures/lineaires/liste.py
-
-type Vide = tuple[()]
-type Liste[T] = Vide | tuple[T, Liste[T]]
-
-
-def vide[T]() -> Liste[T]:
-    """Crée et renvoie la liste vide."""
-    return ()
-
-
-def cons[T](t: T, q: Liste[T]) -> Liste[T]:
-    """Renvoie la liste dont la tête est t et la queue q."""
-    return (t, q)
-
-
-def est_vide(lst: Liste) -> bool:
-    """Indique si la liste lst est vide."""
-    return lst == ()
-
-
-def tete[T](lst: Liste[T]) -> T:
-    """
-    Renvoie la tête de lst.
-    Précondition : lst ne doit pas être vide.
-    """
-    assert not est_vide(lst), "La liste est vide"
-    return lst[0]
-
-
-def queue[T](lst: Liste[T]) -> Liste[T]:
-    """
-    Renvoie la queue de lst.
-    Précondition : lst ne doit pas être vide.
-    """
-    assert not est_vide(lst), "La liste est vide"
-    return lst[1]
-```
-
-Regarde la deuxième ligne : le `|` (OU) réapparaît, cette fois **dans le type**. Une `Liste` est `Vide` **ou** un couple (tête, queue), et c'est le même `|` que dans `int | None`. En Gleam, ce OU était porté par les deux constructeurs `Vide` et `Cons`.
-
 !!! note "Mise en place"
-    - Le fichier va dans `python/structures/lineaires/`. Si ce répertoire n'existe pas encore, crée-le, et **chaque répertoire créé reçoit un fichier vide `__init__.py`**.
+    - Ton fichier est `python/structures/lineaires/liste.py`. Si le répertoire n'existe pas encore, crée-le, et **chaque répertoire créé reçoit un fichier vide `__init__.py`**.
     - Les tests vont **à côté**, dans `python/structures/lineaires/liste_test.py`. Chaque exercice te donne le sien, à coller à la fin du fichier, en tête duquel tu écris une seule fois :
 
         ```python
@@ -71,17 +27,105 @@ Regarde la deuxième ligne : le `|` (OU) réapparaît, cette fois **dans le type
         ```
 
     - Pour les lancer, depuis la racine de ton dépôt : `uv run pytest`
+    - Toutes les fonctions des sections suivantes viendront **à la suite**, dans ce même `liste.py`.
 
-    Colle ce premier test tout de suite : il ne teste rien que tu aies écrit, il vérifie que **le montage tient**, c'est-à-dire que le fichier est au bon endroit et que `pytest` le trouve.
+!!! question "Écris les cinq primitives"
+    **La représentation, et c'est le seul endroit qui a le droit de la connaître** : une liste vide est le **tuple vide** `()`, et une liste non vide est le **couple** `(tête, queue)`. Une fois ces cinq fonctions écrites, tu l'oublies : tout le reste de la page passe par elles.
+
+    Recopie ce fichier et complète les cinq corps. Les deux lignes de type et les en-têtes te sont donnés, et `...` marque ce qu'il y a à écrire. Tel quel le fichier s'importe déjà, donc le test échoue proprement au lieu de refuser de se lancer.
 
     ```python
-    def test_primitives() -> None:
-        l = liste.cons(2, liste.cons(3, liste.vide()))
-        assert liste.est_vide(liste.vide())
-        assert not liste.est_vide(l)
-        assert liste.tete(l) == 2
-        assert liste.queue(l) == liste.cons(3, liste.vide())
+    # structures/lineaires/liste.py
+
+    type Vide = tuple[()]
+    type Liste[T] = Vide | tuple[T, Liste[T]]
+
+
+    def vide[T]() -> Liste[T]:
+        """Crée et renvoie la liste vide."""
+        ...
+
+
+    def cons[T](t: T, q: Liste[T]) -> Liste[T]:
+        """Renvoie la liste dont la tête est t et la queue q."""
+        ...
+
+
+    def est_vide(lst: Liste) -> bool:
+        """Indique si la liste lst est vide."""
+        ...
+
+
+    def tete[T](lst: Liste[T]) -> T:
+        """
+        Renvoie la tête de lst.
+        Précondition : lst ne doit pas être vide.
+        """
+        ...
+
+
+    def queue[T](lst: Liste[T]) -> Liste[T]:
+        """
+        Renvoie la queue de lst.
+        Précondition : lst ne doit pas être vide.
+        """
+        ...
     ```
+
+    Deux d'entre elles portent une **précondition** : `tete` et `queue` n'ont rien à rendre si la liste est vide. Cela s'écrit avec un `assert`, comme `depiler` sur une pile vide.
+
+    ??? info "Le test, à coller dans `liste_test.py`"
+        ```python
+        def test_primitives() -> None:
+            l = liste.cons(2, liste.cons(3, liste.vide()))
+            assert liste.est_vide(liste.vide())
+            assert not liste.est_vide(l)
+            assert liste.tete(l) == 2
+            assert liste.queue(l) == liste.cons(3, liste.vide())
+        ```
+
+    ??? success "Corrigé"
+        ```python
+        # structures/lineaires/liste.py
+
+        type Vide = tuple[()]
+        type Liste[T] = Vide | tuple[T, Liste[T]]
+
+
+        def vide[T]() -> Liste[T]:
+            """Crée et renvoie la liste vide."""
+            return ()
+
+
+        def cons[T](t: T, q: Liste[T]) -> Liste[T]:
+            """Renvoie la liste dont la tête est t et la queue q."""
+            return (t, q)
+
+
+        def est_vide(lst: Liste) -> bool:
+            """Indique si la liste lst est vide."""
+            return lst == ()
+
+
+        def tete[T](lst: Liste[T]) -> T:
+            """
+            Renvoie la tête de lst.
+            Précondition : lst ne doit pas être vide.
+            """
+            assert not est_vide(lst), "La liste est vide"
+            return lst[0]
+
+
+        def queue[T](lst: Liste[T]) -> Liste[T]:
+            """
+            Renvoie la queue de lst.
+            Précondition : lst ne doit pas être vide.
+            """
+            assert not est_vide(lst), "La liste est vide"
+            return lst[1]
+        ```
+
+Regarde la deuxième ligne du fichier : le `|` (OU) réapparaît, cette fois **dans le type**. Une `Liste` est `Vide` **ou** un couple (tête, queue), et c'est le même `|` que dans `int | None`. En Gleam, ce OU était porté par les deux constructeurs `Vide` et `Cons`.
 
 ## 2 La correspondance, terme à terme
 
