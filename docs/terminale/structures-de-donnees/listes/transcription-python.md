@@ -1,10 +1,5 @@
 # Transcription en Python
 
-!!! info "Ce que tu fais ici, et ce que tu ne fais pas"
-    Tu as déjà écrit toutes ces fonctions en Gleam. **Les algorithmes, tu les as.** Il n'y a rien à chercher sur cette page : on réécrit les mêmes fonctions en Python, et le seul travail est la **syntaxe**.
-
-    Garde la page [Listes et récursivité](listes.md) ouverte à côté. Ta version Gleam est ton énoncé.
-
 ## 1 Les primitives
 
 Comme pour les piles et les files, une fois la structure en place on ne touche **jamais** à sa représentation : tout passe par les **cinq primitives**. Encore faut-il les écrire une fois, et c'est le premier exercice de la page.
@@ -126,6 +121,11 @@ Comme pour les piles et les files, une fois la structure en place on ne touche *
         ```
 
 Regarde la deuxième ligne du fichier : le `|` (OU) réapparaît, cette fois **dans le type**. Une `Liste` est `Vide` **ou** un couple (tête, queue), et c'est le même `|` que dans `int | None`. En Gleam, ce OU était porté par les deux constructeurs `Vide` et `Cons`.
+
+!!! fondamental "Ce que tu fais ici, et ce que tu ne fais pas"
+    Les primitives étaient le seul morceau à trouver. Toutes les fonctions qui suivent, tu les as déjà écrites en Gleam : **les algorithmes, tu les as.** À partir d'ici on réécrit les mêmes, en Python, et le seul travail est la **syntaxe**.
+
+    Garde la page [Listes et récursivité](listes.md) ouverte à côté. Ta version Gleam est ton énoncé.
 
 ## 2 La correspondance, terme à terme
 
