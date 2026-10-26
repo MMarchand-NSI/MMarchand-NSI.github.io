@@ -471,18 +471,71 @@ Cons(tete, queue) ->
 !!! warning "Pourquoi ces fonctions n'étaient pas en Gleam"
     Les fonctions qui suivent peuvent **échouer** sur certaines entrées : une liste vide n'a pas de dernier élément, un indice peut sortir des bornes. En Python, on le signale par une **assertion** qui lève une erreur, exactement comme le font `tete` et `queue`. En Gleam, il n'y a pas d'exception : une fonction qui peut échouer renvoie un `Result`, une valeur qui porte **soit** le résultat, **soit** l'échec, et que l'appelant est obligé d'ouvrir. On ne verra pas ce type en classe, faute de temps, et ces fonctions se font donc **uniquement en Python**. Rien ne t'empêche d'aller voir par toi-même.
 
-À écrire avec `assert` pour les préconditions :
+!!! note "Comment lire les exemples, et ce qu'on attend de toi"
+    On note `2 -> 3 -> 4` la liste de ces trois éléments, comme ton `to_str` l'affiche. Les indices commencent à **0**.
 
-- **`dernier_element[T](lst: Liste[T]) -> T`** : le dernier élément (erreur si la liste est vide).
-- **`avant_dernier_element[T](lst: Liste[T]) -> T`** : l'avant-dernier (erreur si moins de deux éléments).
-- **`minimum(lst: Liste[int]) -> int`** : le plus petit élément (erreur si la liste est vide).
-- **`get_n[T](lst: Liste[T], n: int) -> T`** : l'élément d'indice `n` (erreur si hors bornes).
-- **`insert[T](lst: Liste[T], e: T, n: int) -> Liste[T]`** : insère `e` à l'indice `n` (erreur si hors bornes).
-- **`supprimer_n[T](lst: Liste[T], n: int) -> Liste[T]`** : supprime l'élément d'indice `n` (erreur si hors bornes).
-- **`supprimer_fin[T](lst: Liste[T]) -> Liste[T]`** : supprime le dernier élément (erreur si la liste est vide).
-- **`trier(lst: Liste[int]) -> Liste[int]`** : tri par sélection (il s'appuie sur `minimum`).
+    Celles-là n'ont **pas de version Gleam** à transcrire, donc **pas de test fourni** : pour chacune, écris aussi une fonction `test_<nom>` avec des `assert`, et fais-y figurer le **cas limite** nommé dans l'énoncé. Écrire le test, ici, c'est dire précisément ce que la fonction promet.
 
-Celles-là n'ont pas de version Gleam à transcrire, donc **pas de test fourni** : pour chacune, écris aussi une fonction `test_<nom>` avec des `assert`, y compris un cas limite (liste vide, indice au bord).
+!!! question "dernier_element"
+    `dernier_element[T](lst: Liste[T]) -> T` rend le **dernier** élément.
+
+    - `dernier_element(2 -> 3 -> 4)` vaut `4`
+    - **Précondition** : erreur si la liste est vide.
+
+    Attention au cas d'arrêt : ce n'est pas la liste vide, c'est la liste dont la **queue** est vide.
+
+!!! question "avant_dernier_element"
+    `avant_dernier_element[T](lst: Liste[T]) -> T` rend l'**avant-dernier** élément.
+
+    - `avant_dernier_element(2 -> 3 -> 4)` vaut `3`
+    - **Précondition** : erreur si la liste a moins de deux éléments.
+
+!!! question "get_n"
+    `get_n[T](lst: Liste[T], n: int) -> T` rend l'élément d'**indice `n`**, le premier portant l'indice 0.
+
+    - `get_n(2 -> 3 -> 4, 0)` vaut `2`
+    - `get_n(2 -> 3 -> 4, 1)` vaut `3`
+    - **Précondition** : erreur si `n` est négatif, ou s'il dépasse le dernier indice. Les deux se traitent, et pas au même endroit.
+
+!!! question "insert"
+    `insert[T](lst: Liste[T], e: T, n: int) -> Liste[T]` rend une **nouvelle** liste où `e` a été inséré à l'indice `n`.
+
+    - `insert(2 -> 3 -> 4, 9, 1)` donne `2 -> 9 -> 3 -> 4`
+    - `insert(2 -> 3 -> 4, 9, 3)` donne `2 -> 3 -> 4 -> 9`, insérer à l'indice égal à la taille revient à ajouter à la fin
+    - **Précondition** : erreur si `n` est négatif ou **dépasse** la taille.
+
+!!! question "supprimer_n"
+    `supprimer_n[T](lst: Liste[T], n: int) -> Liste[T]` rend la liste **privée** de l'élément d'indice `n`.
+
+    - `supprimer_n(2 -> 3 -> 4, 1)` donne `2 -> 4`
+    - **Précondition** : erreur si `n` est négatif ou hors bornes.
+
+    À ne pas confondre avec `supprimer`, qui enlève la première occurrence d'une **valeur**. Ici on désigne une **position**.
+
+!!! question "supprimer_fin"
+    `supprimer_fin[T](lst: Liste[T]) -> Liste[T]` rend la liste **privée de son dernier élément**.
+
+    - `supprimer_fin(2 -> 3 -> 4)` donne `2 -> 3`
+    - **Précondition** : erreur si la liste est vide.
+
+!!! question "minimum"
+    `minimum(lst: Liste[int]) -> int` rend le **plus petit** élément.
+
+    - `minimum(3 -> 1 -> 4)` vaut `1`
+    - **Précondition** : erreur si la liste est vide.
+
+    C'est le lutin du minimum, déjà rencontré : si la queue est vide, le minimum c'est la tête, sinon on compare la tête au minimum de la queue.
+
+!!! question "tri_selection"
+    `tri_selection(lst: Liste[int]) -> Liste[int]` rend une **nouvelle** liste, triée dans l'ordre croissant, par la méthode du **tri par sélection**.
+
+    - `tri_selection(3 -> 1 -> 4)` donne `1 -> 3 -> 4`
+    - `tri_selection` de la liste vide donne la liste vide
+    - Pas de précondition : la liste vide est déjà triée.
+
+    L'algorithme tient en une phrase, et il s'écrit presque tout seul une fois `minimum` écrite : **le plus petit en tête, suivi du tri de tout le reste**. « Tout le reste », c'est la liste privée de ce minimum, et tu as déjà `supprimer` pour cela.
+
+    Vérifie ton tri sur une liste qui contient **deux fois la même valeur** : c'est le cas où une erreur de « reste » se voit, et pas ailleurs.
 
 ## 6 Pour aller plus loin : `dataclass` et `match`
 
