@@ -75,89 +75,10 @@ pub type Liste(a) {
 
     - Le compilateur est un allié : messages d'erreur clairs, et il t'**empêche d'oublier un cas**.
 
-!!! info "La police soude certains symboles : tu en tapes toujours deux"
-    Pour que le code soit agréable à lire, la police du site **soude** quelques paires de symboles en un seul dessin. Ce dessin n'est sur aucune touche de ton clavier : tu tapes bien les **deux** caractères, collés, sans espace entre eux.
+!!! note "Avant de commencer"
+    Gleam s'installe avec `nsi install gleam`, et tes programmes se lancent avec `gleam run` et `gleam test`. Tout est sur la page [Gleam, l'atelier](../../../les-outils/gleam.md), à faire une fois pour toutes avant d'aller plus loin.
 
-    | Tu tapes | La page affiche | Ce que c'est |
-    |---|---|---|
-    | `-` puis `>` | `->` | la flèche d'un cas de `case`, et celle entre deux maillons d'une liste |
-    | `=` puis `=` | `==` | le test d'égalité, à ne pas confondre avec le `=` d'une affectation |
-    | `!` puis `=` | `!=` | « différent de » |
-    | `<` puis `>` | `<>` | coller deux chaînes bout à bout |
-    | <code>&#124;</code> puis `>` | <code>&#124;&gt;</code> | le *pipe*, que tu rencontreras à l'exercice `slice` |
-
-    Le bouton de copie, lui, rend les vrais caractères : un bloc copié puis collé dans ton éditeur est toujours correct.
-
-    ??? info "Avoir la même police dans VSCode"
-        La police du site est **JetBrains Mono**, elle est gratuite, et ton éditeur peut l'utiliser aussi.
-
-        1. Télécharge-la sur [jetbrains.com/lp/mono](https://www.jetbrains.com/lp/mono/), décompresse l'archive, sélectionne tous les fichiers `.ttf` qu'elle contient, clic droit, **Installer**.
-
-            Si tu travailles dans WSL, installe-la **côté Windows** : c'est Windows qui dessine la fenêtre de VSCode.
-
-        2. Dans VSCode, `Ctrl+Shift+P`, tape `settings json`, choisis **Preferences: Open User Settings (JSON)**, et ajoute ces deux lignes :
-
-            ```json
-            "editor.fontFamily": "'JetBrains Mono', Consolas, monospace",
-            "editor.fontLigatures": true
-            ```
-
-            La seconde n'est pas facultative : sans elle, la police est bien là, mais elle ne soude rien.
-
-        3. Ferme et rouvre VSCode.
-
-!!! note "Mise en place, une seule fois"
-    Dans un terminal, **à la racine de ton dépôt de cours** :
-
-    ```bash
-    nsi install gleam
-    ```
-
-    La commande installe Gleam et crée dans ton dépôt un répertoire `prog_gleam/`, déjà prêt :
-
-    ```text
-    prog_gleam/
-      gleam.toml     la description du projet, tu n'y touches pas
-      src/           ton code
-      test/          tes tests
-    ```
-
-    Deux réponses qui ne sont pas des erreurs. Si la commande dit qu'elle ne sait pas où est ton dépôt, lance `nsi init`, puis de nouveau `nsi install gleam`. Si `gleam` reste introuvable ensuite, ouvre un nouveau terminal.
-
-!!! note "Faire tourner ton premier programme"
-    1. Place-toi dans le projet : `cd prog_gleam`
-
-    2. Crée le fichier `src/liste.gleam` et écris-y le type, puis un `main` :
-
-        ```gleam
-        pub type Liste(a) {
-          Vide
-          Cons(a, Liste(a))
-        }
-
-        pub fn main() {
-          let exemple = Cons(2, Cons(3, Cons(4, Vide)))
-          echo exemple
-        }
-        ```
-
-        `exemple` est la liste dont la tête est `2`, suivie de `3`, puis `4`, puis la fin.
-
-    3. Exécute, depuis `prog_gleam/` :
-
-        ```bash
-        gleam run -m liste
-        ```
-
-    Tu dois lire exactement ceci :
-
-    ```text
-    src/liste.gleam:8
-    Cons(2, Cons(3, Cons(4, Vide)))
-    ```
-
-    - `echo` affiche le fichier et le **numéro de la ligne**, puis la valeur. C'est ta façon d'observer une liste.
-    - `-m liste` lance le `main` du module `liste`, c'est-à-dire ton fichier `src/liste.gleam`. **Tout le code de ce chapitre va dans ce fichier.**
+    Une seule chose à savoir pour **lire** cette page : la police du site **soude** certaines paires de symboles en un seul dessin, `->`, `==`, `!=` et `<>`. Tu en tapes toujours **deux**, et la [correspondance y est donnée](../../../les-outils/gleam.md#la-police-soude-certains-symboles).
 
 !!! question "Construire"
     Écris, dans `main`, la liste des trois chaînes `"rouge"`, `"vert"`, `"bleu"`, puis affiche-la.
@@ -276,32 +197,8 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
 
 #### 2.1.2 À toi d'écrire
 
-!!! note "Tester ton code : un fichier, une commande"
-    Tu n'écriras aucun test toi-même dans ce chapitre : chaque exercice te donne le sien, tout fait.
-
-    Crée **une seule fois** le fichier `test/liste_test.gleam`, avec cette ligne en tête :
-
-    ```gleam
-    import liste.{Cons, Vide}
-    ```
-
-    Le répertoire `test/` contient déjà un fichier `prog_gleam_test.gleam` : **laisse-le**, c'est lui qui lance tous les tests.
-
-    Sous chaque exercice, ouvre le bloc « Le test » et colle-le **à la fin** de ce fichier. Puis, depuis `prog_gleam/` :
-
-    ```bash
-    gleam test
-    ```
-
-    Un point vert par test réussi. Quand un test échoue, Gleam dit où et quoi :
-
-    ```text
-    assert test/liste_test.gleam:12
-     test: liste_test.somme_test
-     code: assert liste.somme(l) == 9
-     left: 0
-    right: 9
-    ```
+!!! note "Tester ton code"
+    Tu n'écriras aucun test toi-même dans ce chapitre : chaque exercice te donne le sien, tout fait. Tu le colles dans `test/liste_test.gleam`, et `gleam test` les lance tous. La mise en place du fichier et la lecture d'un échec sont sur la page [Gleam, l'atelier](../../../les-outils/gleam.md#tester).
 
     `left` est ce que **ta** fonction a renvoyé, `right` ce qu'on attendait.
 
