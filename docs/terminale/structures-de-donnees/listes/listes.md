@@ -230,7 +230,13 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
     Chaque ligne où un lutin **attend** le résultat d'un autre est un appel **empilé** : la pile grandit à la descente (jusqu'à `Vide`), puis se vide à la remontée, quand chaque `1 + ...` se calcule enfin. Cette cascade **est** la **pile d'appels**, le mécanisme caché de toute récursion (on la retrouvera partout : arbres, tri fusion).
 
 !!! fondamental "Cas de base"
-    Je ne te ferai pas l'affront de t'écrire ce qu'est un cas de base, ni même un cas récursif, tellement c'est martelé en cours
+    J'hésite à t'expliquer ici ce que c'est, tellement c'est martelé en cours.
+
+    Le **cas de base** est celui où la réponse est immédiate, sans appel à soi-même : ici `Vide -> 0`. Le **cas récursif** est celui où la fonction s'appelle elle-même, et elle le fait toujours sur une **sous-structure** de ce qu'on lui a donné : ici `taille(queue)`, c'est-à-dire sur une liste strictement plus courte.
+
+    C'est cette deuxième chose qui assure la **terminaison**. Chaque appel porte sur une liste plus courte d'un maillon, donc on **converge** vers le cas de base, et comme une liste a une taille finie, on l'atteint en un nombre fini d'étapes. Le calcul finit.
+
+    Si l'appel récursif ne rapproche pas du cas de base, par exemple `taille(lst)` au lieu de `taille(queue)`, rien ne converge, le calcul ne finit jamais, et la machine finit par refuser d'aller plus loin.
 
 !!! fondamental "Pour écrire, ne déroule pas"
     La trace sert à **comprendre** ce que fait la machine. Pour **écrire** une fonction récursive, on ne déroule rien : on fait confiance à l'appel sur la queue, comme le lutin fait confiance à l'autre lutin, et on se demande seulement quoi faire de sa réponse.
