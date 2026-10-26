@@ -617,14 +617,14 @@ Aucune version n'existe d'avance, ni en Gleam ni en Python, et la solution n'est
 
     Regarde le `1` de la fin, qui **reste** : ce n'est pas « enlever les doublons », c'est « enlever les répétitions qui se touchent ».
 
-!!! question "aplatir"
-    Une liste peut contenir des **listes**, et rien d'autre. `aplatir[T](lst: Liste[Liste[T]]) -> Liste[T]` rend la liste **plate** de tous leurs éléments, dans l'ordre.
+!!! question "aplatir (flatten)"
+    Une liste peut contenir des **listes**, et rien d'autre. `flatten[T](lst: Liste[Liste[T]]) -> Liste[T]` rend la liste **plate** de tous leurs éléments, dans l'ordre.
 
-    - `aplatir((1 -> 2) -> (3) -> (4 -> 5))` donne `1 -> 2 -> 3 -> 4 -> 5`
+    - `flatten((1 -> 2) -> (3) -> (4 -> 5))` donne `1 -> 2 -> 3 -> 4 -> 5`
     - une liste intérieure **vide** n'apporte rien, elle disparaît du résultat
     - sur la liste vide, le résultat est la liste vide
 
-    Lis le type avant de coder, il dit tout le travail à faire : l'entrée n'est pas une `Liste[T]` mais une `Liste[Liste[T]]`, et la sortie est une `Liste[T]`. Une épaisseur disparaît.
+    Lis le type avant de coder, il dit tout le travail à faire : l'entrée n'est pas une `Liste[T]` mais une `Liste[Liste[T]]`, et la sortie est une `Liste[T]`. **Une** épaisseur disparaît, pas toutes, et c'est précisément ce que le mot `flatten` veut dire partout : la bibliothèque standard de Gleam a la sienne, `list.flatten`, avec exactement cette signature.
 
     ??? tip "Indice"
         Tu as déjà écrit la fonction qui met deux listes bout à bout.
