@@ -9,13 +9,21 @@ type Vide = tuple[()]
 type Liste[T] = Vide | tuple[T, Liste[T]]
 ```
 
-### 1.1 `type` donne un nom, il ne crée rien
+### 1.1 Ce que tu sais déjà lire, et les deux nouveautés
 
-`type X = ...` déclare un **alias** : un nom pour un type qui existe déjà. Rien n'est fabriqué, aucun objet ne change à l'exécution. C'est une annotation, que les outils savent vérifier et que tu sais lire.
+Tu as déjà écrit des alias de type, pour les piles et les files :
 
-- `type Vide = tuple[()]` : le nom `Vide` désigne désormais le type du tuple vide.
-- `type Liste[T] = ...` : le `[T]` en fait un alias **paramétré**, exactement comme le `a` de `Liste(a)` en Gleam. Une `Liste[int]` et une `Liste[str]` sont le même alias, rempli deux fois.
-- La deuxième ligne **s'appelle elle-même** : `Liste[T]` apparaît dans sa propre définition. C'est permis, et c'est la définition récursive du cours, écrite cette fois dans le type.
+```python
+type Pile[T] = list[T]
+type File[T] = tuple[Pile[T], Pile[T]]   # (entree, sortie)
+```
+
+Un nom donné à un type qui existe déjà, paramétré par `T`, et qui ne fabrique rien à l'exécution. Les deux lignes de la liste se lisent pareil, à **deux nouveautés près**, et elles seules méritent qu'on s'arrête :
+
+- le `|`, un OU écrit **dans le type**,
+- la définition qui **s'appelle elle-même**.
+
+S'y ajoute une curiosité d'écriture, `tuple[()]`, qui n'est pas un détail non plus.
 
 ### 1.2 Le `|` est un OU, et il est dans le type
 
@@ -29,7 +37,35 @@ type Liste[T] = Vide | tuple[T, Liste[T]]
 
 En Gleam, ce OU n'avait pas à être écrit : il était porté par les **deux constructeurs**, `Vide` et `Cons`. Même énoncé, autre notation.
 
-### 1.3 Pourquoi le tuple vide a un type à lui
+### 1.3 Un type qui s'appelle lui-même
+
+`File[T]` renvoyait à un **autre** alias, `Pile[T]`. Ici, `Liste[T]` renvoie à **lui-même** :
+
+```python
+type Liste[T] = Vide | tuple[T, Liste[T]]
+#                               ^^^^^^^^
+#                               la queue est une liste
+```
+
+C'est mot pour mot le `Cons(a, Liste(a))` de Gleam, et c'est ce qui rend la structure **sans limite de taille** : une ligne décrit des listes de n'importe quelle longueur, parce que le second cas se redéploie autant de fois qu'il le faut.
+
+Lis bien ce que cette ligne ne dit pas. Elle ne décrit aucun objet infini : elle dit que pour connaître une liste, il faut connaître une liste **plus courte**, et que cela s'arrête sur `Vide`. C'est la définition récursive du cours, écrite dans le type au lieu de l'être dans une fonction.
+
+!!! note "Pourquoi cela ne marche qu'avec l'instruction `type`"
+    Une affectation ordinaire échouerait, parce que Python calcule la partie droite tout de suite et que le nom n'existe pas encore :
+
+    ```python
+    type Vide = tuple[()]
+    Liste = Vide | tuple[int, Liste]
+    ```
+
+    ```text
+    NameError: name 'Liste' is not defined. Did you mean: 'list'?
+    ```
+
+    L'instruction `type`, elle, **ne calcule sa définition qu'au moment où on la demande**. Le nom peut donc y figurer avant d'être connu, et c'est exactement ce qu'il faut pour une définition récursive.
+
+### 1.4 Pourquoi le tuple vide a un type à lui
 
 Ce n'est pas un hasard, et c'est la raison pour laquelle on représente la liste par des **tuples** plutôt que par des listes Python.
 
