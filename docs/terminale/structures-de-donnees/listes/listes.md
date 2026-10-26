@@ -230,7 +230,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
     Chaque ligne où un lutin **attend** le résultat d'un autre est un appel **empilé** : la pile grandit à la descente (jusqu'à `Vide`), puis se vide à la remontée, quand chaque `1 + ...` se calcule enfin. Cette cascade **est** la **pile d'appels**, le mécanisme caché de toute récursion (on la retrouvera partout : arbres, tri fusion).
 
 !!! fondamental "Cas de base"
-    Je ne vous ferai pas l'affront de vous écrire ce qu'est un cas de base, ni même un cas récursif, tellement c'est martelé en cours
+    Je ne te ferai pas l'affront de t'écrire ce qu'est un cas de base, ni même un cas récursif, tellement c'est martelé en cours
 
 !!! warning "Pour écrire, ne déroule pas"
     La trace sert à **comprendre** ce que fait la machine. Pour **écrire** une fonction récursive, on ne déroule rien : on fait confiance à l'appel sur la queue, comme le lutin fait confiance à l'autre lutin, et on se demande seulement quoi faire de sa réponse.
