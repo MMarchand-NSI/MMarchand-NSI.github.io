@@ -400,11 +400,11 @@ Cons(tete, queue) ->
     - `impairs(lst: Liste[int]) -> Liste[int]`
     - `positifs(lst: Liste[int]) -> Liste[int]`
     - `negatifs(lst: Liste[int]) -> Liste[int]`
-    - `filter[T](predicat, lst: Liste[T]) -> Liste[T]`
+    - `filtrer[T](predicat, lst: Liste[T]) -> Liste[T]`
     - `carres(lst: Liste[int]) -> Liste[int]`
     - `doubles(lst: Liste[int]) -> Liste[int]`
     - `triples(lst: Liste[int]) -> Liste[int]`
-    - `map[T, U](f, lst: Liste[T]) -> Liste[U]`
+    - `mapper[T, U](f, lst: Liste[T]) -> Liste[U]`
 
     ??? info "Les tests de ce groupe, à coller dans `liste_test.py`"
         ```python
@@ -426,10 +426,10 @@ Cons(tete, queue) ->
             assert liste.negatifs(l) == liste.cons(-3, liste.vide())
 
 
-        def test_filter() -> None:
+        def test_filtrer() -> None:
             l = liste.cons(2, liste.cons(-3, liste.cons(4, liste.vide())))
-            assert liste.filter(lambda x: x > 0, liste.vide()) == liste.vide()
-            assert liste.filter(lambda x: x > 0, l) == liste.cons(2, liste.cons(4, liste.vide()))
+            assert liste.filtrer(lambda x: x > 0, liste.vide()) == liste.vide()
+            assert liste.filtrer(lambda x: x > 0, l) == liste.cons(2, liste.cons(4, liste.vide()))
 
 
         def test_carres() -> None:
@@ -450,19 +450,22 @@ Cons(tete, queue) ->
             assert liste.triples(l) == liste.cons(6, liste.cons(9, liste.cons(12, liste.vide())))
 
 
-        def test_map() -> None:
+        def test_mapper() -> None:
             l = liste.cons(2, liste.cons(3, liste.cons(4, liste.vide())))
-            assert liste.map(lambda x: x * x, liste.vide()) == liste.vide()
-            assert liste.map(lambda x: x * x, l) == liste.cons(
+            assert liste.mapper(lambda x: x * x, liste.vide()) == liste.vide()
+            assert liste.mapper(lambda x: x * x, l) == liste.cons(
                 4, liste.cons(9, liste.cons(16, liste.vide()))
             )
         ```
 
-!!! note "`filter` et `map` prennent une fonction en paramètre"
-    En Gleam, le prédicat de `filter` et la transformation de `map` étaient des fonctions passées en argument. En Python aussi, une fonction est une valeur : le `fn(x) { x > 0 }` de Gleam s'écrit `lambda x: x > 0`.
+!!! warning "Deux fonctions changent de nom : `filtrer` et `mapper`"
+    `filter` et `map` sont **déjà pris**. Ce sont deux fonctions que Python met à ta disposition sans aucun import, ce que Gleam appelle son **prélude**, et qui font d'ailleurs la même chose sur les listes Python.
 
-!!! note "`filter` et `map` existent déjà en Python"
-    Ce sont deux fonctions de la bibliothèque standard, qui font la même chose sur les listes Python. Les tiennes ne les écrasent pas tant que tu passes par `liste.filter` et `liste.map`, c'est-à-dire tant que tu importes **le module** et non les fonctions une par une.
+    Les redéfinir ne casserait rien ailleurs, mais **dans ton propre fichier** le nom `filter` ne désignerait plus la fonction de Python : ce serait la tienne, et plus moyen d'appeler l'autre. On ne masque pas un nom du prélude, on en prend un autre. En Gleam la question ne se posait pas, et elles portaient le nom usuel.
+
+!!! note "Elles prennent une fonction en paramètre"
+    En Gleam, le prédicat de `filtrer` et la transformation de `mapper` étaient des fonctions passées en argument. En Python aussi, une fonction est une valeur : le `fn(x) { x > 0 }` de Gleam s'écrit `lambda x: x > 0`.
+
 ## 5 En Python seulement
 
 !!! warning "Pourquoi ces fonctions n'étaient pas en Gleam"
