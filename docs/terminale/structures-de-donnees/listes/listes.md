@@ -75,19 +75,89 @@ pub type Liste(a) {
 
     - Le compilateur est un allié : messages d'erreur clairs, et il t'**empêche d'oublier un cas**.
 
-!!! note "Mise en place"
-    Dans un terminal, exécute la commande `nsi install gleam`, puis écris tes fichiers dans le répertoire `src`. Pour exécuter ton code : `gleam run`. Pour afficher une valeur et l'observer, écris `echo` devant elle : `echo exemple`.
+!!! info "La police soude certains symboles : tu en tapes toujours deux"
+    Pour que le code soit agréable à lire, la police du site **soude** quelques paires de symboles en un seul dessin. Ce dessin n'est sur aucune touche de ton clavier : tu tapes bien les **deux** caractères, collés, sans espace entre eux.
 
-La liste dont la tête est `2`, suivie de `3`, puis `4`, puis la fin :
+    | Tu tapes | La page affiche | Ce que c'est |
+    |---|---|---|
+    | `-` puis `>` | `->` | la flèche d'un cas de `case`, et celle entre deux maillons d'une liste |
+    | `=` puis `=` | `==` | le test d'égalité, à ne pas confondre avec le `=` d'une affectation |
+    | `!` puis `=` | `!=` | « différent de » |
+    | `<` puis `>` | `<>` | coller deux chaînes bout à bout |
+    | <code>&#124;</code> puis `>` | <code>&#124;&gt;</code> | le *pipe*, que tu rencontreras à l'exercice `slice` |
 
-```gleam
-pub fn main() {
-  let exemple = Cons(2, Cons(3, Cons(4, Vide)))
-  echo exemple
-}
-```
+    Le bouton de copie, lui, rend les vrais caractères : un bloc copié puis collé dans ton éditeur est toujours correct.
 
-`gleam run` affiche le nom du fichier et le numéro de la ligne de `echo`, puis `Cons(2, Cons(3, Cons(4, Vide)))`.
+    ??? info "Avoir la même police dans VSCode"
+        La police du site est **JetBrains Mono**, elle est gratuite, et ton éditeur peut l'utiliser aussi.
+
+        1. Télécharge-la sur [jetbrains.com/lp/mono](https://www.jetbrains.com/lp/mono/), décompresse l'archive, sélectionne tous les fichiers `.ttf` qu'elle contient, clic droit, **Installer**.
+
+            Si tu travailles dans WSL, installe-la **côté Windows** : c'est Windows qui dessine la fenêtre de VSCode.
+
+        2. Dans VSCode, `Ctrl+Shift+P`, tape `settings json`, choisis **Preferences: Open User Settings (JSON)**, et ajoute ces deux lignes :
+
+            ```json
+            "editor.fontFamily": "'JetBrains Mono', Consolas, monospace",
+            "editor.fontLigatures": true
+            ```
+
+            La seconde n'est pas facultative : sans elle, la police est bien là, mais elle ne soude rien.
+
+        3. Ferme et rouvre VSCode.
+
+!!! note "Mise en place, une seule fois"
+    Dans un terminal, **à la racine de ton dépôt de cours** :
+
+    ```bash
+    nsi install gleam
+    ```
+
+    La commande installe Gleam et crée dans ton dépôt un répertoire `prog_gleam/`, déjà prêt :
+
+    ```text
+    prog_gleam/
+      gleam.toml     la description du projet, tu n'y touches pas
+      src/           ton code
+      test/          tes tests
+    ```
+
+    Deux réponses qui ne sont pas des erreurs. Si la commande dit qu'elle ne sait pas où est ton dépôt, lance `nsi init`, puis de nouveau `nsi install gleam`. Si `gleam` reste introuvable ensuite, ouvre un nouveau terminal.
+
+!!! note "Faire tourner ton premier programme"
+    1. Place-toi dans le projet : `cd prog_gleam`
+
+    2. Crée le fichier `src/liste.gleam` et écris-y le type, puis un `main` :
+
+        ```gleam
+        pub type Liste(a) {
+          Vide
+          Cons(a, Liste(a))
+        }
+
+        pub fn main() {
+          let exemple = Cons(2, Cons(3, Cons(4, Vide)))
+          echo exemple
+        }
+        ```
+
+        `exemple` est la liste dont la tête est `2`, suivie de `3`, puis `4`, puis la fin.
+
+    3. Exécute, depuis `prog_gleam/` :
+
+        ```bash
+        gleam run -m liste
+        ```
+
+    Tu dois lire exactement ceci :
+
+    ```text
+    src/liste.gleam:8
+    Cons(2, Cons(3, Cons(4, Vide)))
+    ```
+
+    - `echo` affiche le fichier et le **numéro de la ligne**, puis la valeur. C'est ta façon d'observer une liste.
+    - `-m liste` lance le `main` du module `liste`, c'est-à-dire ton fichier `src/liste.gleam`. **Tout le code de ce chapitre va dans ce fichier.**
 
 !!! question "Construire"
     Écris, dans `main`, la liste des trois chaînes `"rouge"`, `"vert"`, `"bleu"`, puis affiche-la.
@@ -97,6 +167,8 @@ pub fn main() {
         let couleurs = Cons("rouge", Cons("vert", Cons("bleu", Vide)))
         echo couleurs
         ```
+
+        `echo` affiche `Cons("rouge", Cons("vert", Cons("bleu", Vide)))` : les chaînes gardent leurs guillemets.
 
 ### 1.3 La disjonction de cas
 
@@ -187,11 +259,49 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
 
 ##### 1.4.1.2 À toi d'écrire
 
+!!! note "Tester ton code : un fichier, une commande"
+    Tu n'écriras aucun test toi-même dans ce chapitre : chaque exercice te donne le sien, tout fait.
+
+    Crée **une seule fois** le fichier `test/liste_test.gleam`, avec cette ligne en tête :
+
+    ```gleam
+    import liste.{Cons, Vide}
+    ```
+
+    Le répertoire `test/` contient déjà un fichier `prog_gleam_test.gleam` : **laisse-le**, c'est lui qui lance tous les tests.
+
+    Sous chaque exercice, ouvre le bloc « Le test » et colle-le **à la fin** de ce fichier. Puis, depuis `prog_gleam/` :
+
+    ```bash
+    gleam test
+    ```
+
+    Un point vert par test réussi. Quand un test échoue, Gleam dit où et quoi :
+
+    ```text
+    assert test/liste_test.gleam:12
+     test: liste_test.somme_test
+     code: assert liste.somme(l) == 9
+     left: 0
+    right: 9
+    ```
+
+    `left` est ce que **ta** fonction a renvoyé, `right` ce qu'on attendait.
+
 !!! tip "Méthode"
     Avant de coder, écris la **disjonction de cas au papier** : que renvoie la fonction si la liste est `Vide` ? et si c'est `Cons(tete, queue)` ?
 
 !!! question "La somme"
     Écris `somme(lst: Liste(Int)) -> Int` qui renvoie la somme des éléments d'une liste d'entiers.
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn somme_test() {
+          let l = Cons(2, Cons(3, Cons(4, Vide)))
+          assert liste.somme(Vide) == 0
+          assert liste.somme(l) == 9
+        }
+        ```
 
     ??? success "Corrigé"
         ```gleam
@@ -202,6 +312,62 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
           }
         }
         ```
+
+!!! question "La somme des pairs"
+    Écris `somme_pairs(lst: Liste(Int)) -> Int` qui renvoie la somme des seuls éléments **pairs**. `2 -> 3 -> 4` donne `6`.
+
+    Il te faut une **condition**, et Gleam n'a pas de `if`. Une condition est une expression qui vaut `True` ou `False` : tu en fais donc une disjonction de cas, comme pour une liste.
+
+    ```gleam
+    case tete % 2 == 0 {
+      True -> ...
+      False -> ...
+    }
+    ```
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn somme_pairs_test() {
+          let l = Cons(2, Cons(3, Cons(4, Vide)))
+          assert liste.somme_pairs(Vide) == 0
+          assert liste.somme_pairs(l) == 6
+          assert liste.somme_pairs(Cons(1, Cons(3, Vide))) == 0
+        }
+        ```
+
+    ??? success "Corrigé"
+        ```gleam
+        pub fn somme_pairs(lst: Liste(Int)) -> Int {
+          case lst {
+            Vide -> 0
+            Cons(tete, queue) ->
+              case tete % 2 == 0 {
+                True -> tete + somme_pairs(queue)
+                False -> somme_pairs(queue)
+              }
+          }
+        }
+        ```
+
+        Le `case` sur la condition est **imbriqué** dans le cas `Cons` : on ne regarde la parité de la tête que s'il y a une tête.
+
+    ??? tip "Pour aller plus loin : comparer ne rend pas un booléen"
+        Un `case` sur une condition n'a que deux issues, `True` et `False`. Mais **comparer** deux nombres en a trois, et Gleam a un type exprès pour cela, `Order`, avec ses trois valeurs `Lt` (plus petit), `Eq` (égal) et `Gt` (plus grand). C'est ce que renvoie `int.compare` :
+
+        ```gleam
+        import gleam/int
+        import gleam/order.{Eq, Gt, Lt}
+
+        pub fn comparer(a: Int, b: Int) -> String {
+          case int.compare(a, b) {
+            Lt -> "plus petit"
+            Eq -> "égal"
+            Gt -> "plus grand"
+          }
+        }
+        ```
+
+        Les trois cas sont là, et le compilateur vérifie qu'aucun ne manque, exactement comme pour `Vide` et `Cons`. Avec des booléens il aurait fallu enchaîner `a < b`, puis `a == b`, sans que rien ne garantisse d'avoir tout couvert. C'est la forme qu'on retrouvera pour trier.
 
 !!! info "OU, ET, NON en Gleam"
     Une fonction qui renvoie un `Bool` se construit souvent en **combinant** des conditions. Les trois opérateurs s'écrivent ainsi :
@@ -222,8 +388,11 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
 
     Comme `or` et `and` en Python, `||` et `&&` sont **paresseux** : si la partie gauche suffit à décider (`True` pour `||`, `False` pour `&&`), la partie droite n'est **pas calculée**.
 
+!!! info "La structure d'abord"
+    Dans tout ce chapitre, une fonction prend la **liste en premier** paramètre, et le reste ensuite : `contient(lst, x)`, `take(lst, n)`. Ce n'est pas une question de goût, et l'exercice `slice` te montrera ce que cette règle permet.
+
 !!! question "Contient"
-    On veut écrire `contient(x: a, lst: Liste(a)) -> Bool`, qui indique si `x` est présent dans la liste. La réponse sera une **expression booléenne**, qu'on construit en trois temps.
+    On veut écrire `contient(lst: Liste(a), x: a) -> Bool`, qui indique si `x` est présent dans la liste. La réponse sera une **expression booléenne**, qu'on construit en trois temps.
 
     1. Si la liste est `Vide`, que renvoie la fonction ?
 
@@ -238,16 +407,26 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
     3. Traduis cette phrase en une expression booléenne Gleam. Quelle partie est un appel récursif ?
 
         ??? success "Réponse"
-            `tete == x || contient(x, queue)`. La partie droite, `contient(x, queue)`, est l'appel récursif : on redemande à un autre lutin de chercher dans la queue.
+            `tete == x || contient(queue, x)`. La partie droite, `contient(queue, x)`, est l'appel récursif : on redemande à un autre lutin de chercher dans la queue.
 
     Écris maintenant `contient` en entier.
 
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn contient_test() {
+          let l = Cons(2, Cons(3, Cons(4, Vide)))
+          assert liste.contient(Vide, 2) == False
+          assert liste.contient(l, 3) == True
+          assert liste.contient(l, 9) == False
+        }
+        ```
+
     ??? success "Corrigé"
         ```gleam
-        pub fn contient(x: a, lst: Liste(a)) -> Bool {
+        pub fn contient(lst: Liste(a), x: a) -> Bool {
           case lst {
             Vide -> False
-            Cons(tete, queue) -> tete == x || contient(x, queue)
+            Cons(tete, queue) -> tete == x || contient(queue, x)
           }
         }
         ```
@@ -293,6 +472,17 @@ On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si de
     }
     ```
 
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn sont_egales_test() {
+          let l = Cons(2, Cons(3, Vide))
+          assert liste.sont_egales(Vide, Vide) == True
+          assert liste.sont_egales(l, Cons(2, Cons(3, Vide))) == True
+          assert liste.sont_egales(l, Cons(2, Vide)) == False
+          assert liste.sont_egales(l, Cons(2, Cons(9, Vide))) == False
+        }
+        ```
+
     ??? success "Corrigé"
         ```gleam
         pub fn sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool {
@@ -316,10 +506,10 @@ On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si de
 Exemple à lire, ajouter un élément **à la fin** :
 
 ```gleam
-pub fn ajouter_fin(x: a, lst: Liste(a)) -> Liste(a) {
+pub fn ajouter_fin(lst: Liste(a), x: a) -> Liste(a) {
   case lst {
     Vide -> Cons(x, Vide)
-    Cons(tete, queue) -> Cons(tete, ajouter_fin(x, queue))
+    Cons(tete, queue) -> Cons(tete, ajouter_fin(queue, x))
   }
 }
 ```
@@ -330,6 +520,15 @@ Le **lutin ajouteur** : *« Si on me tend une liste vide, je renvoie une liste q
 
 !!! question "Inverser"
     Écris `inverser(lst: Liste(a)) -> Liste(a)` qui renvoie la liste à l'envers.
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn inverser_test() {
+          let l = Cons(2, Cons(3, Cons(4, Vide)))
+          assert liste.inverser(Vide) == Vide
+          assert liste.inverser(l) == Cons(4, Cons(3, Cons(2, Vide)))
+        }
+        ```
 
     ??? tip "Indice"
         Cas `Vide` : la liste renversée est `Vide`. Cas `Cons(tete, queue)` : renverse d'abord la **queue**, puis ajoute `tete` **à la fin** avec `ajouter_fin`.
@@ -342,13 +541,24 @@ Le **lutin ajouteur** : *« Si on me tend une liste vide, je renvoie une liste q
         pub fn inverser(lst: Liste(a)) -> Liste(a) {
           case lst {
             Vide -> Vide
-            Cons(tete, queue) -> ajouter_fin(tete, inverser(queue))
+            Cons(tete, queue) -> ajouter_fin(inverser(queue), tete)
           }
         }
         ```
 
 !!! question "Concaténer"
     Écris `concat(l1: Liste(a), l2: Liste(a)) -> Liste(a)` qui met `l2` à la suite de `l1`. Il y a **deux** listes : fais la disjonction des **quatre** cas, comme pour `sont_egales`, et traite-les un par un.
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn concat_test() {
+          let l = Cons(2, Cons(3, Vide))
+          assert liste.concat(Vide, Vide) == Vide
+          assert liste.concat(Vide, l) == l
+          assert liste.concat(l, Vide) == l
+          assert liste.concat(l, Cons(4, Vide)) == Cons(2, Cons(3, Cons(4, Vide)))
+        }
+        ```
 
     ??? success "Corrigé"
         ```gleam
@@ -387,22 +597,22 @@ C'est exactement la **récurrence** de ton cours de maths : un cas pour 0, puis 
 - Les cas sont essayés **dans l'ordre** : `_` doit venir en dernier, sinon il attraperait aussi `0` (Gleam t'avertit alors que le cas `0` est inatteignable).
 
 !!! question "Répéter"
-    Écris `repete(x: a, n: Int) -> Liste(a)` qui renvoie une liste contenant `n` fois l'élément `x` (on suppose `n` positif ou nul).
+    Écris `repete(n: Int, x: a) -> Liste(a)` qui renvoie une liste contenant `n` fois l'élément `x` (on suppose `n` positif ou nul). Il n'y a pas de liste à passer ici : c'est la **graine** `n` qui vient en premier.
 
-    1. Que renvoie `repete(x, 0)` ?
+    1. Que renvoie `repete(0, x)` ?
 
         ??? success "Réponse"
             `Vide` : zéro fois `x`, c'est la liste vide.
 
-    2. Si `n` n'est pas nul, comment obtenir `repete(x, n)` à partir de `repete(x, n - 1)` ?
+    2. Si `n` n'est pas nul, comment obtenir `repete(n, x)` à partir de `repete(n - 1, x)` ?
 
         ??? success "Réponse"
-            On met `x` en tête de `repete(x, n - 1)` : `Cons(x, repete(x, n - 1))`.
+            On met `x` en tête de `repete(n - 1, x)` : `Cons(x, repete(n - 1, x))`.
 
     Complète :
 
     ```gleam
-    pub fn repete(x: a, n: Int) -> Liste(a) {
+    pub fn repete(n: Int, x: a) -> Liste(a) {
       case n {
         0 -> ...
         _ -> ...
@@ -410,12 +620,20 @@ C'est exactement la **récurrence** de ton cours de maths : un cas pour 0, puis 
     }
     ```
 
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn repete_test() {
+          assert liste.repete(0, "a") == Vide
+          assert liste.repete(3, "a") == Cons("a", Cons("a", Cons("a", Vide)))
+        }
+        ```
+
     ??? success "Corrigé"
         ```gleam
-        pub fn repete(x: a, n: Int) -> Liste(a) {
+        pub fn repete(n: Int, x: a) -> Liste(a) {
           case n {
             0 -> Vide
-            _ -> Cons(x, repete(x, n - 1))
+            _ -> Cons(x, repete(n - 1, x))
           }
         }
         ```
@@ -529,7 +747,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
 ### 3.2 À toi : `ajouter_fin` et `inverser`
 
 !!! question "Le coût de `inverser`"
-    1. Écris la relation de récurrence du coût $A(n)$ de `ajouter_fin(x, lst)`, pour une liste `lst` de taille $n$. Quelle est sa forme générale ?
+    1. Écris la relation de récurrence du coût $A(n)$ de `ajouter_fin(lst, x)`, pour une liste `lst` de taille $n$. Quelle est sa forme générale ?
 
         ??? success "Réponse"
             $A(0) = a$ et $A(n) = A(n-1) + b$ : c'est la même récurrence que `taille`. $A(n) = a + b \times n$, coût **linéaire**.
@@ -557,12 +775,21 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
 ## 4 Exercices
 
 !!! tip "Comment t'entraîner"
-    Écris chaque fonction **d'abord en Gleam** (avec `case`), puis **en Python** (avec des `if` et les accesseurs `tete` / `queue`). Fais la **disjonction de cas au papier** avant de coder. Le corrigé **Gleam** est replié sous chaque exercice. (Pour `to_str`, ajoute `import gleam/int` en tête du fichier Gleam.)
+    Écris chaque fonction **d'abord en Gleam** (avec `case`), puis **en Python** (avec des `if` et les accesseurs `tete` / `queue`). Fais la **disjonction de cas au papier** avant de coder. Sous chaque exercice, son **test** à coller dans `test/liste_test.gleam`, puis son corrigé **Gleam**. (Pour `to_str`, ajoute `import gleam/int` en tête de `src/liste.gleam`.)
 
 ### 4.1 Lire une liste
 
 !!! question "to_str"
     Écris `to_str(lst: Liste(Int)) -> String`, qui renvoie une chaîne façon `"2 -> 3 -> 4 -> _|_"` (la liste vide donne `"_|_"`).
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn to_str_test() {
+          let l = Cons(2, Cons(3, Cons(4, Vide)))
+          assert liste.to_str(Vide) == "_|_"
+          assert liste.to_str(l) == "2 -> 3 -> 4 -> _|_"
+        }
+        ```
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -577,6 +804,15 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
 !!! question "tous_vrais"
     Écris `tous_vrais(lst: Liste(Bool)) -> Bool`, qui renvoie `True` si **tous** les booléens de la liste sont vrais. La liste vide donne `True` (rien ne le contredit).
 
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn tous_vrais_test() {
+          assert liste.tous_vrais(Vide) == True
+          assert liste.tous_vrais(Cons(True, Cons(True, Vide))) == True
+          assert liste.tous_vrais(Cons(True, Cons(False, Vide))) == False
+        }
+        ```
+
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn tous_vrais(lst: Liste(Bool)) -> Bool {
@@ -590,6 +826,15 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
 !!! question "au_moins_un_vrai"
     Écris `au_moins_un_vrai(lst: Liste(Bool)) -> Bool`, qui renvoie `True` si **au moins un** booléen est vrai. La liste vide donne `False`.
 
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn au_moins_un_vrai_test() {
+          assert liste.au_moins_un_vrai(Vide) == False
+          assert liste.au_moins_un_vrai(Cons(False, Cons(True, Vide))) == True
+          assert liste.au_moins_un_vrai(Cons(False, Cons(False, Vide))) == False
+        }
+        ```
+
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn au_moins_un_vrai(lst: Liste(Bool)) -> Bool {
@@ -601,17 +846,27 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
 !!! question "compte"
-    Écris `compte(e: a, lst: Liste(a)) -> Int`, qui compte le nombre d'occurrences d'un élément. `compte(3, 2 -> 3 -> 4)` vaut `1`.
+    Écris `compte(lst: Liste(a), e: a) -> Int`, qui compte le nombre d'occurrences d'un élément. `compte(2 -> 3 -> 4, 3)` vaut `1`.
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn compte_test() {
+          let l = Cons(2, Cons(3, Cons(2, Vide)))
+          assert liste.compte(Vide, 2) == 0
+          assert liste.compte(l, 2) == 2
+          assert liste.compte(l, 9) == 0
+        }
+        ```
 
     ??? success "Corrigé Gleam"
         ```gleam
-        pub fn compte(e: a, lst: Liste(a)) -> Int {
+        pub fn compte(lst: Liste(a), e: a) -> Int {
           case lst {
             Vide -> 0
             Cons(t, q) ->
               case t == e {
-                True -> 1 + compte(e, q)
-                False -> compte(e, q)
+                True -> 1 + compte(q, e)
+                False -> compte(q, e)
               }
           }
         }
@@ -622,79 +877,173 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
 #### 4.2.1 Prendre, sauter, supprimer
 
 !!! question "take"
-    Écris `take(n: Int, lst: Liste(a)) -> Liste(a)`, qui renvoie les `n` premiers éléments. `take(2, 2 -> 3 -> 4)` donne `2 -> 3`. Si `n` dépasse la taille, on prend tout.
+    Écris `take(lst: Liste(a), n: Int) -> Liste(a)`, qui renvoie les `n` premiers éléments. `take(2 -> 3 -> 4, 2)` donne `2 -> 3`. Si `n` dépasse la taille, on prend tout.
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn take_test() {
+          let l = Cons(2, Cons(3, Cons(4, Vide)))
+          assert liste.take(Vide, 2) == Vide
+          assert liste.take(l, 0) == Vide
+          assert liste.take(l, 2) == Cons(2, Cons(3, Vide))
+          assert liste.take(l, 9) == l
+        }
+        ```
+
+    ??? tip "Indice : deux `case`, l'un dans l'autre"
+        Il y a **deux** choses à examiner, la liste et le compteur, donc deux disjonctions emboîtées. La liste d'abord, et dans le cas `Cons`, le compteur, comme pour `repete` :
+
+        ```gleam
+        case lst {
+          Vide -> ...
+          Cons(t, q) ->
+            case n {
+              0 -> ...
+              _ -> ...
+            }
+        }
+        ```
+
+        Il y a donc **deux** façons de s'arrêter : plus de liste, ou plus rien à prendre.
+
+    ??? question "Avant d'ouvrir le corrigé"
+        En une phrase, sur ton cahier : lequel des deux arrêts avais-tu oublié ?
 
     ??? success "Corrigé Gleam"
         ```gleam
-        pub fn take(n: Int, lst: Liste(a)) -> Liste(a) {
+        pub fn take(lst: Liste(a), n: Int) -> Liste(a) {
           case lst {
             Vide -> Vide
             Cons(t, q) ->
-              case n <= 0 {
-                True -> Vide
-                False -> Cons(t, take(n - 1, q))
+              case n {
+                0 -> Vide
+                _ -> Cons(t, take(q, n - 1))
               }
           }
         }
         ```
 
 !!! question "drop"
-    Écris `drop(n: Int, lst: Liste(a)) -> Liste(a)`, qui renvoie la liste **sans** ses `n` premiers éléments. `drop(1, 2 -> 3 -> 4)` donne `3 -> 4`.
+    Écris `drop(lst: Liste(a), n: Int) -> Liste(a)`, qui renvoie la liste **sans** ses `n` premiers éléments. `drop(2 -> 3 -> 4, 1)` donne `3 -> 4`.
+
+    Les cas sont **exactement les mêmes** que ceux de `take` : la liste, puis le compteur. Seul ce qu'on renvoie dans chaque cas change.
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn drop_test() {
+          let l = Cons(2, Cons(3, Cons(4, Vide)))
+          assert liste.drop(Vide, 2) == Vide
+          assert liste.drop(l, 0) == l
+          assert liste.drop(l, 2) == Cons(4, Vide)
+          assert liste.drop(l, 9) == Vide
+        }
+        ```
 
     ??? success "Corrigé Gleam"
         ```gleam
-        pub fn drop(n: Int, lst: Liste(a)) -> Liste(a) {
+        pub fn drop(lst: Liste(a), n: Int) -> Liste(a) {
           case lst {
             Vide -> Vide
             Cons(_, q) ->
-              case n <= 0 {
-                True -> lst
-                False -> drop(n - 1, q)
+              case n {
+                0 -> lst
+                _ -> drop(q, n - 1)
               }
           }
         }
         ```
 
-!!! question "supprimer"
-    Écris `supprimer(e: a, lst: Liste(a)) -> Liste(a)`, qui renvoie une liste privée de la **première** occurrence d'un élément. `supprimer(3, 2 -> 3 -> 4)` donne `2 -> 4`.
+        Quand il n'y a plus rien à sauter, on renvoie `lst` **en entier**, pas `q` : la tête fait partie du résultat.
+
+!!! question "slice"
+    Écris `slice(lst: Liste(a), debut: Int, fin: Int) -> Liste(a)`, qui renvoie les éléments d'indice `debut` à `fin` **exclu**, c'est-à-dire l'intervalle `[debut ; fin)`. `slice(2 -> 3 -> 4, 1, 3)` donne `3 -> 4`.
+
+    Tu n'as **aucun `case` à écrire** : `take` et `drop` font déjà tout le travail. Trouve dans quel ordre les appeler.
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn slice_test() {
+          let l = Cons(2, Cons(3, Cons(4, Vide)))
+          assert liste.slice(Vide, 0, 2) == Vide
+          assert liste.slice(l, 1, 3) == Cons(3, Cons(4, Vide))
+          assert liste.slice(l, 0, 0) == Vide
+          assert liste.slice(l, 0, 9) == l
+        }
+        ```
 
     ??? success "Corrigé Gleam"
         ```gleam
-        pub fn supprimer(e: a, lst: Liste(a)) -> Liste(a) {
+        pub fn slice(lst: Liste(a), debut: Int, fin: Int) -> Liste(a) {
+          drop(take(lst, fin), debut)
+        }
+        ```
+
+        On garde d'abord tout ce qui est avant `fin`, puis on jette ce qui est avant `debut`. Dans l'autre ordre il faudrait corriger `fin`, puisque la liste a raccourci.
+
+    ??? question "Cherche : l'opérateur `|>`"
+        Cette autre écriture du **même** corrigé est valable en Gleam :
+
+        ```gleam
+        pub fn slice(lst: Liste(a), debut: Int, fin: Int) -> Liste(a) {
+          lst |> take(fin) |> drop(debut)
+        }
+        ```
+
+        Cherche dans la documentation de Gleam ce que fait l'opérateur `|>` (le *pipe*), et réponds sur ton cahier :
+
+        - pourquoi les deux écritures font-elles la même chose ?
+        - pourquoi cesserait-elle de fonctionner si `take` prenait son compteur en premier et sa liste ensuite ?
+
+        **Tu n'es pas obligé d'écrire ta réponse avec `|>`**, mais tu dois savoir la lire.
+
+        ??? success "Réponse"
+            `x |> f(y)` est une autre façon d'écrire `f(x, y)` : la valeur de gauche devient le **premier** argument de la fonction de droite. On lit alors le calcul dans l'ordre où il se fait, de gauche à droite, au lieu de le lire de l'intérieur vers l'extérieur.
+
+            C'est pour cela que toutes les fonctions de ce chapitre prennent la **liste en premier** : sans cela, le *pipe* ne tomberait pas sur le bon paramètre. L'ordre des paramètres n'est donc pas un détail, c'est ce qui rend ces fonctions enchaînables.
+
+!!! question "supprimer"
+    Écris `supprimer(lst: Liste(a), e: a) -> Liste(a)`, qui renvoie une liste privée de la **première** occurrence d'un élément. `supprimer(2 -> 3 -> 4, 3)` donne `2 -> 4`.
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn supprimer_test() {
+          let l = Cons(2, Cons(3, Cons(2, Vide)))
+          assert liste.supprimer(Vide, 2) == Vide
+          assert liste.supprimer(l, 2) == Cons(3, Cons(2, Vide))
+          assert liste.supprimer(l, 9) == l
+        }
+        ```
+
+    ??? success "Corrigé Gleam"
+        ```gleam
+        pub fn supprimer(lst: Liste(a), e: a) -> Liste(a) {
           case lst {
             Vide -> Vide
             Cons(t, q) ->
               case t == e {
                 True -> q
-                False -> Cons(t, supprimer(e, q))
+                False -> Cons(t, supprimer(q, e))
               }
           }
         }
         ```
 
-#### 4.2.2 Par filtrage : vers `filtrer`
+#### 4.2.2 Par filtrage : vers `filter`
 
-On **garde** certains éléments selon une **condition**. Écris ces quatre fonctions, puis regarde ce qu'elles ont en commun. (En Python, ce sont des variantes de `pairs` : on change la condition.)
-
-!!! question "pairs"
-    Écris `pairs(lst: Liste(Int)) -> Liste(Int)`, qui garde les éléments **pairs**. `2 -> 3 -> 4` donne `2 -> 4`.
-
-    ??? success "Corrigé Gleam"
-        ```gleam
-        pub fn pairs(lst: Liste(Int)) -> Liste(Int) {
-          case lst {
-            Vide -> Vide
-            Cons(t, q) ->
-              case t % 2 == 0 {
-                True -> Cons(t, pairs(q))
-                False -> pairs(q)
-              }
-          }
-        }
-        ```
+On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'a fait pour additionner. Écris ces trois fonctions, puis regarde ce qu'elles ont en commun.
 
 !!! question "impairs"
     Écris `impairs(lst: Liste(Int)) -> Liste(Int)`, qui garde les éléments **impairs**. `2 -> 3 -> 4` donne `3`.
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn impairs_test() {
+          let l = Cons(2, Cons(3, Cons(4, Vide)))
+          assert liste.impairs(Vide) == Vide
+          assert liste.impairs(l) == Cons(3, Vide)
+          assert liste.impairs(Cons(-3, Cons(2, Vide))) == Cons(-3, Vide)
+        }
+        ```
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -713,6 +1062,15 @@ On **garde** certains éléments selon une **condition**. Écris ces quatre fonc
 !!! question "positifs"
     Écris `positifs(lst: Liste(Int)) -> Liste(Int)`, qui garde les éléments **strictement positifs**. `2 -> -3 -> 4` donne `2 -> 4`.
 
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn positifs_test() {
+          let l = Cons(2, Cons(-3, Cons(0, Vide)))
+          assert liste.positifs(Vide) == Vide
+          assert liste.positifs(l) == Cons(2, Vide)
+        }
+        ```
+
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn positifs(lst: Liste(Int)) -> Liste(Int) {
@@ -730,6 +1088,15 @@ On **garde** certains éléments selon une **condition**. Écris ces quatre fonc
 !!! question "negatifs"
     Écris `negatifs(lst: Liste(Int)) -> Liste(Int)`, qui garde les éléments **strictement négatifs**. `2 -> -3 -> 4` donne `-3`.
 
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn negatifs_test() {
+          let l = Cons(2, Cons(-3, Cons(0, Vide)))
+          assert liste.negatifs(Vide) == Vide
+          assert liste.negatifs(l) == Cons(-3, Vide)
+        }
+        ```
+
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn negatifs(lst: Liste(Int)) -> Liste(Int) {
@@ -744,36 +1111,57 @@ On **garde** certains éléments selon une **condition**. Écris ces quatre fonc
         }
         ```
 
-**Ce qu'elles ont en commun.** Compare les quatre corrigés : ils sont **identiques**, seule la **condition** change (`t % 2 == 0`, `t % 2 != 0`, `t > 0`, `t < 0`). Écrire une fonction par condition, c'est se répéter. L'idée : **passer la condition en paramètre**. On obtient une seule fonction, `filtrer` :
+**Ce qu'elles ont en commun.** Compare les trois corrigés : ils sont **identiques**, seule la **condition** change (`t % 2 != 0`, `t > 0`, `t < 0`). Écrire une fonction par condition, c'est se répéter. L'idée : **passer la condition en paramètre**. On obtient une seule fonction, `filter` (c'est son nom partout, dans tous les langages) :
 
 ```gleam
-pub fn filtrer(predicat: fn(a) -> Bool, lst: Liste(a)) -> Liste(a) {
+pub fn filter(predicat: fn(a) -> Bool, lst: Liste(a)) -> Liste(a) {
   case lst {
     Vide -> Vide
     Cons(t, q) ->
       case predicat(t) {
-        True -> Cons(t, filtrer(predicat, q))
-        False -> filtrer(predicat, q)
+        True -> Cons(t, filter(predicat, q))
+        False -> filter(predicat, q)
       }
   }
 }
 ```
 
-`predicat` est **une fonction** (elle prend un élément et renvoie un booléen). Les quatre fonctions deviennent alors un seul appel, avec la bonne condition écrite **sur place** (une fonction anonyme `fn(x) { ... }`) :
+`predicat` est **une fonction** (elle prend un élément et renvoie un booléen). Les trois fonctions deviennent alors un seul appel, avec la bonne condition écrite **sur place** (une fonction anonyme `fn(x) { ... }`) :
 
 ```gleam
-filtrer(fn(x) { x % 2 == 0 }, lst)   // les pairs
-filtrer(fn(x) { x % 2 != 0 }, lst)   // les impairs
-filtrer(fn(x) { x > 0 }, lst)        // les positifs
-filtrer(fn(x) { x < 0 }, lst)        // les négatifs
+filter(fn(x) { x % 2 != 0 }, lst)   // les impairs
+filter(fn(x) { x > 0 }, lst)        // les positifs
+filter(fn(x) { x < 0 }, lst)        // les négatifs
+filter(fn(x) { x % 2 == 0 }, lst)   // les pairs, sans écrire une ligne de plus
 ```
 
-#### 4.2.3 Par transformation : vers `mapper`
+!!! question "filter"
+    Recopie `filter` dans `src/liste.gleam`, et vérifie-la.
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn filter_test() {
+          let l = Cons(2, Cons(-3, Cons(4, Vide)))
+          assert liste.filter(fn(x) { x > 0 }, Vide) == Vide
+          assert liste.filter(fn(x) { x > 0 }, l) == Cons(2, Cons(4, Vide))
+        }
+        ```
+
+#### 4.2.3 Par transformation : vers `map`
 
 Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces trois fonctions.
 
 !!! question "carres"
     Écris `carres(lst: Liste(Int)) -> Liste(Int)`, qui renvoie les **carrés**. `2 -> 3 -> 4` donne `4 -> 9 -> 16`.
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn carres_test() {
+          let l = Cons(2, Cons(3, Cons(4, Vide)))
+          assert liste.carres(Vide) == Vide
+          assert liste.carres(l) == Cons(4, Cons(9, Cons(16, Vide)))
+        }
+        ```
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -788,6 +1176,15 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
 !!! question "doubles"
     Écris `doubles(lst: Liste(Int)) -> Liste(Int)`, qui renvoie les **doubles**. `2 -> 3 -> 4` donne `4 -> 6 -> 8`.
 
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn doubles_test() {
+          let l = Cons(2, Cons(3, Cons(4, Vide)))
+          assert liste.doubles(Vide) == Vide
+          assert liste.doubles(l) == Cons(4, Cons(6, Cons(8, Vide)))
+        }
+        ```
+
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn doubles(lst: Liste(Int)) -> Liste(Int) {
@@ -801,6 +1198,15 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
 !!! question "triples"
     Écris `triples(lst: Liste(Int)) -> Liste(Int)`, qui renvoie les **triples**. `2 -> 3 -> 4` donne `6 -> 9 -> 12`.
 
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn triples_test() {
+          let l = Cons(2, Cons(3, Cons(4, Vide)))
+          assert liste.triples(Vide) == Vide
+          assert liste.triples(l) == Cons(6, Cons(9, Cons(12, Vide)))
+        }
+        ```
+
     ??? success "Corrigé Gleam"
         ```gleam
         pub fn triples(lst: Liste(Int)) -> Liste(Int) {
@@ -811,25 +1217,37 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
         }
         ```
 
-**Même constat.** Les trois corrigés sont identiques, seule la **transformation** change (`t * t`, `2 * t`, `3 * t`). On la passe en paramètre : c'est `mapper`.
+**Même constat.** Les trois corrigés sont identiques, seule la **transformation** change (`t * t`, `2 * t`, `3 * t`). On la passe en paramètre : c'est `map`, et c'est là aussi son nom partout.
 
 ```gleam
-pub fn mapper(f: fn(a) -> b, lst: Liste(a)) -> Liste(b) {
+pub fn map(f: fn(a) -> b, lst: Liste(a)) -> Liste(b) {
   case lst {
     Vide -> Vide
-    Cons(t, q) -> Cons(f(t), mapper(f, q))
+    Cons(t, q) -> Cons(f(t), map(f, q))
   }
 }
 ```
 
 ```gleam
-mapper(fn(x) { x * x }, lst)   // les carrés
-mapper(fn(x) { 2 * x }, lst)   // les doubles
-mapper(fn(x) { 3 * x }, lst)   // les triples
+map(fn(x) { x * x }, lst)   // les carrés
+map(fn(x) { 2 * x }, lst)   // les doubles
+map(fn(x) { 3 * x }, lst)   // les triples
 ```
 
-!!! tip "filtrer choisit, mapper transforme"
-    `filtrer` **garde** ou **jette** des éléments (la liste peut rétrécir), alors que `mapper` **transforme** chaque élément (la liste garde sa taille). Ce sont deux outils très courants, et tu viens de les redécouvrir en remarquant que plusieurs fonctions n'en faisaient qu'une.
+!!! question "map"
+    Recopie `map` dans `src/liste.gleam`, et vérifie-la.
+
+    ??? info "Le test, à coller dans `test/liste_test.gleam`"
+        ```gleam
+        pub fn map_test() {
+          let l = Cons(2, Cons(3, Cons(4, Vide)))
+          assert liste.map(fn(x) { x * x }, Vide) == Vide
+          assert liste.map(fn(x) { x * x }, l) == Cons(4, Cons(9, Cons(16, Vide)))
+        }
+        ```
+
+!!! tip "`filter` choisit, `map` transforme"
+    `filter` **garde** ou **jette** des éléments (la liste peut rétrécir), alors que `map` **transforme** chaque élément (la liste garde sa taille). Ce sont deux outils très courants, et tu viens de les redécouvrir en remarquant que plusieurs fonctions n'en faisaient qu'une.
 
 ### 4.3 En Python seulement
 
@@ -841,9 +1259,9 @@ mapper(fn(x) { 3 * x }, lst)   // les triples
 - **`dernier_element[T](lst: Liste[T]) -> T`** : le dernier élément (erreur si la liste est vide).
 - **`avant_dernier_element[T](lst: Liste[T]) -> T`** : l'avant-dernier (erreur si moins de deux éléments).
 - **`minimum(lst: Liste[int]) -> int`** : le plus petit élément (erreur si la liste est vide).
-- **`get_n[T](n: int, lst: Liste[T]) -> T`** : l'élément d'indice `n` (erreur si hors bornes).
-- **`insert[T](e: T, n: int, lst: Liste[T]) -> Liste[T]`** : insère `e` à l'indice `n` (erreur si hors bornes).
-- **`supprimer_n[T](n: int, lst: Liste[T]) -> Liste[T]`** : supprime l'élément d'indice `n` (erreur si hors bornes).
+- **`get_n[T](lst: Liste[T], n: int) -> T`** : l'élément d'indice `n` (erreur si hors bornes).
+- **`insert[T](lst: Liste[T], e: T, n: int) -> Liste[T]`** : insère `e` à l'indice `n` (erreur si hors bornes).
+- **`supprimer_n[T](lst: Liste[T], n: int) -> Liste[T]`** : supprime l'élément d'indice `n` (erreur si hors bornes).
 - **`supprimer_fin[T](lst: Liste[T]) -> Liste[T]`** : supprime le dernier élément (erreur si la liste est vide).
 - **`trier(lst: Liste[int]) -> Liste[int]`** : tri par sélection (il s'appuie sur `minimum`, donc entraîné lui aussi côté Python).
 
