@@ -1252,7 +1252,9 @@ map(fn(x) { 3 * x }, lst)   // les triples
 ### 4.3 En Python seulement
 
 !!! warning "Pourquoi pas en Gleam"
-    Les fonctions qui suivent peuvent **échouer** sur certaines entrées : une liste vide n'a pas de dernier élément, un indice peut sortir des bornes. En Python, on le signale par une **assertion** qui lève une erreur. En Gleam, il n'y a pas d'exception : il faudrait renvoyer un `Result` ou un `Option` pour dire « ça a échoué », une notion qu'on verra plus tard. On les fait donc **uniquement en Python**.
+    Les fonctions qui suivent peuvent **échouer** sur certaines entrées : une liste vide n'a pas de dernier élément, un indice peut sortir des bornes. En Python, on le signale par une **assertion** qui lève une erreur. En Gleam, il n'y a pas d'exception : il faudrait renvoyer un `Option` ou un `Result` pour dire « ça a échoué ». On ne verra pas ces types en classe, faute de temps, et ces fonctions se font donc **uniquement en Python**.
+
+    Rien ne t'empêche d'aller fouiller : la page [Le type `Option`](../../langages/fonctionnels/2.gleam-option.md) l'explique, et les écrire en Gleam est alors à ta portée.
 
 À écrire en Python (avec `assert` pour les préconditions) :
 
