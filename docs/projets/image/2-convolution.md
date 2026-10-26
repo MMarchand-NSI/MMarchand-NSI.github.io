@@ -74,7 +74,7 @@ IDENTITE = [
 
 !!! question "Écrire `somme_ponderee` (obligatoire)"
     ```python
-    def somme_ponderee(g: grille, i: int, j: int, noyau: grille) -> float:
+    def somme_ponderee(g: Grille, i: int, j: int, noyau: Grille) -> float:
         """Renvoie la somme des pixels du voisinage de (i, j), chacun multiplié
         par le poids du noyau à la même place. Bord répliqué."""
         pass
@@ -97,7 +97,7 @@ IDENTITE = [
 
     ??? success "Solution"
         ```python
-        def somme_ponderee(g: grille, i: int, j: int, noyau: grille) -> float:
+        def somme_ponderee(g: Grille, i: int, j: int, noyau: Grille) -> float:
             """Renvoie la somme des pixels du voisinage de (i, j), chacun multiplié
             par le poids du noyau à la même place. Bord répliqué."""
             s = 0
@@ -111,7 +111,7 @@ IDENTITE = [
     Elle renvoie une **nouvelle** grille et ne modifie pas `g`. Complète le test : que doit renvoyer une convolution par `IDENTITE` ? Et que doit valoir `copie` après l'appel ?
 
     ```python
-    def convolution(g: grille, noyau: grille) -> grille:
+    def convolution(g: Grille, noyau: Grille) -> Grille:
         """Renvoie une nouvelle grille : chaque pixel est remplacé par la somme
         pondérée de son voisinage. g n'est pas modifiée."""
         pass
@@ -132,7 +132,7 @@ IDENTITE = [
 
     ??? success "Solution"
         ```python
-        def convolution(g: grille, noyau: grille) -> grille:
+        def convolution(g: Grille, noyau: Grille) -> Grille:
             """Renvoie une nouvelle grille : chaque pixel est remplacé par la somme
             pondérée de son voisinage. g n'est pas modifiée."""
             res = []
@@ -230,7 +230,7 @@ En Python, la racine carrée s'écrit `x ** 0.5`.
 
 !!! question "Écrire `sobel` (obligatoire)"
     ```python
-    def sobel(g: grille) -> grille:
+    def sobel(g: Grille) -> Grille:
         """Renvoie une nouvelle grille : en chaque pixel, l'intensité du contour."""
         pass
 
@@ -254,7 +254,7 @@ En Python, la racine carrée s'écrit `x ** 0.5`.
 
     ??? success "Solution"
         ```python
-        def sobel(g: grille) -> grille:
+        def sobel(g: Grille) -> Grille:
             """Renvoie une nouvelle grille : en chaque pixel, l'intensité du contour."""
             gx = convolution(g, SOBEL_X)
             gy = convolution(g, SOBEL_Y)
@@ -269,20 +269,45 @@ En Python, la racine carrée s'écrit `x ** 0.5`.
 
 !!! question "Les contours de ta photo"
     ```python
-    photo = charger("ma_photo.jpg")
-    sauver(vers_image(sobel(photo)), "contours.png")
+    if __name__ == "__main__":
+        photo = charger("ma_photo.jpg")
+        sauver(vers_image(sobel(photo)), "contours.png")
     ```
 
     1. Ouvre `contours.png`. Qu'est-ce qui apparaît en blanc ? en noir ?
     2. Applique d'abord `GAUSS` à la photo, puis `sobel` au résultat. Qu'est-ce qui change ? Pourquoi est-ce utile sur une photo granuleuse ?
 
+## Étape 6 - Une fenêtre pour essayer des noyaux
+
+Le fichier [interface_convolution.py](interface_convolution.py) ouvre une fenêtre où tu écris un noyau dans 9 cases, puis l'appliques à une image avec **ta** fonction `convolution`. Une case accepte un entier, un décimal ou une fraction comme `1/9`. La liste déroulante remplit les cases avec les noyaux de cette page, et la fenêtre affiche la somme des poids.
+
+Après chaque noyau, la fenêtre applique `vers_image`, pour pouvoir afficher le résultat. On peut appliquer plusieurs noyaux à la suite, et revenir à l'image d'origine.
+
+Place le fichier à côté de `filtres.py` et de `image_io.py`, puis lance-le avec `uv run interface_convolution.py`. PySide6 s'installe avec `uv add pyside6`.
+
+La fenêtre importe `filtres.py`. Les instructions de ton bloc `if __name__ == "__main__":` ne s'exécutent alors pas : seules tes fonctions sont chargées.
+
+!!! question "`SOBEL_X` seul"
+    1. Avant de l'appliquer, sur ton cahier : la fenêtre passe le résultat dans `vers_image`. Quels contours de ta photo vont apparaître en blanc, et lesquels vont disparaître ?
+    2. Applique `SOBEL_X` et vérifie.
+
+    ??? success "Réponse"
+        Seuls apparaissent les contours où l'image devient **plus claire** de gauche à droite : `gx` y est positif. Là où elle devient plus sombre, `gx` est négatif, et `vers_image` le ramène à `0`, donc au noir. C'est le piège de l'étape 5 : c'est pour cela que `sobel` calcule la norme **avant** d'appliquer `vers_image`.
+
+!!! question "Un noyau à toi"
+    1. Remplis les 9 cases avec `1/18`. Sur ton cahier, avant d'appliquer : que vaut la somme des poids, et à quoi ressemblera l'image ?
+    2. Invente un noyau, prédis son effet, puis applique-le.
+
+    ??? success "Réponse à la question 1"
+        La somme vaut $9 \times 1/18 = 0{,}5$. L'image est floutée comme avec `FLOU`, et deux fois plus sombre : chaque pixel vaut la moitié de la moyenne de son voisinage.
+
 ## Pour aller plus loin
 
 !!! question "Bonus 1 - Des contours nets"
-    Les contours de Sobel ont toutes les nuances de gris. Écris `seuil(g: grille, s: float) -> grille` qui renvoie une nouvelle grille où chaque pixel vaut `255` si sa valeur dépasse `s`, et `0` sinon. Applique-la au résultat de `sobel` et cherche le seuil qui donne le dessin le plus lisible.
+    Les contours de Sobel ont toutes les nuances de gris. Écris `seuil(g: Grille, s: float) -> Grille` qui renvoie une nouvelle grille où chaque pixel vaut `255` si sa valeur dépasse `s`, et `0` sinon. Applique-la au résultat de `sobel` et cherche le seuil qui donne le dessin le plus lisible.
 
 !!! question "Bonus 2 - Un noyau plus grand"
-    Un noyau peut être de taille 5 × 5, 7 × 7, toujours impaire pour avoir un centre. Écris `convolution_r(g: grille, noyau: grille) -> grille` qui accepte un noyau carré de côté $2r + 1$, avec `r = len(noyau) // 2`. Teste-la avec un flou 5 × 5 dont tous les poids valent $1/25$, et vérifie qu'avec le noyau 3 × 3 `NETTETE` elle donne le même résultat que `convolution`.
+    Un noyau peut être de taille 5 × 5, 7 × 7, toujours impaire pour avoir un centre. Écris `convolution_r(g: Grille, noyau: Grille) -> Grille` qui accepte un noyau carré de côté $2r + 1$, avec `r = len(noyau) // 2`. Teste-la avec un flou 5 × 5 dont tous les poids valent $1/25$, et vérifie qu'avec le noyau 3 × 3 `NETTETE` elle donne le même résultat que `convolution`.
 
 ??? note "Convolution ou corrélation ?"
     En mathématiques, la convolution **retourne** le noyau (haut et bas, gauche et droite) avant de faire la somme pondérée. Le calcul écrit ici, sans retournement, s'appelle une **corrélation**. Pour les noyaux symétriques comme `FLOU`, `GAUSS` et `NETTETE`, c'est exactement la même chose. Pour `SOBEL_X` et `SOBEL_Y`, le retournement change seulement le **signe** de `gx` et de `gy`, ce qui ne change rien à la norme : les contours obtenus sont identiques.

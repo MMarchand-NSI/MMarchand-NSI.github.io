@@ -42,14 +42,14 @@ Pour ne rien perdre, on applique Sobel **à chaque canal** séparément, puis on
 `image_io.py` fournit `charger_couleur`, qui rend une liste de listes de triplets :
 
 ```python
-from image_io import charger_couleur, image_couleur
+from image_io import charger_couleur, ImageCouleur
 ```
 
 !!! question "Écrire `canal` (obligatoire)"
     La fonction extrait une seule composante de chaque pixel : `k = 0` pour le rouge, `1` pour le vert, `2` pour le bleu. Elle renvoie une grille ordinaire, à laquelle on peut appliquer `convolution`.
 
     ```python
-    def canal(img: image_couleur, k: int) -> grille:
+    def canal(img: ImageCouleur, k: int) -> Grille:
         """Renvoie une nouvelle grille contenant la composante k de chaque pixel."""
         pass
 
@@ -64,7 +64,7 @@ from image_io import charger_couleur, image_couleur
 
     ??? success "Solution"
         ```python
-        def canal(img: image_couleur, k: int) -> grille:
+        def canal(img: ImageCouleur, k: int) -> Grille:
             """Renvoie une nouvelle grille contenant la composante k de chaque pixel."""
             res = []
             for i in range(0, len(img)):
@@ -102,7 +102,7 @@ C'est la même formule que Sobel, avec trois fois plus de termes sous la racine.
 
 !!! question "Écrire `energie` (obligatoire)"
     ```python
-    def energie(img: image_couleur) -> grille:
+    def energie(img: ImageCouleur) -> Grille:
         """Renvoie une nouvelle grille : en chaque pixel, la norme des six
         dérivées de Sobel (gx et gy sur chacun des trois canaux)."""
         pass
@@ -127,7 +127,7 @@ C'est la même formule que Sobel, avec trois fois plus de termes sous la racine.
 
     ??? success "Solution"
         ```python
-        def energie(img: image_couleur) -> grille:
+        def energie(img: ImageCouleur) -> Grille:
             """Renvoie une nouvelle grille : en chaque pixel, la norme des six
             dérivées de Sobel (gx et gy sur chacun des trois canaux)."""
             hauteur = len(img)
@@ -162,8 +162,9 @@ C'est la même formule que Sobel, avec trois fois plus de termes sous la racine.
 ## Étape 5 - Voir l'énergie de ta photo
 
 ```python
-photo = charger_couleur("ma_photo.jpg")
-sauver(vers_image(energie(photo)), "energie.png")
+if __name__ == "__main__":
+    photo = charger_couleur("ma_photo.jpg")
+    sauver(vers_image(energie(photo)), "energie.png")
 ```
 
 !!! question "Observer"
@@ -178,12 +179,12 @@ Pour **voir** l'énergie, on la ramène à l'échelle 0 à 255 : on divise chaqu
 
 !!! question "Écrire `maximum` et `normaliser` (obligatoire)"
     ```python
-    def maximum(g: grille) -> float:
+    def maximum(g: Grille) -> float:
         """Renvoie la plus grande valeur de g. g n'est pas vide."""
         pass
 
 
-    def normaliser(g: grille) -> grille:
+    def normaliser(g: Grille) -> Grille:
         """Renvoie une nouvelle grille où la plus grande valeur de g devient 255,
         les autres proportionnellement. Si g ne contient que des 0, renvoie des 0."""
         pass
@@ -203,7 +204,7 @@ Pour **voir** l'énergie, on la ramène à l'échelle 0 à 255 : on divise chaqu
 
     ??? success "Solution"
         ```python
-        def maximum(g: grille) -> float:
+        def maximum(g: Grille) -> float:
             """Renvoie la plus grande valeur de g. g n'est pas vide."""
             m = g[0][0]
             for i in range(0, len(g)):
@@ -213,7 +214,7 @@ Pour **voir** l'énergie, on la ramène à l'échelle 0 à 255 : on divise chaqu
             return m
 
 
-        def normaliser(g: grille) -> grille:
+        def normaliser(g: Grille) -> Grille:
             """Renvoie une nouvelle grille où la plus grande valeur de g devient 255,
             les autres proportionnellement. Si g ne contient que des 0, renvoie des 0."""
             m = maximum(g)
@@ -231,8 +232,9 @@ Pour **voir** l'énergie, on la ramène à l'échelle 0 à 255 : on divise chaqu
 
 !!! question "Comparer"
     ```python
-    sauver(vers_image(normaliser(energie(photo))), "energie.png")
-    sauver(vers_image(normaliser(sobel(charger("ma_photo.jpg")))), "sobel_gris.png")
+    if __name__ == "__main__":
+        sauver(vers_image(normaliser(energie(photo))), "energie.png")
+        sauver(vers_image(normaliser(sobel(charger("ma_photo.jpg")))), "sobel_gris.png")
     ```
 
     1. Où l'énergie est-elle la plus faible sur ta photo ? Qu'ont ces zones en commun ?

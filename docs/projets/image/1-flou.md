@@ -9,14 +9,14 @@ Sur cette page, on écrit un **flou**. Sur la suivante, on généralise jusqu'à
 Une image en niveaux de gris est une grille : chaque case contient un entier entre `0` (noir) et `255` (blanc). On la représente comme dans le voisinage, par une liste de listes.
 
 ```python
-type grille = list[list[int]]
+type Grille = list[list[int]]
 ```
 
 Pour lire et écrire un fichier image, on te donne le fichier [image_io.py](image_io.py), à placer à côté de ton programme. Il ne contient **que** de la lecture et de l'écriture de fichiers :
 
-- `charger(chemin: str) -> grille` lit une image et la rend en niveaux de gris, réduite à 400 pixels de côté au plus,
-- `sauver(g: grille, chemin: str) -> None` enregistre une grille d'entiers entre 0 et 255 dans un fichier,
-- `charger_couleur(chemin: str) -> image_couleur` lit une image en couleur. Elle ne servira qu'à la fin de cette page et à la dernière page.
+- `charger(chemin: str) -> Grille` lit une image et la rend en niveaux de gris, réduite à 400 pixels de côté au plus,
+- `sauver(g: Grille, chemin: str) -> None` enregistre une grille d'entiers entre 0 et 255 dans un fichier,
+- `charger_couleur(chemin: str) -> ImageCouleur` lit une image en couleur. Elle ne servira qu'à la fin de cette page et à la dernière page.
 
 `sauver` accepte aussi une image en couleur.
 
@@ -25,11 +25,15 @@ Tout le reste, c'est toi qui l'écris. Installe la bibliothèque qu'utilise `ima
 Crée un fichier `filtres.py` qui commence ainsi, et choisis une de tes photos :
 
 ```python
-from image_io import charger, sauver, grille
+from image_io import charger, sauver, Grille
 
-photo = charger("ma_photo.jpg")
-sauver(photo, "gris.png")
+
+if __name__ == "__main__":
+    photo = charger("ma_photo.jpg")
+    sauver(photo, "gris.png")
 ```
+
+Tout ce qui n'est pas une fonction se place dans le bloc `if __name__ == "__main__":`. Garde ce bloc à la fin du fichier : les fonctions de cette page s'écrivent au-dessus.
 
 !!! question "Vérifier l'installation"
     1. Lance le programme et ouvre `gris.png` : c'est ta photo en noir et blanc.
@@ -124,7 +128,7 @@ Une valeur de pixel est un **entier**. On arrondit donc toujours la moyenne à l
     En utilisant `borner`, écris la fonction qui lit un pixel avec la règle du bord répliqué. Complète les tests avec les quatre positions de l'étape 1.
 
     ```python
-    def pixel(g: grille, i: int, j: int) -> int:
+    def pixel(g: Grille, i: int, j: int) -> int:
         """Renvoie la valeur du pixel (i, j). Si (i, j) sort de l'image,
         renvoie la valeur du pixel du bord le plus proche."""
         pass
@@ -146,7 +150,7 @@ Une valeur de pixel est un **entier**. On arrondit donc toujours la moyenne à l
 
     ??? success "Solution"
         ```python
-        def pixel(g: grille, i: int, j: int) -> int:
+        def pixel(g: Grille, i: int, j: int) -> int:
             """Renvoie la valeur du pixel (i, j). Si (i, j) sort de l'image,
             renvoie la valeur du pixel du bord le plus proche."""
             ii = borner(i, 0, len(g))
@@ -170,7 +174,7 @@ Une valeur de pixel est un **entier**. On arrondit donc toujours la moyenne à l
     C'est la double boucle du voisinage, sans exclure `(0, 0)` et sans test de bord, puisque `pixel` s'en charge.
 
     ```python
-    def moyenne_voisinage(g: grille, i: int, j: int) -> int:
+    def moyenne_voisinage(g: Grille, i: int, j: int) -> int:
         """Renvoie la moyenne des 9 pixels du voisinage de (i, j), bord répliqué,
         arrondie à l'entier le plus proche."""
         pass
@@ -192,7 +196,7 @@ Une valeur de pixel est un **entier**. On arrondit donc toujours la moyenne à l
 
     ??? success "Solution"
         ```python
-        def moyenne_voisinage(g: grille, i: int, j: int) -> int:
+        def moyenne_voisinage(g: Grille, i: int, j: int) -> int:
             """Renvoie la moyenne des 9 pixels du voisinage de (i, j), bord répliqué,
             arrondie à l'entier le plus proche."""
             s = 0
@@ -207,7 +211,7 @@ Une valeur de pixel est un **entier**. On arrondit donc toujours la moyenne à l
 Il reste à appliquer `moyenne_voisinage` à **chaque** pixel. Une première idée vient naturellement : parcourir l'image et remplacer chaque valeur sur place.
 
 ```python
-def flou_en_place(g: grille) -> None:
+def flou_en_place(g: Grille) -> None:
     for i in range(0, len(g)):
         for j in range(0, len(g[0])):
             g[i][j] = moyenne_voisinage(g, i, j)
@@ -240,7 +244,7 @@ P = [
     La fonction renvoie une **nouvelle** grille, de même taille que `g`. Le second test vérifie que l'image d'origine n'a pas été modifiée : complète-le.
 
     ```python
-    def flou(g: grille) -> grille:
+    def flou(g: Grille) -> Grille:
         """Renvoie une nouvelle grille, floutée. g n'est pas modifiée."""
         pass
 
@@ -264,7 +268,7 @@ P = [
 
     ??? success "Solution"
         ```python
-        def flou(g: grille) -> grille:
+        def flou(g: Grille) -> Grille:
             """Renvoie une nouvelle grille, floutée. g n'est pas modifiée."""
             res = []
             for i in range(0, len(g)):
@@ -291,7 +295,7 @@ P = [
     La fonction arrondit chaque valeur à l'entier le plus proche avec `round`, puis la ramène dans l'intervalle `[0 ; 256)`, c'est-à-dire entre 0 et 255 inclus. Tu as déjà la fonction qu'il faut pour la seconde partie.
 
     ```python
-    def vers_image(g: list[list[float]]) -> grille:
+    def vers_image(g: list[list[float]]) -> Grille:
         """Renvoie une nouvelle grille d'entiers entre 0 et 255."""
         pass
 
@@ -302,7 +306,7 @@ P = [
 
     ??? success "Solution"
         ```python
-        def vers_image(g: list[list[float]]) -> grille:
+        def vers_image(g: list[list[float]]) -> Grille:
             """Renvoie une nouvelle grille d'entiers entre 0 et 255."""
             res = []
             for i in range(0, len(g)):
@@ -315,8 +319,9 @@ P = [
 
 !!! question "Flouter ta photo"
     ```python
-    photo = charger("ma_photo.jpg")
-    sauver(flou(photo), "flou.png")
+    if __name__ == "__main__":
+        photo = charger("ma_photo.jpg")
+        sauver(flou(photo), "flou.png")
     ```
 
     1. Ouvre `flou.png` et compare avec `gris.png`. Le flou est léger : pourquoi ?
@@ -331,7 +336,7 @@ P = [
 `charger_couleur` rend une image en couleur : chaque pixel est un triplet `(rouge, vert, bleu)`, chaque composante étant un entier entre 0 et 255.
 
 ```python
-from image_io import charger_couleur, image_couleur
+from image_io import charger_couleur, ImageCouleur
 ```
 
 !!! question "Synthèse"
@@ -348,7 +353,7 @@ from image_io import charger_couleur, image_couleur
 
         En couleur, on fait la moyenne de **chaque canal** séparément : la moyenne des 9 rouges, celle des 9 verts et celle des 9 bleus, chacune arrondie à l'entier le plus proche. Le pixel flouté est le triplet de ces trois moyennes.
 
-        Dans les autres fonctions, seules les annotations de type changent : on y lit `image_couleur` au lieu de `grille`.
+        Dans les autres fonctions, seules les annotations de type changent : on y lit `ImageCouleur` au lieu de `Grille`.
 
 !!! question "Écrire `moyenne_voisinage` en couleur"
     Copie `filtres.py` dans un nouveau fichier `filtres_couleur.py`. Réécris `moyenne_voisinage` pour une image en couleur, et ne touche à rien d'autre.
@@ -361,7 +366,7 @@ from image_io import charger_couleur, image_couleur
     ]
 
 
-    def moyenne_voisinage(img: image_couleur, i: int, j: int) -> tuple[int, int, int]:
+    def moyenne_voisinage(img: ImageCouleur, i: int, j: int) -> tuple[int, int, int]:
         """Renvoie le triplet des moyennes de chaque canal sur les 9 pixels du
         voisinage de (i, j), bord répliqué, chacune arrondie à l'entier le plus proche."""
         pass
@@ -375,13 +380,14 @@ from image_io import charger_couleur, image_couleur
     Puis floute ta photo en couleur :
 
     ```python
-    photo = charger_couleur("ma_photo.jpg")
-    sauver(flou(photo), "flou_couleur.png")
+    if __name__ == "__main__":
+        photo = charger_couleur("ma_photo.jpg")
+        sauver(flou(photo), "flou_couleur.png")
     ```
 
     ??? success "Solution"
         ```python
-        def moyenne_voisinage(img: image_couleur, i: int, j: int) -> tuple[int, int, int]:
+        def moyenne_voisinage(img: ImageCouleur, i: int, j: int) -> tuple[int, int, int]:
             """Renvoie le triplet des moyennes de chaque canal sur les 9 pixels du
             voisinage de (i, j), bord répliqué, chacune arrondie à l'entier le plus proche."""
             r = 0
@@ -395,3 +401,15 @@ from image_io import charger_couleur, image_couleur
                     b = b + p[2]
             return (round(r / 9), round(v / 9), round(b / 9))
         ```
+
+## Pour finir - Une fenêtre pour flouter
+
+Le fichier [interface_flou.py](interface_flou.py) ouvre une fenêtre avec deux boutons : **Ouvrir une image**, puis **Flouter**, autant de fois que tu veux. Il utilise **ta** fonction `flou`, et tu n'as rien à y écrire.
+
+Place-le à côté de `filtres.py` et de `image_io.py`, installe PySide6 avec `uv add pyside6`, puis lance-le avec `uv run interface_flou.py`.
+
+La fenêtre importe `filtres.py`. Les instructions de ton bloc `if __name__ == "__main__":` ne s'exécutent alors pas : seules tes fonctions sont chargées.
+
+!!! question "Essayer la fenêtre"
+    1. Ouvre une de tes photos et clique plusieurs fois sur **Flouter**. Combien de clics faut-il pour qu'on ne reconnaisse plus rien ?
+    2. Dans `interface_flou.py`, remplace `COULEUR = False` par `COULEUR = True`. La fenêtre utilise alors le `flou` de `filtres_couleur.py`. Floute une photo en couleur.
