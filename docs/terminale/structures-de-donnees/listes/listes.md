@@ -989,7 +989,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
-        Cherche dans la documentation de Gleam ce que fait l'opérateur `|>` (le *pipe*), et réponds sur ton cahier :
+        Va lire ce que fait cet opérateur, le *pipe*, sur la page [L'opérateur pipe](../../langages/fonctionnels/3.gleam-pipe.md), puis réponds sur ton cahier :
 
         - pourquoi les deux écritures font-elles la même chose ?
         - pourquoi cesserait-elle de fonctionner si `take` prenait son compteur en premier et sa liste ensuite ?
@@ -1252,9 +1252,7 @@ map(fn(x) { 3 * x }, lst)   // les triples
 ### 4.3 En Python seulement
 
 !!! warning "Pourquoi pas en Gleam"
-    Les fonctions qui suivent peuvent **échouer** sur certaines entrées : une liste vide n'a pas de dernier élément, un indice peut sortir des bornes. En Python, on le signale par une **assertion** qui lève une erreur. En Gleam, il n'y a pas d'exception : il faudrait renvoyer un `Option` ou un `Result` pour dire « ça a échoué ». On ne verra pas ces types en classe, faute de temps, et ces fonctions se font donc **uniquement en Python**.
-
-    Rien ne t'empêche d'aller fouiller : la page [Le type `Option`](../../langages/fonctionnels/2.gleam-option.md) l'explique, et les écrire en Gleam est alors à ta portée.
+    Les fonctions qui suivent peuvent **échouer** sur certaines entrées : une liste vide n'a pas de dernier élément, un indice peut sortir des bornes. En Python, on le signale par une **assertion** qui lève une erreur. En Gleam, il n'y a pas d'exception : une fonction qui peut échouer renvoie un `Result`, une valeur qui porte **soit** le résultat, **soit** l'échec, et que l'appelant est obligé d'ouvrir. On ne verra pas ce type en classe, faute de temps, et ces fonctions se font donc **uniquement en Python**. Rien ne t'empêche d'aller voir par toi-même.
 
 À écrire en Python (avec `assert` pour les préconditions) :
 
