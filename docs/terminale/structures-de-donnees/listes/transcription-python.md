@@ -47,7 +47,7 @@ type Liste[T] = Vide | tuple[T, Liste[T]]
 
 C'est mot pour mot le `Cons(a, Liste(a))` de Gleam, et c'est ce qui rend la structure **sans limite de taille** : une ligne décrit des listes de n'importe quelle longueur, parce que le second cas se redéploie autant de fois qu'il le faut.
 
-Lis bien ce que cette ligne ne dit pas. Elle ne décrit aucun objet infini : elle dit que pour connaître une liste, il faut connaître une liste **plus courte**, et que cela s'arrête sur `Vide`. C'est la définition récursive du cours, écrite dans le type au lieu de l'être dans une fonction.
+Lis bien ce que cette ligne ne dit pas. Elle ne décrit aucun objet infini : elle dit que pour connaître une liste, il faut connaître une liste **plus courte**, jusqu'au **cas de base**, `Vide`. C'est la définition récursive du cours, écrite dans le type au lieu de l'être dans une fonction.
 
 ## 2 Les primitives
 
@@ -482,7 +482,7 @@ Cons(tete, queue) ->
     - `dernier_element(2 -> 3 -> 4)` vaut `4`
     - **Précondition** : erreur si la liste est vide.
 
-    Attention au cas d'arrêt : ce n'est pas la liste vide, c'est la liste dont la **queue** est vide.
+    Attention au **cas de base** : ce n'est pas la liste vide, c'est la liste dont la **queue** est vide.
 
 !!! question "avant_dernier_element"
     `avant_dernier_element[T](lst: Liste[T]) -> T` rend l'**avant-dernier** élément.

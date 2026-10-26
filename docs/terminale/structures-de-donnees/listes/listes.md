@@ -832,10 +832,10 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
-        Il y a donc **deux** façons de s'arrêter : plus de liste, ou plus rien à prendre.
+        Il y a donc **deux cas de base** : plus de liste, ou plus rien à prendre.
 
     ??? question "Avant d'ouvrir le corrigé"
-        En une phrase, sur ton cahier : lequel des deux arrêts avais-tu oublié ?
+        En une phrase, sur ton cahier : lequel des deux cas de base avais-tu oublié ?
 
     ??? success "Corrigé Gleam"
         ```gleam
