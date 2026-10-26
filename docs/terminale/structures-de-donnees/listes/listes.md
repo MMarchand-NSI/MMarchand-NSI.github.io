@@ -288,7 +288,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
 
     `left` est ce que **ta** fonction a renvoyé, `right` ce qu'on attendait.
 
-!!! tip "Méthode"
+!!! fondamental "Méthode"
     Avant de coder, écris la **disjonction de cas au papier** : que renvoie la fonction si la liste est `Vide` ? et si c'est `Cons(tete, queue)` ?
 
 !!! question "La somme"
