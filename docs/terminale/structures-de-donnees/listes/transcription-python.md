@@ -594,7 +594,7 @@ def sont_egales(l1: Liste, l2: Liste) -> bool:
 
 Cette écriture est **hors programme** (les dataclasses ne sont pas exigées), mais c'est le calque le plus exact de Gleam, et la façon dont `match` est vraiment prévu pour être utilisé. Une différence subtile demeure : Python, contrairement à Gleam, **ne vérifie pas** que tu as traité tous les cas.
 
-## 7 Quatre problèmes pour finir
+## 7 Trois problèmes pour finir
 
 Aucune version n'existe d'avance, ni en Gleam ni en Python, et la solution n'est écrite nulle part. On te donne ce que la fonction doit rendre, et des exemples qui te serviront de test.
 
@@ -645,53 +645,6 @@ Aucune version n'existe d'avance, ni en Gleam ni en Python, et la solution n'est
     ```
 
     **Poser la question à chaque élément**, « es-tu une liste ? ». En Python, elle se pose à l'exécution : `isinstance(t, tuple)`, puisqu'une liste est représentée par un tuple. En Gleam, elle ne se pose pas du tout : `Element` et `Sous` sont deux motifs du `case`, et le compilateur vérifie que tu les as traités tous les deux.
-
-!!! question "permutations"
-    `permutations[T](lst: Liste[T]) -> Liste[Liste[T]]` rend **toutes** les façons d'ordonner les éléments. Le résultat est une liste **de listes**.
-
-    - `permutations(1 -> 2)` rend deux listes, `1 -> 2` et `2 -> 1`, dans l'ordre que tu veux
-    - `permutations(1 -> 2 -> 3)` en rend **six**
-    - sur la liste vide, le résultat est **une** liste, qui est la liste vide. Il y a exactement une façon d'ordonner « rien », c'est de ne rien faire. Et ne rien faire, c'est quelque chose
-
-    Celui-ci ne s'attaque pas de face. On passe par une **autre fonction**, qu'on te donne, et qu'on lit avant de s'en servir. Cinq étapes, dans l'ordre, et les deux premières ne se sautent pas.
-
-    **1. Prédis.** La fonction ci-dessous n'est pas de toi. Lis-la, et écris **sur ton cahier** ce que rend `insere_partout(2 -> 3, 9)` : combien de listes, et lesquelles, dans l'ordre.
-
-    **N'exécute pas ce code tant que tu n'as pas écrit ta réponse.**
-
-    ```python
-    def insere_partout[T](lst: Liste[T], x: T) -> Liste[Liste[T]]:
-        if est_vide(lst):
-            return cons(cons(x, vide()), vide())
-        en_tete = cons(cons(x, lst), vide())
-        dans_la_queue = mapper(lambda p: cons(tete(lst), p), insere_partout(queue(lst), x))
-        return concat(en_tete, dans_la_queue)
-    ```
-
-    **2. Exécute.** Colle-la dans `liste.py`, appelle-la, compare à ta prédiction. Si elles diffèrent, c'est maintenant que tu apprends quelque chose : trouve **où exactement** ton idée et le code se séparent.
-
-    **3. Comprends.** Avec le code sous les yeux, réponds sur ton cahier.
-
-    - Que rend `insere_partout` sur la liste **vide** ? Pourquoi ce n'est pas la liste vide ?
-    - Combien de listes rend-elle sur une liste de `n` éléments ? Vérifie sur `2 -> 3 -> 4`.
-    - À quoi sert le `mapper` ? Dis en une phrase ce que `cons(tete(lst), p)` fait à chacune des listes rendues par l'appel récursif.
-    - Repère les **deux** endroits où une liste de listes est fabriquée, et dis ce que `concat` fait entre les deux.
-
-    ??? success "Réponses"
-        - Elle rend **une** liste, celle qui contient `x` tout seul. Il y a bien une façon d'insérer `x` dans une liste vide, et son résultat n'est pas vide.
-        - Elle en rend `n + 1`, parce qu'il y a `n + 1` positions où glisser un élément dans une liste de `n`. Sur `2 -> 3 -> 4`, quatre listes.
-        - L'appel récursif insère `x` partout dans la **queue**. À chacune des listes obtenues il manque la tête de `lst`, et `mapper` la remet devant chacune.
-        - `en_tete` est une liste qui contient **une seule** liste, celle où `x` est en premier. `dans_la_queue` contient toutes les autres. `concat` les met bout à bout.
-
-    **4. Modifie.** Échange les deux arguments du `concat`. Prédis d'abord ce que cela change, puis vérifie.
-
-    ??? success "Réponse"
-        Les mêmes listes, dans l'**ordre inverse** : `insere_partout(2 -> 3, 9)` rend alors `2 -> 3 -> 9`, puis `2 -> 9 -> 3`, puis `9 -> 2 -> 3`. Pour l'énoncé, cela ne change rien, l'ordre des permutations étant libre. Remets le code comme il était.
-
-    **5. Écris `permutations`.** Tu as maintenant tout ce qu'il faut.
-
-    ??? tip "Indice"
-        Trois fonctions en tout. `insere_partout`, que tu viens de lire. Une deuxième, qui prend les permutations **déjà trouvées** et un élément, applique `insere_partout` à chacune, et recolle les résultats bout à bout. Et `permutations` elle-même, qui tient alors en deux lignes : le cas de la liste vide, et un appel à la deuxième sur les permutations de la queue.
 
 !!! note "Une troisième fois, plus tard"
     Après la programmation objet, on réimplémentera cette même structure une **troisième** fois : une liste chaînée en **objet impératif**, avec des `while`. Même structure, trois paradigmes (fonctionnel, impératif, objet), de quoi mesurer ce que la récursivité apporte ici.
