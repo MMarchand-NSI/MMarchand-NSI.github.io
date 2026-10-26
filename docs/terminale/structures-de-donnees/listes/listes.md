@@ -232,11 +232,11 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
 !!! fondamental "Cas de base"
     J'hésite à t'expliquer ici ce que c'est, tellement c'est martelé en cours.
 
-    Le **cas de base** est celui où la réponse est immédiate, sans appel à soi-même : ici `Vide -> 0`. Le **cas récursif** est celui où la fonction s'appelle elle-même, et elle le fait toujours sur une **sous-structure** de ce qu'on lui a donné : ici `taille(queue)`, c'est-à-dire sur une liste strictement plus courte.
+    Un **cas de base** est un cas où la réponse est immédiate, sans appel à soi-même : ici `Vide -> 0`. Il peut y en avoir **plusieurs**, et c'est fréquent. Un **cas récursif** est un cas où la fonction s'appelle elle-même, et elle le fait toujours sur une **sous-structure** de ce qu'on lui a donné : ici `taille(queue)`, c'est-à-dire sur une liste strictement plus courte.
 
-    C'est cette deuxième chose qui assure la **terminaison**. Chaque appel porte sur une liste plus courte d'un maillon, donc on **converge** vers le cas de base, et comme une liste a une taille finie, on l'atteint en un nombre fini d'étapes. Le calcul finit.
+    C'est cette deuxième chose qui assure la **terminaison**. Chaque appel porte sur une liste plus courte d'un maillon, donc on **converge vers un cas de base**, et comme une liste a une taille finie, on en atteint un en un nombre fini d'étapes. Le calcul finit.
 
-    Si l'appel récursif ne rapproche pas du cas de base, par exemple `taille(lst)` au lieu de `taille(queue)`, rien ne converge, le calcul ne finit jamais, et la machine finit par refuser d'aller plus loin.
+    Si l'appel récursif ne rapproche d'**aucun** cas de base, par exemple `taille(lst)` au lieu de `taille(queue)`, rien ne converge, le calcul ne finit jamais, et la machine finit par refuser d'aller plus loin.
 
 !!! fondamental "Pour écrire, ne déroule pas"
     La trace sert à **comprendre** ce que fait la machine. Pour **écrire** une fonction récursive, on ne déroule rien : on fait confiance à l'appel sur la queue, comme le lutin fait confiance à l'autre lutin, et on se demande seulement quoi faire de sa réponse.
