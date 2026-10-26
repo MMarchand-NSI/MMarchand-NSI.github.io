@@ -1184,6 +1184,102 @@ map(fn(x) { 3 * x }, lst)   // les triples
 !!! tip "`filter` choisit, `map` transforme"
     `filter` **garde** ou **jette** des éléments (la liste peut rétrécir), alors que `map` **transforme** chaque élément (la liste garde sa taille). Ce sont deux outils très courants, et tu viens de les redécouvrir en remarquant que plusieurs fonctions n'en faisaient qu'une.
 
-## 5 Et maintenant, en Python
+## 5 Tout cela n'était qu'un seul pli
+
+Tu as factorisé deux fois. Les quatre fonctions qui gardaient des éléments n'en faisaient qu'une, `filter`, et les trois qui les transformaient n'en faisaient qu'une, `map`. On peut aller une fois de plus, et cette fois c'est presque tout le chapitre qui tombe.
+
+Mets côte à côte `somme` et `map`, et regarde ce qui change vraiment :
+
+```gleam
+Vide -> 0                             Vide -> Vide
+Cons(t, q) -> t + somme(q)            Cons(t, q) -> Cons(f(t), map(f, q))
+```
+
+Même squelette. Deux choses seulement changent : **ce qu'on rend sur `Vide`**, et **ce qu'on fait de la tête et du résultat de l'appel sur la queue**. On les passe toutes les deux en paramètre.
+
+```gleam
+pub fn foldr(lst: Liste(a), f: fn(a, b) -> b, depart: b) -> b {
+  case lst {
+    Vide -> depart
+    Cons(t, q) -> f(t, foldr(q, f, depart))
+  }
+}
+```
+
+!!! warning "Le piège, et il est unique"
+    Le second paramètre de `f` n'est **pas la queue**. C'est le **résultat déjà calculé** de l'appel sur la queue. C'est pour cela qu'on l'appelle `reste` ci-dessous et jamais `queue` : quand `f` est appelée, le travail sur la queue est **fini**, il ne reste qu'à en faire quelque chose.
+
+    C'est le lutin faignant une dernière fois : il reçoit sa tête d'un côté, la réponse de son voisin de l'autre, et il n'a plus qu'à les combiner.
+
+Et voilà des fonctions entières du chapitre, en une ligne chacune.
+
+```gleam
+pub fn taille(lst: Liste(a)) -> Int {
+  foldr(lst, fn(_, reste) { 1 + reste }, 0)
+}
+
+pub fn somme(lst: Liste(Int)) -> Int {
+  foldr(lst, fn(t, reste) { t + reste }, 0)
+}
+
+pub fn concat(l1: Liste(a), l2: Liste(a)) -> Liste(a) {
+  foldr(l1, fn(t, reste) { Cons(t, reste) }, l2)
+}
+
+pub fn map(f: fn(a) -> b, lst: Liste(a)) -> Liste(b) {
+  foldr(lst, fn(t, reste) { Cons(f(t), reste) }, Vide)
+}
+```
+
+Lis `concat` deux fois : on part de `l2` au lieu de `Vide`, on recolle chaque tête par-dessus, et c'est tout. La concaténation est un pli qui ne change rien, sauf son point de départ.
+
+!!! question "À toi"
+    Ces quatre-là sont **montrées**, pas à recopier : tu les as déjà dans ton fichier. Prends-en trois autres, `tous_vrais`, `au_moins_un_vrai` et `filter`, et **remplace tes versions** par des plis, sans aucun `case` sur la liste.
+
+    Puis relance `gleam test`. **Les tests que tu as déjà collés doivent rester verts** : ce sont les mêmes fonctions, écrites autrement. Tu n'as donc aucun test à ajouter, et c'est la meilleure preuve que tu puisses avoir.
+
+    ??? success "Corrigé Gleam"
+        ```gleam
+        pub fn tous_vrais(lst: Liste(Bool)) -> Bool {
+          foldr(lst, fn(t, reste) { t && reste }, True)
+        }
+
+        pub fn au_moins_un_vrai(lst: Liste(Bool)) -> Bool {
+          foldr(lst, fn(t, reste) { t || reste }, False)
+        }
+
+        pub fn filter(predicat: fn(a) -> Bool, lst: Liste(a)) -> Liste(a) {
+          foldr(
+            lst,
+            fn(t, reste) {
+              case predicat(t) {
+                True -> Cons(t, reste)
+                False -> reste
+              }
+            },
+            Vide,
+          )
+        }
+        ```
+
+### 5.1 Ce que le pli ne sait pas faire
+
+Sur les vingt-trois fonctions des exercices, **dix-sept** s'écrivent ainsi. Les six autres résistent, et elles résistent pour trois raisons qui valent d'être vues.
+
+- `take`, `drop` et `slice` doivent transporter un **compteur**, que le pli ne prévoit pas.
+- `supprimer` enlève la **première** occurrence, or `foldr` travaille depuis la **droite** : écrit naïvement avec un pli, il enlève la dernière.
+- `sont_egales` regarde **deux** listes à la fois, le pli n'en consomme qu'une.
+- `repete` ne consomme **aucune** liste, il en fabrique une à partir d'un entier. Ce n'est pas un pli du tout, c'est son exact contraire.
+
+Un outil qui couvre dix-sept cas sur vingt-trois est un bon outil. Un outil dont tu sais nommer les six qu'il ne couvre pas est un outil que tu maîtrises.
+
+??? note "Pour aller plus loin : ce pli porte un nom"
+    `foldr` s'appelle un **catamorphisme**, du grec *kata*, « vers le bas » : il descend la structure et la réduit. Son contraire, qui fabrique une structure à partir d'une graine, comme `repete`, s'appelle un **anamorphisme**, *ana*, « vers le haut ».
+
+    Les deux viennent d'un article de 1991 au titre inoubliable, Meijer, Fokkinga et Paterson, *Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire*, qui les note avec quatre sortes de crochets, d'où le titre. On y lit noir sur blanc que `filter` est un catamorphisme, au même titre que `length`.
+
+    La bibliothèque standard de Gleam a les siens, `list.fold` et `list.fold_right`, et Python a `functools.reduce`.
+
+## 6 Et maintenant, en Python
 
 Tu as les algorithmes. Il reste à les écrire dans le langage de l'épreuve, et c'est l'objet de la page suivante : [Transcription en Python](transcription-python.md). La structure y est la même, portée par des primitives `vide`, `cons`, `tete`, `queue` et `est_vide`, et chaque fonction y retrouve la sienne.
