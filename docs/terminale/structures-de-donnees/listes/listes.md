@@ -3,21 +3,48 @@
 !!! danger "Ce ne sont pas les listes Python"
     Ici, on ne parle **pas** des listes Python (qui sont en réalité des *tableaux dynamiques*). On étudie la **vraie** structure de liste, définie récursivement.
 
-La **récursivité** est la **généralisation totale** du principe de **récurrence** que tu connais en mathématiques. Les listes sont l'outil idéal pour **faire ses premiers pas en récursivité**.
+La **récursivité** **généralise** le principe de **récurrence** que tu connais en mathématiques. Les listes sont l'outil idéal pour **faire ses premiers pas en récursivité**.
+
+??? note "Pour l'enseignant (non destiné aux élèves) : pourquoi « généralisation de la récurrence »"
+    **$\mathbb{N}$ est une liste comme une autre.** Peano définit les entiers naturels exactement comme ce chapitre définit la liste : un cas de base, et un constructeur qui s'applique à un objet du même type.
+
+    ```gleam
+    pub type Nat {
+      Zero
+      Succ(Nat)
+    }
+    ```
+
+    `Nat` est une `Liste` dont les maillons ne portent aucune information : `Succ(Succ(Zero))` est `Cons(_, Cons(_, Vide))` sans les têtes. La fonction `taille` est d'ailleurs exactement l'oubli des têtes, de `Liste(a)` vers `Nat`.
+
+    **Un seul fait, deux outils.** Un type défini ainsi est le **plus petit ensemble** qui contient les cas de base et qui est stable par les constructeurs. Ce fait unique donne de quoi démontrer et de quoi définir :
+
+    | | Sur $\mathbb{N}$ (le cours de maths) | Sur les listes, et tout type défini par constructeurs |
+    |---|---|---|
+    | **Démontrer** | récurrence : $P(0)$, et $P(n) \Rightarrow P(n+1)$ | récurrence structurelle : $P(\texttt{Vide})$, et $P(q) \Rightarrow P(\texttt{Cons}(x, q))$ pour tout $x$ |
+    | **Définir** | suite récurrente : $u_0 = a$, $u_{n+1} = f(n, u_n)$ | fonction récursive : un cas par constructeur, appel sur la sous-structure |
+
+    La récurrence du lycée est la colonne $\mathbb{N}$ de ce tableau. La généralisation consiste à remplacer « $n+1$ » par « n'importe quel constructeur » et « $n$ » par « ses sous-structures ». Un arbre binaire (`Vide` ou `Noeud(gauche, valeur, droite)`) donne ainsi une hérédité à **deux** hypothèses, une par sous-arbre.
+
+    **Ce que cela donne dans le code.** Dans `taille`, le cas `Vide` est l'**initialisation**, le cas `Cons` est l'**hérédité**, et l'appel `taille(queue)` est l'**hypothèse de récurrence**. Prouver que `taille` est juste est une récurrence structurelle mot pour mot : juste sur `Vide`, et si `taille(queue)` est juste, `1 + taille(queue)` l'est aussi. C'est le « saut de foi » de *How to Design Programs* (Felleisen et al., section 9), que ses auteurs relient eux-mêmes à l'usage de l'hypothèse de récurrence. Le lutin qui fait confiance à l'autre lutin, c'est cette hypothèse. La **terminaison** vient avec : chaque appel porte sur une sous-structure stricte, et on ne descend pas indéfiniment dans un objet construit en un nombre fini d'étapes.
+
+    **Où « totale » demande une réserve.** L'énoncé est exact pour la récursivité **structurelle**, celle de ce chapitre. Il s'étend à la récursivité sur une **mesure qui décroît** (tri fusion, `pgcd`), qui relève de la récurrence forte. Mais un langage de programmation accepte aussi des fonctions récursives qui ne terminent pas, ou dont on ignore si elles terminent (la suite de Syracuse). Celles-là ne s'adossent à aucune récurrence : la récursivité générale **déborde** la récurrence, elle ne s'y réduit pas. C'est ce qui sépare ce chapitre de celui sur la calculabilité.
+
+    *Source du terme* : R. M. Burstall (1969), « Proving Properties of Programs by Structural Induction », *The Computer Journal* 12(1), 41-48, [DOI 10.1093/comjnl/12.1.41](https://doi.org/10.1093/comjnl/12.1.41).
 
 ## 1 Les listes récursives
 
 ### 1.1 La structure : deux possibilités
 
-Imaginez un **lutin** à qui on tend une liste. Il n'a que **deux possibilités** devant lui :
+Imagine un **lutin** à qui on tend une liste. Il n'a que **deux possibilités** devant lui :
 
-- soit la liste est **vide** ;
+- soit la liste est **vide**
 - soit c'est un élément, la **tête**, suivi d'une autre liste, la **queue**.
 
 !!! abstract "Définition récursive d'une liste"
     Une liste est :
 
-    1. soit **vide** ;
+    1. soit **vide**
     2. soit une **tête** (un élément) suivie d'une **queue** (qui est elle-même une liste).
 
 On **définit la liste avec sa propre définition** : c'est une structure **récursive**. On l'écrit ainsi :
@@ -49,20 +76,18 @@ pub type Liste(a) {
     - Le compilateur est un allié : messages d'erreur clairs, et il t'**empêche d'oublier un cas**.
 
 !!! note "Mise en place"
-    Dans un terminal, exécute la commande `nsi install gleam`, puis écris tes fichiers dans le répertoire `src`. Pour exécuter ton code : `gleam run`. Pour afficher une valeur et l'observer, utilise `io.debug(...)` (après un `import gleam/io` en haut du fichier).
+    Dans un terminal, exécute la commande `nsi install gleam`, puis écris tes fichiers dans le répertoire `src`. Pour exécuter ton code : `gleam run`. Pour afficher une valeur et l'observer, écris `echo` devant elle : `echo exemple`.
 
 La liste dont la tête est `2`, suivie de `3`, puis `4`, puis la fin :
 
 ```gleam
-import gleam/io
-
 pub fn main() {
   let exemple = Cons(2, Cons(3, Cons(4, Vide)))
-  io.debug(exemple)
+  echo exemple
 }
 ```
 
-`gleam run` affiche `Cons(2, Cons(3, Cons(4, Vide)))`.
+`gleam run` affiche le nom du fichier et le numéro de la ligne de `echo`, puis `Cons(2, Cons(3, Cons(4, Vide)))`.
 
 !!! question "Construire"
     Écris, dans `main`, la liste des trois chaînes `"rouge"`, `"vert"`, `"bleu"`, puis affiche-la.
@@ -70,7 +95,7 @@ pub fn main() {
     ??? success "Corrigé"
         ```gleam
         let couleurs = Cons("rouge", Cons("vert", Cons("bleu", Vide)))
-        io.debug(couleurs)
+        echo couleurs
         ```
 
 ### 1.3 La disjonction de cas
@@ -84,7 +109,7 @@ case lst {
 }
 ```
 
-- **un cas par constructeur** : le cas `Vide`, et le cas `Cons` ;
+- **un cas par constructeur** : le cas `Vide`, et le cas `Cons`
 - `Cons(tete, queue)` **déconstruit** la liste : ça donne un nom à la tête (`tete`) et à la queue (`queue`).
 
 !!! warning "Piège, et garde-fou : les deux cas, toujours"
@@ -94,8 +119,8 @@ case lst {
 
 Presque toutes les fonctions sur les listes relèvent de l'un de ces trois types :
 
-- **lire** une liste : de la liste à une **valeur** (`taille`, `somme`, `contient`) ;
-- **construire** une liste : de la liste à une **nouvelle liste** (`inverser`, `concat`) ;
+- **lire** une liste : de la liste à une **valeur** (`taille`, `somme`, `contient`)
+- **construire** une liste : de la liste à une **nouvelle liste** (`inverser`, `concat`)
 - **faire pousser** une liste : d'une **graine** à une liste (`repete`).
 
 #### 1.4.1 Lire une liste : de la liste à une valeur
@@ -115,7 +140,7 @@ pub fn taille(lst: Liste(a)) -> Int {
 }
 ```
 
-Le raisonnement du lutin : *« Je ne sais pas compter toute la liste d'un coup. Mais je sais deux choses : une liste vide a pour taille 0 ; sinon, c'est 1 (pour ma tête) plus ce que comptera un autre lutin sur la queue. »*
+Le raisonnement du lutin : *« Je ne sais pas compter toute la liste d'un coup. Mais je sais deux choses : une liste vide a pour taille 0, et sinon c'est 1 (pour ma tête) plus ce que comptera un autre lutin sur la queue. »*
 
 - `_` remplace `tete` : ici on **ignore** la valeur de la tête (on n'en a pas besoin pour compter).
 
@@ -132,11 +157,33 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
 !!! info "C'est la pile d'appels"
     Chaque ligne où un lutin **attend** le résultat d'un autre est un appel **empilé** : la pile grandit à la descente (jusqu'à `Vide`), puis se vide à la remontée, quand chaque `1 + ...` se calcule enfin. Cette cascade **est** la **pile d'appels**, le mécanisme caché de toute récursion (on la retrouvera partout : arbres, tri fusion).
 
+!!! warning "Pour écrire, ne déroule pas"
+    La trace sert à **comprendre** ce que fait la machine. Pour **écrire** une fonction récursive, on ne déroule rien : on fait confiance à l'appel sur la queue, comme le lutin fait confiance à l'autre lutin, et on se demande seulement quoi faire de sa réponse.
+
 !!! question "Prédire"
-    Sans exécuter : que renvoie `taille(Cons(7, Cons(8, Vide)))` ?
+    Sans exécuter, écris la trace de `f(Cons(2, Cons(3, Cons(4, Vide))))` sur le modèle de celle de `taille`, puis donne le résultat.
+
+    ```gleam
+    pub fn f(lst: Liste(Int)) -> Int {
+      case lst {
+        Vide -> 0
+        Cons(tete, queue) -> tete - f(queue)
+      }
+    }
+    ```
 
     ??? success "Réponse"
-        `2`. Deux têtes avant d'atteindre `Vide`.
+        ```text
+        f(Cons(2, ...)) = 2 - f(Cons(3, ...))
+                        = 2 - (3 - f(Cons(4, Vide)))
+                        = 2 - (3 - (4 - f(Vide)))
+                        = 2 - (3 - (4 - 0))
+                        = 2 - (3 - 4)
+                        = 2 - (-1)
+                        = 3
+        ```
+
+        Si tu as trouvé `-5`, tu as calculé `2 - 3 - 4` de gauche à droite, comme une boucle. Les soustractions se font **à la remontée**, de la fin vers le début.
 
 ##### 1.4.1.2 À toi d'écrire
 
@@ -217,17 +264,17 @@ On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si de
         ??? success "Réponse"
             Chaque liste peut être `Vide` ou `Cons`, ce qui fait **quatre** cas (2 × 2) :
 
-            - `l1` vide et `l2` vide ;
-            - `l1` vide et `l2` non vide ;
-            - `l1` non vide et `l2` vide ;
+            - `l1` vide et `l2` vide
+            - `l1` vide et `l2` non vide
+            - `l1` non vide et `l2` vide
             - `l1` non vide et `l2` non vide.
 
     2. Que doit renvoyer la fonction dans **chacun** de ces cas ?
 
         ??? success "Réponse"
-            - deux listes vides : elles sont **égales**, on renvoie `True` ;
-            - `l1` vide, `l2` non vide : elles n'ont pas la même longueur, on renvoie `False` ;
-            - `l1` non vide, `l2` vide : même raison, `False` ;
+            - deux listes vides : elles sont **égales**, on renvoie `True`
+            - `l1` vide, `l2` non vide : elles n'ont pas la même longueur, on renvoie `False`
+            - `l1` non vide, `l2` vide : même raison, `False`
             - deux listes non vides : elles sont égales si leurs **têtes** sont égales **et** si leurs **queues** sont égales.
 
     3. Parmi ces quatre cas, lesquels sont des **cas de base** (la réponse est immédiate) et lesquels sont **récursifs** (il faut redemander à un autre lutin) ?
@@ -279,13 +326,16 @@ pub fn ajouter_fin(x: a, lst: Liste(a)) -> Liste(a) {
 
 Le **lutin ajouteur** : *« Si on me tend une liste vide, je renvoie une liste qui ne contient que `x`. Sinon, je garde la même tête, et pour la queue je demande à un autre lutin d'y ajouter `x`, puis je recolle. »*
 
-![alt text](image.png)
+![Deux lutins qui se passent le travail](image.png)
 
 !!! question "Inverser"
     Écris `inverser(lst: Liste(a)) -> Liste(a)` qui renvoie la liste à l'envers.
 
     ??? tip "Indice"
         Cas `Vide` : la liste renversée est `Vide`. Cas `Cons(tete, queue)` : renverse d'abord la **queue**, puis ajoute `tete` **à la fin** avec `ajouter_fin`.
+
+    ??? question "Avant d'ouvrir le corrigé"
+        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
     ??? success "Corrigé"
         ```gleam
@@ -312,9 +362,9 @@ Le **lutin ajouteur** : *« Si on me tend une liste vide, je renvoie une liste q
         }
         ```
 
-        - deux listes vides : le résultat est **vide** ;
-        - `l1` vide : le résultat est **`l2`** ;
-        - `l2` vide : le résultat est **`l1`** ;
+        - deux listes vides : le résultat est **vide**
+        - `l1` vide : le résultat est **`l2`**
+        - `l2` vide : le résultat est **`l1`**
         - deux non vides : on garde la tête de `l1`, et pour la suite on demande à un autre lutin de concaténer la queue de `l1` avec `l2`, puis on recolle.
 
 #### 1.4.3 Faire pousser une liste : d'une graine à une liste
@@ -332,6 +382,8 @@ case n {
 
 - `0 ->` : le cas où `n` vaut exactement `0`. C'est le **cas de base**.
 - `_ ->` : `_` attrape **toutes les autres valeurs**. C'est le **cas récursif**, où l'on rappelle la fonction avec `n - 1`.
+
+C'est exactement la **récurrence** de ton cours de maths : un cas pour 0, puis le cas $n$ obtenu à partir du cas $n - 1$. Les listes suivent la même idée : un cas pour `Vide`, puis le cas `Cons` obtenu à partir de la queue.
 - Les cas sont essayés **dans l'ordre** : `_` doit venir en dernier, sinon il attraperait aussi `0` (Gleam t'avertit alors que le cas `0` est inatteignable).
 
 !!! question "Répéter"
@@ -432,7 +484,7 @@ def somme(lst: Liste[int]) -> int:
 ```
 
 !!! warning "Ce que les `if` cachent"
-    Avec `if` / `else`, rien ne signale **combien** de cas il y a, ni qu'on les a **tous** couverts. La disjonction **exhaustive**, un cas par possibilité, que le `case` de Gleam rendait évidente, n'apparaît plus. En Gleam, le compilateur **vérifiait** cette exhaustivité ; avec des `if`, c'est à toi d'y veiller à chaque fois. (Python a aussi un `match`, voir la section 5.)
+    Avec `if` / `else`, rien ne signale **combien** de cas il y a, ni qu'on les a **tous** couverts. La disjonction **exhaustive**, un cas par possibilité, que le `case` de Gleam rendait évidente, n'apparaît plus. En Gleam, le compilateur **vérifiait** cette exhaustivité. Avec des `if`, c'est à toi d'y veiller à chaque fois. (Python a aussi un `match`, voir la section 5.)
 
 L'écart se voit encore mieux sur **deux** listes, où il y a **quatre** cas (chaque liste vide ou non). En `if`, ils **fondent** en conditions imbriquées, et on ne les distingue plus :
 
@@ -505,12 +557,12 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
 ## 4 Exercices
 
 !!! tip "Comment t'entraîner"
-    Écris chaque fonction **d'abord en Gleam** (avec `case`), puis **en Python** (avec des `if` et les accesseurs `tete` / `queue`). Fais la **disjonction de cas au papier** avant de coder. Le corrigé **Gleam** est replié sous chaque exercice ; le corrigé **Python**, avec ses tests, est dans le fichier `liste_immuable.py`. (Pour `to_str`, ajoute `import gleam/int` en tête du fichier Gleam.)
+    Écris chaque fonction **d'abord en Gleam** (avec `case`), puis **en Python** (avec des `if` et les accesseurs `tete` / `queue`). Fais la **disjonction de cas au papier** avant de coder. Le corrigé **Gleam** est replié sous chaque exercice. (Pour `to_str`, ajoute `import gleam/int` en tête du fichier Gleam.)
 
 ### 4.1 Lire une liste
 
 !!! question "to_str"
-    Renvoie une chaîne façon `"2 -> 3 -> 4 -> _|_"` (la liste vide donne `"_|_"`).
+    Écris `to_str(lst: Liste(Int)) -> String`, qui renvoie une chaîne façon `"2 -> 3 -> 4 -> _|_"` (la liste vide donne `"_|_"`).
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -523,7 +575,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
 !!! question "tous_vrais"
-    Renvoie `True` si **tous** les booléens de la liste sont vrais. La liste vide donne `True` (rien ne le contredit).
+    Écris `tous_vrais(lst: Liste(Bool)) -> Bool`, qui renvoie `True` si **tous** les booléens de la liste sont vrais. La liste vide donne `True` (rien ne le contredit).
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -536,7 +588,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
 !!! question "au_moins_un_vrai"
-    Renvoie `True` si **au moins un** booléen est vrai. La liste vide donne `False`.
+    Écris `au_moins_un_vrai(lst: Liste(Bool)) -> Bool`, qui renvoie `True` si **au moins un** booléen est vrai. La liste vide donne `False`.
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -549,7 +601,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
 !!! question "compte"
-    Compte le nombre d'occurrences d'un élément. `compte(3, 2 -> 3 -> 4)` vaut `1`.
+    Écris `compte(e: a, lst: Liste(a)) -> Int`, qui compte le nombre d'occurrences d'un élément. `compte(3, 2 -> 3 -> 4)` vaut `1`.
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -570,7 +622,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
 #### 4.2.1 Prendre, sauter, supprimer
 
 !!! question "take"
-    Renvoie les `n` premiers éléments. `take(2, 2 -> 3 -> 4)` donne `2 -> 3`. Si `n` dépasse la taille, on prend tout.
+    Écris `take(n: Int, lst: Liste(a)) -> Liste(a)`, qui renvoie les `n` premiers éléments. `take(2, 2 -> 3 -> 4)` donne `2 -> 3`. Si `n` dépasse la taille, on prend tout.
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -587,7 +639,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
 !!! question "drop"
-    Renvoie la liste **sans** ses `n` premiers éléments. `drop(1, 2 -> 3 -> 4)` donne `3 -> 4`.
+    Écris `drop(n: Int, lst: Liste(a)) -> Liste(a)`, qui renvoie la liste **sans** ses `n` premiers éléments. `drop(1, 2 -> 3 -> 4)` donne `3 -> 4`.
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -604,7 +656,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
 !!! question "supprimer"
-    Renvoie une liste privée de la **première** occurrence d'un élément. `supprimer(3, 2 -> 3 -> 4)` donne `2 -> 4`.
+    Écris `supprimer(e: a, lst: Liste(a)) -> Liste(a)`, qui renvoie une liste privée de la **première** occurrence d'un élément. `supprimer(3, 2 -> 3 -> 4)` donne `2 -> 4`.
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -625,7 +677,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
 On **garde** certains éléments selon une **condition**. Écris ces quatre fonctions, puis regarde ce qu'elles ont en commun. (En Python, ce sont des variantes de `pairs` : on change la condition.)
 
 !!! question "pairs"
-    Garde les éléments **pairs**. `2 -> 3 -> 4` donne `2 -> 4`.
+    Écris `pairs(lst: Liste(Int)) -> Liste(Int)`, qui garde les éléments **pairs**. `2 -> 3 -> 4` donne `2 -> 4`.
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -642,7 +694,7 @@ On **garde** certains éléments selon une **condition**. Écris ces quatre fonc
         ```
 
 !!! question "impairs"
-    Garde les éléments **impairs**. `2 -> 3 -> 4` donne `3`.
+    Écris `impairs(lst: Liste(Int)) -> Liste(Int)`, qui garde les éléments **impairs**. `2 -> 3 -> 4` donne `3`.
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -659,7 +711,7 @@ On **garde** certains éléments selon une **condition**. Écris ces quatre fonc
         ```
 
 !!! question "positifs"
-    Garde les éléments **strictement positifs**. `2 -> -3 -> 4` donne `2 -> 4`.
+    Écris `positifs(lst: Liste(Int)) -> Liste(Int)`, qui garde les éléments **strictement positifs**. `2 -> -3 -> 4` donne `2 -> 4`.
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -676,7 +728,7 @@ On **garde** certains éléments selon une **condition**. Écris ces quatre fonc
         ```
 
 !!! question "negatifs"
-    Garde les éléments **strictement négatifs**. `2 -> -3 -> 4` donne `-3`.
+    Écris `negatifs(lst: Liste(Int)) -> Liste(Int)`, qui garde les éléments **strictement négatifs**. `2 -> -3 -> 4` donne `-3`.
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -721,7 +773,7 @@ filtrer(fn(x) { x < 0 }, lst)        // les négatifs
 Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces trois fonctions.
 
 !!! question "carres"
-    Renvoie les **carrés**. `2 -> 3 -> 4` donne `4 -> 9 -> 16`.
+    Écris `carres(lst: Liste(Int)) -> Liste(Int)`, qui renvoie les **carrés**. `2 -> 3 -> 4` donne `4 -> 9 -> 16`.
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -734,7 +786,7 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
         ```
 
 !!! question "doubles"
-    Renvoie les **doubles**. `2 -> 3 -> 4` donne `4 -> 6 -> 8`.
+    Écris `doubles(lst: Liste(Int)) -> Liste(Int)`, qui renvoie les **doubles**. `2 -> 3 -> 4` donne `4 -> 6 -> 8`.
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -747,7 +799,7 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
         ```
 
 !!! question "triples"
-    Renvoie les **triples**. `2 -> 3 -> 4` donne `6 -> 9 -> 12`.
+    Écris `triples(lst: Liste(Int)) -> Liste(Int)`, qui renvoie les **triples**. `2 -> 3 -> 4` donne `6 -> 9 -> 12`.
 
     ??? success "Corrigé Gleam"
         ```gleam
@@ -777,23 +829,25 @@ mapper(fn(x) { 3 * x }, lst)   // les triples
 ```
 
 !!! tip "filtrer choisit, mapper transforme"
-    `filtrer` **garde** ou **jette** des éléments (la liste peut rétrécir) ; `mapper` **transforme** chaque élément (la liste garde sa taille). Ce sont deux outils très courants, et tu viens de les redécouvrir en remarquant que plusieurs fonctions n'en faisaient qu'une.
+    `filtrer` **garde** ou **jette** des éléments (la liste peut rétrécir), alors que `mapper` **transforme** chaque élément (la liste garde sa taille). Ce sont deux outils très courants, et tu viens de les redécouvrir en remarquant que plusieurs fonctions n'en faisaient qu'une.
 
 ### 4.3 En Python seulement
 
 !!! warning "Pourquoi pas en Gleam"
-    Les fonctions qui suivent peuvent **échouer** sur certaines entrées : une liste vide n'a pas de dernier élément, un indice peut sortir des bornes. En Python, on le signale par une **assertion** qui lève une erreur. En Gleam, il n'y a pas d'exception : il faudrait renvoyer un `Result` ou un `Option` pour dire « ça a échoué », une notion qu'on verra plus tard. On les fait donc **uniquement en Python**. Les corrigés (avec leurs tests) sont dans `liste_immuable.py`.
+    Les fonctions qui suivent peuvent **échouer** sur certaines entrées : une liste vide n'a pas de dernier élément, un indice peut sortir des bornes. En Python, on le signale par une **assertion** qui lève une erreur. En Gleam, il n'y a pas d'exception : il faudrait renvoyer un `Result` ou un `Option` pour dire « ça a échoué », une notion qu'on verra plus tard. On les fait donc **uniquement en Python**.
 
 À écrire en Python (avec `assert` pour les préconditions) :
 
-- **`dernier_element(lst)`** : le dernier élément (erreur si la liste est vide).
-- **`avant_dernier_element(lst)`** : l'avant-dernier (erreur si moins de deux éléments).
-- **`minimum(lst)`** : le plus petit élément (erreur si la liste est vide).
-- **`get_n(n, lst)`** : l'élément d'indice `n` (erreur si hors bornes).
-- **`insert(e, n, lst)`** : insère `e` à l'indice `n` (erreur si hors bornes).
-- **`supprimer_n(n, lst)`** : supprime l'élément d'indice `n` (erreur si hors bornes).
-- **`supprimer_fin(lst)`** : supprime le dernier élément (erreur si la liste est vide).
-- **`trier(lst)`** : tri par sélection (il s'appuie sur `minimum`, donc entraîné lui aussi côté Python).
+- **`dernier_element[T](lst: Liste[T]) -> T`** : le dernier élément (erreur si la liste est vide).
+- **`avant_dernier_element[T](lst: Liste[T]) -> T`** : l'avant-dernier (erreur si moins de deux éléments).
+- **`minimum(lst: Liste[int]) -> int`** : le plus petit élément (erreur si la liste est vide).
+- **`get_n[T](n: int, lst: Liste[T]) -> T`** : l'élément d'indice `n` (erreur si hors bornes).
+- **`insert[T](e: T, n: int, lst: Liste[T]) -> Liste[T]`** : insère `e` à l'indice `n` (erreur si hors bornes).
+- **`supprimer_n[T](n: int, lst: Liste[T]) -> Liste[T]`** : supprime l'élément d'indice `n` (erreur si hors bornes).
+- **`supprimer_fin[T](lst: Liste[T]) -> Liste[T]`** : supprime le dernier élément (erreur si la liste est vide).
+- **`trier(lst: Liste[int]) -> Liste[int]`** : tri par sélection (il s'appuie sur `minimum`, donc entraîné lui aussi côté Python).
+
+Pour chaque fonction, écris aussi une fonction `test_<nom>` qui contient des `assert`, y compris un cas limite (liste vide, indice au bord).
 
 ## 5 Pour aller plus loin
 

@@ -73,13 +73,24 @@ On considère maintenant la suite $\displaystyle Q_n = \frac{P_{n-1}P_{n+1}}{P_n
 
 - En jouant avec cette fonction, conjecturer sur $\displaystyle \lim_{n \to \infin}Q_n$
 
-- Montrez que $\displaystyle \frac{P_{n+1}}{P_n} = \prod_{k=0}^{n} \frac{n+1}{n+1-k}$ sachant que:
+Soit $\displaystyle R_n = \frac{P_{n+1}}{P_n}$:
+
+- Montrez que $\displaystyle R_n  = \prod_{k=0}^{n} \frac{n+1}{n+1-k}$ sachant que:
     - $\displaystyle P_n = \prod_{k=0}^{n} \binom{n}{k}$
     - $\displaystyle \binom{n}{k} = \frac{n!}{k!(n-k)!}$ (C'est bien de savoir le montrer par récurrence)
 
-- En déduire que $\displaystyle \frac{P_{n+1}}{P_n} = \frac{(n+1)^n}{n!}$
+- En déduire que $\displaystyle R_n = \frac{(n+1)^n}{n!}$
 
-- Vous avez fait le plus dur. Démontrez votre conjecture en conséquence. Il faudra se ramener à une limite éminemment célèbre.
+Vous avez fait le plus dur.
+
+- Montrer que $\displaystyle Q_n = \frac{R_n}{R_{n-1}}$
+
+- Montrer que $\displaystyle Q_n = (1 + \frac{1}{n})^n$
+
+Cette suite est éminement célèbre, soit vous connaissez sa limite, soit vous la cherchez. On ne demande pas de la démontrer.
+
+- Conclure sur $\displaystyle \lim_{n \to \infin}Q_n$
+
 
 !!! tip "Interprétation"
     - $\displaystyle \frac{P_{n+1}}{P_n}$ mesure les rapports successifs de $P_n$, elle est donc une mesure "d'évolution".
