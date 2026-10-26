@@ -715,7 +715,7 @@ def sont_egales(l1: Liste, l2: Liste) -> bool:
     return tete(l1) == tete(l2) and sont_egales(queue(l1), queue(l2))
 ```
 
-La grande différence reste que **Gleam n'a pas de boucle** : la récursivité y était le seul chemin, alors qu'en Python on la **choisit**, parce que c'est la **structure** qui l'appelle. Toutes les autres fonctions (`contient`, `inverser`, `concat`, `repete`) se transposent de la même manière.
+La grande différence reste que **Gleam n'a pas de boucle** : la récursivité y était le seul chemin, alors qu'en Python on la **choisit**, parce que c'est la **structure** qui l'appelle. Toutes les autres fonctions (`contient`, `inverser`, `concat`, `repete`) se transposent de la même manière, et c'est ce que tu feras sur la page [Transcription en Python](transcription-python.md), une fois les versions Gleam écrites.
 
 !!! note "Une troisième fois, plus tard"
     Après la programmation objet, on réimplémentera cette même structure une **troisième** fois : une liste chaînée en **objet impératif** (avec des `while`). Même structure, trois paradigmes (fonctionnel, impératif, objet), de quoi mesurer ce que la récursivité apporte ici.
@@ -775,7 +775,9 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
 ## 4 Exercices
 
 !!! tip "Comment t'entraîner"
-    Écris chaque fonction **d'abord en Gleam** (avec `case`), puis **en Python** (avec des `if` et les accesseurs `tete` / `queue`). Fais la **disjonction de cas au papier** avant de coder. Sous chaque exercice, son **test** à coller dans `test/liste_test.gleam`, puis son corrigé **Gleam**. (Pour `to_str`, ajoute `import gleam/int` en tête de `src/liste.gleam`.)
+    Écris chaque fonction **en Gleam**, avec `case`. Fais la **disjonction de cas au papier** avant de coder. Sous chaque exercice, son **test** à coller dans `test/liste_test.gleam`, puis son corrigé. (Pour `to_str`, ajoute `import gleam/int` en tête de `src/liste.gleam`.)
+
+    Quand tu les auras toutes, tu les réécriras **en Python** : c'est l'objet de la page [Transcription en Python](transcription-python.md), où les algorithmes seront déjà les tiens et où il ne restera que la syntaxe.
 
 ### 4.1 Lire une liste
 
