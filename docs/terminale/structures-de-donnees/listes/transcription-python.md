@@ -651,7 +651,7 @@ Aucune version n'existe d'avance, ni en Gleam ni en Python, et la solution n'est
 
     - `permutations(1 -> 2)` rend deux listes, `1 -> 2` et `2 -> 1`, dans l'ordre que tu veux
     - `permutations(1 -> 2 -> 3)` en rend **six**
-    - sur la liste vide, le résultat est **une** liste, qui est la liste vide : il y a exactement une façon de n'ordonner rien, et ce n'est pas zéro
+    - sur la liste vide, le résultat est **une** liste, qui est la liste vide. Il y a exactement une façon d'ordonner « rien », c'est de ne rien faire. Et ne rien faire, c'est quelque chose
 
     ??? tip "Indice : commence par une autre fonction"
         Suppose les permutations de la **queue** déjà obtenues. Il reste à y faire entrer la tête, et elle peut entrer à **toutes les positions** de chacune. Écris donc d'abord la fonction qui rend la liste de toutes les listes obtenues en insérant un élément à chaque position :
