@@ -5,19 +5,31 @@ from pathlib import Path
 
 log = logging.getLogger('mkdocs')
 
-# Cache pour le fichier de configuration des corrections
+# Cache pour le fichier de configuration des corrections, invalidé par la date
+# de modification du fichier
 _corrections_config = None
+_corrections_mtime = None
 
 def _load_corrections_config():
-    """Charge la configuration des corrections depuis corrections.yml"""
-    global _corrections_config
-    if _corrections_config is None:
-        config_path = Path(__file__).parent / 'corrections.yml'
+    """Charge la configuration des corrections depuis corrections.yml
+
+    Le fichier est relu dès que sa date de modification change. Sans cela, une
+    modification de corrections.yml n'était prise en compte qu'au redémarrage de
+    mkdocs serve, qui ne réimporte jamais ce module. Voir la clé watch de
+    mkdocs.yml, qui déclenche la reconstruction.
+    """
+    global _corrections_config, _corrections_mtime
+    config_path = Path(__file__).parent / 'corrections.yml'
+    mtime = config_path.stat().st_mtime if config_path.exists() else None
+
+    if _corrections_config is None or mtime != _corrections_mtime:
         if config_path.exists():
             with open(config_path, 'r', encoding='utf-8') as f:
                 _corrections_config = yaml.safe_load(f) or {}
         else:
             _corrections_config = {}
+        _corrections_mtime = mtime
+
     return _corrections_config
 
 def _should_show_corrections(page_path: str) -> bool:
@@ -46,6 +58,33 @@ _SOLUTION_PROJET_RE = re.compile(
     r'^(\s*)\?\?\?\+?\s+(\w+\s+"(Solution( de la question \d+)?|Vérifier sa solution|Avant d\'ouvrir la solution)"'
     r'|warning\s+"Correction")'
 )
+
+# Blocs retirés en plus sur les pages listées sous hide_solutions : la question
+# « Avant d'ouvrir la correction », qui n'a plus d'objet quand la correction
+# qu'elle annonce est masquée. Les corrections de code elles-mêmes sont déjà
+# prises par _CORRECTION_RE, puisqu'elles s'écrivent en warning.
+# Sur ces pages, tout bloc de réponse s'intitule « Correction » : c'est le TYPE
+# d'admonition qui décide, warning pour la correction de code, masquée, et
+# success pour celle d'un exercice sur le cahier, que l'élève peut ouvrir.
+_SOLUTION_PAGE_RE = re.compile(
+    r'^(\s*)\?\?\?\+?\s+warning\s+"Correction"'
+    r'|^(\s*)\?\?\?\+?\s+\w+\s+"Avant d\'ouvrir [^"]*"'
+)
+
+def _should_hide_solutions(page_path: str) -> bool:
+    """Vérifie si l'auto-explication doit être masquée avec les corrections.
+
+    Vrai pour les chemins listés sous hide_solutions dans corrections.yml
+    (un fichier, ou un préfixe de répertoire). Les pages de projets/ relèvent
+    d'une autre règle, qui masque en plus les blocs intitulés « Solution ».
+    """
+    page_path = page_path.replace('\\', '/')
+    config = _load_corrections_config()
+    for entree in config.get('hide_solutions') or []:
+        entree = entree.replace('\\', '/').rstrip('/')
+        if page_path == entree or page_path.startswith(entree + '/'):
+            return True
+    return False
 
 def _remove_corrections(markdown: str, pattern: re.Pattern = _CORRECTION_RE) -> str:
     """Supprime du markdown les blocs repliables dont l'en-tête correspond à pattern"""
@@ -93,7 +132,9 @@ def on_page_markdown(markdown, page, config, files):
     # Masquer les corrections si le fichier n'est pas dans la liste
     src_path = page.file.src_path.replace('\\', '/')
     if not _should_show_corrections(src_path):
-        if src_path.startswith('projets/'):
+        if _should_hide_solutions(src_path):
+            markdown = _remove_corrections(markdown, _SOLUTION_PAGE_RE)
+        elif src_path.startswith('projets/'):
             markdown = _remove_corrections(markdown, _SOLUTION_PROJET_RE)
         else:
             markdown = _remove_corrections(markdown)

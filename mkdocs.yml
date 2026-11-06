@@ -3,11 +3,19 @@ docs_dir: docs
 hooks:
   - hooks.py
 
+# mkdocs serve ne surveille que docs/ et ce fichier-ci. Sans cette clé, une
+# modification de corrections.yml n'était vue qu'au redémarrage du serveur.
+# hooks.py, lui, n'est chargé qu'une fois par processus : le modifier impose
+# toujours un redémarrage.
+watch:
+  - corrections.yml
+
 site_url: https://mmarchand-nsi.github.io/
 
 draft_docs: |
   première/prog/tuples.md
   recherche/hyperoperation.md
+  terminale/structures-de-donnees/listes/listeschainees.md
   
 copyright: >
   Copyright &copy; 2025 Matthieu Marchand - 
