@@ -33,7 +33,7 @@ b
     2. Combien de tours fait `for i in range(3, 8)`, et quelle est la **dernière** valeur prise par `i` ?
     3. Une fonction peut-elle renvoyer deux valeurs ? Comment ferais-tu, avec ce que tu sais déjà ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. Avec une variable temporaire : `temp = a`, `a = b`, `b = temp`.
         2. Cinq tours, et la dernière valeur de `i` est `7`. L'intervalle est **semi-ouvert** : `3` est inclus, `8` est exclu.
         3. Elle le peut, et c'est précisément l'objet de cette page. Sans le tuple, on s'en tirerait en renvoyant une liste de deux éléments.

@@ -47,44 +47,34 @@ def _should_show_corrections(page_path: str) -> bool:
     # Vérifier si le fichier est dans la liste
     return page_path in show_list
 
-# Blocs retirés sur toutes les pages
-_CORRECTION_RE = re.compile(r'^(\s*)\?\?\?\+?\s+warning\s+"Correction"')
-
-# Blocs retirés en plus dans les projets : les solutions de code (titre
-# « Solution »), et la question « Avant d'ouvrir la solution » qui n'a plus
-# d'objet sans elle. Les « Réponse » des exercices préparatoires sur le cahier
-# et les indices sont conservés.
-_SOLUTION_PROJET_RE = re.compile(
-    r'^(\s*)\?\?\?\+?\s+(\w+\s+"(Solution( de la question \d+)?|Vérifier sa solution|Avant d\'ouvrir la solution)"'
-    r'|warning\s+"Correction")'
-)
-
-# Blocs retirés en plus sur les pages listées sous hide_solutions : la question
-# « Avant d'ouvrir la correction », qui n'a plus d'objet quand la correction
-# qu'elle annonce est masquée. Les corrections de code elles-mêmes sont déjà
-# prises par _CORRECTION_RE, puisqu'elles s'écrivent en warning.
-# Sur ces pages, tout bloc de réponse s'intitule « Correction » : c'est le TYPE
-# d'admonition qui décide, warning pour la correction de code, masquée, et
-# success pour celle d'un exercice sur le cahier, que l'élève peut ouvrir.
-_SOLUTION_PAGE_RE = re.compile(
-    r'^(\s*)\?\?\?\+?\s+warning\s+"Correction"'
-    r'|^(\s*)\?\?\?\+?\s+\w+\s+"Avant d\'ouvrir [^"]*"'
-)
-
-def _should_hide_solutions(page_path: str) -> bool:
-    """Vérifie si l'auto-explication doit être masquée avec les corrections.
-
-    Vrai pour les chemins listés sous hide_solutions dans corrections.yml
-    (un fichier, ou un préfixe de répertoire). Les pages de projets/ relèvent
-    d'une autre règle, qui masque en plus les blocs intitulés « Solution ».
-    """
-    page_path = page_path.replace('\\', '/')
-    config = _load_corrections_config()
-    for entree in config.get('hide_solutions') or []:
-        entree = entree.replace('\\', '/').rstrip('/')
-        if page_path == entree or page_path.startswith(entree + '/'):
-            return True
-    return False
+# UNE SEULE CONVENTION, ET C'EST LE TYPE QUI DÉCIDE (08/11/2026).
+#
+# Le titre d'un bloc de réponse commence toujours par « Correction », et celui
+# de l'invite d'auto-explication par « Avant d'ouvrir la correction ». Ce qui
+# décide du masquage est le TYPE de l'admonition, pas son titre :
+#
+#   ??? warning  "Correction..."                      masqué
+#   ??? success  "Correction..."                      ouvrable (exercice sur le cahier)
+#   ??? question "Avant d'ouvrir la correction..."    masqué, avec sa correction
+#   ??? note     "Avant d'ouvrir la correction..."    ouvrable, comme sa correction
+#
+# Pourquoi cette réécriture. Le motif précédent exigeait le titre EXACT
+# « Correction », si bien qu'un synonyme portant le bon type, `warning
+# "Corrigé"` ou `warning "Réponse"`, n'était pas reconnu et partait en ligne.
+# Mesure du 08/11/2026 avant correction : 53 blocs sur 16 pages dans ce cas,
+# dont 7 sur Numération/conversion-bases.md. Rien ne le signalait, la page
+# était valide et le bloc replié. Les titres ont été harmonisés le même jour
+# (511 en-têtes, 69 fichiers) et le motif accepte désormais un COMPLÉMENT
+# après « Correction », pour garder l'information des titres composés
+# (« Correction BFS », « Correction : partie A »).
+#
+# Et les deux motifs spéciaux ont disparu avec cette harmonisation. Il y en
+# avait un pour projets/ et un pour les pages de hide_solutions, chacun
+# énumérant des titres ; ils encodaient en réalité une politique de masquage
+# dans un nom, ce que le type dit mieux. La clé hide_solutions de
+# corrections.yml n'a donc plus d'effet, et show_corrections garde le sien.
+_CORRECTION_RE = re.compile(r'^(\s*)\?\?\?\+?\s+warning\s+"Correction')
+_INVITE_RE = re.compile(r'^(\s*)\?\?\?\+?\s+question\s+"Avant d\'ouvrir la correction')
 
 def _remove_corrections(markdown: str, pattern: re.Pattern = _CORRECTION_RE) -> str:
     """Supprime du markdown les blocs repliables dont l'en-tête correspond à pattern"""
@@ -132,11 +122,7 @@ def on_page_markdown(markdown, page, config, files):
     # Masquer les corrections si le fichier n'est pas dans la liste
     src_path = page.file.src_path.replace('\\', '/')
     if not _should_show_corrections(src_path):
-        if _should_hide_solutions(src_path):
-            markdown = _remove_corrections(markdown, _SOLUTION_PAGE_RE)
-        elif src_path.startswith('projets/'):
-            markdown = _remove_corrections(markdown, _SOLUTION_PROJET_RE)
-        else:
-            markdown = _remove_corrections(markdown)
+        markdown = _remove_corrections(markdown, _CORRECTION_RE)
+        markdown = _remove_corrections(markdown, _INVITE_RE)
 
     return markdown

@@ -5,7 +5,7 @@
     2. Quelle est la seule ligne où le OU et le OU EXCLUSIF donnent des résultats différents ?
     3. $a$ vaut 1 et $b$ vaut 0. Que valent $a.b$, $a+b$ et $\bar{a}$ ?
 
-??? success "Corrigé"
+??? success "Correction"
     1. $0 \oplus 0 = 0$, $0 \oplus 1 = 1$, $1 \oplus 0 = 1$, $1 \oplus 1 = 0$.
     2. Celle où **les deux entrées valent 1** : le OU vaut 1, le OU EXCLUSIF vaut 0. Retenez cette ligne, c'est elle qui fera toute la différence dans le circuit que vous allez construire.
     3. $a.b = 0$ (le ET exige les deux), $a+b = 1$ (le OU se contente d'un seul), $\bar{a} = 0$.
@@ -75,7 +75,7 @@ Par exemple, le circuit suivant réalise l'expression $\overline{a.b}$ (c'est un
     - Etudiez la table de vérité de S
     - Proposez une simplification drastique de ce circuit.
 
-??? success "Correction — Interrupteurs et lampe"
+??? success "Correction : Interrupteurs et lampe"
 
     L'expression booléenne du circuit est :
 
@@ -106,7 +106,7 @@ Par exemple, le circuit suivant réalise l'expression $\overline{a.b}$ (c'est un
 
     Sachant que $\bar{\bar{x}} = x $, à l'aide de la loi de Morgan, exprimez $a+b$ unqiuement grâces aux opérations ET et NON.
 
-??? success "Correction — Porte NAND"
+??? success "Correction : Porte NAND"
 
     **Table de vérité :**
 
@@ -154,7 +154,7 @@ components: {
 }
 ```
 
-??? success "Correction — Turing Complete"
+??? success "Correction : Turing Complete"
 
     [Télécharger la correction (turing.json)](turing.json)
 
@@ -197,7 +197,7 @@ Ainsi, on peut directement construire la table de vérité du circuit résultant
     ??? tip "Indice précis"
         Comparez la colonne de la retenue avec la table du **ET** : elles sont identiques. Comparez ensuite la colonne de la somme avec celle du **OU**, puis avec celle du **OU EXCLUSIF** : une seule des deux convient, et c'est la ligne où $a$ et $b$ valent tous les deux 1 qui tranche.
 
-??? success "Correction — Demi-additionneur"
+??? success "Correction : Demi-additionneur"
 
     [Télécharger la correction (half-adder.json)](half-adder.json)
 
@@ -234,7 +234,7 @@ Il émet 2 informations en sortie, la somme obtenue $S$, ainsi que la retenue $C
 
         Reste à décider la retenue sortante. Regardez votre table : elle vaut 1 dès que **l'une des deux** retenues intermédiaires vaut 1. Il ne peut jamais y en avoir deux à la fois, vérifiez-le sur les huit lignes.
 
-??? success "Correction — Full-Adder"
+??? success "Correction : Full-Adder"
 
     **Table de vérité complète :**
 
@@ -326,6 +326,6 @@ Il émet 2 informations en sortie, la somme obtenue $S$, ainsi que la retenue $C
 
         Deux questions restent, et elles se répondent en regardant votre addition posée : que branche-t-on sur le $C_{in}$ du tout premier ? Et que faire du $C_{out}$ du dernier ?
 
-??? success "Correction — Additionneur 4 bits"
+??? success "Correction : Additionneur 4 bits"
 
     [Télécharger la correction (4-bits-adder.json)](4-bits-adder.json)

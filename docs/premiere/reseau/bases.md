@@ -44,7 +44,7 @@ Deux machines peuvent communiquer **directement** (sans routeur) si et seulement
 
 Les adresses **privées** ne sont pas routées sur Internet. Elles sont utilisées librement dans les réseaux locaux. La traduction vers une adresse publique se fait via le **NAT** (*Network Address Translation*), assuré par le routeur/box.
 
-!!! info "127.0.0.1 — l'adresse qu'on utilise tous les jours en informatique"
+!!! info "127.0.0.1 : l'adresse qu'on utilise tous les jours en informatique"
     `127.0.0.1` (ou son alias `localhost`) désigne **la machine elle-même**. Un paquet envoyé à cette adresse ne sort jamais sur le réseau : il fait demi-tour dans la pile réseau du système d'exploitation, sans même atteindre la carte réseau.
 
     C'est l'adresse qu'on utilise en permanence en développement :

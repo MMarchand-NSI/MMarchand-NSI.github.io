@@ -37,7 +37,7 @@ Toutes les fonctions de cette page renvoient une **nouvelle** matrice et ne modi
     1. Que vaut `C[1][2]` ? Et `D[2][0]` ?
     2. Que valent `len(D)` et `len(D[0])` ? Que représente chacun de ces deux nombres ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. `C[1][2]` vaut `1` (deuxième ligne, troisième colonne). `D[2][0]` vaut `3`.
         2. `len(D)` vaut `3`, c'est le nombre de lignes. `len(D[0])` vaut `2`, c'est le nombre de colonnes, lu sur la première ligne.
 
@@ -54,7 +54,7 @@ Toutes les fonctions de cette page renvoient une **nouvelle** matrice et ne modi
         assert dimensions(D) == ...
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def dimensions[T](M: Matrice[T]) -> tuple[int, int]:
             """Renvoie le couple (nombre de lignes, nombre de colonnes) de M."""
@@ -78,7 +78,7 @@ $$
 !!! question "Calculer"
     Sur ton cahier : calcule $A + B$. Peut-on calculer $A + C$ ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         $A + B = \begin{pmatrix} 1 & 3 \\ 4 & 4 \end{pmatrix}$. On ne peut pas calculer $A + C$ : $A$ est de taille $2 \times 2$ et $C$ de taille $2 \times 3$.
 
 !!! question "Écrire `addition` (obligatoire)"
@@ -102,10 +102,10 @@ $$
     ??? tip "Indice léger"
         Une boucle sur les lignes, une boucle sur les colonnes, et une nouvelle ligne construite à chaque tour de la première.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def addition[T: (int, float)](A: Matrice[T], B: Matrice[T]) -> Matrice[T]:
             """Renvoie une nouvelle matrice A + B.
@@ -145,7 +145,7 @@ Pour que cela ait un sens, une ligne de $A$ doit avoir autant de coefficients qu
     2. Donne la taille de $C \times D$, puis celle de $D \times C$, sans les calculer.
     3. Calcule le coefficient de la ligne `0` et de la colonne `0` de $C \times D$.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. $A \times B = \begin{pmatrix} 2 & 1 \\ 4 & 3 \end{pmatrix}$ et $B \times A = \begin{pmatrix} 3 & 4 \\ 1 & 2 \end{pmatrix}$. Les deux résultats sont **différents**.
         2. $C$ est de taille $2 \times 3$ et $D$ de taille $3 \times 2$ : $C \times D$ est de taille $2 \times 2$ et $D \times C$ de taille $3 \times 3$.
         3. Ligne `0` de $C$ : `1, 0, 2`. Colonne `0` de $D$ : `1, 0, 3`. On obtient $1 \times 1 + 0 \times 0 + 2 \times 3 = 7$.
@@ -174,10 +174,10 @@ Pour que cela ait un sens, une ligne de $A$ doit avoir autant de coefficients qu
     ??? tip "Indice plus précis"
         La troisième boucle, sur `k`, calcule la somme d'une seule case : `s = s + A[i][k] * B[k][j]`. La somme `s` repart de `0` pour chaque case.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def produit[T: (int, float)](A: Matrice[T], B: Matrice[T]) -> Matrice[T]:
             """Renvoie une nouvelle matrice A × B.
@@ -222,7 +222,7 @@ $$
         assert produit(identite(2), A) == A
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def identite(n: int) -> Matrice[int]:
             """Renvoie la matrice identité de taille n × n."""
@@ -260,7 +260,7 @@ La **transposée** de $M$, notée ${}^t M$, échange les lignes et les colonnes 
     ??? tip "Indice"
         Le coefficient de la ligne `i` et de la colonne `j` de ${}^t M$ est `M[j][i]`. Le résultat a autant de lignes que $M$ a de colonnes.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ${}^t C = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 2 & 1 \end{pmatrix}$, de taille $3 \times 2$.
 
         ```python
@@ -299,7 +299,7 @@ Pour une matrice plus grande, on se ramène à des matrices plus petites. Le **m
     1. Calcule $\det A$.
     2. Écris le mineur de `M` obtenu en supprimant la ligne `0` et la colonne `1`, puis celui obtenu en supprimant la ligne `1` et la colonne `2`.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. $\det A = 1 \times 4 - 2 \times 3 = -2$.
         2. Ligne `0` et colonne `1` supprimées : $\begin{pmatrix} 1 & 2 \\ 1 & 2 \end{pmatrix}$. Ligne `1` et colonne `2` supprimées : $\begin{pmatrix} 2 & 0 \\ 1 & 1 \end{pmatrix}$.
 
@@ -327,10 +327,10 @@ Pour une matrice plus grande, on se ramène à des matrices plus petites. Le **m
     ??? tip "Indice plus précis"
         Le test `k != i` se place dans la première boucle, **avant** de créer la nouvelle ligne : sinon le résultat contient une ligne vide.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def mineur[T](M: Matrice[T], i: int, j: int) -> Matrice[T]:
             """Renvoie une nouvelle matrice : M privée de sa ligne i et de sa colonne j."""
@@ -367,7 +367,7 @@ Le déterminant d'une matrice $1 \times 1$, `[[a]]`, vaut `a`.
 !!! question "Calculer"
     Sur ton cahier, développe $\det M$ selon la première ligne. Écris les trois termes, avec leur signe, avant de faire le calcul.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         $$
         \det M = + 2 \times \det \begin{pmatrix} 3 & 2 \\ 1 & 2 \end{pmatrix} - 0 \times \det \begin{pmatrix} 1 & 2 \\ 1 & 2 \end{pmatrix} + 1 \times \det \begin{pmatrix} 1 & 3 \\ 1 & 1 \end{pmatrix}
         $$
@@ -397,10 +397,10 @@ Le déterminant d'une matrice $1 \times 1$, `[[a]]`, vaut `a`.
     ??? tip "Indice plus précis"
         Le signe s'écrit `(-1) ** j`. Chaque tour ajoute `(-1) ** j * M[0][j] * determinant(mineur(M, 0, j))`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def determinant[T: (int, float)](M: Matrice[T]) -> T:
             """Renvoie le déterminant de M, développé selon la première ligne.
@@ -424,7 +424,7 @@ Le déterminant d'une matrice $1 \times 1$, `[[a]]`, vaut `a`.
 !!! question "Compter les appels"
     Sur ton cahier : combien de fois `determinant` est-elle appelée au total pour calculer `determinant(M)`, le premier appel compris ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `10` : l'appel sur `M` ($3 \times 3$), trois appels sur des mineurs $2 \times 2$, et pour chacun d'eux deux appels sur des matrices $1 \times 1$. $1 + 3 \times (1 + 2) = 10$.
 
 ## Étape 6 - La comatrice
@@ -444,7 +444,7 @@ $$
 !!! question "Calculer"
     Sur ton cahier, calcule $\operatorname{com} A$. Les mineurs de $A$ sont des matrices $1 \times 1$.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         $\operatorname{com} A = \begin{pmatrix} 4 & -3 \\ -2 & 1 \end{pmatrix}$. Par exemple, en `(0, 1)` : on supprime la ligne `0` et la colonne `1`, il reste `[[3]]`, et le signe est $(-1)^{0+1} = -1$.
 
 !!! question "Écrire `comatrice` (obligatoire)"
@@ -463,10 +463,10 @@ $$
     ??? tip "Indice"
         Même double boucle qu'à l'étape 2. Chaque case vaut `(-1) ** (i + j) * determinant(mineur(M, i, j))`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def comatrice[T: (int, float)](M: Matrice[T]) -> Matrice[T]:
             """Renvoie une nouvelle matrice : la comatrice de M.
@@ -490,7 +490,7 @@ $$
     1. Sur ton cahier : que doit valoir `produit(M, transposee(comatrice(M)))` ? Et pour `A` ?
     2. Écris `test_propriete_comatrice` qui le vérifie sur `A` et sur `M`.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. $\det M = 6$, donc on doit obtenir `[[6, 0, 0], [0, 6, 0], [0, 0, 6]]`. Pour `A`, `[[-2, 0], [0, -2]]`.
         2. ```python
            def test_propriete_comatrice():
@@ -516,7 +516,7 @@ Si $A$ est de taille $n \times m$ et $B$ de taille $p \times q$, alors $A \otime
     1. Écris $A \otimes B$. C'est une matrice $4 \times 4$.
     2. Quelle est la taille de $C \otimes D$ ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Chaque bloc est $B = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$ multiplié par un coefficient de $A$ :
 
             $$
@@ -536,7 +536,7 @@ Pour écrire la fonction, il faut savoir, pour une case `(i, j)` du résultat, d
     ??? tip "Indice"
         Les lignes `0` à `p - 1` forment le premier bloc, les lignes `p` à `2p - 1` le deuxième, et ainsi de suite. Le quotient `i // p` donne le numéro du bloc, le reste `i % p` la position dans ce bloc.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. `A[1][0]`, qui vaut `3`, et `B[0][1]`, qui vaut `1`. La ligne `2` est dans le deuxième bloc de lignes (`2 // 2 = 1`), à la première ligne de ce bloc (`2 % 2 = 0`). La colonne `1` est dans le premier bloc de colonnes (`1 // 2 = 0`), à la deuxième colonne de ce bloc (`1 % 2 = 1`).
         2. `A[i // p][j // q] * B[i % p][j % q]`
 
@@ -556,10 +556,10 @@ Pour écrire la fonction, il faut savoir, pour une case `(i, j)` du résultat, d
     ??? tip "Indice"
         Une double boucle sur les cases du résultat, avec l'expression de la question précédente. Combien le résultat a-t-il de lignes ?
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def kronecker[T: (int, float)](A: Matrice[T], B: Matrice[T]) -> Matrice[T]:
             """Renvoie une nouvelle matrice : le produit de Kronecker de A par B."""
@@ -582,7 +582,7 @@ Pour écrire la fonction, il faut savoir, pour une case `(i, j)` du résultat, d
 !!! question "L'ordre compte encore"
     Sur ton cahier, écris $B \otimes A$, puis compare avec $A \otimes B$.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         $$
         B \otimes A = \begin{pmatrix} 0 & 0 & 1 & 2 \\ 0 & 0 & 3 & 4 \\ 1 & 2 & 0 & 0 \\ 3 & 4 & 0 & 0 \end{pmatrix}
         $$
@@ -598,7 +598,7 @@ Pour écrire la fonction, il faut savoir, pour une case `(i, j)` du résultat, d
     2. Combien pour une matrice $10 \times 10$ ? Ajoute un compteur à ta fonction pour le vérifier.
     3. Une matrice $20 \times 20$ est une petite matrice en pratique. Que penses-tu de cette méthode pour la calculer ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. $4 \times 3 \times 2 \times 1 = 24$. Pour $n \times n$, $n \times (n - 1) \times \dots \times 1$, qu'on note $n!$ (« factorielle $n$ »).
         2. $10! = 3\,628\,800$.
         3. $20!$ dépasse $2 \times 10^{18}$ : même à un milliard de déterminants par seconde, il faudrait plus de soixante ans. Il faut une autre méthode.
@@ -625,7 +625,7 @@ La ligne $L_i$ est remplacée par $L_i + c \, L_k$. Toutes les autres lignes, $L
     1. Applique $L_1 \leftarrow L_1 - 2 \, L_0$ à `N`. Écris la matrice obtenue.
     2. Calcule avec ta fonction `determinant` le déterminant de `N`, puis celui de la matrice obtenue. Que constates-tu ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. $\begin{pmatrix} 2 & 1 & 1 \\ 0 & 1 & 1 \\ 8 & 7 & 9 \end{pmatrix}$. La ligne `1` devient `4 - 2 × 2, 3 - 2 × 1, 3 - 2 × 1`, soit `0, 1, 1`.
         2. Les deux déterminants valent `4`. Une transvection **ne change pas** le déterminant.
 
@@ -635,7 +635,7 @@ La ligne $L_i$ est remplacée par $L_i + c \, L_k$. Toutes les autres lignes, $L
     1. Calcule `produit(E, N)` avec ta fonction. Que reconnais-tu ?
     2. Que vaut `determinant(E)` ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. On retrouve la matrice de la question précédente : multiplier à gauche par `E` effectue la transvection $L_1 \leftarrow L_1 - 2 \, L_0$.
         2. `1`. On admet que $\det(E \times N) = \det E \times \det N$ : c'est pourquoi une transvection ne change pas le déterminant.
 
@@ -664,10 +664,10 @@ La ligne $L_i$ est remplacée par $L_i + c \, L_k$. Toutes les autres lignes, $L
     ??? tip "Indice plus précis"
         Dans la ligne `i`, la case de la colonne `j` vaut `M[i][j] + c * M[k][j]`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def transvection[T: (int, float)](M: Matrice[T], i: int, k: int, c: T) -> Matrice[T]:
             """Renvoie une nouvelle matrice : M où la ligne i est remplacée
@@ -706,7 +706,7 @@ $$
     1. Calcule `determinant(U)` avec ta fonction, puis le produit des coefficients de la diagonale de `U`.
     2. Fais de même avec une matrice triangulaire $3 \times 3$ de ton choix.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Les deux valent `4`.
         2. On obtient toujours l'égalité : le déterminant d'une matrice triangulaire est le **produit des coefficients de sa diagonale**. Ce calcul ne demande que $n - 1$ multiplications.
 
@@ -723,7 +723,7 @@ $$
         assert produit_diagonale(identite(5)) == 1
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def produit_diagonale[T: (int, float)](M: Matrice[T]) -> T:
             """Renvoie le produit des coefficients de la diagonale de M.
@@ -751,7 +751,7 @@ On annule la colonne `0` sous la diagonale, puis la colonne `1`, et ainsi de sui
     ??? tip "Indice"
         Pour annuler la case `(1, 0)`, qui vaut `4`, avec le pivot `N[0][0]`, qui vaut `2` : il faut $4 + c \times 2 = 0$.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. $L_1 \leftarrow L_1 - 2 \, L_0$ : $\begin{pmatrix} 2 & 1 & 1 \\ 0 & 1 & 1 \\ 8 & 7 & 9 \end{pmatrix}$
         2. $L_2 \leftarrow L_2 - 4 \, L_0$ : $\begin{pmatrix} 2 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 3 & 5 \end{pmatrix}$
         3. $L_2 \leftarrow L_2 - 3 \, L_1$ : $\begin{pmatrix} 2 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 2 \end{pmatrix}$
@@ -783,10 +783,10 @@ On annule la colonne `0` sous la diagonale, puis la colonne `1`, et ainsi de sui
     ??? tip "Indice plus précis"
         Le résultat se construit transvection après transvection : `res = transvection(res, i, j, -res[i][j] / res[j][j])`. Le calcul de $c$ se fait sur `res`, la matrice en cours, et pas sur `M`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def triangulaire(M: Matrice[float]) -> Matrice[float]:
             """Renvoie une nouvelle matrice triangulaire, obtenue à partir de M
@@ -816,7 +816,7 @@ On annule la colonne `0` sous la diagonale, puis la colonne `1`, et ainsi de sui
         assert determinant_gauss([[2, 0, 1], [1, 3, 2], [1, 1, 2]]) == ...
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def determinant_gauss(M: Matrice[float]) -> float:
             """Renvoie le déterminant de M, calculé par le pivot de Gauss.
@@ -835,7 +835,7 @@ On annule la colonne `0` sous la diagonale, puis la colonne `1`, et ainsi de sui
     1. Combien de transvections faut-il pour rendre triangulaire une matrice $3 \times 3$ ? Une matrice $n \times n$ ?
     2. Chaque transvection recalcule une ligne de $n$ coefficients. Pour une matrice $20 \times 20$, combien de coefficients sont calculés au total ? Compare avec la réponse à la première question de cette étape.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. `3`. Pour $n \times n$ : $n - 1$ cases à annuler dans la colonne `0`, $n - 2$ dans la colonne `1`, et ainsi de suite, soit $\dfrac{n(n - 1)}{2}$.
         2. $\dfrac{20 \times 19}{2} = 190$ transvections, donc $190 \times 20 = 3\,800$ coefficients, contre plus de $2 \times 10^{18}$ déterminants $1 \times 1$ pour le développement. Le nombre d'opérations du pivot de Gauss est de l'ordre de $n^3$.
 

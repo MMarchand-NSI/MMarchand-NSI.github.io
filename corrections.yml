@@ -1,6 +1,7 @@
-# Liste des fichiers pour lesquels afficher les corrections
-# Les chemins sont relatifs au dossier docs/
-# Commenter ou supprimer une ligne pour masquer les corrections de ce fichier
+# Pages pour lesquelles les corrections sont AFFICHÉES malgré le masquage par
+# défaut. Les chemins sont relatifs au dossier docs/.
+# Commenter ou supprimer une ligne remet la page au régime normal, c'est-à-dire
+# corrections masquées.
 
 show_corrections:
   # - projets/devine-mon-nombre.md
@@ -9,13 +10,21 @@ show_corrections:
   - terminale/structures-de-donnees/graphes.md
   # - premiere/prog/recursivite.md
 
-# Pages où la question « Avant d'ouvrir la correction » est masquée avec la
-# correction qu'elle annonce. Sur ces pages, tout bloc de réponse s'intitule
-# « Correction », et c'est le TYPE d'admonition qui décide : warning pour une
-# correction de code, masquée, success pour celle d'un exercice sur le cahier,
-# que l'élève peut ouvrir. Les indices et les blocs de test restent visibles.
-# Un chemin de fichier, ou un préfixe de répertoire.
-# Pour tout rouvrir ponctuellement, ajouter la page à show_corrections ci-dessus.
-hide_solutions:
-  - terminale/structures-de-donnees/listes/maillons.md
-  - terminale/structures-de-donnees/listes/liste.md
+# UNE SEULE CONVENTION, ET C'EST LE TYPE QUI DÉCIDE (08/11/2026).
+#
+# Le titre d'un bloc de réponse commence toujours par « Correction », et celui
+# de l'invite d'auto-explication par « Avant d'ouvrir la correction ». Le TYPE
+# de l'admonition décide seul du masquage :
+#
+#   ??? warning  "Correction..."                      masqué
+#   ??? success  "Correction..."                      ouvrable (exercice sur le cahier)
+#   ??? question "Avant d'ouvrir la correction..."    masqué, avec sa correction
+#   ??? note     "Avant d'ouvrir la correction..."    ouvrable, comme sa correction
+#
+# Les indices (tip) et les blocs de test (info) restent toujours visibles.
+#
+# La clé « hide_solutions » qui vivait ici a été SUPPRIMÉE le 08/11/2026 : elle
+# désignait deux pages où les blocs « Solution » devaient être masqués comme
+# les corrections, ce qui revenait à encoder une politique de masquage dans un
+# titre. Le type le dit mieux, et pour toutes les pages à la fois. Même motif
+# pour le traitement particulier de projets/, disparu de hooks.py.

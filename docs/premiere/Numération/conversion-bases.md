@@ -5,7 +5,7 @@
     2. Combien de crans faut-il pour faire avancer la roue 2 d'un seul cran, en base 5 ?
     3. Le mot « poisson » et le dessin `12` ont un point commun. Lequel ?
 
-??? success "Corrigé"
+??? success "Correction"
     1. `1111`, qui vaut $15$. Au clic suivant, il repasse à `0000` : c'est le débordement.
     2. $5^2 = 25$ crans. Le poids de la roue $k$ vaut $b^k$.
     3. Ce sont deux **signifiants** : des dessins choisis par convention pour désigner une idée. L'idée (le poisson, la quantité douze) ne change pas quand on change de dessin.
@@ -69,7 +69,7 @@ où $b_i$ est le chiffre en position $i$ en partant de la droite (avec $b_i \in 
     4. Que donne le binaire $1010101$ en base 10 ?  
     5. Sans convertir entièrement : lequel de $1000_2$ et $111_2$ est le plus grand ? Justifiez.
 
-??? warning "Corrigé"
+??? warning "Correction"
     1. $1101 = 1 \times 2^3 + 1 \times 2^2 + 0 \times 2^1 + 1 \times 2^0 = 8 + 4 + 0 + 1 = \boxed{13}$  
     2. $10010 = 1 \times 2^4 + 0 \times 2^3 + 0 \times 2^2 + 1 \times 2^1 + 0 \times 2^0 = 16 + 0 + 0 + 2 + 0 = \boxed{18}$  
     3. $111111 = 1 \times 2^5 + 1 \times 2^4 + 1 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0 = 32 + 16 + 8 + 4 + 2 + 1 = \boxed{63}$  
@@ -94,7 +94,7 @@ Soit : $9 + 0 + 2 = 11$ en base 10.
     4. Que donne le ternaire $1001$ en base 10 ?
     5. Que valent $1000_3$, $0001_3$ et $101_3$ ? Quel est le rôle d'un zéro selon sa place ?
 
-??? warning "Corrigé"
+??? warning "Correction"
     1. $102 = 1 \times 3^2 + 0 \times 3^1 + 2 \times 3^0 = 9 + 0 + 2 = \boxed{11}$
     2. $210 = 2 \times 3^2 + 1 \times 3^1 + 0 \times 3^0 = 18 + 3 + 0 = \boxed{21}$
     3. $222 = 2 \times 3^2 + 2 \times 3^1 + 2 \times 3^0 = 18 + 6 + 2 = \boxed{26}$
@@ -111,7 +111,7 @@ Le procédé est exactement le même que pour la base 2 ou la base 3 : chaque ch
     1. Que vaut $321$ (base 4) en base 10 ?
     2. Que donne $1002$ (base 4) en base 10 ?
 
-??? warning "Corrigé"
+??? warning "Correction"
     1. $321 = 3 \times 4^2 + 2 \times 4^1 + 1 \times 4^0 = 48 + 8 + 1 = \boxed{57}$
     2. $1002 = 1 \times 4^3 + 0 \times 4^2 + 0 \times 4^1 + 2 \times 4^0 = 64 + 0 + 0 + 2 = \boxed{66}$
 
@@ -123,7 +123,7 @@ Le procédé est exactement le même que pour les autres bases : chaque chiffre 
     1. Convertissez $B4$ (base 16) en base 10.
     2. Que donne $3E8$ (base 16) en base 10 ?
 
-??? warning "Corrigé"
+??? warning "Correction"
     1. $B4 = B \times 16^1 + 4 \times 16^0 = 11 \times 16 + 4 = \boxed{180}$
     2. $3E8 = 3 \times 16^2 + E \times 16^1 + 8 \times 16^0 = 3 \times 256 + 14 \times 16 + 8 = 768 + 224 + 8 = \boxed{1000}$
 
@@ -136,7 +136,7 @@ Le procédé est exactement le même que pour les autres bases : chaque chiffre 
     4. Quel est le plus grand entier que l'on peut écrire avec $5$ chiffres en base $10$ ?
     5. Donnez la formule générale pour le plus grand entier représentable avec $k$ chiffres en base $n$. (à savoir)
 
-??? warning "Corrigé"
+??? warning "Correction"
     1. En base $2$, les chiffres vont de $0$ à $1$, donc le plus grand nombre à $4$ chiffres est $1111_2$ :  
     $1 \times 2^3 + 1 \times 2^2 + 1 \times 2^1 + 1 \times 2^0 = 8 + 4 + 2 + 1 = \boxed{15}$
 
@@ -275,7 +275,7 @@ Ce procédé fonctionne exactement de la même manière pour convertir un entier
     4. Convertissez $73_{10}$ en base $8$  
     5. Convertissez $255_{10}$ en base $16$
 
-??? warning "Corrigé"
+??? warning "Correction"
     1. Divisions successives par $2$ :  
     $19 \div 2 = 9$ reste $1$  
     $9 \div 2 = 4$ reste $1$  
@@ -318,7 +318,7 @@ Ce procédé fonctionne exactement de la même manière pour convertir un entier
     4. Convertissez $100_{10}$ en base $16$, puis vérifiez votre résultat en le reconvertissant vers la base 10.
     5. Un élève convertit $13_{10}$ en base 2 et écrit $1011$. Sans refaire tout le calcul, montrez qu'il s'est trompé.
 
-??? warning "Corrigé"
+??? warning "Correction"
     1. $8 \div 2 = 4$ r $0$ ; $4 \div 2 = 2$ r $0$ ; $2 \div 2 = 1$ r $0$ ; $1 \div 2 = 0$ r $1$.
     Lecture de bas en haut : $\boxed{1000_2}$, soit **4 chiffres**. C'est logique : $8 = 2^3$, il faut donc atteindre le poids $2^3$, c'est-à-dire une quatrième roue.
 

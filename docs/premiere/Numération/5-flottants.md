@@ -5,7 +5,7 @@
     2. Comment reconnaît-on, en complément à deux, qu'un nombre est négatif ?
     3. Combien de valeurs différentes une case de 8 bits peut-elle contenir, quelle que soit la manière dont on les interprète ?
 
-??? success "Corrigé"
+??? success "Correction"
     1. De $-128$ à $+127$. L'intervalle n'est pas symétrique : il y a une valeur négative de plus, car zéro occupe une place du côté positif.
     2. Son **bit de poids fort vaut 1**. C'est une convention de lecture, pas un signe écrit à part.
     3. **256**, dans tous les cas. Une case ne contient jamais que des combinaisons de bits ; c'est nous qui décidons de ce qu'elles signifient.
@@ -65,7 +65,7 @@ $$0{,}11_2 = 1 \times 2^{-1} + 1 \times 2^{-2} = 0{,}5 + 0{,}25 = 0{,}75$$
     3. $0{,}101_2$
     4. $0{,}0011_2$
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         1. $0{,}1_2 = 2^{-1} = 0{,}5$
         2. $0{,}01_2 = 2^{-2} = 0{,}25$
         3. $0{,}101_2 = 2^{-1} + 2^{-3} = 0{,}5 + 0{,}125 = 0{,}625$
@@ -111,7 +111,7 @@ C'est la même situation que $\dfrac{1}{3}$ en base 10, qui s'écrit $0{,}3333\l
 !!! question "À votre tour : $\frac{1}{3}$ en binaire"
     Appliquez la méthode des multiplications par 2 à $0{,}333\ldots$ (on prendra $1/3$). Que constatez-vous ?
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         $$
         \begin{aligned}
         \tfrac{1}{3} \times 2 &= \tfrac{2}{3} \approx 0{,}666 &\rightarrow\ &\textbf{0} \\
@@ -160,7 +160,7 @@ Les minuscules erreurs d'approximation de `0.1` et de `0.2` s'additionnent, et l
     3. $0{,}2$
     4. $0{,}125$
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         1. $0{,}5 = 0{,}1_2$ : **exact**.
         2. $0{,}75 = 0{,}11_2$ : **exact**.
         3. $0{,}2 \times 2 = 0{,}4 \rightarrow 0$ ; $0{,}4 \times 2 = 0{,}8 \rightarrow 0$ ; $0{,}8 \times 2 = 1{,}6 \rightarrow 1$ ; $0{,}6 \times 2 = 1{,}2 \rightarrow 1$ ; on retombe sur $0{,}2$ : **infini** ($0{,}0011\,0011\ldots_2$).
@@ -174,7 +174,7 @@ Les minuscules erreurs d'approximation de `0.1` et de `0.2` s'additionnent, et l
     print(0.1 + 0.1 + 0.1 == 0.3)
     ```
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         - `0.25 + 0.25 == 0.5` affiche `True` : $0{,}25$ et $0{,}5$ ont une représentation **exacte** en binaire, donc le calcul est exact.
         - `0.1 + 0.1 + 0.1 == 0.3` affiche `False` : $0{,}1$ est approché, et les erreurs s'accumulent.
 
@@ -187,7 +187,7 @@ Les minuscules erreurs d'approximation de `0.1` et de `0.2` s'additionnent, et l
         print("OK")
     ```
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         ```python
         prix = 0.1 + 0.2
         if abs(prix - 0.3) < 1e-9:

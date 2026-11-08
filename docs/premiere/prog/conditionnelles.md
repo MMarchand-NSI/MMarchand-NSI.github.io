@@ -43,7 +43,7 @@ n != 4 {{op:or|and}} n != 8
     2. Écris la **signature typée** d'une fonction `est_majeur` qui prend un âge entier et renvoie un booléen.
     3. Avec $a = 1$ et $b = 0$, que vaut $\overline{a.b}$ ? Que vaut $\bar{a} + \bar{b}$ ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. `a` vaut `5`. Le membre de droite est **calculé d'abord** (`3 + 2`), et le résultat est **ensuite** rangé dans la case `a`. Le `=` n'est pas une égalité mathématique.
         2. `def est_majeur(age: int) -> bool:`
         3. $a.b = 0$, donc $\overline{a.b} = 1$. Et $\bar{a} = 0$, $\bar{b} = 1$, donc $\bar{a} + \bar{b} = 1$. Les deux valent $1$, et ce n'est pas un hasard : c'est la loi de De Morgan, que tu as utilisée pour câbler tes portes. Tu vas la retrouver dans les conditions de ce chapitre.
@@ -99,7 +99,7 @@ print("Fin du programme.")
 !!! question "Prédis avant d'exécuter"
     Sans lancer le code, écris ce qui s'affiche **dans les deux cas** : avec `age = 20`, puis avec `age = 15`. Combien de lignes chaque fois ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Avec `age = 20`, trois lignes : « Vous êtes majeur. », « Bienvenue. », « Fin du programme. » Python évalue `20 >= 18`, qui vaut `True`, **entre dans le bloc indenté** et exécute ses deux lignes, puis continue avec la ligne non indentée.
 
         Avec `age = 15`, une seule ligne : « Fin du programme. » La condition `15 >= 18` vaut `False`, Python **saute tout le bloc indenté** et reprend juste après.
@@ -157,7 +157,7 @@ Une condition se construit avec des comparaisons :
     3. **Valeur absolue.** Demande un nombre et affiche sa valeur absolue (sans `abs`).
     4. **Mot de passe.** Le mot de passe est `"azerty"`. Demande-le et indique si l'accès est autorisé.
 
-    ??? warning "Corrigés (3 et 4)"
+    ??? warning "Correction (3 et 4)"
         ```python
         # 3. Valeur absolue
         x = int(input("Un nombre : "))
@@ -212,7 +212,7 @@ if majeur:
     f = (a == 6)
     ```
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `a` : int, 18. `b` : bool, True. `c` : bool, False. `e` : bool, True. Puis `a` devient float, 6.0. `f` : bool, True (car `6.0 == 6`).
 
 ## SINON SI : plusieurs branches (`elif`)
@@ -247,7 +247,7 @@ else:
     1. **Mention au bac.** À partir d'une moyenne sur 20 : `[0;8)` Recalé, `[8;10)` Rattrapage, `[10;12)` Sans mention, `[12;14)` Assez bien, `[14;16)` Bien, `[16;18)` Très bien, `[18;20]` Félicitations.
     2. **Année bissextile.** Une année est bissextile si elle est multiple de 4 mais pas de 100, **ou** multiple de 400. Teste 2021, 2020, 1900, 2000.
 
-    ??? warning "Corrigé (mention)"
+    ??? warning "Correction (mention)"
         ```python
         moyenne = float(input("Moyenne : "))
         if moyenne >= 18:
@@ -368,7 +368,7 @@ Le passage de l'un à l'autre suit une règle, et une seule :
 
     Que remarques-tu en comparant `c1` et `c2` ? Et `c3` et `c4` ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `age >= 18` est **vrai**, `permis` est **faux**.
 
         - `c1` : `not (vrai and faux)` = `not faux` = **True**
@@ -406,7 +406,7 @@ Le passage de l'un à l'autre suit une règle, et une seule :
     ??? tip "Indice plus précis (cinéma)"
         Le diagramme se lit en deux temps. Un premier bloc `if / elif / else` fixe le tarif selon l'âge, du plus exigeant au moins exigeant. Puis, **après** ce bloc et une seule fois, un second `if` applique la promotion. Ne recopie pas la promotion dans chaque branche.
 
-    ??? warning "Corrigé (bissextile booléenne)"
+    ??? warning "Correction (bissextile booléenne)"
         ```python
         annee = int(input("Année : "))
         bissextile = (annee % 4 == 0 and annee % 100 != 0) or (annee % 400 == 0)
@@ -449,7 +449,7 @@ Tu sais écrire des fonctions : une conditionnelle se place maintenant **dans** 
     1. `pair_ou_impair(n)` : renvoie `"pair"` ou `"impair"`.
     2. `plus_petit(a, b)` : renvoie le plus petit des deux entiers.
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         ```python
         def pair_ou_impair(n: int) -> str:
             """Renvoie 'pair' ou 'impair' selon la parité de n"""
@@ -509,7 +509,7 @@ Ce bloc (variables, entiers, chaînes, conditionnelles) est le socle de tout le 
 
     **3. Écrire.** Depuis zéro : demande une année et affiche si elle est bissextile (multiple de 4 mais pas de 100, **ou** multiple de 400).
 
-    ??? success "Réponses"
+    ??? success "Correction"
         **1.** `les deux` puis `10 7`. Le point délicat est `y = x` : il a copié la valeur `7` à cet instant, et `x = x + 3` ne l'a pas suivi.
 
         **2.** `if prix > 100:` puis `elif prix >= 50:`. L'ordre compte : le `elif` n'est atteint que si le premier test est faux, donc il est inutile d'y réécrire `prix <= 100`.

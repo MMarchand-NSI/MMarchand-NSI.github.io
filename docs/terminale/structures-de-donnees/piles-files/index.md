@@ -71,7 +71,7 @@ Une pile est définie par l’interface comprenant les primitives suivantes:
 
     ??? note "Sur la question 2, si tu ne vois pas"
         Regarde l'état de `p` juste avant chaque `DEPILER`. Le contrat dit que cette opération a une **précondition**.
-    ??? question "Avant de regarder la correction, écris une phrase"
+    ??? note "Avant d'ouvrir la correction, écris une phrase"
         Pourquoi la troisième colonne n'est-elle pas remplie de la même façon selon l'opération ? Si tu ne sais pas l'écrire, ta trace n'est pas finie, et la correction ne t'apprendra rien.
 
     ??? success "Correction"
@@ -402,10 +402,10 @@ def test_depiler_pile_vide() -> None:
     ??? tip "Indice plus précis"
         Un transfert inverse l'ordre, deux transferts le rétablissent. Il t'en faut donc un nombre **impair**, et le dernier doit arriver dans `p`. Trois transferts, donc deux piles temporaires. Aucune autre structure n'est nécessaire, et tu n'as le droit d'utiliser que les quatre primitives.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? note "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def renverse_inplace[T](p: pile.Pile[T]) -> None:
             t1: pile.Pile[T] = pile.creer()
@@ -512,12 +512,12 @@ def test_depiler_pile_vide() -> None:
     ??? tip "Indice précis"
         `empiler` doit **rendre la pile obtenue** : `-> Pile[T]` au lieu de `-> None`. Et `depiler` doit rendre l'élément retiré **et** la pile qui reste, donc un couple : `-> tuple[T, Pile[T]]`.
 
-    ??? question "Avant d'ouvrir la solution, une phrase sur ton cahier"
+    ??? note "Avant d'ouvrir la correction, une phrase sur ton cahier"
         L'ancien `empiler` ne renvoyait **rien**. Alors comment la pile changeait-elle ?
 
         Ta réponse dit pourquoi les signatures doivent changer.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         # structures/lineaires/pile_immuable.py
 

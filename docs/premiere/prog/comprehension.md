@@ -23,7 +23,7 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
     2. Où place-t-on le `if` quand on ne veut accumuler que certains éléments : avant, dans, ou après la boucle ?
     3. Que vaut `"informatique"[2:6]` ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. ```python
            multiples = []
            for i in range(0, 51, 5):
@@ -137,7 +137,7 @@ Résultat : `[0, 1, 4, 9, 16]`
     res = [x * 2 for x in range(0, 5) if x % 2 == 1]
     ```
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `[2, 6]`. On parcourt `0, 1, 2, 3, 4`, on ne garde que les impairs (`1` et `3`), puis on les double.
 
 ## 4. Exercices
@@ -149,7 +149,7 @@ Résultat : `[0, 1, 4, 9, 16]`
 
     Résultat attendu : `[0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30]`
 
-??? success "Solution"
+??? success "Correction"
     ```python
     multiples_de_3 = [x for x in range(0, 31) if x % 3 == 0]
     ```
@@ -167,7 +167,7 @@ Résultat : `[0, 1, 4, 9, 16]`
 
     Résultat attendu : `[12, 8, 7]`
 
-??? success "Solution"
+??? success "Correction"
     ```python
     valeurs = [-5, 12, -3, 8, -1, 0, 7]
     positifs = [v for v in valeurs if v > 0]
@@ -180,7 +180,7 @@ Résultat : `[0, 1, 4, 9, 16]`
 
     Résultat attendu : `[32.0, 50.0, 68.0, 86.0, 212.0]`
 
-??? success "Solution"
+??? success "Correction"
     ```python
     celsius = [0, 10, 20, 30, 100]
     fahrenheit = [c * 9/5 + 32 for c in celsius]
@@ -193,7 +193,7 @@ Résultat : `[0, 1, 4, 9, 16]`
 
     Résultat attendu : `[6, 3, 14, 4]`
 
-??? success "Solution"
+??? success "Correction"
     ```python
     mots = ["python", "nsi", "algorithmique", "code"]
     longueurs = [len(mot) for mot in mots]
@@ -204,7 +204,7 @@ Résultat : `[0, 1, 4, 9, 16]`
 
     Résultat attendu : `["python", "algorithmique"]`
 
-??? success "Solution"
+??? success "Correction"
     ```python
     mots = ["python", "nsi", "algorithmique", "code"]
     mots_longs = [mot for mot in mots if len(mot) >= 5]
@@ -248,7 +248,7 @@ Les compréhensions de liste sont très utiles pour **filtrer ou transformer** d
 
     Résultat attendu : `["Bob", "Diana"]`
 
-??? success "Solution"
+??? success "Correction"
     ```python
     majeurs = [p["nom"] for p in personnes if p["age"] >= 18]
     ```
@@ -268,7 +268,7 @@ Les compréhensions de liste sont très utiles pour **filtrer ou transformer** d
 
     Résultat attendu : `[{"nom": "Livre", "prix": 18.0}, {"nom": "Stylo", "prix": 1.8}, {"nom": "Cahier", "prix": 4.5}]`
 
-??? success "Solution"
+??? success "Correction"
     ```python
     produits_promo = [{"nom": p["nom"], "prix": p["prix"] * 0.9} for p in produits]
     ```
@@ -285,7 +285,7 @@ Les compréhensions de liste sont très utiles pour **filtrer ou transformer** d
 
     Résultat attendu : `["STYLO", "CAHIER"]`
 
-??? success "Solution"
+??? success "Correction"
     ```python
     noms_petit_prix = [p["nom"].upper() for p in produits if p["prix"] < 10]
     ```
@@ -306,7 +306,7 @@ Les compréhensions de liste sont très utiles pour **filtrer ou transformer** d
 
     Résultat attendu : `["Interstellar"]`
 
-??? success "Solution"
+??? success "Correction"
     ```python
     films_selectionnes = [f["titre"] for f in films if f["annee"] > 2010 and f["note"] > 8.5]
     ```
@@ -316,7 +316,7 @@ Les compréhensions de liste sont très utiles pour **filtrer ou transformer** d
 
     Résultat attendu : `["Inception (2010)", "Interstellar (2014)", "Matrix (1999)", "Dune (2021)"]`
 
-??? success "Solution"
+??? success "Correction"
 
     ```python
     descriptifs = [f["titre"] + " (" + str(f["annee"]) + ")" for f in films]
@@ -358,7 +358,7 @@ Les compréhensions de liste sont très utiles pour **filtrer ou transformer** d
 
     **3. Écrire.** Depuis zéro : `occurrences(txt)` qui renvoie un **dictionnaire** associant à chaque caractère de `txt` son nombre d'apparitions.
 
-    ??? success "Réponses"
+    ??? success "Correction"
         **1.** `[1, 2, 3, 4] [1, 2, 3, 4] [1, 2, 3, 5]` puis `0`. `b = a` **ne copie pas** : `a` et `b` sont un seul objet. `c = a.copy()` en fabrique un second, indépendant, et il a été copié **avant** l'`append` sur `b`.
 
         **2.** `res = [mot.upper() for mot in ["chat", "hippopotame", "rat", "girafe"] if len(mot) > 4]`

@@ -35,7 +35,7 @@ if __name__ == "__main__":
     print(octets("Bé"))
     ```
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `[66, 195, 169]` : 3 octets. `B` est un caractère ASCII, codé sur un seul octet, $66$. Le `é` en prend deux en UTF-8.
 
 ## Étape 1 - Un bit dans un pixel
@@ -49,7 +49,7 @@ Le bit de poids faible d'un pixel, c'est sa **parité** : il vaut `0` si le pixe
     |---|---|---|---|---|
     | bit voulu | 0 | 0 | 1 | 0 |
 
-    ??? success "Réponse"
+    ??? success "Correction"
         $200$ (déjà pair), $12$, $15$, $254$. Seul le dernier bit change : l'écart vaut au plus $1$.
 
 !!! question "Trouver la formule de `avec_bit` (obligatoire)"
@@ -76,10 +76,10 @@ Le bit de poids faible d'un pixel, c'est sa **parité** : il vaut `0` si le pixe
     ??? tip "Indice plus précis"
         Commence par effacer le bit de poids faible : `(p // 2) * 2` est le nombre pair juste en dessous de `p`, ou `p` lui-même.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def avec_bit(p: int, b: int) -> int:
             """Renvoie l'octet p dont le bit de poids faible est remplacé par b.
@@ -94,7 +94,7 @@ Chaque octet du texte s'écrit sur 8 bits, de poids fort à poids faible. Le tex
 !!! question "À la main"
     Sur ton cahier, convertis l'écriture $65$ de la base 10 à la base 2, sur 8 bits. Puis écris la liste de ses 8 bits, poids fort en premier.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         $65 = 0100\ 0001_2$, soit `[0, 1, 0, 0, 0, 0, 0, 1]`.
 
 !!! question "Écrire `vers_bits` (obligatoire)"
@@ -118,10 +118,10 @@ Chaque octet du texte s'écrit sur 8 bits, de poids fort à poids faible. Le tex
     ??? tip "Indice plus précis"
         Le premier bit de la liste est celui de poids 7, le dernier celui de poids 0. Pour le `i`-ème de la liste, le poids est `7 - i`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def vers_bits(n: int) -> list[int]:
             """Renvoie la liste des 8 bits de l'octet n, poids fort en premier.
@@ -152,7 +152,7 @@ Pour retrouver le texte, il faudra savoir **où il s'arrête**. On ajoute donc �
     ??? tip "Indice"
         Parcours `octets(texte)`, et ajoute au résultat les 8 bits de chaque octet, un par un. N'oublie pas l'octet `0` à la fin.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def bits_du_message(texte: str) -> list[int]:
             """Renvoie la liste des bits des octets du texte en UTF-8, suivis des
@@ -185,7 +185,7 @@ On parcourt les pixels **dans l'ordre de lecture** : la ligne 0 de gauche à dro
     ]
     ```
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Les 16 bits sont ceux de `bits_du_message("A")` : `0100 0001` puis `0000 0000`.
 
         ```
@@ -225,10 +225,10 @@ On parcourt les pixels **dans l'ordre de lecture** : la ligne 0 de gauche à dro
     ??? tip "Indice plus précis"
         Pour chaque pixel : si `k < len(bits)`, on ajoute `avec_bit(g[i][j], bits[k])`, sinon `g[i][j]`. Puis `k` augmente.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def cacher_texte(g: Grille, texte: str) -> Grille:
             """Renvoie une nouvelle grille où les bits de poids faible des premiers
@@ -260,7 +260,7 @@ Pour lire, on refait le chemin à l'envers : on relève le bit de poids faible d
 !!! question "À la main"
     Les 8 premiers pixels d'une image valent `52, 81, 120, 44, 17, 203, 99, 255`. Sur ton cahier, écris les 8 bits de poids faible, puis convertis cette écriture de la base 2 à la base 10. Quel caractère ASCII est caché ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `0 1 0 0 1 1 1 1`, soit $0100\ 1111_2 = 79$, le code de `O`.
 
 !!! question "Écrire `lire_bits` (obligatoire)"
@@ -275,7 +275,7 @@ Pour lire, on refait le chemin à l'envers : on relève le bit de poids faible d
         assert lire_bits([[52, 81], [120, 44]]) == [0, 1, 0, 0]
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def lire_bits(g: Grille) -> list[int]:
             """Renvoie la liste des bits de poids faible de tous les pixels de g,
@@ -308,10 +308,10 @@ Pour lire, on refait le chemin à l'envers : on relève le bit de poids faible d
     ??? tip "Indice léger"
         Le bit `bits[debut + i]` a pour poids `7 - i`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def vers_octet(bits: list[int], debut: int) -> int:
             """Renvoie l'octet dont les 8 bits, poids fort en premier, sont
@@ -356,10 +356,10 @@ Pour lire, on refait le chemin à l'envers : on relève le bit de poids faible d
     ??? tip "Indice plus précis"
         Range les octets lus dans une liste, sans l'octet nul, et termine par `texte_de` sur cette liste.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def lire_texte(g: Grille) -> str:
             """Renvoie le texte caché dans g par cacher_texte.
@@ -394,7 +394,7 @@ Pour lire, on refait le chemin à l'envers : on relève le bit de poids faible d
 
     3. Lance, compare les deux images, et vérifie que le texte est bien relu depuis le fichier.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. De 1 au plus, sur une échelle de 0 à 255 : aucune différence visible.
         2. Chaque pixel porte un bit, il faut 8 bits par octet, et l'octet `0` final prend 8 pixels : `len(photo) * len(photo[0]) // 8 - 1` octets. Pour une photo de 400 sur 300 pixels, $120\,000 / 8 - 1 = 14\,999$ octets, de quoi cacher un long chapitre de roman.
 

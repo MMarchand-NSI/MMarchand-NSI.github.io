@@ -7,7 +7,7 @@
     2. À quoi sert un `assert` placé au début d'une fonction ?
     3. Que vaut `d.get("absente", 0)` si la clé `"absente"` n'est pas dans le dictionnaire `d` ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. ```python
            def aire_disque(rayon: float) -> float:
                """Renvoie l'aire d'un disque de rayon donné."""
@@ -275,7 +275,7 @@ uv sync
 
     Crée ensuite un fichier `test_conversions.py` qui importe ce module et teste les trois fonctions.
 
-??? success "Solution"
+??? success "Correction"
     **Fichier `conversions.py` :**
 
     ```python
@@ -316,7 +316,7 @@ uv sync
 
     Exécute le code pour vérifier tes hypothèses.
 
-??? success "Solution"
+??? success "Correction"
     ```python
     import math
 
@@ -337,7 +337,7 @@ uv sync
     print(aire)
     ```
 
-??? success "Solution"
+??? success "Correction"
     ```python
     from math import pi, pow
 
@@ -355,7 +355,7 @@ uv sync
 
     Teste ton module avec `[10, 15, 8, 22, 19]`.
 
-??? success "Solution"
+??? success "Correction"
     **Fichier `stats.py` :**
 
     ```python

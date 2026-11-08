@@ -161,7 +161,7 @@ On assemble maintenant tout ce qui précède pour construire l'interface d'une f
 
     Tu n'écris que l'interface : rien ne se passera au clic pour l'instant. On lui donnera vie dans la partie suivante.
 
-??? success "Vérifier sa solution"
+??? warning "Correction"
     ```qml title="Main.qml"
     import QtQuick
     import QtQuick.Controls

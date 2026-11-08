@@ -17,7 +17,7 @@ Dans ce projet, tu écris la fonction `euclidien(k, n)`, puis tu écoutes ce qu'
     1. Place 4 frappes dans 8 cases, le plus régulièrement possible, en commençant par une frappe.
     2. Même chose avec 3 frappes dans 8 cases. Note l'écart entre deux frappes successives, sans oublier l'écart entre la dernière frappe et la première du tour suivant, puisque le rythme se répète.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. `"x.x.x.x."` : les quatre écarts valent 2.
         2. Les écarts ne peuvent pas être tous égaux, puisque 8 n'est pas divisible par 3. Le mieux possible est qu'ils ne diffèrent que de 1 : deux écarts de 3 et un de 2, par exemple `"x..x..x."`. C'est le tresillo.
 
@@ -51,7 +51,7 @@ résultat : "x..x.x..x.x.."
     1. pour $E(3, 8)$,
     2. pour $E(5, 8)$.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         $E(3, 8)$ :
 
         ```
@@ -96,7 +96,7 @@ Le rythme s'arrête simplement un peu plus tôt.
         assert pgcd(7, 0) == 7
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def pgcd(a: int, b: int) -> int:
             """Plus grand commun diviseur de a et b, par l'algorithme d'Euclide.
@@ -126,7 +126,7 @@ Le rythme s'arrête simplement un peu plus tôt.
         assert distribuer_groupes(["x", "x", "."], 3) == ["x", "x", "."]
     ```
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Aucune. `texte[i]` était un caractère, `groupes[i]` est une chaîne, et `+` colle deux chaînes dans les deux cas. C'est le même algorithme, appliqué à d'autres cartes.
 
 !!! question "Coller les groupes (obligatoire)"
@@ -138,7 +138,7 @@ Le rythme s'arrête simplement un peu plus tôt.
         ...
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def concatener(groupes: list[str]) -> str:
             """Colle bout à bout les chaînes de groupes, dans l'ordre."""
@@ -180,10 +180,10 @@ Le rythme s'arrête simplement un peu plus tôt.
     ??? tip "Indice plus précis"
         Cas d'arrêt : `m == 0`, ou `len(groupes) - m <= 1`. On renvoie alors `groupes` tels quels. Sinon, on rappelle `regrouper` avec les groupes distribués en `m` paquets et avec `len(groupes) % m`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def regrouper(groupes: list[str], m: int) -> list[str]:
             """Déroule l'algorithme des rythmes euclidiens à partir de groupes et de m,
@@ -217,7 +217,7 @@ Le rythme s'arrête simplement un peu plus tôt.
         assert euclidien(4, 4) == "xxxx"
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def euclidien(k: int, n: int) -> str:
             """Rythme euclidien E(k, n) : k frappes réparties dans n cases.
@@ -244,7 +244,7 @@ Toussaint donne une liste de rythmes euclidiens joués dans des musiques traditi
 !!! question "Ta fonction contre la table (obligatoire)"
     Sur ton cahier, prédis : `euclidien(7, 12)` renvoie-t-il la chaîne de la table ? Puis vérifie dans la console.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Non : `euclidien(7, 12)` renvoie `"x.xx.x.x.xx."`. Écris les deux chaînes l'une sous l'autre : elles ont les mêmes écarts entre frappes, `2 1 2 2 2 1 2` pour la tienne, `2 1 2 2 1 2 2` pour celle de la table. C'est la **même boucle de 12 cases**, commencée à un endroit différent.
 
         Un rythme qui se répète n'a pas de début : le musicien entre dans la boucle où il veut. Toussaint le dit lui-même à propos de l'arrêt de l'algorithme : puisque le rythme est cyclique, continuer d'une étape ne change que l'endroit où l'on commence. Notre version ne s'arrête pas toujours au même moment que la sienne, et certains rythmes de sa table sont eux-mêmes donnés à partir d'une autre case.
@@ -269,7 +269,7 @@ On dit que deux rythmes de même longueur sont des **rotations** l'un de l'autre
     ??? tip "Indice"
         Le résultat est fait de deux tranches de `rythme` : de la case `d` jusqu'à la fin, puis du début jusqu'à la case `d` exclue.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def rotation(rythme: str, d: int) -> str:
             """Le rythme commencé à la case d.
@@ -297,7 +297,7 @@ On dit que deux rythmes de même longueur sont des **rotations** l'un de l'autre
         # à compléter avec les six autres lignes de la table
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def est_rotation(r1: str, r2: str) -> bool:
             """Vrai si r2 est r1 commencé à une autre case (ou à la même)."""
@@ -312,7 +312,7 @@ On dit que deux rythmes de même longueur sont des **rotations** l'un de l'autre
 !!! question "La samba (entraînement)"
     Toussaint donne aussi $E(7, 16)$ comme base de la samba brésilienne, que l'on joue `"x.x..x.x.x..x.x."`. Écris une boucle qui trouve la valeur de `d` telle que `rotation(euclidien(7, 16), d)` donne la samba.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         samba = "x.x..x.x.x..x.x."
         for d in range(0, 16):
@@ -329,7 +329,7 @@ Un percussionniste qui **alterne** strictement ses mains joue les cases d'indice
 !!! question "La partie de chaque main (obligatoire)"
     Sur ton cahier, sans rien lancer : que renvoie `distribuer("x..x..x.", 2)` ? Laquelle des deux chaînes est la partie de la main droite ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `["x..x", ".x.."]`. La première est la main droite (cases 0, 2, 4, 6), la seconde la main gauche (cases 1, 3, 5, 7). Pour le tresillo, la main droite frappe deux fois, la gauche une fois.
 
 !!! question "Composer à deux mains (obligatoire)"
@@ -338,7 +338,7 @@ Un percussionniste qui **alterne** strictement ses mains joue les cases d'indice
     1. Écris l'expression Python qui donne le rythme de 16 cases que l'on entend.
     2. Sur ton cahier, prédis la chaîne obtenue, puis vérifie.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. `rassembler([euclidien(3, 8), euclidien(5, 8)])`
         2. `"xx...xxx...xxx.."`
 
@@ -365,7 +365,7 @@ ecrire_wav([euclidien(3, 8)], "tresillo.wav")
     3. Écris le rythme à deux mains de l'étape 6, puis deux rythmes de la table de ton choix.
     4. Écris `euclidien(3, 8)` et `euclidien(4, 8)` ensemble, puis `euclidien(2, 6)` et `euclidien(3, 8)` ensemble. Dans le second cas, les deux rythmes n'ont pas la même longueur : sur ton cahier, prédis au bout de combien de cases ils recommencent leur boucle en même temps, puis écoute.
 
-    ??? success "Réponse à la question 4"
+    ??? success "Correction de la question 4"
         Une boucle dure 6 cases, l'autre 8. Elles recommencent ensemble au bout de 24 cases, le plus petit multiple commun de 6 et 8 : c'est alors seulement que l'on réentend exactement le même passage.
 
 ## Bonus - Les écarts
@@ -390,7 +390,7 @@ Toussaint décrit souvent un rythme par la suite de ses écarts : le tresillo s'
 
     Puis vérifie, pour quelques valeurs de $k$ et $n$, que deux écarts de `euclidien(k, n)` ne diffèrent jamais de plus de 1.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def intervalles(rythme: str) -> list[int]:
             """Écarts successifs entre les frappes de rythme, le dernier écart

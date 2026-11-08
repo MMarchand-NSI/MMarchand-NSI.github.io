@@ -30,7 +30,7 @@ Python connaît les nombres complexes. Le nombre $i$ s'écrit `1j`, et $3 + 4i$ 
 
     Puis vérifie dans la console Python.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         - `5.0` : $\sqrt{3^2 + 4^2} = 5$. Le module est toujours un `float`.
         - `(-1+0j)` : $i^2 = -1$.
         - `2j` : $(1 + i)^2 = 1 + 2i + i^2 = 2i$.
@@ -52,7 +52,7 @@ $$
     - la suite $(|z_n|)$ est-elle bornée ?
     - la suite $(z_n)$ a-t-elle une limite ? Laquelle ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         | $c$ | $z_0$ à $z_4$ | bornée ? | limite ? |
         |---|---|---|---|
         | $0$ | $0, 0, 0, 0, 0$ | oui | $0$ |
@@ -78,7 +78,7 @@ $$
         assert terme(1j, 3) == ...
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def terme(c: complex, n: int) -> complex:
             """Renvoie z_n, pour la suite z_0 = 0 et z_{k+1} = z_k ** 2 + c."""
@@ -113,7 +113,7 @@ On calcule donc les termes un par un, et on s'arrête dès que le module dépass
     2. Pour $c = -2$, existe-t-il un tel $n$ ?
     3. Pour $c = 0$, la fonction renverra `n_max`. Cela prouve-t-il que $0$ est dans $\mathcal{M}$ ? Et pour un $c$ quelconque ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Pour $c = 1$ : $|z_0| = 0$, $|z_1| = 1$, $|z_2| = 2$, $|z_3| = 5$. Donc $n = 3$. Pour $c = 3$ : $z_1 = 3$, donc $n = 1$.
         2. Non : les modules valent $0, 2, 2, 2\dots$, et $2$ n'est pas **strictement** supérieur à $2$. $-2$ est dans $\mathcal{M}$.
         3. Pour $c = 0$, oui, puisqu'on sait que la suite est nulle. Mais en général, non : la suite pourrait dépasser 2 au terme suivant. Renvoyer `n_max` veut seulement dire « pas encore sorti après `n_max` termes ».
@@ -140,10 +140,10 @@ On calcule donc les termes un par un, et on s'arrête dès que le module dépass
     ??? tip "Indice plus précis"
         Deux variables, `z` qui part de `0` et `n` qui part de `0`. À chaque tour : `z = z * z + c`, puis `n = n + 1`. La condition est `n < n_max and abs(z) <= 2`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def iterations(c: complex, n_max: int) -> int:
             """Renvoie le plus petit n < n_max tel que |z_n| > 2, pour la suite
@@ -184,7 +184,7 @@ Le dessin montre une image de 8 × 8 pixels posée sur le plan. Chaque pixel rep
     3. Quand `x` augmente de 1, que devient la partie réelle ? Quand `y` augmente de 1, que devient la partie imaginaire ?
     4. Écris la partie réelle $a$ en fonction de `x`, puis la partie imaginaire $b$ en fonction de `y`.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. `(1, 0)` : $-2 + 1{,}5i$. `(0, 1)` : $-2{,}5 + i$. `(6, 3)` : $0{,}5$. `(7, 7)` : $1 - 2i$.
         2. Le pixel `(7, 1)`. La partie réelle $1$ est à $3{,}5$ unités de celle de la colonne `x = 0`, qui vaut $-2{,}5$, soit 7 pixels : `x = 7`. La partie imaginaire $1$ est à $0{,}5$ unité sous celle de la ligne `y = 0`, qui vaut $1{,}5$, soit 1 pixel : `y = 1`.
         3. La partie réelle augmente de $0{,}5$. La partie imaginaire **diminue** de $0{,}5$ : `y` descend, la partie imaginaire monte.
@@ -206,7 +206,7 @@ L'interface ne retient pas `gauche` et `haut`. Elle retient le **centre** de la 
     1. Sur le dessin, quel est le centre de la vue ? Quelle est son étendue ?
     2. Retrouve `gauche` et `haut` avec les deux dernières formules de la liste.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Le centre de la vue est le pixel `(4, 4)`, qui représente $-0{,}5 - 0{,}5i$. L'étendue vaut $4$, puisqu'une ligne compte 8 pixels et que le pas vaut $0{,}5$.
         2. `pas = 4 / 8 = 0.5`. `gauche = -0.5 - 4 / 2 = -2.5` et `haut = -0.5 + 8 × 0.5 / 2 = 1.5`. Ce sont bien les nombres du pixel `(0, 0)`, alors que l'origine du plan est ailleurs, au pixel `(5, 3)`.
 
@@ -216,7 +216,7 @@ L'interface ne retient pas `gauche` et `haut`. Elle retient le **centre** de la 
     1. Calcule `pas`, `gauche` et `haut`.
     2. Quel nombre représente le pixel `(0, 0)` ? Le pixel `(2, 2)` ? Le pixel `(1, 3)` ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. `pas = 2 / 4 = 0.5`, `gauche = -1 - 1 = -2`, `haut = 1 + 4 × 0.5 / 2 = 2`.
         2. `(0, 0)` : $-2 + 2i$. `(2, 2)` : $-2 + 2 \times 0{,}5 = -1$ et $2 - 2 \times 0{,}5 = 1$, donc $-1 + i$, le centre. `(1, 3)` : $-2 + 0{,}5 = -1{,}5$ et $2 - 3 \times 0{,}5 = 0{,}5$, donc $-1{,}5 + 0{,}5i$.
 
@@ -244,10 +244,10 @@ L'interface ne retient pas `gauche` et `haut`. Elle retient le **centre** de la 
     ??? tip "Indice"
         Calcule d'abord `pas`, `gauche` et `haut` avec les trois formules de la liste, puis `a` et `b`. `complex(a, b)` construit le résultat.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def vers_complexe(x: int, y: int, largeur: int, hauteur: int,
                           centre: complex, etendue: float) -> complex:
@@ -296,10 +296,10 @@ La grille a `hauteur` lignes et `largeur` colonnes. Chaque case contient `iterat
     ??? tip "Indice"
         Une double boucle, `y` sur les lignes à l'extérieur, `x` sur les colonnes à l'intérieur. Chaque case vaut `iterations(vers_complexe(x, y, largeur, hauteur, centre, etendue), n_max)`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def grille_mandelbrot(largeur: int, hauteur: int, centre: complex,
                               etendue: float, n_max: int) -> Grille:
@@ -327,7 +327,7 @@ Place-le à côté de `fractales.py`, installe PySide6 avec `uv add pyside6`, pu
     2. Zoome six ou sept fois sur le **bord** de la partie noire. Que vois-tu apparaître ?
     3. À force de zoomer, l'image devient grossière, et le noir s'étale. Change `n_max` de `50` à `300`, puis clique sur **Dessiner**. Qu'est-ce qui change, et pourquoi ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. $0$, $-1$ et $-2$ sont dans la partie noire, $1$ est en dehors. $-2$ est tout au bout de la longue pointe vers la gauche.
         2. Des formes de plus en plus fines, et de petites copies de l'ensemble entier, reliées au reste par des filaments.
         3. Près du bord, la suite met beaucoup de termes à dépasser 2. Avec `n_max = 50`, ces points sont comptés noirs alors qu'ils sont hors de $\mathcal{M}$. Avec `n_max = 300`, ils sont colorés, et les détails réapparaissent. Le dessin est plus long : pour chaque pixel noir, on calcule `n_max` termes.
@@ -359,7 +359,7 @@ Chaque clic divise l'étendue par 2 : après `k` zooms depuis la vue de départ,
     ??? tip "Indice pour la question 1"
         Une boucle sur `x` de `1` à `299`, qui compare `vers_complexe(x, 150, 300, 300, centre, etendue).real` à la même valeur pour `x - 1`.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. ```python
            def nb_confondus(centre: complex, etendue: float) -> int:
                """Renvoie le nombre de pixels de la ligne y = 150 d'une image de
@@ -398,7 +398,7 @@ On garde le critère du module 2 : il reste valable tant que $|c| \leqslant 2$ (
     2. Quelle est la limite de $|z_n|$ si $|z| < 1$ ? Si $|z| = 1$ ? Si $|z| > 1$ ?
     3. Quelle est la forme de $K_0$ ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. $z_1 = z^2$, $z_2 = z^4$, $z_3 = z^8$, donc $z_n = z^{2^n}$ et $|z_n| = |z|^{2^n}$.
         2. C'est une suite géométrique de raison $|z|$, prise aux rangs $2^n$. Si $|z| < 1$, la limite est $0$. Si $|z| = 1$, la suite est constante égale à $1$. Si $|z| > 1$, la limite est $+\infty$.
         3. $K_0$ est l'ensemble des $z$ tels que $|z| \leqslant 1$ : le **disque** de centre $0$ et de rayon $1$.
@@ -406,7 +406,7 @@ On garde le critère du module 2 : il reste valable tant que $|c| \leqslant 2$ (
 !!! question "Le cas c = -1"
     Sur ton cahier, calcule $z_0$ à $z_4$ pour $z = 1$, puis pour $z = 2$. Ces deux points sont-ils dans $K_{-1}$ ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         - $z = 1$ : $1, 0, -1, 0, -1$. La suite est bornée : $1$ est dans $K_{-1}$.
         - $z = 2$ : $2, 3, 8, 63, 3968$. Dès $z_1 = 3$, le module dépasse 2 : $2$ n'est pas dans $K_{-1}$.
 
@@ -429,7 +429,7 @@ On garde le critère du module 2 : il reste valable tant que $|c| \leqslant 2$ (
     ??? tip "Indice"
         Compare avec `iterations` : une seule chose change.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def iterations_julia(z: complex, c: complex, n_max: int) -> int:
             """Renvoie le plus petit n < n_max tel que |z_n| > 2, pour la suite
@@ -457,7 +457,7 @@ On garde le critère du module 2 : il reste valable tant que $|c| \leqslant 2$ (
     1. Quel appel de `iterations_julia` calcule la même chose que `iterations(c, n_max)` ?
     2. Remplace le corps de `iterations` par une seule ligne qui utilise `iterations_julia`. Relance `test_iterations` et `test_grille_mandelbrot` : ils doivent passer sans être modifiés.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. `iterations_julia(0, c, n_max)` : la suite de Mandelbrot est celle de Julia qui part de $z_0 = 0$.
         2. ```python
            def iterations(c: complex, n_max: int) -> int:
@@ -486,7 +486,7 @@ On garde le critère du module 2 : il reste valable tant que $|c| \leqslant 2$ (
         ]
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def grille_julia(largeur: int, hauteur: int, centre: complex,
                          etendue: float, c: complex, n_max: int) -> Grille:
@@ -509,7 +509,7 @@ Relance l'interface : elle a trouvé `grille_julia`, et la liste déroulante pro
     2. Dessine $K_c$ pour $c = -1$, puis pour $c = -0.123+0.745j$.
     3. En mode Mandelbrot, fais **Maj + clic** sur des points pris dans la partie noire, puis sur des points pris loin d'elle. Que remarques-tu ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Un disque noir de rayon 1.
         2. $c = -1$ donne une suite de bulles reliées entre elles, qu'on appelle la **basilique**. $c = -0.123 + 0.745i$ donne le **lapin de Douady**.
         3. Pour un point de la partie noire, $K_c$ a une zone noire d'un seul morceau. Pour un point loin d'elle, il n'y a presque pas de noir.
@@ -522,7 +522,7 @@ Relance l'interface : elle a trouvé `grille_julia`, et la liste déroulante pro
     1. Calcule `iterations(c, 1000)` pour chacun. Lesquels semblent être dans $\mathcal{M}$ ?
     2. Dans l'interface, dessine $K_c$ pour chacun, une fois avec `n_max = 50`, une fois avec `n_max = 300`. Que devient le noir ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Les trois premiers donnent `1000`. Pour $c = 0.3$, on obtient `12` : $0.3$ n'est pas dans $\mathcal{M}$.
         2. Pour les trois premiers, la zone noire change à peine et reste d'un seul morceau. Pour $c = 0.3$, les quelques pixels noirs disparaissent quand `n_max` augmente : $K_{0.3}$ n'a aucune surface, c'est une poussière de points isolés.
 

@@ -34,7 +34,7 @@ x.parler()  # On accède aussi aux méthodes d'instance par le point. Affiche: T
 !!! question "Prédis la sortie"
     Avant d'exécuter, écris ce que ce programme affiche, puis déplie pour vérifier.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         ```
         Bidule
         Truc fait du bruit.

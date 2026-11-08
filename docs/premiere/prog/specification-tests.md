@@ -7,7 +7,7 @@
     2. Que vaut `"ha" * 3 + "!"` ?
     3. Que vaut `(17 // 5) * 5 + 17 % 5` ? Pourquoi ce résultat ne dépend-il pas des deux nombres choisis ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. `7` et `"j"`. Le premier caractère a l'indice `0`.
         2. `"hahaha!"` : la répétition est calculée d'abord, puis la concaténation.
         3. `17`. Quotient fois diviseur plus reste redonne toujours le nombre de départ : c'est la définition même de la division euclidienne.
@@ -54,7 +54,7 @@ assert carre(3) == 9, "carre(3) aurait dû valoir 9"
     assert carre(3) == 9, "carre(3) aurait dû valoir 9"
     ```
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         ```python
         def carre(x: float) -> float:
             """Renvoie le carré du flottant x."""
@@ -128,7 +128,7 @@ Ici, la précondition « la liste n'est pas vide » est nécessaire : le minimum
     3. `est_pair(n)` : `True` si `n` est pair.
     4. `celsius_vers_fahrenheit(t)` : convertit une température ($°F = °C \times 1{,}8 + 32$).
 
-    ??? warning "Corrigé (exemple pour les deux premières)"
+    ??? warning "Correction (exemple pour les deux premières)"
         ```python
         def aire_rectangle(largeur: float, hauteur: float) -> float:
             """Renvoie l'aire d'un rectangle largeur x hauteur."""

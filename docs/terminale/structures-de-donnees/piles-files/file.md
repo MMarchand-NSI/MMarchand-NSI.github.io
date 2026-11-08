@@ -227,10 +227,10 @@ Les exercices suivants se font dans le fichier exos_files.py.
     ??? tip "Indice plus précis"
         Une pile temporaire inverserait l'ordre, une **file** temporaire le conserve : ce qui entre en premier en ressort en premier, deux fois de suite. Défile `f` en entier, compte au passage, enfile chaque élément dans la file temporaire, puis vide la temporaire dans `f`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         # dans exos/exos_files.py : on est du côté qui UTILISE, d'où le préfixe file.
 
@@ -280,10 +280,10 @@ Quand un même motif revient trois fois, on l'écrit une fois pour toutes.
     ??? tip "Indice"
         Tu l'as déjà écrit dans « Occurrences ». Reprends ta solution et enlève le comptage : ce qui reste **est** `elements`.
 
-    ??? note "Avant d'ouvrir la solution"
+    ??? note "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : pourquoi une **file** temporaire, et pas une **pile** ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def elements[T](f: File[T]) -> list[T]:
             """Liste des éléments de f, de la sortie vers l'entrée, sans modifier f."""
@@ -393,10 +393,10 @@ Tu remarqueras que le bouton `défiler` est **grisé quand la file est vide**. C
     ??? tip "Indice précis"
         Le basculement est une boucle : tant que `entree` n'est pas vide, dépiler `entree` et empiler le résultat sur `sortie`. Une seule ligne de corps.
 
-    ??? note "En une phrase, sur ton cahier, avant d'ouvrir la solution"
+    ??? note "En une phrase, sur ton cahier, avant d'ouvrir la correction"
         Qu'est-ce que ton `defiler` fait quand `sortie` n'est pas vide ? Écris-le en français. Si tu ne sais pas le dire, tu ne sais pas encore l'écrire.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def creer[T]() -> File[T]:
             return (pile.creer(), pile.creer())

@@ -16,7 +16,7 @@ Le modèle OSI (*Open Systems Interconnection*) découpe ce problème en **7 cou
 
 À l'émission, chaque couche ajoute ses propres informations aux données : c'est l'**encapsulation**.
 
-!!! info "PDU — Protocol Data Unit"
+!!! info "PDU : Protocol Data Unit"
     À chaque couche, les données ont un nom spécifique : on parle de **PDU** (*Protocol Data Unit*). Le PDU d'une couche devient la **charge utile** (*payload*) de la couche inférieure.
 
 ---

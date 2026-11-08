@@ -42,7 +42,7 @@ Ainsi la première mesure du violon 1, deux blanches, s'écrit `[("do4", 4), ("m
     2. La note `("sol4", 4)` est écrite sur la ligne de la mesure 3. Pourtant la mesure 3 ne contient que `("si3", 4)`, `("silence", 2)` et ce sol. Où passe la fin de ce sol ? Regarde la partition.
     3. Écris la première mesure du violon 2 sous la forme d'une liste de couples. Compare-la avec la dernière mesure de `LIGNE`.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. 8 croches. Mesure 1 : 4 + 4. Mesure 7 : 2 + 2 + 2 + 2. Mesure 10 : huit croches de durée 1.
         2. Le sol commence sur le dernier temps de la mesure 3 et se prolonge sur le premier temps de la mesure 4 : sur la partition, une **liaison** relie les deux moitiés. La mesure 3 contient 4 + 2 + 2 croches, la mesure 4 commence par les 2 croches restantes. `ligne_bach.py` l'écrit comme une seule note de 4 croches. Deux autres notes sont dans ce cas : le fa, des mesures 4 à 5, et le mib, des mesures 5 à 6.
         3. `[("do4", 2), ("mib4", 2), ("sol4", 2), ("do5", 2)]`. La dernière mesure de `LIGNE` est `[("do5", 2), ("sol4", 2), ("mib4", 2), ("do4", 2)]` : les mêmes notes, dans l'ordre inverse.
@@ -67,7 +67,7 @@ Ainsi la première mesure du violon 1, deux blanches, s'écrit `[("do4", 4), ("m
         assert duree_totale(LIGNE) == ...
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def duree_totale(ligne: list[tuple[str, int]]) -> int:
             """Durée de ligne, en croches."""
@@ -102,10 +102,10 @@ Ainsi la première mesure du violon 1, deux blanches, s'écrit `[("do4", 4), ("m
     ??? tip "Indice plus précis"
         La note d'indice `i` du rétrograde est la note d'indice `len(ligne) - 1 - i` de `ligne`. Parcours `i` de 0 à `len(ligne) - 1`, et ajoute chaque note au bout du résultat avec `append`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def retrograde(ligne: list[tuple[str, int]]) -> list[tuple[str, int]]:
             """Les notes de ligne, de la dernière à la première."""
@@ -128,7 +128,7 @@ Ainsi la première mesure du violon 1, deux blanches, s'écrit `[("do4", 4), ("m
         assert retrograde(retrograde(LIGNE)) == LIGNE
     ```
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Les trois sont vraies.
 
         - Le rétrograde contient les mêmes notes, seulement dans un autre ordre : il y en a autant.
@@ -157,7 +157,7 @@ ecrire_wav_notes([LIGNE], "violon1.wav")
     2. Écris `violon2.wav`, la ligne seule lue à l'envers. Reconnais-tu le thème du roi ? Où est-il ?
     3. Écris `cancrizans.wav`, la pièce entière.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         2. Le thème du roi est à la fin, joué à reculons : du milieu de la mesure 10 jusqu'à la dernière note du violon 2.
         3. `ecrire_wav_notes([LIGNE, retrograde(LIGNE)], "cancrizans.wav")`
 
@@ -170,7 +170,7 @@ ecrire_wav_notes([LIGNE], "violon1.wav")
             print(f1.read() == f2.read())
     ```
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Les deux fichiers sont identiques, au dernier octet près. Les deux violons jouent la même chose, simplement échangés, et `son.py` leur donne le même timbre : à chaque instant, il additionne les deux mêmes sons, dans l'autre ordre.
 
         Autrement dit, si l'on retourne la partition entière, en lisant chaque violon à l'envers, on retrouve exactement la même pièce. C'est un palindrome musical.
@@ -182,7 +182,7 @@ On numérote les croches de la pièce de 0 à 143. Pour savoir ce que les deux v
 !!! question "Quelle note à quel moment ? (obligatoire)"
     Sur ton cahier : quelle note de `LIGNE` sonne à la croche 0 ? à la croche 3 ? à la croche 4 ? à la croche 20 ? à la croche 143 ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `"do4"` occupe les croches 0 à 3, `"mib4"` les croches 4 à 7. À la croche 0 et à la croche 3, on entend donc `"do4"`, et à la croche 4, `"mib4"`.
 
         Pour la croche 20, on additionne les durées : `do4`, `mib4`, `sol4`, `lab4` et `si3` occupent les croches 0 à 19. La note suivante, `("silence", 2)`, occupe les croches 20 et 21 : c'est le silence.
@@ -213,10 +213,10 @@ On numérote les croches de la pièce de 0 à 143. Pour savoir ce que les deux v
     ??? tip "Indice plus précis"
         Avec deux variables `i = 0` (indice de la note) et `debut = 0` (croche où elle commence) : tant que la note `i` finit avant ou pendant `t`, c'est-à-dire tant que `debut + ligne[i][1] <= t`, avance `debut` de sa durée et passe à la note suivante.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def note_a(ligne: list[tuple[str, int]], t: int) -> str:
             """Le nom de la note de ligne qui sonne pendant la croche t.
@@ -237,10 +237,10 @@ On numérote les croches de la pièce de 0 à 143. Pour savoir ce que les deux v
     1. À la croche 1, le violon 2 joue ce que le violon 1 joue à quelle croche ? Et à la croche `t` ?
     2. Écris un test qui vérifie ta réponse pour toutes les croches de la pièce, à l'aide d'une boucle.
 
-    ??? success "Réponse à la question 1"
+    ??? success "Correction de la question 1"
         À la croche 1, le violon 2 joue la note de la croche 142 du violon 1. À la croche `t`, celle de la croche `143 - t`. C'est la formule de `retrograde`, `len(ligne) - 1 - i`, appliquée cette fois aux croches : la pièce dure 144 croches, et 144 - 1 - t = 143 - t.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def test_miroir() -> None:
             for t in range(0, 144):
@@ -266,7 +266,7 @@ On numérote les croches de la pièce de 0 à 143. Pour savoir ce que les deux v
     1. Écris `unissons`, puis affiche `unissons(LIGNE, retrograde(LIGNE))`.
     2. Les unissons vont par paires. Additionne les deux croches de chaque paire. Que remarques-tu ? Explique-le sur ton cahier à l'aide de l'exercice précédent.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def unissons(voix1: list[tuple[str, int]], voix2: list[tuple[str, int]]) -> list[int]:
             """Les croches où voix1 et voix2 jouent la même note (les silences ne comptent pas).
@@ -314,7 +314,7 @@ En musique, l'écart entre deux notes se mesure en **demi-tons**. Dans une octav
     ??? tip "Indice"
         Le dernier caractère du nom est l'octave. Ce qui reste est le nom de la note, éventuellement suivi de `"#"` (un demi-ton de plus) ou de `"b"` (un demi-ton de moins). Aucun nom de `NOTES` ne finit par `"b"`.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def demi_tons(nom: str) -> int:
             """Nombre de demi-tons entre "do0" et la note nom, par exemple "mib4" ou "fa#3".
@@ -352,7 +352,7 @@ En musique, l'écart entre deux notes se mesure en **demi-tons**. Dans une octav
     2. Sur ton cahier, prédis : pour la ligne de Bach, l'écart à la croche `t` et l'écart à la croche `143 - t` sont-ils égaux ? Vérifie-le pour toutes les croches où aucun violon ne se tait.
     3. Ta réponse dépend-elle de la ligne écrite par Bach ? Essaie avec une autre ligne, par exemple `[("do4", 2), ("re4", 1), ("sol4", 3)]`, qui dure 6 croches : compare l'écart à la croche `t` et à la croche `5 - t`.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def ecart(ligne: list[tuple[str, int]], t: int) -> int:
             """Écart en demi-tons entre ligne et son rétrograde, à la croche t.
@@ -370,7 +370,7 @@ En musique, l'écart entre deux notes se mesure en **demi-tons**. Dans une octav
                 assert ecart(autre, t) == ecart(autre, 5 - t)
         ```
 
-    ??? success "Réponse aux questions 2 et 3"
+    ??? success "Correction des questions 2 et 3"
         Les écarts sont égaux, pour toutes les croches, et **pour n'importe quelle ligne**. Pour une ligne de `n` croches, à la croche `t`, on entend les notes des croches `t` et `n - 1 - t` de la ligne. À la croche `n - 1 - t`, on entend les notes des croches `n - 1 - t` et `t` : les deux mêmes notes, échangées entre les violons. La valeur absolue de leur écart ne change pas.
 
         Le miroir est donc automatique : n'importe quelle ligne, jouée contre son rétrograde, donne un palindrome. Ce qui ne l'est pas, c'est que le résultat sonne bien. Écoute ta ligne contre son rétrograde : le travail de Bach a été d'écrire une ligne qui, lue dans les deux sens à la fois, fait encore de la musique.

@@ -167,7 +167,7 @@ def chiffrement_symetrique(message: bytes, cle: bytes) -> bytes:
     return resultat_bytes
 ```
 
-??? success "Solution"
+??? success "Correction"
     ```python
     def chiffrement_symetrique(message: bytes, cle: bytes) -> bytes:
         # Nombre de répétitions de la clé

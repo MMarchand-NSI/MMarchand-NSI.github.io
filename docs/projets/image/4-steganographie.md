@@ -64,7 +64,7 @@ Par exemple, $182 = 1011\ 0110_2$ : les bits de poids fort sont $1011_2$, les bi
     3. Même question pour ses 4 bits de poids faible.
     4. Calcule la valeur du poids fort fois 16, plus celle du poids faible. Que retrouves-tu ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. $200 = 1100\ 1000_2$
         2. $1100_2$, qui vaut $12$.
         3. $1000_2$, qui vaut $8$.
@@ -83,7 +83,7 @@ En Python, c'est donc une division entière par 16 qui donne le poids fort, et s
     1. On change seulement ses 4 bits de poids faible.
     2. On change seulement ses 4 bits de poids fort.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Le poids faible vaut entre $0000_2 = 0$ et $1111_2 = 15$ : l'écart vaut au plus $15$.
         2. Le poids fort vaut entre $0$ et $15$ paquets de 16 : l'écart vaut au plus $15 \times 16 = 240$.
 
@@ -100,7 +100,7 @@ Le procédé tient en une phrase : **on remplace les 4 bits de poids faible de l
     2. Quel écart y a-t-il entre la porteuse et le pixel transmis ?
     3. Quels bits du secret ont été perdus ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Poids fort de la porteuse, $1011$, suivi du poids fort du secret, $0100$ : $1011\ 0100_2 = 180$.
         2. $182 - 180 = 2$.
         3. Ses 4 bits de poids faible, $1101_2$ : ils ne sont écrits nulle part.
@@ -127,10 +127,10 @@ Le procédé tient en une phrase : **on remplace les 4 bits de poids faible de l
     ??? tip "Indice plus précis"
         Le poids fort de `p` est `p // 16`. Remis à sa place, il vaut `(p // 16) * 16`. On lui ajoute `s // 16`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def cacher_pixel(p: int, s: int) -> int:
             """Renvoie le pixel formé des 4 bits de poids fort de p, suivis des
@@ -160,10 +160,10 @@ Le procédé tient en une phrase : **on remplace les 4 bits de poids faible de l
     ??? tip "Indice léger"
         C'est la construction ligne par ligne de `recadrer`, ou de `flou`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def cacher(porteuse: Grille, secret: Grille) -> Grille:
             """Renvoie une nouvelle grille, la porteuse dans laquelle le secret
@@ -197,7 +197,7 @@ Le procédé tient en une phrase : **on remplace les 4 bits de poids faible de l
     1. Avant de lancer, sur ton cahier : verra-t-on une différence entre `porteuse.png` et `transmise.png` ? Appuie-toi sur l'étape 1.
     2. Lance, ouvre les deux images et compare.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Aucun pixel ne change de plus de 15 sur 255 : la différence ne se voit pas, ou à peine dans les grandes zones unies.
 
 ## Étape 3 - Retrouver le secret
@@ -212,7 +212,7 @@ Le pixel transmis contient le poids fort du secret, mais **à droite**, à la pl
     3. D'où viennent les 4 bits de droite du résultat ?
     4. Échange à nouveau les deux moitiés du résultat. Qu'obtiens-tu ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. $0100\ 1011_2 = 75$.
         2. $77 - 75 = 2$.
         3. Ce sont les 4 bits de poids fort de la **porteuse**, $1011$. Ils remplacent les 4 bits de poids faible du secret, qui ont été perdus.
@@ -244,10 +244,10 @@ Le pixel transmis contient le poids fort du secret, mais **à droite**, à la pl
     ??? tip "Indice plus précis"
         Reconstruis ensuite un octet à partir de ces deux nombres, comme dans la question 4 de l'étape 1 ($12 \times 16 + 8 = 200$), mais en les plaçant dans l'autre ordre.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def echanger(p: int) -> int:
             """Renvoie l'octet obtenu en échangeant les 4 bits de poids fort et
@@ -266,7 +266,7 @@ Le pixel transmis contient le poids fort du secret, mais **à droite**, à la pl
 !!! question "Écrire `reveler` (obligatoire)"
     Écris la fonction `reveler(transmise: Grille) -> Grille`, qui renvoie une nouvelle grille où chaque pixel de `transmise` a ses deux moitiés échangées. Écris aussi sa fonction de test, avec la grille transmise de `test_cacher`.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def reveler(transmise: Grille) -> Grille:
             """Renvoie une nouvelle grille : chaque pixel de transmise a ses
@@ -297,7 +297,7 @@ Le pixel transmis contient le poids fort du secret, mais **à droite**, à la pl
     1. Ouvre `revelee.png` et compare-la avec ta photo secrète. Que remarques-tu dans les zones où le gris varie lentement, comme un ciel ?
     2. Distingue-t-on la porteuse dans `revelee.png` ? Pourquoi ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Le gris varie par marches : seuls les 4 bits de poids fort du secret ont été transmis, donc il ne reste que 16 niveaux de gris possibles au lieu de 256.
         2. À peine : la porteuse n'occupe plus que les 4 bits de poids faible, où elle produit des écarts de 15 au plus.
 
@@ -309,7 +309,7 @@ Les deux images ont été abîmées : la porteuse en devenant l'image transmise,
     1. Sur ton cahier : quel est le plus grand écart possible entre un pixel de la porteuse et le pixel transmis ? Donne une porteuse et un secret qui l'atteignent.
     2. Même question entre un pixel du secret et le pixel révélé.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Le pixel transmis ne diffère de la porteuse que par ses 4 bits de poids faible : l'écart vaut au plus $15$. Il est atteint pour une porteuse $0 = 0000\ 0000_2$ et un secret $255 = 1111\ 1111_2$, qui donnent $0000\ 1111_2 = 15$.
         2. Le pixel révélé ne diffère du secret que par ses 4 bits de poids faible, remplacés par ceux de la porteuse : au plus $15$ aussi. Avec le même exemple, on révèle $1111\ 0000_2 = 240$ au lieu de $255$.
 
@@ -331,10 +331,10 @@ Les deux images ont été abîmées : la porteuse en devenant l'image transmise,
     ??? tip "Indice léger"
         C'est la recherche d'un maximum, sur toutes les cases à la fois. La valeur absolue s'écrit `abs`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def ecart_max(a: Grille, b: Grille) -> int:
             """Renvoie le plus grand écart, en valeur absolue, entre deux pixels
@@ -352,7 +352,7 @@ Les deux images ont été abîmées : la porteuse en devenant l'image transmise,
 !!! question "Écrire `ecart_moyen` (entraînement)"
     Écris `ecart_moyen(a: Grille, b: Grille) -> float`, qui renvoie la moyenne des écarts en valeur absolue sur tous les pixels, avec sa fonction de test.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def ecart_moyen(a: Grille, b: Grille) -> float:
             """Renvoie la moyenne des écarts, en valeur absolue, entre les pixels
@@ -381,7 +381,7 @@ Les deux images ont été abîmées : la porteuse en devenant l'image transmise,
     1. Les deux écarts maximaux respectent-ils ta réponse au pire cas ?
     2. Les écarts moyens sont bien plus petits que 15. Pourquoi ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Oui : aucun ne dépasse 15.
         2. L'écart de 15 n'est atteint que si les 4 bits remplacés et les 4 bits qui les remplacent sont à l'opposé, `0000` contre `1111`. La plupart du temps, ils sont plus proches.
 
@@ -401,7 +401,7 @@ Ajoute `charger_couleur` et `ImageCouleur` à la ligne `from image_io import ...
     - travaille-t-elle sur **un pixel**, ou parcourt-elle la grille **sans regarder** ce que contiennent les cases ?
     - faut-il la réécrire pour des triplets ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         - `cacher_pixel` et `echanger` calculent sur un pixel, avec `//`, `%`, `*` et `+` : elles exigent un entier. Il faut une version pour les triplets, qui applique le même calcul à chaque composante.
         - `cacher` et `reveler` ne font que parcourir la grille et appeler la fonction précédente sur chaque case. Leur boucle reste la même : seule la fonction appelée change, et les annotations de type.
         - `recadrer` recopie les cases sans les regarder. Son type le dit : `list[list[T]]`, pour n'importe quel type `T` de case. Elle marche déjà en couleur.
@@ -432,10 +432,10 @@ Ajoute `charger_couleur` et `ImageCouleur` à la ligne `from image_io import ...
     ??? tip "Indice"
         Ne refais pas le calcul : appelle `cacher_pixel` sur `p[0]` et `s[0]`, puis sur les composantes `1` et `2`, et renvoie le triplet des trois résultats.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def cacher_pixel_couleur(p: tuple[int, int, int],
                                  s: tuple[int, int, int]) -> tuple[int, int, int]:
@@ -487,7 +487,7 @@ Ajoute `charger_couleur` et `ImageCouleur` à la ligne `from image_io import ...
         assert reveler_couleur(t) == ...
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         Une ligne change dans chaque boucle : l'appel de `cacher_pixel` devient `cacher_pixel_couleur`, celui de `echanger` devient `echanger_couleur`.
 
         ```python
@@ -542,7 +542,7 @@ Ajoute `charger_couleur` et `ImageCouleur` à la ligne `from image_io import ...
     1. Compare `transmise_couleur.png` avec ta porteuse, puis `revelee_couleur.png` avec ton secret.
     2. Peut-on appeler `ecart_max(porteuse_c, transmise_c)` ? Pourquoi ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Comme en niveaux de gris : la transmise ressemble à la porteuse, et la révélée au secret, avec des couleurs en marches, chaque composante n'ayant plus que 16 niveaux.
         2. Non : `ecart_max` calcule `a[i][j] - b[i][j]`, et Python ne sait pas soustraire deux triplets. Il faudrait mesurer l'écart composante par composante.
 

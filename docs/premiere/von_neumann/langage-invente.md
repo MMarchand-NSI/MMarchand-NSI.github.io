@@ -32,7 +32,7 @@ répète 4
     recommence plusieurs fois
     ```
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. `avance` **sans quantité** : de combien ? Une instruction qui attend un nombre doit toujours le recevoir.
         2. `tourne un peu à droite` : « un peu » n'est pas une valeur, et le sens devrait être porté par le **signe** de l'angle, pas par un mot.
         3. `recommence plusieurs fois` : ni le nombre de répétitions, ni **ce qui** doit être répété ne sont indiqués. C'est le rôle du bloc indenté.
@@ -121,7 +121,7 @@ Regardez à nouveau la suite `9 3 100 7 90 3 100 4`.
 !!! question "Un problème que la table ne résout pas"
     Comment savez-vous que `100` est une **quantité** (avancer de 100) et non le numéro d'une instruction ? Et si un groupe avait attribué le nombre 100 au mot `lève` ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Vous ne le savez pas. Vous l'avez deviné grâce au contexte, parce que vous compreniez le programme. Une machine, elle, ne devine rien.
 
         Il manque donc une seconde convention : un **format**, qui dise où commence et où finit chaque instruction, et lesquels de ces nombres sont des ordres et lesquels sont des quantités.

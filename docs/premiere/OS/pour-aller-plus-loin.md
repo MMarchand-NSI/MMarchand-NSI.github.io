@@ -36,7 +36,7 @@ ls -l coffre
 
     Tape-les ensuite, dans cet ordre, et compare.
 
-    ??? success "Réponses"
+    ??? success "Correction"
         1. `secret.txt`. Le nom s'affiche.
         2. Deux lignes étranges :
         ```
@@ -70,7 +70,7 @@ Le résultat est net : tu connais le nom du fichier, tu ne peux ni le lire, ni m
     cd coffre
     ```
 
-    ??? success "Réponses"
+    ??? success "Correction"
         1. `ls: cannot open directory 'coffre': Permission denied`
         2. `le code est 4821`
         3. La commande réussit : `pwd` affiche le chemin de `coffre`.
@@ -78,7 +78,7 @@ Le résultat est net : tu connais le nom du fichier, tu ne peux ni le lire, ni m
     ??? question "Avant de continuer"
         En une phrase sur ton cahier : comment peut-on lire un fichier dans un répertoire dont on ne peut pas afficher le contenu ?
 
-        ??? success "Réponse"
+        ??? success "Correction"
             En connaissant son nom. Le droit `r` sert à **découvrir** les noms, le droit `x` à **s'en servir**. Sans `r`, un nom qu'on connaît déjà fonctionne encore. C'est le principe du répertoire dont on ne donne la clé qu'avec l'adresse exacte du fichier.
 
 Remets les deux droits avant de continuer :
@@ -111,7 +111,7 @@ chmod u+rx coffre
     ??? tip "Indice"
         Relis l'encart sur les trois droits. Le nom `notes.txt` est écrit dans quelle liste ?
 
-    ??? success "Réponses"
+    ??? success "Correction"
         1. `bash: coffre/notes.txt: Permission denied`. Sans le droit `w` sur le fichier, impossible d'écrire dedans.
         2. Le terminal demande confirmation, parce que le fichier est protégé en écriture :
         ```
@@ -139,7 +139,7 @@ Maintenant l'inverse.
     touch coffre/neuf.txt
     ```
 
-    ??? success "Réponses"
+    ??? success "Correction"
         1. Aucune réponse : la commande réussit. `cat coffre/notes.txt` affiche `bonjour`, le contenu a bien été remplacé.
         2. `rm: cannot remove 'coffre/notes.txt': Permission denied`
         3. `touch: cannot touch 'coffre/neuf.txt': Permission denied`
@@ -166,7 +166,7 @@ chmod u+w coffre
     ??? tip "Indice plus précis"
         Compte les répertoires du chemin, en commençant par `/`. Chacun doit être traversé.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Le droit `r` sur `secret.txt`, et le droit `x` sur **chacun** des cinq répertoires du chemin : `/`, `home`, `eleve`, `depot`, `os` et `coffre`. Un seul `x` manquant quelque part sur le trajet, et le fichier devient inatteignable, même s'il est lisible par tout le monde.
 
         Le droit `r` sur ces répertoires n'est pas nécessaire : tu donnes les noms, tu n'as pas à les découvrir.
@@ -215,7 +215,7 @@ Note la durée obtenue, c'est ta référence.
 
     Avant de taper : sur ton cahier, prédis les deux durées, en partant de ta référence.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Chacune des deux durées est environ le **double** de la référence. Sur la machine de test : 3,4 s pour une seule copie, puis 7,0 s et 7,3 s pour les deux.
 
         Aucun des deux programmes n'a ralenti de lui-même. Ils reçoivent chacun **la moitié du temps** du cœur, donc ils mettent deux fois plus longtemps à faire le même travail. Essaie avec trois copies : la durée triple. Sur la machine de test, 10,0 s, 10,3 s et 10,3 s pour une référence de 3,5 s.
@@ -227,7 +227,7 @@ Note la durée obtenue, c'est ta référence.
 
     Prédis, puis tape.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Les deux durées retombent à peu près à la référence : 4,1 s et 4,1 s sur la machine de test, pour une référence de 3,4 s.
 
         Le ralentissement de l'exercice 6 ne venait donc pas de la présence de l'autre programme, mais du **partage d'un seul cœur**.
@@ -241,7 +241,7 @@ Note la durée obtenue, c'est ta référence.
 
     Prédis les deux durées.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `A`, normal, retrouve presque sa vitesse de référence, et `B`, poli, prend tout le reste. Sur la machine de test : `A` en 4,0 s et `B` en 6,3 s, là où les deux prenaient 7 s à égalité.
 
         Le partage n'est donc pas forcément équitable : l'ordonnanceur suit une **priorité**. C'est ce qui permet à ta machine de rester réactive pendant qu'un gros calcul tourne en arrière-plan.
@@ -310,7 +310,7 @@ Le système tient sur chaque processus un répertoire à son numéro, rangé dan
 
     Avant de le faire : sur ton cahier, prédis laquelle des deux valeurs change, et de combien.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Sur la machine de test, au démarrage :
 
         ```
@@ -330,7 +330,7 @@ Le système tient sur chaque processus un répertoire à son numéro, rangé dan
 !!! question "Exercice 10 : et écrire ?"
     Appuie sur Entrée pour lancer l'écriture des 100 Mo, attends quelques secondes, puis relève les deux valeurs.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         ```
         VmSize:	 1970392 kB
         VmRSS:	  107064 kB
@@ -368,7 +368,7 @@ Lance-le, note le PID, et observe depuis le second terminal.
 
     Cette commande affiche la ligne de commande que le système a retenue pour ce processus. Prédis ce qu'elle va afficher.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `python3 journal.py`
 
         Le système ne connaît **qu'un** programme en train de s'exécuter, `python3`, et `journal.py` n'est pour lui qu'un mot écrit à la suite, un argument. C'est la même chose que tu avais constatée avec le bouton ▶ : le fichier `.py` est une donnée, l'exécutable est `python3`.
@@ -380,7 +380,7 @@ Lance-le, note le PID, et observe depuis le second terminal.
 
     Prédis combien de lignes vont s'afficher, et ce que tu vas reconnaître dedans.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Une ligne `total 0`, puis quatre entrées numérotées 0, 1, 2 et 3. L'entrée `3` pointe vers `journal.txt`, et `3` est bien le numéro que le programme avait affiché.
 
         Les numéros 0, 1 et 2 sont déjà là sans que le programme ait rien demandé : l'**entrée standard**, la **sortie standard** et la **sortie d'erreur**, celles-là mêmes que tu utilises sans le savoir quand `print` écrit dans le terminal. Note vers quoi elles pointent chez toi.

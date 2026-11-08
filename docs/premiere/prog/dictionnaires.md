@@ -49,7 +49,7 @@ d['a']
     2. Écris la boucle qui construit la liste des carrés des entiers de `0` à `9`. Quels sont les trois temps de l'accumulation ?
     3. Que vaut `len([[1, 2], [3, 4], [5, 6]])` ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. `a` vaut `[1, 2, 3, 4]`. `b = a` ne copie rien : ce sont **deux noms pour une seule liste**, et modifier l'une modifie l'autre.
         2. `x` vaut `3` et `y` vaut `5` : c'est la **déstructuration**. C'est aussi ce qui permet à une fonction de « renvoyer deux valeurs », en renvoyant en réalité un tuple.
         3. `3`. C'est une liste de **trois** éléments, chacun étant lui-même une liste de deux éléments.
@@ -223,7 +223,7 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
     print(total)
     ```
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         1. `fruit` vaut `"poire"`, et `stock[fruit]` vaut `5`. La variable de boucle prend les **clés**, dans leur ordre d'insertion.
         2. `8`, soit `3 + 5`.
         3. `10`, soit `3 + 5 + 2`.
@@ -263,7 +263,7 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
     10. Teste si `"NSI"` est une clé de `notes`, sans provoquer d'erreur.
     11. Affiche la note de `"Anglais"`, en renvoyant `0` si la matière n'y est pas.
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```python
         notes = {}                                  # 1
         print(employe["age"])                       # 2
@@ -309,7 +309,7 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
     ??? tip "Indice plus précis"
         Un seul accumulateur suffit : `len(dico)` te donne déjà le compte. Parcours donc `dico.values()` et accumule la somme.
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```python
         def moyenne(dico: dict[str, float]) -> float:
             """Renvoie la moyenne des valeurs du dictionnaire, qui n'est pas vide."""
@@ -329,7 +329,7 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
     ??? tip "Indice plus précis"
         Parcours `dico.items()`. Garde une variable `meilleure_cle`, initialisée à... rien de valide au départ : on peut partir de la première clé rencontrée, ou traiter le premier tour à part.
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```python
         def meilleure(dico: dict[str, float]) -> str:
             """Renvoie la clé associée à la plus grande valeur."""
@@ -361,7 +361,7 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
     ??? tip "Indice (question 4)"
         On ne renomme pas une clé en Python. Il faut en **créer une nouvelle** avec l'ancienne valeur, puis **supprimer** l'ancienne. Dans quel ordre ? Essaie l'ordre inverse et regarde ce qui se passe.
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```python
         ville = {"nom": "Montreal", "pays": "Canada", "province": "Quebec",
                  "pop": 1825208, "superficie": 315}
@@ -389,7 +389,7 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
     ??? tip "Indice (question 6)"
         C'est une accumulation : l'accumulateur est un dictionnaire **vide**, et à chaque tour on ajoute un couple, dans l'autre sens. Sur quoi parcourt-on pour disposer des deux à la fois ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```python
         print(repertoire["Piotr"])                  # 1
         print("Fanny" in repertoire)                # 2
@@ -418,7 +418,7 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
     ??? tip "Indice plus précis"
         Parcours les **indices**, avec `for i in range(0, len(cles))`. À chaque tour, `cles[i]` et `valeurs[i]` se correspondent.
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```python
         resultat = {}
         for i in range(0, len(cles)):
@@ -445,7 +445,7 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
     ??? tip "Indice (question 4)"
         Deux accumulateurs de types différents, `total = 0` et `bien_payes = []`, tous deux initialisés **avant** la boucle. L'un se met à jour à chaque tour, l'autre seulement sous un `if`.
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```python
         employes[2]["salaire"] = 8500              # 1 : indice de liste, puis clé
 
@@ -488,7 +488,7 @@ Note: C'est un raccourci pour dire `"pays" in mon_dictionnaire.keys()`
     ??? tip "Indice plus précis"
         `compte = {}` avant la boucle. À chaque caractère, deux cas : la clé existe déjà (on ajoute 1 à sa valeur) ou non (on la crée à 1). Le `get` avec valeur par défaut permet d'écrire les deux cas en une seule ligne.
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```python
         def compteur(chaine: str) -> dict[str, int]:
             """Renvoie le nombre d'apparitions de chaque caractère de chaine."""

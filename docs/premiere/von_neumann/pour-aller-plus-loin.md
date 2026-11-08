@@ -59,7 +59,7 @@ C'est le signal sur le bus de contrôle qui déclenche l'action. Sans lui, la m�
     | Bus de contrôle | ? | ? → ? |
     | Bus de données | ? | ? → ? |
 
-    ??? success "Réponse"
+    ??? success "Correction"
         | Bus | Valeur transportée | Sens |
         |-----|--------------------|------|
         | Bus d'adresses | **7** | CPU → Mémoire |
@@ -77,7 +77,7 @@ C'est le signal sur le bus de contrôle qui déclenche l'action. Sans lui, la m�
     | Bus de contrôle | ? | ? → ? |
     | Bus de données | ? | ? → ? |
 
-    ??? success "Réponse"
+    ??? success "Correction"
         | Bus | Valeur transportée | Sens |
         |-----|--------------------|------|
         | Bus d'adresses | **3** | CPU → Mémoire |
@@ -91,7 +91,7 @@ C'est le signal sur le bus de contrôle qui déclenche l'action. Sans lui, la m�
 
     La mémoire doit-elle lire ou écrire ? Peut-elle le savoir ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Non, elle ne peut pas le savoir. Sans bus de contrôle, la mémoire voit une adresse (3) et une donnée (25) mais ne sait pas si elle doit :
 
         - **lire** la valeur à l'adresse 3 et la mettre sur le bus de données, ou
@@ -179,10 +179,10 @@ L'UC commande l'UAL ou les autres composants pour réaliser l'opération.
 
     Une fois ton tableau rempli, saisis ce programme dans le simulateur, lance-le **en mode pas à pas**, et vérifie ta trace.
 
-    ??? question "Avant d'ouvrir la correction"
+    ??? note "Avant d'ouvrir la correction"
         Explique en une phrase ce que tu as prédit pour l'accumulateur après `ADD 11`, et pourquoi. Puis compare.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         **Instruction 0 : `LDA 10`**
 
         - PC = 0 avant le fetch
@@ -216,7 +216,7 @@ L'UC commande l'UAL ou les autres composants pour réaliser l'opération.
     2. Que transporte le bus de contrôle ?
     3. Que transporte le bus de données ? Dans quel sens ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Le bus d'adresses transporte **1** (l'adresse de l'instruction à charger, celle contenue dans le PC). Sens : CPU → Mémoire.
         2. Le bus de contrôle transporte **LIRE** (le CPU veut récupérer l'instruction). Sens : CPU → Mémoire.
         3. Le bus de données transporte **l'instruction `ADD 11`**, c'est-à-dire le nombre `1011`. Sens : Mémoire → CPU.

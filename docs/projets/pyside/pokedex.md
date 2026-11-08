@@ -212,7 +212,7 @@ ApplicationWindow {
     2. `StatLigne` a une propriété `valeur`. Sur `stat_pv`, comment appelle-t-on, **depuis Python**, la mise à jour de cette propriété ? (repense à `.setProperty(...)` des projets précédents)
     3. `badge2` a `visible: false` par défaut. À ton avis, pourquoi ? Quel pokémon de l'extrait CSV plus haut aurait besoin que `badge2` reste invisible ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Dix-sept : `recherche`, `btn_rechercher`, `numero`, `nom`, `sprite`, `badge1`, `badge1_txt`, `badge2`, `badge2_txt`, `stat_pv`, `stat_atk`, `stat_def`, `stat_ats`, `stat_dfs`, `stat_vit`, `btn_prec`, `btn_suiv`. Les six `StatLigne` comptent chacune pour un seul `objectName`, même si chacune contient plusieurs `Label` et `Rectangle` internes sans étiquette.
         2. `stat_pv.setProperty("valeur", ...)`.
         3. Un pokémon **mono-type** n'a rien à afficher dans le second badge. Salamèche, dans l'extrait CSV, a un `type2` vide : c'est exactement ce cas.
@@ -335,7 +335,7 @@ if __name__ == "__main__":
     ??? tip "Pour la couleur d'un type"
         `COULEUR_TYPE.get(p["type1"], "#999999")` : si le type n'est pas dans le dictionnaire, un gris par défaut plutôt qu'une erreur.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def afficher() -> None:
             """Affiche le pokémon d'indice `index` sur la fiche."""
@@ -372,7 +372,7 @@ if __name__ == "__main__":
     ??? tip "L'opérateur qui boucle"
         `(index + 1) % len(pokedex)` : le reste de la division par la longueur de la liste revient toujours à 0 juste après avoir atteint la fin. Tu as déjà rencontré `%` pour tester la parité ; ici, il sert à **boucler**.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def suivant() -> None:
             """Passe au pokémon suivant (callback du bouton Suivant)."""
@@ -405,7 +405,7 @@ Rôle B prend le clavier. Rôle A copilote : relit chaque ligne avant qu'elle so
     ??? tip "Indice"
         Reprends le motif de `plus_petite_lettre` ([boucle-for.md](../../premiere/prog/boucle-for.md)) : un parcours par indice avec `enumerate`, et un `return` **dès qu'on trouve**, plutôt qu'un accumulateur. Si la boucle se termine sans avoir renvoyé, il faut renvoyer `None`.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def trouver_index(requete: str) -> int | None:
             """Cherche un pokémon par numéro exact ou par début de nom (insensible à la casse).
@@ -435,7 +435,7 @@ Rôle B prend le clavier. Rôle A copilote : relit chaque ligne avant qu'elle so
     !!! danger "La frontière avec le travail de Rôle A"
         `rechercher` **appelle** `afficher`, écrite par Rôle A. C'est le seul endroit du fichier où votre code se touche directement. Si `afficher` n'est pas encore terminée, teste `trouver_index` seule (étape 3) en attendant.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def rechercher() -> None:
             """Callback du bouton Chercher : lit le champ recherche, saute au pokémon trouvé."""

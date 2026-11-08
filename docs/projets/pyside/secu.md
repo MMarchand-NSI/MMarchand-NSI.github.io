@@ -183,7 +183,7 @@ if __name__ == "__main__":
     ??? tip "Indice"
         `str(97 - (int(n) % 97)).zfill(2)`, où `n` est la chaîne déjà substituée.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def calculer_cle(treize: str) -> str:
             """Calcule la clé de contrôle (2 caractères) à partir des 13 premiers caractères du NIR.
@@ -229,10 +229,10 @@ if __name__ == "__main__":
             return
         ```
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         Écris une phrase sur ton cahier : pourquoi `communes.get((dept, commune_code), "commune non répertoriée")` est-il préférable à `communes[(dept, commune_code)]` ici ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def decoder() -> None:
             """Callback du bouton Décoder."""

@@ -7,7 +7,7 @@
     2. Un programme attend une donnée du disque. Que fait le processeur pendant ce temps ?
     3. Ton programme Python fait `print("bonjour")`. Qui allume les pixels de l'écran ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. Grâce à la **mémoire virtuelle** : le système d'exploitation range chaque « adresse 1 » à un endroit différent de la vraie mémoire, et retient la correspondance.
         2. L'**ordonnanceur** met ce programme en pause et donne le processeur à un autre.
         3. Pas ton programme : il fait un **appel système**, et c'est le système d'exploitation, par le **pilote** de l'écran, qui agit sur le matériel.
@@ -109,7 +109,7 @@ Recopie ce schéma sur ton cahier : il sert pour tous les exercices.
     ??? tip "Indice"
         `..` remonte d'**un** niveau. `../../..` en remonte trois, un par `..`.
 
-    ??? success "Réponses"
+    ??? success "Correction"
         1. `/home/padawan/PNSINFGR_2_2026-2027/os/scripts`
         2. `/home/padawan/PNSINFGR_2_2026-2027/os`
         3. `/home/padawan/PNSINFGR_2_2026-2027/os/notes`
@@ -127,7 +127,7 @@ Recopie ce schéma sur ton cahier : il sert pour tous les exercices.
 
     Tape-les ensuite et compare.
 
-    ??? success "Réponses"
+    ??? success "Correction"
         1. `notes  scripts`
         2. `calcul.py  essais` : `ls` liste les fichiers **et** les répertoires, et `essais` existe même s'il est vide.
         3. `.  ..  cours.txt  td.txt` : avec `-a`, `ls` montre aussi `.` et `..`, qui existent dans tout répertoire.
@@ -141,7 +141,7 @@ Recopie ce schéma sur ton cahier : il sert pour tous les exercices.
     - où se trouve le terminal ensuite
     - la commande qu'il fallait taper pour aller dans `scripts`
 
-    ??? success "Réponses"
+    ??? success "Correction"
         - `bash: cd: scripts: No such file or directory`. Le chemin `scripts` se lit depuis `notes`, et `notes` ne contient pas de répertoire `scripts`.
         - Toujours dans `/home/padawan/PNSINFGR_2_2026-2027/os/notes` : une commande qui échoue ne déplace rien.
         - `cd ../scripts`
@@ -163,10 +163,10 @@ Recopie ce schéma sur ton cahier : il sert pour tous les exercices.
     ??? tip "Indice plus précis"
         `os` est le parent de `notes`, donc `..`. Tout ce qui est à créer dans `os` commence par `../`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? note "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **tes** commandes ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```bash
         mkdir ../projet
         mkdir ../projet/images
@@ -178,7 +178,7 @@ Recopie ce schéma sur ton cahier : il sert pour tous les exercices.
 !!! question "Exercice 5 : les fichiers cachés"
     Reviens à la racine de ton dépôt et compare `ls` et `ls -a`. Sur ton cahier, note les noms qui n'apparaissent qu'avec `-a`.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Au moins `.`, `..` et `.git`, le répertoire où sont rangées les informations du dépôt. Selon ton dépôt, d'autres noms qui commencent par un point peuvent apparaître. On les voit, on n'y touche pas.
 
 ## Résumé

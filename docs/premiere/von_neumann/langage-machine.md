@@ -5,7 +5,7 @@
     2. Que désigne le compteur ordinal ?
     3. Pourquoi un programme d'ordinateur ne marche-t-il pas sur un téléphone ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. Dans la **mémoire**, avec les données.
         2. Le **numéro de la case** où se trouve la prochaine instruction.
         3. Les deux machines n'ont pas la même **table d'instructions**.

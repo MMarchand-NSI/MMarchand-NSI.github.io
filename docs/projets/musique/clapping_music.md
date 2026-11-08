@@ -44,7 +44,7 @@ section 1   première   x x x . x x . x . x x .
     2. Même chose pour la section 12. Que remarques-tu ?
     3. Combien la pièce a-t-elle de sections en tout ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         ```
         section 3    première   x x x . x x . x . x x .
                      seconde    . x x . x . x x . x x x
@@ -81,7 +81,7 @@ section 1   première   x x x . x x . x . x x .
     ??? tip "Indice"
         Le résultat est fait de deux morceaux du motif : de la case `d` jusqu'à la fin, puis du début jusqu'à la case `d` exclue.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def decaler(motif: str, d: int) -> str:
             """Le motif commencé d cases plus loin.
@@ -103,7 +103,7 @@ Dans la pièce, chaque section est jouée 8 fois avant le décalage suivant. On 
     1. Combien y a-t-il de sections ?
     2. Écris la partie de chaque personne comme une seule chaîne.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. 3 sections : 2 décalages, plus la section 0.
         2. Première : `"x.x.x."`. Seconde : `"x." + ".x" + "x."`, soit `"x..xx."`.
 
@@ -134,10 +134,10 @@ Dans la pièce, chaque section est jouée 8 fois avant le décalage suivant. On 
     ??? tip "Indice plus précis"
         Pour `s` dans `range(0, len(motif) + 1)`, et pour chaque répétition, ajoute `motif` au bout de la première partie, et `decaler(motif, s)` au bout de la seconde.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def partition(motif: str, repetitions: int) -> list[str]:
             """Les deux parties de la pièce construite sur motif, chaque section
@@ -177,7 +177,7 @@ ecrire_wav(partition(MOTIF, 8), "clapping.wav", 0.18, 1)
     1. Avant de lancer `ecouter.py`, calcule sur ton cahier la durée de la pièce en secondes, avec une case de 0,18 s.
     2. Lance `ecouter.py` et écoute `clapping.wav` en entier. Ton calcul était-il juste ?
 
-    ??? success "Réponse à la question 1"
+    ??? success "Correction de la question 1"
         13 sections × 8 répétitions × 12 cases = 1248 cases, et 1248 × 0,18 ≈ 225 secondes, soit un peu moins de 4 minutes.
 
 ## Étape 5 - Ce qu'on entend
@@ -190,7 +190,7 @@ Quand les deux personnes frappent sur la même case, on n'entend qu'un coup, plu
     - les cases où les deux personnes frappent,
     - les cases où les deux se taisent.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         - Section 0 : 8 cases où les deux frappent, 4 où les deux se taisent.
         - Section 1 : 4 cases où les deux frappent, et **aucune** où les deux se taisent. On entend un flot continu de frappes, sans un seul trou.
 
@@ -210,7 +210,7 @@ Quand les deux personnes frappent sur la même case, on n'entend qu'un coup, plu
         assert frappes_communes(MOTIF, decaler(MOTIF, 1)) == 4
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def frappes_communes(r1: str, r2: str) -> int:
             """Nombre de cases où r1 et r2 ont tous les deux une frappe.
@@ -229,13 +229,13 @@ Quand les deux personnes frappent sur la même case, on n'entend qu'un coup, plu
     2. Chaque personne frappe 8 fois par tour, sur 12 cases. Explique sur ton cahier pourquoi une section où il n'y a que 4 frappes communes n'a **aucun** trou.
     3. Quelles sections n'ont aucun trou ? Réécoute `clapping.wav` en les guettant.
 
-    ??? success "Solution de la question 1"
+    ??? warning "Correction de la question 1"
         ```python
         for s in range(0, 13):
             print(s, frappes_communes(MOTIF, decaler(MOTIF, s)))
         ```
 
-    ??? success "Réponse aux questions 2 et 3"
+    ??? success "Correction des questions 2 et 3"
         | section | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 |
         |---|---|---|---|---|---|---|---|---|---|---|---|---|---|
         | frappes communes | 8 | 4 | 5 | 6 | 5 | 6 | 4 | 6 | 5 | 6 | 5 | 4 | 8 |
@@ -266,7 +266,7 @@ Quand les deux personnes frappent sur la même case, on n'entend qu'un coup, plu
     ??? tip "Indice"
         Garde une liste des rythmes déjà rencontrés. Un nouveau rythme n'y entre que s'il n'y est pas encore.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def nb_sections_differentes(motif: str) -> int:
             """Nombre de rythmes différents parmi decaler(motif, d), pour d de 0 à len(motif) - 1.
@@ -296,7 +296,7 @@ CLOCHE: str = "x.xx.x.xx.x."
 
     Puis écris `partition(CLOCHE, 8)` dans un fichier `.wav`, et compare avec la pièce de Reich.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         for i in range(0, len(MOTIF)):
             if MOTIF[i] == "x":

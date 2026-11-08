@@ -33,7 +33,7 @@ Pour chaque pixel, on multiplie chaque valeur du voisinage par le poids qui est 
     2. Et au déplacement `(0, 0)` ? Et à `(1, 0)` ?
     3. Écris l'expression qui donne le poids du déplacement `(di, dj)`.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. `noyau[0][0]`, en haut à gauche.
         2. `noyau[1][1]`, le centre. `noyau[2][1]`, en bas au milieu.
         3. `noyau[di + 1][dj + 1]`
@@ -54,7 +54,7 @@ NETTETE = [
     - la somme pondérée par `NETTETE` au pixel `(1, 1)` de `G`,
     - la même au pixel `(0, 0)`.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         - En `(1, 1)` : $5 \times 50 - 20 - 40 - 60 - 80 = 250 - 200 = 50$. Les zéros du noyau annulent les coins.
         - En `(0, 0)` : le voisin du haut et celui de gauche sont hors de l'image et valent `10` par le bord répliqué. $5 \times 10 - 10 - 10 - 20 - 40 = -30$.
 
@@ -92,10 +92,10 @@ IDENTITE = [
     ??? tip "Indice plus précis"
         Dans la double boucle, on ajoute `noyau[di + 1][dj + 1] * pixel(g, i + di, j + dj)`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def somme_ponderee(g: Grille, i: int, j: int, noyau: Grille) -> float:
             """Renvoie la somme des pixels du voisinage de (i, j), chacun multiplié
@@ -127,10 +127,10 @@ IDENTITE = [
     ??? tip "Indice léger"
         Reprends `flou` : seule la ligne qui calcule la valeur change.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def convolution(g: Grille, noyau: Grille) -> Grille:
             """Renvoie une nouvelle grille : chaque pixel est remplacé par la somme
@@ -168,7 +168,7 @@ GAUSS = [
     2. Sans écrire de code : sur une image **uniforme** où tous les pixels valent `100`, que donne chacun de ces trois filtres ?
     3. Quel lien fais-tu entre les deux réponses ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Les trois valent `1`.
         2. Les trois rendent une image uniforme à `100` : sur une zone uniforme, la somme pondérée vaut $100 \times$ (somme des poids).
         3. Un noyau dont les poids font `1` conserve la luminosité des zones uniformes. Il ne change que les endroits où les pixels **diffèrent** de leurs voisins.
@@ -214,7 +214,7 @@ SOBEL_Y = [
 
     **Ne lance pas la cellule de code tant que tu n'as pas écrit ta réponse.**
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. La somme vaut `0` : une zone uniforme donne `0`, c'est-à-dire du noir.
         2. En `(1, 0)`, tout le voisinage vaut `0` (la colonne de gauche est répliquée) : on obtient `0`. En `(1, 1)`, la colonne de gauche vaut `0` et celle de droite `255` : $(1 + 2 + 1) \times 255 = 1020$.
         3. `0` : les trois lignes du voisinage sont identiques, donc la ligne du haut et celle du bas s'annulent. `SOBEL_X` mesure le changement **de gauche à droite**, `SOBEL_Y` le changement **de haut en bas**.
@@ -249,10 +249,10 @@ En Python, la racine carrée s'écrit `x ** 0.5`.
     ??? tip "Indice plus précis"
         Puis construis la grille résultat comme dans `flou`, avec en chaque case `(gx[i][j] ** 2 + gy[i][j] ** 2) ** 0.5`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def sobel(g: Grille) -> Grille:
             """Renvoie une nouvelle grille : en chaque pixel, l'intensité du contour."""
@@ -291,14 +291,14 @@ La fenêtre importe `filtres.py`. Les instructions de ton bloc `if __name__ == "
     1. Avant de l'appliquer, sur ton cahier : la fenêtre passe le résultat dans `vers_image`. Quels contours de ta photo vont apparaître en blanc, et lesquels vont disparaître ?
     2. Applique `SOBEL_X` et vérifie.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Seuls apparaissent les contours où l'image devient **plus claire** de gauche à droite : `gx` y est positif. Là où elle devient plus sombre, `gx` est négatif, et `vers_image` le ramène à `0`, donc au noir. C'est le piège de l'étape 5 : c'est pour cela que `sobel` calcule la norme **avant** d'appliquer `vers_image`.
 
 !!! question "Un noyau à toi"
     1. Remplis les 9 cases avec `1/18`. Sur ton cahier, avant d'appliquer : que vaut la somme des poids, et à quoi ressemblera l'image ?
     2. Invente un noyau, prédis son effet, puis applique-le.
 
-    ??? success "Réponse à la question 1"
+    ??? success "Correction de la question 1"
         La somme vaut $9 \times 1/18 = 0{,}5$. L'image est floutée comme avec `FLOU`, et deux fois plus sombre : chaque pixel vaut la moitié de la moyenne de son voisinage.
 
 ## Pour aller plus loin

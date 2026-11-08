@@ -5,7 +5,7 @@
     2. Le LMC écrit ses instructions avec trois chiffres décimaux. Un processeur réel dispose de combien de symboles différents, et pourquoi ?
     3. Une case mémoire contient un nombre et ne peut en contenir qu'un. Qu'est-ce qui limite la valeur qu'on peut y ranger ?
 
-??? success "Corrigé"
+??? success "Correction"
     1. L'**unité arithmétique et logique** (UAL), à l'intérieur de l'unité centrale.
     2. **Deux**, parce que ses circuits ne savent distinguer que deux états, par exemple le passage ou non du courant. C'est le point de départ de cette page.
     3. Sa **taille**, c'est-à-dire le nombre de symboles qu'elle peut contenir. Une case de trois chiffres décimaux s'arrête à 999 ; au-delà, la valeur ne rentre plus.
@@ -251,7 +251,7 @@ Pour construire un additionneur, la page suivante n'a besoin que de **quatre op�
     5. $a.\bar{a}$
     6. $a+\bar{a}$
 
-??? success "Correction — Propriétés de base"
+??? success "Correction : Propriétés de base"
 
     **1. $1 + a = 1$**
 
@@ -328,7 +328,7 @@ Pour construire un additionneur, la page suivante n'a besoin que de **quatre op�
     5. $$x.(x + y) = x$$
     6. $$\bar{x} + x.y = \bar{x} + y$$
 
-??? success "Correction — Égalités remarquables"
+??? success "Correction : Égalités remarquables"
 
     **1. $\bar{x}.y + x.\bar{y} = x \oplus y$**
 
@@ -414,7 +414,7 @@ Pour construire un additionneur, la page suivante n'a besoin que de **quatre op�
     2. $x + y.z = (x + y).(x + z)$ — autrement dit, $+$ est distributif sur $.$
     3. $x.(y \oplus z) = x.y \oplus x.z$ — autrement dit, $.$ est distributif sur $\oplus$
 
-??? success "Correction — Distributivité"
+??? success "Correction : Distributivité"
 
     **1. $x.(y + z) = x.y + x.z$**
 

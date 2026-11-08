@@ -22,7 +22,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     ```
 
 
-??? warning "Corrigé BFS"
+??? warning "Correction BFS"
 
     ```python
     def bfs(depart: str, g: gr.Graphe) -> list[str]:
@@ -54,7 +54,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
 
 
 
-??? warning "Corrigé DFS"
+??? warning "Correction DFS"
 
     La seule différence avec le BFS est l'utilisation d'une pile au lieu d'une file.
 
@@ -85,7 +85,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
 
     On pourra tester avec le graphe non connexe du cours, cette fonction peut faire une ligne.
 
-??? warning "Corrigé Connexité"
+??? warning "Correction Connexité"
 
     Un graphe est connexe si, en partant d'un sommet quelconque, on peut atteindre tous les autres sommets.
 
@@ -102,7 +102,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     ```
 
 
-??? warning "Corrigé Cyclicité"
+??? warning "Correction Cyclicité"
 
     Un graphe non orienté est cyclique si, lors d'un BFS, on tente d'enfiler un sommet déjà visité qui n'est pas le parent du sommet courant.
 
@@ -131,7 +131,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     ```
 
 
-??? warning "Corrigé Sous graphe"
+??? warning "Correction Sous graphe"
 
     ```python
     def sous_graphe(sommets: list[str], g: gr.Graphe) -> gr.Graphe:
@@ -157,7 +157,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
 
 
 
-??? warning "Corrigé Composantes connexes"
+??? warning "Correction Composantes connexes"
 
     L'opérateur `-` sur les ensembles (`set`) réalise la **différence ensembliste** : `A - B` renvoie les éléments de `A` qui ne sont pas dans `B`.
 
@@ -200,7 +200,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     ```
 
 
-??? warning "Corrigé prédécesseurs"
+??? warning "Correction prédécesseurs"
     
     ```python
     def predecesseurs_bfs(g: gr.Graphe, s1: str) -> dict[str, str]:
@@ -225,7 +225,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     On veut montrer que pour n'importe quel sommet $s2$, en remontant $\pi$, on
     obtient le plus court chemin de $s2$ à $s1$.
 
-??? warning "Corrigé shortest_path"
+??? warning "Correction shortest_path"
 
     ```python
     def shortest_path(g: gr.Graphe, s1: str, s2: str) -> list[str]:
@@ -241,7 +241,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
         return chemin
     ```
 
-??? warning "Corrigé distance"
+??? warning "Correction distance"
 
     ```python
     def distance(g: gr.Graphe, s1: str, s2: str) -> int:
@@ -293,7 +293,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
         return ...
     ```
 
-??? warning "Corrigé Indicateurs"
+??? warning "Correction Indicateurs"
 
     ```python
     def excentricite(g: gr.Graphe, s: str) -> int:
@@ -326,7 +326,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     Sur les graphes pondérés, il est fréquent de rechercher l'arbre couvrant de poids minimum (Minimum Spanning Tree).
     Il représente le minimum de ce qui peut tout connecter au moindre coût.
 
-??? warning "Corrigé Arbre couvrant"
+??? warning "Correction Arbre couvrant"
 
     On construit l'arbre couvrant à partir du dictionnaire des prédécesseurs : chaque entrée `π[v] = u` donne une arête de l'arbre.
 
@@ -348,7 +348,7 @@ Les exercices suivants portent uniquement sur les graphes non orientés.
     En modifiant le bfs, créer un plugin distance qui renvoie le dictionnaire des distances au sommet de départ.
 
 
-??? warning "Corrigé Plugin distances"
+??? warning "Correction Plugin distances"
 
     La distance d'un voisin découvert est celle de son parent + 1.
 

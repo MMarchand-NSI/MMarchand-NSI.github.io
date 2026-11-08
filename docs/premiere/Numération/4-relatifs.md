@@ -5,7 +5,7 @@
     2. Sur $k$ bits, combien d'entiers naturels différents peut-on écrire ?
     3. Sur 4 bits, on veut écrire à la fois des nombres positifs et négatifs. Combien de valeurs seront disponibles au total ?
 
-??? success "Corrigé"
+??? success "Correction"
     1. $13 = 1101_2$. Vérification : $8 + 4 + 0 + 1 = 13$.
     2. **$2^k$**, de $0$ à $2^k - 1$. Le nombre de valeurs ne change pas quand on change ce qu'elles représentent.
     3. **Toujours 16**, comme pour les naturels. Ajouter les négatifs n'ajoute aucune combinaison : cela redistribue les 16 existantes. C'est tout le problème de cette page.
@@ -42,7 +42,7 @@ Il faut seulement savoir que:
  - $1 + 1 + 1 = 11$  (trois) donc $1$ et je retiens $1$
 
 
-!!! question "Additions en base 2 – Exercices"
+!!! question "Additions en base 2 : Exercices"
 
     Effectue les additions suivantes en **base 2**, en les posant, retenues apparentes..
 
@@ -58,7 +58,7 @@ Il faut seulement savoir que:
     8. Complète : \( 0101_2 +\ \_\_\_\_ = 1111_2 \)
 
 
-??? warning "Corrigés – Additions en base 2"
+??? warning "Correction : Additions en base 2"
 
     1. \( 0010_2 + 0101_2 = 0111_2 \) → 2 + 5 = 7  
     2. \( 1000_2 + 0011_2 = 1011_2 \) → 8 + 3 = 11  
@@ -111,7 +111,7 @@ $\begin{array}{ccccc}
 \end{array}$
 
 
-??? warning "Corrigé"
+??? warning "Correction"
     $\begin{array}{ccccc}
     ... _1  & _1 & _1 & _1 & _1 & _1 &  \\
     ...& 0 & 0 & 0 & 1 & 0 & 1 \\
@@ -133,7 +133,7 @@ Pour résoudre ce problème, on ne va travailler que sur des nombres dont **la t
     
     De la même façon, donnez moi la définition du mot "pain"
     
-    ??? warning "Réponse"
+    ??? warning "Correction"
         Il s'agit d'une douleur en anglais. Il fallait savoir à l'avance qu'il s'agissait d'un mot anglais.
 
     Ici c'est pareil, lorsqu'on voit $101101$, il faut savoir si on parle d'un entier relatif ou d'un entier naturel à l'avance, et il faut savoir sur combien de bits on travaille.

@@ -84,7 +84,7 @@ pub type Liste(a) {
     Écris, dans `main`, la liste des trois chaînes `"rouge"`, `"vert"`, `"bleu"`, puis affiche-la.
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```gleam
         let couleurs = Cons("rouge", Cons("vert", Cons("bleu", Vide)))
         echo couleurs
@@ -181,7 +181,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
     ```
 
     <div markdown="block" style="display: none">
-    ??? success "Réponse"
+    ??? success "Correction"
         ```text
         f(Cons(2, ...)) = 2 - f(Cons(3, ...))
                         = 2 - (3 - f(Cons(4, Vide)))
@@ -220,7 +220,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```gleam
         pub fn somme(lst: Liste(Int)) -> Int {
           case lst {
@@ -254,7 +254,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```gleam
         pub fn somme_pairs(lst: Liste(Int)) -> Int {
           case lst {
@@ -317,21 +317,21 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
     1. Si la liste est `Vide`, que renvoie la fonction ?
 
         <div markdown="block" style="display: none">
-        ??? success "Réponse"
+        ??? success "Correction"
             `False` : une liste vide ne contient rien.
         </div>
 
     2. Si la liste est `Cons(tete, queue)`, complète la phrase : « `x` est dans la liste si … **ou** … ».
 
         <div markdown="block" style="display: none">
-        ??? success "Réponse"
+        ??? success "Correction"
             « `x` est dans la liste si **la tête vaut `x`**, **ou** si **`x` est dans la queue**. »
         </div>
 
     3. Traduis cette phrase en une expression booléenne Gleam. Quelle partie est un appel récursif ?
 
         <div markdown="block" style="display: none">
-        ??? success "Réponse"
+        ??? success "Correction"
             `tete == x || contient(queue, x)`. La partie droite, `contient(queue, x)`, est l'appel récursif : on redemande à un autre lutin de chercher dans la queue.
         </div>
 
@@ -348,7 +348,7 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```gleam
         pub fn contient(lst: Liste(a), x: a) -> Bool {
           case lst {
@@ -369,7 +369,7 @@ On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si de
     1. Quels sont **tous** les cas possibles pour le couple d'entrée `(l1, l2)` ?
 
         <div markdown="block" style="display: none">
-        ??? success "Réponse"
+        ??? success "Correction"
             Chaque liste peut être `Vide` ou `Cons`, ce qui fait **quatre** cas (2 × 2) :
 
             - `l1` vide et `l2` vide
@@ -381,7 +381,7 @@ On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si de
     2. Que doit renvoyer la fonction dans **chacun** de ces cas ?
 
         <div markdown="block" style="display: none">
-        ??? success "Réponse"
+        ??? success "Correction"
             - deux listes vides : elles sont **égales**, on renvoie `True`
             - `l1` vide, `l2` non vide : elles n'ont pas la même longueur, on renvoie `False`
             - `l1` non vide, `l2` vide : même raison, `False`
@@ -391,7 +391,7 @@ On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si de
     3. Parmi ces quatre cas, lesquels sont des **cas de base** (la réponse est immédiate) et lesquels sont **récursifs** (il faut redemander à un autre lutin) ?
 
         <div markdown="block" style="display: none">
-        ??? success "Réponse"
+        ??? success "Correction"
             Les **trois** premiers sont des cas de base : la réponse se lit directement. Le **quatrième** est le seul cas récursif : pour savoir si les queues sont égales, on appelle `sont_egales` sur `q1` et `q2`.
         </div>
 
@@ -418,7 +418,7 @@ On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si de
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```gleam
         pub fn sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool {
           case l1, l2 {
@@ -467,11 +467,11 @@ Le **lutin ajouteur** : *« Si je reçois une liste vide, je renvoie la liste qu
     ??? tip "Indice"
         Cas `Vide` : la liste renversée est `Vide`. Cas `Cons(tete, queue)` : renverse d'abord la **queue**, puis ajoute `tete` **à la fin** avec `ajouter_fin`.
 
-    ??? question "Avant d'ouvrir le corrigé"
+    ??? note "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```gleam
         pub fn inverser(lst: Liste(a)) -> Liste(a) {
           case lst {
@@ -497,7 +497,7 @@ Le **lutin ajouteur** : *« Si je reçois une liste vide, je renvoie la liste qu
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```gleam
         pub fn concat(l1: Liste(a), l2: Liste(a)) -> Liste(a) {
           case l1, l2 {
@@ -540,14 +540,14 @@ C'est exactement la **récurrence** de ton cours de maths : un cas pour 0, puis 
     1. Que renvoie `repete(0, x)` ?
 
         <div markdown="block" style="display: none">
-        ??? success "Réponse"
+        ??? success "Correction"
             `Vide` : zéro fois `x`, c'est la liste vide.
         </div>
 
     2. Si `n` n'est pas nul, comment obtenir `repete(n, x)` à partir de `repete(n - 1, x)` ?
 
         <div markdown="block" style="display: none">
-        ??? success "Réponse"
+        ??? success "Correction"
             On met `x` en tête de `repete(n - 1, x)` : `Cons(x, repete(n - 1, x))`.
         </div>
 
@@ -571,7 +571,7 @@ C'est exactement la **récurrence** de ton cours de maths : un cas pour 0, puis 
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```gleam
         pub fn repete(n: Int, x: a) -> Liste(a) {
           case n {
@@ -614,21 +614,21 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
     1. Écris la relation de récurrence du coût $A(n)$ de `ajouter_fin(lst, x)`, pour une liste `lst` de taille $n$. Quelle est sa forme générale ?
 
         <div markdown="block" style="display: none">
-        ??? success "Réponse"
+        ??? success "Correction"
             $A(0) = a$ et $A(n) = A(n-1) + b$ : c'est la même récurrence que `taille`. $A(n) = a + b \times n$, coût **linéaire**.
         </div>
 
     2. `inverser` appelle `inverser` sur la queue (taille $n-1$), **puis** `ajouter_fin` sur le résultat (taille $n-1$ aussi). Écris la relation de récurrence de son coût $T(n)$.
 
         <div markdown="block" style="display: none">
-        ??? success "Réponse"
+        ??? success "Correction"
             $T(0) = c$ et $T(n) = T(n-1) + A(n-1) + d$, où $d$ compte les opérations fixes de l'appel. En remplaçant $A(n-1)$ : $T(n) = T(n-1) + b \times (n-1) + (a + d)$.
         </div>
 
     3. Cette suite n'est ni arithmétique ni géométrique : ce qu'on ajoute à chaque étape **grandit** avec $n$. Trouve sa forme générale, en additionnant les écarts $T(k) - T(k-1)$ pour $k$ allant de $1$ à $n$.
 
         <div markdown="block" style="display: none">
-        ??? success "Réponse"
+        ??? success "Correction"
             Les termes intermédiaires se simplifient :
 
             $$T(n) = T(0) + b \times \big(0 + 1 + \dots + (n-1)\big) + (a + d) \times n = c + b \times \frac{n(n-1)}{2} + (a + d) \times n$$
@@ -666,7 +666,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn to_str(lst: Liste(Int)) -> String {
           case lst {
@@ -690,7 +690,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn tous_vrais(lst: Liste(Bool)) -> Bool {
           case lst {
@@ -714,7 +714,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn au_moins_un_vrai(lst: Liste(Bool)) -> Bool {
           case lst {
@@ -739,7 +739,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn compte(lst: Liste(a), e: a) -> Int {
           case lst {
@@ -788,11 +788,11 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
 
         Il y a donc **deux cas de base** : plus de liste, ou plus rien à prendre.
 
-    ??? question "Avant d'ouvrir le corrigé"
+    ??? note "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : lequel des deux cas de base avais-tu oublié ?
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn take(lst: Liste(a), n: Int) -> Liste(a) {
           case lst {
@@ -824,7 +824,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn drop(lst: Liste(a), n: Int) -> Liste(a) {
           case lst {
@@ -858,7 +858,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn slice(lst: Liste(a), debut: Int, fin: Int) -> Liste(a) {
           drop(take(lst, fin), debut)
@@ -885,7 +885,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         **Tu n'es pas obligé d'écrire ta réponse avec `|>`**, mais tu dois savoir la lire.
 
         <div markdown="block" style="display: none">
-        ??? success "Réponse"
+        ??? success "Correction"
             `x |> f(y)` est une autre façon d'écrire `f(x, y)` : la valeur de gauche devient le **premier** argument de la fonction de droite. On lit alors le calcul dans l'ordre où il se fait, de gauche à droite, au lieu de le lire de l'intérieur vers l'extérieur.
 
             C'est pour cela que toutes les fonctions de ce chapitre prennent la **liste en premier** : sans cela, le *pipe* ne tomberait pas sur le bon paramètre. L'ordre des paramètres n'est donc pas un détail, c'est ce qui rend ces fonctions enchaînables.
@@ -905,7 +905,7 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn supprimer(lst: Liste(a), e: a) -> Liste(a) {
           case lst {
@@ -938,7 +938,7 @@ On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn impairs(lst: Liste(Int)) -> Liste(Int) {
           case lst {
@@ -966,7 +966,7 @@ On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn positifs(lst: Liste(Int)) -> Liste(Int) {
           case lst {
@@ -994,7 +994,7 @@ On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn negatifs(lst: Liste(Int)) -> Liste(Int) {
           case lst {
@@ -1062,7 +1062,7 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn carres(lst: Liste(Int)) -> Liste(Int) {
           case lst {
@@ -1086,7 +1086,7 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn doubles(lst: Liste(Int)) -> Liste(Int) {
           case lst {
@@ -1110,7 +1110,7 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn triples(lst: Liste(Int)) -> Liste(Int) {
           case lst {
@@ -1208,7 +1208,7 @@ Lis `concat` deux fois : on part de `l2` au lieu de `Vide`, on recolle chaque t�
     Puis relance `gleam test`. **Les tests que tu as déjà collés doivent rester verts** : ce sont les mêmes fonctions, écrites autrement. Tu n'as donc aucun test à ajouter, et c'est la meilleure preuve que tu puisses avoir.
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé Gleam"
+    ??? success "Correction Gleam"
         ```gleam
         pub fn tous_vrais(lst: Liste(Bool)) -> Bool {
           foldr(lst, fn(t, reste) { t && reste }, True)

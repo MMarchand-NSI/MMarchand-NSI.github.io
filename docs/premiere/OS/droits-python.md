@@ -9,7 +9,7 @@
     2. `../notes/td.txt`
     3. `../../os`
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. `/home/eleve/nsi/os/scripts/essais`
         2. `/home/eleve/nsi/os/notes/td.txt`
         3. `/home/eleve/nsi/os` : on remonte deux fois, jusqu'à la racine du dépôt, puis on redescend dans `os`.
@@ -63,37 +63,37 @@ Enregistre. Dans le terminal, toujours dans `os/scripts`, tu vas taper une suite
 !!! question "Étape 1"
     `ls -l bonjour.py` : quels sont les dix premiers caractères ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `-rw-r--r--`, comme pour `calcul.py` : un fichier neuf n'est exécutable par personne.
 
 !!! question "Étape 2"
     `./bonjour.py` : `./` veut dire « le fichier `bonjour.py` du répertoire courant ». Que répond le terminal ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `bash: ./bonjour.py: Permission denied`. Le fichier n'a pas le droit `x` : on ne peut pas l'exécuter.
 
 !!! question "Étape 3"
     `python3 bonjour.py` : que répond le terminal ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `bonjour`. Ici, ce n'est pas `bonjour.py` qu'on exécute, c'est le programme `python3`. Lui se contente de **lire** `bonjour.py`, et le droit `r` lui suffit.
 
 !!! question "Étape 4"
     `chmod u+x bonjour.py`, puis `ls -l bonjour.py`, puis `./bonjour.py`. Que deviennent les dix premiers caractères, et que répond le terminal ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `-rwxr--r--`, puis `bonjour`. Le propriétaire a maintenant le droit `x`.
 
 !!! question "Étape 5"
     `bonjour.py`, **sans** `./`. Que répond le terminal ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `bash: bonjour.py: command not found`. Sans `./`, le terminal cherche une commande qui s'appelle `bonjour.py` parmi les programmes du système, et pas dans le répertoire courant.
 
 !!! question "Étape 6"
     Efface la première ligne de `bonjour.py` (celle qui commence par `#!`), enregistre, puis tape `./bonjour.py`. Que répond le terminal ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         ```
         ./bonjour.py: line 1: syntax error near unexpected token `"bonjour"'
         ```
@@ -104,7 +104,7 @@ Enregistre. Dans le terminal, toujours dans `os/scripts`, tu vas taper une suite
 !!! question "Étape 7"
     `chmod u-r bonjour.py`, puis `python3 bonjour.py`. Que répond le terminal ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `python3: can't open file '.../bonjour.py': [Errno 13] Permission denied`. Cette fois, `python3` ne peut plus **lire** le fichier.
 
     **Rends le droit de lecture avant de continuer** : `chmod u+r bonjour.py`.
@@ -130,7 +130,7 @@ Ouvre `bonjour.py` dans VS Code et clique sur le bouton ▶ en haut à droite.
     - indique quel programme s'exécute
     - indique quel fichier est seulement lu
 
-    ??? success "Réponse"
+    ??? success "Correction"
         La ligne a la forme `/home/eleve/nsi/.venv/bin/python /home/eleve/nsi/os/scripts/bonjour.py` (chez toi, les chemins diffèrent). Le programme qui s'exécute est le **premier**, `python`. Le second, `bonjour.py`, est un fichier qu'il **lit**. Le bouton ▶ fait exactement ce que tu as fait à l'étape 3, avec des chemins absolus.
 
 Dans le chapitre suivant, tu écriras beaucoup de programmes Python. Chaque fois que tu cliqueras sur ▶, c'est cela qui se passera : le système d'exploitation lance `python`, qui lit ton fichier et exécute ce qu'il y trouve.
@@ -146,7 +146,7 @@ Dans le chapitre suivant, tu écriras beaucoup de programmes Python. Chaque fois
 
     **3. Expliquer.** `python3 outil.py` fonctionne, alors que `./outil.py` répond `Permission denied`. Pourquoi ?
 
-    ??? success "Réponses"
+    ??? success "Correction"
         **1.** `/home/eleve/nsi/os/notes`. `../..` remonte de `essais` à `os`, puis on descend dans `notes`.
 
         **2.** `chmod u+x outil.py`.

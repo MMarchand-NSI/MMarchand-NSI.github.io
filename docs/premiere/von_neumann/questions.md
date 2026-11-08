@@ -16,7 +16,7 @@
 5. Von Neumann fréquente le lycée luthérien de Budapest. Quels autres futurs scientifiques y croise-t-il, et sur quel projet se retrouveront-ils tous plus tard ?
 6. Pourquoi son père le pousse-t-il vers la chimie plutôt que vers les mathématiques ?
 
-??? success "Corrigé — partie A"
+??? success "Correction : partie A"
     1. Le **28 décembre 1903**, à **Budapest** (Empire austro-hongrois).
     2. **Banquier**. Le titre de noblesse (« von ») lui aurait été accordé par l'empereur François-Joseph pendant la Première Guerre mondiale, en récompense de son aide au financement de l'effort de guerre hongrois. Le documentaire rappelle que les grandes familles juives utiles à l'Empire étaient invitées à s'intégrer en se convertissant ou en achetant un titre.
     3. Deux suffisent parmi : il démonte les mécanismes de la maison (monte-charge, téléphones) dès 2 ou 3 ans ; on lui apprend à lire vers 2 ans pour le calmer ; à 6 ans il converse en **grec ancien** avec son père ; à 8 ans il a lu l'essentiel de la bibliothèque familiale et mémorisé les **44 volumes** d'une histoire universelle ; enfant, il manipule déjà devant ses cousines des suites numériques et des idées de convergence de sommes.
@@ -33,7 +33,7 @@
 11. Roger Penrose distingue deux sortes de mathématiciens. Lesquelles, et dans laquelle range-t-il von Neumann ?
 12. À 25 ans, quel titre universitaire obtient-il, et en quoi est-ce remarquable ?
 
-??? success "Corrigé — partie B"
+??? success "Correction : partie B"
     7. À **16 ans** : mathématiques à **Budapest**, chimie à **Berlin**, en parallèle. Il passera ensuite par l'école polytechnique de **Zurich** (1923) et obtiendra en **1926** son diplôme de chimie et son doctorat de mathématiques.
     8. Un paradoxe caché dans les bases mêmes des mathématiques, illustré dans le film par l'image d'un immeuble dont toutes les fenêtres seraient contenues dans une seule de ses fenêtres. Von Neumann participe, à 20 ans, à la refonte des règles de construction des fondements mathématiques.
     9. Qu'il peut exister dans les mathématiques des **règles dont on ne peut pas savoir si elles sont vraies ou fausses** : il faut leur faire confiance. C'est le théorème d'incomplétude. Penrose s'en servira à la fin du film pour contester l'analogie cerveau/ordinateur.
@@ -51,7 +51,7 @@
 18. Quelle grandeur précise, décisive pour l'effet destructeur des bombes d'Hiroshima et Nagasaki, a-t-il calculée ?
 19. Sa fille Marina savait-elle ce que faisait son père pendant la guerre ?
 
-??? success "Corrigé — partie C"
+??? success "Correction : partie C"
     13. Il **démissionne de tous ses postes** universitaires et honorifiques en Allemagne. À partir de là, il fera tout pour éradiquer le nazisme.
     14. L'**Institut d'études avancées** (IAS) de Princeton, alors en construction à côté de l'université, avec **Einstein**, **Gödel** et des mathématiciens américains. Il était arrivé à Princeton en **1930**, faute de chaire en Allemagne.
     15. Le calcul des **trajectoires de projectiles** pour les armées britannique et américaine. C'est un casse-tête parce que la **densité de l'air change** le long de la trajectoire.
@@ -69,7 +69,7 @@
 24. Quel film de Stanley Kubrick le documentaire cite-t-il, et quel point de logique la scène de la salle de commandement met-elle en évidence ?
 25. Freeman Dyson explique le pessimisme de von Neumann sur l'humanité. Quelle est, selon lui, l'origine de sa méfiance envers l'URSS ?
 
-??? success "Corrigé — partie D"
+??? success "Correction : partie D"
     20. **Modéliser mathématiquement l'interaction entre plusieurs individus**, pour en fournir un modèle et une **prédiction** de ce qui va se passer.
     21. Deux parmi : les marchés financiers, une compétition pour l'accès à l'eau, la coopération entre prisonniers interrogés séparément, un conflit militaire, la guerre froide États-Unis / URSS. Von Neumann étend la théorie à tous les domaines de l'activité humaine à partir de **1944**.
     22. Une **frappe nucléaire préventive** contre l'URSS, au nom de la théorie des jeux ; c'est de là que découle le concept d'**équilibre de la destruction mutuelle assurée**. La phrase citée par Marina : « Si on me dit bombardons-les demain, je réponds : pourquoi pas aujourd'hui ? Et si vous me dites à 5 h, je réponds : pourquoi pas à 4 h ? »
@@ -90,7 +90,7 @@
 34. À quel usage la machine de Princeton a-t-elle surtout servi, et quelle « arme absolue », plus efficace que la bombe selon von Neumann, cet usage annonçait-il ?
 35. Pourquoi la machine de Princeton est-elle vite dépassée, alors même que l'idée de von Neumann, elle, triomphe ?
 
-??? success "Corrigé — partie E"
+??? success "Correction : partie E"
     26. Une **mémoire**, un **système central de calcul**, une **unité d'assemblage des données**. C'est l'**architecture de von Neumann**, celle de la totalité des ordinateurs d'aujourd'hui. (Le cours, lui, en distingue quatre : le **CPU**, la **mémoire**, les **entrées/sorties** et les **bus**.)
     27. Que **toute la réalité du monde** — y compris l'univers et ses lois — peut se décrire sous forme de **0 et de 1** inscrits sur un simple ruban de papier. Mais la machine de Turing est un modèle de calcul **théorique et minimal**, pas fait pour être concrétisé : von Neumann, lui, conçoit la structure d'un **ordinateur à usage général**, réellement constructible.
     28. Parce que le **programme n'était pas dans la mémoire** : on le programmait en **branchant et débranchant des fiches**, physiquement. La machine possédait bien une mémoire, mais changer de programme voulait dire recâbler.
@@ -111,7 +111,7 @@
 40. Qu'appelle-t-on la **singularité**, et quel argument le chercheur de Google donne-t-il pour l'illustrer ?
 41. De quoi et quand von Neumann meurt-il ? Quelle cause probable le documentaire avance-t-il ? Dans quelles conditions se passent ses derniers jours ?
 
-??? success "Corrigé — partie F"
+??? success "Correction : partie F"
     36. Un système fait de **cellules qui changent d'état** en fonction de leurs voisines. Exemple donné : une **colonie de fourmis** — les fourmis bougent, mais on peut voir ces mouvements comme des changements d'état d'une cellule à l'autre. Un automate cellulaire est un exemple de **calcul universel** au sens de la machine de Turing, ce qui explique les constructions époustouflantes d'une fourmilière.
     37. « Pourquoi ne pas imaginer des calculs, des codes, qui **se reproduiraient** et **évolueraient** un peu comme des êtres vivants ? » Il défendait l'idée d'un système capable de se copier lui-même et d'évoluer.
     38. ***L'ordinateur et le cerveau***. Thèse : le cerveau comme l'ordinateur sont fondamentalement des **machines à calculer**, des systèmes de **traitement de l'information**.

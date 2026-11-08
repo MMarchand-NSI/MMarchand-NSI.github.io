@@ -30,7 +30,7 @@ ROUGE_GRIS = [
     2. Que donne alors le filtre de Sobel sur la version grise de `ROUGE_GRIS` ?
     3. Y a-t-il pourtant un contour visible dans l'image en couleur ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. $0{,}299 \times 255 \approx 76$ pour `R`. $(0{,}299 + 0{,}587 + 0{,}114) \times 76 = 76$ pour `N`. Les deux donnent `76`.
         2. Une image en gris uniforme à `76`, donc un Sobel nul partout.
         3. Oui, une limite nette entre le rouge et le gris. Le passage en gris l'a effacée.
@@ -62,7 +62,7 @@ from image_io import charger_couleur, ImageCouleur
     ??? tip "Indice"
         C'est la construction ligne par ligne de `flou`. Le pixel `img[i][j]` est un triplet, et sa composante `k` s'écrit `img[i][j][k]`.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def canal(img: ImageCouleur, k: int) -> Grille:
             """Renvoie une nouvelle grille contenant la composante k de chaque pixel."""
@@ -90,7 +90,7 @@ C'est la même formule que Sobel, avec trois fois plus de termes sous la racine.
     2. Écris l'expression de l'énergie, sans la calculer.
     3. Que vaut l'énergie au pixel `(1, 0)` ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Les trois lignes du voisinage sont identiques, donc les trois $g_y$ valent `0`. Pour les $g_x$, la colonne de gauche est soustraite à celle de droite avec les poids 1, 2, 1 :
             - rouge : $4 \times (76 - 255) = -716$
             - vert : $4 \times (76 - 0) = 304$
@@ -122,10 +122,10 @@ C'est la même formule que Sobel, avec trois fois plus de termes sous la racine.
     ??? tip "Indice plus précis"
         Prépare une grille `somme` de la taille de l'image, remplie de `0`. Pour chaque canal, calcule les grilles `gx` et `gy` avec `convolution`, puis ajoute `gx[i][j] ** 2 + gy[i][j] ** 2` à chaque case de `somme`. À la fin, prends la racine de chaque case.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def energie(img: ImageCouleur) -> Grille:
             """Renvoie une nouvelle grille : en chaque pixel, la norme des six
@@ -171,7 +171,7 @@ if __name__ == "__main__":
     1. Ouvre `energie.png`. Beaucoup de zones sont d'un blanc uniforme. Quelle valeur maximale l'énergie peut-elle atteindre ? Qu'en fait `vers_image` ?
     2. Écris l'expression de l'énergie maximale possible, sans la calculer.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Bien plus que 255 : `vers_image` ramène tout ce qui dépasse à 255, d'où le blanc uniforme. On ne distingue plus un contour fort d'un contour moyen.
         2. Chaque $g$ vaut au plus $4 \times 255 = 1020$ en valeur absolue, d'où la borne $\sqrt{6 \times 1020^2}$. C'est une borne : rien ne dit qu'une image l'atteint.
 
@@ -202,7 +202,7 @@ Pour **voir** l'énergie, on la ramène à l'échelle 0 à 255 : on divise chaqu
     ??? tip "Indice"
         Dans `maximum`, pars de `g[0][0]`, pas de `0`. Dans `normaliser`, traite le cas où le maximum vaut `0` **avant** de diviser.
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def maximum(g: Grille) -> float:
             """Renvoie la plus grande valeur de g. g n'est pas vide."""
@@ -271,7 +271,7 @@ HAUT_BAS = [
 
     **Ne lance pas la cellule de code tant que tu n'as pas écrit ta réponse.**
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. La même chose, `[0, 835.2, 835.2, 0]` : les $g_x$ changent de signe, et le signe disparaît au carré.
         2. `[0, 835.2, 835.2, 0]` : cette fois ce sont les $g_y$ qui sont non nuls, et la somme des carrés est la même.
         3. Non, aucune des trois. L'énergie dit **combien** la couleur change, jamais **quoi** change, ni **dans quel sens**, ni **dans quelle direction**.
@@ -293,7 +293,7 @@ LIGNE = [
 
     **Ne lance pas la cellule de code tant que tu n'as pas écrit ta réponse.**
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Environ `[0, 835.2, 0, 835.2, 0]`.
         2. Non, elle est **nulle** sur la ligne. La colonne du milieu de `SOBEL_X` ne contient que des `0` : le pixel lui-même n'est pas lu, seuls ses voisins de gauche et de droite le sont. Sur la ligne rouge, les deux côtés sont gris, donc identiques.
         3. « ... de la différence entre ce qu'il y a d'un côté du pixel et ce qu'il y a de l'autre. » Une énergie nulle veut donc dire « les deux côtés sont pareils », ce qui n'est pas tout à fait « la zone est unie ».
@@ -304,7 +304,7 @@ LIGNE = [
     1. Son énergie est-elle faible ou forte ?
     2. Une forte énergie signale-t-elle forcément le contour d'un objet ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Forte, et partout dans la zone : la couleur y change d'un pixel à l'autre.
         2. Non. L'énergie mesure du **changement**. Un contour d'objet en produit, une texture aussi, et le grain d'une photo prise dans le noir également.
 

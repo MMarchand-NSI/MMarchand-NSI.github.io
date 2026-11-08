@@ -51,7 +51,7 @@ i
        ```
     3. Une variable créée dans le corps d'une fonction existe-t-elle encore après l'appel ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. `33`, puis `11`, puis `3`. Chaque division entière fait diminuer `x` : retiens-le, c'est ce genre de quantité qui garantit qu'une boucle s'arrête.
         2. Parce que Python **s'arrête au premier test vrai**. `15 >= 10` est vrai, donc le premier bloc s'exécute et tous les `elif` suivants sont ignorés. Il faut tester **du cas le plus exigeant au moins exigeant**.
         3. Non. Elle est **locale** : elle naît à l'appel et disparaît quand la fonction rend la main.
@@ -107,7 +107,7 @@ print(acc)
     print(acc)
     ```
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Il affiche `nohtyp`, comme la version avec `for`. `i` est la **position** du caractère qu'on traite : il va de `0` à `len(mot) - 1`, et la boucle s'arrête quand il atteint `len(mot)`. Sans `i = i + 1`, `i` resterait à `0`, la condition resterait vraie, et la boucle ne s'arrêterait jamais.
 
         Avec `while i <= len(mot):`, la boucle ferait un tour de trop : quand `i` vaut `6`, `mot[6]` n'existe pas, puisque les positions de `"python"` vont de `0` à `5`. Le programme s'arrête sur une `IndexError` avant d'avoir rien affiché. C'est pour cela qu'on écrit `<` : les positions valides forment l'intervalle semi-ouvert $[0 ; \text{len(mot)})$.
@@ -120,7 +120,7 @@ print(acc)
     ??? tip "Indice léger"
         Même squelette que ci-dessus : `i = 0`, `while i < len(phrase)`, et `i = i + 1` à la fin du corps. Le `if` porte sur `phrase[i]`.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         phrase = "le petit chat"
         acc = ""
@@ -155,7 +155,7 @@ print("fini")
     | ? | ? | ? | ? |
     | ? | ? | ? | ? |
 
-    ??? success "Réponse"
+    ??? success "Correction"
         | Avant le tour | `i < 3` ? | on exécute | après |
         | :--: | :--: | :--: | :--: |
         | `i = 0` | vrai | affiche 0, `i` devient 1 | `i = 1` |
@@ -233,7 +233,7 @@ La condition d'un `while` n'est pas forcément une simple comparaison d'entiers 
     print(i)
     ```
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Il affiche `7`. Il **cherche la position du premier espace** : `i` avance tant qu'on n'est pas au bout **et** qu'on n'est pas sur un espace.
 
         Avec `"bonjour"`, il n'y a pas d'espace : la boucle s'arrête quand `i` vaut `7`, c'est-à-dire `len(phrase)`, et le programme affiche `7`. Une position égale à la longueur veut dire « pas trouvé ».
@@ -268,7 +268,7 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
     print(n)
     ```
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         « Bravo » s'affiche **4 fois** (`n` vaut 10, 7, 4, 1 au moment du test), puis `n` passe à `-2` et la condition devient fausse. À la fin, `n` vaut `-2`.
 
 !!! question "Corriger une boucle infinie"
@@ -280,7 +280,7 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
         print(i)
     ```
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         Il manque la **mise à jour** : `i` ne change jamais, donc `i < 5` reste vrai pour toujours. Il faut ajouter `i = i + 1` **dans** la boucle.
 
 ## Exercices
@@ -288,7 +288,7 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
 !!! question "1 - Saisie contrôlée"
     Demande un nombre **entre 1 et 10** à l'utilisateur, en redemandant tant que la valeur saisie est hors de cet intervalle.
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         ```python
         n = int(input("Un nombre entre 1 et 10 : "))
         while n < 1 or n > 10:
@@ -299,7 +299,7 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
 !!! question "2 - Somme jusqu'à un seuil"
     En partant de 1, additionne les entiers successifs (1, 2, 3, ...) et affiche combien il en faut pour que la somme **atteigne ou dépasse 100**.
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         ```python
         somme = 0
         i = 0
@@ -340,7 +340,7 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
     ??? tip "Indice précis"
         `while b != 0:`. Dans la boucle, il faut que `a` prenne l'ancienne valeur de `b`, et `b` l'ancienne valeur de `a % b`. Attention : si tu écris `a = b` en premier, l'ancienne valeur de `a` est perdue. Range d'abord `a % b` dans une variable `r`.
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         1. `(48, 36)`, puis `(36, 12)`, puis `(12, 0)` : `b` est nul, le PGCD est `12`.
         2. ```python
            def pgcd(a: int, b: int) -> int:
@@ -361,7 +361,7 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
     ??? tip "Indice léger"
         Écris d'abord, en français, quand la réponse est **acceptable**. La condition du `while` est le contraire : `not` de cette phrase.
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```python
         rep = input("Continuer ? (oui/non) ")
         while not (rep == "oui" or rep == "non"):
@@ -386,7 +386,7 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
     ??? tip "Indice léger"
         C'est la recherche du premier espace, avec une autre condition sur le caractère. Laquelle, avec `not` ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```python
         def premier_chiffre(txt: str) -> int:
             """Renvoie la position du premier chiffre de txt, ou len(txt) s'il n'y en a pas."""
@@ -414,7 +414,7 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
     ??? tip "Indice léger"
         Pour la question 3 : la négation d'un `or` est un `and` de négations. Que devient `not (code == "1234")` ? Et `not (essais == 3)`, sachant que `essais` ne dépasse jamais `3` ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. `code == "1234" or essais == 3`
         2. `while not (code == "1234" or essais == 3):`
         3. `while code != "1234" and essais < 3:`. Comme `essais` ne dépasse jamais `3`, « différent de 3 » revient à « plus petit que 3 ».
@@ -460,7 +460,7 @@ En pratique : si tu peux dire « pour chaque élément » ou « n fois », utili
 
     **3. Écrire.** Depuis zéro, avec un `for` : `nb_chiffres(txt)`, qui renvoie le nombre de chiffres présents dans une chaîne. Rappel : `c.isdigit()` dit si le caractère `c` est un chiffre.
 
-    ??? success "Réponses"
+    ??? success "Correction"
         **1.** `res` vaut `"024"` et la boucle fait **trois** tours (`i` vaut 0, 2, 4). Le `if` est toujours vrai ici, puisque `i` avance de 2 en 2 depuis 0 : c'est un test inutile, et le repérer fait partie de la lecture.
 
         **2.** L'initialisation doit sortir de la boucle, l'affichage aussi :

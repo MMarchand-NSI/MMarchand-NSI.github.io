@@ -1012,10 +1012,10 @@ Un `Comparator<T>` est l'objet qui décide de l'ordre. `cmp.compare(a, b)` rend 
 
         Si tu n'en testes qu'une, le lièvre enjambe la sentinelle et repart pour un tour. Le test coupe au bout d'une seconde, mais le programme, lui, ne s'arrêterait jamais.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? note "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```java
             Maillon<T> lievre = this.suivant;
             Maillon<T> tortue = this.suivant;
@@ -1083,10 +1083,10 @@ Un `Comparator<T>` est l'objet qui décide de l'ordre. `cmp.compare(a, b)` rend 
 
         Sinon, nomme les deux maillons de la frontière, le dernier de gauche que `milieu` te donne, et le premier de droite qui est son suivant. Il reste à faire pointer trois flèches au bon endroit pour que les deux chaînes circulaires soient refermées, chacune sur sa propre sentinelle.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? note "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```java
             if (this.estVide()) {
                 return new Liste<T>();
@@ -1185,10 +1185,10 @@ Un `Comparator<T>` est l'objet qui décide de l'ordre. `cmp.compare(a, b)` rend 
 
         Dernier point, celui du test `fusionEgalite` : quand les deux éléments sont équivalents, c'est celui de `lst` qui doit passer en premier. Regarde bien quel côté de ton `if` reçoit l'égalité.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? note "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```java
             Maillon<T> ref1 = this;
             Maillon<T> ref2 = lst;
@@ -1298,10 +1298,10 @@ Un `Comparator<T>` est l'objet qui décide de l'ordre. `cmp.compare(a, b)` rend 
 
         La moitié gauche est la liste que `couper` renvoie, la droite est `this`. Les deux appels récursifs portent donc sur des listes **strictement plus courtes**, ce qui garantit l'arrêt.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? note "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```java
             if (this.estVide() || this.suivant.suivant == this) {
                 return;

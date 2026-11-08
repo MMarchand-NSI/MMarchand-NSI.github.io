@@ -42,7 +42,7 @@ print(r)
     2. Que valent `23 // 4` et `23 % 4` ? Quelle égalité relie ces deux résultats à `23` et à `4` ?
     3. Que vaut `n % 2 == 0` quand `n` vaut `14` ? Et quand `n` vaut `9` ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. `7`. La deuxième ligne calcule `5 * 2 + 1`, soit `11`, **puis** range le résultat dans `x` ; la troisième calcule `11 - 4`.
         2. `5` et `3`, et on a bien `4 * 5 + 3 = 23`.
         3. `True` pour `14`, `False` pour `9`. Le reste de la division par `2` dit si un nombre est pair, et la comparaison `==` rend un booléen.
@@ -238,7 +238,7 @@ Le résultat d'un appel est une valeur comme une autre : on peut l'utiliser dans
     1. Écris une fonction qui calcule le périmètre d'un rectangle.
     2. Calcule le périmètre d'un rectangle de dimensions $14 \times 50$.
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         ```python
         def perimetre(largeur: float, hauteur: float) -> float:
             """Renvoie le périmètre d'un rectangle de dimensions largeur x hauteur"""
@@ -259,7 +259,7 @@ Le résultat d'un appel est une valeur comme une autre : on peut l'utiliser dans
 
     Écris une fonction `xor` qui prend deux booléens et renvoie `True` ou `False` selon les cas. Teste-la dans les quatre cas.
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         ```python
         def xor(c1: bool, c2: bool) -> bool:
             """Renvoie le ou exclusif des deux booléens c1 et c2"""
@@ -302,7 +302,7 @@ Une fonction peut avoir autant de paramètres qu'on veut. À l'appel, il faut re
     1. `nb_secondes(heures, minutes, secondes)` : renvoie le nombre total de secondes.
     2. `conversion_euro_dollar(euros)` : convertit des euros en dollars (taux $1€ = 1{,}17\$$). Convertis 12 €.
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         ```python
         def nb_secondes(heures: int, minutes: int, secondes: int) -> int:
             """Renvoie le nombre total de secondes"""

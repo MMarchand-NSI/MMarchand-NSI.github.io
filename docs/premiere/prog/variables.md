@@ -60,7 +60,7 @@ a
     2. Dans le Little Man Computer, à quoi servent les instructions `STA` et `LDA` ?
     3. Convertis `1011` (binaire) en décimal.
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. **256** valeurs, de `0` à `255`. La plus grande s'écrit `11111111` : huit bits, donc $2^8$ combinaisons.
         2. `STA` (*store*) **range** une valeur à une adresse mémoire. `LDA` (*load*) **lit** la valeur qui s'y trouve. Ce sont les deux seules opérations de la mémoire : écrire et lire.
         3. `1011` vaut $8 + 0 + 2 + 1 = 11$.
@@ -85,7 +85,7 @@ a
     ```
     Que vaut `a` après ces deux lignes ? Et où est passé le résultat de `a + 3` ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `a` vaut toujours `4`. La deuxième ligne calcule bien `7`, mais **aucune variable ne le reçoit** : la valeur est produite puis immédiatement perdue, et plus rien dans le programme ne permet de la retrouver.
 
 !!! question "Exercice"
@@ -95,7 +95,7 @@ a
     ```
     Ce programme devait calculer l'aire d'un carré pour pouvoir s'en servir plus loin. Il ne le fait pas. Qu'est-ce qui manque ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         Il manque une **affectation** pour conserver le résultat :
 
         ```python
@@ -112,7 +112,7 @@ a
     ```
     Après ces deux lignes, on voudrait pouvoir se servir **à la fois** de `7` et de `9`. Est-ce possible en l'état ? Si non, que faut-il changer ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         Ce n'est pas possible : `mesure` ne contient qu'une valeur à la fois, et c'est `9`. Le `7` a été effacé par la deuxième ligne.
 
         Pour garder les deux, il faut **deux cases**, donc deux variables :
@@ -130,7 +130,7 @@ a
     ```
     Combien de cases mémoire sont utilisées, et que vaut chacune à la fin ? Quelle valeur n'existe plus nulle part dans le programme ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         Deux cases. `jour` vaut `3` et `mois` vaut `3`.
 
         La valeur `12` n'existe plus : la troisième ligne a écrit `3` par-dessus. Noter que les deux cases contiennent maintenant la même valeur, mais elles restent **deux cases distinctes** : changer `mois` ensuite ne changerait pas `jour`.
@@ -141,7 +141,7 @@ a
     ```
     Sur combien de bits au minimum la valeur de `n` tient-elle dans la mémoire ? Justifie.
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         **8 bits**, soit un octet.
 
         Sur 7 bits, on code $2^7$ = 128 valeurs, de `0` à `127`, et `200` dépasse. Sur 8 bits, on code $2^8$ = 256 valeurs, de `0` à `255`, ce qui suffit.
@@ -149,7 +149,7 @@ a
 !!! question "Exercice"
     Un programme range une valeur dans une variable, puis l'ordinateur est éteint. Que devient cette valeur ? Dans quel composant était-elle pendant l'exécution ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         Elle est **perdue**. Les variables vivent dans la **RAM**, qui est une mémoire **volatile** : son contenu disparaît à l'extinction.
 
         Pour conserver une information après l'extinction, il faut l'écrire ailleurs, sur un disque par exemple. Une variable ne sert à se souvenir que **pendant** l'exécution du programme.
@@ -167,7 +167,7 @@ Une **variable**, c'est exactement cela : une **case mémoire à laquelle on a d
     ```
     Pour chacune de ces deux lignes, dis si la machine **lit** une case, si elle **écrit** dans une case, ou les deux, et nomme la ou les cases concernées.
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         - `a = 5` : la machine **écrit** seulement. Elle range `5` dans la case `a`.
         - `b = a` : la machine **lit** la case `a` pour en obtenir `5`, puis **écrit** ce `5` dans la case `b`. Deux cases, deux opérations.
 
@@ -180,7 +180,7 @@ Une **variable**, c'est exactement cela : une **case mémoire à laquelle on a d
     ```
     Combien de cases mémoire ce programme utilise-t-il ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         **Trois** : `x`, `y` et `z`. La ligne `x = 3` ne crée pas une quatrième case, elle écrit dans celle de `x`, qui existe déjà, et sa valeur `1` est effacée. À la fin, `x` vaut `3`, `y` vaut `2` et `z` vaut `5`.
 
 ## Écrire dans une variable : l'affectation
@@ -206,7 +206,7 @@ a = 4
     ```
     Que vaut `truc` à la fin ? Pourquoi ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `3`. La deuxième affectation a **remplacé** le contenu de la case : `4` est perdu.
 
 !!! question "Exercice"
@@ -217,7 +217,7 @@ a = 4
     ```
     Que vaut `score` à la fin ? Combien de valeurs différentes cette case a-t-elle contenues au cours du programme, et combien en contient-elle à la fin ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `score` vaut `15`. La case a contenu **trois** valeurs successives, mais elle n'en contient **qu'une seule à la fois** : `12` puis `20` ont été effacés. Rien dans le programme ne permet de les retrouver.
 
 ## Lire une variable
@@ -242,7 +242,7 @@ bidule = truc + 5    # on lit truc, on calcule, on range le résultat dans bidul
     ??? tip "Indice"
         Dans `n + n`, on lit `n` deux fois. Combien vaut-il à la deuxième lecture ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `m` vaut `10` et `n` vaut `15`.
 
         À la deuxième ligne, on lit `n` deux fois de suite, et il vaut `5` les deux fois : la première lecture ne l'a pas vidé. On range donc `10` dans `m`. À la troisième ligne, on lit `n` (`5`) et `m` (`10`), on calcule `15`, et on le range dans `n`, dont l'ancienne valeur est effacée.
@@ -256,7 +256,7 @@ bidule = truc + 5    # on lit truc, on calcule, on range le résultat dans bidul
     ```
     Que valent `a`, `b`, `c` et `k` à la fin ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `a` vaut `6`, `b` vaut `9`, `c` vaut `3`, et `k` vaut **toujours** `3`.
 
         `k` a été lu **cinq fois** et n'a jamais changé. Seule une affectation vers `k` pourrait le modifier, et il n'y en a aucune après la première ligne.
@@ -284,7 +284,7 @@ print(truc)
     ```
     Quelles instructions du Little Man Computer la deuxième ligne demande-t-elle ? Combien d'opérations la machine fait-elle ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         Deux : **`LDA n`** puis **`OUT`**.
 
         `print` ne va pas chercher la valeur directement sur la sortie. Il faut d'abord **lire** la case, ce qui en donne une copie, puis **envoyer** cette copie dehors. La case `n` n'est pas modifiée, et elle vaut toujours `42`.
@@ -297,7 +297,7 @@ print(truc)
     ```
     Qu'affiche ce programme ? Que valent `a` et `b` à la fin ? Une variable contient-elle `8` ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         Il affiche `8`. `a` vaut `3` et `b` vaut `5`, inchangés : ils ont seulement été lus.
 
         Et **aucune variable ne contient `8`**. La valeur a été calculée, envoyée sur la sortie, puis perdue, comme toute valeur qu'aucune affectation ne range. Afficher une information n'est pas la mémoriser : ce sont deux opérations différentes, `OUT` et `STA`.
@@ -312,7 +312,7 @@ print(truc)
     ```
     Qu'affichent les trois `print`, dans l'ordre ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `2`, puis `9`, puis `2`.
 
         Le deuxième lit `bidule` (`7`) et `truc` (`2`), et affiche leur somme sans la ranger nulle part. Le troisième montre que `truc` vaut **toujours** `2` : il a été lu trois fois et n'a jamais changé.
@@ -336,7 +336,7 @@ En tant qu'égalité mathématique, ce serait absurde. En tant qu'affectation, c
     ```
     Que vaut `c` après chaque ligne ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `0`, puis `3`, puis `6`, puis `5`.
 
         Chaque ligne lit la valeur actuelle de `c`, calcule, et range le résultat dans `c` par-dessus l'ancienne valeur.
@@ -353,7 +353,7 @@ En tant qu'égalité mathématique, ce serait absurde. En tant qu'affectation, c
     ??? tip "Indice"
         À la quatrième ligne, `u` ne vaut plus `2`.
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `u` vaut `7` et `w` vaut `12`.
 
         La troisième ligne range `2 + 5` dans `u`, qui vaut donc `7`. La quatrième lit `w` (`5`) et `u` (`7`, sa **nouvelle** valeur), ce qui donne `12`.
@@ -394,7 +394,7 @@ En tant qu'égalité mathématique, ce serait absurde. En tant qu'affectation, c
     | `p = q` | | |
     | `q = p - 1` | | |
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         | Instruction | `p` | `q` |
         | --- | :--: | :--: |
         | `p = 2` | 2 | |
@@ -422,7 +422,7 @@ En tant qu'égalité mathématique, ce serait absurde. En tant qu'affectation, c
     | `t = r + s` | | | |
     | `r = t` | | | |
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         | Instruction | `r` | `s` | `t` |
         | --- | :--: | :--: | :--: |
         | `r = 1` | 1 | | |
@@ -449,7 +449,7 @@ Tu as déjà traité ce problème en langage machine, sur les cases n°10 et n°
     ??? tip "Indice"
         Écris la solution qui vient spontanément, `a = b` puis `b = a`, et déroule-la ligne par ligne. Quelle valeur n'existe déjà plus après la première ligne ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         La solution spontanée **échoue** :
 
         ```python
@@ -478,7 +478,7 @@ Tu as déjà traité ce problème en langage machine, sur les cases n°10 et n°
     ??? tip "Indice"
         Une seule valeur est menacée dès la première affectation que tu écris : celle de la variable que tu écrases en premier. Mets-la de côté avant.
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         ```python
         t = c    # on sauvegarde 3, la valeur qu'on va écraser
         c = b    # c devient 2
@@ -501,7 +501,7 @@ Tu as déjà traité ce problème en langage machine, sur les cases n°10 et n°
     ```
     Que valent `a`, `b` et `c` à la fin ? Que fait ce programme, comparé à celui de l'exercice précédent ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `a` vaut `2`, `b` vaut `3`, `c` vaut `1`.
 
         Il fait tourner les trois valeurs dans l'**autre sens** : chaque variable reçoit la valeur de la suivante, et non de la précédente. La méthode est la même, seule la valeur mise de côté change : ici c'est celle de `a`, puisque c'est `a` qu'on écrase en premier.
@@ -542,7 +542,7 @@ print(type(age))   # affiche <class 'int'>
     d = True
     ```
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `a` est un `int`, `b` un `float`, `c` un `str`, `d` un `bool`.
 
         `7`, `7.0` et `"7"` sont trois valeurs de **types différents**, alors qu'on y lit le même chiffre. Les guillemets de `c` en font une chaîne de caractères, c'est-à-dire du texte, et non un nombre : on ne peut pas calculer avec. La fin de cette page traite les entiers, et la [page suivante](caracteres.md) les chaînes de caractères.
@@ -557,7 +557,7 @@ print(type(age))   # affiche <class 'int'>
     d = 3.0
     ```
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `a` est un `int`, `b` un `str`, `c` un `bool`, `d` un `float`.
 
         Deux remarques. `3.0` est un `float` bien qu'il n'ait aucune décimale après la virgule : c'est la **présence du point** qui le décide, pas la valeur. Et `"16"` est du texte, pas le nombre seize, à cause de ses guillemets.
@@ -590,7 +590,7 @@ Les priorités sont celles des mathématiques : la puissance d'abord, puis la mu
     ```
     Que valent `a + b`, `a * b`, `a // b`, `a % b` et `a ** 2` ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `22`, `85`, `3`, `2` et `289`.
 
 !!! question "Exercice"
@@ -603,7 +603,7 @@ Les priorités sont celles des mathématiques : la puissance d'abord, puis la mu
     2 ** 3 * 2
     ```
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `14`, `20`, `4` et `16`.
 
         Dans la première, la multiplication passe avant l'addition. Dans la deuxième, les parenthèses renversent l'ordre. Dans la quatrième, la puissance se calcule d'abord, ce qui donne `8 * 2`.
@@ -615,7 +615,7 @@ Les priorités sont celles des mathématiques : la puissance d'abord, puis la mu
     ```
     Que valent `x` et `y` ? De quel type est chacune des deux variables ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `x` vaut `5.0` et c'est un `float`. `y` vaut `5` et c'est un `int`.
 
         Les deux valeurs se lisent « cinq », mais elles ne sont pas du même type et Python ne les écrit pas pareil.
@@ -628,7 +628,7 @@ Les priorités sont celles des mathématiques : la puissance d'abord, puis la mu
     ```
     Que vaut chaque variable, et de quel type est-elle ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `a` vaut `1.0`, `b` vaut `2.0`, tous deux des `float` : `/` rend un `float` **même quand la division tombe juste**. `c` vaut `4`, un `int` : `9 // 2` donne le quotient entier, la moitié de `9` étant `4` et des restes.
 
 ## Écrire plus court : `+=`
@@ -656,7 +656,7 @@ On appelle cela une **affectation combinée**. Il en existe pour les autres opé
     ```
     Que vaut `a` après chaque ligne ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `5`, puis `8`, puis `11`, puis `21`.
 
         Chaque ligne repart de la valeur courante de `a` et lui ajoute quelque chose. C'est ainsi qu'on accumule dans une variable.
@@ -668,7 +668,7 @@ On appelle cela une **affectation combinée**. Il en existe pour les autres opé
     ```
     Réécris la deuxième ligne en écriture longue, et donne la valeur de `c`. Que se passerait-il si la première ligne n'existait pas ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `c += 7` s'écrit `c = c + 7`, et `c` vaut `17`.
 
         Sans la première ligne, le programme s'arrête sur une **erreur** : `c += 7` commence par lire `c`, et il n'y a rien à lire dans une case qui n'a jamais été créée.
@@ -703,7 +703,7 @@ Le **quotient** est `32`, et on l'obtient par `163 // 5`. Le **reste** est `3`, 
 
     Combien de sachets pleins, et combien de bonbons en trop ? Écris les deux calculs Python qui donnent ces deux nombres, puis vérifie ton résultat avec la première propriété.
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `47 // 6` donne `7` sachets pleins, et `47 % 6` donne `5` bonbons en trop.
 
         Vérification : `6 * 7 + 5` redonne bien `47`. Et `5` est plus petit que `6`, donc on ne peut pas faire un sachet de plus.
@@ -717,19 +717,19 @@ Le **quotient** est `32`, et on l'obtient par `163 // 5`. Le **reste** est `3`, 
     ```
     Que valent `q` et `r` ? Que vaut `d * q + r` ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `q` vaut `14` et `r` vaut `2`. `d * q + r` vaut `7 * 14 + 2`, donc `100`, c'est-à-dire `n`.
 
 !!! question "Exercice"
     Peut-on écrire un programme où `n % 5` vaut `7` ? Quelles valeurs cette expression peut-elle prendre ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         Non, c'est impossible pour un `n` positif. Le reste d'une division par `5` est toujours plus petit que `5`, donc l'expression ne peut valoir que `0`, `1`, `2`, `3` ou `4`.
 
 !!! question "Exercice"
     Que valent `14 % 2` et `15 % 2` ? Et plus généralement, que t'apprend `n % 2` sur `n` ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `14 % 2` vaut `0` et `15 % 2` vaut `1`.
 
         `n % 2` vaut `0` quand `n` est pair et `1` quand il est impair, puisque ce sont les deux seuls restes possibles d'une division par `2`. C'est la façon habituelle de tester la parité en programmation.
@@ -752,7 +752,7 @@ print(hex(157))   # affiche 0x9d
     ```
     Qu'affiche ce programme ? Combien de bits occupe cette écriture, et tient-elle sur un octet ?
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         Il affiche `0b11001000`.
 
         Huit bits après le préfixe, donc exactement un octet. C'est cohérent avec ce qu'on a vu plus haut : `200` dépasse `127`, donc 7 bits ne suffisent pas, et il reste sous `255`, donc 8 bits suffisent.
@@ -764,7 +764,345 @@ print(hex(157))   # affiche 0x9d
     ```
     Qu'affiche ce programme ? Retrouve ce résultat à la main depuis l'écriture binaire `10011101`.
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         Il affiche `0x9d`.
 
         On groupe les bits par quatre en partant de la droite : `1001` et `1101`. Le premier groupe vaut $8 + 1$, soit `9`, et le second $8 + 4 + 1$, soit `13`, qui s'écrit `d` en hexadécimal. D'où `9d`.
+
+## Faire entrer une information : `input`
+
+Jusqu'ici, toutes les valeurs étaient écrites dans le programme. Pour qu'une information **entre** dans la machine pendant qu'elle tourne, il faut `input`.
+
+!!! abstract "Ce que fait vraiment la machine"
+    C'est l'instruction **`INP`** (*input*) du [Little Man Computer](../von_neumann/langage-machine.md) : « attends une valeur et mets-la dans l'accumulateur ». `saisie = input()` enchaîne donc **`INP`** puis **`STA`**, exactement comme `print(truc)` enchaînait `LDA` puis `OUT`.
+
+Le texte entre parenthèses est la question posée à l'écran avant d'attendre.
+
+```python
+saisie = input("Un nombre : ")
+```
+
+### `input` rend toujours du texte
+
+Et c'est là que `input` cesse de ressembler à `INP`. Le `INP` du simulateur mettait un **nombre** dans l'accumulateur. `input`, lui, rend du **texte**, toujours, même quand tu as tapé `7`. Tu peux le vérifier avec `type`.
+
+```python
+saisie = input("Un nombre : ")
+print(type(saisie))
+```
+
+Si on tape `7`, ce programme affiche `<class 'str'>`, et pas `<class 'int'>`.
+
+La conséquence est immédiate : **on ne peut pas calculer avec**.
+
+```python
+n = input("Un nombre : ")
+print(n + 1)
+```
+
+Ce programme s'arrête sur une erreur, `TypeError: can only concatenate str (not "int") to str`. La machine refuse d'ajouter le nombre `1` à du texte, et elle a raison de refuser : ce sont deux informations de natures différentes.
+
+### La méthode, et elle ne change jamais
+
+On **convertit** le texte en entier avec `int`.
+
+```python
+saisie = input("Un nombre : ")
+n = int(saisie)
+print(n + 1)
+```
+
+Si on tape `7`, ce programme affiche `8`.
+
+**Garde toujours les deux lignes**, l'une pour la saisie, l'autre pour la conversion. Elles font deux choses différentes, et les voir séparément est ce qui permet de savoir laquelle a échoué quand quelque chose ne marche pas.
+
+!!! fondamental "La règle à retenir"
+    `input` rend du **texte**. Si tu veux un **nombre**, tu le convertis à la ligne suivante, avec `int`.
+
+    Fais-le systématiquement, dès la saisie. Une saisie non convertie ne se voit pas tout de suite : elle se voit plus loin, au premier calcul, sous la forme d'une erreur dont la cause est quelques lignes plus haut.
+
+!!! note "Et ce « texte », qu'est-ce que c'est au juste ?"
+    Il a un nom, un type (`str`), et des opérations qui lui sont propres. C'est l'objet du cours suivant, [Les chaînes de caractère](caracteres.md). Pour l'instant, retiens seulement la conversion.
+
+!!! question "Exercice"
+    ```python
+    saisie = input("Un nombre : ")
+    n = int(saisie)
+    print(n + 1)
+    print(n)
+    ```
+    On tape `41`. Qu'affiche ce programme, dans l'ordre ? Et que vaut `n` à la fin ?
+
+    ??? warning "Correction"
+        Il affiche `42`, puis `41`.
+
+        `n` vaut toujours `41`. Le premier `print` a calculé `n + 1`, l'a envoyé sur la sortie et l'a perdu, sans rien ranger : c'est le même constat que pour `print(a + b)` plus haut.
+
+!!! question "Exercice"
+    ```python
+    saisie = input("a : ")
+    a = int(saisie)
+    saisie = input("b : ")
+    b = int(saisie)
+    print(a + b)
+    ```
+    On tape `3` puis `8`. Qu'affiche ce programme ? Et si on tape `8` puis `3` ?
+
+    ??? warning "Correction"
+        `11` dans les deux cas. L'ordre de saisie change ce que contiennent `a` et `b`, mais pas leur somme.
+
+        Attention : il n'en irait pas de même avec `a - b`, qui donnerait `-5` dans un cas et `5` dans l'autre.
+
+!!! question "Exercice"
+    ```python
+    n = input("Un nombre : ")
+    m = int(n)
+    print(type(n))
+    print(type(m))
+    ```
+    On tape `12`. Qu'affichent les deux `print` ?
+
+    ??? warning "Correction"
+        `<class 'str'>` puis `<class 'int'>`.
+
+        `int(n)` **ne modifie pas** `n` : il en fabrique une nouvelle valeur, rangée dans `m`. La case `n` contient toujours du texte. C'est le même mécanisme que `b = a + 1`, qui laisse `a` intact.
+
+## Exercices
+
+!!! info "Comment faire ces exercices"
+    Tout se passe dans **un seul fichier**, `python/exos_variables.py`. Tu écris les exercices **les uns à la suite des autres**, et chacun commence par une ligne qui le repère :
+
+    ```python
+    print("Exercice 1")
+    ```
+
+    Quand tu lances le fichier, les exercices se déroulent dans l'ordre et te demandent tes nombres l'un après l'autre. Les lignes `Exercice 1`, `Exercice 2`... te permettent de retrouver quel résultat appartient à quel exercice.
+
+    Chaque énoncé donne un exemple de saisie et le résultat attendu : c'est avec lui que tu vérifies ton programme.
+
+    Les exercices **1 à 8** sont à faire, les **9 à 12** sont de l'entraînement, et les **13 et 14** sont des bonus.
+
+!!! question "Exercice 1 (à faire)"
+    Demande un nombre, puis affiche son double.
+
+    Avec `7`, le programme affiche `14`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 1")
+        saisie = input("Un nombre : ")
+        n = int(saisie)
+        print(n * 2)
+        ```
+
+!!! question "Exercice 2 (à faire)"
+    Demande deux nombres, puis affiche leur somme, et en dessous leur produit.
+
+    Avec `3` puis `5`, le programme affiche `8` puis `15`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 2")
+        saisie = input("Premier nombre : ")
+        a = int(saisie)
+        saisie = input("Deuxième nombre : ")
+        b = int(saisie)
+        print(a + b)
+        print(a * b)
+        ```
+
+!!! question "Exercice 3 (à faire)"
+    Demande un nombre de secondes, puis affiche combien cela fait de minutes entières, et en dessous combien il reste de secondes.
+
+    Avec `163`, le programme affiche `2` puis `43`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 3")
+        saisie = input("Un nombre de secondes : ")
+        s = int(saisie)
+        print(s // 60)
+        print(s % 60)
+        ```
+
+!!! question "Exercice 4 (à faire)"
+    Demande un prix en centimes, puis affiche le nombre d'euros, et en dessous les centimes restants.
+
+    Avec `1250`, le programme affiche `12` puis `50`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 4")
+        saisie = input("Un prix en centimes : ")
+        centimes = int(saisie)
+        print(centimes // 100)
+        print(centimes % 100)
+        ```
+
+!!! question "Exercice 5 (à faire)"
+    Demande deux nombres `x` et `y`, **échange** leurs contenus, puis affiche `x` et en dessous `y`.
+
+    Avec `3` puis `8`, le programme affiche `8` puis `3`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 5")
+        saisie = input("x : ")
+        x = int(saisie)
+        saisie = input("y : ")
+        y = int(saisie)
+        temp = x
+        x = y
+        y = temp
+        print(x)
+        print(y)
+        ```
+
+        Sans la variable `temp`, la première affectation écraserait la valeur qu'il faut garder.
+
+!!! question "Exercice 6 (à faire)"
+    Demande un nombre, puis affiche son écriture binaire, et en dessous son écriture hexadécimale.
+
+    Avec `157`, le programme affiche `0b10011101` puis `0x9d`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 6")
+        saisie = input("Un nombre : ")
+        n = int(saisie)
+        print(bin(n))
+        print(hex(n))
+        ```
+
+!!! question "Exercice 7 (à faire)"
+    Demande un nombre de bonbons, puis la taille d'un sachet. Affiche le nombre de sachets pleins, et en dessous le nombre de bonbons en trop.
+
+    Avec `47` puis `6`, le programme affiche `7` puis `5`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 7")
+        saisie = input("Nombre de bonbons : ")
+        bonbons = int(saisie)
+        saisie = input("Taille d'un sachet : ")
+        taille = int(saisie)
+        print(bonbons // taille)
+        print(bonbons % taille)
+        ```
+
+!!! question "Exercice 8 (à faire)"
+    Demande un nombre et affiche son reste dans la division par `2`.
+
+    Avec `15`, le programme affiche `1`. Avec `14`, il affiche `0`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 8")
+        saisie = input("Un nombre : ")
+        n = int(saisie)
+        print(n % 2)
+        ```
+
+        Ce reste ne peut valoir que `0` ou `1` : il dit si le nombre est pair ou impair.
+
+!!! question "Exercice 9 (entraînement)"
+    Demande un nombre, augmente-le de `10` **en réutilisant la même variable**, puis affiche-le.
+
+    Avec `32`, le programme affiche `42`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 9")
+        saisie = input("Un nombre : ")
+        n = int(saisie)
+        n += 10
+        print(n)
+        ```
+
+        `n = n + 10` fait exactement la même chose.
+
+!!! question "Exercice 10 (entraînement)"
+    Demande un âge, puis affiche cet âge dans dix ans, et en dessous cet âge il y a dix ans.
+
+    Avec `17`, le programme affiche `27` puis `7`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 10")
+        saisie = input("Ton âge : ")
+        age = int(saisie)
+        print(age + 10)
+        print(age - 10)
+        ```
+
+!!! question "Exercice 11 (entraînement)"
+    Demande trois notes entières. Affiche leur moyenne **entière**, et en dessous le reste de la division de leur total par `3`.
+
+    Avec `12`, `15` puis `20`, le programme affiche `15` puis `2`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 11")
+        saisie = input("Note 1 : ")
+        a = int(saisie)
+        saisie = input("Note 2 : ")
+        b = int(saisie)
+        saisie = input("Note 3 : ")
+        c = int(saisie)
+        total = a + b + c
+        print(total // 3)
+        print(total % 3)
+        ```
+
+        Le total vaut `47`, et $3 \times 15 + 2 = 47$. La moyenne entière perd le reste : ce n'est pas la même chose que la moyenne exacte, qui vaudrait `15.666...`.
+
+!!! question "Exercice 12 (entraînement)"
+    Demande un nombre. Affiche le type de ce que `input` a rendu, puis convertis-le et affiche le type du résultat.
+
+    Avec `7`, le programme affiche `<class 'str'>` puis `<class 'int'>`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 12")
+        saisie = input("Un nombre : ")
+        print(type(saisie))
+        nombre = int(saisie)
+        print(type(nombre))
+        ```
+
+!!! question "Exercice 13 (bonus)"
+    Demande un prix en centimes. Affiche le nombre de pièces de 2 euros, puis le nombre de pièces de 1 euro, puis les centimes restants, en utilisant le moins de pièces possible.
+
+    Avec `1370`, le programme affiche `6`, puis `1`, puis `70`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 13")
+        saisie = input("Un prix en centimes : ")
+        centimes = int(saisie)
+        pieces2 = centimes // 200
+        reste = centimes % 200
+        pieces1 = reste // 100
+        restant = reste % 100
+        print(pieces2)
+        print(pieces1)
+        print(restant)
+        ```
+
+        La méthode se répète : on prend le quotient par la valeur de la pièce, puis on **continue sur le reste**. Une pièce de 2 euros vaut `200` centimes, d'où le `200`.
+
+!!! question "Exercice 14 (bonus)"
+    Demande un nombre, puis affiche son chiffre des unités, et en dessous son chiffre des dizaines.
+
+    Avec `482`, le programme affiche `2` puis `8`.
+
+    ??? warning "Correction"
+        ```python
+        print("Exercice 14")
+        saisie = input("Un nombre : ")
+        n = int(saisie)
+        print(n % 10)
+        print(n // 10 % 10)
+        ```
+
+        Le chiffre des unités est le reste de la division par `10`. Pour les dizaines, on **enlève d'abord** les unités avec `n // 10`, ce qui décale le nombre d'un rang, et on reprend le reste par `10`.

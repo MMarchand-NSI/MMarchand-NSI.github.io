@@ -48,7 +48,7 @@ r
            print("impair")
        ```
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. **Avant** la boucle. Placée dedans, elle serait remise à sa valeur de départ à chaque tour, et le résultat final ne compterait que le dernier élément.
         2. `0` : avant la première itération, on n'a encore rien compté.
         3. `impair` : `7 % 2` vaut `1`, la condition est fausse, c'est le bloc `else` qui s'exécute.
@@ -156,7 +156,7 @@ Pour un anglophone, la première ligne se lit presque comme une phrase : *for i 
     print("fini")
     ```
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Il n'affiche que `fini`. Le `print(i)` ne s'exécute jamais, et aucune erreur ne se produit.
 
 `range(a, b)` représente les entiers $k$ tels que $a \leqslant k < b$. Quand $a$ est **supérieur ou égal** à $b$, aucun entier ne vérifie les deux conditions à la fois : avec `range(6, 4)`, il faudrait $6 \leqslant k$ et $k < 4$. L'intervalle est **vide**.
@@ -213,7 +213,7 @@ Là encore, c'est un `for each` : « pour chaque indice `i` dans `range(0, len(s
         print(i)
     ```
 
-    ??? success "Réponse"
+    ??? success "Correction"
         `5`, `4`, `3`. La première borne, `5`, est atteinte, la seconde, `2`, ne l'est pas : c'est encore un intervalle semi-ouvert, lu de haut en bas. Compare avec `range(2, 5)`, qui donne `2`, `3`, `4` : chaque valeur est **décalée d'un cran vers le haut**.
 
 !!! danger "Parcourir un intervalle à l'envers"
@@ -248,7 +248,7 @@ for i in range(len(mot), 0, -1):
 !!! question "À toi"
     Écris la boucle qui affiche les entiers de $[3\,;\,8)$, du plus grand au plus petit.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         for i in range(8, 3, -1):
             print(i - 1)         # affiche 7, 6, 5, 4, 3
@@ -266,7 +266,7 @@ for i in range(len(mot), 0, -1):
     print(res)
     ```
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `10`. `res` prend successivement 0, 1, 3, 6, puis 10 (on ajoute 1, 2, 3, 4).
 
 ## Exercices
@@ -303,7 +303,7 @@ for i in range(len(mot), 0, -1):
     ??? tip "Indice plus précis"
         Pour la somme, l'accumulateur part de `0` et on fait `res = res + x`. Pour le produit, il part de **`1`** (car multiplier par 1 ne change rien) et on fait `res = res * x`.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def somme(n: int) -> int:
             """Renvoie la somme des entiers de 1 à n."""
@@ -357,10 +357,10 @@ for i in range(len(mot), 0, -1):
     ??? tip "Indice plus précis"
         Parcours **par indice** (`for i in range(0, len(s))`), et le filtre compare `i` à `n` : tu n'ajoutes `s[i]` à l'accumulateur que si `i < n`. Le cas `n` plus grand que `s` se règle tout seul : la boucle s'arrête avant d'avoir jamais pu être fausse.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? note "Avant d'ouvrir la correction"
         Écris une phrase sur ton cahier : pourquoi ce filtre n'a-t-il **rien de spécial** à faire pour le cas `take(10, "abc")` ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def take(n: int, s: str) -> str:
             """Renvoie les n premiers caractères de s."""
@@ -392,7 +392,7 @@ for i in range(len(mot), 0, -1):
     ??? tip "Indice léger"
         Transfert proche de l'exercice précédent : même squelette, un seul symbole change dans le filtre.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def drop(n: int, s: str) -> str:
             """Renvoie s privée de ses n premiers caractères."""
@@ -438,7 +438,7 @@ Une boucle se place, elle aussi, dans le corps d'une fonction. Les exercices qui
     ??? tip "Indice plus précis"
         `acc = ""` avant tout. La boucle **extérieure** fait `hauteur` tours. La boucle **intérieure** ajoute `car` à `acc`, `largeur` fois. Le `"\n"` s'ajoute **dans** la boucle extérieure, mais **après** la boucle intérieure.
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         ```python
         def rectangle(hauteur: int, largeur: int, car: str) -> str:
             """Renvoie la chaîne qui dessine un rectangle de hauteur lignes et de largeur
@@ -472,7 +472,7 @@ Une boucle se place, elle aussi, dans le corps d'une fonction. Les exercices qui
 
     Puis exécute pour vérifier. Que se passe-t-il avec `x` et `i` ?
 
-??? success "Solution"
+??? success "Correction"
     ```
     x = 4
     i = 2
@@ -513,7 +513,7 @@ Une boucle se place, elle aussi, dans le corps d'une fonction. Les exercices qui
 
     Rappel : `c.isdigit()` dit si le caractère `c` est un chiffre, et `int(c)` le convertit en entier.
 
-??? success "Solution"
+??? success "Correction"
     ```python
     def somme_chiffres(texte: str) -> int:
         """Renvoie la somme des chiffres présents dans texte."""
@@ -535,7 +535,7 @@ Une boucle se place, elle aussi, dans le corps d'une fonction. Les exercices qui
     ??? tip "Indice léger"
         Compter les mots, c'est compter les **débuts** de mot : un caractère qui n'est pas une espace, et qui arrive au début de la phrase ou juste après une espace.
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```python
         def nb_mots(phrase: str) -> int:
             """Renvoie le nombre de mots de phrase, les mots étant séparés par des espaces."""

@@ -349,7 +349,7 @@ Dessinez les ABR obtenus en insérant successivement les valeurs suivantes dans 
 2. **6, 2, 9, 1, 5, 3, 8, 4, 7**
 3. **9, 5, 3, 7, 2, 6, 1, 8, 4**
 
-??? success "Solutions"
+??? success "Correction"
     **Séquence 1 : 3, 7, 1, 9, 4, 8, 2, 5, 6**
 
     ```mermaid
@@ -514,7 +514,7 @@ Implémentez la fonction `recherche_abr(element: T, arbre: ArbreBin[T]) -> bool`
 2. Quelle est la complexité de `recherche_abr` pour un **arbre parfait** de n éléments ?
 3. Expliquez pourquoi l'ordre d'insertion impacte les performances.
 
-??? success "Réponses"
+??? success "Correction"
     1. **Arbre filiforme :** O(n)
        - La hauteur est n-1
        - Dans le pire cas, on parcourt tous les nœuds

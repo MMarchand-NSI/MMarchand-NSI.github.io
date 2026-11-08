@@ -31,7 +31,7 @@ Une cellule est repérée par ses coordonnées `(i, j)` : `i` est l'indice de li
     | **i**     | `(di=?, dj=?)` | **(i, j)** | `(di=?, dj=?)` |
     | **i + 1** | `(di=?, dj=?)` | `(di=?, dj=?)` | `(di=?, dj=?)` |
 
-??? hint "Réponse"
+??? success "Correction"
     |        | j - 1       | j        | j + 1       |
     |--------|-------------|----------|-------------|
     | **i - 1** | `(-1, -1)` | `(-1, 0)` | `(-1, +1)` |
@@ -62,7 +62,7 @@ Une cellule est repérée par ses coordonnées `(i, j)` : `i` est l'indice de li
                     print(di, dj)
         ```
 
-??? hint "Réponse"
+??? success "Correction"
     `di != 0 or dj != 0`
 
     Si `di` et `dj` sont tous les deux nuls en même temps, on est sur la cellule elle-même. Cette condition est vraie dans tous les autres cas.
@@ -114,7 +114,7 @@ Une cellule est repérée par ses coordonnées `(i, j)` : `i` est l'indice de li
 
     Traduisez en Python : "l'indice de ligne `i + di` est compris entre `0` et `len(g) - 1`, ET l'indice de colonne `j + dj` est compris entre `0` et `len(g[0]) - 1`".
 
-??? hint "Solution"
+??? warning "Correction"
     Voici la condition complète
 
     ```python

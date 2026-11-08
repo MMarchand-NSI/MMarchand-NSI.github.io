@@ -56,7 +56,7 @@ G = [
 !!! question "Le pixel du centre"
     Sur ton cahier, calcule la valeur floutée du pixel `(1, 1)`.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         $(10 + 20 + 30 + 40 + 50 + 60 + 70 + 80 + 90) / 9 = 450 / 9 = 50$
 
 Pour le pixel `(0, 0)`, il manque 5 voisins : ils sont hors de l'image. Dans le voisinage, on les ignorait. Ici ce n'est pas possible : une moyenne sur 4 valeurs au coin et 9 au centre ne traiterait pas les pixels de la même façon.
@@ -71,7 +71,7 @@ On choisit donc la règle du **bord répliqué** : un pixel hors de l'image pren
     - `(-1, -1)`
     - `(3, -1)`
 
-    ??? success "Réponse"
+    ??? success "Correction"
         - `(-1, 1)` : la ligne `-1` est ramenée à `0`, donc `G[0][1]`, soit `20`.
         - `(1, 3)` : la colonne `3` est ramenée à `2`, donc `G[1][2]`, soit `60`.
         - `(-1, -1)` : ramené à `(0, 0)`, soit `10`.
@@ -80,7 +80,7 @@ On choisit donc la règle du **bord répliqué** : un pixel hors de l'image pren
 !!! question "Le pixel du coin"
     Sur ton cahier, écris les 9 valeurs du voisinage de `(0, 0)` avec la règle du bord répliqué, puis leur moyenne.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         ```
         10  10  20
         10  10  20
@@ -112,7 +112,7 @@ Une valeur de pixel est un **entier**. On arrondit donc toujours la moyenne à l
         assert borner(10, 0, 10) == 9
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def borner(x: int, debut: int, fin: int) -> int:
             """Renvoie x s'il est dans l'intervalle [debut ; fin), sinon l'entier
@@ -145,10 +145,10 @@ Une valeur de pixel est un **entier**. On arrondit donc toujours la moyenne à l
     ??? tip "Indice plus précis"
         Calcule d'abord deux nouveaux indices avec deux appels à `borner`, l'un pour la ligne, l'autre pour la colonne, puis lis la case de `g` à ces indices.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def pixel(g: Grille, i: int, j: int) -> int:
             """Renvoie la valeur du pixel (i, j). Si (i, j) sort de l'image,
@@ -191,10 +191,10 @@ Une valeur de pixel est un **entier**. On arrondit donc toujours la moyenne à l
     ??? tip "Indice plus précis"
         Le pixel visité est `pixel(g, i + di, j + dj)`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def moyenne_voisinage(g: Grille, i: int, j: int) -> int:
             """Renvoie la moyenne des 9 pixels du voisinage de (i, j), bord répliqué,
@@ -233,7 +233,7 @@ P = [
 
     **Ne lance pas la cellule de code tant que tu n'as pas écrit ta réponse.**
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. $90 / 9 = 10$ pour chaque pixel.
         2. Le calcul de `(0, 1)` lit la **nouvelle** valeur de `(0, 0)`, qui vaut déjà `10`, et il la lit deux fois à cause du bord répliqué. On obtient $(10 + 10 + 90) / 9 \approx 12{,}2$, arrondi à `12`, au lieu de `10`. Chaque pixel est calculé à partir de pixels **déjà floutés** : l'erreur se propage dans tout le parcours.
 
@@ -263,10 +263,10 @@ P = [
     ??? tip "Indice plus précis"
         Dans la double boucle sur `i` et `j`, la valeur ajoutée à `ligne` est `moyenne_voisinage(g, i, j)`. On ne touche jamais à `g`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def flou(g: Grille) -> Grille:
             """Renvoie une nouvelle grille, floutée. g n'est pas modifiée."""
@@ -304,7 +304,7 @@ P = [
         assert vers_image([[12.4, -30, 300.0, 254.6]]) == [[12, 0, 255, 255]]
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def vers_image(g: list[list[float]]) -> Grille:
             """Renvoie une nouvelle grille d'entiers entre 0 et 255."""
@@ -327,7 +327,7 @@ P = [
     1. Ouvre `flou.png` et compare avec `gris.png`. Le flou est léger : pourquoi ?
     2. Applique `flou` **cinq fois de suite** et enregistre le résultat. Qu'observes-tu ?
 
-    ??? success "Réponse"
+    ??? success "Correction"
         1. Chaque pixel ne se mélange qu'avec ses voisins immédiats, sur une image de plusieurs centaines de pixels de côté.
         2. Le flou s'étend : à chaque passage, un pixel reçoit l'influence de pixels un cran plus loin.
 
@@ -342,7 +342,7 @@ from image_io import charger_couleur, ImageCouleur
 !!! question "Synthèse"
     Pour flouter une image en couleur, il suffit de modifier **une seule** de tes fonctions. Laquelle, et pourquoi les autres peuvent-elles rester telles quelles ? Réponds sur ton cahier.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         C'est `moyenne_voisinage`, la seule fonction qui **calcule** avec la valeur d'un pixel.
 
         - `borner` travaille sur des indices, jamais sur des valeurs de pixel.
@@ -385,7 +385,7 @@ from image_io import charger_couleur, ImageCouleur
         sauver(flou(photo), "flou_couleur.png")
     ```
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def moyenne_voisinage(img: ImageCouleur, i: int, j: int) -> tuple[int, int, int]:
             """Renvoie le triplet des moyennes de chaque canal sur les 9 pixels du

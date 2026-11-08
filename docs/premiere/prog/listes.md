@@ -45,7 +45,7 @@ r
     2. Toujours avec `s = "chat"`, que se passe-t-il si on écrit `s[0] = "p"` ?
     3. Écris la boucle qui construit dans `res` la chaîne `mot` à l'envers.
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. `s[-1]` vaut `"t"` et `len(s)` vaut `4`. Le plus grand indice valide est `3`, pas `4`.
         2. Une `TypeError` : une chaîne est **immuable**, on ne peut pas en changer un caractère. Retiens bien cette réponse, la page d'aujourd'hui introduit précisément le type qui, lui, le permet.
         3. `res = ""` avant la boucle, puis `res = c + res` à chaque tour.
@@ -164,7 +164,7 @@ print(mes_notes)   # [12, 15, 0] : la liste d'origine a été modifiée
     print(a)
     ```
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         `[1, 2, 3, 99]`. Comme `b` et `a` désignent la même liste, l'ajout via `b` se voit aussi par `a`.
 
 ## Construire une liste par accumulation
@@ -225,7 +225,7 @@ Parfois, on veut **deux résultats à la fois**, calculés pendant le **même** 
     print(a, b)
     ```
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Il affiche `6 6`. Il **compte, en un seul parcours, les voyelles et les consonnes** du texte : `a` compte les voyelles, `b` tout le reste, ce qui fait des consonnes quand le texte n'a que des lettres.
 
         Deux accumulateurs, une seule boucle : à chaque tour, on met à jour **l'un ou l'autre**.
@@ -244,12 +244,12 @@ Parfois, on veut **deux résultats à la fois**, calculés pendant le **même** 
     ??? tip "Indice plus précis"
         `acc = ""` et `compte = 0` avant la boucle. Dans la boucle, on ajoute `c.upper()` à `acc` **à chaque tour**, mais on n'incrémente `compte` que **si** `c.islower()`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? note "Avant d'ouvrir la correction"
         Écris une phrase sur ton cahier : **lequel de tes deux accumulateurs** était mal placé, et pourquoi ?
 
         Si tu ne peux pas répondre, c'est que tu n'as pas encore identifié ton erreur, et la solution ne te l'apprendra pas.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         txt = "Bonjour le Monde"
         acc = ""
@@ -286,7 +286,7 @@ Ces deux exercices sont ceux de la [boucle `for`](boucle-for.md), portés sur le
     ??? tip "Indice plus précis"
         On l'initialise avec `lst[0]`, le seul candidat dont on soit sûr qu'il appartient à la liste. Puis, dans la boucle, on le remplace chaque fois qu'on rencontre plus petit.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def minimum(lst: list[int]) -> int:
             """Renvoie le plus petit élément d'une liste non vide."""
@@ -307,7 +307,7 @@ Ces deux exercices sont ceux de la [boucle `for`](boucle-for.md), portés sur le
     ??? tip "Indice plus précis"
         `mini` et `maxi` sont tous deux initialisés à `lst[0]`. Dans la boucle, deux `if` **indépendants** : l'un compare à `mini`, l'autre à `maxi`. Ce n'est pas un `if / else`, car un même élément peut mettre les deux à jour au premier tour.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def min_et_max(lst: list[int]) -> tuple[int, int]:
             """Renvoie le couple (minimum, maximum) d'une liste non vide."""
@@ -338,7 +338,7 @@ print(grille[1][2])     # 6 : ligne 1, colonne 2
 !!! question "1 - Remplir une liste"
     Construis, par accumulation, la liste des multiples de 3 de 0 à 30 inclus.
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         ```python
         multiples = []
         for i in range(0, 31, 3):
@@ -360,7 +360,7 @@ print(grille[1][2])     # 6 : ligne 1, colonne 2
         ...
     ```
 
-    ??? warning "Corrigé"
+    ??? warning "Correction"
         ```python
         def reussies(notes: list[int]) -> list[int]:
             """Renvoie les notes supérieures ou égales à 10, dans leur ordre d'origine."""

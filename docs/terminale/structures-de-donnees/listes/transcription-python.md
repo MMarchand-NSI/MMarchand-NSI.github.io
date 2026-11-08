@@ -129,7 +129,7 @@ Comme pour les piles et les files, une fois la structure en place on ne touche *
         ```
 
     <div markdown="block" style="display: none">
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```python
         # structures/lineaires/liste.py
 

@@ -42,7 +42,7 @@ for c in {{m:'abc'|'nsi'|'rat'}}:
     2. Avec `mot = "python"` : que valent `mot[0]`, `mot[-1]` et `len(mot)` ? Quel est le plus grand indice valide ?
     3. La fonction `double(n)` renvoie le double de `n`. Écris l'`assert` qui vérifie que `double(3)` vaut `6`. Que se passe-t-il s'il est faux ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. `13`. Le membre de droite est **calculé d'abord** (`10 + 3`), puis rangé dans `acc`. C'est ce mécanisme, répété, qui va faire toute la page d'aujourd'hui.
         2. `"p"`, `"n"` et `6`. Le plus grand indice valide est `5`, soit `len(mot) - 1` : écrire `mot[6]` lève une `IndexError`.
         3. `assert double(3) == 6`. S'il est vrai, rien ne se passe ; s'il est faux, Python lève une `AssertionError` et arrête le programme.
@@ -193,7 +193,7 @@ Avant d'écrire une boucle, entraîne-toi à **lire** celles des autres et à **
     1. Prédis l'affichage.
     2. **Modifie une seule ligne** pour que le mot s'affiche à l'envers.
 
-    ??? warning "Réponse"
+    ??? warning "Correction"
         1. `python` : chaque lettre est ajoutée **derrière** les précédentes, donc on obtient une copie du mot.
         2. Remplacer `acc = acc + lettre` par `acc = lettre + acc` : chaque lettre se place alors **devant** les précédentes, et on obtient `nohtyp`.
 
@@ -207,7 +207,7 @@ Avant d'écrire une boucle, entraîne-toi à **lire** celles des autres et à **
 !!! question "1 - Afficher un par un"
     Avec `mot = "bonjour"`, affiche les caractères de `mot` un par un, un par ligne.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         mot = "bonjour"
         for car in mot:
@@ -221,7 +221,7 @@ Avant d'écrire une boucle, entraîne-toi à **lire** celles des autres et à **
     ??? tip "Indice léger"
         C'est l'exemple « doubler » du cours, à un détail près. Qu'est-ce qui change, et qu'est-ce qui ne change pas ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         mot = "chat"
         acc = ""
@@ -236,7 +236,7 @@ Avant d'écrire une boucle, entraîne-toi à **lire** celles des autres et à **
     ??? tip "Indice léger"
         Dans `acc`, où doit aller chaque nouveau caractère : **avant** ou **après** ceux qui y sont déjà ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         mot = "python"
         acc = ""
@@ -254,7 +254,7 @@ Avant d'écrire une boucle, entraîne-toi à **lire** celles des autres et à **
     ??? tip "Indice léger"
         Cette fois, l'accumulateur n'est pas une chaîne mais un **entier** : à chaque caractère, il augmente de `1`.
 
-    ??? success "Solution"
+    ??? success "Correction"
         1. **Zéro** : tant qu'on n'a parcouru aucun caractère, on n'en a compté aucun. C'est pour cela que le compteur part de `0`.
         2. ```python
            mot = "anticonstitutionnellement"
@@ -288,7 +288,7 @@ Souvent, on n'accumule que les éléments qui **remplissent une condition** : on
     print(n)
     ```
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Il affiche `4`. Il **compte combien de fois le chiffre 6 apparaît** dans la chaîne : si `x` note une série de lancers de dé, il dit combien de fois le 6 est sorti.
 
         Les noms `x`, `n` et `c` ne t'aidaient pas : il fallait lire le code. Avec de bons noms, `lancers`, `nb_six` et `de`, la phrase se serait presque écrite toute seule. C'est à cela que sert un nom.
@@ -302,12 +302,12 @@ Souvent, on n'accumule que les éléments qui **remplissent une condition** : on
     ??? tip "Indice plus précis"
         Un accumulateur `acc = ""` avant, un parcours `for car in phrase`, et **dans** la boucle un `if car != " "` avant d'ajouter.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? note "Avant d'ouvrir la correction"
         Écris une phrase sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui bloquait dans **ton** code ?
 
         Une phrase suffit, et elle doit parler de ton code, pas du cours. C'est ce geste qui fait la différence entre finir l'exercice et savoir le refaire seul la prochaine fois.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         phrase = "le petit chat"
         acc = ""
@@ -326,10 +326,10 @@ Souvent, on n'accumule que les éléments qui **remplissent une condition** : on
     ??? tip "Indice plus précis"
         Dans la boucle, un `if car == "o"` qui ajoute `"0"`, et un `else` qui ajoute `car` tel quel.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? note "Avant d'ouvrir la correction"
         Écris une phrase sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui bloquait dans **ton** code ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         phrase = "bonjour le monde"
         acc = ""
@@ -399,7 +399,7 @@ Souvent, on n'accumule que les éléments qui **remplissent une condition** : on
     ??? tip "Indice plus précis"
         On l'initialise avec `txt[0]`, le seul candidat dont on soit sûr qu'il appartient au texte. C'est d'ailleurs à cela que sert l'`assert` : sans lui, `txt[0]` planterait sur une chaîne vide.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def plus_petite_lettre(txt: str) -> str:
             """Renvoie la plus petite lettre de txt, qui n'est pas vide."""
@@ -456,7 +456,7 @@ Souvent, on n'accumule que les éléments qui **remplissent une condition** : on
         ...
     ```
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         ```python
         def tripler(txt: str) -> str:
             """Renvoie txt où chaque caractère est répété trois fois."""
@@ -564,10 +564,10 @@ Souvent, on n'accumule que les éléments qui **remplissent une condition** : on
     ??? tip "Indice plus précis"
         Le rang décalé vaut `(ord(car) - ord("a") + n) % 26`, et la lettre correspondante s'obtient avec `chr(... + ord("a"))`. `cesar` est une accumulation dans une chaîne avec un branchement conditionnel : si `car in ALPHABET`, on ajoute `decaler(car, n)`, sinon on ajoute `car`. C'est l'exercice « Remplacer un caractère », avec une fonction à la place du `"0"`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? note "Avant d'ouvrir la correction"
         Écris une phrase sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui bloquait dans **ton** code ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         **1.** `"cheuh"`.
 
         **2. et 3.**
@@ -624,7 +624,7 @@ Souvent, on n'accumule que les éléments qui **remplissent une condition** : on
         ...
     ```
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def rot13(txt: str) -> str:
             """Renvoie txt chiffré par César avec un décalage de 13."""
@@ -656,7 +656,7 @@ Souvent, on n'accumule que les éléments qui **remplissent une condition** : on
     ??? tip "Indice léger"
         Un mot est un palindrome quand il est **égal** à son renversement.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def est_palindrome(mot: str) -> bool:
             """Renvoie True si mot se lit de la même façon dans les deux sens."""
@@ -689,7 +689,7 @@ Souvent, on n'accumule que les éléments qui **remplissent une condition** : on
     ??? tip "Indice léger"
         C'est « Remplacer un caractère », mais avec **quatre** cas au lieu de deux : `if`, puis des `elif`.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def complementaire(brin: str) -> str:
             """Renvoie le brin complémentaire de brin.
@@ -730,7 +730,7 @@ Souvent, on n'accumule que les éléments qui **remplissent une condition** : on
         ...
     ```
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def leet(txt: str) -> str:
             """Renvoie txt où a, e, i et o sont remplacés par 4, 3, 1 et 0."""
@@ -772,7 +772,7 @@ Souvent, on n'accumule que les éléments qui **remplissent une condition** : on
     ??? tip "Indice léger"
         Quand le caractère est une voyelle, on n'ajoute pas un morceau à `acc`, on en ajoute **deux**.
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def javanais(mot: str) -> str:
             """Renvoie mot où "av" est inséré devant chaque voyelle."""
@@ -823,10 +823,10 @@ Souvent, on n'accumule que les éléments qui **remplissent une condition** : on
     ??? tip "Indice plus précis"
         `trouve = False` avant la boucle ; dans la boucle, `if car.isupper(): trouve = True` ; on renvoie `trouve` après. `est_robuste` n'a pas de boucle : elle combine trois conditions avec `and`.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? note "Avant d'ouvrir la correction"
         Écris une phrase sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui bloquait dans **ton** code ?
 
-    ??? success "Solution"
+    ??? success "Correction"
         ```python
         def contient_majuscule(mdp: str) -> bool:
             """Renvoie True si mdp contient au moins une majuscule."""

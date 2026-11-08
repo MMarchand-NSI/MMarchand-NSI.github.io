@@ -57,7 +57,7 @@ n
     2. On écrit `b = carre(5)`. Explique en une phrase ce qui remplace l'appel `carre(5)` dans cette ligne.
     3. Que renvoie une fonction qui n'a aucune instruction `return` ?
 
-    ??? success "Corrigé"
+    ??? success "Correction"
         1. `return` **rend une valeur** au reste du programme, qui peut la ranger et la réutiliser. `print` ne fait que l'**afficher** : la valeur est perdue pour le programme.
         2. La **valeur renvoyée** remplace l'appel. La ligne devient `b = 25` : un appel de fonction se comporte comme la valeur qu'il renvoie.
         3. Elle renvoie `None`. Une fonction renvoie **toujours** quelque chose ; sans `return`, c'est `None`. D'où le piège `return` contre `print`.
@@ -275,7 +275,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
 
     Puis exécute pour vérifier.
 
-??? success "Solution"
+??? success "Correction"
     ```
     Dans tester, y = 50
     En dehors, y = 100
@@ -296,7 +296,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
     print(total)
     ```
 
-??? success "Solution"
+??? success "Correction"
     **Erreur :** `UnboundLocalError: local variable 'total' referenced before assignment`
 
     **Pourquoi :** Python voit `total = ...` et décide que `total` est locale. Quand il lit `total + valeur`, il cherche une variable locale qui n'existe pas encore.
@@ -333,7 +333,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
 
     Teste avec un stock initial de 10, 2 achats, puis une livraison de 5.
 
-??? success "Solution"
+??? success "Correction"
     ```python
     def acheter(stock: int) -> int:
         """Diminue le stock de 1."""
@@ -398,7 +398,7 @@ Ici, la fonction crée une **nouvelle variable locale** `compteur` qui masque la
 
     **3. Écrire.** Depuis zéro : la signature typée, la docstring, une fonction `test_initiales` avec **deux `assert`**, puis le code de `initiales(prenom, nom)`, qui renvoie les initiales suivies chacune d'un point : `initiales("Ada", "Lovelace")` vaut `"A.L."`. Le prénom et le nom ne sont jamais vides.
 
-    ??? success "Réponses"
+    ??? success "Correction"
         **1.** `5 5` puis `8`. Le paramètre `n` est **local** : le modifier dans la fonction ne touche pas `x`. Et un appel vaut la valeur qu'il renvoie, donc `double(double(2))` vaut `double(4)`, soit `8`.
 
         **2.** La fonction **affiche** au lieu de **renvoyer**. Elle rend donc `None`, et `m * 2` lève une `TypeError`. C'est le piège `return` contre `print`. Il faut remplacer `print(...)` par `return (a + b + c) / 3`.

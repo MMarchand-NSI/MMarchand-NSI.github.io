@@ -212,7 +212,7 @@ Le template Jinja :
 
     **Indice** : Regardez dans `templates/liste_acteurs.html.j2`
 
-??? success "Solution"
+??? warning "Correction"
     Dans `templates/liste_acteurs.html.j2`, ligne 8 :
     ```html
     <h1 class="title is-2">Acteurs et actrices IMDB</h1>
@@ -230,7 +230,7 @@ Le template Jinja :
 
     **Indice** : C'est un calcul Jinja `{{ acteur.death_year - acteur.birth_year }}`
 
-??? success "Solution"
+??? warning "Correction"
     Dans `templates/liste_acteurs.html.j2` :
 
     1. Ajoutez l'en-tete de colonne :
@@ -259,7 +259,7 @@ Le template Jinja :
     3. Quelle(s) fonction(s) du service sont appelees ?
     4. Quel template genere le HTML ?
 
-??? success "Réponse"
+??? success "Correction"
     1. `app.py` recoit la requete, reconnait le prefixe `/acteurs` et la transmet au blueprint
     2. `detail_acteur(nconst)` dans `acteurs_controler.py`
     3. `get_acteur()`, `get_films_acteur()`, `get_professions_acteur()` dans `acteurs_db.py`
@@ -274,7 +274,7 @@ Le template Jinja :
 
     **Indice** : Cherchez la variable `limit` dans le controleur.
 
-??? success "Solution"
+??? warning "Correction"
     Dans `controlers/acteurs_controler.py`, fonction `liste_acteurs()` :
     ```python
     limit = 20  # etait 50
@@ -289,7 +289,7 @@ Le template Jinja :
 
     **Attention** : Cet exercice necessite de modifier plusieurs fichiers !
 
-??? success "Solution"
+??? warning "Correction"
 
     1. **Modifier le service** (`services/acteurs_db.py`) - ajouter une fonction :
     ```python

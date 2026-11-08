@@ -20,7 +20,7 @@ On distribue un paquet comme autour d'une table : une carte à chaque joueur, ch
     - quand on distribue à 3 joueurs,
     - quand on distribue à 4 joueurs.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         - 3 joueurs : `"ADGJ"`, `"BEH"`, `"CFI"`.
         - 4 joueurs : `"AEI"`, `"BFJ"`, `"CG"`, `"DH"`.
 
@@ -39,7 +39,7 @@ On distribue un paquet comme autour d'une table : une carte à chaque joueur, ch
     ??? tip "Indice"
         Regarde la ligne « joueur » : tous les combien se répète-t-elle ? Puis la ligne « place » : tous les combien augmente-t-elle de 1 ? Fais le même tableau à 4 joueurs et compare.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         | carte `i` | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 |
         |---|---|---|---|---|---|---|---|---|---|---|
         | joueur | 0 | 1 | 2 | 0 | 1 | 2 | 0 | 1 | 2 | 0 |
@@ -80,10 +80,10 @@ On distribue un paquet comme autour d'une table : une carte à chaque joueur, ch
     ??? tip "Indice plus précis"
         `[""] * n` crée une liste de `n` chaînes vides. Parcours ensuite les indices de `texte` : le caractère d'indice `i` s'ajoute au bout de la main du joueur qui le reçoit. L'exercice « Qui reçoit quelle carte ? » te dit lequel.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def distribuer(texte: str, n: int) -> list[str]:
             """Distribue les caractères de texte entre n paquets, à chacun son tour.
@@ -109,7 +109,7 @@ La partie est finie, on ramasse. Pour reconstituer le paquet d'origine, on repre
     - la carte numéro 7 du paquet : chez quel joueur est-elle, à quelle place, et quelle lettre est-ce ?
     - même question pour la carte numéro 9.
 
-    ??? success "Réponse"
+    ??? success "Correction"
         - Carte 7 : joueur `7 % 3 = 1`, place `7 // 3 = 2`. C'est `"BEH"` à la place 2, donc `"H"`.
         - Carte 9 : joueur `9 % 3 = 0`, place `9 // 3 = 3`. C'est `"ADGJ"` à la place 3, donc `"J"`.
 
@@ -144,10 +144,10 @@ La partie est finie, on ramasse. Pour reconstituer le paquet d'origine, on repre
     ??? tip "Indice plus précis"
         Calcule d'abord le nombre total de cartes. Puis, pour `i` dans `range(0, total)`, la carte `i` est `paquets[i % n][i // n]`, où `n` est le nombre de paquets.
 
-    ??? question "Avant d'ouvrir la solution"
+    ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
-    ??? success "Solution"
+    ??? warning "Correction"
         ```python
         def rassembler(paquets: list[str]) -> str:
             """Réciproque de distribuer : reconstitue le texte que distribuer
@@ -176,7 +176,7 @@ La partie est finie, on ramasse. Pour reconstituer le paquet d'origine, on repre
     print(rassembler(["AB", "CDE"]))
     ```
 
-    ??? success "Réponse"
+    ??? success "Correction"
         Une erreur `IndexError`. Il y a 5 cartes en tout, et pour `i = 4` la fonction cherche `paquets[0][2]`, alors que `"AB"` n'a que deux cartes.
 
         Dans une distribution, le joueur 0 est servi en premier : sa main n'est **jamais plus courte** que celle des autres. Ici elle l'est, donc ces mains ne proviennent pas de `distribuer`, et la précondition de `rassembler` n'est pas respectée.

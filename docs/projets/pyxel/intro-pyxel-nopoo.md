@@ -28,7 +28,7 @@ L'objectif est de créer un pixel capable de se dessiner et de se déplacer en f
     3. Quel vecteur faut-il pour qu'il monte tout droit ?
     4. Le jeu tourne à 10 frames par seconde avec le vecteur $(1, 0)$. De combien de pixels avance-t-il en une seconde ?
 
-    ??? success "Réponses"
+    ??? success "Correction"
         1. $(15 + 3 \times 2,\ 15 + 3 \times (-1)) = (21, 12)$
         2. Vers la droite et vers le **haut** : $y$ diminue.
         3. $(0, -1)$
