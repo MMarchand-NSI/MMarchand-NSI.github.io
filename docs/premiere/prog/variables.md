@@ -870,17 +870,22 @@ Si on tape `7`, ce programme affiche `8`.
 ## Exercices
 
 !!! info "Comment faire ces exercices"
-    Tout se passe dans **un seul fichier**, `python/exos_variables.py`. Tu écris les exercices **les uns à la suite des autres**, et chacun commence par une ligne qui le repère :
+    Tout se passe dans **un seul fichier**, `python/exos_variables.py`, et chaque exercice commence par une ligne qui le repère :
 
     ```python
     print("Exercice 1")
     ```
 
-    Quand tu lances le fichier, les exercices se déroulent dans l'ordre et te demandent tes nombres l'un après l'autre. Les lignes `Exercice 1`, `Exercice 2`... te permettent de retrouver quel résultat appartient à quel exercice.
+    **Écris chaque nouvel exercice tout en haut du fichier**, au-dessus des précédents. Celui sur lequel tu travailles s'exécute alors en premier, et tu n'as pas à retaper les saisies de tous les autres avant d'arriver à lui. Ton fichier se lit donc à l'envers, du plus récent au plus ancien, et les lignes `Exercice 1`, `Exercice 2`... te disent quel résultat appartient à quel exercice.
 
     Chaque énoncé donne un exemple de saisie et le résultat attendu : c'est avec lui que tu vérifies ton programme.
 
     Les exercices **1 à 8** sont à faire, les **9 à 12** sont de l'entraînement, et les **13 et 14** sont des bonus.
+
+!!! tip "Arrêter un programme en cours : `Ctrl+C`"
+    Quand tu as vu le résultat qui t'intéresse, inutile de répondre aux saisies des exercices suivants. Clique dans le terminal et appuie sur `Ctrl+C`.
+
+    Cette combinaison envoie au programme un **signal** qui lui demande de s'arrêter immédiatement, où qu'il en soit. Python affiche alors quelques lignes qui se terminent par `KeyboardInterrupt` : **c'est normal**, cela veut seulement dire « arrêté au clavier ». Tu n'as rien cassé.
 
 !!! question "Exercice 1 (à faire)"
     Demande un nombre, puis affiche son double.
