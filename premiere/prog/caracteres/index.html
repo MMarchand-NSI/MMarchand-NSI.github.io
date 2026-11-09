@@ -11,7 +11,7 @@
         <link rel="canonical" href="https://mmarchand-nsi.github.io/premiere/prog/caracteres/">
       
       
-        <link rel="prev" href="../entiers/">
+        <link rel="prev" href="../variables/">
       
       
         <link rel="next" href="../fonctions/">
@@ -1501,35 +1501,7 @@
   <span class="md-ellipsis">
     
   
-    Les variables
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../entiers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Le type entier
+    Les variables et le type entier
   
 
     
@@ -1608,6 +1580,34 @@
       Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#dans-la-memoire-il-ny-a-que-des-nombres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dans la mémoire, il n'y a que des nombres
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dans la mémoire, il n&#39;y a que des nombres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qui-a-decide-que-n-valait-78" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qui a décidé que N valait 78 ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
       
         <li class="md-nav__item">
   <a href="#operations-possibles" class="md-nav__link">
@@ -9152,6 +9152,34 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#dans-la-memoire-il-ny-a-que-des-nombres" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dans la mémoire, il n'y a que des nombres
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Dans la mémoire, il n&#39;y a que des nombres">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#qui-a-decide-que-n-valait-78" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Qui a décidé que N valait 78 ?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#operations-possibles" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -9328,8 +9356,8 @@
 
 <h1 id="les-chaines-de-caractere">Les chaînes de caractère</h1>
 <div class="admonition question">
-<p class="admonition-title">Prédire la dernière ligne</p>
-<p>Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
+<p class="admonition-title">Prédire la valeur</p>
+<p>Écris la valeur de l'expression demandée comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris plutôt ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
 </div>
 <script type="text/x-silent-teacher" data-titre="Les chaînes de caractères">
 s = {{m:'chat'|'loup'|'ours'}}
@@ -9374,7 +9402,7 @@ s
 <li>Que vaut <code>type(3.0)</code> ? Et <code>type(3)</code> ?</li>
 </ol>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <ol>
 <li>La première ligne <strong>écrase</strong> l'ancienne valeur de <code>a</code>, qui est perdue. Il faut la mettre de côté : <code>temp = a</code>, puis <code>a = b</code>, puis <code>b = temp</code>.</li>
 <li><code>17 // 5</code> vaut <code>3</code> (quotient entier) et <code>17 % 5</code> vaut <code>2</code> (reste). On a <span class="arithmatex">\(5 \\times 3 + 2 = 17\)</span>.</li>
@@ -9399,9 +9427,129 @@ Cette instruction affecte l'information "Bonjour" qui est une chaine de caractè
 </code></pre></div>
 Cette instruction affecte le contenu de la variable <code>Bonjour</code> à la variable a.</p>
 </div>
-<div class="admonition info">
-<p class="admonition-title">Comment un texte est-il stocké en mémoire ?</p>
-<p>La représentation d'un texte en machine (codes ASCII, Unicode, encodage UTF-8) est traitée dans le chapitre <a href="../../Num%C3%A9ration/texte/">Représentation de l'information &gt; Texte</a>. Cette page-ci se concentre sur la <strong>manipulation</strong> des chaînes en Python.</p>
+<h2 id="dans-la-memoire-il-ny-a-que-des-nombres">Dans la mémoire, il n'y a que des nombres</h2>
+<p>Reprends le simulateur <strong>LMC</strong> du chapitre sur l'architecture. Cette machine n'a que des cases, et chaque case contient un nombre.</p>
+<div class="admonition question">
+<p class="admonition-title">Programme 1 : prédire, puis vérifier</p>
+<p>Recopie ce programme dans un fichier <code>nsi.lmc</code>. Sur ton cahier, écris :</p>
+<ul>
+<li>les nombres contenus dans les cases n°7, n°8 et n°9,</li>
+<li>ce que le programme affiche, dans l'ordre.</li>
+</ul>
+<p>Puis assemble, charge, et compare : la <strong>mémoire</strong> répond à la première question, <strong>Run</strong> à la seconde.</p>
+<p><strong>N'ouvre pas le simulateur tant que tu n'as pas écrit tes réponses.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>        LDA 7
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>        OUT
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>        LDA 8
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>        OUT
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>        LDA 9
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>        OUT
+<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>        HLT
+<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>
+<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a>mot:    DAT &quot;NSI&quot;
+</code></pre></div>
+<details class="success">
+<summary>Correction</summary>
+<p>Les cases n°7, n°8 et n°9 contiennent <strong>78</strong>, <strong>83</strong> et <strong>73</strong>. Le programme affiche <code>78 83 73</code>.</p>
+<p><code>DAT "NSI"</code> n'a mis dans la mémoire que trois nombres, un par lettre.</p>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Programme 2 : une seule ligne change</p>
+<p>Le même programme, avec la ligne <code>mot:</code> écrite autrement. Sur ton cahier, écris :</p>
+<ul>
+<li>les nombres contenus dans les cases n°7, n°8 et n°9,</li>
+<li>ce que le programme affiche.</li>
+</ul>
+<p><strong>N'ouvre pas le simulateur tant que tu n'as pas écrit tes réponses.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>        LDA 7
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>        OUT
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        LDA 8
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>        OUT
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>        LDA 9
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>        OUT
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        HLT
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>mot:    DAT 78, 83, 73
+</code></pre></div>
+<details class="success">
+<summary>Correction</summary>
+<p>La même chose : les cases n°7, n°8 et n°9 contiennent <strong>78</strong>, <strong>83</strong> et <strong>73</strong>, et le programme affiche <code>78 83 73</code>.</p>
+<p><code>DAT "NSI"</code> et <code>DAT 78, 83, 73</code> rangent les mêmes nombres dans les mêmes cases. Pour la machine, les deux lignes ne se distinguent pas : « ranger du texte » n'existe pas chez elle.</p>
+<p>Une seule chose les sépare, et elle ne se voit pas dans ces cases : <code>DAT "NSI"</code> réserve une <strong>quatrième</strong> case, la n°10, qui contient 0 et marque la fin du mot. C'est elle qui permet à un programme de savoir où le mot s'arrête sans qu'on lui donne sa longueur.</p>
+</details>
+</div>
+<div class="admonition abstract">
+<p class="admonition-title">Une chaîne de caractères est une suite de nombres</p>
+<p><code>"NSI"</code> n'est pas rangé en mémoire sous forme de lettres : c'est <strong>78, 83, 73</strong>, trois nombres dans trois cases voisines. En Python, c'est la même chose, à ceci près que c'est Python qui retient la longueur du mot, et c'est elle que <code>len</code> te rend.</p>
+<p>Et les lettres que tu vois à l'écran ? C'est un <strong>dessin</strong>. Il n'y a rien dans la mémoire qui ressemble à un <code>N</code> : il y a 78, et un programme d'affichage a décidé de tracer la forme qu'on appelle <code>N</code> quand il rencontre 78. Change la police de caractères, le dessin change. Le 78, lui, ne change pas. Le simulateur LMC, qui n'a pas de police, affiche d'ailleurs <code>78</code>.</p>
+</div>
+<h3 id="qui-a-decide-que-n-valait-78">Qui a décidé que <code>N</code> valait 78 ?</h3>
+<p>Le simulateur aurait pu choisir 1 pour <code>A</code>, 2 pour <code>B</code>, ou n'importe quelle autre correspondance. Associer un nombre à un caractère est un <strong>code</strong>, exactement comme la table que tu avais fabriquée à la première séance de l'année : toutes les correspondances se valent, aucune n'est plus juste qu'une autre.</p>
+<p>Mais si chaque machine choisissait la sienne, un texte écrit sur l'une serait illisible sur l'autre. Il a donc fallu se mettre d'accord une fois pour toutes, et un tel accord s'appelle une <strong>norme</strong>. La plus ancienne est <strong>ASCII</strong>, qui associe un nombre de 0 à 127 à chaque caractère courant.</p>
+<table>
+<thead>
+<tr>
+<th>Caractères</th>
+<th>Codes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>'0'</code> à <code>'9'</code></td>
+<td>48 à 57</td>
+</tr>
+<tr>
+<td><code>'A'</code> à <code>'Z'</code></td>
+<td>65 à 90</td>
+</tr>
+<tr>
+<td><code>'a'</code> à <code>'z'</code></td>
+<td>97 à 122</td>
+</tr>
+<tr>
+<td>l'espace</td>
+<td>32</td>
+</tr>
+</tbody>
+</table>
+<p>Dans chaque intervalle, les caractères se suivent dans l'ordre. Un code se retrouve donc par le calcul, sans table complète : <code>N</code> est la 14e lettre de l'alphabet, son code est <span class="arithmatex">\(65 + 13 = 78\)</span>. C'est bien ce que le simulateur a affiché.</p>
+<div class="admonition danger">
+<p class="admonition-title">Le caractère <code>'0'</code> n'est pas le nombre 0</p>
+<p>Le code du caractère <code>'0'</code> est <strong>48</strong>, pas 0. De même, <code>'1'</code> vaut 49 et non 1. <code>"0"</code> et <code>0</code> sont deux choses différentes, et une machine ne les confond jamais.</p>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Majuscules et minuscules sont des caractères différents</p>
+<p><code>'A'</code> vaut 65 et <code>'a'</code> vaut 97. Ce ne sont pas deux façons d'écrire la même chose : ce sont deux codes, donc deux caractères.</p>
+</div>
+<p>En Python, deux fonctions font le va-et-vient avec cette table :</p>
+<ul>
+<li><code>ord(c)</code> donne le <strong>code</strong> du caractère <code>c</code>. <code>ord("A")</code> vaut 65.</li>
+<li><code>chr(n)</code> donne le <strong>caractère</strong> de code <code>n</code>. <code>chr(65)</code> vaut <code>'A'</code>.</li>
+</ul>
+<div class="admonition question">
+<p class="admonition-title">Les mêmes nombres, en Python</p>
+<p>Le simulateur a affiché <code>78 83 73</code>. Sur ton cahier, écris les trois instructions Python qui donnent ces trois nombres à partir des lettres <code>N</code>, <code>S</code> et <code>I</code>, puis celle qui redonne la lettre <code>S</code> à partir de 83.</p>
+<details class="success">
+<summary>Correction</summary>
+<p><code>ord("N")</code> vaut 78, <code>ord("S")</code> vaut 83, <code>ord("I")</code> vaut 73. Et <code>chr(83)</code> vaut <code>'S'</code>.</p>
+</details>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Jusqu'où cette machine sait-elle aller ?</p>
+<p>Dans le programme 1, remplace la ligne <code>mot:</code> par <code>DAT "été"</code>. Sur ton cahier, écris :</p>
+<ul>
+<li>combien de cases le mot va occuper,</li>
+<li>si les trois nombres affichés seront tous différents.</li>
+</ul>
+<p><strong>N'ouvre pas le simulateur tant que tu n'as pas écrit tes réponses.</strong></p>
+<p>Assemble et lance pour vérifier, puis essaie <code>DAT "10€"</code> et note ce que répond le simulateur.</p>
+<details class="success">
+<summary>Correction</summary>
+<p>Le mot occupe <strong>quatre</strong> cases, comme <code>"NSI"</code> : trois pour les lettres, une pour le 0 de fin. Et le programme affiche <strong>233, 116, 233</strong> : le premier et le troisième nombres sont identiques, puisque c'est deux fois la même lettre. Le <code>é</code> a donc un code lui aussi, 233. Il est au-delà de 127 : ce n'est plus de l'ASCII, mais une norme qui l'étend à 256 codes, celle que le simulateur nomme dans son message ci-dessous.</p>
+<p><code>"10€"</code> est refusé, et le simulateur dit pourquoi : <code>« € » n'existe pas en ISO-8859-1 : seuls les caractères de code 0 à 255 sont représentables</code>. Cette machine ne connaît que 256 codes, et le <code>€</code> n'en fait pas partie.</p>
+<p>C'est exactement ce qui a rendu Unicode nécessaire. Les codes ASCII, Unicode et l'encodage UTF-8 sont traités dans le chapitre <a href="../../Num%C3%A9ration/texte/">Représentation de l'information &gt; Texte</a>. Cette page-ci se concentre sur la <strong>manipulation</strong> des chaînes en Python.</p>
+</details>
 </div>
 <h2 id="operations-possibles">Opérations possibles</h2>
 <table>
@@ -9505,7 +9653,7 @@ Cette instruction affecte le contenu de la variable <code>Bonjour</code> à la v
 </table>
 <p>Note: La comparaison lexicographique est celle de l'ordre des mots dans un dictionnaire.</p>
 <h2 id="acces-aux-caracteres">Accès aux caractères</h2>
-<p>En Python, une chaîne de caractères est une suite ordonnée de lettres, comme un mot ou une phrase. Chaque lettre de la chaîne est numérotée selon sa position : la première lettre porte le numéro 0, la deuxième le numéro 1, et ainsi de suite. Par exemple, dans la chaîne "chat", la lettre 'c' est à la position 0, 'h' à la position 1, 'a' à la position 2, et 't' à la position 3. Pour accéder à une lettre, on écrit le nom de la chaîne suivi de crochets avec le numéro entre les crochets. Exemple : <code>"chat"[1]</code> renvoie 'h'.</p>
+<p>En Python, une chaîne de caractères est une suite ordonnée de caractères, c'est-à-dire, comme tu viens de le voir sur le simulateur, une suite de nombres. Chaque lettre de la chaîne est numérotée selon sa position : la première lettre porte le numéro 0, la deuxième le numéro 1, et ainsi de suite. Par exemple, dans la chaîne "chat", la lettre 'c' est à la position 0, 'h' à la position 1, 'a' à la position 2, et 't' à la position 3. Pour accéder à une lettre, on écrit le nom de la chaîne suivi de crochets avec le numéro entre les crochets. Exemple : <code>"chat"[1]</code> renvoie 'h'.</p>
 <table>
 <thead>
 <tr>
@@ -9526,6 +9674,7 @@ Cette instruction affecte le contenu de la variable <code>Bonjour</code> à la v
 </tr>
 </tbody>
 </table>
+<p>Les indices 0, 1 et 2 de <code>"NSI"</code>, ce sont les cases n°7, n°8 et n°9 du simulateur. Numéroter à partir de 0, c'est compter les cases depuis le début du mot.</p>
 <div class="admonition danger">
 <p class="admonition-title">Attention au 0</p>
 <p>Il faut faire attention, comme d'habitude, on commence toujours à tout numéroter à partir de 0.</p>
@@ -9580,31 +9729,31 @@ Cette instruction affecte le contenu de la variable <code>Bonjour</code> à la v
 </div>
 <h2 id="immutabilite">Immutabilité</h2>
 <p>Une chaîne est <strong>immuable</strong> : une fois créée, on ne peut pas en changer un caractère. Toute opération qui « modifie » une chaîne renvoie en réalité une <strong>nouvelle</strong> chaîne.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;python&quot;</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;P&quot;</span>        <span class="c1"># TypeError : on ne peut pas modifier un caractère</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;P&quot;</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>   <span class="c1"># on fabrique une nouvelle chaîne : &quot;Python&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;python&quot;</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">s</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;P&quot;</span>        <span class="c1"># TypeError : on ne peut pas modifier un caractère</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;P&quot;</span> <span class="o">+</span> <span class="n">s</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>   <span class="c1"># on fabrique une nouvelle chaîne : &quot;Python&quot;</span>
 </code></pre></div>
 <h2 id="chaines-sur-plusieurs-lignes">Chaînes sur plusieurs lignes</h2>
 <p>Avec des triples guillemets :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">texte</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Ligne 1</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="s2">Ligne 2&quot;&quot;&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">texte</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;Ligne 1</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="s2">Ligne 2&quot;&quot;&quot;</span>
 </code></pre></div>
 <h2 id="les-f-strings-inserer-des-valeurs">Les f-strings : insérer des valeurs</h2>
 <p>Pour construire une chaîne à partir de variables, on préfixe la chaîne par <code>f</code> et on met les expressions entre accolades :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">nom</span> <span class="o">=</span> <span class="s2">&quot;Alice&quot;</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">age</span> <span class="o">=</span> <span class="mi">25</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Je m&#39;appelle </span><span class="si">{</span><span class="n">nom</span><span class="si">}</span><span class="s2"> et j&#39;ai </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2"> ans.&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">nom</span> <span class="o">=</span> <span class="s2">&quot;Alice&quot;</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">age</span> <span class="o">=</span> <span class="mi">25</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Je m&#39;appelle </span><span class="si">{</span><span class="n">nom</span><span class="si">}</span><span class="s2"> et j&#39;ai </span><span class="si">{</span><span class="n">age</span><span class="si">}</span><span class="s2"> ans.&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="quelques-methodes-utiles">Quelques méthodes utiles</h2>
 <p>À ne pas apprendre par cœur : on les retrouve au besoin.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;  Python  &quot;</span>
-<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>               <span class="c1"># &#39;  python  &#39;</span>
-<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">s</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>               <span class="c1"># &#39;  PYTHON  &#39;</span>
-<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>               <span class="c1"># &#39;Python&#39; (enlève les espaces autour)</span>
-<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Py&quot;</span><span class="p">,</span> <span class="s2">&quot;My&quot;</span><span class="p">)</span>   <span class="c1"># &#39;  Mython  &#39;</span>
-<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>
-<a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a><span class="s2">&quot;123&quot;</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span>         <span class="c1"># True</span>
-<a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="s2">&quot;abc&quot;</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span>         <span class="c1"># True</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;  Python  &quot;</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>               <span class="c1"># &#39;  python  &#39;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">s</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>               <span class="c1"># &#39;  PYTHON  &#39;</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>               <span class="c1"># &#39;Python&#39; (enlève les espaces autour)</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">s</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;Py&quot;</span><span class="p">,</span> <span class="s2">&quot;My&quot;</span><span class="p">)</span>   <span class="c1"># &#39;  Mython  &#39;</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>
+<a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="s2">&quot;123&quot;</span><span class="o">.</span><span class="n">isdigit</span><span class="p">()</span>         <span class="c1"># True</span>
+<a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a><span class="s2">&quot;abc&quot;</span><span class="o">.</span><span class="n">isalpha</span><span class="p">()</span>         <span class="c1"># True</span>
 </code></pre></div>
 <div class="admonition danger">
 <p class="admonition-title">Une méthode ne modifie pas la chaîne</p>
@@ -9630,7 +9779,7 @@ Cette instruction affecte le contenu de la variable <code>Bonjour</code> à la v
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2026 14:25:15 UTC">October 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 8, 2026 21:18:52 UTC">November 8, 2026</span>
   </span>
 
     

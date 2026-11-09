@@ -1499,35 +1499,7 @@
   <span class="md-ellipsis">
     
   
-    Les variables
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../entiers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Le type entier
+    Les variables et le type entier
   
 
     
@@ -9472,8 +9444,8 @@
 
 <h1 id="la-boucle-non-bornee-while">La boucle non bornée : <code>while</code></h1>
 <div class="admonition question">
-<p class="admonition-title">Prédire la dernière ligne</p>
-<p>Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
+<p class="admonition-title">Prédire la valeur</p>
+<p>Écris la valeur de l'expression demandée comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris plutôt ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
 </div>
 <script type="text/x-silent-teacher" data-titre="La boucle while">
 n = {{n:20..40}}
@@ -9524,7 +9496,7 @@ i
 <li>Une variable créée dans le corps d'une fonction existe-t-elle encore après l'appel ?</li>
 </ol>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <ol>
 <li><code>33</code>, puis <code>11</code>, puis <code>3</code>. Chaque division entière fait diminuer <code>x</code> : retiens-le, c'est ce genre de quantité qui garantit qu'une boucle s'arrête.</li>
 <li>Parce que Python <strong>s'arrête au premier test vrai</strong>. <code>15 &gt;= 10</code> est vrai, donc le premier bloc s'exécute et tous les <code>elif</code> suivants sont ignorés. Il faut tester <strong>du cas le plus exigeant au moins exigeant</strong>.</li>
@@ -9572,7 +9544,7 @@ i
 <a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">acc</span><span class="p">)</span>
 </code></pre></div>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p>Il affiche <code>nohtyp</code>, comme la version avec <code>for</code>. <code>i</code> est la <strong>position</strong> du caractère qu'on traite : il va de <code>0</code> à <code>len(mot) - 1</code>, et la boucle s'arrête quand il atteint <code>len(mot)</code>. Sans <code>i = i + 1</code>, <code>i</code> resterait à <code>0</code>, la condition resterait vraie, et la boucle ne s'arrêterait jamais.</p>
 <p>Avec <code>while i &lt;= len(mot):</code>, la boucle ferait un tour de trop : quand <code>i</code> vaut <code>6</code>, <code>mot[6]</code> n'existe pas, puisque les positions de <code>"python"</code> vont de <code>0</code> à <code>5</code>. Le programme s'arrête sur une <code>IndexError</code> avant d'avoir rien affiché. C'est pour cela qu'on écrit <code>&lt;</code> : les positions valides forment l'intervalle semi-ouvert <span class="arithmatex">\([0 ; \text{len(mot)})\)</span>.</p>
 <p>Avec le <code>for</code>, Python passait tout seul d'un caractère au suivant. Avec le <code>while</code>, <strong>c'est toi qui le fais</strong>.</p>
@@ -9586,7 +9558,7 @@ i
 <p>Même squelette que ci-dessus : <code>i = 0</code>, <code>while i &lt; len(phrase)</code>, et <code>i = i + 1</code> à la fin du corps. Le <code>if</code> porte sur <code>phrase[i]</code>.</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">phrase</span> <span class="o">=</span> <span class="s2">&quot;le petit chat&quot;</span>
 <a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">acc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
@@ -9647,7 +9619,7 @@ Attention à l'indentation : <code>i = i + 1</code> est <strong>dans</strong> la
 </tbody>
 </table>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <table>
 <thead>
 <tr>
@@ -9745,7 +9717,7 @@ Attention à l'indentation : <code>i = i + 1</code> est <strong>dans</strong> la
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </code></pre></div>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p>Il affiche <code>7</code>. Il <strong>cherche la position du premier espace</strong> : <code>i</code> avance tant qu'on n'est pas au bout <strong>et</strong> qu'on n'est pas sur un espace.</p>
 <p>Avec <code>"bonjour"</code>, il n'y a pas d'espace : la boucle s'arrête quand <code>i</code> vaut <code>7</code>, c'est-à-dire <code>len(phrase)</code>, et le programme affiche <code>7</code>. Une position égale à la longueur veut dire « pas trouvé ».</p>
 </details>
@@ -9794,10 +9766,6 @@ Attention à l'indentation : <code>i = i + 1</code> est <strong>dans</strong> la
 <a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">3</span>
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div>
-<details class="warning">
-<summary>Réponse</summary>
-<p>« Bravo » s'affiche <strong>4 fois</strong> (<code>n</code> vaut 10, 7, 4, 1 au moment du test), puis <code>n</code> passe à <code>-2</code> et la condition devient fausse. À la fin, <code>n</code> vaut <code>-2</code>.</p>
-</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Corriger une boucle infinie</p>
@@ -9806,37 +9774,15 @@ Attention à l'indentation : <code>i = i + 1</code> est <strong>dans</strong> la
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">5</span><span class="p">:</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </code></pre></div>
-<details class="warning">
-<summary>Réponse</summary>
-<p>Il manque la <strong>mise à jour</strong> : <code>i</code> ne change jamais, donc <code>i &lt; 5</code> reste vrai pour toujours. Il faut ajouter <code>i = i + 1</code> <strong>dans</strong> la boucle.</p>
-</details>
 </div>
 <h2 id="exercices">Exercices</h2>
 <div class="admonition question">
 <p class="admonition-title">1 - Saisie contrôlée</p>
 <p>Demande un nombre <strong>entre 1 et 10</strong> à l'utilisateur, en redemandant tant que la valeur saisie est hors de cet intervalle.</p>
-<details class="warning">
-<summary>Corrigé</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre entre 1 et 10 : &quot;</span><span class="p">))</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">while</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Non valide. Recommencez : &quot;</span><span class="p">))</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Merci :&quot;</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
-</code></pre></div>
-</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">2 - Somme jusqu'à un seuil</p>
 <p>En partant de 1, additionne les entiers successifs (1, 2, 3, ...) et affiche combien il en faut pour que la somme <strong>atteigne ou dépasse 100</strong>.</p>
-<details class="warning">
-<summary>Corrigé</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">somme</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="k">while</span> <span class="n">somme</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="n">somme</span> <span class="o">=</span> <span class="n">somme</span> <span class="o">+</span> <span class="n">i</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="s2">&quot;entiers, somme =&quot;</span><span class="p">,</span> <span class="n">somme</span><span class="p">)</span>
-</code></pre></div>
-</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">3 - Deviner un nombre</p>
@@ -9850,17 +9796,17 @@ Attention à l'indentation : <code>i = i + 1</code> est <strong>dans</strong> la
 <li>Sur ton cahier, déroule l'algorithme pour <code>a = 48</code> et <code>b = 36</code> : écris les valeurs de <code>a</code> et <code>b</code> avant chaque tour.</li>
 <li>Écris la fonction <code>pgcd</code>, puis lance <code>test_pgcd</code> : tous les tests doivent passer.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">pgcd</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le PGCD de a et b, par l&#39;algorithme d&#39;Euclide.</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="sd">    Précondition : a et b sont positifs ou nuls, et pas tous les deux nuls.&quot;&quot;&quot;</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="o">...</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_pgcd</span><span class="p">():</span>
-<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>    <span class="k">assert</span> <span class="n">pgcd</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span> <span class="mi">36</span><span class="p">)</span> <span class="o">==</span> <span class="mi">12</span>
-<a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>    <span class="k">assert</span> <span class="n">pgcd</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">48</span><span class="p">)</span> <span class="o">==</span> <span class="mi">12</span>
-<a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>    <span class="k">assert</span> <span class="n">pgcd</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
-<a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>    <span class="k">assert</span> <span class="n">pgcd</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span>
-<a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>    <span class="k">assert</span> <span class="n">pgcd</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">pgcd</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le PGCD de a et b, par l&#39;algorithme d&#39;Euclide.</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="sd">    Précondition : a et b sont positifs ou nuls, et pas tous les deux nuls.&quot;&quot;&quot;</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="o">...</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_pgcd</span><span class="p">():</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    <span class="k">assert</span> <span class="n">pgcd</span><span class="p">(</span><span class="mi">48</span><span class="p">,</span> <span class="mi">36</span><span class="p">)</span> <span class="o">==</span> <span class="mi">12</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    <span class="k">assert</span> <span class="n">pgcd</span><span class="p">(</span><span class="mi">36</span><span class="p">,</span> <span class="mi">48</span><span class="p">)</span> <span class="o">==</span> <span class="mi">12</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    <span class="k">assert</span> <span class="n">pgcd</span><span class="p">(</span><span class="mi">17</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="k">assert</span> <span class="n">pgcd</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">7</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    <span class="k">assert</span> <span class="n">pgcd</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="mi">10</span>
 </code></pre></div>
 <details class="tip">
 <summary>Indice léger</summary>
@@ -9869,22 +9815,6 @@ Attention à l'indentation : <code>i = i + 1</code> est <strong>dans</strong> la
 <details class="tip">
 <summary>Indice précis</summary>
 <p><code>while b != 0:</code>. Dans la boucle, il faut que <code>a</code> prenne l'ancienne valeur de <code>b</code>, et <code>b</code> l'ancienne valeur de <code>a % b</code>. Attention : si tu écris <code>a = b</code> en premier, l'ancienne valeur de <code>a</code> est perdue. Range d'abord <code>a % b</code> dans une variable <code>r</code>.</p>
-</details>
-<details class="warning">
-<summary>Corrigé</summary>
-<ol>
-<li><code>(48, 36)</code>, puis <code>(36, 12)</code>, puis <code>(12, 0)</code> : <code>b</code> est nul, le PGCD est <code>12</code>.</li>
-<li><code>python
-   def pgcd(a: int, b: int) -&gt; int:
-       """Renvoie le PGCD de a et b, par l'algorithme d'Euclide.
-       Précondition : a et b sont positifs ou nuls, et pas tous les deux nuls."""
-       while b != 0:
-           r = a % b
-           a = b
-           b = r
-       return a</code></li>
-</ol>
-<p>Le test <code>pgcd(36, 48)</code> est intéressant : au premier tour, <code>36 % 48</code> vaut <code>36</code>, et l'algorithme <strong>échange</strong> simplement <code>a</code> et <code>b</code>. Il n'y a pas besoin de savoir lequel est le plus grand.</p>
 </details>
 </div>
 <div class="admonition question">
@@ -9895,11 +9825,11 @@ Attention à l'indentation : <code>i = i + 1</code> est <strong>dans</strong> la
 <p>Écris d'abord, en français, quand la réponse est <strong>acceptable</strong>. La condition du <code>while</code> est le contraire : <code>not</code> de cette phrase.</p>
 </details>
 <details class="success">
-<summary>Corrigé</summary>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">rep</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Continuer ? (oui/non) &quot;</span><span class="p">)</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">while</span> <span class="ow">not</span> <span class="p">(</span><span class="n">rep</span> <span class="o">==</span> <span class="s2">&quot;oui&quot;</span> <span class="ow">or</span> <span class="n">rep</span> <span class="o">==</span> <span class="s2">&quot;non&quot;</span><span class="p">):</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="n">rep</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Réponds par oui ou par non : &quot;</span><span class="p">)</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Terminé&quot;</span><span class="p">)</span>
+<summary>Correction</summary>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">rep</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Continuer ? (oui/non) &quot;</span><span class="p">)</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">while</span> <span class="ow">not</span> <span class="p">(</span><span class="n">rep</span> <span class="o">==</span> <span class="s2">&quot;oui&quot;</span> <span class="ow">or</span> <span class="n">rep</span> <span class="o">==</span> <span class="s2">&quot;non&quot;</span><span class="p">):</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">rep</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Réponds par oui ou par non : &quot;</span><span class="p">)</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Terminé&quot;</span><span class="p">)</span>
 </code></pre></div>
 On peut aussi écrire <code>while rep != "oui" and rep != "non":</code>. Les deux conditions sont équivalentes : « ni l'un ni l'autre », c'est « pas l'un <strong>et</strong> pas l'autre ».</p>
 </details>
@@ -9907,32 +9837,32 @@ On peut aussi écrire <code>while rep != "oui" and rep != "non":</code>. Les deu
 <div class="admonition question">
 <p class="admonition-title">6 - Position du premier chiffre</p>
 <p>Écris <code>premier_chiffre(txt)</code>, qui renvoie la position du premier chiffre de <code>txt</code>, ou <code>len(txt)</code> s'il n'y en a pas. Rappel : <code>car.isdigit()</code> dit si <code>car</code> est un chiffre.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">premier_chiffre</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la position du premier chiffre de txt, ou len(txt) s&#39;il n&#39;y en a pas.&quot;&quot;&quot;</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="o">...</span>
-<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>
-<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_premier_chiffre</span><span class="p">():</span>
-<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    <span class="k">assert</span> <span class="n">premier_chiffre</span><span class="p">(</span><span class="s2">&quot;abc4d5&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
-<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>    <span class="o">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">premier_chiffre</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la position du premier chiffre de txt, ou len(txt) s&#39;il n&#39;y en a pas.&quot;&quot;&quot;</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="o">...</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_premier_chiffre</span><span class="p">():</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="k">assert</span> <span class="n">premier_chiffre</span><span class="p">(</span><span class="s2">&quot;abc4d5&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+<a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>    <span class="o">...</span>
 </code></pre></div>
 <details class="tip">
 <summary>Indice léger</summary>
 <p>C'est la recherche du premier espace, avec une autre condition sur le caractère. Laquelle, avec <code>not</code> ?</p>
 </details>
 <details class="success">
-<summary>Corrigé</summary>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">premier_chiffre</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la position du premier chiffre de txt, ou len(txt) s&#39;il n&#39;y en a pas.&quot;&quot;&quot;</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">txt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    <span class="k">return</span> <span class="n">i</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>
-<a id="__codelineno-16-8" name="__codelineno-16-8" href="#__codelineno-16-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_premier_chiffre</span><span class="p">():</span>
-<a id="__codelineno-16-9" name="__codelineno-16-9" href="#__codelineno-16-9"></a>    <span class="k">assert</span> <span class="n">premier_chiffre</span><span class="p">(</span><span class="s2">&quot;abc4d5&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
-<a id="__codelineno-16-10" name="__codelineno-16-10" href="#__codelineno-16-10"></a>    <span class="k">assert</span> <span class="n">premier_chiffre</span><span class="p">(</span><span class="s2">&quot;7 nains&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-<a id="__codelineno-16-11" name="__codelineno-16-11" href="#__codelineno-16-11"></a>    <span class="k">assert</span> <span class="n">premier_chiffre</span><span class="p">(</span><span class="s2">&quot;aucun&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
-<a id="__codelineno-16-12" name="__codelineno-16-12" href="#__codelineno-16-12"></a>    <span class="k">assert</span> <span class="n">premier_chiffre</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<summary>Correction</summary>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">premier_chiffre</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la position du premier chiffre de txt, ou len(txt) s&#39;il n&#39;y en a pas.&quot;&quot;&quot;</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">txt</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>        <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>    <span class="k">return</span> <span class="n">i</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_premier_chiffre</span><span class="p">():</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>    <span class="k">assert</span> <span class="n">premier_chiffre</span><span class="p">(</span><span class="s2">&quot;abc4d5&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>    <span class="k">assert</span> <span class="n">premier_chiffre</span><span class="p">(</span><span class="s2">&quot;7 nains&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>    <span class="k">assert</span> <span class="n">premier_chiffre</span><span class="p">(</span><span class="s2">&quot;aucun&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">5</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a>    <span class="k">assert</span> <span class="n">premier_chiffre</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
 </code></pre></div>
 Le test <code>"aucun"</code> vérifie le cas « pas trouvé », et le test <code>""</code> qu'on ne lit jamais <code>txt[0]</code> sur une chaîne vide : c'est l'ordre des deux conditions du <code>and</code> qui le garantit.</p>
 </details>
@@ -9951,7 +9881,7 @@ Le test <code>"aucun"</code> vérifie le cas « pas trouvé », et le test <code
 <p>Pour la question 3 : la négation d'un <code>or</code> est un <code>and</code> de négations. Que devient <code>not (code == "1234")</code> ? Et <code>not (essais == 3)</code>, sachant que <code>essais</code> ne dépasse jamais <code>3</code> ?</p>
 </details>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <ol>
 <li><code>code == "1234" or essais == 3</code></li>
 <li><code>while not (code == "1234" or essais == 3):</code></li>
@@ -9975,46 +9905,46 @@ Le test <code>"aucun"</code> vérifie le cas « pas trouvé », et le test <code
 <p class="admonition-title">À faire seul, cours fermé (15 minutes)</p>
 <p>Sans aide et sans IA. Ce n'est pas noté.</p>
 <p><strong>1. Lire.</strong> Que vaut <code>res</code> à la fin, et combien de tours la boucle fait-elle ?
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
-<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span>
-<a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="k">if</span> <span class="n">i</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>        <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">2</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 </code></pre></div></p>
 <p><strong>2. Compléter.</strong> Ce code doit compter les voyelles de <code>mot</code>. Trois lignes sont mal placées ou manquantes : corrige-le.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;anticonstitutionnellement&quot;</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mot</span><span class="p">:</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    <span class="n">compteur</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="s2">&quot;aeiouy&quot;</span><span class="p">:</span>
-<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>        <span class="n">compteur</span> <span class="o">=</span> <span class="n">compteur</span> <span class="o">+</span> <span class="mi">1</span>
-<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">compteur</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;anticonstitutionnellement&quot;</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mot</span><span class="p">:</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="n">compteur</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>    <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="s2">&quot;aeiouy&quot;</span><span class="p">:</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>        <span class="n">compteur</span> <span class="o">=</span> <span class="n">compteur</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">compteur</span><span class="p">)</span>
 </code></pre></div></p>
 <p><strong>3. Écrire.</strong> Depuis zéro, avec un <code>for</code> : <code>nb_chiffres(txt)</code>, qui renvoie le nombre de chiffres présents dans une chaîne. Rappel : <code>c.isdigit()</code> dit si le caractère <code>c</code> est un chiffre.</p>
 <details class="success">
-<summary>Réponses</summary>
+<summary>Correction</summary>
 <p><strong>1.</strong> <code>res</code> vaut <code>"024"</code> et la boucle fait <strong>trois</strong> tours (<code>i</code> vaut 0, 2, 4). Le <code>if</code> est toujours vrai ici, puisque <code>i</code> avance de 2 en 2 depuis 0 : c'est un test inutile, et le repérer fait partie de la lecture.</p>
 <p><strong>2.</strong> L'initialisation doit sortir de la boucle, l'affichage aussi :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;anticonstitutionnellement&quot;</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">compteur</span> <span class="o">=</span> <span class="mi">0</span>                    <span class="c1"># AVANT</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mot</span><span class="p">:</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a>    <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="s2">&quot;aeiouy&quot;</span><span class="p">:</span>
-<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>        <span class="n">compteur</span> <span class="o">=</span> <span class="n">compteur</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># DANS</span>
-<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">compteur</span><span class="p">)</span>                 <span class="c1"># APRÈS</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;anticonstitutionnellement&quot;</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">compteur</span> <span class="o">=</span> <span class="mi">0</span>                    <span class="c1"># AVANT</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">mot</span><span class="p">:</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>    <span class="k">if</span> <span class="n">c</span> <span class="ow">in</span> <span class="s2">&quot;aeiouy&quot;</span><span class="p">:</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>        <span class="n">compteur</span> <span class="o">=</span> <span class="n">compteur</span> <span class="o">+</span> <span class="mi">1</span> <span class="c1"># DANS</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">compteur</span><span class="p">)</span>                 <span class="c1"># APRÈS</span>
 </code></pre></div></p>
 <p><strong>3.</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">nb_chiffres</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le nombre de chiffres présents dans txt.&quot;&quot;&quot;</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    <span class="n">combien</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">txt</span><span class="p">:</span>
-<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
-<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>            <span class="n">combien</span> <span class="o">=</span> <span class="n">combien</span> <span class="o">+</span> <span class="mi">1</span>
-<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>    <span class="k">return</span> <span class="n">combien</span>
-<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>
-<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_nb_chiffres</span><span class="p">():</span>
-<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a>    <span class="k">assert</span> <span class="n">nb_chiffres</span><span class="p">(</span><span class="s2">&quot;a1b22c&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
-<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a>    <span class="k">assert</span> <span class="n">nb_chiffres</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">nb_chiffres</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le nombre de chiffres présents dans txt.&quot;&quot;&quot;</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    <span class="n">combien</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">txt</span><span class="p">:</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a>        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+<a id="__codelineno-18-6" name="__codelineno-18-6" href="#__codelineno-18-6"></a>            <span class="n">combien</span> <span class="o">=</span> <span class="n">combien</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a>    <span class="k">return</span> <span class="n">combien</span>
+<a id="__codelineno-18-8" name="__codelineno-18-8" href="#__codelineno-18-8"></a>
+<a id="__codelineno-18-9" name="__codelineno-18-9" href="#__codelineno-18-9"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_nb_chiffres</span><span class="p">():</span>
+<a id="__codelineno-18-10" name="__codelineno-18-10" href="#__codelineno-18-10"></a>    <span class="k">assert</span> <span class="n">nb_chiffres</span><span class="p">(</span><span class="s2">&quot;a1b22c&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+<a id="__codelineno-18-11" name="__codelineno-18-11" href="#__codelineno-18-11"></a>    <span class="k">assert</span> <span class="n">nb_chiffres</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
 </code></pre></div></p>
 </details>
 </div>
@@ -10038,7 +9968,7 @@ Le test <code>"aucun"</code> vérifie le cas « pas trouvé », et le test <code
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2026 14:25:15 UTC">October 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 8, 2026 21:18:52 UTC">November 8, 2026</span>
   </span>
 
     

@@ -1494,35 +1494,7 @@
   <span class="md-ellipsis">
     
   
-    Les variables
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../premiere/prog/entiers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Le type entier
+    Les variables et le type entier
   
 
     
@@ -9385,7 +9357,7 @@
 <li>Calcule la valeur du poids fort fois 16, plus celle du poids faible. Que retrouves-tu ?</li>
 </ol>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <ol>
 <li><span class="arithmatex">\(200 = 1100\ 1000_2\)</span></li>
 <li><span class="arithmatex">\(1100_2\)</span>, qui vaut <span class="arithmatex">\(12\)</span>.</li>
@@ -9406,7 +9378,7 @@
 <li>On change seulement ses 4 bits de poids fort.</li>
 </ol>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <ol>
 <li>Le poids faible vaut entre <span class="arithmatex">\(0000_2 = 0\)</span> et <span class="arithmatex">\(1111_2 = 15\)</span> : l'écart vaut au plus <span class="arithmatex">\(15\)</span>.</li>
 <li>Le poids fort vaut entre <span class="arithmatex">\(0\)</span> et <span class="arithmatex">\(15\)</span> paquets de 16 : l'écart vaut au plus <span class="arithmatex">\(15 \times 16 = 240\)</span>.</li>
@@ -9425,7 +9397,7 @@
 <li>Quels bits du secret ont été perdus ?</li>
 </ol>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <ol>
 <li>Poids fort de la porteuse, <span class="arithmatex">\(1011\)</span>, suivi du poids fort du secret, <span class="arithmatex">\(0100\)</span> : <span class="arithmatex">\(1011\ 0100_2 = 180\)</span>.</li>
 <li><span class="arithmatex">\(182 - 180 = 2\)</span>.</li>
@@ -9490,7 +9462,7 @@
 <li>Lance, ouvre les deux images et compare.</li>
 </ol>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p>Aucun pixel ne change de plus de 15 sur 255 : la différence ne se voit pas, ou à peine dans les grandes zones unies.</p>
 </details>
 </div>
@@ -9506,7 +9478,7 @@
 <li>Échange à nouveau les deux moitiés du résultat. Qu'obtiens-tu ?</li>
 </ol>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <ol>
 <li><span class="arithmatex">\(0100\ 1011_2 = 75\)</span>.</li>
 <li><span class="arithmatex">\(77 - 75 = 2\)</span>.</li>
@@ -9556,7 +9528,7 @@
 <li>Distingue-t-on la porteuse dans <code>revelee.png</code> ? Pourquoi ?</li>
 </ol>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <ol>
 <li>Le gris varie par marches : seuls les 4 bits de poids fort du secret ont été transmis, donc il ne reste que 16 niveaux de gris possibles au lieu de 256.</li>
 <li>À peine : la porteuse n'occupe plus que les 4 bits de poids faible, où elle produit des écarts de 15 au plus.</li>
@@ -9572,7 +9544,7 @@
 <li>Même question entre un pixel du secret et le pixel révélé.</li>
 </ol>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <ol>
 <li>Le pixel transmis ne diffère de la porteuse que par ses 4 bits de poids faible : l'écart vaut au plus <span class="arithmatex">\(15\)</span>. Il est atteint pour une porteuse <span class="arithmatex">\(0 = 0000\ 0000_2\)</span> et un secret <span class="arithmatex">\(255 = 1111\ 1111_2\)</span>, qui donnent <span class="arithmatex">\(0000\ 1111_2 = 15\)</span>.</li>
 <li>Le pixel révélé ne diffère du secret que par ses 4 bits de poids faible, remplacés par ceux de la porteuse : au plus <span class="arithmatex">\(15\)</span> aussi. Avec le même exemple, on révèle <span class="arithmatex">\(1111\ 0000_2 = 240\)</span> au lieu de <span class="arithmatex">\(255\)</span>.</li>
@@ -9613,7 +9585,7 @@
 <li>Les écarts moyens sont bien plus petits que 15. Pourquoi ?</li>
 </ol>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <ol>
 <li>Oui : aucun ne dépasse 15.</li>
 <li>L'écart de 15 n'est atteint que si les 4 bits remplacés et les 4 bits qui les remplacent sont à l'opposé, <code>0000</code> contre <code>1111</code>. La plupart du temps, ils sont plus proches.</li>
@@ -9633,7 +9605,7 @@
 <li>faut-il la réécrire pour des triplets ?</li>
 </ul>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <ul>
 <li><code>cacher_pixel</code> et <code>echanger</code> calculent sur un pixel, avec <code>//</code>, <code>%</code>, <code>*</code> et <code>+</code> : elles exigent un entier. Il faut une version pour les triplets, qui applique le même calcul à chaque composante.</li>
 <li><code>cacher</code> et <code>reveler</code> ne font que parcourir la grille et appeler la fonction précédente sur chaque case. Leur boucle reste la même : seule la fonction appelée change, et les annotations de type.</li>
@@ -9710,7 +9682,7 @@
 <li>Peut-on appeler <code>ecart_max(porteuse_c, transmise_c)</code> ? Pourquoi ?</li>
 </ol>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <ol>
 <li>Comme en niveaux de gris : la transmise ressemble à la porteuse, et la révélée au secret, avec des couleurs en marches, chaque composante n'ayant plus que 16 niveaux.</li>
 <li>Non : <code>ecart_max</code> calcule <code>a[i][j] - b[i][j]</code>, et Python ne sait pas soustraire deux triplets. Il faudrait mesurer l'écart composante par composante.</li>
@@ -9747,7 +9719,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 26, 2026 11:50:17 UTC">October 26, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 8, 2026 21:18:52 UTC">November 8, 2026</span>
   </span>
 
     

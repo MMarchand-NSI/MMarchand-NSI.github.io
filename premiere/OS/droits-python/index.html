@@ -1601,35 +1601,7 @@
   <span class="md-ellipsis">
     
   
-    Les variables
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../prog/entiers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Le type entier
+    Les variables et le type entier
   
 
     
@@ -9287,7 +9259,7 @@
 <li><code>../../os</code></li>
 </ol>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <ol>
 <li><code>/home/eleve/nsi/os/scripts/essais</code></li>
 <li><code>/home/eleve/nsi/os/notes/td.txt</code></li>
@@ -9342,7 +9314,7 @@
 <p class="admonition-title">Étape 1</p>
 <p><code>ls -l bonjour.py</code> : quels sont les dix premiers caractères ?</p>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p><code>-rw-r--r--</code>, comme pour <code>calcul.py</code> : un fichier neuf n'est exécutable par personne.</p>
 </details>
 </div>
@@ -9350,7 +9322,7 @@
 <p class="admonition-title">Étape 2</p>
 <p><code>./bonjour.py</code> : <code>./</code> veut dire « le fichier <code>bonjour.py</code> du répertoire courant ». Que répond le terminal ?</p>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p><code>bash: ./bonjour.py: Permission denied</code>. Le fichier n'a pas le droit <code>x</code> : on ne peut pas l'exécuter.</p>
 </details>
 </div>
@@ -9358,7 +9330,7 @@
 <p class="admonition-title">Étape 3</p>
 <p><code>python3 bonjour.py</code> : que répond le terminal ?</p>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p><code>bonjour</code>. Ici, ce n'est pas <code>bonjour.py</code> qu'on exécute, c'est le programme <code>python3</code>. Lui se contente de <strong>lire</strong> <code>bonjour.py</code>, et le droit <code>r</code> lui suffit.</p>
 </details>
 </div>
@@ -9366,7 +9338,7 @@
 <p class="admonition-title">Étape 4</p>
 <p><code>chmod u+x bonjour.py</code>, puis <code>ls -l bonjour.py</code>, puis <code>./bonjour.py</code>. Que deviennent les dix premiers caractères, et que répond le terminal ?</p>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p><code>-rwxr--r--</code>, puis <code>bonjour</code>. Le propriétaire a maintenant le droit <code>x</code>.</p>
 </details>
 </div>
@@ -9374,7 +9346,7 @@
 <p class="admonition-title">Étape 5</p>
 <p><code>bonjour.py</code>, <strong>sans</strong> <code>./</code>. Que répond le terminal ?</p>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p><code>bash: bonjour.py: command not found</code>. Sans <code>./</code>, le terminal cherche une commande qui s'appelle <code>bonjour.py</code> parmi les programmes du système, et pas dans le répertoire courant.</p>
 </details>
 </div>
@@ -9382,7 +9354,7 @@
 <p class="admonition-title">Étape 6</p>
 <p>Efface la première ligne de <code>bonjour.py</code> (celle qui commence par <code>#!</code>), enregistre, puis tape <code>./bonjour.py</code>. Que répond le terminal ?</p>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>./bonjour.py: line 1: syntax error near unexpected token `&quot;bonjour&quot;&#39;
 </code></pre></div>
 Sans la ligne <code>#!</code>, le système ne sait pas quel programme doit lire le fichier, et c'est le terminal lui-même, <code>bash</code>, qui essaie. Or <code>print("bonjour")</code> n'est pas une commande <code>bash</code>. La ligne <code>#!/usr/bin/env python3</code> dit : « ce fichier se lit avec <code>python3</code> ».</p>
@@ -9393,7 +9365,7 @@ Sans la ligne <code>#!</code>, le système ne sait pas quel programme doit lire 
 <p class="admonition-title">Étape 7</p>
 <p><code>chmod u-r bonjour.py</code>, puis <code>python3 bonjour.py</code>. Que répond le terminal ?</p>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p><code>python3: can't open file '.../bonjour.py': [Errno 13] Permission denied</code>. Cette fois, <code>python3</code> ne peut plus <strong>lire</strong> le fichier.</p>
 </details>
 <p><strong>Rends le droit de lecture avant de continuer</strong> : <code>chmod u+r bonjour.py</code>.</p>
@@ -9422,7 +9394,7 @@ Sans la ligne <code>#!</code>, le système ne sait pas quel programme doit lire 
 <li>indique quel fichier est seulement lu</li>
 </ul>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p>La ligne a la forme <code>/home/eleve/nsi/.venv/bin/python /home/eleve/nsi/os/scripts/bonjour.py</code> (chez toi, les chemins diffèrent). Le programme qui s'exécute est le <strong>premier</strong>, <code>python</code>. Le second, <code>bonjour.py</code>, est un fichier qu'il <strong>lit</strong>. Le bouton ▶ fait exactement ce que tu as fait à l'étape 3, avec des chemins absolus.</p>
 </details>
 </div>
@@ -9435,7 +9407,7 @@ Sans la ligne <code>#!</code>, le système ne sait pas quel programme doit lire 
 <p><strong>2. Compléter.</strong> <code>ls -l outil.py</code> affiche <code>-rw-r--r-- ... outil.py</code>, et <code>./outil.py</code> répond <code>Permission denied</code>. Quelle commande faut-il taper pour que <code>./outil.py</code> s'exécute ?</p>
 <p><strong>3. Expliquer.</strong> <code>python3 outil.py</code> fonctionne, alors que <code>./outil.py</code> répond <code>Permission denied</code>. Pourquoi ?</p>
 <details class="success">
-<summary>Réponses</summary>
+<summary>Correction</summary>
 <p><strong>1.</strong> <code>/home/eleve/nsi/os/notes</code>. <code>../..</code> remonte de <code>essais</code> à <code>os</code>, puis on descend dans <code>notes</code>.</p>
 <p><strong>2.</strong> <code>chmod u+x outil.py</code>.</p>
 <p><strong>3.</strong> Avec <code>./outil.py</code>, c'est le fichier lui-même qu'on demande d'exécuter, et il n'a pas le droit <code>x</code>. Avec <code>python3 outil.py</code>, le programme exécuté est <code>python3</code>, qui ne fait que <strong>lire</strong> <code>outil.py</code> : le droit <code>r</code> suffit.</p>
@@ -9475,7 +9447,7 @@ Sans la ligne <code>#!</code>, le système ne sait pas quel programme doit lire 
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 13, 2026 18:58:58 UTC">October 13, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 8, 2026 21:18:52 UTC">November 8, 2026</span>
   </span>
 
     

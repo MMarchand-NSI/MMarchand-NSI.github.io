@@ -1499,35 +1499,7 @@
   <span class="md-ellipsis">
     
   
-    Les variables
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../entiers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Le type entier
+    Les variables et le type entier
   
 
     
@@ -9372,8 +9344,8 @@
 
 <h1 id="la-boucle-for-sur-un-intervalle-semi-ouvert-dentiers">La boucle <code>for</code> sur un intervalle semi-ouvert d'entiers</h1>
 <div class="admonition question">
-<p class="admonition-title">Prédire la dernière ligne</p>
-<p>Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
+<p class="admonition-title">Prédire la valeur</p>
+<p>Écris la valeur de l'expression demandée comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris plutôt ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
 </div>
 <script type="text/x-silent-teacher" data-titre="range">
 n = 0
@@ -9421,7 +9393,7 @@ r
 </code></pre></div></li>
 </ol>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <ol>
 <li><strong>Avant</strong> la boucle. Placée dedans, elle serait remise à sa valeur de départ à chaque tour, et le résultat final ne compterait que le dernier élément.</li>
 <li><code>0</code> : avant la première itération, on n'a encore rien compté.</li>
@@ -9513,7 +9485,7 @@ r
 <a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;fini&quot;</span><span class="p">)</span>
 </code></pre></div>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p>Il n'affiche que <code>fini</code>. Le <code>print(i)</code> ne s'exécute jamais, et aucune erreur ne se produit.</p>
 </details>
 </div>
@@ -9556,7 +9528,7 @@ r
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
 </code></pre></div>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p><code>5</code>, <code>4</code>, <code>3</code>. La première borne, <code>5</code>, est atteinte, la seconde, <code>2</code>, ne l'est pas : c'est encore un intervalle semi-ouvert, lu de haut en bas. Compare avec <code>range(2, 5)</code>, qui donne <code>2</code>, <code>3</code>, <code>4</code> : chaque valeur est <strong>décalée d'un cran vers le haut</strong>.</p>
 </details>
 </div>
@@ -9585,7 +9557,7 @@ r
 <p class="admonition-title">À toi</p>
 <p>Écris la boucle qui affiche les entiers de <span class="arithmatex">\([3\,;\,8)\)</span>, du plus grand au plus petit.</p>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>         <span class="c1"># affiche 7, 6, 5, 4, 3</span>
 </code></pre></div>
@@ -9600,10 +9572,6 @@ r
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="n">res</span> <span class="o">+</span> <span class="n">i</span>
 <a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">res</span><span class="p">)</span>
 </code></pre></div>
-<details class="warning">
-<summary>Réponse</summary>
-<p><code>10</code>. <code>res</code> prend successivement 0, 1, 3, 6, puis 10 (on ajoute 1, 2, 3, 4).</p>
-</details>
 </div>
 <h2 id="exercices">Exercices</h2>
 <div class="admonition question">
@@ -9643,7 +9611,7 @@ Affiche une par une les lettres de <code>mot</code>, par élément, puis par ind
 <p>Pour la somme, l'accumulateur part de <code>0</code> et on fait <code>res = res + x</code>. Pour le produit, il part de <strong><code>1</code></strong> (car multiplier par 1 ne change rien) et on fait <code>res = res * x</code>.</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">somme</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la somme des entiers de 1 à n.&quot;&quot;&quot;</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="mi">0</span>
@@ -9696,12 +9664,12 @@ Affiche une par une les lettres de <code>mot</code>, par élément, puis par ind
 <summary>Indice plus précis</summary>
 <p>Parcours <strong>par indice</strong> (<code>for i in range(0, len(s))</code>), et le filtre compare <code>i</code> à <code>n</code> : tu n'ajoutes <code>s[i]</code> à l'accumulateur que si <code>i &lt; n</code>. Le cas <code>n</code> plus grand que <code>s</code> se règle tout seul : la boucle s'arrête avant d'avoir jamais pu être fausse.</p>
 </details>
-<details class="question">
-<summary>Avant d'ouvrir la solution</summary>
+<details class="note">
+<summary>Avant d'ouvrir la correction</summary>
 <p>Écris une phrase sur ton cahier : pourquoi ce filtre n'a-t-il <strong>rien de spécial</strong> à faire pour le cas <code>take(10, "abc")</code> ?</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">take</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie les n premiers caractères de s.&quot;&quot;&quot;</span>
 <a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -9734,7 +9702,7 @@ Aucun cas particulier : si <code>n</code> dépasse <code>len(s)</code>, la condi
 <p>Transfert proche de l'exercice précédent : même squelette, un seul symbole change dans le filtre.</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">drop</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">s</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie s privée de ses n premiers caractères.&quot;&quot;&quot;</span>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    <span class="n">res</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -9776,43 +9744,24 @@ Aucun cas particulier : si <code>n</code> dépasse <code>len(s)</code>, la condi
 <summary>Indice plus précis</summary>
 <p><code>acc = ""</code> avant tout. La boucle <strong>extérieure</strong> fait <code>hauteur</code> tours. La boucle <strong>intérieure</strong> ajoute <code>car</code> à <code>acc</code>, <code>largeur</code> fois. Le <code>"\n"</code> s'ajoute <strong>dans</strong> la boucle extérieure, mais <strong>après</strong> la boucle intérieure.</p>
 </details>
-<details class="warning">
-<summary>Corrigé</summary>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">rectangle</span><span class="p">(</span><span class="n">hauteur</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">largeur</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">car</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la chaîne qui dessine un rectangle de hauteur lignes et de largeur</span>
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="sd">    colonnes, fait du caractère car. Chaque ligne se termine par un retour à la ligne.&quot;&quot;&quot;</span>
-<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>    <span class="n">acc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
-<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">hauteur</span><span class="p">):</span>
-<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">largeur</span><span class="p">):</span>
-<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a>            <span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span> <span class="o">+</span> <span class="n">car</span>
-<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a>        <span class="n">acc</span> <span class="o">=</span> <span class="n">acc</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
-<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>    <span class="k">return</span> <span class="n">acc</span>
-<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>
-<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_rectangle</span><span class="p">():</span>
-<a id="__codelineno-22-12" name="__codelineno-22-12" href="#__codelineno-22-12"></a>    <span class="k">assert</span> <span class="n">rectangle</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;AAAAA</span><span class="se">\n</span><span class="s2">AAAAA</span><span class="se">\n</span><span class="s2">&quot;</span>
-<a id="__codelineno-22-13" name="__codelineno-22-13" href="#__codelineno-22-13"></a>    <span class="k">assert</span> <span class="n">rectangle</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;#&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;#</span><span class="se">\n</span><span class="s2">#</span><span class="se">\n</span><span class="s2">#</span><span class="se">\n</span><span class="s2">&quot;</span>
-<a id="__codelineno-22-14" name="__codelineno-22-14" href="#__codelineno-22-14"></a>    <span class="k">assert</span> <span class="n">rectangle</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="s2">&quot;A&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;&quot;</span>
-</code></pre></div>
-Le dernier test est le cas où la boucle extérieure est vide d'exécution : l'accumulateur garde sa valeur de départ, la chaîne vide.</p>
-</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Portée dans les boucles (piège)</p>
 <p>Que va afficher ce code ?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">mystere</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x =&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
-<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;i =&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
-<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="n">mystere</span><span class="p">()</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">mystere</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>        <span class="n">x</span> <span class="o">=</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;x =&quot;</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;i =&quot;</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span>
+<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
+<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="n">mystere</span><span class="p">()</span>
 </code></pre></div>
 <p>Puis exécute pour vérifier. Que se passe-t-il avec <code>x</code> et <code>i</code> ?</p>
 </div>
 <details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a>x = 4
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a>i = 2
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a>x = 4
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a>i = 2
 </code></pre></div>
 <p><strong>Attention :</strong> En Python, les variables créées dans une boucle <code>for</code> <strong>ne sont pas locales à la boucle</strong>, elles sont locales à la <strong>fonction</strong>. Donc <code>x</code> et <code>i</code> existent encore après la boucle.</p>
 <p>C'est différent de langages comme C, Java ou Rust où les variables de boucle sont détruites après la boucle.</p>
@@ -9820,20 +9769,20 @@ Le dernier test est le cas où la boucle extérieure est vide d'exécution : l'a
 <details class="note">
 <summary>Pour aller plus loin : la portée dans d'autres langages</summary>
 <p>D'autres langages ont des règles de portée plus strictes. Par exemple, en <strong>Rust</strong>, même les variables dans une boucle ont leur propre portée :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
-<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="mi">3</span><span class="w"> </span><span class="p">{</span>
-<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">  </span><span class="c1">// Nouvelle variable locale à la boucle</span>
-<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Boucle : x = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
-<a id="__codelineno-25-6" name="__codelineno-25-6" href="#__codelineno-25-6"></a><span class="w">    </span><span class="p">}</span>
-<a id="__codelineno-25-7" name="__codelineno-25-7" href="#__codelineno-25-7"></a><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Après : x = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w">  </span><span class="c1">// x = 10 (inchangé)</span>
-<a id="__codelineno-25-8" name="__codelineno-25-8" href="#__codelineno-25-8"></a><span class="p">}</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">    </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="k">in</span><span class="w"> </span><span class="mi">0</span><span class="o">..</span><span class="mi">3</span><span class="w"> </span><span class="p">{</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="w">        </span><span class="kd">let</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">i</span><span class="p">;</span><span class="w">  </span><span class="c1">// Nouvelle variable locale à la boucle</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="w">        </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Boucle : x = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span>
+<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="w">    </span><span class="p">}</span>
+<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">    </span><span class="fm">println!</span><span class="p">(</span><span class="s">&quot;Après : x = {}&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">);</span><span class="w">  </span><span class="c1">// x = 10 (inchangé)</span>
+<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="p">}</span>
 </code></pre></div>
 <p>Sortie :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a>Boucle : x = 10
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>Boucle : x = 11
-<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>Boucle : x = 12
-<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>Après : x = 10
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a>Boucle : x = 10
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a>Boucle : x = 11
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>Boucle : x = 12
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a>Après : x = 10
 </code></pre></div></p>
 <p>En Rust, les variables globales modifiables nécessitent un bloc <code>unsafe</code> car elles sont considérées dangereuses. Python est plus permissif, mais cela ne signifie pas qu'il faut en abuser !</p>
 </details>
@@ -9844,17 +9793,17 @@ Le dernier test est le cas où la boucle extérieure est vide d'exécution : l'a
 <p>Rappel : <code>c.isdigit()</code> dit si le caractère <code>c</code> est un chiffre, et <code>int(c)</code> le convertit en entier.</p>
 </div>
 <details class="success">
-<summary>Solution</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">somme_chiffres</span><span class="p">(</span><span class="n">texte</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la somme des chiffres présents dans texte.&quot;&quot;&quot;</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># variable LOCALE : elle disparaît à la fin de l&#39;appel</span>
-<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">texte</span><span class="p">:</span>
-<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
-<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>            <span class="n">total</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
-<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>    <span class="k">return</span> <span class="n">total</span>
-<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>
-<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a><span class="c1"># Test</span>
-<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">somme_chiffres</span><span class="p">(</span><span class="s2">&quot;a1b2c3&quot;</span><span class="p">))</span>   <span class="c1"># 6</span>
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">somme_chiffres</span><span class="p">(</span><span class="n">texte</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la somme des chiffres présents dans texte.&quot;&quot;&quot;</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a>    <span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># variable LOCALE : elle disparaît à la fin de l&#39;appel</span>
+<a id="__codelineno-26-4" name="__codelineno-26-4" href="#__codelineno-26-4"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">texte</span><span class="p">:</span>
+<a id="__codelineno-26-5" name="__codelineno-26-5" href="#__codelineno-26-5"></a>        <span class="k">if</span> <span class="n">c</span><span class="o">.</span><span class="n">isdigit</span><span class="p">():</span>
+<a id="__codelineno-26-6" name="__codelineno-26-6" href="#__codelineno-26-6"></a>            <span class="n">total</span> <span class="o">+=</span> <span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+<a id="__codelineno-26-7" name="__codelineno-26-7" href="#__codelineno-26-7"></a>    <span class="k">return</span> <span class="n">total</span>
+<a id="__codelineno-26-8" name="__codelineno-26-8" href="#__codelineno-26-8"></a>
+<a id="__codelineno-26-9" name="__codelineno-26-9" href="#__codelineno-26-9"></a><span class="c1"># Test</span>
+<a id="__codelineno-26-10" name="__codelineno-26-10" href="#__codelineno-26-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">somme_chiffres</span><span class="p">(</span><span class="s2">&quot;a1b2c3&quot;</span><span class="p">))</span>   <span class="c1"># 6</span>
 </code></pre></div>
 <p>L'accumulateur <code>total</code> est <strong>local</strong> : c'est ce qui permet d'appeler la fonction autant de fois qu'on veut sans que les appels se contaminent. Une variable globale, ici, serait un bug en attente.</p>
 </details>
@@ -9866,24 +9815,24 @@ Le dernier test est le cas où la boucle extérieure est vide d'exécution : l'a
 <p>Compter les mots, c'est compter les <strong>débuts</strong> de mot : un caractère qui n'est pas une espace, et qui arrive au début de la phrase ou juste après une espace.</p>
 </details>
 <details class="success">
-<summary>Corrigé</summary>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">nb_mots</span><span class="p">(</span><span class="n">phrase</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le nombre de mots de phrase, les mots étant séparés par des espaces.&quot;&quot;&quot;</span>
-<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>    <span class="n">mots</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a>    <span class="n">en_mot</span> <span class="o">=</span> <span class="kc">False</span>
-<a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">phrase</span><span class="p">:</span>
-<a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a>        <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
-<a id="__codelineno-28-7" name="__codelineno-28-7" href="#__codelineno-28-7"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">en_mot</span><span class="p">:</span>
-<a id="__codelineno-28-8" name="__codelineno-28-8" href="#__codelineno-28-8"></a>                <span class="n">mots</span> <span class="o">=</span> <span class="n">mots</span> <span class="o">+</span> <span class="mi">1</span>
-<a id="__codelineno-28-9" name="__codelineno-28-9" href="#__codelineno-28-9"></a>            <span class="n">en_mot</span> <span class="o">=</span> <span class="kc">True</span>
-<a id="__codelineno-28-10" name="__codelineno-28-10" href="#__codelineno-28-10"></a>        <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-28-11" name="__codelineno-28-11" href="#__codelineno-28-11"></a>            <span class="n">en_mot</span> <span class="o">=</span> <span class="kc">False</span>
-<a id="__codelineno-28-12" name="__codelineno-28-12" href="#__codelineno-28-12"></a>    <span class="k">return</span> <span class="n">mots</span>
-<a id="__codelineno-28-13" name="__codelineno-28-13" href="#__codelineno-28-13"></a>
-<a id="__codelineno-28-14" name="__codelineno-28-14" href="#__codelineno-28-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_nb_mots</span><span class="p">():</span>
-<a id="__codelineno-28-15" name="__codelineno-28-15" href="#__codelineno-28-15"></a>    <span class="k">assert</span> <span class="n">nb_mots</span><span class="p">(</span><span class="s2">&quot;bonjour le monde&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
-<a id="__codelineno-28-16" name="__codelineno-28-16" href="#__codelineno-28-16"></a>    <span class="k">assert</span> <span class="n">nb_mots</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-<a id="__codelineno-28-17" name="__codelineno-28-17" href="#__codelineno-28-17"></a>    <span class="k">assert</span> <span class="n">nb_mots</span><span class="p">(</span><span class="s2">&quot;  deux   espaces &quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
+<summary>Correction</summary>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">nb_mots</span><span class="p">(</span><span class="n">phrase</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le nombre de mots de phrase, les mots étant séparés par des espaces.&quot;&quot;&quot;</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>    <span class="n">mots</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a>    <span class="n">en_mot</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-27-5" name="__codelineno-27-5" href="#__codelineno-27-5"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">phrase</span><span class="p">:</span>
+<a id="__codelineno-27-6" name="__codelineno-27-6" href="#__codelineno-27-6"></a>        <span class="k">if</span> <span class="n">c</span> <span class="o">!=</span> <span class="s2">&quot; &quot;</span><span class="p">:</span>
+<a id="__codelineno-27-7" name="__codelineno-27-7" href="#__codelineno-27-7"></a>            <span class="k">if</span> <span class="ow">not</span> <span class="n">en_mot</span><span class="p">:</span>
+<a id="__codelineno-27-8" name="__codelineno-27-8" href="#__codelineno-27-8"></a>                <span class="n">mots</span> <span class="o">=</span> <span class="n">mots</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-27-9" name="__codelineno-27-9" href="#__codelineno-27-9"></a>            <span class="n">en_mot</span> <span class="o">=</span> <span class="kc">True</span>
+<a id="__codelineno-27-10" name="__codelineno-27-10" href="#__codelineno-27-10"></a>        <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-27-11" name="__codelineno-27-11" href="#__codelineno-27-11"></a>            <span class="n">en_mot</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-27-12" name="__codelineno-27-12" href="#__codelineno-27-12"></a>    <span class="k">return</span> <span class="n">mots</span>
+<a id="__codelineno-27-13" name="__codelineno-27-13" href="#__codelineno-27-13"></a>
+<a id="__codelineno-27-14" name="__codelineno-27-14" href="#__codelineno-27-14"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_nb_mots</span><span class="p">():</span>
+<a id="__codelineno-27-15" name="__codelineno-27-15" href="#__codelineno-27-15"></a>    <span class="k">assert</span> <span class="n">nb_mots</span><span class="p">(</span><span class="s2">&quot;bonjour le monde&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+<a id="__codelineno-27-16" name="__codelineno-27-16" href="#__codelineno-27-16"></a>    <span class="k">assert</span> <span class="n">nb_mots</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+<a id="__codelineno-27-17" name="__codelineno-27-17" href="#__codelineno-27-17"></a>    <span class="k">assert</span> <span class="n">nb_mots</span><span class="p">(</span><span class="s2">&quot;  deux   espaces &quot;</span><span class="p">)</span> <span class="o">==</span> <span class="mi">2</span>
 </code></pre></div>
 Toute solution correcte convient. Le troisième test est celui qui compte : avec plusieurs espaces à la suite, compter les espaces ne donne plus le nombre de mots.</p>
 </details>
@@ -9908,7 +9857,7 @@ Toute solution correcte convient. Le troisième test est celui qui compte : avec
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2026 14:25:15 UTC">October 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 8, 2026 21:18:52 UTC">November 8, 2026</span>
   </span>
 
     

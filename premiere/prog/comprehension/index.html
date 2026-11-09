@@ -1499,35 +1499,7 @@
   <span class="md-ellipsis">
     
   
-    Les variables
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../entiers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Le type entier
+    Les variables et le type entier
   
 
     
@@ -9474,8 +9446,8 @@
 
 <h1 id="comprehensions-de-liste">Compréhensions de liste</h1>
 <div class="admonition question">
-<p class="admonition-title">Prédire la dernière ligne</p>
-<p>Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
+<p class="admonition-title">Prédire la valeur</p>
+<p>Écris la valeur de l'expression demandée comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris plutôt ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
 </div>
 <script type="text/x-silent-teacher" data-titre="Les compréhensions">
 [x * 2 for x in range(0, {{n:3..5}})]
@@ -9499,7 +9471,7 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
 <li>Que vaut <code>"informatique"[2:6]</code> ?</li>
 </ol>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <ol>
 <li><code>python
    multiples = []
@@ -9586,10 +9558,6 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
 <p>Que contient <code>res</code> ? Traduis d'abord la compréhension en phrase, puis vérifie.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="o">*</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="p">]</span>
 </code></pre></div>
-<details class="warning">
-<summary>Réponse</summary>
-<p><code>[2, 6]</code>. On parcourt <code>0, 1, 2, 3, 4</code>, on ne garde que les impairs (<code>1</code> et <code>3</code>), puis on les double.</p>
-</details>
 </div>
 <h2 id="4-exercices">4. Exercices</h2>
 <h3 id="listes-de-types-primitifs">Listes de types primitifs</h3>
@@ -9599,7 +9567,7 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
 <p>Résultat attendu : <code>[0, 3, 6, 9, 12, 15, 18, 21, 24, 27, 30]</code></p>
 </div>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">multiples_de_3</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span> <span class="k">if</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
 </code></pre></div>
 <p>Ou en utilisant directement <code>range</code> :</p>
@@ -9613,7 +9581,7 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
 <p>Résultat attendu : <code>[12, 8, 7]</code></p>
 </div>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">valeurs</span> <span class="o">=</span> <span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">7</span><span class="p">]</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">positifs</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">valeurs</span> <span class="k">if</span> <span class="n">v</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
 </code></pre></div>
@@ -9625,7 +9593,7 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
 <p>Résultat attendu : <code>[32.0, 50.0, 68.0, 86.0, 212.0]</code></p>
 </div>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">celsius</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">100</span><span class="p">]</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">fahrenheit</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span> <span class="o">*</span> <span class="mi">9</span><span class="o">/</span><span class="mi">5</span> <span class="o">+</span> <span class="mi">32</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">celsius</span><span class="p">]</span>
 </code></pre></div>
@@ -9637,7 +9605,7 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
 <p>Résultat attendu : <code>[6, 3, 14, 4]</code></p>
 </div>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">mots</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;nsi&quot;</span><span class="p">,</span> <span class="s2">&quot;algorithmique&quot;</span><span class="p">,</span> <span class="s2">&quot;code&quot;</span><span class="p">]</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">longueurs</span> <span class="o">=</span> <span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="n">mot</span><span class="p">)</span> <span class="k">for</span> <span class="n">mot</span> <span class="ow">in</span> <span class="n">mots</span><span class="p">]</span>
 </code></pre></div>
@@ -9648,7 +9616,7 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
 <p>Résultat attendu : <code>["python", "algorithmique"]</code></p>
 </div>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">mots</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;python&quot;</span><span class="p">,</span> <span class="s2">&quot;nsi&quot;</span><span class="p">,</span> <span class="s2">&quot;algorithmique&quot;</span><span class="p">,</span> <span class="s2">&quot;code&quot;</span><span class="p">]</span>
 <a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">mots_longs</span> <span class="o">=</span> <span class="p">[</span><span class="n">mot</span> <span class="k">for</span> <span class="n">mot</span> <span class="ow">in</span> <span class="n">mots</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mot</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="mi">5</span><span class="p">]</span>
 </code></pre></div>
@@ -9687,7 +9655,7 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
 <p>Résultat attendu : <code>["Bob", "Diana"]</code></p>
 </div>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">majeurs</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;nom&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">personnes</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">]</span>
 </code></pre></div>
 </details>
@@ -9704,7 +9672,7 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
 <p>Résultat attendu : <code>[{"nom": "Livre", "prix": 18.0}, {"nom": "Stylo", "prix": 1.8}, {"nom": "Cahier", "prix": 4.5}]</code></p>
 </div>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">produits_promo</span> <span class="o">=</span> <span class="p">[{</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;nom&quot;</span><span class="p">],</span> <span class="s2">&quot;prix&quot;</span><span class="p">:</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;prix&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="mf">0.9</span><span class="p">}</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">produits</span><span class="p">]</span>
 </code></pre></div>
 </details>
@@ -9718,7 +9686,7 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
 <p>Résultat attendu : <code>["STYLO", "CAHIER"]</code></p>
 </div>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">noms_petit_prix</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="p">[</span><span class="s2">&quot;nom&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">produits</span> <span class="k">if</span> <span class="n">p</span><span class="p">[</span><span class="s2">&quot;prix&quot;</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">]</span>
 </code></pre></div>
 </details>
@@ -9736,7 +9704,7 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
 <p>Résultat attendu : <code>["Interstellar"]</code></p>
 </div>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">films_selectionnes</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;titre&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">films</span> <span class="k">if</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;annee&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">2010</span> <span class="ow">and</span> <span class="n">f</span><span class="p">[</span><span class="s2">&quot;note&quot;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">8.5</span><span class="p">]</span>
 </code></pre></div>
 </details>
@@ -9746,7 +9714,7 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
 <p>Résultat attendu : <code>["Inception (2010)", "Interstellar (2014)", "Matrix (1999)", "Dune (2021)"]</code></p>
 </div>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">descriptifs</span> <span class="o">=</span> <span class="p">[</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;titre&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot; (&quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">f</span><span class="p">[</span><span class="s2">&quot;annee&quot;</span><span class="p">])</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">films</span><span class="p">]</span>
 </code></pre></div>
 </details>
@@ -9781,7 +9749,7 @@ len([x for x in range(0, {{n:5..9}}) if x % 2 == 0])
 </code></pre></div></p>
 <p><strong>3. Écrire.</strong> Depuis zéro : <code>occurrences(txt)</code> qui renvoie un <strong>dictionnaire</strong> associant à chaque caractère de <code>txt</code> son nombre d'apparitions.</p>
 <details class="success">
-<summary>Réponses</summary>
+<summary>Correction</summary>
 <p><strong>1.</strong> <code>[1, 2, 3, 4] [1, 2, 3, 4] [1, 2, 3, 5]</code> puis <code>0</code>. <code>b = a</code> <strong>ne copie pas</strong> : <code>a</code> et <code>b</code> sont un seul objet. <code>c = a.copy()</code> en fabrique un second, indépendant, et il a été copié <strong>avant</strong> l'<code>append</code> sur <code>b</code>.</p>
 <p><strong>2.</strong> <code>res = [mot.upper() for mot in ["chat", "hippopotame", "rat", "girafe"] if len(mot) &gt; 4]</code></p>
 <p><strong>3.</strong>
@@ -9824,7 +9792,7 @@ C'est encore une accumulation : l'accumulateur est simplement un <strong>diction
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2026 14:25:15 UTC">October 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 8, 2026 21:18:52 UTC">November 8, 2026</span>
   </span>
 
     

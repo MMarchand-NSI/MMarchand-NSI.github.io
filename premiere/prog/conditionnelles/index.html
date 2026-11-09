@@ -1499,35 +1499,7 @@
   <span class="md-ellipsis">
     
   
-    Les variables
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../entiers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Le type entier
+    Les variables et le type entier
   
 
     
@@ -9420,8 +9392,8 @@
 
 <h1 id="les-conditionnelles">Les conditionnelles</h1>
 <div class="admonition question">
-<p class="admonition-title">Prédire la dernière ligne</p>
-<p>Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
+<p class="admonition-title">Prédire la valeur</p>
+<p>Écris la valeur de l'expression demandée comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris plutôt ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
 </div>
 <script type="text/x-silent-teacher" data-titre="Les conditionnelles">
 a = {{a:1..9}}
@@ -9465,7 +9437,7 @@ n != 4 {{op:or|and}} n != 8
 <li>Avec <span class="arithmatex">\(a = 1\)</span> et <span class="arithmatex">\(b = 0\)</span>, que vaut <span class="arithmatex">\(\overline{a.b}\)</span> ? Que vaut <span class="arithmatex">\(\bar{a} + \bar{b}\)</span> ?</li>
 </ol>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <ol>
 <li><code>a</code> vaut <code>5</code>. Le membre de droite est <strong>calculé d'abord</strong> (<code>3 + 2</code>), et le résultat est <strong>ensuite</strong> rangé dans la case <code>a</code>. Le <code>=</code> n'est pas une égalité mathématique.</li>
 <li><code>def est_majeur(age: int) -&gt; bool:</code></li>
@@ -9512,7 +9484,7 @@ n != 4 {{op:or|and}} n != 8
 <p class="admonition-title">Prédis avant d'exécuter</p>
 <p>Sans lancer le code, écris ce qui s'affiche <strong>dans les deux cas</strong> : avec <code>age = 20</code>, puis avec <code>age = 15</code>. Combien de lignes chaque fois ?</p>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p>Avec <code>age = 20</code>, trois lignes : « Vous êtes majeur. », « Bienvenue. », « Fin du programme. » Python évalue <code>20 &gt;= 18</code>, qui vaut <code>True</code>, <strong>entre dans le bloc indenté</strong> et exécute ses deux lignes, puis continue avec la ligne non indentée.</p>
 <p>Avec <code>age = 15</code>, une seule ligne : « Fin du programme. » La condition <code>15 &gt;= 18</code> vaut <code>False</code>, Python <strong>saute tout le bloc indenté</strong> et reprend juste après.</p>
 <p>Ce qui décide de tout, ce n'est pas le <code>if</code> mais l'<strong>indentation</strong> : elle seule dit ce qui est sauté et ce qui ne l'est pas.</p>
@@ -9592,68 +9564,47 @@ n != 4 {{op:or|and}} n != 8
 <li><strong>Valeur absolue.</strong> Demande un nombre et affiche sa valeur absolue (sans <code>abs</code>).</li>
 <li><strong>Mot de passe.</strong> Le mot de passe est <code>"azerty"</code>. Demande-le et indique si l'accès est autorisé.</li>
 </ol>
-<details class="warning">
-<summary>Corrigés (3 et 4)</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># 3. Valeur absolue</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">))</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">)</span>
-<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-<a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a>
-<a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="c1"># 4. Mot de passe</span>
-<a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">mdp</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Mot de passe : &quot;</span><span class="p">)</span>
-<a id="__codelineno-4-10" name="__codelineno-4-10" href="#__codelineno-4-10"></a><span class="k">if</span> <span class="n">mdp</span> <span class="o">==</span> <span class="s2">&quot;azerty&quot;</span><span class="p">:</span>
-<a id="__codelineno-4-11" name="__codelineno-4-11" href="#__codelineno-4-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accès autorisé&quot;</span><span class="p">)</span>
-<a id="__codelineno-4-12" name="__codelineno-4-12" href="#__codelineno-4-12"></a><span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-4-13" name="__codelineno-4-13" href="#__codelineno-4-13"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accès refusé&quot;</span><span class="p">)</span>
-</code></pre></div>
-</details>
 </div>
 <h2 id="une-condition-est-un-booleen">Une condition est un booléen</h2>
 <p>Une comparaison comme <code>7 &gt; 4</code> est une <strong>opération</strong>, au même titre que <code>+</code> ou <code>*</code>, sauf qu'elle ne renvoie pas un nombre mais un <strong>booléen</strong> : <code>True</code> ou <code>False</code> (le type booléen est présenté dans <a href="../../Num%C3%A9ration/booleens/">Les booléens</a>, du nom du logicien George Boole).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">&gt;</span> <span class="mi">4</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>         <span class="c1"># True</span>
-<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>   <span class="c1"># &lt;class &#39;bool&#39;&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">&gt;</span> <span class="mi">4</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>         <span class="c1"># True</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>   <span class="c1"># &lt;class &#39;bool&#39;&gt;</span>
 </code></pre></div>
 <div class="admonition hint">
 <p class="admonition-title">Une condition est un calcul</p>
 <p>Une condition est en réalité <strong>un calcul qui renvoie un booléen</strong>. Quand tu te demandes s'il fait beau, ton cerveau <em>calcule</em> vrai ou faux à partir de ce que voient tes yeux.</p>
 </div>
 <p>On peut donc stocker une condition dans une variable, puis l'utiliser :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">majeur</span> <span class="o">=</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">if</span> <span class="n">majeur</span><span class="p">:</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous êtes majeur.&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">majeur</span> <span class="o">=</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="k">if</span> <span class="n">majeur</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous êtes majeur.&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition tip">
 <p class="admonition-title">Écrire <code>if majeur</code>, pas <code>if majeur == True</code></p>
 <p>Si <code>majeur</code> vaut <code>True</code>, alors <code>majeur == True</code> vaut aussi <code>True</code> ; s'il vaut <code>False</code>, <code>majeur == True</code> vaut <code>False</code>. Tester <code>majeur</code> ou <code>majeur == True</code> revient donc au même. On écrit simplement :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">if</span> <span class="n">majeur</span><span class="p">:</span>        <span class="c1"># et non : if majeur == True</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">if</span> <span class="n">majeur</span><span class="p">:</span>        <span class="c1"># et non : if majeur == True</span>
 </code></pre></div></p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice : type et valeur</p>
 <p>On exécute ces lignes dans l'ordre. Donne le <strong>type</strong> et la <strong>valeur</strong> de chaque variable.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">18</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">)</span>
-<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)</span>
-<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">e</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">7</span>
-<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">a</span> <span class="o">=</span> <span class="mf">6.0</span>
-<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">18</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">b</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">&gt;</span> <span class="mi">7</span><span class="p">)</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="n">c</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">e</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="mi">7</span>
+<a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">a</span> <span class="o">=</span> <span class="mf">6.0</span>
+<a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="mi">6</span><span class="p">)</span>
 </code></pre></div></p>
-<details class="warning">
-<summary>Réponse</summary>
-<p><code>a</code> : int, 18. <code>b</code> : bool, True. <code>c</code> : bool, False. <code>e</code> : bool, True. Puis <code>a</code> devient float, 6.0. <code>f</code> : bool, True (car <code>6.0 == 6</code>).</p>
-</details>
 </div>
 <h2 id="sinon-si-plusieurs-branches-elif">SINON SI : plusieurs branches (<code>elif</code>)</h2>
 <p>Pour plus de deux cas, on enchaîne avec <code>elif</code> (contraction de « else if »).</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">if</span> <span class="n">note</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Très bien&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">elif</span> <span class="n">note</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
-<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Admis&quot;</span><span class="p">)</span>
-<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ajourné&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">if</span> <span class="n">note</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Très bien&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="k">elif</span> <span class="n">note</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Admis&quot;</span><span class="p">)</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Ajourné&quot;</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition abstract">
 <p class="admonition-title">Le mécanisme caché : Python s'arrête au premier vrai</p>
@@ -9662,12 +9613,12 @@ n != 4 {{op:or|and}} n != 8
 <div class="admonition danger">
 <p class="admonition-title">L'ordre des <code>elif</code> compte</p>
 <p>Avec <code>note = 15</code> :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">if</span> <span class="n">note</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="n">mention</span> <span class="o">=</span> <span class="s2">&quot;passable&quot;</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">elif</span> <span class="n">note</span> <span class="o">&gt;=</span> <span class="mi">12</span><span class="p">:</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">mention</span> <span class="o">=</span> <span class="s2">&quot;assez bien&quot;</span>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="k">elif</span> <span class="n">note</span> <span class="o">&gt;=</span> <span class="mi">14</span><span class="p">:</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="n">mention</span> <span class="o">=</span> <span class="s2">&quot;bien&quot;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">if</span> <span class="n">note</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>    <span class="n">mention</span> <span class="o">=</span> <span class="s2">&quot;passable&quot;</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="k">elif</span> <span class="n">note</span> <span class="o">&gt;=</span> <span class="mi">12</span><span class="p">:</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>    <span class="n">mention</span> <span class="o">=</span> <span class="s2">&quot;assez bien&quot;</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">elif</span> <span class="n">note</span> <span class="o">&gt;=</span> <span class="mi">14</span><span class="p">:</span>
+<a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="n">mention</span> <span class="o">=</span> <span class="s2">&quot;bien&quot;</span>
 </code></pre></div>
 Résultat : <code>"passable"</code> ! Car <code>15 &gt;= 10</code> est vrai en premier, et Python s'arrête là. Il faut tester <strong>du cas le plus exigeant au moins exigeant</strong>.</p>
 </div>
@@ -9677,25 +9628,6 @@ Résultat : <code>"passable"</code> ! Car <code>15 &gt;= 10</code> est vrai en p
 <li><strong>Mention au bac.</strong> À partir d'une moyenne sur 20 : <code>[0;8)</code> Recalé, <code>[8;10)</code> Rattrapage, <code>[10;12)</code> Sans mention, <code>[12;14)</code> Assez bien, <code>[14;16)</code> Bien, <code>[16;18)</code> Très bien, <code>[18;20]</code> Félicitations.</li>
 <li><strong>Année bissextile.</strong> Une année est bissextile si elle est multiple de 4 mais pas de 100, <strong>ou</strong> multiple de 400. Teste 2021, 2020, 1900, 2000.</li>
 </ol>
-<details class="warning">
-<summary>Corrigé (mention)</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">moyenne</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Moyenne : &quot;</span><span class="p">))</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">if</span> <span class="n">moyenne</span> <span class="o">&gt;=</span> <span class="mi">18</span><span class="p">:</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Félicitations&quot;</span><span class="p">)</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="k">elif</span> <span class="n">moyenne</span> <span class="o">&gt;=</span> <span class="mi">16</span><span class="p">:</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Très bien&quot;</span><span class="p">)</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="k">elif</span> <span class="n">moyenne</span> <span class="o">&gt;=</span> <span class="mi">14</span><span class="p">:</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Bien&quot;</span><span class="p">)</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="k">elif</span> <span class="n">moyenne</span> <span class="o">&gt;=</span> <span class="mi">12</span><span class="p">:</span>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Assez bien&quot;</span><span class="p">)</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="k">elif</span> <span class="n">moyenne</span> <span class="o">&gt;=</span> <span class="mi">10</span><span class="p">:</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Sans mention&quot;</span><span class="p">)</span>
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a><span class="k">elif</span> <span class="n">moyenne</span> <span class="o">&gt;=</span> <span class="mi">8</span><span class="p">:</span>
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rattrapage&quot;</span><span class="p">)</span>
-<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a><span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Recalé&quot;</span><span class="p">)</span>
-</code></pre></div>
-</details>
 </div>
 <h2 id="combiner-les-conditions-and-or-not">Combiner les conditions : <code>and</code>, <code>or</code>, <code>not</code></h2>
 <p>On combine des booléens avec <code>and</code> (et), <code>or</code> (ou, inclusif) et <code>not</code> (non). Les tables de vérité sont dans <a href="../../Num%C3%A9ration/booleens/">Les booléens</a>. Ce sont de vraies opérations : elles prennent des booléens et renvoient un booléen.</p>
@@ -9704,46 +9636,46 @@ Résultat : <code>"passable"</code> ! Car <code>15 &gt;= 10</code> est vrai en p
 <p class="admonition-title">Le pass sanitaire : de l'imbriqué au booléen</p>
 <p>On peut entrer si on est vacciné, ou, à défaut, si on a un test négatif.</p>
 <p>Version imbriquée, lourde :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">if</span> <span class="n">vaccine</span><span class="p">:</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous pouvez entrer&quot;</span><span class="p">)</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="k">if</span> <span class="n">test_negatif</span><span class="p">:</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous pouvez entrer&quot;</span><span class="p">)</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous ne pouvez pas entrer&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">if</span> <span class="n">vaccine</span><span class="p">:</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous pouvez entrer&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="k">if</span> <span class="n">test_negatif</span><span class="p">:</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous pouvez entrer&quot;</span><span class="p">)</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous ne pouvez pas entrer&quot;</span><span class="p">)</span>
 </code></pre></div></p>
 <p>Version <code>elif</code>, un peu mieux :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">if</span> <span class="n">vaccine</span><span class="p">:</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous pouvez entrer&quot;</span><span class="p">)</span>
-<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="k">elif</span> <span class="n">test_negatif</span><span class="p">:</span>
-<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous pouvez entrer&quot;</span><span class="p">)</span>
-<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous ne pouvez pas entrer&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">if</span> <span class="n">vaccine</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous pouvez entrer&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">elif</span> <span class="n">test_negatif</span><span class="p">:</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous pouvez entrer&quot;</span><span class="p">)</span>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous ne pouvez pas entrer&quot;</span><span class="p">)</span>
 </code></pre></div></p>
 <p>Version booléenne, la plus claire :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">if</span> <span class="n">vaccine</span> <span class="ow">or</span> <span class="n">test_negatif</span><span class="p">:</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous pouvez entrer&quot;</span><span class="p">)</span>
-<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous ne pouvez pas entrer&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">if</span> <span class="n">vaccine</span> <span class="ow">or</span> <span class="n">test_negatif</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous pouvez entrer&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Vous ne pouvez pas entrer&quot;</span><span class="p">)</span>
 </code></pre></div></p>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Tester un encadrement</p>
 <p>Pour vérifier qu'un nombre <code>n</code> est entre 4 et 8 inclus, il faut qu'il soit <code>&gt;= 4</code> <strong>et</strong> <code>&lt;= 8</code> :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">:</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="o">...</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">if</span> <span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="o">...</span>
 </code></pre></div></p>
 </div>
 <h3 id="nier-une-condition-les-lois-de-de-morgan">Nier une condition : les lois de De Morgan</h3>
 <p>Tu as calculé sur les expressions booléennes dans le chapitre <a href="../../logique/logique/">Logique booléenne</a>, sans savoir encore à quoi cela servirait. C'est ici. Le cas le plus fréquent est la <strong>négation d'une condition composée</strong>, et c'est aussi celui où l'on se trompe le plus.</p>
 <p>Reprends l'encadrement ci-dessus. Comment écrire « <code>n</code> n'est <strong>pas</strong> entre 4 et 8 » ?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="c1"># Correct, mais lourd</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">):</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hors de l&#39;intervalle&quot;</span><span class="p">)</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="c1"># Le même test, écrit directement</span>
-<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
-<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hors de l&#39;intervalle&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="c1"># Correct, mais lourd</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">8</span><span class="p">):</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hors de l&#39;intervalle&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="c1"># Le même test, écrit directement</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">4</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;hors de l&#39;intervalle&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p>Le passage de l'un à l'autre suit une règle, et une seule :</p>
 <div class="admonition abstract">
@@ -9772,25 +9704,25 @@ Résultat : <code>"passable"</code> ! Car <code>15 &gt;= 10</code> est vrai en p
 <div class="admonition danger">
 <p class="admonition-title">Piège : le <code>or</code> qui est toujours vrai</p>
 <p>Tu veux tester que <code>n</code> n'est ni 4 ni 8. Beaucoup écrivent :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">4</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">8</span><span class="p">:</span>   <span class="c1"># TOUJOURS VRAI</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">4</span> <span class="ow">or</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">8</span><span class="p">:</span>   <span class="c1"># TOUJOURS VRAI</span>
 </code></pre></div>
 <p>Prends <code>n = 4</code> : <code>n != 4</code> est faux, mais <code>n != 8</code> est <strong>vrai</strong>, donc le <code>or</code> est vrai. Prends <code>n = 8</code> : c'est l'inverse, et le <code>or</code> est encore vrai. Prends n'importe quel autre nombre : les deux sont vrais. <strong>Cette condition ne peut jamais être fausse.</strong></p>
 <p>L'erreur vient de la négation. La phrase de départ est « <code>n</code> est 4 <strong>ou</strong> 8 », soit <code>n == 4 or n == 8</code>. En la niant, De Morgan transforme le <code>or</code> en <code>and</code> :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">8</span><span class="p">:</span>   <span class="c1"># correct</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">if</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">4</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">8</span><span class="p">:</span>   <span class="c1"># correct</span>
 </code></pre></div>
 <p>Retiens la forme : <strong>quand tu nies une liste de possibilités, les <code>or</code> deviennent des <code>and</code></strong>.</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Prédis avant d'exécuter</p>
 <p>Pour chacune de ces conditions, dis si elle est vraie ou fausse quand <code>age = 20</code> et <code>permis = False</code>, <strong>avant</strong> de l'essayer.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">c1</span> <span class="o">=</span> <span class="ow">not</span> <span class="p">(</span><span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span> <span class="ow">and</span> <span class="n">permis</span><span class="p">)</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">c2</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">permis</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="n">c3</span> <span class="o">=</span> <span class="ow">not</span> <span class="p">(</span><span class="n">age</span> <span class="o">&lt;</span> <span class="mi">18</span> <span class="ow">or</span> <span class="n">permis</span><span class="p">)</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="n">c4</span> <span class="o">=</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">permis</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">c1</span> <span class="o">=</span> <span class="ow">not</span> <span class="p">(</span><span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span> <span class="ow">and</span> <span class="n">permis</span><span class="p">)</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">c2</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">permis</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="n">c3</span> <span class="o">=</span> <span class="ow">not</span> <span class="p">(</span><span class="n">age</span> <span class="o">&lt;</span> <span class="mi">18</span> <span class="ow">or</span> <span class="n">permis</span><span class="p">)</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="n">c4</span> <span class="o">=</span> <span class="n">age</span> <span class="o">&gt;=</span> <span class="mi">18</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">permis</span>
 </code></pre></div>
 <p>Que remarques-tu en comparant <code>c1</code> et <code>c2</code> ? Et <code>c3</code> et <code>c4</code> ?</p>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p><code>age &gt;= 18</code> est <strong>vrai</strong>, <code>permis</code> est <strong>faux</strong>.</p>
 <ul>
 <li><code>c1</code> : <code>not (vrai and faux)</code> = <code>not faux</code> = <strong>True</strong></li>
@@ -9804,7 +9736,7 @@ Résultat : <code>"passable"</code> ! Car <code>15 &gt;= 10</code> est vrai en p
 <div class="admonition tip">
 <p class="admonition-title">Simplifier au lieu d'empiler</p>
 <p>L'autre usage de l'algèbre booléenne est la <strong>simplification</strong>. Si tu obtiens une condition comme celle-ci :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">if</span> <span class="n">vaccine</span> <span class="ow">or</span> <span class="p">(</span><span class="n">vaccine</span> <span class="ow">and</span> <span class="n">test_negatif</span><span class="p">):</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">if</span> <span class="n">vaccine</span> <span class="ow">or</span> <span class="p">(</span><span class="n">vaccine</span> <span class="ow">and</span> <span class="n">test_negatif</span><span class="p">):</span>
 </code></pre></div>
 <p>elle se réduit à <code>if vaccine:</code>. En effet, si <code>vaccine</code> est vrai, le premier morceau suffit ; s'il est faux, le second l'est aussi puisqu'il commence par <code>vaccine</code>. C'est la règle <span class="arithmatex">\(x + x.y = x\)</span>, que tu as démontrée par le calcul en logique.</p>
 <p>Une condition simplifiée n'est pas seulement plus courte : elle est plus facile à relire, donc plus facile à corriger.</p>
@@ -9831,13 +9763,6 @@ Résultat : <code>"passable"</code> ! Car <code>15 &gt;= 10</code> est vrai en p
 <details class="tip">
 <summary>Indice plus précis (cinéma)</summary>
 <p>Le diagramme se lit en deux temps. Un premier bloc <code>if / elif / else</code> fixe le tarif selon l'âge, du plus exigeant au moins exigeant. Puis, <strong>après</strong> ce bloc et une seule fois, un second <code>if</code> applique la promotion. Ne recopie pas la promotion dans chaque branche.</p>
-</details>
-<details class="warning">
-<summary>Corrigé (bissextile booléenne)</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">annee</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Année : &quot;</span><span class="p">))</span>
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">bissextile</span> <span class="o">=</span> <span class="p">(</span><span class="n">annee</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">annee</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">annee</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
-<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">bissextile</span><span class="p">)</span>
-</code></pre></div>
 </details>
 </div>
 <div class="admonition question">
@@ -9871,21 +9796,6 @@ Résultat : <code>"passable"</code> ! Car <code>15 &gt;= 10</code> est vrai en p
 <li><code>pair_ou_impair(n)</code> : renvoie <code>"pair"</code> ou <code>"impair"</code>.</li>
 <li><code>plus_petit(a, b)</code> : renvoie le plus petit des deux entiers.</li>
 </ol>
-<details class="warning">
-<summary>Corrigé</summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">pair_ou_impair</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie &#39;pair&#39; ou &#39;impair&#39; selon la parité de n&quot;&quot;&quot;</span>
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a>    <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a>        <span class="k">return</span> <span class="s2">&quot;pair&quot;</span>
-<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a>    <span class="k">return</span> <span class="s2">&quot;impair&quot;</span>
-<a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a>
-<a id="__codelineno-22-7" name="__codelineno-22-7" href="#__codelineno-22-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">plus_petit</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-22-8" name="__codelineno-22-8" href="#__codelineno-22-8"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le plus petit des deux entiers&quot;&quot;&quot;</span>
-<a id="__codelineno-22-9" name="__codelineno-22-9" href="#__codelineno-22-9"></a>    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">:</span>
-<a id="__codelineno-22-10" name="__codelineno-22-10" href="#__codelineno-22-10"></a>        <span class="k">return</span> <span class="n">a</span>
-<a id="__codelineno-22-11" name="__codelineno-22-11" href="#__codelineno-22-11"></a>    <span class="k">return</span> <span class="n">b</span>
-</code></pre></div>
-</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">IMC</p>
@@ -9909,37 +9819,37 @@ Résultat : <code>"passable"</code> ! Car <code>15 &gt;= 10</code> est vrai en p
 <p class="admonition-title">Vérification individuelle (15 minutes, seul, cours fermé)</p>
 <p>À faire seul, sans aide et sans IA. Ce n'est pas noté : c'est un instrument de mesure, et il ne sert que si tu ne triches pas avec toi-même.</p>
 <p><strong>1. Lire.</strong> Que s'affiche-t-il ?
-<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">7</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
-<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">3</span>
-<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="k">if</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
-<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;les deux&quot;</span><span class="p">)</span>
-<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="k">elif</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
-<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y seul&quot;</span><span class="p">)</span>
-<a id="__codelineno-23-8" name="__codelineno-23-8" href="#__codelineno-23-8"></a><span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-23-9" name="__codelineno-23-9" href="#__codelineno-23-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;aucun&quot;</span><span class="p">)</span>
-<a id="__codelineno-23-10" name="__codelineno-23-10" href="#__codelineno-23-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">7</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">y</span> <span class="o">=</span> <span class="n">x</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="n">x</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">3</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="k">if</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">5</span> <span class="ow">and</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;les deux&quot;</span><span class="p">)</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="k">elif</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">5</span><span class="p">:</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;y seul&quot;</span><span class="p">)</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;aucun&quot;</span><span class="p">)</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </code></pre></div></p>
 <p><strong>2. Compléter.</strong> Remplis les trous pour que le programme affiche <code>"cher"</code> si le prix dépasse 100, <code>"correct"</code> entre 50 et 100 inclus, et <code>"bon marché"</code> en dessous.
-<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">prix</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Prix ? &quot;</span><span class="p">))</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="k">if</span> <span class="o">...</span><span class="p">:</span>
-<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cher&quot;</span><span class="p">)</span>
-<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="k">elif</span> <span class="o">...</span><span class="p">:</span>
-<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;correct&quot;</span><span class="p">)</span>
-<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;bon marché&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">prix</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Prix ? &quot;</span><span class="p">))</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="k">if</span> <span class="o">...</span><span class="p">:</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;cher&quot;</span><span class="p">)</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="k">elif</span> <span class="o">...</span><span class="p">:</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;correct&quot;</span><span class="p">)</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;bon marché&quot;</span><span class="p">)</span>
 </code></pre></div></p>
 <p><strong>3. Écrire.</strong> Depuis zéro : demande une année et affiche si elle est bissextile (multiple de 4 mais pas de 100, <strong>ou</strong> multiple de 400).</p>
 <details class="success">
-<summary>Réponses</summary>
+<summary>Correction</summary>
 <p><strong>1.</strong> <code>les deux</code> puis <code>10 7</code>. Le point délicat est <code>y = x</code> : il a copié la valeur <code>7</code> à cet instant, et <code>x = x + 3</code> ne l'a pas suivi.</p>
 <p><strong>2.</strong> <code>if prix &gt; 100:</code> puis <code>elif prix &gt;= 50:</code>. L'ordre compte : le <code>elif</code> n'est atteint que si le premier test est faux, donc il est inutile d'y réécrire <code>prix &lt;= 100</code>.</p>
 <p><strong>3.</strong>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">annee</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Année ? &quot;</span><span class="p">))</span>
-<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="k">if</span> <span class="p">(</span><span class="n">annee</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">annee</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">annee</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;bissextile&quot;</span><span class="p">)</span>
-<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="k">else</span><span class="p">:</span>
-<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;non bissextile&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">annee</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Année ? &quot;</span><span class="p">))</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="k">if</span> <span class="p">(</span><span class="n">annee</span> <span class="o">%</span> <span class="mi">4</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">annee</span> <span class="o">%</span> <span class="mi">100</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">or</span> <span class="n">annee</span> <span class="o">%</span> <span class="mi">400</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;bissextile&quot;</span><span class="p">)</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="k">else</span><span class="p">:</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;non bissextile&quot;</span><span class="p">)</span>
 </code></pre></div></p>
 </details>
 </div>
@@ -9976,7 +9886,7 @@ Résultat : <code>"passable"</code> ! Car <code>15 &gt;= 10</code> est vrai en p
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2026 14:25:15 UTC">October 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 8, 2026 21:18:52 UTC">November 8, 2026</span>
   </span>
 
     

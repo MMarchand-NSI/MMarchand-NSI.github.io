@@ -1499,35 +1499,7 @@
   <span class="md-ellipsis">
     
   
-    Les variables
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../entiers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Le type entier
+    Les variables et le type entier
   
 
     
@@ -9596,8 +9568,8 @@
 
 <h1 id="les-dictionnaires">Les dictionnaires</h1>
 <div class="admonition question">
-<p class="admonition-title">Prédire la dernière ligne</p>
-<p>Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
+<p class="admonition-title">Prédire la valeur</p>
+<p>Écris la valeur de l'expression demandée comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris plutôt ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
 </div>
 <script type="text/x-silent-teacher" data-titre="Les dictionnaires">
 d = {'a': {{a:1..4}}, 'b': {{b:5..9}}}
@@ -9642,7 +9614,7 @@ d['a']
 <li>Que vaut <code>len([[1, 2], [3, 4], [5, 6]])</code> ?</li>
 </ol>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <ol>
 <li><code>a</code> vaut <code>[1, 2, 3, 4]</code>. <code>b = a</code> ne copie rien : ce sont <strong>deux noms pour une seule liste</strong>, et modifier l'une modifie l'autre.</li>
 <li><code>x</code> vaut <code>3</code> et <code>y</code> vaut <code>5</code> : c'est la <strong>déstructuration</strong>. C'est aussi ce qui permet à une fonction de « renvoyer deux valeurs », en renvoyant en réalité un tuple.</li>
@@ -9768,15 +9740,6 @@ d['a']
 <a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="n">total</span> <span class="o">=</span> <span class="n">total</span> <span class="o">+</span> <span class="n">stock</span><span class="p">[</span><span class="n">fruit</span><span class="p">]</span>
 <a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">total</span><span class="p">)</span>
 </code></pre></div>
-<details class="warning">
-<summary>Réponse</summary>
-<ol>
-<li><code>fruit</code> vaut <code>"poire"</code>, et <code>stock[fruit]</code> vaut <code>5</code>. La variable de boucle prend les <strong>clés</strong>, dans leur ordre d'insertion.</li>
-<li><code>8</code>, soit <code>3 + 5</code>.</li>
-<li><code>10</code>, soit <code>3 + 5 + 2</code>.</li>
-</ol>
-<p>Le point à retenir est celui de la question 1 : <code>for fruit in stock</code> parcourt les <strong>clés</strong>, pas les valeurs. C'est <code>stock[fruit]</code> qui donne la valeur associée. Si tu as répondu <code>3</code> à la première question, tu confondais les deux.</p>
-</details>
 </div>
 <h2 id="exercices">Exercices</h2>
 <div class="admonition abstract">
@@ -9810,7 +9773,7 @@ d['a']
 <li>Affiche la note de <code>"Anglais"</code>, en renvoyant <code>0</code> si la matière n'y est pas.</li>
 </ol>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">notes</span> <span class="o">=</span> <span class="p">{}</span>                                  <span class="c1"># 1</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">employe</span><span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">])</span>                       <span class="c1"># 2</span>
 <a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">employe</span><span class="p">[</span><span class="s2">&quot;poste&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;ingénieure&quot;</span>             <span class="c1"># 3</span>
@@ -9856,7 +9819,7 @@ Question 11 : écrire <code>notes["Anglais"]</code> lèverait une <code>KeyError
 <p>Un seul accumulateur suffit : <code>len(dico)</code> te donne déjà le compte. Parcours donc <code>dico.values()</code> et accumule la somme.</p>
 </details>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">moyenne</span><span class="p">(</span><span class="n">dico</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
 <a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la moyenne des valeurs du dictionnaire, qui n&#39;est pas vide.&quot;&quot;&quot;</span>
 <a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">dico</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;le dictionnaire ne doit pas être vide&quot;</span>
@@ -9879,7 +9842,7 @@ Question 11 : écrire <code>notes["Anglais"]</code> lèverait une <code>KeyError
 <p>Parcours <code>dico.items()</code>. Garde une variable <code>meilleure_cle</code>, initialisée à... rien de valide au départ : on peut partir de la première clé rencontrée, ou traiter le premier tour à part.</p>
 </details>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">meilleure</span><span class="p">(</span><span class="n">dico</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la clé associée à la plus grande valeur.&quot;&quot;&quot;</span>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">dico</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;le dictionnaire ne doit pas être vide&quot;</span>
@@ -9937,7 +9900,7 @@ Piège fréquent : initialiser <code>meilleure_note = 0</code>. Cela marche sur 
 <p>On ne renomme pas une clé en Python. Il faut en <strong>créer une nouvelle</strong> avec l'ancienne valeur, puis <strong>supprimer</strong> l'ancienne. Dans quel ordre ? Essaie l'ordre inverse et regarde ce qui se passe.</p>
 </details>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">ville</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;nom&quot;</span><span class="p">:</span> <span class="s2">&quot;Montreal&quot;</span><span class="p">,</span> <span class="s2">&quot;pays&quot;</span><span class="p">:</span> <span class="s2">&quot;Canada&quot;</span><span class="p">,</span> <span class="s2">&quot;province&quot;</span><span class="p">:</span> <span class="s2">&quot;Quebec&quot;</span><span class="p">,</span>
 <a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>         <span class="s2">&quot;pop&quot;</span><span class="p">:</span> <span class="mi">1825208</span><span class="p">,</span> <span class="s2">&quot;superficie&quot;</span><span class="p">:</span> <span class="mi">315</span><span class="p">}</span>
 <a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">ville</span><span class="p">[</span><span class="s2">&quot;superficie&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">365</span>
@@ -9967,7 +9930,7 @@ Piège fréquent : initialiser <code>meilleure_note = 0</code>. Cela marche sur 
 <p>C'est une accumulation : l'accumulateur est un dictionnaire <strong>vide</strong>, et à chaque tour on ajoute un couple, dans l'autre sens. Sur quoi parcourt-on pour disposer des deux à la fois ?</p>
 </details>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nb">print</span><span class="p">(</span><span class="n">repertoire</span><span class="p">[</span><span class="s2">&quot;Piotr&quot;</span><span class="p">])</span>                  <span class="c1"># 1</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Fanny&quot;</span> <span class="ow">in</span> <span class="n">repertoire</span><span class="p">)</span>                <span class="c1"># 2</span>
 <a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">repertoire</span><span class="p">[</span><span class="s2">&quot;Ewen&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;0612345679&quot;</span>           <span class="c1"># 3</span>
@@ -9997,7 +9960,7 @@ Cette inversion n'est fiable que si les numéros sont <strong>tous différents</
 <p>Parcours les <strong>indices</strong>, avec <code>for i in range(0, len(cles))</code>. À chaque tour, <code>cles[i]</code> et <code>valeurs[i]</code> se correspondent.</p>
 </details>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">resultat</span> <span class="o">=</span> <span class="p">{}</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cles</span><span class="p">)):</span>
 <a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a>    <span class="n">resultat</span><span class="p">[</span><span class="n">cles</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valeurs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
@@ -10025,7 +9988,7 @@ Remarque : n'importe quel type <strong>immuable</strong> peut servir de clé. Un
 <p>Deux accumulateurs de types différents, <code>total = 0</code> et <code>bien_payes = []</code>, tous deux initialisés <strong>avant</strong> la boucle. L'un se met à jour à chaque tour, l'autre seulement sous un <code>if</code>.</p>
 </details>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">employes</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="s2">&quot;salaire&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">8500</span>              <span class="c1"># 1 : indice de liste, puis clé</span>
 <a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a>
 <a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="n">total</span> <span class="o">=</span> <span class="mi">0</span>                                  <span class="c1"># 2 et 3 séparément</span>
@@ -10068,7 +10031,7 @@ La question 1 combine les deux notations : <code>employes[2]</code> sort un dict
 <p><code>compte = {}</code> avant la boucle. À chaque caractère, deux cas : la clé existe déjà (on ajoute 1 à sa valeur) ou non (on la crée à 1). Le <code>get</code> avec valeur par défaut permet d'écrire les deux cas en une seule ligne.</p>
 </details>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">compteur</span><span class="p">(</span><span class="n">chaine</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le nombre d&#39;apparitions de chaque caractère de chaine.&quot;&quot;&quot;</span>
 <a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a>    <span class="n">compte</span> <span class="o">=</span> <span class="p">{}</span>
@@ -10106,7 +10069,7 @@ Les deux sont justes. La première est celle qu'on écrit une fois qu'on a compr
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2026 14:25:15 UTC">October 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 8, 2026 21:18:52 UTC">November 8, 2026</span>
   </span>
 
     

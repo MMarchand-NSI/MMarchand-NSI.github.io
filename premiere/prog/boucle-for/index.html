@@ -1499,35 +1499,7 @@
   <span class="md-ellipsis">
     
   
-    Les variables
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../entiers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Le type entier
+    Les variables et le type entier
   
 
     
@@ -9350,8 +9322,8 @@
 
 <h1 id="la-boucle-for">La boucle <code>for</code></h1>
 <div class="admonition question">
-<p class="admonition-title">Prédire la dernière ligne</p>
-<p>Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
+<p class="admonition-title">Prédire la valeur</p>
+<p>Écris la valeur de l'expression demandée comme Python l'écrirait (<code>'abc'</code>, <code>True</code>, <code>2.0</code>), puis valide. Quand le champ est marqué « affiche », écris plutôt ce que le programme affiche. Si le programme s'arrête sur une erreur, écris <code>erreur</code>. Les valeurs changent à chaque essai.</p>
 </div>
 <script type="text/x-silent-teacher" data-titre="La boucle for">
 n = 0
@@ -9394,7 +9366,7 @@ for c in {{m:'abc'|'nsi'|'rat'}}:
 <li>La fonction <code>double(n)</code> renvoie le double de <code>n</code>. Écris l'<code>assert</code> qui vérifie que <code>double(3)</code> vaut <code>6</code>. Que se passe-t-il s'il est faux ?</li>
 </ol>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <ol>
 <li><code>13</code>. Le membre de droite est <strong>calculé d'abord</strong> (<code>10 + 3</code>), puis rangé dans <code>acc</code>. C'est ce mécanisme, répété, qui va faire toute la page d'aujourd'hui.</li>
 <li><code>"p"</code>, <code>"n"</code> et <code>6</code>. Le plus grand indice valide est <code>5</code>, soit <code>len(mot) - 1</code> : écrire <code>mot[6]</code> lève une <code>IndexError</code>.</li>
@@ -9571,13 +9543,6 @@ affiche <code>c</code>, puis <code>h</code>, puis <code>a</code>, puis <code>t</
 <li>Prédis l'affichage.</li>
 <li><strong>Modifie une seule ligne</strong> pour que le mot s'affiche à l'envers.</li>
 </ol>
-<details class="warning">
-<summary>Réponse</summary>
-<ol>
-<li><code>python</code> : chaque lettre est ajoutée <strong>derrière</strong> les précédentes, donc on obtient une copie du mot.</li>
-<li>Remplacer <code>acc = acc + lettre</code> par <code>acc = lettre + acc</code> : chaque lettre se place alors <strong>devant</strong> les précédentes, et on obtient <code>nohtyp</code>.</li>
-</ol>
-</details>
 </div>
 <h2 id="premiers-exercices-accumuler-en-parcourant-une-chaine">Premiers exercices : accumuler en parcourant une chaîne</h2>
 <div class="admonition note">
@@ -9589,7 +9554,7 @@ affiche <code>c</code>, puis <code>h</code>, puis <code>a</code>, puis <code>t</
 <p class="admonition-title">1 - Afficher un par un</p>
 <p>Avec <code>mot = "bonjour"</code>, affiche les caractères de <code>mot</code> un par un, un par ligne.</p>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;bonjour&quot;</span>
 <a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="k">for</span> <span class="n">car</span> <span class="ow">in</span> <span class="n">mot</span><span class="p">:</span>
 <a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">car</span><span class="p">)</span>
@@ -9605,7 +9570,7 @@ Pas encore d'accumulateur : on applique seulement <strong>le même traitement</s
 <p>C'est l'exemple « doubler » du cours, à un détail près. Qu'est-ce qui change, et qu'est-ce qui ne change pas ?</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;chat&quot;</span>
 <a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">acc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="k">for</span> <span class="n">car</span> <span class="ow">in</span> <span class="n">mot</span><span class="p">:</span>
@@ -9622,7 +9587,7 @@ Pas encore d'accumulateur : on applique seulement <strong>le même traitement</s
 <p>Dans <code>acc</code>, où doit aller chaque nouveau caractère : <strong>avant</strong> ou <strong>après</strong> ceux qui y sont déjà ?</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">mot</span> <span class="o">=</span> <span class="s2">&quot;python&quot;</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">acc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="k">for</span> <span class="n">car</span> <span class="ow">in</span> <span class="n">mot</span><span class="p">:</span>
@@ -9643,7 +9608,7 @@ Pas encore d'accumulateur : on applique seulement <strong>le même traitement</s
 <p>Cette fois, l'accumulateur n'est pas une chaîne mais un <strong>entier</strong> : à chaque caractère, il augmente de <code>1</code>.</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <ol>
 <li><strong>Zéro</strong> : tant qu'on n'a parcouru aucun caractère, on n'en a compté aucun. C'est pour cela que le compteur part de <code>0</code>.</li>
 <li><code>python
@@ -9675,7 +9640,7 @@ Pas encore d'accumulateur : on applique seulement <strong>le même traitement</s
 <a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p>Il affiche <code>4</code>. Il <strong>compte combien de fois le chiffre 6 apparaît</strong> dans la chaîne : si <code>x</code> note une série de lancers de dé, il dit combien de fois le 6 est sorti.</p>
 <p>Les noms <code>x</code>, <code>n</code> et <code>c</code> ne t'aidaient pas : il fallait lire le code. Avec de bons noms, <code>lancers</code>, <code>nb_six</code> et <code>de</code>, la phrase se serait presque écrite toute seule. C'est à cela que sert un nom.</p>
 </details>
@@ -9691,13 +9656,13 @@ Pas encore d'accumulateur : on applique seulement <strong>le même traitement</s
 <summary>Indice plus précis</summary>
 <p>Un accumulateur <code>acc = ""</code> avant, un parcours <code>for car in phrase</code>, et <strong>dans</strong> la boucle un <code>if car != " "</code> avant d'ajouter.</p>
 </details>
-<details class="question">
-<summary>Avant d'ouvrir la solution</summary>
+<details class="note">
+<summary>Avant d'ouvrir la correction</summary>
 <p>Écris une phrase sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui bloquait dans <strong>ton</strong> code ?</p>
 <p>Une phrase suffit, et elle doit parler de ton code, pas du cours. C'est ce geste qui fait la différence entre finir l'exercice et savoir le refaire seul la prochaine fois.</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">phrase</span> <span class="o">=</span> <span class="s2">&quot;le petit chat&quot;</span>
 <a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">acc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="k">for</span> <span class="n">car</span> <span class="ow">in</span> <span class="n">phrase</span><span class="p">:</span>
@@ -9718,12 +9683,12 @@ Pas encore d'accumulateur : on applique seulement <strong>le même traitement</s
 <summary>Indice plus précis</summary>
 <p>Dans la boucle, un <code>if car == "o"</code> qui ajoute <code>"0"</code>, et un <code>else</code> qui ajoute <code>car</code> tel quel.</p>
 </details>
-<details class="question">
-<summary>Avant d'ouvrir la solution</summary>
+<details class="note">
+<summary>Avant d'ouvrir la correction</summary>
 <p>Écris une phrase sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui bloquait dans <strong>ton</strong> code ?</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">phrase</span> <span class="o">=</span> <span class="s2">&quot;bonjour le monde&quot;</span>
 <a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">acc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
 <a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="k">for</span> <span class="n">car</span> <span class="ow">in</span> <span class="n">phrase</span><span class="p">:</span>
@@ -9792,7 +9757,7 @@ Compare avec <em>Sans les espaces</em> : là, certains caractères n'étaient <s
 <p>On l'initialise avec <code>txt[0]</code>, le seul candidat dont on soit sûr qu'il appartient au texte. C'est d'ailleurs à cela que sert l'<code>assert</code> : sans lui, <code>txt[0]</code> planterait sur une chaîne vide.</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">plus_petite_lettre</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie la plus petite lettre de txt, qui n&#39;est pas vide.&quot;&quot;&quot;</span>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;le texte ne doit pas être vide&quot;</span>
@@ -9847,7 +9812,7 @@ Tu retrouveras exactement cet algorithme sur les listes, puis sur les dictionnai
 <a id="__codelineno-20-37" name="__codelineno-20-37" href="#__codelineno-20-37"></a>    <span class="o">...</span>
 </code></pre></div>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">tripler</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie txt où chaque caractère est répété trois fois.&quot;&quot;&quot;</span>
 <a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a>    <span class="n">acc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -9954,12 +9919,12 @@ Dans chaque test, le cas de la chaîne vide vérifie la valeur de départ de l'a
 <summary>Indice plus précis</summary>
 <p>Le rang décalé vaut <code>(ord(car) - ord("a") + n) % 26</code>, et la lettre correspondante s'obtient avec <code>chr(... + ord("a"))</code>. <code>cesar</code> est une accumulation dans une chaîne avec un branchement conditionnel : si <code>car in ALPHABET</code>, on ajoute <code>decaler(car, n)</code>, sinon on ajoute <code>car</code>. C'est l'exercice « Remplacer un caractère », avec une fonction à la place du <code>"0"</code>.</p>
 </details>
-<details class="question">
-<summary>Avant d'ouvrir la solution</summary>
+<details class="note">
+<summary>Avant d'ouvrir la correction</summary>
 <p>Écris une phrase sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui bloquait dans <strong>ton</strong> code ?</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <p><strong>1.</strong> <code>"cheuh"</code>.</p>
 <p><strong>2. et 3.</strong></p>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">ALPHABET</span> <span class="o">=</span> <span class="s2">&quot;abcdefghijklmnopqrstuvwxyz&quot;</span>
@@ -10014,7 +9979,7 @@ Dans chaque test, le cas de la chaîne vide vérifie la valeur de départ de l'a
 <a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a>    <span class="o">...</span>
 </code></pre></div>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">rot13</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie txt chiffré par César avec un décalage de 13.&quot;&quot;&quot;</span>
 <a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a>    <span class="k">return</span> <span class="n">cesar</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="mi">13</span><span class="p">)</span>
@@ -10047,7 +10012,7 @@ Deux décalages de <code>13</code> font <code>26</code> rangs, soit un tour comp
 <p>Un mot est un palindrome quand il est <strong>égal</strong> à son renversement.</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">est_palindrome</span><span class="p">(</span><span class="n">mot</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si mot se lit de la même façon dans les deux sens.&quot;&quot;&quot;</span>
 <a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a>    <span class="k">return</span> <span class="n">mot</span> <span class="o">==</span> <span class="n">renverser</span><span class="p">(</span><span class="n">mot</span><span class="p">)</span>
@@ -10079,7 +10044,7 @@ Deux décalages de <code>13</code> font <code>26</code> rangs, soit un tour comp
 <p>C'est « Remplacer un caractère », mais avec <strong>quatre</strong> cas au lieu de deux : <code>if</code>, puis des <code>elif</code>.</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">complementaire</span><span class="p">(</span><span class="n">brin</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le brin complémentaire de brin.</span>
 <a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="sd">    Précondition : brin ne contient que les lettres A, C, G et T.&quot;&quot;&quot;</span>
@@ -10117,7 +10082,7 @@ Le dernier test vérifie une propriété, comme pour ROT13 : le complémentaire 
 <a id="__codelineno-30-7" name="__codelineno-30-7" href="#__codelineno-30-7"></a>    <span class="o">...</span>
 </code></pre></div>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">leet</span><span class="p">(</span><span class="n">txt</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie txt où a, e, i et o sont remplacés par 4, 3, 1 et 0.&quot;&quot;&quot;</span>
 <a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>    <span class="n">acc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -10158,7 +10123,7 @@ Le dernier test vérifie une propriété, comme pour ROT13 : le complémentaire 
 <p>Quand le caractère est une voyelle, on n'ajoute pas un morceau à <code>acc</code>, on en ajoute <strong>deux</strong>.</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">javanais</span><span class="p">(</span><span class="n">mot</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie mot où &quot;av&quot; est inséré devant chaque voyelle.&quot;&quot;&quot;</span>
 <a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a>    <span class="n">acc</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -10209,12 +10174,12 @@ Le dernier test vérifie une propriété, comme pour ROT13 : le complémentaire 
 <summary>Indice plus précis</summary>
 <p><code>trouve = False</code> avant la boucle ; dans la boucle, <code>if car.isupper(): trouve = True</code> ; on renvoie <code>trouve</code> après. <code>est_robuste</code> n'a pas de boucle : elle combine trois conditions avec <code>and</code>.</p>
 </details>
-<details class="question">
-<summary>Avant d'ouvrir la solution</summary>
+<details class="note">
+<summary>Avant d'ouvrir la correction</summary>
 <p>Écris une phrase sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui bloquait dans <strong>ton</strong> code ?</p>
 </details>
 <details class="success">
-<summary>Solution</summary>
+<summary>Correction</summary>
 <p><div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">contient_majuscule</span><span class="p">(</span><span class="n">mdp</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie True si mdp contient au moins une majuscule.&quot;&quot;&quot;</span>
 <a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>    <span class="n">trouve</span> <span class="o">=</span> <span class="kc">False</span>
@@ -10269,7 +10234,7 @@ On ne remet <strong>jamais</strong> <code>trouve</code> à <code>False</code> da
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2026 14:25:15 UTC">October 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 8, 2026 21:18:52 UTC">November 8, 2026</span>
   </span>
 
     

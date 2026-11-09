@@ -1132,21 +1132,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#le-standard-ascii" class="md-nav__link">
+  <a href="#iso-8859-1-les-256-cases-dun-octet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Le standard ASCII
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#une-etape-intermediaire-iso-8859-1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Une étape intermédiaire : ISO-8859-1
+        ISO-8859-1 : les 256 cases d'un octet
       
     </span>
   </a>
@@ -1165,10 +1154,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#convertir-un-texte-dun-encodage-a-un-autre" class="md-nav__link">
+  <a href="#peser-le-meme-texte-dans-deux-normes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Convertir un texte d'un encodage à un autre
+        Peser le même texte dans deux normes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ce-que-chaque-norme-achete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ce que chaque norme achète
       
     </span>
   </a>
@@ -1590,35 +1590,7 @@
   <span class="md-ellipsis">
     
   
-    Les variables
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../prog/entiers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Le type entier
+    Les variables et le type entier
   
 
     
@@ -9128,21 +9100,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#le-standard-ascii" class="md-nav__link">
+  <a href="#iso-8859-1-les-256-cases-dun-octet" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Le standard ASCII
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#une-etape-intermediaire-iso-8859-1" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Une étape intermédiaire : ISO-8859-1
+        ISO-8859-1 : les 256 cases d'un octet
       
     </span>
   </a>
@@ -9161,10 +9122,21 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#convertir-un-texte-dun-encodage-a-un-autre" class="md-nav__link">
+  <a href="#peser-le-meme-texte-dans-deux-normes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Convertir un texte d'un encodage à un autre
+        Peser le même texte dans deux normes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#ce-que-chaque-norme-achete" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ce que chaque norme achète
       
     </span>
   </a>
@@ -9265,73 +9237,32 @@
 <h1 id="representation-dun-texte">Représentation d'un texte</h1>
 <div class="admonition question">
 <p class="admonition-title">Rappel d'ouverture (5 minutes, cours fermé)</p>
+<p>Réponds <strong>sans rouvrir</strong> les pages précédentes, en écrivant tes réponses.</p>
 <ol>
-<li><code>a</code> est vrai et <code>b</code> est faux. Que valent <code>a and b</code>, <code>a or b</code> et <code>not a</code> ?</li>
-<li>Un octet vaut 8 bits. Combien de valeurs différentes peut-il contenir ?</li>
-<li>On veut associer un nombre à chaque lettre de l'alphabet latin. Un octet suffit-il ?</li>
+<li>Associer un nombre à un caractère est un choix arbitraire. Pourquoi a-t-il pourtant fallu se mettre d'accord ?</li>
+<li>ASCII associe à chaque caractère un nombre de 0 à 127. Combien de caractères différents cela permet-il de nommer ?</li>
+<li>Le simulateur LMC a refusé <code>DAT "10€"</code>. Pourquoi ?</li>
 </ol>
-</div>
 <details class="success">
-<summary>Corrigé</summary>
+<summary>Correction</summary>
 <ol>
-<li><code>a and b</code> est <strong>faux</strong> (le ET exige les deux), <code>a or b</code> est <strong>vrai</strong> (le OU se contente d'un seul), <code>not a</code> est <strong>faux</strong>.</li>
-<li><strong>256</strong>, de 0 à 255.</li>
-<li><strong>Largement</strong> : 26 lettres minuscules, 26 majuscules, les chiffres et la ponctuation tiennent sans peine dans 256 valeurs. La difficulté commence quand on veut écrire <strong>toutes les langues du monde</strong>, et c'est l'objet de cette page.</li>
+<li>Parce qu'un texte écrit sur une machine doit rester lisible sur une autre. Un accord de ce genre s'appelle une <strong>norme</strong>.</li>
+<li><strong>128</strong>, de 0 à 127.</li>
+<li>Parce que le <code>€</code> n'a pas de code dans la norme qu'emploie le simulateur, laquelle n'en connaît que 256.</li>
 </ol>
 </details>
-<p>Un texte est une suite de <strong>caractères</strong> (lettres, chiffres, symboles, espaces, emojis...). Comme toute information, un caractère doit être <strong>codé sous forme de nombre</strong> pour être stocké et manipulé par la machine.</p>
-<p>Il faut que tout le monde le fasse de la même manière pour que les informations puissent être communiquées. À ce titre, il existe des standards internationaux.</p>
-<h2 id="le-standard-ascii">Le standard ASCII</h2>
-<p>Le code ASCII (utilisé au départ par les ordinateurs) associe un nombre entre 0 et 127 à chaque caractère courant.</p>
-<p>C'est exactement le <strong>code</strong> dont on a parlé au début du chapitre (la section « Les chiffres et les codes ») : une convention qui associe un nombre (le signifiant) à un caractère (le signifié). Rien n'oblige <code>'A'</code> à valoir 65, c'est un choix qu'on a figé une fois pour toutes pour que toutes les machines s'accordent.</p>
-<table>
-<thead>
-<tr>
-<th>Caractère</th>
-<th>Code ASCII</th>
-<th>Stockage Binaire (8 bits)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>'A'</code></td>
-<td>65</td>
-<td><code>01000001</code></td>
-</tr>
-<tr>
-<td><code>'a'</code></td>
-<td>97</td>
-<td><code>01100001</code></td>
-</tr>
-<tr>
-<td><code>'B'</code></td>
-<td>66</td>
-<td><code>01000010</code></td>
-</tr>
-<tr>
-<td><code>'0'</code></td>
-<td>48</td>
-<td><code>00110000</code></td>
-</tr>
-</tbody>
-</table>
-<p>Vous noterez que pour un ordinateur, les majuscules et les minuscules ne sont pas du tout les mêmes informations. Il les considère comme différentes.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">s</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;B&#39;</span>
-<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">ord</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>    <span class="c1">## Affiche 66</span>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">print</span><span class="p">(</span><span class="nb">chr</span><span class="p">(</span><span class="mi">48</span><span class="p">))</span>   <span class="c1">## Affiche &#39;0&#39;</span>
-</code></pre></div>
-<p><code>ord(c)</code> renvoie le code (le point de code) du caractère <code>c</code>. <code>chr(n)</code> fait l'inverse : il renvoie le caractère associé au code <code>n</code>. Les deux fonctions sont réciproques.</p>
-<h2 id="une-etape-intermediaire-iso-8859-1">Une étape intermédiaire : ISO-8859-1</h2>
-<p>ASCII n'utilise que 7 bits (128 caractères) et ne connaît ni <code>é</code>, ni <code>ç</code>, ni <code>€</code>. Une première réponse a été la norme <strong>ISO-8859-1</strong> (aussi appelée Latin-1), qui utilise les 8 bits d'un octet (256 caractères) pour ajouter les lettres accentuées des langues d'Europe de l'Ouest.</p>
-<p>Mais 256 cases restent très insuffisantes pour le monde entier (alphabets grec, cyrillique, arabe, idéogrammes...). Il a donc fallu un standard universel.</p>
+</div>
+<p>Tu sais déjà qu'une chaîne de caractères est une suite de nombres, et que la table ASCII donne ces nombres : c'est la page <a href="../../prog/caracteres/">Les chaînes de caractère</a>. Cette page part de là et répond à la question suivante : 128 codes, puis 256, cela ne suffit pas au monde entier, alors que fait-on ?</p>
+<h2 id="iso-8859-1-les-256-cases-dun-octet">ISO-8859-1 : les 256 cases d'un octet</h2>
+<p>ASCII n'utilise que 7 bits, donc 128 codes, et ne connaît ni <code>é</code>, ni <code>ç</code>, ni <code>€</code>. La norme <strong>ISO-8859-1</strong>, aussi appelée Latin-1, utilise les 8 bits d'un octet, soit <strong>256 codes</strong>, et ajoute les lettres accentuées des langues d'Europe de l'Ouest. C'est elle qu'emploie le simulateur LMC, où le <code>é</code> vaut <strong>233</strong>.</p>
+<p>Un caractère tient donc dans <strong>exactement un octet</strong>. C'est simple, et c'est la limite : 256 cases pour le grec, le cyrillique, l'arabe, les idéogrammes et les emojis, c'est sans espoir.</p>
 <h2 id="le-standard-unicode">Le standard Unicode</h2>
-<p>Le code ASCII ne suffit pas pour représenter toutes les lettres (comme 'é', 'ç') ou d’autres symboles d'autres langues. Pour encoder plus de caractères, on utilise maintenant Unicode, qui peut représenter plus de 1 million de caractères du monde entier (accents, symboles scientifiques, emojis...).</p>
-<p>Unicode est un standard universel. Il définit chaque caractère avec un code unique (point de code). Le 10 septembre 2024, 5185 nouveaux caractères ont été ajoutés, portant le total à 154998 caractères représentables.</p>
+<p>Unicode abandonne la limite de l'octet. Il attribue un <strong>point de code</strong> à chaque caractère de toutes les écritures du monde, et en nomme aujourd'hui plus de 150 000.</p>
 <table>
 <thead>
 <tr>
 <th>Caractère</th>
-<th>Point de code Unicode</th>
+<th>Point de code</th>
 </tr>
 </thead>
 <tbody>
@@ -9349,90 +9280,92 @@
 </tr>
 </tbody>
 </table>
-<p>Mais ce sont juste des nombres abstraits : on ne dit pas comment les stocker ou transmettre.</p>
-<p>Pour ceci, on utilise des encodages qui transforment les points de code en octets (bytes) pour les stocker.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">caractere</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="mh">0x1F60A</span><span class="p">)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">caractere</span><span class="p">)</span>    <span class="c1">## Affiche 😊</span>
+</code></pre></div>
+<p>C'est la même fonction <code>chr</code> que sur la page des chaînes de caractères. Un point de code est un nombre, rien de plus.</p>
+<div class="admonition info">
+<p class="admonition-title">Un point de code n'est pas encore un octet</p>
+<p>Unicode dit <strong>quel nombre</strong> désigne quel caractère. Il ne dit pas <strong>comment écrire ce nombre dans un fichier</strong>, et c'est une autre question, car <code>U+1F60A</code> ne tient pas dans un octet.</p>
+<p>Les règles qui transforment les points de code en octets s'appellent des <strong>encodages</strong>, et le plus répandu est <strong>UTF-8</strong>. Tu n'as pas à connaître ces règles. Ce qu'il faut en savoir est ce que la section suivante te fait mesurer.</p>
+</div>
+<h2 id="peser-le-meme-texte-dans-deux-normes">Peser le même texte dans deux normes</h2>
+<div class="admonition question">
+<p class="admonition-title">Au terminal</p>
+<p>Dans le terminal de VS Code, fabrique un fichier, puis convertis-le dans l'autre norme.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="nb">printf</span><span class="w"> </span><span class="s1">&#39;Crème brûlée&#39;</span><span class="w"> </span>&gt;<span class="w"> </span>utf8.txt
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>iconv<span class="w"> </span>-f<span class="w"> </span>UTF-8<span class="w"> </span>-t<span class="w"> </span>ISO-8859-1<span class="w"> </span>utf8.txt<span class="w"> </span>&gt;<span class="w"> </span>latin1.txt
+</code></pre></div>
+<p>Les deux fichiers contiennent le même texte, qui compte <strong>12 caractères</strong>. Sur ton cahier, écris :</p>
+<ul>
+<li>si les deux fichiers ont la même taille, et sinon lequel est le plus petit,</li>
+<li>la taille en octets de <code>latin1.txt</code>.</li>
+</ul>
+<p><strong>Ne lance pas les commandes de vérification tant que tu n'as pas écrit tes réponses.</strong></p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>wc<span class="w"> </span>-c<span class="w"> </span>utf8.txt<span class="w"> </span>latin1.txt
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>file<span class="w"> </span>utf8.txt<span class="w"> </span>latin1.txt
+</code></pre></div>
+<details class="success">
+<summary>Correction</summary>
+<p><code>latin1.txt</code> pèse <strong>12 octets</strong>, un par caractère : dans cette norme, un caractère <strong>est</strong> un octet.</p>
+<p><code>utf8.txt</code> pèse <strong>15 octets</strong> pour les mêmes 12 caractères. Les trois octets de plus correspondent aux trois caractères accentués, <code>è</code>, <code>û</code> et <code>é</code>, qui en prennent <strong>deux</strong> chacun en UTF-8. Retiens cela, et rien d'autre sur UTF-8 : un caractère n'y occupe pas toujours un octet.</p>
+<p><code>file</code> nomme la norme qu'il a reconnue : <code>Unicode text, UTF-8 text</code> pour le premier, <code>ISO-8859 text</code> pour le second. Il ajoute <code>with no line terminators</code>, parce que <code>printf</code> n'a pas mis de saut de ligne à la fin.</p>
+</details>
+</div>
+<div class="admonition danger">
+<p class="admonition-title">Un fichier ne dit pas dans quelle norme il est écrit</p>
+<p>Un fichier ne contient que des octets. Si on se trompe de norme en le relisant, on obtient du charabia.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>iconv<span class="w"> </span>-f<span class="w"> </span>ISO-8859-1<span class="w"> </span>-t<span class="w"> </span>UTF-8<span class="w"> </span>utf8.txt
+</code></pre></div>
+<p>Cette commande lit <code>utf8.txt</code> <strong>comme s'il était</strong> en ISO-8859-1, et affiche <code>CrÃ¨me brÃ»lÃ©e</code> : chacun des deux octets du <code>è</code> a été pris pour un caractère à part entière. C'est le <code>Ã©</code> qu'on voit sur les pages web mal configurées.</p>
+<p>C'est le même problème que pour un entier signé, où il faut savoir d'avance sur combien de bits il est écrit. Et c'est celui du mot « pain », qui ne désigne pas la même chose selon la langue qu'on suppose.</p>
+</div>
+<div class="admonition question">
+<p class="admonition-title">Exercice</p>
+<p>Tu relis maintenant <code>latin1.txt</code> en le prenant pour de l'UTF-8.</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>iconv<span class="w"> </span>-f<span class="w"> </span>UTF-8<span class="w"> </span>-t<span class="w"> </span>ISO-8859-1<span class="w"> </span>latin1.txt
+</code></pre></div>
+<p>Sur ton cahier, écris ce que tu attends : du charabia comme ci-dessus, ou autre chose ? Justifie en une phrase.</p>
+<p><strong>Ne lance pas la commande tant que tu n'as pas écrit ta réponse.</strong></p>
+<details class="success">
+<summary>Correction</summary>
+<p>Autre chose : la commande <strong>s'arrête sur une erreur</strong>, <code>iconv: illegal input sequence at position 2</code>, après avoir affiché <code>Cr</code>.</p>
+<p>La différence avec le cas précédent est la suivante. Tout octet est un caractère valide en ISO-8859-1, donc lire de l'UTF-8 comme du Latin-1 réussit toujours et donne du charabia. L'inverse est faux : UTF-8 n'accepte pas n'importe quelle suite d'octets, et l'octet 233 du <code>è</code>, seul, n'en est pas une. Un charabia est pénible, une erreur est préférable, car elle prévient.</p>
+</details>
+</div>
+<h2 id="ce-que-chaque-norme-achete">Ce que chaque norme achète</h2>
 <table>
 <thead>
 <tr>
-<th>Caractère</th>
-<th>Description</th>
-<th>Encodage UTF-8 (en hexadécimal)</th>
-<th>Octets (en binaire)</th>
+<th>Norme</th>
+<th>Codes</th>
+<th>Taille d'un caractère</th>
+<th>Ce qu'elle couvre</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td><code>'A'</code></td>
-<td>Lettre ASCII</td>
-<td><code>41</code></td>
-<td><code>01000001</code></td>
+<td>ASCII</td>
+<td>128</td>
+<td>1 octet</td>
+<td>l'anglais, les chiffres, la ponctuation</td>
 </tr>
 <tr>
-<td><code>'é'</code></td>
-<td>Lettre accentuée (latin)</td>
-<td><code>C3 A9</code></td>
-<td><code>11000011 10101001</code></td>
+<td>ISO-8859-1</td>
+<td>256</td>
+<td>1 octet</td>
+<td>en plus, l'Europe de l'Ouest accentuée</td>
 </tr>
 <tr>
-<td><code>'€'</code></td>
-<td>Symbole euro</td>
-<td><code>E2 82 AC</code></td>
-<td><code>11100010 10000010 10101100</code></td>
-</tr>
-<tr>
-<td><code>'😊'</code></td>
-<td>Emoji « visage joyeux »</td>
-<td><code>F0 9F 98 8A</code></td>
-<td><code>11110000 10011111 10011000 10001010</code></td>
-</tr>
-<tr>
-<td><code>'語'</code></td>
-<td>Kanji « langue / mot »</td>
-<td><code>E8 AA 9E</code></td>
-<td><code>11101000 10101010 10011110</code></td>
+<td>UTF-8</td>
+<td>tout Unicode</td>
+<td>1 à 4 octets</td>
+<td>toutes les écritures du monde</td>
 </tr>
 </tbody>
 </table>
-<p>On utilise souvent la représentation des octets en hexadécimal lorsqu'on a besoin de les lire.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">caractere</span> <span class="o">=</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">fromhex</span><span class="p">(</span><span class="s2">&quot;F09F988A&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span>
-<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">caractere</span><span class="p">)</span>  <span class="c1"># Affiche 😊</span>
-</code></pre></div>
-<p>Dans le code précédent, on créé une suite de 4 octets (bytes en anglais) d'après leur forme hexadécimale, puis on demande à python leur représentation en caractère d'après l'encodage UTF-8.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">caractere</span> <span class="o">=</span> <span class="nb">chr</span><span class="p">(</span><span class="mh">0x1F60A</span><span class="p">)</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">caractere</span><span class="p">)</span>  <span class="c1"># Affiche 😊</span>
-</code></pre></div>
-<p>Ici, la fonction <code>chr</code> nous permet directement d'utiliser le point unicode pour en déduire un caractère.</p>
-<div class="admonition danger">
-<p class="admonition-title">Il faut connaître l'encodage à l'avance</p>
-<p>Tout comme, pour un entier signé, il faut savoir à l'avance sur combien de bits il est écrit, il faut savoir à l'avance <strong>avec quel encodage</strong> un texte a été écrit pour le relire correctement.</p>
-<p>Si on se trompe d'encodage, on obtient du charabia : le fameux <code>Ã©</code> qui s'affiche à la place de <code>é</code> vient d'un texte écrit en UTF-8 mais relu avec un autre encodage. C'est le même problème que le mot « pain », qui ne signifie pas la même chose selon la langue qu'on suppose.</p>
-</div>
-<p>Le site suivant est celui de la norme unicode https://home.unicode.org/</p>
-<h2 id="convertir-un-texte-dun-encodage-a-un-autre">Convertir un texte d'un encodage à un autre</h2>
-<p>Un même texte peut être enregistré dans des encodages différents. En Python, on choisit l'encodage au moment de lire ou d'écrire un fichier, avec le paramètre <code>encoding</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">texte</span> <span class="o">=</span> <span class="s2">&quot;Crème brûlée&quot;</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="c1"># Le même texte, écrit dans deux fichiers, avec deux encodages différents</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;en_utf8.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;en_latin1.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">texte</span><span class="p">)</span>
-</code></pre></div>
-<p>Les deux fichiers contiennent le même texte, mais <strong>pas les mêmes octets</strong> : en UTF-8 le « è » occupe 2 octets, en ISO-8859-1 il n'en occupe qu'un seul.</p>
-<p>Le piège classique consiste à relire un fichier avec le <strong>mauvais</strong> encodage :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Fichier écrit en utf-8, relu (à tort) en latin-1</span>
-<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;en_utf8.txt&quot;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;latin-1&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>   <span class="c1"># Affiche : CrÃ¨me brÃ»lÃ©e</span>
-</code></pre></div>
-<div class="admonition question">
-<p class="admonition-title">Exercice</p>
-<p>Un fichier a été écrit en ISO-8859-1 et contient le mot <code>café</code>. On le relit avec <code>encoding="utf-8"</code>. D'après ce que vous avez vu, que va-t-il se passer ? Pourquoi ?</p>
-<details class="warning">
-<summary>Corrigé</summary>
-<p>Python va probablement lever une erreur (<code>UnicodeDecodeError</code>) : l'octet unique utilisé par ISO-8859-1 pour le <code>é</code> ne correspond à aucune séquence UTF-8 valide. Là où UTF-8 attend 2 octets pour un caractère accentué, il n'en trouve qu'un. Il faut <strong>connaître l'encodage d'origine</strong> pour relire correctement.</p>
-</details>
-</div>
+<p>UTF-8 est la norme employée par défaut à peu près partout aujourd'hui, et elle a une propriété qui explique son succès : sur un texte qui ne contient que des caractères ASCII, elle produit <strong>exactement les mêmes octets</strong> qu'ASCII. Un vieux fichier anglais reste donc lisible sans rien convertir.</p>
+<p>Le site de la norme Unicode : <a href="https://home.unicode.org/">https://home.unicode.org/</a></p>
 <div class="admonition note">
 <p class="admonition-title">Et la manipulation des textes en Python ?</p>
 <p>Créer, découper, parcourir des chaînes de caractères (<code>str</code>) en Python est traité dans le chapitre Programmation, à la page <a href="../../prog/caracteres/">Les chaînes de caractère</a>.</p>
@@ -9457,7 +9390,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="August 1, 2026 23:34:39 UTC">August 1, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 8, 2026 21:18:52 UTC">November 8, 2026</span>
   </span>
 
     

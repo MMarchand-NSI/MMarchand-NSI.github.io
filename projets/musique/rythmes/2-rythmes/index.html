@@ -1494,35 +1494,7 @@
   <span class="md-ellipsis">
     
   
-    Les variables
-  
-
-    
-  </span>
-  
-  
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../../../premiere/prog/entiers/" class="md-nav__link">
-        
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Le type entier
+    Les variables et le type entier
   
 
     
@@ -9397,7 +9369,7 @@
 <li>Même chose avec 3 frappes dans 8 cases. Note l'écart entre deux frappes successives, sans oublier l'écart entre la dernière frappe et la première du tour suivant, puisque le rythme se répète.</li>
 </ol>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <ol>
 <li><code>"x.x.x.x."</code> : les quatre écarts valent 2.</li>
 <li>Les écarts ne peuvent pas être tous égaux, puisque 8 n'est pas divisible par 3. Le mieux possible est qu'ils ne diffèrent que de 1 : deux écarts de 3 et un de 2, par exemple <code>"x..x..x."</code>. C'est le tresillo.</li>
@@ -9432,7 +9404,7 @@
 <li>pour <span class="arithmatex">\(E(5, 8)\)</span>.</li>
 </ol>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p><span class="arithmatex">\(E(3, 8)\)</span> :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>groupes = [&quot;x&quot;, &quot;x&quot;, &quot;x&quot;, &quot;.&quot;, &quot;.&quot;, &quot;.&quot;, &quot;.&quot;, &quot;.&quot;]    m = 3
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>groupes = [&quot;x..&quot;, &quot;x..&quot;, &quot;x.&quot;]                        m = 8 % 3 = 2
@@ -9480,7 +9452,7 @@
 <a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="k">assert</span> <span class="n">distribuer_groupes</span><span class="p">([</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">],</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="s2">&quot;.&quot;</span><span class="p">]</span>
 </code></pre></div>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p>Aucune. <code>texte[i]</code> était un caractère, <code>groupes[i]</code> est une chaîne, et <code>+</code> colle deux chaînes dans les deux cas. C'est le même algorithme, appliqué à d'autres cartes.</p>
 </details>
 </div>
@@ -9591,7 +9563,7 @@
 <p class="admonition-title">Ta fonction contre la table (obligatoire)</p>
 <p>Sur ton cahier, prédis : <code>euclidien(7, 12)</code> renvoie-t-il la chaîne de la table ? Puis vérifie dans la console.</p>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p>Non : <code>euclidien(7, 12)</code> renvoie <code>"x.xx.x.x.xx."</code>. Écris les deux chaînes l'une sous l'autre : elles ont les mêmes écarts entre frappes, <code>2 1 2 2 2 1 2</code> pour la tienne, <code>2 1 2 2 1 2 2</code> pour celle de la table. C'est la <strong>même boucle de 12 cases</strong>, commencée à un endroit différent.</p>
 <p>Un rythme qui se répète n'a pas de début : le musicien entre dans la boucle où il veut. Toussaint le dit lui-même à propos de l'arrêt de l'algorithme : puisque le rythme est cyclique, continuer d'une étape ne change que l'endroit où l'on commence. Notre version ne s'arrête pas toujours au même moment que la sienne, et certains rythmes de sa table sont eux-mêmes donnés à partir d'une autre case.</p>
 </details>
@@ -9643,7 +9615,7 @@
 <p class="admonition-title">La partie de chaque main (obligatoire)</p>
 <p>Sur ton cahier, sans rien lancer : que renvoie <code>distribuer("x..x..x.", 2)</code> ? Laquelle des deux chaînes est la partie de la main droite ?</p>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <p><code>["x..x", ".x.."]</code>. La première est la main droite (cases 0, 2, 4, 6), la seconde la main gauche (cases 1, 3, 5, 7). Pour le tresillo, la main droite frappe deux fois, la gauche une fois.</p>
 </details>
 </div>
@@ -9655,7 +9627,7 @@
 <li>Sur ton cahier, prédis la chaîne obtenue, puis vérifie.</li>
 </ol>
 <details class="success">
-<summary>Réponse</summary>
+<summary>Correction</summary>
 <ol>
 <li><code>rassembler([euclidien(3, 8), euclidien(5, 8)])</code></li>
 <li><code>"xx...xxx...xxx.."</code></li>
@@ -9683,7 +9655,7 @@
 <li>Écris <code>euclidien(3, 8)</code> et <code>euclidien(4, 8)</code> ensemble, puis <code>euclidien(2, 6)</code> et <code>euclidien(3, 8)</code> ensemble. Dans le second cas, les deux rythmes n'ont pas la même longueur : sur ton cahier, prédis au bout de combien de cases ils recommencent leur boucle en même temps, puis écoute.</li>
 </ol>
 <details class="success">
-<summary>Réponse à la question 4</summary>
+<summary>Correction de la question 4</summary>
 <p>Une boucle dure 6 cases, l'autre 8. Elles recommencent ensemble au bout de 24 cases, le plus petit multiple commun de 6 et 8 : c'est alors seulement que l'on réentend exactement le même passage.</p>
 </details>
 </div>
@@ -9733,7 +9705,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 18, 2026 11:34:26 UTC">October 18, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 8, 2026 21:18:52 UTC">November 8, 2026</span>
   </span>
 
     

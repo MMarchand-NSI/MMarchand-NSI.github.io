@@ -43,8 +43,15 @@
  *   des alternatives (inseree telle quelle), `{{x}}` reutilise le tirage. Les
  *   tirages d'une meme question sont DISTINCTS quand c'est possible : avec
  *   a == b, on ne saurait pas quelle variable l'eleve a suivie.
- * - Si la derniere ligne est une expression, on attend sa valeur (ce que
- *   la console Python afficherait). Sinon, ou si c'est un print(...), on
+ * - Si la derniere ligne est une expression, on attend sa valeur. Elle est
+ *   alors DETACHEE du programme et presentee comme la question (« Que vaut
+ *   a + 1 »), au lieu d'etre montree comme une ligne de code de plus : une
+ *   expression nue dans un script ne fait rien, pas meme afficher, et la
+ *   donner a lire comme une instruction enseigne le contraire du cours, qui
+ *   affiche par print partout. Ne pas la remplacer par print(...) dans les
+ *   questions : beaucoup n'ont pas d'autre ligne (« 17 // 5 »), et print
+ *   effacerait les guillemets qui montrent le type (ecart 4 ci-dessus).
+ * - Si la derniere ligne est un print(...), ou n'est pas une expression, on
  *   attend ce que le code affiche. Si le code leve une exception, on attend
  *   « erreur » (ou son nom).
  * - Le code doit TERMINER : une boucle infinie gele la page de l'eleve.
@@ -74,19 +81,29 @@ def _st_executer(src):
     # print(...) en derniere ligne est un affichage, pas une valeur (None)
     affiche = (isinstance(dernier, ast.Expr) and isinstance(dernier.value, ast.Call)
                and isinstance(dernier.value.func, ast.Name) and dernier.value.func.id == 'print')
+    demande = isinstance(dernier, ast.Expr) and not affiche
+    # La derniere expression est la QUESTION, pas une instruction du programme :
+    # on la detache pour que la page ne la montre pas comme une ligne de code.
+    # Le decoupage est fait ici, par l'arbre, et non cote JS : une expression
+    # peut tenir sur plusieurs lignes.
+    coupe = {}
+    if demande:
+        lignes = src.splitlines()
+        coupe = {'prefixe': '\\n'.join(lignes[0:dernier.lineno - 1]).strip(),
+                 'question': '\\n'.join(lignes[dernier.lineno - 1:dernier.end_lineno]).strip()}
     try:
         with contextlib.redirect_stdout(sortie):
-            if isinstance(dernier, ast.Expr) and not affiche:
+            if demande:
                 debut = ast.Module(body=arbre.body[0:-1], type_ignores=[])
                 exec(compile(debut, '<question>', 'exec'), ns)
                 v = eval(compile(ast.Expression(body=dernier.value), '<question>', 'eval'), ns)
-                return json.dumps({'mode': 'valeur', 'repr': repr(v),
-                                   'type': type(v).__name__,
-                                   'parasite': sortie.getvalue() != ''})
+                return json.dumps(dict(coupe, mode='valeur', repr=repr(v),
+                                       type=type(v).__name__,
+                                       parasite=sortie.getvalue() != ''))
             exec(compile(arbre, '<question>', 'exec'), ns)
             return json.dumps({'mode': 'sortie', 'texte': sortie.getvalue()})
     except Exception as e:
-        return json.dumps({'mode': 'erreur', 'nom': type(e).__name__})
+        return json.dumps(dict(coupe, mode='erreur', nom=type(e).__name__))
 
 def _st_normer(t):
     return '\\n'.join(l.rstrip() for l in t.strip().splitlines())
@@ -320,15 +337,19 @@ def _st_verifier(attendu_json, reponse):
       }
 
       corps.replaceChildren();
-      const pre = el('pre', 'st-code');
-      pre.append(el('code', '', code));
+      // Mode valeur (et erreur sur une expression) : le bloc de code ne porte
+      // que les lignes qui s'executent, et peut etre vide (« 17 // 5 »).
+      const demande = typeof attendu.question === 'string';
+      const programme = demande ? attendu.prefixe : code;
+      const pre = programme ? el('pre', 'st-code') : null;
+      if (pre) pre.append(el('code', '', programme));
       const ligne = el('div', 'st-ligne');
       // Toute question d'affichage recoit la meme zone de saisie : une hauteur
       // calee sur la reponse en trahirait le nombre de lignes.
       const multi = attendu.mode === 'sortie';
       const champ = el(multi ? 'textarea' : 'input', 'st-champ');
       champ.setAttribute('aria-label',
-        attendu.mode === 'sortie' ? 'Ce que le programme affiche' : 'Valeur de la dernière ligne');
+        demande ? 'Que vaut ' + attendu.question : 'Ce que le programme affiche');
       champ.setAttribute('autocomplete', 'off');
       champ.setAttribute('autocapitalize', 'off');
       champ.setAttribute('spellcheck', 'false');
@@ -338,11 +359,12 @@ def _st_verifier(attendu_json, reponse):
       }
       const valider = el('button', 'st-bouton', 'Valider');
       const passer = el('button', 'st-bouton st-discret', 'Je ne sais pas');
-      ligne.append(el('span', 'st-invite', attendu.mode === 'sortie' ? 'affiche' : '→'),
-        champ, valider, passer);
+      ligne.append(el('span', 'st-invite', demande ? 'Que vaut' : 'affiche'));
+      if (demande) ligne.append(el('code', 'st-demande', attendu.question));
+      ligne.append(champ, valider, passer);
       const retour = el('div', 'st-retour');
       retour.setAttribute('aria-live', 'polite');
-      corps.append(pre, ligne, retour);
+      corps.append(...(pre ? [pre] : []), ligne, retour);
       champ.focus({ preventScroll: true });
 
       let repondu = false;
@@ -426,7 +448,10 @@ def _st_verifier(attendu_json, reponse):
                 color: var(--md-code-fg-color); font-family: var(--md-code-font-family, monospace);
                 white-space: pre; overflow-x: auto; }
 .st-ligne { display: flex; gap: .4rem; align-items: center; flex-wrap: wrap; width: 100%; }
-.st-invite { font-family: var(--md-code-font-family, monospace); opacity: .7; }
+.st-invite { opacity: .7; }
+.st-demande { font-family: var(--md-code-font-family, monospace); font-size: .8rem;
+  white-space: pre; padding: .15rem .4rem; border-radius: .2rem;
+  background: var(--md-code-bg-color); font-weight: 700; }
 .st-champ { font-family: var(--md-code-font-family, monospace); font-size: .8rem;
             padding: .25rem .4rem; min-width: 8rem; flex: 1 1 8rem; max-width: 20rem;
             border: 1px solid var(--md-default-fg-color--light); border-radius: .2rem;
