@@ -9620,6 +9620,10 @@ a
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="n">a</span> <span class="o">+</span> <span class="mi">3</span>
 </code></pre></div>
 Que vaut <code>a</code> après ces deux lignes ? Et où est passé le résultat de <code>a + 3</code> ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>a</code> vaut toujours <code>4</code>. La deuxième ligne calcule bien <code>7</code>, mais <strong>aucune variable ne le reçoit</strong> : la valeur est produite puis immédiatement perdue, et plus rien dans le programme ne permet de la retrouver.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
@@ -9627,54 +9631,96 @@ Que vaut <code>a</code> après ces deux lignes ? Et où est passé le résultat 
 <a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">cote</span> <span class="o">*</span> <span class="n">cote</span>
 </code></pre></div>
 Ce programme devait calculer l'aire d'un carré pour pouvoir s'en servir plus loin. Il ne le fait pas. Qu'est-ce qui manque ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p>Il manque une <strong>affectation</strong> pour conserver le résultat :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">cote</span> <span class="o">=</span> <span class="mi">6</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">aire</span> <span class="o">=</span> <span class="n">cote</span> <span class="o">*</span> <span class="n">cote</span>
+</code></pre></div>
+<p><code>aire</code> vaut alors <code>36</code>, et la suite du programme peut l'utiliser. Sans cette ligne, le <code>36</code> est calculé puis jeté.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">mesure</span> <span class="o">=</span> <span class="mi">7</span>
-<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">mesure</span> <span class="o">=</span> <span class="mi">9</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">mesure</span> <span class="o">=</span> <span class="mi">7</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">mesure</span> <span class="o">=</span> <span class="mi">9</span>
 </code></pre></div>
 Après ces deux lignes, on voudrait pouvoir se servir <strong>à la fois</strong> de <code>7</code> et de <code>9</code>. Est-ce possible en l'état ? Si non, que faut-il changer ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p>Ce n'est pas possible : <code>mesure</code> ne contient qu'une valeur à la fois, et c'est <code>9</code>. Le <code>7</code> a été effacé par la deuxième ligne.</p>
+<p>Pour garder les deux, il faut <strong>deux cases</strong>, donc deux variables :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">mesure1</span> <span class="o">=</span> <span class="mi">7</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">mesure2</span> <span class="o">=</span> <span class="mi">9</span>
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">jour</span> <span class="o">=</span> <span class="mi">12</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">mois</span> <span class="o">=</span> <span class="mi">3</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">jour</span> <span class="o">=</span> <span class="n">mois</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">jour</span> <span class="o">=</span> <span class="mi">12</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">mois</span> <span class="o">=</span> <span class="mi">3</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">jour</span> <span class="o">=</span> <span class="n">mois</span>
 </code></pre></div>
 Combien de cases mémoire sont utilisées, et que vaut chacune à la fin ? Quelle valeur n'existe plus nulle part dans le programme ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p>Deux cases. <code>jour</code> vaut <code>3</code> et <code>mois</code> vaut <code>3</code>.</p>
+<p>La valeur <code>12</code> n'existe plus : la troisième ligne a écrit <code>3</code> par-dessus. Noter que les deux cases contiennent maintenant la même valeur, mais elles restent <strong>deux cases distinctes</strong> : changer <code>mois</code> ensuite ne changerait pas <code>jour</code>.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">200</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">200</span>
 </code></pre></div>
 Sur combien de bits au minimum la valeur de <code>n</code> tient-elle dans la mémoire ? Justifie.</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><strong>8 bits</strong>, soit un octet.</p>
+<p>Sur 7 bits, on code <span class="arithmatex">\(2^7\)</span> = 128 valeurs, de <code>0</code> à <code>127</code>, et <code>200</code> dépasse. Sur 8 bits, on code <span class="arithmatex">\(2^8\)</span> = 256 valeurs, de <code>0</code> à <code>255</code>, ce qui suffit.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
 <p>Un programme range une valeur dans une variable, puis l'ordinateur est éteint. Que devient cette valeur ? Dans quel composant était-elle pendant l'exécution ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p>Elle est <strong>perdue</strong>. Les variables vivent dans la <strong>RAM</strong>, qui est une mémoire <strong>volatile</strong> : son contenu disparaît à l'extinction.</p>
+<p>Pour conserver une information après l'extinction, il faut l'écrire ailleurs, sur un disque par exemple. Une variable ne sert à se souvenir que <strong>pendant</strong> l'exécution du programme.</p>
+</details>
 </div>
 <h2 id="une-variable-est-une-case-memoire-nommee">Une variable est une case mémoire nommée</h2>
 <p>Souviens-toi du modèle de von Neumann et du <a href="../../von_neumann/langage-machine/">Little Man Computer</a> : la mémoire est une suite de <strong>cases</strong>, chacune repérée par une <strong>adresse</strong>, et le processeur y <strong>range</strong> ou y <strong>lit</strong> des valeurs.</p>
 <p>Une <strong>variable</strong>, c'est exactement cela : une <strong>case mémoire à laquelle on a donné un nom</strong>. Plutôt que de retenir « la case d'adresse 17 », on écrit <code>age</code>, et l'ordinateur sait de quelle case on parle.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>
 </code></pre></div>
 Pour chacune de ces deux lignes, dis si la machine <strong>lit</strong> une case, si elle <strong>écrit</strong> dans une case, ou les deux, et nomme la ou les cases concernées.</p>
+<details class="warning">
+<summary>Correction</summary>
+<ul>
+<li><code>a = 5</code> : la machine <strong>écrit</strong> seulement. Elle range <code>5</code> dans la case <code>a</code>.</li>
+<li><code>b = a</code> : la machine <strong>lit</strong> la case <code>a</code> pour en obtenir <code>5</code>, puis <strong>écrit</strong> ce <code>5</code> dans la case <code>b</code>. Deux cases, deux opérations.</li>
+</ul>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
-<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
-<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
-<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">y</span> <span class="o">=</span> <span class="mi">2</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">3</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
 </code></pre></div>
 Combien de cases mémoire ce programme utilise-t-il ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><strong>Trois</strong> : <code>x</code>, <code>y</code> et <code>z</code>. La ligne <code>x = 3</code> ne crée pas une quatrième case, elle écrit dans celle de <code>x</code>, qui existe déjà, et sa valeur <code>1</code> est effacée. À la fin, <code>x</code> vaut <code>3</code>, <code>y</code> vaut <code>2</code> et <code>z</code> vaut <code>5</code>.</p>
+</details>
 </div>
 <h2 id="ecrire-dans-une-variable-laffectation">Écrire dans une variable : l'affectation</h2>
 <p>Pour ranger une valeur dans une variable, on utilise l'opérateur <code>=</code>, appelé <strong>affectation</strong>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
 </code></pre></div>
 <div class="admonition danger">
 <p class="admonition-title"><code>=</code> n'est pas l'égalité</p>
@@ -9687,18 +9733,26 @@ Combien de cases mémoire ce programme utilise-t-il ?</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">truc</span> <span class="o">=</span> <span class="mi">4</span>
-<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">truc</span> <span class="o">=</span> <span class="mi">3</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">truc</span> <span class="o">=</span> <span class="mi">4</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">truc</span> <span class="o">=</span> <span class="mi">3</span>
 </code></pre></div>
 Que vaut <code>truc</code> à la fin ? Pourquoi ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>3</code>. La deuxième affectation a <strong>remplacé</strong> le contenu de la case : <code>4</code> est perdu.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">score</span> <span class="o">=</span> <span class="mi">12</span>
-<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">score</span> <span class="o">=</span> <span class="mi">20</span>
-<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">score</span> <span class="o">=</span> <span class="mi">15</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">score</span> <span class="o">=</span> <span class="mi">12</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">score</span> <span class="o">=</span> <span class="mi">20</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">score</span> <span class="o">=</span> <span class="mi">15</span>
 </code></pre></div>
 Que vaut <code>score</code> à la fin ? Combien de valeurs différentes cette case a-t-elle contenues au cours du programme, et combien en contient-elle à la fin ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>score</code> vaut <code>15</code>. La case a contenu <strong>trois</strong> valeurs successives, mais elle n'en contient <strong>qu'une seule à la fois</strong> : <code>12</code> puis <code>20</code> ont été effacés. Rien dans le programme ne permet de les retrouver.</p>
+</details>
 </div>
 <h2 id="lire-une-variable">Lire une variable</h2>
 <p>On utilise le contenu d'une variable simplement en écrivant son <strong>nom</strong> dans une expression.</p>
@@ -9706,34 +9760,44 @@ Que vaut <code>score</code> à la fin ? Combien de valeurs différentes cette ca
 <p class="admonition-title">Ce que fait vraiment la machine</p>
 <p>Lire une variable correspond à l'instruction <strong><code>LDA</code></strong> (<em>load</em>) du Little Man Computer : « va chercher la valeur à telle adresse ». On en obtient une <strong>copie</strong> : <strong>lire une variable ne la vide pas</strong>, on peut la relire autant qu'on veut.</p>
 </div>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">bidule</span> <span class="o">=</span> <span class="n">truc</span> <span class="o">+</span> <span class="mi">5</span>    <span class="c1"># on lit truc, on calcule, on range le résultat dans bidule</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">bidule</span> <span class="o">=</span> <span class="n">truc</span> <span class="o">+</span> <span class="mi">5</span>    <span class="c1"># on lit truc, on calcule, on range le résultat dans bidule</span>
 </code></pre></div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">m</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="n">n</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="n">m</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">5</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="n">m</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="n">n</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a><span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">+</span> <span class="n">m</span>
 </code></pre></div>
 Que valent <code>n</code> et <code>m</code> à la fin ?</p>
 <details class="tip">
 <summary>Indice</summary>
 <p>Dans <code>n + n</code>, on lit <code>n</code> deux fois. Combien vaut-il à la deuxième lecture ?</p>
 </details>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>m</code> vaut <code>10</code> et <code>n</code> vaut <code>15</code>.</p>
+<p>À la deuxième ligne, on lit <code>n</code> deux fois de suite, et il vaut <code>5</code> les deux fois : la première lecture ne l'a pas vidé. On range donc <code>10</code> dans <code>m</code>. À la troisième ligne, on lit <code>n</code> (<code>5</code>) et <code>m</code> (<code>10</code>), on calcule <code>15</code>, et on le range dans <code>n</code>, dont l'ancienne valeur est effacée.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">a</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="n">k</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">b</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">k</span>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">c</span> <span class="o">=</span> <span class="n">k</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">k</span> <span class="o">=</span> <span class="mi">3</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">a</span> <span class="o">=</span> <span class="n">k</span> <span class="o">+</span> <span class="n">k</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="n">b</span> <span class="o">=</span> <span class="n">k</span> <span class="o">*</span> <span class="n">k</span>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a><span class="n">c</span> <span class="o">=</span> <span class="n">k</span>
 </code></pre></div>
 Que valent <code>a</code>, <code>b</code>, <code>c</code> et <code>k</code> à la fin ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>a</code> vaut <code>6</code>, <code>b</code> vaut <code>9</code>, <code>c</code> vaut <code>3</code>, et <code>k</code> vaut <strong>toujours</strong> <code>3</code>.</p>
+<p><code>k</code> a été lu <strong>cinq fois</strong> et n'a jamais changé. Seule une affectation vers <code>k</code> pourrait le modifier, et il n'y en a aucune après la première ligne.</p>
+</details>
 </div>
 <h2 id="afficher-sortir-de-la-machine">Afficher : sortir de la machine</h2>
 <p>Une variable sert à se souvenir <strong>à l'intérieur</strong> de la machine. Pour qu'une information en <strong>sorte</strong>, il faut une instruction de plus : <code>print</code>.</p>
 <p>Appelée sans rien d'autre que la valeur à écrire, elle l'envoie sur la <strong>sortie standard</strong>, c'est-à-dire le terminal, donc l'écran. C'est son comportement par défaut, et on peut lui demander autre chose, mais ce ne sera pas utile ici.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">truc</span> <span class="o">=</span> <span class="mi">2</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">truc</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">truc</span> <span class="o">=</span> <span class="mi">2</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">truc</span><span class="p">)</span>
 </code></pre></div>
 <div class="admonition abstract">
 <p class="admonition-title">Ce que fait vraiment la machine</p>
@@ -9742,63 +9806,88 @@ Que valent <code>a</code>, <code>b</code>, <code>c</code> et <code>k</code> à l
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">42</span>
-<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">42</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div>
 Quelles instructions du Little Man Computer la deuxième ligne demande-t-elle ? Combien d'opérations la machine fait-elle ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p>Deux : <strong><code>LDA n</code></strong> puis <strong><code>OUT</code></strong>.</p>
+<p><code>print</code> ne va pas chercher la valeur directement sur la sortie. Il faut d'abord <strong>lire</strong> la case, ce qui en donne une copie, puis <strong>envoyer</strong> cette copie dehors. La case <code>n</code> n'est pas modifiée, et elle vaut toujours <code>42</code>.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
-<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
-<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">3</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
 </code></pre></div>
 Qu'affiche ce programme ? Que valent <code>a</code> et <code>b</code> à la fin ? Une variable contient-elle <code>8</code> ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p>Il affiche <code>8</code>. <code>a</code> vaut <code>3</code> et <code>b</code> vaut <code>5</code>, inchangés : ils ont seulement été lus.</p>
+<p>Et <strong>aucune variable ne contient <code>8</code></strong>. La valeur a été calculée, envoyée sur la sortie, puis perdue, comme toute valeur qu'aucune affectation ne range. Afficher une information n'est pas la mémoriser : ce sont deux opérations différentes, <code>OUT</code> et <code>STA</code>.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">truc</span> <span class="o">=</span> <span class="mi">2</span>
-<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">truc</span><span class="p">)</span>
-<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a><span class="n">bidule</span> <span class="o">=</span> <span class="n">truc</span> <span class="o">+</span> <span class="mi">5</span>
-<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">bidule</span> <span class="o">+</span> <span class="n">truc</span><span class="p">)</span>
-<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">truc</span><span class="p">)</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">truc</span> <span class="o">=</span> <span class="mi">2</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">truc</span><span class="p">)</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="n">bidule</span> <span class="o">=</span> <span class="n">truc</span> <span class="o">+</span> <span class="mi">5</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">bidule</span> <span class="o">+</span> <span class="n">truc</span><span class="p">)</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">truc</span><span class="p">)</span>
 </code></pre></div>
 Qu'affichent les trois <code>print</code>, dans l'ordre ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>2</code>, puis <code>9</code>, puis <code>2</code>.</p>
+<p>Le deuxième lit <code>bidule</code> (<code>7</code>) et <code>truc</code> (<code>2</code>), et affiche leur somme sans la ranger nulle part. Le troisième montre que <code>truc</code> vaut <strong>toujours</strong> <code>2</code> : il a été lu trois fois et n'a jamais changé.</p>
+</details>
 </div>
 <h2 id="le-membre-de-droite-est-calcule-puis-range">Le membre de droite est calculé, <em>puis</em> rangé</h2>
 <p>Parce que <code>=</code> n'est pas l'égalité, une ligne comme celle-ci a un sens parfaitement clair :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">1</span>
 </code></pre></div>
 <p>En tant qu'égalité mathématique, ce serait absurde. En tant qu'affectation, c'est mécanique : <strong>on calcule d'abord la droite</strong> (<code>a + 1</code>, avec la valeur actuelle de <code>a</code>), <strong>puis on range</strong> le résultat dans <code>a</code>. Si <code>a</code> valait 4, il vaut maintenant 5.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="n">c</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">3</span>
-<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="n">c</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="mi">2</span>
-<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="n">c</span> <span class="o">=</span> <span class="n">c</span> <span class="o">-</span> <span class="mi">1</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">c</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="n">c</span> <span class="o">=</span> <span class="n">c</span> <span class="o">+</span> <span class="mi">3</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">c</span> <span class="o">=</span> <span class="n">c</span> <span class="o">*</span> <span class="mi">2</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="n">c</span> <span class="o">=</span> <span class="n">c</span> <span class="o">-</span> <span class="mi">1</span>
 </code></pre></div>
 Que vaut <code>c</code> après chaque ligne ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>0</code>, puis <code>3</code>, puis <code>6</code>, puis <code>5</code>.</p>
+<p>Chaque ligne lit la valeur actuelle de <code>c</code>, calcule, et range le résultat dans <code>c</code> par-dessus l'ancienne valeur.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="n">u</span> <span class="o">=</span> <span class="mi">2</span>
-<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="n">w</span> <span class="o">=</span> <span class="mi">5</span>
-<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="n">u</span> <span class="o">=</span> <span class="n">u</span> <span class="o">+</span> <span class="n">w</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="n">w</span> <span class="o">=</span> <span class="n">w</span> <span class="o">+</span> <span class="n">u</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">u</span> <span class="o">=</span> <span class="mi">2</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">w</span> <span class="o">=</span> <span class="mi">5</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="n">u</span> <span class="o">=</span> <span class="n">u</span> <span class="o">+</span> <span class="n">w</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="n">w</span> <span class="o">=</span> <span class="n">w</span> <span class="o">+</span> <span class="n">u</span>
 </code></pre></div>
 Que valent <code>u</code> et <code>w</code> à la fin ?</p>
 <details class="tip">
 <summary>Indice</summary>
 <p>À la quatrième ligne, <code>u</code> ne vaut plus <code>2</code>.</p>
 </details>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>u</code> vaut <code>7</code> et <code>w</code> vaut <code>12</code>.</p>
+<p>La troisième ligne range <code>2 + 5</code> dans <code>u</code>, qui vaut donc <code>7</code>. La quatrième lit <code>w</code> (<code>5</code>) et <code>u</code> (<code>7</code>, sa <strong>nouvelle</strong> valeur), ce qui donne <code>12</code>.</p>
+</details>
 </div>
 <div class="admonition abstract">
 <p class="admonition-title">Dérouler un programme pas à pas</p>
 <p>Suivons l'état des cases mémoire, instruction après instruction :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
-<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
-<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">2</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
 </code></pre></div>
 <table>
 <thead>
@@ -9831,11 +9920,11 @@ Que valent <code>u</code> et <code>w</code> à la fin ?</p>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
 <p>À ton tour de dérouler. Recopie le tableau et remplis-le ligne par ligne, puis donne l'affichage.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="n">p</span> <span class="o">=</span> <span class="mi">2</span>
-<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="n">q</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">3</span>
-<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="n">p</span> <span class="o">=</span> <span class="n">q</span>
-<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="n">q</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span>
-<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">p</span> <span class="o">=</span> <span class="mi">2</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="n">q</span> <span class="o">=</span> <span class="n">p</span> <span class="o">+</span> <span class="mi">3</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="n">p</span> <span class="o">=</span> <span class="n">q</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="n">q</span> <span class="o">=</span> <span class="n">p</span> <span class="o">-</span> <span class="mi">1</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
 </code></pre></div>
 <table>
 <thead>
@@ -9868,15 +9957,50 @@ Que valent <code>u</code> et <code>w</code> à la fin ?</p>
 </tr>
 </tbody>
 </table>
+<details class="warning">
+<summary>Correction</summary>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th style="text-align: center;"><code>p</code></th>
+<th style="text-align: center;"><code>q</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>p = 2</code></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td><code>q = p + 3</code></td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr>
+<td><code>p = q</code></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">5</td>
+</tr>
+<tr>
+<td><code>q = p - 1</code></td>
+<td style="text-align: center;">5</td>
+<td style="text-align: center;">4</td>
+</tr>
+</tbody>
+</table>
+<p>L'affichage est <code>5 4</code>. À la troisième ligne, <code>p</code> et <code>q</code> valent tous les deux <code>5</code> : <code>p = q</code> a <strong>recopié</strong> la valeur de <code>q</code>, il n'a pas lié les deux variables. C'est pourquoi changer <code>q</code> juste après ne touche pas <code>p</code>.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
 <p>Même travail avec trois cases.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
-<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="n">s</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span>
-<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="n">t</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">s</span>
-<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="n">r</span> <span class="o">=</span> <span class="n">t</span>
-<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">r</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="n">s</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="mi">1</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="n">t</span> <span class="o">=</span> <span class="n">r</span> <span class="o">+</span> <span class="n">s</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="n">r</span> <span class="o">=</span> <span class="n">t</span>
+<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
 </code></pre></div>
 <table>
 <thead>
@@ -9914,6 +10038,46 @@ Que valent <code>u</code> et <code>w</code> à la fin ?</p>
 </tr>
 </tbody>
 </table>
+<details class="warning">
+<summary>Correction</summary>
+<table>
+<thead>
+<tr>
+<th>Instruction</th>
+<th style="text-align: center;"><code>r</code></th>
+<th style="text-align: center;"><code>s</code></th>
+<th style="text-align: center;"><code>t</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>r = 1</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td><code>s = r + 1</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;"></td>
+</tr>
+<tr>
+<td><code>t = r + s</code></td>
+<td style="text-align: center;">1</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+</tr>
+<tr>
+<td><code>r = t</code></td>
+<td style="text-align: center;">3</td>
+<td style="text-align: center;">2</td>
+<td style="text-align: center;">3</td>
+</tr>
+</tbody>
+</table>
+<p>L'affichage est <code>3 2 3</code>. La dernière ligne change <code>r</code>, mais <code>t</code> avait été calculé avant : il garde <code>3</code>.</p>
+</details>
 </div>
 <div class="admonition tip">
 <p class="admonition-title">Trace toi-même avec Python Tutor</p>
@@ -9923,13 +10087,26 @@ Que valent <code>u</code> et <code>w</code> à la fin ?</p>
 <p>Tu as déjà traité ce problème en langage machine, sur les cases n°10 et n°11. Rien ne change ici, sauf que les cases ont un nom au lieu d'un numéro.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
-<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="n">b</span> <span class="o">=</span> <span class="mi">7</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">4</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="n">b</span> <span class="o">=</span> <span class="mi">7</span>
 </code></pre></div>
 Écris la suite du programme pour que <code>a</code> vaille <code>7</code> et <code>b</code> vaille <code>4</code>.</p>
 <details class="tip">
 <summary>Indice</summary>
 <p>Écris la solution qui vient spontanément, <code>a = b</code> puis <code>b = a</code>, et déroule-la ligne par ligne. Quelle valeur n'existe déjà plus après la première ligne ?</p>
+</details>
+<details class="warning">
+<summary>Correction</summary>
+<p>La solution spontanée <strong>échoue</strong> :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">a</span> <span class="o">=</span> <span class="n">b</span>   <span class="c1"># a devient 7, et le 4 est perdu</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>   <span class="c1"># b devient 7 aussi. Raté.</span>
+</code></pre></div>
+<p>En rangeant <code>b</code> dans <code>a</code>, on a écrasé le <code>4</code>, et plus rien ne permet de le retrouver. Il faut le <strong>mettre de côté</strong> avant :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">temp</span> <span class="o">=</span> <span class="n">a</span>    <span class="c1"># on sauvegarde 4</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">a</span> <span class="o">=</span> <span class="n">b</span>       <span class="c1"># a devient 7</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="n">b</span> <span class="o">=</span> <span class="n">temp</span>    <span class="c1"># b récupère 4</span>
+</code></pre></div>
+<p>C'est exactement la case de passage du langage machine.</p>
 </details>
 </div>
 <div class="admonition abstract">
@@ -9944,19 +10121,33 @@ Que valent <code>u</code> et <code>w</code> à la fin ?</p>
 <summary>Indice</summary>
 <p>Une seule valeur est menacée dès la première affectation que tu écris : celle de la variable que tu écrases en premier. Mets-la de côté avant.</p>
 </details>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">t</span> <span class="o">=</span> <span class="n">c</span>    <span class="c1"># on sauvegarde 3, la valeur qu&#39;on va écraser</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">c</span> <span class="o">=</span> <span class="n">b</span>    <span class="c1"># c devient 2</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="n">b</span> <span class="o">=</span> <span class="n">a</span>    <span class="c1"># b devient 1</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="n">a</span> <span class="o">=</span> <span class="n">t</span>    <span class="c1"># a récupère 3</span>
+</code></pre></div>
+<p>L'ordre compte : chaque ligne écrase une valeur, donc on part de celle qu'on a sauvegardée et on remonte. Si tu avais commencé par <code>a = t</code> avant d'avoir servi <code>b</code>, tu aurais perdu le <code>1</code>.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
-<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
-<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="n">c</span> <span class="o">=</span> <span class="mi">3</span>
-<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a>
-<a id="__codelineno-24-5" name="__codelineno-24-5" href="#__codelineno-24-5"></a><span class="n">t</span> <span class="o">=</span> <span class="n">a</span>
-<a id="__codelineno-24-6" name="__codelineno-24-6" href="#__codelineno-24-6"></a><span class="n">a</span> <span class="o">=</span> <span class="n">b</span>
-<a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="n">b</span> <span class="o">=</span> <span class="n">c</span>
-<a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="n">c</span> <span class="o">=</span> <span class="n">t</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">1</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="n">b</span> <span class="o">=</span> <span class="mi">2</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="n">c</span> <span class="o">=</span> <span class="mi">3</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a>
+<a id="__codelineno-29-5" name="__codelineno-29-5" href="#__codelineno-29-5"></a><span class="n">t</span> <span class="o">=</span> <span class="n">a</span>
+<a id="__codelineno-29-6" name="__codelineno-29-6" href="#__codelineno-29-6"></a><span class="n">a</span> <span class="o">=</span> <span class="n">b</span>
+<a id="__codelineno-29-7" name="__codelineno-29-7" href="#__codelineno-29-7"></a><span class="n">b</span> <span class="o">=</span> <span class="n">c</span>
+<a id="__codelineno-29-8" name="__codelineno-29-8" href="#__codelineno-29-8"></a><span class="n">c</span> <span class="o">=</span> <span class="n">t</span>
 </code></pre></div>
 Que valent <code>a</code>, <code>b</code> et <code>c</code> à la fin ? Que fait ce programme, comparé à celui de l'exercice précédent ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>a</code> vaut <code>2</code>, <code>b</code> vaut <code>3</code>, <code>c</code> vaut <code>1</code>.</p>
+<p>Il fait tourner les trois valeurs dans l'<strong>autre sens</strong> : chaque variable reçoit la valeur de la suivante, et non de la précédente. La méthode est la même, seule la valeur mise de côté change : ici c'est celle de <code>a</code>, puisque c'est <code>a</code> qu'on écrase en premier.</p>
+</details>
 </div>
 <h2 id="le-type-dune-variable">Le type d'une variable</h2>
 <p>Toute variable a un <strong>type</strong>, qui indique le genre d'information qu'elle contient :</p>
@@ -9992,30 +10183,40 @@ Que valent <code>a</code>, <code>b</code> et <code>c</code> à la fin ? Que fait
 </tbody>
 </table>
 <p>Python <strong>devine</strong> le type d'après la valeur rangée, et cela s'appelle l'<strong>inférence de type</strong>. On peut aussi l'écrire explicitement :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="n">age</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="n">age</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span>
 </code></pre></div>
 <p>Rien n'y oblige, mais quand un programme s'allonge on finit par ne plus savoir ce que contient quoi. Prends l'habitude de noter le type à la création d'une variable.</p>
 <p>Et pour savoir ce qu'une variable contient réellement, <code>type</code> le dit :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="n">age</span> <span class="o">=</span> <span class="mi">16</span>
-<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">age</span><span class="p">))</span>   <span class="c1"># affiche &lt;class &#39;int&#39;&gt;</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">age</span> <span class="o">=</span> <span class="mi">16</span>
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">age</span><span class="p">))</span>   <span class="c1"># affiche &lt;class &#39;int&#39;&gt;</span>
 </code></pre></div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
 <p>Donne le type de chacune de ces quatre variables.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">7</span>
-<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="n">b</span> <span class="o">=</span> <span class="mf">7.0</span>
-<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;7&quot;</span>
-<a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="n">d</span> <span class="o">=</span> <span class="kc">True</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">7</span>
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="n">b</span> <span class="o">=</span> <span class="mf">7.0</span>
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="n">c</span> <span class="o">=</span> <span class="s2">&quot;7&quot;</span>
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a><span class="n">d</span> <span class="o">=</span> <span class="kc">True</span>
 </code></pre></div>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>a</code> est un <code>int</code>, <code>b</code> un <code>float</code>, <code>c</code> un <code>str</code>, <code>d</code> un <code>bool</code>.</p>
+<p><code>7</code>, <code>7.0</code> et <code>"7"</code> sont trois valeurs de <strong>types différents</strong>, alors qu'on y lit le même chiffre. Les guillemets de <code>c</code> en font une chaîne de caractères, c'est-à-dire du texte, et non un nombre : on ne peut pas calculer avec. La fin de cette page traite les entiers, et la <a href="../caracteres/">page suivante</a> les chaînes de caractères.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
 <p>Même question sur quatre autres variables.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
-<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="n">b</span> <span class="o">=</span> <span class="s2">&quot;16&quot;</span>
-<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="n">c</span> <span class="o">=</span> <span class="kc">False</span>
-<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="n">d</span> <span class="o">=</span> <span class="mf">3.0</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">0</span>
+<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="n">b</span> <span class="o">=</span> <span class="s2">&quot;16&quot;</span>
+<a id="__codelineno-33-3" name="__codelineno-33-3" href="#__codelineno-33-3"></a><span class="n">c</span> <span class="o">=</span> <span class="kc">False</span>
+<a id="__codelineno-33-4" name="__codelineno-33-4" href="#__codelineno-33-4"></a><span class="n">d</span> <span class="o">=</span> <span class="mf">3.0</span>
 </code></pre></div>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>a</code> est un <code>int</code>, <code>b</code> un <code>str</code>, <code>c</code> un <code>bool</code>, <code>d</code> un <code>float</code>.</p>
+<p>Deux remarques. <code>3.0</code> est un <code>float</code> bien qu'il n'ait aucune décimale après la virgule : c'est la <strong>présence du point</strong> qui le décide, pas la valeur. Et <code>"16"</code> est du texte, pas le nombre seize, à cause de ses guillemets.</p>
+</details>
 </div>
 <h2 id="calculer-avec-des-entiers">Calculer avec des entiers</h2>
 <p>Le type <code>int</code> vient avec ses opérateurs. Les voici tous, et il n'y en a pas d'autres au programme de cette année.</p>
@@ -10073,39 +10274,57 @@ Que valent <code>a</code>, <code>b</code> et <code>c</code> à la fin ? Que fait
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">17</span>
-<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">17</span>
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="n">b</span> <span class="o">=</span> <span class="mi">5</span>
 </code></pre></div>
 Que valent <code>a + b</code>, <code>a * b</code>, <code>a // b</code>, <code>a % b</code> et <code>a ** 2</code> ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>22</code>, <code>85</code>, <code>3</code>, <code>2</code> et <code>289</code>.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
 <p>Que valent ces quatre expressions ?</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span>
-<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span>
-<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="mi">10</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span>
-<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span>
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="p">(</span><span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span><span class="p">)</span> <span class="o">*</span> <span class="mi">4</span>
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a><span class="mi">10</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="mi">3</span>
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a><span class="mi">2</span> <span class="o">**</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">2</span>
 </code></pre></div>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>14</code>, <code>20</code>, <code>4</code> et <code>16</code>.</p>
+<p>Dans la première, la multiplication passe avant l'addition. Dans la deuxième, les parenthèses renversent l'ordre. Dans la quatrième, la puissance se calcule d'abord, ce qui donne <code>8 * 2</code>.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">2</span>
-<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="n">y</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">//</span> <span class="mi">2</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">x</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">/</span> <span class="mi">2</span>
+<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="n">y</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">//</span> <span class="mi">2</span>
 </code></pre></div>
 Que valent <code>x</code> et <code>y</code> ? De quel type est chacune des deux variables ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>x</code> vaut <code>5.0</code> et c'est un <code>float</code>. <code>y</code> vaut <code>5</code> et c'est un <code>int</code>.</p>
+<p>Les deux valeurs se lisent « cinq », mais elles ne sont pas du même type et Python ne les écrit pas pareil.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">/</span> <span class="mi">7</span>
-<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a><span class="n">b</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">/</span> <span class="mi">3</span>
-<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a><span class="n">c</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">//</span> <span class="mi">2</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">7</span> <span class="o">/</span> <span class="mi">7</span>
+<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="n">b</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">/</span> <span class="mi">3</span>
+<a id="__codelineno-37-3" name="__codelineno-37-3" href="#__codelineno-37-3"></a><span class="n">c</span> <span class="o">=</span> <span class="mi">9</span> <span class="o">//</span> <span class="mi">2</span>
 </code></pre></div>
 Que vaut chaque variable, et de quel type est-elle ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>a</code> vaut <code>1.0</code>, <code>b</code> vaut <code>2.0</code>, tous deux des <code>float</code> : <code>/</code> rend un <code>float</code> <strong>même quand la division tombe juste</strong>. <code>c</code> vaut <code>4</code>, un <code>int</code> : <code>9 // 2</code> donne le quotient entier, la moitié de <code>9</code> étant <code>4</code> et des restes.</p>
+</details>
 </div>
 <h2 id="ecrire-plus-court">Écrire plus court : <code>+=</code></h2>
 <p>Ajouter quelque chose à une variable est si fréquent que Python offre une écriture abrégée pour le faire.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">3</span>    <span class="c1"># l&#39;écriture longue</span>
-<a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="n">a</span> <span class="o">+=</span> <span class="mi">3</span>       <span class="c1"># exactement la même chose</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">a</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="mi">3</span>    <span class="c1"># l&#39;écriture longue</span>
+<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="n">a</span> <span class="o">+=</span> <span class="mi">3</span>       <span class="c1"># exactement la même chose</span>
 </code></pre></div>
 <p>On appelle cela une <strong>affectation combinée</strong>. Il en existe pour les autres opérateurs, <code>-=</code>, <code>*=</code> et les suivantes, mais <code>+=</code> est de loin la plus utilisée, parce qu'ajouter à un total ou à un compteur est ce qu'on fait le plus souvent.</p>
 <div class="admonition abstract">
@@ -10115,19 +10334,29 @@ Que vaut chaque variable, et de quel type est-elle ?</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
-<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a><span class="n">a</span> <span class="o">+=</span> <span class="mi">3</span>
-<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a><span class="n">a</span> <span class="o">+=</span> <span class="mi">3</span>
-<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a><span class="n">a</span> <span class="o">+=</span> <span class="mi">10</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="n">a</span> <span class="o">=</span> <span class="mi">5</span>
+<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="n">a</span> <span class="o">+=</span> <span class="mi">3</span>
+<a id="__codelineno-39-3" name="__codelineno-39-3" href="#__codelineno-39-3"></a><span class="n">a</span> <span class="o">+=</span> <span class="mi">3</span>
+<a id="__codelineno-39-4" name="__codelineno-39-4" href="#__codelineno-39-4"></a><span class="n">a</span> <span class="o">+=</span> <span class="mi">10</span>
 </code></pre></div>
 Que vaut <code>a</code> après chaque ligne ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>5</code>, puis <code>8</code>, puis <code>11</code>, puis <code>21</code>.</p>
+<p>Chaque ligne repart de la valeur courante de <code>a</code> et lui ajoute quelque chose. C'est ainsi qu'on accumule dans une variable.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="n">c</span> <span class="o">=</span> <span class="mi">10</span>
-<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="n">c</span> <span class="o">+=</span> <span class="mi">7</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">c</span> <span class="o">=</span> <span class="mi">10</span>
+<a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="n">c</span> <span class="o">+=</span> <span class="mi">7</span>
 </code></pre></div>
 Réécris la deuxième ligne en écriture longue, et donne la valeur de <code>c</code>. Que se passerait-il si la première ligne n'existait pas ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>c += 7</code> s'écrit <code>c = c + 7</code>, et <code>c</code> vaut <code>17</code>.</p>
+<p>Sans la première ligne, le programme s'arrête sur une <strong>erreur</strong> : <code>c += 7</code> commence par lire <code>c</code>, et il n'y a rien à lire dans une case qui n'a jamais été créée.</p>
+</details>
 </div>
 <h2 id="la-division-euclidienne">La division euclidienne</h2>
 <p><code>//</code> et <code>%</code> sont les deux moitiés d'une même opération, celle que tu as apprise à l'école primaire.</p>
@@ -10153,43 +10382,71 @@ Réécris la deuxième ligne en écriture longue, et donne la valeur de <code>c<
 <p class="admonition-title">Exercice</p>
 <p>On veut ranger 47 bonbons dans des sachets de 6.</p>
 <p>Combien de sachets pleins, et combien de bonbons en trop ? Écris les deux calculs Python qui donnent ces deux nombres, puis vérifie ton résultat avec la première propriété.</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>47 // 6</code> donne <code>7</code> sachets pleins, et <code>47 % 6</code> donne <code>5</code> bonbons en trop.</p>
+<p>Vérification : <code>6 * 7 + 5</code> redonne bien <code>47</code>. Et <code>5</code> est plus petit que <code>6</code>, donc on ne peut pas faire un sachet de plus.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
-<a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="n">d</span> <span class="o">=</span> <span class="mi">7</span>
-<a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="n">q</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="n">d</span>
-<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="n">r</span> <span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="n">d</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">100</span>
+<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="n">d</span> <span class="o">=</span> <span class="mi">7</span>
+<a id="__codelineno-41-3" name="__codelineno-41-3" href="#__codelineno-41-3"></a><span class="n">q</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="n">d</span>
+<a id="__codelineno-41-4" name="__codelineno-41-4" href="#__codelineno-41-4"></a><span class="n">r</span> <span class="o">=</span> <span class="n">n</span> <span class="o">%</span> <span class="n">d</span>
 </code></pre></div>
 Que valent <code>q</code> et <code>r</code> ? Que vaut <code>d * q + r</code> ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>q</code> vaut <code>14</code> et <code>r</code> vaut <code>2</code>. <code>d * q + r</code> vaut <code>7 * 14 + 2</code>, donc <code>100</code>, c'est-à-dire <code>n</code>.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
 <p>Peut-on écrire un programme où <code>n % 5</code> vaut <code>7</code> ? Quelles valeurs cette expression peut-elle prendre ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p>Non, c'est impossible pour un <code>n</code> positif. Le reste d'une division par <code>5</code> est toujours plus petit que <code>5</code>, donc l'expression ne peut valoir que <code>0</code>, <code>1</code>, <code>2</code>, <code>3</code> ou <code>4</code>.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
 <p>Que valent <code>14 % 2</code> et <code>15 % 2</code> ? Et plus généralement, que t'apprend <code>n % 2</code> sur <code>n</code> ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>14 % 2</code> vaut <code>0</code> et <code>15 % 2</code> vaut <code>1</code>.</p>
+<p><code>n % 2</code> vaut <code>0</code> quand <code>n</code> est pair et <code>1</code> quand il est impair, puisque ce sont les deux seuls restes possibles d'une division par <code>2</code>. C'est la façon habituelle de tester la parité en programmation.</p>
+</details>
 </div>
 <h2 id="comment-un-entier-est-ecrit-en-memoire">Comment un entier est écrit en mémoire</h2>
 <p>Comme toute information, un entier est stocké sous forme d'une suite de <strong>bits</strong> groupés en octets. Deux fonctions donnent cette écriture.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="nb">print</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="mi">157</span><span class="p">))</span>   <span class="c1"># affiche 0b10011101</span>
-<a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="mi">157</span><span class="p">))</span>   <span class="c1"># affiche 0x9d</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="nb">print</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="mi">157</span><span class="p">))</span>   <span class="c1"># affiche 0b10011101</span>
+<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="mi">157</span><span class="p">))</span>   <span class="c1"># affiche 0x9d</span>
 </code></pre></div>
 <p><code>bin</code> donne l'écriture <strong>binaire</strong>, <code>hex</code> l'écriture <strong>hexadécimale</strong>. Les préfixes <code>0b</code> et <code>0x</code> ne font pas partie du nombre : ils sont là pour dire dans quelle base lire ce qui suit, puisque <code>10011101</code> tout seul serait ambigu.</p>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">200</span>
-<a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">200</span>
+<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </code></pre></div>
 Qu'affiche ce programme ? Combien de bits occupe cette écriture, et tient-elle sur un octet ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p>Il affiche <code>0b11001000</code>.</p>
+<p>Huit bits après le préfixe, donc exactement un octet. C'est cohérent avec ce qu'on a vu plus haut : <code>200</code> dépasse <code>127</code>, donc 7 bits ne suffisent pas, et il reste sous <code>255</code>, donc 8 bits suffisent.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-39-1" name="__codelineno-39-1" href="#__codelineno-39-1"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">157</span>
-<a id="__codelineno-39-2" name="__codelineno-39-2" href="#__codelineno-39-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="n">n</span> <span class="o">=</span> <span class="mi">157</span>
+<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
 </code></pre></div>
 Qu'affiche ce programme ? Retrouve ce résultat à la main depuis l'écriture binaire <code>10011101</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<p>Il affiche <code>0x9d</code>.</p>
+<p>On groupe les bits par quatre en partant de la droite : <code>1001</code> et <code>1101</code>. Le premier groupe vaut <span class="arithmatex">\(8 + 1\)</span>, soit <code>9</code>, et le second <span class="arithmatex">\(8 + 4 + 1\)</span>, soit <code>13</code>, qui s'écrit <code>d</code> en hexadécimal. D'où <code>9d</code>.</p>
+</details>
 </div>
 <h2 id="faire-entrer-une-information-input">Faire entrer une information : <code>input</code></h2>
 <p>Jusqu'ici, toutes les valeurs étaient écrites dans le programme. Pour qu'une information <strong>entre</strong> dans la machine pendant qu'elle tourne, il faut <code>input</code>.</p>
@@ -10198,24 +10455,24 @@ Qu'affiche ce programme ? Retrouve ce résultat à la main depuis l'écriture bi
 <p>C'est l'instruction <strong><code>INP</code></strong> (<em>input</em>) du <a href="../../von_neumann/langage-machine/">Little Man Computer</a> : « attends une valeur et mets-la dans l'accumulateur ». <code>saisie = input()</code> enchaîne donc <strong><code>INP</code></strong> puis <strong><code>STA</code></strong>, exactement comme <code>print(truc)</code> enchaînait <code>LDA</code> puis <code>OUT</code>.</p>
 </div>
 <p>Le texte entre parenthèses est la question posée à l'écran avant d'attendre.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
 </code></pre></div>
 <h3 id="input-rend-toujours-du-texte"><code>input</code> rend toujours du texte</h3>
 <p>Et c'est là que <code>input</code> cesse de ressembler à <code>INP</code>. Le <code>INP</code> du simulateur mettait un <strong>nombre</strong> dans l'accumulateur. <code>input</code>, lui, rend du <strong>texte</strong>, toujours, même quand tu as tapé <code>7</code>. Tu peux le vérifier avec <code>type</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-41-1" name="__codelineno-41-1" href="#__codelineno-41-1"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
-<a id="__codelineno-41-2" name="__codelineno-41-2" href="#__codelineno-41-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">saisie</span><span class="p">))</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
+<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">saisie</span><span class="p">))</span>
 </code></pre></div>
 <p>Si on tape <code>7</code>, ce programme affiche <code>&lt;class 'str'&gt;</code>, et pas <code>&lt;class 'int'&gt;</code>.</p>
 <p>La conséquence est immédiate : <strong>on ne peut pas calculer avec</strong>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
-<a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
+<a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre></div>
 <p>Ce programme s'arrête sur une erreur, <code>TypeError: can only concatenate str (not "int") to str</code>. La machine refuse d'ajouter le nombre <code>1</code> à du texte, et elle a raison de refuser : ce sont deux informations de natures différentes.</p>
 <h3 id="la-methode-et-elle-ne-change-jamais">La méthode, et elle ne change jamais</h3>
 <p>On <strong>convertit</strong> le texte en entier avec <code>int</code>.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-43-1" name="__codelineno-43-1" href="#__codelineno-43-1"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
-<a id="__codelineno-43-2" name="__codelineno-43-2" href="#__codelineno-43-2"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
-<a id="__codelineno-43-3" name="__codelineno-43-3" href="#__codelineno-43-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-48-1" name="__codelineno-48-1" href="#__codelineno-48-1"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
+<a id="__codelineno-48-2" name="__codelineno-48-2" href="#__codelineno-48-2"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-48-3" name="__codelineno-48-3" href="#__codelineno-48-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </code></pre></div>
 <p>Si on tape <code>7</code>, ce programme affiche <code>8</code>.</p>
 <p><strong>Garde toujours les deux lignes</strong>, l'une pour la saisie, l'autre pour la conversion. Elles font deux choses différentes, et les voir séparément est ce qui permet de savoir laquelle a échoué quand quelque chose ne marche pas.</p>
@@ -10230,37 +10487,52 @@ Qu'affiche ce programme ? Retrouve ce résultat à la main depuis l'écriture bi
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
-<a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
-<a id="__codelineno-44-3" name="__codelineno-44-3" href="#__codelineno-44-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-44-4" name="__codelineno-44-4" href="#__codelineno-44-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
+<a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-49-3" name="__codelineno-49-3" href="#__codelineno-49-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-49-4" name="__codelineno-49-4" href="#__codelineno-49-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
 </code></pre></div>
 On tape <code>41</code>. Qu'affiche ce programme, dans l'ordre ? Et que vaut <code>n</code> à la fin ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p>Il affiche <code>42</code>, puis <code>41</code>.</p>
+<p><code>n</code> vaut toujours <code>41</code>. Le premier <code>print</code> a calculé <code>n + 1</code>, l'a envoyé sur la sortie et l'a perdu, sans rien ranger : c'est le même constat que pour <code>print(a + b)</code> plus haut.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-45-1" name="__codelineno-45-1" href="#__codelineno-45-1"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;a : &quot;</span><span class="p">)</span>
-<a id="__codelineno-45-2" name="__codelineno-45-2" href="#__codelineno-45-2"></a><span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
-<a id="__codelineno-45-3" name="__codelineno-45-3" href="#__codelineno-45-3"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;b : &quot;</span><span class="p">)</span>
-<a id="__codelineno-45-4" name="__codelineno-45-4" href="#__codelineno-45-4"></a><span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
-<a id="__codelineno-45-5" name="__codelineno-45-5" href="#__codelineno-45-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-50-1" name="__codelineno-50-1" href="#__codelineno-50-1"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;a : &quot;</span><span class="p">)</span>
+<a id="__codelineno-50-2" name="__codelineno-50-2" href="#__codelineno-50-2"></a><span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-50-3" name="__codelineno-50-3" href="#__codelineno-50-3"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;b : &quot;</span><span class="p">)</span>
+<a id="__codelineno-50-4" name="__codelineno-50-4" href="#__codelineno-50-4"></a><span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
 </code></pre></div>
 On tape <code>3</code> puis <code>8</code>. Qu'affiche ce programme ? Et si on tape <code>8</code> puis <code>3</code> ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>11</code> dans les deux cas. L'ordre de saisie change ce que contiennent <code>a</code> et <code>b</code>, mais pas leur somme.</p>
+<p>Attention : il n'en irait pas de même avec <code>a - b</code>, qui donnerait <code>-5</code> dans un cas et <code>5</code> dans l'autre.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice</p>
-<p><div class="highlight"><pre><span></span><code><a id="__codelineno-46-1" name="__codelineno-46-1" href="#__codelineno-46-1"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
-<a id="__codelineno-46-2" name="__codelineno-46-2" href="#__codelineno-46-2"></a><span class="n">m</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
-<a id="__codelineno-46-3" name="__codelineno-46-3" href="#__codelineno-46-3"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
-<a id="__codelineno-46-4" name="__codelineno-46-4" href="#__codelineno-46-4"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
+<p><div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
+<a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a><span class="n">m</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<a id="__codelineno-51-3" name="__codelineno-51-3" href="#__codelineno-51-3"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<a id="__codelineno-51-4" name="__codelineno-51-4" href="#__codelineno-51-4"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">m</span><span class="p">))</span>
 </code></pre></div>
 On tape <code>12</code>. Qu'affichent les deux <code>print</code> ?</p>
+<details class="warning">
+<summary>Correction</summary>
+<p><code>&lt;class 'str'&gt;</code> puis <code>&lt;class 'int'&gt;</code>.</p>
+<p><code>int(n)</code> <strong>ne modifie pas</strong> <code>n</code> : il en fabrique une nouvelle valeur, rangée dans <code>m</code>. La case <code>n</code> contient toujours du texte. C'est le même mécanisme que <code>b = a + 1</code>, qui laisse <code>a</code> intact.</p>
+</details>
 </div>
 <h2 id="exercices">Exercices</h2>
 <div class="admonition info">
 <p class="admonition-title">Comment faire ces exercices</p>
 <p>Tout se passe dans <strong>un seul fichier</strong>, <code>python/exos_variables.py</code>, et chaque exercice commence par une ligne qui le repère :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 1&quot;</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-52-1" name="__codelineno-52-1" href="#__codelineno-52-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 1&quot;</span><span class="p">)</span>
 </code></pre></div>
 <p><strong>Écris chaque nouvel exercice tout en haut du fichier</strong>, au-dessus des précédents. Celui sur lequel tu travailles s'exécute alors en premier, et tu n'as pas à retaper les saisies de tous les autres avant d'arriver à lui. Ton fichier se lit donc à l'envers, du plus récent au plus ancien, et les lignes <code>Exercice 1</code>, <code>Exercice 2</code>... te disent quel résultat appartient à quel exercice.</p>
 <p>Chaque énoncé donne un exemple de saisie et le résultat attendu : c'est avec lui que tu vérifies ton programme.</p>
@@ -10275,71 +10547,220 @@ On tape <code>12</code>. Qu'affichent les deux <code>print</code> ?</p>
 <p class="admonition-title">Exercice 1 (à faire)</p>
 <p>Demande un nombre, puis affiche son double.</p>
 <p>Avec <code>7</code>, le programme affiche <code>14</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 1&quot;</span><span class="p">)</span>
+<a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
+<a id="__codelineno-53-3" name="__codelineno-53-3" href="#__codelineno-53-3"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-53-4" name="__codelineno-53-4" href="#__codelineno-53-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 2 (à faire)</p>
 <p>Demande deux nombres, puis affiche leur somme, et en dessous leur produit.</p>
 <p>Avec <code>3</code> puis <code>5</code>, le programme affiche <code>8</code> puis <code>15</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 2&quot;</span><span class="p">)</span>
+<a id="__codelineno-54-2" name="__codelineno-54-2" href="#__codelineno-54-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Premier nombre : &quot;</span><span class="p">)</span>
+<a id="__codelineno-54-3" name="__codelineno-54-3" href="#__codelineno-54-3"></a><span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-54-4" name="__codelineno-54-4" href="#__codelineno-54-4"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Deuxième nombre : &quot;</span><span class="p">)</span>
+<a id="__codelineno-54-5" name="__codelineno-54-5" href="#__codelineno-54-5"></a><span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-54-6" name="__codelineno-54-6" href="#__codelineno-54-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span>
+<a id="__codelineno-54-7" name="__codelineno-54-7" href="#__codelineno-54-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span>
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 3 (à faire)</p>
 <p>Demande un nombre de secondes, puis affiche combien cela fait de minutes entières, et en dessous combien il reste de secondes.</p>
 <p>Avec <code>163</code>, le programme affiche <code>2</code> puis <code>43</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-55-1" name="__codelineno-55-1" href="#__codelineno-55-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 3&quot;</span><span class="p">)</span>
+<a id="__codelineno-55-2" name="__codelineno-55-2" href="#__codelineno-55-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre de secondes : &quot;</span><span class="p">)</span>
+<a id="__codelineno-55-3" name="__codelineno-55-3" href="#__codelineno-55-3"></a><span class="n">s</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-55-4" name="__codelineno-55-4" href="#__codelineno-55-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">s</span> <span class="o">//</span> <span class="mi">60</span><span class="p">)</span>
+<a id="__codelineno-55-5" name="__codelineno-55-5" href="#__codelineno-55-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">s</span> <span class="o">%</span> <span class="mi">60</span><span class="p">)</span>
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 4 (à faire)</p>
 <p>Demande un prix en centimes, puis affiche le nombre d'euros, et en dessous les centimes restants.</p>
 <p>Avec <code>1250</code>, le programme affiche <code>12</code> puis <code>50</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-56-1" name="__codelineno-56-1" href="#__codelineno-56-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 4&quot;</span><span class="p">)</span>
+<a id="__codelineno-56-2" name="__codelineno-56-2" href="#__codelineno-56-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un prix en centimes : &quot;</span><span class="p">)</span>
+<a id="__codelineno-56-3" name="__codelineno-56-3" href="#__codelineno-56-3"></a><span class="n">centimes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-56-4" name="__codelineno-56-4" href="#__codelineno-56-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">centimes</span> <span class="o">//</span> <span class="mi">100</span><span class="p">)</span>
+<a id="__codelineno-56-5" name="__codelineno-56-5" href="#__codelineno-56-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">centimes</span> <span class="o">%</span> <span class="mi">100</span><span class="p">)</span>
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 5 (à faire)</p>
 <p>Demande deux nombres <code>x</code> et <code>y</code>, <strong>échange</strong> leurs contenus, puis affiche <code>x</code> et en dessous <code>y</code>.</p>
 <p>Avec <code>3</code> puis <code>8</code>, le programme affiche <code>8</code> puis <code>3</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-57-1" name="__codelineno-57-1" href="#__codelineno-57-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 5&quot;</span><span class="p">)</span>
+<a id="__codelineno-57-2" name="__codelineno-57-2" href="#__codelineno-57-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;x : &quot;</span><span class="p">)</span>
+<a id="__codelineno-57-3" name="__codelineno-57-3" href="#__codelineno-57-3"></a><span class="n">x</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-57-4" name="__codelineno-57-4" href="#__codelineno-57-4"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;y : &quot;</span><span class="p">)</span>
+<a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a><span class="n">y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-57-6" name="__codelineno-57-6" href="#__codelineno-57-6"></a><span class="n">temp</span> <span class="o">=</span> <span class="n">x</span>
+<a id="__codelineno-57-7" name="__codelineno-57-7" href="#__codelineno-57-7"></a><span class="n">x</span> <span class="o">=</span> <span class="n">y</span>
+<a id="__codelineno-57-8" name="__codelineno-57-8" href="#__codelineno-57-8"></a><span class="n">y</span> <span class="o">=</span> <span class="n">temp</span>
+<a id="__codelineno-57-9" name="__codelineno-57-9" href="#__codelineno-57-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<a id="__codelineno-57-10" name="__codelineno-57-10" href="#__codelineno-57-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+</code></pre></div>
+<p>Sans la variable <code>temp</code>, la première affectation écraserait la valeur qu'il faut garder.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 6 (à faire)</p>
 <p>Demande un nombre, puis affiche son écriture binaire, et en dessous son écriture hexadécimale.</p>
 <p>Avec <code>157</code>, le programme affiche <code>0b10011101</code> puis <code>0x9d</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 6&quot;</span><span class="p">)</span>
+<a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
+<a id="__codelineno-58-3" name="__codelineno-58-3" href="#__codelineno-58-3"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-58-4" name="__codelineno-58-4" href="#__codelineno-58-4"></a><span class="nb">print</span><span class="p">(</span><span class="nb">bin</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+<a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="nb">print</span><span class="p">(</span><span class="nb">hex</span><span class="p">(</span><span class="n">n</span><span class="p">))</span>
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 7 (à faire)</p>
 <p>Demande un nombre de bonbons, puis la taille d'un sachet. Affiche le nombre de sachets pleins, et en dessous le nombre de bonbons en trop.</p>
 <p>Avec <code>47</code> puis <code>6</code>, le programme affiche <code>7</code> puis <code>5</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-59-1" name="__codelineno-59-1" href="#__codelineno-59-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 7&quot;</span><span class="p">)</span>
+<a id="__codelineno-59-2" name="__codelineno-59-2" href="#__codelineno-59-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Nombre de bonbons : &quot;</span><span class="p">)</span>
+<a id="__codelineno-59-3" name="__codelineno-59-3" href="#__codelineno-59-3"></a><span class="n">bonbons</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-59-4" name="__codelineno-59-4" href="#__codelineno-59-4"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Taille d&#39;un sachet : &quot;</span><span class="p">)</span>
+<a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="n">taille</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-59-6" name="__codelineno-59-6" href="#__codelineno-59-6"></a><span class="nb">print</span><span class="p">(</span><span class="n">bonbons</span> <span class="o">//</span> <span class="n">taille</span><span class="p">)</span>
+<a id="__codelineno-59-7" name="__codelineno-59-7" href="#__codelineno-59-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">bonbons</span> <span class="o">%</span> <span class="n">taille</span><span class="p">)</span>
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 8 (à faire)</p>
 <p>Demande un nombre et affiche son reste dans la division par <code>2</code>.</p>
 <p>Avec <code>15</code>, le programme affiche <code>1</code>. Avec <code>14</code>, il affiche <code>0</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 8&quot;</span><span class="p">)</span>
+<a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
+<a id="__codelineno-60-3" name="__codelineno-60-3" href="#__codelineno-60-3"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-60-4" name="__codelineno-60-4" href="#__codelineno-60-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">2</span><span class="p">)</span>
+</code></pre></div>
+<p>Ce reste ne peut valoir que <code>0</code> ou <code>1</code> : il dit si le nombre est pair ou impair.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 9 (entraînement)</p>
 <p>Demande un nombre, augmente-le de <code>10</code> <strong>en réutilisant la même variable</strong>, puis affiche-le.</p>
 <p>Avec <code>32</code>, le programme affiche <code>42</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-61-1" name="__codelineno-61-1" href="#__codelineno-61-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 9&quot;</span><span class="p">)</span>
+<a id="__codelineno-61-2" name="__codelineno-61-2" href="#__codelineno-61-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
+<a id="__codelineno-61-3" name="__codelineno-61-3" href="#__codelineno-61-3"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-61-4" name="__codelineno-61-4" href="#__codelineno-61-4"></a><span class="n">n</span> <span class="o">+=</span> <span class="mi">10</span>
+<a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</code></pre></div>
+<p><code>n = n + 10</code> fait exactement la même chose.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 10 (entraînement)</p>
 <p>Demande un âge, puis affiche cet âge dans dix ans, et en dessous cet âge il y a dix ans.</p>
 <p>Avec <code>17</code>, le programme affiche <code>27</code> puis <code>7</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 10&quot;</span><span class="p">)</span>
+<a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Ton âge : &quot;</span><span class="p">)</span>
+<a id="__codelineno-62-3" name="__codelineno-62-3" href="#__codelineno-62-3"></a><span class="n">age</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-62-4" name="__codelineno-62-4" href="#__codelineno-62-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">age</span> <span class="o">+</span> <span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-62-5" name="__codelineno-62-5" href="#__codelineno-62-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">age</span> <span class="o">-</span> <span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 11 (entraînement)</p>
 <p>Demande trois notes entières. Affiche leur moyenne <strong>entière</strong>, et en dessous le reste de la division de leur total par <code>3</code>.</p>
 <p>Avec <code>12</code>, <code>15</code> puis <code>20</code>, le programme affiche <code>15</code> puis <code>2</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 11&quot;</span><span class="p">)</span>
+<a id="__codelineno-63-2" name="__codelineno-63-2" href="#__codelineno-63-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Note 1 : &quot;</span><span class="p">)</span>
+<a id="__codelineno-63-3" name="__codelineno-63-3" href="#__codelineno-63-3"></a><span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-63-4" name="__codelineno-63-4" href="#__codelineno-63-4"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Note 2 : &quot;</span><span class="p">)</span>
+<a id="__codelineno-63-5" name="__codelineno-63-5" href="#__codelineno-63-5"></a><span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-63-6" name="__codelineno-63-6" href="#__codelineno-63-6"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Note 3 : &quot;</span><span class="p">)</span>
+<a id="__codelineno-63-7" name="__codelineno-63-7" href="#__codelineno-63-7"></a><span class="n">c</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-63-8" name="__codelineno-63-8" href="#__codelineno-63-8"></a><span class="n">total</span> <span class="o">=</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span>
+<a id="__codelineno-63-9" name="__codelineno-63-9" href="#__codelineno-63-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">total</span> <span class="o">//</span> <span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-63-10" name="__codelineno-63-10" href="#__codelineno-63-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">total</span> <span class="o">%</span> <span class="mi">3</span><span class="p">)</span>
+</code></pre></div>
+<p>Le total vaut <code>47</code>, et <span class="arithmatex">\(3 \times 15 + 2 = 47\)</span>. La moyenne entière perd le reste : ce n'est pas la même chose que la moyenne exacte, qui vaudrait <code>15.666...</code>.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 12 (entraînement)</p>
 <p>Demande un nombre. Affiche le type de ce que <code>input</code> a rendu, puis convertis-le et affiche le type du résultat.</p>
 <p>Avec <code>7</code>, le programme affiche <code>&lt;class 'str'&gt;</code> puis <code>&lt;class 'int'&gt;</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-64-1" name="__codelineno-64-1" href="#__codelineno-64-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 12&quot;</span><span class="p">)</span>
+<a id="__codelineno-64-2" name="__codelineno-64-2" href="#__codelineno-64-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
+<a id="__codelineno-64-3" name="__codelineno-64-3" href="#__codelineno-64-3"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">saisie</span><span class="p">))</span>
+<a id="__codelineno-64-4" name="__codelineno-64-4" href="#__codelineno-64-4"></a><span class="n">nombre</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-64-5" name="__codelineno-64-5" href="#__codelineno-64-5"></a><span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">nombre</span><span class="p">))</span>
+</code></pre></div>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 13 (bonus)</p>
 <p>Demande un prix en centimes. Affiche le nombre de pièces de 2 euros, puis le nombre de pièces de 1 euro, puis les centimes restants, en utilisant le moins de pièces possible.</p>
 <p>Avec <code>1370</code>, le programme affiche <code>6</code>, puis <code>1</code>, puis <code>70</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-65-1" name="__codelineno-65-1" href="#__codelineno-65-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 13&quot;</span><span class="p">)</span>
+<a id="__codelineno-65-2" name="__codelineno-65-2" href="#__codelineno-65-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un prix en centimes : &quot;</span><span class="p">)</span>
+<a id="__codelineno-65-3" name="__codelineno-65-3" href="#__codelineno-65-3"></a><span class="n">centimes</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-65-4" name="__codelineno-65-4" href="#__codelineno-65-4"></a><span class="n">pieces2</span> <span class="o">=</span> <span class="n">centimes</span> <span class="o">//</span> <span class="mi">200</span>
+<a id="__codelineno-65-5" name="__codelineno-65-5" href="#__codelineno-65-5"></a><span class="n">reste</span> <span class="o">=</span> <span class="n">centimes</span> <span class="o">%</span> <span class="mi">200</span>
+<a id="__codelineno-65-6" name="__codelineno-65-6" href="#__codelineno-65-6"></a><span class="n">pieces1</span> <span class="o">=</span> <span class="n">reste</span> <span class="o">//</span> <span class="mi">100</span>
+<a id="__codelineno-65-7" name="__codelineno-65-7" href="#__codelineno-65-7"></a><span class="n">restant</span> <span class="o">=</span> <span class="n">reste</span> <span class="o">%</span> <span class="mi">100</span>
+<a id="__codelineno-65-8" name="__codelineno-65-8" href="#__codelineno-65-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">pieces2</span><span class="p">)</span>
+<a id="__codelineno-65-9" name="__codelineno-65-9" href="#__codelineno-65-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">pieces1</span><span class="p">)</span>
+<a id="__codelineno-65-10" name="__codelineno-65-10" href="#__codelineno-65-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">restant</span><span class="p">)</span>
+</code></pre></div>
+<p>La méthode se répète : on prend le quotient par la valeur de la pièce, puis on <strong>continue sur le reste</strong>. Une pièce de 2 euros vaut <code>200</code> centimes, d'où le <code>200</code>.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Exercice 14 (bonus)</p>
 <p>Demande un nombre, puis affiche son chiffre des unités, et en dessous son chiffre des dizaines.</p>
 <p>Avec <code>482</code>, le programme affiche <code>2</code> puis <code>8</code>.</p>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-66-1" name="__codelineno-66-1" href="#__codelineno-66-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Exercice 14&quot;</span><span class="p">)</span>
+<a id="__codelineno-66-2" name="__codelineno-66-2" href="#__codelineno-66-2"></a><span class="n">saisie</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s2">&quot;Un nombre : &quot;</span><span class="p">)</span>
+<a id="__codelineno-66-3" name="__codelineno-66-3" href="#__codelineno-66-3"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">saisie</span><span class="p">)</span>
+<a id="__codelineno-66-4" name="__codelineno-66-4" href="#__codelineno-66-4"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="o">%</span> <span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-66-5" name="__codelineno-66-5" href="#__codelineno-66-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">n</span> <span class="o">//</span> <span class="mi">10</span> <span class="o">%</span> <span class="mi">10</span><span class="p">)</span>
+</code></pre></div>
+<p>Le chiffre des unités est le reste de la division par <code>10</code>. Pour les dizaines, on <strong>enlève d'abord</strong> les unités avec <code>n // 10</code>, ce qui décale le nombre d'un rang, et on reprend le reste par <code>10</code>.</p>
+</details>
 </div>
 
 
