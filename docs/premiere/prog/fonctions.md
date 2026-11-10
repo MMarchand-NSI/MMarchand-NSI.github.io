@@ -1,7 +1,7 @@
 # Les fonctions
 
-!!! question "Prédire la dernière ligne"
-    Pour chaque programme, écris la valeur de la dernière ligne comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
+!!! question "Prédire la valeur"
+    Écris la valeur de l'expression demandée comme Python l'écrirait (`'abc'`, `True`, `2.0`), puis valide. Quand le champ est marqué « affiche », écris plutôt ce que le programme affiche. Si le programme s'arrête sur une erreur, écris `erreur`. Les valeurs changent à chaque essai.
 
 <script type="text/x-silent-teacher" data-titre="Les fonctions">
 def f(x: int) -> int:
