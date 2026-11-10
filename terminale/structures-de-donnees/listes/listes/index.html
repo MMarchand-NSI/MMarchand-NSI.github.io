@@ -9985,6 +9985,14 @@
 <a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds <code>0</code>, je n'ai rien à additionner.</li>
+<li>une tête et une queue : je donne la queue à un autre lutin, et je réponds ma tête plus sa réponse.</li>
+</ul>
+</div>
 </details>
 </div>
 <div class="admonition question">
@@ -10019,6 +10027,15 @@
 <a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>. Quand j'ai une tête, je regarde si elle est paire.</p>
+<ul>
+<li>vide : je réponds <code>0</code>.</li>
+<li>ma tête est <strong>paire</strong> : je donne la queue à un autre lutin, et je réponds ma tête plus sa réponse.</li>
+<li>ma tête est <strong>impaire</strong> : je donne la queue à un autre lutin, et je réponds sa réponse sans rien y ajouter.</li>
+</ul>
+</div>
 <p>Le <code>case</code> sur la condition est <strong>imbriqué</strong> dans le cas <code>Cons</code> : on ne regarde la parité de la tête que s'il y a une tête.</p>
 </details>
 <details class="tip">
@@ -10124,6 +10141,15 @@
 <a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne un élément <code>x</code>, et soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds <code>False</code>, une liste vide ne contient rien.</li>
+<li>ma tête vaut <code>x</code> : je réponds <code>True</code> tout de suite, personne d'autre ne cherche.</li>
+<li>ma tête ne vaut pas <code>x</code> : je demande à un autre lutin de chercher dans la queue, et je réponds comme lui.</li>
+</ul>
+</div>
 <p>Le <code>||</code> est <strong>paresseux</strong> : si <code>tete == x</code> est vrai, Gleam ne va pas chercher plus loin dans la queue.</p>
 </details>
 </div>
@@ -10195,6 +10221,16 @@
 <a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne <strong>deux</strong> listes, et chacune est vide ou non : quatre possibilités.</p>
+<ul>
+<li>les deux vides : je réponds <code>True</code>.</li>
+<li><code>l1</code> vide, <code>l2</code> non : je réponds <code>False</code>, elles n'ont pas la même longueur.</li>
+<li><code>l1</code> non vide, <code>l2</code> vide : je réponds <code>False</code>, même raison.</li>
+<li>les deux non vides : si mes deux têtes diffèrent, je réponds <code>False</code>. Sinon je donne les deux queues à un autre lutin, et je réponds comme lui.</li>
+</ul>
+</div>
 </details>
 </div>
 <div class="admonition note">
@@ -10244,6 +10280,14 @@
 <a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds la liste vide, elle est déjà à l'envers.</li>
+<li>une tête et une queue : je donne la queue à un autre lutin pour qu'il la renverse, puis j'ajoute ma tête <strong>à la fin</strong> de sa réponse.</li>
+</ul>
+</div>
 </details>
 </div>
 <div class="admonition question">
@@ -10271,12 +10315,16 @@
 <a id="__codelineno-24-7" name="__codelineno-24-7" href="#__codelineno-24-7"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-24-8" name="__codelineno-24-8" href="#__codelineno-24-8"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne <strong>deux</strong> listes, et chacune est vide ou non : quatre possibilités.</p>
 <ul>
-<li>deux listes vides : le résultat est <strong>vide</strong></li>
-<li><code>l1</code> vide : le résultat est <strong><code>l2</code></strong></li>
-<li><code>l2</code> vide : le résultat est <strong><code>l1</code></strong></li>
-<li>deux non vides : on garde la tête de <code>l1</code>, et pour la suite on demande à un autre lutin de concaténer la queue de <code>l1</code> avec <code>l2</code>, puis on recolle.</li>
+<li>les deux vides : je réponds la liste vide.</li>
+<li><code>l1</code> vide : je réponds <code>l2</code> telle quelle.</li>
+<li><code>l2</code> vide : je réponds <code>l1</code> telle quelle.</li>
+<li>les deux non vides : je garde la tête de <code>l1</code>, je donne sa queue et <code>l2</code> à un autre lutin, et je recolle ma tête devant sa réponse.</li>
 </ul>
+</div>
 </details>
 </div>
 <h3 id="23-faire-pousser-une-liste-dune-graine-a-une-liste">2.3 Faire pousser une liste : d'une graine à une liste</h3>
@@ -10337,6 +10385,14 @@
 <a id="__codelineno-28-5" name="__codelineno-28-5" href="#__codelineno-28-5"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-28-6" name="__codelineno-28-6" href="#__codelineno-28-6"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin, et pour une fois on ne me donne pas de liste : on me donne un nombre <code>n</code> et un élément <code>x</code>. Soit <code>n</code> vaut <code>0</code>, soit il vaut autre chose.</p>
+<ul>
+<li><code>0</code> : je réponds la liste vide, zéro fois <code>x</code>.</li>
+<li>autre chose : je demande à un autre lutin la liste de <code>n - 1</code> fois <code>x</code>, et je mets <code>x</code> en tête de sa réponse.</li>
+</ul>
+</div>
 <p>Le cas de base n'est plus <code>Vide</code> mais <code>n == 0</code> : la graine <code>n</code> <strong>décroît</strong> à chaque appel jusqu'à 0.</p>
 </details>
 </div>
@@ -10422,6 +10478,14 @@
 <a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds <code>"_|_"</code>, le bout de la liste.</li>
+<li>une tête et une queue : je demande à un autre lutin la chaîne de la queue, puis je mets ma tête et <code>" -&gt; "</code> devant sa réponse.</li>
+</ul>
+</div>
 </details>
 </div>
 <div class="admonition question">
@@ -10445,6 +10509,14 @@
 <a id="__codelineno-33-5" name="__codelineno-33-5" href="#__codelineno-33-5"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds <code>True</code>, rien ne me contredit.</li>
+<li>une tête et une queue : je demande à un autre lutin si toute la queue est vraie, et je réponds ma tête <strong>et</strong> sa réponse.</li>
+</ul>
+</div>
 </details>
 </div>
 <div class="admonition question">
@@ -10468,6 +10540,14 @@
 <a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds <code>False</code>, je n'ai rien trouvé.</li>
+<li>une tête et une queue : je demande à un autre lutin s'il y a un vrai dans la queue, et je réponds ma tête <strong>ou</strong> sa réponse.</li>
+</ul>
+</div>
 </details>
 </div>
 <div class="admonition question">
@@ -10496,6 +10576,15 @@
 <a id="__codelineno-37-9" name="__codelineno-37-9" href="#__codelineno-37-9"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne un élément <code>e</code>, et soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds <code>0</code>.</li>
+<li>ma tête vaut <code>e</code> : je demande à un autre lutin de compter dans la queue, et je réponds sa réponse plus <code>1</code>.</li>
+<li>ma tête ne vaut pas <code>e</code> : je réponds sa réponse, sans rien y ajouter.</li>
+</ul>
+</div>
 </details>
 </div>
 <h3 id="42-transformer-une-liste">4.2 Transformer une liste</h3>
@@ -10545,6 +10634,15 @@
 <a id="__codelineno-40-9" name="__codelineno-40-9" href="#__codelineno-40-9"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne un compteur <code>n</code>, et soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>. Je regarde la liste d'abord, le compteur ensuite.</p>
+<ul>
+<li>vide : je réponds la liste vide, je n'ai plus rien à prendre.</li>
+<li><code>n</code> vaut <code>0</code> : je réponds la liste vide, je n'ai plus le droit de prendre.</li>
+<li>sinon : je garde ma tête, je demande à un autre lutin les <code>n - 1</code> premiers de la queue, et je recolle.</li>
+</ul>
+</div>
 </details>
 </div>
 <div class="admonition question">
@@ -10575,6 +10673,15 @@
 <a id="__codelineno-42-9" name="__codelineno-42-9" href="#__codelineno-42-9"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-42-10" name="__codelineno-42-10" href="#__codelineno-42-10"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne un compteur <code>n</code>, et soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>. Je regarde la liste d'abord, le compteur ensuite.</p>
+<ul>
+<li>vide : je réponds la liste vide, il n'y a plus rien à sauter.</li>
+<li><code>n</code> vaut <code>0</code> : je n'ai plus rien à sauter, je réponds la liste <strong>entière</strong>, ma tête comprise.</li>
+<li>sinon : je jette ma tête, et je laisse un autre lutin sauter les <code>n - 1</code> suivants.</li>
+</ul>
+</div>
 <p>Quand il n'y a plus rien à sauter, on renvoie <code>lst</code> <strong>en entier</strong>, pas <code>q</code> : la tête fait partie du résultat.</p>
 </details>
 </div>
@@ -10647,6 +10754,15 @@
 <a id="__codelineno-47-9" name="__codelineno-47-9" href="#__codelineno-47-9"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-47-10" name="__codelineno-47-10" href="#__codelineno-47-10"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne un élément <code>e</code>, et soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds la liste vide, il n'y a rien à supprimer.</li>
+<li>ma tête vaut <code>e</code> : je réponds ma queue, et c'est fini, personne d'autre ne cherche.</li>
+<li>ma tête ne vaut pas <code>e</code> : je garde ma tête, je demande à un autre lutin de supprimer <code>e</code> dans la queue, et je recolle.</li>
+</ul>
+</div>
 </details>
 </div>
 <h4 id="422-par-filtrage-vers-filter">4.2.2 Par filtrage : vers <code>filter</code></h4>
@@ -10677,6 +10793,15 @@
 <a id="__codelineno-49-9" name="__codelineno-49-9" href="#__codelineno-49-9"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-49-10" name="__codelineno-49-10" href="#__codelineno-49-10"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds la liste vide.</li>
+<li>ma tête est <strong>impaire</strong> : je la garde, je demande à un autre lutin les impairs de la queue, et je recolle.</li>
+<li>ma tête est <strong>paire</strong> : je la jette, et je réponds comme l'autre lutin.</li>
+</ul>
+</div>
 </details>
 </div>
 <div class="admonition question">
@@ -10704,6 +10829,15 @@
 <a id="__codelineno-51-9" name="__codelineno-51-9" href="#__codelineno-51-9"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-51-10" name="__codelineno-51-10" href="#__codelineno-51-10"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds la liste vide.</li>
+<li>ma tête est <strong>strictement positive</strong> : je la garde, je demande à un autre lutin les positifs de la queue, et je recolle.</li>
+<li>ma tête est <strong>négative ou nulle</strong> : je la jette, et je réponds comme l'autre lutin.</li>
+</ul>
+</div>
 </details>
 </div>
 <div class="admonition question">
@@ -10731,6 +10865,15 @@
 <a id="__codelineno-53-9" name="__codelineno-53-9" href="#__codelineno-53-9"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds la liste vide.</li>
+<li>ma tête est <strong>strictement négative</strong> : je la garde, je demande à un autre lutin les négatifs de la queue, et je recolle.</li>
+<li>ma tête est <strong>positive ou nulle</strong> : je la jette, et je réponds comme l'autre lutin.</li>
+</ul>
+</div>
 </details>
 </div>
 <p><strong>Ce qu'elles ont en commun.</strong> Compare les trois corrigés : ils sont <strong>identiques</strong>, seule la <strong>condition</strong> change (<code>t % 2 != 0</code>, <code>t &gt; 0</code>, <code>t &lt; 0</code>). Écrire une fonction par condition, c'est se répéter. L'idée : <strong>passer la condition en paramètre</strong>. On obtient une seule fonction, <code>filter</code> (c'est son nom partout, dans tous les langages) :</p>
@@ -10787,6 +10930,14 @@
 <a id="__codelineno-58-5" name="__codelineno-58-5" href="#__codelineno-58-5"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds la liste vide.</li>
+<li>une tête et une queue : je demande à un autre lutin les carrés de la queue, et je mets le carré de ma tête devant sa réponse.</li>
+</ul>
+</div>
 </details>
 </div>
 <div class="admonition question">
@@ -10810,6 +10961,14 @@
 <a id="__codelineno-60-5" name="__codelineno-60-5" href="#__codelineno-60-5"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-60-6" name="__codelineno-60-6" href="#__codelineno-60-6"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds la liste vide.</li>
+<li>une tête et une queue : je demande à un autre lutin les doubles de la queue, et je mets le double de ma tête devant sa réponse.</li>
+</ul>
+</div>
 </details>
 </div>
 <div class="admonition question">
@@ -10833,6 +10992,14 @@
 <a id="__codelineno-62-5" name="__codelineno-62-5" href="#__codelineno-62-5"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-62-6" name="__codelineno-62-6" href="#__codelineno-62-6"></a><span class="p">}</span>
 </code></pre></div>
+<div class="admonition quote">
+<p class="admonition-title">En langage lutin</p>
+<p>Je suis un lutin. On me donne soit une liste <strong>vide</strong>, soit une liste avec une <strong>tête</strong> et une <strong>queue</strong>.</p>
+<ul>
+<li>vide : je réponds la liste vide.</li>
+<li>une tête et une queue : je demande à un autre lutin les triples de la queue, et je mets le triple de ma tête devant sa réponse.</li>
+</ul>
+</div>
 </details>
 </div>
 <p><strong>Même constat.</strong> Les trois corrigés sont identiques, seule la <strong>transformation</strong> change (<code>t * t</code>, <code>2 * t</code>, <code>3 * t</code>). On la passe en paramètre : c'est <code>map</code>, et c'est là aussi son nom partout.</p>
@@ -10967,7 +11134,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 10, 2026 07:36:22 UTC">November 10, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 10, 2026 08:50:48 UTC">November 10, 2026</span>
   </span>
 
     
