@@ -225,6 +225,12 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
         }
         ```
 
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds `0`, je n'ai rien à additionner.
+            - une tête et une queue : je donne la queue à un autre lutin, et je réponds ma tête plus sa réponse.
+
 !!! question "La somme des pairs"
     Écris `somme_pairs(lst: Liste(Int)) -> Int` qui renvoie la somme des seuls éléments **pairs**. `2 -> 3 -> 4` donne `6`.
 
@@ -260,6 +266,13 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
           }
         }
         ```
+
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne soit une liste **vide**, soit une liste avec une **tête** et une **queue**. Quand j'ai une tête, je regarde si elle est paire.
+
+            - vide : je réponds `0`.
+            - ma tête est **paire** : je donne la queue à un autre lutin, et je réponds ma tête plus sa réponse.
+            - ma tête est **impaire** : je donne la queue à un autre lutin, et je réponds sa réponse sans rien y ajouter.
 
         Le `case` sur la condition est **imbriqué** dans le cas `Cons` : on ne regarde la parité de la tête que s'il y a une tête.
 
@@ -343,6 +356,13 @@ taille(Cons(2, ...)) = 1 + taille(Cons(3, ...))
         }
         ```
 
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne un élément `x`, et soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds `False`, une liste vide ne contient rien.
+            - ma tête vaut `x` : je réponds `True` tout de suite, personne d'autre ne cherche.
+            - ma tête ne vaut pas `x` : je demande à un autre lutin de chercher dans la queue, et je réponds comme lui.
+
         Le `||` est **paresseux** : si `tete == x` est vrai, Gleam ne va pas chercher plus loin dans la queue.
 
 #### 2.1.3 Deux listes à la fois : les quatre cas
@@ -407,6 +427,14 @@ On veut écrire `sont_egales(l1: Liste(a), l2: Liste(a)) -> Bool`, qui dit si de
         }
         ```
 
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne **deux** listes, et chacune est vide ou non : quatre possibilités.
+
+            - les deux vides : je réponds `True`.
+            - `l1` vide, `l2` non : je réponds `False`, elles n'ont pas la même longueur.
+            - `l1` non vide, `l2` vide : je réponds `False`, même raison.
+            - les deux non vides : si mes deux têtes diffèrent, je réponds `False`. Sinon je donne les deux queues à un autre lutin, et je réponds comme lui.
+
 !!! note "Quatre cas, même si on pourrait en écrire moins"
     On pourrait fusionner les deux cas « une seule est vide » en un seul. Ce n'est qu'une **optimisation d'écriture**, et ce n'est pas le sujet : on écrit les **quatre** cas pour voir toute la disjonction. Là encore, Gleam **exige** que les quatre soient traités.
 
@@ -456,6 +484,12 @@ Le **lutin ajouteur** : *« Si je reçois une liste vide, je renvoie la liste qu
         }
         ```
 
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds la liste vide, elle est déjà à l'envers.
+            - une tête et une queue : je donne la queue à un autre lutin pour qu'il la renverse, puis j'ajoute ma tête **à la fin** de sa réponse.
+
 !!! question "Concaténer"
     Écris `concat(l1: Liste(a), l2: Liste(a)) -> Liste(a)` qui met `l2` à la suite de `l1`. Il y a **deux** listes : fais la disjonction des **quatre** cas, comme pour `sont_egales`, et traite-les un par un.
 
@@ -482,10 +516,13 @@ Le **lutin ajouteur** : *« Si je reçois une liste vide, je renvoie la liste qu
         }
         ```
 
-        - deux listes vides : le résultat est **vide**
-        - `l1` vide : le résultat est **`l2`**
-        - `l2` vide : le résultat est **`l1`**
-        - deux non vides : on garde la tête de `l1`, et pour la suite on demande à un autre lutin de concaténer la queue de `l1` avec `l2`, puis on recolle.
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne **deux** listes, et chacune est vide ou non : quatre possibilités.
+
+            - les deux vides : je réponds la liste vide.
+            - `l1` vide : je réponds `l2` telle quelle.
+            - `l2` vide : je réponds `l1` telle quelle.
+            - les deux non vides : je garde la tête de `l1`, je donne sa queue et `l2` à un autre lutin, et je recolle ma tête devant sa réponse.
 
 ### 2.3 Faire pousser une liste : d'une graine à une liste
 
@@ -547,6 +584,12 @@ C'est exactement la **récurrence** de ton cours de maths : un cas pour 0, puis 
           }
         }
         ```
+
+        !!! quote "En langage lutin"
+            Je suis un lutin, et pour une fois on ne me donne pas de liste : on me donne un nombre `n` et un élément `x`. Soit `n` vaut `0`, soit il vaut autre chose.
+
+            - `0` : je réponds la liste vide, zéro fois `x`.
+            - autre chose : je demande à un autre lutin la liste de `n - 1` fois `x`, et je mets `x` en tête de sa réponse.
 
         Le cas de base n'est plus `Vide` mais `n == 0` : la graine `n` **décroît** à chaque appel jusqu'à 0.
 
@@ -633,6 +676,12 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds `"_|_"`, le bout de la liste.
+            - une tête et une queue : je demande à un autre lutin la chaîne de la queue, puis je mets ma tête et `" -> "` devant sa réponse.
+
 !!! question "tous_vrais"
     Écris `tous_vrais(lst: Liste(Bool)) -> Bool`, qui renvoie `True` si **tous** les booléens de la liste sont vrais. La liste vide donne `True` (rien ne le contredit).
 
@@ -655,6 +704,12 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds `True`, rien ne me contredit.
+            - une tête et une queue : je demande à un autre lutin si toute la queue est vraie, et je réponds ma tête **et** sa réponse.
+
 !!! question "au_moins_un_vrai"
     Écris `au_moins_un_vrai(lst: Liste(Bool)) -> Bool`, qui renvoie `True` si **au moins un** booléen est vrai. La liste vide donne `False`.
 
@@ -676,6 +731,12 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
           }
         }
         ```
+
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds `False`, je n'ai rien trouvé.
+            - une tête et une queue : je demande à un autre lutin s'il y a un vrai dans la queue, et je réponds ma tête **ou** sa réponse.
 
 !!! question "compte"
     Écris `compte(lst: Liste(a), e: a) -> Int`, qui compte le nombre d'occurrences d'un élément. `compte(2 -> 3 -> 4, 3)` vaut `1`.
@@ -703,6 +764,13 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
           }
         }
         ```
+
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne un élément `e`, et soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds `0`.
+            - ma tête vaut `e` : je demande à un autre lutin de compter dans la queue, et je réponds sa réponse plus `1`.
+            - ma tête ne vaut pas `e` : je réponds sa réponse, sans rien y ajouter.
 
 ### 4.2 Transformer une liste
 
@@ -755,6 +823,13 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne un compteur `n`, et soit une liste **vide**, soit une liste avec une **tête** et une **queue**. Je regarde la liste d'abord, le compteur ensuite.
+
+            - vide : je réponds la liste vide, je n'ai plus rien à prendre.
+            - `n` vaut `0` : je réponds la liste vide, je n'ai plus le droit de prendre.
+            - sinon : je garde ma tête, je demande à un autre lutin les `n - 1` premiers de la queue, et je recolle.
+
 !!! question "drop"
     Écris `drop(lst: Liste(a), n: Int) -> Liste(a)`, qui renvoie la liste **sans** ses `n` premiers éléments. `drop(2 -> 3 -> 4, 1)` donne `3 -> 4`.
 
@@ -784,6 +859,13 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
           }
         }
         ```
+
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne un compteur `n`, et soit une liste **vide**, soit une liste avec une **tête** et une **queue**. Je regarde la liste d'abord, le compteur ensuite.
+
+            - vide : je réponds la liste vide, il n'y a plus rien à sauter.
+            - `n` vaut `0` : je n'ai plus rien à sauter, je réponds la liste **entière**, ma tête comprise.
+            - sinon : je jette ma tête, et je laisse un autre lutin sauter les `n - 1` suivants.
 
         Quand il n'y a plus rien à sauter, on renvoie `lst` **en entier**, pas `q` : la tête fait partie du résultat.
 
@@ -860,6 +942,13 @@ Le coût est proportionnel à $n$ : il est **linéaire**, en $O(n)$. Les valeurs
         }
         ```
 
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne un élément `e`, et soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds la liste vide, il n'y a rien à supprimer.
+            - ma tête vaut `e` : je réponds ma queue, et c'est fini, personne d'autre ne cherche.
+            - ma tête ne vaut pas `e` : je garde ma tête, je demande à un autre lutin de supprimer `e` dans la queue, et je recolle.
+
 #### 4.2.2 Par filtrage : vers `filter`
 
 On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'a fait pour additionner. Écris ces trois fonctions, puis regarde ce qu'elles ont en commun.
@@ -891,6 +980,13 @@ On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'
         }
         ```
 
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds la liste vide.
+            - ma tête est **impaire** : je la garde, je demande à un autre lutin les impairs de la queue, et je recolle.
+            - ma tête est **paire** : je la jette, et je réponds comme l'autre lutin.
+
 !!! question "positifs"
     Écris `positifs(lst: Liste(Int)) -> Liste(Int)`, qui garde les éléments **strictement positifs**. `2 -> -3 -> 4` donne `2 -> 4`.
 
@@ -917,6 +1013,13 @@ On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'
         }
         ```
 
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds la liste vide.
+            - ma tête est **strictement positive** : je la garde, je demande à un autre lutin les positifs de la queue, et je recolle.
+            - ma tête est **négative ou nulle** : je la jette, et je réponds comme l'autre lutin.
+
 !!! question "negatifs"
     Écris `negatifs(lst: Liste(Int)) -> Liste(Int)`, qui garde les éléments **strictement négatifs**. `2 -> -3 -> 4` donne `-3`.
 
@@ -942,6 +1045,13 @@ On **garde** certains éléments selon une **condition**, comme `somme_pairs` l'
           }
         }
         ```
+
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds la liste vide.
+            - ma tête est **strictement négative** : je la garde, je demande à un autre lutin les négatifs de la queue, et je recolle.
+            - ma tête est **positive ou nulle** : je la jette, et je réponds comme l'autre lutin.
 
 **Ce qu'elles ont en commun.** Compare les trois corrigés : ils sont **identiques**, seule la **condition** change (`t % 2 != 0`, `t > 0`, `t < 0`). Écrire une fonction par condition, c'est se répéter. L'idée : **passer la condition en paramètre**. On obtient une seule fonction, `filter` (c'est son nom partout, dans tous les langages) :
 
@@ -1005,6 +1115,12 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
         }
         ```
 
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds la liste vide.
+            - une tête et une queue : je demande à un autre lutin les carrés de la queue, et je mets le carré de ma tête devant sa réponse.
+
 !!! question "doubles"
     Écris `doubles(lst: Liste(Int)) -> Liste(Int)`, qui renvoie les **doubles**. `2 -> 3 -> 4` donne `4 -> 6 -> 8`.
 
@@ -1027,6 +1143,12 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
         }
         ```
 
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds la liste vide.
+            - une tête et une queue : je demande à un autre lutin les doubles de la queue, et je mets le double de ma tête devant sa réponse.
+
 !!! question "triples"
     Écris `triples(lst: Liste(Int)) -> Liste(Int)`, qui renvoie les **triples**. `2 -> 3 -> 4` donne `6 -> 9 -> 12`.
 
@@ -1048,6 +1170,12 @@ Cette fois, on ne **garde** pas : on **transforme** chaque élément. Écris ces
           }
         }
         ```
+
+        !!! quote "En langage lutin"
+            Je suis un lutin. On me donne soit une liste **vide**, soit une liste avec une **tête** et une **queue**.
+
+            - vide : je réponds la liste vide.
+            - une tête et une queue : je demande à un autre lutin les triples de la queue, et je mets le triple de ma tête devant sa réponse.
 
 **Même constat.** Les trois corrigés sont identiques, seule la **transformation** change (`t * t`, `2 * t`, `3 * t`). On la passe en paramètre : c'est `map`, et c'est là aussi son nom partout.
 
