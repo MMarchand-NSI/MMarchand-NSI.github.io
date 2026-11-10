@@ -9861,15 +9861,13 @@
 <div class="admonition question">
 <p class="admonition-title">Construire</p>
 <p>Écris, dans <code>main</code>, la liste des trois chaînes <code>"rouge"</code>, <code>"vert"</code>, <code>"bleu"</code>, puis affiche-la.</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">let</span><span class="w"> </span><span class="n">couleurs</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="s">&quot;rouge&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="s">&quot;vert&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Cons</span><span class="p">(</span><span class="s">&quot;bleu&quot;</span><span class="p">,</span><span class="w"> </span><span class="n">Vide</span><span class="p">)))</span>
 <a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="k">echo</span><span class="w"> </span><span class="n">couleurs</span>
 </code></pre></div>
 <p><code>echo</code> affiche <code>Cons("rouge", Cons("vert", Cons("bleu", Vide)))</code> : les chaînes gardent leurs guillemets.</p>
 </details>
-</div>
 </div>
 <h3 id="13-la-disjonction-de-cas">1.3 La disjonction de cas</h3>
 <p>Pour <strong>faire quelque chose</strong> d'une liste, le lutin regarde <strong>laquelle des deux possibilités</strong> il a en main. C'est la <strong>disjonction de cas</strong>, écrite avec <code>case</code> :</p>
@@ -9942,8 +9940,7 @@
 <a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a><span class="w">  </span><span class="p">}</span>
 <a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a><span class="p">}</span>
 </code></pre></div>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>f(Cons(2, ...)) = 2 - f(Cons(3, ...))
 <a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>                = 2 - (3 - f(Cons(4, Vide)))
@@ -9955,7 +9952,6 @@
 </code></pre></div>
 <p>Si tu as trouvé <code>-5</code>, tu as calculé <code>2 - 3 - 4</code> de gauche à droite, comme une boucle. Les soustractions se font <strong>à la remontée</strong>, de la fin vers le début.</p>
 </details>
-</div>
 </div>
 <h4 id="212-a-toi-decrire">2.1.2 À toi d'écrire</h4>
 <div class="admonition note">
@@ -9980,8 +9976,7 @@
 <a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">somme</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Int</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -9991,7 +9986,6 @@
 <a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">La somme des pairs</p>
@@ -10012,8 +10006,7 @@
 <a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">somme_pairs</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Int</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10028,7 +10021,6 @@
 </code></pre></div>
 <p>Le <code>case</code> sur la condition est <strong>imbriqué</strong> dans le cas <code>Cons</code> : on ne regarde la parité de la tête que s'il y a une tête.</p>
 </details>
-</div>
 <details class="tip">
 <summary>Pour aller plus loin : comparer ne rend pas un booléen</summary>
 <p>Un <code>case</code> sur une condition n'a que deux issues, <code>True</code> et <code>False</code>. Mais <strong>comparer</strong> deux nombres en a trois, et Gleam a un type exprès pour cela, <code>Order</code>, avec ses trois valeurs <code>Lt</code> (plus petit), <code>Eq</code> (égal) et <code>Gt</code> (plus grand). C'est ce que renvoie <code>int.compare</code> :</p>
@@ -10092,30 +10084,24 @@
 <ol>
 <li>
 <p>Si la liste est <code>Vide</code>, que renvoie la fonction ?</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <p><code>False</code> : une liste vide ne contient rien.</p>
 </details>
-</div>
 </li>
 <li>
 <p>Si la liste est <code>Cons(tete, queue)</code>, complète la phrase : « <code>x</code> est dans la liste si … <strong>ou</strong> … ».</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <p>« <code>x</code> est dans la liste si <strong>la tête vaut <code>x</code></strong>, <strong>ou</strong> si <strong><code>x</code> est dans la queue</strong>. »</p>
 </details>
-</div>
 </li>
 <li>
 <p>Traduis cette phrase en une expression booléenne Gleam. Quelle partie est un appel récursif ?</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <p><code>tete == x || contient(queue, x)</code>. La partie droite, <code>contient(queue, x)</code>, est l'appel récursif : on redemande à un autre lutin de chercher dans la queue.</p>
 </details>
-</div>
 </li>
 </ol>
 <p>Écris maintenant <code>contient</code> en entier.</p>
@@ -10129,8 +10115,7 @@
 <a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">contient</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Bool</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10142,7 +10127,6 @@
 <p>Le <code>||</code> est <strong>paresseux</strong> : si <code>tete == x</code> est vrai, Gleam ne va pas chercher plus loin dans la queue.</p>
 </details>
 </div>
-</div>
 <h4 id="213-deux-listes-a-la-fois-les-quatre-cas">2.1.3 Deux listes à la fois : les quatre cas</h4>
 <p>On veut écrire <code>sont_egales(l1: Liste(a), l2: Liste(a)) -&gt; Bool</code>, qui dit si deux listes contiennent les mêmes éléments dans le même ordre. Le lutin en tient maintenant <strong>deux</strong> en même temps. La méthode tient en trois questions, à se poser <strong>dans l'ordre</strong>, avant d'écrire la moindre ligne.</p>
 <div class="admonition question">
@@ -10150,8 +10134,7 @@
 <ol>
 <li>
 <p>Quels sont <strong>tous</strong> les cas possibles pour le couple d'entrée <code>(l1, l2)</code> ?</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <p>Chaque liste peut être <code>Vide</code> ou <code>Cons</code>, ce qui fait <strong>quatre</strong> cas (2 × 2) :</p>
 <ul>
@@ -10161,12 +10144,10 @@
 <li><code>l1</code> non vide et <code>l2</code> non vide.</li>
 </ul>
 </details>
-</div>
 </li>
 <li>
 <p>Que doit renvoyer la fonction dans <strong>chacun</strong> de ces cas ?</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <ul>
 <li>deux listes vides : elles sont <strong>égales</strong>, on renvoie <code>True</code></li>
@@ -10175,16 +10156,13 @@
 <li>deux listes non vides : elles sont égales si leurs <strong>têtes</strong> sont égales <strong>et</strong> si leurs <strong>queues</strong> sont égales.</li>
 </ul>
 </details>
-</div>
 </li>
 <li>
 <p>Parmi ces quatre cas, lesquels sont des <strong>cas de base</strong> (la réponse est immédiate) et lesquels sont <strong>récursifs</strong> (il faut redemander à un autre lutin) ?</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <p>Les <strong>trois</strong> premiers sont des cas de base : la réponse se lit directement. Le <strong>quatrième</strong> est le seul cas récursif : pour savoir si les queues sont égales, on appelle <code>sont_egales</code> sur <code>q1</code> et <code>q2</code>.</p>
 </details>
-</div>
 </li>
 </ol>
 <p>Écris maintenant <code>sont_egales</code> en Gleam, avec <strong>une branche par cas</strong>. Pour faire la disjonction sur <strong>deux</strong> listes à la fois, on les met toutes les deux après <code>case</code>, séparées par une virgule, et chaque branche donne un motif pour chacune. Complète :</p>
@@ -10206,8 +10184,7 @@
 <a id="__codelineno-18-7" name="__codelineno-18-7" href="#__codelineno-18-7"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">sont_egales</span><span class="p">(</span><span class="n">l1</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">l2</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Bool</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">l1</span><span class="p">,</span><span class="w"> </span><span class="n">l2</span><span class="w"> </span><span class="p">{</span>
@@ -10219,7 +10196,6 @@
 <a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Quatre cas, même si on pourrait en écrire moins</p>
@@ -10255,12 +10231,11 @@
 <summary>Indice</summary>
 <p>Cas <code>Vide</code> : la liste renversée est <code>Vide</code>. Cas <code>Cons(tete, queue)</code> : renverse d'abord la <strong>queue</strong>, puis ajoute <code>tete</code> <strong>à la fin</strong> avec <code>ajouter_fin</code>.</p>
 </details>
-<details class="note">
+<details class="question">
 <summary>Avant d'ouvrir la correction</summary>
 <p>En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans <strong>ton</strong> code ?</p>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">inverser</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10270,7 +10245,6 @@
 <a id="__codelineno-22-6" name="__codelineno-22-6" href="#__codelineno-22-6"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Concaténer</p>
@@ -10286,8 +10260,7 @@
 <a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">concat</span><span class="p">(</span><span class="n">l1</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">l2</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">l1</span><span class="p">,</span><span class="w"> </span><span class="n">l2</span><span class="w"> </span><span class="p">{</span>
@@ -10305,7 +10278,6 @@
 <li>deux non vides : on garde la tête de <code>l1</code>, et pour la suite on demande à un autre lutin de concaténer la queue de <code>l1</code> avec <code>l2</code>, puis on recolle.</li>
 </ul>
 </details>
-</div>
 </div>
 <h3 id="23-faire-pousser-une-liste-dune-graine-a-une-liste">2.3 Faire pousser une liste : d'une graine à une liste</h3>
 <p>Jusqu'ici, le lutin <strong>déconstruisait</strong> une liste. Il peut aussi en <strong>construire une à partir d'une graine</strong> (ici, un entier).</p>
@@ -10327,21 +10299,17 @@
 <ol>
 <li>
 <p>Que renvoie <code>repete(0, x)</code> ?</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <p><code>Vide</code> : zéro fois <code>x</code>, c'est la liste vide.</p>
 </details>
-</div>
 </li>
 <li>
 <p>Si <code>n</code> n'est pas nul, comment obtenir <code>repete(n, x)</code> à partir de <code>repete(n - 1, x)</code> ?</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <p>On met <code>x</code> en tête de <code>repete(n - 1, x)</code> : <code>Cons(x, repete(n - 1, x))</code>.</p>
 </details>
-</div>
 </li>
 </ol>
 <p>Complète :</p>
@@ -10360,8 +10328,7 @@
 <a id="__codelineno-27-4" name="__codelineno-27-4" href="#__codelineno-27-4"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">repete</span><span class="p">(</span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="p">{</span>
@@ -10372,7 +10339,6 @@
 </code></pre></div>
 <p>Le cas de base n'est plus <code>Vide</code> mais <code>n == 0</code> : la graine <code>n</code> <strong>décroît</strong> à chaque appel jusqu'à 0.</p>
 </details>
-</div>
 </div>
 <h2 id="3-le-cout">3 Le coût</h2>
 <p>On appelle <span class="arithmatex">\(T(n)\)</span> le <strong>nombre d'opérations élémentaires</strong> (comparaisons, additions, appels) effectuées par une fonction sur une liste de taille <span class="arithmatex">\(n\)</span>. Une fonction récursive s'appelle elle-même sur une liste plus courte : son coût <span class="arithmatex">\(T(n)\)</span> s'exprime donc à partir de <span class="arithmatex">\(T(n-1)\)</span>. C'est une <strong>suite récurrente</strong>, et calculer le coût, c'est trouver sa <strong>forme générale</strong>.</p>
@@ -10397,44 +10363,36 @@
 <ol>
 <li>
 <p>Écris la relation de récurrence du coût <span class="arithmatex">\(A(n)\)</span> de <code>ajouter_fin(lst, x)</code>, pour une liste <code>lst</code> de taille <span class="arithmatex">\(n\)</span>. Quelle est sa forme générale ?</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <p><span class="arithmatex">\(A(0) = a\)</span> et <span class="arithmatex">\(A(n) = A(n-1) + b\)</span> : c'est la même récurrence que <code>taille</code>. <span class="arithmatex">\(A(n) = a + b \times n\)</span>, coût <strong>linéaire</strong>.</p>
 </details>
-</div>
 </li>
 <li>
 <p><code>inverser</code> appelle <code>inverser</code> sur la queue (taille <span class="arithmatex">\(n-1\)</span>), <strong>puis</strong> <code>ajouter_fin</code> sur le résultat (taille <span class="arithmatex">\(n-1\)</span> aussi). Écris la relation de récurrence de son coût <span class="arithmatex">\(T(n)\)</span>.</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <p><span class="arithmatex">\(T(0) = c\)</span> et <span class="arithmatex">\(T(n) = T(n-1) + A(n-1) + d\)</span>, où <span class="arithmatex">\(d\)</span> compte les opérations fixes de l'appel. En remplaçant <span class="arithmatex">\(A(n-1)\)</span> : <span class="arithmatex">\(T(n) = T(n-1) + b \times (n-1) + (a + d)\)</span>.</p>
 </details>
-</div>
 </li>
 <li>
 <p>Cette suite n'est ni arithmétique ni géométrique : ce qu'on ajoute à chaque étape <strong>grandit</strong> avec <span class="arithmatex">\(n\)</span>. Trouve sa forme générale, en additionnant les écarts <span class="arithmatex">\(T(k) - T(k-1)\)</span> pour <span class="arithmatex">\(k\)</span> allant de <span class="arithmatex">\(1\)</span> à <span class="arithmatex">\(n\)</span>.</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <p>Les termes intermédiaires se simplifient :</p>
 <div class="arithmatex">\[T(n) = T(0) + b \times \big(0 + 1 + \dots + (n-1)\big) + (a + d) \times n = c + b \times \frac{n(n-1)}{2} + (a + d) \times n\]</div>
 <p>Le terme en <span class="arithmatex">\(n^2\)</span> l'emporte : le coût est <strong>quadratique</strong>, en <span class="arithmatex">\(O(n^2)\)</span>. C'est <code>ajouter_fin</code>, linéaire, appelée <span class="arithmatex">\(n\)</span> fois, qui coûte cher.</p>
 </details>
-</div>
 </li>
 </ol>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Vérifie en dépliant</p>
 <p>Déplie <code>inverser(2 -&gt; 3 -&gt; 4)</code> en écrivant chaque appel à <code>ajouter_fin</code>. Combien de fois chaque élément est-il reparcouru ? Tu dois <strong>voir</strong> le <span class="arithmatex">\(O(n^2)\)</span> apparaître, pas seulement le calculer.</p>
-<div markdown="block" style="display: none">
-<details class="success">
-<summary>Ce qu'on observe</summary>
+<details class="warning">
+<summary>Correction : ce qu'on observe</summary>
 <p><code>inverser</code> fait un appel par élément (<span class="arithmatex">\(n\)</span> appels), et <strong>chaque</strong> appel relance <code>ajouter_fin</code>, qui reparcourt toute la liste déjà renversée (de longueur <span class="arithmatex">\(0\)</span>, puis <span class="arithmatex">\(1\)</span>, puis <span class="arithmatex">\(2\)</span>…). On retrouve la somme <span class="arithmatex">\(0 + 1 + \dots + (n-1)\)</span> du calcul.</p>
 </details>
-</div>
 </div>
 <h2 id="4-exercices">4 Exercices</h2>
 <div class="admonition tip">
@@ -10455,8 +10413,7 @@
 <a id="__codelineno-30-5" name="__codelineno-30-5" href="#__codelineno-30-5"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">to_str</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10466,7 +10423,6 @@
 <a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">tous_vrais</p>
@@ -10480,8 +10436,7 @@
 <a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">tous_vrais</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Bool</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Bool</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-33-2" name="__codelineno-33-2" href="#__codelineno-33-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10491,7 +10446,6 @@
 <a id="__codelineno-33-6" name="__codelineno-33-6" href="#__codelineno-33-6"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">au_moins_un_vrai</p>
@@ -10505,8 +10459,7 @@
 <a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">au_moins_un_vrai</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Bool</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Bool</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10516,7 +10469,6 @@
 <a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">compte</p>
@@ -10531,8 +10483,7 @@
 <a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">compte</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Int</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-37-2" name="__codelineno-37-2" href="#__codelineno-37-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10546,7 +10497,6 @@
 <a id="__codelineno-37-10" name="__codelineno-37-10" href="#__codelineno-37-10"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <h3 id="42-transformer-une-liste">4.2 Transformer une liste</h3>
 <h4 id="421-prendre-sauter-supprimer">4.2.1 Prendre, sauter, supprimer</h4>
@@ -10578,12 +10528,11 @@
 </code></pre></div>
 <p>Il y a donc <strong>deux cas de base</strong> : plus de liste, ou plus rien à prendre.</p>
 </details>
-<details class="note">
+<details class="question">
 <summary>Avant d'ouvrir la correction</summary>
 <p>En une phrase, sur ton cahier : lequel des deux cas de base avais-tu oublié ?</p>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-40-1" name="__codelineno-40-1" href="#__codelineno-40-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">take</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-40-2" name="__codelineno-40-2" href="#__codelineno-40-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10597,7 +10546,6 @@
 <a id="__codelineno-40-10" name="__codelineno-40-10" href="#__codelineno-40-10"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">drop</p>
@@ -10614,8 +10562,7 @@
 <a id="__codelineno-41-7" name="__codelineno-41-7" href="#__codelineno-41-7"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-42-1" name="__codelineno-42-1" href="#__codelineno-42-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">drop</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">n</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-42-2" name="__codelineno-42-2" href="#__codelineno-42-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10630,7 +10577,6 @@
 </code></pre></div>
 <p>Quand il n'y a plus rien à sauter, on renvoie <code>lst</code> <strong>en entier</strong>, pas <code>q</code> : la tête fait partie du résultat.</p>
 </details>
-</div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">slice</p>
@@ -10647,8 +10593,7 @@
 <a id="__codelineno-43-7" name="__codelineno-43-7" href="#__codelineno-43-7"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-44-1" name="__codelineno-44-1" href="#__codelineno-44-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">slice</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">debut</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">,</span><span class="w"> </span><span class="n">fin</span><span class="p">:</span><span class="w"> </span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-44-2" name="__codelineno-44-2" href="#__codelineno-44-2"></a><span class="w">  </span><span class="n">drop</span><span class="p">(</span><span class="n">take</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span><span class="w"> </span><span class="n">fin</span><span class="p">),</span><span class="w"> </span><span class="n">debut</span><span class="p">)</span>
@@ -10656,7 +10601,6 @@
 </code></pre></div>
 <p>On garde d'abord tout ce qui est avant <code>fin</code>, puis on jette ce qui est avant <code>debut</code>. Dans l'autre ordre il faudrait corriger <code>fin</code>, puisque la liste a raccourci.</p>
 </details>
-</div>
 <details class="question">
 <summary>Cherche : l'opérateur <code>|&gt;</code></summary>
 <p>Cette autre écriture du <strong>même</strong> corrigé est valable en Gleam :</p>
@@ -10670,13 +10614,11 @@
 <li>pourquoi cesserait-elle de fonctionner si <code>take</code> prenait son compteur en premier et sa liste ensuite ?</li>
 </ul>
 <p><strong>Tu n'es pas obligé d'écrire ta réponse avec <code>|&gt;</code></strong>, mais tu dois savoir la lire.</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction</summary>
 <p><code>x |&gt; f(y)</code> est une autre façon d'écrire <code>f(x, y)</code> : la valeur de gauche devient le <strong>premier</strong> argument de la fonction de droite. On lit alors le calcul dans l'ordre où il se fait, de gauche à droite, au lieu de le lire de l'intérieur vers l'extérieur.</p>
 <p>C'est pour cela que toutes les fonctions de ce chapitre prennent la <strong>liste en premier</strong> : sans cela, le <em>pipe</em> ne tomberait pas sur le bon paramètre. L'ordre des paramètres n'est donc pas un détail, c'est ce qui rend ces fonctions enchaînables.</p>
 </details>
-</div>
 </details>
 </div>
 <div class="admonition question">
@@ -10692,8 +10634,7 @@
 <a id="__codelineno-46-6" name="__codelineno-46-6" href="#__codelineno-46-6"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-47-1" name="__codelineno-47-1" href="#__codelineno-47-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">supprimer</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">e</span><span class="p">:</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-47-2" name="__codelineno-47-2" href="#__codelineno-47-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10707,7 +10648,6 @@
 <a id="__codelineno-47-10" name="__codelineno-47-10" href="#__codelineno-47-10"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <h4 id="422-par-filtrage-vers-filter">4.2.2 Par filtrage : vers <code>filter</code></h4>
 <p>On <strong>garde</strong> certains éléments selon une <strong>condition</strong>, comme <code>somme_pairs</code> l'a fait pour additionner. Écris ces trois fonctions, puis regarde ce qu'elles ont en commun.</p>
@@ -10724,8 +10664,7 @@
 <a id="__codelineno-48-6" name="__codelineno-48-6" href="#__codelineno-48-6"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-49-1" name="__codelineno-49-1" href="#__codelineno-49-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">impairs</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-49-2" name="__codelineno-49-2" href="#__codelineno-49-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10740,7 +10679,6 @@
 </code></pre></div>
 </details>
 </div>
-</div>
 <div class="admonition question">
 <p class="admonition-title">positifs</p>
 <p>Écris <code>positifs(lst: Liste(Int)) -&gt; Liste(Int)</code>, qui garde les éléments <strong>strictement positifs</strong>. <code>2 -&gt; -3 -&gt; 4</code> donne <code>2 -&gt; 4</code>.</p>
@@ -10753,8 +10691,7 @@
 <a id="__codelineno-50-5" name="__codelineno-50-5" href="#__codelineno-50-5"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-51-1" name="__codelineno-51-1" href="#__codelineno-51-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">positifs</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-51-2" name="__codelineno-51-2" href="#__codelineno-51-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10769,7 +10706,6 @@
 </code></pre></div>
 </details>
 </div>
-</div>
 <div class="admonition question">
 <p class="admonition-title">negatifs</p>
 <p>Écris <code>negatifs(lst: Liste(Int)) -&gt; Liste(Int)</code>, qui garde les éléments <strong>strictement négatifs</strong>. <code>2 -&gt; -3 -&gt; 4</code> donne <code>-3</code>.</p>
@@ -10782,8 +10718,7 @@
 <a id="__codelineno-52-5" name="__codelineno-52-5" href="#__codelineno-52-5"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-53-1" name="__codelineno-53-1" href="#__codelineno-53-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">negatifs</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-53-2" name="__codelineno-53-2" href="#__codelineno-53-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10797,7 +10732,6 @@
 <a id="__codelineno-53-10" name="__codelineno-53-10" href="#__codelineno-53-10"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <p><strong>Ce qu'elles ont en commun.</strong> Compare les trois corrigés : ils sont <strong>identiques</strong>, seule la <strong>condition</strong> change (<code>t % 2 != 0</code>, <code>t &gt; 0</code>, <code>t &lt; 0</code>). Écrire une fonction par condition, c'est se répéter. L'idée : <strong>passer la condition en paramètre</strong>. On obtient une seule fonction, <code>filter</code> (c'est son nom partout, dans tous les langages) :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-54-1" name="__codelineno-54-1" href="#__codelineno-54-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">filter</span><span class="p">(</span><span class="n">predicat</span><span class="p">:</span><span class="w"> </span><span class="k">fn</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Bool</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -10844,8 +10778,7 @@
 <a id="__codelineno-57-5" name="__codelineno-57-5" href="#__codelineno-57-5"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-58-1" name="__codelineno-58-1" href="#__codelineno-58-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">carres</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-58-2" name="__codelineno-58-2" href="#__codelineno-58-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10855,7 +10788,6 @@
 <a id="__codelineno-58-6" name="__codelineno-58-6" href="#__codelineno-58-6"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">doubles</p>
@@ -10869,8 +10801,7 @@
 <a id="__codelineno-59-5" name="__codelineno-59-5" href="#__codelineno-59-5"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-60-1" name="__codelineno-60-1" href="#__codelineno-60-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">doubles</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-60-2" name="__codelineno-60-2" href="#__codelineno-60-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10880,7 +10811,6 @@
 <a id="__codelineno-60-6" name="__codelineno-60-6" href="#__codelineno-60-6"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <div class="admonition question">
 <p class="admonition-title">triples</p>
@@ -10894,8 +10824,7 @@
 <a id="__codelineno-61-5" name="__codelineno-61-5" href="#__codelineno-61-5"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-62-1" name="__codelineno-62-1" href="#__codelineno-62-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">triples</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Int</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-62-2" name="__codelineno-62-2" href="#__codelineno-62-2"></a><span class="w">  </span><span class="k">case</span><span class="w"> </span><span class="n">lst</span><span class="w"> </span><span class="p">{</span>
@@ -10905,7 +10834,6 @@
 <a id="__codelineno-62-6" name="__codelineno-62-6" href="#__codelineno-62-6"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <p><strong>Même constat.</strong> Les trois corrigés sont identiques, seule la <strong>transformation</strong> change (<code>t * t</code>, <code>2 * t</code>, <code>3 * t</code>). On la passe en paramètre : c'est <code>map</code>, et c'est là aussi son nom partout.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-63-1" name="__codelineno-63-1" href="#__codelineno-63-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">:</span><span class="w"> </span><span class="k">fn</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
@@ -10977,8 +10905,7 @@
 <p class="admonition-title">À toi</p>
 <p>Ces quatre-là sont <strong>montrées</strong>, pas à recopier : tu les as déjà dans ton fichier. Prends-en trois autres, <code>tous_vrais</code>, <code>au_moins_un_vrai</code> et <code>filter</code>, et <strong>remplace tes versions</strong> par des plis, sans aucun <code>case</code> sur la liste.</p>
 <p>Puis relance <code>gleam test</code>. <strong>Les tests que tu as déjà collés doivent rester verts</strong> : ce sont les mêmes fonctions, écrites autrement. Tu n'as donc aucun test à ajouter, et c'est la meilleure preuve que tu puisses avoir.</p>
-<div markdown="block" style="display: none">
-<details class="success">
+<details class="warning">
 <summary>Correction Gleam</summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-69-1" name="__codelineno-69-1" href="#__codelineno-69-1"></a><span class="k">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="n">tous_vrais</span><span class="p">(</span><span class="n">lst</span><span class="p">:</span><span class="w"> </span><span class="n">Liste</span><span class="p">(</span><span class="n">Bool</span><span class="p">))</span><span class="w"> </span><span class="p">-&gt;</span><span class="w"> </span><span class="n">Bool</span><span class="w"> </span><span class="p">{</span>
 <a id="__codelineno-69-2" name="__codelineno-69-2" href="#__codelineno-69-2"></a><span class="w">  </span><span class="n">foldr</span><span class="p">(</span><span class="n">lst</span><span class="p">,</span><span class="w"> </span><span class="k">fn</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">reste</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">t</span><span class="w"> </span><span class="p">&amp;&amp;</span><span class="w"> </span><span class="n">reste</span><span class="w"> </span><span class="p">},</span><span class="w"> </span><span class="n">True</span><span class="p">)</span>
@@ -11002,7 +10929,6 @@
 <a id="__codelineno-69-20" name="__codelineno-69-20" href="#__codelineno-69-20"></a><span class="p">}</span>
 </code></pre></div>
 </details>
-</div>
 </div>
 <h3 id="51-ce-que-le-pli-ne-sait-pas-faire">5.1 Ce que le pli ne sait pas faire</h3>
 <p>Sur les vingt-trois fonctions des exercices, <strong>dix-sept</strong> s'écrivent ainsi. Les six autres résistent, et elles résistent pour trois raisons qui valent d'être vues.</p>
@@ -11041,7 +10967,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 8, 2026 21:18:52 UTC">November 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 10, 2026 07:36:22 UTC">November 10, 2026</span>
   </span>
 
     
