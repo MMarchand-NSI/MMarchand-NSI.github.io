@@ -25,7 +25,9 @@ D = [[1, 1], [0, 2], [3, 0]]
 M = [[2, 0, 1], [1, 3, 2], [1, 1, 2]]
 ```
 
-`T` est le type des coefficients : `A` est une `Matrice[int]`. Les fonctions qui calculent écrivent `[T: (int, float)]` : `T` y est forcément `int` ou `float`, pour que `+` et `*` aient un sens. Le coefficient de la ligne `i` et de la colonne `j` est `M[i][j]`. Les lignes et les colonnes sont numérotées à partir de `0`.
+`T` est le type des coefficients : `A` est une `Matrice[int]`. Les fonctions qui calculent écrivent `[T: (int, float)]` : `T` y est forcément `int` ou `float`, pour que `+` et `*` aient un sens. Le coefficient de la ligne `i` et de la colonne `j` est `M[i][j]`.
+
+**Les lignes et les colonnes sont numérotées à partir de `0`.** En mathématiques, l'usage est de numéroter à partir de 1, et il est plus ancien que les ordinateurs : le coefficient en haut à gauche y est celui de la ligne 1 et de la colonne 1. Ce n'est qu'une **convention** : rien dans la notion de matrice n'impose l'une plutôt que l'autre. Ici, le choix est forcé : une liste Python commence à l'indice `0`, donc le coefficient en haut à gauche est `M[0][0]`, à la ligne `0` et à la colonne `0`.
 
 Toutes les fonctions de cette page renvoient une **nouvelle** matrice et ne modifient jamais celles qu'elles reçoivent.
 
@@ -67,7 +69,175 @@ Toutes les fonctions de cette page renvoient une **nouvelle** matrice et ne modi
             assert dimensions(D) == (3, 2)
         ```
 
-## Étape 2 - L'addition
+
+Lire un coefficient est une opération à part entière, et elle porte un nom. L'**évaluation** en $(i, j)$, notée $\mathrm{ev}_{i,j}$, est l'opération qui à une matrice associe son coefficient de la ligne $i$ et de la colonne $j$. Un coefficient s'écrit donc $\mathrm{ev}_{i,j}(M)$.
+
+Elle n'est définie que si $i$ est un numéro de ligne de $M$ et $j$ un numéro de colonne : c'est sa précondition.
+
+Deux matrices de même taille sont égales exactement quand **toutes** leurs évaluations coïncident. C'est ce qui rend cette opération utile : pour **définir** une opération sur les matrices, il suffit de dire ce que vaut $\mathrm{ev}_{i,j}$ de son résultat, pour tout $i$ et pour tout $j$. Plusieurs des étapes qui suivent sont écrites ainsi.
+
+!!! question "Évaluer"
+    Sur ton cahier :
+
+    1. Que vaut $\mathrm{ev}_{0,1}(D)$ ?
+    2. L'évaluation $\mathrm{ev}_{2,0}(A)$ est-elle définie ? Et $\mathrm{ev}_{1,2}(D)$ ?
+
+    ??? success "Correction"
+        1. `1` : c'est le coefficient de la ligne `0` et de la colonne `1` de $D$.
+        2. Aucune des deux. $A$ n'a que deux lignes, numérotées `0` et `1` : il n'y a pas de ligne `2`. $D$ n'a que deux colonnes : il n'y a pas de colonne `2`.
+
+!!! question "Écrire `ev` (obligatoire)"
+    Deux `assert` écrivent la précondition : ils refusent un indice qui sort de la matrice.
+
+    ```python
+    def ev[T](M: Matrice[T], i: int, j: int) -> T:
+        """Renvoie le coefficient de la ligne i et de la colonne j de M.
+        Précondition : i est un numéro de ligne de M, j un numéro de colonne."""
+        pass
+
+
+    def test_ev():
+        assert ev(C, 1, 2) == 1
+        assert ev(D, 2, 0) == 3
+        assert ev(A, 0, 0) == ...
+    ```
+
+    ??? tip "Indice"
+        Un numéro de ligne valide est compris entre `0` et `len(M) - 1`. Le nombre de colonnes se lit sur la première ligne.
+
+    ??? warning "Correction"
+        ```python
+        def ev[T](M: Matrice[T], i: int, j: int) -> T:
+            """Renvoie le coefficient de la ligne i et de la colonne j de M.
+            Précondition : i est un numéro de ligne de M, j un numéro de colonne."""
+            assert i >= 0 and i < len(M)
+            assert j >= 0 and j < len(M[0])
+            return M[i][j]
+
+
+        def test_ev():
+            assert ev(C, 1, 2) == 1
+            assert ev(D, 2, 0) == 3
+            assert ev(A, 0, 0) == 1
+        ```
+
+        Avec les `assert`, `ev(A, 2, 0)` déclenche une `AssertionError` : l'erreur dit que la précondition n'est pas respectée. Sans eux, `A[2][0]` déclenche une `IndexError`, qui dit seulement qu'une liste est trop courte.
+
+## Étape 2 - La dilatation
+
+Multiplier une matrice par un nombre $c$, c'est multiplier **chacun** de ses coefficients par $c$. Le résultat se note $c\,M$, il a la même taille que $M$, et l'opération s'appelle la **dilatation** de rapport $c$. On dit aussi *multiplication par un scalaire*, un scalaire étant simplement un nombre, par opposition à une matrice.
+
+$$
+\mathrm{ev}_{i,j}(c\,M) = c \times \mathrm{ev}_{i,j}(M)
+$$
+
+Pour $c = 2$, tous les coefficients doublent. Pour $c = -1$, on obtient l'**opposée** de $M$, notée $-M$. Pour $c = 0$, la matrice dont tous les coefficients sont nuls.
+
+!!! question "Calculer"
+    Sur ton cahier :
+
+    1. Calcule $3A$.
+    2. Calcule $-1 \times C$. Quelle est sa taille ?
+
+    ??? success "Correction"
+        1. $3A = \begin{pmatrix} 3 & 6 \\ 9 & 12 \end{pmatrix}$.
+        2. $-1 \times C = \begin{pmatrix} -1 & 0 & -2 \\ 0 & -1 & -1 \end{pmatrix}$, de taille $2 \times 3$ : la dilatation ne change pas la taille.
+
+!!! question "Écrire `dilatation` (obligatoire)"
+    Le nombre vient en premier, comme dans l'écriture $c\,M$. Complète le test : que doit valoir `copie` après l'appel ?
+
+    ```python
+    def dilatation[T: (int, float)](c: T, M: Matrice[T]) -> Matrice[T]:
+        """Renvoie une nouvelle matrice c M : chaque coefficient de M est multiplié par c."""
+        pass
+
+
+    def test_dilatation():
+        assert dilatation(3, A) == [[3, 6], [9, 12]]
+        assert dilatation(-1, C) == [[-1, 0, -2], [0, -1, -1]]
+        assert dilatation(0, D) == [[0, 0], [0, 0], [0, 0]]
+        copie = [[1, 2], [3, 4]]
+        dilatation(3, copie)
+        assert copie == ...
+    ```
+
+    ??? tip "Indice léger"
+        Une boucle sur les lignes, une boucle sur les colonnes, et une nouvelle ligne construite à chaque tour de la première.
+
+    ??? tip "Indice plus précis"
+        La nouvelle ligne se crée **dans** la première boucle, avant la seconde, et s'ajoute au résultat **après** la seconde.
+
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
+
+    ??? warning "Correction"
+        ```python
+        def dilatation[T: (int, float)](c: T, M: Matrice[T]) -> Matrice[T]:
+            """Renvoie une nouvelle matrice c M : chaque coefficient de M est multiplié par c."""
+            res = []
+            for i in range(0, len(M)):
+                ligne = []
+                for j in range(0, len(M[0])):
+                    ligne.append(c * M[i][j])
+                res.append(ligne)
+            return res
+
+
+        def test_dilatation():
+            assert dilatation(3, A) == [[3, 6], [9, 12]]
+            assert dilatation(-1, C) == [[-1, 0, -2], [0, -1, -1]]
+            assert dilatation(0, D) == [[0, 0], [0, 0], [0, 0]]
+            copie = [[1, 2], [3, 4]]
+            dilatation(3, copie)
+            assert copie == [[1, 2], [3, 4]]
+        ```
+
+        C'est la première fonction de cette page qui **construit** une matrice. Toutes celles qui suivent reprennent cette double boucle, en changeant seulement ce qu'on met dans `ligne.append(...)`.
+
+## Étape 3 - La transposée
+
+La **transposée** de $M$, notée ${}^t M$, échange les lignes et les colonnes : la ligne `i` de $M$ devient la colonne `i` de ${}^t M$. On en aura besoin à l'étape 5 et à l'étape 7.
+
+!!! question "Écrire `transposee` (obligatoire)"
+    Sur ton cahier d'abord : écris ${}^t C$. Quelle est sa taille ? Puis écris la fonction et complète le test.
+
+    ```python
+    def transposee[T](M: Matrice[T]) -> Matrice[T]:
+        """Renvoie une nouvelle matrice : la transposée de M."""
+        pass
+
+
+    def test_transposee():
+        assert transposee(A) == [[1, 3], [2, 4]]
+        assert transposee(C) == ...
+        assert transposee(transposee(D)) == D
+    ```
+
+    ??? tip "Indice"
+        Le coefficient de la ligne `i` et de la colonne `j` de ${}^t M$ est `M[j][i]`. Le résultat a autant de lignes que $M$ a de colonnes.
+
+    ??? warning "Correction"
+        ${}^t C = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 2 & 1 \end{pmatrix}$, de taille $3 \times 2$.
+
+        ```python
+        def transposee[T](M: Matrice[T]) -> Matrice[T]:
+            """Renvoie une nouvelle matrice : la transposée de M."""
+            res = []
+            for i in range(0, len(M[0])):
+                ligne = []
+                for j in range(0, len(M)):
+                    ligne.append(M[j][i])
+                res.append(ligne)
+            return res
+
+
+        def test_transposee():
+            assert transposee(A) == [[1, 3], [2, 4]]
+            assert transposee(C) == [[1, 0], [0, 1], [2, 1]]
+            assert transposee(transposee(D)) == D
+        ```
+
+## Étape 4 - L'addition
 
 On n'additionne que deux matrices **de même taille**. On ajoute les coefficients qui sont à la même place :
 
@@ -100,7 +270,7 @@ $$
     ```
 
     ??? tip "Indice léger"
-        Une boucle sur les lignes, une boucle sur les colonnes, et une nouvelle ligne construite à chaque tour de la première.
+        Même construction qu'à l'étape 2, avec deux matrices à lire au lieu d'une.
 
     ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
@@ -128,12 +298,12 @@ $$
             assert copie == [[1, 2], [3, 4]]
         ```
 
-## Étape 3 - La multiplication
+## Étape 5 - La multiplication
 
 Le produit $A \times B$ n'est **pas** le produit des coefficients à la même place. Le coefficient de la ligne $i$ et de la colonne $j$ du résultat se calcule avec **la ligne $i$ de $A$** et **la colonne $j$ de $B$** : on multiplie leurs coefficients deux à deux, et on additionne.
 
 $$
-(A \times B)_{i,j} = \sum_{k} A_{i,k} \times B_{k,j}
+\mathrm{ev}_{i,j}(A \times B) = \sum_{k} \mathrm{ev}_{i,k}(A) \times \mathrm{ev}_{k,j}(B)
 $$
 
 Pour que cela ait un sens, une ligne de $A$ doit avoir autant de coefficients qu'une colonne de $B$ : **le nombre de colonnes de $A$ doit être égal au nombre de lignes de $B$**. Si $A$ est de taille $n \times p$ et $B$ de taille $p \times q$, le produit est de taille $n \times q$.
@@ -202,6 +372,8 @@ Pour que cela ait un sens, une ligne de $A$ doit avoir autant de coefficients qu
             assert dimensions(produit(D, C)) == (3, 3)
         ```
 
+### La matrice identité
+
 La **matrice identité** $I_n$ a des `1` sur la diagonale et des `0` partout ailleurs. Elle joue pour le produit le rôle du nombre `1` : $A \times I_n = A$.
 
 $$
@@ -238,50 +410,76 @@ $$
             return res
         ```
 
-## Étape 4 - La transposée
+### Le produit scalaire
 
-La **transposée** de $M$, notée ${}^t M$, échange les lignes et les colonnes : la ligne `i` de $M$ devient la colonne `i` de ${}^t M$. On en aura besoin à l'étape 6.
+Un **vecteur** se représente par une matrice **colonne**, de taille $n \times 1$. On le note en minuscule, pour le distinguer des autres matrices :
 
-!!! question "Écrire `transposee` (obligatoire)"
-    Sur ton cahier d'abord : écris ${}^t C$. Quelle est sa taille ? Puis écris la fonction et complète le test.
+```python
+u: Matrice[int] = [[1], [2], [3]]
+v: Matrice[int] = [[4], [5], [6]]
+```
 
+Le **produit scalaire** de $u$ et $v$, noté $u \cdot v$, est le nombre $1 \times 4 + 2 \times 5 + 3 \times 6$. C'est exactement ce que fabrique cette étape : ${}^t u$ est de taille $1 \times 3$ et $v$ de taille $3 \times 1$, donc le produit ${}^t u \times v$ existe, et il est de taille $1 \times 1$. Son unique coefficient est le produit scalaire, et on le lit avec l'évaluation de l'étape 1 :
+
+$$
+u \cdot v = \mathrm{ev}_{0,0}({}^t u \times v)
+$$
+
+!!! question "Calculer"
+    Sur ton cahier :
+
+    1. Écris ${}^t u$, puis calcule ${}^t u \times v$.
+    2. Calcule ${}^t v \times u$. Que remarques-tu ?
+    3. Donne la taille de $u \times {}^t v$, sans la calculer.
+
+    ??? success "Correction"
+        1. ${}^t u = \begin{pmatrix} 1 & 2 & 3 \end{pmatrix}$, et ${}^t u \times v = \begin{pmatrix} 32 \end{pmatrix}$ : une seule case, qui vaut $4 + 10 + 18 = 32$.
+        2. ${}^t v \times u = \begin{pmatrix} 32 \end{pmatrix}$ aussi : $u \cdot v = v \cdot u$, le produit scalaire ne dépend pas de l'ordre.
+        3. $u$ est de taille $3 \times 1$ et ${}^t v$ de taille $1 \times 3$ : $u \times {}^t v$ est de taille $3 \times 3$. L'ordre compte donc bien ici aussi : d'un côté un nombre, de l'autre une matrice $3 \times 3$.
+
+!!! warning "Piège : deux produits qui n'ont rien à voir"
+    La **dilatation** de l'étape 2 s'appelle aussi *multiplication par un scalaire* : elle prend un nombre et une matrice, et rend une matrice. Le **produit scalaire** prend deux vecteurs et rend un nombre. Les deux noms se ressemblent, les deux opérations non.
+
+!!! question "Écrire `produit_scalaire` (obligatoire)"
     ```python
-    def transposee[T](M: Matrice[T]) -> Matrice[T]:
-        """Renvoie une nouvelle matrice : la transposée de M."""
+    def produit_scalaire[T: (int, float)](u: Matrice[T], v: Matrice[T]) -> T:
+        """Renvoie le produit scalaire des vecteurs colonnes u et v.
+        Précondition : u et v sont de même taille n × 1."""
         pass
 
 
-    def test_transposee():
-        assert transposee(A) == [[1, 3], [2, 4]]
-        assert transposee(C) == ...
-        assert transposee(transposee(D)) == D
+    def test_produit_scalaire():
+        assert produit_scalaire(u, v) == 32
+        assert produit_scalaire(v, u) == 32
+        assert produit_scalaire([[1], [0]], [[0], [1]]) == 0
     ```
 
     ??? tip "Indice"
-        Le coefficient de la ligne `i` et de la colonne `j` de ${}^t M$ est `M[j][i]`. Le résultat a autant de lignes que $M$ a de colonnes.
+        Aucune boucle : trois des fonctions que tu as déjà écrites suffisent. La matrice ${}^t u \times v$ n'a qu'une seule case, et il existe une fonction pour lire une case.
+
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
     ??? warning "Correction"
-        ${}^t C = \begin{pmatrix} 1 & 0 \\ 0 & 1 \\ 2 & 1 \end{pmatrix}$, de taille $3 \times 2$.
-
         ```python
-        def transposee[T](M: Matrice[T]) -> Matrice[T]:
-            """Renvoie une nouvelle matrice : la transposée de M."""
-            res = []
-            for i in range(0, len(M[0])):
-                ligne = []
-                for j in range(0, len(M)):
-                    ligne.append(M[j][i])
-                res.append(ligne)
-            return res
+        def produit_scalaire[T: (int, float)](u: Matrice[T], v: Matrice[T]) -> T:
+            """Renvoie le produit scalaire des vecteurs colonnes u et v.
+            Précondition : u et v sont de même taille n × 1."""
+            assert dimensions(u) == dimensions(v)
+            assert len(u[0]) == 1
+            w = produit(transposee(u), v)
+            return ev(w, 0, 0)
 
 
-        def test_transposee():
-            assert transposee(A) == [[1, 3], [2, 4]]
-            assert transposee(C) == [[1, 0], [0, 1], [2, 1]]
-            assert transposee(transposee(D)) == D
+        def test_produit_scalaire():
+            assert produit_scalaire(u, v) == 32
+            assert produit_scalaire(v, u) == 32
+            assert produit_scalaire([[1], [0]], [[0], [1]]) == 0
         ```
 
-## Étape 5 - Le déterminant
+        Le dernier test donne `0` : deux vecteurs dont le produit scalaire est nul sont **orthogonaux**, c'est-à-dire perpendiculaires.
+
+## Étape 6 - Le déterminant
 
 Le **déterminant** d'une matrice **carrée** est un nombre, noté $\det M$. Il dit, entre autres, si la matrice a une inverse : c'est le cas exactement quand $\det M \neq 0$.
 
@@ -291,33 +489,33 @@ $$
 \det \begin{pmatrix} a & b \\ c & d \end{pmatrix} = a d - b c
 $$
 
-Pour une matrice plus grande, on se ramène à des matrices plus petites. Le **mineur** $M_{i,j}$ est la matrice obtenue en **supprimant la ligne $i$ et la colonne $j$** de $M$.
+Pour une matrice plus grande, on se ramène à des matrices plus petites. La **sous-matrice** $M_{i,j}$, aussi appelée matrice extraite, est la matrice obtenue en **supprimant la ligne $i$ et la colonne $j$** de $M$. Son déterminant $\det M_{i,j}$ porte un nom : c'est un **mineur** de $M$. Un mineur est donc un nombre, pas une matrice.
 
 !!! question "Calculer"
     Sur ton cahier :
 
     1. Calcule $\det A$.
-    2. Écris le mineur de `M` obtenu en supprimant la ligne `0` et la colonne `1`, puis celui obtenu en supprimant la ligne `1` et la colonne `2`.
+    2. Écris la sous-matrice de `M` obtenue en supprimant la ligne `0` et la colonne `1`, puis celle obtenue en supprimant la ligne `1` et la colonne `2`.
 
     ??? success "Correction"
         1. $\det A = 1 \times 4 - 2 \times 3 = -2$.
         2. Ligne `0` et colonne `1` supprimées : $\begin{pmatrix} 1 & 2 \\ 1 & 2 \end{pmatrix}$. Ligne `1` et colonne `2` supprimées : $\begin{pmatrix} 2 & 0 \\ 1 & 1 \end{pmatrix}$.
 
-!!! question "Écrire `mineur` (obligatoire)"
+!!! question "Écrire `sous_matrice` (obligatoire)"
     Complète le test : il doit vérifier que `M` n'a pas été modifiée.
 
     ```python
-    def mineur[T](M: Matrice[T], i: int, j: int) -> Matrice[T]:
+    def sous_matrice[T](M: Matrice[T], i: int, j: int) -> Matrice[T]:
         """Renvoie une nouvelle matrice : M privée de sa ligne i et de sa colonne j."""
         pass
 
 
-    def test_mineur():
-        assert mineur(M, 0, 1) == [[1, 2], [1, 2]]
-        assert mineur(M, 1, 2) == [[2, 0], [1, 1]]
-        assert mineur(A, 0, 0) == [[4]]
+    def test_sous_matrice():
+        assert sous_matrice(M, 0, 1) == [[1, 2], [1, 2]]
+        assert sous_matrice(M, 1, 2) == [[2, 0], [1, 1]]
+        assert sous_matrice(A, 0, 0) == [[4]]
         copie = [[2, 0, 1], [1, 3, 2], [1, 1, 2]]
-        mineur(copie, 0, 0)
+        sous_matrice(copie, 0, 0)
         assert ...
     ```
 
@@ -332,7 +530,7 @@ Pour une matrice plus grande, on se ramène à des matrices plus petites. Le **m
 
     ??? warning "Correction"
         ```python
-        def mineur[T](M: Matrice[T], i: int, j: int) -> Matrice[T]:
+        def sous_matrice[T](M: Matrice[T], i: int, j: int) -> Matrice[T]:
             """Renvoie une nouvelle matrice : M privée de sa ligne i et de sa colonne j."""
             res = []
             for k in range(0, len(M)):
@@ -345,21 +543,21 @@ Pour une matrice plus grande, on se ramène à des matrices plus petites. Le **m
             return res
 
 
-        def test_mineur():
-            assert mineur(M, 0, 1) == [[1, 2], [1, 2]]
-            assert mineur(M, 1, 2) == [[2, 0], [1, 1]]
-            assert mineur(A, 0, 0) == [[4]]
+        def test_sous_matrice():
+            assert sous_matrice(M, 0, 1) == [[1, 2], [1, 2]]
+            assert sous_matrice(M, 1, 2) == [[2, 0], [1, 1]]
+            assert sous_matrice(A, 0, 0) == [[4]]
             copie = [[2, 0, 1], [1, 3, 2], [1, 1, 2]]
-            mineur(copie, 0, 0)
+            sous_matrice(copie, 0, 0)
             assert copie == [[2, 0, 1], [1, 3, 2], [1, 1, 2]]
         ```
 
         Une solution qui part de `M[k]` et supprime une case avec `del` ou `pop` modifie `M` elle-même : c'est ce que la dernière assertion attrape.
 
-Le déterminant se calcule en **développant selon la première ligne** : chaque coefficient de la ligne `0` est multiplié par le déterminant de son mineur, et les signes alternent, `+`, `-`, `+`, `-`...
+Le déterminant se calcule en **développant selon la première ligne** : chaque coefficient de la ligne `0` est multiplié par le mineur correspondant, et les signes alternent, `+`, `-`, `+`, `-`...
 
 $$
-\det M = \sum_{j} (-1)^{j} \times M_{0,j} \times \det M_{0,j}
+\det M = \sum_{j} (-1)^{j} \times \mathrm{ev}_{0,j}(M) \times \det M_{0,j}
 $$
 
 Le déterminant d'une matrice $1 \times 1$, `[[a]]`, vaut `a`.
@@ -375,7 +573,7 @@ Le déterminant d'une matrice $1 \times 1$, `[[a]]`, vaut `a`.
         $= 2 \times 4 - 0 + 1 \times (-2) = 6$.
 
 !!! question "Écrire `determinant` (obligatoire)"
-    La fonction est **récursive** : elle s'appelle elle-même sur chaque mineur.
+    La fonction est **récursive** : elle s'appelle elle-même sur chaque sous-matrice.
 
     ```python
     def determinant[T: (int, float)](M: Matrice[T]) -> T:
@@ -395,7 +593,7 @@ Le déterminant d'une matrice $1 \times 1$, `[[a]]`, vaut `a`.
         Le cas de base est la matrice $1 \times 1$. Dans le cas général, une seule boucle sur `j`, de `0` à `len(M)`.
 
     ??? tip "Indice plus précis"
-        Le signe s'écrit `(-1) ** j`. Chaque tour ajoute `(-1) ** j * M[0][j] * determinant(mineur(M, 0, j))`.
+        Le signe s'écrit `(-1) ** j`. Chaque tour ajoute `(-1) ** j * M[0][j] * determinant(sous_matrice(M, 0, j))`.
 
     ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
@@ -410,7 +608,7 @@ Le déterminant d'une matrice $1 \times 1$, `[[a]]`, vaut `a`.
                 return M[0][0]
             s: T = 0
             for j in range(0, len(M)):
-                s = s + (-1) ** j * M[0][j] * determinant(mineur(M, 0, j))
+                s = s + (-1) ** j * M[0][j] * determinant(sous_matrice(M, 0, j))
             return s
 
 
@@ -425,24 +623,24 @@ Le déterminant d'une matrice $1 \times 1$, `[[a]]`, vaut `a`.
     Sur ton cahier : combien de fois `determinant` est-elle appelée au total pour calculer `determinant(M)`, le premier appel compris ?
 
     ??? success "Correction"
-        `10` : l'appel sur `M` ($3 \times 3$), trois appels sur des mineurs $2 \times 2$, et pour chacun d'eux deux appels sur des matrices $1 \times 1$. $1 + 3 \times (1 + 2) = 10$.
+        `10` : l'appel sur `M` ($3 \times 3$), trois appels sur des sous-matrices $2 \times 2$, et pour chacun d'eux deux appels sur des matrices $1 \times 1$. $1 + 3 \times (1 + 2) = 10$.
 
-## Étape 6 - La comatrice
+## Étape 7 - La comatrice
 
 La **comatrice** de $M$, notée $\operatorname{com} M$, est la matrice de même taille dont le coefficient de la ligne $i$ et de la colonne $j$ est :
 
 $$
-(\operatorname{com} M)_{i,j} = (-1)^{i+j} \times \det M_{i,j}
+\mathrm{ev}_{i,j}(\operatorname{com} M) = (-1)^{i+j} \times \det M_{i,j}
 $$
 
-Ce nombre s'appelle le **cofacteur** de la case $(i, j)$. Les signes $(-1)^{i+j}$ forment un damier :
+Ce nombre, le mineur affecté d'un signe, s'appelle le **cofacteur** de la case $(i, j)$. Les signes $(-1)^{i+j}$ forment un damier :
 
 $$
 \begin{pmatrix} + & - & + \\ - & + & - \\ + & - & + \end{pmatrix}
 $$
 
 !!! question "Calculer"
-    Sur ton cahier, calcule $\operatorname{com} A$. Les mineurs de $A$ sont des matrices $1 \times 1$.
+    Sur ton cahier, calcule $\operatorname{com} A$. Les sous-matrices de $A$ sont des matrices $1 \times 1$.
 
     ??? success "Correction"
         $\operatorname{com} A = \begin{pmatrix} 4 & -3 \\ -2 & 1 \end{pmatrix}$. Par exemple, en `(0, 1)` : on supprime la ligne `0` et la colonne `1`, il reste `[[3]]`, et le signe est $(-1)^{0+1} = -1$.
@@ -461,7 +659,7 @@ $$
     ```
 
     ??? tip "Indice"
-        Même double boucle qu'à l'étape 2. Chaque case vaut `(-1) ** (i + j) * determinant(mineur(M, i, j))`.
+        Même double boucle qu'à l'étape 2. Chaque case vaut `(-1) ** (i + j) * determinant(sous_matrice(M, i, j))`.
 
     ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
@@ -475,7 +673,7 @@ $$
             for i in range(0, len(M)):
                 ligne = []
                 for j in range(0, len(M)):
-                    ligne.append((-1) ** (i + j) * determinant(mineur(M, i, j)))
+                    ligne.append((-1) ** (i + j) * determinant(sous_matrice(M, i, j)))
                 res.append(ligne)
             return res
         ```
@@ -500,7 +698,7 @@ $$
 
         Ce test fait travailler ensemble quatre de tes fonctions. S'il échoue alors que les autres tests passent, l'erreur est souvent dans l'ordre des arguments de `produit`.
 
-## Étape 7 - Le produit de Kronecker
+## Étape 8 - Le produit de Kronecker
 
 Le **produit de Kronecker** $A \otimes B$ remplace chaque coefficient de $A$ par un **bloc** : une copie de $B$ multipliée par ce coefficient.
 
@@ -508,7 +706,7 @@ $$
 \begin{pmatrix} a & b \\ c & d \end{pmatrix} \otimes B = \begin{pmatrix} a B & b B \\ c B & d B \end{pmatrix}
 $$
 
-Si $A$ est de taille $n \times m$ et $B$ de taille $p \times q$, alors $A \otimes B$ est de taille $np \times mq$. Contrairement au produit de l'étape 3, il n'y a **aucune** condition sur les tailles.
+Si $A$ est de taille $n \times m$ et $B$ de taille $p \times q$, alors $A \otimes B$ est de taille $np \times mq$. Contrairement au produit de l'étape 5, il n'y a **aucune** condition sur les tailles.
 
 !!! question "Calculer"
     Sur ton cahier :
@@ -589,10 +787,10 @@ Pour écrire la fonction, il faut savoir, pour une case `(i, j)` du résultat, d
 
         Les deux matrices contiennent les mêmes nombres, mais pas à la même place : $A \otimes B \neq B \otimes A$.
 
-## Étape 8 - Transvections et pivot de Gauss
+## Étape 9 - Transvections et pivot de Gauss
 
 !!! question "Le coût du déterminant"
-    À l'étape 5, le calcul de `determinant(M)` pour une matrice $3 \times 3$ finit par calculer six déterminants $1 \times 1$.
+    À l'étape 6, le calcul de `determinant(M)` pour une matrice $3 \times 3$ finit par calculer six déterminants $1 \times 1$.
 
     1. Combien de déterminants $1 \times 1$ sont calculés pour une matrice $4 \times 4$ ? Pour une matrice $n \times n$ ?
     2. Combien pour une matrice $10 \times 10$ ? Ajoute un compteur à ta fonction pour le vérifier.
@@ -756,7 +954,7 @@ On annule la colonne `0` sous la diagonale, puis la colonne `1`, et ainsi de sui
         2. $L_2 \leftarrow L_2 - 4 \, L_0$ : $\begin{pmatrix} 2 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 3 & 5 \end{pmatrix}$
         3. $L_2 \leftarrow L_2 - 3 \, L_1$ : $\begin{pmatrix} 2 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 2 \end{pmatrix}$
 
-        On obtient `U`, donc $\det N = 2 \times 1 \times 2 = 4$. Pour annuler la case `(i, j)`, on a pris $c = -\dfrac{M_{i,j}}{M_{j,j}}$.
+        On obtient `U`, donc $\det N = 2 \times 1 \times 2 = 4$. Pour annuler la case `(i, j)`, on a pris $c = -\dfrac{\mathrm{ev}_{i,j}(M)}{\mathrm{ev}_{j,j}(M)}$.
 
 !!! warning "Piège : utiliser la bonne ligne"
     À la troisième transvection, on annule la case `(2, 1)` avec la ligne `1`, et non avec la ligne `0`. La ligne `0` a un `2` en colonne `0` : l'ajouter à la ligne `2` ferait réapparaître un coefficient non nul dans la colonne qu'on vient d'annuler.
