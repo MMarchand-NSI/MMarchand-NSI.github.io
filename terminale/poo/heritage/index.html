@@ -9424,14 +9424,14 @@
 <p>L'héritage sert peu quand les classes sont aussi proches que <code>Chien</code> et <code>Chat</code> : un attribut <code>cri</code> suffisait. Il devient utile quand la sous classe fait vraiment autre chose.</p>
 <p>Tu en rencontreras deux usages dans la suite de l'année, et tu peux déjà aller voir à quoi ils ressemblent.</p>
 <ul>
-<li><strong><a href="../../../projets/pyxel/space_invader/">Le projet Space Invaders</a></strong>, où une classe <code>EltGraphique</code> porte ce que tout élément à l'écran sait faire, sa position, son déplacement, son dessin, sa collision, et où <code>Vaisseau</code>, <code>Ennemi</code> et <code>Missile</code> n'écrivent que ce qui les distingue. Le schéma de classes y est déjà dessiné, et tu sais maintenant le lire : trois flèches à pointe creuse, et un trait entre <code>Jeu</code> et <code>Vaisseau</code> avec ses cardinalités.</li>
-<li><strong><a href="../../structures-de-donnees/listes/maillons/">La liste chaînée</a></strong>, où une classe marque la fin de la chaîne en héritant du maillon ordinaire. Elle s'écrit en Java, et c'est là que la forme de la section 2 de la première page prend tout son sens.</li>
+<li><strong><a href="../../../projets/pyxel/space_invader/">Le projet Space Invaders</a></strong>, où une classe <code>EltGraphique</code> porte ce que tout élément à l'écran sait faire, sa position, son déplacement, son dessin, sa collision, et où <code>Vaisseau</code>, <code>Missile</code>, <code>Joueur</code> et <code>Ennemi</code> n'écrivent que ce qui les distingue. Le schéma de classes y est déjà dessiné, et tu sais maintenant le lire : quatre flèches à pointe creuse, dont deux sur <strong>deux étages</strong>, un joueur est un vaisseau qui est un élément graphique, et trois flèches à pointe simple avec leurs cardinalités.</li>
+<li><strong><a href="../../structures-de-donnees/listes/maillons/">La liste chaînée</a></strong>, où une classe marque la fin de la chaîne en héritant du maillon ordinaire, et redéfinit une méthode pour répondre autrement que lui. C'est là que la forme de la section 2 de la première page prend tout son sens.</li>
 </ul>
 <div class="admonition info">
 <p class="admonition-title">Les schémas ont un nom</p>
 <p>Les trois dessins de ce chapitre, le cadre en trois parties, la flèche à pointe simple et celle à pointe creuse, ne sont pas une invention de ce cours. Ils viennent d'une notation standard, <strong>UML</strong>, utilisée partout où l'on conçoit des programmes à objets, et tu en as vu la petite partie qui sert ici.</p>
 <p>Deux choses à savoir si tu cherches par toi-même. C'est le mot à taper, et il te donnera bien plus que ce dont tu as besoin : UML compte une dizaine de sortes de schémas, et une seule nous a servi. Et tu verras des <code>+</code> et des <code>-</code> devant les attributs, que nous n'écrivons pas : ils disent ce qui est accessible depuis l'extérieur de la classe, et Python ne le marque pas.</p>
-<p>Tu n'as d'ailleurs pas besoin de chercher pour les rencontrer. Le schéma du projet Space Invaders les emploie, et il y écrit aussi le type <strong>avant</strong> le nom, <code>+float x</code> au lieu de <code>x : float</code>. C'est l'ordre de Java, celui que tu retrouveras dans la liste chaînée.</p>
+<p>Tu n'as d'ailleurs pas besoin de chercher pour les rencontrer. Le schéma de <a href="../../architecture_reseau/modelisation/">la modélisation d'un réseau</a> les emploie, et il y écrit aussi le type <strong>avant</strong> le nom, <code>+str nom</code> au lieu de <code>nom : str</code>. C'est l'ordre du C et de Java, et il se lit sans difficulté.</p>
 </div>
 
 
@@ -9453,7 +9453,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 22, 2026 15:24:00 UTC">November 22, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 22, 2026 20:15:27 UTC">November 22, 2026</span>
   </span>
 
     

@@ -8313,6 +8313,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#la-planche-de-sprites-et-les-sons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La planche de sprites et les sons
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#le-jeu" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -8335,10 +8346,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lennemi" class="md-nav__link">
+  <a href="#le-joueur-et-lennemi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        L'ennemi
+        Le Joueur et l'Ennemi
       
     </span>
   </a>
@@ -9174,6 +9185,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#la-planche-de-sprites-et-les-sons" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        La planche de sprites et les sons
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#le-jeu" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -9196,10 +9218,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#lennemi" class="md-nav__link">
+  <a href="#le-joueur-et-lennemi" class="md-nav__link">
     <span class="md-ellipsis">
       
-        L'ennemi
+        Le Joueur et l'Ennemi
       
     </span>
   </a>
@@ -9331,96 +9353,151 @@
 
 
 <h1 id="projet-space-invader">Projet space invader</h1>
-<p>L'objectif est de créer un "space invader" like  (original: https://freeinvaders.org )</p>
-<p>Nous allons utiliser le retro game engine pyxel (<code>pip install pyxel</code>)</p>
+<p>L'objectif est de créer un "space invader" like (original : <a href="https://freeinvaders.org">https://freeinvaders.org</a>)</p>
+<p>Nous allons utiliser le retro game engine pyxel (<code>uv add pyxel</code>).</p>
 <div class="admonition warning">
 <p class="admonition-title">Propreté</p>
-<p>La très grande majorité des exemples sur internet de jeux pyxels ne sont pas propres du tout. Merci de ne pas vous en inspirer afin de ne pas prendre de mauvaises habitudes.
-A ce titre, c'est la raison pour laquelle je vous guide afin de le faire proprement, dans la limite du raisonable.</p>
+<p>La très grande majorité des exemples de jeux pyxel qu'on trouve sur internet ne sont pas propres du tout. Merci de ne pas t'en inspirer, afin de ne pas prendre de mauvaises habitudes.</p>
+<p>C'est la raison pour laquelle je te guide, afin de le faire proprement, dans la limite du raisonnable.</p>
 </div>
-<p>Voici la modélisation de ce space invader où nous utilisons l'héritage à fin de simplification (Je considère l'héritage comme faisant partie de la zone proximale de développement). Sans héritage, il faudrait gérer dans toutes les classes tous les attributs et méthodes d'EltGraphique. Il reste toujours possible de les adapter dans les classes filles.</p>
+<p>Voici la modélisation de ce space invader. L'héritage y sert à <strong>ne pas écrire deux fois la même chose</strong> : sans lui, chaque classe porterait tous les attributs et toutes les méthodes d'<code>EltGraphique</code>, et le joueur et l'ennemi porteraient en double tout ce qu'un vaisseau sait faire. Il reste toujours possible de redéfinir dans une sous classe ce qui lui est propre.</p>
+<div class="admonition info">
+<p class="admonition-title">Comment lire ce schéma</p>
+<p>Les deux sortes de flèches sont celles du chapitre <a href="../../../terminale/poo/heritage/">héritage</a>.</p>
+<ul>
+<li><strong>Pointe creuse</strong>, de la sous classe vers la super classe : elle dit « <strong>est un</strong> ». Un ennemi <strong>est un</strong> vaisseau, un vaisseau <strong>est un</strong> élément graphique.</li>
+<li><strong>Pointe simple</strong> : elle dit « <strong>a un</strong> », et sa pointe désigne la classe <strong>tenue</strong>. Son étiquette nomme l'attribut qui porte le rapport, et les nombres aux deux bouts sont les <strong>cardinalités</strong>.</li>
+</ul>
+<p>Une sous classe ne déclare que ce qu'elle <strong>ajoute</strong> ou ce qu'elle <strong>redéfinit</strong>. Tout le reste se lit en remontant la flèche à pointe creuse.</p>
+</div>
 <pre class="mermaid"><code>classDiagram
-    EltGraphique &lt;|-- Vaisseau
-    EltGraphique &lt;|-- Ennemi
-    EltGraphique &lt;|-- Missile
-    EltGraphique : +float x
-    EltGraphique : +float y
-    EltGraphique : +float dx
-    EltGraphique : +float dy
-    EltGraphique : +int height
-    EltGraphique : +int width
-    EltGraphique : +int u
-    EltGraphique : +int v
-    EltGraphique : +draw()
-    EltGraphique : +update()
-    EltGraphique : +bool collision(EltGraphique)
+  Jeu "1" --&gt; "1" Joueur : joueur
+  Jeu "1" --&gt; "0..*" Ennemi : ennemis
+  EltGraphique &lt;|-- Vaisseau
+  EltGraphique &lt;|-- Missile
+  Vaisseau &lt;|-- Ennemi
+  Vaisseau &lt;|-- Joueur
+  Vaisseau "1" --&gt; "0..*" Missile : missiles
 
-    class Jeu{
-        +int score
-        +draw()
-        +update()
-        -check_collisions()
-    }
-    class Ennemi{
-        +tirer()
-    }
-    class Vaisseau{
-        +tirer()
-    }
-    Jeu "1"--"1" Vaisseau
-    Jeu "1"--"*" Ennemi
-    Ennemi "1"--"*" Missile
-    Vaisseau "1"--"*" Missile</code></pre>
+  class EltGraphique {
+    x : float
+    y : float
+    dx : float
+    dy : float
+    width : int
+    height : int
+    img : int
+    u : int
+    v : int
+    draw()
+    update()
+    collision(autre) bool
+  }
+  class Vaisseau {
+    missiles : list[Missile]
+    tirer()
+    update()
+    draw()
+  }
+  class Joueur {
+    tirer()
+  }
+  class Ennemi {
+    tirer()
+  }
+  class Missile {
+  }
+  class Jeu {
+    score : int
+    joueur : Joueur
+    ennemis : list[Ennemi]
+    update()
+    draw()
+    spawn_ennemi(x, y, dx, dy)
+    check_collisions()
+  }
+</code></pre>
 <h2 id="element-graphique">Element graphique</h2>
 <p>Un Elément Graphique est quelque chose qui peut apparaître à l'écran.</p>
 <ul>
 <li>Il a une position x, y dans le plan.</li>
-<li>Il a un vecteur de déplacement dx, dy duquel il se déplace en permanence</li>
-<li>Il a une coordonnée dans le fichier de ressource pour aller y rechercher son image.</li>
+<li>Il a un vecteur de déplacement dx, dy duquel il se déplace en permanence.</li>
+<li>Il sait où est son image dans la planche de sprites : la banque <code>img</code>, et les coordonnées <code>u</code>, <code>v</code> de son coin haut gauche.</li>
 <li>Il a une largeur <code>width</code> et une hauteur <code>height</code>.</li>
 <li>Il sait se dessiner à l'écran.</li>
 <li>Il sait se mettre à jour en fonction de son vecteur directeur.</li>
-<li>Il sait dire s'il est en collision avec un autre élément graphique (voir fonction donnée plus bas).</li>
+<li>Il sait dire s'il est en collision avec un autre élément graphique (voir la méthode donnée plus bas).</li>
 </ul>
-<p>Par exemple, Un Vaisseau <strong>EST UN</strong> Element Graphique.</p>
+<p>Par exemple, un Missile <strong>EST UN</strong> Element Graphique.</p>
 <div class="admonition danger">
 <p class="admonition-title">Danger</p>
 <p>Les vecteurs de position et de déplacement seront gérés en float. Par contre l'affichage attendra des ints.
 C'est équivalent à dire qu'on réfléchit au mouvement dans <span class="arithmatex">\(\mathbb{R^2}\)</span> mais qu'on affiche dans <span class="arithmatex">\(\mathbb{Z^2}\)</span></p>
 </div>
-<h2 id="le-jeu">Le Jeu</h2>
-<p>Le jeu est le chef d'orchestre.</p>
-<p>il gère:</p>
+<h2 id="la-planche-de-sprites-et-les-sons">La planche de sprites et les sons</h2>
+<p>Télécharge la planche <a href="../../../assets/star_shooter/spritesheet.pyxres">spritesheet.pyxres</a> et sa palette <a href="../../../assets/star_shooter/spritesheet.pyxpal">spritesheet.pyxpal</a>. C'est la même que celle de l'<a href="../intro-pyxel/">introduction à pyxel</a>.</p>
 <ul>
-<li>Un Vaisseau </li>
+<li>Place les deux fichiers <strong>dans le même répertoire</strong>, et <strong>ne les renomme pas</strong> : pyxel ne lit la palette que si elle porte le nom de la planche.</li>
+<li>Charge-la <strong>juste après <code>px.init</code></strong> : <code>px.load("&lt;répertoire&gt;/spritesheet.pyxres")</code></li>
+<li>Pour la regarder et y relever ce dont tu as besoin : <code>pyxel edit &lt;répertoire&gt;/spritesheet.pyxres</code></li>
+</ul>
+<p>Ce qu'elle contient se range exactement dans le schéma ci-dessus.</p>
+<ul>
+<li>Les sprites font <strong>16 sur 16</strong>, donc <code>width</code> et <code>height</code> valent 16.</li>
+<li>La planche tient en <strong>trois banques d'images</strong>, numérotées 0, 1 et 2 : c'est ce que porte l'attribut <code>img</code>. L'éditeur te donne les trois nombres dont un élément graphique a besoin, la banque et les coordonnées <code>u</code>, <code>v</code> du coin haut gauche du sprite.</li>
+<li>Les <strong>vaisseaux</strong> occupent le début de la première ligne de la banque 0 : cinq couleurs à <code>v = 0</code>, dont les <code>u</code> vont de 16 à 80, de seize en seize. Le vaisseau blanc est donc en <code>(0, 16, 0)</code>. Prends-en un pour le joueur et un autre pour les ennemis.</li>
+<li>La couleur d'indice <strong>0</strong> est la transparence : c'est la valeur à donner à <code>colkey</code>.</li>
+<li>Quatre <strong>bruitages</strong> : 0 le laser du joueur, 1 le laser de l'ennemi, 2 une petite explosion, 3 une grosse. <code>px.play(0, 2)</code> joue la petite explosion sur le canal 0. Ils tombent sur quatre endroits précis de ton modèle, les deux <code>tirer</code> et les deux issues de <code>check_collisions</code>.</li>
+<li>Deux <strong>musiques</strong> de fond, <code>px.playm(0, loop=True)</code> et <code>px.playm(1, loop=True)</code>.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Une couleur n'est pas une classe</p>
+<p>Deux ennemis de couleurs différentes ne demandent pas deux classes : c'est la valeur de <code>u</code> qui change, et pas une ligne de code. Tu n'écriras une sous classe d'<code>Ennemi</code> que le jour où l'un d'eux se <strong>comportera</strong> autrement, par exemple en tirant deux missiles à la fois.</p>
+</div>
+<h2 id="le-jeu">Le Jeu</h2>
+<p>Le jeu est le chef d'orchestre. Ce n'est <strong>pas</strong> un élément graphique : il n'apparaît pas à l'écran, il fait apparaître les autres. Aucune flèche à pointe creuse ne part de lui.</p>
+<p>Il gère :</p>
+<ul>
+<li>Un Joueur</li>
 <li>Des Ennemis</li>
 <li>Un Score</li>
 <li>Les évènements utilisateurs dans sa méthode update</li>
 </ul>
-<p>Le Jeu doit pouvoir spawner un ennemi à une certaine position pour un certain vecteur de déplacement. Le jeu sait se dessiner et demander à ses vaisseaux et à ses ennemis de se mettre à jour et de se dessiner.</p>
-<p>Le jeu sait tester toutes les collisions et agir en conséquence.</p>
+<p>Le Jeu doit pouvoir spawner un ennemi à une certaine position pour un certain vecteur de déplacement. Le jeu sait se dessiner et demander à son joueur et à ses ennemis de se mettre à jour et de se dessiner.</p>
+<p>Le jeu sait tester toutes les collisions et agir en conséquence. Remarque que <strong>le jeu ne tient aucun missile</strong> : aucune flèche ne va de <code>Jeu</code> vers <code>Missile</code>. Pour les atteindre, il passe par les vaisseaux qui les ont tirés, <code>self.joueur.missiles</code> et les <code>missiles</code> de chacun de ses ennemis. C'est exactement ce que la flèche à pointe simple entre <code>Vaisseau</code> et <code>Missile</code> annonce.</p>
 <h2 id="le-vaisseau">Le Vaisseau</h2>
-<p>Un vaisseau doit pouvoir tirer un nouveau missile.
-Un vaisseau connaît la liste de ses missiles et sait leur demander de se mettre à jour et de se dessiner. </p>
-<h2 id="lennemi">L'ennemi</h2>
-<p>Un ennemi doit pouvoir tirer un nouveau missile.
-Un ennemi connaît la liste de ses missiles et sait leur demander de se mettre à jour et de se dessiner. </p>
+<p>Un vaisseau <strong>est un</strong> élément graphique, et c'est la super classe du joueur comme de l'ennemi : tout ce qui suit s'écrit <strong>une seule fois</strong>, ici.</p>
+<ul>
+<li>Un vaisseau connaît la liste de ses missiles et sait leur demander de se mettre à jour et de se dessiner. Ses <code>update</code> et <code>draw</code> redéfinissent donc ceux d'<code>EltGraphique</code> : un vaisseau se déplace et se dessine comme tout élément graphique, puis s'occupe de ses missiles.</li>
+<li>Un vaisseau doit pouvoir tirer un nouveau missile, c'est-à-dire le créer à sa propre position et l'ajouter à sa liste.</li>
+</ul>
+<h2 id="le-joueur-et-lennemi">Le Joueur et l'Ennemi</h2>
+<p>Les deux <strong>sont des</strong> vaisseaux, et c'est tout ce qu'ils ont de commun. Ce qui les distingue tient en peu de chose, et c'est le signe que le modèle est juste.</p>
+<ul>
+<li>Leur <strong>sprite</strong> n'est pas le même.</li>
+<li>Leur missile ne part pas dans le même sens : vers le haut pour le joueur, vers le bas pour l'ennemi. <code>tirer</code> est donc <strong>redéfinie</strong> dans chacune des deux sous classes.</li>
+<li>Le joueur est unique et piloté par les touches. Les ennemis sont nombreux et pilotés par le jeu.</li>
+</ul>
+<div class="admonition tip">
+<p class="admonition-title">Ce que l'héritage t'autorise ici</p>
+<p>Ce qui est commun à tout tir, créer le missile et l'ajouter à la liste, peut rester dans <code>Vaisseau</code>. Les deux sous classes ont alors un <code>tirer</code> très court, qui appelle celui de la super classe par <code>super().tirer(...)</code> en lui fixant ce qui leur est propre. C'est le geste du <code>super().__init__(nom, "aboie")</code> de <code>Chien</code>, au même endroit du raisonnement : <strong>la sous classe fixe ce que la super classe laissait au choix</strong>.</p>
+</div>
 <h2 id="le-missile">Le missile</h2>
-<p>C'est un élément Graphique simple.</p>
+<p>C'est un élément Graphique simple. Sa partie attributs est <strong>vide</strong> dans le schéma, et ce n'est pas un oubli : un missile n'ajoute rien à ce qu'un élément graphique sait déjà faire. Il n'y a rien à recopier.</p>
 <h2 id="optionnel">Optionnel</h2>
 <ul>
 <li>Il existe plusieurs types d'ennemis plus ou moins puissants.</li>
-<li>Il y a un boss ded fin de niveau.</li>
-<li>Les ennemis et le vaisseau peuvent avoir des points de vie.</li>
-<li>Le jeu peut créer une explosion à un certain endroit</li>
-<li>Les ennemis peuvent drop des Bonus (invincibilité, changement de missile, ...)
-La liste est sans fin.</li>
+<li>Il y a un boss de fin de niveau.</li>
+<li>Les ennemis et le joueur peuvent avoir des points de vie.</li>
+<li>Le jeu peut créer une explosion à un certain endroit.</li>
+<li>Les ennemis peuvent drop des Bonus (invincibilité, changement de missile, ...)</li>
 </ul>
-<p>Ne vous lancez pas dans les fonctionnalités optionnelles sans avoir un code propre et complètement testé.
-Ne vous lancez pas dans une amélioration sans avoir pensé sa modélisation.
-Si vous écrivez trop de code, c'est que vous avez peut-être pris un mauvais chemin.</p>
+<p>La liste est sans fin.</p>
+<p>Ne te lance pas dans les fonctionnalités optionnelles sans avoir un code propre et complètement testé.
+Ne te lance pas dans une amélioration sans avoir pensé sa modélisation.
+Si tu écris trop de code, c'est que tu as peut-être pris un mauvais chemin.</p>
 <h2 id="les-collisions">Les collisions</h2>
-<p>Rajoutez cette méthode dans votre classe EltGraphique. L'objectif ici, c'est que vous vous plongiez dans la POO, pas d'étudier la collision d'objets dans l'espace (très vaste sujet), donc je vous la donne. (La collision peut faire l'objet d'un grand oral maths/info.)</p>
+<p>Rajoute cette méthode dans ta classe EltGraphique. L'objectif ici, c'est que tu te plonges dans la POO, pas d'étudier la collision d'objets dans l'espace (très vaste sujet), donc je te la donne. (La collision peut faire l'objet d'un grand oral maths/info.)</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">collision</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">:</span> <span class="s1">&#39;EltGraphique&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot; Cette méthode détecte les collisions entre 2 boites</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="sd">    rectangulaires. Les rectangles doivent avoir des attributs:</span>
@@ -9434,7 +9511,7 @@ Si vous écrivez trop de code, c'est que vous avez peut-être pris un mauvais ch
 <a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>            <span class="ow">or</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">height</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">)</span> 
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>     <span class="p">)</span>
 </code></pre></div>
-<p>Pour aller plus loin dans les collisions, vous pouvez vous intéresser au théorème des axes séparateurs (Accessible spé math), ou encore à GJK, qui utilise la somme de Minkowski (Difficile à ce stade, mais je vous le mets quand même parce que c'est beau)</p>
+<p>Pour aller plus loin dans les collisions, tu peux t'intéresser au théorème des axes séparateurs (accessible en spé maths), ou encore à GJK, qui utilise la somme de Minkowski (difficile à ce stade, mais je te le mets quand même parce que c'est beau)</p>
 <p>La détection de collisions utilise plusieurs algorithmes en cascade :</p>
 <p><strong>Broad phase :</strong> Partitionnement spatial (QuadTree, Grid, etc.) 
 pour identifier les paires potentielles. Élimine rapidement les objets 
@@ -9467,7 +9544,7 @@ tests AABB avant SAT), mais n'est pas systématique.</p>
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 23, 2025 19:29:47 UTC">October 23, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 22, 2026 20:15:27 UTC">November 22, 2026</span>
   </span>
 
     
