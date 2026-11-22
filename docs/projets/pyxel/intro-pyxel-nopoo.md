@@ -124,15 +124,20 @@ px.run(update, draw)
 
 
 !!! question "Remplacer un pixel par un sprite"
-    1. Télécharge le fichier 2.pyxres sur [le site de la nuit du code](https://depot.nuitducode.net)
-        - Il s'agit d'un fichier contenant des ressources visuelles et sonores.
-        - Place-le **dans le même répertoire** que ton fichier python.
-        - Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources du jeu, exécute la commande suivante dans un terminal:
-            `pyxel edit <répertoire>/2.pyxres`
-        - N'hésite pas à bidouiller, tu ne peux rien casser, au pire tu pourras retélécharger le fichier.
-    2. A la place d'un simple pixel, on veut maintenant utiliser un sprite
-        - Pour le faire, il faut d'abord charger ce fichier dans le code **juste avant de démarrer le jeu**:
-            `px.load("<répertoire>/2.pyxres")`
-        - Ensuite il faut dessiner le sprite que tu auras choisi au lieu de simplement remplir un pixel. Il n'y a qu'une ligne de code à modifier. Je te laisse la trouver en explorant la [documentation de pyxel](https://github.com/kitao/pyxel/blob/main/docs/README.fr.md).
-            - remarque: Tu auras nécessairement besoin d'augmenter la hauteur et la largeur de ta fenêtre (H et W), ce qui réduira la taille des "pixels".
-
+    1. Télécharge la planche de sprites [spritesheet.pyxres](../../assets/star_shooter/spritesheet.pyxres) et sa palette [spritesheet.pyxpal](../../assets/star_shooter/spritesheet.pyxpal).
+        - Le `.pyxres` contient les images, 4 bruitages (emplacements 0 à 3) et 2 musiques. Le `.pyxpal` contient les 16 couleurs de la planche.
+        - Place les deux fichiers **dans le même répertoire**, et **ne les renomme pas** : pyxel ne lit la palette que si elle porte le nom de la planche.
+        - Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources, exécute la commande suivante dans un terminal :
+            `pyxel edit <répertoire>/spritesheet.pyxres`
+        - N'hésite pas à bidouiller, tu ne peux rien casser, au pire tu pourras retélécharger les fichiers.
+    2. À la place d'un simple pixel, on veut maintenant utiliser un sprite.
+        - Il faut d'abord charger la planche **juste après `px.init`** :
+            `px.load("<répertoire>/spritesheet.pyxres")`
+        - Les sprites de cette planche font 16 sur 16.
+        - La planche est découpée en **3 banques d'images**, numérotées 0, 1 et 2. L'éditeur te donne la banque et les coordonnées $(u, v)$ du sprite que tu choisis.
+        - La couleur d'indice **0** est la transparence de cette planche : c'est la valeur à donner à `colkey`.
+        - Il n'y a alors qu'une ligne de code à modifier dans `draw`. Je te laisse la trouver en explorant la [documentation de pyxel](https://github.com/kitao/pyxel/blob/main/docs/README.fr.md).
+            - remarque: Tu auras nécessairement besoin d'augmenter la hauteur et la largeur de ta fenêtre (H et W), sans quoi le sprite occupera tout l'écran.
+    3. Pour l'ambiance, un bruitage et une musique sont déjà dans la planche :
+        - `px.play(0, 2)` joue la petite explosion sur le canal 0.
+        - `px.playm(0, loop=True)` lance la musique de fond en boucle.
