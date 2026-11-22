@@ -1,7 +1,15 @@
 # Maillons et sentinelle
 
 !!! danger "Requis"
-    Tu dois savoir refaire les exercices sur la création et l'utilisation de classes en POO sans regarder le corrigé, et savoir ce qu'est l'héritage.
+    Le chapitre [Objet (POO)](../../poo/poo.md) en entier. Trois choses doivent être acquises, et pas seulement comprises en lisant.
+
+    - **Écrire une classe** sans regarder un corrigé : ses attributs déclarés en haut avec leur type, son constructeur, ses méthodes.
+    - **Dire ce que `self` désigne**, et pourquoi deux noms peuvent pointer sur le même objet. Toute cette page repose là-dessus.
+    - **[L'héritage](../../poo/heritage.md)**, et savoir lire un schéma de classes.
+
+    Tu as aussi écrit la liste **deux fois**, en Gleam puis en Python. Garde ces deux versions sous la main : c'est la même structure, une troisième fois.
+
+    **Il n'y a rien de nouveau à installer et aucun langage à apprendre.** C'est le Python et la POO que tu connais déjà, et la nouveauté est ailleurs : dans la structure.
 
 !!! question "Rappel d'ouverture (5 minutes, de mémoire, cahier fermé)"
     1. En Python, `a = [1, 42, 312]` et `b = [1, 42, 312]`. Que vaut `a is b` ? Que vaut `a == b` ? **Écris pourquoi**, une raison pour chacun.
@@ -29,32 +37,27 @@ Tu as déjà implémenté une liste deux fois, en Gleam où elle était `Vide` o
 | `Vide` | `tuple[()]` | une **sentinelle**, un maillon sans donnée |
 | `Cons(tête, queue)` | `tuple[T, Liste[T]]` | un **maillon**, une donnée et une flèche vers le suivant |
 
-Ce chapitre ne cherche pas à te faire apprendre Java. Ce que tu connais en Python est suffisant pour que tu ne sois pas perdu. Il cherche deux choses : voir **comment une collection est faite de l'intérieur**, et savoir **ce que chaque opération coûte**.
+Ce chapitre cherche deux choses : voir **comment une collection est faite de l'intérieur**, et savoir **ce que chaque opération coûte**.
 
 Il tient sur deux pages. Celle-ci construit la brique, le **maillon**. La [suivante](liste.md) en fait une **liste**.
 
-Cette page-ci te fait écrire quatre fichiers, dans un répertoire `java/listes/` de ton dépôt.
+Cette page-ci te fait écrire trois fichiers. Les chemins sont donnés depuis le répertoire `python/` de ton dépôt, et tout répertoire que tu crées reçoit un fichier vide `__init__.py`.
 
 ```text
-java/
-  listes/
-    Maillon.java        la brique, à compléter
-    Sentinelle.java     la fin de la chaîne, donnée
-    Dessin.java         l'outil qui dessine, donné
-    MaillonTest.java    les tests, donnés au fur et à mesure
+structures/
+  lineaires/
+    maillon.py          la brique, à compléter
+    maillon_test.py     les tests, donnés au fur et à mesure
+exos/
+  exos_maillons.py      ton bac à sable, pour regarder ce que tu fabriques
 ```
 
-!!! info "L'atelier Java, à faire une fois avant de commencer"
-    Java s'installe avec `nsi install openjdk`, plus deux extensions VSCode, et rien de ce chapitre ne se lance en ligne de commande. Tout est sur la page [Java, l'atelier](../../../les-outils/java.md), à faire une fois pour toutes avant d'aller plus loin.
+C'est l'organisation des piles et des files, à l'identique : le module d'un côté, ses tests **à côté de lui**, et tes essais dans `exos/`. Tu vérifies tout par `uv run pytest`, depuis la racine de ton dépôt. Si un répertoire est neuf et que Python te répond `ModuleNotFoundError: No module named 'structures'`, lance une fois `uv sync` depuis la racine.
 
-    Deux choses à y lire pour **comprendre** cette page-ci : le tableau des [correspondances entre Python et Java](../../../les-outils/java.md#java-ce-qui-change), une dizaine de lignes, et la façon de [lancer les tests](../../../les-outils/java.md#lancer-les-tests).
+!!! info "Dans ce chapitre, la question est presque toujours `is`"
+    L'objet d'étude de ces deux pages est la **flèche entre deux objets**. La question qu'on se pose sans arrêt est donc « est-ce le **même** maillon », et elle s'écrit `is`, jamais `==`.
 
-    Pourquoi Java : tout y est déclaré avec son type, et `==` y compare **toujours** des références. Ce que Python laisse implicite, Java l'écrit, ce qui est utile sur un chapitre dont l'objet d'étude est la flèche entre deux objets.
-
-!!! warning "`==` ne compare pas ce que tu crois"
-    En Java, `==` et `!=` comparent **toujours** des références : c'est le `is` de Python, jamais le `==` de Python. Pour comparer deux données, il faut écrire `a.equals(b)`.
-
-    L'essentiel de ce chapitre consiste à comparer des références, donc `==` sera presque toujours le bon choix. L'exception arrive sur la page suivante, et elle y est signalée.
+    `==` ne servira qu'une seule fois, page suivante, à l'endroit où l'on compare des **données** et non des maillons. Il y est signalé.
 
 ## 2 Le maillon
 
@@ -65,27 +68,36 @@ Un maillon porte deux choses, et deux seulement :
 
 C'est tout. Il n'a pas d'indice, il ne sait pas combien de maillons le suivent, et il ne sait pas qui le précède. Il ne connaît que son voisin de droite.
 
-Crée `Maillon.java` et mets-y ceci. C'est la classe complète pour l'instant : un attribut, un attribut, un constructeur.
+Crée `structures/lineaires/maillon.py` et mets-y ceci. C'est la classe complète pour l'instant : un attribut, un attribut, un constructeur.
 
-```java
-/** Un maillon d'une chaîne : une donnée, et une référence vers le maillon suivant. */
-class Maillon<T> {
+```python
+# structures/lineaires/maillon.py
 
-    /** La donnée portée par ce maillon. */
-    T data;
 
-    /** Le maillon suivant. */
-    Maillon<T> suivant;
+class Maillon[T]:
+    """Un maillon d'une chaîne : une donnée, et une référence vers le suivant."""
 
-    /** Crée un maillon portant une donnée et pointant sur suivant. */
-    Maillon(T data, Maillon<T> suivant) {
-        this.data = data;
-        this.suivant = suivant;
-    }
-}
+    data: T
+    suivant: "Maillon[T]"
+
+    def __init__(self, data: T, suivant: "Maillon[T]") -> None:
+        self.data = data
+        self.suivant = suivant
 ```
 
-Le `<T>` est le `[T]` de Python : un maillon peut porter n'importe quoi, un entier, une chaîne de caractères, un élève, et le type choisi vaut pour toute la chaîne.
+```mermaid
+classDiagram
+  class Maillon {
+    data : T
+    suivant : Maillon
+  }
+  Maillon --> Maillon : suivant
+```
+
+Deux détails d'écriture, et aucun n'est une nouveauté de fond.
+
+- Le `[T]` est celui que tu as déjà écrit sur `Pile[T]` : un maillon peut porter n'importe quoi, un entier, une chaîne de caractères, un élève, et le type choisi vaut pour toute la chaîne.
+- Les **guillemets** autour de `"Maillon[T]"` sont là parce que la classe se nomme elle-même **dans sa propre définition**, à un moment où son nom n'existe pas encore. Sans eux, Python s'arrête sur une erreur. C'est la même écriture que dans `Noeud[T]` au chapitre des arbres.
 
 ## 3 Dessiner un maillon, puis une chaîne
 
@@ -93,7 +105,7 @@ Tu vas passer ce chapitre à déplacer des flèches, et tu ne les verras pas à 
 
 1. **Un objet, un rond.** La donnée s'écrit dedans.
 2. **Un `suivant`, une flèche.** Elle part du rond et arrive sur un autre rond. Chaque rond a **une seule** flèche qui en part, puisqu'un maillon n'a qu'un `suivant`.
-3. **Un nom n'est pas un objet, c'est une flèche.** `m1`, `this`, `ref` ne sont pas des ronds : ce sont des étiquettes posées à côté d'une flèche qui désigne un rond. Écris-les **à l'extérieur**, et en rouge si tu peux.
+3. **Un nom n'est pas un objet, c'est une flèche.** `m1`, `self`, `ref` ne sont pas des ronds : ce sont des étiquettes posées à côté d'une flèche qui désigne un rond. Écris-les **à l'extérieur**, et en rouge si tu peux.
 
 Voilà un maillon seul, nommé `m`, qui porte `2` et pointe sur un maillon qui porte `3`.
 
@@ -102,7 +114,7 @@ graph LR
   m1["2"] --> m2["3"]
 ```
 
-Le nom `m` ne se dessine pas en rond : il s'écrit **à gauche du premier rond**, avec une petite flèche vers lui, et en rouge. Tu verras exactement cette convention sur l'image de la section 6.
+Le nom `m` n'apparaît pas sur ce dessin, et c'est voulu : il ne se dessine pas en rond. Sur ton cahier, écris-le **à gauche du premier rond**, avec une petite flèche vers lui, et en rouge.
 
 !!! question "Dessiner une chaîne (obligatoire)"
     Sur ton cahier, dessine la chaîne de **trois** maillons qui portent `2`, puis `3`, puis `4`, et nomme `m1` le premier.
@@ -122,9 +134,9 @@ Le nom `m` ne se dessine pas en rond : il s'écrit **à gauche du premier rond**
 
         Et la deuxième question n'a pas de réponse pour l'instant : le dernier maillon doit bien pointer quelque part, puisqu'il a un attribut `suivant`. C'est l'objet de la section suivante.
 
-## 4 La sentinelle, pour en finir avec `null`
+## 4 La sentinelle, pour en finir avec `None`
 
-Le dernier maillon doit pointer sur quelque chose. La réponse immédiate est « sur rien », `null` en Java, `None` en Python. Elle coûte cher : à partir de là, **chaque** opération doit se demander « est-ce que je suis au bout ? » avant de toucher à un `suivant`, et celle qui oublie de le demander casse.
+Le dernier maillon doit pointer sur quelque chose. La réponse immédiate est « sur rien », `None`. Elle coûte cher : à partir de là, **chaque** opération doit se demander « est-ce que je suis au bout ? » avant de toucher à un `suivant`, et celle qui oublie de le demander casse.
 
 On fait autre chose. On met au bout un maillon **qui est toujours là**, qui ne porte aucune donnée, et qui **pointe sur lui-même**. On l'appelle une **sentinelle**.
 
@@ -133,161 +145,138 @@ graph LR
   m1["2"] --> m2["3"] --> m3["4"] --> S(("S")) --> S
 ```
 
-Une sentinelle est un maillon comme les autres, avec deux particularités : sa donnée n'existe pas, et son `suivant` est elle-même. Elle hérite donc de `Maillon`. Crée `Sentinelle.java` :
+Une sentinelle est un maillon comme les autres, avec deux particularités : sa donnée n'existe pas, et son `suivant` est elle-même. Elle **hérite** donc de `Maillon`. Ajoute-la à la fin de `maillon.py` :
 
-```java
-/**
- * Un maillon sans donnée (data vaut null) qui marque la fin d'une chaîne.
- * Une sentinelle pointe sur elle-même.
- */
-class Sentinelle<T> extends Maillon<T> {
-    Sentinelle() {
-        super(null, null);
-        this.suivant = this;
-    }
-}
+```python
+class Sentinelle[T](Maillon[T]):
+    """
+    Un maillon sans donnée (data vaut None) qui marque la fin d'une chaîne.
+    Une sentinelle pointe sur elle-même.
+    """
+
+    def __init__(self) -> None:
+        super().__init__(None, self)
 ```
 
-!!! warning "`null` n'apparaît nulle part ailleurs"
-    C'est la **seule** ligne de tout le chapitre où tu écriras `null`, et c'est exactement ce que la sentinelle achète. Quand tu auras besoin d'un maillon de fin, tu écriras `new Sentinelle<>()`, jamais `null`.
+Le constructeur tient en une ligne, et cette ligne dit exactement les deux particularités : pas de donnée, et `self` comme suivant. C'est l'héritage que tu connais, `super().__init__(...)` appelant le constructeur de la super classe.
 
-    Si `null` réapparaît ailleurs dans ton code, c'est le signe que tu es en train de refaire à la main ce que la sentinelle fait pour toi.
+!!! warning "`None` n'apparaît nulle part ailleurs"
+    C'est le **seul** `None` de tout le chapitre, et c'est exactement ce que la sentinelle achète. Quand tu auras besoin d'un maillon de fin, tu écriras `Sentinelle()`, jamais `None`.
 
-## 5 Ton premier programme
+    Si `None` réapparaît ailleurs dans ton code, c'est le signe que tu es en train de refaire à la main ce que la sentinelle fait pour toi.
 
-Ajoute un `main` à la classe `Maillon`, **à l'intérieur de la classe**, sous le constructeur. C'est ton bac à sable pour toute la page.
+## 5 Ton bac à sable, et comment vérifier ton dessin
 
-```java
-    public static void main(String args[]) {
+Crée `exos/exos_maillons.py`. C'est ton brouillon pour toute la page : tu y construis des chaînes et tu regardes ce qu'elles sont devenues. Tu le lances par le bouton **▷** de VSCode.
 
-        // La chaîne 1 -> 2 -> 3 -> S
-        Maillon<Integer> un = new Maillon<>(1, new Maillon<>(2, new Maillon<>(3, new Sentinelle<>())));
+```python
+# exos/exos_maillons.py
 
-    }
+from structures.lineaires.maillon import Maillon, Sentinelle
+
+
+def montrer[T](m: Maillon[T]) -> str:
+    """Rend la chaîne qui commence à m sous la forme 1 -> 2 -> 3 -> S."""
+    res = ""
+    ptr = m
+    while not isinstance(ptr, Sentinelle):
+        res = res + str(ptr.data) + " -> "
+        ptr = ptr.suivant
+    return res + "S"
+
+
+# La chaîne 1 -> 2 -> 3 -> S
+un = Maillon(1, Maillon(2, Maillon(3, Sentinelle())))
+print(montrer(un))
 ```
 
-Cette ligne-là mérite un instant. Elle se lit **de l'intérieur vers l'extérieur** : on fabrique d'abord la sentinelle, puis le maillon `3` qui la pointe, puis le maillon `2` qui pointe le `3`, et enfin le maillon `1`. L'ordre est imposé, puisque pour construire un maillon il faut déjà tenir son suivant.
+La ligne qui construit la chaîne mérite un instant. Elle se lit **de l'intérieur vers l'extérieur** : on fabrique d'abord la sentinelle, puis le maillon `3` qui la pointe, puis le maillon `2` qui pointe le `3`, et enfin le maillon `1`. L'ordre est imposé, puisque pour construire un maillon il faut déjà tenir son suivant.
 
-C'est mot pour mot le `Cons(1, Cons(2, Cons(3, Vide)))` de Gleam.
+C'est mot pour mot le `Cons(1, Cons(2, Cons(3, Vide)))` de Gleam. Tu dois lire :
 
-## 6 `Dessin`, pour vérifier ton dessin
-
-Un outil est fourni, qui dessine une chaîne telle qu'elle est réellement en mémoire. Récupère **[Dessin.java](Dessin.java)** et place-le à côté de tes autres fichiers, sans rien y changer.
-
-Il s'emploie en une ligne, n'importe où :
-
-```java
-        Dessin.dessiner(un);                 // la chaîne qui commence à un
-        Dessin.dessiner(un, "retire", m);    // la même, avec une flèche rouge nommée "retire" vers m
+```text
+1 -> 2 -> 3 -> S
 ```
 
-Trois choses à savoir avant de l'essayer.
+**Un affichage ne montre pas les flèches, il montre la suite des données.** Quand c'est une flèche précise qui t'intéresse, demande-la directement : `m.suivant.data`, ou `x.suivant is un`. Ce sont deux lignes de Python, et elles répondent exactement à la question « où pointe ce maillon ».
 
-1. **Il ne fait rien en mode Run.** Il faut lancer en **Debug** (`F5`).
-2. **Pose un point d'arrêt** sur la ligne qui suit l'appel, sinon le programme se termine avant que tu aies regardé.
-3. Il écrit une image **`liste.png`**, à côté de tes fichiers `.java`. Ouvre-la dans VSCode : elle se met à jour toute seule à chaque arrêt.
-
-Ajoute cette ligne à ton `main`, sous la construction de la chaîne, et pose ton point d'arrêt juste dessous :
-
-```java
-        Dessin.dessiner(un, "un", un);
-```
-
-Tu dois obtenir exactement ceci :
-
-![Une chaîne de trois maillons portant 1, 2 et 3, terminée par une sentinelle grise qui pointe sur elle-même](dessin-chaine.png){ style="width: 160px; display: block; margin: 0 auto" }
-
-Le titre est le nom de la méthode qui a appelé `dessiner`. La sentinelle est le rond gris marqué `S`, et sa flèche revient bien sur elle. Et le nom `un` est en rouge, **à l'extérieur**, avec sa flèche : c'est la règle 3 de la section 3, dessinée par la machine.
-
-!!! warning "`Dessin` ne remplace pas ton crayon"
+!!! warning "L'affichage ne remplace pas ton crayon"
     Il dit si ton dessin était juste, il ne le fait pas à ta place. L'ordre est toujours le même, et il ne s'inverse pas : **tu dessines, puis tu lances, puis tu compares**. Un dessin obtenu sans l'avoir cherché ne t'apprend rien, et c'est à la main que tu écriras tes méthodes.
 
 !!! question "Construire, dessiner, vérifier (obligatoire)"
-    Dans ton `main`, construis la chaîne `2 -> 3 -> 4 -> S` de la section 3, en nommant `m1` le premier maillon.
+    Dans `exos_maillons.py`, construis la chaîne `2 -> 3 -> 4 -> S` de la section 3, en nommant `m1` le premier maillon.
 
     1. **Dessine-la d'abord** sur ton cahier.
-    2. Écris les **trois lignes** qui la construisent, une par maillon, sans emboîter les `new` les uns dans les autres cette fois.
-    3. Ajoute `Dessin.dessiner(m1);` et lance en Debug.
+    2. Écris les **trois lignes** qui la construisent, une par maillon, sans emboîter les `Maillon(...)` les uns dans les autres cette fois.
+    3. Ajoute `print(montrer(m1))` et lance.
 
     **Écris les trois lignes avant de dérouler la correction.**
 
     ??? success "Correction"
-        ```java
-        Maillon<Integer> m3 = new Maillon<>(4, new Sentinelle<>());
-        Maillon<Integer> m2 = new Maillon<>(3, m3);
-        Maillon<Integer> m1 = new Maillon<>(2, m2);
+        ```python
+        m3 = Maillon(4, Sentinelle())
+        m2 = Maillon(3, m3)
+        m1 = Maillon(2, m2)
         ```
 
         L'ordre est imposé, et c'est pour cela que la première ligne est celle du **bout** : pour construire un maillon, il faut déjà tenir son suivant.
 
-        Une fois les trois lignes écrites, la version emboîtée de la section 5 se relit toute seule : c'est la même chose, sans les noms intermédiaires.
+        L'affichage rend `2 -> 3 -> 4 -> S`. Une fois les trois lignes écrites, la version emboîtée se relit toute seule : c'est la même chose, sans les noms intermédiaires.
 
-## 7 Le fichier de tests
+## 6 Le fichier de tests
 
-Crée `MaillonTest.java` à côté des autres, et mets-y ceci. Chaque test que la suite te donne se colle **à l'intérieur** de la classe, avant son accolade fermante.
+Crée `structures/lineaires/maillon_test.py`, **à côté** de `maillon.py`, et mets-y ceci. Chaque test que la suite te donne se colle à la fin du fichier.
 
-??? tip "Le fichier `MaillonTest.java`, à créer"
-    ```java
-    import static org.junit.jupiter.api.Assertions.*;
+??? info "Le fichier `maillon_test.py`, à créer"
+    ```python
+    # structures/lineaires/maillon_test.py
 
-    import java.util.ArrayList;
-    import java.util.List;
-    import org.junit.jupiter.api.DisplayName;
-    import org.junit.jupiter.api.Test;
+    from structures.lineaires.maillon import Maillon, Sentinelle
 
-    /** Tests de Maillon et de Sentinelle. */
-    public class MaillonTest {
 
-        /**
-         * Construit la chaîne xs[0] -> xs[1] -> ... -> S et renvoie son premier maillon
-         * (la sentinelle si xs est vide).
-         */
-        static Maillon<Integer> chaine(Integer... xs) {
-            Maillon<Integer> res = new Sentinelle<>();
-            for (int i = xs.length - 1; i >= 0; i--) {
-                res = new Maillon<>(xs[i], res);
-            }
-            return res;
-        }
+    def chaine(*xs: int) -> Maillon[int]:
+        """
+        Construit la chaîne xs[0] -> xs[1] -> ... -> S et renvoie son premier maillon
+        (la sentinelle si xs est vide).
+        """
+        res: Maillon[int] = Sentinelle()
+        for i in range(len(xs) - 1, -1, -1):
+            res = Maillon(xs[i], res)
+        return res
 
-        /** Renvoie les données de la chaîne qui commence à m, jusqu'à la sentinelle. */
-        static <T> List<T> contenu(Maillon<T> m) {
-            List<T> res = new ArrayList<>();
-            Maillon<T> ptr = m;
-            while (!(ptr instanceof Sentinelle)) {
-                res.add(ptr.data);
-                ptr = ptr.suivant;
-            }
-            return res;
-        }
-    }
+
+    def contenu[T](m: Maillon[T]) -> list[T]:
+        """Renvoie les données de la chaîne qui commence à m, jusqu'à la sentinelle."""
+        res = []
+        ptr = m
+        while not isinstance(ptr, Sentinelle):
+            res.append(ptr.data)
+            ptr = ptr.suivant
+        return res
     ```
 
-`chaine(1, 2, 3)` construit une chaîne, `contenu` en rend les données sous une forme qui se compare d'un coup. Les trois assertions qui reviennent partout, et la façon de lire un échec, sont sur la page [Java, l'atelier](../../../les-outils/java.md#les-trois-assertions).
+`chaine(1, 2, 3)` construit une chaîne, `contenu` en rend les données sous une forme qui se compare d'un coup. L'étoile de `*xs` veut dire « autant d'arguments qu'on veut » : `chaine()`, `chaine(1)` et `chaine(1, 2, 3)` sont tous les trois des appels valides.
 
-Voici les deux premiers tests, qui vérifient ce que tu as déjà écrit. Colle-les et lance-les : ils doivent passer tout de suite.
+Voici les deux premiers tests, qui vérifient ce que tu as déjà écrit. Colle-les et lance `uv run pytest` : ils doivent passer tout de suite.
 
-??? tip "Tests à recopier dans `MaillonTest.java`"
-    ```java
-        @Test
-        @DisplayName("Maillon(data, suivant) stocke la donnée et le suivant")
-        void maillonConstructeur() {
-            Maillon<Integer> fin = new Sentinelle<>();
-            Maillon<Integer> m = new Maillon<>(5, fin);
-            assertEquals(5, m.data);
-            assertSame(fin, m.suivant);
-        }
+??? info "Tests à recopier dans `maillon_test.py`"
+    ```python
+    def test_maillon_constructeur() -> None:
+        fin: Maillon[int] = Sentinelle()
+        m = Maillon(5, fin)
+        assert m.data == 5
+        assert m.suivant is fin
 
-        @Test
-        @DisplayName("Sentinelle() crée un maillon sans donnée qui pointe sur lui-même")
-        void sentinelle() {
-            Sentinelle<Integer> s = new Sentinelle<>();
-            assertNull(s.data);
-            assertSame(s, s.suivant);
-        }
+
+    def test_sentinelle() -> None:
+        s: Sentinelle[int] = Sentinelle()
+        assert s.data is None
+        assert s.suivant is s
     ```
 
-## 8 Trois opérations, et leur contrat
+    Regarde bien quelle assertion emploie quel outil. `m.data == 5` compare une **valeur**. `m.suivant is fin` et `s.suivant is s` demandent « est-ce le **même objet** », et c'est la seule question qui ait un sens sur une flèche.
+
+## 7 Trois opérations, et leur contrat
 
 Construire une chaîne à la main est vite pénible. On donne donc au maillon trois opérations, qui ne font **que rebrancher des flèches** : aucune ne crée ni ne détruit de maillon.
 
@@ -295,9 +284,18 @@ Dans le tableau, **ce maillon** désigne celui sur lequel on appelle la méthode
 
 | Opération | Ce qu'elle fait | Précondition | Coût |
 | --- | --- | --- | --- |
-| `insereApres(m)` | insère le maillon `m` **entre** ce maillon et son suivant | aucune | `O(1)` |
-| `decrocheProchain()` | décroche de la chaîne le maillon qui suit ce maillon et le renvoie. La chaîne se referme derrière lui, et il emporte sa flèche | il y a un vrai maillon après celui-ci, c'est-à-dire que son suivant n'est pas la sentinelle | `O(1)` |
-| `avancer(k)` | renvoie le maillon situé `k` crans plus loin. `avancer(0)` renvoie ce maillon, et arrivé sur la sentinelle on y reste | `k` positif ou nul, sinon `IllegalArgumentException` | `O(k)` |
+| `insere_apres(m)` | insère le maillon `m` **entre** ce maillon et son suivant | aucune | `O(1)` |
+| `decroche_prochain()` | décroche de la chaîne le maillon qui suit ce maillon et le renvoie. La chaîne se referme derrière lui, et il emporte sa flèche | il y a un vrai maillon après celui-ci, c'est-à-dire que son suivant n'est pas la sentinelle | `O(1)` |
+| `avancer(k)` | renvoie le maillon situé `k` crans plus loin. `avancer(0)` renvoie ce maillon, et arrivé sur la sentinelle on y reste | `k` positif ou nul | `O(k)` |
+
+!!! info "Une précondition s'écrit, et elle se vérifie par `assert`"
+    C'est la convention des piles et des files, et elle ne change pas ici : la docstring **dit** la précondition, et un `assert` au début de la méthode la **refuse** quand elle est violée.
+
+    ```python
+    assert k >= 0, "k doit être positif ou nul"
+    ```
+
+    Un `assert` qui échoue arrête le programme sur une `AssertionError` portant ton message. C'est ce que les tests iront chercher.
 
 !!! question "Suivre les flèches, sur papier (obligatoire)"
     On part de la chaîne `1 -> 2 -> 3 -> 4 -> S`, dont les maillons s'appellent `a`, `b`, `c`, `d`.
@@ -308,12 +306,12 @@ Dans le tableau, **ce maillon** désigne celui sur lequel on appelle la méthode
     - la donnée du maillon renvoyé, quand la méthode en renvoie un
     - vers quoi pointe ce maillon renvoyé.
 
-    ```java
-    Maillon<Integer> neuf = new Maillon<>(9, new Sentinelle<>());
-    a.insereApres(neuf);                            // ligne 1
-    Maillon<Integer> x = a.decrocheProchain();      // ligne 2
-    c.insereApres(x);                               // ligne 3
-    Maillon<Integer> y = a.avancer(2);              // ligne 4
+    ```python linenums="1"
+    neuf = Maillon(9, Sentinelle())
+    a.insere_apres(neuf)
+    x = a.decroche_prochain()
+    c.insere_apres(x)
+    y = a.avancer(2)
     ```
 
     Tu n'as que le tableau de contrats ci-dessus, et il suffit : ces quatre lignes se déroulent sans avoir écrit une ligne de code.
@@ -321,187 +319,189 @@ Dans le tableau, **ce maillon** désigne celui sur lequel on appelle la méthode
     **Dessine les quatre étapes avant de dérouler la correction.**
 
     ??? success "Correction"
-        **Ligne 1.** `1 -> 9 -> 2 -> 3 -> 4 -> S`. Rien n'est renvoyé.
+        **Après la ligne 2.** `1 -> 9 -> 2 -> 3 -> 4 -> S`. Rien n'est renvoyé.
 
-        **Ligne 2.** `1 -> 2 -> 3 -> 4 -> S`, la chaîne s'est refermée derrière le maillon décroché. `x` porte `9`, et il emporte sa flèche : il pointe **toujours** vers le maillon `2`, qui ne le sait pas.
+        **Après la ligne 3.** `1 -> 2 -> 3 -> 4 -> S`, la chaîne s'est refermée derrière le maillon décroché. `x` porte `9`, et il emporte sa flèche : il pointe **toujours** vers le maillon `2`, qui ne le sait pas. C'est ce que dit `x.suivant is b`.
 
-        **Ligne 3.** `1 -> 2 -> 3 -> 9 -> 4 -> S`. C'est le **même objet** `x` qu'à la ligne 2, déplacé, aucun maillon n'a été créé. Et sa flèche a changé toute seule : `insereApres` la rebranche vers `4`, c'est sa première affectation.
+        **Après la ligne 4.** `1 -> 2 -> 3 -> 9 -> 4 -> S`. C'est le **même objet** `x` qu'à la ligne 3, déplacé, aucun maillon n'a été créé. Et sa flèche a changé toute seule : `insere_apres` la rebranche vers `4`, c'est sa première affectation.
 
-        **Ligne 4.** `y` porte `3`. On part de `a`, un cran mène à `2`, deux crans mènent à `3`.
+        **Après la ligne 5.** `y` porte `3`. On part de `a`, un cran mène à `2`, deux crans mènent à `3`.
 
-        La ligne 3 est la seconde moitié de la ligne 2 : décrocher, puis réinsérer ailleurs. C'est ainsi que tout se déplacera dans ce chapitre.
+        La ligne 4 est la seconde moitié de la ligne 3 : décrocher, puis réinsérer ailleurs. C'est ainsi que tout se déplacera dans ce chapitre.
 
     ??? question "Une de plus, sur la sentinelle"
         Que renvoie `a.avancer(10)` sur la chaîne de départ, qui n'a que quatre maillons ? Et `a.avancer(100)` ?
 
         ??? success "Correction"
-            Les deux renvoient **la sentinelle**, et c'est le **même objet** dans les deux cas. Une fois dessus, on n'en bouge plus, puisqu'elle pointe sur elle-même. Avec `null` au bout, les deux appels auraient planté.
+            Les deux renvoient **la sentinelle**, et c'est le **même objet** dans les deux cas : `a.avancer(10) is a.avancer(100)` vaut `True`. Une fois dessus, on n'en bouge plus, puisqu'elle pointe sur elle-même. Avec `None` au bout, les deux appels auraient planté.
 
-## 9 À écrire : les trois opérations
+## 8 À écrire : les trois opérations
 
-Chaque méthode se place dans la classe `Maillon`, sous le constructeur et au-dessus du `main`.
+Chaque méthode se place dans la classe `Maillon`, sous le constructeur.
 
 Dans les squelettes qui suivent, `...` marque ce que tu as à écrire.
 
-!!! question "`insereApres` (obligatoire)"
-    ```java
-    /**
-     * Insère le maillon m juste après celui-ci, en O(1).
-     *
-     * Exemple : un pointe sur 1 dans 1 -> 2
-     *   un.insereApres(new Maillon<>(5, new Sentinelle<>()));   // 1 -> 5 -> 2
-     */
-    void insereApres(Maillon<T> m) {
+!!! question "`insere_apres` (obligatoire)"
+    ```python
+    def insere_apres(self, m: "Maillon[T]") -> None:
+        """
+        Insère le maillon m juste après celui-ci, en O(1).
+
+        Exemple : un désigne le maillon 1 dans 1 -> 2
+          un.insere_apres(Maillon(5, Sentinelle()))   # 1 -> 5 -> 2
+        """
         ...
         ...
-    }
     ```
 
     Deux affectations, et **l'ordre compte** : `m` doit d'abord apprendre où va la suite de la chaîne, et ce maillon ne peut le pointer qu'ensuite. Dans l'autre ordre, plus rien ne désigne le maillon qui suivait.
 
     Dessine les deux ordres avant de choisir.
 
-    ??? tip "Test à recopier dans `MaillonTest.java`"
-        ```java
-            @Test
-            @DisplayName("insereApres branche un maillon juste après")
-            void insereApres() {
-                Maillon<Integer> c = chaine(1, 3);
-                Maillon<Integer> m = new Maillon<>(2, new Sentinelle<>());
-                c.insereApres(m);
-                assertEquals(List.of(1, 2, 3), contenu(c));
-                assertSame(m, c.suivant);
+    ??? info "Test à recopier dans `maillon_test.py`"
+        ```python
+        def test_insere_apres() -> None:
+            c = chaine(1, 3)
+            m = Maillon(2, Sentinelle())
+            c.insere_apres(m)
+            assert contenu(c) == [1, 2, 3]
+            assert c.suivant is m
 
-                // Sur le dernier maillon : on ajoute avant la sentinelle
-                Maillon<Integer> f = chaine(1, 2);
-                f.suivant.insereApres(new Maillon<>(3, new Sentinelle<>()));
-                assertEquals(List.of(1, 2, 3), contenu(f));
-                assertInstanceOf(Sentinelle.class, f.suivant.suivant.suivant);
-            }
+            # Sur le dernier maillon : on ajoute avant la sentinelle
+            f = chaine(1, 2)
+            f.suivant.insere_apres(Maillon(3, Sentinelle()))
+            assert contenu(f) == [1, 2, 3]
+            assert isinstance(f.suivant.suivant.suivant, Sentinelle) == True
         ```
 
-!!! question "`decrocheProchain` (obligatoire)"
-    ```java
-    /**
-     * Retire de la chaîne le maillon qui suit celui-ci et le renvoie, en O(1).
-     *
-     * Exemple : un pointe sur 1 dans 1 -> 5 -> 2
-     *   Maillon<Integer> m = un.decrocheProchain();   // 1 -> 2, et m.data vaut 5
-     */
-    Maillon<T> decrocheProchain() {
-        Maillon<T> m = ...;
+!!! question "`decroche_prochain` (obligatoire)"
+    ```python
+    def decroche_prochain(self) -> "Maillon[T]":
+        """
+        Retire de la chaîne le maillon qui suit celui-ci et le renvoie, en O(1).
+        Précondition : le maillon suivant n'est pas une sentinelle.
+
+        Exemple : un désigne le maillon 1 dans 1 -> 5 -> 2
+          m = un.decroche_prochain()   # 1 -> 2, et m.data vaut 5
+        """
+        assert not isinstance(self.suivant, Sentinelle), "Il n'y a pas de maillon après celui-ci"
+        m = ...
         ...
-        return m;
-    }
+        return m
     ```
 
-    La première ligne est déjà là, et elle dit l'essentiel : il faut **garder** une référence vers le maillon décroché avant de le sortir de la chaîne, sinon plus rien ne le désigne et tu ne peux plus le renvoyer.
+    La ligne `m = ...` dit l'essentiel : il faut **garder** une référence vers le maillon décroché avant de le sortir de la chaîne, sinon plus rien ne le désigne et tu ne peux plus le renvoyer.
 
-    ??? tip "Test à recopier dans `MaillonTest.java`"
-        ```java
-            @Test
-            @DisplayName("decrocheProchain retire le maillon suivant et le renvoie")
-            void decrocheProchain() {
-                Maillon<Integer> c = chaine(1, 2, 3);
-                Maillon<Integer> deux = c.suivant;
-                Maillon<Integer> m = c.decrocheProchain();
-                assertSame(deux, m);
-                assertEquals(List.of(1, 3), contenu(c));
+    ??? info "Tests à recopier dans `maillon_test.py`"
+        ```python
+        def test_decroche_prochain() -> None:
+            c = chaine(1, 2, 3)
+            deux = c.suivant
+            m = c.decroche_prochain()
+            assert m is deux
+            assert contenu(c) == [1, 3]
 
-                // Le dernier maillon : la chaîne se raccroche à la sentinelle
-                Maillon<Integer> f = chaine(1, 2);
-                Maillon<Integer> dernier = f.decrocheProchain();
-                assertEquals(2, dernier.data);
-                assertEquals(List.of(1), contenu(f));
-                assertInstanceOf(Sentinelle.class, f.suivant);
-            }
+            # Le dernier maillon : la chaîne se raccroche à la sentinelle
+            f = chaine(1, 2)
+            dernier = f.decroche_prochain()
+            assert dernier.data == 2
+            assert contenu(f) == [1]
+            assert isinstance(f.suivant, Sentinelle) == True
+
+
+        def test_decroche_prochain_sans_suivant() -> None:
+            c = chaine(1)
+            try:
+                c.decroche_prochain()
+            except AssertionError:
+                return                  # comportement attendu
+            assert False, "decroche_prochain sans maillon après aurait dû échouer"
         ```
 
+        Le second test est la forme que tu connais depuis les piles : on provoque l'échec, et on vérifie qu'il a bien lieu.
+
 !!! question "`avancer` (obligatoire)"
-    Deux choses de Java que tu n'as pas encore vues sont données ici : la façon de refuser un argument, et la boucle `for`. Le commentaire donne la ligne Python correspondante.
+    ```python
+    def avancer(self, k: int) -> "Maillon[T]":
+        """
+        Renvoie le maillon situé k crans plus loin, en O(k).
+        Arrivé sur la sentinelle de fin, on y reste : elle pointe sur elle-même.
+        Précondition : k est positif ou nul.
 
-    ```java
-    /**
-     * Renvoie le maillon situé k crans plus loin, en O(k).
-     * Arrivé sur la sentinelle de fin, on y reste, car elle pointe sur elle-même.
-     *
-     * Exemple : un pointe sur 1 dans 1 -> 2 -> 3 -> S
-     *   un.avancer(0);   // le maillon 1
-     *   un.avancer(2);   // le maillon 3
-     *   un.avancer(5);   // la sentinelle S
-     */
-    Maillon<T> avancer(int k) {
-        if (k < 0) {
-            throw new IllegalArgumentException("k doit être positif ou nul");
-        }
-        Maillon<T> ref = this;
-
-        // for i in range(0, k):
-        for (int i = 0; i < k; i++) {
+        Exemple : un désigne le maillon 1 dans 1 -> 2 -> 3 -> S
+          un.avancer(0)   # le maillon 1
+          un.avancer(2)   # le maillon 3
+          un.avancer(5)   # la sentinelle S
+        """
+        assert k >= 0, "k doit être positif ou nul"
+        ref = self
+        for i in range(0, k):
             ...
-        }
-        return ref;
-    }
+        return ref
     ```
 
     Une seule ligne à écrire, dans la boucle. Demande-toi ce qui doit avoir changé après un tour, et une seule chose a le droit de changer.
 
-    ??? tip "Test à recopier dans `MaillonTest.java`"
-        ```java
-            @Test
-            @DisplayName("avancer(k) renvoie le maillon k crans plus loin, et reste sur la sentinelle")
-            void avancer() {
-                Maillon<Integer> c = chaine(1, 2, 3);
-                assertSame(c, c.avancer(0));
-                assertEquals(3, c.avancer(2).data);
-                Maillon<Integer> s = c.avancer(3);
-                assertInstanceOf(Sentinelle.class, s);
-                assertSame(s, c.avancer(10), "on reste sur la sentinelle");
+    ??? info "Tests à recopier dans `maillon_test.py`"
+        ```python
+        def test_avancer() -> None:
+            c = chaine(1, 2, 3)
+            assert c.avancer(0) is c
+            assert c.avancer(2).data == 3
+            s = c.avancer(3)
+            assert isinstance(s, Sentinelle) == True
+            assert c.avancer(10) is s       # on reste sur la sentinelle
 
-                // k négatif
-                assertThrows(IllegalArgumentException.class, () -> c.avancer(-1));
-            }
+
+        def test_avancer_k_negatif() -> None:
+            c = chaine(1, 2, 3)
+            try:
+                c.avancer(-1)
+            except AssertionError:
+                return                      # comportement attendu
+            assert False, "avancer(-1) aurait dû échouer"
         ```
 
     ??? tip "Indice"
-        `ref` est une **flèche**, pas un rond : l'affecter ne déplace aucun maillon, cela déplace seulement l'endroit où la flèche arrive.
-
         Dessine la chaîne, pose `ref` sur le premier maillon, et demande-toi où elle doit être après le premier tour. La ligne à écrire est la réponse.
+
+    ??? tip "Indice plus précis"
+        `ref` est une **flèche**, pas un rond : l'affecter ne déplace aucun maillon, cela déplace seulement l'endroit où la flèche arrive.
 
     ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
     ??? warning "Correction"
-        ```java
-                ref = ref.suivant;
+        ```python
+                ref = ref.suivant
         ```
 
 !!! info "Relance tout"
-    Les cinq tests de `MaillonTest` doivent passer. Si l'un d'eux échoue, lis le message : `expected` est ce qu'on attendait, `but was` ce que **ton** code a produit.
+    `uv run pytest` doit faire passer les sept tests de `maillon_test.py`. Si l'un d'eux échoue, lis le message : pytest affiche la ligne fautive et les deux valeurs comparées, celle qu'on attendait et celle que **ton** code a produite.
 
-    Et garde ces trois méthodes en tête telles qu'elles sont : aucune ne parle de la fin de la chaîne, aucune ne parle de `null`. Elles ne font que rebrancher des flèches, et c'est ce qui leur permettra de resservir **sans une ligne de changement** sur la page suivante.
+    Et garde ces trois méthodes en tête telles qu'elles sont : aucune ne parle de la fin de la chaîne, aucune ne parle de `None`. Elles ne font que rebrancher des flèches, et c'est ce qui leur permettra de resservir **sans une ligne de changement** sur la page suivante.
 
-## 10 Ce que cela coûte
+## 9 Ce que cela coûte
 
 Trois opérations, deux en `O(1)` et une en `O(k)`. Ce tableau est court, et pourtant il contient déjà tout ce qui distingue une chaîne d'un tableau.
 
 | Coût | Opération |
 | --- | --- |
-| `O(1)` | `insereApres`, `decrocheProchain` |
+| `O(1)` | `insere_apres`, `decroche_prochain` |
 | `O(k)` | `avancer(k)` |
 
 !!! question "Ce que la flèche unique interdit (obligatoire)"
     La chaîne est `1 -> 2 -> 3 -> 4 -> S`. Tu tiens une référence `m` vers le maillon qui porte `3`, et **lui seul** : tu ne tiens pas les autres.
 
-    1. Est-ce que `m.decrocheProchain()` retire le maillon qui porte `3` ? Sinon, lequel retire-t-il ?
+    1. Est-ce que `m.decroche_prochain()` retire le maillon qui porte `3` ? Sinon, lequel retire-t-il ?
     2. Quel maillon faut-il tenir pour retirer de la chaîne celui qui porte `3` ?
     3. Tu tiens aussi le premier maillon. Combien de crans faut-il parcourir depuis lui pour atteindre le maillon qu'il te faut ? Et si la chaîne avait `n` maillons et que `m` était le dernier ?
-    4. En Python, `t.insert(2, 7)` sur une liste `t` de `n` cases coûte `O(n)`. `insereApres` coûte `O(1)`. D'où vient l'écart ?
+    4. En Python, `t.insert(2, 7)` sur une liste `t` de `n` cases coûte `O(n)`. `insere_apres` coûte `O(1)`. D'où vient l'écart ?
 
     **Écris tes quatre réponses avant de dérouler la correction.**
 
     ??? success "Correction"
-        1. Non. `decrocheProchain` retire le maillon qui **suit** celui sur lequel on l'appelle, donc ici celui qui porte `4`. Un maillon ne peut rien faire à lui-même : il n'a aucune flèche qui arrive sur lui.
+        1. Non. `decroche_prochain` retire le maillon qui **suit** celui sur lequel on l'appelle, donc ici celui qui porte `4`. Un maillon ne peut rien faire à lui-même : il n'a aucune flèche qui arrive sur lui.
         2. Celui qui porte `2`. Pour retirer un maillon, il faut tenir **son précédent**, c'est la seule façon de refermer la chaîne.
         3. Un cran. Et si `m` était le dernier d'une chaîne de `n` maillons, il faudrait en parcourir `n - 2`, donc `O(n)`.
         4. Dans un tableau, les cases sont **côte à côte** en mémoire : en insérer une oblige à décaler toutes les suivantes. Dans une chaîne, les maillons sont n'importe où, et insérer revient à rebrancher deux flèches, quel que soit le nombre de maillons.
