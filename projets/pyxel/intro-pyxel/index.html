@@ -9132,113 +9132,135 @@
 
 
 <h1 id="introduction-a-pyxel-poo">Introduction à pyxel - POO</h1>
-<p>L'objectif est de créer une classe Pixel capable de se dessiner et de se déplacer en fonction de son vecteur directionnel (dx, dy). Nous utiliserons également une classe App pour gérer l'application et les événements utilisateur, permettant de déplacer le pixel.</p>
+<p>L'objectif est de créer une classe <code>Rectangle</code> capable de se dessiner et de se déplacer en fonction de son vecteur directeur (dx, dy). Un rectangle connaît aussi sa taille : <code>width</code> et <code>height</code>. Une classe <code>Jeu</code> gère l'application et les événements utilisateur, et c'est elle qui demande au rectangle de bouger et de se dessiner.</p>
+<div class="admonition info">
+<p class="admonition-title">Rappel : un rectangle est un point et une taille</p>
+<p><code>px.rect(x, y, width, height, color)</code> remplit le rectangle dont le <strong>coin haut gauche</strong> est <span class="arithmatex">\((x, y)\)</span>.</p>
+<p>Il couvre les colonnes <span class="arithmatex">\(x\)</span> à <span class="arithmatex">\(x + width - 1\)</span> : le bord <strong>droit</strong> est donc en <span class="arithmatex">\(x + width\)</span>, et le bord <strong>bas</strong> en <span class="arithmatex">\(y + height\)</span>. L'origine <span class="arithmatex">\((0, 0)\)</span> de l'écran est en haut à gauche, et <span class="arithmatex">\(y\)</span> augmente <strong>vers le bas</strong>.</p>
+</div>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pyxel</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="k">class</span><span class="w"> </span><span class="nc">Pixel</span><span class="p">:</span>
-<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span><span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span><span class="nb">float</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="sd">        Initialise un pixel avec une position (x, y), un vecteur directeur (dx, dy) et une couleur.</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">=</span> <span class="n">dx</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dy</span> <span class="o">=</span> <span class="n">dy</span>
-<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a><span class="sd">        Le pyxel sait se déplacer toujours de son vecteur directeur</span>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>        <span class="k">pass</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="sd">        Le pixel sait se dessiner.</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>        <span class="n">px</span><span class="o">.</span><span class="n">pset</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>
-<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="k">class</span><span class="w"> </span><span class="nc">Jeu</span><span class="p">:</span>
-<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a><span class="sd">        Un jeu gère un Pixel.</span>
-<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span> <span class="o">=</span> <span class="n">Pixel</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">px</span><span class="o">.</span><span class="n">height</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a>
-<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a><span class="sd">        Gère les événements utilisateur pour déplacer le pixel.</span>
-<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>        <span class="c1"># Modification du vecteur directeur selon les touches fléchées</span>
-<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>        <span class="k">if</span> <span class="n">px</span><span class="o">.</span><span class="n">btn</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">KEY_RIGHT</span><span class="p">):</span>
-<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="o">.</span><span class="n">dx</span> <span class="o">+=</span> <span class="mi">1</span>
-<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a>        <span class="k">elif</span> <span class="n">px</span><span class="o">.</span><span class="n">btn</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">KEY_LEFT</span><span class="p">):</span>
-<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="o">.</span><span class="n">dx</span> <span class="o">-=</span> <span class="mi">1</span>
-<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>        <span class="k">if</span> <span class="n">px</span><span class="o">.</span><span class="n">btn</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">KEY_DOWN</span><span class="p">):</span>
-<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="o">.</span><span class="n">dy</span> <span class="o">+=</span> <span class="mi">1</span>
-<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>        <span class="k">elif</span> <span class="n">px</span><span class="o">.</span><span class="n">btn</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">KEY_UP</span><span class="p">):</span>
-<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="o">.</span><span class="n">dy</span> <span class="o">-=</span> <span class="mi">1</span>
-<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>
-<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>        <span class="c1"># Le jeu demande au pixel de se mettre à jour</span>
-<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
-<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>
-<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a><span class="sd">        Efface l&#39;écran et dessine le pixel.</span>
-<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a><span class="sd">        &quot;&quot;&quot;</span>
-<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>        <span class="c1"># Remplir l&#39;écran en noir</span>
-<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>        <span class="n">px</span><span class="o">.</span><span class="n">cls</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a>        <span class="c1"># Le jeu demande au pixel de se dessiner</span>
-<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">pixel</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
-<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a>
-<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>
-<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>    <span class="c1"># Démarre l&#39;application</span>
-<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>    <span class="n">px</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Pixel en Mouvement&quot;</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="mi">10</span><span class="p">)</span>
-<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>    <span class="n">appli</span> <span class="o">=</span> <span class="n">Jeu</span><span class="p">()</span>
-<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a>    <span class="n">px</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">appli</span><span class="o">.</span><span class="n">update</span><span class="p">,</span> <span class="n">appli</span><span class="o">.</span><span class="n">draw</span><span class="p">)</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>
+<a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="p">:</span>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">width</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">height</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>                 <span class="n">dx</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">dy</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">COLOR_GREEN</span><span class="p">):</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">        Initialise un rectangle de coin haut gauche (x, y), de taille</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">        (width, height), de vecteur directeur (dx, dy) et de couleur color.</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+<a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">height</span> <span class="o">=</span> <span class="n">height</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dx</span> <span class="o">=</span> <span class="n">dx</span>
+<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">dy</span> <span class="o">=</span> <span class="n">dy</span>
+<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">color</span> <span class="o">=</span> <span class="n">color</span>
+<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a>
+<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="sd">        Le rectangle sait se déplacer de son vecteur directeur.</span>
+<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a>        <span class="k">pass</span>
+<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
+<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a><span class="sd">        Le rectangle sait se dessiner.</span>
+<a id="__codelineno-0-28" name="__codelineno-0-28" href="#__codelineno-0-28"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-0-29" name="__codelineno-0-29" href="#__codelineno-0-29"></a>        <span class="n">px</span><span class="o">.</span><span class="n">rect</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">y</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">height</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">color</span><span class="p">)</span>
+<a id="__codelineno-0-30" name="__codelineno-0-30" href="#__codelineno-0-30"></a>
+<a id="__codelineno-0-31" name="__codelineno-0-31" href="#__codelineno-0-31"></a>
+<a id="__codelineno-0-32" name="__codelineno-0-32" href="#__codelineno-0-32"></a><span class="k">class</span><span class="w"> </span><span class="nc">Jeu</span><span class="p">:</span>
+<a id="__codelineno-0-33" name="__codelineno-0-33" href="#__codelineno-0-33"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<a id="__codelineno-0-34" name="__codelineno-0-34" href="#__codelineno-0-34"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-35" name="__codelineno-0-35" href="#__codelineno-0-35"></a><span class="sd">        Un jeu gère un Rectangle de 8 pixels de côté, posé au centre de l&#39;écran.</span>
+<a id="__codelineno-0-36" name="__codelineno-0-36" href="#__codelineno-0-36"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-0-37" name="__codelineno-0-37" href="#__codelineno-0-37"></a>        <span class="n">cote</span> <span class="o">=</span> <span class="mi">8</span>
+<a id="__codelineno-0-38" name="__codelineno-0-38" href="#__codelineno-0-38"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rectangle</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">((</span><span class="n">px</span><span class="o">.</span><span class="n">width</span> <span class="o">-</span> <span class="n">cote</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">height</span> <span class="o">-</span> <span class="n">cote</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">cote</span><span class="p">,</span> <span class="n">cote</span><span class="p">)</span>
+<a id="__codelineno-0-39" name="__codelineno-0-39" href="#__codelineno-0-39"></a>
+<a id="__codelineno-0-40" name="__codelineno-0-40" href="#__codelineno-0-40"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-41" name="__codelineno-0-41" href="#__codelineno-0-41"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-42" name="__codelineno-0-42" href="#__codelineno-0-42"></a><span class="sd">        Gère les événements utilisateur pour déplacer le rectangle.</span>
+<a id="__codelineno-0-43" name="__codelineno-0-43" href="#__codelineno-0-43"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-0-44" name="__codelineno-0-44" href="#__codelineno-0-44"></a>        <span class="c1"># Modification du vecteur directeur selon les touches fléchées</span>
+<a id="__codelineno-0-45" name="__codelineno-0-45" href="#__codelineno-0-45"></a>        <span class="k">if</span> <span class="n">px</span><span class="o">.</span><span class="n">btn</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">KEY_RIGHT</span><span class="p">):</span>
+<a id="__codelineno-0-46" name="__codelineno-0-46" href="#__codelineno-0-46"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">rectangle</span><span class="o">.</span><span class="n">dx</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-0-47" name="__codelineno-0-47" href="#__codelineno-0-47"></a>        <span class="k">elif</span> <span class="n">px</span><span class="o">.</span><span class="n">btn</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">KEY_LEFT</span><span class="p">):</span>
+<a id="__codelineno-0-48" name="__codelineno-0-48" href="#__codelineno-0-48"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">rectangle</span><span class="o">.</span><span class="n">dx</span> <span class="o">-=</span> <span class="mi">1</span>
+<a id="__codelineno-0-49" name="__codelineno-0-49" href="#__codelineno-0-49"></a>        <span class="k">if</span> <span class="n">px</span><span class="o">.</span><span class="n">btn</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">KEY_DOWN</span><span class="p">):</span>
+<a id="__codelineno-0-50" name="__codelineno-0-50" href="#__codelineno-0-50"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">rectangle</span><span class="o">.</span><span class="n">dy</span> <span class="o">+=</span> <span class="mi">1</span>
+<a id="__codelineno-0-51" name="__codelineno-0-51" href="#__codelineno-0-51"></a>        <span class="k">elif</span> <span class="n">px</span><span class="o">.</span><span class="n">btn</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">KEY_UP</span><span class="p">):</span>
+<a id="__codelineno-0-52" name="__codelineno-0-52" href="#__codelineno-0-52"></a>            <span class="bp">self</span><span class="o">.</span><span class="n">rectangle</span><span class="o">.</span><span class="n">dy</span> <span class="o">-=</span> <span class="mi">1</span>
+<a id="__codelineno-0-53" name="__codelineno-0-53" href="#__codelineno-0-53"></a>
+<a id="__codelineno-0-54" name="__codelineno-0-54" href="#__codelineno-0-54"></a>        <span class="c1"># Le jeu demande au rectangle de se mettre à jour</span>
+<a id="__codelineno-0-55" name="__codelineno-0-55" href="#__codelineno-0-55"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rectangle</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+<a id="__codelineno-0-56" name="__codelineno-0-56" href="#__codelineno-0-56"></a>
+<a id="__codelineno-0-57" name="__codelineno-0-57" href="#__codelineno-0-57"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-58" name="__codelineno-0-58" href="#__codelineno-0-58"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-59" name="__codelineno-0-59" href="#__codelineno-0-59"></a><span class="sd">        Efface l&#39;écran et dessine le rectangle.</span>
+<a id="__codelineno-0-60" name="__codelineno-0-60" href="#__codelineno-0-60"></a><span class="sd">        &quot;&quot;&quot;</span>
+<a id="__codelineno-0-61" name="__codelineno-0-61" href="#__codelineno-0-61"></a>        <span class="n">px</span><span class="o">.</span><span class="n">cls</span><span class="p">(</span><span class="n">px</span><span class="o">.</span><span class="n">COLOR_BLACK</span><span class="p">)</span>
+<a id="__codelineno-0-62" name="__codelineno-0-62" href="#__codelineno-0-62"></a>        <span class="c1"># Le jeu demande au rectangle de se dessiner</span>
+<a id="__codelineno-0-63" name="__codelineno-0-63" href="#__codelineno-0-63"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">rectangle</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
+<a id="__codelineno-0-64" name="__codelineno-0-64" href="#__codelineno-0-64"></a>
+<a id="__codelineno-0-65" name="__codelineno-0-65" href="#__codelineno-0-65"></a>
+<a id="__codelineno-0-66" name="__codelineno-0-66" href="#__codelineno-0-66"></a><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+<a id="__codelineno-0-67" name="__codelineno-0-67" href="#__codelineno-0-67"></a>    <span class="c1"># Démarre l&#39;application</span>
+<a id="__codelineno-0-68" name="__codelineno-0-68" href="#__codelineno-0-68"></a>    <span class="n">px</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="mi">128</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Rectangle en mouvement&quot;</span><span class="p">,</span> <span class="n">fps</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-0-69" name="__codelineno-0-69" href="#__codelineno-0-69"></a>    <span class="n">jeu</span> <span class="o">=</span> <span class="n">Jeu</span><span class="p">()</span>
+<a id="__codelineno-0-70" name="__codelineno-0-70" href="#__codelineno-0-70"></a>    <span class="n">px</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">jeu</span><span class="o">.</span><span class="n">update</span><span class="p">,</span> <span class="n">jeu</span><span class="o">.</span><span class="n">draw</span><span class="p">)</span>
 </code></pre></div>
+<div class="admonition abstract">
+<p class="admonition-title">Fondamental</p>
+<p>Un jeu est une succession infinie de cycles <code>update</code> puis <code>draw</code>, un cycle par frame. Le jeu n'appelle jamais lui-même ces deux méthodes : c'est <code>px.run</code> qui les appelle.</p>
+</div>
 <div class="admonition question">
 <p class="admonition-title">Exercices de base</p>
 <ol>
-<li>Complétez la méthode update de la classe Pixel (2 lignes). Testez</li>
-<li>Modifiez le framerate. Testez</li>
-<li>Remplacez le 3ème if de la méthode update par un elif. Analysez la différence. Rétablissez le if</li>
-<li>Modifiez la méthode update pour que le pixel s'arrête lorsqu'on lâche les touches.</li>
-<li>Le jeu gère maintenant un groupe de Pixels. A chaque fois que l'utilisateur appuie sur la barre espace, un nouveau Pixel spawn aléatoirement avec une couleur aléatoire. Lorsque l'utilisateur utilise les flèches, tous les pixels bougent dans la direction donnée. Dans Jeu:<ul>
-<li>Modifier la méthode <code>__init__</code></li>
-<li>Ecrire une méthode <code>spawn_pixel(self)</code></li>
-<li>modifier les méthodes <code>update</code> et <code>draw</code> en conséquence.</li>
+<li>Complète la méthode <code>update</code> de la classe <code>Rectangle</code> (2 lignes). Teste.</li>
+<li>Modifie le framerate. Teste.</li>
+<li>Remplace le 3ème <code>if</code> de la méthode <code>update</code> de <code>Jeu</code> par un <code>elif</code>. Analyse la différence. Rétablis le <code>if</code>.</li>
+<li>Modifie la méthode <code>update</code> de <code>Jeu</code> pour que le rectangle s'arrête lorsqu'on lâche les touches.</li>
+<li>Donne au rectangle une largeur de 16 et une hauteur de 4. Une seule ligne change, et ni <code>update</code> ni <code>draw</code> n'y touchent.</li>
+<li>Le jeu gère maintenant un groupe de rectangles. À chaque fois que l'utilisateur appuie sur la barre espace, un nouveau rectangle apparaît à une position, une taille et une couleur aléatoires. Lorsque l'utilisateur utilise les flèches, tous les rectangles bougent dans la direction donnée. Dans <code>Jeu</code> :<ul>
+<li>modifie la méthode <code>__init__</code></li>
+<li>écris une méthode <code>spawn_rectangle(self)</code></li>
+<li>modifie les méthodes <code>update</code> et <code>draw</code> en conséquence.</li>
 </ul>
 </li>
-<li>Un pixel ne doit pas bouger s'il dépasse de l'écran.<ul>
-<li>Modifiez la classe Pixel pour tenir compte de cette informations. </li>
+<li>Un rectangle ne doit pas bouger s'il va sortir de l'écran. Attention, c'est son bord droit qui sort, en <code>x + width</code>, et son bord bas en <code>y + height</code>.<ul>
+<li>Modifie la classe <code>Rectangle</code> pour tenir compte de cette information.</li>
 </ul>
 </li>
-<li>Espace torique: Un pixel peut dépasser un bord mais il réapparaît au bord opposé (ce qui fait de l'espace de jeu un espace sans bord)<ul>
-<li>Modifiez la classe Pixel pour tenir compte de cette informations.</li>
+<li>Espace torique : un rectangle peut maintenant dépasser un bord mais il réapparaît au bord opposé (ce qui fait de l'espace de jeu un espace sans bord).<ul>
+<li>Modifie la classe <code>Rectangle</code> pour tenir compte de cette information. On s'intéressera à l'opérateur modulo.</li>
 </ul>
 </li>
-<li>Lorsqu'on appuie sur la touche "p", un pixel aléatoire est supprimé.</li>
+<li>Lorsqu'on appuie sur la touche "p", un rectangle aléatoire est supprimé.</li>
 </ol>
 </div>
 <div class="admonition question">
-<p class="admonition-title">Remplacer un pixel par un sprite</p>
+<p class="admonition-title">Remplacer un rectangle par un sprite</p>
 <ol>
-<li>Téléchargez le fichier 2.pyxres sur <a href="https://depot.nuitducode.net">le site de la nuit du code</a><ul>
-<li>Il s'agit d'un fichier contenant des ressources visuelles et sonores.</li>
-<li>Placez le <strong>dans le même répertoire</strong> que votre fichier python.</li>
-<li>Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources du jeu, exécutez la commande suivante dans un terminal:
-    <code>pyxel edit 2.pyxres</code></li>
-<li>N'hésitez pas à bidouiller, vous ne pouvez rien casser, au pire vous pourrez retélécharger le fichier.</li>
+<li>Télécharge la planche de sprites <a href="../../../assets/star_shooter/spritesheet.pyxres">spritesheet.pyxres</a> et sa palette <a href="../../../assets/star_shooter/spritesheet.pyxpal">spritesheet.pyxpal</a>.<ul>
+<li>Le <code>.pyxres</code> contient les images, 4 bruitages (emplacements 0 à 3) et 2 musiques. Le <code>.pyxpal</code> contient les 16 couleurs de la planche.</li>
+<li>Place les deux fichiers <strong>dans le même répertoire</strong>, et <strong>ne les renomme pas</strong> : pyxel ne lit la palette que si elle porte le nom de la planche.</li>
+<li>Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources, exécute la commande suivante dans un terminal :
+    <code>pyxel edit &lt;répertoire&gt;/spritesheet.pyxres</code></li>
+<li>N'hésite pas à bidouiller, tu ne peux rien casser, au pire tu pourras retélécharger les fichiers.</li>
 </ul>
 </li>
-<li>A la place d'un simple pixel, on veut maintenant utiliser un sprite<ul>
-<li>Pour le faire, il faut d'abord charger ce fichier dans le code juste avant de démarrer le jeu:
-    <code>px.load("2.pyxres")</code></li>
-<li>Ensuite il faut dessiner le sprite que vous aurez choisi au lieu de simplement remplir un pixel. Il n'y a qu'une ligne de code à modifier. Je vous laisse la trouver en explorant la <a href="https://github.com/kitao/pyxel/blob/main/docs/README.fr.md">documentation de pyxel</a>.</li>
+<li>À la place d'un rectangle uni, on veut maintenant un sprite.<ul>
+<li>Il faut d'abord charger la planche <strong>juste après <code>px.init</code></strong> :
+    <code>px.load("&lt;répertoire&gt;/spritesheet.pyxres")</code></li>
+<li>Les sprites de cette planche font 16 sur 16, soit exactement le <code>width</code> et le <code>height</code> de ton rectangle.</li>
+<li>La planche est découpée en <strong>3 banques d'images</strong>, numérotées 0, 1 et 2. L'éditeur te donne la banque et les coordonnées <span class="arithmatex">\((u, v)\)</span> du sprite que tu choisis.</li>
+<li>La couleur d'indice <strong>0</strong> est la transparence de cette planche : c'est la valeur à donner à <code>colkey</code>.</li>
+<li>Il n'y a alors qu'une ligne de code à modifier dans <code>draw</code>. Je te laisse la trouver en explorant la <a href="https://github.com/kitao/pyxel/blob/main/docs/README.fr.md">documentation de pyxel</a>.</li>
+</ul>
+</li>
+<li>Pour l'ambiance, un bruitage et une musique sont déjà dans la planche :<ul>
+<li><code>px.play(0, 2)</code> joue la petite explosion sur le canal 0.</li>
+<li><code>px.playm(0, loop=True)</code> lance la musique de fond en boucle.</li>
 </ul>
 </li>
 </ol>
@@ -9263,7 +9285,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 25, 2025 19:26:06 UTC">November 25, 2025</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 22, 2026 19:50:20 UTC">November 22, 2026</span>
   </span>
 
     

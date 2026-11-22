@@ -9261,21 +9261,29 @@
 <div class="admonition question">
 <p class="admonition-title">Remplacer un pixel par un sprite</p>
 <ol>
-<li>Télécharge le fichier 2.pyxres sur <a href="https://depot.nuitducode.net">le site de la nuit du code</a><ul>
-<li>Il s'agit d'un fichier contenant des ressources visuelles et sonores.</li>
-<li>Place-le <strong>dans le même répertoire</strong> que ton fichier python.</li>
-<li>Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources du jeu, exécute la commande suivante dans un terminal:
-    <code>pyxel edit &lt;répertoire&gt;/2.pyxres</code></li>
-<li>N'hésite pas à bidouiller, tu ne peux rien casser, au pire tu pourras retélécharger le fichier.</li>
+<li>Télécharge la planche de sprites <a href="../../../assets/star_shooter/spritesheet.pyxres">spritesheet.pyxres</a> et sa palette <a href="../../../assets/star_shooter/spritesheet.pyxpal">spritesheet.pyxpal</a>.<ul>
+<li>Le <code>.pyxres</code> contient les images, 4 bruitages (emplacements 0 à 3) et 2 musiques. Le <code>.pyxpal</code> contient les 16 couleurs de la planche.</li>
+<li>Place les deux fichiers <strong>dans le même répertoire</strong>, et <strong>ne les renomme pas</strong> : pyxel ne lit la palette que si elle porte le nom de la planche.</li>
+<li>Pyxel vient avec un éditeur de ressources. Pour visualiser les ressources, exécute la commande suivante dans un terminal :
+    <code>pyxel edit &lt;répertoire&gt;/spritesheet.pyxres</code></li>
+<li>N'hésite pas à bidouiller, tu ne peux rien casser, au pire tu pourras retélécharger les fichiers.</li>
 </ul>
 </li>
-<li>A la place d'un simple pixel, on veut maintenant utiliser un sprite<ul>
-<li>Pour le faire, il faut d'abord charger ce fichier dans le code <strong>juste avant de démarrer le jeu</strong>:
-    <code>px.load("&lt;répertoire&gt;/2.pyxres")</code></li>
-<li>Ensuite il faut dessiner le sprite que tu auras choisi au lieu de simplement remplir un pixel. Il n'y a qu'une ligne de code à modifier. Je te laisse la trouver en explorant la <a href="https://github.com/kitao/pyxel/blob/main/docs/README.fr.md">documentation de pyxel</a>.<ul>
-<li>remarque: Tu auras nécessairement besoin d'augmenter la hauteur et la largeur de ta fenêtre (H et W), ce qui réduira la taille des "pixels".</li>
+<li>À la place d'un simple pixel, on veut maintenant utiliser un sprite.<ul>
+<li>Il faut d'abord charger la planche <strong>juste après <code>px.init</code></strong> :
+    <code>px.load("&lt;répertoire&gt;/spritesheet.pyxres")</code></li>
+<li>Les sprites de cette planche font 16 sur 16.</li>
+<li>La planche est découpée en <strong>3 banques d'images</strong>, numérotées 0, 1 et 2. L'éditeur te donne la banque et les coordonnées <span class="arithmatex">\((u, v)\)</span> du sprite que tu choisis.</li>
+<li>La couleur d'indice <strong>0</strong> est la transparence de cette planche : c'est la valeur à donner à <code>colkey</code>.</li>
+<li>Il n'y a alors qu'une ligne de code à modifier dans <code>draw</code>. Je te laisse la trouver en explorant la <a href="https://github.com/kitao/pyxel/blob/main/docs/README.fr.md">documentation de pyxel</a>.<ul>
+<li>remarque: Tu auras nécessairement besoin d'augmenter la hauteur et la largeur de ta fenêtre (H et W), sans quoi le sprite occupera tout l'écran.</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>Pour l'ambiance, un bruitage et une musique sont déjà dans la planche :<ul>
+<li><code>px.play(0, 2)</code> joue la petite explosion sur le canal 0.</li>
+<li><code>px.playm(0, loop=True)</code> lance la musique de fond en boucle.</li>
 </ul>
 </li>
 </ol>
@@ -9300,7 +9308,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 8, 2026 21:18:52 UTC">November 8, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 22, 2026 19:50:20 UTC">November 22, 2026</span>
   </span>
 
     
