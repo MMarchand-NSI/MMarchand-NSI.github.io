@@ -52,7 +52,7 @@ java/
 | Python | Java | |
 | --- | --- | --- |
 | `class Maillon[T]:` | `class Maillon<T> {` | crochets contre chevrons |
-| `self.data = data` dans `__init__` | `T data;` déclaré dans la classe | l'attribut est **déclaré**, avec son type |
+| `data: T` déclaré dans la classe | `T data;` déclaré dans la classe | **même place**, et en Java le type passe **avant** le nom |
 | `def __init__(self, ...)` | `Maillon(T data, ...)` | le constructeur porte le nom de la classe, et `self` disparaît |
 | `self.data` | `this.data` | `this` existe, mais il n'est pas un paramètre |
 | `Maillon(2, s)` | `new Maillon<>(2, s)` | `new`, et les chevrons vides suffisent, Java retrouve le type |

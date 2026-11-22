@@ -423,10 +423,6 @@ Tu remarqueras que le bouton `défiler` est **grisé quand la file est vide**. C
 !!! note "Et la complexité ?"
     Un défilement peut coûter cher quand il faut tout basculer. Mais chaque élément n'est basculé **qu'une seule fois** de `entree` vers `sortie` sur toute sa vie dans la file. Réparti sur l'ensemble des opérations, le coût est en `O(1)` **amorti**, bien meilleur que le `pop(0)` du tableau.
 
-!!! tip "Ce que l'IA ne change pas"
-    Une IA écrit `enfiler` et `defiler`, et elle sait aussi les spécifier et les tester. Le point n'est pas là.
-
-    La file avec deux piles est le meilleur exemple de ce qui reste à ta charge : le code est court, mais l'essentiel est de **se convaincre**, tests à l'appui, qu'il respecte bien le contrat FIFO. Cette conviction ne se délègue pas : ou bien tu sais dire ce que doit produire la structure (y compris quand on défile une file vide) et tu peux valider ce que tu lis, ou bien tu fais confiance sans pouvoir vérifier.
 
 ## Et maintenant, la vraie leçon : tes exercices marchent toujours
 

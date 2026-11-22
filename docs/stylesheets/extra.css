@@ -130,6 +130,30 @@ code, pre, .highlight code {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Alignement des numeros de ligne (``` ... linenums="1"), mesure au
+   navigateur le 15/11/2026 sur terminale/poo/poo.md.
+   Material dimensionne la colonne des numeros par la CLASSE .linenos
+   (0.85em), et la colonne du code par l'ELEMENT code (0.85em aussi) : d'
+   origine les deux colonnes s'alignent. La regle `code, pre, .highlight
+   code { font-size: 0.95em }` ci-dessus ne touche que la seconde, et elle y
+   compose deux fois, sur le <pre> puis sur le <code> imbriqué, soit
+   0.9025em. Mesure avant correction : numeros 12.92px / interligne 18.09px
+   contre code 15.2px / 22.8px, soit 26 % d'ecart d'interligne, qui se
+   cumule ligne apres ligne.
+   On aligne donc la colonne des numeros sur la taille EFFECTIVE du code,
+   0.95 x 0.95. `inherit` sur les deux niveaux internes evite de recomposer.
+   Ce bloc ne touche que les blocs numerotes : sans linenums, Pygments ne
+   produit aucune .highlighttable, donc aucune autre page ne bouge. */
+.md-typeset .highlighttable .linenos {
+  font-size: 0.9025em;
+}
+
+.md-typeset .highlighttable .linenodiv,
+.md-typeset .highlighttable .linenodiv pre {
+  font-size: inherit;
+  line-height: 1.5;
+}
+
 p code, li code, td code {
   font-family: 'JetBrains Mono', monospace !important;
   font-variant-ligatures: common-ligatures;

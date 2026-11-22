@@ -95,7 +95,7 @@ Comme pour les piles et les files, une fois la structure en place on ne touche *
         ...
 
 
-    def est_vide(lst: Liste) -> bool:
+    def est_vide[T](lst: Liste[T]) -> bool:
         """Indique si la liste lst est vide."""
         ...
 
@@ -116,7 +116,7 @@ Comme pour les piles et les files, une fois la structure en place on ne touche *
         ...
     ```
 
-    Deux d'entre elles portent une **précondition** : `tete` et `queue` n'ont rien à rendre si la liste est vide. Cela s'écrit avec un `assert`, comme `depiler` sur une pile vide.
+    Deux d'entre elles portent une **précondition** : `tete` et `queue` n'ont rien à rendre si la liste est vide. Cela s'écrit avec un `assert`, comme `depiler` sur une pile vide, et ici tu l'écris sur la **forme du tuple** : `assert len(lst) == 2`. Ce sont les deux seules fonctions qui ont le droit de savoir qu'une liste non vide est un couple, et c'est aussi la seule écriture qui dise à VS Code que `lst[0]` existe : avec `est_vide`, il souligne la ligne en rouge.
 
     ??? info "Le test, à coller dans `liste_test.py`"
         ```python
@@ -147,7 +147,7 @@ Comme pour les piles et les files, une fois la structure en place on ne touche *
             return (t, q)
 
 
-        def est_vide(lst: Liste) -> bool:
+        def est_vide[T](lst: Liste[T]) -> bool:
             """Indique si la liste lst est vide."""
             return lst == ()
 
@@ -157,7 +157,7 @@ Comme pour les piles et les files, une fois la structure en place on ne touche *
             Renvoie la tête de lst.
             Précondition : lst ne doit pas être vide.
             """
-            assert not est_vide(lst), "La liste est vide"
+            assert len(lst) == 2, "La liste est vide"
             return lst[0]
 
 
@@ -166,7 +166,7 @@ Comme pour les piles et les files, une fois la structure en place on ne touche *
             Renvoie la queue de lst.
             Précondition : lst ne doit pas être vide.
             """
-            assert not est_vide(lst), "La liste est vide"
+            assert len(lst) == 2, "La liste est vide"
             return lst[1]
         ```
     </div>
@@ -203,7 +203,7 @@ pub fn taille(lst: Liste(a)) -> Int {
 ```
 
 ```python
-def taille(lst: Liste) -> int:
+def taille[T](lst: Liste[T]) -> int:
     if est_vide(lst):
         return 0
     return 1 + taille(queue(lst))
@@ -251,7 +251,7 @@ Cons(tete, queue) ->
     Cela ne coûte rien sur une liste, où il n'y a que deux cas. Sur **deux** listes il y en a quatre, ils fondent dans des conditions, et **rien ne te dit si tu en as oublié un**. Écris-les au papier avant de coder, comme en Gleam, puis regroupe-les seulement après.
 
     ```python
-    def sont_egales(l1: Liste, l2: Liste) -> bool:
+    def sont_egales[T](l1: Liste[T], l2: Liste[T]) -> bool:
         if est_vide(l1) and est_vide(l2):      # les deux vides
             return True
         if est_vide(l1) or est_vide(l2):       # une seule vide, les deux autres cas
@@ -271,7 +271,7 @@ Cons(tete, queue) ->
     - `somme(lst: Liste[int]) -> int`
     - `somme_pairs(lst: Liste[int]) -> int`
     - `contient[T](lst: Liste[T], x: T) -> bool`
-    - `sont_egales(l1: Liste, l2: Liste) -> bool`
+    - `sont_egales[T](l1: Liste[T], l2: Liste[T]) -> bool`
     - `to_str(lst: Liste[int]) -> str`
     - `tous_vrais(lst: Liste[bool]) -> bool`
     - `au_moins_un_vrai(lst: Liste[bool]) -> bool`
@@ -547,7 +547,7 @@ exemple = Cons(2, Cons(3, Cons(4, Vide())))
 Et le `match` retrouve tout son sens, **un cas par constructeur**, comme le `case` de Gleam :
 
 ```python
-def taille(lst: Liste) -> int:
+def taille[T](lst: Liste[T]) -> int:
     match lst:
         case Vide():
             return 0
@@ -558,7 +558,7 @@ def taille(lst: Liste) -> int:
 Sur deux listes, les **quatre** cas redeviennent nets, à comparer avec la version en `if` de la section 3 :
 
 ```python
-def sont_egales(l1: Liste, l2: Liste) -> bool:
+def sont_egales[T](l1: Liste[T], l2: Liste[T]) -> bool:
     match l1, l2:
         case Vide(), Vide():
             return True
