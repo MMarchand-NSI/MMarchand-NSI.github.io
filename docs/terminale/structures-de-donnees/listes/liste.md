@@ -50,7 +50,7 @@ graph LR
 
     ??? success "Correction"
         1. **Quatre** ronds, trois maillons plus la sentinelle, et **quatre** flèches : une par maillon, plus celle de la sentinelle. Autant de flèches que de ronds, c'est la signature d'un cercle.
-        2. Il sait qu'il a fait le tour quand il **retombe sur la sentinelle**. Un parcours ne s'arrête donc plus sur `None`, ni sur un `isinstance(..., Sentinelle)` : il s'arrête quand il revient sur son point de départ.
+        2. Il sait qu'il a fait le tour quand il **retombe sur la sentinelle**. Un parcours ne s'arrête donc plus sur `None`, ni sur un test de sentinelle : il s'arrête quand il revient sur son point de départ.
         3. Non, et c'est tout l'intérêt. Chaque maillon a un suivant, chaque maillon a un précédent, et il n'y a plus un seul cas particulier à traiter.
 
 ## 2 La liste est sa propre sentinelle

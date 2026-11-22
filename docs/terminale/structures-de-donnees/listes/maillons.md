@@ -160,6 +160,28 @@ class Sentinelle[T](Maillon[T]):
 
 Le constructeur tient en une ligne, et cette ligne dit exactement les deux particularités : pas de donnée, et `self` comme suivant. C'est l'héritage que tu connais, `super().__init__(...)` appelant le constructeur de la super classe.
 
+Il reste à pouvoir **demander** à un maillon s'il est la fin. La question se pose à n'importe quel maillon, donc **tout** maillon doit savoir y répondre. Ajoute cette méthode à `Maillon` :
+
+```python
+    def est_sentinelle(self) -> bool:
+        """Dit si ce maillon marque la fin d'une chaîne. Un maillon ordinaire, non."""
+        return False
+```
+
+et sa **redéfinition** dans `Sentinelle` :
+
+```python
+    def est_sentinelle(self) -> bool:
+        return True
+```
+
+Une méthode qui renvoie `False` en dur a l'air de ne rien faire, et c'est pourtant elle qui porte tout le mécanisme. Quand tu écris `ptr.est_sentinelle()`, ce n'est pas ton code qui décide de la réponse, c'est **l'objet que `ptr` désigne** : un maillon ordinaire répond `False`, une sentinelle répond `True`. C'est la redéfinition du chapitre [héritage](../../poo/heritage.md), section 2, cette fois sur du vrai matériel. C'est aussi pourquoi on n'écrit pas `isinstance(ptr, Sentinelle)`, qui inspecterait l'objet **de l'extérieur** : ce chapitre-là le dit déjà, hors du débogage, en avoir besoin est en général le signe qu'on s'y est mal pris. Un maillon sait ce qu'il est, il suffit de le lui demander.
+
+!!! warning "Si tu oublies la redéfinition, rien ne te le dira"
+    Sans la version de `Sentinelle`, une sentinelle répond `False` comme un maillon ordinaire, donc un parcours ne s'arrête jamais sur elle. Et comme elle pointe sur elle-même, il tourne indéfiniment, **sans message d'erreur**.
+
+    Quand un programme reste bloqué sans rien afficher, c'est souvent cela. Clique dans le terminal et appuie sur `Ctrl+C` : Python s'arrête et affiche `KeyboardInterrupt`, ce qui veut seulement dire « arrêté au clavier ». Tu n'as rien cassé.
+
 !!! warning "`None` n'apparaît nulle part ailleurs"
     C'est le **seul** `None` de tout le chapitre, et c'est exactement ce que la sentinelle achète. Quand tu auras besoin d'un maillon de fin, tu écriras `Sentinelle()`, jamais `None`.
 
@@ -179,7 +201,7 @@ def montrer[T](m: Maillon[T]) -> str:
     """Rend la chaîne qui commence à m sous la forme 1 -> 2 -> 3 -> S."""
     res = ""
     ptr = m
-    while not isinstance(ptr, Sentinelle):
+    while not ptr.est_sentinelle():
         res = res + str(ptr.data) + " -> "
         ptr = ptr.suivant
     return res + "S"
@@ -249,7 +271,7 @@ Crée `structures/lineaires/maillon_test.py`, **à côté** de `maillon.py`, et 
         """Renvoie les données de la chaîne qui commence à m, jusqu'à la sentinelle."""
         res = []
         ptr = m
-        while not isinstance(ptr, Sentinelle):
+        while not ptr.est_sentinelle():
             res.append(ptr.data)
             ptr = ptr.suivant
         return res
@@ -371,7 +393,7 @@ Dans les squelettes qui suivent, `...` marque ce que tu as à écrire.
             f = chaine(1, 2)
             f.suivant.insere_apres(Maillon(3, Sentinelle()))
             assert contenu(f) == [1, 2, 3]
-            assert isinstance(f.suivant.suivant.suivant, Sentinelle) == True
+            assert f.suivant.suivant.suivant.est_sentinelle() == True
         ```
 
 !!! question "`decroche_prochain` (obligatoire)"
@@ -384,7 +406,7 @@ Dans les squelettes qui suivent, `...` marque ce que tu as à écrire.
         Exemple : un désigne le maillon 1 dans 1 -> 5 -> 2
           m = un.decroche_prochain()   # 1 -> 2, et m.data vaut 5
         """
-        assert not isinstance(self.suivant, Sentinelle), "Il n'y a pas de maillon après celui-ci"
+        assert not self.suivant.est_sentinelle(), "Il n'y a pas de maillon après celui-ci"
         m = ...
         ...
         return m
@@ -406,7 +428,7 @@ Dans les squelettes qui suivent, `...` marque ce que tu as à écrire.
             dernier = f.decroche_prochain()
             assert dernier.data == 2
             assert contenu(f) == [1]
-            assert isinstance(f.suivant, Sentinelle) == True
+            assert f.suivant.est_sentinelle() == True
 
 
         def test_decroche_prochain_sans_suivant() -> None:
@@ -449,7 +471,7 @@ Dans les squelettes qui suivent, `...` marque ce que tu as à écrire.
             assert c.avancer(0) is c
             assert c.avancer(2).data == 3
             s = c.avancer(3)
-            assert isinstance(s, Sentinelle) == True
+            assert s.est_sentinelle() == True
             assert c.avancer(10) is s       # on reste sur la sentinelle
 
 
