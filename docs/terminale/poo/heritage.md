@@ -209,12 +209,12 @@ L'héritage sert peu quand les classes sont aussi proches que `Chien` et `Chat` 
 
 Tu en rencontreras deux usages dans la suite de l'année, et tu peux déjà aller voir à quoi ils ressemblent.
 
-- **[Le projet Space Invaders](../../projets/pyxel/space_invader.md)**, où une classe `EltGraphique` porte ce que tout élément à l'écran sait faire, sa position, son déplacement, son dessin, sa collision, et où `Vaisseau`, `Ennemi` et `Missile` n'écrivent que ce qui les distingue. Le schéma de classes y est déjà dessiné, et tu sais maintenant le lire : trois flèches à pointe creuse, et un trait entre `Jeu` et `Vaisseau` avec ses cardinalités.
-- **[La liste chaînée](../structures-de-donnees/listes/maillons.md)**, où une classe marque la fin de la chaîne en héritant du maillon ordinaire. Elle s'écrit en Java, et c'est là que la forme de la section 2 de la première page prend tout son sens.
+- **[Le projet Space Invaders](../../projets/pyxel/space_invader.md)**, où une classe `EltGraphique` porte ce que tout élément à l'écran sait faire, sa position, son déplacement, son dessin, sa collision, et où `Vaisseau`, `Missile`, `Joueur` et `Ennemi` n'écrivent que ce qui les distingue. Le schéma de classes y est déjà dessiné, et tu sais maintenant le lire : quatre flèches à pointe creuse, dont deux sur **deux étages**, un joueur est un vaisseau qui est un élément graphique, et trois flèches à pointe simple avec leurs cardinalités.
+- **[La liste chaînée](../structures-de-donnees/listes/maillons.md)**, où une classe marque la fin de la chaîne en héritant du maillon ordinaire, et redéfinit une méthode pour répondre autrement que lui. C'est là que la forme de la section 2 de la première page prend tout son sens.
 
 !!! info "Les schémas ont un nom"
     Les trois dessins de ce chapitre, le cadre en trois parties, la flèche à pointe simple et celle à pointe creuse, ne sont pas une invention de ce cours. Ils viennent d'une notation standard, **UML**, utilisée partout où l'on conçoit des programmes à objets, et tu en as vu la petite partie qui sert ici.
 
     Deux choses à savoir si tu cherches par toi-même. C'est le mot à taper, et il te donnera bien plus que ce dont tu as besoin : UML compte une dizaine de sortes de schémas, et une seule nous a servi. Et tu verras des `+` et des `-` devant les attributs, que nous n'écrivons pas : ils disent ce qui est accessible depuis l'extérieur de la classe, et Python ne le marque pas.
 
-    Tu n'as d'ailleurs pas besoin de chercher pour les rencontrer. Le schéma du projet Space Invaders les emploie, et il y écrit aussi le type **avant** le nom, `+float x` au lieu de `x : float`. C'est l'ordre de Java, celui que tu retrouveras dans la liste chaînée.
+    Tu n'as d'ailleurs pas besoin de chercher pour les rencontrer. Le schéma de [la modélisation d'un réseau](../architecture_reseau/modelisation.md) les emploie, et il y écrit aussi le type **avant** le nom, `+str nom` au lieu de `nom : str`. C'est l'ordre du C et de Java, et il se lit sans difficulté.

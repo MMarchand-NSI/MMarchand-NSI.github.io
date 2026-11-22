@@ -470,4 +470,4 @@ Tu sais fabriquer des objets d'une classe, suivre qui appelle quoi, et dire si d
 - L'**héritage**, qui permet d'écrire une classe à partir d'une autre.
 - Un objet qui référence un objet de sa propre classe. C'est avec cela qu'on fabrique une [liste chaînée](../structures-de-donnees/listes/maillons.md), et c'est le dernier état de la liste que tu as déjà écrite deux fois.
 
-Et tu retrouveras la forme de la section 2 ailleurs qu'en Python. Déclarer les attributs en haut de la classe, puis les remplir dans le constructeur, est la façon ordinaire d'écrire une classe dans la plupart des langages à objets. C'est exactement ce que tu liras le jour où la liste chaînée s'écrira en Java.
+Et cette forme n'est pas une coquetterie de ce cours. Déclarer les attributs en haut de la classe, puis les remplir dans le constructeur, est la façon ordinaire d'écrire une classe dans la plupart des langages à objets, et c'est sous cette forme que tu écriras la liste chaînée.
