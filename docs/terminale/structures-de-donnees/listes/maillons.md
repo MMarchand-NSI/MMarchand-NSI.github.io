@@ -7,8 +7,6 @@
     - **Dire ce que `self` désigne**, et pourquoi deux noms peuvent pointer sur le même objet. Toute cette page repose là-dessus.
     - **[L'héritage](../../poo/heritage.md)**, et savoir lire un schéma de classes.
 
-    Tu as aussi écrit la liste **deux fois**, en Gleam puis en Python. Garde ces deux versions sous la main : c'est la même structure, une troisième fois.
-
     **Il n'y a rien de nouveau à installer et aucun langage à apprendre.** C'est le Python et la POO que tu connais déjà, et la nouveauté est ailleurs : dans la structure.
 
 !!! question "Rappel d'ouverture (5 minutes, de mémoire, cahier fermé)"
@@ -30,29 +28,22 @@
 
 ## 1 Ce qu'on fabrique
 
-Tu as déjà implémenté une liste deux fois, en Gleam où elle était `Vide` ou `Cons(tête, queue)`, puis en Python avec le même découpage. C'est la **troisième**, et le changement est complet : une liste devient une chaîne d'objets, chacun gardant une **référence** vers le suivant.
+Une liste devient une **chaîne d'objets** : chacun porte une donnée et une **référence** vers le suivant. Plus d'indice, plus de cases côte à côte, seulement des flèches d'un objet à l'autre.
 
-| Gleam | Python fonctionnel | Ici |
-| --- | --- | --- |
-| `Vide` | `tuple[()]` | une **sentinelle**, un maillon sans donnée |
-| `Cons(tête, queue)` | `tuple[T, Liste[T]]` | un **maillon**, une donnée et une flèche vers le suivant |
+C'est là tout l'objet de ces deux pages, **les références en mémoire**. Tout ce que tu écriras consiste à rebrancher des flèches, et la question reviendra sans cesse : quel objet ce nom désigne-t-il ? Tu mesureras aussi ce que chaque opération **coûte**.
 
-Ce chapitre cherche deux choses : voir **comment une collection est faite de l'intérieur**, et savoir **ce que chaque opération coûte**.
+Celle-ci construit la brique, le **maillon**. La [suivante](liste.md) en fait une **liste**.
 
-Il tient sur deux pages. Celle-ci construit la brique, le **maillon**. La [suivante](liste.md) en fait une **liste**.
-
-Cette page-ci te fait écrire trois fichiers. Les chemins sont donnés depuis le répertoire `python/` de ton dépôt, et tout répertoire que tu crées reçoit un fichier vide `__init__.py`.
+Cette page-ci te fait écrire deux fichiers. Les chemins sont donnés depuis le répertoire `python/` de ton dépôt, et tout répertoire que tu crées reçoit un fichier vide `__init__.py`.
 
 ```text
 structures/
   lineaires/
     maillon.py          la brique, à compléter
     maillon_test.py     les tests, donnés au fur et à mesure
-exos/
-  exos_maillons.py      ton bac à sable, pour regarder ce que tu fabriques
 ```
 
-C'est l'organisation des piles et des files, à l'identique : le module d'un côté, ses tests **à côté de lui**, et tes essais dans `exos/`. Tu vérifies tout par `uv run pytest`, depuis la racine de ton dépôt. Si un répertoire est neuf et que Python te répond `ModuleNotFoundError: No module named 'structures'`, lance une fois `uv sync` depuis la racine.
+C'est l'organisation des piles et des files, à l'identique : le module d'un côté, ses tests **à côté de lui**. Tu vérifies tout par `uv run pytest`, depuis la racine de ton dépôt. Si un répertoire est neuf et que Python te répond `ModuleNotFoundError: No module named 'structures'`, lance une fois `uv sync` depuis la racine.
 
 !!! info "Dans ce chapitre, la question est presque toujours `is`"
     L'objet d'étude de ces deux pages est la **flèche entre deux objets**. La question qu'on se pose sans arrêt est donc « est-ce le **même** maillon », et elle s'écrit `is`, jamais `==`.
@@ -103,9 +94,9 @@ Deux détails d'écriture, et aucun n'est une nouveauté de fond.
 
 Tu vas passer ce chapitre à déplacer des flèches, et tu ne les verras pas à l'écran. Le crayon est donc le premier outil, avant l'éditeur. Il tient en trois règles.
 
-1. **Un objet, un rond.** La donnée s'écrit dedans.
-2. **Un `suivant`, une flèche.** Elle part du rond et arrive sur un autre rond. Chaque rond a **une seule** flèche qui en part, puisqu'un maillon n'a qu'un `suivant`.
-3. **Un nom n'est pas un objet, c'est une flèche.** `m1`, `self`, `ref` ne sont pas des ronds : ce sont des étiquettes posées à côté d'une flèche qui désigne un rond. Écris-les **à l'extérieur**, et en rouge si tu peux.
+1. **Un objet, un rectangle.** La donnée s'écrit dedans.
+2. **Un `suivant`, une flèche.** Elle part du rectangle et arrive sur un autre rectangle. Chaque rectangle a **une seule** flèche qui en part, puisqu'un maillon n'a qu'un `suivant`.
+3. **Un nom n'est pas un objet, c'est une flèche.** `m1`, `self`, `ref` ne sont pas des rectangles : ce sont des étiquettes posées à côté d'une flèche qui désigne un rectangle. Écris-les **à l'extérieur**, et en rouge si tu peux.
 
 Voilà un maillon seul, nommé `m`, qui porte `2` et pointe sur un maillon qui porte `3`.
 
@@ -114,14 +105,14 @@ graph LR
   m1["2"] --> m2["3"]
 ```
 
-Le nom `m` n'apparaît pas sur ce dessin, et c'est voulu : il ne se dessine pas en rond. Sur ton cahier, écris-le **à gauche du premier rond**, avec une petite flèche vers lui, et en rouge.
+Le nom `m` n'apparaît pas sur ce dessin, et c'est voulu : il ne se dessine pas en rectangle. Sur ton cahier, écris-le **à gauche du premier rectangle**, avec une petite flèche vers lui, et en rouge.
 
 !!! question "Dessiner une chaîne (obligatoire)"
     Sur ton cahier, dessine la chaîne de **trois** maillons qui portent `2`, puis `3`, puis `4`, et nomme `m1` le premier.
 
     Réponds ensuite à ces deux questions, par écrit :
 
-    - combien de flèches as-tu tracées entre des ronds ?
+    - combien de flèches as-tu tracées entre des rectangles ?
     - vers quoi pointe le troisième maillon ?
 
     ??? success "Correction"
@@ -130,7 +121,7 @@ Le nom `m` n'apparaît pas sur ce dessin, et c'est voulu : il ne se dessine pas 
           m1["2"] --> m2["3"] --> m3["4"]
         ```
 
-        **Deux** flèches entre des ronds, pour trois maillons. Celle qui porte le nom `m1`, à gauche, ne compte pas : ce n'est pas un `suivant`.
+        **Deux** flèches entre des rectangles, pour trois maillons. Celle qui porte le nom `m1`, à gauche, ne compte pas : ce n'est pas un `suivant`.
 
         Et la deuxième question n'a pas de réponse pour l'instant : le dernier maillon doit bien pointer quelque part, puisqu'il a un attribut `suivant`. C'est l'objet de la section suivante.
 
@@ -142,7 +133,7 @@ On fait autre chose. On met au bout un maillon **qui est toujours là**, qui ne 
 
 ```mermaid
 graph LR
-  m1["2"] --> m2["3"] --> m3["4"] --> S(("S")) --> S
+  m1["2"] --> m2["3"] --> m3["4"] --> S["S"] --> S
 ```
 
 Une sentinelle est un maillon comme les autres, avec deux particularités : sa donnée n'existe pas, et son `suivant` est elle-même. Elle **hérite** donc de `Maillon`. Ajoute-la à la fin de `maillon.py` :
@@ -161,56 +152,17 @@ class Sentinelle[T](Maillon[T]):
 Le constructeur tient en une ligne, et cette ligne dit exactement les deux particularités : pas de donnée, et `self` comme suivant. C'est l'héritage que tu connais, `super().__init__(...)` appelant le constructeur de la super classe.
 
 !!! warning "`None` n'apparaît nulle part ailleurs"
-    C'est le **seul** `None` de tout le chapitre, et c'est exactement ce que la sentinelle achète. Quand tu auras besoin d'un maillon de fin, tu écriras `Sentinelle()`, jamais `None`.
+    C'est le **seul** `None` de tout le chapitre, et c'est exactement ce que la sentinelle apporte. Quand tu auras besoin d'un maillon de fin, tu écriras `Sentinelle()`, jamais `None`.
 
     Si `None` réapparaît ailleurs dans ton code, c'est le signe que tu es en train de refaire à la main ce que la sentinelle fait pour toi.
 
-## 5 Ton bac à sable, et comment vérifier ton dessin
-
-Crée `exos/exos_maillons.py`. C'est ton brouillon pour toute la page : tu y construis des chaînes et tu regardes ce qu'elles sont devenues. Tu le lances par le bouton **▷** de VSCode.
-
-```python
-# exos/exos_maillons.py
-
-from structures.lineaires.maillon import Maillon, Sentinelle
-
-
-def montrer[T](m: Maillon[T]) -> str:
-    """Rend la chaîne qui commence à m sous la forme 1 -> 2 -> 3 -> S."""
-    res = ""
-    ptr = m
-    while ptr.suivant is not ptr:
-        res = res + str(ptr.data) + " -> "
-        ptr = ptr.suivant
-    return res + "S"
-
-
-# La chaîne 1 -> 2 -> 3 -> S
-un = Maillon(1, Maillon(2, Maillon(3, Sentinelle())))
-print(montrer(un))
-```
-
-La ligne qui construit la chaîne mérite un instant. Elle se lit **de l'intérieur vers l'extérieur** : on fabrique d'abord la sentinelle, puis le maillon `3` qui la pointe, puis le maillon `2` qui pointe le `3`, et enfin le maillon `1`. L'ordre est imposé, puisque pour construire un maillon il faut déjà tenir son suivant.
-
-C'est mot pour mot le `Cons(1, Cons(2, Cons(3, Vide)))` de Gleam. Tu dois lire :
-
-```text
-1 -> 2 -> 3 -> S
-```
-
-**Un affichage ne montre pas les flèches, il montre la suite des données.** Quand c'est une flèche précise qui t'intéresse, demande-la directement : `m.suivant.data`, ou `x.suivant is un`. Ce sont deux lignes de Python, et elles répondent exactement à la question « où pointe ce maillon ».
-
-!!! warning "L'affichage ne remplace pas ton crayon"
-    Il dit si ton dessin était juste, il ne le fait pas à ta place. L'ordre est toujours le même, et il ne s'inverse pas : **tu dessines, puis tu lances, puis tu compares**. Un dessin obtenu sans l'avoir cherché ne t'apprend rien, et c'est à la main que tu écriras tes méthodes.
-
-!!! question "Construire, dessiner, vérifier (obligatoire)"
-    Dans `exos_maillons.py`, construis la chaîne `2 -> 3 -> 4 -> S` de la section 3, en nommant `m1` le premier maillon.
+!!! question "Construire une chaîne (obligatoire)"
+    Reprends la chaîne `2 -> 3 -> 4 -> S` de la section 3, en nommant `m1` le premier maillon.
 
     1. **Dessine-la d'abord** sur ton cahier.
-    2. Écris les **trois lignes** qui la construisent, une par maillon, sans emboîter les `Maillon(...)` les uns dans les autres cette fois.
-    3. Ajoute `print(montrer(m1))` et lance.
+    2. Écris les **trois lignes** qui la construisent, une par maillon.
 
-    **Écris les trois lignes avant de dérouler la correction.**
+    **Écris-les avant de dérouler la correction.**
 
     ??? success "Correction"
         ```python
@@ -221,9 +173,13 @@ C'est mot pour mot le `Cons(1, Cons(2, Cons(3, Vide)))` de Gleam. Tu dois lire :
 
         L'ordre est imposé, et c'est pour cela que la première ligne est celle du **bout** : pour construire un maillon, il faut déjà tenir son suivant.
 
-        L'affichage rend `2 -> 3 -> 4 -> S`. Une fois les trois lignes écrites, la version emboîtée se relit toute seule : c'est la même chose, sans les noms intermédiaires.
+        Cela s'écrit aussi d'un seul coup, en emboîtant les appels. Le code se lit alors **de l'intérieur vers l'extérieur**, et dit la même chose sans les noms intermédiaires :
 
-## 6 Le fichier de tests
+        ```python
+        m1 = Maillon(2, Maillon(3, Maillon(4, Sentinelle())))
+        ```
+
+## 5 Le fichier de tests
 
 Crée `structures/lineaires/maillon_test.py`, **à côté** de `maillon.py`, et mets-y ceci. Chaque test que la suite te donne se colle à la fin du fichier.
 
@@ -276,31 +232,21 @@ Voici les deux premiers tests, qui vérifient ce que tu as déjà écrit. Colle-
 
     Regarde bien quelle assertion emploie quel outil. `m.data == 5` compare une **valeur**. `m.suivant is fin` et `s.suivant is s` demandent « est-ce le **même objet** », et c'est la seule question qui ait un sens sur une flèche.
 
-## 7 Trois opérations, et leur contrat
+## 6 Deux opérations, et leur contrat
 
-Construire une chaîne à la main est vite pénible. On donne donc au maillon trois opérations, qui ne font **que rebrancher des flèches** : aucune ne crée ni ne détruit de maillon.
+Construire une chaîne à la main est vite pénible. On donne donc au maillon deux opérations, qui ne font **que rebrancher des flèches** : aucune ne crée ni ne détruit de maillon.
 
 Dans le tableau, **ce maillon** désigne celui sur lequel on appelle la méthode.
 
-| Opération | Ce qu'elle fait | Précondition | Coût |
-| --- | --- | --- | --- |
-| `insere_apres(m)` | insère le maillon `m` **entre** ce maillon et son suivant | aucune | `O(1)` |
-| `decroche_prochain()` | décroche de la chaîne le maillon qui suit ce maillon et le renvoie. La chaîne se referme derrière lui, et il emporte sa flèche | aucune | `O(1)` |
-| `avancer(k)` | renvoie le maillon situé `k` crans plus loin. `avancer(0)` renvoie ce maillon, et arrivé sur la sentinelle on y reste | `k` positif ou nul | `O(k)` |
-
-!!! info "Une précondition s'écrit, et elle se vérifie par `assert`"
-    C'est la convention des piles et des files, et elle ne change pas ici : la docstring **dit** la précondition, et un `assert` au début de la méthode la **refuse** quand elle est violée.
-
-    ```python
-    assert k >= 0, "k doit être positif ou nul"
-    ```
-
-    Un `assert` qui échoue arrête le programme sur une `AssertionError` portant ton message. C'est ce que les tests iront chercher.
+| Opération | Ce qu'elle fait | Coût |
+| --- | --- | --- |
+| `insere_apres(m)` | insère le maillon `m` **entre** ce maillon et son suivant | `O(1)` |
+| `deplacer_prochain_apres(dest)` | déplace le maillon qui suit ce maillon juste après `dest`, et le renvoie. La chaîne se referme derrière lui | `O(1)` |
 
 !!! question "Suivre les flèches, sur papier (obligatoire)"
     On part de la chaîne `1 -> 2 -> 3 -> 4 -> S`, dont les maillons s'appellent `a`, `b`, `c`, `d`.
 
-    Dessine la chaîne après **chacune** des quatre lignes, dans l'ordre. Pour chaque ligne, écris :
+    Dessine la chaîne après **chacune** des deux lignes, dans l'ordre. Pour chaque ligne, écris :
 
     - la chaîne obtenue, sous la forme `1 -> ... -> S`
     - la donnée du maillon renvoyé, quand la méthode en renvoie un
@@ -309,33 +255,21 @@ Dans le tableau, **ce maillon** désigne celui sur lequel on appelle la méthode
     ```python linenums="1"
     neuf = Maillon(9, Sentinelle())
     a.insere_apres(neuf)
-    x = a.decroche_prochain()
-    c.insere_apres(x)
-    y = a.avancer(2)
+    x = a.deplacer_prochain_apres(c)
     ```
 
-    Tu n'as que le tableau de contrats ci-dessus, et il suffit : ces quatre lignes se déroulent sans avoir écrit une ligne de code.
+    Tu n'as que le tableau de contrats ci-dessus, et il suffit : ces deux lignes se déroulent sans avoir écrit une ligne de code.
 
-    **Dessine les quatre étapes avant de dérouler la correction.**
+    **Dessine les deux étapes avant de dérouler la correction.**
 
     ??? success "Correction"
         **Après la ligne 2.** `1 -> 9 -> 2 -> 3 -> 4 -> S`. Rien n'est renvoyé.
 
-        **Après la ligne 3.** `1 -> 2 -> 3 -> 4 -> S`, la chaîne s'est refermée derrière le maillon décroché. `x` porte `9`, et il emporte sa flèche : il pointe **toujours** vers le maillon `2`, qui ne le sait pas. C'est ce que dit `x.suivant is b`.
+        **Après la ligne 3.** `1 -> 2 -> 3 -> 9 -> 4 -> S`. Le maillon `9` a changé de place, et c'est le **même objet** : aucun maillon n'a été créé, et c'est lui que `x` désigne. Sa flèche pointe maintenant vers `4`, puisqu'il suit `3`.
 
-        **Après la ligne 4.** `1 -> 2 -> 3 -> 9 -> 4 -> S`. C'est le **même objet** `x` qu'à la ligne 3, déplacé, aucun maillon n'a été créé. Et sa flèche a changé toute seule : `insere_apres` la rebranche vers `4`, c'est sa première affectation.
+        **Trois flèches ont changé, et trois seulement** : celle de `1`, qui se referme sur `2`, celle de `3`, qui va vers `9`, et celle de `9`, qui va vers `4`. C'est ainsi que tout se déplacera dans ce chapitre : rien ne se crée, rien ne se détruit, des flèches se rebranchent.
 
-        **Après la ligne 5.** `y` porte `3`. On part de `a`, un cran mène à `2`, deux crans mènent à `3`.
-
-        La ligne 4 est la seconde moitié de la ligne 3 : décrocher, puis réinsérer ailleurs. C'est ainsi que tout se déplacera dans ce chapitre.
-
-    ??? question "Une de plus, sur la sentinelle"
-        Que renvoie `a.avancer(10)` sur la chaîne de départ, qui n'a que quatre maillons ? Et `a.avancer(100)` ?
-
-        ??? success "Correction"
-            Les deux renvoient **la sentinelle**, et c'est le **même objet** dans les deux cas : `a.avancer(10) is a.avancer(100)` vaut `True`. Une fois dessus, on n'en bouge plus, puisqu'elle pointe sur elle-même. Avec `None` au bout, les deux appels auraient planté.
-
-## 8 À écrire : les trois opérations
+## 7 À écrire : les deux opérations
 
 Chaque méthode se place dans la classe `Maillon`, sous le constructeur.
 
@@ -375,128 +309,77 @@ Dans les squelettes qui suivent, `...` marque ce que tu as à écrire.
             assert fin.suivant is fin
         ```
 
-!!! question "`decroche_prochain` (obligatoire)"
+!!! question "`deplacer_prochain_apres` (obligatoire)"
     ```python
-    def decroche_prochain(self) -> "Maillon[T]":
+    def deplacer_prochain_apres(self, dest: "Maillon[T]") -> "Maillon[T]":
         """
-        Retire de la chaîne le maillon qui suit celui-ci et le renvoie, en O(1).
+        Déplace le maillon qui suit celui-ci juste après dest, et le renvoie, en O(1).
 
-        Exemple : un désigne le maillon 1 dans 1 -> 5 -> 2
-          m = un.decroche_prochain()   # 1 -> 2, et m.data vaut 5
+        Exemple : un et deux désignent les maillons 1 et 2 dans 1 -> 5 -> 2 -> 3
+          m = un.deplacer_prochain_apres(deux)   # 1 -> 2 -> 5 -> 3, et m.data vaut 5
         """
         m = ...
+        ...
+        ...
         ...
         return m
     ```
 
-    La ligne `m = ...` dit l'essentiel : il faut **garder** une référence vers le maillon décroché avant de le sortir de la chaîne, sinon plus rien ne le désigne et tu ne peux plus le renvoyer.
+    Quatre lignes, et **leur ordre n'est pas libre**. Chaque flèche qu'on écrit écrase la précédente, donc une flèche se lit **avant** d'être écrasée. La première ligne dit laquelle : garde une référence vers le maillon qui va bouger, sinon plus rien ne le désigne.
 
     ??? info "Test à recopier dans `maillon_test.py`"
         ```python
-        def test_decroche_prochain() -> None:
-            c = chaine(1, 2, 3)
-            deux = c.suivant
-            m = c.decroche_prochain()
-            assert m is deux
-            assert contenu(c) == [1, 3]
+        def test_deplacer_prochain_apres() -> None:
+            c = chaine(1, 5, 2, 3)
+            deux = c.suivant.suivant
+            m = c.deplacer_prochain_apres(deux)
+            assert m.data == 5
+            assert contenu(c) == [1, 2, 5, 3]
+            assert m.suivant is deux.suivant.suivant    # il a pris la suite de deux
 
-            # Le dernier maillon : la chaîne se raccroche à la sentinelle
+            # D'une chaîne vers une autre
+            a = chaine(1, 2)
+            b = chaine(7, 8)
+            x = a.deplacer_prochain_apres(b)
+            assert x.data == 2
+            assert contenu(a) == [1]
+            assert contenu(b) == [7, 2, 8]
+
+            # Déplacer le dernier maillon : la chaîne se referme sur la sentinelle
             f = chaine(1, 2)
-            dernier = f.decroche_prochain()
-            assert dernier.data == 2
+            g = chaine(9)
+            f.deplacer_prochain_apres(g)
             assert contenu(f) == [1]
-            assert f.suivant.suivant is f.suivant
+            assert f.suivant.suivant is f.suivant        # 1 pointe sur la sentinelle
+            assert contenu(g) == [9, 2]
         ```
 
-!!! question "`avancer` (obligatoire)"
-    ```python
-    def avancer(self, k: int) -> "Maillon[T]":
-        """
-        Renvoie le maillon situé k crans plus loin, en O(k).
-        Arrivé sur la sentinelle de fin, on y reste : elle pointe sur elle-même.
-        Précondition : k est positif ou nul.
 
-        Exemple : un désigne le maillon 1 dans 1 -> 2 -> 3 -> S
-          un.avancer(0)   # le maillon 1
-          un.avancer(2)   # le maillon 3
-          un.avancer(5)   # la sentinelle S
-        """
-        assert k >= 0, "k doit être positif ou nul"
-        ref = self
-        for i in range(0, k):
-            ...
-        return ref
-    ```
+## 8 Ce que cela coûte
 
-    Une seule ligne à écrire, dans la boucle. Demande-toi ce qui doit avoir changé après un tour, et une seule chose a le droit de changer.
-
-    ??? info "Tests à recopier dans `maillon_test.py`"
-        ```python
-        def test_avancer() -> None:
-            c = chaine(1, 2, 3)
-            assert c.avancer(0) is c
-            assert c.avancer(2).data == 3
-            s = c.avancer(3)
-            assert s.suivant is s
-            assert c.avancer(10) is s       # on reste sur la sentinelle
-
-
-        def test_avancer_k_negatif() -> None:
-            c = chaine(1, 2, 3)
-            try:
-                c.avancer(-1)
-            except AssertionError:
-                return                      # comportement attendu
-            assert False, "avancer(-1) aurait dû échouer"
-        ```
-
-        Le second test est la forme que tu connais depuis les piles : on provoque l'échec, et on vérifie qu'il a bien lieu.
-
-    ??? tip "Indice"
-        Dessine la chaîne, pose `ref` sur le premier maillon, et demande-toi où elle doit être après le premier tour. La ligne à écrire est la réponse.
-
-    ??? tip "Indice plus précis"
-        `ref` est une **flèche**, pas un rond : l'affecter ne déplace aucun maillon, cela déplace seulement l'endroit où la flèche arrive.
-
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
-
-    ??? warning "Correction"
-        ```python
-                ref = ref.suivant
-        ```
-
-!!! info "Relance tout"
-    `uv run pytest` doit faire passer les sept tests de `maillon_test.py`. Si l'un d'eux échoue, lis le message : pytest affiche la ligne fautive et les deux valeurs comparées, celle qu'on attendait et celle que **ton** code a produite.
-
-    Et garde ces trois méthodes en tête telles qu'elles sont : aucune ne parle de la fin de la chaîne, aucune ne parle de `None`. Elles ne font que rebrancher des flèches, et c'est ce qui leur permettra de resservir **sans une ligne de changement** sur la page suivante.
-
-## 9 Ce que cela coûte
-
-Trois opérations, deux en `O(1)` et une en `O(k)`. Ce tableau est court, et pourtant il contient déjà tout ce qui distingue une chaîne d'un tableau.
+Deux opérations, toutes deux en `O(1)`. Le tableau est court, et pourtant il contient déjà ce qui distingue une chaîne d'un tableau : rebrancher une flèche ne dépend pas du nombre de maillons, mais **arriver** jusqu'au bon maillon se paie un cran à la fois.
 
 | Coût | Opération |
 | --- | --- |
-| `O(1)` | `insere_apres`, `decroche_prochain` |
-| `O(k)` | `avancer(k)` |
+| `O(1)` | `insere_apres`, `deplacer_prochain_apres` |
 
 !!! question "Ce que la flèche unique interdit (obligatoire)"
     La chaîne est `1 -> 2 -> 3 -> 4 -> S`. Tu tiens une référence `m` vers le maillon qui porte `3`, et **lui seul** : tu ne tiens pas les autres.
 
-    1. Est-ce que `m.decroche_prochain()` retire le maillon qui porte `3` ? Sinon, lequel retire-t-il ?
-    2. Quel maillon faut-il tenir pour retirer de la chaîne celui qui porte `3` ?
+    1. Est-ce que `m.deplacer_prochain_apres(dest)` déplace le maillon qui porte `3` ? Sinon, lequel déplace-t-il ?
+    2. Quel maillon faut-il tenir pour déplacer celui qui porte `3` ?
     3. Tu tiens aussi le premier maillon. Combien de crans faut-il parcourir depuis lui pour atteindre le maillon qu'il te faut ? Et si la chaîne avait `n` maillons et que `m` était le dernier ?
     4. En Python, `t.insert(2, 7)` sur une liste `t` de `n` cases coûte `O(n)`. `insere_apres` coûte `O(1)`. D'où vient l'écart ?
 
     **Écris tes quatre réponses avant de dérouler la correction.**
 
     ??? success "Correction"
-        1. Non. `decroche_prochain` retire le maillon qui **suit** celui sur lequel on l'appelle, donc ici celui qui porte `4`. Un maillon ne peut rien faire à lui-même : il n'a aucune flèche qui arrive sur lui.
-        2. Celui qui porte `2`. Pour retirer un maillon, il faut tenir **son précédent**, c'est la seule façon de refermer la chaîne.
+        1. Non. `deplacer_prochain_apres` déplace le maillon qui **suit** celui sur lequel on l'appelle, donc ici celui qui porte `4`. Un maillon ne peut rien faire à lui-même : il n'a aucune flèche qui arrive sur lui.
+        2. Celui qui porte `2`. Pour agir sur un maillon, il faut tenir **son précédent**, c'est la seule façon de refermer la chaîne derrière lui.
         3. Un cran. Et si `m` était le dernier d'une chaîne de `n` maillons, il faudrait en parcourir `n - 2`, donc `O(n)`.
         4. Dans un tableau, les cases sont **côte à côte** en mémoire : en insérer une oblige à décaler toutes les suivantes. Dans une chaîne, les maillons sont n'importe où, et insérer revient à rebrancher deux flèches, quel que soit le nombre de maillons.
 
-        Retiens le partage, il décidera de tout sur la page suivante. Une chaîne est **imbattable là où on est déjà**, et **lente pour arriver quelque part**.
+        Retiens le partage, il décidera de tout à la page suivante. Une chaîne est **imbattable là où on est déjà**, et **lente pour arriver quelque part**.
 
 !!! info "La suite"
     Tu as la brique. La [page suivante](liste.md) en fait une collection, en déplaçant la sentinelle : elle passera de la fin au début, et la liste deviendra sa propre sentinelle.
