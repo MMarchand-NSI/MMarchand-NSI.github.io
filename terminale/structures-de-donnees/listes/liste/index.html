@@ -9727,14 +9727,14 @@
 <h1 id="la-liste-chainee">La liste chaînée</h1>
 <div class="admonition danger">
 <p class="admonition-title">Requis</p>
-<p>La page <a href="../maillons/">Maillons et sentinelle</a>, et ses sept tests qui passent. Tes fichiers <code>maillon.py</code> et <code>maillon_test.py</code> ne changeront plus d'une ligne.</p>
+<p>La page <a href="../maillons/">Maillons et sentinelle</a>, et ses quatre tests qui passent. Tes fichiers <code>maillon.py</code> et <code>maillon_test.py</code> ne changeront plus d'une ligne.</p>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Rappel d'ouverture (5 minutes, de mémoire, cahier fermé)</p>
 <ol>
 <li>La chaîne est <code>1 -&gt; 2 -&gt; 3 -&gt; S</code>, et tu tiens le maillon <code>b</code> qui porte <code>2</code>. Écris la ligne qui insère un maillon portant <code>7</code> entre le <code>2</code> et le <code>3</code>.</li>
 <li>Tu tiens <code>b</code>, et lui seul. Pourquoi ne peux-tu pas retirer de la chaîne le maillon qui porte <code>2</code> ?</li>
-<li>Que coûte <code>avancer(k)</code>, et pourquoi n'est-ce pas <code>O(1)</code> ?</li>
+<li>Pourquoi atteindre le <code>k</code>-ième maillon d'une chaîne coûte-t-il <code>O(k)</code>, et non <code>O(1)</code> comme dans un tableau ?</li>
 </ol>
 <details class="success">
 <summary>Correction</summary>
@@ -9746,7 +9746,7 @@
 <li>
 <p>Parce qu'un maillon n'a aucune flèche qui <strong>arrive</strong> sur lui. Pour le sortir de la chaîne, il faut tenir celui d'avant, et refermer la chaîne par-dessus. <code>b</code> ne peut rien faire à <code>b</code>.</p>
 </li>
-<li><code>O(k)</code>, parce qu'il faut suivre les flèches une par une : il n'y a pas d'adresse à calculer comme dans un tableau, il n'y a qu'un chemin à parcourir.</li>
+<li>Parce qu'il faut suivre les flèches une par une : il n'y a pas d'adresse à calculer comme dans un tableau, il n'y a qu'un chemin à parcourir.</li>
 </ol>
 </details>
 </div>
@@ -9758,24 +9758,24 @@
 </ul>
 <p>Les deux ont la même cause : il manque un maillon <strong>avant le premier</strong>. On va donc en poser un, qui est toujours là, qui ne porte aucune donnée, et qui ne bouge jamais. C'est une sentinelle, la même classe exactement, mais on la met <strong>au début</strong> au lieu de la mettre à la fin.</p>
 <p>Et puisqu'on en a une au début, on n'en veut plus une seconde à la fin : le dernier maillon pointe <strong>de nouveau sur elle</strong>. La chaîne devient un <strong>cercle</strong>.</p>
-<p>Voici la liste qui contient <code>1</code> puis <code>2</code>. La sentinelle est le rond <code>S</code>.</p>
+<p>Voici la liste qui contient <code>1</code> puis <code>2</code>. La sentinelle est le rectangle <code>S</code>.</p>
 <pre class="mermaid"><code>graph LR
-  S(("S")) --&gt; m1["1"] --&gt; m2["2"] --&gt; S</code></pre>
+  S["S"] --&gt; m1["1"] --&gt; m2["2"] --&gt; S</code></pre>
 <p>Et voici la liste <strong>vide</strong> : il n'y a que la sentinelle, et elle pointe sur elle-même, exactement comme à la fin d'une chaîne.</p>
 <pre class="mermaid"><code>graph LR
-  S(("S")) --&gt; S</code></pre>
+  S["S"] --&gt; S</code></pre>
 <div class="admonition question">
 <p class="admonition-title">Dessiner, et compter (obligatoire)</p>
 <p>Sur ton cahier, dessine la liste qui contient <code>1</code>, <code>2</code>, <code>3</code>.</p>
 <ol>
-<li>Combien de ronds as-tu tracés ? Combien de flèches ?</li>
+<li>Combien de rectangles as-tu tracés ? Combien de flèches ?</li>
 <li>Un parcours part de la sentinelle et suit les flèches. Comment sait-il qu'il a fait le tour ?</li>
 <li>Y a-t-il encore, quelque part dans ce dessin, un maillon dont le <code>suivant</code> serait inconnu ?</li>
 </ol>
 <details class="success">
 <summary>Correction</summary>
 <ol>
-<li><strong>Quatre</strong> ronds, trois maillons plus la sentinelle, et <strong>quatre</strong> flèches : une par maillon, plus celle de la sentinelle. Autant de flèches que de ronds, c'est la signature d'un cercle.</li>
+<li><strong>Quatre</strong> rectangles, trois maillons plus la sentinelle, et <strong>quatre</strong> flèches : une par maillon, plus celle de la sentinelle. Autant de flèches que de rectangles, c'est la signature d'un cercle.</li>
 <li>Il sait qu'il a fait le tour quand il <strong>retombe sur la sentinelle</strong>. Un parcours ne s'arrête donc plus sur <code>None</code>, ni sur un test de sentinelle : il s'arrête quand il revient sur son point de départ.</li>
 <li>Non, et c'est tout l'intérêt. Chaque maillon a un suivant, chaque maillon a un précédent, et il n'y a plus un seul cas particulier à traiter.</li>
 </ol>
@@ -9783,40 +9783,27 @@
 </div>
 <h2 id="2-la-liste-est-sa-propre-sentinelle">2 La liste est sa propre sentinelle</h2>
 <p>Il reste une question : <strong>où range-t-on cette sentinelle</strong> ? Quelque part, il faut un objet qui désigne la liste entière, celui qu'on passe aux fonctions et qu'on garde dans une variable.</p>
-<p>Cinq montages sont possibles, et ils sont tous employés dans la vraie vie.</p>
+<p>Cinq montages sont possibles, et ils sont tous employés dans de vrais programmes.</p>
 <p><img alt="Cinq variantes de liste chaînée : simple, avec pointeur de fin, avec sentinelle, avec la tête qui est la sentinelle, et circulaire" src="../image-1.png" /></p>
-<p>On prend le <strong>(d)</strong>, et la réponse à la question tient en une phrase : on ne range la sentinelle nulle part, <strong>la liste est la sentinelle</strong>. Un seul objet fait les deux métiers.</p>
+<p>On prend le <strong>(d)</strong>, et la réponse à la question tient en une phrase : on ne range la sentinelle nulle part, <strong>la liste est la sentinelle</strong>. Un seul objet remplit les deux rôles.</p>
 <p>Cela s'écrit en deux lignes. Crée <code>structures/lineaires/liste.py</code> :</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="c1"># structures/lineaires/liste.py</span>
 <a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
-<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Callable</span>
+<a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires.maillon</span><span class="w"> </span><span class="kn">import</span> <span class="n">Maillon</span><span class="p">,</span> <span class="n">Sentinelle</span>
 <a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>
-<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires.maillon</span><span class="w"> </span><span class="kn">import</span> <span class="n">Maillon</span><span class="p">,</span> <span class="n">Sentinelle</span>
-<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>
-<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="c1"># Une clé est une fonction qui, d&#39;un élément, rend quelque chose de comparable.</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="c1"># `Comparable` est un nom de convention : il dit ce qu&#39;on attend, il n&#39;existe pas</span>
-<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="c1"># à l&#39;exécution, et c&#39;est celui qu&#39;emploient déjà les cours sur les arbres.</span>
-<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="nb">type</span> <span class="n">Cle</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">Callable</span><span class="p">[[</span><span class="n">T</span><span class="p">],</span> <span class="n">Comparable</span><span class="p">]</span>
-<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a>
+<a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+<a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="k">class</span><span class="w"> </span><span class="nc">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">Sentinelle</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="sd">    Une liste simplement chaînée circulaire, qui est sa propre sentinelle.</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="sd">    Le premier élément est self.suivant, et le dernier maillon pointe de nouveau</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10" href="#__codelineno-0-10"></a><span class="sd">    sur la liste : une liste vide pointe donc sur elle-même.</span>
+<a id="__codelineno-0-11" name="__codelineno-0-11" href="#__codelineno-0-11"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-0-12" name="__codelineno-0-12" href="#__codelineno-0-12"></a>
-<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a><span class="k">def</span><span class="w"> </span><span class="nf">identite</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">x</span><span class="p">:</span> <span class="n">T</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Clé par défaut : l&#39;élément est sa propre clé.&quot;&quot;&quot;</span>
-<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>    <span class="k">return</span> <span class="n">x</span>
-<a id="__codelineno-0-16" name="__codelineno-0-16" href="#__codelineno-0-16"></a>
-<a id="__codelineno-0-17" name="__codelineno-0-17" href="#__codelineno-0-17"></a>
-<a id="__codelineno-0-18" name="__codelineno-0-18" href="#__codelineno-0-18"></a><span class="k">class</span><span class="w"> </span><span class="nc">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">Sentinelle</span><span class="p">[</span><span class="n">T</span><span class="p">]):</span>
-<a id="__codelineno-0-19" name="__codelineno-0-19" href="#__codelineno-0-19"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-0-20" name="__codelineno-0-20" href="#__codelineno-0-20"></a><span class="sd">    Une liste simplement chaînée circulaire, qui est sa propre sentinelle.</span>
-<a id="__codelineno-0-21" name="__codelineno-0-21" href="#__codelineno-0-21"></a><span class="sd">    Le premier élément est self.suivant, et le dernier maillon pointe de nouveau</span>
-<a id="__codelineno-0-22" name="__codelineno-0-22" href="#__codelineno-0-22"></a><span class="sd">    sur la liste : une liste vide pointe donc sur elle-même.</span>
-<a id="__codelineno-0-23" name="__codelineno-0-23" href="#__codelineno-0-23"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-0-24" name="__codelineno-0-24" href="#__codelineno-0-24"></a>
-<a id="__codelineno-0-25" name="__codelineno-0-25" href="#__codelineno-0-25"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-0-26" name="__codelineno-0-26" href="#__codelineno-0-26"></a>        <span class="c1"># Sentinelle() fait déjà pointer la liste vide sur elle-même</span>
-<a id="__codelineno-0-27" name="__codelineno-0-27" href="#__codelineno-0-27"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+<a id="__codelineno-0-13" name="__codelineno-0-13" href="#__codelineno-0-13"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-0-14" name="__codelineno-0-14" href="#__codelineno-0-14"></a>        <span class="c1"># Sentinelle() fait déjà pointer la liste vide sur elle-même</span>
+<a id="__codelineno-0-15" name="__codelineno-0-15" href="#__codelineno-0-15"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
 </code></pre></div>
 <p>Le constructeur n'a rien à faire. <code>Sentinelle.__init__</code> fait déjà pointer l'objet sur lui-même, et c'est exactement ce qu'est une liste vide.</p>
-<p><code>Cle</code> et <code>identite</code> ne serviront que dans la dernière partie. Écris-les maintenant, cela t'évitera d'y revenir.</p>
 <pre class="mermaid"><code>classDiagram
   class Maillon {
     data : T
@@ -9826,7 +9813,7 @@
   class Liste
   Maillon &lt;|-- Sentinelle
   Sentinelle &lt;|-- Liste</code></pre>
-<p>Une liste <strong>est</strong> une sentinelle, qui <strong>est</strong> un maillon. Les trois opérations de la page précédente marchent donc dessus sans une ligne de changement.</p>
+<p>Une liste <strong>est</strong> une sentinelle, qui <strong>est</strong> un maillon. Les deux opérations de la page précédente marchent donc dessus sans une ligne de changement.</p>
 <div class="admonition info">
 <p class="admonition-title">Ce que cela change dans tous les parcours</p>
 <p>Trois réflexes, et ils vont revenir dans presque chaque méthode.</p>
@@ -9871,29 +9858,29 @@
 <a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">READ_ONCE</span><span class="p">(</span><span class="n">head</span><span class="o">-&gt;</span><span class="n">next</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">head</span><span class="p">;</span>
 <a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="p">}</span>
 </code></pre></div>
-<p><strong>Ce que ce choix achète.</strong> Aucun <code>suivant</code> ne vaut jamais <code>None</code>, donc aucune opération n'a à se demander si elle est au bout de la chaîne, ni si la liste est vide. C'est le piège que Tony Hoare appelle son erreur à un milliard de dollars : il a introduit la référence nulle en 1965 dans ALGOL W parce qu'elle était facile à implémenter, et il en a fait une conférence en 2009 sous le titre <em>Null References: The Billion Dollar Mistake</em>.</p>
+<p><strong>Ce que ce choix apporte.</strong> Aucun <code>suivant</code> ne vaut jamais <code>None</code>, donc aucune opération n'a à se demander si elle est au bout de la chaîne, ni si la liste est vide. C'est le piège que Tony Hoare appelle son erreur à un milliard de dollars : il a introduit la référence nulle en 1965 dans ALGOL W parce qu'elle était facile à implémenter, et il en a fait une conférence en 2009 sous le titre <em>Null References: The Billion Dollar Mistake</em>.</p>
 <p><strong>Deux différences, pour ne pas croire que c'est le même objet.</strong> Le noyau est <strong>doublement chaîné</strong>, chaque maillon ayant un <code>next</code> et un <code>prev</code> : il insère en fin et retire un maillon en <code>O(1)</code>, là où il nous faudra un <code>precedent</code> en <code>O(n)</code>. Et il est <strong>intrusif</strong>, il n'y a pas de champ <code>data</code> : le maillon est embarqué <strong>dans</strong> la donnée, et on remonte de l'un à l'autre avec <code>container_of</code>.</p>
 </details>
 <div class="admonition question">
 <p class="admonition-title">Prédire, sur une chaîne circulaire (obligatoire)</p>
-<p>Soit <code>lst</code> une liste contenant <code>1</code>, <code>2</code>, <code>3</code>. Tu n'as rien de nouveau à écrire : <code>avancer</code> est celle de la page précédente, inchangée.</p>
+<p>Soit <code>lst</code> une liste contenant <code>1</code>, <code>2</code>, <code>3</code>. Tu n'as rien à écrire : il n'y a que des flèches à suivre.</p>
 <p>Donne les quatre réponses :</p>
 <ul>
-<li>ce que renvoie <code>lst.avancer(0)</code></li>
-<li>la donnée de <code>lst.avancer(3)</code></li>
-<li>ce que renvoie <code>lst.avancer(4)</code></li>
-<li>la donnée de <code>lst.avancer(5)</code>.</li>
+<li>ce que désigne <code>lst.suivant</code></li>
+<li>ce que désigne <code>lst.suivant.suivant.suivant</code></li>
+<li>ce que désigne <code>lst.suivant.suivant.suivant.suivant</code></li>
+<li>ce que désigne <code>lst.suivant.suivant.suivant.suivant.suivant</code>.</li>
 </ul>
 <p><strong>Écris tes quatre réponses avant de dérouler la correction.</strong></p>
 <details class="success">
 <summary>Correction</summary>
 <ul>
-<li><code>lst.avancer(0)</code> renvoie <strong><code>lst</code> elle-même</strong> : la liste est un maillon, et <code>avancer(0)</code> ne bouge pas.</li>
-<li><code>lst.avancer(3).data</code> vaut <code>3</code>. La sentinelle est le départ, donc le premier élément est à <strong>un</strong> cran, pas à zéro.</li>
-<li><code>lst.avancer(4)</code> renvoie <strong><code>lst</code></strong> : on est revenu sur la sentinelle.</li>
-<li><code>lst.avancer(5).data</code> vaut <code>1</code> : on repart pour un tour.</li>
+<li><code>lst.suivant</code> est le maillon qui porte <code>1</code>. La sentinelle est le départ, donc le premier élément est à <strong>un</strong> cran, pas à zéro.</li>
+<li>Trois crans mènent au maillon qui porte <code>3</code>, le dernier.</li>
+<li>Quatre crans ramènent sur <strong><code>lst</code> elle-même</strong> : le cercle se referme, et <code>lst.suivant.suivant.suivant.suivant is lst</code> vaut <code>True</code>.</li>
+<li>Cinq crans repartent pour un tour, et on retombe sur le maillon qui porte <code>1</code>.</li>
 </ul>
-<p>Sur un cercle, <code>avancer</code> ne tombe jamais en panne de maillon. Il tourne, et c'est l'avertissement ci-dessus en acte.</p>
+<p>Sur un cercle, suivre les flèches ne tombe jamais en panne de maillon. Cela tourne, et c'est l'avertissement ci-dessus en acte.</p>
 </details>
 </div>
 <h2 id="3-le-fichier-de-tests">3 Le fichier de tests</h2>
@@ -9906,87 +9893,56 @@
 <a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">structures.lineaires.maillon</span><span class="w"> </span><span class="kn">import</span> <span class="n">Maillon</span>
 <a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>
 <a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">class</span><span class="w"> </span><span class="nc">Eleve</span><span class="p">:</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Un élève, pour tester la stabilité du tri : on trie par note uniquement.&quot;&quot;&quot;</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="n">note</span><span class="p">:</span> <span class="nb">int</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">note</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">nom</span> <span class="o">=</span> <span class="n">nom</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">note</span> <span class="o">=</span> <span class="n">note</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="k">def</span><span class="w"> </span><span class="nf">L</span><span class="p">(</span><span class="o">*</span><span class="n">xs</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Construit une liste contenant les éléments donnés, dans l&#39;ordre, sans append.&quot;&quot;&quot;</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Liste</span><span class="p">()</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a>    <span class="n">ref</span><span class="p">:</span> <span class="n">Maillon</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">:</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a>        <span class="n">ref</span><span class="o">.</span><span class="n">suivant</span> <span class="o">=</span> <span class="n">Maillon</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>        <span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">suivant</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a>    <span class="k">return</span> <span class="n">lst</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a>
 <a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="k">def</span><span class="w"> </span><span class="nf">note_de</span><span class="p">(</span><span class="n">e</span><span class="p">:</span> <span class="n">Eleve</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Clé de tri : la note, et elle seule.&quot;&quot;&quot;</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>    <span class="k">return</span> <span class="n">e</span><span class="o">.</span><span class="n">note</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="k">def</span><span class="w"> </span><span class="nf">un_a</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Construit la liste 1, 2, ..., n.&quot;&quot;&quot;</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a>    <span class="k">return</span> <span class="n">L</span><span class="p">(</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a>
 <a id="__codelineno-3-21" name="__codelineno-3-21" href="#__codelineno-3-21"></a>
-<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a>
-<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="k">def</span><span class="w"> </span><span class="nf">oppose</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Clé de tri : l&#39;opposé, qui range les nombres en décroissant.&quot;&quot;&quot;</span>
-<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>    <span class="k">return</span> <span class="o">-</span><span class="n">x</span>
-<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>
-<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>
-<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a><span class="k">def</span><span class="w"> </span><span class="nf">L</span><span class="p">(</span><span class="o">*</span><span class="n">xs</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Construit une liste contenant les éléments donnés, dans l&#39;ordre, sans append.&quot;&quot;&quot;</span>
-<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a>    <span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Liste</span><span class="p">()</span>
-<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a>    <span class="n">ref</span><span class="p">:</span> <span class="n">Maillon</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span>
-<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">xs</span><span class="p">:</span>
-<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>        <span class="n">ref</span><span class="o">.</span><span class="n">suivant</span> <span class="o">=</span> <span class="n">Maillon</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
-<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>        <span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">suivant</span>
-<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>    <span class="k">return</span> <span class="n">lst</span>
-<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>
-<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>
-<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a><span class="k">def</span><span class="w"> </span><span class="nf">eleves</span><span class="p">(</span><span class="o">*</span><span class="n">es</span><span class="p">:</span> <span class="n">Eleve</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="n">Eleve</span><span class="p">]:</span>
-<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Construit une liste d&#39;élèves, dans l&#39;ordre, sans append.&quot;&quot;&quot;</span>
-<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a>    <span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">Eleve</span><span class="p">]</span> <span class="o">=</span> <span class="n">Liste</span><span class="p">()</span>
-<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a>    <span class="n">ref</span><span class="p">:</span> <span class="n">Maillon</span><span class="p">[</span><span class="n">Eleve</span><span class="p">]</span> <span class="o">=</span> <span class="n">lst</span>
-<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>    <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">es</span><span class="p">:</span>
-<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>        <span class="n">ref</span><span class="o">.</span><span class="n">suivant</span> <span class="o">=</span> <span class="n">Maillon</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">lst</span><span class="p">)</span>
-<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>        <span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">suivant</span>
-<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>    <span class="k">return</span> <span class="n">lst</span>
-<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>
-<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>
-<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a><span class="k">def</span><span class="w"> </span><span class="nf">un_a</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Liste</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Construit la liste 1, 2, ..., n.&quot;&quot;&quot;</span>
-<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a>    <span class="k">return</span> <span class="n">L</span><span class="p">(</span><span class="o">*</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
-<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>
-<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>
-<a id="__codelineno-3-53" name="__codelineno-3-53" href="#__codelineno-3-53"></a><span class="k">def</span><span class="w"> </span><span class="nf">cran</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">m</span><span class="p">:</span> <span class="n">Maillon</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Maillon</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-3-54" name="__codelineno-3-54" href="#__codelineno-3-54"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le maillon situé k crans après m (comme avancer, sans l&#39;utiliser).&quot;&quot;&quot;</span>
-<a id="__codelineno-3-55" name="__codelineno-3-55" href="#__codelineno-3-55"></a>    <span class="n">ref</span> <span class="o">=</span> <span class="n">m</span>
-<a id="__codelineno-3-56" name="__codelineno-3-56" href="#__codelineno-3-56"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
-<a id="__codelineno-3-57" name="__codelineno-3-57" href="#__codelineno-3-57"></a>        <span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">suivant</span>
-<a id="__codelineno-3-58" name="__codelineno-3-58" href="#__codelineno-3-58"></a>    <span class="k">return</span> <span class="n">ref</span>
-<a id="__codelineno-3-59" name="__codelineno-3-59" href="#__codelineno-3-59"></a>
-<a id="__codelineno-3-60" name="__codelineno-3-60" href="#__codelineno-3-60"></a>
-<a id="__codelineno-3-61" name="__codelineno-3-61" href="#__codelineno-3-61"></a><span class="k">def</span><span class="w"> </span><span class="nf">contenu</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
-<a id="__codelineno-3-62" name="__codelineno-3-62" href="#__codelineno-3-62"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie les éléments de la liste, dans l&#39;ordre, pour les comparer facilement.&quot;&quot;&quot;</span>
-<a id="__codelineno-3-63" name="__codelineno-3-63" href="#__codelineno-3-63"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-3-64" name="__codelineno-3-64" href="#__codelineno-3-64"></a>    <span class="n">ptr</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="n">suivant</span>
-<a id="__codelineno-3-65" name="__codelineno-3-65" href="#__codelineno-3-65"></a>    <span class="k">while</span> <span class="n">ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">lst</span><span class="p">:</span>
-<a id="__codelineno-3-66" name="__codelineno-3-66" href="#__codelineno-3-66"></a>        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ptr</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
-<a id="__codelineno-3-67" name="__codelineno-3-67" href="#__codelineno-3-67"></a>        <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">.</span><span class="n">suivant</span>
-<a id="__codelineno-3-68" name="__codelineno-3-68" href="#__codelineno-3-68"></a>    <span class="k">return</span> <span class="n">res</span>
-<a id="__codelineno-3-69" name="__codelineno-3-69" href="#__codelineno-3-69"></a>
-<a id="__codelineno-3-70" name="__codelineno-3-70" href="#__codelineno-3-70"></a>
-<a id="__codelineno-3-71" name="__codelineno-3-71" href="#__codelineno-3-71"></a><span class="k">def</span><span class="w"> </span><span class="nf">maillons</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Maillon</span><span class="p">[</span><span class="n">T</span><span class="p">]]:</span>
-<a id="__codelineno-3-72" name="__codelineno-3-72" href="#__codelineno-3-72"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie les maillons de la liste (les objets eux-mêmes), dans l&#39;ordre.&quot;&quot;&quot;</span>
-<a id="__codelineno-3-73" name="__codelineno-3-73" href="#__codelineno-3-73"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
-<a id="__codelineno-3-74" name="__codelineno-3-74" href="#__codelineno-3-74"></a>    <span class="n">ptr</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="n">suivant</span>
-<a id="__codelineno-3-75" name="__codelineno-3-75" href="#__codelineno-3-75"></a>    <span class="k">while</span> <span class="n">ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">lst</span><span class="p">:</span>
-<a id="__codelineno-3-76" name="__codelineno-3-76" href="#__codelineno-3-76"></a>        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span>
-<a id="__codelineno-3-77" name="__codelineno-3-77" href="#__codelineno-3-77"></a>        <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">.</span><span class="n">suivant</span>
-<a id="__codelineno-3-78" name="__codelineno-3-78" href="#__codelineno-3-78"></a>    <span class="k">return</span> <span class="n">res</span>
-<a id="__codelineno-3-79" name="__codelineno-3-79" href="#__codelineno-3-79"></a>
-<a id="__codelineno-3-80" name="__codelineno-3-80" href="#__codelineno-3-80"></a>
-<a id="__codelineno-3-81" name="__codelineno-3-81" href="#__codelineno-3-81"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_constructeur</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-3-82" name="__codelineno-3-82" href="#__codelineno-3-82"></a>    <span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Liste</span><span class="p">()</span>
-<a id="__codelineno-3-83" name="__codelineno-3-83" href="#__codelineno-3-83"></a>    <span class="k">assert</span> <span class="n">lst</span><span class="o">.</span><span class="n">suivant</span> <span class="ow">is</span> <span class="n">lst</span>       <span class="c1"># la liste vide pointe sur elle-même</span>
+<a id="__codelineno-3-22" name="__codelineno-3-22" href="#__codelineno-3-22"></a><span class="k">def</span><span class="w"> </span><span class="nf">cran</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">m</span><span class="p">:</span> <span class="n">Maillon</span><span class="p">[</span><span class="n">T</span><span class="p">],</span> <span class="n">k</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Maillon</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-3-23" name="__codelineno-3-23" href="#__codelineno-3-23"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie le maillon situé k crans après m.&quot;&quot;&quot;</span>
+<a id="__codelineno-3-24" name="__codelineno-3-24" href="#__codelineno-3-24"></a>    <span class="n">ref</span> <span class="o">=</span> <span class="n">m</span>
+<a id="__codelineno-3-25" name="__codelineno-3-25" href="#__codelineno-3-25"></a>    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
+<a id="__codelineno-3-26" name="__codelineno-3-26" href="#__codelineno-3-26"></a>        <span class="n">ref</span> <span class="o">=</span> <span class="n">ref</span><span class="o">.</span><span class="n">suivant</span>
+<a id="__codelineno-3-27" name="__codelineno-3-27" href="#__codelineno-3-27"></a>    <span class="k">return</span> <span class="n">ref</span>
+<a id="__codelineno-3-28" name="__codelineno-3-28" href="#__codelineno-3-28"></a>
+<a id="__codelineno-3-29" name="__codelineno-3-29" href="#__codelineno-3-29"></a>
+<a id="__codelineno-3-30" name="__codelineno-3-30" href="#__codelineno-3-30"></a><span class="k">def</span><span class="w"> </span><span class="nf">contenu</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
+<a id="__codelineno-3-31" name="__codelineno-3-31" href="#__codelineno-3-31"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie les éléments de la liste, dans l&#39;ordre, pour les comparer facilement.&quot;&quot;&quot;</span>
+<a id="__codelineno-3-32" name="__codelineno-3-32" href="#__codelineno-3-32"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-3-33" name="__codelineno-3-33" href="#__codelineno-3-33"></a>    <span class="n">ptr</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="n">suivant</span>
+<a id="__codelineno-3-34" name="__codelineno-3-34" href="#__codelineno-3-34"></a>    <span class="k">while</span> <span class="n">ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">lst</span><span class="p">:</span>
+<a id="__codelineno-3-35" name="__codelineno-3-35" href="#__codelineno-3-35"></a>        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ptr</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+<a id="__codelineno-3-36" name="__codelineno-3-36" href="#__codelineno-3-36"></a>        <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">.</span><span class="n">suivant</span>
+<a id="__codelineno-3-37" name="__codelineno-3-37" href="#__codelineno-3-37"></a>    <span class="k">return</span> <span class="n">res</span>
+<a id="__codelineno-3-38" name="__codelineno-3-38" href="#__codelineno-3-38"></a>
+<a id="__codelineno-3-39" name="__codelineno-3-39" href="#__codelineno-3-39"></a>
+<a id="__codelineno-3-40" name="__codelineno-3-40" href="#__codelineno-3-40"></a><span class="k">def</span><span class="w"> </span><span class="nf">maillons</span><span class="p">[</span><span class="n">T</span><span class="p">](</span><span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="n">Maillon</span><span class="p">[</span><span class="n">T</span><span class="p">]]:</span>
+<a id="__codelineno-3-41" name="__codelineno-3-41" href="#__codelineno-3-41"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie les maillons de la liste (les objets eux-mêmes), dans l&#39;ordre.&quot;&quot;&quot;</span>
+<a id="__codelineno-3-42" name="__codelineno-3-42" href="#__codelineno-3-42"></a>    <span class="n">res</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-3-43" name="__codelineno-3-43" href="#__codelineno-3-43"></a>    <span class="n">ptr</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="n">suivant</span>
+<a id="__codelineno-3-44" name="__codelineno-3-44" href="#__codelineno-3-44"></a>    <span class="k">while</span> <span class="n">ptr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">lst</span><span class="p">:</span>
+<a id="__codelineno-3-45" name="__codelineno-3-45" href="#__codelineno-3-45"></a>        <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ptr</span><span class="p">)</span>
+<a id="__codelineno-3-46" name="__codelineno-3-46" href="#__codelineno-3-46"></a>        <span class="n">ptr</span> <span class="o">=</span> <span class="n">ptr</span><span class="o">.</span><span class="n">suivant</span>
+<a id="__codelineno-3-47" name="__codelineno-3-47" href="#__codelineno-3-47"></a>    <span class="k">return</span> <span class="n">res</span>
+<a id="__codelineno-3-48" name="__codelineno-3-48" href="#__codelineno-3-48"></a>
+<a id="__codelineno-3-49" name="__codelineno-3-49" href="#__codelineno-3-49"></a>
+<a id="__codelineno-3-50" name="__codelineno-3-50" href="#__codelineno-3-50"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_constructeur</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-3-51" name="__codelineno-3-51" href="#__codelineno-3-51"></a>    <span class="n">lst</span><span class="p">:</span> <span class="n">Liste</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="n">Liste</span><span class="p">()</span>
+<a id="__codelineno-3-52" name="__codelineno-3-52" href="#__codelineno-3-52"></a>    <span class="k">assert</span> <span class="n">lst</span><span class="o">.</span><span class="n">suivant</span> <span class="ow">is</span> <span class="n">lst</span>       <span class="c1"># la liste vide pointe sur elle-même</span>
 </code></pre></div>
 </details>
 <p>Un mot sur ces outils, parce qu'ils ont été écrits ainsi exprès. <code>L(1, 2, 3)</code> construit une liste en <strong>branchant les maillons à la main</strong>, sans passer par <code>append</code> ni <code>ajouter_debut</code>. Si elle les utilisait, le jour où ta méthode <code>append</code> serait fausse, <strong>tous</strong> les tests échoueraient d'un coup et aucun ne te dirait où est le problème. Un test ne doit dépendre que de ce qu'il teste.</p>
-<p><code>eleves</code>, <code>un_a</code>, <code>cran</code> et <code>maillons</code> ne serviront que plus bas, et <code>Eleve</code>, <code>note_de</code> et <code>oppose</code> seulement dans la dernière partie.</p>
+<p><code>un_a</code>, <code>cran</code> et <code>maillons</code> ne serviront que plus bas.</p>
 <p>Le test du constructeur est déjà là : lance <code>uv run pytest</code>, il doit passer.</p>
 <h2 id="4-les-methodes-de-la-liste">4 Les méthodes de la liste</h2>
 <p>Voici ce que la liste saura faire. Lis le tableau en entier <strong>avant</strong> d'écrire quoi que ce soit : c'est le contrat, et la moitié des méthodes s'écrit en appelant celles d'au-dessus.</p>
@@ -10067,7 +10023,7 @@
 </tbody>
 </table>
 <p>Les méthodes se placent toutes dans la classe <code>Liste</code>. Leur ordre dans le fichier n'a aucune importance, mais écris-les dans l'ordre de la page : chacune se sert des précédentes.</p>
-<p>Et comme sur la page précédente, <code>...</code> marque ce que tu as à écrire.</p>
+<p>Et comme à la page précédente, <code>...</code> marque ce que tu as à écrire.</p>
 <h3 id="41-est_vide">4.1 <code>est_vide</code></h3>
 <div class="admonition question">
 <p class="admonition-title">Une seule ligne, et c'est la plus réemployée de la page (obligatoire)</p>
@@ -10096,7 +10052,7 @@
 <a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>        <span class="o">...</span>
 <a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="k">return</span> <span class="n">res</span>
 </code></pre></div>
-<p>C'est le parcours type, celui que tu vas réécrire une dizaine de fois : une référence qui part du premier élément et qui avance tant qu'elle n'est pas revenue sur <code>self</code>. C'est aussi, aux <code>append</code> près, la fonction <code>montrer</code> de la page précédente.</p>
+<p>C'est le parcours type, celui que tu vas réécrire une dizaine de fois : une référence qui part du premier élément et qui avance tant qu'elle n'est pas revenue sur <code>self</code>.</p>
 <details class="info">
 <summary>Test à recopier dans <code>liste_test.py</code></summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_taille</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -10274,11 +10230,11 @@
 <h3 id="48-precedent">4.8 <code>precedent</code></h3>
 <div class="admonition question">
 <p class="admonition-title">Le maillon d'avant (obligatoire)</p>
-<p>Cette méthode existe pour une raison précise, et c'est la question 2 du rappel d'ouverture : dans une chaîne à sens unique, on ne peut retirer un maillon qu'<strong>en passant par celui d'avant</strong>. <code>precedent(m).decroche_prochain()</code> retire <code>m</code>, et c'est la seule façon de le faire.</p>
+<p>Cette méthode existe pour une raison précise, et c'est la question 2 du rappel d'ouverture : dans une chaîne à sens unique, on ne peut retirer un maillon qu'<strong>en passant par celui d'avant</strong>. <code>precedent(m)</code> rend la seule position depuis laquelle on peut agir sur <code>m</code>, et c'est de là que <code>deplacer_prochain_apres</code> le déplacera.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">precedent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="n">Maillon</span><span class="p">[</span><span class="n">T</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Maillon</span><span class="p">[</span><span class="n">T</span><span class="p">]:</span>
 <a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="sd">    Renvoie le maillon qui précède m dans la liste, en O(n).</span>
-<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="sd">    Utile pour retirer m : precedent(m).decroche_prochain().</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="sd">    Utile pour agir sur m, qu&#39;on n&#39;atteint que par son précédent.</span>
 <a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="sd">    Précondition : m est un maillon de cette liste.</span>
 <a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a>    <span class="n">ref</span> <span class="o">=</span> <span class="bp">self</span>
@@ -10339,7 +10295,7 @@
 <a id="__codelineno-21-9" name="__codelineno-21-9" href="#__codelineno-21-9"></a>        <span class="o">...</span>
 <a id="__codelineno-21-10" name="__codelineno-21-10" href="#__codelineno-21-10"></a>    <span class="k">return</span> <span class="o">...</span>
 </code></pre></div>
-<p>Deux références avancent en parallèle, une par liste. La dernière ligne décide de deux choses d'un coup : la boucle s'arrête dès que <strong>l'une</strong> des deux listes est épuisée, et deux listes de longueurs différentes ne doivent pas être déclarées égales.</p>
+<p>Deux références avancent en parallèle, une par liste. La dernière ligne décide de deux choses d'un coup : la boucle s'arrête dès que <strong>l'une</strong> des deux listes est épuisée, et deux listes de longueurs différentes ne doivent pas être tenues pour égales.</p>
 <details class="info">
 <summary>Test à recopier dans <code>liste_test.py</code></summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_est_egale</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -10523,10 +10479,10 @@
 <h3 id="413-renverser-la-liste">4.13 Renverser la liste</h3>
 <div class="admonition question">
 <p class="admonition-title">Lire, pas écrire (entraînement)</p>
-<p>Ce code ne demande aucune méthode nouvelle. Il renverse une liste <strong>en place</strong>, sans créer un seul maillon, avec deux lignes qui n'utilisent que <code>decroche_prochain</code> et <code>insere_apres</code>.</p>
+<p>Ce code ne demande aucune méthode nouvelle. Il renverse une liste <strong>en place</strong>, sans créer un seul maillon, avec deux lignes qui n'utilisent qu'une seule méthode du maillon.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="n">premier</span> <span class="o">=</span> <span class="n">lst</span><span class="o">.</span><span class="n">suivant</span>
 <a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="k">while</span> <span class="n">premier</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">lst</span> <span class="ow">and</span> <span class="n">premier</span><span class="o">.</span><span class="n">suivant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">lst</span><span class="p">:</span>
-<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>    <span class="n">lst</span><span class="o">.</span><span class="n">insere_apres</span><span class="p">(</span><span class="n">premier</span><span class="o">.</span><span class="n">decroche_prochain</span><span class="p">())</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a>    <span class="n">premier</span><span class="o">.</span><span class="n">deplacer_prochain_apres</span><span class="p">(</span><span class="n">lst</span><span class="p">)</span>
 </code></pre></div>
 <p>Réponds à ces trois questions sur ton cahier, puis déroule les tours sur la liste <code>1, 2, 3, 4</code> :</p>
 <ul>
@@ -10537,7 +10493,7 @@
 <details class="success">
 <summary>Correction</summary>
 <p><code>premier</code> désigne le maillon qui portait le <strong>premier</strong> élément, et il n'est <strong>jamais réaffecté</strong> : tout le reste défile devant lui, et il finit dernier.</p>
-<p>À chaque tour, le maillon qui suit <code>premier</code> est décroché et réinséré juste après <code>lst</code>, c'est-à-dire <strong>en tête</strong>.</p>
+<p>À chaque tour, le maillon qui suit <code>premier</code> est déplacé juste après <code>lst</code>, c'est-à-dire <strong>en tête</strong>.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a>départ : 1, 2, 3, 4
 <a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a>tour 1 : 2, 1, 3, 4
 <a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a>tour 2 : 3, 2, 1, 4
@@ -10545,10 +10501,6 @@
 </code></pre></div>
 <p>La boucle s'arrête quand <code>premier.suivant</code> est <code>lst</code>, parce que cela veut dire que <code>premier</code> est devenu le dernier maillon : tout ce qui le suivait est passé devant.</p>
 <p>Le test <code>premier is not lst</code> est ce qui protège la liste <strong>vide</strong>, où <code>lst.suivant</code> est <code>lst</code> et où il n'y a rien à renverser.</p>
-</details>
-<details class="question">
-<summary>À écrire (bonus)</summary>
-<p>Range ce code dans une méthode <code>renverser(self) -&gt; None</code> de la classe <code>Liste</code>, et écris son test. Il doit vérifier le contenu renversé <strong>et</strong> qu'aucun maillon n'a été créé, avec <code>maillons</code> et <code>is</code>. Vérifie-le pour <code>n</code> allant de <code>0</code> à <code>4</code>.</p>
 </details>
 </div>
 <h2 id="5-ce-que-cela-coute">5 Ce que cela coûte</h2>
@@ -10564,11 +10516,7 @@
 <tbody>
 <tr>
 <td><code>O(1)</code></td>
-<td><code>insere_apres</code>, <code>decroche_prochain</code>, <code>est_vide</code>, <code>premier</code>, <code>ajouter_debut</code></td>
-</tr>
-<tr>
-<td><code>O(k)</code></td>
-<td><code>avancer(k)</code></td>
+<td><code>insere_apres</code>, <code>deplacer_prochain_apres</code>, <code>est_vide</code>, <code>premier</code>, <code>ajouter_debut</code></td>
 </tr>
 <tr>
 <td><code>O(n)</code></td>
@@ -10623,7 +10571,7 @@
 <ol>
 <li><strong>Liste chaînée.</strong> L'opération fréquente est l'ajout en tête : <code>ajouter_debut</code> est en <code>O(1)</code>, alors qu'insérer en tête d'un tableau oblige à décaler toutes les cases, donc <code>O(n)</code>.</li>
 <li><strong>Tableau.</strong> L'opération fréquente est l'accès par indice : <code>O(1)</code> dans un tableau, qui calcule une adresse, contre <code>O(n)</code> pour <code>get</code>, qui parcourt.</li>
-<li><strong>Liste chaînée.</strong> Une fois le maillon précédent en main, <code>decroche_prochain</code> est en <code>O(1)</code>, on rebranche une flèche. Dans un tableau, chaque suppression décale la suite, donc <code>O(n)</code>.</li>
+<li><strong>Liste chaînée.</strong> Une fois le maillon précédent en main, le sortir de la chaîne ne demande qu'à rebrancher <strong>une</strong> flèche, donc <code>O(1)</code>. Dans un tableau, chaque suppression décale la suite, donc <code>O(n)</code>.</li>
 <li><strong>Ni l'une ni l'autre sur ce critère.</strong> Un parcours complet coûte <code>O(n)</code> des deux côtés. Le coût ne départage pas, la décision se prend donc ailleurs : sur ce que la collection doit faire <strong>le reste du temps</strong>.</li>
 </ol>
 <p>Retiens la question, pas les réponses : <em>quelle opération est la plus fréquente, et que coûte-t-elle dans chaque structure ?</em> C'est elle qui se transporte d'une situation à la suivante, et c'est elle qu'on te demandera.</p>
@@ -10631,8 +10579,7 @@
 </div>
 <h2 id="6-probleme-de-fin-trier-la-liste">6 Problème de fin : trier la liste</h2>
 <p>Quatre méthodes, à écrire dans l'ordre. Elles forment un <strong>tri fusion</strong> qui ne crée <strong>aucun maillon</strong> : tout se fait en déplaçant des flèches, avec les deux opérations de la page précédente.</p>
-<p>Une <strong>clé</strong> est l'objet qui décide de l'ordre, et c'est le <code>key</code> de <code>sorted</code> et de <code>min</code> que tu connais depuis la première : une fonction qui, d'un élément, rend ce sur quoi on compare. <code>identite</code> range les nombres en croissant, et <code>oppose</code> en décroissant.</p>
-<p>C'est ici que servent la classe <code>Eleve</code> et la clé <code>note_de</code> posées dans l'en-tête de <code>liste_test.py</code> : elles vérifieront que le tri est <strong>stable</strong>, c'est-à-dire qu'à note égale, deux élèves gardent leur ordre d'origine.</p>
+<p>Le tri sera <strong>stable</strong> : à donnée égale, deux maillons gardent leur ordre d'origine. Sur des nombres, les données ne permettent pas de le voir, deux <code>2</code> se ressemblent. C'est donc <code>maillons</code> qui le vérifiera, en comparant les <strong>objets</strong> : c'est la question <code>is</code> de la page précédente, et c'est la seule qui ait un sens ici.</p>
 <h3 id="61-milieu">6.1 <code>milieu</code></h3>
 <div class="admonition question">
 <p class="admonition-title">Trouver le milieu sans compter (obligatoire)</p>
@@ -10728,7 +10675,7 @@
 </details>
 <details class="tip">
 <summary>Voir les deux références avancer (ligne de mise au point, à retirer)</summary>
-<p>Place cette ligne dans ta boucle, et lance la méthode depuis <code>exos/exos_maillons.py</code> :</p>
+<p>Place cette ligne dans ta boucle, et lance <code>uv run pytest -s</code>. Le <code>-s</code> laisse passer les affichages, que <code>pytest</code> retient d'ordinaire.</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-33-1" name="__codelineno-33-1" href="#__codelineno-33-1"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">lievre</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">tortue</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
 </code></pre></div>
 <p>Tu vois l'écart se creuser à chaque tour, et la sentinelle se reconnaît à son <code>None</code>. Retire la ligne une fois la méthode juste.</p>
@@ -10792,29 +10739,27 @@
 <h3 id="63-fusion">6.3 <code>fusion</code></h3>
 <div class="admonition question">
 <p class="admonition-title">Fusionner deux listes triées (obligatoire)</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">fusion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="s2">&quot;Liste[T]&quot;</span><span class="p">,</span> <span class="n">cle</span><span class="p">:</span> <span class="n">Cle</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">identite</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-36-1" name="__codelineno-36-1" href="#__codelineno-36-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">fusion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lst</span><span class="p">:</span> <span class="s2">&quot;Liste[T]&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-36-2" name="__codelineno-36-2" href="#__codelineno-36-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <a id="__codelineno-36-3" name="__codelineno-36-3" href="#__codelineno-36-3"></a><span class="sd">    Fusionne lst dans cette liste, en place, en O(n + m). Les deux listes</span>
-<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="sd">    doivent être triées selon cle, et lst est vide après l&#39;appel.</span>
+<a id="__codelineno-36-4" name="__codelineno-36-4" href="#__codelineno-36-4"></a><span class="sd">    doivent être triées, et lst est vide après l&#39;appel.</span>
 <a id="__codelineno-36-5" name="__codelineno-36-5" href="#__codelineno-36-5"></a><span class="sd">    &quot;&quot;&quot;</span>
 <a id="__codelineno-36-6" name="__codelineno-36-6" href="#__codelineno-36-6"></a>    <span class="c1"># ref1 et ref2 désignent le maillon d&#39;AVANT celui qu&#39;on compare</span>
 <a id="__codelineno-36-7" name="__codelineno-36-7" href="#__codelineno-36-7"></a>    <span class="n">ref1</span> <span class="o">=</span> <span class="bp">self</span>
 <a id="__codelineno-36-8" name="__codelineno-36-8" href="#__codelineno-36-8"></a>    <span class="n">ref2</span> <span class="o">=</span> <span class="n">lst</span>
 <a id="__codelineno-36-9" name="__codelineno-36-9" href="#__codelineno-36-9"></a>
 <a id="__codelineno-36-10" name="__codelineno-36-10" href="#__codelineno-36-10"></a>    <span class="k">while</span> <span class="n">ref1</span><span class="o">.</span><span class="n">suivant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">self</span> <span class="ow">and</span> <span class="n">ref2</span><span class="o">.</span><span class="n">suivant</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">lst</span><span class="p">:</span>
-<a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>        <span class="k">if</span> <span class="n">cle</span><span class="p">(</span><span class="n">ref1</span><span class="o">.</span><span class="n">suivant</span><span class="o">.</span><span class="n">data</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">cle</span><span class="p">(</span><span class="n">ref2</span><span class="o">.</span><span class="n">suivant</span><span class="o">.</span><span class="n">data</span><span class="p">):</span>
+<a id="__codelineno-36-11" name="__codelineno-36-11" href="#__codelineno-36-11"></a>        <span class="k">if</span> <span class="n">ref1</span><span class="o">.</span><span class="n">suivant</span><span class="o">.</span><span class="n">data</span> <span class="o">&lt;</span> <span class="n">ref2</span><span class="o">.</span><span class="n">suivant</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
 <a id="__codelineno-36-12" name="__codelineno-36-12" href="#__codelineno-36-12"></a>            <span class="c1"># Le maillon de cette liste est déjà à sa place : on avance</span>
 <a id="__codelineno-36-13" name="__codelineno-36-13" href="#__codelineno-36-13"></a>            <span class="o">...</span>
 <a id="__codelineno-36-14" name="__codelineno-36-14" href="#__codelineno-36-14"></a>        <span class="k">else</span><span class="p">:</span>
 <a id="__codelineno-36-15" name="__codelineno-36-15" href="#__codelineno-36-15"></a>            <span class="c1"># On déplace le maillon de lst juste après ref1,</span>
 <a id="__codelineno-36-16" name="__codelineno-36-16" href="#__codelineno-36-16"></a>            <span class="c1"># puis on se place dessus pour observer son suivant</span>
 <a id="__codelineno-36-17" name="__codelineno-36-17" href="#__codelineno-36-17"></a>            <span class="o">...</span>
-<a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a>            <span class="o">...</span>
-<a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a>            <span class="o">...</span>
-<a id="__codelineno-36-20" name="__codelineno-36-20" href="#__codelineno-36-20"></a>    <span class="c1"># greffer_apres ne fait rien si lst est vide, et vide lst sinon</span>
-<a id="__codelineno-36-21" name="__codelineno-36-21" href="#__codelineno-36-21"></a>    <span class="o">...</span>
+<a id="__codelineno-36-18" name="__codelineno-36-18" href="#__codelineno-36-18"></a>    <span class="c1"># greffer_apres ne fait rien si lst est vide, et vide lst sinon</span>
+<a id="__codelineno-36-19" name="__codelineno-36-19" href="#__codelineno-36-19"></a>    <span class="o">...</span>
 </code></pre></div>
-<p>Les deux références désignent le maillon <strong>d'avant</strong>, et ce n'est pas un détail de confort : c'est la seule position depuis laquelle on peut décrocher.</p>
+<p>Les deux références désignent le maillon <strong>d'avant</strong>, et ce n'est pas un détail de confort : c'est la seule position depuis laquelle on peut déplacer un maillon.</p>
 <details class="info">
 <summary>Test à recopier dans <code>liste_test.py</code></summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-37-1" name="__codelineno-37-1" href="#__codelineno-37-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_fusion</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -10840,28 +10785,30 @@
 <a id="__codelineno-37-21" name="__codelineno-37-21" href="#__codelineno-37-21"></a>    <span class="n">vv</span><span class="o">.</span><span class="n">fusion</span><span class="p">(</span><span class="n">L</span><span class="p">())</span>
 <a id="__codelineno-37-22" name="__codelineno-37-22" href="#__codelineno-37-22"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">vv</span><span class="p">)</span> <span class="o">==</span> <span class="p">[]</span>
 <a id="__codelineno-37-23" name="__codelineno-37-23" href="#__codelineno-37-23"></a>
-<a id="__codelineno-37-24" name="__codelineno-37-24" href="#__codelineno-37-24"></a>    <span class="c1"># En cas d&#39;égalité, les éléments de lst passent en premier</span>
-<a id="__codelineno-37-25" name="__codelineno-37-25" href="#__codelineno-37-25"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">Eleve</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-<a id="__codelineno-37-26" name="__codelineno-37-26" href="#__codelineno-37-26"></a>    <span class="n">b</span> <span class="o">=</span> <span class="n">Eleve</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-<a id="__codelineno-37-27" name="__codelineno-37-27" href="#__codelineno-37-27"></a>    <span class="n">e</span> <span class="o">=</span> <span class="n">eleves</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<a id="__codelineno-37-28" name="__codelineno-37-28" href="#__codelineno-37-28"></a>    <span class="n">e</span><span class="o">.</span><span class="n">fusion</span><span class="p">(</span><span class="n">eleves</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">note_de</span><span class="p">)</span>
-<a id="__codelineno-37-29" name="__codelineno-37-29" href="#__codelineno-37-29"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">e</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span>
+<a id="__codelineno-37-24" name="__codelineno-37-24" href="#__codelineno-37-24"></a>    <span class="c1"># En cas d&#39;égalité, le maillon de l&#39;autre liste passe en premier.</span>
+<a id="__codelineno-37-25" name="__codelineno-37-25" href="#__codelineno-37-25"></a>    <span class="c1"># Les données ne permettent pas de le voir, on compare donc les maillons.</span>
+<a id="__codelineno-37-26" name="__codelineno-37-26" href="#__codelineno-37-26"></a>    <span class="n">g</span> <span class="o">=</span> <span class="n">L</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-37-27" name="__codelineno-37-27" href="#__codelineno-37-27"></a>    <span class="n">d</span> <span class="o">=</span> <span class="n">L</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<a id="__codelineno-37-28" name="__codelineno-37-28" href="#__codelineno-37-28"></a>    <span class="n">md</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">suivant</span>
+<a id="__codelineno-37-29" name="__codelineno-37-29" href="#__codelineno-37-29"></a>    <span class="n">g</span><span class="o">.</span><span class="n">fusion</span><span class="p">(</span><span class="n">d</span><span class="p">)</span>
+<a id="__codelineno-37-30" name="__codelineno-37-30" href="#__codelineno-37-30"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<a id="__codelineno-37-31" name="__codelineno-37-31" href="#__codelineno-37-31"></a>    <span class="k">assert</span> <span class="n">g</span><span class="o">.</span><span class="n">suivant</span> <span class="ow">is</span> <span class="n">md</span>
 </code></pre></div>
 </details>
 <details class="tip">
 <summary>Indice</summary>
-<p>Dans le <code>else</code>, trois lignes et trois gestes : décrocher le maillon qui suit <code>ref2</code>, l'insérer après <code>ref1</code>, puis <strong>faire avancer <code>ref1</code> dessus</strong>. Si tu oublies le troisième, le maillon suivant de <code>lst</code> se placera avant celui que tu viens de poser.</p>
+<p>Dans le <code>else</code>, une seule ligne, mais deux gestes : déplacer le maillon qui suit <code>ref2</code> juste après <code>ref1</code>, et <strong>faire avancer <code>ref1</code> dessus</strong>. La méthode renvoie le maillon déplacé, donc les deux gestes tiennent dans une affectation. Si tu oublies le second, le maillon suivant de <code>lst</code> se placera avant celui que tu viens de poser.</p>
 <p>Après la boucle, il reste deux cas. Si c'est <code>lst</code> qui est vide, tout est déjà en place. Si c'est cette liste, il reste à raccrocher la fin de <code>lst</code>. Tu as déjà écrit la méthode qui fait exactement cela, et qui ne fait rien quand la liste est vide : elle traite donc les deux cas d'un coup, <strong>sans aucun <code>if</code></strong>.</p>
 </details>
 <details class="tip">
 <summary>Indice plus précis</summary>
-<p>Le dernier test est celui de l'égalité : quand les deux notes sont les mêmes, aucun des deux <code>cle(...)</code> n'est plus petit que l'autre, et c'est l'élément de <code>lst</code> qui doit passer en premier. Regarde donc bien quel côté de ton <code>if</code> reçoit le cas d'égalité. C'est ce détail, et lui seul, qui rendra le tri <strong>stable</strong>.</p>
+<p>Le dernier test est celui de l'égalité : quand les deux données sont les mêmes, aucune n'est plus petite que l'autre, et c'est le maillon de <code>lst</code> qui doit passer en premier. Regarde donc bien quel côté de ton <code>if</code> reçoit le cas d'égalité. C'est ce détail, et lui seul, qui rendra le tri <strong>stable</strong>.</p>
 </details>
 </div>
 <h3 id="64-tri_fusion">6.4 <code>tri_fusion</code></h3>
 <div class="admonition question">
 <p class="admonition-title">Trier (obligatoire)</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">tri_fusion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">cle</span><span class="p">:</span> <span class="n">Cle</span><span class="p">[</span><span class="n">T</span><span class="p">]</span> <span class="o">=</span> <span class="n">identite</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-38-1" name="__codelineno-38-1" href="#__codelineno-38-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">tri_fusion</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <a id="__codelineno-38-2" name="__codelineno-38-2" href="#__codelineno-38-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Trie la liste en place par tri fusion, en O(n log n), sans copier de maillon.&quot;&quot;&quot;</span>
 <a id="__codelineno-38-3" name="__codelineno-38-3" href="#__codelineno-38-3"></a>    <span class="k">if</span> <span class="o">...</span> <span class="ow">or</span> <span class="o">...</span><span class="p">:</span>
 <a id="__codelineno-38-4" name="__codelineno-38-4" href="#__codelineno-38-4"></a>        <span class="k">return</span>
@@ -10897,28 +10844,22 @@
 <a id="__codelineno-39-22" name="__codelineno-39-22" href="#__codelineno-39-22"></a>    <span class="n">triee</span><span class="o">.</span><span class="n">tri_fusion</span><span class="p">()</span>
 <a id="__codelineno-39-23" name="__codelineno-39-23" href="#__codelineno-39-23"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">triee</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 <a id="__codelineno-39-24" name="__codelineno-39-24" href="#__codelineno-39-24"></a>
-<a id="__codelineno-39-25" name="__codelineno-39-25" href="#__codelineno-39-25"></a>    <span class="c1"># L&#39;ordre est celui de la clé</span>
-<a id="__codelineno-39-26" name="__codelineno-39-26" href="#__codelineno-39-26"></a>    <span class="n">decroissant</span> <span class="o">=</span> <span class="n">L</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-39-27" name="__codelineno-39-27" href="#__codelineno-39-27"></a>    <span class="n">decroissant</span><span class="o">.</span><span class="n">tri_fusion</span><span class="p">(</span><span class="n">oppose</span><span class="p">)</span>
-<a id="__codelineno-39-28" name="__codelineno-39-28" href="#__codelineno-39-28"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">decroissant</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
-<a id="__codelineno-39-29" name="__codelineno-39-29" href="#__codelineno-39-29"></a>
-<a id="__codelineno-39-30" name="__codelineno-39-30" href="#__codelineno-39-30"></a>    <span class="c1"># Le tri est stable : à note égale, l&#39;ordre d&#39;origine est conservé</span>
-<a id="__codelineno-39-31" name="__codelineno-39-31" href="#__codelineno-39-31"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">Eleve</span><span class="p">(</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-39-32" name="__codelineno-39-32" href="#__codelineno-39-32"></a>    <span class="n">b</span> <span class="o">=</span> <span class="n">Eleve</span><span class="p">(</span><span class="s2">&quot;B&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-39-33" name="__codelineno-39-33" href="#__codelineno-39-33"></a>    <span class="n">c</span> <span class="o">=</span> <span class="n">Eleve</span><span class="p">(</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-39-34" name="__codelineno-39-34" href="#__codelineno-39-34"></a>    <span class="n">d</span> <span class="o">=</span> <span class="n">Eleve</span><span class="p">(</span><span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<a id="__codelineno-39-35" name="__codelineno-39-35" href="#__codelineno-39-35"></a>    <span class="n">classe</span> <span class="o">=</span> <span class="n">eleves</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span>
-<a id="__codelineno-39-36" name="__codelineno-39-36" href="#__codelineno-39-36"></a>    <span class="n">classe</span><span class="o">.</span><span class="n">tri_fusion</span><span class="p">(</span><span class="n">note_de</span><span class="p">)</span>
-<a id="__codelineno-39-37" name="__codelineno-39-37" href="#__codelineno-39-37"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">classe</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="n">b</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span>
-<a id="__codelineno-39-38" name="__codelineno-39-38" href="#__codelineno-39-38"></a>
-<a id="__codelineno-39-39" name="__codelineno-39-39" href="#__codelineno-39-39"></a>    <span class="c1"># Les maillons sont réutilisés, sans en créer</span>
-<a id="__codelineno-39-40" name="__codelineno-39-40" href="#__codelineno-39-40"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">L</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-39-41" name="__codelineno-39-41" href="#__codelineno-39-41"></a>    <span class="n">avant</span> <span class="o">=</span> <span class="n">maillons</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<a id="__codelineno-39-42" name="__codelineno-39-42" href="#__codelineno-39-42"></a>    <span class="n">s</span><span class="o">.</span><span class="n">tri_fusion</span><span class="p">()</span>
-<a id="__codelineno-39-43" name="__codelineno-39-43" href="#__codelineno-39-43"></a>    <span class="n">apres</span> <span class="o">=</span> <span class="n">maillons</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
-<a id="__codelineno-39-44" name="__codelineno-39-44" href="#__codelineno-39-44"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">apres</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
-<a id="__codelineno-39-45" name="__codelineno-39-45" href="#__codelineno-39-45"></a>    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">apres</span><span class="p">:</span>
-<a id="__codelineno-39-46" name="__codelineno-39-46" href="#__codelineno-39-46"></a>        <span class="k">assert</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">avant</span><span class="p">,</span> <span class="s2">&quot;maillon inconnu après le tri&quot;</span>
+<a id="__codelineno-39-25" name="__codelineno-39-25" href="#__codelineno-39-25"></a>    <span class="c1"># Le tri est stable : à donnée égale, les maillons gardent leur ordre.</span>
+<a id="__codelineno-39-26" name="__codelineno-39-26" href="#__codelineno-39-26"></a>    <span class="c1"># Les données ne permettent pas de le voir, on compare donc les maillons.</span>
+<a id="__codelineno-39-27" name="__codelineno-39-27" href="#__codelineno-39-27"></a>    <span class="n">st</span> <span class="o">=</span> <span class="n">L</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<a id="__codelineno-39-28" name="__codelineno-39-28" href="#__codelineno-39-28"></a>    <span class="n">premier_deux</span><span class="p">,</span> <span class="n">premier_un</span><span class="p">,</span> <span class="n">second_deux</span><span class="p">,</span> <span class="n">second_un</span> <span class="o">=</span> <span class="n">maillons</span><span class="p">(</span><span class="n">st</span><span class="p">)</span>
+<a id="__codelineno-39-29" name="__codelineno-39-29" href="#__codelineno-39-29"></a>    <span class="n">st</span><span class="o">.</span><span class="n">tri_fusion</span><span class="p">()</span>
+<a id="__codelineno-39-30" name="__codelineno-39-30" href="#__codelineno-39-30"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">st</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<a id="__codelineno-39-31" name="__codelineno-39-31" href="#__codelineno-39-31"></a>    <span class="k">assert</span> <span class="n">maillons</span><span class="p">(</span><span class="n">st</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="n">premier_un</span><span class="p">,</span> <span class="n">second_un</span><span class="p">,</span> <span class="n">premier_deux</span><span class="p">,</span> <span class="n">second_deux</span><span class="p">]</span>
+<a id="__codelineno-39-32" name="__codelineno-39-32" href="#__codelineno-39-32"></a>
+<a id="__codelineno-39-33" name="__codelineno-39-33" href="#__codelineno-39-33"></a>    <span class="c1"># Les maillons sont réutilisés, sans en créer</span>
+<a id="__codelineno-39-34" name="__codelineno-39-34" href="#__codelineno-39-34"></a>    <span class="n">s</span> <span class="o">=</span> <span class="n">L</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-39-35" name="__codelineno-39-35" href="#__codelineno-39-35"></a>    <span class="n">avant</span> <span class="o">=</span> <span class="n">maillons</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<a id="__codelineno-39-36" name="__codelineno-39-36" href="#__codelineno-39-36"></a>    <span class="n">s</span><span class="o">.</span><span class="n">tri_fusion</span><span class="p">()</span>
+<a id="__codelineno-39-37" name="__codelineno-39-37" href="#__codelineno-39-37"></a>    <span class="n">apres</span> <span class="o">=</span> <span class="n">maillons</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<a id="__codelineno-39-38" name="__codelineno-39-38" href="#__codelineno-39-38"></a>    <span class="k">assert</span> <span class="nb">len</span><span class="p">(</span><span class="n">apres</span><span class="p">)</span> <span class="o">==</span> <span class="mi">3</span>
+<a id="__codelineno-39-39" name="__codelineno-39-39" href="#__codelineno-39-39"></a>    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">apres</span><span class="p">:</span>
+<a id="__codelineno-39-40" name="__codelineno-39-40" href="#__codelineno-39-40"></a>        <span class="k">assert</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">avant</span><span class="p">,</span> <span class="s2">&quot;maillon inconnu après le tri&quot;</span>
 </code></pre></div>
 </details>
 <details class="tip">
@@ -10929,7 +10870,6 @@
 <summary>Indice plus précis</summary>
 <p><strong>Les deux cas de base</strong> sont la liste vide et la liste à un seul élément : dans les deux, il n'y a rien à trier, on sort sans rien faire. « La liste n'a qu'un élément » s'écrit <code>self.suivant.suivant is self</code> : on part de la sentinelle, et deux crans plus loin on est revenu dessus.</p>
 <p>Ensuite : couper, trier chaque moitié, fusionner. La moitié gauche est la liste que <code>couper</code> renvoie, la droite est <code>self</code>. Les deux appels portent donc sur des listes <strong>strictement plus courtes</strong>, ce qui garantit l'arrêt.</p>
-<p>N'oublie pas de passer <code>cle</code> à chacun des trois appels, sinon les moitiés se trieront dans un ordre et la fusion dans un autre.</p>
 </details>
 </div>
 <div class="admonition question">
@@ -10951,7 +10891,7 @@
 </div>
 <div class="admonition info">
 <p class="admonition-title">Pour finir</p>
-<p>Lance <code>uv run pytest</code> une dernière fois : les sept tests de <code>maillon_test.py</code> et les vingt-deux de <code>liste_test.py</code> doivent passer, vingt-trois si tu as fait le bonus de la section 4.13. Tes quatre fichiers tiennent maintenant une structure de données entière, ses tests, et un tri en <code>O(n log n)</code> qui n'a créé aucun maillon : il n'a fait que déplacer des flèches, du début à la fin.</p>
+<p>Lance <code>uv run pytest</code> une dernière fois : les quatre tests de <code>maillon_test.py</code> et les vingt-deux de <code>liste_test.py</code> doivent passer. Tes quatre fichiers tiennent maintenant une structure de données entière, ses tests, et un tri en <code>O(n log n)</code> qui n'a créé aucun maillon : il n'a fait que déplacer des flèches, du début à la fin.</p>
 </div>
 
 
@@ -10973,7 +10913,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 22, 2026 19:49:59 UTC">November 22, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 23, 2026 22:54:25 UTC">November 23, 2026</span>
   </span>
 
     
