@@ -9419,6 +9419,29 @@
 <summary>Avant d'ouvrir la correction</summary>
 <p>Deux des assertions à compléter portent sur des méthodes que tu n'as <strong>pas</strong> écrites. Si tu ne sais pas quoi y mettre, relis la section 1 : où est écrite la méthode qui s'exécute ?</p>
 </details>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Chat</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">nom</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">nom</span><span class="p">,</span> <span class="s2">&quot;miaule&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>
+<a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ronronner</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Renvoie une chaîne de la forme &#39;Felix ronronne.&#39;.&quot;&quot;&quot;</span>
+<a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">nom</span><span class="si">}</span><span class="s2"> ronronne.&quot;</span>
+<a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>
+<a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a>
+<a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_Chat</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a>    <span class="n">felix</span> <span class="o">=</span> <span class="n">Chat</span><span class="p">(</span><span class="s2">&quot;Felix&quot;</span><span class="p">)</span>
+<a id="__codelineno-5-12" name="__codelineno-5-12" href="#__codelineno-5-12"></a>    <span class="k">assert</span> <span class="n">felix</span><span class="o">.</span><span class="n">nom</span> <span class="o">==</span> <span class="s2">&quot;Felix&quot;</span>
+<a id="__codelineno-5-13" name="__codelineno-5-13" href="#__codelineno-5-13"></a>    <span class="k">assert</span> <span class="n">felix</span><span class="o">.</span><span class="n">cri</span> <span class="o">==</span> <span class="s2">&quot;miaule&quot;</span>
+<a id="__codelineno-5-14" name="__codelineno-5-14" href="#__codelineno-5-14"></a>    <span class="k">assert</span> <span class="n">felix</span><span class="o">.</span><span class="n">parler</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Felix miaule&quot;</span>
+<a id="__codelineno-5-15" name="__codelineno-5-15" href="#__codelineno-5-15"></a>    <span class="k">assert</span> <span class="n">felix</span><span class="o">.</span><span class="n">ronronner</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Felix ronronne.&quot;</span>
+<a id="__codelineno-5-16" name="__codelineno-5-16" href="#__codelineno-5-16"></a>    <span class="k">assert</span> <span class="n">felix</span><span class="o">.</span><span class="n">presenter</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Je suis Felix. Felix miaule&quot;</span>
+<a id="__codelineno-5-17" name="__codelineno-5-17" href="#__codelineno-5-17"></a>    <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">felix</span><span class="p">,</span> <span class="n">Animal</span><span class="p">)</span> <span class="o">==</span> <span class="kc">True</span>
+</code></pre></div>
+<p><code>Chat</code> ne déclare aucun attribut en haut, comme <code>Chien</code> : il n'en ajoute pas, il <strong>fixe</strong> seulement le <code>cri</code> qu'<code>Animal</code> laissait au choix.</p>
+<p><code>parler</code> et <code>presenter</code> fonctionnent sans qu'une ligne ait été écrite pour elles : c'est tout l'intérêt. Et <code>presenter</code> renvoie bien <code>"Je suis Felix. Felix miaule"</code>, donc elle a appelé <code>parler</code>, qui a lu le <code>cri</code> que <code>super().__init__</code> avait posé.</p>
+</details>
 </div>
 <h2 id="4-ce-qui-vient-ensuite">4 Ce qui vient ensuite</h2>
 <p>L'héritage sert peu quand les classes sont aussi proches que <code>Chien</code> et <code>Chat</code> : un attribut <code>cri</code> suffisait. Il devient utile quand la sous classe fait vraiment autre chose.</p>

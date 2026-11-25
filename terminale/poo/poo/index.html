@@ -9652,6 +9652,28 @@
 <summary>Avant d'ouvrir la correction</summary>
 <p>Reprends ta réponse à la question 1 du rappel d'ouverture. <code>copie = bete</code> appartient à laquelle des deux lignes que tu y as comparées ?</p>
 </details>
+<details class="warning">
+<summary>Correction</summary>
+<p>La docstring annonce <strong>deux</strong> choses : la valeur rendue est un animal au nom changé et au cri conservé, <strong>et</strong> l'animal passé en argument n'est pas modifié. Le test ne vérifie que le nom de la valeur rendue. Il ne regarde ni le cri, ni l'état de <code>bete</code> après l'appel.</p>
+<p><code>copie = bete</code> ne copie rien : c'est la ligne <code>t = [9]</code> du rappel, sans le <code>=</code> qui fabriquerait un objet neuf. Il n'y a qu'<strong>un</strong> rond, et deux noms dessus. La ligne suivante change donc le nom de l'animal d'origine, et la fonction rend ce même animal.</p>
+<p>Le test complet :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_renommer</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">bete</span> <span class="o">=</span> <span class="n">Animal</span><span class="p">(</span><span class="s2">&quot;Rocket&quot;</span><span class="p">,</span> <span class="s2">&quot;grogne&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">autre</span> <span class="o">=</span> <span class="n">renommer</span><span class="p">(</span><span class="n">bete</span><span class="p">,</span> <span class="s2">&quot;Groot&quot;</span><span class="p">)</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="k">assert</span> <span class="n">autre</span><span class="o">.</span><span class="n">nom</span> <span class="o">==</span> <span class="s2">&quot;Groot&quot;</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="k">assert</span> <span class="n">autre</span><span class="o">.</span><span class="n">cri</span> <span class="o">==</span> <span class="s2">&quot;grogne&quot;</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="k">assert</span> <span class="n">bete</span><span class="o">.</span><span class="n">nom</span> <span class="o">==</span> <span class="s2">&quot;Rocket&quot;</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="k">assert</span> <span class="p">(</span><span class="n">autre</span> <span class="ow">is</span> <span class="n">bete</span><span class="p">)</span> <span class="o">==</span> <span class="kc">False</span>
+</code></pre></div>
+<p>Les deux dernières assertions sont celles qui comptent, et ce sont exactement celles qu'on oublie. La fonction qui les passe :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">renommer</span><span class="p">(</span><span class="n">bete</span><span class="p">:</span> <span class="n">Animal</span><span class="p">,</span> <span class="n">nouveau</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Animal</span><span class="p">:</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Renvoie un nouvel animal, de même cri que bete, portant le nom nouveau.</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a><span class="sd">    L&#39;animal passé en argument n&#39;est pas modifié.</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="k">return</span> <span class="n">Animal</span><span class="p">(</span><span class="n">nouveau</span><span class="p">,</span> <span class="n">bete</span><span class="o">.</span><span class="n">cri</span><span class="p">)</span>
+</code></pre></div>
+</details>
 </div>
 <div class="admonition warning">
 <p class="admonition-title">Ce qu'il faut retenir de cette section</p>
@@ -9671,36 +9693,36 @@
 <li>Complète les assertions de <code>test_Eleve</code> marquées par un commentaire. Fais-le <strong>avant</strong> d'écrire le moindre corps de méthode : c'est ce qui te dira si ton code fait ce qui était prévu.</li>
 <li>Remplis les corps, une méthode à la fois, en relançant le test après chacune.</li>
 </ol>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Eleve</span><span class="p">:</span>
-<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="o">...</span>               <span class="c1"># les declarations d&#39;attributs, une par ligne</span>
-<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>
-<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prenom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">classe</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>        <span class="o">...</span>
-<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>
-<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajoute_note</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">note</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Ajoute note à la liste des notes de cet élève.&quot;&quot;&quot;</span>
-<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>        <span class="o">...</span>
-<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>
-<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">moyenne</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
-<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Renvoie la moyenne des notes de cet élève, et 0.0 s&#39;il n&#39;en a aucune.&quot;&quot;&quot;</span>
-<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>        <span class="o">...</span>
-<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>
-<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">bulletin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Renvoie une chaîne de la forme &#39;Lucie (TG3) : 14.0&#39;.&quot;&quot;&quot;</span>
-<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>        <span class="o">...</span>
-<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>
-<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>
-<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_Eleve</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>    <span class="n">e</span> <span class="o">=</span> <span class="n">Eleve</span><span class="p">(</span><span class="s2">&quot;Lucie&quot;</span><span class="p">,</span> <span class="s2">&quot;TG3&quot;</span><span class="p">)</span>
-<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>    <span class="k">assert</span> <span class="n">e</span><span class="o">.</span><span class="n">notes</span> <span class="o">==</span> <span class="p">[]</span>
-<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>    <span class="k">assert</span> <span class="n">e</span><span class="o">.</span><span class="n">moyenne</span><span class="p">()</span> <span class="o">==</span> <span class="mf">0.0</span>
-<a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>    <span class="n">e</span><span class="o">.</span><span class="n">ajoute_note</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-<a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>    <span class="n">e</span><span class="o">.</span><span class="n">ajoute_note</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
-<a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>    <span class="k">assert</span> <span class="o">...</span>        <span class="c1"># la liste des notes de e</span>
-<a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>    <span class="k">assert</span> <span class="o">...</span>        <span class="c1"># sa moyenne</span>
-<a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>    <span class="k">assert</span> <span class="o">...</span>        <span class="c1"># son bulletin</span>
-<a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a>    <span class="n">autre</span> <span class="o">=</span> <span class="n">Eleve</span><span class="p">(</span><span class="s2">&quot;Sam&quot;</span><span class="p">,</span> <span class="s2">&quot;TG3&quot;</span><span class="p">)</span>
-<a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a>    <span class="k">assert</span> <span class="o">...</span>        <span class="c1"># la liste des notes de autre</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Eleve</span><span class="p">:</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>    <span class="o">...</span>               <span class="c1"># les declarations d&#39;attributs, une par ligne</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
+<a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prenom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">classe</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>        <span class="o">...</span>
+<a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>
+<a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajoute_note</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">note</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Ajoute note à la liste des notes de cet élève.&quot;&quot;&quot;</span>
+<a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a>        <span class="o">...</span>
+<a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a>
+<a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">moyenne</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-14-12" name="__codelineno-14-12" href="#__codelineno-14-12"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Renvoie la moyenne des notes de cet élève, et 0.0 s&#39;il n&#39;en a aucune.&quot;&quot;&quot;</span>
+<a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a>        <span class="o">...</span>
+<a id="__codelineno-14-14" name="__codelineno-14-14" href="#__codelineno-14-14"></a>
+<a id="__codelineno-14-15" name="__codelineno-14-15" href="#__codelineno-14-15"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">bulletin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-14-16" name="__codelineno-14-16" href="#__codelineno-14-16"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Renvoie une chaîne de la forme &#39;Lucie (TG3) : 14.0&#39;.&quot;&quot;&quot;</span>
+<a id="__codelineno-14-17" name="__codelineno-14-17" href="#__codelineno-14-17"></a>        <span class="o">...</span>
+<a id="__codelineno-14-18" name="__codelineno-14-18" href="#__codelineno-14-18"></a>
+<a id="__codelineno-14-19" name="__codelineno-14-19" href="#__codelineno-14-19"></a>
+<a id="__codelineno-14-20" name="__codelineno-14-20" href="#__codelineno-14-20"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_Eleve</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-14-21" name="__codelineno-14-21" href="#__codelineno-14-21"></a>    <span class="n">e</span> <span class="o">=</span> <span class="n">Eleve</span><span class="p">(</span><span class="s2">&quot;Lucie&quot;</span><span class="p">,</span> <span class="s2">&quot;TG3&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-22" name="__codelineno-14-22" href="#__codelineno-14-22"></a>    <span class="k">assert</span> <span class="n">e</span><span class="o">.</span><span class="n">notes</span> <span class="o">==</span> <span class="p">[]</span>
+<a id="__codelineno-14-23" name="__codelineno-14-23" href="#__codelineno-14-23"></a>    <span class="k">assert</span> <span class="n">e</span><span class="o">.</span><span class="n">moyenne</span><span class="p">()</span> <span class="o">==</span> <span class="mf">0.0</span>
+<a id="__codelineno-14-24" name="__codelineno-14-24" href="#__codelineno-14-24"></a>    <span class="n">e</span><span class="o">.</span><span class="n">ajoute_note</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<a id="__codelineno-14-25" name="__codelineno-14-25" href="#__codelineno-14-25"></a>    <span class="n">e</span><span class="o">.</span><span class="n">ajoute_note</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<a id="__codelineno-14-26" name="__codelineno-14-26" href="#__codelineno-14-26"></a>    <span class="k">assert</span> <span class="o">...</span>        <span class="c1"># la liste des notes de e</span>
+<a id="__codelineno-14-27" name="__codelineno-14-27" href="#__codelineno-14-27"></a>    <span class="k">assert</span> <span class="o">...</span>        <span class="c1"># sa moyenne</span>
+<a id="__codelineno-14-28" name="__codelineno-14-28" href="#__codelineno-14-28"></a>    <span class="k">assert</span> <span class="o">...</span>        <span class="c1"># son bulletin</span>
+<a id="__codelineno-14-29" name="__codelineno-14-29" href="#__codelineno-14-29"></a>    <span class="n">autre</span> <span class="o">=</span> <span class="n">Eleve</span><span class="p">(</span><span class="s2">&quot;Sam&quot;</span><span class="p">,</span> <span class="s2">&quot;TG3&quot;</span><span class="p">)</span>
+<a id="__codelineno-14-30" name="__codelineno-14-30" href="#__codelineno-14-30"></a>    <span class="k">assert</span> <span class="o">...</span>        <span class="c1"># la liste des notes de autre</span>
 </code></pre></div>
 <details class="tip">
 <summary>Indice : la dernière assertion</summary>
@@ -9710,12 +9732,57 @@
 <summary>Avant d'ouvrir la correction</summary>
 <p>Si une de tes assertions échoue, écris d'abord <strong>ce que tu croyais</strong> que la méthode renvoyait, puis ce qu'elle renvoie vraiment. C'est l'écart entre les deux qui désigne la ligne à corriger, pas le message d'erreur.</p>
 </details>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">class</span><span class="w"> </span><span class="nc">Eleve</span><span class="p">:</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="n">prenom</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="n">classe</span><span class="p">:</span> <span class="nb">str</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="n">notes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a>    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">prenom</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">classe</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-15-7" name="__codelineno-15-7" href="#__codelineno-15-7"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">prenom</span> <span class="o">=</span> <span class="n">prenom</span>
+<a id="__codelineno-15-8" name="__codelineno-15-8" href="#__codelineno-15-8"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">classe</span> <span class="o">=</span> <span class="n">classe</span>
+<a id="__codelineno-15-9" name="__codelineno-15-9" href="#__codelineno-15-9"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+<a id="__codelineno-15-10" name="__codelineno-15-10" href="#__codelineno-15-10"></a>
+<a id="__codelineno-15-11" name="__codelineno-15-11" href="#__codelineno-15-11"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">ajoute_note</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">note</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-15-12" name="__codelineno-15-12" href="#__codelineno-15-12"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Ajoute note à la liste des notes de cet élève.&quot;&quot;&quot;</span>
+<a id="__codelineno-15-13" name="__codelineno-15-13" href="#__codelineno-15-13"></a>        <span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">note</span><span class="p">)</span>
+<a id="__codelineno-15-14" name="__codelineno-15-14" href="#__codelineno-15-14"></a>
+<a id="__codelineno-15-15" name="__codelineno-15-15" href="#__codelineno-15-15"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">moyenne</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+<a id="__codelineno-15-16" name="__codelineno-15-16" href="#__codelineno-15-16"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Renvoie la moyenne des notes de cet élève, et 0.0 s&#39;il n&#39;en a aucune.&quot;&quot;&quot;</span>
+<a id="__codelineno-15-17" name="__codelineno-15-17" href="#__codelineno-15-17"></a>        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+<a id="__codelineno-15-18" name="__codelineno-15-18" href="#__codelineno-15-18"></a>            <span class="k">return</span> <span class="mf">0.0</span>
+<a id="__codelineno-15-19" name="__codelineno-15-19" href="#__codelineno-15-19"></a>        <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span>
+<a id="__codelineno-15-20" name="__codelineno-15-20" href="#__codelineno-15-20"></a>        <span class="k">return</span> <span class="n">total</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span>
+<a id="__codelineno-15-21" name="__codelineno-15-21" href="#__codelineno-15-21"></a>
+<a id="__codelineno-15-22" name="__codelineno-15-22" href="#__codelineno-15-22"></a>    <span class="k">def</span><span class="w"> </span><span class="nf">bulletin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<a id="__codelineno-15-23" name="__codelineno-15-23" href="#__codelineno-15-23"></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;Renvoie une chaîne de la forme &#39;Lucie (TG3) : 14.0&#39;.&quot;&quot;&quot;</span>
+<a id="__codelineno-15-24" name="__codelineno-15-24" href="#__codelineno-15-24"></a>        <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">moyenne</span><span class="p">()</span>
+<a id="__codelineno-15-25" name="__codelineno-15-25" href="#__codelineno-15-25"></a>        <span class="k">return</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">prenom</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">classe</span><span class="si">}</span><span class="s2">) : </span><span class="si">{</span><span class="n">m</span><span class="si">}</span><span class="s2">&quot;</span>
+<a id="__codelineno-15-26" name="__codelineno-15-26" href="#__codelineno-15-26"></a>
+<a id="__codelineno-15-27" name="__codelineno-15-27" href="#__codelineno-15-27"></a>
+<a id="__codelineno-15-28" name="__codelineno-15-28" href="#__codelineno-15-28"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_Eleve</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-15-29" name="__codelineno-15-29" href="#__codelineno-15-29"></a>    <span class="n">e</span> <span class="o">=</span> <span class="n">Eleve</span><span class="p">(</span><span class="s2">&quot;Lucie&quot;</span><span class="p">,</span> <span class="s2">&quot;TG3&quot;</span><span class="p">)</span>
+<a id="__codelineno-15-30" name="__codelineno-15-30" href="#__codelineno-15-30"></a>    <span class="k">assert</span> <span class="n">e</span><span class="o">.</span><span class="n">notes</span> <span class="o">==</span> <span class="p">[]</span>
+<a id="__codelineno-15-31" name="__codelineno-15-31" href="#__codelineno-15-31"></a>    <span class="k">assert</span> <span class="n">e</span><span class="o">.</span><span class="n">moyenne</span><span class="p">()</span> <span class="o">==</span> <span class="mf">0.0</span>
+<a id="__codelineno-15-32" name="__codelineno-15-32" href="#__codelineno-15-32"></a>    <span class="n">e</span><span class="o">.</span><span class="n">ajoute_note</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<a id="__codelineno-15-33" name="__codelineno-15-33" href="#__codelineno-15-33"></a>    <span class="n">e</span><span class="o">.</span><span class="n">ajoute_note</span><span class="p">(</span><span class="mi">16</span><span class="p">)</span>
+<a id="__codelineno-15-34" name="__codelineno-15-34" href="#__codelineno-15-34"></a>    <span class="k">assert</span> <span class="n">e</span><span class="o">.</span><span class="n">notes</span> <span class="o">==</span> <span class="p">[</span><span class="mi">12</span><span class="p">,</span> <span class="mi">16</span><span class="p">]</span>
+<a id="__codelineno-15-35" name="__codelineno-15-35" href="#__codelineno-15-35"></a>    <span class="k">assert</span> <span class="n">e</span><span class="o">.</span><span class="n">moyenne</span><span class="p">()</span> <span class="o">==</span> <span class="mf">14.0</span>
+<a id="__codelineno-15-36" name="__codelineno-15-36" href="#__codelineno-15-36"></a>    <span class="k">assert</span> <span class="n">e</span><span class="o">.</span><span class="n">bulletin</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;Lucie (TG3) : 14.0&quot;</span>
+<a id="__codelineno-15-37" name="__codelineno-15-37" href="#__codelineno-15-37"></a>    <span class="n">autre</span> <span class="o">=</span> <span class="n">Eleve</span><span class="p">(</span><span class="s2">&quot;Sam&quot;</span><span class="p">,</span> <span class="s2">&quot;TG3&quot;</span><span class="p">)</span>
+<a id="__codelineno-15-38" name="__codelineno-15-38" href="#__codelineno-15-38"></a>    <span class="k">assert</span> <span class="n">autre</span><span class="o">.</span><span class="n">notes</span> <span class="o">==</span> <span class="p">[]</span>
+</code></pre></div>
+<p>Deux remarques sur la correction.</p>
+<p><code>bulletin</code> appelle <code>self.moyenne()</code>. C'est le <code>self.parler()</code> de la section 3 : une méthode qui en appelle une autre sur le même objet.</p>
+<p>La dernière assertion vérifie que <strong>chaque objet a ses propres attributs</strong>. Elle échouerait si la liste des notes était partagée entre tous les élèves, ce qui arrive quand on la fabrique ailleurs que dans <code>__init__</code>.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title">Nommer (entraînement)</p>
 <p>Voici une méthode récupérée dans un projet. Son nom ne correspond pas à ce qu'elle fait, ce qui est banal sur du code qu'on n'a pas écrit soi-même.</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">total</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">total</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">notes</span><span class="p">)</span>
 </code></pre></div>
 <p>Sur ton cahier :</p>
 <ul>
