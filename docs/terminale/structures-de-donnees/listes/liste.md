@@ -901,7 +901,7 @@ Regarde la deuxième ligne du tableau et la troisième ensemble. **Tout ce qui e
 
 ## 6 Problème de fin : trier la liste
 
-Quatre méthodes, à écrire dans l'ordre. Elles forment un **tri fusion** qui ne crée **aucun maillon** : tout se fait en déplaçant des flèches, avec les deux opérations de la page précédente.
+Deux méthodes, puis deux **fonctions** qui ne sont pas dans la classe, à écrire dans l'ordre. Elles forment un **tri fusion** qui ne crée **aucun maillon** : tout se fait en déplaçant des flèches, avec les deux opérations de la page précédente.
 
 Le tri sera **stable** : à donnée égale, deux maillons gardent leur ordre d'origine. Sur des nombres, les données ne permettent pas de le voir, deux `2` se ressemblent. C'est donc `maillons` qui le vérifiera, en comparant les **objets** : c'est la question `is` de la page précédente, et c'est la seule qui ait un sens ici.
 
@@ -1050,96 +1050,128 @@ Le tri sera **stable** : à donnée égale, deux maillons gardent leur ordre d'o
 
 ### 6.3 `fusion`
 
+Les deux dernières ne sont **pas des méthodes**, alors que tout le reste de la page en est une. Voici pourquoi.
+
+Une liste contient n'importe quoi : des entiers, des chaînes, des élèves, des dictionnaires. Ni `est_vide`, ni `append`, ni `copie` ne demandent jamais de comparer deux éléments. Trier, si : il faut `<`. Exiger ce `<` de la classe entière interdirait `Liste[dict]`, qui n'a pourtant aucune raison d'être interdite. On l'exige donc des deux seules opérations qui en ont besoin, et elles sortent de la classe pour cela.
+
+Ajoute tout en haut de `liste.py` :
+
+```python
+from typing import Protocol
+```
+
+Puis ceci **après** la classe, à la fin du fichier :
+
+```python
+class Comparable(Protocol):
+    """
+    Une classe (assimilable à un type en python)
+    munie de l'opération <, c'est à dire qui a la méthode __lt__
+    """
+    def __lt__(self, other, /) -> bool: ...
+```
+
+Un `Protocol` ne range pas les types par leur ancêtre, mais par ce qu'ils **savent faire** : est `Comparable` tout ce qui a une méthode `__lt__`, sans rien avoir à hériter. `int`, `str` et `float` le sont déjà. La notation `[T: Comparable]` des deux signatures qui suivent se lit « pour tout type `T` comparable ».
+
+Enfin, complète la première ligne de `liste_test.py`, qui va se servir des deux fonctions :
+
+```python
+from structures.lineaires.liste import Liste, fusion, tri_fusion
+```
+
 !!! question "Fusionner deux listes triées (obligatoire)"
     ```python
-    def fusion(self, lst: "Liste[T]") -> None:
+    # On contraint le type T. Il doit être comparable
+    def fusion[T: Comparable](lst1: Liste[T], lst2: Liste[T]) -> None:
         """
-        Fusionne lst dans cette liste, en place, en O(n + m). Les deux listes
-        doivent être triées, et lst est vide après l'appel.
+        Fusionne lst2 dans lst1, en O(n + m). Les deux listes
+        doivent être triées, et lst2 est vide après l'appel.
         """
         # ref1 et ref2 désignent le maillon d'AVANT celui qu'on compare
-        ref1 = self
-        ref2 = lst
+        ref1 = lst1
+        ref2 = lst2
 
-        while ref1.suivant is not self and ref2.suivant is not lst:
+        while ref1.suivant is not lst1 and ref2.suivant is not lst2:
             if ref1.suivant.data < ref2.suivant.data:
-                # Le maillon de cette liste est déjà à sa place : on avance
+                # Le maillon de lst1 est déjà à sa place : on avance
                 ...
             else:
-                # On déplace le maillon de lst juste après ref1,
+                # On déplace le maillon de lst2 juste après ref1,
                 # puis on se place dessus pour observer son suivant
                 ...
-        # greffer_apres ne fait rien si lst est vide, et vide lst sinon
+        # greffer_apres ne fait rien si lst2 est vide, et vide lst2 sinon
         ...
     ```
 
     Les deux références désignent le maillon **d'avant**, et ce n'est pas un détail de confort : c'est la seule position depuis laquelle on peut déplacer un maillon.
+
+    Les deux listes ne jouent pas le même rôle, et l'ordre des paramètres le dit : `lst1` reçoit, `lst2` se vide.
 
     ??? info "Test à recopier dans `liste_test.py`"
         ```python
         def test_fusion() -> None:
             lst = L(1, 4, 6)
             m = L(2, 3, 5, 7, 8)
-            lst.fusion(m)
+            fusion(lst, m)
             assert contenu(lst) == [1, 2, 3, 4, 5, 6, 7, 8]
             assert contenu(m) == []             # l'autre liste est absorbée
 
             # Toute l'autre liste est plus petite
             p = L(5, 6)
-            p.fusion(L(1, 2))
+            fusion(p, L(1, 2))
             assert contenu(p) == [1, 2, 5, 6]
 
             # Avec des listes vides
             v = L()
-            v.fusion(L(1, 2))
+            fusion(v, L(1, 2))
             assert contenu(v) == [1, 2]
             n = L(1, 2)
-            n.fusion(L())
+            fusion(n, L())
             assert contenu(n) == [1, 2]
             vv = L()
-            vv.fusion(L())
+            fusion(vv, L())
             assert contenu(vv) == []
 
-            # En cas d'égalité, le maillon de l'autre liste passe en premier.
+            # En cas d'égalité, le maillon de la SECONDE liste passe en premier.
             # Les données ne permettent pas de le voir, on compare donc les maillons.
             g = L(10)
             d = L(10)
             md = d.suivant
-            g.fusion(d)
+            fusion(g, d)
             assert contenu(g) == [10, 10]
             assert g.suivant is md
         ```
 
     ??? tip "Indice"
-        Dans le `else`, une seule ligne, mais deux gestes : déplacer le maillon qui suit `ref2` juste après `ref1`, et **faire avancer `ref1` dessus**. La méthode renvoie le maillon déplacé, donc les deux gestes tiennent dans une affectation. Si tu oublies le second, le maillon suivant de `lst` se placera avant celui que tu viens de poser.
+        Dans le `else`, une seule ligne, mais deux gestes : déplacer le maillon qui suit `ref2` juste après `ref1`, et **faire avancer `ref1` dessus**. La méthode de `Maillon` renvoie le maillon déplacé, donc les deux gestes tiennent dans une affectation. Si tu oublies le second, le maillon suivant de `lst2` se placera avant celui que tu viens de poser.
 
-        Après la boucle, il reste deux cas. Si c'est `lst` qui est vide, tout est déjà en place. Si c'est cette liste, il reste à raccrocher la fin de `lst`. Tu as déjà écrit la méthode qui fait exactement cela, et qui ne fait rien quand la liste est vide : elle traite donc les deux cas d'un coup, **sans aucun `if`**.
+        Après la boucle, il reste deux cas. Si c'est `lst2` qui est vide, tout est déjà en place. Si c'est `lst1`, il reste à raccrocher la fin de `lst2`. Tu as déjà écrit la méthode qui fait exactement cela, et qui ne fait rien quand la liste est vide : elle traite donc les deux cas d'un coup, **sans aucun `if`**.
 
     ??? tip "Indice plus précis"
-        Le dernier test est celui de l'égalité : quand les deux données sont les mêmes, aucune n'est plus petite que l'autre, et c'est le maillon de `lst` qui doit passer en premier. Regarde donc bien quel côté de ton `if` reçoit le cas d'égalité. C'est ce détail, et lui seul, qui rendra le tri **stable**.
+        Le dernier test est celui de l'égalité : quand les deux données sont les mêmes, aucune n'est plus petite que l'autre, et c'est le maillon de `lst2` qui doit passer en premier. Regarde donc bien quel côté de ton `if` reçoit le cas d'égalité. C'est ce détail, et lui seul, qui rendra le tri **stable**.
 
     ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
     ??? warning "Correction"
         ```python
-            ref1 = self
-            ref2 = lst
-            while ref1.suivant is not self and ref2.suivant is not lst:
+            ref1 = lst1
+            ref2 = lst2
+            while ref1.suivant is not lst1 and ref2.suivant is not lst2:
                 if ref1.suivant.data < ref2.suivant.data:
                     ref1 = ref1.suivant
                 else:
                     ref1 = ref2.deplacer_prochain_apres(ref1)
-            lst.greffer_apres(ref1)
+            lst2.greffer_apres(ref1)
         ```
 
-        Le `<` **strict** est ce qui donne l'égalité à `lst` : à donnée égale, on passe dans le `else`, donc on déplace.
+        Le `<` **strict** est ce qui donne l'égalité à `lst2` : à donnée égale, on passe dans le `else`, donc on déplace.
 
 ### 6.4 `tri_fusion`
 
 !!! question "Trier (obligatoire)"
     ```python
-    def tri_fusion(self) -> None:
+    def tri_fusion[T: Comparable](lst: Liste[T]) -> None:
         """Trie la liste en place par tri fusion, en O(n log n), sans copier de maillon."""
         if ... or ...:
             return
@@ -1155,40 +1187,40 @@ Le tri sera **stable** : à donnée égale, deux maillons gardent leur ordre d'o
         ```python
         def test_tri_fusion() -> None:
             lst = L(5, 2, 8, 1, 9, 3)
-            lst.tri_fusion()
+            tri_fusion(lst)
             assert contenu(lst) == [1, 2, 3, 5, 8, 9]
 
             # Petites listes
             vide = L()
-            vide.tri_fusion()
+            tri_fusion(vide)
             assert contenu(vide) == []
             un = L(1)
-            un.tri_fusion()
+            tri_fusion(un)
             assert contenu(un) == [1]
             deux = L(2, 1)
-            deux.tri_fusion()
+            tri_fusion(deux)
             assert contenu(deux) == [1, 2]
 
             # Doublons, et liste déjà triée
             doublons = L(4, 4, 1, 4)
-            doublons.tri_fusion()
+            tri_fusion(doublons)
             assert contenu(doublons) == [1, 4, 4, 4]
             triee = L(1, 2, 3, 4, 5)
-            triee.tri_fusion()
+            tri_fusion(triee)
             assert contenu(triee) == [1, 2, 3, 4, 5]
 
             # Le tri est stable : à donnée égale, les maillons gardent leur ordre.
             # Les données ne permettent pas de le voir, on compare donc les maillons.
             st = L(2, 1, 2, 1)
             premier_deux, premier_un, second_deux, second_un = maillons(st)
-            st.tri_fusion()
+            tri_fusion(st)
             assert contenu(st) == [1, 1, 2, 2]
             assert maillons(st) == [premier_un, second_un, premier_deux, second_deux]
 
             # Les maillons sont réutilisés, sans en créer
             s = L(3, 1, 2)
             avant = maillons(s)
-            s.tri_fusion()
+            tri_fusion(s)
             apres = maillons(s)
             assert len(apres) == 3
             for m in apres:
@@ -1198,25 +1230,27 @@ Le tri sera **stable** : à donnée égale, deux maillons gardent leur ordre d'o
     ??? tip "Indice"
         Deux cas de base, puis trois appels, et tu as déjà écrit les trois. Les cas de base sont les listes sur lesquelles il n'y a rien à faire : lesquelles ?
 
-    ??? tip "Indice plus précis"
-        **Les deux cas de base** sont la liste vide et la liste à un seul élément : dans les deux, il n'y a rien à trier, on sort sans rien faire. « La liste n'a qu'un élément » s'écrit `self.suivant.suivant is self` : on part de la sentinelle, et deux crans plus loin on est revenu dessus.
+        Attention à l'appel récursif : `tri_fusion` n'est plus une méthode, donc il s'appelle par son nom, pas sur un objet.
 
-        Ensuite : couper, trier chaque moitié, fusionner. La moitié gauche est la liste que `couper` renvoie, la droite est `self`. Les deux appels portent donc sur des listes **strictement plus courtes**, ce qui garantit l'arrêt.
+    ??? tip "Indice plus précis"
+        **Les deux cas de base** sont la liste vide et la liste à un seul élément : dans les deux, il n'y a rien à trier, on sort sans rien faire. « La liste est vide » s'écrit `lst.suivant is lst`, qui est exactement le corps d'`est_vide`, et « la liste n'a qu'un élément » s'écrit `lst.suivant.suivant is lst`. Les deux se lisent pareil : on part de la sentinelle, et un cran, puis deux crans plus loin, on est revenu dessus.
+
+        Ensuite : couper, trier chaque moitié, fusionner. La moitié gauche est la liste que `couper` renvoie, la droite est `lst`. Les deux appels portent donc sur des listes **strictement plus courtes**, ce qui garantit l'arrêt.
 
     ??? question "Avant d'ouvrir la correction"
         En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
 
     ??? warning "Correction"
         ```python
-            if self.est_vide() or self.suivant.suivant is self:
+            if lst.suivant is lst or lst.suivant.suivant is lst:
                 return
-            gauche = self.couper()
-            gauche.tri_fusion()
-            self.tri_fusion()
-            self.fusion(gauche)
+            gauche = lst.couper()
+            tri_fusion(gauche)
+            tri_fusion(lst)
+            fusion(lst, gauche)
         ```
 
-        L'ordre de la dernière ligne n'est pas libre. `fusion` donne l'égalité aux éléments de son **argument**, donc c'est `gauche` qui doit être l'argument pour que le tri reste stable. Le test de stabilité échoue si tu inverses les deux.
+        L'ordre des deux arguments de la dernière ligne n'est pas libre. `fusion` donne l'égalité à sa **seconde** liste, donc `gauche` doit être en seconde position pour que le tri reste stable. Le test de stabilité échoue si tu inverses les deux.
 
 !!! question "Ce que le tri a coûté (obligatoire)"
     1. `couper` est en `O(n)`, et `fusion` aussi. Combien de niveaux de découpe faut-il pour arriver à des listes d'un seul élément, à partir de `n` éléments ?
