@@ -288,9 +288,34 @@ Dans les squelettes qui suivent, `...` marque ce que tu as à écrire.
         ...
     ```
 
-    Deux affectations, et **l'ordre compte** : `m` doit d'abord apprendre où va la suite de la chaîne, et ce maillon ne peut le pointer qu'ensuite. Dans l'autre ordre, plus rien ne désigne le maillon qui suivait.
+    **Au départ**, deux chaînes séparées. `self` désigne le `1`, et `m` désigne le `5`, qui a sa propre sentinelle.
 
-    Dessine les deux ordres avant de choisir.
+    ```mermaid
+    graph LR
+      self --> a["1"]
+      a --> b["2"]
+      b --> S1["S"]
+      S1 --> S1
+      m --> c["5"]
+      c --> S2["S"]
+      S2 --> S2
+    ```
+
+    **À l'arrivée**, une seule chaîne. Aucun maillon n'a été créé ni détruit : **deux flèches ont changé**, celle de `1` et celle de `5`.
+
+    ```mermaid
+    graph LR
+      self --> a["1"]
+      a --> c["5"]
+      c --> b["2"]
+      b --> S1["S"]
+      S1 --> S1
+      m --> c
+    ```
+
+    Compare les deux dessins et tu as tes deux affectations. **Leur ordre compte** : `m` doit d'abord apprendre où va la suite de la chaîne, et `self` ne peut le pointer qu'ensuite. Dans l'autre ordre, plus rien ne désigne le maillon qui suivait.
+
+    Remarque aussi la sentinelle de `m` : plus rien ne la désigne. C'est pour cela que le maillon qu'on passe peut avoir n'importe quel suivant.
 
     ??? info "Test à recopier dans `maillon_test.py`"
         ```python
@@ -325,7 +350,34 @@ Dans les squelettes qui suivent, `...` marque ce que tu as à écrire.
         return m
     ```
 
-    Quatre lignes, et **leur ordre n'est pas libre**. Chaque flèche qu'on écrit écrase la précédente, donc une flèche se lit **avant** d'être écrasée. La première ligne dit laquelle : garde une référence vers le maillon qui va bouger, sinon plus rien ne le désigne.
+    **Au départ**, une seule chaîne. `self` désigne le `1`, et `dest` désigne le `2`. Le maillon qui va bouger est celui qui suit `self`, donc le `5`.
+
+    ```mermaid
+    graph LR
+      self --> a["1"]
+      a --> b["5"]
+      b --> c["2"]
+      c --> d["3"]
+      d --> S["S"]
+      S --> S
+      dest --> c
+    ```
+
+    **À l'arrivée**, le `5` est passé derrière le `2`. **Trois flèches ont changé** : celle de `1`, celle de `2` et celle de `5`. Et `m` désigne le maillon déplacé, celui que la méthode renvoie.
+
+    ```mermaid
+    graph LR
+      self --> a["1"]
+      a --> c["2"]
+      c --> b["5"]
+      b --> d["3"]
+      d --> S["S"]
+      S --> S
+      dest --> c
+      m --> b
+    ```
+
+    Les trois flèches du dessin sont trois de tes quatre lignes. **Leur ordre n'est pas libre** : chaque flèche qu'on écrit écrase la précédente, donc une flèche se lit **avant** d'être écrasée. La quatrième ligne est la première du squelette, et elle dit laquelle : garde une référence vers le maillon qui va bouger, sinon plus rien ne le désigne.
 
     ??? info "Test à recopier dans `maillon_test.py`"
         ```python
