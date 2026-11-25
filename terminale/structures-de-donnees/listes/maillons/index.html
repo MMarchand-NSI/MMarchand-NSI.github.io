@@ -9619,6 +9619,7 @@
 <h2 id="7-a-ecrire-les-deux-operations">7 À écrire : les deux opérations</h2>
 <p>Chaque méthode se place dans la classe <code>Maillon</code>, sous le constructeur.</p>
 <p>Dans les squelettes qui suivent, <code>...</code> marque ce que tu as à écrire.</p>
+<p>Les dessins qui suivent ne montrent <strong>pas</strong> la sentinelle : ni l'une ni l'autre de ces deux méthodes ne la regarde. Ils ne mettent pas non plus <code>self</code>, <code>m</code> ni <code>dest</code> dans un rectangle : un nom est une <strong>flèche</strong>, pas un objet, c'est la règle 3 de la section 3.</p>
 <div class="admonition question">
 <p class="admonition-title"><code>insere_apres</code> (obligatoire)</p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">insere_apres</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">m</span><span class="p">:</span> <span class="s2">&quot;Maillon[T]&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -9631,25 +9632,39 @@
 <a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>    <span class="o">...</span>
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>    <span class="o">...</span>
 </code></pre></div>
-<p><strong>Au départ</strong>, deux chaînes séparées. <code>self</code> désigne le <code>1</code>, et <code>m</code> désigne le <code>5</code>, qui a sa propre sentinelle.</p>
-<pre class="mermaid"><code>graph LR
-  self --&gt; a["1"]
-  a --&gt; b["2"]
-  b --&gt; S1["S"]
-  S1 --&gt; S1
-  m --&gt; c["5"]
-  c --&gt; S2["S"]
-  S2 --&gt; S2</code></pre>
+<p><strong>Au départ</strong>, <code>self</code> désigne le <code>1</code> de la chaîne <code>1 -&gt; 2</code>, et <code>m</code> désigne un maillon <code>5</code> qui n'en fait pas partie.</p>
+<p><svg viewBox="0 0 326 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:326px;display:block;margin:1em 0;font-family:var(--md-code-font-family,monospace);font-size:15px">
+<defs><marker id="ins1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+<rect x="8" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="36" y="71" text-anchor="middle" fill="currentColor">1</text>
+<line x1="64" y1="66" x2="104" y2="66" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins1)"/>
+<rect x="110" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="138" y="71" text-anchor="middle" fill="currentColor">2</text>
+<rect x="262" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="290" y="71" text-anchor="middle" fill="currentColor">5</text>
+<text x="36" y="18" text-anchor="middle" fill="currentColor" font-size="14">self</text>
+<line x1="36" y1="24" x2="36" y2="44" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins1)"/>
+<text x="290" y="116" text-anchor="middle" fill="currentColor" font-size="14">m</text>
+<line x1="290" y1="110" x2="290" y2="88" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins1)"/>
+</svg></p>
 <p><strong>À l'arrivée</strong>, une seule chaîne. Aucun maillon n'a été créé ni détruit : <strong>deux flèches ont changé</strong>, celle de <code>1</code> et celle de <code>5</code>.</p>
-<pre class="mermaid"><code>graph LR
-  self --&gt; a["1"]
-  a --&gt; c["5"]
-  c --&gt; b["2"]
-  b --&gt; S1["S"]
-  S1 --&gt; S1
-  m --&gt; c</code></pre>
+<p><svg viewBox="0 0 276 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:276px;display:block;margin:1em 0;font-family:var(--md-code-font-family,monospace);font-size:15px">
+<defs><marker id="ins2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+<rect x="8" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="36" y="71" text-anchor="middle" fill="currentColor">1</text>
+<line x1="64" y1="66" x2="104" y2="66" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins2)"/>
+<rect x="110" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="138" y="71" text-anchor="middle" fill="currentColor">5</text>
+<line x1="166" y1="66" x2="206" y2="66" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins2)"/>
+<rect x="212" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="240" y="71" text-anchor="middle" fill="currentColor">2</text>
+<text x="36" y="18" text-anchor="middle" fill="currentColor" font-size="14">self</text>
+<line x1="36" y1="24" x2="36" y2="44" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins2)"/>
+<text x="138" y="116" text-anchor="middle" fill="currentColor" font-size="14">m</text>
+<line x1="138" y1="110" x2="138" y2="88" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins2)"/>
+</svg></p>
 <p>Compare les deux dessins et tu as tes deux affectations. <strong>Leur ordre compte</strong> : <code>m</code> doit d'abord apprendre où va la suite de la chaîne, et <code>self</code> ne peut le pointer qu'ensuite. Dans l'autre ordre, plus rien ne désigne le maillon qui suivait.</p>
-<p>Remarque aussi la sentinelle de <code>m</code> : plus rien ne la désigne. C'est pour cela que le maillon qu'on passe peut avoir n'importe quel suivant.</p>
+<p>Remarque aussi que le <code>suivant</code> de <code>m</code> est <strong>écrasé</strong>, quel qu'il soit. C'est pour cela que le maillon qu'on passe peut avoir n'importe quel suivant.</p>
 <details class="info">
 <summary>Test à recopier dans <code>maillon_test.py</code></summary>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_insere_apres</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
@@ -9667,68 +9682,119 @@
 <a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a>    <span class="k">assert</span> <span class="n">fin</span><span class="o">.</span><span class="n">suivant</span> <span class="ow">is</span> <span class="n">fin</span>
 </code></pre></div>
 </details>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur ton cahier : dans quel ordre tes deux lignes sont-elles écrites, et que se perdrait-il dans l'autre ordre ?</p>
+</details>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>    <span class="n">m</span><span class="o">.</span><span class="n">suivant</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">suivant</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">suivant</span> <span class="o">=</span> <span class="n">m</span>
+</code></pre></div>
+<p>Dans l'autre ordre, <code>self.suivant</code> vaut déjà <code>m</code> quand on le lit, donc le <code>5</code> se met à pointer sur <strong>lui-même</strong> et le <code>2</code> n'est plus atteignable. En suivant les flèches depuis le <code>1</code>, on obtient <code>1</code>, <code>5</code>, <code>5</code>, <code>5</code>, sans fin.</p>
+</details>
 </div>
 <div class="admonition question">
 <p class="admonition-title"><code>deplacer_prochain_apres</code> (obligatoire)</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">deplacer_prochain_apres</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dest</span><span class="p">:</span> <span class="s2">&quot;Maillon[T]&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Maillon[T]&quot;</span><span class="p">:</span>
-<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="sd">    Déplace le maillon qui suit celui-ci juste après dest, et le renvoie, en O(1).</span>
-<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>
-<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="sd">    Exemple : un et deux désignent les maillons 1 et 2 dans 1 -&gt; 5 -&gt; 2 -&gt; 3</span>
-<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="sd">      m = un.deplacer_prochain_apres(deux)   # 1 -&gt; 2 -&gt; 5 -&gt; 3, et m.data vaut 5</span>
-<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="sd">    &quot;&quot;&quot;</span>
-<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a>    <span class="n">m</span> <span class="o">=</span> <span class="o">...</span>
-<a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a>    <span class="o">...</span>
-<a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a>    <span class="o">...</span>
-<a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a>    <span class="o">...</span>
-<a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>    <span class="k">return</span> <span class="n">m</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">deplacer_prochain_apres</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dest</span><span class="p">:</span> <span class="s2">&quot;Maillon[T]&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;Maillon[T]&quot;</span><span class="p">:</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="sd">    Déplace le maillon qui suit celui-ci juste après dest, et le renvoie, en O(1).</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="sd">    Exemple : un désigne le 1 de 1 -&gt; 5 -&gt; 2, et sept le 7 de 7 -&gt; 8</span>
+<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="sd">      m = un.deplacer_prochain_apres(sept)   # 1 -&gt; 2 et 7 -&gt; 5 -&gt; 8, m.data vaut 5</span>
+<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="sd">    &quot;&quot;&quot;</span>
+<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>    <span class="n">m</span> <span class="o">=</span> <span class="o">...</span>
+<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    <span class="o">...</span>
+<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="o">...</span>
+<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    <span class="o">...</span>
+<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>    <span class="k">return</span> <span class="n">m</span>
 </code></pre></div>
-<p><strong>Au départ</strong>, une seule chaîne. <code>self</code> désigne le <code>1</code>, et <code>dest</code> désigne le <code>2</code>. Le maillon qui va bouger est celui qui suit <code>self</code>, donc le <code>5</code>.</p>
-<pre class="mermaid"><code>graph LR
-  self --&gt; a["1"]
-  a --&gt; b["5"]
-  b --&gt; c["2"]
-  c --&gt; d["3"]
-  d --&gt; S["S"]
-  S --&gt; S
-  dest --&gt; c</code></pre>
-<p><strong>À l'arrivée</strong>, le <code>5</code> est passé derrière le <code>2</code>. <strong>Trois flèches ont changé</strong> : celle de <code>1</code>, celle de <code>2</code> et celle de <code>5</code>. Et <code>m</code> désigne le maillon déplacé, celui que la méthode renvoie.</p>
-<pre class="mermaid"><code>graph LR
-  self --&gt; a["1"]
-  a --&gt; c["2"]
-  c --&gt; b["5"]
-  b --&gt; d["3"]
-  d --&gt; S["S"]
-  S --&gt; S
-  dest --&gt; c
-  m --&gt; b</code></pre>
-<p>Les trois flèches du dessin sont trois de tes quatre lignes. <strong>Leur ordre n'est pas libre</strong> : chaque flèche qu'on écrit écrase la précédente, donc une flèche se lit <strong>avant</strong> d'être écrasée. La quatrième ligne est la première du squelette, et elle dit laquelle : garde une référence vers le maillon qui va bouger, sinon plus rien ne le désigne.</p>
+<p><strong>Au départ</strong>, deux chaînes. <code>self</code> désigne le <code>1</code> de <code>1 -&gt; 5 -&gt; 2</code>, et <code>dest</code> le <code>7</code> de <code>7 -&gt; 8</code>. Le maillon qui va bouger est celui qui <strong>suit</strong> <code>self</code>, donc le <code>5</code>, en vert.</p>
+<p><svg viewBox="0 0 276 232" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:276px;display:block;margin:1em 0;font-family:var(--md-code-font-family,monospace);font-size:15px">
+<defs><marker id="dep1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+<rect x="8" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="36" y="71" text-anchor="middle" fill="currentColor">1</text>
+<rect x="110" y="46" width="56" height="40" rx="4" fill="#157347" stroke="currentColor" stroke-width="1.5"/>
+<text x="138" y="71" text-anchor="middle" fill="#ffffff">5</text>
+<rect x="212" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="240" y="71" text-anchor="middle" fill="currentColor">2</text>
+<line x1="64" y1="66" x2="104" y2="66" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep1)"/>
+<line x1="166" y1="66" x2="206" y2="66" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep1)"/>
+<rect x="8" y="146" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="36" y="171" text-anchor="middle" fill="currentColor">7</text>
+<rect x="212" y="146" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="240" y="171" text-anchor="middle" fill="currentColor">8</text>
+<line x1="64" y1="166" x2="206" y2="166" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep1)"/>
+<text x="36" y="18" text-anchor="middle" fill="currentColor" font-size="14">self</text>
+<line x1="36" y1="24" x2="36" y2="44" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep1)"/>
+<text x="36" y="118" text-anchor="middle" fill="currentColor" font-size="14">dest</text>
+<line x1="36" y1="124" x2="36" y2="144" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep1)"/>
+</svg></p>
+<p><strong>À l'arrivée</strong>, le <code>5</code> a quitté la première chaîne, qui se referme sur <code>1 -&gt; 2</code>, et il s'est glissé <strong>entre <code>dest</code> et son suivant</strong>. C'est le <strong>même objet</strong> : aucun maillon n'a été créé, et c'est lui que la méthode renvoie, ici dans <code>m</code>.</p>
+<p><svg viewBox="0 0 276 232" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:276px;display:block;margin:1em 0;font-family:var(--md-code-font-family,monospace);font-size:15px">
+<defs><marker id="dep2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+<rect x="8" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="36" y="71" text-anchor="middle" fill="currentColor">1</text>
+<rect x="212" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="240" y="71" text-anchor="middle" fill="currentColor">2</text>
+<line x1="64" y1="66" x2="206" y2="66" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep2)"/>
+<rect x="8" y="146" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="36" y="171" text-anchor="middle" fill="currentColor">7</text>
+<rect x="110" y="146" width="56" height="40" rx="4" fill="#157347" stroke="currentColor" stroke-width="1.5"/>
+<text x="138" y="171" text-anchor="middle" fill="#ffffff">5</text>
+<rect x="212" y="146" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+<text x="240" y="171" text-anchor="middle" fill="currentColor">8</text>
+<line x1="64" y1="166" x2="104" y2="166" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep2)"/>
+<line x1="166" y1="166" x2="206" y2="166" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep2)"/>
+<text x="36" y="18" text-anchor="middle" fill="currentColor" font-size="14">self</text>
+<line x1="36" y1="24" x2="36" y2="44" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep2)"/>
+<text x="36" y="118" text-anchor="middle" fill="currentColor" font-size="14">dest</text>
+<line x1="36" y1="124" x2="36" y2="144" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep2)"/>
+<text x="138" y="216" text-anchor="middle" fill="currentColor" font-size="14">m</text>
+<line x1="138" y1="210" x2="138" y2="188" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep2)"/>
+</svg></p>
+<p><strong>Trois flèches ont changé</strong>, et trois seulement. Celle de <code>1</code>, qui saute par-dessus le <code>5</code>. Celle de <code>7</code>, qui va maintenant vers le <code>5</code>. Celle du <code>5</code>, qui va vers le <code>8</code>. La flèche du <code>8</code>, elle, n'a pas bougé.</p>
+<p>Ces trois flèches sont trois de tes quatre lignes. <strong>Leur ordre n'est pas libre</strong> : chaque flèche qu'on écrit écrase la précédente, donc une flèche se lit <strong>avant</strong> d'être écrasée. La quatrième ligne est la première du squelette, et elle dit laquelle : garde une référence vers le maillon qui va bouger, sinon plus rien ne le désigne.</p>
 <details class="info">
 <summary>Test à recopier dans <code>maillon_test.py</code></summary>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_deplacer_prochain_apres</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="n">c</span> <span class="o">=</span> <span class="n">chaine</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
-<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">deux</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">suivant</span><span class="o">.</span><span class="n">suivant</span>
-<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="n">m</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">deplacer_prochain_apres</span><span class="p">(</span><span class="n">deux</span><span class="p">)</span>
-<a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="k">assert</span> <span class="n">m</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="mi">5</span>
-<a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-<a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>    <span class="k">assert</span> <span class="n">m</span><span class="o">.</span><span class="n">suivant</span> <span class="ow">is</span> <span class="n">deux</span><span class="o">.</span><span class="n">suivant</span><span class="o">.</span><span class="n">suivant</span>    <span class="c1"># il a pris la suite de deux</span>
-<a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>
-<a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>    <span class="c1"># D&#39;une chaîne vers une autre</span>
-<a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">chaine</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>    <span class="n">b</span> <span class="o">=</span> <span class="n">chaine</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
-<a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">deplacer_prochain_apres</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
-<a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>    <span class="k">assert</span> <span class="n">x</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="mi">2</span>
-<a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<a id="__codelineno-11-15" name="__codelineno-11-15" href="#__codelineno-11-15"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
-<a id="__codelineno-11-16" name="__codelineno-11-16" href="#__codelineno-11-16"></a>
-<a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>    <span class="c1"># Déplacer le dernier maillon : la chaîne se referme sur la sentinelle</span>
-<a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">chaine</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<a id="__codelineno-11-19" name="__codelineno-11-19" href="#__codelineno-11-19"></a>    <span class="n">g</span> <span class="o">=</span> <span class="n">chaine</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
-<a id="__codelineno-11-20" name="__codelineno-11-20" href="#__codelineno-11-20"></a>    <span class="n">f</span><span class="o">.</span><span class="n">deplacer_prochain_apres</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<a id="__codelineno-11-21" name="__codelineno-11-21" href="#__codelineno-11-21"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-<a id="__codelineno-11-22" name="__codelineno-11-22" href="#__codelineno-11-22"></a>    <span class="k">assert</span> <span class="n">f</span><span class="o">.</span><span class="n">suivant</span><span class="o">.</span><span class="n">suivant</span> <span class="ow">is</span> <span class="n">f</span><span class="o">.</span><span class="n">suivant</span>        <span class="c1"># 1 pointe sur la sentinelle</span>
-<a id="__codelineno-11-23" name="__codelineno-11-23" href="#__codelineno-11-23"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">test_deplacer_prochain_apres</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">c</span> <span class="o">=</span> <span class="n">chaine</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">deux</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">suivant</span><span class="o">.</span><span class="n">suivant</span>
+<a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>    <span class="n">m</span> <span class="o">=</span> <span class="n">c</span><span class="o">.</span><span class="n">deplacer_prochain_apres</span><span class="p">(</span><span class="n">deux</span><span class="p">)</span>
+<a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="k">assert</span> <span class="n">m</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="mi">5</span>
+<a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>    <span class="k">assert</span> <span class="n">m</span><span class="o">.</span><span class="n">suivant</span> <span class="ow">is</span> <span class="n">deux</span><span class="o">.</span><span class="n">suivant</span><span class="o">.</span><span class="n">suivant</span>    <span class="c1"># il a pris la suite de deux</span>
+<a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+<a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>    <span class="c1"># D&#39;une chaîne vers une autre</span>
+<a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>    <span class="n">a</span> <span class="o">=</span> <span class="n">chaine</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="n">b</span> <span class="o">=</span> <span class="n">chaine</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span>
+<a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>    <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="o">.</span><span class="n">deplacer_prochain_apres</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+<a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>    <span class="k">assert</span> <span class="n">x</span><span class="o">.</span><span class="n">data</span> <span class="o">==</span> <span class="mi">2</span>
+<a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>
+<a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>    <span class="c1"># Déplacer le dernier maillon : la chaîne se referme sur la sentinelle</span>
+<a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">chaine</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>    <span class="n">g</span> <span class="o">=</span> <span class="n">chaine</span><span class="p">(</span><span class="mi">9</span><span class="p">)</span>
+<a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>    <span class="n">f</span><span class="o">.</span><span class="n">deplacer_prochain_apres</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+<a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>    <span class="k">assert</span> <span class="n">f</span><span class="o">.</span><span class="n">suivant</span><span class="o">.</span><span class="n">suivant</span> <span class="ow">is</span> <span class="n">f</span><span class="o">.</span><span class="n">suivant</span>        <span class="c1"># 1 pointe sur la sentinelle</span>
+<a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>    <span class="k">assert</span> <span class="n">contenu</span><span class="p">(</span><span class="n">g</span><span class="p">)</span> <span class="o">==</span> <span class="p">[</span><span class="mi">9</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
 </code></pre></div>
+</details>
+<details class="question">
+<summary>Avant d'ouvrir la correction</summary>
+<p>En une phrase, sur ton cahier : à quoi sert la première ligne, celle qui ne rebranche aucune flèche ?</p>
+</details>
+<details class="warning">
+<summary>Correction</summary>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>    <span class="n">m</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">suivant</span>
+<a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="bp">self</span><span class="o">.</span><span class="n">suivant</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">suivant</span>
+<a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="n">m</span><span class="o">.</span><span class="n">suivant</span> <span class="o">=</span> <span class="n">dest</span><span class="o">.</span><span class="n">suivant</span>
+<a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="n">dest</span><span class="o">.</span><span class="n">suivant</span> <span class="o">=</span> <span class="n">m</span>
+<a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="k">return</span> <span class="n">m</span>
+</code></pre></div>
+<p>La première ligne ne rebranche rien, elle <strong>retient</strong> le maillon qui va bouger. Chacune des trois autres lit une flèche juste avant qu'elle ne soit écrasée : <code>m.suivant</code> referme la chaîne derrière le <code>5</code> avant que le <code>5</code> ne change de suivant, et <code>dest.suivant</code> branche le <code>5</code> sur le <code>8</code> avant que <code>dest</code> ne pointe sur le <code>5</code>.</p>
 </details>
 </div>
 <h2 id="8-ce-que-cela-coute">8 Ce que cela coûte</h2>
@@ -9792,7 +9858,7 @@
     <span class="md-icon" title="Last update">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 25, 2026 16:11:04 UTC">November 25, 2026</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="November 25, 2026 20:42:01 UTC">November 25, 2026</span>
   </span>
 
     
