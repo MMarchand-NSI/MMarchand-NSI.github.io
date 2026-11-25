@@ -135,7 +135,7 @@ Une liste **est** une sentinelle, qui **est** un maillon. Les deux opérations d
 
     **Ce que ce choix apporte.** Aucun `suivant` ne vaut jamais `None`, donc aucune opération n'a à se demander si elle est au bout de la chaîne, ni si la liste est vide. C'est le piège que Tony Hoare appelle son erreur à un milliard de dollars : il a introduit la référence nulle en 1965 dans ALGOL W parce qu'elle était facile à implémenter, et il en a fait une conférence en 2009 sous le titre *Null References: The Billion Dollar Mistake*.
 
-    **Deux différences, pour ne pas croire que c'est le même objet.** Le noyau est **doublement chaîné**, chaque maillon ayant un `next` et un `prev` : il insère en fin et retire un maillon en `O(1)`, là où il nous faudra un `precedent` en `O(n)`. Et il est **intrusif**, il n'y a pas de champ `data` : le maillon est embarqué **dans** la donnée, et on remonte de l'un à l'autre avec `container_of`.
+    **Deux différences, pour ne pas croire que c'est le même objet.** Le noyau est **doublement chaîné**, chaque maillon ayant un `next` et un `prev` : il insère en fin et retire un maillon en `O(1)`, là où il nous faudrait remonter toute la chaîne pour trouver le précédent, donc `O(n)`. Et il est **intrusif**, il n'y a pas de champ `data` : le maillon est embarqué **dans** la donnée, et on remonte de l'un à l'autre avec `container_of`.
 
 !!! question "Prédire, sur une chaîne circulaire (obligatoire)"
     Soit `lst` une liste contenant `1`, `2`, `3`. Tu n'as rien à écrire : il n'y a que des flèches à suivre.
@@ -237,7 +237,6 @@ Voici ce que la liste saura faire. Lis le tableau en entier **avant** d'écrire 
 | `append(data)` | rien, ajoute un élément en fin | `O(n)` |
 | `dernier()` | le dernier élément. Précondition : la liste n'est pas vide | `O(n)` |
 | `get(key)` | l'élément d'indice `key`, à partir de 0 | `O(n)` |
-| `precedent(m)` | le maillon dont le suivant est `m` | `O(n)` |
 | `est_egale(autre)` | `True` si les deux listes ont les mêmes éléments, dans le même ordre | `O(n)` |
 | `copie()` | une copie indépendante de la liste | `O(n)` |
 | `greffer_apres(m)` | rien, déplace tous les maillons de cette liste après `m`, et la vide | `O(n)` |
@@ -307,7 +306,7 @@ Et comme à la page précédente, `...` marque ce que tu as à écrire.
             return res
         ```
 
-        Garde ces cinq lignes sous les yeux : `dernier_maillon`, `get`, `precedent`, `est_egale` et `copie` sont toutes des variantes de ce parcours.
+        Garde ces cinq lignes sous les yeux : `dernier_maillon`, `get`, `est_egale` et `copie` sont toutes des variantes de ce parcours.
 
 ### 4.3 `ajouter_debut`
 
@@ -489,72 +488,7 @@ Et comme à la page précédente, `...` marque ce que tu as à écrire.
             return courant.data
         ```
 
-### 4.8 `precedent`
-
-!!! question "Le maillon d'avant (obligatoire)"
-    Cette méthode existe pour une raison précise, et c'est la question 2 du rappel d'ouverture : dans une chaîne à sens unique, on ne peut retirer un maillon qu'**en passant par celui d'avant**. `precedent(m)` rend la seule position depuis laquelle on peut agir sur `m`, et c'est de là que `deplacer_prochain_apres` le déplacera.
-
-    ```python
-    def precedent(self, m: Maillon[T]) -> Maillon[T]:
-        """
-        Renvoie le maillon qui précède m dans la liste, en O(n).
-        Utile pour agir sur m, qu'on n'atteint que par son précédent.
-        Précondition : m est un maillon de cette liste.
-        """
-        ref = self
-        while ...:
-            ...
-            assert ..., "Ce maillon n'est pas dans la liste"
-        return ref
-    ```
-
-    ??? info "Tests à recopier dans `liste_test.py`"
-        ```python
-        def test_precedent() -> None:
-            lst = L(1, 2, 3)
-            assert lst.precedent(cran(lst, 3)).data == 2
-            assert lst.precedent(lst.suivant) is lst    # le précédent du premier est la liste
-            assert lst.precedent(lst).data == 3         # le précédent de la liste est le dernier
-
-            # Liste vide
-            v = L()
-            assert v.precedent(v) is v
-
-            # precedent permet de retirer un maillon
-            r = L(1, 2, 3)
-            deux = cran(r, 2)
-            p = r.precedent(deux)
-            p.suivant = p.suivant.suivant
-            assert contenu(r) == [1, 3]
-
-
-        def test_precedent_maillon_absent() -> None:
-            lst = L(1, 2, 3)
-            try:
-                lst.precedent(Maillon(9, lst))
-            except AssertionError:
-                return                  # comportement attendu
-            assert False, "precedent d'un maillon absent aurait dû échouer"
-        ```
-
-    ??? tip "Indice"
-        On cherche la référence `ref` telle que `ref.suivant is m`. Tant que ce n'est pas le cas, on avance.
-
-    ??? tip "Indice plus précis"
-        Si `m` n'est pas dans la liste, on finira par **repasser par la sentinelle**. C'est là, et seulement là, que l'`assert` refuse. Sans lui, la boucle tourne indéfiniment : c'est ce qu'annonçait l'avertissement de la section 2, et c'est le test ci-dessus qui ne s'arrêtera pas.
-
-    ??? question "Avant d'ouvrir la correction"
-        En une phrase, sur ton cahier : qu'est-ce que l'indice t'a appris sur ce qui n'allait pas dans **ton** code ?
-
-    ??? warning "Correction"
-        ```python
-            while ref.suivant is not m:
-                ref = ref.suivant
-                assert ref is not self, "Ce maillon n'est pas dans la liste"
-            return ref
-        ```
-
-### 4.9 `est_egale`
+### 4.8 `est_egale`
 
 !!! question "Comparer deux listes (obligatoire)"
     ```python
@@ -609,7 +543,7 @@ Et comme à la page précédente, `...` marque ce que tu as à écrire.
 
         La dernière ligne dit : les deux listes sont épuisées **en même temps**. Si une seule l'est, elles n'avaient pas la même longueur.
 
-### 4.10 `copie`
+### 4.9 `copie`
 
 !!! question "Copier la liste (obligatoire)"
     ```python
@@ -671,7 +605,7 @@ Et comme à la page précédente, `...` marque ce que tu as à écrire.
             return lst
         ```
 
-### 4.11 `greffer_apres`
+### 4.10 `greffer_apres`
 
 !!! question "Déménager des maillons (obligatoire)"
     Attention au sens : c'est **cette** liste qui se vide, et ses maillons vont se placer après le maillon `m`, qui est ailleurs. On écrit `source.greffer_apres(destination)`.
@@ -746,7 +680,7 @@ Et comme à la page précédente, `...` marque ce que tu as à écrire.
 
         Le premier `if` n'est pas indispensable au résultat, et c'est une bonne occasion de le vérifier : déroule les trois dernières lignes sur une liste vide, où `self.suivant` vaut `self`. Elles ne cassent rien. Il reste là parce qu'il **dit l'intention**, une liste vide n'a rien à déménager, et qu'un lecteur n'a alors pas à refaire ce calcul.
 
-### 4.12 `extend`
+### 4.11 `extend`
 
 !!! question "Ajouter une copie (obligatoire)"
     ```python
@@ -811,7 +745,7 @@ Et comme à la page précédente, `...` marque ce que tu as à écrire.
 
         Et c'est ce qui fait marcher `d.extend(d)` : `lst.copie()` est évaluée **avant** que quoi que ce soit ne bouge, donc la copie est faite sur la liste telle qu'elle était.
 
-### 4.13 Renverser la liste
+### 4.12 Renverser la liste
 
 !!! question "Lire, pas écrire (entraînement)"
     Ce code ne demande aucune méthode nouvelle. Il renverse une liste **en place**, sans créer un seul maillon, avec deux lignes qui n'utilisent qu'une seule méthode du maillon.
@@ -853,7 +787,7 @@ Tu viens d'écrire une structure entière. Savoir **ce que chaque opération co�
 | Coût | Opérations |
 | --- | --- |
 | `O(1)` | `insere_apres`, `deplacer_prochain_apres`, `est_vide`, `premier`, `ajouter_debut` |
-| `O(n)` | `taille`, `dernier_maillon`, `dernier`, `append`, `get`, `precedent`, `est_egale`, `copie`, `greffer_apres` |
+| `O(n)` | `taille`, `dernier_maillon`, `dernier`, `append`, `get`, `est_egale`, `copie`, `greffer_apres` |
 | `O(n + m)` | `extend` |
 
 Regarde la deuxième ligne du tableau et la troisième ensemble. **Tout ce qui est à un endroit connu coûte `O(1)`. Tout ce qui demande d'arriver quelque part coûte `O(n)`.** C'est la seule chose à retenir, et elle suffit à reconstruire le tableau entier.
@@ -1235,4 +1169,4 @@ Le tri sera **stable** : à donnée égale, deux maillons gardent leur ordre d'o
         3. Rien sur le coût en temps, et tout sur le coût en **mémoire**. Un tri de tableau doit déplacer des cases, ou recopier dans un second tableau. Ici, on n'a déplacé que des flèches.
 
 !!! info "Pour finir"
-    Lance `uv run pytest` une dernière fois : les quatre tests de `maillon_test.py` et les vingt-deux de `liste_test.py` doivent passer. Tes quatre fichiers tiennent maintenant une structure de données entière, ses tests, et un tri en `O(n log n)` qui n'a créé aucun maillon : il n'a fait que déplacer des flèches, du début à la fin.
+    Lance `uv run pytest` une dernière fois : les quatre tests de `maillon_test.py` et les vingt de `liste_test.py` doivent passer. Tes quatre fichiers tiennent maintenant une structure de données entière, ses tests, et un tri en `O(n log n)` qui n'a créé aucun maillon : il n'a fait que déplacer des flèches, du début à la fin.
