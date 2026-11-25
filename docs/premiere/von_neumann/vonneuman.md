@@ -113,7 +113,7 @@ Les machines actuelles sont **multiprocesseur** : elles contiennent plusieurs un
 
 Le processeur est un calculateur hors pair, mais il ne peut pas travailler à vide. Pour réaliser une opération aussi simple que 3 + 2, il a besoin qu'on lui fournisse ses opérandes : le nombre 3 et le nombre 2. C’est là qu'intervient la mémoire : elle sert de réservoir pour stocker les données nécessaires à un calcul.
 
-![](image-9.png)
+![Une barrette de mémoire vive DDR4](image-9.jpg)
 
 La **mémoire** stocke à la fois :
 
