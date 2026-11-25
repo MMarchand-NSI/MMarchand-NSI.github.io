@@ -275,6 +275,8 @@ Chaque méthode se place dans la classe `Maillon`, sous le constructeur.
 
 Dans les squelettes qui suivent, `...` marque ce que tu as à écrire.
 
+Les dessins qui suivent ne montrent **pas** la sentinelle : ni l'une ni l'autre de ces deux méthodes ne la regarde. Ils ne mettent pas non plus `self`, `m` ni `dest` dans un rectangle : un nom est une **flèche**, pas un objet, c'est la règle 3 de la section 3.
+
 !!! question "`insere_apres` (obligatoire)"
     ```python
     def insere_apres(self, m: "Maillon[T]") -> None:
@@ -288,34 +290,44 @@ Dans les squelettes qui suivent, `...` marque ce que tu as à écrire.
         ...
     ```
 
-    **Au départ**, deux chaînes séparées. `self` désigne le `1`, et `m` désigne le `5`, qui a sa propre sentinelle.
+    **Au départ**, `self` désigne le `1` de la chaîne `1 -> 2`, et `m` désigne un maillon `5` qui n'en fait pas partie.
 
-    ```mermaid
-    graph LR
-      self --> a["1"]
-      a --> b["2"]
-      b --> S1["S"]
-      S1 --> S1
-      m --> c["5"]
-      c --> S2["S"]
-      S2 --> S2
-    ```
+    <svg viewBox="0 0 326 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:326px;display:block;margin:1em 0;font-family:var(--md-code-font-family,monospace);font-size:15px">
+    <defs><marker id="ins1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+    <rect x="8" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="36" y="71" text-anchor="middle" fill="currentColor">1</text>
+    <line x1="64" y1="66" x2="104" y2="66" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins1)"/>
+    <rect x="110" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="138" y="71" text-anchor="middle" fill="currentColor">2</text>
+    <rect x="262" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="290" y="71" text-anchor="middle" fill="currentColor">5</text>
+    <text x="36" y="18" text-anchor="middle" fill="currentColor" font-size="14">self</text>
+    <line x1="36" y1="24" x2="36" y2="44" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins1)"/>
+    <text x="290" y="116" text-anchor="middle" fill="currentColor" font-size="14">m</text>
+    <line x1="290" y1="110" x2="290" y2="88" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins1)"/>
+    </svg>
 
     **À l'arrivée**, une seule chaîne. Aucun maillon n'a été créé ni détruit : **deux flèches ont changé**, celle de `1` et celle de `5`.
 
-    ```mermaid
-    graph LR
-      self --> a["1"]
-      a --> c["5"]
-      c --> b["2"]
-      b --> S1["S"]
-      S1 --> S1
-      m --> c
-    ```
+    <svg viewBox="0 0 276 130" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:276px;display:block;margin:1em 0;font-family:var(--md-code-font-family,monospace);font-size:15px">
+    <defs><marker id="ins2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+    <rect x="8" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="36" y="71" text-anchor="middle" fill="currentColor">1</text>
+    <line x1="64" y1="66" x2="104" y2="66" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins2)"/>
+    <rect x="110" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="138" y="71" text-anchor="middle" fill="currentColor">5</text>
+    <line x1="166" y1="66" x2="206" y2="66" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins2)"/>
+    <rect x="212" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="240" y="71" text-anchor="middle" fill="currentColor">2</text>
+    <text x="36" y="18" text-anchor="middle" fill="currentColor" font-size="14">self</text>
+    <line x1="36" y1="24" x2="36" y2="44" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins2)"/>
+    <text x="138" y="116" text-anchor="middle" fill="currentColor" font-size="14">m</text>
+    <line x1="138" y1="110" x2="138" y2="88" stroke="currentColor" stroke-width="1.5" marker-end="url(#ins2)"/>
+    </svg>
 
     Compare les deux dessins et tu as tes deux affectations. **Leur ordre compte** : `m` doit d'abord apprendre où va la suite de la chaîne, et `self` ne peut le pointer qu'ensuite. Dans l'autre ordre, plus rien ne désigne le maillon qui suivait.
 
-    Remarque aussi la sentinelle de `m` : plus rien ne la désigne. C'est pour cela que le maillon qu'on passe peut avoir n'importe quel suivant.
+    Remarque aussi que le `suivant` de `m` est **écrasé**, quel qu'il soit. C'est pour cela que le maillon qu'on passe peut avoir n'importe quel suivant.
 
     ??? info "Test à recopier dans `maillon_test.py`"
         ```python
@@ -334,14 +346,25 @@ Dans les squelettes qui suivent, `...` marque ce que tu as à écrire.
             assert fin.suivant is fin
         ```
 
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur ton cahier : dans quel ordre tes deux lignes sont-elles écrites, et que se perdrait-il dans l'autre ordre ?
+
+    ??? warning "Correction"
+        ```python
+            m.suivant = self.suivant
+            self.suivant = m
+        ```
+
+        Dans l'autre ordre, `self.suivant` vaut déjà `m` quand on le lit, donc le `5` se met à pointer sur **lui-même** et le `2` n'est plus atteignable. En suivant les flèches depuis le `1`, on obtient `1`, `5`, `5`, `5`, sans fin.
+
 !!! question "`deplacer_prochain_apres` (obligatoire)"
     ```python
     def deplacer_prochain_apres(self, dest: "Maillon[T]") -> "Maillon[T]":
         """
         Déplace le maillon qui suit celui-ci juste après dest, et le renvoie, en O(1).
 
-        Exemple : un et deux désignent les maillons 1 et 2 dans 1 -> 5 -> 2 -> 3
-          m = un.deplacer_prochain_apres(deux)   # 1 -> 2 -> 5 -> 3, et m.data vaut 5
+        Exemple : un désigne le 1 de 1 -> 5 -> 2, et sept le 7 de 7 -> 8
+          m = un.deplacer_prochain_apres(sept)   # 1 -> 2 et 7 -> 5 -> 8, m.data vaut 5
         """
         m = ...
         ...
@@ -350,34 +373,57 @@ Dans les squelettes qui suivent, `...` marque ce que tu as à écrire.
         return m
     ```
 
-    **Au départ**, une seule chaîne. `self` désigne le `1`, et `dest` désigne le `2`. Le maillon qui va bouger est celui qui suit `self`, donc le `5`.
+    **Au départ**, deux chaînes. `self` désigne le `1` de `1 -> 5 -> 2`, et `dest` le `7` de `7 -> 8`. Le maillon qui va bouger est celui qui **suit** `self`, donc le `5`, en vert.
 
-    ```mermaid
-    graph LR
-      self --> a["1"]
-      a --> b["5"]
-      b --> c["2"]
-      c --> d["3"]
-      d --> S["S"]
-      S --> S
-      dest --> c
-    ```
+    <svg viewBox="0 0 276 232" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:276px;display:block;margin:1em 0;font-family:var(--md-code-font-family,monospace);font-size:15px">
+    <defs><marker id="dep1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+    <rect x="8" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="36" y="71" text-anchor="middle" fill="currentColor">1</text>
+    <rect x="110" y="46" width="56" height="40" rx="4" fill="#157347" stroke="currentColor" stroke-width="1.5"/>
+    <text x="138" y="71" text-anchor="middle" fill="#ffffff">5</text>
+    <rect x="212" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="240" y="71" text-anchor="middle" fill="currentColor">2</text>
+    <line x1="64" y1="66" x2="104" y2="66" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep1)"/>
+    <line x1="166" y1="66" x2="206" y2="66" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep1)"/>
+    <rect x="8" y="146" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="36" y="171" text-anchor="middle" fill="currentColor">7</text>
+    <rect x="212" y="146" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="240" y="171" text-anchor="middle" fill="currentColor">8</text>
+    <line x1="64" y1="166" x2="206" y2="166" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep1)"/>
+    <text x="36" y="18" text-anchor="middle" fill="currentColor" font-size="14">self</text>
+    <line x1="36" y1="24" x2="36" y2="44" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep1)"/>
+    <text x="36" y="118" text-anchor="middle" fill="currentColor" font-size="14">dest</text>
+    <line x1="36" y1="124" x2="36" y2="144" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep1)"/>
+    </svg>
 
-    **À l'arrivée**, le `5` est passé derrière le `2`. **Trois flèches ont changé** : celle de `1`, celle de `2` et celle de `5`. Et `m` désigne le maillon déplacé, celui que la méthode renvoie.
+    **À l'arrivée**, le `5` a quitté la première chaîne, qui se referme sur `1 -> 2`, et il s'est glissé **entre `dest` et son suivant**. C'est le **même objet** : aucun maillon n'a été créé, et c'est lui que la méthode renvoie, ici dans `m`.
 
-    ```mermaid
-    graph LR
-      self --> a["1"]
-      a --> c["2"]
-      c --> b["5"]
-      b --> d["3"]
-      d --> S["S"]
-      S --> S
-      dest --> c
-      m --> b
-    ```
+    <svg viewBox="0 0 276 232" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:276px;display:block;margin:1em 0;font-family:var(--md-code-font-family,monospace);font-size:15px">
+    <defs><marker id="dep2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+    <rect x="8" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="36" y="71" text-anchor="middle" fill="currentColor">1</text>
+    <rect x="212" y="46" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="240" y="71" text-anchor="middle" fill="currentColor">2</text>
+    <line x1="64" y1="66" x2="206" y2="66" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep2)"/>
+    <rect x="8" y="146" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="36" y="171" text-anchor="middle" fill="currentColor">7</text>
+    <rect x="110" y="146" width="56" height="40" rx="4" fill="#157347" stroke="currentColor" stroke-width="1.5"/>
+    <text x="138" y="171" text-anchor="middle" fill="#ffffff">5</text>
+    <rect x="212" y="146" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="240" y="171" text-anchor="middle" fill="currentColor">8</text>
+    <line x1="64" y1="166" x2="104" y2="166" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep2)"/>
+    <line x1="166" y1="166" x2="206" y2="166" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep2)"/>
+    <text x="36" y="18" text-anchor="middle" fill="currentColor" font-size="14">self</text>
+    <line x1="36" y1="24" x2="36" y2="44" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep2)"/>
+    <text x="36" y="118" text-anchor="middle" fill="currentColor" font-size="14">dest</text>
+    <line x1="36" y1="124" x2="36" y2="144" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep2)"/>
+    <text x="138" y="216" text-anchor="middle" fill="currentColor" font-size="14">m</text>
+    <line x1="138" y1="210" x2="138" y2="188" stroke="currentColor" stroke-width="1.5" marker-end="url(#dep2)"/>
+    </svg>
 
-    Les trois flèches du dessin sont trois de tes quatre lignes. **Leur ordre n'est pas libre** : chaque flèche qu'on écrit écrase la précédente, donc une flèche se lit **avant** d'être écrasée. La quatrième ligne est la première du squelette, et elle dit laquelle : garde une référence vers le maillon qui va bouger, sinon plus rien ne le désigne.
+    **Trois flèches ont changé**, et trois seulement. Celle de `1`, qui saute par-dessus le `5`. Celle de `7`, qui va maintenant vers le `5`. Celle du `5`, qui va vers le `8`. La flèche du `8`, elle, n'a pas bougé.
+
+    Ces trois flèches sont trois de tes quatre lignes. **Leur ordre n'est pas libre** : chaque flèche qu'on écrit écrase la précédente, donc une flèche se lit **avant** d'être écrasée. La quatrième ligne est la première du squelette, et elle dit laquelle : garde une référence vers le maillon qui va bouger, sinon plus rien ne le désigne.
 
     ??? info "Test à recopier dans `maillon_test.py`"
         ```python
@@ -406,6 +452,19 @@ Dans les squelettes qui suivent, `...` marque ce que tu as à écrire.
             assert contenu(g) == [9, 2]
         ```
 
+    ??? question "Avant d'ouvrir la correction"
+        En une phrase, sur ton cahier : à quoi sert la première ligne, celle qui ne rebranche aucune flèche ?
+
+    ??? warning "Correction"
+        ```python
+            m = self.suivant
+            self.suivant = m.suivant
+            m.suivant = dest.suivant
+            dest.suivant = m
+            return m
+        ```
+
+        La première ligne ne rebranche rien, elle **retient** le maillon qui va bouger. Chacune des trois autres lit une flèche juste avant qu'elle ne soit écrasée : `m.suivant` referme la chaîne derrière le `5` avant que le `5` ne change de suivant, et `dest.suivant` branche le `5` sur le `8` avant que `dest` ne pointe sur le `5`.
 
 ## 8 Ce que cela coûte
 

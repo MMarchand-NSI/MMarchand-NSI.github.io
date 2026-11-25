@@ -625,7 +625,69 @@ Et comme à la page précédente, `...` marque ce que tu as à écrire.
         ...
     ```
 
-    Aucun maillon n'est créé ni copié : ils **changent de liste**. Trois flèches changent à la fin, et aucune autre. Et `fin` ne demande aucune boucle : tu as déjà écrit la méthode qui le trouve.
+    **Au départ**, deux listes, chacune avec sa propre sentinelle `S`. En bas, celle que `self` désigne : c'est elle qui va se vider, et ses deux maillons sont en vert. En haut, la liste d'accueil, dont la méthode ne connaît qu'un seul maillon, le `1`, celui que `m` désigne.
+
+    <svg viewBox="0 0 276 272" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:276px;display:block;margin:1em 0;font-family:var(--md-code-font-family,monospace);font-size:15px">
+    <defs><marker id="gr1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+    <rect x="8" y="60" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="36" y="85" text-anchor="middle" fill="currentColor">S</text>
+    <rect x="110" y="60" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="138" y="85" text-anchor="middle" fill="currentColor">1</text>
+    <rect x="212" y="60" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="240" y="85" text-anchor="middle" fill="currentColor">2</text>
+    <line x1="64" y1="80" x2="104" y2="80" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr1)"/>
+    <line x1="166" y1="80" x2="206" y2="80" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr1)"/>
+    <path d="M 240 100 L 240 122 L 36 122 L 36 102" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr1)"/>
+    <text x="138" y="32" text-anchor="middle" fill="currentColor" font-size="14">m</text>
+    <line x1="138" y1="38" x2="138" y2="58" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr1)"/>
+    <rect x="8" y="190" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="36" y="215" text-anchor="middle" fill="currentColor">S</text>
+    <rect x="110" y="190" width="56" height="40" rx="4" fill="#157347" stroke="currentColor" stroke-width="1.5"/>
+    <text x="138" y="215" text-anchor="middle" fill="#ffffff">8</text>
+    <rect x="212" y="190" width="56" height="40" rx="4" fill="#157347" stroke="currentColor" stroke-width="1.5"/>
+    <text x="240" y="215" text-anchor="middle" fill="#ffffff">9</text>
+    <line x1="64" y1="210" x2="104" y2="210" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr1)"/>
+    <line x1="166" y1="210" x2="206" y2="210" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr1)"/>
+    <path d="M 240 230 L 240 252 L 36 252 L 36 232" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr1)"/>
+    <text x="36" y="162" text-anchor="middle" fill="currentColor" font-size="14">self</text>
+    <line x1="36" y1="168" x2="36" y2="188" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr1)"/>
+    <text x="240" y="162" text-anchor="middle" fill="currentColor" font-size="14">fin</text>
+    <line x1="240" y1="168" x2="240" y2="188" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr1)"/>
+    </svg>
+
+    `fin` est le dernier maillon de `self`, donc le `9`. Il ne demande aucune boucle : tu as déjà écrit la méthode qui le trouve, et c'est pour cela que cette méthode coûte `O(n)`.
+
+    **À l'arrivée**, les deux maillons verts ont changé de liste, et `self` est vide. Ce sont les **mêmes objets** : aucun maillon n'a été créé ni copié.
+
+    <svg viewBox="0 0 480 272" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:480px;display:block;margin:1em 0;font-family:var(--md-code-font-family,monospace);font-size:15px">
+    <defs><marker id="gr2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker></defs>
+    <rect x="8" y="60" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="36" y="85" text-anchor="middle" fill="currentColor">S</text>
+    <rect x="110" y="60" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="138" y="85" text-anchor="middle" fill="currentColor">1</text>
+    <rect x="212" y="60" width="56" height="40" rx="4" fill="#157347" stroke="currentColor" stroke-width="1.5"/>
+    <text x="240" y="85" text-anchor="middle" fill="#ffffff">8</text>
+    <rect x="314" y="60" width="56" height="40" rx="4" fill="#157347" stroke="currentColor" stroke-width="1.5"/>
+    <text x="342" y="85" text-anchor="middle" fill="#ffffff">9</text>
+    <rect x="416" y="60" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="444" y="85" text-anchor="middle" fill="currentColor">2</text>
+    <line x1="64" y1="80" x2="104" y2="80" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr2)"/>
+    <line x1="166" y1="80" x2="206" y2="80" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr2)"/>
+    <line x1="268" y1="80" x2="308" y2="80" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr2)"/>
+    <line x1="370" y1="80" x2="410" y2="80" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr2)"/>
+    <path d="M 444 100 L 444 122 L 36 122 L 36 102" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr2)"/>
+    <text x="138" y="32" text-anchor="middle" fill="currentColor" font-size="14">m</text>
+    <line x1="138" y1="38" x2="138" y2="58" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr2)"/>
+    <rect x="8" y="190" width="56" height="40" rx="4" fill="none" stroke="currentColor" stroke-width="1.5"/>
+    <text x="36" y="215" text-anchor="middle" fill="currentColor">S</text>
+    <path d="M 64 210 L 90 210 L 90 252 L 36 252 L 36 232" fill="none" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr2)"/>
+    <text x="36" y="162" text-anchor="middle" fill="currentColor" font-size="14">self</text>
+    <line x1="36" y1="168" x2="36" y2="188" stroke="currentColor" stroke-width="1.5" marker-end="url(#gr2)"/>
+    </svg>
+
+    **Trois flèches ont changé**, et trois seulement. Celle du `9`, qui va maintenant vers ce que `m` suivait. Celle du `1`, c'est-à-dire de `m`, qui va vers le premier maillon déménagé. Et celle de `self`, qui revient sur elle-même, puisque la liste est vide. Les flèches de la sentinelle d'accueil, du `2` et du `8` n'ont pas bougé.
+
+    Compare les deux dessins et tu as tes trois affectations. **Leur ordre n'est pas libre** : chaque flèche qu'on écrit écrase la précédente, donc une flèche se lit **avant** d'être écrasée. Des six ordres possibles, un seul marche.
 
     ??? info "Test à recopier dans `liste_test.py`"
         ```python
@@ -658,7 +720,7 @@ Et comme à la page précédente, `...` marque ce que tu as à écrire.
         ```
 
     ??? tip "Indice"
-        Dessine les deux listes côte à côte, puis pose-toi la question pour **chacune** des trois dernières flèches : d'où part-elle, et où doit-elle arriver ?
+        Sur le dessin d'arrivée, prends les trois flèches qui ont changé une par une, et écris pour chacune : d'où part-elle, et où arrive-t-elle ? Tu obtiens trois affectations. Demande-toi ensuite laquelle doit être écrite en premier, en cherchant celle qui lit une flèche que les autres vont écraser.
 
     ??? tip "Indice plus précis"
         La fin de cette liste doit pointer vers ce qui suivait `m`. `m` doit pointer vers le début de cette liste. Et cette liste doit pointer sur elle-même, puisqu'elle est maintenant vide.
